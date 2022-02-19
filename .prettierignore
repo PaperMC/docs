@@ -1,0 +1,5 @@
+/.docusaurus
+/.vscode
+/.yarn
+/build
+/node_modules

@@ -142,6 +142,21 @@ const config = {
         darkTheme: require("prism-react-renderer/themes/dracula"),
       },
     }),
+
+  plugins: [
+    [
+      // TODO: investigate algolia docsearch? seems super nice and more official
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        docsDir: "docs",
+        docsRouteBasePath: "/",
+        indexDocs: true,
+        indexPages: false,
+        highlightSearchTermsOnTargetPage: false,
+      },
+    ],
+  ],
 };
 
 module.exports = config;

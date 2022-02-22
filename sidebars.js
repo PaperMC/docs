@@ -85,7 +85,11 @@ const sidebars = {
     {
       type: "category",
       label: "Waterfall",
-      items: [],
+      link: {
+        type: "doc",
+        id: "waterfall/README",
+      },
+      items: ["waterfall/configuration"],
     },
     {
       type: "category",

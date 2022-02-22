@@ -1,0 +1,28 @@
+name: "Build Artifact"
+
+on:
+  workflow_call:
+
+env:
+  NODE_VERSION: "17"
+
+jobs:
+  build-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: "Setup Node ${{ env.NODE_VERSION }}"
+        uses: actions/setup-node@v2
+        with:
+          node-version: "${{ env.NODE_VERSION }}"
+          cache: "yarn"
+      - name: "Install Dependencies"
+        run: "yarn install --immutable"
+      - name: "Build Docs"
+        run: yarn build
+      - name: "Upload HTML"
+        uses: actions/upload-artifact@v2
+        with:
+          name: html
+          path: build/
+          retention-days: 1

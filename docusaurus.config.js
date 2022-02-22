@@ -4,13 +4,14 @@
 const config = {
   title: "PaperMC Documentation",
   tagline: "Documentation for projects within the PaperMC organization.",
-  url: "https://paperdocs.sulu.me",
+  url: "https://docs.papermc.io",
   baseUrl: "/",
   onBrokenLinks: "error",
   onBrokenMarkdownLinks: "error",
   favicon: "img/favicon.ico",
   organizationName: "PaperMC",
   projectName: "docs",
+  trailingSlash: false,
 
   presets: [
     [

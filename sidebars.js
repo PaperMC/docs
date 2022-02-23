@@ -16,7 +16,32 @@ const sidebars = {
         type: "doc",
         id: "paper/README",
       },
-      items: ["paper/update"],
+      items: [
+        {
+          type: "category",
+          label: "Reference",
+          link: {
+            type: "generated-index",
+          },
+          items: ["paper/reference/paper-yml"],
+        },
+        {
+          type: "category",
+          label: "Tutorials",
+          link: {
+            type: "generated-index",
+          },
+          items: ["paper/tutorial/update", "paper/tutorial/aikars-flags"],
+        },
+        {
+          type: "category",
+          label: "How-to Guides",
+          link: {
+            type: "generated-index",
+          },
+          items: ["paper/how-to/getting-started"],
+        },
+      ],
     },
     {
       type: "category",

@@ -1,9 +1,5 @@
 # Updating Paper
 
-[//]:
-  #
-  "Not organized currently, just placed here so the sidebar works properly and I have already written it."
-
 Updating Paper is an important part of running every server. With new features and fixes coming
 every day, we recommend updating at least once per week to keep your server patched for the latest
 bugs. Installing updates is very simple, but it's important to know how to do it correctly.

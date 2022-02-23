@@ -61,6 +61,7 @@ const sidebars = {
           items: [
             "velocity/users/getting-started",
             "velocity/users/what-does-velocity-do-for-me",
+            "velocity/users/configuration",
             "velocity/users/server-compatibility",
             "velocity/users/comparison",
             "velocity/users/forwarding",

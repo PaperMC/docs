@@ -28,4 +28,5 @@ jobs:
         with:
           branch: "gh-pages"
           folder: "build"
-          single-commit: true
+          git-config-name: "GitHub Actions"
+          git-config-email: "actions@github.com"

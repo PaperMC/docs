@@ -12,7 +12,7 @@ Global settings affect all worlds on the server as well as the core server funct
 ### use-display-name-in-quit-message
 
 - **default**: false
-- **description**: Sets whether the server should use the player\'s display name in quit messages.
+- **description**: Sets whether the server should use the player's display name in quit messages.
 
 ### verbose
 
@@ -23,14 +23,14 @@ Global settings affect all worlds on the server as well as the core server funct
 ### load-permissions-yml-before-plugins
 
 - **default**: true
-- **description**: Loads bukkit\'s permission.yml file before plugins, allowing them to check
+- **description**: Loads bukkit's permission.yml file before plugins, allowing them to check
   permissions immediately on enable.
 
 ### bungee-online-mode
 
 - **default**: true
 - **description**: Instructs the server how to handle player UUIDs and data when behind bungee. Set
-  to match your proxy\'s online-mode setting.
+  to match your proxy's online-mode setting.
 
 ### console-has-all-permissions
 
@@ -139,7 +139,7 @@ Global settings affect all worlds on the server as well as the core server funct
 - secret
   - **default**: `` (empty string)
   - **description**: The secret string that is shared by your Velocity proxy and this server. This
-    needs to match your proxy\'s `forwarding-secret` setting.
+    needs to match your proxy's `forwarding-secret` setting.
 
 ### unsupported-settings
 
@@ -223,7 +223,7 @@ Global settings affect all worlds on the server as well as the core server funct
 - threads
   - **default**: -1
   - **description**: The number of threads the server should use for world saving and loading. The
-    default `-1` indicates that Paper will utilize half your system\'s threads for chunk loading
+    default `-1` indicates that Paper will utilize half your system's threads for chunk loading
     unless otherwise specified. There is also a maximum default of 4 threads used for saving and
     loading chunks. This can be overridden by adding `-Dpaper.maxChunkThreads=[number of threads]`
     to your JVM flags (and of course replacing `[number of threads]` with the number of threads you
@@ -233,14 +233,14 @@ Global settings affect all worlds on the server as well as the core server funct
 
 - no-permission
 
-  - **default**: \'&cI\'\'m sorry, but you do not have permission to perform this command. Please
+  - **default**: '&cI''m sorry, but you do not have permission to perform this command. Please
     contact the server administrators if you believe that this is in error.'
   - **description**: The message the server sends to requesters with insufficient permissions.
 
 - kick
 
   - authentication-servers-down
-    - **default**: \'\' (empty string)
+    - **default**: '' (empty string)
     - **note**: The default value instructs the server to send the vanilla translatable kick
       message.
     - **description**: Message to kick a player with when they are disconnected because the Mojang
@@ -255,7 +255,7 @@ Global settings affect all worlds on the server as well as the core server funct
     - **description**: Message to use when kicking a player for flying.
   - flying-vehicle
     - **default**: Flying is not enabled on this server
-    - **description**: Message to use when kicking a player\'s vehicle for flying.
+    - **description**: Message to use when kicking a player's vehicle for flying.
 
 ## timings
 
@@ -268,7 +268,7 @@ Global settings affect all worlds on the server as well as the core server funct
 
   - **default**: true
   - **description**: Instructs Timings to provide more specific information in its reports. For
-    example, specific entity types causing lag rather than just \"entities\".
+    example, specific entity types causing lag rather than just "entities".
 
 - url
 
@@ -307,39 +307,39 @@ Global settings affect all worlds on the server as well as the core server funct
 - enable-brigadier-highlighting
 
   - **default**: true
-  - **description**: Enables Mojang\'s Brigadier highlighting in the server console.
+  - **description**: Enables Mojang's Brigadier highlighting in the server console.
 
 - enable-brigadier-completions
   - **default**: true
-  - **description**: Enables Mojang\'s Brigadier command completions in the server console.
+  - **description**: Enables Mojang's Brigadier command completions in the server console.
 
 ### item-validation
 
 - display-name
 
   - **default**: 8192
-  - **description**: Overrides Spigot\'s limit on item display name length.
+  - **description**: Overrides Spigot's limit on item display name length.
 
 - loc-name
 
   - **default**: 8192
-  - **description**: Overrides Spigot\'s limit on translatable item name length.
+  - **description**: Overrides Spigot's limit on translatable item name length.
 
 - lore-title
 
   - **default**: 8192
-  - **description**: Overrides Spigot\'s limit on lore title length.
+  - **description**: Overrides Spigot's limit on lore title length.
 
 - book
   - title
     - **default**: 8192
-    - **description**: Overrides Spigot\'s limit on book title length.
+    - **description**: Overrides Spigot's limit on book title length.
   - author
     - **default**: 8192
-    - **description**: Overrides Spigot\'s limit on book author length.
+    - **description**: Overrides Spigot's limit on book author length.
   - page
     - **default**: 16384
-    - **description**: Overrides Spigot\'s limit on individual book page length.
+    - **description**: Overrides Spigot's limit on individual book page length.
 
 ### chunk-loading
 
@@ -362,10 +362,10 @@ Global settings affect all worlds on the server as well as the core server funct
 - autoconfig-send-distance
 
   - **default**: true
-  - **description**: Whether to use the client\'s view distance for the chunk send distance of the
+  - **description**: Whether to use the client's view distance for the chunk send distance of the
     server. This will exclusively change the radius of chunks sent to the client and will not affect
     ticking or non-ticking view distance. Assuming no plugin has explicitly set the send distance
-    and the client\'s view distance is less than the server\'s send distance, the client\'s view
+    and the client's view distance is less than the server's send distance, the client's view
     distance will be used.
 
 - target-player-chunk-send-rate
@@ -444,7 +444,7 @@ Global settings affect all worlds on the server as well as the core server funct
 
 - **default**: true
 - **description**: When set to false, player IP addresses in the server logs will be replaced with
-  `<ip address withheld>`. This doesn\'t affect log messages generated by plugins.
+  `<ip address withheld>`. This doesn't affect log messages generated by plugins.
 
 ## World Settings
 
@@ -620,7 +620,7 @@ that do not have their own specific settings.
 ### parrots-are-unaffected-by-player-movement
 
 - **default**: false
-- **description**: Makes parrots \"sticky\" so they do not fall off a player\'s shoulder when they
+- **description**: Makes parrots "sticky" so they do not fall off a player's shoulder when they
   move. Use crouch to shake them off.
 
 ### only-players-collide
@@ -646,7 +646,7 @@ that do not have their own specific settings.
 
 - **default**: 128
 - **description**: The maximum range the server will use to look for an existing nether portal. If
-  it can\'t find one in that range, it will generate a new one.
+  it can't find one in that range, it will generate a new one.
 
 ### portal-create-radius
 
@@ -667,7 +667,7 @@ that do not have their own specific settings.
 ### skeleton-horse-thunder-spawn-chance
 
 - **default**: 0.01
-- **description**: Sets the chance that a \"Skeleton Trap\" (4 skeleton horsemen) will spawn in a
+- **description**: Sets the chance that a "Skeleton Trap" (4 skeleton horsemen) will spawn in a
   thunderstorm.
 
 ### disable-ice-and-snow
@@ -767,7 +767,7 @@ that do not have their own specific settings.
 
 - **default**: true
 - **description**: Sets whether zombies and zombified piglins should target turtle eggs. Setting
-  this to false may help with performance, as they won\'t search for nearby eggs.
+  this to false may help with performance, as they won't search for nearby eggs.
 
 ### zombie-villager-infection-chance
 
@@ -814,8 +814,8 @@ that do not have their own specific settings.
 ### auto-save-interval
 
 - **default**: -1
-- **note**: Default value instructs the world to use Bukkit\'s default.
-- **description**: Instructs this world to use a specific value for auto-save instead of bukkit\'s
+- **note**: Default value instructs the world to use Bukkit's default.
+- **description**: Instructs this world to use a specific value for auto-save instead of bukkit's
   global value.
 
 ### game-mechanics
@@ -1140,14 +1140,14 @@ be found in
     may struggle with the number of checks made. This should only be used with modern permission
     plugins.
 - hidden-blocks
-  - **default**: \[copper_ore, deepslate_copper_ore, gold_ore, deepslate_gold_ore, iron_ore,
+  - **default**: [copper_ore, deepslate_copper_ore, gold_ore, deepslate_gold_ore, iron_ore,
     deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
     mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore,
-    deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest\]
+    deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]
   - **description**: List of blocks to be hidden in engine mode
   - **note**: This list is using Mojang server names, _not_ bukkit names.
 - replacement-blocks:
-  - **default**: \[stone, oak_planks\]
+  - **default**: [stone, oak_planks]
   - **description**: List of blocks that should be replaced by hidden-blocks in engine mode 2.
   - **note**: This list is using Mojang server names, _not_ bukkit names.
 
@@ -1217,7 +1217,7 @@ be found in
 ### fix-entity-position-desync
 
 - **default**: true
-- **description**: Fixes the issue in which an item\'s position is desynchronized between the client
+- **description**: Fixes the issue in which an item's position is desynchronized between the client
   and the server.
 
 ### update-pathfinding-on-block-update
@@ -1289,11 +1289,11 @@ be found in
 - zombies
   - **default**: false
   - **description**: Controls whether zombies always pick up loot. If set to false, the probability
-    that a zombie picks up items depends on the world\'s difficulty.
+    that a zombie picks up items depends on the world's difficulty.
 - skeletons
   - **default**: false
   - **description**: Controls whether skeletons always pick up loot. If set to false, the
-    probability that a skeleton picks up items depends on the world\'s difficulty.
+    probability that a skeleton picks up items depends on the world's difficulty.
 
 ### map-item-frame-cursor-limit
 
@@ -1304,7 +1304,7 @@ be found in
 ### seed-based-feature-search
 
 - **default**: true
-- **description**: Whether the server should check if a chunk\'s biome (determined by world seed)
+- **description**: Whether the server should check if a chunk's biome (determined by world seed)
   can support the desired feature before loading it during feature searches. This dramatically
   reduces the number of chunks loaded during feature searches.
 - **note**: This assumes the seed and generator have remained unchanged. If your seed or world

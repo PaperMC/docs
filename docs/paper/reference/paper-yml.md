@@ -1304,9 +1304,9 @@ be found in
 ### seed-based-feature-search
 
 - **default**: true
-- **description**: Whether the server should check if a chunk's biome (determined by world seed)
-  can support the desired feature before loading it during feature searches. This dramatically
-  reduces the number of chunks loaded during feature searches.
+- **description**: Whether the server should check if a chunk's biome (determined by world seed) can
+  support the desired feature before loading it during feature searches. This dramatically reduces
+  the number of chunks loaded during feature searches.
 - **note**: This assumes the seed and generator have remained unchanged. If your seed or world
   generator has been changed, features will be located incorrectly.
 

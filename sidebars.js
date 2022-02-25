@@ -117,11 +117,6 @@ const sidebars = {
       },
       items: ["waterfall/configuration"],
     },
-    {
-      type: "category",
-      label: "Meta",
-      items: [],
-    },
   ],
 };
 

@@ -146,22 +146,12 @@ const config = {
         theme: require("prism-react-renderer/themes/github"),
         darkTheme: require("prism-react-renderer/themes/dracula"),
       },
-    }),
-
-  plugins: [
-    [
-      // TODO: investigate algolia docsearch? seems super nice and more official
-      require.resolve("@easyops-cn/docusaurus-search-local"),
-      {
-        hashed: true,
-        docsDir: "docs",
-        docsRouteBasePath: "/",
-        indexDocs: true,
-        indexPages: false,
-        highlightSearchTermsOnTargetPage: false,
+      algolia: {
+        appId: "P1BCDPTG1Q",
+        apiKey: "34772712950f27c6e9c714ad2e6c5e16",
+        indexName: "docs-papermc",
       },
-    ],
-  ],
+    }),
 };
 
 module.exports = config;

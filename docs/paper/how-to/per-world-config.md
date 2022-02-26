@@ -51,7 +51,7 @@ there is no need to copy and paste the entire `default` section into each new wo
 For a more complex real-world example: setting both different `spawn-limits` and `keep-spawn-loaded`
 in two worlds.
 
-```yml title="paper.yml"
+```yaml title="paper.yml"
 world-settings:
   default:
     spawn-limits:

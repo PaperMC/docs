@@ -141,11 +141,10 @@ const config = {
           "groovy",
           "log",
           "toml",
-          "yaml",
           "properties",
         ],
         theme: require("prism-react-renderer/themes/github"),
-        darkTheme: require("prism-react-renderer/themes/dracula"),
+        darkTheme: require("prism-react-renderer/themes/palenight"),
       },
       algolia: {
         appId: "P1BCDPTG1Q",

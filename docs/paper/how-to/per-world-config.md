@@ -1,8 +1,9 @@
 # Per World Configuration
 
 One of the most powerful yet least understood features of the Paper configuration is setting
-configuration options per world. While not available for all config options, any setting under
-`world-settings` in either `paper.yml` or `spigot.yml` can be set differently for each world.
+configuration options per world. While not every config option can be set per world, everything
+under `world-settings` in either `paper.yml` or `spigot.yml` can be configured differently on a per
+world basis.
 
 ## Default Values
 

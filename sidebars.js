@@ -39,7 +39,7 @@ const sidebars = {
           link: {
             type: "generated-index",
           },
-          items: ["paper/how-to/getting-started"],
+          items: ["paper/how-to/getting-started", "paper/how-to/per-world-config"],
         },
       ],
     },

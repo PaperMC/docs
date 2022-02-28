@@ -2,9 +2,25 @@ name: "Build Artifact"
 
 on:
   workflow_call:
+    preview:
+      description: "Is this a preview deployment?"
+      default: false
+      required: false
+      type: boolean
+    url:
+      description: "Domain the deployment will be hosted on"
+      required: false
+      type: string
+    baseurl:
+      description: "Path where does are hosted on domain"
+      required: false
+      type: string
 
 env:
   NODE_VERSION: "17"
+  DEPLOY_PREVIEW: ${{ inputs.preview }}
+  PREVIEW_URL: ${{ inputs.url }}
+  PREVIEW_BASE_URL: ${{ inputs.baseurl }}
 
 jobs:
   build-docs:

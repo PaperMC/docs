@@ -17,10 +17,11 @@
   margin: 0;
 }
 
-.project h3 {
+.projectGitHub {
   color: var(--ifm-link-color);
   font-size: 1rem;
   margin-bottom: 0.25rem;
+  font-weight: bold;
 }
 
 .projects {

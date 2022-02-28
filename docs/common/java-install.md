@@ -5,9 +5,6 @@ description: How to install or update to Java 17 on Linux (apt/rpm), Windows, or
 toc_max_heading_level: 5
 ---
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 Installing Java is a critical first step to using or developing plugins for Paper, Velocity, and
 Waterfall. This guide will walk you through the recommended installation steps for most major
 platforms.

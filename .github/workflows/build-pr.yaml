@@ -1,3 +1,5 @@
+# Based on https://github.com/KyoriPowered/adventure-docs
+
 name: "Build PR"
 
 on:
@@ -10,3 +12,14 @@ concurrency:
 jobs:
   build:
     uses: ./.github/workflows/build-artifact.yaml
+  publish-pr-number:
+    runs-on: "ubuntu-latest"
+    steps:
+      - name: "pr number / save"
+        run: "echo ${{ github.event.number }} > ./pr-num.txt"
+      - name: "pr number / publish"
+        uses: "actions/upload-artifact@v2"
+        with:
+          name: "pr-num"
+          path: "./pr-num.txt"
+          retention-days: 1

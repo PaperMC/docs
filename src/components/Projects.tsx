@@ -28,7 +28,9 @@ function Project(project: Project) {
   return (
     <div className={styles.project}>
       <div className={styles.flex}>
-        <Link className={styles.projectGitHub} to={`https://github.com/${project.repo}`}>{project.title}</Link>
+        <Link className={styles.projectGitHub} to={`https://github.com/${project.repo}`}>
+          {project.title}
+        </Link>
         <p>{project.description}</p>
       </div>
       <div>

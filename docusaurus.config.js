@@ -1,7 +1,7 @@
 // @ts-check
 
 /** @type {import("@docusaurus/types").Config} */
-const config = {
+const base = {
   title: "PaperMC Documentation",
   tagline: "Documentation for projects within the PaperMC organization.",
   url: "https://docs.papermc.io",
@@ -143,8 +143,7 @@ const config = {
           "toml",
           "properties",
         ],
-        theme: require("prism-react-renderer/themes/github"),
-        darkTheme: require("prism-react-renderer/themes/palenight"),
+        theme: require("prism-react-renderer/themes/vsLight"),
       },
       algolia: {
         appId: "P1BCDPTG1Q",
@@ -153,5 +152,12 @@ const config = {
       },
     }),
 };
+
+async function config() {
+  // @ts-expect-error
+  base.themeConfig.prism.darkTheme = (await import("./src/prism/dark.mjs")).default;
+
+  return base;
+}
 
 module.exports = config;

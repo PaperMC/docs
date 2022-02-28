@@ -1912,7 +1912,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/plugin-pwa@npm:^2.0.0-beta.16":
+"@docusaurus/plugin-pwa@npm:2.0.0-beta.16":
   version: 2.0.0-beta.16
   resolution: "@docusaurus/plugin-pwa@npm:2.0.0-beta.16"
   dependencies:
@@ -4818,7 +4818,7 @@ __metadata:
   dependencies:
     "@docusaurus/core": 2.0.0-beta.16
     "@docusaurus/module-type-aliases": 2.0.0-beta.16
-    "@docusaurus/plugin-pwa": ^2.0.0-beta.16
+    "@docusaurus/plugin-pwa": 2.0.0-beta.16
     "@docusaurus/preset-classic": 2.0.0-beta.16
     "@docusaurus/theme-classic": 2.0.0-beta.16
     "@fec/remark-a11y-emoji": 3.1.0

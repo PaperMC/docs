@@ -35,6 +35,36 @@ const base = {
     ],
   ],
 
+  plugins: [
+    [
+      "@docusaurus/plugin-pwa",
+      ({
+        offlineModeActivationStrategies: [
+          "appInstalled",
+          "standalone",
+          "queryString"
+        ],
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'icon',
+            href: 'img/paper.png'
+          },
+          {
+            tagName: "link",
+            rel: "manifest",
+            href: "/manifest.json"
+          },
+          {
+            tagName: "meta",
+            name: "theme-color",
+            content: "rgb(0, 78, 233)"
+          }
+        ],
+      })
+    ]
+  ],
+
   themeConfig:
     /** @type {import("@docusaurus/preset-classic").ThemeConfig} */
     ({

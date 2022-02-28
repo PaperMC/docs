@@ -1,14 +1,18 @@
 // @ts-check
 
+const isCI = process.env.CI === "true"
+const isPreview = process.env.DEPLOY_PREVIEW === "true"
+
+
 /** @type {import("@docusaurus/types").Config} */
 const base = {
   title: "PaperMC Documentation",
   tagline: "Documentation for projects within the PaperMC organization.",
-  url: "https://docs.papermc.io",
-  baseUrl: "/",
-  onBrokenLinks: process.env.CI === "true" ? "throw" : "warn",
-  onBrokenMarkdownLinks: process.env.CI === "true" ? "throw" : "warn",
-  onDuplicateRoutes: process.env.CI === "true" ? "throw" : "error",
+  url: isPreview ? process.env.PREVIEW_URL : "https://docs.papermc.io",
+  baseUrl: isPreview ? process.env.PREVIEW_BASE_URL : "/",
+  onBrokenLinks: isCI ? "throw" : "warn",
+  onBrokenMarkdownLinks: isCI ? "throw" : "warn",
+  onDuplicateRoutes: isCI ? "throw" : "error",
   favicon: "img/favicon.ico",
   organizationName: "PaperMC",
   projectName: "docs",

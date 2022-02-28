@@ -1,0 +1,102 @@
+# Based on https://github.com/KyoriPowered/adventure-docs
+
+name: "Publish PR Preview"
+
+on:
+  workflow_run:
+    workflows:
+      - "Build PR"
+    types:
+      - "completed"
+
+jobs:
+  docs:
+    runs-on: "ubuntu-latest"
+    if: "github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'"
+    steps:
+      - uses: "actions/checkout@v2" # for pages publishing
+      - name: "download PR"
+        uses: "dawidd6/action-download-artifact@v2"
+        with:
+          workflow: "${{ github.event.workflow_run.workflow_id }}"
+          run_id: "${{ github.event.workflow_run.id }}"
+          name: "pr-num"
+          path: "."
+      - name: "download dist artifact"
+        uses: "dawidd6/action-download-artifact@v2"
+        with:
+          workflow: "${{ github.event.workflow_run.workflow_id }}"
+          run_id: "${{ github.event.workflow_run.id }}"
+          name: "html"
+          path: "build/"
+      - name: "generate data blob"
+        id: "data"
+        uses: "actions/github-script@v6"
+        with:
+          script: |
+            let fs = require("fs/promises");
+            let dirPromise = fs.mkdir('build/', {recursive: true});
+            let prNum = (await fs.readFile('pr-num.txt', {encoding: 'UTF-8'})).trim();
+            let time = new Date().toISOString();
+            let data = {
+              pr: prNum,
+              time: time
+            };
+            await dirPromise;
+            await fs.writeFile('build/_preview_data.json', JSON.stringify(data));
+            return data
+      - name: "publish to pages"
+        id: "publish"
+        uses: "JamesIves/github-pages-deploy-action@v4.2.5"
+        with:
+          branch: "main"
+          folder: "build/"
+          ssh-key: "${{ secrets.DOCS_PREVIEWS_DEPLOY_KEY }}"
+          repository-name: "PaperMC/docs-previews"
+          target-folder: "pull/${{ fromJSON(steps.data.outputs.result).pr }}"
+          clean: false
+      - name: "notify"
+        if: "${{ steps.publish.outputs.deployment-status == 'success' }}"
+        uses: "actions/github-script@v6"
+        env:
+          PR: "${{ fromJSON(steps.data.outputs.result).pr }}"
+          COMMIT: "${{ github.event.workflow_run.head_sha }}"
+        with:
+          script: |
+            const { PR, COMMIT } = process.env
+            // Format body
+            const header = "Your pull request has been made available for preview at:"
+            const body = `${header}
+            https://papermc.github.io/docs-previews/pull/${PR}/
+            <sub>Last deployed: ${COMMIT}.</sub>
+            `
+            // Check for existing comment
+            const repo = context.repo;
+            const comments = await github.rest.issues.listComments({
+              owner: repo.owner,
+              repo:  repo.repo,
+              issue_number: Number(PR)
+            })
+            let commentId = -1;
+            for (const comment of comments.data) {
+              if (comment.body.startsWith(header) && comment.user.login == 'github-actions[bot]' && comment.user.type == 'Bot') {
+                commentId = comment.id;
+                break;
+              }
+            }
+            // If comment exists: edit it, otherwise create 
+            if (commentId != -1) {
+              await github.rest.issues.updateComment({
+                owner: repo.owner,
+                repo: repo.repo,
+                comment_id: commentId,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: repo.owner,
+                repo: repo.repo,
+                issue_number: Number(PR),
+                body: body
+              });
+            }

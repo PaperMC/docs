@@ -14,7 +14,7 @@ jobs:
     runs-on: "ubuntu-latest"
     if: "github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'"
     steps:
-      - uses: "actions/checkout@v2" # for pages publishing
+      - uses: actions/checkout@v2
       - name: "download PR"
         uses: "dawidd6/action-download-artifact@v2"
         with:

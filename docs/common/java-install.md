@@ -135,14 +135,16 @@ The Verifying Installation section does not apply for Pterodactyl.
 
 ## Verifying Installation
 
-Now that you have installed Java 17, run this command to ensure the process was successful.
+Now that you have installed Java 17, run this command in your terminal to ensure the process was
+successful.
 
 ```bash
 java -version
 ```
 
 The output should be similar to this. The important parts to look out for is that it starts with
-`openjdk 17` and contains `64-Bit` in the last line.
+`openjdk 17` and contains `64-Bit` in the last line. If the output you get is similar to
+`java: command not found`, try creating a new terminal session.
 
 ```
 openjdk 17 2021-09-14 LTS
@@ -150,5 +152,5 @@ OpenJDK Runtime Environment Corretto-17.0.0.35.1 (build 17+35-LTS)
 OpenJDK 64-Bit Server VM Corretto-17.0.0.35.1 (build 17+35-LTS, mixed mode, sharing)
 ```
 
-If your installation has failed, do not hesitate to reach out on our
+If your installation has failed, do not hesitate to reach out in the `#paper-help` channel of our
 [Discord](https://discord.gg/papermc) for support.

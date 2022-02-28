@@ -15,7 +15,7 @@ jobs:
     with:
       preview: true
       url: "https://papermc.github.io"
-      baseurl: "/pull/docs-previews/pull/${{ github.event.number }}/"
+      baseurl: "/docs-previews/pull/${{ github.event.number }}/"
   publish-pr-number:
     runs-on: "ubuntu-latest"
     steps:

@@ -1,6 +1,17 @@
 {
   "extends": ["config:base", "schedule:weekends", "group:monorepos", "group:allNonMajor"],
+  "labels": ["dependencies"],
   "timezone": "America/Chicago",
-  "rebaseWhen": "conflicted",
-  "updateNotScheduled": true
+  "updateNotScheduled": true,
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions", "gradle-wrapper"],
+      "groupName": "gradle and github actions"
+    },
+    {
+      "matchDepTypes": ["plugin"],
+      "groupName": "gradle and github actions"
+    }
+  ],
+  "prHourlyLimit": 6
 }

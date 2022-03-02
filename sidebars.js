@@ -117,6 +117,11 @@ const sidebars = {
       },
       items: ["waterfall/configuration"],
     },
+    {
+      type: "category",
+      label: "Common",
+      items: ["common/java-install"],
+    },
   ],
 };
 

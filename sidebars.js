@@ -120,7 +120,10 @@ const sidebars = {
     {
       type: "category",
       label: "Common",
-      items: ["common/java-install"],
+      items: [
+        "common/contributing-guide",
+        "common/java-install"
+      ],
     },
   ],
 };

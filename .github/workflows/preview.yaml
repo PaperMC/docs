@@ -16,7 +16,7 @@ jobs:
       "github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion ==
       'success'"
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: "download PR"
         uses: "dawidd6/action-download-artifact@v2"
         with:

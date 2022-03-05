@@ -22,7 +22,7 @@ jobs:
       - name: "pr number / save"
         run: "echo ${{ github.event.number }} > ./pr-num.txt"
       - name: "pr number / publish"
-        uses: "actions/upload-artifact@v2"
+        uses: actions/upload-artifact@v3
         with:
           name: "pr-num"
           path: "./pr-num.txt"

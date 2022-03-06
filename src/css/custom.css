@@ -1,13 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap");
 
 :root {
-  --ifm-color-primary: #5585fd;
-  --ifm-color-primary-dark: #4e7ffc;
-  --ifm-color-primary-darker: #4779f9;
-  --ifm-color-primary-darkest: #2966ff;
-  --ifm-color-primary-light: #6a93f9;
-  --ifm-color-primary-lighter: #7299f9;
-  --ifm-color-primary-lightest: #8aaafc;
+  --ifm-color-primary: #0240dc;
+  --ifm-color-primary-dark: #033ed5;
+  --ifm-color-primary-darker: #063ecc;
+  --ifm-color-primary-darkest: #0037c3;
+  --ifm-color-primary-light: #0946e1;
+  --ifm-color-primary-lighter: #0949e5;
+  --ifm-color-primary-lightest: #084bf8;
 
   --ifm-code-font-size: 95%;
 
@@ -16,7 +16,7 @@
 }
 
 html[data-theme="dark"] {
-  --ifm-color-primary: #1c8cfe;
+  --ifm-color-primary: #409efe;
   --ifm-menu-color: #dadada !important;
   --ifm-toc-link-color: #dadada !important;
   --ifm-background-color: #151515;

@@ -4,7 +4,7 @@
 
 .project {
   display: flex;
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid var(--ifm-color-emphasis-300);
   padding: var(--ifm-global-spacing);
   margin: 24px 0;

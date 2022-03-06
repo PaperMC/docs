@@ -5,12 +5,8 @@
   "updateNotScheduled": true,
   "packageRules": [
     {
-      "matchManagers": ["github-actions", "gradle-wrapper"],
-      "groupName": "gradle and github actions"
-    },
-    {
-      "matchDepTypes": ["plugin"],
-      "groupName": "gradle and github actions"
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions"
     }
   ],
   "prHourlyLimit": 6

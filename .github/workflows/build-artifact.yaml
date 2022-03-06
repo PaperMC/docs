@@ -27,7 +27,7 @@ jobs:
   build-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: "Setup Node ${{ env.NODE_VERSION }}"
         uses: actions/setup-node@v3
         with:
@@ -38,7 +38,7 @@ jobs:
       - name: "Build Docs"
         run: yarn build
       - name: "Upload HTML"
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: html
           path: build/

@@ -1,8 +1,7 @@
 // @ts-check
 
-const isCI = process.env.CI === "true"
-const isPreview = process.env.DEPLOY_PREVIEW === "true"
-
+const isCI = process.env.CI === "true";
+const isPreview = process.env.DEPLOY_PREVIEW === "true";
 
 /** @type {import("@docusaurus/types").Config} */
 const base = {
@@ -43,31 +42,27 @@ const base = {
   plugins: [
     [
       "@docusaurus/plugin-pwa",
-      ({
-        offlineModeActivationStrategies: [
-          "appInstalled",
-          "standalone",
-          "queryString"
-        ],
+      {
+        offlineModeActivationStrategies: ["appInstalled", "standalone", "queryString"],
         pwaHead: [
           {
-            tagName: 'link',
-            rel: 'icon',
-            href: 'img/paper.png'
+            tagName: "link",
+            rel: "icon",
+            href: "img/paper.png",
           },
           {
             tagName: "link",
             rel: "manifest",
-            href: "/manifest.json"
+            href: "/manifest.json",
           },
           {
             tagName: "meta",
             name: "theme-color",
-            content: "rgb(0, 78, 233)"
-          }
+            content: "rgb(0, 78, 233)",
+          },
         ],
-      })
-    ]
+      },
+    ],
   ],
 
   themeConfig:
@@ -178,7 +173,7 @@ const base = {
           "toml",
           "properties",
         ],
-        theme: require("prism-react-renderer/themes/vsLight"),
+        theme: require("prism-react-renderer/themes/vsDark"),
       },
       algolia: {
         appId: "P1BCDPTG1Q",
@@ -189,9 +184,6 @@ const base = {
 };
 
 async function config() {
-  // @ts-expect-error
-  base.themeConfig.prism.darkTheme = (await import("./src/prism/dark.mjs")).default;
-
   return base;
 }
 

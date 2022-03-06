@@ -1,0 +1,31 @@
+---
+slug: /velocity/credits
+---
+
+# Libraries Used
+
+Velocity uses a number of open-source libraries:
+
+| Name                                                                            | Author                                                                   | License                                                                                                      |
+| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| [Guava](https://github.com/google/guava)                                        | [Google](https://github.com/google)                                      | [Apache License 2.0](https://github.com/google/guava/blob/master/COPYING)                                    |
+| [Gson](https://github.com/google/gson)                                          | [Google](https://github.com/google)                                      | [Apache License 2.0](https://github.com/google/gson/blob/master/LICENSE)                                     |
+| [Netty](https://github.com/netty/netty)                                         | [Netty Project](https://netty.io)                                        | [Apache License 2.0](https://github.com/netty/netty/blob/4.1/LICENSE.txt)                                    |
+| [libdeflate](https://github.com/ebiggers/libdeflate)                            | [Eric Biggers](https://github.com/ebiggers)                              | [MIT License](https://github.com/ebiggers/libdeflate/blob/master/COPYING)                                    |
+| [text](https://github.com/KyoriPowered/text)                                    | [KyoriPowered](https://github.com/KyoriPowered)                          | [MIT License](https://github.com/KyoriPowered/text/blob/master/license.txt)                                  |
+| [adventure](https://github.com/KyoriPowered/text)                               | [KyoriPowered](https://github.com/KyoriPowered)                          | [MIT License](https://github.com/KyoriPowered/adventure/blob/master/license.txt)                             |
+| [Brigadier](https://github.com/Mojang/brigadier)                                | [Mojang](https://www.minecraft.net)                                      | [MIT License](https://github.com/Mojang/brigadier/blob/master/LICENSE)                                       |
+| [event](https://github.com/KyoriPowered/event)                                  | [KyoriPowered](https://github.com/KyoriPowered)                          | [MIT License](https://github.com/KyoriPowered/event/blob/master/license.txt)                                 |
+| [ASM](http://asm.ow2.org/)                                                      | [OW2](https://www.ow2.org/)                                              | [BSD 3-Clause License](http://asm.ow2.io/license.html)                                                       |
+| [SLF4J](https://github.com/qos-ch/slf4j)                                        | [SLF4J](https://www.slf4j.org/)                                          | [MIT License](https://github.com/qos-ch/slf4j/blob/master/LICENSE.txt)                                       |
+| [Log4j](https://logging.apache.org/log4j/2.x/)                                  | [Apache Log4j Team](https://logging.apache.org/log4j/2.x/team-list.html) | [Apache License 2.0](https://logging.apache.org/log4j/2.x/license.html)                                      |
+| [TerminalConsoleAppender](https://github.com/Minecrell/TerminalConsoleAppender) | [Minecrell](https://github.com/Minecrell)                                | [MIT License](https://github.com/Minecrell/TerminalConsoleAppender/blob/master/LICENSE)                      |
+| [Configurate](https://github.com/SpongePowered/configurate)                     | [SpongePowered](https://github.com/SpongePowered)                        | [Apache License 2.0](https://github.com/SpongePowered/configurate/blob/master/LICENSE)                       |
+| [SnakeYAML](https://bitbucket.org/asomov/snakeyaml)                             | [Andrey Somov](https://bitbucket.org/asomov)                             | [Apache License 2.0](https://bitbucket.org/asomov/snakeyaml/src/default/LICENSE.txt)                         |
+| [HOCON](https://github.com/lightbend/config)                                    | [lightbend](https://github.com/lightbend)                                | [Apache License 2.0](https://github.com/lightbend/config/blob/master/LICENSE-2.0.txt)                        |
+| [toml4j](https://github.com/mwanji/toml4j)                                      | [Moandji Ezana](https://github.com/mwanji)                               | [MIT License](https://github.com/mwanji/toml4j/blob/master/LICENSE)                                          |
+| [Night-Config](https://github.com/TheElectronWill/night-config)                 | [TheElectronWill](https://github.com/TheElectronWill)                    | [GNU Lesser General Public License 3.0](https://github.com/TheElectronWill/night-config/blob/master/LICENSE) |
+| [fastutil](http://fastutil.di.unimi.it/)                                        | [Sebastiano Vigna](http://vigna.di.unimi.it/)                            | [Apache License 2.0](https://github.com/vigna/fastutil/blob/master/LICENSE-2.0)                              |
+| [JLine](https://github.com/jline/jline3/blob/master/LICENSE.txt)                | [JLine project](https://github.com/jline/jline3)                         | [BSD 3-Clause License](https://github.com/jline/jline3/blob/master/LICENSE.txt)                              |
+| [AsyncHttpClient](https://github.com/AsyncHttpClient/async-http-client)         | [Stephane Landelle](https://github.com/slandelle)                        | [Apache License 2.0](https://github.com/AsyncHttpClient/async-http-client/blob/master/LICENSE.txt)           |
+| [completable-futures](https://github.com/spotify/completable-futures)           | [Spotify](https://github.com/spotify)                                    | [Apache License 2.0](https://github.com/spotify/completable-futures/blob/master/LICENSE)                     |

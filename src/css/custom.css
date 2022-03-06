@@ -54,6 +54,8 @@ html[data-theme="dark"] {
     no-repeat center;
 }
 
-.DocSearch.DocSearch-Button {
-  border-radius: 6px;
+@media (min-width: 751px) {
+  .DocSearch.DocSearch-Button {
+    border-radius: 6px;
+  }
 }

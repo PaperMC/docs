@@ -1,6 +1,6 @@
 import Link from "@docusaurus/Link";
 import React from "react";
-import styles from "../css/Projects.module.css";
+import styles from "../css/projects.module.css";
 
 const projects: Project[] = [
   {

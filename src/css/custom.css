@@ -1,31 +1,26 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap");
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary-lightest: #377aff;
-  --ifm-color-primary-lighter: #1d69ff;
-  --ifm-color-primary-light: #0358ff;
-  --ifm-color-primary: #004ee9;
-  --ifm-color-primary-dark: #0045d0;
-  --ifm-color-primary-darker: #003db6;
-  --ifm-color-primary-darkest: #00349d;
+  --ifm-color-primary: #5585fd;
+  --ifm-color-primary-dark: #4e7ffc;
+  --ifm-color-primary-darker: #4779f9;
+  --ifm-color-primary-darkest: #2966ff;
+  --ifm-color-primary-light: #6a93f9;
+  --ifm-color-primary-lighter: #7299f9;
+  --ifm-color-primary-lightest: #8aaafc;
 
   --ifm-code-font-size: 95%;
+
+  --ifm-font-family-monospace: "JetBrains Mono", "SFMono-Regular", "Menlo", "Consolas",
+    "Liberation Mono", monospace;
 }
 
-.docusaurus-highlight-code-line {
-  background-color: rgb(0 0 0 / 10%);
-  display: block;
-  margin: 0 calc(-1 * var(--ifm-pre-padding));
-  padding: 0 var(--ifm-pre-padding);
-}
-
-[data-theme="dark"] .docusaurus-highlight-code-line {
-  background-color: rgb(66 66 66 / 30%);
+html[data-theme="dark"] {
+  --ifm-color-primary: #1c8cfe;
+  --ifm-menu-color: #dadada !important;
+  --ifm-toc-link-color: #dadada !important;
+  --ifm-background-color: #151515;
+  --ifm-heading-color: #ededed;
 }
 
 .header-icon-link::before {

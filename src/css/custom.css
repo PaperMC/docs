@@ -17,6 +17,8 @@
 
 html[data-theme="dark"] {
   --ifm-color-primary: #409efe;
+  --ifm-color-primary-dark: #0175ec;
+
   --ifm-menu-color: #dadada !important;
   --ifm-toc-link-color: #dadada !important;
   --ifm-background-color: #151515;

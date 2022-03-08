@@ -145,12 +145,17 @@ const sidebars = {
         type: "doc",
         id: "waterfall/README",
       },
-      items: ["waterfall/configuration"],
+      items: ["waterfall/getting-started", "waterfall/configuration"],
     },
     {
       type: "category",
       label: "Common",
       items: ["common/java-install"],
+    },
+    {
+      type: "category",
+      label: "PaperMC",
+      items: ["papermc/downloads-api", "papermc/assets", "papermc/contact"],
     },
   ],
 };

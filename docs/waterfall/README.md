@@ -1,3 +1,6 @@
 # Welcome to the Waterfall Wiki
 
-Waterfall is a fork of the BungeeCord proxy that aims to...
+Waterfall is the BungeeCord fork that aims to improve performance and stability.
+
+- [Getting Started](getting-started.md)
+- [Configuration](configuration.md)

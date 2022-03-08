@@ -1,4 +1,4 @@
-# docs ![Build Status](https://img.shields.io/github/workflow/status/PaperMC/docs/Publish/main?logo=github) ![Deployment Status](https://img.shields.io/github/deployments/PaperMC/docs/github-pages?label=deployment&logo=github)
+# docs ![Build Status](https://img.shields.io/github/workflow/status/PaperMC/docs/Publish/main?logo=github) ![Deployment Status](https://img.shields.io/github/deployments/PaperMC/docs/github-pages?label=deployment&logo=github) ![License](https://img.shields.io/github/license/PaperMC/docs)
 
 This is the repository for all project documentation under the PaperMC umbrella. Content in this
 repository is published to [docs.papermc.io](https://docs.papermc.io) for viewing.

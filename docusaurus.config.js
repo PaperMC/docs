@@ -74,6 +74,20 @@ const base = {
         respectPrefersColorScheme: true,
       },
       image: "img/og-image.png",
+      metadata: [
+        {
+          name: "twitter:card",
+          content: "summary",
+        },
+        {
+          name: "og:type",
+          content: "website",
+        },
+        {
+          name: "og:image:alt",
+          content: "PaperMC Logo",
+        },
+      ],
       navbar: {
         title: "PaperMC Docs",
         logo: {

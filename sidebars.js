@@ -29,9 +29,6 @@ const sidebars = {
         {
           type: "category",
           label: "How-to Guides",
-          link: {
-            type: "generated-index",
-          },
           items: [
             "paper/how-to/per-world-configuration",
             "paper/how-to/update",
@@ -41,9 +38,6 @@ const sidebars = {
         {
           type: "category",
           label: "Reference",
-          link: {
-            type: "generated-index",
-          },
           items: [
             "paper/reference/paper-global-configuration",
             "paper/reference/paper-per-world-configuration",
@@ -76,9 +70,6 @@ const sidebars = {
         {
           type: "category",
           label: "How-to Guides",
-          link: {
-            type: "generated-index",
-          },
           items: [
             "velocity/how-to/security",
             "velocity/how-to/tuning",
@@ -88,9 +79,6 @@ const sidebars = {
         {
           type: "category",
           label: "Reference",
-          link: {
-            type: "generated-index",
-          },
           items: [
             "velocity/reference/configuration",
             "velocity/reference/commands",

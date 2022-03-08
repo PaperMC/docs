@@ -95,7 +95,6 @@ html[data-theme="dark"] {
   border-radius: 6px;
 }
 
-.homePageSearch .DocSearch-Button-Keys,
 .homePageSearch .DocSearch-Button-Placeholder {
   display: flex;
 }

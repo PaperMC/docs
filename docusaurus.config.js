@@ -168,7 +168,7 @@ const base = {
                 href: "https://papermc.io",
               },
               {
-                label: "Github",
+                label: "GitHub",
                 href: "https://github.com/PaperMC",
               },
             ],

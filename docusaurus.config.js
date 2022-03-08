@@ -125,7 +125,7 @@ const base = {
               },
               {
                 label: "Forums",
-                href: "https://papermc.io/forums",
+                href: "https://forums.papermc.io",
               },
               {
                 label: "IRC",

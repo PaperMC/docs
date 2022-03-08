@@ -19,19 +19,12 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "Reference",
+          label: "Getting Started",
           link: {
-            type: "generated-index",
+            type: "doc",
+            id: "paper/getting-started/README",
           },
-          items: ["paper/reference/paper-yml"],
-        },
-        {
-          type: "category",
-          label: "Tutorials",
-          link: {
-            type: "generated-index",
-          },
-          items: ["paper/tutorial/update", "paper/tutorial/aikars-flags"],
+          items: ["paper/getting-started/README"],
         },
         {
           type: "category",
@@ -39,7 +32,22 @@ const sidebars = {
           link: {
             type: "generated-index",
           },
-          items: ["paper/how-to/getting-started", "paper/how-to/per-world-config"],
+          items: [
+            "paper/how-to/per-world-configuration",
+            "paper/how-to/update",
+            "paper/how-to/aikars-flags",
+          ],
+        },
+        {
+          type: "category",
+          label: "Reference",
+          link: {
+            type: "generated-index",
+          },
+          items: [
+            "paper/reference/paper-global-configuration",
+            "paper/reference/paper-per-world-configuration",
+          ],
         },
       ],
     },
@@ -53,58 +61,80 @@ const sidebars = {
       items: [
         {
           type: "category",
-          label: "User's Guide",
+          label: "Getting Started",
           link: {
             type: "doc",
-            id: "velocity/users/README",
+            id: "velocity/getting-started/README",
           },
           items: [
-            "velocity/users/getting-started",
-            "velocity/users/what-does-velocity-do-for-me",
-            "velocity/users/configuration",
-            "velocity/users/server-compatibility",
-            "velocity/users/comparison",
-            "velocity/users/forwarding",
-            "velocity/users/commands",
-            "velocity/users/faq",
-            "velocity/users/migration",
+            "velocity/getting-started/README",
+            "velocity/getting-started/why-velocity",
+            "velocity/getting-started/forwarding",
+            "velocity/getting-started/faq",
           ],
         },
         {
           type: "category",
-          label: "Developer's Guide",
+          label: "How-to Guides",
+          link: {
+            type: "generated-index",
+          },
+          items: [
+            "velocity/how-to/security",
+            "velocity/how-to/tuning",
+            "velocity/how-to/migration",
+          ],
+        },
+        {
+          type: "category",
+          label: "Reference",
+          link: {
+            type: "generated-index",
+          },
+          items: [
+            "velocity/reference/configuration",
+            "velocity/reference/commands",
+            "velocity/reference/server-compatibility",
+            "velocity/reference/comparison",
+            "velocity/reference/libraries",
+          ],
+        },
+        {
+          type: "category",
+          label: "Developers",
           link: {
             type: "doc",
             id: "velocity/developers/README",
           },
           items: [
-            "velocity/developers/creating-your-first-plugin",
-            "velocity/developers/api-basics",
-            "velocity/developers/event-api",
-            "velocity/developers/command-api",
-            "velocity/developers/task-scheduling",
-            "velocity/developers/dependencies",
-            "velocity/developers/pitfalls",
-            "velocity/developers/porting-from-velocity-1",
+            "velocity/developers/README",
+            {
+              type: "category",
+              label: "Getting Started",
+              items: [
+                "velocity/developers/getting-started/creating-your-first-plugin",
+                "velocity/developers/getting-started/api-basics",
+                "velocity/developers/getting-started/pitfalls",
+              ],
+            },
+            {
+              type: "category",
+              label: "How-to Guides",
+              items: [
+                "velocity/developers/how-to/dependencies",
+                "velocity/developers/how-to/porting-from-velocity-1",
+              ],
+            },
+            {
+              type: "category",
+              label: "API",
+              items: [
+                "velocity/developers/api/event",
+                "velocity/developers/api/command",
+                "velocity/developers/api/scheduler",
+              ],
+            },
           ],
-        },
-        {
-          type: "category",
-          label: "Deployment Guide",
-          link: {
-            type: "doc",
-            id: "velocity/deployment/README",
-          },
-          items: ["velocity/deployment/security", "velocity/deployment/tuning"],
-        },
-        {
-          type: "category",
-          label: "Misc",
-          link: {
-            type: "doc",
-            id: "velocity/misc/credits",
-          },
-          items: ["velocity/misc/credits"],
         },
       ],
     },

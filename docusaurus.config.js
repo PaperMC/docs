@@ -30,6 +30,8 @@ const base = {
         docs: {
           editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
           showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
+          sidebarCollapsible: true,
           remarkPlugins: [require("@fec/remark-a11y-emoji")],
           routeBasePath: "/",
           sidebarPath: require.resolve("./sidebars.js"),

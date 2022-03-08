@@ -126,7 +126,7 @@ If this does not show up for you, the Java version can be manually changed. Navi
 "Startup" tab of your server, select `ghcr.io/pterodactyl/yolks:java_17` from the "Docker Image"
 dropdown as shown in the image below.
 
-![Pterodactyl Manual Java Version Change](pterodactyl-prompt.png)
+![Pterodactyl Manual Java Version Change](pterodactyl-manual.png)
 
 The Verifying Installation section does not apply for Pterodactyl.
 

@@ -120,13 +120,13 @@ version. These instructions will not apply.
 If you have started a Paper server with an incorrect Java version, Pterodactyl will automatically
 prompt you to update like this:
 
-![Pterodactyl Automatic Prompt](/img/docs/guides/java/pterodactyl-prompt.png)
+![Pterodactyl Automatic Prompt](pterodactyl-prompt.png)
 
 If this does not show up for you, the Java version can be manually changed. Navigate to the
 "Startup" tab of your server, select `ghcr.io/pterodactyl/yolks:java_17` from the "Docker Image"
 dropdown as shown in the image below.
 
-![Pterodactyl Manual Java Version Change](/img/docs/guides/java/pterodactyl-manual.png)
+![Pterodactyl Manual Java Version Change](pterodactyl-prompt.png)
 
 The Verifying Installation section does not apply for Pterodactyl.
 

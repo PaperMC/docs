@@ -3,11 +3,6 @@
 :root {
   --ifm-color-primary: #0240dc;
   --ifm-color-primary-dark: #033ed5;
-  --ifm-color-primary-darker: #063ecc;
-  --ifm-color-primary-darkest: #0037c3;
-  --ifm-color-primary-light: #0946e1;
-  --ifm-color-primary-lighter: #0949e5;
-  --ifm-color-primary-lightest: #084bf8;
 
   --ifm-code-font-size: 95%;
 
@@ -60,4 +55,25 @@ html[data-theme="dark"] {
   .DocSearch.DocSearch-Button {
     border-radius: 6px;
   }
+}
+
+.footer {
+  background-color: #f6f7f8;
+}
+
+[data-theme="dark"] .footer {
+  background-color: #1b1c1d;
+}
+
+.footer__title {
+  color: var(--ifm-navbar-link-color);
+}
+
+.footer__link-item {
+  color: var(--ifm-color-emphasis-800);
+}
+
+.footer__copyright {
+  color: var(--ifm-color-emphasis-900);
+  font-size: 95%;
 }

@@ -97,7 +97,7 @@ const base = {
             position: "left",
           },
           {
-            href: "https://papermc.io/downloads",
+            to: "https://papermc.io/downloads",
             label: "Downloads",
             position: "right",
           },

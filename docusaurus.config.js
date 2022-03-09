@@ -27,7 +27,7 @@ const base = {
       "classic",
       /** @type {import("@docusaurus/preset-classic").Options} */
       ({
-        debug: true,
+        debug: !isCI || isPreview,
         theme: {
           customCss: [require.resolve("./src/css/custom.css")],
         },

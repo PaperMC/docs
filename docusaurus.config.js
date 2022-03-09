@@ -7,6 +7,10 @@ const isPreview = process.env.DEPLOY_PREVIEW === "true";
 const base = {
   title: "PaperMC Documentation",
   tagline: "Documentation for projects within the PaperMC organization.",
+  customFields: {
+    description:
+      "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
+  },
   url: isPreview ? process.env.PREVIEW_URL : "https://docs.papermc.io",
   baseUrl: isPreview ? process.env.PREVIEW_BASE_URL : "/",
   onBrokenLinks: isCI ? "throw" : "warn",

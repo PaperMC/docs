@@ -18,8 +18,14 @@ function HomepageHeader() {
 }
 
 export default function Home(): JSX.Element {
+  const {
+    siteConfig: { customFields },
+  } = useDocusaurusContext();
+
+  const { description } = customFields as { description: string };
+
   return (
-    <Layout title="Home">
+    <Layout title="Home" description={description}>
       <HomepageHeader />
       <section className="homePageSearch">
         <SearchBar />

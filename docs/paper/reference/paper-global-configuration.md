@@ -259,7 +259,7 @@ function itself. For per-world configuration, see the
     - **default**: Flying is not enabled on this server
     - **description**: Message to use when kicking a player's vehicle for flying.
 
-## timings
+### timings
 
 - enabled
 

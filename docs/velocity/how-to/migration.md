@@ -1,5 +1,5 @@
 ---
-slug: /velocity/how-to-migrate
+slug: /velocity/migration
 ---
 
 # Migration Guide

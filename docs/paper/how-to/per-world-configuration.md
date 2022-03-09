@@ -1,5 +1,5 @@
 ---
-slug: /paper/how-to-use-per-world-configuration
+slug: /paper/per-world-configuration
 ---
 
 # Per World Configuration

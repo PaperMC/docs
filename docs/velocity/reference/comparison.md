@@ -1,5 +1,5 @@
 ---
-slug: /velocity/comparison-to-other-proxies
+slug: /velocity/comparisons-to-other-proxies
 ---
 
 # Comparing With Other Proxies

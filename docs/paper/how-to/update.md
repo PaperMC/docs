@@ -1,5 +1,5 @@
 ---
-slug: /paper/how-to-update
+slug: /paper/updating
 ---
 
 # Updating Paper

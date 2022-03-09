@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/common-pitfalls
+slug: /velocity/developers/pitfalls
 ---
 
 # Common Pitfalls

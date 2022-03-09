@@ -1,5 +1,5 @@
 ---
-slug: /velocity/how-to-tune-velocity
+slug: /velocity/tuning
 ---
 
 # Tuning Velocity

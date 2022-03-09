@@ -1,5 +1,5 @@
 ---
-slug: /paper/how-to-use-aikars-flags
+slug: /paper/aikars-flags
 ---
 
 # Aikar's Flags

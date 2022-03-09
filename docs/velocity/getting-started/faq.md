@@ -1,5 +1,5 @@
 ---
-slug: /velocity/frequently-asked-questions
+slug: /velocity/faq
 ---
 
 # Frequently Asked Questions

@@ -1,5 +1,5 @@
 ---
-slug: /velocity/how-to-secure-your-servers
+slug: /velocity/security
 ---
 
 # Securing Your Servers

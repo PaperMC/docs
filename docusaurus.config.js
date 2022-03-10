@@ -162,6 +162,10 @@ const base = {
                 label: "Docs",
                 href: "/",
               },
+              {
+                label: "Downloads API",
+                href: "https://papermc.io/api/docs",
+              },
             ],
           },
           {

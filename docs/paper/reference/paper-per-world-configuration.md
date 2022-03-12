@@ -56,12 +56,6 @@ global config, see the [Paper Global Configuration Reference](paper-global-confi
 - **description**: Instructs the server to use the vanilla scoreboard for player nickname coloring.
 - **note**: Useful when playing on adventure maps made for the vanilla server and client.
 
-### remove-corrupt-tile-entities
-
-- **default**: false
-- **description**: Instructs the server to automatically remove tile entities it detects as broken
-  and cannot fix.
-
 ### experience-merge-max-value
 
 - **default**: -1

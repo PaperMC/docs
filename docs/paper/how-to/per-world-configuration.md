@@ -95,4 +95,4 @@ configuration which will be applied:
 
 Notice that `world_the_end` was never specified in this configuration. Because of this, it inherits
 all the configuration options from the `default` section. Additionally, `keep-spawn-loaded` was only
-disabled in `resource_world` because in the `defualt` section, `keep-spawn-loaded` is set to `true`.
+disabled in `resource_world` because in the `default` section, `keep-spawn-loaded` is set to `true`.

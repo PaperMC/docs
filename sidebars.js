@@ -37,11 +37,8 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Reference",
-          items: [
-            "paper/reference/paper-global-configuration",
-            "paper/reference/paper-per-world-configuration",
-          ],
+          label: "Configuration",
+          items: ["paper/configuration/paper-global", "paper/configuration/paper-per-world"],
         },
       ],
     },
@@ -78,13 +75,13 @@ const sidebars = {
         },
         {
           type: "category",
-          label: "Reference",
+          label: "Configuration",
           items: [
-            "velocity/reference/configuration",
-            "velocity/reference/commands",
-            "velocity/reference/server-compatibility",
-            "velocity/reference/comparison",
-            "velocity/reference/libraries",
+            "velocity/configuration/configuration",
+            "velocity/configuration/commands",
+            "velocity/configuration/server-compatibility",
+            "velocity/configuration/comparison",
+            "velocity/configuration/libraries",
           ],
         },
         {

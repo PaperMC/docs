@@ -90,7 +90,7 @@ We now need to configure each server to accept connections from the proxy.
 
 Velocity is a highly configurable proxy. While most users will not need to change everything in the
 config, there are tons of options covered
-[on the configuration wiki page](../reference/configuration.md) along with an explanation on how
+[on the configuration wiki page](../configuration/configuration.md) along with an explanation on how
 each option works. However, in this section we will do the bare minimum to get the proxy up and
 running.
 

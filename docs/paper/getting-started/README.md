@@ -50,8 +50,8 @@ disables Vanilla's GUI, so you don't get double interfaces when using the comman
 
 For more advanced Java tuning, see [Aikar's Flags](../how-to/aikars-flags.md).
 
-To configure your server, see the [Global Configuration](../reference/paper-global-configuration.md)
-and [Per World Configuration](../reference/paper-per-world-configuration.md) pages.
+To configure your server, see the [Global Configuration](../configuration/paper-global.md) and
+[Per World Configuration](../configuration/paper-per-world.md) pages.
 
 ## Updating The Server
 

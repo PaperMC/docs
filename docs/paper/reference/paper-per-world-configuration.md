@@ -228,7 +228,7 @@ global config, see the [Paper Global Configuration Reference](paper-global-confi
 ### disable-ice-and-snow
 
 - **default**: false
-- **description**: Disables ice and snow formation.
+- **description**: Disables ice and snow formation. This also causes cauldrons to no longer be filled by rain.
 
 ### disable-explosion-knockback
 

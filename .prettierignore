@@ -3,3 +3,4 @@
 /.yarn
 /build
 /node_modules
+/.pnp*

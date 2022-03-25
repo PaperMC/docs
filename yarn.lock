@@ -5192,10 +5192,21 @@ __metadata:
     "@types/prettier": 2.4.4
     clsx: 1.1.1
     copy-text-to-clipboard: 3.0.1
+    docusaurus-plugin-custom-tags: "workspace:^"
     prettier: 2.6.1
     prism-react-renderer: 1.3.1
     react: 17.0.2
     react-dom: 17.0.2
+    typescript: 4.6.3
+  languageName: unknown
+  linkType: soft
+
+"docusaurus-plugin-custom-tags@workspace:^, docusaurus-plugin-custom-tags@workspace:plugins/docusaurus-plugin-custom-tags":
+  version: 0.0.0-use.local
+  resolution: "docusaurus-plugin-custom-tags@workspace:plugins/docusaurus-plugin-custom-tags"
+  dependencies:
+    "@docusaurus/types": 2.0.0-beta.18
+    "@types/node": 17.0.18
     typescript: 4.6.3
   languageName: unknown
   linkType: soft
@@ -6487,6 +6498,20 @@ __metadata:
   bin:
     he: bin/he
   checksum: 3d4d6babccccd79c5c5a3f929a68af33360d6445587d628087f39a965079d84f18ce9c3d3f917ee1e3978916fc833bb8b29377c3b403f919426f91bc6965e7a7
+  languageName: node
+  linkType: hard
+
+"history@npm:4.9.0":
+  version: 4.9.0
+  resolution: "history@npm:4.9.0"
+  dependencies:
+    "@babel/runtime": ^7.1.2
+    loose-envify: ^1.2.0
+    resolve-pathname: ^2.2.0
+    tiny-invariant: ^1.0.2
+    tiny-warning: ^1.0.0
+    value-equal: ^0.4.0
+  checksum: b1afb05d60c2f8861974a83742ee408d093ec1673a24abe13172dd0d103f507bf7fc7de1b7cfd6e61ac8b0b1d380f50dd41c621d2fb9aef1122198fac0142335
   languageName: node
   linkType: hard
 
@@ -10263,6 +10288,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resolve-pathname@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "resolve-pathname@npm:2.2.0"
+  checksum: c12eb87f04d6a6101aa44080c4c2f25b8fab49db8c43823a142614e1f5fb359f7c511a02b0f1089919778da79af99b3a11b8991556b51b494f30be4b2ee3748b
+  languageName: node
+  linkType: hard
+
 "resolve-pathname@npm:^3.0.0":
   version: 3.0.0
   resolution: "resolve-pathname@npm:3.0.0"
@@ -11816,6 +11848,13 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 5575a8a75c13120e2f10e6ddc801b2c7ed7d8f3c8ac22c7ed0c7b2ba6383ec0abda88c905085d630e251719e0777045ae3236f04c812184b7c765f63a70e58df
+  languageName: node
+  linkType: hard
+
+"value-equal@npm:^0.4.0":
+  version: 0.4.0
+  resolution: "value-equal@npm:0.4.0"
+  checksum: 8a9b4b866705470d4d6a2e01bda24a75dd435fe0ea3a8bef003f67780a58116e65e795db4d018caf2e4b8bee336ee7787c338322325fc3a7dac8cbb8064ebca8
   languageName: node
   linkType: hard
 

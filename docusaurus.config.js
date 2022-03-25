@@ -3,6 +3,10 @@
 const isCI = process.env.CI === "true";
 const isPreview = process.env.DEPLOY_PREVIEW === "true";
 
+const url = isPreview ? process.env.PREVIEW_URL : "https://docs.papermc.io";
+const baseUrl = isPreview ? process.env.PREVIEW_BASE_URL : "/";
+const completeUrl = url + baseUrl;
+
 /** @type {import("@docusaurus/types").Config} */
 const base = {
   title: "PaperMC Documentation",
@@ -11,8 +15,8 @@ const base = {
     description:
       "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
   },
-  url: isPreview ? process.env.PREVIEW_URL : "https://docs.papermc.io",
-  baseUrl: isPreview ? process.env.PREVIEW_BASE_URL : "/",
+  url: url,
+  baseUrl: baseUrl,
   onBrokenLinks: isCI ? "throw" : "warn",
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
   onDuplicateRoutes: isCI ? "throw" : "error",
@@ -65,6 +69,32 @@ const base = {
             tagName: "meta",
             name: "theme-color",
             content: "rgb(0, 78, 233)",
+          },
+        ],
+      },
+    ],
+    [
+      "custom-tags",
+      {
+        headTags: [
+          {
+            tagName: "script",
+            attributes: {
+              type: "application/ld+json",
+            },
+            innerHTML: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              url: completeUrl,
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: `${completeUrl}search?q={search_term_string}`,
+                },
+                "query-input": "required name=search_term_string",
+              },
+            }),
           },
         ],
       },

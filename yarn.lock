@@ -2263,7 +2263,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/theme-common@npm:2.0.0-beta.18, @docusaurus/theme-common@npm:^2.0.0-beta.18":
+"@docusaurus/theme-common@npm:2.0.0-beta.18":
   version: 2.0.0-beta.18
   resolution: "@docusaurus/theme-common@npm:2.0.0-beta.18"
   dependencies:
@@ -5184,7 +5184,7 @@ __metadata:
     "@docusaurus/module-type-aliases": 2.0.0-beta.18
     "@docusaurus/plugin-pwa": 2.0.0-beta.18
     "@docusaurus/preset-classic": 2.0.0-beta.18
-    "@docusaurus/theme-common": ^2.0.0-beta.18
+    "@docusaurus/theme-common": 2.0.0-beta.18
     "@fec/remark-a11y-emoji": 3.1.0
     "@mdx-js/react": 1.6.22
     "@tsconfig/docusaurus": 1.0.5

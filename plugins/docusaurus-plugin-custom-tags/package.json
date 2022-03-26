@@ -4,12 +4,16 @@
   "private": true,
   "main": "lib/index.js",
   "scripts": {
-    "build": "tsc",
+    "check": "tsc",
+    "build": "swc src -d lib",
     "postinstall": "yarn build"
   },
   "devDependencies": {
     "@docusaurus/types": "2.0.0-beta.18",
+    "@swc/cli": "^0.1.56",
+    "@swc/core": "^1.2.160",
     "@types/node": "17.0.18",
+    "swc-loader": "^0.1.15",
     "typescript": "4.6.3"
   }
 }

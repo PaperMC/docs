@@ -1,0 +1,13 @@
+{
+  "test": ".*.ts$",
+  "jsc": {
+    "parser": {
+      "syntax": "typescript"
+    },
+    "target": "es2017"
+  },
+  "module": {
+    "type": "commonjs"
+  },
+  "sourceMaps": false
+}

@@ -31,6 +31,7 @@ const sidebars: SidebarsConfig = {
           items: [
             "paper/how-to/per-world-configuration",
             "paper/how-to/update",
+            "paper/how-to/migration",
             "paper/how-to/aikars-flags",
           ],
         },

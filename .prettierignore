@@ -6,3 +6,4 @@
 /.pnp*
 /*.js
 /*.js.map
+/config/*.js

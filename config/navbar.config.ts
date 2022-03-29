@@ -1,9 +1,9 @@
-import type { Navbar } from "@docusaurus/theme-common";
-
-const navbar: Navbar = {
+// Docusaurus does not have a good navbar type that can be used here. Left untyped for the moment.
+// Navbar from "@docusaurus/theme-common" cannot be used as it requires a theme to be set, which
+// stays constant between light/dark themes.
+const navbar = {
   title: "PaperMC Docs",
   hideOnScroll: true,
-  style: "dark",
   logo: {
     src: "img/logo.svg",
     alt: "PaperMC Logo",

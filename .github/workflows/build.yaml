@@ -28,5 +28,6 @@ jobs:
         with:
           branch: "gh-pages"
           folder: "build"
-          git-config-name: "GitHub Actions"
-          git-config-email: "actions@github.com"
+          clean: true
+          git-config-name: "github-actions[bot]"
+          git-config-email: "41898282+github-actions[bot]@users.noreply.github.com"

@@ -56,9 +56,10 @@ jobs:
           ssh-key: "${{ secrets.DOCS_PREVIEWS_DEPLOY_KEY }}"
           repository-name: "PaperMC/docs-previews"
           target-folder: "pull/${{ fromJSON(steps.data.outputs.result).pr }}"
-          clean: true
+          clean: false
           git-config-name: "github-actions[bot]"
           git-config-email: "41898282+github-actions[bot]@users.noreply.github.com"
+          single-commit: true
       - name: "notify"
         if: "${{ steps.publish.outputs.deployment-status == 'success' }}"
         uses: "actions/github-script@v6"

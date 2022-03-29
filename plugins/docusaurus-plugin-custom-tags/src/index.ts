@@ -1,4 +1,4 @@
-import { LoadContext, PluginOptions, Plugin, InjectedHtmlTags } from "@docusaurus/types";
+import type { LoadContext, PluginOptions, Plugin, InjectedHtmlTags } from "@docusaurus/types";
 
 export default async function pluginCustomTags(
   context: LoadContext,

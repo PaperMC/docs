@@ -1,7 +1,6 @@
-// Docusaurus does not have a good navbar type that can be used here. Left untyped for the moment.
-// Navbar from "@docusaurus/theme-common" cannot be used as it requires a theme to be set, which
-// stays constant between light/dark themes.
-const navbar = {
+import {Navbar} from "@docusaurus/theme-common";
+
+const navbar: Omit<Navbar, "style"> = { // don't specify style here, we want it to be dynamic
   title: "PaperMC Docs",
   hideOnScroll: true,
   logo: {

@@ -98,6 +98,22 @@ of the following:
    panel) to upload your plugin to a shared hosting service, ensure your FTP client is in `binary`
    and not `ASCII` mode. Consult the documentation for your FTP client for details.
 
+#### Ambiguous plugin name
+
+If you see something like this:
+
+```log
+Ambiguous plugin name `Essentials' for files `plugins/EssentialsX-2.19.4.jar' and `plugins/Essentialsx-2.20.0-dev.jar' in `plugins'
+```
+
+This means you have two plugins with the same name, which is not supported. In this case, two
+versions of EssentialsX are installed. Both the release `2.19.4`, and a development build of
+`2.20.0`. Ensure you only have one version of each plugin installed at one time. Delete the older
+version of the duplicate plugin, and restart your server.
+
+[//]: # "To prevent accidentally installing two versions of one plugin while updating, you can use"
+[//]: # "the `update` folder as described in the [Update Guide](/paper/how-to/update)."
+
 #### Something Else
 
 If you see an error, but it isn't similar to one of the above, attempt to read it yourself. While

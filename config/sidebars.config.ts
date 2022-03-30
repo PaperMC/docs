@@ -23,7 +23,11 @@ const sidebars: SidebarsConfig = {
             type: "doc",
             id: "paper/getting-started/README",
           },
-          items: ["paper/getting-started/README", "paper/getting-started/migration"],
+          items: [
+            "paper/getting-started/README",
+            "paper/getting-started/adding-plugins",
+            "paper/getting-started/migration",
+          ],
         },
         {
           type: "category",

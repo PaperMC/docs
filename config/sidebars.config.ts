@@ -32,6 +32,9 @@ const sidebars: SidebarsConfig = {
         {
           type: "category",
           label: "How-to Guides",
+          link: {
+            type: "generated-index"
+          },
           items: [
             "paper/how-to/per-world-configuration",
             "paper/how-to/anti-xray",
@@ -42,6 +45,9 @@ const sidebars: SidebarsConfig = {
         {
           type: "category",
           label: "Reference",
+          link: {
+            type: "generated-index",
+          },
           items: [
             "paper/reference/paper-global-configuration",
             "paper/reference/paper-per-world-configuration",
@@ -74,6 +80,9 @@ const sidebars: SidebarsConfig = {
         {
           type: "category",
           label: "How-to Guides",
+          link: {
+            type: "generated-index"
+          },
           items: [
             "velocity/how-to/security",
             "velocity/how-to/tuning",
@@ -83,6 +92,9 @@ const sidebars: SidebarsConfig = {
         {
           type: "category",
           label: "Reference",
+          link: {
+            type: "generated-index",
+          },
           items: [
             "velocity/reference/configuration",
             "velocity/reference/commands",
@@ -103,6 +115,9 @@ const sidebars: SidebarsConfig = {
             {
               type: "category",
               label: "Getting Started",
+              link: {
+                type: "generated-index"
+              },
               items: [
                 "velocity/developers/getting-started/creating-your-first-plugin",
                 "velocity/developers/getting-started/api-basics",
@@ -112,6 +127,9 @@ const sidebars: SidebarsConfig = {
             {
               type: "category",
               label: "How-to Guides",
+              link: {
+                type: "generated-index"
+              },
               items: [
                 "velocity/developers/how-to/dependencies",
                 "velocity/developers/how-to/porting-from-velocity-1",
@@ -120,6 +138,9 @@ const sidebars: SidebarsConfig = {
             {
               type: "category",
               label: "API",
+              link: {
+                type: "generated-index"
+              },
               items: [
                 "velocity/developers/api/event",
                 "velocity/developers/api/command",
@@ -142,11 +163,17 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Common",
+      link: {
+        type: "generated-index"
+      },
       items: ["common/java-install"],
     },
     {
       type: "category",
       label: "PaperMC",
+      link: {
+        type: "generated-index"
+      },
       items: ["papermc/downloads-api", "papermc/assets", "papermc/contact"],
     },
   ],

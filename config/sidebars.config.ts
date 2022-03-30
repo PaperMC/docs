@@ -23,7 +23,7 @@ const sidebars: SidebarsConfig = {
             type: "doc",
             id: "paper/getting-started/README",
           },
-          items: ["paper/getting-started/README"],
+          items: ["paper/getting-started/README", "paper/getting-started/migration"],
         },
         {
           type: "category",
@@ -31,7 +31,6 @@ const sidebars: SidebarsConfig = {
           items: [
             "paper/how-to/per-world-configuration",
             "paper/how-to/update",
-            "paper/how-to/migration",
             "paper/how-to/aikars-flags",
           ],
         },

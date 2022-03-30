@@ -25,7 +25,7 @@ const sidebars: SidebarsConfig = {
           },
           items: [
             "paper/getting-started/README",
-            "paper/getting-started/getting-plugins",
+            "paper/getting-started/adding-plugins",
             "paper/getting-started/migration",
           ],
         },

@@ -2,7 +2,7 @@
 toc_max_heading_level: 4
 ---
 
-# Getting Plugins
+# Adding Plugins
 
 Plugins are the most powerful way to extend the functionality of Paper beyond the configuration
 files. Functionality added by plugins can range from making milk restore hunger or dead bushes grow,

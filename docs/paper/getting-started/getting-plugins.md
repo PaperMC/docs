@@ -4,9 +4,10 @@ toc_max_heading_level: 4
 
 # Getting Plugins
 
-Plugins are the way to extend the functionality of Paper, beyond the configuration files, and one of
-the most powerful features Paper offers. Functionality added by plugins can range from making milk
-restore hunger or dead bushes grow, to adding completely new and original gamemodes or items.
+Plugins are the most powerful way to extend the functionality of Paper beyond the configuration files.
+Functionality added by plugins can range from making milk restore hunger or dead bushes grow, to adding
+entirely new and original game modes or items.
+
 
 :::danger Malicious Plugins
 
@@ -42,12 +43,14 @@ mention Paper. It'll still work.
 2. Once you have the plugin downloaded locally, locate the `plugins` folder from the root directory
    of your Paper server.
 3. Drag and drop the plugin file (`.jar`) into the `plugins` folder. If you are using a shared
-   hosting service, you may need to use their web panel or SFTP to upload the plugin, however, the
+   hosting service, you may need to use their web panel or SFTP to upload the plugin; however, the
    procedure will be the same.
 4. Restart your server. The plugin should load.
 5. Check your work. Once the server has finished loading, run the `/plugins` command in-game or type
-   `plugins` into the console. You should see your freshly installed plugin listed. If you do not,
-   continue to [troubleshooting](#troubleshooting).
+   `plugins` into the console. You should see your freshly installed plugin listed in green. If it
+   is not listed, or is colored red, continue to [troubleshooting](#troubleshooting). A plugin
+   listed in red means that it is not currently enabled. For a freshly installed plugin, this often
+   means that the plugin failed to load.
 
 ## Troubleshooting
 
@@ -85,7 +88,7 @@ Could not load 'plugins/MyAwesomePlugin-1.0.0.jar' in folder 'plugins'
 org.bukkit.plugin.InvalidDescriptionException: Invalid plugin.yml
 ```
 
-This means that what you have download isn't a valid Paper plugin. This is generally caused by one
+This means that what you have downloaded isn't a valid Paper plugin. This is generally caused by one
 of the following:
 
 1. The plugin you downloaded isn't a plugin at all, but instead a mod for Forge, Fabric, or similar.
@@ -105,16 +108,16 @@ understand what is going on. If you're not sure, do not hesitate to reach out fo
 
 ### If nothing is logged
 
-If nothing is logged, your server likely not attempting to load any plugins. The conditions needed
+If nothing is logged, your server is likely not attempting to load any plugins. The conditions needed
 for the server to load a plugin are as follows:
 
 1. The file is at the root of the `plugins` folder, relative to its working directory. This is
    usually the same folder as the server JAR file. **Subdirectories of the `plugins` folder will not
    be checked.** All plugins must be in the root folder.
-2. The file ends in `.jar`. If your plugin does not end in `.jar`, what you have download may not be
+2. The file ends in `.jar`. If your plugin does not end in `.jar`, what you have downloaded may not be
    a plugin. Note that some plugins distribute multiple jars as `.zip` files. If this is the case,
-   you must extract them before installing the plugin.
+   you have to extract them before installing the plugin.
 
-If both of these are true, and you still see no logs, please reach out for support on our
+If both of these are true and you still see no logs please reach out for support on our
 [Discord](https://discord.gg/papermc) server in the `#paper-help` channel. We will be happy to
 assist you.

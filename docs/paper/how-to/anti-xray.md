@@ -1,14 +1,6 @@
 # Configuring Anti-Xray
 
-import BlogPostAuthor from "@theme/BlogPostAuthor";
-
-<BlogPostAuthor
-  author={{
-    name: "stonar96",
-    url: "https://github.com/stonar96",
-    imageURL: "https://github.com/stonar96.png",
-  }}
-/>
+> Originally written and maintained by [stonar96](https://github.com/stonar96).
 
 Paper includes obfuscation based anti-xray, configurable per world in paper.yml. If you aren't
 already familiar with per world configuration, please take a moment to familiarize yourself with the

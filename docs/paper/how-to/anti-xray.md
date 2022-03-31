@@ -1,0 +1,243 @@
+# Configuring Anti-Xray
+
+import BlogPostAuthor from "@theme/BlogPostAuthor";
+
+<BlogPostAuthor
+  author={{
+    name: "stonar96",
+    url: "https://github.com/stonar96",
+    imageURL: "https://github.com/stonar96.png",
+  }}
+/>
+
+Paper includes obfuscation based anti-xray, configurable per world in paper.yml. If you aren't
+already familiar with per world configuration, please take a moment to familiarize yourself with the
+[Per World Configuration Guide](per-world-configuration.md).
+
+This guide is a step-by-step walk-through for configuring anti-xray. For reference documentation,
+refer to the Anti-Xray section of the
+[Per-World Configuration Reference](../reference/paper-per-world-configuration.md#anti-xray).
+
+Anti-Xray has two different modes. `engine-mode: 1` replaces specified ores (`hidden-blocks`) with
+other "fake" blocks (`replacement-blocks`), typically stone or similar. In contrast,
+`engine-mode: 2` is designed to replace many default blocks, such as stone or deepslate, with "fake"
+ores, preventing real ores from being located.
+
+The following image[^1] shows how each mode will look for a player using Xray with the recommended
+configuration.
+
+[^1]: Image by `Oberfail#2096`, posted in the [PaperMC Discord](https://discord.gg/papermc). ​
+
+![Anti-Xray Mode Comparison](assets/anti-xray-comparison.png)
+
+Especially on the client side, `engine-mode: 1` is much less computationally intensive, while
+`engine-mode: 2` may work better to prevent Xray. With `engine-mode: 1`, only ores that are
+completely covered by solid blocks will be hidden. Ores exposed to air in caves, or water from a
+lake will not be hidden. With `engine-mode: 2`, all ores will be hidden, including those exposed to
+air.
+
+:::caution Anti-Xray Bypasses
+
+**Range Extension**: While Anti-Xray alone will prevent the majority of users from Xraying on your
+server, it is not by any means infallible. Because of how Anti-Xray is (and has to be) implemented,
+it is possible to, on a default server, extend the range of real ores you are able to see by a not
+insignificant amount. This can be mitigated by any competent anti cheat plugin; however, this is not
+included out of the box.
+
+**Seed Reversing**: Another attack vector is the deterministic nature of Minecraft's world
+generation. If the client is able to obtain the world seed, it is able to know the real location of
+every generated ore, completely bypassing anti-xray. This can be partially worked around by making
+it harder for the client to reverse the world seed with the
+[`feature-seeds` configuration](../reference/paper-per-world-configuration.md#feature-seeds). Note
+that this is not a complete solution, and it may still be possible for a client to obtain the
+server's world seed.
+
+:::
+
+## Recommended Configuration
+
+The recommended configuration for both `engine-mode: 1` and `engine-mode: 2` is as follows:
+
+:::tip Spacing
+
+YAML cares about whitespace! The example configuration below is already formatted correctly. Ensure
+the formatting remains the same.
+
+:::
+
+### `engine-mode: 1`
+
+<details>
+  <summary>Overworld Configuration</summary>
+
+Replace the existing `anti-xray` block in `paper.yml` (under `world-settings.default`) with the
+following:
+
+<!-- prettier-ignore -->
+```yaml title="paper.yml"
+    anti-xray:
+      enabled: true
+      engine-mode: 1
+      chunk-edge-mode: 2
+      max-chunk-section-index: 3
+      # As of 1.18 some ores are generated much higher.
+      # Please adjust the max-block-height setting at your own discretion.
+      # https://minecraft.fandom.com/wiki/Ore might be helpful.
+      max-block-height: 64
+      update-radius: 2
+      lava-obscures: false
+      use-permission: false
+      hidden-blocks:
+      # There's no chance to hide dungeon chests but buried treasures will be hidden.
+      - chest
+      - coal_ore
+      - deepslate_coal_ore
+      - copper_ore
+      - deepslate_copper_ore
+      - raw_copper_block
+      - diamond_ore
+      - deepslate_diamond_ore
+      - emerald_ore
+      - deepslate_emerald_ore
+      - gold_ore
+      - deepslate_gold_ore
+      - iron_ore
+      - deepslate_iron_ore
+      - raw_iron_block
+      - lapis_ore
+      - deepslate_lapis_ore
+      - redstone_ore
+      - deepslate_redstone_ore
+      replacement-blocks:
+      - stone
+      - oak_planks
+      - deepslate
+```
+
+</details>
+
+<details>
+  <summary>End and Nether Configuration</summary>
+
+Copy and paste this at the very bottom of `paper.yml`. See the
+[Per-World Configuration Guide](per-world-configuration.md) for more information. Remember to change
+the world names if your worlds are named differently!
+
+<!-- prettier-ignore -->
+```yml title="paper.yml"
+  world_nether:
+   anti-xray:
+      max-chunk-section-index: 7
+      max-block-height: 128
+      hidden-blocks:
+        - ancient_debris
+        - nether_gold_ore
+        - nether_quartz_ore
+  world_the_end:
+    anti-xray:
+      enabled: false
+```
+
+</details>
+
+### `engine-mode: 2`
+
+<details>
+  <summary>Overworld Configuration</summary>
+
+Replace the existing `anti-xray` block in `paper.yml` (under `world-settings.default`) with the
+following:
+
+<!-- prettier-ignore -->
+```yaml title="paper.yml"
+    anti-xray:
+      enabled: true
+      engine-mode: 2
+      chunk-edge-mode: 2
+      max-chunk-section-index: 3
+      # As of 1.18 some ores are generated much higher.
+      # Please adjust the max-block-height setting at your own discretion.
+      # https://minecraft.fandom.com/wiki/Ore might be helpful.
+      max-block-height: 64
+      update-radius: 2
+      lava-obscures: false
+      use-permission: false
+      hidden-blocks:
+      # You can add air here such that many holes are generated.
+      # This works well against cave finders but may cause client FPS drops for all players.
+      - air
+      - copper_ore
+      - deepslate_copper_ore
+      - raw_copper_block
+      - diamond_ore
+      - deepslate_diamond_ore
+      - gold_ore
+      - deepslate_gold_ore
+      - iron_ore
+      - deepslate_iron_ore
+      - raw_iron_block
+      - lapis_ore
+      - deepslate_lapis_ore
+      - redstone_ore
+      - deepslate_redstone_ore
+      replacement-blocks:
+      # Chest is a tile entity and can't be added to hidden-blocks in engine-mode: 2.
+      # But adding chest here will hide buried treasures, if max-chunk-section-index is increased.
+      - chest
+      - amethyst_block
+      - andesite
+      - budding_amethyst
+      - calcite
+      - coal_ore
+      - deepslate_coal_ore
+      - deepslate
+      - diorite
+      - dirt
+      - emerald_ore
+      - deepslate_emerald_ore
+      - granite
+      - gravel
+      - oak_planks
+      - smooth_basalt
+      - stone
+      - tuff
+```
+
+</details>
+
+<details>
+  <summary>End and Nether Configuration</summary>
+
+Copy and paste this at the very bottom of `paper.yml`. See the
+[Per-World Configuration Guide](per-world-configuration.md) for more information. Remember to change
+the world names if your worlds are named differently!
+
+<!-- prettier-ignore -->
+```yml title="paper.yml"
+  world_nether:
+    anti-xray:
+      max-chunk-section-index: 7
+      max-block-height: 128
+      hidden-blocks:
+        - air # See note about air above.
+        - ancient_debris
+        - bone_block
+        - glowstone
+        - magma_block
+        - nether_bricks
+        - nether_gold_ore
+        - nether_quartz_ore
+        - polished_blackstone_bricks
+      replacement-blocks:
+        - basalt
+        - blackstone
+        - gravel
+        - netherrack
+        - soul_sand
+        - soul_soil
+  world_the_end:
+    anti-xray:
+      enabled: false
+```
+
+</details>

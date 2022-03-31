@@ -34,6 +34,7 @@ const sidebars: SidebarsConfig = {
           label: "How-to Guides",
           items: [
             "paper/how-to/per-world-configuration",
+            "paper/how-to/anti-xray",
             "paper/how-to/update",
             "paper/how-to/aikars-flags",
           ],

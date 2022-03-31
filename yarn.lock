@@ -4768,7 +4768,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"copy-text-to-clipboard@npm:3.0.1, copy-text-to-clipboard@npm:^3.0.1":
+"copy-text-to-clipboard@npm:^3.0.1":
   version: 3.0.1
   resolution: "copy-text-to-clipboard@npm:3.0.1"
   checksum: 4c301b9a65c8bf337e26a74d28849096651697fac829a364c463df81ba5ddfeea0741214f9f1232832fffd229ebd5659d3abcccea3fe54d7010a22e515cc38bc
@@ -5373,7 +5373,6 @@ __metadata:
     "@types/node": 17.0.18
     "@types/prettier": 2.4.4
     clsx: 1.1.1
-    copy-text-to-clipboard: 3.0.1
     docusaurus-plugin-custom-tags: "workspace:^"
     is-ci: ^3.0.1
     prettier: 2.6.1

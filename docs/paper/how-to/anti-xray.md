@@ -89,7 +89,7 @@ following:
       lava-obscures: false
       use-permission: false
       hidden-blocks:
-      # There's no chance to hide dungeon chests but buried treasures will be hidden.
+      # There's no chance to hide dungeon chests as they are entirely surrounded by air, but buried treasures will be hidden.
       - chest
       - coal_ore
       - deepslate_coal_ore
@@ -110,6 +110,7 @@ following:
       - redstone_ore
       - deepslate_redstone_ore
       replacement-blocks:
+      # The replacement-blocks list is not used in engine-mode: 1. Changing this will have no effect.
       - stone
       - oak_planks
       - deepslate
@@ -183,7 +184,7 @@ following:
       - deepslate_redstone_ore
       replacement-blocks:
       # Chest is a tile entity and can't be added to hidden-blocks in engine-mode: 2.
-      # But adding chest here will hide buried treasures, if max-chunk-section-index is increased.
+      # But adding chest here will hide buried treasures, if max-block-height is increased.
       - chest
       - amethyst_block
       - andesite

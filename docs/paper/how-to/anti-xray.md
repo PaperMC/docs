@@ -15,12 +15,15 @@ other "fake" blocks (`replacement-blocks`), typically stone or similar. In contr
 `engine-mode: 2` is designed to replace many default blocks, such as stone or deepslate, with "fake"
 ores, preventing real ores from being located.
 
-The following image[^1] shows how each mode will look for a player using Xray with the recommended
-configuration.
+The following images[^1] show how each mode will look for a player using Xray with the recommended
+configuration in both the overworld and nether.
 
-[^1]: Image by `Oberfail#2096`, posted in the [PaperMC Discord](https://discord.gg/papermc). ​
+[^1]:
+    Image design by `Oberfail`, initially posted in the
+    [PaperMC Discord](https://discord.gg/papermc). ​
 
-![Anti-Xray Mode Comparison](assets/anti-xray-comparison.png)
+![Overworld Anti-Xray Comparison](assets/anti-xray-overworld.png)
+![Nether Anti-Xray Comparison](assets/anti-xray-nether.png)
 
 Especially on the client side, `engine-mode: 1` is much less computationally intensive, while
 `engine-mode: 2` may work better to prevent Xray. With `engine-mode: 1`, only ores that are

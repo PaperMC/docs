@@ -79,8 +79,6 @@ following:
     anti-xray:
       enabled: true
       engine-mode: 1
-      chunk-edge-mode: 2
-      max-chunk-section-index: 3
       # As of 1.18 some ores are generated much higher.
       # Please adjust the max-block-height setting at your own discretion.
       # https://minecraft.fandom.com/wiki/Ore might be helpful.
@@ -129,7 +127,6 @@ the world names if your worlds are named differently!
 ```yml title="paper.yml"
   world_nether:
    anti-xray:
-      max-chunk-section-index: 7
       max-block-height: 128
       hidden-blocks:
       - ancient_debris
@@ -155,8 +152,6 @@ following:
     anti-xray:
       enabled: true
       engine-mode: 2
-      chunk-edge-mode: 2
-      max-chunk-section-index: 3
       # As of 1.18 some ores are generated much higher.
       # Please adjust the max-block-height setting at your own discretion.
       # https://minecraft.fandom.com/wiki/Ore might be helpful.
@@ -218,7 +213,6 @@ the world names if your worlds are named differently!
 ```yml title="paper.yml"
   world_nether:
     anti-xray:
-      max-chunk-section-index: 7
       max-block-height: 128
       hidden-blocks:
       # See note about air and possibe client performance issues above.

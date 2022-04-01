@@ -10,10 +10,10 @@ This guide is a step-by-step walk-through for configuring anti-xray. For referen
 refer to the Anti-Xray section of the
 [Per-World Configuration Reference](../reference/paper-per-world-configuration.md#anti-xray).
 
-Anti-Xray has two different modes. `engine-mode: 1` replaces specified ores (`hidden-blocks`) with
-other "fake" blocks (`replacement-blocks`), typically stone or similar. In contrast,
-`engine-mode: 2` is designed to replace many default blocks, such as stone or deepslate, with "fake"
-ores, preventing real ores from being located.
+Anti-Xray has two different modes. `engine-mode: 1` replaces specified blocks (`hidden-blocks`) with
+other "fake" blocks, `stone`, `netherrack`, or `end_stone` based on the dimension. In contrast,
+`engine-mode: 2` will replace specified `replacement` blocks with the `hidden-blocks`. By creating
+so many fake `hidden-blocks`, it is impossible to locate the real blocks.
 
 The following images[^1] show how each mode will look for a player using Xray with the recommended
 configuration in both the overworld and nether.
@@ -28,7 +28,8 @@ configuration in both the overworld and nether.
 Especially on the client side, `engine-mode: 1` is much less computationally intensive, while
 `engine-mode: 2` may work better to prevent Xray. With `engine-mode: 1`, only ores that are
 completely covered by solid blocks will be hidden. Ores exposed to air in caves, or water from a
-lake will not be hidden. With `engine-mode: 2`, all ores will be hidden, including those exposed to
+lake will not be hidden. With `engine-mode: 2`, fake ores obstruct the view to real blocks. If `air`
+is added to `hidden-blocks`, `engine-mode: 2` will effectively hide all ores, even those exposed to
 air.
 
 :::caution Anti-Xray Bypasses
@@ -43,9 +44,14 @@ included out of the box.
 generation. If the client is able to obtain the world seed, it is able to know the real location of
 every generated ore, completely bypassing anti-xray. This can be partially worked around by making
 it harder for the client to reverse the world seed with the
-[`feature-seeds` configuration](../reference/paper-per-world-configuration.md#feature-seeds). Note
-that this is not a complete solution, and it may still be possible for a client to obtain the
-server's world seed.
+[`feature-seeds` configuration](../reference/paper-per-world-configuration.md#feature-seeds), in
+conjunction with the structure seed options in `spigot.yml`. Note that this is not a complete
+solution, and it may still be possible for a client to obtain the server's world seed. Using a
+different seed for each world may also be beneficial.
+
+**Ores Exposed to Air**: In both `engine-mode: 1` and `engine-mode: 2`, it is possible for a client
+to view ores that are exposed to air. This can be mitigated in `engine-mode: 2` by adding `air` to
+the `hidden-blocks` list. However, doing this may cause client performance issues for some players.
 
 :::
 
@@ -125,9 +131,9 @@ the world names if your worlds are named differently!
       max-chunk-section-index: 7
       max-block-height: 128
       hidden-blocks:
-        - ancient_debris
-        - nether_gold_ore
-        - nether_quartz_ore
+      - ancient_debris
+      - nether_gold_ore
+      - nether_quartz_ore
   world_the_end:
     anti-xray:
       enabled: false
@@ -214,22 +220,23 @@ the world names if your worlds are named differently!
       max-chunk-section-index: 7
       max-block-height: 128
       hidden-blocks:
-        - air # See note about air above.
-        - ancient_debris
-        - bone_block
-        - glowstone
-        - magma_block
-        - nether_bricks
-        - nether_gold_ore
-        - nether_quartz_ore
-        - polished_blackstone_bricks
+      # See note about air and possibe client performance issues above.
+      - air
+      - ancient_debris
+      - bone_block
+      - glowstone
+      - magma_block
+      - nether_bricks
+      - nether_gold_ore
+      - nether_quartz_ore
+      - polished_blackstone_bricks
       replacement-blocks:
-        - basalt
-        - blackstone
-        - gravel
-        - netherrack
-        - soul_sand
-        - soul_soil
+      - basalt
+      - blackstone
+      - gravel
+      - netherrack
+      - soul_sand
+      - soul_soil
   world_the_end:
     anti-xray:
       enabled: false

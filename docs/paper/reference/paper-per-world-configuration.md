@@ -692,7 +692,8 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - lava-obscures
   - **default**: false
   - **description**: Whether to obfuscate blocks touching lava. Does not work well with
-    non-stone-like ore textures.
+    non-stone-like ore textures. This is because lava, while being mostly opaque, does not cover
+    blocks fully at the surface.
 - use-permission
   - **default**: false
   - **description**: Whether to allow players with the `paper.antixray.bypass` permission to bypass
@@ -705,17 +706,26 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
     deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
     mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore,
     deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]
-  - **description**: With `engine-mode: 1`, these blocks will be replaced by `replacement-blocks`.
-    Air blocks are not allowed here in `engine-mode: 1`.
+  - **description**: With `engine-mode: 1`, these blocks will be replaced by `stone`, `netherrack`,
+    or `end_stone`, based on the dimension. All types of air blocks are ignored on this list.
 
-    With `engine-mode: 2`, these blocks will be randomly placed in the world, replacing
-    `replacement-blocks`. Tile entities are not allowed here in `engine-mode: 2`. Individual blocks
-    may be added multiple times, increasing their chance of being placed. The default block states
-    are placed.
+    With `engine-mode: 2`, these blocks will be randomly placed in the world, replacing both
+    `hidden-blocks` and `replacement-blocks`. Tile entities, such as chests or spawners, are not
+    allowed on this list. Individual blocks may be added multiple times, increasing their chance of
+    being placed. The default block states are placed.
+
+  - **note**: This list is using Mojang server names, _not_ bukkit names.
 
 - replacement-blocks:
+
   - **default**: [stone, oak_planks]
-  - **description**: List of blocks that should be replaced by hidden-blocks in engine mode 2.
+  - **description**: With `engine-mode: 1`, replacement blocks are not used. Changing this list will
+    have no effect.
+
+    With `engine-mode: 2`, both `replacement-blocks` and `hidden-blocks` are randomly replaced by
+    `hidden-blocks.` While tile entities are ignored in the `hidden-blocks` list, they may be added
+    to the `replacement-blocks` list. All types of air blocks are ignored here.
+
   - **note**: This list is using Mojang server names, _not_ bukkit names.
 
 ### viewdistances

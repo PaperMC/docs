@@ -51,7 +51,8 @@ different seed for each world may also be beneficial.
 
 **Ores Exposed to Air**: In both `engine-mode: 1` and `engine-mode: 2`, it is possible for a client
 to view ores that are exposed to air. This can be mitigated in `engine-mode: 2` by adding `air` to
-the `hidden-blocks` list. However, doing this may cause client performance issues for some players.
+the `hidden-blocks` list. However, doing this may cause client performance issues (FPS drops) for
+some players.
 
 :::
 

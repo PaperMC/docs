@@ -718,7 +718,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 
 - replacement-blocks:
 
-  - **default**: [stone, oak_planks]
+  - **default**: [stone, oak_planks, deepslate]
   - **description**: With `engine-mode: 1`, replacement blocks are not used. Changing this list will
     have no effect.
 

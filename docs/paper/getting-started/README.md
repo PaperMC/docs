@@ -1,3 +1,6 @@
+---
+pagination_next: paper/getting-started/adding-plugins
+---
 # Getting Started
 
 ## Requirements

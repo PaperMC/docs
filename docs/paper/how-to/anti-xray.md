@@ -2,18 +2,23 @@
 
 > Originally written and maintained by [stonar96](https://github.com/stonar96).
 
-Paper includes obfuscation based anti-xray, configurable per world in paper.yml. If you aren't
-already familiar with per world configuration, please take a moment to familiarize yourself with the
-[Per World Configuration Guide](per-world-configuration.md).
+Paper includes an obfuscation-based Anti-Xray with two modes, configurable per world in paper.yml.
 
-This guide is a step-by-step walk-through for configuring anti-xray. For reference documentation,
+:::info Per World Configuration
+
+If you aren't already familiar with per world configuration, please take a moment to familiarize
+yourself with the [Per World Configuration Guide](per-world-configuration.md).
+
+:::
+
+This guide is a step-by-step walk-through for configuring Anti-Xray. For reference documentation,
 refer to the Anti-Xray section of the
 [Per-World Configuration Reference](../reference/paper-per-world-configuration.md#anti-xray).
 
 Anti-Xray has two different modes. `engine-mode: 1` replaces specified blocks (`hidden-blocks`) with
 other "fake" blocks, `stone`, `netherrack`, or `end_stone` based on the dimension. In contrast,
-`engine-mode: 2` will replace specified `replacement` blocks with the `hidden-blocks`. By creating
-so many fake `hidden-blocks`, it is impossible to locate the real blocks.
+`engine-mode: 2` will replace both `hidden-blocks` and `replacement-blocks` with randomly generated
+`hidden-blocks`.
 
 The following images[^1] show how each mode will look for a player using Xray with the recommended
 configuration in both the overworld and nether.
@@ -26,23 +31,22 @@ configuration in both the overworld and nether.
 ![Nether Anti-Xray Comparison](assets/anti-xray-nether.png)
 
 Especially on the client side, `engine-mode: 1` is much less computationally intensive, while
-`engine-mode: 2` may work better to prevent Xray. With `engine-mode: 1`, only ores that are
-completely covered by solid blocks will be hidden. Ores exposed to air in caves, or water from a
-lake will not be hidden. With `engine-mode: 2`, fake ores obstruct the view to real blocks. If `air`
-is added to `hidden-blocks`, `engine-mode: 2` will effectively hide all ores, even those exposed to
-air.
+`engine-mode: 2` may better prevent Xray. With `engine-mode: 1`, only ores that are entirely covered
+by solid blocks will be hidden. Ores exposed to air in caves or water from a lake will not be
+hidden. With `engine-mode: 2`, fake ores obstruct the view of real blocks. If `air` is added to
+`hidden-blocks`, `engine-mode: 2` will effectively hide all ores, even those exposed to air.
 
 :::caution Anti-Xray Bypasses
 
 **Range Extension**: While Anti-Xray alone will prevent the majority of users from Xraying on your
 server, it is not by any means infallible. Because of how Anti-Xray is (and has to be) implemented,
-it is possible to, on a default server, extend the range of real ores you are able to see by a not
-insignificant amount. This can be mitigated by any competent anti cheat plugin; however, this is not
+it is possible to, on a default server, extend the range of real ores you can see by a not
+insignificant amount. This can be mitigated by any competent anti-cheat plugin; however, this is not
 included out of the box.
 
 **Seed Reversing**: Another attack vector is the deterministic nature of Minecraft's world
 generation. If the client is able to obtain the world seed, it is able to know the real location of
-every generated ore, completely bypassing anti-xray. This can be partially worked around by making
+every generated ore, completely bypassing Anti-Xray. This can be partially worked around by making
 it harder for the client to reverse the world seed with the
 [`feature-seeds` configuration](../reference/paper-per-world-configuration.md#feature-seeds), in
 conjunction with the structure seed options in `spigot.yml`. Note that this is not a complete

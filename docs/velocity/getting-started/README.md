@@ -1,6 +1,3 @@
----
-pagination_next: velocity/getting-started/why-velocity
----
 # Getting Started
 
 This page covers how to install and set up a minimal configuration of Velocity.

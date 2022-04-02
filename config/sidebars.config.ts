@@ -24,7 +24,7 @@ const sidebars: SidebarsConfig = {
             id: "paper/getting-started/README",
           },
           items: [
-            "paper/getting-started/README",
+            { type: "ref", id: "paper/getting-started/README" },
             "paper/getting-started/adding-plugins",
             "paper/getting-started/migration",
           ],
@@ -64,7 +64,7 @@ const sidebars: SidebarsConfig = {
             id: "velocity/getting-started/README",
           },
           items: [
-            "velocity/getting-started/README",
+            { type: "ref", id: "velocity/getting-started/README" },
             "velocity/getting-started/why-velocity",
             "velocity/getting-started/forwarding",
             "velocity/getting-started/faq",
@@ -98,7 +98,7 @@ const sidebars: SidebarsConfig = {
             id: "velocity/developers/README",
           },
           items: [
-            "velocity/developers/README",
+            { type: "ref", id: "velocity/developers/README" },
             {
               type: "category",
               label: "Getting Started",

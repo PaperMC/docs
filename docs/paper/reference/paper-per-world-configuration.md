@@ -714,8 +714,6 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
     allowed on this list. Individual blocks may be added multiple times, increasing their chance of
     being placed. The default block states are placed.
 
-  - **note**: This list is using Mojang server names, _not_ bukkit names.
-
 - replacement-blocks:
 
   - **default**: [stone, oak_planks, deepslate]
@@ -725,8 +723,6 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
     With `engine-mode: 2`, both `replacement-blocks` and `hidden-blocks` are randomly replaced by
     `hidden-blocks.` While tile entities are ignored in the `hidden-blocks` list, they may be added
     to the `replacement-blocks` list. All types of air blocks are ignored here.
-
-  - **note**: This list is using Mojang server names, _not_ bukkit names.
 
 ### viewdistances
 

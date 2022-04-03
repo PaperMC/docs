@@ -1,6 +1,7 @@
 ---
 slug: /paper/anti-xray
 ---
+
 # Configuring Anti-Xray
 
 > Originally written and maintained by [stonar96](https://github.com/stonar96).
@@ -70,7 +71,7 @@ The recommended configuration for both `engine-mode: 1` and `engine-mode: 2` is 
 :::tip Spacing
 
 YAML cares about whitespace! The example configuration below is already formatted correctly. Ensure
-the formatting remains the same.
+formatting remains unchanged by using the "copy" button in the top right of each example.
 
 :::
 

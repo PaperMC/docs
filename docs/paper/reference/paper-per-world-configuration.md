@@ -665,9 +665,8 @@ global config, see the [Paper Global Configuration Reference](paper-global-confi
 
 :::tip
 
-More in-depth anti-xray documentation as well as recommended configuration for both engine modes can
-be found in
-[this guide by stonar96](https://gist.github.com/stonar96/ba18568bd91e5afd590e8038d14e245e).
+Recommended configuration for both `engine-mode` `1` and `2` can be found in the
+[Configuring Anti-Xray](../how-to/anti-xray.md) guide.
 
 :::
 
@@ -680,32 +679,50 @@ be found in
     and 2 is to replace all blocks with random block data.
 - max-block-height
   - **default**: 64
-  - **description**: Sets the maximum height at which anti-xray will attempt to hide ores. Only
-    multiples of 16 are allowed. Other values will be rounded down to a multiple of 16.
+  - **description**: Sets the maximum height (`y` coordinate, starting from the bottom of the world)
+    to which anti-xray will operate. Only integer multiples of 16 are accepted. All other values
+    will be rounded down. The [Minecraft Wiki page about Ore](https://minecraft.fandom.com/wiki/Ore)
+    may be helpful in determining the best value for you.
 - update-radius
   - **default**: 2
-  - **description**: Controls the distance in blocks from air or water that hidden-blocks are hidden
-    by the anti-xray engine. The maximum allowed value is 2.
+  - **description**: Radius for block updates which will be sent containing real block data when the
+    client interacts with a block. Only values `0`, `1`, and `2` are accepted. Values smaller than
+    `0` will be rounded up to `0`, while values larger than `2` will be rounded down to `2`. `0` is
+    only designed for testing purposes. Do not use it in production.
 - lava-obscures
   - **default**: false
-  - **description**: Whether or not to obfuscate blocks touching lava.
+  - **description**: Whether to obfuscate blocks touching lava. Does not work well with
+    non-stone-like ore textures. This is because lava, while being mostly opaque, does not cover
+    blocks fully at the surface.
 - use-permission
   - **default**: false
-  - **description**: Whether or not to allow players with the `paper.antixray.bypass` permission to
-    bypass anti-xray. Checking this permission is disabled by default as legacy permission plugins
-    may struggle with the number of checks made. This should only be used with modern permission
+  - **description**: Whether to allow players with the `paper.antixray.bypass` permission to bypass
+    anti-xray. Checking this permission is disabled by default as legacy permission plugins may
+    struggle with the number of checks made. This should only be used with modern permission
     plugins.
 - hidden-blocks
+
   - **default**: [copper_ore, deepslate_copper_ore, gold_ore, deepslate_gold_ore, iron_ore,
     deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
     mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore,
     deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]
-  - **description**: List of blocks to be hidden in engine mode
-  - **note**: This list is using Mojang server names, _not_ bukkit names.
+  - **description**: With `engine-mode: 1`, these blocks will be replaced by `stone`, `netherrack`,
+    or `end_stone`, based on the dimension. All types of air blocks are ignored on this list.
+
+    With `engine-mode: 2`, these blocks will be randomly placed in the world, replacing both
+    `hidden-blocks` and `replacement-blocks`. Tile entities, such as chests or spawners, are not
+    allowed on this list. Individual blocks may be added multiple times, increasing their chance of
+    being placed. The default block states are placed.
+
 - replacement-blocks:
-  - **default**: [stone, oak_planks]
-  - **description**: List of blocks that should be replaced by hidden-blocks in engine mode 2.
-  - **note**: This list is using Mojang server names, _not_ bukkit names.
+
+  - **default**: [stone, oak_planks, deepslate]
+  - **description**: With `engine-mode: 1`, replacement blocks are not used. Changing this list will
+    have no effect.
+
+    With `engine-mode: 2`, both `replacement-blocks` and `hidden-blocks` are randomly replaced by
+    `hidden-blocks.` While tile entities are ignored in the `hidden-blocks` list, they may be added
+    to the `replacement-blocks` list. All types of air blocks are ignored here.
 
 ### viewdistances
 

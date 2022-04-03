@@ -1,3 +1,6 @@
+---
+slug: /paper/anti-xray
+---
 # Configuring Anti-Xray
 
 > Originally written and maintained by [stonar96](https://github.com/stonar96).

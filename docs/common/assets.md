@@ -28,4 +28,4 @@ You may not:
 - Sell the PaperMC logomark on its own or as part of other products without explicit permission.
 - Alter the transparency of any of the elements in the PaperMC logomark
 
-![PaperMC logomark](papermc_logomark_500.png)
+![PaperMC logomark](papermc-logomark-500.png)

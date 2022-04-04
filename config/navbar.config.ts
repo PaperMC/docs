@@ -1,11 +1,13 @@
-import {Navbar} from "@docusaurus/theme-common";
+import { Navbar } from "@docusaurus/theme-common";
 
-const navbar: Omit<Navbar, "style"> = { // don't specify style here, we want it to be dynamic
-  title: "PaperMC Docs",
-  hideOnScroll: true,
+// don't specify style here, we want it to be dynamic
+const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
   logo: {
-    src: "img/logo.svg",
-    alt: "PaperMC Logo",
+    src: "img/logo-marker-light.svg",
+    srcDark: "img/logo-marker-dark.svg",
+    width: 130,
+    height: 32,
+    alt: "PaperMC Docs",
   },
   items: [
     {
@@ -21,6 +23,11 @@ const navbar: Omit<Navbar, "style"> = { // don't specify style here, we want it 
     {
       to: "waterfall",
       label: "Waterfall",
+      position: "left",
+    },
+    {
+      to: "common",
+      label: "Common",
       position: "left",
     },
     {

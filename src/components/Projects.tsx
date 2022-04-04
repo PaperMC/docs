@@ -22,6 +22,12 @@ const projects: Project[] = [
     repo: "PaperMC/Waterfall",
     link: "/waterfall",
   },
+  {
+    title: "Common",
+    description: "Pages shared between all PaperMC projects.",
+    repo: "PaperMC",
+    link: "/common",
+  },
 ];
 
 function Project(project: Project) {

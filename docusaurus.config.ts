@@ -1,4 +1,5 @@
 import type { Config } from "@docusaurus/types";
+import type { Options } from "@docusaurus/plugin-content-docs";
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
 import vsDark from "prism-react-renderer/themes/vsDark";
 import isCI from "is-ci";
@@ -11,23 +12,31 @@ const url = isPreview ? process.env.PREVIEW_URL : "https://docs.papermc.io";
 const baseUrl = isPreview ? process.env.PREVIEW_BASE_URL : "/";
 const completeUrl = url + baseUrl;
 
+const docsCommon: Options = {
+  breadcrumbs: true,
+  editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
+  editCurrentVersion: true,
+  sidebarCollapsible: true,
+  sidebarCollapsed: false,
+  remarkPlugins: [remarkA11yEmoji],
+  showLastUpdateAuthor: true,
+  showLastUpdateTime: true,
+};
+
 const config: Config = {
   title: "PaperMC Documentation",
-  tagline: "Documentation for projects within the PaperMC organization.",
-  customFields: {
-    description:
-      "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
-  },
+  tagline:
+    "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
   url: url,
   baseUrl: baseUrl,
   onBrokenLinks: isCI ? "throw" : "warn",
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
   onDuplicateRoutes: isCI ? "throw" : "error",
   favicon: "img/favicon.ico",
-  organizationName: "PaperMC",
-  projectName: "docs",
   trailingSlash: false,
   noIndex: isPreview,
+  baseUrlIssueBanner: false,
+  clientModules: [require.resolve("./src/css/custom.css")],
 
   webpack: {
     jsLoader: (isServer) => ({
@@ -47,31 +56,65 @@ const config: Config = {
     }),
   },
 
-  presets: [
+  themes: [
     [
       "classic",
       {
-        debug: !isCI || isPreview,
-        theme: {
-          customCss: [require.resolve("./src/css/custom.css")],
-        },
-        docs: {
-          editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
-          sidebarCollapsible: true,
-          remarkPlugins: [remarkA11yEmoji],
-          routeBasePath: "/",
-          sidebarPath: require.resolve("./config/sidebars.config"),
-        },
-        blog: false,
+        respectPrefersColorScheme: true,
       },
     ],
+    "@docusaurus/theme-search-algolia",
   ],
 
   plugins: [
     [
-      "@docusaurus/plugin-pwa",
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "common",
+        path: "docs/common",
+        routeBasePath: "/",
+        sidebarPath: require.resolve("./config/sidebar.common"),
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "paper",
+        path: "docs/paper",
+        routeBasePath: "paper",
+        sidebarPath: require.resolve("./config/sidebar.paper"),
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "velocity",
+        path: "docs/velocity",
+        routeBasePath: "velocity",
+        sidebarPath: require.resolve("./config/sidebar.velocity"),
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "waterfall",
+        path: "docs/waterfall",
+        routeBasePath: "waterfall",
+        sidebarPath: require.resolve("./config/sidebar.waterfall"),
+      },
+    ],
+    [
+      "content-pages",
+      {
+        remarkPlugins: [remarkA11yEmoji],
+      },
+    ],
+    [
+      "pwa",
       {
         offlineModeActivationStrategies: ["appInstalled", "standalone", "queryString"],
         pwaHead: [

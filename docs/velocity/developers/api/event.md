@@ -174,7 +174,7 @@ First we need to create a class for our event. In this tutorial we'll assume you
 messaging plugin, and thus use a `PrivateMessageEvent`. Most of this part is boilerplate.
 
 ```java
-public class PrivateMessageEvent implements Event {
+public class PrivateMessageEvent {
 
   private final Player sender;
   private final Player recipient;

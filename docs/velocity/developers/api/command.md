@@ -23,6 +23,7 @@ and dispatch command actions. You can register your own `CommandNode`s by wrappi
 package com.example.velocityplugin;
 
 import com.google.inject.Inject;
+import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.velocitypowered.api.command.BrigadierCommand;
@@ -63,9 +64,9 @@ public final class HelloWorldPlugin {
                 Component message = Component.text("Hello World", NamedTextColor.AQUA);
                 source.sendMessage(message);
 
-                // Returning 1 means that the execution was successful
+                // Returning Command.SINGLE_SUCCESS means that the execution was successful
                 // Returning BrigadierCommand.FORWARD will send the command to the server
-                return 1;
+                return Command.SINGLE_SUCCESS;
             })
             // Using the "then" method you can add subarguments to the command.
             // For example, this subcommand will be executed when using the command "/test subcommand"

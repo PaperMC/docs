@@ -22,6 +22,7 @@ and dispatch command actions. You can register your own `CommandNode`s by wrappi
 ```java
 package com.example.velocityplugin;
 
+import com.google.inject.Inject;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.velocitypowered.api.command.BrigadierCommand;
@@ -29,24 +30,65 @@ import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
+import com.velocitypowered.api.proxy.ProxyServer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
 @Plugin(id = "helloworld")
-public class HelloWorldPlugin {
+public final class HelloWorldPlugin {
+    private final ProxyServer proxy;
+
+    @Inject
+    public HelloWorldPlugin(ProxyServer proxy) {
+        this.proxy = proxy;
+    }
+
+    @Subscribe
+    public void onProxyInitialize(ProxyInitializeEvent event) {
+        this.createBrigadierCommand();
+    }
 
     public void createBrigadierCommand() {
         LiteralCommandNode<CommandSource> helloNode = LiteralArgumentBuilder
             .<CommandSource>literal("test")
+            // Here you can filter the subjects that can execute the command.
+            // This is the ideal place to do "hasPermission" checks
+            .requires(source -> source.hasPermission("test.permission"))
+            // Here you can add the logic that will be used in
+            // the execution of the "/test" command without any argument
             .executes(context -> {
+                // Here you get the subject that executed the command
+                CommandSource source = context.getSource();
+
                 Component message = Component.text("Hello World", NamedTextColor.AQUA);
-                context.getSource().sendMessage(message);
-                return 1; // indicates success
+                source.sendMessage(message);
+
+                // Returning 1 means that the execution was successful
+                // Returning BrigadierCommand.FORWARD will send the command to the server
+                return 1;
             })
+            // Using the "then" method you can add subarguments to the command.
+            // For example, this subcommand will be executed when using the command "/test subcommand"
+            .then(LiteralArgumentBuilder.<CommandSource>literal("argument"))
             .build();
 
         // BrigadierCommand implements Command
         BrigadierCommand command = new BrigadierCommand(helloNode);
+
+        // Obtain the Velocity's command manager
+        CommandManager commandManager = proxy.getCommandManager();
+
+        // Here you can add meta for the command, as aliases and the plugin to which it belongs (RECOMMENDED)
+        // This step is optional, since you can register the BrigadierCommand directly without any alias or
+        // extra feature with the CommandManager#register(BrigadierCommand) method
+        CommandMeta commandMeta = commandManager.metaBuilder(brigadierCommand)
+            // This will create a new command "/example"
+            // with the same arguments and functionality as the command "/test"
+            .aliases("example")
+            .build();
+
+        // Here you can register the command with the specified command meta
+        commandManager.register(commandMeta, brigadierCommand);
     }
 }
 ```
@@ -70,6 +112,8 @@ package com.example.velocityplugin;
 
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.command.SimpleCommand;
+import java.util.concurrent.CompletableFuture;
+import java.util.List;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
@@ -84,9 +128,30 @@ public final class TestCommand implements SimpleCommand {
         source.sendMessage(Component.text("Hello World!").color(NamedTextColor.AQUA));
     }
 
+    // This method allows you to control who can execute the command.
+    // If the possible executor does not have the necessary permission or requirement,
+    // the command execution will be sent directly to the server where it is located,
+    // completely hiding the command from the proxy including its visibility among
+    // the available commands and its execution
     @Override
     public boolean hasPermission(final Invocation invocation) {
         return invocation.source().hasPermission("command.test");
+    }
+
+    // With this method you can control the suggestions to send
+    // to the CommandSource according to the arguments
+    // it has already written or other requirements you need
+    @Override
+    public List<String> suggest(final Invocation invocation) {
+        return List.of();
+    }
+
+    // Here you can offer argument suggestions in the same way as the previous method,
+    // but asynchronously. It is recommended to use this method instead of the previous one
+    // especially in cases where you make a more extensive logic to provide the suggestions
+    @Override
+    public CompletableFuture<List<String>> suggestAsync(final Invocation invocation) {
+        return CompletableFuture.completedFuture(List.of());
     }
 }
 ```

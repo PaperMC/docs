@@ -22,34 +22,17 @@ and dispatch command actions. You can register your own `CommandNode`s by wrappi
 ```java
 package com.example.velocityplugin;
 
-import com.google.inject.Inject;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.velocitypowered.api.command.BrigadierCommand;
 import com.velocitypowered.api.command.CommandSource;
-import com.velocitypowered.api.event.Subscribe;
-import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
-import com.velocitypowered.api.plugin.Plugin;
-import com.velocitypowered.api.proxy.ProxyServer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
-@Plugin(id = "helloworld")
-public final class HelloWorldPlugin {
-    private final ProxyServer proxy;
+public final class TestBrigadierCommand {
 
-    @Inject
-    public HelloWorldPlugin(ProxyServer proxy) {
-        this.proxy = proxy;
-    }
-
-    @Subscribe
-    public void onProxyInitialize(ProxyInitializeEvent event) {
-        this.createBrigadierCommand();
-    }
-
-    public void createBrigadierCommand() {
+    public static BrigadierCommand createBrigadierCommand() {
         LiteralCommandNode<CommandSource> helloNode = LiteralArgumentBuilder
             .<CommandSource>literal("test")
             // Here you can filter the subjects that can execute the command.
@@ -74,22 +57,7 @@ public final class HelloWorldPlugin {
             .build();
 
         // BrigadierCommand implements Command
-        BrigadierCommand command = new BrigadierCommand(helloNode);
-
-        // Obtain the Velocity's command manager
-        CommandManager commandManager = proxy.getCommandManager();
-
-        // Here you can add meta for the command, as aliases and the plugin to which it belongs (RECOMMENDED)
-        // This step is optional, since you can register the BrigadierCommand directly without any alias or
-        // extra feature with the CommandManager#register(BrigadierCommand) method
-        CommandMeta commandMeta = commandManager.metaBuilder(brigadierCommand)
-            // This will create a new command "/example"
-            // with the same arguments and functionality as the command "/test"
-            .aliases("example")
-            .build();
-
-        // Here you can register the command with the specified command meta
-        commandManager.register(commandMeta, brigadierCommand);
+        return new BrigadierCommand(helloNode);
     }
 }
 ```
@@ -207,16 +175,45 @@ The `CommandMeta` contains the case-insensitive aliases and more advanced featur
 Manager provides a meta builder via the `#metaBuilder(String alias)` method.
 
 ```java
-CommandMeta meta = commandManager.metaBuilder("test")
-    // Specify other aliases (optional)
-    .aliases("otherAlias", "anotherAlias")
-    .build();
-```
+package com.example.velocityplugin;
 
-Finally,
+import com.google.inject.Inject;
+import com.velocitypowered.api.command.BrigadierCommand;
+import com.velocitypowered.api.event.Subscribe;
+import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
+import com.velocitypowered.api.plugin.Plugin;
+import com.velocitypowered.api.proxy.ProxyServer;
 
-```java
-commandManager.register(meta, new TestCommand());
+@Plugin(id = "helloworld")
+public final class HelloWorldPlugin {
+    private final ProxyServer proxy;
+
+    @Inject
+    public HelloWorldPlugin(ProxyServer proxy) {
+        this.proxy = proxy;
+    }
+
+    @Subscribe
+    public void onProxyInitialize(ProxyInitializeEvent event) {
+        CommandManager commandManager = proxy.getCommandManager();
+        // Here you can add meta for the command, as aliases and the plugin to which it belongs (RECOMMENDED)
+        CommandMeta commandMeta = commandManager.metaBuilder("test")
+            // This will create new alias por the command "/test"
+            // with the same arguments and functionality
+            .aliases("otherAlias", "anotherAlias")
+            .plugin(this)
+            .build();
+
+        // You can replace this with "new EchoCommand()" or "new TestCommand()"
+        // SimpleCommand simpleCommand = new TestCommand();
+        // RawCommand rawCommand = new EchoCommand();
+        // The registration is done in the same way, since all 3 interfaces implement "Command"
+        BrigadierCommand commandToRegister = TestBrigadierCommand.createBrigadierCommand();
+
+        // Finally...
+        commandManager.register(meta, commandToRegister);
+    }
+}
 ```
 
 If you're registering a `BrigadierCommand`, you may prefer to use the `#register(BrigadierCommand)`

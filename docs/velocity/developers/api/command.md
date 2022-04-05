@@ -135,10 +135,9 @@ public final class TestCommand implements SimpleCommand {
     }
 
     // This method allows you to control who can execute the command.
-    // If the possible executor does not have the necessary permission or requirement,
-    // the command execution will be sent directly to the server where it is located,
-    // completely hiding the command from the proxy including its visibility among
-    // the available commands and its execution
+    // If the executor does not have the required permission,
+    // the execution of the command and the control of its autocompletion
+    // will be sent directly to the server on which the sender is located
     @Override
     public boolean hasPermission(final Invocation invocation) {
         return invocation.source().hasPermission("command.test");

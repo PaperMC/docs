@@ -22,13 +22,15 @@ and dispatch command actions. You can register your own `CommandNode`s by wrappi
 ```java
 package com.example.velocityplugin;
 
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.velocitypowered.api.command.BrigadierCommand;
 import com.velocitypowered.api.command.CommandSource;
-import com.velocitypowered.api.command VelocityBrigadierMessage;
+import com.velocitypowered.api.command.VelocityBrigadierMessage;
+import com.velocitypowered.api.proxy.ProxyServer;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 
@@ -244,7 +246,7 @@ public final class HelloWorldPlugin {
         // SimpleCommand simpleCommand = new TestCommand();
         // RawCommand rawCommand = new EchoCommand();
         // The registration is done in the same way, since all 3 interfaces implement "Command"
-        BrigadierCommand commandToRegister = TestBrigadierCommand.createBrigadierCommand();
+        BrigadierCommand commandToRegister = TestBrigadierCommand.createBrigadierCommand(proxy);
 
         // Finally...
         commandManager.register(meta, commandToRegister);

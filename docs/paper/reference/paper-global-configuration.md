@@ -76,12 +76,6 @@ function itself. For per-world configuration, see the
   [luck formula by Aikar](https://gist.github.com/aikar/40281f6c73ec9b6fef7588e6461e1ba9), allowing
   luck to be applied to items that have no quality defined. Makes major changes to fishing formulas.
 
-### chunk-tasks-per-tick
-
-- **default**: 1000
-- **description**: How many chunk tasks may be done in the middle of ticks for all worlds. This is
-  helpful to rendering and chunk generation.
-
 ### enable-player-collisions
 
 - **default**: true

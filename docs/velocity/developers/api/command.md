@@ -55,7 +55,7 @@ public final class TestBrigadierCommand {
                 // Returning BrigadierCommand.FORWARD will send the command to the server
                 return Command.SINGLE_SUCCESS;
             })
-            // Using the "then" method you can add subarguments to the command.
+            // Using the "then" method, you can add subarguments to the command.
             // For example, this subcommand will be executed when using the command "/test <some argument>"
             // A RequiredArgumentBuilder is a type of argument in which you can enter some undefined data
             // of some kind. For example, this example uses a StringArgumentType.word() that requires
@@ -63,17 +63,17 @@ public final class TestBrigadierCommand {
             // that return data of type Boolean, Integer, Float, other String types, etc
             .then(RequiredArgumentBuilder.<CommandSource, String>argument("argument", StringArgumentType.word())
                 // Here you can define the hints to be provided in case the ArgumentType does not provide them.
-                // In this example the names of all connected players are provided
+                // In this example, the names of all connected players are provided
                 .suggests((ctx, builder) ->
                     // Here we provide the names of the players along with a tooltip,
                     // which can be used as an explanation of a specific argument or as a simple decoration
                     proxy.getAllPlayers().forEach(player -> builder.suggest(
                         player.getUsername(),
-                        // A VelocityBrigadierMessage receives as argument a component,
-                        // in this case the name of the player is provided with a rainbow
-                        // gradient thanks to MiniMessage (Library available since Velocity 3.1.2+)
+                        // A VelocityBrigadierMessage takes a component.
+                        // In this case, the player's name is provided with a rainbow
+                        // gradient created by MiniMessage (Library available since Velocity 3.1.2+)
                         VelocityBrigadierMessage.tooltip(
-                            MiniMessage.miniMessage().deserialize("<rainbow>"+player.getUsername())
+                            MiniMessage.miniMessage().deserialize("<rainbow>" + player.getUsername())
                         )
                     ))
                 )
@@ -236,7 +236,7 @@ public final class HelloWorldPlugin {
         CommandManager commandManager = proxy.getCommandManager();
         // Here you can add meta for the command, as aliases and the plugin to which it belongs (RECOMMENDED)
         CommandMeta commandMeta = commandManager.metaBuilder("test")
-            // This will create new alias por the command "/test"
+            // This will create a new alias for the command "/test"
             // with the same arguments and functionality
             .aliases("otherAlias", "anotherAlias")
             .plugin(this)
@@ -248,7 +248,7 @@ public final class HelloWorldPlugin {
         // The registration is done in the same way, since all 3 interfaces implement "Command"
         BrigadierCommand commandToRegister = TestBrigadierCommand.createBrigadierCommand(proxy);
 
-        // Finally...
+        // Finally, you can register the command
         commandManager.register(meta, commandToRegister);
     }
 }

@@ -1,8 +1,8 @@
-import {Navbar} from "@docusaurus/theme-common";
+import { Navbar } from "@docusaurus/theme-common";
 
-const navbar: Omit<Navbar, "style"> = { // don't specify style here, we want it to be dynamic
+// don't specify style or hideOnScroll here, we want it to be dynamic
+const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
   title: "PaperMC Docs",
-  hideOnScroll: true,
   logo: {
     src: "img/logo.svg",
     alt: "PaperMC Logo",

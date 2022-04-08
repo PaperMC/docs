@@ -28,6 +28,7 @@ const config: Config = {
   projectName: "docs",
   trailingSlash: false,
   noIndex: isPreview,
+  baseUrlIssueBanner: false,
 
   webpack: {
     jsLoader: (isServer) => ({

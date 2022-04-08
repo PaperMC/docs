@@ -3,9 +3,20 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 const sidebars: SidebarsConfig = {
   docs: [
     {
-      type: "link",
-      label: "Support Discord",
-      href: "https://discord.gg/papermc",
+      type: "category",
+      label: "Getting Help",
+      items: [
+        {
+          type: "link",
+          label: "Discord",
+          href: "https://discord.gg/papermc",
+        },
+        {
+          type: "link",
+          label: "Forums",
+          href: "https://forums.papermc.io",
+        },
+      ],
     },
     "README",
     {
@@ -33,7 +44,8 @@ const sidebars: SidebarsConfig = {
           type: "category",
           label: "How-to Guides",
           link: {
-            type: "generated-index"
+            type: "generated-index",
+            slug: "/category/paper/how-to-guides",
           },
           items: [
             "paper/how-to/per-world-configuration",
@@ -47,6 +59,7 @@ const sidebars: SidebarsConfig = {
           label: "Reference",
           link: {
             type: "generated-index",
+            slug: "/category/paper/reference",
           },
           items: [
             "paper/reference/paper-global-configuration",
@@ -81,7 +94,8 @@ const sidebars: SidebarsConfig = {
           type: "category",
           label: "How-to Guides",
           link: {
-            type: "generated-index"
+            type: "generated-index",
+            slug: "/category/velocity/how-to-guides",
           },
           items: [
             "velocity/how-to/security",
@@ -94,6 +108,7 @@ const sidebars: SidebarsConfig = {
           label: "Reference",
           link: {
             type: "generated-index",
+            slug: "/category/velocity/reference",
           },
           items: [
             "velocity/reference/configuration",
@@ -116,7 +131,8 @@ const sidebars: SidebarsConfig = {
               type: "category",
               label: "Getting Started",
               link: {
-                type: "generated-index"
+                type: "generated-index",
+                slug: "/category/velocity/developers/getting-started",
               },
               items: [
                 "velocity/developers/getting-started/creating-your-first-plugin",
@@ -128,7 +144,8 @@ const sidebars: SidebarsConfig = {
               type: "category",
               label: "How-to Guides",
               link: {
-                type: "generated-index"
+                type: "generated-index",
+                slug: "/category/velocity/developers/how-to-guides",
               },
               items: [
                 "velocity/developers/how-to/dependencies",
@@ -139,7 +156,8 @@ const sidebars: SidebarsConfig = {
               type: "category",
               label: "API",
               link: {
-                type: "generated-index"
+                type: "generated-index",
+                slug: "/category/velocity/developers/api",
               },
               items: [
                 "velocity/developers/api/event",
@@ -164,7 +182,9 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "Common",
       link: {
-        type: "generated-index"
+        type: "generated-index",
+        slug: "/category/common",
+        description: "Documentation relevant to all PaperMC projects.",
       },
       items: ["common/java-install"],
     },
@@ -172,7 +192,9 @@ const sidebars: SidebarsConfig = {
       type: "category",
       label: "PaperMC",
       link: {
-        type: "generated-index"
+        type: "generated-index",
+        slug: "/category/papermc",
+        description: "Information about the PaperMC Organization.",
       },
       items: ["papermc/downloads-api", "papermc/assets", "papermc/contact"],
     },

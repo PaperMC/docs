@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap");
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400;
+  src: url("../assets/JetBrainsMono-Regular.woff2") format("woff2");
+}
 
 :root {
   --ifm-color-primary: #0240dc;

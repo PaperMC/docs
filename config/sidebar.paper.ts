@@ -21,6 +21,10 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "How-to Guides",
+      link: {
+        type: "generated-index",
+        slug: "/category/paper/how-to-guides",
+      },
       items: [
         "how-to/per-world-configuration",
         "how-to/update",
@@ -31,6 +35,10 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "Reference",
+      link: {
+        type: "generated-index",
+        slug: "/category/paper/reference",
+      },
       items: ["reference/paper-global-configuration", "reference/paper-per-world-configuration"],
     },
   ],

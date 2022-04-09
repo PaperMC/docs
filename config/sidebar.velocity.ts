@@ -22,11 +22,19 @@ const sidebars: SidebarsConfig = {
     {
       type: "category",
       label: "How-to Guides",
+      link: {
+        type: "generated-index",
+        slug: "/category/velocity/how-to-guides",
+      },
       items: ["how-to/security", "how-to/tuning", "how-to/migration"],
     },
     {
       type: "category",
       label: "Reference",
+      link: {
+        type: "generated-index",
+        slug: "/category/velocity/reference",
+      },
       items: [
         "reference/configuration",
         "reference/commands",
@@ -47,6 +55,10 @@ const sidebars: SidebarsConfig = {
         {
           type: "category",
           label: "Getting Started",
+          link: {
+            type: "generated-index",
+            slug: "/category/velocity/developers/getting-started",
+          },
           items: [
             "developers/getting-started/creating-your-first-plugin",
             "developers/getting-started/api-basics",
@@ -56,11 +68,19 @@ const sidebars: SidebarsConfig = {
         {
           type: "category",
           label: "How-to Guides",
+          link: {
+            type: "generated-index",
+            slug: "/category/velocity/developers/how-to-guides",
+          },
           items: ["developers/how-to/dependencies", "developers/how-to/porting-from-velocity-1"],
         },
         {
           type: "category",
           label: "API",
+          link: {
+            type: "generated-index",
+            slug: "/category/velocity/developers/api",
+          },
           items: ["developers/api/event", "developers/api/command", "developers/api/scheduler"],
         },
       ],

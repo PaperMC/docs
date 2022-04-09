@@ -1,10 +1,6 @@
-import { SidebarsConfig } from "@docusaurus/plugin-content-docs";
+import type { SidebarItemConfig } from "@docusaurus/plugin-content-docs/lib/sidebars/types";
 
-const sidebarType: SidebarsConfig = {
-  sidebar: [],
-};
-
-export const sidebar: typeof sidebarType.sidebar = [
+export const sidebar: SidebarItemConfig[] = [
   {
     type: "category",
     collapsed: true,

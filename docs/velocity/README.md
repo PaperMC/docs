@@ -1,4 +1,4 @@
-# Welcome to the Velocity Wiki
+# Welcome to the Velocity Docs
 
 Velocity is the ridiculously scalable, flexible Minecraft proxy.
 
@@ -11,11 +11,11 @@ It is simple to get started with Velocity. Get started with our
 
 If you need some help with Velocity, please seek help in the following places:
 
-### 📖 This Wiki
+### 📖 These Docs
 
 We have put a lot of effort into documenting Velocity as much as possible with our new website and
-our coverage will continue to expand. We strongly encourage you to check the sidebar of the wiki for
-relevant resources. Helping yourself using the resources in this wiki saves all of us time.
+our coverage will continue to expand. We strongly encourage you to check the sidebar of the docs for
+relevant resources. Helping yourself using the resources in these docs saves all of us time.
 
 We recommend you visit the [frequently-asked questions](admin/getting-started/faq.md) to begin your
 search. Most common issues with Velocity are answered there.
@@ -25,5 +25,5 @@ already answered in the documentation doesn't help anyone.
 
 ### 💬 Our Discord
 
-If you have searched the wiki and didn't find the answer to your question, then it is time to
+If you have searched the docs and didn't find the answer to your question, then it is time to
 [join our Discord](https://discord.gg/papermc) to ask your question.

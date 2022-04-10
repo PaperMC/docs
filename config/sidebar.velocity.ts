@@ -1,9 +1,7 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
-import { sidebar } from "./common";
 
 const velocity: SidebarsConfig = {
   primary: [
-    ...sidebar,
     "README",
     {
       type: "category",

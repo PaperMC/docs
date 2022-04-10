@@ -1,68 +1,34 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 import { sidebar } from "./common";
 
-const sidebars: SidebarsConfig = {
+const velocity: SidebarsConfig = {
   primary: [
     ...sidebar,
     "README",
     {
       type: "category",
-      label: "Getting Started",
+      label: "Server Administrators",
+      collapsed: true,
       link: {
         type: "doc",
-        id: "getting-started/README",
+        id: "admin/README",
       },
       items: [
-        { type: "ref", id: "getting-started/README" },
-        "getting-started/why-velocity",
-        "getting-started/forwarding",
-        "getting-started/faq",
-      ],
-    },
-    {
-      type: "category",
-      label: "How-to Guides",
-      link: {
-        type: "generated-index",
-        slug: "/category/velocity/how-to-guides",
-      },
-      items: ["how-to/security", "how-to/tuning", "how-to/migration"],
-    },
-    {
-      type: "category",
-      label: "Reference",
-      link: {
-        type: "generated-index",
-        slug: "/category/velocity/reference",
-      },
-      items: [
-        "reference/configuration",
-        "reference/commands",
-        "reference/server-compatibility",
-        "reference/comparison",
-        "reference/libraries",
-      ],
-    },
-    {
-      type: "category",
-      label: "Developers",
-      link: {
-        type: "doc",
-        id: "developers/README",
-      },
-      items: [
-        { type: "ref", id: "developers/README" },
         {
           type: "category",
           label: "Getting Started",
           link: {
-            type: "generated-index",
-            slug: "/category/velocity/developers/getting-started",
+            type: "doc",
+            id: "admin/getting-started/README",
           },
           items: [
-            "developers/getting-started/creating-your-first-plugin",
-            "developers/getting-started/api-basics",
-            "developers/getting-started/pitfalls",
+            {
+              type: "ref",
+              id: "admin/getting-started/README",
+            },
+            "admin/getting-started/why-velocity",
+            "admin/getting-started/forwarding",
+            "admin/getting-started/faq",
           ],
         },
         {
@@ -70,22 +36,70 @@ const sidebars: SidebarsConfig = {
           label: "How-to Guides",
           link: {
             type: "generated-index",
-            slug: "/category/velocity/developers/how-to-guides",
+            slug: "/cat/admin/how-to-guides",
           },
-          items: ["developers/how-to/dependencies", "developers/how-to/porting-from-velocity-1"],
+          items: ["admin/how-to/security", "admin/how-to/tuning", "admin/how-to/migration"],
+        },
+        {
+          type: "category",
+          label: "Reference",
+          link: {
+            type: "generated-index",
+            slug: "/cat/admin/reference",
+          },
+          items: [
+            "admin/reference/configuration",
+            "admin/reference/commands",
+            "admin/reference/server-compatibility",
+            "admin/reference/comparison",
+            "admin/reference/libraries",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Developers",
+      collapsed: true,
+      link: {
+        type: "doc",
+        id: "dev/README",
+      },
+      items: [
+        {
+          type: "category",
+          label: "Getting Started",
+          link: {
+            type: "generated-index",
+            slug: "/cat/dev/getting-started",
+          },
+          items: [
+            "dev/getting-started/creating-your-first-plugin",
+            "dev/getting-started/api-basics",
+            "dev/getting-started/pitfalls",
+          ],
+        },
+        {
+          type: "category",
+          label: "How-to Guides",
+          link: {
+            type: "generated-index",
+            slug: "/cat/dev/how-to-guides",
+          },
+          items: ["dev/how-to/dependencies", "dev/how-to/porting-from-velocity-1"],
         },
         {
           type: "category",
           label: "API",
           link: {
             type: "generated-index",
-            slug: "/category/velocity/developers/api",
+            slug: "/cat/dev/api",
           },
-          items: ["developers/api/event", "developers/api/command", "developers/api/scheduler"],
+          items: ["dev/api/event", "dev/api/command", "dev/api/scheduler"],
         },
       ],
     },
   ],
 };
 
-export = sidebars;
+export = velocity;

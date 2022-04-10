@@ -1,8 +1,8 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 import { sidebar } from "./common";
 
-const sidebars: SidebarsConfig = {
+const waterfall: SidebarsConfig = {
   primary: [...sidebar, "README", "getting-started", "configuration"],
 };
 
-export = sidebars;
+export = waterfall;

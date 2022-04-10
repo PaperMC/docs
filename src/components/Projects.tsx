@@ -23,10 +23,10 @@ const projects: Project[] = [
     link: "/waterfall",
   },
   {
-    title: "Common",
-    description: "Pages shared between all PaperMC projects.",
+    title: "Miscellaneous",
+    description: "Documentation that does not apply to any specific project.",
     repo: "PaperMC",
-    link: "/common",
+    link: "/misc",
   },
 ];
 

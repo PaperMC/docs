@@ -71,10 +71,10 @@ const config: Config = {
       "content-docs",
       {
         ...docsCommon,
-        id: "common",
-        path: "docs/common",
+        id: "misc",
+        path: "docs/misc",
         routeBasePath: "/",
-        sidebarPath: require.resolve("./config/sidebar.common"),
+        sidebarPath: require.resolve("./config/sidebar.misc"),
       },
     ],
     [

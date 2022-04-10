@@ -26,8 +26,8 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       position: "left",
     },
     {
-      to: "common",
-      label: "Common",
+      to: "misc",
+      label: "Misc",
       position: "left",
     },
     {

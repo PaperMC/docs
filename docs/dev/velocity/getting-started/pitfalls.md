@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/pitfalls
+slug: /dev/velocity/pitfalls
 ---
 
 # Common Pitfalls

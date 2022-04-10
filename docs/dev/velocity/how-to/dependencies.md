@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/dependency-management
+slug: /dev/velocity/dependency-management
 ---
 
 # Dependency Management

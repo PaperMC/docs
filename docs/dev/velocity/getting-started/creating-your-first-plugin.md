@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/creating-your-first-plugin
+slug: /dev/velocity/creating-your-first-plugin
 ---
 
 # Creating Your First Plugin

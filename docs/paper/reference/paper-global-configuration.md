@@ -1,5 +1,4 @@
 ---
-slug: /paper/reference/paper-global-configuration
 keywords:
   - paper.yml
   - paper.yml settings

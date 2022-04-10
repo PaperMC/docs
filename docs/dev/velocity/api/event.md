@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/event-api
+slug: /dev/velocity/event-api
 ---
 
 # Working With Events

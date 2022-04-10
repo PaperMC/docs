@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/api-basics
+slug: /dev/velocity/api-basics
 ---
 
 # Velocity Plugin Basics

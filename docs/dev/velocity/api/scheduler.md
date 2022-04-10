@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/scheduler-api
+slug: /dev/velocity/scheduler-api
 ---
 
 # Using the Scheduler

@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/command-api
+slug: /dev/velocity/command-api
 ---
 
 # The Command API

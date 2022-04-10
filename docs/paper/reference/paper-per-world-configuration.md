@@ -1,5 +1,4 @@
 ---
-slug: /paper/reference/paper-per-world-configuration
 keywords:
   - paper.yml
   - paper.yml world-settings

@@ -1,5 +1,5 @@
 ---
-slug: /velocity/developers/porting-plugins-from-velocity-1
+slug: /dev/velocity/porting-plugins-from-velocity-1
 ---
 
 # Porting Your Plugin from Velocity 1.x.x

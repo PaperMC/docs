@@ -1,3 +1,7 @@
+:root {
+  --ifm-button-padding-horizontal: 1rem;
+}
+
 .flex {
   flex-grow: 1;
 }
@@ -35,4 +39,9 @@
   max-width: 650px;
   padding-bottom: 8em;
   padding-top: 0;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
 }

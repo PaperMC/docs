@@ -9,14 +9,38 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
   },
   items: [
     {
-      to: "paper",
+      type: "dropdown",
       label: "Paper",
       position: "left",
+      items: [
+        {
+          type: "doc",
+          label: "Server Administrator",
+          docId: "paper/README",
+        },
+        {
+          type: "doc",
+          label: "Developer",
+          docId: "dev/paper/README",
+        },
+      ],
     },
     {
-      to: "velocity",
+      type: "dropdown",
       label: "Velocity",
       position: "left",
+      items: [
+        {
+          type: "doc",
+          label: "Server Administrator",
+          docId: "velocity/README",
+        },
+        {
+          type: "doc",
+          label: "Developer",
+          docId: "dev/velocity/README",
+        },
+      ],
     },
     {
       to: "waterfall",

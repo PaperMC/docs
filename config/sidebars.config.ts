@@ -1,24 +1,7 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const sidebars: SidebarsConfig = {
-  docs: [
-    {
-      type: "category",
-      label: "Getting Help",
-      items: [
-        {
-          type: "link",
-          label: "Discord",
-          href: "https://discord.gg/papermc",
-        },
-        {
-          type: "link",
-          label: "Forums",
-          href: "https://forums.papermc.io",
-        },
-      ],
-    },
-    "README",
+  admin: [
     {
       type: "category",
       label: "Paper",
@@ -45,7 +28,7 @@ const sidebars: SidebarsConfig = {
           label: "How-to Guides",
           link: {
             type: "generated-index",
-            slug: "/category/paper/how-to-guides",
+            slug: "category//paper/how-to-guides",
           },
           items: [
             "paper/how-to/per-world-configuration",
@@ -59,7 +42,7 @@ const sidebars: SidebarsConfig = {
           label: "Reference",
           link: {
             type: "generated-index",
-            slug: "/category/paper/reference",
+            slug: "category//paper/reference",
           },
           items: [
             "paper/reference/paper-global-configuration",
@@ -95,7 +78,7 @@ const sidebars: SidebarsConfig = {
           label: "How-to Guides",
           link: {
             type: "generated-index",
-            slug: "/category/velocity/how-to-guides",
+            slug: "category//velocity/how-to-guides",
           },
           items: [
             "velocity/how-to/security",
@@ -108,7 +91,7 @@ const sidebars: SidebarsConfig = {
           label: "Reference",
           link: {
             type: "generated-index",
-            slug: "/category/velocity/reference",
+            slug: "category//velocity/reference",
           },
           items: [
             "velocity/reference/configuration",
@@ -116,55 +99,6 @@ const sidebars: SidebarsConfig = {
             "velocity/reference/server-compatibility",
             "velocity/reference/comparison",
             "velocity/reference/libraries",
-          ],
-        },
-        {
-          type: "category",
-          label: "Developers",
-          link: {
-            type: "doc",
-            id: "velocity/developers/README",
-          },
-          items: [
-            { type: "ref", id: "velocity/developers/README" },
-            {
-              type: "category",
-              label: "Getting Started",
-              link: {
-                type: "generated-index",
-                slug: "/category/velocity/developers/getting-started",
-              },
-              items: [
-                "velocity/developers/getting-started/creating-your-first-plugin",
-                "velocity/developers/getting-started/api-basics",
-                "velocity/developers/getting-started/pitfalls",
-              ],
-            },
-            {
-              type: "category",
-              label: "How-to Guides",
-              link: {
-                type: "generated-index",
-                slug: "/category/velocity/developers/how-to-guides",
-              },
-              items: [
-                "velocity/developers/how-to/dependencies",
-                "velocity/developers/how-to/porting-from-velocity-1",
-              ],
-            },
-            {
-              type: "category",
-              label: "API",
-              link: {
-                type: "generated-index",
-                slug: "/category/velocity/developers/api",
-              },
-              items: [
-                "velocity/developers/api/event",
-                "velocity/developers/api/command",
-                "velocity/developers/api/scheduler",
-              ],
-            },
           ],
         },
       ],
@@ -183,20 +117,78 @@ const sidebars: SidebarsConfig = {
       label: "Common",
       link: {
         type: "generated-index",
-        slug: "/category/common",
+        slug: "category/common",
         description: "Documentation relevant to all PaperMC projects.",
       },
-      items: ["common/java-install"],
+      items: ["common/java-install", "common/downloads-api", "common/assets", "common/contact"],
+    },
+  ],
+  dev: [
+    {
+      type: "category",
+      label: "Paper",
+      link: {
+        type: "doc",
+        id: "dev/paper/README",
+      },
+      items: [
+        {
+          type: "ref",
+          id: "dev/paper/README",
+        },
+      ],
     },
     {
       type: "category",
-      label: "PaperMC",
+      label: "Velocity",
       link: {
-        type: "generated-index",
-        slug: "/category/papermc",
-        description: "Information about the PaperMC Organization.",
+        type: "doc",
+        id: "dev/velocity/README",
       },
-      items: ["papermc/downloads-api", "papermc/assets", "papermc/contact"],
+      items: [
+        {
+          type: "ref",
+          id: "dev/velocity/README",
+        },
+        {
+          type: "category",
+          label: "Getting Started",
+          link: {
+            type: "generated-index",
+            slug: "category/dev/velocity/getting-started",
+          },
+          items: [
+            "dev/velocity/getting-started/creating-your-first-plugin",
+            "dev/velocity/getting-started/api-basics",
+            "dev/velocity/getting-started/pitfalls",
+          ],
+        },
+        {
+          type: "category",
+          label: "How-to Guides",
+          link: {
+            type: "generated-index",
+            slug: "category/dev/velocity/how-to-guides",
+          },
+          items: [
+            "dev/velocity/how-to/dependencies",
+            "dev/velocity/how-to/porting-from-velocity-1",
+          ],
+        },
+        {
+          type: "category",
+          label: "API",
+          link: {
+            type: "generated-index",
+            slug: "category/dev/velocity/api",
+          },
+          items: [
+            "dev/velocity/api/event",
+            "dev/velocity/api/command",
+            "dev/velocity/api/scheduler",
+          ],
+        },
+      ],
     },
   ],
 };

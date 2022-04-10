@@ -1,6 +1,7 @@
 import Link from "@docusaurus/Link";
 import React from "react";
 import styles from "../css/projects.module.css";
+import clsx from "clsx";
 
 const projects: Project[] = [
   {
@@ -8,19 +9,21 @@ const projects: Project[] = [
     description:
       "High performance Minecraft server that aims to fix gameplay and mechanics inconsistencies.",
     repo: "PaperMC/Paper",
-    link: "/paper",
+    admin: "/paper",
+    developer: "/dev/paper",
   },
   {
     title: "Velocity",
     description: "The modern, next-generation Minecraft server proxy.",
     repo: "PaperMC/Velocity",
-    link: "/velocity",
+    admin: "/velocity",
+    developer: "/dev/velocity",
   },
   {
     title: "Waterfall",
     description: "BungeeCord proxy fork that aims to improve performance and stability.",
     repo: "PaperMC/Waterfall",
-    link: "/waterfall",
+    admin: "/waterfall",
   },
 ];
 
@@ -33,10 +36,20 @@ function Project(project: Project) {
         </Link>
         <p>{project.description}</p>
       </div>
-      <div>
-        <Link className="button button--primary" to={project.link}>
-          Go
-        </Link>
+      <div className={styles.links}>
+        {project.admin ? (
+          <Link className="button button--primary link" to={project.admin}>
+            Server Admin
+          </Link>
+        ) : null}
+        {project.developer ? (
+          <Link
+            className={clsx("button", "button--primary", "link", project.admin && "margin-top--sm")}
+            to={project.developer}
+          >
+            Developer
+          </Link>
+        ) : null}
       </div>
     </div>
   );
@@ -58,5 +71,6 @@ interface Project {
   title: string;
   description: string;
   repo: string;
-  link: string;
+  admin?: string;
+  developer?: string;
 }

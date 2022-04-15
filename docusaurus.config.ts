@@ -73,7 +73,7 @@ const config: Config = {
         ...docsCommon,
         id: "misc",
         path: "docs/misc",
-        routeBasePath: "/",
+        routeBasePath: "/misc",
         sidebarPath: require.resolve("./config/sidebar.misc"),
       },
     ],

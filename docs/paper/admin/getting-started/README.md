@@ -9,7 +9,7 @@ slug: /getting-started
 :::tip
 
 With the release of Minecraft 1.18, Paper now requires **Java 17** to run. If you don't already have
-Java 17, [it's easy to download and install](/java-install-update).
+Java 17, [it's easy to download and install](/misc/java-install-update).
 
 :::
 

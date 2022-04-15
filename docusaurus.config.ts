@@ -162,6 +162,7 @@ const config: Config = {
         ],
       },
     ],
+    "debug",
   ],
 
   themeConfig: {

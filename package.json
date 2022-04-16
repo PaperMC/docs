@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "docusaurus": "docusaurus",
-    "start": "yarn build:config && docusaurus start",
+    "start": "yarn build:config && docusaurus start --no-open",
     "build": "yarn build:config && docusaurus build",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",

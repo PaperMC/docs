@@ -5,7 +5,7 @@ const velocity: SidebarsConfig = {
     "README",
     {
       type: "category",
-      label: "Server Administrators",
+      label: "Administration",
       collapsed: true,
       link: {
         type: "doc",
@@ -57,7 +57,7 @@ const velocity: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Developers",
+      label: "Development",
       collapsed: true,
       link: {
         type: "doc",

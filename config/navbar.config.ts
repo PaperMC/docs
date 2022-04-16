@@ -11,14 +11,42 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
   },
   items: [
     {
-      to: "paper",
+      type: "dropdown",
       label: "Paper",
+      to: "/paper",
       position: "left",
+      activeBaseRegex: "(\\/paper)(.+)?",
+      items: [
+        {
+          label: "Administration",
+          to: "/paper/admin",
+          activeBaseRegex: "(\\/paper/)(?!dev)(.+)?",
+        },
+        {
+          label: "Development",
+          to: "/paper/dev",
+          activeBaseRegex: "(\\/paper\\/dev)(.+)?",
+        },
+      ],
     },
     {
-      to: "velocity",
+      type: "dropdown",
       label: "Velocity",
+      to: "/velocity",
       position: "left",
+      activeBaseRegex: "(\\/velocity)(.+)?",
+      items: [
+        {
+          label: "Administration",
+          to: "/velocity/admin",
+          activeBaseRegex: "(\\/velocity/)(?!dev)(.+)?",
+        },
+        {
+          label: "Development",
+          to: "/velocity/dev",
+          activeBaseRegex: "(\\/velocity\\/dev)(.+)?",
+        },
+      ],
     },
     {
       to: "waterfall",

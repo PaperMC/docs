@@ -5,7 +5,7 @@ const paper: SidebarsConfig = {
     "README",
     {
       type: "category",
-      label: "Server Administrators",
+      label: "Administration",
       collapsed: true,
       link: {
         type: "doc",
@@ -16,14 +16,11 @@ const paper: SidebarsConfig = {
           type: "category",
           label: "Getting Started",
           link: {
-            type: "doc",
-            id: "admin/getting-started/README",
+            type: "generated-index",
+            slug: "/cat/admin/getting-started",
           },
           items: [
-            {
-              type: "ref",
-              id: "admin/getting-started/README",
-            },
+            "admin/getting-started/getting-started",
             "admin/getting-started/adding-plugins",
             "admin/getting-started/migration",
           ],
@@ -58,7 +55,7 @@ const paper: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Developer's Guide",
+      label: "Development",
       collapsed: true,
       link: {
         type: "doc",

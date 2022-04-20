@@ -224,7 +224,7 @@ the world names if your worlds are named differently!
     anti-xray:
       max-block-height: 128
       hidden-blocks:
-      # See note about air and possibe client performance issues above.
+      # See note about air and possible client performance issues above.
       - air
       - ancient_debris
       - bone_block

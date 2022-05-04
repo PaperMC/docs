@@ -60,7 +60,6 @@ const config: Config = {
           editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
           showLastUpdateAuthor: true,
           showLastUpdateTime: true,
-          sidebarCollapsible: true,
           remarkPlugins: [remarkA11yEmoji],
           routeBasePath: "/",
           sidebarPath: require.resolve("./config/sidebars.config"),
@@ -143,6 +142,11 @@ const config: Config = {
     ],
     navbar: navbar,
     footer: footer,
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
     prism: {
       additionalLanguages: [
         "batch",

@@ -149,11 +149,24 @@ global config, see the [Paper Global Configuration Reference](paper-global-confi
 - **description**: Sets the delay, in ticks, at which the server attempts to spread grass. Higher
   values will result in a slower spread.
 
-### use-faster-eigencraft-redstone
+### redstone-implementation
 
-- **default**: false
-- **description**: Instructs the server to use a faster redstone implementation, which may
-  drastically help with performance in redstone.
+- **default**: vanilla
+- **description**: Specifies the redstone implementation that the server uses. Alternative
+  implementations can greatly reduce the lag caused by redstone dust by optimizing power calculations
+  and reducing the number of block and shape updates emitted. The following implementations are
+  available:
+  - **vanilla**: The Vanilla redstone implementation.
+  - **eigencraft**: The Eigencraft redstone implementation by theosib.
+  - **alternate-current**: The Alternate Current redstone implementation by Space Walker.
+- **note:** Alternative implementations are ultimately experimental, and as such, could be removed
+  between updates or even permanently if issues are found.
+- **note:** Both the Eigencraft and Alternate Current implementations change the behavior of redstone
+  dust. You can read about how behavior is changed in each implementation's respective documention:
+  - Eigencraft: No official documentation available. However, theosib's comments on the Mojira bug
+    tracker [here](https://bugs.mojang.com/browse/MC-81098?focusedCommentId=420777&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-420777)
+    give an overview of the Eigencraft implementation.
+  - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
 
 ### nether-ceiling-void-damage-height
 

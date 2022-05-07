@@ -852,10 +852,19 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 
 - zombie
   - **default**: ['HARD']
-  - **description**: Takes a list of difficulties at which zombies are able to break doors
+  - **description**: Takes a list of difficulties at which zombies will attempt to break doors
+- zombie_villager
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which zombie villagers will attempt to break doors
+- zombified_piglin
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which zombified piglins will attempt to break doors
+- husk
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which husks will attempt to break doors
 - vindicator
   - **default**: ['NORMAL', 'HARD']
-  - **description**: Takes a list of difficulties at which vindicators are able to break doors
+  - **description**: Takes a list of difficulties at which vindicators will attempt to break doors
 
 ### mobs-can-always-pick-up-loot
 

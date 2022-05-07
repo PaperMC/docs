@@ -151,21 +151,27 @@ global config, see the [Paper Global Configuration Reference](paper-global-confi
 
 ### redstone-implementation
 
+:::caution
+
+Alternative implementations are ultimately experimental, and as such, could be removed between
+updates or even permanently if issues are found.
+
+:::
+
 - **default**: vanilla
 - **description**: Specifies the redstone implementation that the server uses. Alternative
-  implementations can greatly reduce the lag caused by redstone dust by optimizing power calculations
-  and reducing the number of block and shape updates emitted. The following implementations are
-  available:
+  implementations can greatly reduce the lag caused by redstone dust by optimizing power
+  calculations and reducing the number of block and shape updates emitted. The following
+  implementations are available:
   - **vanilla**: The Vanilla redstone implementation.
   - **eigencraft**: The Eigencraft redstone implementation by theosib.
   - **alternate-current**: The Alternate Current redstone implementation by Space Walker.
-- **note:** Alternative implementations are ultimately experimental, and as such, could be removed
-  between updates or even permanently if issues are found.
-- **note:** Both the Eigencraft and Alternate Current implementations change the behavior of redstone
-  dust. You can read about how behavior is changed in each implementation's respective documention:
-  - Eigencraft: No official documentation available. However, theosib's comments on the Mojira bug
-    tracker [here](https://bugs.mojang.com/browse/MC-81098?focusedCommentId=420777&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-420777)
-    give an overview of the Eigencraft implementation.
+- **note:** Both the Eigencraft and Alternate Current implementations change the behavior of
+  redstone dust. You can read about how behavior is changed in each implementation's respective
+  documention:
+  - Eigencraft: No official documentation available. However,
+    [theosib's comments](https://bugs.mojang.com/browse/MC-81098?focusedCommentId=420777#comment-420777)
+    on the Mojira bug tracker give an overview of the Eigencraft implementation.
   - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
 
 ### nether-ceiling-void-damage-height
@@ -868,10 +874,12 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
   - **description**: Takes a list of difficulties at which zombies will attempt to break doors
 - zombie_villager
   - **default**: ['HARD']
-  - **description**: Takes a list of difficulties at which zombie villagers will attempt to break doors
+  - **description**: Takes a list of difficulties at which zombie villagers will attempt to break
+    doors
 - zombified_piglin
   - **default**: ['HARD']
-  - **description**: Takes a list of difficulties at which zombified piglins will attempt to break doors
+  - **description**: Takes a list of difficulties at which zombified piglins will attempt to break
+    doors
 - husk
   - **default**: ['HARD']
   - **description**: Takes a list of difficulties at which husks will attempt to break doors

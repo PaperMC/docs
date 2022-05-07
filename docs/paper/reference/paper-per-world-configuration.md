@@ -853,6 +853,15 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - zombie
   - **default**: ['HARD']
   - **description**: Takes a list of difficulties at which zombies are able to break doors
+- zombie_villager
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which villagers zombies are able to break doors
+- zombified_piglin
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which zombified piglins are able to break doors
+- husk
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which husks are able to break doors
 - vindicator
   - **default**: ['NORMAL', 'HARD']
   - **description**: Takes a list of difficulties at which vindicators are able to break doors

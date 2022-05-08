@@ -149,11 +149,30 @@ global config, see the [Paper Global Configuration Reference](paper-global-confi
 - **description**: Sets the delay, in ticks, at which the server attempts to spread grass. Higher
   values will result in a slower spread.
 
-### use-faster-eigencraft-redstone
+### redstone-implementation
 
-- **default**: false
-- **description**: Instructs the server to use a faster redstone implementation, which may
-  drastically help with performance in redstone.
+:::caution
+
+Alternative implementations are ultimately experimental, and as such, could be removed between
+updates or even permanently if issues are found.
+
+:::
+
+- **default**: vanilla
+- **description**: Specifies the redstone implementation that the server uses. Alternative
+  implementations can greatly reduce the lag caused by redstone dust by optimizing power
+  calculations and reducing the number of block and shape updates emitted. The following
+  implementations are available:
+  - **vanilla**: The Vanilla redstone implementation.
+  - **eigencraft**: The Eigencraft redstone implementation by theosib.
+  - **alternate-current**: The Alternate Current redstone implementation by Space Walker.
+- **note:** Both the Eigencraft and Alternate Current implementations change the behavior of
+  redstone dust. You can read about how behavior is changed in each implementation's respective
+  documention:
+  - Eigencraft: No official documentation available. However,
+    [theosib's comments](https://bugs.mojang.com/browse/MC-81098?focusedCommentId=420777#comment-420777)
+    on the Mojira bug tracker give an overview of the Eigencraft implementation.
+  - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
 
 ### nether-ceiling-void-damage-height
 
@@ -607,9 +626,11 @@ global config, see the [Paper Global Configuration Reference](paper-global-confi
   - **default**: false
   - **description**: Determines if items will have different despawn rates.
 - items
-  - **default**: { COBBLESTONE: 300 } (a list of mappings)
-  - **description**: Determines how long each respective item despawns in ticks. You can use item
-    names from [the Material enum](https://papermc.io/javadocs/paper/1.18/org/bukkit/Material.html).
+  - **default**: { cobblestone: 300 } (a list of mappings)
+  - **description**: Determines how long each respective item despawns in ticks. The item ids
+    are the same as those used in the /give command. They can be viewed by enabling advanced
+    item tooltips in-game by pressing **F3 + H**; the item id will appear at the bottom
+    of the tooltip that appears when you hover over an item.
 
 ### spawn-limits
 
@@ -852,10 +873,21 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 
 - zombie
   - **default**: ['HARD']
-  - **description**: Takes a list of difficulties at which zombies are able to break doors
+  - **description**: Takes a list of difficulties at which zombies will attempt to break doors
+- zombie_villager
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which zombie villagers will attempt to break
+    doors
+- zombified_piglin
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which zombified piglins will attempt to break
+    doors
+- husk
+  - **default**: ['HARD']
+  - **description**: Takes a list of difficulties at which husks will attempt to break doors
 - vindicator
   - **default**: ['NORMAL', 'HARD']
-  - **description**: Takes a list of difficulties at which vindicators are able to break doors
+  - **description**: Takes a list of difficulties at which vindicators will attempt to break doors
 
 ### mobs-can-always-pick-up-loot
 

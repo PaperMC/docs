@@ -16,8 +16,6 @@ const docsCommon: Options = {
   breadcrumbs: true,
   editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
   editCurrentVersion: true,
-  sidebarCollapsible: true,
-  sidebarCollapsed: false,
   remarkPlugins: [remarkA11yEmoji],
   showLastUpdateAuthor: true,
   showLastUpdateTime: true,
@@ -186,6 +184,11 @@ const config: Config = {
     ],
     navbar: navbar,
     footer: footer,
+    docs: {
+      sidebar: {
+        hideable: true,
+      },
+    },
     prism: {
       additionalLanguages: [
         "batch",

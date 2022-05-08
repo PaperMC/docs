@@ -74,7 +74,11 @@ function DropdownNavbarItemDesktop({
         aria-expanded={showDropdown}
         role="button"
         href={props.to ? undefined : "#"}
-        className={clsx("navbar__link", className)}
+        className={clsx(
+          "navbar__link",
+          className,
+          containsActiveItems(items, useLocalPathname()) && "navbar__link--active"
+        )} // PaperMC/docs - mark as active when has active children
         {...props}
         onClick={props.to ? undefined : (e) => e.preventDefault()}
         onKeyDown={(e) => {

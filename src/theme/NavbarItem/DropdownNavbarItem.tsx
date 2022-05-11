@@ -61,13 +61,15 @@ function DropdownNavbarItemDesktop({
     };
   }, [dropdownRef]);
 
+  const active = isRegexpStringMatch(props.activeBaseRegex, useLocalPathname())
+
   return (
     <div
       ref={dropdownRef}
-      className={clsx("navbar__item", "dropdown", "dropdown--hoverable", {
+      className={clsx("navbar__item", !active && ["dropdown--hoverable", "dropdown", {
         "dropdown--right": position === "right",
         "dropdown--show": showDropdown,
-      })}
+      }])}
     >
       <NavbarNavLink
         aria-haspopup="true"
@@ -87,7 +89,7 @@ function DropdownNavbarItemDesktop({
       >
         {props.children ?? props.label}
       </NavbarNavLink>
-      <ul className="dropdown__menu">
+      {!active && <ul className="dropdown__menu">
         {items.map((childItemProps, i) => (
           <NavbarItem
             isDropdownItem
@@ -112,7 +114,7 @@ function DropdownNavbarItemDesktop({
             key={i}
           />
         ))}
-      </ul>
+      </ul>}
     </div>
   );
 }

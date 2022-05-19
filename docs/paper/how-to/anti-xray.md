@@ -20,9 +20,9 @@ refer to the Anti-Xray section of the
 [Per-World Configuration Reference](../reference/paper-per-world-configuration.md#anti-xray).
 
 Anti-Xray has two different modes. `engine-mode: 1` replaces specified blocks (`hidden-blocks`) with
-other "fake" blocks, `stone`, `netherrack`, or `end_stone` based on the dimension. In contrast,
-`engine-mode: 2` will replace both `hidden-blocks` and `replacement-blocks` with randomly generated
-`hidden-blocks`.
+other "fake" blocks, `stone` (`deepslate` at y < 0), `netherrack`, or `end_stone` based on the
+dimension. In contrast, `engine-mode: 2` will replace both `hidden-blocks` and `replacement-blocks`
+with randomly generated `hidden-blocks`.
 
 The following images[^1] show how each mode will look for a player using Xray with the recommended
 configuration in both the overworld and nether.

@@ -497,9 +497,9 @@ updates or even permanently if issues are found.
   - **max**
     - **default**: 16
     - **description**: Maximum height bamboo will naturally grow to.
-- **min**
-  - **default**: 11
-  - **description**: Minimum height bamboo will naturally grow to.
+  - **min**
+    - **default**: 11
+    - **description**: Minimum height bamboo will naturally grow to.
 
 ### fishing-time-range
 

@@ -452,5 +452,5 @@ Leave this setting off unless you are using HAProxy or another proxy implementin
 :::
 
 - **default**: false
-- **description**: Weather Paper should receive HAProxy PROXY messages
+- **description**: Whether Paper should receive HAProxy PROXY messages
   ([PROXY Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)).

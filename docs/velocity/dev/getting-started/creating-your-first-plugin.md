@@ -36,7 +36,7 @@ Now we have created our project, we need configure our build system.
 
 | Name      | URL                                                |
 | --------- | -------------------------------------------------- |
-| `papermc` | `https://papermc.io/repo/repository/maven-public/` |
+| `papermc` | `https://repo.papermc.io/repository/maven-public/` |
 
 ### Dependency
 
@@ -67,7 +67,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
     <repositories>
         <repository>
             <id>papermc</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
     </repositories>
 
@@ -89,7 +89,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
 repositories {
     maven {
         name = "papermc"
-        url = uri("https://papermc.io/repo/repository/maven-public/")
+        url = uri("https://repo.papermc.io/repository/maven-public/")
     }
 }
 
@@ -106,7 +106,7 @@ dependencies {
 repositories {
     maven {
         name 'papermc'
-        url 'https://papermc.io/repo/repository/maven-public/'
+        url 'https://repo.papermc.io/repository/maven-public/'
     }
 }
 

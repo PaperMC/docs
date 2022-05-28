@@ -33,7 +33,7 @@ const footer: Footer = {
         },
         {
           label: "Downloads API",
-          href: "https://papermc.io/api/docs",
+          href: "https://api.papermc.io/docs",
         },
       ],
     },

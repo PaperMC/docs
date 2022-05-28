@@ -249,7 +249,7 @@ public final class HelloWorldPlugin {
         BrigadierCommand commandToRegister = TestBrigadierCommand.createBrigadierCommand(proxy);
 
         // Finally, you can register the command
-        commandManager.register(meta, commandToRegister);
+        commandManager.register(commandMeta, commandToRegister);
     }
 }
 ```

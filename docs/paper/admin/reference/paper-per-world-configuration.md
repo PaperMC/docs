@@ -497,9 +497,9 @@ updates or even permanently if issues are found.
   - **max**
     - **default**: 16
     - **description**: Maximum height bamboo will naturally grow to.
-- **min**
-  - **default**: 11
-  - **description**: Minimum height bamboo will naturally grow to.
+  - **min**
+    - **default**: 11
+    - **description**: Minimum height bamboo will naturally grow to.
 
 ### fishing-time-range
 
@@ -627,10 +627,10 @@ updates or even permanently if issues are found.
   - **description**: Determines if items will have different despawn rates.
 - items
   - **default**: { cobblestone: 300 } (a list of mappings)
-  - **description**: Determines how long each respective item despawns in ticks. The item ids
-    are the same as those used in the /give command. They can be viewed by enabling advanced
-    item tooltips in-game by pressing **F3 + H**; the item id will appear at the bottom
-    of the tooltip that appears when you hover over an item.
+  - **description**: Determines how long each respective item despawns in ticks. The item ids are
+    the same as those used in the /give command. They can be viewed by enabling advanced item
+    tooltips in-game by pressing **F3 + H**; the item id will appear at the bottom of the tooltip
+    that appears when you hover over an item.
 
 ### spawn-limits
 
@@ -696,8 +696,10 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
   - **description**: Controls the on/off state for the Anti-Xray system.
 - engine-mode
   - **default**: 1
-  - **description**: Sets the Anti-Xray engine mode. Where 1 is to replace hidden blocks with stone
-    and 2 is to replace all blocks with random block data.
+  - **description**: Sets the Anti-Xray engine mode. `1` replaces specified blocks (`hidden-blocks`)
+    with other "fake" blocks, `stone` (`deepslate` at y < 0), `netherrack`, or `end_stone` based on
+    the dimension. In contrast, `2` will replace both `hidden-blocks` and `replacement-blocks` with
+    randomly generated `hidden-blocks`.
 - max-block-height
   - **default**: 64
   - **description**: Sets the maximum height (`y` coordinate, starting from the bottom of the world)
@@ -727,8 +729,9 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
     deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
     mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore,
     deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]
-  - **description**: With `engine-mode: 1`, these blocks will be replaced by `stone`, `netherrack`,
-    or `end_stone`, based on the dimension. All types of air blocks are ignored on this list.
+  - **description**: With `engine-mode: 1`, these blocks will be replaced by `stone` (`deepslate` at
+    y < 0), `netherrack`, or `end_stone`, based on the dimension. All types of air blocks are
+    ignored on this list.
 
     With `engine-mode: 2`, these blocks will be randomly placed in the world, replacing both
     `hidden-blocks` and `replacement-blocks`. Tile entities, such as chests or spawners, are not

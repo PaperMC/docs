@@ -1,0 +1,4 @@
+/assets/*
+  Cache-Control: public
+  Cache-Control: immutable
+  Cache-Control: max-age=31536000

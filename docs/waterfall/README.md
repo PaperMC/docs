@@ -1,4 +1,4 @@
-# Welcome to the Waterfall Wiki
+# Welcome to the Waterfall Docs
 
 Waterfall is the BungeeCord fork that aims to improve performance and stability.
 

@@ -51,7 +51,7 @@ const footer: Footer = {
       ],
     },
   ],
-  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors`,
+  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.`,
 };
 
 export default footer;

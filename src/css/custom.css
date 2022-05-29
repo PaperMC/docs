@@ -108,3 +108,11 @@ html[data-theme="dark"] {
   position: static;
   padding: 0;
 }
+
+.navbar__brand {
+  margin-right: 0;
+}
+
+.navbar__logo {
+  margin: 0;
+}

@@ -108,3 +108,13 @@ html[data-theme="dark"] {
   position: static;
   padding: 0;
 }
+
+.menu__link:not(.menu__link--sublist) {
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-left-color: transparent;
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+  border-left-color: var(--ifm-menu-color-active);
+}

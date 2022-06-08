@@ -389,9 +389,9 @@ updates or even permanently if issues are found.
 ### auto-save-interval
 
 - **default**: -1
-- **note**: Default value instructs the world to use Bukkit's default.
-- **description**: Instructs this world to use a specific value for auto-save instead of bukkit's
-  global value.
+- **description**: Configures the world saving interval in ticks. Overrides `ticks-per.autosave` in
+  `bukkit.yml` for this world.
+- **note**: `-1` will use the global `ticks-per.autosave` in `bukkit.yml`.
 
 ### game-mechanics
 

@@ -4,6 +4,16 @@ slug: /paper/per-world-configuration
 
 # Per World Configuration
 
+:::caution Outdated Content
+
+Content on this page has **not been updated for the 1.19 configuration reorganization** and is
+primarily applicable only to versions 1.18.2 and below. Please proceed accordingly.
+
+If you would like to assist in updating content, please reach out in the `#docs` channel on our
+[Discord](https://discord.gg/papermc) server.
+
+:::
+
 One of the most powerful yet least understood features of the Paper configuration is setting
 configuration options per world. While not every config option can be set per world, everything
 under `world-settings` in either `paper.yml` or `spigot.yml` can be configured differently on a per

@@ -7,6 +7,16 @@ keywords:
 
 # Paper Global Config
 
+:::caution Outdated Content
+
+Content on this page has **not been updated for the 1.19 configuration reorganization** and is
+primarily applicable only to versions 1.18.2 and below. Please proceed accordingly.
+
+If you would like to assist in updating content, please reach out in the `#docs` channel on our
+[Discord](https://discord.gg/papermc) server.
+
+:::
+
 Global configuration options exposed by Paper will affect all worlds on a server, or the server
 function itself. For per-world configuration, see the
 [Per World Configuration Reference](paper-per-world-configuration.md)

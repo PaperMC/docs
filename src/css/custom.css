@@ -108,3 +108,13 @@ html[data-theme="dark"] {
   position: static;
   padding: 0;
 }
+
+.menu__link--active:not(.menu__link--sublist) {
+  --size: 4px;
+
+  border-left-width: var(--size);
+  border-left-style: solid;
+  border-left-color: var(--ifm-menu-color-active);
+  /* prevent text wrapping changes by shifting text to match new border */
+  padding-left: calc(var(--ifm-menu-link-padding-horizontal) - var(--size));
+}

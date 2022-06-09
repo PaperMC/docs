@@ -303,7 +303,7 @@ updates or even permanently if issues are found.
 
 - **description**: Vanilla mechanics normally find the first undiscovered location, which may
   lead to structures that were not fully looted, and can also fail with a world border set. The
-  options below allow configuring the default behavior of maps obtained different ways.
+  options below allow configuring the default behavior of maps obtained in different ways.
 
 - villager-trade
   - **default**: false

@@ -86,14 +86,14 @@ function itself. For per-world configuration, see the
 ### player-auto-save-rate
 
 - **default**: -1
-- **description**: Set how often players should be saved. A value of -1 means it will pick a
-  recommended value for you.
+- **description**: How often player data should be saved in ticks. A value of `-1` will use
+  `ticks-per.autosave` in `bukkit.yml`.
 
 ### max-player-auto-save-per-tick
 
 - **default**: -1
-- **description**: How many players should be saved at most in a single tick. A value of -1 means it
-  will pick a recommended value for you.
+- **description**: How many players should be saved at most in a single tick. A value of `-1` will
+  set a recommended value based on `player-auto-save-rate`.
 
 ### save-empty-scoreboard-teams
 

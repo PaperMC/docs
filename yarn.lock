@@ -1849,7 +1849,7 @@ __metadata:
 
 "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm:2.0.0-beta.21#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.0.0-beta.21-3f331426d5.patch::locator=docs%40workspace%3A.":
   version: 2.0.0-beta.21
-  resolution: "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A2.0.0-beta.21#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.0.0-beta.21-3f331426d5.patch::version=2.0.0-beta.21&hash=7b48d4&locator=docs%40workspace%3A."
+  resolution: "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A2.0.0-beta.21#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.0.0-beta.21-3f331426d5.patch::version=2.0.0-beta.21&hash=6da393&locator=docs%40workspace%3A."
   dependencies:
     "@docusaurus/core": 2.0.0-beta.21
     "@docusaurus/logger": 2.0.0-beta.21
@@ -1868,7 +1868,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.4 || ^17.0.0
     react-dom: ^16.8.4 || ^17.0.0
-  checksum: 8a54262aef4b45c59237f2961577b406acdca5fef3709a3116ee39ab1004552211076eb6696010b018a4a1148e671d3444d69c7e333012d40fb7c7c06bbd4b1e
+  checksum: ee1c7b1294f72a3d5d712471e268ca0cd535c4007bb03c95312a2a68fb830ffc8de8901723b1e5a3f83782eb3d7ff3c7e379b86d1dfae0be137ece60a8d0fbeb
   languageName: node
   linkType: hard
 

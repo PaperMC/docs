@@ -1847,6 +1847,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm:2.0.0-beta.21#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.0.0-beta.21-3f331426d5.patch::locator=docs%40workspace%3A.":
+  version: 2.0.0-beta.21
+  resolution: "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A2.0.0-beta.21#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.0.0-beta.21-3f331426d5.patch::version=2.0.0-beta.21&hash=7b48d4&locator=docs%40workspace%3A."
+  dependencies:
+    "@docusaurus/core": 2.0.0-beta.21
+    "@docusaurus/logger": 2.0.0-beta.21
+    "@docusaurus/mdx-loader": 2.0.0-beta.21
+    "@docusaurus/utils": 2.0.0-beta.21
+    "@docusaurus/utils-validation": 2.0.0-beta.21
+    combine-promises: ^1.1.0
+    fs-extra: ^10.1.0
+    import-fresh: ^3.3.0
+    js-yaml: ^4.1.0
+    lodash: ^4.17.21
+    remark-admonitions: ^1.2.1
+    tslib: ^2.4.0
+    utility-types: ^3.10.0
+    webpack: ^5.72.1
+  peerDependencies:
+    react: ^16.8.4 || ^17.0.0
+    react-dom: ^16.8.4 || ^17.0.0
+  checksum: 8a54262aef4b45c59237f2961577b406acdca5fef3709a3116ee39ab1004552211076eb6696010b018a4a1148e671d3444d69c7e333012d40fb7c7c06bbd4b1e
+  languageName: node
+  linkType: hard
+
 "@docusaurus/plugin-content-pages@npm:2.0.0-beta.21":
   version: 2.0.0-beta.21
   resolution: "@docusaurus/plugin-content-pages@npm:2.0.0-beta.21"

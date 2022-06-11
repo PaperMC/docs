@@ -65,5 +65,8 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.0",
+  "resolutions": {
+    "@docusaurus/plugin-content-docs@2.0.0-beta.21": "patch:@docusaurus/plugin-content-docs@npm:2.0.0-beta.21#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.0.0-beta.21-3f331426d5.patch"
+  }
 }

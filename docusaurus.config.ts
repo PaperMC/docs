@@ -162,7 +162,7 @@ const config: Config = {
         };
       },
     }),
-    "debug",
+    "@docusaurus/plugin-debug",
   ],
 
   themeConfig: {

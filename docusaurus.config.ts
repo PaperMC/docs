@@ -76,6 +76,13 @@ const config: Config = {
         path: "docs/paper",
         routeBasePath: "paper",
         sidebarPath: require.resolve("./config/sidebar.paper"),
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.19",
+            path: "",
+          },
+        },
       },
     ],
     [

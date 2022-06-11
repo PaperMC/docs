@@ -66,17 +66,10 @@ function DropdownNavbarItemDesktop({
   return (
     <div
       ref={dropdownRef}
-      className={clsx(
-        "navbar__item",
-        !active && [
-          "dropdown--hoverable",
-          "dropdown",
-          {
-            "dropdown--right": position === "right",
-            "dropdown--show": showDropdown,
-          },
-        ]
-      )}
+      className={clsx("navbar__item", "dropdown", "dropdown--hoverable", {
+        "dropdown--right": position === "right",
+        "dropdown--show": showDropdown,
+      })}
     >
       <NavbarNavLink
         aria-haspopup="true"
@@ -96,34 +89,32 @@ function DropdownNavbarItemDesktop({
       >
         {props.children ?? props.label}
       </NavbarNavLink>
-      {!active && (
-        <ul className="dropdown__menu">
-          {items.map((childItemProps, i) => (
-            <NavbarItem
-              isDropdownItem
-              onKeyDown={(e) => {
-                if (i === items.length - 1 && e.key === "Tab") {
-                  e.preventDefault();
-                  setShowDropdown(false);
-                  const nextNavbarItem = dropdownRef.current!.nextElementSibling;
-                  if (nextNavbarItem) {
-                    const targetItem =
-                      nextNavbarItem instanceof HTMLAnchorElement
-                        ? nextNavbarItem
-                        : // Next item is another dropdown; focus on the inner
-                          // anchor element instead so there's outline
-                          nextNavbarItem.querySelector("a");
-                    (targetItem as HTMLElement).focus();
-                  }
+      <ul className="dropdown__menu">
+        {items.map((childItemProps, i) => (
+          <NavbarItem
+            isDropdownItem
+            onKeyDown={(e) => {
+              if (i === items.length - 1 && e.key === "Tab") {
+                e.preventDefault();
+                setShowDropdown(false);
+                const nextNavbarItem = dropdownRef.current!.nextElementSibling;
+                if (nextNavbarItem) {
+                  const targetItem =
+                    nextNavbarItem instanceof HTMLAnchorElement
+                      ? nextNavbarItem
+                      : // Next item is another dropdown; focus on the inner
+                        // anchor element instead so there's outline
+                        nextNavbarItem.querySelector("a");
+                  (targetItem as HTMLElement).focus();
                 }
-              }}
-              activeClassName={dropdownLinkActiveClass}
-              {...childItemProps}
-              key={i}
-            />
-          ))}
-        </ul>
-      )}
+              }
+            }}
+            activeClassName={dropdownLinkActiveClass}
+            {...childItemProps}
+            key={i}
+          />
+        ))}
+      </ul>
     </div>
   );
 }

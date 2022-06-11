@@ -311,22 +311,22 @@ updates or even permanently if issues are found.
 
 ### treasure-maps-find-already-discovered
 
-- **description**: Vanilla mechanics normally find the first undiscovered location, which may lead
-  to structures that were not fully looted, and can also fail with a world border set. The options
+- **description**: Options for overriding vanilla and datapack treasure map mechanics. In some cases
+  the server may try and look for an undiscovered location when creating a treasure map. The options
   below allow configuring the default behavior of maps obtained in different ways.
 
 - villager-trade
 
   - **default**: false
-  - **description**: Instructs the server to target the first treasure location found for maps
-    obtained via trading with villagers.
+  - **description**: Vanilla defaults to skipping discovered locations for maps obtained via villager trading. This
+    option, if set to true, reverses that letting vanilla return the first structure it finds.
 
 - loot-tables
   - **default**: default
   - **description**: Overrides the loot table-configured check for undiscovered structures.
     `default` allows loot tables to individually determine if the map should allow discovered
-    locations in its search. All vanilla loot tables default to skipping discovered locations so
-    changing this to `false` would override that behavior and force them to search discovered
+    locations in its search. All vanilla loot tables default to finding discovered locations so
+    changing this to `false` would override that behavior and force them to search for undiscovered
     locations.
 
 ### iron-golems-can-spawn-in-air

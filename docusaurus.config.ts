@@ -5,7 +5,6 @@ import vsDark from "prism-react-renderer/themes/vsDark";
 import isCI from "is-ci";
 import navbar from "./config/navbar.config";
 import footer from "./config/footer.config";
-import browserslistToEsbuild from "browserslist-to-esbuild";
 
 const isPreview = process.env.DEPLOY_PREVIEW === "true";
 
@@ -42,7 +41,7 @@ const config: Config = {
       loader: require.resolve("esbuild-loader"),
       options: {
         loader: "tsx",
-        target: browserslistToEsbuild(),
+        target: isServer ? 'node12' : 'es2017'
       },
     }),
   },

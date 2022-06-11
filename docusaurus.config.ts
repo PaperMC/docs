@@ -1,15 +1,16 @@
-import type { Config } from "@docusaurus/types";
+import type { Config, LoadContext, PluginOptions, Plugin, HtmlTags } from "@docusaurus/types";
 import type { Options } from "@docusaurus/plugin-content-docs";
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
 import vsDark from "prism-react-renderer/themes/vsDark";
 import isCI from "is-ci";
 import navbar from "./config/navbar.config";
 import footer from "./config/footer.config";
+import browserslistToEsbuild from "browserslist-to-esbuild";
 
 const isPreview = process.env.DEPLOY_PREVIEW === "true";
 
-const url = isPreview ? process.env.PREVIEW_URL : "https://docs.papermc.io";
-const baseUrl = isPreview ? process.env.PREVIEW_BASE_URL : "/";
+const url = process.env.PAPER_DOCS_URL ?? "https://docs.papermc.io";
+const baseUrl = process.env.PAPER_DOCS_BASE_URL ?? "/";
 const completeUrl = url + baseUrl;
 
 const docsCommon: Options = {
@@ -34,22 +35,14 @@ const config: Config = {
   trailingSlash: false,
   noIndex: isPreview,
   baseUrlIssueBanner: false,
-  clientModules: [require.resolve("./src/css/custom.css")],
+  clientModules: [require.resolve("../src/css/custom.css")],
 
   webpack: {
     jsLoader: (isServer) => ({
-      loader: require.resolve("swc-loader"),
+      loader: require.resolve("esbuild-loader"),
       options: {
-        minify: true,
-        jsc: {
-          parser: {
-            syntax: "typescript",
-            tsx: true,
-          },
-        },
-        module: {
-          type: isServer ? "commonjs" : "es6",
-        },
+        loader: "tsx",
+        target: browserslistToEsbuild(),
       },
     }),
   },
@@ -134,32 +127,35 @@ const config: Config = {
         ],
       },
     ],
-    [
-      "custom-tags",
-      {
-        headTags: [
-          {
-            tagName: "script",
-            attributes: {
-              type: "application/ld+json",
-            },
-            innerHTML: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              url: completeUrl,
-              potentialAction: {
-                "@type": "SearchAction",
-                target: {
-                  "@type": "EntryPoint",
-                  urlTemplate: `${completeUrl}search?q={search_term_string}`,
-                },
-                "query-input": "required name=search_term_string",
+    () => ({
+      name: "docusaurus-plugin-custom-tags",
+
+      injectHtmlTags() {
+        return {
+          headTags: [
+            {
+              tagName: "script",
+              attributes: {
+                type: "application/ld+json",
               },
-            }),
-          },
-        ],
+              innerHTML: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                url: completeUrl,
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: `${completeUrl}search?q={search_term_string}`,
+                  },
+                  "query-input": "required name=search_term_string",
+                },
+              }),
+            },
+          ],
+        };
       },
-    ],
+    }),
     "debug",
   ],
 

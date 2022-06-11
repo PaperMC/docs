@@ -7,6 +7,16 @@ keywords:
 
 # Paper Per World Config
 
+:::caution Outdated Content
+
+Content on this page has **not been updated for the 1.19 configuration reorganization** and is
+primarily applicable only to versions 1.18.2 and below. Please proceed accordingly.
+
+If you would like to assist in updating content, please reach out in the `#docs` channel on our
+[Discord](https://discord.gg/papermc) server.
+
+:::
+
 World settings are configured on a per-world basis. The child-node _default_ is used for all worlds
 that do not have their own specific settings. For more information about how per world configuration
 of Paper works, see the [Per World Configuration Guide](../how-to/per-world-configuration.md). For

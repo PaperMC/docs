@@ -6,6 +6,16 @@ slug: /anti-xray
 
 > Originally written and maintained by [stonar96](https://github.com/stonar96).
 
+:::caution Outdated Content
+
+Content on this page has not been updated for the 1.19 configuration reorganization and **example
+configurations are only applicable to versions 1.18.2 and below**. Please proceed accordingly.
+
+If you would like to assist in updating content, please reach out in the `#docs` channel on our
+[Discord](https://discord.gg/papermc) server.
+
+:::
+
 Paper includes an obfuscation-based Anti-Xray with two modes, configurable per world in paper.yml.
 
 :::info Per World Configuration

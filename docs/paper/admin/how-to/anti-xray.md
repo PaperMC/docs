@@ -27,7 +27,7 @@ yourself with the [Per World Configuration Guide](per-world-configuration.md).
 
 This guide is a step-by-step walk-through for configuring Anti-Xray. For reference documentation,
 refer to the Anti-Xray section of the
-[Per-World Configuration Reference](../reference/paper-per-world-configuration.md#anti-xray).
+[Per-World Configuration Reference](../reference/world-configuration.md#anti-xray).
 
 Anti-Xray has two different modes. `engine-mode: 1` replaces specified blocks (`hidden-blocks`) with
 other "fake" blocks, `stone` (`deepslate` at y < 0), `netherrack`, or `end_stone` based on the
@@ -62,10 +62,10 @@ included out of the box.
 generation. If the client is able to obtain the world seed, it is able to know the real location of
 every generated ore, completely bypassing Anti-Xray. This can be partially worked around by making
 it harder for the client to reverse the world seed with the
-[`feature-seeds` configuration](../reference/paper-per-world-configuration.md#feature-seeds), in
-conjunction with the structure seed options in `spigot.yml`. Note that this is not a complete
-solution, and it may still be possible for a client to obtain the server's world seed. Using a
-different seed for each world may also be beneficial.
+[`feature-seeds` configuration](../reference/world-configuration.md#feature-seeds), in conjunction
+with the structure seed options in `spigot.yml`. Note that this is not a complete solution, and it
+may still be possible for a client to obtain the server's world seed. Using a different seed for
+each world may also be beneficial.
 
 **Ores Exposed to Air**: In both `engine-mode: 1` and `engine-mode: 2`, it is possible for a client
 to view ores that are exposed to air. This can be mitigated in `engine-mode: 2` by adding `air` to

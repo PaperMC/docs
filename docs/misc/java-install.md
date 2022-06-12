@@ -1,6 +1,5 @@
 ---
 title: Installing or Updating Java
-slug: /java-install-update
 description: How to install or update to Java 17 on Linux (apt/rpm), Windows, or Mac.
 toc_max_heading_level: 5
 ---

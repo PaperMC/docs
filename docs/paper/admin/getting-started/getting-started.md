@@ -9,7 +9,7 @@ slug: /getting-started
 :::tip
 
 With the release of Minecraft 1.18, Paper now requires **Java 17** to run. If you don't already have
-Java 17, [it's easy to download and install](/misc/java-install-update).
+Java 17, [it's easy to download and install](/misc/java-install).
 
 :::
 
@@ -54,8 +54,8 @@ disables Vanilla's GUI, so you don't get double interfaces when using the comman
 
 For more advanced Java tuning, see [Aikar's Flags](../how-to/aikars-flags.md).
 
-To configure your server, see the [Global Configuration](../reference/paper-global-configuration.md)
-and [Per World Configuration](../reference/paper-per-world-configuration.md) pages.
+To configure your server, see the [Global Configuration](../reference/global-configuration.md) and
+[Per World Configuration](../reference/world-configuration.md) pages.
 
 ## Updating The Server
 

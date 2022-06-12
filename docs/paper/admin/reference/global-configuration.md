@@ -1,5 +1,5 @@
 ---
-slug: /reference/paper-global-configuration
+slug: /reference/global-configuration
 keywords:
   - paper.yml
   - paper.yml settings
@@ -19,7 +19,7 @@ If you would like to assist in updating content, please reach out in the `#docs`
 
 Global configuration options exposed by Paper will affect all worlds on a server, or the server
 function itself. For per-world configuration, see the
-[Per World Configuration Reference](paper-per-world-configuration.md)
+[Per World Configuration Reference](world-configuration.md)
 
 ### use-display-name-in-quit-message
 

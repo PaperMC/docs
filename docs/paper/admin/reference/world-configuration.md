@@ -1,5 +1,5 @@
 ---
-slug: /reference/paper-per-world-configuration
+slug: /reference/world-configuration
 keywords:
   - paper.yml
   - paper.yml world-settings
@@ -20,7 +20,7 @@ If you would like to assist in updating content, please reach out in the `#docs`
 World settings are configured on a per-world basis. The child-node _default_ is used for all worlds
 that do not have their own specific settings. For more information about how per world configuration
 of Paper works, see the [Per World Configuration Guide](../how-to/per-world-configuration.md). For
-global config, see the [Paper Global Configuration Reference](paper-global-configuration.md)
+global config, see the [Paper Global Configuration Reference](global-configuration.md)
 
 ### disable-teleportation-suffocation-check
 

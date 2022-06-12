@@ -1,0 +1,47 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "public": true,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/intro",
+      "destination": "/"
+    },
+    {
+      "source": "/java-install-update",
+      "destination": "/misc/java-install"
+    },
+    {
+      "source": "/papermc/:path*",
+      "destination": "/misc/:path*"
+    },
+    {
+      "source": "/velocity/developers/:path*",
+      "destination": "/velocity/dev/:path*"
+    },
+    {
+      "source": "/paper/reference/paper-per-world-configuration",
+      "destination": "/paper/reference/world-configuration"
+    },
+    {
+      "source": "/paper/reference/paper-global-configuration",
+      "destination": "/paper/reference/global-configuration"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "cache-control",
+          "value": "public, immutable, max-age=31536000"
+        }
+      ]
+    }
+  ],
+  "github": {
+    "silent": true,
+    "autoJobCancelation": true
+  }
+}

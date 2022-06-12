@@ -1,7 +1,3 @@
-import type { Config } from "@docusaurus/types";
-import type { Options } from "@docusaurus/plugin-content-docs";
-import type { Config } from "@docusaurus/types";
-import type { Options } from "@docusaurus/plugin-content-docs";
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
 import vsDark from "prism-react-renderer/themes/vsDark";
 import isCI from "is-ci";
@@ -9,9 +5,9 @@ import navbar from "./config/navbar.config";
 import footer from "./config/footer.config";
 import { env } from "process";
 
-const preview = env.DEPLOY_PREVIEW === "true";
+const preview = env.VERCEL_ENV === "preview";
 
-const url = (preview && env.PAPER_DOCS_URL) || "https://docs.papermc.io";
+const url = (preview && env.VERCEL_URL) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,

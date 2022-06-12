@@ -1,5 +1,0 @@
-/intro                      /
-/java-install-update        /misc/java-install-update
-
-/papermc/*                  /misc/:splat
-/velocity/developers/*      /velocity/dev/:splat

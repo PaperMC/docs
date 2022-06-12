@@ -25,7 +25,7 @@ worlds where it is not manually overridden.
 ## Per World Values
 
 To set a value for a specific world, edit `paper-world.yml` within the world folder. For example, if
-you wanted to disable `spawn`, `keep-spawn-loaded` for a world named `resource`, you would edit
+you wanted to disable `spawn.keep-spawn-loaded` for a world named `resource`, you would edit
 `paper-world.yml` within the `resource` folder like so:
 
 ```yaml title=resource/paper-world.yml
@@ -88,16 +88,16 @@ spawn:
 This example demonstrates the concept of inheritance. For each world, this is the effective
 configuration which will be applied:
 
-| Configuration Key                                                    | world  | world_nether | world_the_end | resource_world |
-| -------------------------------------------------------------------- | ------ | ------------ | ------------- | -------------- |
-| `entities`, `spawning`, `spawn-limits`, `ambient`                    | `15`   | `15`         | `15`          | `15`           |
-| `entities`, `spawning`, `spawn-limits`, `axolotls`                   | `5`    | `5`          | `5`           | `8`            |
-| `entities`, `spawning`, `spawn-limits`, `creature`                   | `10`   | `10`         | `10`          | `15`           |
-| `entities`, `spawning`, `spawn-limits`, `monster`                    | `70`   | `90`         | `70`          | `2`            |
-| `entities`, `spawning`, `spawn-limits`, `underground_water_creature` | `5`    | `5`          | `5`           | `5`            |
-| `entities`, `spawning`, `spawn-limits`, `water_ambient`              | `20`   | `20`         | `20`          | `20`           |
-| `entities`, `spawning`, `spawn-limits`, `water_creature`             | `5`    | `5`          | `5`           | `5`            |
-| `spawn`, `keep-spawn-loaded`                                         | `true` | `true`       | `true`        | `false`        |
+| Configuration Key                                           | world  | world_nether | world_the_end | resource_world |
+| ----------------------------------------------------------- | ------ | ------------ | ------------- | -------------- |
+| `entities.spawning.spawn-limits.ambient`                    | `15`   | `15`         | `15`          | `15`           |
+| `entities.spawning.spawn-limits.axolotls`                   | `5`    | `5`          | `5`           | `8`            |
+| `entities.spawning.spawn-limits.creature`                   | `10`   | `10`         | `10`          | `15`           |
+| `entities.spawning.spawn-limits.monster`                    | `70`   | `90`         | `70`          | `2`            |
+| `entities.spawning.spawn-limits.underground_water_creature` | `5`    | `5`          | `5`           | `5`            |
+| `entities.spawning.spawn-limits.water_ambient`              | `20`   | `20`         | `20`          | `20`           |
+| `entities.spawning.spawn-limits.water_creature`             | `5`    | `5`          | `5`           | `5`            |
+| `spawn.keep-spawn-loaded`                                   | `true` | `true`       | `true`        | `false`        |
 
 Notice that `world_the_end/paper-world.yml` was never modified. Because of this, it inherits all the
 configuration options from `config/paper-world-defaults.yml`. Additionally, `keep-spawn-loaded` was

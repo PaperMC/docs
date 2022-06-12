@@ -1,5 +1,7 @@
 # docs ![Build Status](https://img.shields.io/github/workflow/status/PaperMC/docs/Publish/main?logo=github) ![Deployment Status](https://img.shields.io/github/deployments/PaperMC/docs/github-pages?label=deployment&logo=github) ![License](https://img.shields.io/github/license/PaperMC/docs)
 
+[vercel]: https://vercel.com?utm_source=papermc&utm_campaign=oss
+
 This is the repository for all project documentation under the PaperMC umbrella. Content in this
 repository is published to [docs.papermc.io](https://docs.papermc.io) for viewing.
 
@@ -44,3 +46,8 @@ $ yarn build
 
 This command builds a production-ready deployment into the `build` directory. These files are ready
 to be hosted on any static content server.
+
+## Special Thanks
+
+Preview and production hosting for this project has been provided for free by [Vercel]. Thank you!
+[![Vercel](https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg)][vercel]

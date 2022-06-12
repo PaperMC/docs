@@ -4,105 +4,102 @@ slug: /per-world-configuration
 
 # Per World Configuration
 
-:::caution Outdated Content
-
-Content on this page has **not been updated for the 1.19 configuration reorganization** and is
-primarily applicable only to versions 1.18.2 and below. Please proceed accordingly.
-
-If you would like to assist in updating content, please reach out in the `#docs` channel on our
-[Discord](https://discord.gg/papermc) server.
-
-:::
-
 One of the most powerful yet least understood features of the Paper configuration is setting
 configuration options per world. While not every config option can be set per world, everything
-under `world-settings` in either `paper.yml` or `spigot.yml` can be configured differently on a per
-world basis.
+stored within `paper-world-defaults.yml` can be.
+
+:::tip Configuration Migration
+
+This documentation focuses on versions 1.19 and above exclusively. For versions 1.18 and below, use
+the version selector in the top right to select `1.18`.
+
+:::
 
 ## Default Values
 
-The only world generated out of the box is `default`. Any configuration option set here will apply
-to **all** loaded worlds, unless explicitly overridden. Any configuration change that does not need
-to be separated by world should be made in this section.
-
-:::info The main world
-
-The `default` section also serves as the place to configure per world settings for the main world
-(`level-name` in server.properties). An additional section created for the main world will not
-supersede `default`.
-
-:::
+No per world values are set by default. All default values are stored in `paper-world-defaults.yml`,
+within the `config` directory. Everything in this file has the possibility to be set per world, but
+isn't by default. Changing something in `paper-world-defaults.yml` will change the value for all
+worlds where it is not manually overridden.
 
 ## Per World Values
 
-A new section must be manually added to the bottom of the configuration file for each world which
-requires a unique configuration. This section will not be automatically generated; it must be added.
-Remember! YAML (the configuration format used by Paper) cares about spaces. When adding a new world,
-ensure there are two spaces behind it.
+To set a value for a specific world, edit `paper-world.yml` within the world folder. For example, if
+you wanted to disable `spawn`, `keep-spawn-loaded` for a world named `resource`, you would edit
+`paper-world.yml` within the `resource` folder like so:
 
-For example, to disable loading the spawn chunks in `world_nether` and `world_the_end`,
-configuration would be added like this:
+```yaml title=resource/paper-world.yml
+_version: 28
 
-```yaml title="paper.yml"
-world-settings:
-  default:
-    keep-spawn-loaded: true
-  world_nether:
-    keep-spawn-loaded: false
-  world_the_end:
-    keep-spawn-loaded: false
+# highlight-start
+spawn:
+  keep-spawn-loaded: false
+# highlight-end
 ```
 
-This is a very stripped-down example. In reality, the `default` section will be much more extensive
-as it contains all possible configuration options. This may look overwhelming at first, but always
-remember to put new worlds at the very bottom of the configuration file.
+Nothing but `_version` is set in `paper-world.yml` configuration files by default. In order to
+override the default for an option, you must manually add it by copying from
+`paper-world-defaults.yml`.
 
-### Inheritance
+## Inheritance
 
-All configuration not explicitly defined for a world is inherited from the `default` section. This
-means there is no need to repeat configuration options with the same value between sections, so
-there is no need to copy and paste the entire `default` section into each new world created.
+All configuration not explicitly defined for a world is inherited from `paper-world-defaults.yml`.
+This means that there is no need to repeat yourself between the `paper-world-defaults.yml` and each
+individual `paper-world.yml`. You **do not need to and should not** copy the entire
+`paper-world-default.yml` file into each `paper-world.yml` file you want to modify. Only copy the
+exact value you want to change.
 
 For a more complex real-world example: setting both different `spawn-limits` and `keep-spawn-loaded`
 in two worlds.
 
-```yaml title="paper.yml"
-world-settings:
-  default:
+```yaml title="paper-world-defaults.yml"
+entities:
+  spawning:
     spawn-limits:
-      monster: 70
-      creature: 10
-      ambient: 15
-      axolotls: 5
+      ambient: 70
+      axolotls: 10
+      creature: 15
+      monster: 5
       underground_water_creature: 5
-      water_creature: 5
-      water_ambient: 20
-    keep-spawn-loaded: true
-  world_nether:
+      water_ambient: 5
+      water_creature: 20
+spawn:
+  keep-spawn-loaded: true
+```
+
+```yaml title="world_nether/paper-world.yml"
+entities:
+  spawning:
     spawn-limits:
       monster: 90
-  resource_world:
+```
+
+```yaml title="resource_world/paper-world.yml"
+entities:
+  spawning:
     spawn-limits:
-      monster: 2
-      creature: 15
       axolotls: 8
-    keep-spawn-loaded: false
+      creature: 15
+      monster: 2
+spawn:
+  keep-spawn-loaded: false
 ```
 
 This example demonstrates the concept of inheritance. For each world, this is the effective
 configuration which will be applied:
 
-| Configuration Key                         | world  | world_nether | world_the_end | resource_world |
-| ----------------------------------------- | ------ | ------------ | ------------- | -------------- |
-| `spawn-limits.monster`                    | `70`   | `90`         | `70`          | `2`            |
-| `spawn-limits.creature`                   | `10`   | `10`         | `10`          | `15`           |
-| `spawn-limits.ambient`                    | `15`   | `15`         | `15`          | `15`           |
-| `spawn-limits.axolotls`                   | `5`    | `5`          | `5`           | `8`            |
-| `spawn-limits.underground_water_creature` | `5`    | `5`          | `5`           | `5`            |
-| `spawn-limits.water_creature`             | `5`    | `5`          | `5`           | `5`            |
-| `spawn-limits.water_ambient`              | `20`   | `20`         | `20`          | `20`           |
-| `keep-spawn-loaded`                       | `true` | `true`       | `true`        | `false`        |
+| Configuration Key                                                    | world  | world_nether | world_the_end | resource_world |
+| -------------------------------------------------------------------- | ------ | ------------ | ------------- | -------------- |
+| `entities`, `spawning`, `spawn-limits`, `ambient`                    | `15`   | `15`         | `15`          | `15`           |
+| `entities`, `spawning`, `spawn-limits`, `axolotls`                   | `5`    | `5`          | `5`           | `8`            |
+| `entities`, `spawning`, `spawn-limits`, `creature`                   | `10`   | `10`         | `10`          | `15`           |
+| `entities`, `spawning`, `spawn-limits`, `monster`                    | `70`   | `90`         | `70`          | `2`            |
+| `entities`, `spawning`, `spawn-limits`, `underground_water_creature` | `5`    | `5`          | `5`           | `5`            |
+| `entities`, `spawning`, `spawn-limits`, `water_ambient`              | `20`   | `20`         | `20`          | `20`           |
+| `entities`, `spawning`, `spawn-limits`, `water_creature`             | `5`    | `5`          | `5`           | `5`            |
+| `spawn`, `keep-spawn-loaded`                                         | `true` | `true`       | `true`        | `false`        |
 
-Notice that `world_the_end` was never specified in this configuration. Because of this, it inherits
-all the configuration options from the `default` section. Additionally, `keep-spawn-loaded` was only
-disabled in `resource_world` because in the `default` section, `keep-spawn-loaded` is set to `true`.
+Notice that `world_the_end/paper-world.yml` was never modified. Because of this, it inherits all the
+configuration options from `config/paper-world-defaults.yml`. Additionally, `keep-spawn-loaded` was
+only disabled in `resource_world/paper-world.yml` because in `config/paper-world-defaults.yml`,
+`keep-spawn-loaded` is set to `true`.

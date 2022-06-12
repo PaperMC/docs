@@ -1,77 +1,114 @@
-import type { Config } from "@docusaurus/types";
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
 import vsDark from "prism-react-renderer/themes/vsDark";
 import isCI from "is-ci";
 import navbar from "./config/navbar.config";
 import footer from "./config/footer.config";
+import { env } from "process";
 
-const isPreview = process.env.DEPLOY_PREVIEW === "true";
+const preview = env.VERCEL_ENV === "preview";
 
-const url = isPreview ? process.env.PREVIEW_URL : "https://docs.papermc.io";
-const baseUrl = isPreview ? process.env.PREVIEW_BASE_URL : "/";
-const completeUrl = url + baseUrl;
+const url = (preview && env.VERCEL_URL) || "https://docs.papermc.io";
+
+const docsCommon: Options = {
+  breadcrumbs: true,
+  editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
+  editCurrentVersion: true,
+  remarkPlugins: [remarkA11yEmoji],
+  showLastUpdateAuthor: true,
+  showLastUpdateTime: true,
+};
 
 const config: Config = {
   title: "PaperMC Documentation",
-  tagline: "Documentation for projects within the PaperMC organization.",
-  customFields: {
-    description:
-      "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
-  },
+  tagline:
+    "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
   url: url,
-  baseUrl: baseUrl,
+  baseUrl: "/",
   onBrokenLinks: isCI ? "throw" : "warn",
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
   onDuplicateRoutes: isCI ? "throw" : "error",
   favicon: "img/favicon.ico",
-  organizationName: "PaperMC",
-  projectName: "docs",
   trailingSlash: false,
-  noIndex: isPreview,
+  noIndex: preview,
   baseUrlIssueBanner: false,
+  clientModules: [require.resolve("../src/css/custom.css")],
 
   webpack: {
     jsLoader: (isServer) => ({
-      loader: require.resolve("swc-loader"),
+      loader: require.resolve("esbuild-loader"),
       options: {
-        minify: true,
-        jsc: {
-          parser: {
-            syntax: "typescript",
-            tsx: true,
-          },
-        },
-        module: {
-          type: isServer ? "commonjs" : "es6",
-        },
+        loader: "tsx",
+        target: isServer ? "node12" : "es2017",
       },
     }),
   },
 
-  presets: [
+  themes: [
     [
       "classic",
       {
-        debug: !isCI || isPreview,
-        theme: {
-          customCss: [require.resolve("./src/css/custom.css")],
-        },
-        docs: {
-          editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
-          showLastUpdateAuthor: true,
-          showLastUpdateTime: true,
-          remarkPlugins: [remarkA11yEmoji],
-          routeBasePath: "/",
-          sidebarPath: require.resolve("./config/sidebars.config"),
-        },
-        blog: false,
+        respectPrefersColorScheme: true,
       },
     ],
+    "@docusaurus/theme-search-algolia",
   ],
 
   plugins: [
     [
-      "@docusaurus/plugin-pwa",
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "misc",
+        path: "docs/misc",
+        routeBasePath: "/misc",
+        sidebarPath: require.resolve("./config/sidebar.misc"),
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "paper",
+        path: "docs/paper",
+        routeBasePath: "paper",
+        sidebarPath: require.resolve("./config/sidebar.paper"),
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.19",
+            path: "",
+          },
+        },
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "velocity",
+        path: "docs/velocity",
+        routeBasePath: "velocity",
+        sidebarPath: require.resolve("./config/sidebar.velocity"),
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "waterfall",
+        path: "docs/waterfall",
+        routeBasePath: "waterfall",
+        sidebarPath: require.resolve("./config/sidebar.waterfall"),
+      },
+    ],
+    [
+      "content-pages",
+      {
+        remarkPlugins: [remarkA11yEmoji],
+      },
+    ],
+    [
+      "pwa",
       {
         offlineModeActivationStrategies: ["appInstalled", "standalone", "queryString"],
         pwaHead: [
@@ -93,32 +130,36 @@ const config: Config = {
         ],
       },
     ],
-    [
-      "custom-tags",
-      {
-        headTags: [
-          {
-            tagName: "script",
-            attributes: {
-              type: "application/ld+json",
-            },
-            innerHTML: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              url: completeUrl,
-              potentialAction: {
-                "@type": "SearchAction",
-                target: {
-                  "@type": "EntryPoint",
-                  urlTemplate: `${completeUrl}search?q={search_term_string}`,
-                },
-                "query-input": "required name=search_term_string",
+    () => ({
+      name: "docusaurus-plugin-custom-tags",
+
+      injectHtmlTags() {
+        return {
+          headTags: [
+            {
+              tagName: "script",
+              attributes: {
+                type: "application/ld+json",
               },
-            }),
-          },
-        ],
+              innerHTML: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                url: url,
+                potentialAction: {
+                  "@type": "SearchAction",
+                  target: {
+                    "@type": "EntryPoint",
+                    urlTemplate: `${url}/search?q={search_term_string}`,
+                  },
+                  "query-input": "required name=search_term_string",
+                },
+              }),
+            },
+          ],
+        };
       },
-    ],
+    }),
+    "@docusaurus/plugin-debug",
   ],
 
   themeConfig: {

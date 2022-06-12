@@ -22,6 +22,12 @@ const projects: Project[] = [
     repo: "PaperMC/Waterfall",
     link: "/waterfall",
   },
+  {
+    title: "Miscellaneous",
+    description: "Documentation that does not apply to any specific project.",
+    repo: "PaperMC",
+    link: "/misc",
+  },
 ];
 
 function Project(project: Project) {

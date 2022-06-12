@@ -2,26 +2,66 @@ import { Navbar } from "@docusaurus/theme-common";
 
 // don't specify style or hideOnScroll here, we want it to be dynamic
 const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
-  title: "PaperMC Docs",
   logo: {
-    src: "img/logo.svg",
-    alt: "PaperMC Logo",
+    src: "img/logo-marker-light.svg",
+    srcDark: "img/logo-marker-dark.svg",
+    width: 130,
+    height: 32,
+    alt: "PaperMC Docs",
   },
   items: [
     {
-      to: "paper",
+      type: "dropdown",
       label: "Paper",
+      to: "/paper",
       position: "left",
+      activeBaseRegex: "(\\/paper)(.+)?",
+      items: [
+        {
+          label: "Administration",
+          to: "/paper/admin",
+          activeBaseRegex: "(\\/paper/)(?!dev)(.+)?",
+        },
+        {
+          label: "Development",
+          to: "/paper/dev",
+          activeBaseRegex: "(\\/paper\\/dev)(.+)?",
+        },
+      ],
     },
     {
-      to: "velocity",
+      type: "dropdown",
       label: "Velocity",
+      to: "/velocity",
       position: "left",
+      activeBaseRegex: "(\\/velocity)(.+)?",
+      items: [
+        {
+          label: "Administration",
+          to: "/velocity/admin",
+          activeBaseRegex: "(\\/velocity/)(?!dev)(.+)?",
+        },
+        {
+          label: "Development",
+          to: "/velocity/dev",
+          activeBaseRegex: "(\\/velocity\\/dev)(.+)?",
+        },
+      ],
     },
     {
       to: "waterfall",
       label: "Waterfall",
       position: "left",
+    },
+    {
+      to: "misc",
+      label: "Misc",
+      position: "left",
+    },
+    {
+      type: "docsVersionDropdown",
+      docsPluginId: "paper",
+      position: "right",
     },
     {
       to: "https://papermc.io/downloads",

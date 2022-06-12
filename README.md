@@ -29,7 +29,7 @@ $ yarn
 3. Start the development server
 
 ```bash
-$ yarn start
+$ yarn dev
 ```
 
 This will start a local development server and open a browser window. The majority of changes will

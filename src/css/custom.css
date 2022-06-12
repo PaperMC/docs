@@ -109,6 +109,14 @@ html[data-theme="dark"] {
   padding: 0;
 }
 
+.navbar__brand {
+  margin-right: 0;
+}
+
+.navbar__logo {
+  margin: 0;
+}
+
 .menu__link--active:not(.menu__link--sublist) {
   --size: 4px;
 

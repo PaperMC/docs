@@ -159,6 +159,12 @@ const config: Config = {
         };
       },
     }),
+    [
+      "@docusaurus/plugin-sitemap",
+      {
+        ignorePatterns: ["**/cat/**"],
+      },
+    ],
     "@docusaurus/plugin-debug",
   ],
 
@@ -207,6 +213,7 @@ const config: Config = {
       appId: "P1BCDPTG1Q",
       apiKey: "34772712950f27c6e9c714ad2e6c5e16",
       indexName: "docs-papermc",
+      contextualSearch: true,
     },
   },
 };

@@ -72,7 +72,7 @@ task.cancel();
 System.out.println(task.status());
 ```
 
-As of Velocity 3.1.2 you can schedule _self-cancelling_ tasks.
+You can also schedule _self-cancelling_ tasks using a `Consumer<ScheduledTask>`.
 
 ```java
 AtomicInteger integer = new AtomicInteger(0);
@@ -90,12 +90,12 @@ ScheduledTask task = server.getScheduler()
 
 ## Obtaining tasks from a plugin
 
-As of Velocity 3.1.2 you can get all tasks scheduled by a plugin with `tasksByPlugin`.
+You can get all tasks scheduled by a plugin with `tasksByPlugin`.
 
 ```java
-  Collection<ScheduledTask> tasks = server.getScheduler().tasksByPlugin(plugin);
-  // then you can control them, for example, cancel all task scheduled by a plugin
-  for (ScheduledTask task : tasks) {
-    task.cancel();
-  }
+Collection<ScheduledTask> tasks = server.getScheduler().tasksByPlugin(plugin);
+// then you can control them, for example, cancel all task scheduled by a plugin
+for (ScheduledTask task : tasks) {
+  task.cancel();
+}
 ```

@@ -58,8 +58,7 @@ If a server name has been provided, Velocity will attempt to connect to the serv
 
 When executed from the console, this will gracefully shut down the Velocity proxy. All players will
 be disconnected from the proxy and plugins will have a chance to finish up before the proxy shuts
-down. An optional reason can be given, either as JSON or with legacy color codes, in the same format
-as the MOTD in `velocity.toml`.
+down. An optional reason can be given, either as JSON or with [MiniMessage Format](https://docs.adventure.kyori.net/minimessage/format.html).
 
 ## `/glist`
 

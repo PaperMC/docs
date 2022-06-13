@@ -6,17 +6,7 @@ slug: /anti-xray
 
 > Originally written and maintained by [stonar96](https://github.com/stonar96).
 
-:::caution Outdated Content
-
-Content on this page has not been updated for the 1.19 configuration reorganization and **example
-configurations are only applicable to versions 1.18.2 and below**. Please proceed accordingly.
-
-If you would like to assist in updating content, please reach out in the `#docs` channel on our
-[Discord](https://discord.gg/papermc) server.
-
-:::
-
-Paper includes an obfuscation-based Anti-Xray with two modes, configurable per world in paper.yml.
+Paper includes an obfuscation-based Anti-Xray with two modes, configurable on a per world basis.
 
 :::info Per World Configuration
 
@@ -90,70 +80,81 @@ formatting remains unchanged by using the "copy" button in the top right of each
 <details>
   <summary>Overworld Configuration</summary>
 
-Replace the existing `anti-xray` block in `paper.yml` (under `world-settings.default`) with the
-following:
+Replace the existing `anticheat.anti-xray` block in `paper-world-defaults.yml` with the following:
 
 <!-- prettier-ignore -->
-```yaml title="paper.yml"
-    anti-xray:
-      enabled: true
-      engine-mode: 1
-      # As of 1.18 some ores are generated much higher.
-      # Please adjust the max-block-height setting at your own discretion.
-      # https://minecraft.fandom.com/wiki/Ore might be helpful.
-      max-block-height: 64
-      update-radius: 2
-      lava-obscures: false
-      use-permission: false
-      hidden-blocks:
-      # There's no chance to hide dungeon chests as they are entirely surrounded by air, but buried treasures will be hidden.
-      - chest
-      - coal_ore
-      - deepslate_coal_ore
-      - copper_ore
-      - deepslate_copper_ore
-      - raw_copper_block
-      - diamond_ore
-      - deepslate_diamond_ore
-      - emerald_ore
-      - deepslate_emerald_ore
-      - gold_ore
-      - deepslate_gold_ore
-      - iron_ore
-      - deepslate_iron_ore
-      - raw_iron_block
-      - lapis_ore
-      - deepslate_lapis_ore
-      - redstone_ore
-      - deepslate_redstone_ore
-      replacement-blocks:
-      # The replacement-blocks list is not used in engine-mode: 1. Changing this will have no effect.
-      - stone
-      - oak_planks
-      - deepslate
+```yaml title="paper-world-defaults.yml"
+anticheat:
+  anti-xray:
+    enabled: true
+    engine-mode: 1
+    hidden-blocks:
+    # There's no chance to hide dungeon chests as they are entirely surrounded by air, but buried treasures will be hidden.
+    - chest
+    - coal_ore
+    - deepslate_coal_ore
+    - copper_ore
+    - deepslate_copper_ore
+    - raw_copper_block
+    - diamond_ore
+    - deepslate_diamond_ore
+    - emerald_ore
+    - deepslate_emerald_ore
+    - gold_ore
+    - deepslate_gold_ore
+    - iron_ore
+    - deepslate_iron_ore
+    - raw_iron_block
+    - lapis_ore
+    - deepslate_lapis_ore
+    - redstone_ore
+    - deepslate_redstone_ore
+    lava-obscures: false
+    # As of 1.18 some ores are generated much higher.
+    # Please adjust the max-block-height setting at your own discretion.
+    # https://minecraft.fandom.com/wiki/Ore might be helpful.
+    max-block-height: 64
+    replacement-blocks:
+    # The replacement-blocks list is not used in engine-mode: 1. Changing this will have no effect.
+    - stone
+    - oak_planks
+    - deepslate
+    update-radius: 2
+    use-permission: false
 ```
 
 </details>
 
 <details>
-  <summary>End and Nether Configuration</summary>
+  <summary>Nether Configuration</summary>
 
-Copy and paste this at the very bottom of `paper.yml`. See the
-[Per-World Configuration Guide](per-world-configuration.md) for more information. Remember to change
-the world names if your worlds are named differently!
+Copy and paste into your `paper-world.yml` within your nether world folder. See the
+[Per-World Configuration Guide](per-world-configuration.md) for more information.
 
 <!-- prettier-ignore -->
-```yml title="paper.yml"
-  world_nether:
-   anti-xray:
-      max-block-height: 128
-      hidden-blocks:
-      - ancient_debris
-      - nether_gold_ore
-      - nether_quartz_ore
-  world_the_end:
-    anti-xray:
-      enabled: false
+```yml title="world_nether/paper-world.yml"
+anticheat:
+  anti-xray:
+    hidden-blocks:
+    - ancient_debris
+    - nether_gold_ore
+    - nether_quartz_ore
+    max-block-height: 128
+```
+
+</details>
+
+<details>
+  <summary>End Configuration</summary>
+
+Copy and paste into your `paper-world.yml` within your end world folder. See the
+[Per-World Configuration Guide](per-world-configuration.md) for more information.
+
+<!-- prettier-ignore -->
+```yml title="world_the_end/paper-world.yml"
+anticheat:
+  anti-xray:
+    enabled: false
 ```
 
 </details>
@@ -163,97 +164,108 @@ the world names if your worlds are named differently!
 <details>
   <summary>Overworld Configuration</summary>
 
-Replace the existing `anti-xray` block in `paper.yml` (under `world-settings.default`) with the
-following:
+Replace the existing `anticheat.anti-xray` block in `paper-world-defaults.yml` with the following:
 
 <!-- prettier-ignore -->
-```yaml title="paper.yml"
-    anti-xray:
-      enabled: true
-      engine-mode: 2
-      # As of 1.18 some ores are generated much higher.
-      # Please adjust the max-block-height setting at your own discretion.
-      # https://minecraft.fandom.com/wiki/Ore might be helpful.
-      max-block-height: 64
-      update-radius: 2
-      lava-obscures: false
-      use-permission: false
-      hidden-blocks:
-      # You can add air here such that many holes are generated.
-      # This works well against cave finders but may cause client FPS drops for all players.
-      - air
-      - copper_ore
-      - deepslate_copper_ore
-      - raw_copper_block
-      - diamond_ore
-      - deepslate_diamond_ore
-      - gold_ore
-      - deepslate_gold_ore
-      - iron_ore
-      - deepslate_iron_ore
-      - raw_iron_block
-      - lapis_ore
-      - deepslate_lapis_ore
-      - redstone_ore
-      - deepslate_redstone_ore
-      replacement-blocks:
-      # Chest is a tile entity and can't be added to hidden-blocks in engine-mode: 2.
-      # But adding chest here will hide buried treasures, if max-block-height is increased.
-      - chest
-      - amethyst_block
-      - andesite
-      - budding_amethyst
-      - calcite
-      - coal_ore
-      - deepslate_coal_ore
-      - deepslate
-      - diorite
-      - dirt
-      - emerald_ore
-      - deepslate_emerald_ore
-      - granite
-      - gravel
-      - oak_planks
-      - smooth_basalt
-      - stone
-      - tuff
+```yaml title="paper-world-defaults.yml"
+anticheat:
+  anti-xray:
+    enabled: true
+    engine-mode: 2
+    hidden-blocks:
+    # You can add air here such that many holes are generated.
+    # This works well against cave finders but may cause client FPS drops for all players.
+    - air
+    - copper_ore
+    - deepslate_copper_ore
+    - raw_copper_block
+    - diamond_ore
+    - deepslate_diamond_ore
+    - gold_ore
+    - deepslate_gold_ore
+    - iron_ore
+    - deepslate_iron_ore
+    - raw_iron_block
+    - lapis_ore
+    - deepslate_lapis_ore
+    - redstone_ore
+    - deepslate_redstone_ore
+    lava-obscures: false
+    # As of 1.18 some ores are generated much higher.
+    # Please adjust the max-block-height setting at your own discretion.
+    # https://minecraft.fandom.com/wiki/Ore might be helpful.
+    max-block-height: 64
+    replacement-blocks:
+    # Chest is a tile entity and can't be added to hidden-blocks in engine-mode: 2.
+    # But adding chest here will hide buried treasures, if max-block-height is increased.
+    - chest
+    - amethyst_block
+    - andesite
+    - budding_amethyst
+    - calcite
+    - coal_ore
+    - deepslate_coal_ore
+    - deepslate
+    - diorite
+    - dirt
+    - emerald_ore
+    - deepslate_emerald_ore
+    - granite
+    - gravel
+    - oak_planks
+    - smooth_basalt
+    - stone
+    - tuff
+    update-radius: 2
+    use-permission: false
 ```
 
 </details>
 
 <details>
-  <summary>End and Nether Configuration</summary>
+  <summary>Nether Configuration</summary>
 
-Copy and paste this at the very bottom of `paper.yml`. See the
-[Per-World Configuration Guide](per-world-configuration.md) for more information. Remember to change
-the world names if your worlds are named differently!
+Copy and paste into your `paper-world.yml` within your nether world folder. See the
+[Per-World Configuration Guide](per-world-configuration.md) for more information.
 
 <!-- prettier-ignore -->
-```yml title="paper.yml"
-  world_nether:
-    anti-xray:
-      max-block-height: 128
-      hidden-blocks:
-      # See note about air and possible client performance issues above.
-      - air
-      - ancient_debris
-      - bone_block
-      - glowstone
-      - magma_block
-      - nether_bricks
-      - nether_gold_ore
-      - nether_quartz_ore
-      - polished_blackstone_bricks
-      replacement-blocks:
-      - basalt
-      - blackstone
-      - gravel
-      - netherrack
-      - soul_sand
-      - soul_soil
-  world_the_end:
-    anti-xray:
-      enabled: false
+```yml title="world_nether/paper-world.yml"
+anticheat:
+  anti-xray:
+    hidden-blocks:
+    # See note about air and possible client performance issues above.
+    - air
+    - ancient_debris
+    - bone_block
+    - glowstone
+    - magma_block
+    - nether_bricks
+    - nether_gold_ore
+    - nether_quartz_ore
+    - polished_blackstone_bricks
+    max-block-height: 128
+    replacement-blocks:
+    - basalt
+    - blackstone
+    - gravel
+    - netherrack
+    - soul_sand
+    - soul_soil
+```
+
+</details>
+
+<details>
+  <summary>End Configuration</summary>
+
+Copy and paste into your `paper-world.yml` within your end world folder. See the
+[Per-World Configuration Guide](per-world-configuration.md) for more information.
+
+<!-- prettier-ignore -->
+```yml title="world_the_end/paper-world.yml"
+anticheat:
+  anti-xray:
+    enabled: false
 ```
 
 </details>

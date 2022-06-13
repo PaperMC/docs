@@ -5,8 +5,8 @@ slug: /per-world-configuration
 # Per World Configuration
 
 One of the most powerful yet least understood features of the Paper configuration is setting
-configuration options per world. While not every config option can be set per world, everything
-stored within `paper-world-defaults.yml` can be.
+configuration options per world. While you can not override every config option per world,
+everything stored within `paper-world-defaults.yml` can be.
 
 :::tip Configuration Migration
 
@@ -17,10 +17,10 @@ the version selector in the top right to select `1.18`.
 
 ## Default Values
 
-No per world values are set by default. All default values are stored in `paper-world-defaults.yml`,
-within the `config` directory. Everything in this file has the possibility to be set per world, but
-isn't by default. Changing something in `paper-world-defaults.yml` will change the value for all
-worlds where it is not manually overridden.
+Paper sets no per-world overrides out of the box, storing all default values in
+`config/paper-world-defaults.yml`. Everything in this file can be overridden per world but isn't by
+default. Changing something in `paper-world-defaults.yml` will change the value for all worlds where
+you have not manually overridden it.
 
 ## Per World Values
 

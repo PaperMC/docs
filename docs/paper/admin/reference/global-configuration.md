@@ -397,7 +397,7 @@ function itself. For per-world configuration, see the
 
   - **default**: -1.0
   - **description**: The maximum number of chunks loaded per second for the whole server. A value of
-    -1 will disable this limit.
+    -1 will disable this limit. Takes priority over `player-max-chunk-load-rate`.
 
 - player-max-concurrent-loads
 
@@ -406,9 +406,15 @@ function itself. For per-world configuration, see the
     -1 will not disable this. Use a large number instead.
 
 - global-max-concurrent-loads
+
   - **default**: 500.0
   - **description**: The maximum number of chunk loads processed for the whole server one time. This
     will override `player-max-concurrent-loads` if exceeded. A value of -1 will disable this limit.
+
+- player-max-chunk-load-rate
+
+  - **default**: -1.0
+  - **description**: The maximum number of chunks loaded per player per second.
 
 ### packet-limiter
 

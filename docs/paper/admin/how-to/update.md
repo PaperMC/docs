@@ -22,9 +22,6 @@ updating Paper itself will cause any issues requiring you to restore from a back
 malfunctions or other accidents might! Updating is a great time to work in a backup. Having
 functioning backups is essential to every server, big or small.
 
-If you don't already have a backup plan in place, see [Backup and Recovery] where we walk through
-multiple different backup or recovery strategies.
-
 ## Step 2. Update Plugins
 
 Just like it's important to update Paper, it's equally important to keep plugins up to date. You

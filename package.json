@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "concurrently -k \"npm:sidebar:watch\" \"npm:config:watch\" \"yarn docusaurus:dev\"",
+    "dev": "concurrently -k -n sbr,cfg,dev \"yarn sidebar:watch\" \"yarn config:watch\" \"yarn docusaurus:dev\"",
     "start": "yarn build && yarn serve",
     "build": "yarn meta:build && docusaurus build --config .meta/docusaurus.config.js",
     "clear": "docusaurus clear --config .meta/docusaurus.config.js",
@@ -40,17 +40,17 @@
     "@docusaurus/module-type-aliases": "2.0.0-beta.21",
     "@docusaurus/types": "2.0.0-beta.21",
     "@fec/remark-a11y-emoji": "3.1.0",
-    "@tsconfig/docusaurus": "1.0.5",
+    "@tsconfig/docusaurus": "1.0.6",
     "@types/is-ci": "3.0.0",
-    "@types/node": "17.0.41",
+    "@types/node": "17.0.45",
     "@types/prettier": "2.6.3",
-    "concurrently": "7.2.1",
-    "esbuild": "0.14.43",
+    "concurrently": "7.2.2",
+    "esbuild": "0.14.47",
     "esbuild-loader": "2.19.0",
     "is-ci": "3.0.1",
-    "prettier": "2.6.2",
+    "prettier": "2.7.1",
     "regenerator-runtime": "0.13.9",
-    "typescript": "4.7.3"
+    "typescript": "4.7.4"
   },
   "browserslist": {
     "production": [
@@ -65,7 +65,7 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@3.2.0",
+  "packageManager": "yarn@3.2.1",
   "resolutions": {
     "@docusaurus/plugin-content-docs@2.0.0-beta.21": "patch:@docusaurus/plugin-content-docs@npm:2.0.0-beta.21#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.0.0-beta.21-3f331426d5.patch"
   }

@@ -27,6 +27,10 @@
     {
       "source": "/paper/reference/paper-global-configuration",
       "destination": "/paper/reference/global-configuration"
+    },
+    {
+      "source": "/paper/per-world-configuration",
+      "destination": "/paper/configuration"
     }
   ],
   "headers": [

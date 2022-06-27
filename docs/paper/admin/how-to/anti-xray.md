@@ -11,7 +11,7 @@ Paper includes an obfuscation-based Anti-Xray with two modes, configurable on a 
 :::info Per World Configuration
 
 If you aren't already familiar with per world configuration, please take a moment to familiarize
-yourself with the [Per World Configuration Guide](per-world-configuration.md).
+yourself with the [Configuration Guide](configuration.md).
 
 :::
 
@@ -129,7 +129,7 @@ anticheat:
   <summary>Nether Configuration</summary>
 
 Copy and paste into your `paper-world.yml` within your nether world folder. See the
-[Per-World Configuration Guide](per-world-configuration.md) for more information.
+[Configuration Guide](configuration.md) for more information.
 
 <!-- prettier-ignore -->
 ```yml title="world_nether/paper-world.yml"
@@ -148,7 +148,7 @@ anticheat:
   <summary>End Configuration</summary>
 
 Copy and paste into your `paper-world.yml` within your end world folder. See the
-[Per-World Configuration Guide](per-world-configuration.md) for more information.
+[Configuration Guide](configuration.md) for more information.
 
 <!-- prettier-ignore -->
 ```yml title="world_the_end/paper-world.yml"
@@ -226,7 +226,7 @@ anticheat:
   <summary>Nether Configuration</summary>
 
 Copy and paste into your `paper-world.yml` within your nether world folder. See the
-[Per-World Configuration Guide](per-world-configuration.md) for more information.
+[Configuration Guide](configuration.md) for more information.
 
 <!-- prettier-ignore -->
 ```yml title="world_nether/paper-world.yml"
@@ -259,7 +259,7 @@ anticheat:
   <summary>End Configuration</summary>
 
 Copy and paste into your `paper-world.yml` within your end world folder. See the
-[Per-World Configuration Guide](per-world-configuration.md) for more information.
+[Configuration Guide](configuration.md) for more information.
 
 <!-- prettier-ignore -->
 ```yml title="world_the_end/paper-world.yml"

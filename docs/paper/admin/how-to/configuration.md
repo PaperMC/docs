@@ -1,28 +1,33 @@
 ---
-slug: /per-world-configuration
+slug: /configuration
 ---
 
-# Per World Configuration
+# Configuration
+
+:::note
+
+This guide currently only covers per-world configuration in `paper-world-defaults.yml`. Information
+about general configuration will be added in the future. In the meantime, please refer to the
+information in the [1.19 announcement forum post](https://forums.papermc.io/threads/paper-1-19.344).
+
+:::
+
+<!-- ## Global Configuration -->
+
+## Per World Configuration
 
 One of the most powerful yet least understood features of the Paper configuration is setting
 configuration options per world. While you can not override every config option per world,
 everything stored within `paper-world-defaults.yml` can be.
 
-:::tip Configuration Migration
-
-This documentation focuses on versions 1.19 and above exclusively. For versions 1.18 and below, use
-the version selector in the top right to select `1.18`.
-
-:::
-
-## Default Values
+### Default Values
 
 Paper sets no per-world overrides out of the box, storing all default values in
 `config/paper-world-defaults.yml`. Everything in this file can be overridden per world but isn't by
 default. Changing something in `paper-world-defaults.yml` will change the value for all worlds where
 you have not manually overridden it.
 
-## Per World Values
+### Per World Values
 
 To set a value for a specific world, edit `paper-world.yml` within the world folder. For example, if
 you wanted to disable `spawn.keep-spawn-loaded` for a world named `resource`, you would edit
@@ -41,7 +46,7 @@ Nothing but `_version` is set in `paper-world.yml` configuration files by defaul
 override the default for an option, you must manually add it by copying from
 `paper-world-defaults.yml`.
 
-## Inheritance
+### Inheritance
 
 All configuration not explicitly defined for a world is inherited from `paper-world-defaults.yml`.
 This means that there is no need to repeat yourself between the `paper-world-defaults.yml` and each
@@ -103,3 +108,9 @@ Notice that `world_the_end/paper-world.yml` was never modified. Because of this,
 configuration options from `config/paper-world-defaults.yml`. Additionally, `keep-spawn-loaded` was
 only disabled in `resource_world/paper-world.yml` because in `config/paper-world-defaults.yml`,
 `keep-spawn-loaded` is set to `true`.
+
+<!-- ## System Properties -->
+
+<!-- ## Environment Variables -->
+
+<!-- ## Logging Configuration(?) -->

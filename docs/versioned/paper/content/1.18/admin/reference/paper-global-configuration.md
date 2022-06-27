@@ -3,6 +3,7 @@ slug: /reference/paper-global-configuration
 keywords:
   - paper.yml
   - paper.yml settings
+id: global-configuration
 ---
 
 # Paper Global Config

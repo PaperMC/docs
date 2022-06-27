@@ -1,5 +1,6 @@
 ---
 slug: /per-world-configuration
+id: configuration
 ---
 
 # Per World Configuration

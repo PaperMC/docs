@@ -59,6 +59,11 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       position: "left",
     },
     {
+      to: "hangar",
+      label: "Hangar",
+      position: "left",
+    },
+    {
       type: "docsVersionDropdown",
       docsPluginId: "paper",
       position: "right",

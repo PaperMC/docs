@@ -68,6 +68,16 @@ const config: Config = {
       "content-docs",
       {
         ...docsCommon,
+        id: "hangar",
+        path: "docs/hangar",
+        routeBasePath: "/hangar",
+        sidebarPath: require.resolve("./config/sidebar.hangar"),
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
         id: "paper",
         path: "docs/paper",
         routeBasePath: "paper",

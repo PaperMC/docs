@@ -10,7 +10,7 @@ we can.
 
 ## Compatible game versions
 
-As of this writing, Velocity is compatible with Minecraft 1.7.2 through 1.18.1.
+As of this writing, Velocity is compatible with Minecraft 1.7.2 through 1.19.
 
 ## Vanilla setups
 

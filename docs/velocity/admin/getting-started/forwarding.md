@@ -49,10 +49,16 @@ forwarding natively.
 First, you need to disable BungeeCord forwarding if you had it enabled beforehand. Make sure
 `settings.bungeecord` is set to `false` in your `spigot.yml`.
 
-In `paper.yml`, set `settings.velocity-support.enabled` to true and
-`settings.velocity-support.secret` to match the secret in your `velocity.toml`. You must also set
-`settings.velocity-support.online-mode` to the `online-mode` setting in your `velocity.toml`. Once
-you're done editing `paper.yml`, reboot your server.
+In `config/paper-global.yml`, set `proxies.velocity.enabled` to true and
+`proxies.velocity.secret`, to match the secret in your `velocity.toml`. You must also set
+`proxies.velocity.online-mode` to the `online-mode` setting in your `velocity.toml`. Once
+you're done editing `paper-global.yml`, reboot your server.
+
+:::info
+
+If you are using Paper 1.18.2 or lower, you will find these options as `settings.velocity-support.enabled`, `settings.velocity-support.secret` and `settings.velocity-support.online-mode` in the `paper.yml` file.
+
+:::
 
 ## Configuring modern forwarding for Fabric
 

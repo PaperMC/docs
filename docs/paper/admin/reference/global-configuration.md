@@ -374,7 +374,7 @@ named here use Mojang mappings regardless of the server.
 
 #### secret
 
-- **default**: ``
+- **default**: ` `
 - **description**: The secret string that is shared by your Velocity proxy and this server. This
   needs to match your proxy's `forwarding-secret` setting.
 

@@ -23,6 +23,12 @@ const projects: Project[] = [
     link: "/waterfall",
   },
   {
+    title: "Hangar",
+    description: "A place to upload and share your Paper, Velocity, and Waterfall plugins.",
+    repo: "HangarMC/Hangar",
+    link: "/hangar",
+  },
+  {
     title: "Miscellaneous",
     description: "Documentation that does not apply to any specific project.",
     repo: "PaperMC",

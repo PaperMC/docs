@@ -1,12 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import clsx from "clsx";
-import {
-  isSamePath,
-  useCollapsible,
-  Collapsible,
-  isRegexpStringMatch,
-  useLocalPathname,
-} from "@docusaurus/theme-common";
+import { useCollapsible, Collapsible, isRegexpStringMatch } from "@docusaurus/theme-common";
+
+import { isSamePath, useLocalPathname } from "@docusaurus/theme-common/internal";
 import type { DesktopOrMobileNavBarItemProps, Props } from "@theme/NavbarItem/DropdownNavbarItem";
 import type { LinkLikeNavbarItemProps } from "@theme/NavbarItem";
 

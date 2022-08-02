@@ -15,7 +15,7 @@ index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..db04a015ea2d4474339b1d02f6fbec75
 -exports.VERSIONS_JSON_FILE = 'versions.json';
 +exports.VERSIONED_BASE_DIR = 'docs/versioned';
 diff --git a/lib/versions/files.js b/lib/versions/files.js
-index 5a3efcb0b3dec47120fe32b8824e0c4ca7987df8..5295a02a6fe5829d7621a37a14d456947a75c6de 100644
+index deaadb4357a348c8071b70d72a3c6d9e4e61459f..d2cea53c7b038e60e6e82f92e340d796b6d8c123 100644
 --- a/lib/versions/files.js
 +++ b/lib/versions/files.js
 @@ -13,20 +13,14 @@ const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
@@ -42,8 +42,8 @@ index 5a3efcb0b3dec47120fe32b8824e0c4ca7987df8..5295a02a6fe5829d7621a37a14d45694
 +    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, pluginId, constants_1.VERSIONED_SIDEBARS_DIR, `${versionName}.json`);
  }
  exports.getVersionSidebarsPath = getVersionSidebarsPath;
- function getDocsDirPathLocalized({ siteDir, locale, pluginId, versionName, }) {
-@@ -43,9 +37,9 @@ function getDocsDirPathLocalized({ siteDir, locale, pluginId, versionName, }) {
+ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
+@@ -42,9 +36,9 @@ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
      });
  }
  exports.getDocsDirPathLocalized = getDocsDirPathLocalized;

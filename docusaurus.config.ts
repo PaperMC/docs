@@ -4,6 +4,8 @@ import isCI from "is-ci";
 import navbar from "./config/navbar.config";
 import footer from "./config/footer.config";
 import { env } from "process";
+import { Config } from "@docusaurus/types";
+import { Options } from "@docusaurus/plugin-content-docs";
 
 const preview = env.VERCEL_ENV === "preview";
 
@@ -26,7 +28,7 @@ const config: Config = {
   baseUrl: "/",
   onBrokenLinks: isCI ? "throw" : "warn",
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
-  onDuplicateRoutes: isCI ? "throw" : "error",
+  onDuplicateRoutes: isCI ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: false,
   noIndex: preview,
@@ -43,15 +45,7 @@ const config: Config = {
     }),
   },
 
-  themes: [
-    [
-      "classic",
-      {
-        respectPrefersColorScheme: true,
-      },
-    ],
-    "@docusaurus/theme-search-algolia",
-  ],
+  themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia"],
 
   plugins: [
     [

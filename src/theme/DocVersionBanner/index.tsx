@@ -8,7 +8,8 @@ import {
   useDocVersionSuggestions,
   type GlobalVersion,
 } from "@docusaurus/plugin-content-docs/client";
-import { ThemeClassNames, useDocsPreferredVersion, useDocsVersion } from "@docusaurus/theme-common";
+import { ThemeClassNames, useDocsPreferredVersion } from "@docusaurus/theme-common";
+import { useDocsVersion } from "@docusaurus/theme-common/internal";
 
 import type { Props } from "@theme/DocVersionBanner";
 import type { VersionBanner, PropVersionMetadata } from "@docusaurus/plugin-content-docs";

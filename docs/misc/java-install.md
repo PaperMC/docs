@@ -8,6 +8,13 @@ Installing Java is a critical first step to using or developing plugins for Pape
 Waterfall. This guide will walk you through the recommended installation steps for most major
 platforms.
 
+:::caution Do not use headless variants of Java!
+
+There are `headless` variants of Java which usually have a suffix of `-headless` in their package name. 
+Those variants miss required dependencies for Paper. Therefore, using them is not recommended.
+
+:::
+
 :::tip
 
 This guide focuses on Amazon's Corretto OpenJDK distribution. This is because it offers the best

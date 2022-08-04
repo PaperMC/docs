@@ -11,7 +11,7 @@ platforms.
 :::caution Do not use headless variants of Java!
 
 There are `headless` variants of Java which usually have a suffix of `-headless` in their package name. 
-Those variants miss required dependencies for Paper, and are therefore not recommended.
+Those variants miss required dependencies for Paper. Therefore, using them is not recommended.
 
 :::
 

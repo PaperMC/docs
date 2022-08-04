@@ -11,8 +11,7 @@ platforms.
 :::caution Do not use headless variant of Java!
 
 There are `headless` variants of Java which usually have a suffix of `-headless` in their package name. 
-Those variants don't have JWT class in it, causing crash on server start.  
-Vanilla server and Paper, and some other plugin requires JWT class.
+Those variants miss required dependencies for Paper, and are therefore not recommended.
 
 :::
 

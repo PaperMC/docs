@@ -8,9 +8,8 @@ Installing Java is a critical first step to using or developing plugins for Pape
 Waterfall. This guide will walk you through the recommended installation steps for most major
 platforms.
 
-:::caution
+:::caution Do not use headless variant of Java!
 
-Do not use headless variant of Java!  
 There are `headless` variants of Java which usually have a suffix of `-headless` in their package name. 
 Those variants don't have JWT class in it, causing crash on server start.  
 Vanilla server and Paper, and some other plugin requires JWT class.

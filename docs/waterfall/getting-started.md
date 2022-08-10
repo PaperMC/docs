@@ -25,8 +25,7 @@ configuration.
 
 ## Getting A Proxy Jar
 
-Paper provides runnable proxy jars directly from our [downloads
-page][https://papermc.io/downloads#waterfall].
+Paper provides runnable proxy jars directly from our [downloads page][https://papermc.io/downloads#waterfall].
 
 Click on the build number to download a file.
 

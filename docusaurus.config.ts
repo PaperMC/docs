@@ -13,7 +13,7 @@ const url = (preview && env.VERCEL_URL) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,
-  editUrl: ({ docPath }) => `https://github.com/PaperMC/docs/blob/main/docs/${docPath}`,
+  editUrl: ({ versionDocsDirPath, docPath }) => `https://github.com/PaperMC/docs/blob/main/${versionDocsDirPath}/${docPath}`,
   editCurrentVersion: true,
   remarkPlugins: [remarkA11yEmoji],
   showLastUpdateAuthor: true,

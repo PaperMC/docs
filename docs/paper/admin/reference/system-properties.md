@@ -8,7 +8,7 @@ These system properties can be set when you start your server allowing for the c
 
 :::danger Danger Ahead
 
-Setting flags for the JVM can alter how it operates and the same goes for the paper server.
+Setting flags for the JVM can alter how it operates and the same goes for the Paper server.
 If you are unsure about what a flag does, it is recommended that you **do not use it**.
 
 :::
@@ -30,20 +30,15 @@ Where a `-D` is used to set a system property, and the system property is `paper
 - **default**: `30`
 - **description**: Controls how long the player connection will wait before closing when not receiving any keepalives, in seconds.
 
-#### paper.ticklist-excessive-delay-threshold:
-
-- **default**: `60`
-- **description**: Sets the excessive tick delay to the specified number of seconds.
-
 #### timings.bypassMax:
 
 - **default**: `unset`
-- **description**: Allows for bypassing the max number of frames to send to the Aikar's Timings API. Setting this will not permit bypassing the limit unless the API is configured to allow it.
+- **description**: Allows for bypassing the max amount of data to send to the Aikar's Timings API. Setting this will not permit bypassing the limit unless the API is configured to allow it.
 
 #### LetMeReload:
 
 - **default**: `unset`
-- **description**: Overrides the need to send confirmation message when using the `/reload` command.
+- **description**: This disables the reload confirmation message when using the `/reload` command.
 
 #### paper.disableChannelLimit:
 
@@ -124,7 +119,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.maxCustomChannelName:
 
 - **default**: `64`
-- **description**: Sets the largest size that a plugin channel can be.
+- **description**: Sets the largest size that a plugin channel name can take.
 
 #### Paper.maxSignLength:
 
@@ -160,7 +155,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.strict-thread-checks:
 
 - **default**: `unset`
-- **description**: Overrides the status of the AsyncCatcher so that it will always throw an exception if it is not on the main thread.
+- **description**: This sets the status of the AsyncCatcher so that it will always log an error if code is not run on the main thread.
 
 #### Paper.skipServerPropertiesComments:
 
@@ -170,7 +165,7 @@ It also remaps plugin CB calls to remove the version information.
 #### Paper.debugInvalidSkullProfiles:
 
 - **default**: `unset`
-- **description**: Enables debug logging for invalid skull profiles. It appends an exception to the log.
+- **description**: Enables debug logging for invalid skull profiles. This logs any invalid skulls in the world with the appropriate location information.
 
 #### paper.alwaysPrintWarningState:
 

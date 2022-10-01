@@ -21,12 +21,18 @@ System properties are set when you start your server. For example, if you are us
 java -Dpaper.log-level=FINE -jar paper.jar
 ```
 
-Where a `-D` is used to set a system property, and the system property is `paper.log-level` with a value of `FINE`. Otherwise, just add them to the start command
-
 :::info
 
 Some of the paper system properties require have `.`'s in them. When using Windows Powershell, these will require wrapping in quotes.
 i.e. `"-Dpaper.log-level=FINE"`
+
+:::
+
+Where a `-D` is used to set a system property, and the system property is `paper.log-level` with a value of `FINE`. Otherwise, just add them to the start command
+
+:::note
+
+Where a system property is stated as `unset`, setting it as `true` will work to enable it.
 
 :::
 
@@ -183,3 +189,8 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `unset`
 - **description**: Prints a stacktrace when a plugin attempts to access a class that is not a dependency of the plugin.
+
+#### Paper.parseYamlCommentsByDefault:
+
+- **default**: `true`
+- **description**: Sets whether to parse comments in YAML files by default.

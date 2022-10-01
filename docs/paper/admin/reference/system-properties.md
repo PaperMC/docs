@@ -6,6 +6,13 @@ slug: /reference/system-properties
 
 These system properties can be set when you start your server allowing for the configuration of various settings.
 
+:::danger Danger Ahead
+
+Setting flags for the JVM can alter how it operates and the same goes for the paper server.
+If you are unsure about what a flag does, it is recommended that you **do not use it**.
+
+:::
+
 ## How they work
 
 System properties are set when you start your server. For example, if you are using a `.bat` or a `.sh` file to start your server, you can add the system properties to the file. For example:
@@ -41,7 +48,7 @@ Where a `-D` is used to set a system property, and the system property is `paper
 #### paper.disableChannelLimit:
 
 - **default**: `unset`
-- **description**: Disables the channel limit for the server.
+- **description**: Disables the plugin channel limit for the server. This will disable the limit of 128 plugin channels per player.
 
 #### net.kyori.adventure.text.warnWhenLegacyFormattingDetected:
 
@@ -111,7 +118,8 @@ Where a `-D` is used to set a system property, and the system property is `paper
 #### debug.rewriteForIde:
 
 - **default**: `unset`
-- **description**: Removes the NMS revision from the stack trace to allow for easier debugging in IDEs.
+- **description**: Removes the NMS revision from the stack trace to allow for easier debugging in IDEs. 
+It also remaps plugin CB calls to remove the version information.
 
 #### convertLegacySigns:
 
@@ -159,4 +167,32 @@ Where a `-D` is used to set a system property, and the system property is `paper
 - **default**: `4` but is capped at `number of cpus / 2`
 - **description**: Sets the maximum number of threads to use for chunk loading.
 
+#### io.papermc.paper.suppress.sout.nags:
 
+- **default**: `unset`
+- **description**: Suppresses the nag message about using System.out/System.err in a plugin.
+
+#### paper.strict-thread-checks:
+
+- **default**: `unset`
+- **description**: Overrides the status of the AsyncCatcher so that it will always throw an exception if it is not on the main thread.
+
+#### Paper.skipServerPropertiesComments:
+
+- **default**: `unset`
+- **description**: Skips the comments in the server.properties file.
+
+#### Paper.debugInvalidSkullProfiles:
+
+- **default**: `unset`
+- **description**: Enables debug logging for invalid skull profiles. It appends an exception to the log.
+
+#### paper.alwaysPrintWarningState:
+
+- **default**: `unset`
+- **description**: Always prints the warning state for the particular level.
+
+#### Paper.printStacktraceOnBadPluginClassAccess:
+
+- **default**: `unset`
+- **description**: Prints a stacktrace when a plugin attempts to access a class that is not a dependency of the plugin.

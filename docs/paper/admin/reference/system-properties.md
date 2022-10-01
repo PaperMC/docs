@@ -23,6 +23,13 @@ java -Dpaper.log-level=FINE -jar paper.jar
 
 Where a `-D` is used to set a system property, and the system property is `paper.log-level` with a value of `FINE`. Otherwise, just add them to the start command
 
+:::info
+
+Some of the paper system properties require have `.`'s in them. When using Windows Powershell, these will require wrapping in quotes.
+i.e. `"-Dpaper.log-level=FINE"`
+
+:::
+
 ## List of System Properties
 
 #### paper.playerconnection.keepalive:

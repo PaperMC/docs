@@ -28,7 +28,7 @@ Where a `-D` is used to set a system property, and the system property is `paper
 #### paper.playerconnection.keepalive:
 
 - **default**: `30`
-- **description**: Controls how long the player connection will wait before closing in seconds.
+- **description**: Controls how long the player connection will wait before closing when not receiving any keepalives, in seconds.
 
 #### paper.ticklist-excessive-delay-threshold:
 
@@ -52,8 +52,8 @@ Where a `-D` is used to set a system property, and the system property is `paper
 
 #### net.kyori.adventure.text.warnWhenLegacyFormattingDetected:
 
-- **default**: `true`
-- **description**: Enables or disables the warning when legacy formatting is detected.
+- **default**: `false`
+- **description**: Enables or disables the warning when legacy formatting is detected in a chat component.
 
 #### Paper.DisableClassPrioritization:
 

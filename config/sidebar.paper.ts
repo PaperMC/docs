@@ -46,7 +46,11 @@ const paper: SidebarsConfig = {
             type: "generated-index",
             slug: "/cat/admin/reference",
           },
-          items: ["admin/reference/global-configuration", "admin/reference/world-configuration"],
+          items: [
+            "admin/reference/global-configuration",
+            "admin/reference/world-configuration",
+            "admin/reference/system-properties",
+          ],
         },
       ],
     },

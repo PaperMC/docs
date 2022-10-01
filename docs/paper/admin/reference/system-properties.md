@@ -95,11 +95,6 @@ Where a `-D` is used to set a system property, and the system property is `paper
 - **default**: `unset`
 - **description**: Ignores the world data version when loading a world. This is not recommended and will likely cause issues.
 
-#### Paper.allowAsyncChunksSingleCore:
-
-- **default**: `unset`
-- **description**: Allows async chunk loading on single core systems.
-
 #### debug.entities:
 
 - **default**: `unset`
@@ -147,11 +142,6 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `Minecraft world version + 1`
 - **description**: If you are expecting to convert a large number of chunks you might consider setting this to only convert from a point onwards.
 
-#### paper.maxChunkThreads:
-
-- **default**: `4`
-- **description**: Sets the maximum number of threads to use for chunk loading. You cannot use more than half of the available cores.
-
 #### Paper.WorkerThreadCount:
 
 - **default**: `8` or `number of cpus - 2`. Whichever is lower
@@ -161,11 +151,6 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `750`
 - **description**: Splits tile entities into multiple packets if there are more than this many.
-
-#### paper.maxChunkThreads:
-
-- **default**: `4` but is capped at `number of cpus / 2`
-- **description**: Sets the maximum number of threads to use for chunk loading.
 
 #### io.papermc.paper.suppress.sout.nags:
 

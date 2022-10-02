@@ -4,7 +4,7 @@ slug: /dev/project-setup
 
 # Paper Project Setup
 
-As the Paper team primarily uses IntelliJ IDEA, this guide will be focused on that IDE. 
+As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE. 
 However, the steps below should be applicable to other IDEs as well, with some minor changes.
 
 
@@ -116,8 +116,16 @@ The `resources` directory is where you will place your plugin's `plugin.yml` fil
 You should now have a project set up with Paper as a dependency.
 All you have left to do now is to compile your plugin and run it on a paper server.
 
+:::note
+
+If you want to streamline the process of testing a plugin, you can use the [Run-Paper](https://github.com/jpenilla/run-paper) Gradle task.
+It will automatically download a paper server and run it for you.
+
+:::
+
 :::info
     
 If you are using IntelliJ, you can use the Gradle GUI `Build` menu to compile your plugin - found on the top right of your IDE.
+The output jar of your plugin will be in the `build/libs` directory.
 
 :::

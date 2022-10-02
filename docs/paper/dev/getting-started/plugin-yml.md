@@ -10,11 +10,12 @@ It also contains information about the plugin's dependencies, permissions, and c
 
 The plugin.yml file is located in the `resources` directory of your project.
 ```
-src
-└── main
-    ├── java
-    └── resources
-        └── plugin.yml
+example-plugin
+└── src
+    └── main
+        ├── java
+        └── resources
+            └── plugin.yml
 ```
 
 ## Example
@@ -42,7 +43,7 @@ If they have an asterisk (\*) next to them, that means they are required.
 
 ### name*
 
-The name of your plugin. This is what will be displayed in the plugin list and warning messages.
+The name of your plugin. This is what will be displayed in the plugin list and log messages.
 - `name: ExamplePlugin`
 
 ### version*
@@ -75,8 +76,9 @@ The website of the plugin. This is useful for linking to a GitHub repository or 
 
 ### api-version
 
-The version of the Paper API that your plugin is using. This doesn't include the minor version. 
-The valid versions are 1.12 - 1.19.
+The version of the Paper API that your plugin is using. This doesn't include the minor version.
+Servers with a version lower than the version specified here will refuse to load the plugin.
+The valid versions are 1.13 - 1.19.
 - `api-version: 1.19`
 
 :::info
@@ -103,8 +105,8 @@ There is debate over whether this is against maven central's TOS. This may be re
 
 :::
 
-This is a list of libraries that your plugin depends on. These libraries will be downloaded from the Maven repository and added to the classpath.
-This removes the need to shade or relocate the libraries.
+This is a list of libraries that your plugin depends on. These libraries will be downloaded from the Maven central repository and added to the classpath.
+This removes the need to shade and relocate the libraries.
 
 ```yaml
 libraries:

@@ -52,10 +52,11 @@ It should look like this:
 
 ```
 ...
-src
-└── main
-    ├── java
-    └── resources
+example-plugin
+└── src
+    └── main
+        ├── java
+        └── resources
 ...
 ```
 
@@ -66,14 +67,15 @@ For this example, we will create three packages called `io.papermc.testplugin` a
 
 ```
 ...
-src
-└── main
-    ├── java
-    │   └── io
-    │       └── papermc
-    │           └── testplugin
-    │               └── ExamplePlugin.java
-    └── resources
+example-plugin
+└── src
+    └── main
+        ├── java
+        │   └── io
+        │       └── papermc
+        │           └── testplugin
+        │               └── ExamplePlugin.java
+        └── resources
 ...
 ```
 

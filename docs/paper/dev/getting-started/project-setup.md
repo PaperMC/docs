@@ -23,9 +23,7 @@ To add Paper as a dependency, you will need to add the Paper repository to your 
 ```kotlin
 repositories {
     mavenCentral()
-    maven {
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
+    maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
@@ -45,6 +43,12 @@ To see the versions of Paper you want to use, visit our [Downloads](https://www.
 
 ### Setting up the `src` directory
 
+:::note
+
+If your project creates a `src` directory automatically, you can skip this step.
+
+:::
+
 To set up the `src` directory, you will need to create a new directory called `src` and then create a new directory called `main` inside of it.
 Inside of `main`, create two new directories called `java` and `resources`.
 
@@ -53,6 +57,8 @@ It should look like this:
 ```
 ...
 example-plugin
+├── build.gradle.kts
+├── settings.gradle.kts
 └── src
     └── main
         ├── java
@@ -68,6 +74,8 @@ For this example, we will create three packages called `io.papermc.testplugin` a
 ```
 ...
 example-plugin
+├── build.gradle.kts
+├── settings.gradle.kts
 └── src
     └── main
         ├── java

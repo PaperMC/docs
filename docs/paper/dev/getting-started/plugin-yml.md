@@ -11,6 +11,8 @@ It also contains information about the plugin's dependencies, permissions, and c
 The plugin.yml file is located in the `resources` directory of your project.
 ```
 example-plugin
+├── build.gradle.kts
+├── settings.gradle.kts
 └── src
     └── main
         ├── java

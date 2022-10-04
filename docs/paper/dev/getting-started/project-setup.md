@@ -15,7 +15,7 @@ Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from
 ### Creating a new project
 
 Open your IDE and select the option to create a new project. 
-In Intellij, you will get the option to select the type of project you want to create. 
+In Intellij, you will get the option to select the type of project you want to create - select `New Project`.
 Select `Gradle - Kotlin DSL` and click `Create`.
 
 You will land into the `build.gradle.kts` file where you can add your dependencies.
@@ -24,7 +24,7 @@ You will land into the `build.gradle.kts` file where you can add your dependenci
 
 To add Paper as a dependency, you will need to add the Paper repository to your `build.gradle.kts` file as well as the dependency itself.
 
-```kotlin
+```kotlin title=build.gradle.kts
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
@@ -38,12 +38,6 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 ```
-
-:::info
-
-To see the versions of Paper you want to use, visit our [Downloads](https://www.papermc.io/downloads) page.
-
-:::
 
 ### Setting up the `src` directory
 
@@ -91,6 +85,20 @@ example-plugin
 ...
 ```
 
+### Packages
+
+You can see here that the `ExamplePlugin` class is inside the `io.papermc.testplugin` package. 
+A package is a way to organize your code - essentially, it's a folder. Java packages are used to group related classes. 
+Oracle has a guide on [packages](https://docs.oracle.com/javase/tutorial/java/package/packages.html) if you want to learn more.
+
+When [naming](https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html) your packages, you should use your domain name in reverse order. For example, if your domain name is `papermc.io`,
+your package name should be `io.papermc`. If you do not have a domain name, you could use something like your GitHub username.
+If you were Linus Torvalds, your package would be `io.github.torvalds`.
+
+This is all then followed by the name of your project. 
+For example, if your project was called `ExamplePlugin`, your package would be `io.github.torvalds.exampleplugin`. 
+This allows for a unique package name for every plugin.
+
 ### The _main_ class
 
 The main class is the entry point to your plugin and will be the only class that extends `JavaPlugin` in your plugin. 
@@ -123,7 +131,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
 ### Setting up the `resources`
 
-The `resources` directory is where you will place your plugin's `plugin.yml` file. See the [Plugin YML](/paper/dev/plugin-yml) page for more information.
+The `resources` directory is where you will place your plugin's `plugin.yml` file. See the [Plugin YML](plugin-yml) page for more information.
 
 ### Conclusion
 

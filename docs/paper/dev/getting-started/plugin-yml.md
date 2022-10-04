@@ -45,12 +45,13 @@ If they have an asterisk (\*) next to them, that means they are required.
 
 ### name*
 
-The name of your plugin. This is what will be displayed in the plugin list and log messages.
+The name of your plugin. This is what will be displayed in the plugin list and log messages. 
+This will be overridden in the logs if the prefix is set.
 - `name: ExamplePlugin`
 
 ### version*
 
-The current version of the plugin. 
+The current version of the plugin. This is shown in plugin info messages and server logs.
 - `version: 1.0.0`
 
 ### main*
@@ -62,7 +63,7 @@ This is the package path and class name of your main class.
 
 ### description
 
-A short description of your plugin and what it does.
+A short description of your plugin and what it does. This will be shown in the plugin info commands.
 - `description: An example plugin`
 
 ### author / authors
@@ -70,11 +71,13 @@ A short description of your plugin and what it does.
 The author(s) of the plugin. This can be a single author or a list of authors.
 - `author: PaperMC`
 - `authors: [PaperMC, SpigotMC, Bukkit]`
+These will be shown in the plugin info commands.
 
 ### website
 
 The website of the plugin. This is useful for linking to a GitHub repository or a plugin page.
 - `website: https://papermc.io`
+This will be shown in the plugin info commands.
 
 ### api-version
 
@@ -103,7 +106,7 @@ The prefix of the plugin. This is what will be displayed in the log instead of t
 
 :::warning
 
-There is debate over whether this is against maven central's TOS. This may be removed in the future.
+The use of this feature is *currently* against maven central's TOS. However, this feature is very likely to stay.
 
 :::
 
@@ -156,9 +159,14 @@ commands:
 
 ## Dependencies:
 
-:::note
+:::warning Dependency Loops
 
 If a plugin is specified as a dependency, it will be loaded before your plugin.
+Be careful as these can cause plugin load issues if cyclical dependencies appear. A Cyclical dependency can be illustrated as follows:
+
+PluginA -> PluginB -> PluginA -> PluginB... etc.
+
+Where PluginA and PluginB are plugins that depend on each other.
 
 :::
 

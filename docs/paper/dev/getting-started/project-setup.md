@@ -124,12 +124,12 @@ The `resources` directory is where you will place your plugin's `plugin.yml` fil
 ### Conclusion
 
 You should now have a project set up with Paper as a dependency.
-All you have left to do now is to compile your plugin and run it on a paper server.
+All you have left to do now is to compile your plugin and run it on a Paper server.
 
 :::note
 
 If you want to streamline the process of testing a plugin, you can use the [Run-Paper](https://github.com/jpenilla/run-paper) Gradle task.
-It will automatically download a paper server and run it for you.
+It will automatically download a Paper server and run it for you.
 
 :::
 

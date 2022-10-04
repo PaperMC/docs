@@ -151,7 +151,7 @@ commands:
 - The __description__ is the description of the command. This gives a brief description of what the command does.
 - The __usage__ is the usage of the command. This is what will be displayed when the player uses `/help <command>`.
 - The __aliases__ are a list of aliases that the command can be used with. This is useful for shortening the command.
-- __permission__ is the permission node that the player needs to use the command.
+- __permission__ is the permission node that the player needs to use the command. Note: Players will only see commands they have permission to use.
 - __permission-message__ is the message that will be displayed when the player does not have permission to use the command.
 
 ## Dependencies:

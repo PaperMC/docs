@@ -63,10 +63,8 @@ const paper: SidebarsConfig = {
         id: "dev/README",
       },
       items: [
-        {
-          type: "ref",
-          id: "dev/README",
-        },
+        "dev/getting-started/project-setup",
+        "dev/getting-started/plugin-yml",
       ],
     },
   ],

@@ -7,6 +7,10 @@ slug: /dev/project-setup
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE. 
 However, the steps below should be applicable to other IDEs as well, with some minor changes.
 
+The paper team uses [Gradle](https://gradle.org/) as its build system, and it's tools are implemented for Gradle. 
+Most of the code below can be altered to work with other build systems, such as Maven, but this guide will only cover Gradle.
+
+Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from_maven.html) to learn how to migrate from Maven to Gradle.
 
 ### Creating a new project
 

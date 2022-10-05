@@ -15,7 +15,7 @@ This list is used to call the listeners when the event is called.
 
 :::info `getHandlerList`
 
-Although it is not inherited from `Event`, you need to add a `getHandlerList()` method and return the `HandlerList` for your event.
+Although it is not inherited from `Event`, you need to add a static `getHandlerList()` method and return the `HandlerList` for your event.
 Both methods are required for your event to work.
 
 :::

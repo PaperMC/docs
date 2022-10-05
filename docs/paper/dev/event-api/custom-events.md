@@ -12,7 +12,13 @@ This will allow for other people to listen for your custom events and add functi
 To create a custom event, you need to create a class that extends `Event`. Each event has a `HandlerList` that contains all the listeners that are listening for that event.
 
 This list is used to call the listeners when the event is called.
-    
+
+:::info `getHandlerList`
+
+Although it is not inherited from `Event`, you need to add a `getHandlerList()` method and return the `HandlerList` for your event.
+
+:::
+
 ```java title="PaperIsCoolEvent.java"
 
 public class PaperIsCoolEvent extends Event {

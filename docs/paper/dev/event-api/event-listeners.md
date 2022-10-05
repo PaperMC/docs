@@ -5,8 +5,8 @@ slug: /dev/event-api/event-listeners
 # Event Listeners
 
 Events are an efficient way to listen for specific actions that happen in the game. They can be called by the server, or by plugins. 
-These are called by the server when something happens, such as a player joining the server, or a block being broken. 
-They can be called by plugins. This allows for the addition of custom events, such as a player completing a quest.
+These are called by the server or plugins when something happens, such as a player joining the server, or a block being broken.
+Plugins are able to call custom events, such as a player completing a quest, for other plugins to listen for.
 
 ## Your listener class
 
@@ -96,7 +96,7 @@ This is because the priorities are called in reverse order as the later listener
 
 ## Event cancellation
 
-Events can be cancelled, which means that the event will not happen.
+Events can be cancelled, preventing the given action from being completed.
     
 ```java title="ExampleListener.java"
 public class ExampleListener implements Listener {
@@ -109,8 +109,8 @@ public class ExampleListener implements Listener {
 ```
 
 The above example will cancel the event, meaning that the player will not be able to join the server.
-Once an event is cancelled, it will not call any other listeners for that event. 
-For this reason you can add `ignoreCancelled = true` to the `@EventHandler` annotation to ignore cancelled events.
+Once an event is cancelled, it will not call any other listeners for that event unless they add 
+`ignoreCancelled = true` to the `@EventHandler` annotation to ignore cancelled events.
 
 ```java title="ExampleListener.java"
 public class ExampleListener implements Listener {

@@ -1,5 +1,5 @@
 ---
-slug: /dev/event-api/handler-lists
+slug: /dev/handler-lists
 ---
 
 # Handler Lists
@@ -35,7 +35,6 @@ public class ExampleListener implements Listener {
 To unregister a listener, you can call `unregister()` on the `HandlerList` that the listener is registered to.
 
 ```java title="ExampleListener.java"
-
 public class ExampleListener implements Listener {
 
     @EventHandler

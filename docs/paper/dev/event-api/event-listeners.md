@@ -1,5 +1,5 @@
 ---
-slug: /dev/event-api/event-listeners
+slug: /dev/event-listeners
 ---
 
 # Event Listeners
@@ -59,7 +59,7 @@ public class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        Bukkit.getPluginManager().registerEvents(new ExampleListener(), this);
+        getServer().getPluginManager().registerEvents(new ExampleListener(), this);
     }
 }
 ```
@@ -85,18 +85,20 @@ There are six different priorities that you can use:
 - `EventPriority.HIGHEST`
 - `EventPriority.MONITOR`
 
+The order of the priorities is somewhat counter-intuitive. The **higher** the priority, the **later** the event is called. 
+For example, If it is important that your plugin has the last say in a certain event - to avoid it being changed - you 
+should use `EventPriority.HIGHEST`.
+
 :::note
 
-The `MONITOR` priority is used to monitor the event, but not change it.
+The `MONITOR` priority is used to monitor the event, but not change it. It is called after all other priorities have been called.
+This means you can get the result of any plugin interaction such as cancellation or modification.
 
 :::
 
-The order of the priorities is somewhat counter-intuitive. The **higher** the priority, the **later** the event is called. 
-This is because the priorities are called in reverse order as the later listener can override the result of the earlier listener.
-
 ## Event cancellation
 
-Events can be cancelled, preventing the given action from being completed.
+Some events can be cancelled, preventing the given action from being completed. These events implement `Cancellable`.
     
 ```java title="ExampleListener.java"
 public class ExampleListener implements Listener {
@@ -108,8 +110,15 @@ public class ExampleListener implements Listener {
 }
 ```
 
+:::warning
+
+It is important to consider that another plugin could have cancelled or changed the event before your plugin is called.
+Always check the event before doing anything with it.
+
+:::
+
 The above example will cancel the event, meaning that the player will not be able to join the server.
-Once an event is cancelled, it will not call any other listeners for that event unless they add 
+Once an event is cancelled, it will continue to call any other listeners for that event unless they add 
 `ignoreCancelled = true` to the `@EventHandler` annotation to ignore cancelled events.
 
 ```java title="ExampleListener.java"

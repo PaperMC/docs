@@ -1,5 +1,5 @@
 ---
-slug: /dev/event-api/custom-events
+slug: /dev/custom-events
 ---
 
 # Custom Events
@@ -16,11 +16,11 @@ This list is used to call the listeners when the event is called.
 :::info `getHandlerList`
 
 Although it is not inherited from `Event`, you need to add a `getHandlerList()` method and return the `HandlerList` for your event.
+Both methods are required for your event to work.
 
 :::
 
 ```java title="PaperIsCoolEvent.java"
-
 public class PaperIsCoolEvent extends Event {
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
@@ -40,11 +40,10 @@ Now that we have created our event, we can add some functionality to it.
 Perhaps this will contain a message that will be broadcast to the server when the event is called.
 
 ```java title="PaperIsCoolEvent.java"
-
 public class PaperIsCoolEvent extends Event {
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
-    private final Component message;
+    private Component message;
 
     public PaperIsCoolEvent(Component message) {
         this.message = message;
@@ -62,6 +61,10 @@ public class PaperIsCoolEvent extends Event {
     public Component getMessage() {
         return this.message;
     }
+    
+    public void setMessage(Component message) {
+        this.message = message;
+    }
 }
 ```
 
@@ -70,7 +73,6 @@ public class PaperIsCoolEvent extends Event {
 Now that we have created our event, we can call it.
 
 ```java title="ExamplePlugin.java"
-    
 public class ExamplePlugin extends JavaPlugin {
 
     // ...
@@ -78,6 +80,9 @@ public class ExamplePlugin extends JavaPlugin {
     public void callCoolPaperEvent() {
         PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"))
         coolEvent.callEvent();
+        // Plugins could have changed the message from inside their listeners here. So we need to get the message again.
+        // This event structure allows for other plugins to change the message to their taste. 
+        // Like, for example, a plugin that adds a prefix to all messages.
         Bukkit.broadcast(coolEvent.getMessage());
     }
 }
@@ -88,11 +93,10 @@ public class ExamplePlugin extends JavaPlugin {
 If you want to allow your event to be cancelled, you can implement the `Cancellable` interface.
 
 ```java title="PaperIsCoolEvent.java"
-
 public class PaperIsCoolEvent extends Event implements Cancellable {
 
     private static final HandlerList HANDLER_LIST = new HandlerList();
-    private final Component message;
+    private Component message;
     private boolean cancelled;
 
     // ...
@@ -112,7 +116,6 @@ public class PaperIsCoolEvent extends Event implements Cancellable {
 Now, when the event is called, you can check if it is cancelled and act accordingly.
 
 ```java title="ExamplePlugin.java"
-
 public class ExamplePlugin extends JavaPlugin {
 
     // ...

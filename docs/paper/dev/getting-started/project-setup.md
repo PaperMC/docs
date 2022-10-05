@@ -1,5 +1,5 @@
 ---
-slug: /dev/project-setup
+slug: /dev/getting-started/project-setup
 ---
 
 # Paper Project Setup

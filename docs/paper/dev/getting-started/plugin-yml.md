@@ -1,5 +1,5 @@
 ---
-slug: /dev/plugin-yml
+slug: /dev/getting-started/plugin-yml
 ---
 
 # Paper Plugin YML

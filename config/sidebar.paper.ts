@@ -63,8 +63,33 @@ const paper: SidebarsConfig = {
         id: "dev/README",
       },
       items: [
-        "dev/getting-started/project-setup",
-        "dev/getting-started/plugin-yml",
+        {
+          type: "category",
+          label: "Getting started",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "dev/getting-started/README",
+          },
+          items: [
+            "dev/getting-started/project-setup",
+            "dev/getting-started/plugin-yml",
+          ],
+        },
+        {
+          type: "category",
+          label: "Event API",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "dev/event-api/README",
+          },
+          items: [
+            "dev/event-api/event-listeners",
+            "dev/event-api/handler-lists",
+            "dev/event-api/custom-events",
+          ],
+        },
       ],
     },
   ],

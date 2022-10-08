@@ -405,9 +405,9 @@ this list.
 - **default**: `false`
 - **description**: Whether to block players from changing the type of mob spawners with a spawn egg.
 
-### duplicate-uuid
+#### duplicate-uuid
 
-#### mode
+##### mode
 
 - **default**: `saferegen`
 
@@ -418,7 +418,7 @@ this list.
   - **`silent`**: Does nothing, not printing logs.
   - **`warn`**: Does nothing, printing logs.
 
-#### safe-regen-delete-range
+##### safe-regen-delete-range
 
 - **default**: `32`
 - **description**: If multiple entities with duplicate UUIDs are within this many blocks, saferegen

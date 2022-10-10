@@ -26,8 +26,8 @@ This method can be named anything you want, but it is recommended to name it som
 
 ## The listener method
 
-The method body does not need to return any data, for this reason use `void` as the return type. 
-Listeners take in a single parameter, which is the event that is being listened for.
+The method body does not need to return any data, for this reason, use void as the return type.
+Listeners take in a single parameter, which is the event that is being listened to.
     
 ```java title="ExampleListener.java"
 public class ExampleListener implements Listener {
@@ -41,8 +41,10 @@ public class ExampleListener implements Listener {
 
 :::note Events
 
-There is no list of events that can be listened for, however take a look 
+There is no list of events that can be listened to, however take a look 
 [here](https://jd.papermc.io/paper/1.19/org/bukkit/event/Event.html) to see all events that extend `Event`.
+
+An event can only be listened to if it has a static `getHandlerList` method.
 
 :::
 
@@ -130,5 +132,3 @@ public class ExampleListener implements Listener {
     }
 }
 ```
-
-

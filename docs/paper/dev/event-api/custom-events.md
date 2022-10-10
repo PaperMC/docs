@@ -5,11 +5,11 @@ slug: /dev/custom-events
 # Custom Events
 
 Creating custom events is a great way to add functionality to your plugin. 
-This will allow for other people to listen for your custom events and add functionality to your plugin.
+This will allow other people to listen to your custom events and add functionality to your plugin.
 
 ## Creating a custom event
 
-To create a custom event, you need to create a class that extends `Event`. Each event has a `HandlerList` that contains all the listeners that are listening for that event.
+To create a custom event, you need to create a class that extends `Event`. Each event should have a `HandlerList` that will contain all the listeners that are listening to that event.
 
 This list is used to call the listeners when the event is called.
 
@@ -78,7 +78,7 @@ public class ExamplePlugin extends JavaPlugin {
     // ...
 
     public void callCoolPaperEvent() {
-        PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"))
+        PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"));
         coolEvent.callEvent();
         // Plugins could have changed the message from inside their listeners here. So we need to get the message again.
         // This event structure allows for other plugins to change the message to their taste. 
@@ -121,9 +121,26 @@ public class ExamplePlugin extends JavaPlugin {
     // ...
 
     public void callCoolPaperEvent() {
-        PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"))
+        PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"));
         coolEvent.callEvent();
         if (!coolEvent.isCancelled()) {
+            Bukkit.broadcast(coolEvent.getMessage());
+        }
+    }
+}
+```
+
+When an event is cancellable, `Event#callEvent` will return false if the event was cancelled. This allows you to directly use `callEvent`
+in your if statement, instead of having to check `Cancellable#isCancelled` manually.
+
+```java title="ExamplePlugin.java"
+public class ExamplePlugin extends JavaPlugin {
+
+    // ...
+
+    public void callCoolPaperEvent() {
+        PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"));
+        if (coolEvent.callEvent()) { // Directly get the output from callEvent
             Bukkit.broadcast(coolEvent.getMessage());
         }
     }

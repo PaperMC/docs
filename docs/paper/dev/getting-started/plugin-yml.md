@@ -194,7 +194,3 @@ A list of plugins that your plugin should be loaded __before__. They are specifi
 This is useful if you want to load your plugin before another plugin for the other plugin to use your plugin's API.
 
 - `loadbefore: [Vault, FactionsUUID]`
-
-
-
-

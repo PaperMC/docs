@@ -4,7 +4,7 @@ slug: /dev/handler-lists
 
 # Handler Lists
 
-Every `Event` has a `HandlerList` that contains all the listeners that are listening for that event. 
+Every `Event` that can be listened to has a `HandlerList` containing all the listeners that are listening to that event. 
 This list is used to call the listeners when the event is called.
 
 ## Getting the handler list for an event

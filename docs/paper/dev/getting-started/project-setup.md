@@ -5,9 +5,9 @@ slug: /dev/project-setup
 # Paper Project Setup
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE. 
-However, the steps below should be applicable to other IDEs as well, with some minor changes.
+However, the steps below should apply to other IDEs as well, with some minor changes.
 
-The paper team uses [Gradle](https://gradle.org/) as its build system, and it's tools are implemented for Gradle. 
+The Paper team uses [Gradle](https://gradle.org/) as its build system, and its tools are implemented for Gradle. 
 Most of the code below can be altered to work with other build systems, such as Maven, but this guide will only cover Gradle.
 
 Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from_maven.html) to learn how to migrate from Maven to Gradle.
@@ -43,7 +43,7 @@ java {
 
 :::note
 
-If your project creates a `src` directory automatically, you can skip this step.
+If your IDE creates a `src` directory automatically, you can skip this step.
 
 :::
 
@@ -95,7 +95,7 @@ When [naming](https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.ht
 your package name should be `io.papermc`. If you do not have a domain name, you could use something like your GitHub username.
 If you were Linus Torvalds, your package would be `io.github.torvalds`.
 
-This is all then followed by the name of your project. 
+This is then followed by the name of your project. 
 For example, if your project was called `ExamplePlugin`, your package would be `io.github.torvalds.exampleplugin`. 
 This allows for a unique package name for every plugin.
 

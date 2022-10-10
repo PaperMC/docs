@@ -5,7 +5,7 @@ slug: /dev/custom-events
 # Custom Events
 
 Creating custom events is a great way to add functionality to your plugin. 
-This will allow other people to listen to your custom events and add functionality to your plugin.
+This will allow other plugins to listen to your custom events and add functionality to your plugin.
 
 ## Creating a custom event
 

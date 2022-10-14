@@ -1,10 +1,3 @@
-@font-face {
-  font-family: "JetBrains Mono";
-  font-style: normal;
-  font-weight: 400;
-  src: url("../assets/JetBrainsMono-Regular.woff2") format("woff2");
-}
-
 :root {
   --ifm-color-primary: #0240dc;
   --ifm-color-primary-dark: #033ed5;

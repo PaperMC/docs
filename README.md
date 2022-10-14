@@ -47,6 +47,17 @@ $ yarn build
 This command builds a production-ready deployment into the `build` directory. These files are ready
 to be hosted on any static content server.
 
+## License
+
+The PaperMC Documentation (e.g., `.md` files in the `/docs` folder) is
+[CC-BY-SA-4.0](https://github.com/papermd/docs/blob/main/LICENSE-docs) licensed.
+
+The supporting code is
+[BSD-2-Clause](https://github.com/papermd/docs/blob/main/LICENSE) licensed.
+
+The PaperMC logomark is subject to its [own terms](https://docs.papermc.io/misc/assets) and does not
+inherit a license from any of the projects it represents.
+
 ## Special Thanks
 
 Preview and production hosting for this project has been provided for free by [Vercel]. Thank you!

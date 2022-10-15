@@ -33,7 +33,10 @@ const config: Config = {
   trailingSlash: false,
   noIndex: preview,
   baseUrlIssueBanner: false,
-  clientModules: [require.resolve("../src/css/custom.css")],
+  clientModules: [
+    require.resolve("../src/css/custom.css"),
+    require.resolve("@fontsource/jetbrains-mono/index.css"),
+  ],
 
   webpack: {
     jsLoader: (isServer) => ({

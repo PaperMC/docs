@@ -691,9 +691,8 @@ this list.
 
 ### falling-block-height-nerf
 
-- **default**: `0`
-- **description**: The height at which falling blocks will be removed from the server. Values less
-  than 1 will disable this feature.
+- **default**: `disabled`
+- **description**: The height at which falling blocks will be removed from the server. A value of `disabled` will disable this feature.
 
 ### fix-curing-zombie-villager-discount-exploit
 
@@ -723,9 +722,8 @@ this list.
 
 ### tnt-entity-height-nerf
 
-- **default**: `0`
-- **note**: Values less than 1 will disable this feature.
-- **description**: The height at which Primed TNT entities will be removed from the server.
+- **default**: `disabled`
+- **description**: The height at which Primed TNT entities will be removed from the server. A value of `disabled` will disable this feature.
 
 ## hopper
 

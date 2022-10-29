@@ -22,15 +22,15 @@
     "prepare": "yarn meta:build"
   },
   "dependencies": {
-    "@docusaurus/core": "2.1.0",
-    "@docusaurus/plugin-content-docs": "2.1.0",
-    "@docusaurus/plugin-content-pages": "2.1.0",
-    "@docusaurus/plugin-debug": "2.1.0",
-    "@docusaurus/plugin-pwa": "2.1.0",
-    "@docusaurus/plugin-sitemap": "2.1.0",
-    "@docusaurus/theme-classic": "2.1.0",
-    "@docusaurus/theme-common": "2.1.0",
-    "@docusaurus/theme-search-algolia": "2.1.0",
+    "@docusaurus/core": "2.2.0",
+    "@docusaurus/plugin-content-docs": "2.2.0",
+    "@docusaurus/plugin-content-pages": "2.2.0",
+    "@docusaurus/plugin-debug": "2.2.0",
+    "@docusaurus/plugin-pwa": "2.2.0",
+    "@docusaurus/plugin-sitemap": "2.2.0",
+    "@docusaurus/theme-classic": "2.2.0",
+    "@docusaurus/theme-common": "2.2.0",
+    "@docusaurus/theme-search-algolia": "2.2.0",
     "@fontsource/jetbrains-mono": "4.5.11",
     "@mdx-js/react": "1.6.22",
     "clsx": "1.2.1",
@@ -39,15 +39,15 @@
     "react-dom": "17.0.2"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "2.1.0",
-    "@docusaurus/types": "2.1.0",
+    "@docusaurus/module-type-aliases": "2.2.0",
+    "@docusaurus/types": "2.2.0",
     "@fec/remark-a11y-emoji": "3.1.0",
     "@tsconfig/docusaurus": "1.0.6",
     "@types/is-ci": "3.0.0",
     "@types/node": "17.0.45",
     "@types/prettier": "2.7.1",
-    "concurrently": "7.4.0",
-    "esbuild": "0.15.11",
+    "concurrently": "7.5.0",
+    "esbuild": "0.15.12",
     "esbuild-loader": "2.20.0",
     "is-ci": "3.0.1",
     "prettier": "2.7.1",
@@ -69,7 +69,6 @@
   },
   "packageManager": "yarn@3.2.1",
   "resolutions": {
-    "@docusaurus/plugin-content-docs@2.1.0": "patch:@docusaurus/plugin-content-docs@npm:2.1.0#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.1.0-e33a6bac60.patch",
-    "@docusaurus/core@2.1.0": "patch:@docusaurus/core@npm:2.1.0#.yarn/patches/@docusaurus-core-npm-2.1.0-ee70472f68.patch"
+    "@docusaurus/plugin-content-docs@2.2.0": "patch:@docusaurus/plugin-content-docs@npm:2.2.0#.yarn/patches/@docusaurus-plugin-content-docs-npm-2.2.0-34ac512661.patch"
   }
 }

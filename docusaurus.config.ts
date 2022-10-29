@@ -9,7 +9,7 @@ import { Options } from "@docusaurus/plugin-content-docs";
 
 const preview = env.VERCEL_ENV === "preview";
 
-const url = (preview && env.VERCEL_URL) || "https://docs.papermc.io";
+const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,

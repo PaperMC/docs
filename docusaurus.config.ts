@@ -48,6 +48,28 @@ const config: Config = {
     }),
   },
 
+  headTags: [
+    {
+      tagName: "script",
+        attributes: {
+          type: "application/ld+json",
+        },
+        innerHTML: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          url,
+          potentialAction: {
+            "@type": "SearchAction",
+            target: {
+              "@type": "EntryPoint",
+              urlTemplate: `${url}/search?q={search_term_string}`,
+            },
+            "query-input": "required name=search_term_string",
+          },
+        }),
+    },
+  ],
+
   themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia"],
 
   plugins: [
@@ -127,35 +149,6 @@ const config: Config = {
         ],
       },
     ],
-    () => ({
-      name: "docusaurus-plugin-custom-tags",
-
-      injectHtmlTags() {
-        return {
-          headTags: [
-            {
-              tagName: "script",
-              attributes: {
-                type: "application/ld+json",
-              },
-              innerHTML: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                url: url,
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: {
-                    "@type": "EntryPoint",
-                    urlTemplate: `${url}/search?q={search_term_string}`,
-                  },
-                  "query-input": "required name=search_term_string",
-                },
-              }),
-            },
-          ],
-        };
-      },
-    }),
     [
       "@docusaurus/plugin-sitemap",
       {

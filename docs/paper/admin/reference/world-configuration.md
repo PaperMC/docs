@@ -166,7 +166,7 @@ this list.
 ### fix-climbing-bypassing-cramming-rule
 
 - **default**: `false`
-- **description**: Sets whether climbing should bypass the entity cramming limit.
+- **description**: Sets whether climbing should bypass the entity cramming limit(`maxEntityCramming` game rule). If set to `true`, climbing entities will also be counted toward the entity cramming limit so that they can take suffocation damage.
 
 ### max-entity-collisions
 

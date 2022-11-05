@@ -72,10 +72,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 
 - **default**:
   `[copper_ore, deepslate_copper_ore, gold_ore, deepslate_gold_ore, iron_ore, deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore, mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore, deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]`
-- **description**: With `engine-mode: 1`, these blocks will be replaced by `stone` (`deepslate` at y
-
-    < 0), `netherrack`, or `end_stone`, based on the dimension. All types of air blocks are ignored on
-this list.
+- **description**: With `engine-mode: 1`, these blocks will be replaced by `stone` (`deepslate` at y < 0), `netherrack`, or `end_stone`, based on the dimension. All types of air are ignored on this list.
 
   With `engine-mode: 2`, these blocks will be randomly placed in the world, replacing both
   `hidden-blocks` and `replacement-blocks`. Tile entities, such as chests or spawners, are not
@@ -155,7 +152,7 @@ this list.
 
 - **default**: `false`
 - **description**: Allows players to take damage from cramming when colliding with more entities
-  than set in the `maxEntityCramming` gamerule.
+  than set in the `maxEntityCramming` game rule.
 
 ### allow-vehicle-collisions
 
@@ -166,7 +163,7 @@ this list.
 ### fix-climbing-bypassing-cramming-rule
 
 - **default**: `false`
-- **description**: Sets whether climbing should bypass the entity cramming limit.
+- **description**: Sets whether climbing should bypass the entity cramming limit(`maxEntityCramming` game rule). If set to `true`, climbing entities will also be counted towards the entity cramming limit so that they can take suffocation damage.
 
 ### max-entity-collisions
 

@@ -155,7 +155,7 @@ this list.
 
 - **default**: `false`
 - **description**: Allows players to take damage from cramming when colliding with more entities
-  than set in the `maxEntityCramming` gamerule.
+  than set in the `maxEntityCramming` game rule.
 
 ### allow-vehicle-collisions
 

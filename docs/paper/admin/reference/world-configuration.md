@@ -163,7 +163,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 ### fix-climbing-bypassing-cramming-rule
 
 - **default**: `false`
-- **description**: Sets whether climbing should bypass the entity cramming limit(`maxEntityCramming` game rule). If set to `true`, climbing entities will also be counted toward the entity cramming limit so that they can take suffocation damage.
+- **description**: Sets whether climbing should bypass the entity cramming limit(`maxEntityCramming` game rule). If set to `true`, climbing entities will also be counted towards the entity cramming limit so that they can take suffocation damage.
 
 ### max-entity-collisions
 

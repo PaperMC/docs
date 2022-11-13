@@ -1,0 +1,27 @@
+{
+	"image": "mcr.microsoft.com/vscode/devcontainers/base:ubuntu-20.04",
+	"settings": {
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": true
+		},
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode",
+			"editor.formatOnSave": true
+		},
+		"[markdown]": {
+			"editor.wordWrap": "on"
+		}
+	},
+	"extensions": [
+		"esbenp.prettier-vscode"
+	],
+	"forwardPorts": [3000],
+	"postCreateCommand": ["yarn", "install"],
+	"waitFor": "postCreateCommand",
+	"features": {
+		"node": {
+			"version": "18"
+		}
+	}
+}

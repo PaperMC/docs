@@ -127,3 +127,12 @@ public VelocityTest(ProxyServer server, Logger logger, @DataDirectory Path dataD
 
 This will get you a `java.nio.file.Path` of your plugin directory. If you absolutely need a
 `java.io.File`, you may use `Path#toFile()`. However, Velocity usually works with `Path`.
+
+## Using configs
+
+Velocoty does implemnt [Sponges Configurate](https://github.com/SpongePowered/Configurate) by default, so you can use it to create 
+and mange different formats of your config. Currently supported formats are: `JSON`, `HOCON`, `YAML` and `XML`. This is an example
+of a YAML config.
+
+```java
+```

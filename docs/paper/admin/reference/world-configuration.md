@@ -314,7 +314,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 #### zombie-villager-infection-chance
 
 - **default**: `-1.0`
-- **description**: Sets the change for villager conversion to zombie villager. Set to -1.0 for
+- **description**: Sets the chance for villager conversion to zombie villager. Set to -1.0 for
   default behavior based on game difficulty. Set to 0.0 to always have villagers die when killed by
   zombies. Set to 100.0 to always convert villagers to zombie villagers.
 

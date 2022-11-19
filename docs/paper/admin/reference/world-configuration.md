@@ -113,7 +113,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **description**: Controls whether item information that affects how an item is displayed
   (such as lodestone compass positions) should be sent to other players' clients. This information
   could be used by cheat clients to give another advantage to the cheating player. However, this
-  may affect small details about how an item looks when held by another player.
+  will affect how certain items look when held by another player.
 
 ## chunks
 

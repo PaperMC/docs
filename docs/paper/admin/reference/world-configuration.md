@@ -744,14 +744,26 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **description**: Completely disables the `InventoryMoveItemEvent` for hoppers. Dramatically
   improves hopper performance but will break protection plugins and any others that depend on this
   event.
+ 
+### hopper-minecart-transfer-cooldown
 
+- **default**: `0`
+- **description**: Sets how many ticks that a hopper minecart should
+  be on cooldown for after transfering items.
+  
 ### ignore-occluding-blocks
 
 - **default**: `false`
 - **description**: Determines if hoppers will ignore containers inside occluding blocks, like a
   hopper minecart inside a sand block. Enabling this will improve performance for hoppers checking
   where to insert items.
+  
+### reset-hopper-minecart-cooldown-on-move
 
+- **default**: `true`
+- **description**: Sets if a hopper minecart should reset its
+ item transfer cooldown when its position changes. 
+  
 ## lootables
 
 ### auto-replenish

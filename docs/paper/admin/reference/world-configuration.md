@@ -106,6 +106,14 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
   shulker box/bundle, etc.) that can give cheat clients an advantage should be sent to other
   players' clients. This may break resource packs that rely on information such as enchantments,
   lore or item names when observing other players.
+  
+##### hide-itemmeta-with-visual-effects
+
+- **default**: `false`
+- **description**: Controls whether item information that effects how an item is displayed (such as
+  lodestone compass positions) that can give cheat clients an advantage should be sent to other
+  players' clients. This may affect small details about how an item looks when held by another
+  player.
 
 ## chunks
 

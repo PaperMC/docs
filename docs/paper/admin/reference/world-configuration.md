@@ -110,10 +110,10 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 ##### hide-itemmeta-with-visual-effects
 
 - **default**: `false`
-- **description**: Controls whether item information that effects how an item is displayed (such as
-  lodestone compass positions) that can give cheat clients an advantage should be sent to other
-  players' clients. This may affect small details about how an item looks when held by another
-  player.
+- **description**: Controls whether item information that affects how an item is displayed
+  (such as lodestone compass positions) should be sent to other players' clients. This information
+  could be used by cheat clients to give another advantage to the cheating player. However, this
+  may affect small details about how an item looks when held by another player.
 
 ## chunks
 

@@ -222,6 +222,12 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **description**: Instructs the server to disable critical hits in PvP, treating them as normal
   hits instead.
 
+#### allow-spider-world-border-climbing
+
+- **default**: `true`
+- **description:** Whether spiders should be able to climb on the world border, as if it is
+  a regular wall.
+
 #### door-breaking-difficulty
 
 - **default**: `[HARD, NORMAL, EASY, PEACEFUL]`

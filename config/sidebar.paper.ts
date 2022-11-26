@@ -90,6 +90,18 @@ const paper: SidebarsConfig = {
             "dev/event-api/custom-events",
           ],
         },
+        {
+          type: "category",
+          label: "Development Guides",
+          collapsed: true,
+          link: {
+              type: "doc",
+              id: "dev/guides/README",
+          },
+          items: [
+              "dev/guides/pdc",
+          ],
+        }
       ],
     },
   ],

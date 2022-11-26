@@ -16,8 +16,9 @@ The Full list of classes that support the PDC are:
 
 ## What is it used for?
 In the past, developers resorted to storing data within the NBT tags of an object. 
-This was a very hacky way of storing data, and was prone to breaking if the NBT tags were changed. 
-The PDC is a much more stable way of storing data, and is much easier to use.
+This was a very hacky way of storing data, and was prone to having conflicts between different plugins
+when they used the same keys. This is resolved by the use of `NamespacedKey`.
+Therefore, the PDC is a much more stable way of storing data, and is much easier to use.
 
 As the name implies, the PDC is persistent. This means that the data stored in the PDC will be saved to disk, 
 and will be loaded back into the object when the server is restarted. This is great for storing attributes of an object,
@@ -38,9 +39,9 @@ item.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Ta
 item.setItemMeta(meta);
 ```
 
-:::note NamespacedKeys
+:::note
 
-It is considered good practice to store the `NamespacedKey`'s and reuse them.
+It is considered good practice to reuse the `NamespacedKey`'s. Constructing them from a static context is ideal for this.
 
 :::
 
@@ -64,7 +65,14 @@ if (container.has(key, PersistentDataType.STRING)) {
 ## Data Types
 
 The PDC supports a wide range of data types, such as:
-`Byte`, `Byte` `Array`, `Double`, `Float`, `Integer`, `Integer Array`, `Long`, `Long Array`, `Short`, `String` as well as `Tag Containers`.
+- `Byte`, `Byte Array`
+- `Double`
+- `Float`
+- `Integer`, `Integer Array`
+- `Long`, `Long Array`
+- `Short`
+- `String` 
+- There are also `Tag Containers`.
 This means that you can store a wide range of data in the PDC. However, If you need a more complex data type, you can
 implement your own `PersistentDataType` and use that instead. Here is an example of how to do that for a UUID:
 
@@ -120,13 +128,12 @@ container.set(key, new UUIDDataType(), uuid);
       This does not work for all blocks, only those that have a tile entity. F.E:
       ```java
         Block block = ...;
-        if (block instanceof Chest) {
-            Chest chest = (Chest) block;
+        if (block instanceof Chest chest) {
             chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
+            chest.update();
         }
       ```
 - ##### Structure
     - `Structure#getPersistentDataContainer()`
 - ##### ItemMeta
-    - `ItemMeta#getPersistentDataContainer()`
-    - `ItemStack#getItemMeta()#getPersistentDataContainer()`
+    - `ItemMeta#getPersistentDataContainer()`#

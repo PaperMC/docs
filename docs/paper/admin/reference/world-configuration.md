@@ -225,7 +225,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 #### allow-spider-world-border-climbing
 
 - **default**: `true`
-- **description:** Whether spiders should be able to climb on the world border, as if it is
+- **description:** Whether spiders should be able to climb on the world border, as if it were
   a regular wall.
 
 #### door-breaking-difficulty

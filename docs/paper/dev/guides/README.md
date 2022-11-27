@@ -1,10 +1,9 @@
 import DocCardList from "@theme/DocCardList";
 import { useCurrentSidebarCategory } from "@docusaurus/theme-common";
 
-# Development Guide
+# Guides
 
-Welcome to the Paper Development Guide! These guides will help you understand how 
-specific parts of Paper work, and how to use them to your advantage.
+These guides will help you understand how specific parts of Paper work, and how to use them to your advantage.
 
 ---
 

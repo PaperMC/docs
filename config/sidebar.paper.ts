@@ -92,7 +92,7 @@ const paper: SidebarsConfig = {
         },
         {
           type: "category",
-          label: "Development Guides",
+          label: "Guides",
           collapsed: true,
           link: {
               type: "doc",

@@ -15,14 +15,14 @@ The Full list of classes that support the PDC are:
 - [Structure](#structure)
 
 ## What is it used for?
-In the past, developers resorted to storing data within the NBT tags of an object. 
-This was a very hacky way of storing data, and was prone to having conflicts between different plugins
-when they used the same keys. This is resolved by the use of `NamespacedKey`.
-Therefore, the PDC is a much more stable way of storing data, and is much easier to use.
+In the past, developers resorted to a variety of methods to store custom data on objects:
 
-As the name implies, the PDC is persistent. This means that the data stored in the PDC will be saved to disk, 
-and will be loaded back into the object when the server is restarted. This is great for storing attributes of an object,
-such as the owner of an item, or the custom name of an entity.
+- NBT tags: Requires reflection to access internals and was generally unreliable in the long term.
+- Lore and display names: Prone to collisions as well as slow to access.
+
+The benefit of the PDC is that it allows for a more reliable and performant way to store arbitrary data on objects.
+It also doesn't rely on accessing server internals, so it's less likely to break on future versions. It also removes the need to 
+manually track the data lifecycle, as, for example with an entity, the PDC will be saved when the entity unloads.
 
 ## Adding Data
 To store data in the PDC, there are a few things you need first. The first is a `NamespacedKey` which is used to identify the data.
@@ -35,13 +35,18 @@ NamespacedKey key = new NamespacedKey(pluginInstance, "example-key");
 ItemStack item = new ItemStack(Material.DIAMOND);
 // ItemMeta implements PersistentDataHolder so we can get the PDC from it
 ItemMeta meta = item.getItemMeta();
-item.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
+meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
 item.setItemMeta(meta);
 ```
 
-:::note
+:::info
 
-It is considered good practice to reuse the `NamespacedKey` objects. Constructing them from a static context is ideal for this.
+It is considered good practice to reuse the `NamespacedKey` objects. They can be constructed with either:
+- A `Plugin` instance and a `String` identifier
+- A `String` namespace and a `String` identifier
+
+The first option is often preferred as it will automatically use the plugin's namespace, however the second option can be used if you
+want to use a different namespace / access the data from another plugin.
 
 :::
 
@@ -83,7 +88,10 @@ The PDC supports a wide range of data types, such as:
 ### Custom Data Types
 
 You can store a wide range of data in the PDC with the native adapters, however, if you need a more complex data type you can
-implement your own `PersistentDataType` and use that instead. Here is an example of how to do that for a UUID:
+implement your own `PersistentDataType` and use that instead. 
+The `PersistentDataType`'s job is to "deconstruct" a complex data type into something that is natively supported (see above) and then vice-versa.
+
+Here is an example of how to do that for a UUID:
 
 ```java
 public class UUIDDataType implements PersistentDataType<byte[], UUID> {

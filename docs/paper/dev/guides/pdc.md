@@ -54,7 +54,7 @@ NamespacedKey key = new NamespacedKey(pluginInstance, "example-key");
 
 ItemStack item = ...; // Retrieve the item from before
 // Get the data from the PDC
-PeristentDataContainer container = item.getItemMeta().getPersistentDataContainer();
+PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
 if (container.has(key, PersistentDataType.STRING)) {
     String value = container.get(key, PersistentDataType.STRING);
     // Do something with the value

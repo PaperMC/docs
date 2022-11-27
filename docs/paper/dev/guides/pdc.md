@@ -63,7 +63,7 @@ PersistentDataContainer container = item.getItemMeta().getPersistentDataContaine
 if (container.has(key, PersistentDataType.STRING)) {
     String value = container.get(key, PersistentDataType.STRING);
     // Do something with the value
-    player.sendMessage(Compontent.text(value));
+    player.sendMessage(Component.text(value));
 }
 ```
 
@@ -145,7 +145,7 @@ container.set(key, new UUIDDataType(), uuid);
       This does not work for all blocks, only those that have a tile entity. F.E:
       ```java
         Block block = ...;
-        if (block instanceof Chest chest) {
+        if (block.getState() instanceof Chest chest) {
             chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
             chest.update();
         }

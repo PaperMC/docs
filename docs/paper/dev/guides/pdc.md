@@ -72,8 +72,17 @@ The PDC supports a wide range of data types, such as:
 - `Long`, `Long Array`
 - `Short`
 - `String` 
-- There are also `Tag Containers`.
-This means that you can store a wide range of data in the PDC. However, If you need a more complex data type, you can
+- There are also `Tag Containers`. Tag Containers are a way of nesting PDC's within each other. To create a new PersistentDataContainer, you can use:
+  ```java
+  // Get the existing container
+  PersistentDataContainer container = ...;
+  // Create a new container
+  PersistentDataContainer newContainer = container.getAdapterContext().newPersistentDataContainer();
+  ```
+  
+### Custom Data Types
+
+You can store a wide range of data in the PDC with the native adapters, however, if you need a more complex data type you can
 implement your own `PersistentDataType` and use that instead. Here is an example of how to do that for a UUID:
 
 ```java
@@ -108,7 +117,7 @@ public class UUIDDataType implements PersistentDataType<byte[], UUID> {
 
 :::note
 
-In order to use your own `PersistentDataType`, you must pass an instance of it to the set/get methods.
+In order to use your own `PersistentDataType`, you must pass an instance of it to the set/get/has methods.
 ```java
 container.set(key, new UUIDDataType(), uuid);
 ```

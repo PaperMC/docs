@@ -41,7 +41,7 @@ item.setItemMeta(meta);
 
 :::note
 
-It is considered good practice to reuse the `NamespacedKey`'s. Constructing them from a static context is ideal for this.
+It is considered good practice to reuse the `NamespacedKey` objects. Constructing them from a static context is ideal for this.
 
 :::
 

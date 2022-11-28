@@ -78,30 +78,19 @@ const paper: SidebarsConfig = {
         },
         {
           type: "category",
-          label: "Event API",
+          label: "API",
           collapsed: true,
           link: {
             type: "doc",
-            id: "dev/event-api/README",
+            id: "dev/api/README",
           },
           items: [
-            "dev/event-api/event-listeners",
-            "dev/event-api/handler-lists",
-            "dev/event-api/custom-events",
+            "dev/api/event-listeners",
+            "dev/api/handler-lists",
+            "dev/api/custom-events",
+            "dev/api/pdc",
           ],
         },
-        {
-          type: "category",
-          label: "Guides",
-          collapsed: true,
-          link: {
-              type: "doc",
-              id: "dev/guides/README",
-          },
-          items: [
-              "dev/guides/pdc",
-          ],
-        }
       ],
     },
   ],

@@ -85,10 +85,17 @@ const paper: SidebarsConfig = {
             id: "dev/api/README",
           },
           items: [
-            "dev/api/event-listeners",
-            "dev/api/handler-lists",
-            "dev/api/custom-events",
             "dev/api/pdc",
+            {
+              type: "category",
+              label: "Event API",
+              collapsed: true,
+              items: [
+                "dev/api/event-api/event-listeners",
+                "dev/api/event-api/custom-events",
+                "dev/api/event-api/handler-lists",
+              ],
+            },
           ],
         },
       ],

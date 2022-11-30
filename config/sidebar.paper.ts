@@ -85,7 +85,6 @@ const paper: SidebarsConfig = {
             id: "dev/api/README",
           },
           items: [
-            "dev/api/pdc",
             {
               type: "category",
               label: "Event API",
@@ -96,6 +95,7 @@ const paper: SidebarsConfig = {
                 "dev/api/event-api/handler-lists",
               ],
             },
+            "dev/api/pdc",
           ],
         },
       ],

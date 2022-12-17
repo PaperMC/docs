@@ -1,4 +1,4 @@
-# docs ![Build Status](https://img.shields.io/github/workflow/status/PaperMC/docs/Publish/main?logo=github) ![Deployment Status](https://img.shields.io/github/deployments/PaperMC/docs/github-pages?label=deployment&logo=github) ![License](https://img.shields.io/github/license/PaperMC/docs)
+# docs [![Discord](https://img.shields.io/discord/289587909051416579.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/papermc) ![Deployment Status](https://img.shields.io/github/deployments/PaperMC/docs/production?label=deployment&logo=github) ![License](https://img.shields.io/github/license/PaperMC/docs)
 
 [vercel]: https://vercel.com?utm_source=papermc&utm_campaign=oss
 

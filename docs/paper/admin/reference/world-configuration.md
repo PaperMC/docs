@@ -435,12 +435,19 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **description**: If multiple entities with duplicate UUIDs are within this many blocks, saferegen
   will delete all but 1 of them.
 
-#### filter-nbt-data-from-spawn-eggs-and-related
+#### filter-bad-tile-entity-nbt-from-falling-blocks
 
 - **default**: `true`
-- **description**: Instructs the server to remove certain NBT data from spawn eggs, falling blocks,
-  and other often abused items in creative mode.
+- **description**: Instructs the server to remove certain NBT data from falling blocks.
 - **note**: Some adventure maps may require this to be turned off to function correctly, but we do
+  not recommend turning it off on a public server.
+
+#### filtered-entity-tag-nbt-paths
+
+- **default**: `[Pos, Motion]`
+- **description**: A list of nbt paths that will be removed from the `EntityTag` tag on items which spawn entities.
+  The format of these strings follows the same format used to select nbt paths in vanilla commands. 
+- **note**: Some adventure maps may require this to be an empty list to function correctly, but we do 
   not recommend turning it off on a public server.
 
 #### iron-golems-can-spawn-in-air

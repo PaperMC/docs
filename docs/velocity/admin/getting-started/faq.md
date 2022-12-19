@@ -14,7 +14,7 @@ Velocity 3.0.0 requires Java 11 or above.
 ## Where can I find Velocity plugins?
 
 A good source for finding plugins compatible with Velocity would be our
-[forums](https://forums.velocitypowered.com/c/plugins/plugin-releases/6).
+[forums](https://forums.papermc.io/forums/velocity-plugin-releases/).
 
 ## Does Velocity support plugins developed for BungeeCord or Waterfall?
 

@@ -194,3 +194,8 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `true`
 - **description**: Sets whether to parse comments in YAML files by default.
+
+#### paperclip.patchonly:
+
+- **default**: `false`
+- **description**: Sets whether the server should only patch the Vanilla server and download libraries.

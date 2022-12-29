@@ -135,6 +135,8 @@ Copy and paste into your `paper-world.yml` within your nether world folder. See 
 ```yml title="world_nether/paper-world.yml"
 anticheat:
   anti-xray:
+    enabled: true
+    engine-mode: 1
     hidden-blocks:
     - ancient_debris
     - nether_gold_ore
@@ -232,6 +234,8 @@ Copy and paste into your `paper-world.yml` within your nether world folder. See 
 ```yml title="world_nether/paper-world.yml"
 anticheat:
   anti-xray:
+    enabled: true
+    engine-mode: 2
     hidden-blocks:
     # See note about air and possible client performance issues above.
     - air

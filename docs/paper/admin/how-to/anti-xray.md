@@ -142,6 +142,8 @@ anticheat:
     - nether_gold_ore
     - nether_quartz_ore
     max-block-height: 128
+    update-radius: 2
+    use-permission: false
 ```
 
 </details>
@@ -255,6 +257,8 @@ anticheat:
     - netherrack
     - soul_sand
     - soul_soil
+    update-radius: 2
+    use-permission: false
 ```
 
 </details>

@@ -33,6 +33,7 @@ const paper: SidebarsConfig = {
             slug: "/cat/admin/how-to-guides",
           },
           items: [
+            "admin/how-to/basic-troubleshooting",
             "admin/how-to/configuration",
             "admin/how-to/update",
             "admin/how-to/aikars-flags",

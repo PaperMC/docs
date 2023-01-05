@@ -141,7 +141,9 @@ anticheat:
     - ancient_debris
     - nether_gold_ore
     - nether_quartz_ore
+    lava-obscures: false
     max-block-height: 128
+    replacement-blocks: []
     update-radius: 2
     use-permission: false
 ```

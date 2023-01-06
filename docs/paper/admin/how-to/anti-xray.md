@@ -251,6 +251,7 @@ anticheat:
     - nether_gold_ore
     - nether_quartz_ore
     - polished_blackstone_bricks
+    lava-obscures: false
     max-block-height: 128
     replacement-blocks:
     - basalt

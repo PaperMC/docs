@@ -307,7 +307,7 @@ have enabled Anti-Xray:
   Changes won't be applied automatically.
 * Do not use the `/reload` command. To apply Anti-Xray configuration changes a restart is required.
 * After restarting the server, verify that the configuration is applied correctly by inspecting the
-  config sections with Aikar's Minecraft Timings Viewer or spark.
+  config sections with timings or spark.
 
 </details>
 
@@ -315,10 +315,10 @@ have enabled Anti-Xray:
   <summary>How and where do I ask for support if it still doesn't work?</summary>
 
 If the above bullet points don't solve your problem or if you have further questions about
-Anti-Xray, please don't hesitate to ask us on the [PaperMC Discord](https://discord.gg/papermc).
-Please try to provide as much detail as possible about your problem. "It doesn't work" isn't very
-helpful when asking for support. Describe what you are trying to achieve, what you expect and what
-you observe. Ideally include a link to Aikar's Minecraft Timings Viewer or spark and a picture what
-you observe in-game.
+Anti-Xray, please don't hesitate to ask us on the [PaperMC Discord](https://discord.gg/papermc)
+using the #paper-help channel. Please try to provide as much detail as possible about your problem.
+"It doesn't work" isn't very helpful when asking for support. Describe what you want to achieve,
+what you have tried, what you expect and what you observe. Ideally include a timings or spark link
+and a picture what you observe in-game.
 
 </details>

@@ -301,6 +301,19 @@ have enabled Anti-Xray:
 </details>
 
 <details>
+  <summary>I have added fake blocks but X-ray doesn't show them</summary>
+
+If you use `engine-mode: 2` and you have added fake blocks to the `hidden-blocks` list but you can't
+see them in-game using X-ray, this can have the following reasons:
+
+* The added block types are tile entities. Anti-Xray can hide (replace) tile entities (such as
+  chests), provided that they are not exposed to air or other transparent blocks. However, Anti-Xray
+  can't place tile entities as fake blocks into the chunk.
+* The block is disabled in your client's X-ray mod or not shown by your X-ray resource pack.
+
+</details>
+
+<details>
   <summary>It still doesn't work, further troubleshooting</summary>
 
 * Make sure to always restart your server after making changes to the Anti-Xray configuration.

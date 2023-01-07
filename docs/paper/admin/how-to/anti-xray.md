@@ -114,11 +114,8 @@ anticheat:
     # Please adjust the max-block-height setting at your own discretion.
     # https://minecraft.fandom.com/wiki/Ore might be helpful.
     max-block-height: 64
-    replacement-blocks:
     # The replacement-blocks list is not used in engine-mode: 1. Changing this will have no effect.
-    - stone
-    - oak_planks
-    - deepslate
+    replacement-blocks: []
     update-radius: 2
     use-permission: false
 ```
@@ -143,6 +140,7 @@ anticheat:
     - nether_quartz_ore
     lava-obscures: false
     max-block-height: 128
+    # The replacement-blocks list is not used in engine-mode: 1. Changing this will have no effect.
     replacement-blocks: []
     update-radius: 2
     use-permission: false

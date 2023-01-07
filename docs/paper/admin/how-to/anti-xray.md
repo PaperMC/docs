@@ -74,7 +74,8 @@ YAML cares about whitespace! The example configuration below is already formatte
 formatting and indentation remains unchanged by using the "copy" button in the top right of each
 example. Especially ensure that no tabulators are accidentally inserted. In Notepad++ you can use
 `Settings -> Preferences... -> Language -> Replace by space` or `Edit -> Blank Operations -> TAB to
-Space`.
+Space`. If your configuration file already contains other important changes, it is recommended to
+make a backup before editing it.
 
 :::
 

@@ -131,6 +131,6 @@ Paper can also be configured in a variety of ways. Check these documents for det
 ## Consult With Developer
 
 If your problem is related to a plugin you use and you still don't know how to solve it, you can try to reach out to the plugin's author.  
-Many plugins have a way to contact their author, like a GitHub issue trakcer, Discord support guild, Gitter, IRC, etc.  
+Many plugins have a way to contact their author, like a GitHub issue tracker, Discord support guild, Gitter, IRC, etc.  
 
 If your problem isn't related to any plugin, you can come to PaperMC's Discord server and ask for help, or create a new issue on our GitHub issue tracker.

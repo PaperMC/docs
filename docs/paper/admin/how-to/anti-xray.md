@@ -280,3 +280,45 @@ anticheat:
 ```
 
 </details>
+
+## FAQ, Common Pitfalls and Support
+
+<details>
+  <summary>I can still see (some) ores / use X-ray</summary>
+
+As described above, there are several reasons why you might still see (some) ores even though you
+have enabled Anti-Xray:
+
+* The ores are above the configured `max-block-height` value.
+* Anti-Xray cannot hide ores exposed to air or other transparent blocks (in caves for example). In
+  principle this is also the case for `engine-mode: 2`, however, usually the fake ores obstruct the
+  view of real blocks. Hiding those exposed ores too requires additional plugins.
+* The `use-permission` option is enabled and you have the Anti-Xray bypass permission or you have
+  operator status.
+* The block type is missing in the configured block lists. This can be the result of using an
+  outdated configuration file.
+
+</details>
+
+<details>
+  <summary>It still doesn't work, further troubleshooting</summary>
+
+* Make sure to always restart your server after making changes to the Anti-Xray configuration.
+  Changes won't be applied automatically.
+* Do not use the `/reload` command. To apply Anti-Xray configuration changes a restart is required.
+* After restarting the server, verify that the configuration is applied correctly by inspecting the
+  config sections with Aikar's Minecraft Timings Viewer or spark.
+
+</details>
+
+<details>
+  <summary>How and where do I ask for support if it still doesn't work?</summary>
+
+If the above bullet points don't solve your problem or if you have further questions about
+Anti-Xray, please don't hesitate to ask us on the [PaperMC Discord](https://discord.gg/papermc).
+Please try to provide as much detail as possible about your problem. "It doesn't work" isn't very
+helpful when asking for support. Describe what you are trying to achieve, what you expect and what
+you observe. Ideally include a link to Aikar's Minecraft Timings Viewer or spark and a picture what
+you observe in-game.
+
+</details>

@@ -14,8 +14,6 @@ Only a full server shutdown can prevent this.
 Also, if you don't follow this guide carefully or make a mistake while following this guide, you might corrupt your server. It is highly advised to backup your server before following this guide.  
 It would be ideal to create a test server by copying your production server's file, but that's not always possible.
 
-Please, take a backup first.
-
 :::
 
 ## Read The Error Message
@@ -89,11 +87,7 @@ If you still experience problems, head to [Paper Documentation](#paper-documenta
 
 ### Binary Search
 
-To find out what plugin is causing problem, [binary search](https://en.wikipedia.org/wiki/Binary_search_algorithm) is ideal way to do it.
-
-<!-- Animated GIF file -->
-
-And here is brief explanation about how to do it.
+To efficiently search for the plugin that is causing the issue, you can do the following:
 
 1. **Split your plugins into two groups**  
    The size of the two groups can be different, but it is ideal if the difference is minimal.
@@ -137,7 +131,6 @@ Paper can also be configured in a variety of ways. Check these documents for det
 ## Consult With Developer
 
 If your problem is related to a plugin you use and you still don't know how to solve it, you can try to reach out to the plugin's author.  
-Many plugins have a way to contact their author, like GitHub Issue Trakcer, Discord Support Server, Gitter, IRC, etc.  
-Don't ask for help related to a plugin in PaperMC.
+Many plugins have a way to contact their author, like a GitHub issue trakcer, Discord support guild, Gitter, IRC, etc.  
 
-If your problem isn't related to any plugin, you can come to PaperMC's Discord server and ask for help, or create a new issue in the GitHub Issue Tracker.
+If your problem isn't related to any plugin, you can come to PaperMC's Discord server and ask for help, or create a new issue on our GitHub issue tracker.

@@ -78,7 +78,7 @@ formatting remains unchanged by using the "copy" button in the top right of each
 ### `engine-mode: 1`
 
 <details>
-  <summary>Overworld Configuration</summary>
+  <summary>Default World Configuration</summary>
 
 Replace the existing `anticheat.anti-xray` block in `paper-world-defaults.yml` with the following:
 
@@ -168,7 +168,7 @@ anticheat:
 ### `engine-mode: 2`
 
 <details>
-  <summary>Overworld Configuration</summary>
+  <summary>Default World Configuration</summary>
 
 Replace the existing `anticheat.anti-xray` block in `paper-world-defaults.yml` with the following:
 

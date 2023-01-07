@@ -71,7 +71,10 @@ The recommended configuration for both `engine-mode: 1` and `engine-mode: 2` is 
 :::tip Spacing
 
 YAML cares about whitespace! The example configuration below is already formatted correctly. Ensure
-formatting remains unchanged by using the "copy" button in the top right of each example.
+formatting and indentation remains unchanged by using the "copy" button in the top right of each
+example. Especially ensure that no tabulators are accidentally inserted. In Notepad++ you can use
+`Settings -> Preferences... -> Language -> Replace by space` or `Edit -> Blank Operations -> TAB to
+Space`.
 
 :::
 

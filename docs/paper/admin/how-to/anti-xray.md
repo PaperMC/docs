@@ -135,11 +135,17 @@ Copy and paste into your `paper-world.yml` within your nether world folder. See 
 ```yml title="world_nether/paper-world.yml"
 anticheat:
   anti-xray:
+    enabled: true
+    engine-mode: 1
     hidden-blocks:
     - ancient_debris
     - nether_gold_ore
     - nether_quartz_ore
+    lava-obscures: false
     max-block-height: 128
+    replacement-blocks: []
+    update-radius: 2
+    use-permission: false
 ```
 
 </details>
@@ -232,6 +238,8 @@ Copy and paste into your `paper-world.yml` within your nether world folder. See 
 ```yml title="world_nether/paper-world.yml"
 anticheat:
   anti-xray:
+    enabled: true
+    engine-mode: 2
     hidden-blocks:
     # See note about air and possible client performance issues above.
     - air
@@ -243,6 +251,7 @@ anticheat:
     - nether_gold_ore
     - nether_quartz_ore
     - polished_blackstone_bricks
+    lava-obscures: false
     max-block-height: 128
     replacement-blocks:
     - basalt
@@ -251,6 +260,8 @@ anticheat:
     - netherrack
     - soul_sand
     - soul_soil
+    update-radius: 2
+    use-permission: false
 ```
 
 </details>

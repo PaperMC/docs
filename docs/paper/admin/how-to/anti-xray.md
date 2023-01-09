@@ -121,6 +121,7 @@ anticheat:
     - deepslate
     update-radius: 2
     use-permission: false
+
 ```
 
 </details>
@@ -146,6 +147,7 @@ anticheat:
     replacement-blocks: []
     update-radius: 2
     use-permission: false
+
 ```
 
 </details>
@@ -161,6 +163,7 @@ Copy and paste into your `paper-world.yml` within your end world folder. See the
 anticheat:
   anti-xray:
     enabled: false
+
 ```
 
 </details>
@@ -224,6 +227,7 @@ anticheat:
     - tuff
     update-radius: 2
     use-permission: false
+
 ```
 
 </details>
@@ -262,6 +266,7 @@ anticheat:
     - soul_soil
     update-radius: 2
     use-permission: false
+
 ```
 
 </details>
@@ -277,6 +282,7 @@ Copy and paste into your `paper-world.yml` within your end world folder. See the
 anticheat:
   anti-xray:
     enabled: false
+
 ```
 
 </details>

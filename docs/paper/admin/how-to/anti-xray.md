@@ -314,6 +314,17 @@ see them in-game using X-ray, this can have the following reasons:
 </details>
 
 <details>
+  <summary>It doesn't work below y = 0 or in certain other places.</summary>
+
+* Your configuration file is probably outdated and missing important blocks in the
+  `replacement-blocks` list, such as `deepslate` or biome-specific blocks, such as `basalt`. You
+  might also want to check if the `hidden-blocks` list includes all important ores and their
+  `deepslate` variants.
+* If it doesn't work above a certain y-level, check your `max-block-height` setting.
+
+</details>
+
+<details>
   <summary>It still doesn't work, further troubleshooting</summary>
 
 * Make sure to always restart your server after making changes to the Anti-Xray configuration.

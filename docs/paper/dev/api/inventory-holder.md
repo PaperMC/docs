@@ -11,7 +11,7 @@ Using an InventoryHolder is a great way of identifying your plugin's inventories
 InventoryHolder greatly simplifies the steps you need to do to make sure an inventory was created by your plugin.
 
 Using inventory names for identification is unreliable as other plugins can create inventories with names exactly as yours
-and with Components you need to make sure the names is exactly the same or serialize it to other formats.
+and with Components you need to make sure the name is exactly the same or serialize it to other formats.
 
 InventoryHolder has no such downsides and by using it you're guaranteed to have methods available to handle your inventory.
 

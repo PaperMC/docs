@@ -18,12 +18,12 @@ InventoryHolder has no such downsides and by using it you're guaranteed to have 
 ## Creating an InventoryHolder
 
 InventoryHolder is an interface that we must implement.
-We can do this the following way, let's create a new class that will create our `Inventory` in the constructor.
+We can do this the following way: create a new class that will create our `Inventory` in the constructor.
 
 :::info
 
-The constructor takes your main plugin class as an argument in order to create the `Inventory`,
-if you wish you can use the static method `Bukkit.createInventory(InventoryHolder, int)` instead and remove the argument.
+The constructor takes your main plugin class as an argument in order to create the `Inventory`.
+If you wish you can use the static method `Bukkit.createInventory(InventoryHolder, int)` instead and remove the argument.
 
 :::
 

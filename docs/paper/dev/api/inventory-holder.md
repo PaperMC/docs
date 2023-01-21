@@ -27,7 +27,7 @@ We can do this the following way: create a new class that will create our `Inven
 :::info
 
 The constructor takes your main plugin class as an argument in order to create the `Inventory`.
-If you wish you can use the static method `Bukkit.createInventory(InventoryHolder, int)` instead and remove the argument.
+If you wish, you can use the static method `Bukkit.createInventory(InventoryHolder, int)` instead and remove the argument.
 
 :::
 

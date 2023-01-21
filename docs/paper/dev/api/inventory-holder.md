@@ -10,10 +10,14 @@ InventoryHolder can be used to identify your plugin's inventories in events.
 
 InventoryHolder simplifies the steps you need to do to make sure an inventory was created by your plugin.
 
+:::info
+
 Using inventory names for identification is unreliable as other plugins can create inventories with names exactly as yours
 and with Components you need to make sure the name is exactly the same or serialize it to other formats.
 
 InventoryHolder has no such downsides and by using it you're guaranteed to have methods available to handle your inventory.
+
+:::
 
 ## Creating an InventoryHolder
 

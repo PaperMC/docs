@@ -80,7 +80,7 @@ public void onInventoryClick(InventoryClickEvent event) {
 	Inventory inventory = event.getInventory();
 	// Check if the holder is our MyInventory,
 	// if yes, use instanceof pattern matching to store it in a variable immediately.
-	if(!(inventory.getHolder() instanceof MyInventory myInventory)) {
+	if (!(inventory.getHolder() instanceof MyInventory myInventory)) {
 		// It's not our inventory, ignore it.
 		return;
 	}
@@ -135,7 +135,7 @@ Now, we can modify our listener to check if the player clicked the stone, and if
 @EventHandler
 public void onInventoryClick(InventoryClickEvent event) {
 	Inventory inventory = event.getInventory();
-	if(!(inventory.getHolder() instanceof MyInventory myInventory)) {
+	if (!(inventory.getHolder() instanceof MyInventory myInventory)) {
 		return;
 	}
 
@@ -143,7 +143,7 @@ public void onInventoryClick(InventoryClickEvent event) {
 
 	ItemStack clicked = event.getCurrentItem();
 	// Check if the player clicked the stone.
-	if(clicked.getType() == Material.STONE) {
+	if (clicked.getType() == Material.STONE) {
 		// Use the method we have on MyInventory to increment the field
 		// and update the counter.
 		myInventory.addClick();

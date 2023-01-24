@@ -286,3 +286,69 @@ anticheat:
 ```
 
 </details>
+
+## FAQ, Common Pitfalls and Support
+
+<details>
+  <summary>I can still see (some) ores / use X-ray</summary>
+
+As described above, there are several reasons why you might still see (some) ores even though you
+have enabled Anti-Xray:
+
+* The ores are above the configured `max-block-height` value.
+* Anti-Xray cannot hide ores exposed to air or other transparent blocks (in caves for example). In
+  principle this is also the case for `engine-mode: 2`, however, usually the fake ores obstruct the
+  view of real blocks. Hiding those exposed ores too requires additional plugins.
+* The `use-permission` option is enabled and you have the Anti-Xray bypass permission or you have
+  operator status.
+* The block type is missing in the configured block lists. This can be the result of using an
+  outdated configuration file.
+
+</details>
+
+<details>
+  <summary>I have added fake blocks but X-ray doesn't show them</summary>
+
+If you use `engine-mode: 2` and you have added fake blocks to the `hidden-blocks` list but you can't
+see them in-game using X-ray, this can have the following reasons:
+
+* The added block types are tile entities. Anti-Xray can hide (replace) tile entities (such as
+  chests), provided that they are not exposed to air or other transparent blocks. However, Anti-Xray
+  can't place tile entities as fake blocks into the chunk.
+* The block is disabled in your client's X-ray mod or not shown by your X-ray resource pack.
+
+</details>
+
+<details>
+  <summary>It doesn't work below y = 0 or in certain other places.</summary>
+
+* Your configuration file is probably outdated and missing important blocks in the
+  `replacement-blocks` list, such as `deepslate` or biome-specific blocks, such as `basalt`. You
+  might also want to check if the `hidden-blocks` list includes all important ores and their
+  `deepslate` variants.
+* If it doesn't work above a certain y-level, check your `max-block-height` setting.
+
+</details>
+
+<details>
+  <summary>It still doesn't work, further troubleshooting</summary>
+
+* Make sure to always restart your server after making changes to the Anti-Xray configuration.
+  Changes won't be applied automatically.
+* Do not use the `/reload` command. To apply Anti-Xray configuration changes a restart is required.
+* After restarting the server, verify that the configuration is applied correctly by inspecting the
+  config sections with timings or spark.
+
+</details>
+
+<details>
+  <summary>How and where do I ask for support if it still doesn't work?</summary>
+
+If the above bullet points don't solve your problem or if you have further questions about
+Anti-Xray, please don't hesitate to ask us on the [PaperMC Discord](https://discord.gg/papermc)
+using the #paper-help channel. Please try to provide as much detail as possible about your problem.
+"It doesn't work" isn't very helpful when asking for support. Describe what you want to achieve,
+what you have tried, what you expect and what you observe. Ideally include a timings or spark link
+and a picture what you observe in-game.
+
+</details>

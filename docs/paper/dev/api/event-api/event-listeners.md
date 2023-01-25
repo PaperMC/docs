@@ -111,7 +111,7 @@ public class ExampleListener implements Listener {
     }
 }
 ```
-**The BlockLockCheckEvent method and the PlayerLoginEvent method do not implement the Cancellable interface, but similar effects can still be achieved through the setResult (Result result) method.**
+**The BlockLockCheckEvent and PlayerLoginEvent types do not implement the Cancellable interface, but similar effects can still be achieved through the setResult (Result result) method.**
 :::warning
 
 It is important to consider that another plugin could have cancelled or changed the event before your plugin is called.

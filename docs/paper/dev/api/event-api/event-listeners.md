@@ -33,7 +33,7 @@ Listeners take in a single parameter, which is the event that is being listened 
 public class ExampleListener implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onAnvilDamagedEvent(AnvilDamagedEvent event) {
         // ...
     }
 }
@@ -74,7 +74,7 @@ You can also specify the priority of the event.
 public class ExampleListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onAnvilDamagedEvent(AnvilDamagedEvent event) {
         // ...
     }
 }
@@ -106,12 +106,12 @@ Some events can be cancelled, preventing the given action from being completed. 
 public class ExampleListener implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onAnvilDamagedEvent(AnvilDamagedEvent event) {
         event.setCancelled(true);
     }
 }
 ```
-
+**The BlockLockCheckEvent method and the PlayerLoginEvent method do not implement the Cancellable interface, but similar effects can still be achieved through the setResult (Result result) method.**
 :::warning
 
 It is important to consider that another plugin could have cancelled or changed the event before your plugin is called.

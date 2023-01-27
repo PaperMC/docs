@@ -134,8 +134,8 @@ Now, we can modify our listener to check if the player clicked the stone, and if
 ```java
 @EventHandler
 public void onInventoryClick(InventoryClickEvent event) {
-    // We're getting the clicked inventory to avoid situations where the player
-    // already has a stone in their inventory and clicks that one.
+	// We're getting the clicked inventory to avoid situations where the player
+	// already has a stone in their inventory and clicks that one.
 	Inventory inventory = event.getClickedInventory();
 	if (!(inventory.getHolder() instanceof MyInventory myInventory)) {
 		return;

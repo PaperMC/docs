@@ -137,7 +137,8 @@ public void onInventoryClick(InventoryClickEvent event) {
 	// We're getting the clicked inventory to avoid situations where the player
 	// already has a stone in their inventory and clicks that one.
 	Inventory inventory = event.getClickedInventory();
-	if (!(inventory.getHolder() instanceof MyInventory myInventory)) {
+	// Add a null check in case the player clicked outside the window.
+	if (inventory == null || !(inventory.getHolder() instanceof MyInventory myInventory)) {
 		return;
 	}
 

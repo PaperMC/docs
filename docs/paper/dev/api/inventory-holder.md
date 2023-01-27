@@ -145,7 +145,7 @@ public void onInventoryClick(InventoryClickEvent event) {
 
 	ItemStack clicked = event.getCurrentItem();
 	// Check if the player clicked the stone.
-	if (clicked.getType() == Material.STONE) {
+	if (clicked != null && clicked.getType() == Material.STONE) {
 		// Use the method we have on MyInventory to increment the field
 		// and update the counter.
 		myInventory.addClick();

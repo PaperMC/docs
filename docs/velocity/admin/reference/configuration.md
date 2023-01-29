@@ -18,10 +18,9 @@ There are a few "special" data types in the Velocity configuration.
 
 ### Chat
 
-Chat messages may be provided in [MiniMessage](https://docs.adventure.kyori.net/minimessage/format.html) or JSON format.
+Chat messages may be provided in [MiniMessage](https://docs.adventure.kyori.net/minimessage/format.html).
 
-RGB support (using the `<#rrggbb>` format) is available and JSON messages are deserialized for
-Minecraft 1.16.
+RGB support (using the `<#rrggbb>` format) is available for Minecraft 1.16.
 
 ### Address
 
@@ -36,7 +35,7 @@ These settings mostly cover the basic, most essential settings of the proxy.
 | ----------------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `config-version`              | String  | This is the current config version used by Velocity. You should not alter this setting.                                                                                                                          |
 | `bind`                        | Address | This tells the proxy to accept connections on a specific IP. By default, Velocity will listen for connections on all IP addresses on the computer on port 25577.                                                 |
-| `motd`                        | Chat    | This allows you to change the message shown to players when they add your server to their server list. You can use [MiniMessage format](https://docs.adventure.kyori.net/minimessage/format.html) or JSON chat.                                                    |
+| `motd`                        | Chat    | This allows you to change the message shown to players when they add your server to their server list. You can use [MiniMessage format](https://docs.adventure.kyori.net/minimessage/format.html).               |
 | `show-max-players`            | Integer | This allows you to customize the number of "maximum" players in the player's server list. Note that Velocity doesn't have a maximum number of players it supports.                                               |
 | `player-info-forwarding-mode` | Enum    | See [Configuring player information forwarding](../getting-started/forwarding.md) for more information.                                                                                                          |
 | `forwarding-secret`           | String  | This setting is used as a secret to ensure that player info forwarded by Velocity comes from your proxy and not from someone pretending to run Velocity. See the "Player info forwarding" section for more info. |

@@ -18,7 +18,7 @@ There are a few "special" data types in the Velocity configuration.
 
 ### Chat
 
-Chat messages may be provided in [MiniMessage](https://docs.adventure.kyori.net/minimessage/format.html).
+Chat messages may be provided in [MiniMessage](https://docs.adventure.kyori.net/minimessage/format.html) format.
 
 RGB support (using the `<#rrggbb>` format) is available for Minecraft 1.16.
 

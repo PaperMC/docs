@@ -44,6 +44,20 @@ If the user has the `velocity.command.plugins` permission, they can use this com
 anonymized dump of details on the proxy. This can be sent to the Velocity Discord to help us provide
 support.
 
+### `/velocity heap`
+
+:::caution
+
+This command generates a heap dump which contains detailed information about your Velocity instance
+which can be quite sensitive, be very careful to whom you share the generated heap dump.
+
+:::
+
+If the user has the `velocity.command.heap` permission, they will be able to generate a heap dump
+from the running Velocity instance, which will allow a detailed analysis of memory consumption.
+
+The generated heap dump will be found in the `dumps` folder.
+
 ## `/server`
 
 If the user has the `velocity.command.server` permission (by default, this is granted to all users),

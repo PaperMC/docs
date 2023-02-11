@@ -1,6 +1,7 @@
 :root {
   --ifm-color-primary: #0240dc;
   --ifm-color-primary-dark: #033ed5;
+  --ifm-color-warning-contrast-background: #ffe39c;
 
   --ifm-code-font-size: 95%;
 

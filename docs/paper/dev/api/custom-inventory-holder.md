@@ -1,8 +1,8 @@
 ---
-slug: /dev/inventory-holder
+slug: /dev/custom-inventory-holder
 ---
 
-# InventoryHolder
+# Custom InventoryHolder
 
 InventoryHolder can be used to identify your plugin's inventories in events.
 

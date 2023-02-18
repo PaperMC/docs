@@ -97,7 +97,7 @@ const paper: SidebarsConfig = {
               ],
             },
             "dev/api/pdc",
-            "dev/api/inventory-holder",
+            "dev/api/custom-inventory-holder",
           ],
         },
       ],

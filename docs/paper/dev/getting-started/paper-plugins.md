@@ -4,7 +4,7 @@ slug: /dev/getting-started/paper-plugins
 
 # Paper Plugins
 
-Paper plugins allow developers to take advantage of more modern concepts introduced by mojang, such as datapacks, to 
+Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to 
 expand the field of what the Paper API is able to introduce.
 
 :::info Experimental
@@ -36,7 +36,7 @@ dependencies:
 ```
 
 ## What is it used for?
-Paper plugins lay down the framework for some future api.
+Paper plugins lay down the framework for some future API.
 
 
 ## Bootstrapper
@@ -57,8 +57,8 @@ public class TestPluginBootstrap implements PluginBootstrap {
     
 }
 ```
-A Bootstrapper allow you to also override how your plugin is initiated, allowing you to pass values into your plugin constructor.
-Currently, bootstrappers do not offer much new api, and are highly experimental. This may be subject to change once more api is more introduced.
+A Bootstrapper allows you to also override how your plugin is initiated, allowing you to pass values into your plugin constructor.
+Currently, bootstrappers do not offer much new API, and are highly experimental. This may be subject to change once more API is introduced.
 
 ## Loaders
 Paper plugins are able to identify their own plugin loader by implementing ``io.papermc.paper.plugin.loader.PluginLoader`` and adding

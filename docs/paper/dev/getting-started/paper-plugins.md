@@ -35,6 +35,19 @@ permissions:
 dependencies:
 ```
 
+Dependency declaration is specified a bit differently than Bukkit plugins, as you are
+able to define if a dependency is required during bootstrapping. This means that any bootstrapping
+logic for your dependencies will be run before yours is run. 
+```yml
+dependencies:
+  - name: DependencyName
+    required: true
+    bootstrap: true
+```
+
+This dependency is ``required``, meaning that if this dependency is not found your plugin will fail to load.
+The bootstrap field indicates that this dependency is required during bootstrapping, which currently does not serve a purpose.
+
 ## What is it used for?
 Paper plugins lay down the framework for some future API.
 

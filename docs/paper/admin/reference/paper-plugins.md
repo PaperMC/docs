@@ -17,8 +17,11 @@ take advantage of modern systems Mojang provides, for example, datapacks.
 
 ## What is the difference?
 
-When loaded, Paper plugins are **identical** to Bukkit plugins. This allows plugins to still fully communicate and support each other, meaning that even if a
+When enabled, Paper plugins are **identical** to Bukkit plugins. This allows plugins to still fully communicate and support each other, meaning that even if a
 plugin is a Bukkit or Paper plugin, they are both able to depend on each other just fine.
+
+Paper plugins simply note that they may only support being loaded by Paper's Plugin Loader, and may use new modern API that 
+Bukkit plugins are not able to utilize.
 
 ## How do I add Paper plugins?
 

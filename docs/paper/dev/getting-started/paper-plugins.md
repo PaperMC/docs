@@ -54,7 +54,7 @@ If a dependency is marked as ``bootstrap``, this indicates that this dependency 
 Paper plugins lay down the framework for some future API.
 Our goals are to open more modern API that better aligns with Vanilla.
 Paper plugins allow us to do just that by making a new way to load plugin resources
-before the server has started by using [Boostrappers](#bootstrapper).
+before the server has started by using [Bootstrappers](#bootstrapper).
 
 
 ## Bootstrapper

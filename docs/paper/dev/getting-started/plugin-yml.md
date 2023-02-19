@@ -2,7 +2,7 @@
 slug: /dev/plugin-yml
 ---
 
-# Paper Plugin YML
+# Bukkit Plugin YML
 
 The plugin.yml file is the main configuration file for your plugin. 
 It contains information about your plugin, such as its name, version, and description. 

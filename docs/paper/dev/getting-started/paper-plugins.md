@@ -19,20 +19,19 @@ This is experimental and may be subject to change.
 
 ## How do I use them?
 Similarly to Bukkit plugins, you have to introduce a ``paper-plugin.yml`` file into your jar resources folder.
+This can act as a drop in replacement for ``plugin.yml``, allowing you to specifically target the Paper platform.
+
+It should be noted you still have the ability to include both ``paper-plugin.yml``and ``plugin.yml`` in the same jar.
+
 Here is an example configuration.
 ```yml
 name: Paper-Test-Plugin
-version: ${version}
+version: '1.0'
 main: io.papermc.testplugin.TestPlugin
 description: Paper Test Plugin
-author: PaperMC
-api-version: ${apiversion}
-load: STARTUP
+api-version: '1.19'
 bootstrapper: io.papermc.testplugin.TestPluginBootstrap
 loader: io.papermc.testplugin.TestPluginLoader
-defaultPerm: FALSE
-permissions:
-dependencies:
 ```
 
 Dependency declaration is specified a bit differently than Bukkit plugins, as you are
@@ -45,11 +44,17 @@ dependencies:
     bootstrap: true
 ```
 
-This dependency is ``required``, meaning that if this dependency is not found your plugin will fail to load.
-The bootstrap field indicates that this dependency is required during bootstrapping, which currently does not serve a purpose.
+If a dependency is ``required`` it must be installed on the server or your plugin will fail to load. If marked otherwise, it will
+ignore if the dependency isn't found. 
+Otherwise, your plugin will be loaded fine, in the same fashion as a plugin that is a ``soft-depend`` in a Bukkit plugin.yml
+
+If a dependency is marked as ``bootstrap``, this indicates that this dependency is required during bootstrapping, which currently does not serve a purpose.
 
 ## What is it used for?
 Paper plugins lay down the framework for some future API.
+Our goals are to open more modern API that better aligns with Vanilla.
+Paper plugins allow us to do just that by making a new way to load plugin resources
+before the server has started by using [Boostrappers](#bootstrapper).
 
 
 ## Bootstrapper
@@ -101,11 +106,11 @@ Currently, you are able to add two different library types, ``JarLibrary``, and 
 ## Differences 
 
 ### Bukkit Serialization System
-Paper plugins do not support the serialization system (``org.bukkit.configuration.serialization``) that bukkit uses. Your classes will not be able to be
-serialized, vise versa. It is highly recommended to not use this system with Paper Plugins.
+Paper plugins do not support the serialization system (``org.bukkit.configuration.serialization``) that Bukkit uses. Your classes will not be able to be
+serialized, vise versa. It is highly recommended to not use this system with Paper plugins.
 
 ### Classloading Isolation
-Paper plugins have isolated classloaders, meaning that relocating dependencies will not be necessary. Paper plugin are not able to access each other unless given explicit access
+Paper plugins have isolated classloaders, meaning that relocating dependencies will not be necessary. Paper plugins are not able to access each other unless given explicit access
 by depending on another plugin, etc. This prevents plugins from accidentally accessing your dependencies, and in general helps ensure that plugins are only able to access your plugin
 if they explicitly say that they're depending on it.
 

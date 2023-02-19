@@ -4,22 +4,22 @@ slug: /dev/custom-inventory-holder
 
 # Custom InventoryHolder
 
-InventoryHolder can be used to identify your plugin's inventories in events.
+Custom InventoryHolders can be used to identify your plugin's inventories in events.
 
 ## Why use an InventoryHolder?
 
-InventoryHolder simplifies the steps you need to do to make sure an inventory was created by your plugin.
+Custom InventoryHolders simplify the steps you need to do to make sure an inventory was created by your plugin.
 
 :::info
 
 Using inventory names for identification is unreliable as other plugins can create inventories with names exactly as yours
-and with Components you need to make sure the name is exactly the same or serialize it to other formats.
+and with components you need to make sure the name is exactly the same or serialize it to other formats.
 
-InventoryHolder has no such downsides and by using it you're guaranteed to have methods available to handle your inventory.
+Custom InventoryHolders have no such downsides and by using them you're guaranteed to have methods available to handle your inventory.
 
 :::
 
-## Creating an InventoryHolder
+## Creating a custom InventoryHolder
 
 InventoryHolder is an interface that we must implement.
 We can do this the following way: create a new class that will create our `Inventory` in the constructor.
@@ -89,9 +89,9 @@ public void onInventoryClick(InventoryClickEvent event) {
 }
 ```
 
-## Storing data on the InventoryHolder
+## Storing data on the custom InventoryHolder
 
-You can store extra data for your inventories on the InventoryHolder by adding fields and methods to your class.
+You can store extra data for your inventories on the custom InventoryHolder by adding fields and methods to your class.
 
 Let's make an inventory that counts the amount of times we clicked a stone inside it.
 First let's modify our `MyInventory` class a little:

@@ -34,6 +34,8 @@ bootstrapper: io.papermc.testplugin.TestPluginBootstrap
 loader: io.papermc.testplugin.TestPluginLoader
 ```
 
+### Dependency Declaration
+
 Dependency declaration is specified a bit differently than Bukkit plugins, as you are
 able to define if a dependency is required during bootstrapping. This means that any bootstrapping
 logic for your dependencies will be run before yours is run. 
@@ -49,6 +51,42 @@ ignore if the dependency isn't found.
 Otherwise, your plugin will be loaded fine, in the same fashion as a plugin that is a ``soft-depend`` in a Bukkit plugin.yml
 
 If a dependency is marked as ``bootstrap``, this indicates that this dependency is required during bootstrapping, which currently does not serve a purpose.
+
+:::note Plugin Loading Order
+
+Note that unlike Bukkit plugins, dependencies **do not** affect the load order. 
+:::
+
+### Load Order Declaration
+
+To declare the order in which plugins are loaded before/after your plugin, you are able to define two sections in your ``paper-plugin.yml``.
+
+It should be noted that the load order for bootstrapping is independent, meaning that if you want to define the load order for bootstrappers
+you must set the ``bootstrap`` field to ``true``.
+
+:::note Cyclic Loading
+
+Note that in certain cases plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
+Please read [this](docs/paper/admin/reference/paper-plugins.md#cyclic-plugin-loading) for more information.
+:::
+
+#### load-before
+You are able to define a list of plugins that your plugin should load before. 
+```yml
+load-before:
+  - name: DependencyName
+    bootstrap: false
+```
+This means that your plugin will load **before** ``DependencyName``. 
+
+#### load-after
+You are then able to provide a list of plugins that should be loaded after your plugin loads by using:
+```yml
+load-after:
+  - name: DependencyName
+    bootstrap: false
+```
+This means that your plugin will load **after** ``DependencyName``.
 
 ## What is it used for?
 Paper plugins lay down the framework for some future API.
@@ -119,3 +157,10 @@ Paper plugins have the ability to bypass this, being able to access OTHER plugin
 has-open-classloader: true
 ```
 to your ``paper-plugin.yml``. Note, other plugins will still be unable to access your classloader.
+
+
+### Load Order Logic Split
+In order to better take advantage of classloading isolation, Paper plugins do **not** use the ``dependencies`` field to determine load order.
+This was done for a variety of reasons, mostly to allow better control and allow plugins to properly share classloaders.
+
+See [here](#load-order-declaration) for more information on how to declare the load order of your plugin.

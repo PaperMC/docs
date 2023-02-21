@@ -185,11 +185,6 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `unset`
 - **description**: Always prints the warning state for the particular level.
 
-#### Paper.printStacktraceOnBadPluginClassAccess:
-
-- **default**: `unset`
-- **description**: Prints a stacktrace when a plugin attempts to access a class that is not a dependency of the plugin.
-
 #### Paper.parseYamlCommentsByDefault:
 
 - **default**: `true`

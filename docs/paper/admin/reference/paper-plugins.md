@@ -33,7 +33,7 @@ However, as a result, this now causes [cyclic loading](#cyclic-plugin-loading) b
 
 ![Cyclic Loading](assets/cyclic-loading.png)
 
-Cyclic loading are when a plugin loading causes a loop which eventually will cycle back to the original plugin.
+Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.
 
 If Paper detects a loop, your server will be shut down with an error similar to this:
 ```

@@ -55,7 +55,7 @@ If a dependency is marked as ``bootstrap``, this indicates that this dependency 
 :::note Plugin Loading Order
 
 Note that [unlike Bukkit plugins](#load-order-logic-split), dependencies are independent of the plugin load order. 
-This means that although declaring a dependency will give you access to its classes, if you require it to be initialised before your plugin is loaded, see [this](#load-order-declaration).
+This means that although declaring a dependency will give you access to its classes, if you require it to be initialised before your plugin is loaded, see how to [declare load order](#load-order-declaration).
 :::
 
 ### Load Order Declaration
@@ -68,7 +68,7 @@ you must set the ``bootstrap`` field to ``true``.
 :::note Cyclic Loading
 
 Note that in certain cases plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
-Please read [this](docs/paper/admin/reference/paper-plugins.md#cyclic-plugin-loading) for more information.
+Please read the [cyclic loading guide](docs/paper/admin/reference/paper-plugins.md#cyclic-plugin-loading) for more information.
 :::
 
 #### load-before
@@ -164,4 +164,4 @@ to your ``paper-plugin.yml``. Note, other plugins will still be unable to access
 In order to better take advantage of classloading isolation, Paper plugins do **not** use the ``dependencies`` field to determine load order.
 This was done for a variety of reasons, mostly to allow better control and allow plugins to properly share classloaders.
 
-See [here](#load-order-declaration) for more information on how to declare the load order of your plugin.
+See information on [declaring load order](#load-order-declaration) for more information on how to declare the load order of your plugin.

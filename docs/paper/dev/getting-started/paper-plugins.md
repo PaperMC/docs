@@ -54,7 +54,8 @@ If a dependency is marked as ``bootstrap``, this indicates that this dependency 
 
 :::note Plugin Loading Order
 
-Note that unlike Bukkit plugins, dependencies **do not** affect the load order. 
+Note that [unlike Bukkit plugins](#load-order-logic-split), dependencies are independent of the plugin load order. 
+This means that although declaring a dependency will give you access to its classes, if you require it to be initialised before your plugin is loaded, see [this](#load-order-declaration).
 :::
 
 ### Load Order Declaration
@@ -77,7 +78,7 @@ load-before:
   - name: DependencyName
     bootstrap: false
 ```
-This means that your plugin will load **before** ``DependencyName``. 
+This means that your plugin will load **before** ``DependencyName`` is loaded. 
 
 #### load-after
 You are then able to provide a list of plugins that should be loaded after your plugin loads by using:
@@ -86,7 +87,7 @@ load-after:
   - name: DependencyName
     bootstrap: false
 ```
-This means that your plugin will load **after** ``DependencyName``.
+This means that your plugin will load **after** ``DependencyName`` is loaded.
 
 ## What is it used for?
 Paper plugins lay down the framework for some future API.

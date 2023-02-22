@@ -75,19 +75,19 @@ Please read the [cyclic loading guide](docs/paper/admin/reference/paper-plugins.
 You are able to define a list of plugins that your plugin should load before. 
 ```yml
 load-before:
-  - name: DependencyName
+  - name: PluginName
     bootstrap: false
 ```
-This means that your plugin will load **before** ``DependencyName`` is loaded. 
+This means that your plugin will load **before** ``PluginName`` is loaded. 
 
 #### load-after
-You are then able to provide a list of plugins that should be loaded after your plugin loads by using:
+You are then able to define a list of plugins that your plugin should load after.
 ```yml
 load-after:
-  - name: DependencyName
+  - name: PluginName
     bootstrap: false
 ```
-This means that your plugin will load **after** ``DependencyName`` is loaded.
+This means that your plugin will load **after** ``PluginName`` is loaded.
 
 ## What is it used for?
 Paper plugins lay down the framework for some future API.

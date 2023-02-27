@@ -448,6 +448,8 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **description**: A list of nbt paths that will be removed from the `EntityTag` tag on items which spawn entities.
   The format of these strings follows the same format used to select nbt paths in vanilla commands. If the spawning was
   directly caused by a player and the player has the `minecraft.nbt.place` permission, the filter list will be ignored.
+  The defaults are set to prevent entities from spawning or moving to a place other than the location they are placed. If
+  `Pos` wasn't included, for example, a spawn egg could place an entity at any coords from any location.
 - **note**: Some adventure maps may require this to be an empty list to function correctly, but we do 
   not recommend turning it off on a public server.
 

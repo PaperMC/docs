@@ -445,8 +445,8 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 #### filtered-entity-tag-nbt-paths
 
 - **default**: `[Pos, Motion, SleepingX, SleepingY, SleepingZ]`
-- **description**: A list of nbt paths that will be removed from the `EntityTag` tag on items which spawn entities.
-  The format of these strings follows the same format used to select nbt paths in vanilla commands. If the spawning was
+- **description**: A list of nbt tags that will be removed from the `EntityTag` tag on items which spawn entities.
+  The format of these strings follows the same format used to select nbt tags in vanilla commands. If the spawning was
   directly caused by a player and the player has the `minecraft.nbt.place` permission, the filter list will be ignored.
   The defaults are set to prevent entities from spawning or moving to a place other than the location they were placed. 
   For example, if `Pos` wasn't included, a spawn egg could place an entity at any location.

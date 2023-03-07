@@ -213,7 +213,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 
 #### disable-creeper-lingering-effect
 
-- **default**: false
+- **default**: `false`
 - **description**: Disables creepers randomly leaving behind a lingering area effect cloud.
 
 #### disable-player-crits

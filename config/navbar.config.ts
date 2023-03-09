@@ -5,7 +5,7 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
   logo: {
     src: "img/logo-marker-light.svg",
     srcDark: "img/logo-marker-dark.svg",
-    width: 130,
+    width: 100,
     height: 32,
     alt: "PaperMC Docs",
   },

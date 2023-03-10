@@ -109,6 +109,14 @@ html[data-theme="dark"] {
 
 .navbar__logo {
   margin: 0;
+  height: unset;
+  display: flex;
+}
+
+.navbar__logo img {
+  height: 42px;
+  width: auto;
+  margin-top: 2px; /* simulated line height to align stuff */
 }
 
 .menu__link--active:not(.menu__link--sublist) {

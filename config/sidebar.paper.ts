@@ -23,6 +23,7 @@ const paper: SidebarsConfig = {
             "admin/getting-started/getting-started",
             "admin/getting-started/adding-plugins",
             "admin/getting-started/migration",
+            "admin/reference/paper-plugins"
           ],
         },
         {
@@ -75,6 +76,7 @@ const paper: SidebarsConfig = {
           items: [
             "dev/getting-started/project-setup",
             "dev/getting-started/plugin-yml",
+            "dev/getting-started/paper-plugins"
           ],
         },
         {
@@ -97,6 +99,7 @@ const paper: SidebarsConfig = {
               ],
             },
             "dev/api/pdc",
+            "dev/api/custom-inventory-holder",
           ],
         },
       ],

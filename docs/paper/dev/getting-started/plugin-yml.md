@@ -2,7 +2,7 @@
 slug: /dev/plugin-yml
 ---
 
-# Paper Plugin YML
+# Bukkit Plugin YML
 
 The plugin.yml file is the main configuration file for your plugin. 
 It contains information about your plugin, such as its name, version, and description. 
@@ -73,6 +73,12 @@ The author(s) of the plugin. This can be a single author or a list of authors.
 - `authors: [PaperMC, SpigotMC, Bukkit]`
 These will be shown in the plugin info commands.
 
+### contributors
+
+The contributors to the plugin that aren't the managing author(s).
+- `contributors: [PaperMC, SpigotMC, Bukkit]`
+These will be shown in the plugin info commands.
+
 ### website
 
 The website of the plugin. This is useful for linking to a GitHub repository or a plugin page.
@@ -94,7 +100,7 @@ If this is not specified, the plugin will be loaded as a legacy plugin and a war
 
 ### load
 
-This tells the server when to load the plugin. This can be `STARTUP` or `POSTWORLD`.
+This tells the server when to load the plugin. This can be `STARTUP` or `POSTWORLD`. Will default to `POSTWORLD` if not specified.
 - `load: STARTUP`
 
 ### prefix
@@ -124,26 +130,31 @@ libraries:
 This is a list of permissions that your plugin uses. This is useful for plugins that use permissions to restrict access to certain features.
 ```yaml
 permissions :
-  - permission.node:
+    permission.node:
         description: "This is a permission node"
         default: op
         children:
-            - permission.node.child: true
-  - another.permission.node:
+            permission.node.child: true
+    another.permission.node:
         description: "This is another permission node"
         default: not op
 ```
 
 The description is the description of the permission node. This is what will be displayed in the permissions list.
-The default is the default value of the permission node. This can be `op`/`not op`, or `true`/`false`. This defaults to `op`.
+The default is the default value of the permission node. This can be `op`/`not op`, or `true`/`false`. This defaults to the value of `default-permission` if not specified. (Which defaults to `op` if not specified)
 Each permission node can have children. When set to `true` it will inherit the parent permission.
+
+### default-permission
+
+The default value that permissions that don't have a `default` specified will have. This can be `op`/`not op`, or `true`/`false`.
+- `default-permission: true`
 
 ## Commands
 
 This is a list of commands that your plugin uses. This is useful for plugins that use commands to provide features.
 ```yaml
 commands:
-  - command:
+    command:
         description: "This is a command"
         usage: "/command <arg>"
         aliases: [cmd, command]
@@ -194,3 +205,9 @@ A list of plugins that your plugin should be loaded __before__. They are specifi
 This is useful if you want to load your plugin before another plugin for the other plugin to use your plugin's API.
 
 - `loadbefore: [Vault, FactionsUUID]`
+
+### provides
+
+This can be used to tell the server that this plugin will provide the functionality of some library or other plugin (like an alias system).
+Plugins that (soft)depend on the other plugin will treat your plugin as if the other plugin exists when resolving dependencies or using `PluginManager#getPlugin(String)`.
+- `provides: [SomeOtherPlugin]`

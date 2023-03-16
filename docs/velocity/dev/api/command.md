@@ -64,19 +64,20 @@ public final class TestBrigadierCommand {
             .then(RequiredArgumentBuilder.<CommandSource, String>argument("argument", StringArgumentType.word())
                 // Here you can define the hints to be provided in case the ArgumentType does not provide them.
                 // In this example, the names of all connected players are provided
-                .suggests((ctx, builder) ->
+                .suggests((ctx, builder) -> {
                     // Here we provide the names of the players along with a tooltip,
                     // which can be used as an explanation of a specific argument or as a simple decoration
                     proxy.getAllPlayers().forEach(player -> builder.suggest(
-                        player.getUsername(),
-                        // A VelocityBrigadierMessage takes a component.
-                        // In this case, the player's name is provided with a rainbow
-                        // gradient created by MiniMessage (Library available since Velocity 3.1.2+)
-                        VelocityBrigadierMessage.tooltip(
-                            MiniMessage.miniMessage().deserialize("<rainbow>" + player.getUsername())
-                        )
-                    ))
-                )
+                            player.getUsername(),
+                            // A VelocityBrigadierMessage takes a component.
+                            // In this case, the player's name is provided with a rainbow
+                            // gradient created by MiniMessage (Library available since Velocity 3.1.2+)
+                            VelocityBrigadierMessage.tooltip(
+                                    MiniMessage.miniMessage().deserialize("<rainbow>" + player.getUsername())
+                            )
+                    ));
+                    return builder.buildFuture();
+                })
                 // Here the logic of the command "/test <some argument>" is executed
                 .executes(context -> {
                     // Here you get the argument that the CommandSource has entered.

@@ -20,7 +20,7 @@ There are a few "special" data types in the Velocity configuration.
 
 Chat messages may be provided in [MiniMessage](https://docs.advntr.dev/minimessage/format.html) format.
 
-RGB support (using the `<#rrggbb>` format) is available for Minecraft 1.16.
+RGB support is available for Minecraft 1.16 and later versions.
 
 ### Address
 

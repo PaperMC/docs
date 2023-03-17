@@ -21,7 +21,7 @@ Every method of the scheduler that takes a delay or period uses ticks as a unit 
 
 :::warning
 
-The above also applies to the asynchronous methods. If you need a scheduler with millisecond precision, create your own
+The above also applies to the asynchronous methods. If you need **an asynchronous scheduler** with millisecond precision, create your own
 [`ScheduledExecutorService`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html).
 
 :::

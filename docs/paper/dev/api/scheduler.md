@@ -30,12 +30,6 @@ Converting from human units to ticks and back is as simple as:
 `ticks = seconds * 20`  
 `seconds = ticks / 20`
 
-:::note
-
-In Java and Kotlin to not lose precision you must use `ticks / 20.0`.
-
-:::
-
 You can make your code more readable by using the
 [`TimeUnit`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/TimeUnit.html)
 enum, e.g. to convert 5 minutes to ticks and back:  

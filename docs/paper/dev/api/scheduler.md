@@ -15,7 +15,7 @@ In Minecraft's case the amount of ticks per second is 20, meaning that the game 
 With some math we can see that 1 tick is equal to 50 milliseconds. A tick taking more than 50ms to execute is the moment
 when your server starts to fall behind on its work and lag.
 
-### Converting between SI units and Minecraft ticks
+### Converting between human units and Minecraft ticks
 
 Every method of the scheduler that takes a delay or period uses ticks as a unit of time.
 

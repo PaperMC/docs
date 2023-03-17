@@ -52,3 +52,88 @@ public void onEnable() {
 	BukkitScheduler scheduler = this.getServer().getScheduler();
 }
 ```
+
+## Scheduling tasks
+
+Scheduling a task requires you to pass:
+- your plugin's instance,
+- the code to run, either with a `Runnable` or `Consumer<BukkitTask>` (the differences and usage are explained below),
+- the delay in ticks before the task should run,
+- the period in ticks between each execution of the task if you're scheduling a repeating task.
+
+### Using `Runnable`
+
+The `Runnable` interface is used for the simplest tasks that don't require a `BukkitTask` instance.
+
+You can either implement it in a separate class, e.g.:
+
+```java
+public class MyRunnableTask implements Runnable {
+
+	private final MyPlugin plugin;
+	
+	public MyRunnableTask(MyPlugin plugin) {
+		this.plugin = plugin;
+	}
+	
+	@Override
+	public void run() {
+		this.plugin.getServer().broadcast(Component.text("Hello, World!"));
+	}
+
+}
+```
+```java
+scheulder.runTaskLater(plugin, new MyRunnableTask(plugin), 20);
+```
+
+Or use a lambda expression which is great for simple and short tasks:
+
+```java
+scheduler.runTaskLater(
+	plugin, 
+	// Lambda:
+	() -> {
+		this.plugin.getServer().broadcast(Component.text("Hello, World!")
+	},
+	// End of the lambda
+	20);
+```
+
+### Using `Consumer<BukkitTask>`
+
+The Consumer interface is used for tasks that require a `BukkitTask` instance (usually in repeated tasks),
+e.g. when you want to cancel the task from inside it.
+
+You can either implement it in a separate class similarly to the `Runnable`, e.g.:
+
+```java
+public class MyConsumerTask implements Consumer<BukkitTask> {
+	
+	private final LivingEntity entity;
+	
+	public MyConsumerTask(LivingEntity entity) {
+		this.entity = entity;
+	}
+	
+	@Override
+	public void accept(BukkitTask task) {
+		if(this.entity.isDead()) task.cancel(); // The entity died, there's no point
+		                                        // in running the code anymore.
+		this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+	}
+	
+}
+```
+```java
+scheduler.runTaskTimer(plugin, new MyConsumerTask(someEntity), 0, 20);
+```
+
+Or use a lambda expression which again is much cleaner for short and simple tasks:
+
+```java
+scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
+	if(this.entity.isDead()) task.cancel();
+	this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+} /* End of the lambda */, 0, 20);
+```

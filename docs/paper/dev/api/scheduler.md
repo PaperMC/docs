@@ -78,7 +78,7 @@ public class MyRunnableTask implements Runnable {
 }
 ```
 ```java
-scheulder.runTaskLater(plugin, new MyRunnableTask(plugin), 20);
+scheduler.runTaskLater(plugin, new MyRunnableTask(plugin), 20);
 ```
 
 Or use a lambda expression which is great for simple and short tasks:

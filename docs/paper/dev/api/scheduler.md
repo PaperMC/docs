@@ -131,3 +131,73 @@ scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
 	this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
 } /* End of the lambda */, 0, 20);
 ```
+
+## Tasks on the main thread
+
+### A task to run later once
+
+This task will run a single time after the delay specified in ticks, in this case 1 second.
+
+```java
+scheduler.runTaskLater(plugin, () -> {
+	server.broadcast(Component.text("Hello, World!"));
+}, 20);
+```
+
+### A task to run later repeatedly
+
+This task will run repeatedly, first time after the delay specified in ticks - in this case 1 second -
+and then every period specified in ticks - in this case 5 seconds.
+
+```java
+scheduler.runTaskTimer(plugin, () -> {
+	server.broadcast(Component.text("Hello, World!"));
+}, 20, 5 * 20);
+```
+
+### A repeating task to be canceled later
+
+This task will run repeatedly, first time after 10 seconds, and then every 5 seconds. After 10 minutes
+the task will be canceled entirely.
+
+```java
+BukkitTask task = scheduler.runTaskTimer(plugin, () -> {
+	server.broadcast(Component.text("Hello, World!"));
+}, 10 * 20, 5 * 20);
+
+scheduler.runTaskLater(plugin, () -> task.cancel(), TimeUnit.MINUTES.toSeconds(10) * 20);
+```
+
+### A repeating task with a dynamic period
+
+This task will run repeatedly, first time after 10 seconds, and then every 20-100 ticks (1-5 seconds) chosen randomly.
+
+```java
+public class MyDynamicTask implements Runnable {
+	
+	private final Random random = new Random();
+	private final MyPlugin plugin;
+	
+	public MyDynamicTask(MyPlugin plugin) {
+		this.plugin = plugin;
+	}
+	
+	@Override
+	public void run() {
+		this.plugin.getServer().broadcast(Component.text("Hello, World!"));
+		this.plugin.getServer().getScheduler().runTaskLater(
+			this.plugin,
+			this,
+			this.random.nextInt(20, 101)
+		);
+	}
+	
+}
+```
+
+Note that we schedule the task again in the `run` method, when scheduling initially we will also
+use the `runTaskLater` method and not `runTaskTimer`.
+
+```java
+scheduler.runTaskLater(plugin, new MyDynamicTask(plugin), 10 * 20);
+```

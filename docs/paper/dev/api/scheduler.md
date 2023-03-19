@@ -184,20 +184,34 @@ public class MyDynamicTask implements Runnable {
 	
 	@Override
 	public void run() {
-		this.plugin.getServer().broadcast(Component.text("Hello, World!"));
-		this.plugin.getServer().getScheduler().runTaskLater(
-			this.plugin,
-			this,
-			this.random.nextInt(20, 101)
-		);
+		try {
+			this.plugin.getServer().broadcast(Component.text("Hello, World!"));
+		} finally {
+			this.plugin.getServer().getScheduler().runTaskLater(
+				this.plugin,
+				this,
+				this.random.nextInt(20, 101)
+			);
+		}
 	}
 	
 }
 ```
 
-Note that we schedule the task again in the `run` method, when scheduling initially we will also
-use the `runTaskLater` method and not `runTaskTimer`.
-
 ```java
 scheduler.runTaskLater(plugin, new MyDynamicTask(plugin), 10 * 20);
 ```
+
+:::note
+
+We schedule the task again in the `run` method, that's why to schedule the task initially
+we use the `runTaskLater` method too and not `runTaskTimer`.
+
+:::
+
+:::info
+
+We use a try-finally block to ensure the task is scheduled again. Otherwise if the methods before scheduling
+the tasks would throw an exception the task would never be scheduled again.
+
+:::

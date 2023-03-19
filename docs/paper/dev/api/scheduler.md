@@ -96,7 +96,7 @@ scheduler.runTaskLater(
 
 ### Using `Consumer<BukkitTask>`
 
-The Consumer interface is used for tasks that require a `BukkitTask` instance (usually in repeated tasks),
+The `Consumer` interface is used for tasks that require a `BukkitTask` instance (usually in repeated tasks),
 e.g. when you want to cancel the task from inside it.
 
 You can either implement it in a separate class similarly to the `Runnable`, e.g.:

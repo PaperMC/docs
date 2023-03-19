@@ -2,7 +2,7 @@
 slug: /dev/scheduler
 ---
 
-# Scheduler
+# Task Scheduler
 
 The `BukkitScheduler` can be used to schedule your code to be run later or run it repeatedly.
 

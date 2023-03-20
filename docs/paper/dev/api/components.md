@@ -67,7 +67,7 @@ final Component component = text()
     .build();
 ```
 
-:::info
+:::info In-Depth Documentation
 
 For complete documentation on the Adventure Component API Paper and Velocity use, please look at the
 [Adventure documentation](https://docs.advntr.dev).
@@ -90,9 +90,15 @@ final Component component = MiniMessage.miniMessage().deserialize(
 
 We recommend using this format for user-facing input such as commands or configuration values.
 
-:::info
+:::info In-Depth Documentation
 
 MiniMessage is a part of Adventure, and you can find its documentation on [Adventure's documentation](https://docs.advntr.dev/minimessage/index.html).
+
+:::
+
+:::tip
+
+MiniMessage as a [WebViewer](https://webui.advntr.dev/) which is useful for constructing more complicated components and seeing the results in real time
 
 :::
 
@@ -122,10 +128,15 @@ of this format.
 }
 ```
 
-:::info
+:::info In-Depth Documentation
 
-The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). There are
-online tools to make generating this format much easier like [JSON Text Generator](https://minecraft.tools/en/json_text.php).
+The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). 
+
+:::
+
+:::tip
+
+There are online tools to make generating this format much easier like [JSON Text Generator](https://minecraft.tools/en/json_text.php).
 
 :::
 

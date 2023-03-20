@@ -30,7 +30,9 @@ All these component types support more style options like any RGB color, interac
 (click and hover). The other component types and these style options have poor or missing
 representations in the legacy string format.
 
-## Uses
+## Usage
+
+### Components
 
 Components are used all over the API, almost everywhere text is displayed, like chat,
 boss bars, action bars, item names and lore, player list text, and more. As you look
@@ -39,7 +41,18 @@ are now deprecated in favor of methods which take a `Component`. These deprecati
 because of [Mojang's planned dropping](https://bugs.mojang.com/browse/MC-190605?focusedId=993040&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-993040)
 of support for the legacy formatting with `§`.
 
-## MiniMessage
+```java
+final Component component = Component.text("Hello world!", NamedTextColor.RED);
+
+// the adventure component library is built with static imports in mind to make code more consise.
+final Component component = text()
+    .content("Hello")
+    .color(color(0x13f832))
+    .append(text(" world!, GREEN))
+    .build();
+```
+
+### MiniMessage
 
 Paper includes the MiniMessage library which is a string representation of components. If you prefer working with
 strings rather than objects, MiniMessage is vastly superior to the legacy string format. It can utilize the tree
@@ -51,7 +64,7 @@ MiniMessage is a part of adventure, and you can find its documentation on [adven
 
 :::
 
-## JSON Format
+### JSON Format
 
 Components can be serialized and deserialized from a standard JSON format. This format is used
 in vanilla in various commands which accept component arguments like `/tellraw`. Below is a simple example
@@ -59,7 +72,7 @@ of this format.
 
 ```json
 {
-  "text": "This is the parent component; its style is applied to all children",
+  "text": "This is the parent component; its style is applied to all children. ",
   "color": "#438df2",
   "bold": true,
   "extra": [

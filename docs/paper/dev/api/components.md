@@ -10,7 +10,7 @@ This documentation page applies to both the Paper and Velocity projects
 
 :::
 
-Since Minecraft 1.17, the game has utilized components to represent text to be displayed
+Since Minecraft 1.7, the game has utilized components to represent text to be displayed
 by clients. Components offer a number of benefits over plain text strings which are enumerated below.
 Paper and Velocity natively implements the Adventure API to add component support wherever possible.
 
@@ -52,13 +52,17 @@ builders for all the types. These objects are immutable so when constructing mor
 recommended to use builders to avoid creating new Component instances with every change.
 
 ```java
-final Component component = Component.text("Hello world!", NamedTextColor.RED);
+// This is a sub-optimimal construction of the component as each change creates a new component
+final Component component = Component.text("Hello")
+    .color(TextColor.color(0x13f832))
+    .append(Component.text(" world!", NamedTextColor.GREEN));
 
-// the adventure component library is built with static imports in mind to make code more consise.
+// This is an optimal use of the builder to create the same component
+// Also note that adventure Components are designed for use with static method imports 
+// to make code less verbose
 final Component component = text()
-    .content("Hello")
-    .color(color(0x13f832))
-    .append(text(" world!, GREEN))
+    .content("Hello").color(color(0x13f832))
+    .append(text(" world!", GREEN))
     .build();
 ```
 

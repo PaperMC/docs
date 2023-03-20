@@ -19,7 +19,6 @@ Paper and Velocity natively implements the Adventure API to add component suppor
 Previously, text was a linear structure with the only formatting options being
 confusing symbols like `§c` and `§k` to control basic colors and styles of text.
 Components are a tree-like structure which inherit style and colors from their parents.
-The docs mentioned above contain examples of this. 
 
 Components have several types which do different things than just display raw text, like
 translating text to the client's language based on a key, or showing a client-specific keybind
@@ -52,14 +51,16 @@ builders for all the types. These objects are immutable so when constructing mor
 recommended to use builders to avoid creating new Component instances with every change.
 
 ```java
-// This is a sub-optimimal construction of the component as each change creates a new component
+// This is a sub-optimimal construction of the
+// component as each change creates a new component
 final Component component = Component.text("Hello")
     .color(TextColor.color(0x13f832))
     .append(Component.text(" world!", NamedTextColor.GREEN));
 
-// This is an optimal use of the builder to create the same component
-// Also note that adventure Components are designed for use with static method imports 
-// to make code less verbose
+/* This is an optimal use of the builder to create
+   the same component. Also note that Adventure
+   Components are designed for use with static method imports 
+   to make code less verbose */
 final Component component = text()
     .content("Hello").color(color(0x13f832))
     .append(text(" world!", GREEN))
@@ -68,8 +69,8 @@ final Component component = text()
 
 :::info
 
-For complete documentation on the adventure Component API Paper and Velocity use, please look at the
-[adventure documentation](https://docs.advntr.dev).
+For complete documentation on the Adventure Component API Paper and Velocity use, please look at the
+[Adventure documentation](https://docs.advntr.dev).
 
 :::
 
@@ -80,17 +81,18 @@ strings rather than objects, MiniMessage is vastly superior to the legacy string
 structure for style inheritance and can represent the more complex component types while legacy cannot.
 
 ```java
-final Component component = MiniMessage.miniMessage().deserialize("""
-    <#438df2><b>This is the parent component; its style is applied to all children.
-    <u><!b>This is the first child, which is rendered after the parent</!b></u><key:key.inventory></b></#438df2>
-    """);
+final Component component = MiniMessage.miniMessage().deserialize(
+    "<#438df2><b>This is the parent component; its style is " +
+    "applied to all children.\n<u><!b>This is the first child, " +
+    "which is rendered after the parent</!b></u><key:key.inventory></b></#438df2>"
+);
 ```
 
 We recommend using this format for user-facing input such as commands or configuration values.
 
 :::info
 
-MiniMessage is a part of adventure, and you can find its documentation on [adventure's documentation](https://docs.advntr.dev/minimessage/index.html).
+MiniMessage is a part of Adventure, and you can find its documentation on [Adventure's documentation](https://docs.advntr.dev/minimessage/index.html).
 
 :::
 
@@ -109,50 +111,70 @@ of this format.
     {
       "text": "This is this first child, which is rendered after the parent",
       "underlined": true,
-      "bold": false // This overrides the parent's "bold" value just for this component
+      // This overrides the parent's "bold" value just for this component
+      "bold": false
     },
     {
-      "keybind": "key.inventory" // This is a keybind component which will display the client's keybind for that action
+      // This is a keybind component which will display the client's keybind for that action
+      "keybind": "key.inventory"
     }
   ]
 }
 ```
 
 :::info
-The JSON Format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). There are
+
+The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). There are
 online tools to make generating this format much easier like [JSON Text Generator](https://minecraft.tools/en/json_text.php).
+
 :::
 
 ## Serializers
 
-Paper and Velocity come bundled with 4 different serializers for converting between Components and other forms
+Paper and Velocity come bundled with different serializers for converting between Components and other forms
 of serialized text.
 
-### GsonComponentSerializer
+### [GsonComponentSerializer](https://jd.advntr.dev/text-serializer-gson/latest)
 
 Converts between `Component` and Gson's `JsonElement`. This conversion is lossless and is the preferred form of serialization
 for components that do not have to be edited by users regularly.
 
-### MiniMessage
+### [MiniMessage](https://jd.advntr.dev/text-minimessage/latest)
 
 Converts between `Component` and a MiniMessage-formatted string. This conversion is lossless and is the preferred form of
 serialization for components that have to be edited by users. There is also extensive customization you can add to the
 serializer which is [documented here](https://docs.advntr.dev/minimessage/api.html#getting-started).
 
-### PlainTextComponentSerializer
+### [PlainTextComponentSerializer](https://jd.advntr.dev/text-serializer-plain/latest)
 
 Serializes a `Component` into a plain text string. This is very lossy as all style information as well as most other
 types of components will lose information. There may be special handling for `TranslatableComponent`s to be serialized
 into a default language but generally this shouldn't be used except in certain circumstances like logging to a text file.
 
 
-### LegacyComponentSerializer
+### [LegacyComponentSerializer](https://jd.advntr.dev/text-serializer-legacy/latest)
 
-:::danger
+:::caution
 
-This is not recommended for use at all as the legacy format may be removed in the future.
+This is not recommended for use as the legacy format may be removed in the future.
 
 :::
 
 Converts between `Component` and the legacy string format. This conversion is very lossy as component types and events
 do not have a legacy string representation.
+
+A more useful use case is converting legacy text to MiniMessage format in a migration process.
+```java
+final String legacyString = ChatColor.RED + "This is a legacy " + ChatColor.GOLD + "string";
+
+// this just runs the legacy string through two serializers to 
+final String miniMessageString = MiniMessage.miniMessage().serialize(
+    LegacyComponentSerializer.legacySection().deserialize(legacyString)
+);
+```
+
+:::note
+
+There are 2 main types of legacy serializers, one works with `§` symbols and the other is for
+`&` symbols. They have their own instances available with `LegacyComponentSerializer#legacySection()`
+and `LegacyComponentSerializer#legacyAmpersand()`

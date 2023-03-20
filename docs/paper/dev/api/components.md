@@ -38,3 +38,44 @@ through the API, you will see quite a few methods which take a `String` paramete
 are now deprecated in favor of methods which take a `Component`. These deprecations exist
 because of [Mojang's planned dropping](https://bugs.mojang.com/browse/MC-190605?focusedId=993040&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-993040)
 of support for the legacy formatting with `§`.
+
+## MiniMessage
+
+Paper includes the MiniMessage library which is a string representation of components. If you prefer working with
+strings rather than objects, MiniMessage is vastly superior to the legacy string format. It can utilize the tree
+structure for style inheritance and can represent the more complex component types while legacy cannot.
+
+:::info
+
+MiniMessage is a part of adventure, and you can find its documentation on [adventure's documentation](https://docs.advntr.dev/minimessage/index.html).
+
+:::
+
+## JSON Format
+
+Components can be serialized and deserialized from a standard JSON format. This format is used
+in vanilla in various commands which accept component arguments like `/tellraw`. Below is a simple example
+of this format.
+
+```json
+{
+  "text": "This is the parent component; its style is applied to all children",
+  "color": "#438df2",
+  "bold": true,
+  "extra": [
+    {
+      "text": "This is first child which is rendered after the parent",
+      "underlined": true,
+      "bold": false // This overrides the parent's "bold" value just for this component
+    },
+    {
+      "keybind": "key.inventory" // This is a keybind component which will display the client's keybind for that action
+    }
+  ]
+}
+```
+
+:::info
+The JSON Format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). There are
+online tools to make generating this format much easier like [JSON Text Generator](https://minecraft.tools/en/json_text.php).
+:::

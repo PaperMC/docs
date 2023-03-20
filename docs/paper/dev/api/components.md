@@ -45,7 +45,7 @@ signal that a better alternative in Components is available and should be migrat
 
 :::
 
-### Components
+## Components
 
 Components can be interacted with as objects. There are different interfaces for each type along with
 builders for all the types. These objects are immutable so when constructing more complex components, it's
@@ -73,7 +73,7 @@ For complete documentation on the adventure Component API Paper and Velocity use
 
 :::
 
-### MiniMessage
+## MiniMessage
 
 Paper and Velocity include the MiniMessage library which is a string representation of components. If you prefer working with
 strings rather than objects, MiniMessage is vastly superior to the legacy string format. It can utilize the tree
@@ -82,7 +82,7 @@ structure for style inheritance and can represent the more complex component typ
 ```java
 final Component component = MiniMessage.miniMessage().deserialize("""
     <#438df2><b>This is the parent component; its style is applied to all children.
-    <u><!b>This is the first child which is rendered after the parent</!b></u><key:key.inventory></b></#438df2>
+    <u><!b>This is the first child, which is rendered after the parent</!b></u><key:key.inventory></b></#438df2>
     """);
 ```
 
@@ -94,7 +94,7 @@ MiniMessage is a part of adventure, and you can find its documentation on [adven
 
 :::
 
-### JSON Format
+## JSON Format
 
 Components can be serialized and deserialized from a standard JSON format. This format is used
 in vanilla in various commands which accept component arguments like `/tellraw`. Below is a simple example
@@ -107,7 +107,7 @@ of this format.
   "bold": true,
   "extra": [
     {
-      "text": "This is first child which is rendered after the parent",
+      "text": "This is this first child, which is rendered after the parent",
       "underlined": true,
       "bold": false // This overrides the parent's "bold" value just for this component
     },
@@ -122,3 +122,37 @@ of this format.
 The JSON Format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). There are
 online tools to make generating this format much easier like [JSON Text Generator](https://minecraft.tools/en/json_text.php).
 :::
+
+## Serializers
+
+Paper and Velocity come bundled with 4 different serializers for converting between Components and other forms
+of serialized text.
+
+### GsonComponentSerializer
+
+Converts between `Component` and Gson's `JsonElement`. This conversion is lossless and is the preferred form of serialization
+for components that do not have to be edited by users regularly.
+
+### MiniMessage
+
+Converts between `Component` and a MiniMessage-formatted string. This conversion is lossless and is the preferred form of
+serialization for components that have to be edited by users. There is also extensive customization you can add to the
+serializer which is [documented here](https://docs.advntr.dev/minimessage/api.html#getting-started).
+
+### PlainTextComponentSerializer
+
+Serializes a `Component` into a plain text string. This is very lossy as all style information as well as most other
+types of components will lose information. There may be special handling for `TranslatableComponent`s to be serialized
+into a default language but generally this shouldn't be used except in certain circumstances like logging to a text file.
+
+
+### LegacyComponentSerializer
+
+:::danger
+
+This is not recommended for use at all as the legacy format may be removed in the future.
+
+:::
+
+Converts between `Component` and the legacy string format. This conversion is very lossy as component types and events
+do not have a legacy string representation.

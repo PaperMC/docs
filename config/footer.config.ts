@@ -25,7 +25,7 @@ const footer: Footer = {
       items: [
         {
           label: "Javadoc",
-          href: "https://papermc.io/javadocs",
+          href: "https://jd.papermc.io",
         },
         {
           label: "Docs",

@@ -71,7 +71,10 @@ The recommended configuration for both `engine-mode: 1` and `engine-mode: 2` is 
 :::tip Spacing
 
 YAML cares about whitespace! The example configuration below is already formatted correctly. Ensure
-formatting remains unchanged by using the "copy" button in the top right of each example.
+formatting and indentation remains unchanged by using the "copy" button in the top right of each
+example. Especially ensure that no tabulators are accidentally inserted. Check your editor's options
+for using spaces instead of tabulators for indentation. If your configuration file already contains
+other important changes, it is recommended to make a backup before editing it.
 
 :::
 

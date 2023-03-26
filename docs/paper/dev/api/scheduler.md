@@ -19,13 +19,6 @@ when your server starts to fall behind on its work and lag.
 
 Every method of the scheduler that takes a delay or period uses ticks as a unit of time.
 
-:::warning
-
-The above also applies to the asynchronous methods. If you need **an asynchronous scheduler** with millisecond precision, create your own
-[`ScheduledExecutorService`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html).
-
-:::
-
 Converting from human units to ticks and back is as simple as:  
 `ticks = seconds * 20`  
 `seconds = ticks / 20`
@@ -51,11 +44,47 @@ public void onEnable() {
 
 Scheduling a task requires you to pass:
 - your plugin's instance,
-- the code to run, either with a `Runnable` or `Consumer<BukkitTask>` (the differences and usage are explained below),
+- the code to run, either with a `Runnable` or `Consumer<BukkitTask>`,
 - the delay in ticks before the task should run,
 - the period in ticks between each execution of the task if you're scheduling a repeating task.
 
-### Using `Runnable`
+### Difference between synchronous and asynchronous tasks
+
+#### Synchronous tasks (on the main thread)
+
+Synchronous tasks are tasks that are executed on the main server thread. This is the same
+thread that handles all game logic.
+
+All tasks scheduled on the main thread will affect the server's performance. If your task
+is making web requests, accessing files, databases or otherwise time-consuming operations you should consider using 
+an asynchronous task.
+
+#### Asynchronous tasks (off the main thread)
+
+Asynchronous tasks are tasks that are executed on separate threads, therefore will not affect
+your server's performance.
+
+:::warning
+
+**You cannot safely access the Bukkit API from within asynchronous tasks**. If a method is not explicitly marked
+as thread-safe or isn't obviously designed to be used asynchronously **you will eventually encounter errors**.
+
+:::
+
+:::info
+
+While the tasks are executed on separate threads, they are still started from the main thread
+and will be affected if the server is lagging, an example would be 20 ticks not being exactly 1 second.
+
+If you need a scheduler that runs independently of the server consider using your own
+[`ScheduledExecutorService`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html).
+You can follow [this guide](https://www.baeldung.com/java-executor-service-tutorial#ScheduledExecutorService) to learn how to use it.
+
+:::
+
+### Difference between `Runnable` and `Consumer<BukkitTask>`
+
+#### Using `Runnable`
 
 The `Runnable` interface is used for the simplest tasks that don't require a `BukkitTask` instance.
 
@@ -94,7 +123,7 @@ scheduler.runTaskLater(
 	20);
 ```
 
-### Using `Consumer<BukkitTask>`
+#### Using `Consumer<BukkitTask>`
 
 The `Consumer` interface is used for tasks that require a `BukkitTask` instance (usually in repeated tasks),
 e.g. when you want to cancel the task from inside it.
@@ -132,7 +161,7 @@ scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
 } /* End of the lambda */, 0, 20);
 ```
 
-## Tasks on the main thread
+## Examples of tasks on the main thread
 
 ### A task to run later once
 

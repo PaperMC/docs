@@ -46,7 +46,7 @@ Scheduling a task requires you to pass:
 - your plugin's instance,
 - the code to run, either with a `Runnable` or `Consumer<BukkitTask>`,
 - the delay in ticks before the task should run,
-- the period in ticks between each execution of the task if you're scheduling a repeating task.
+- if you're scheduling a repeating task - the period in ticks between each execution of the task.
 
 ### Difference between synchronous and asynchronous tasks
 

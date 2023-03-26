@@ -240,7 +240,7 @@ we use the `runTaskLater` method too and not `runTaskTimer`.
 
 :::info
 
-We use a try-finally block to ensure the task is scheduled again. Otherwise if the methods before scheduling
-the task would throw an exception the task would never be scheduled again.
+We use a try-finally block to ensure the task is scheduled again, without it if an exception is
+thrown before scheduling the task, it will never run again.
 
 :::

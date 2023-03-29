@@ -104,6 +104,23 @@ const config: Config = {
       "content-docs",
       {
         ...docsCommon,
+        id: "folia",
+        path: "docs/folia",
+        routeBasePath: "folia",
+        sidebarPath: require.resolve("./config/sidebar.folia"),
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.19",
+            path: "",
+          },
+        },
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
         id: "velocity",
         path: "docs/velocity",
         routeBasePath: "velocity",

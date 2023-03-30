@@ -11,6 +11,12 @@ const projects: Project[] = [
     link: "/paper",
   },
   {
+    title: "Folia",
+    description: "A fork of Paper which adds regionized multithreading to the dedicated server.",
+    repo: "PaperMC/Folia",
+    link: "/folia",
+  },
+  {
     title: "Velocity",
     description: "The modern, next-generation Minecraft server proxy.",
     repo: "PaperMC/Velocity",

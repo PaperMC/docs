@@ -31,6 +31,20 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
     },
     {
       type: "dropdown",
+      label: "Folia",
+      to: "/folia",
+      position: "left",
+      activeBaseRegex: "(\\/folia)(.+)?",
+      items: [
+        {
+          label: "Administration",
+          to: "/folia/admin",
+          activeBaseRegex: "(\\/folia/)(?!dev)(.+)?",
+        },
+      ],
+    },
+    {
+      type: "dropdown",
       label: "Velocity",
       to: "/velocity",
       position: "left",

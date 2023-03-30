@@ -25,7 +25,7 @@ IDEA is recommended.
 - Open your IDE
 - Click `Create New Project` or the equivalent
 - Select either `Gradle` or `Maven`
-- Make sure your **Project JDK** is Java 8 or later
+- Make sure your **Project JDK** is Java 11 or later
 - **Finish** the dialog and open the project.
 
 Now we have created our project, we need configure our build system.
@@ -46,7 +46,7 @@ Now we have created our project, we need configure our build system.
 
 ### Javadocs
 
-Javadocs are available at [jd.velocitypowered.com/3.0.0](https://jd.velocitypowered.com/3.0.0).
+Javadocs are available at [jd.papermc.io/velocity/3.0.0](https://jd.papermc.io/velocity/3.0.0).
 
 ## Set up your build system
 

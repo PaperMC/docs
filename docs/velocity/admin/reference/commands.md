@@ -30,16 +30,6 @@ applied.
 
 ### `/velocity dump`
 
-:::caution
-
-This command will send some basic information to a web service maintained by the Velocity project
-(`dump.velocitypowered.com`). While we anonymize potentially sensitive details in the proxy such as
-external IP addresses and all dumps expire after 3 days, we do not take responsibility for any
-potential misuse of the data provided. Use this command with caution and after you have considered
-the privacy and security concerns.
-
-:::
-
 If the user has the `velocity.command.plugins` permission, they can use this command to get an
 anonymized dump of details on the proxy. This can be sent to the Velocity Discord to help us provide
 support.

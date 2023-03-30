@@ -13,7 +13,8 @@ const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io
 
 const docsCommon: Options = {
   breadcrumbs: true,
-  editUrl: ({ versionDocsDirPath, docPath }) => `https://github.com/PaperMC/docs/blob/main/${versionDocsDirPath}/${docPath}`,
+  editUrl: ({ versionDocsDirPath, docPath }) =>
+    `https://github.com/PaperMC/docs/blob/main/${versionDocsDirPath}/${docPath}`,
   editCurrentVersion: true,
   remarkPlugins: [remarkA11yEmoji],
   showLastUpdateAuthor: true,
@@ -34,7 +35,7 @@ const config: Config = {
   noIndex: preview,
   baseUrlIssueBanner: false,
   clientModules: [
-    require.resolve("../src/css/custom.css"),
+    require.resolve("./src/css/custom.css"),
     require.resolve("@fontsource/jetbrains-mono/index.css"),
   ],
 
@@ -51,22 +52,22 @@ const config: Config = {
   headTags: [
     {
       tagName: "script",
-        attributes: {
-          type: "application/ld+json",
-        },
-        innerHTML: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          url,
-          potentialAction: {
-            "@type": "SearchAction",
-            target: {
-              "@type": "EntryPoint",
-              urlTemplate: `${url}/search?q={search_term_string}`,
-            },
-            "query-input": "required name=search_term_string",
+      attributes: {
+        type: "application/ld+json",
+      },
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        url,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${url}/search?q={search_term_string}`,
           },
-        }),
+          "query-input": "required name=search_term_string",
+        },
+      }),
     },
   ],
 
@@ -162,7 +163,7 @@ const config: Config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
-    image: "img/og-image.png",
+    image: "img/paper.png",
     metadata: [
       {
         name: "twitter:card",

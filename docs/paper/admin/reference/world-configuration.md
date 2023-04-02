@@ -922,9 +922,9 @@ updates or even permanently if issues are found.
 
 ### allow-non-player-entities-on-scoreboards
 
-- **default**: `false`
-- **description**: Instructs the server to treat non-player entities as if they are never on a
-  scoreboard when calculating collisions. Enabling this may increase the amount of time the server
+- **default**: `true`
+- **description**: Instructs the server to always treat non-player entities as if they are never on a
+  team. Disabling this may slightly decrease the amount of time the server
   spends calculating entity collisions.
 
 ### use-vanilla-world-scoreboard-name-coloring

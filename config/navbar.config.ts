@@ -41,6 +41,11 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
           to: "/folia/admin",
           activeBaseRegex: "(\\/folia/)(?!dev)(.+)?",
         },
+        {
+          label: "Development",
+          to: "/folia/dev",
+          activeBaseRegex: "\\/folia\\/dev.*",
+        },
       ],
     },
     {

@@ -198,6 +198,14 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **description**: Disable to prevent armor stands from ticking. Can improve performance with many
   armor stands.
 
+### markers
+
+#### tick
+
+- **default**: `true`
+- **description**: Disable to prevent markers from ticking. This may affect how they behave as passengers
+  of other entities.
+
 ### behaviour
 
 #### baby-zombie-movement-modifier

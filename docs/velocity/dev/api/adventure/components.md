@@ -1,0 +1,1 @@
+../../../../paper/dev/api/adventure/components.md

@@ -98,7 +98,7 @@ MiniMessage is a part of Adventure, and you can find its documentation on [Adven
 
 :::tip
 
-MiniMessage as a [WebViewer](https://webui.advntr.dev/) which is useful for constructing more complicated components and seeing the results in real time
+MiniMessage has a [WebViewer](https://webui.advntr.dev/) which is useful for constructing more complicated components and seeing the results in real time
 
 :::
 
@@ -147,7 +147,8 @@ of serialized text.
 
 ### [GsonComponentSerializer](https://jd.advntr.dev/text-serializer-gson/latest)
 
-Converts between `Component` and Gson's `JsonElement`. This conversion is lossless and is the preferred form of serialization
+Converts between `Component` and JSON-formatted strings with convenience methods to directly deal with gson `JsonElement`.
+This conversion is lossless and is the preferred form of serialization
 for components that do not have to be edited by users regularly.
 
 ### [MiniMessage](https://jd.advntr.dev/text-minimessage/latest)

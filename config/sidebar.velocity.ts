@@ -93,7 +93,19 @@ const velocity: SidebarsConfig = {
             type: "generated-index",
             slug: "/cat/dev/api",
           },
-          items: ["dev/api/components", "dev/api/event", "dev/api/command", "dev/api/scheduler"],
+          items: [
+            {
+              type: "category",
+              label: "Adventure",
+              collapsed: true,
+              items: [
+                "dev/api/adventure/components",
+              ]
+            },
+            "dev/api/event",
+            "dev/api/command",
+            "dev/api/scheduler"
+          ],
         },
       ],
     },

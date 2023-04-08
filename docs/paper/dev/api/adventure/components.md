@@ -187,6 +187,6 @@ final String miniMessageString = MiniMessage.miniMessage().serialize(
 
 :::note
 
-There are 2 main types of legacy serializers, one works with `§` symbols and the other is for
+There are 2 built in legacy serializers, one dealing with `§` symbols and the other for
 `&` symbols. They have their own instances available with `LegacyComponentSerializer#legacySection()`
 and `LegacyComponentSerializer#legacyAmpersand()`

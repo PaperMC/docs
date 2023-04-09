@@ -46,3 +46,25 @@ that you cannot configure or even predict.
 Additionally, the above is all a rough guess based on player count, but
 it is very likely that the thread allocation will not be ideal, and you 
 will need to tune it based on usage of the threads that you end up seeing.
+
+## What commands does Folia disable?
+Folia currently disables a handful of commands. These are them:
+- Bossbar commands
+- Clone commands
+- Data commands
+- Datapack
+- Debug
+- Function
+- Item commands
+- Loot
+- Reload
+- Ride
+- Schedule
+- Scoreboard
+- Tag
+- Team
+- TeamMsg
+- Trigger
+- WorldBorder
+- Perf
+- SaveAll

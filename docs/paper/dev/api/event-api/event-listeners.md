@@ -33,7 +33,7 @@ Listeners take in a single parameter, which is the event that is being listened 
 public class ExampleListener implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onAnvilDamagedEvent(AnvilDamagedEvent event) {
         // ...
     }
 }
@@ -74,7 +74,7 @@ You can also specify the priority of the event.
 public class ExampleListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onAnvilDamagedEvent(AnvilDamagedEvent event) {
         // ...
     }
 }
@@ -106,12 +106,11 @@ Some events can be cancelled, preventing the given action from being completed. 
 public class ExampleListener implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onAnvilDamagedEvent(AnvilDamagedEvent event) {
         event.setCancelled(true);
     }
 }
 ```
-
 :::warning
 
 It is important to consider that another plugin could have cancelled or changed the event before your plugin is called.
@@ -119,7 +118,7 @@ Always check the event before doing anything with it.
 
 :::
 
-The above example will cancel the event, meaning that the player will not be able to join the server.
+The above example will cancel the event, meaning that the Anvil will not cause damage.
 Once an event is cancelled, it will continue to call any other listeners for that event unless they add 
 `ignoreCancelled = true` to the `@EventHandler` annotation to ignore cancelled events.
 
@@ -127,8 +126,20 @@ Once an event is cancelled, it will continue to call any other listeners for tha
 public class ExampleListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onAnvilDamagedEvent(AnvilDamagedEvent event) {
         // ...
     }
 }
 ```
+## Set event result
+
+The results of some events can be modified, To change some behaviors. These events have method 'setResult' and internal enumeration class `Result`.
+    
+```java title="ExampleListener.java"
+public class ExampleListener implements Listener {
+
+    @EventHandler
+    public void onPlayerJoin(PlayerLoginEvent event) {
+        e.setResult(PlayerLoginEvent.Result.KICK_OTHER);//This means that the player cannot access the server for "other reasons"
+    }
+}

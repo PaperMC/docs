@@ -1,5 +1,6 @@
 ---
 slug: /reference/world-configuration
+toc_max_heading_level: 5
 keywords:
   - paper-world-defaults.yml
   - paper-world.yml

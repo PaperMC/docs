@@ -1,5 +1,6 @@
 ---
 slug: /reference/global-configuration
+toc_max_heading_level: 5
 keywords:
   - paper-global.yml
   - paper.yml

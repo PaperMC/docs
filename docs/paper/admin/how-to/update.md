@@ -25,7 +25,7 @@ functioning backups is essential to every server, big or small.
 ## Step 2. Update Plugins
 
 Just like it's important to update Paper, it's equally important to keep plugins up to date. You
-never know what plugin authors may be working on, be it bugfixes or new features.
+never know what plugin authors may be working on, be it bug fixes or new features.
 
 A little known feature of Paper servers is the `update` folder. Here's how you use it.
 

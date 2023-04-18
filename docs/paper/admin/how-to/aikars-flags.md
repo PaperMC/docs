@@ -7,7 +7,7 @@ slug: /aikars-flags
 ## Recommended JVM Startup Flags
 
 Use these flags exactly, only changing Xmx and Xms. These flags work and scale accordingly to any
-size of memory, even 500MB but modern Minecraft versions will not do well with such low memory.
+size of memory, even 500 MB but modern Minecraft versions will not do well with such low memory.
 
 ```bash
 java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper.jar --nogui
@@ -26,19 +26,19 @@ give you 9500M instead. Some hosts will! Just ask._
 
 ## Recommended Memory
 
-**We recommend using at least 6-10GB**, no matter how few players! If you can't afford 10GB of
+**We recommend using at least 6-10 GB**, no matter how few players! If you can't afford 10 GB of
 memory, give as much as you can, but ensure you leave the operating system some memory too. G1GC
 operates better with more memory.
 
 However, more memory does not mean better performance above a certain point. Eventually you will hit
-a point of diminishing returns. Going out and getting 32GB of RAM for a server will only waste your
+a point of diminishing returns. Going out and getting 32 GB of RAM for a server will only waste your
 money with minimal returns.
 
-If you are running with 12GB or less memory for MC, you should not adjust these parameters.
+If you are running with 12 GB or less memory for MC, you should not adjust these parameters.
 
 ### If you are using an Xmx value greater than 12G
 
-If you have and use more than 12GB of memory, adjust the following:
+If you have and use more than 12 GB of memory, adjust the following:
 
 - `-XX:G1NewSizePercent=40`
 - `-XX:G1MaxNewSizePercent=50`
@@ -81,7 +81,7 @@ to enable GC Logging:
 ```
 
 GC logging does not hurt your performance and can be left on at all times. The files will not take
-up much space (5MB)
+up much space (5 MB)
 
 ## Technical Explanation of the Flags
 
@@ -135,7 +135,7 @@ up much space (5MB)
 6.  **MaxTenuringThreshold=1:** Minecraft has a really high allocation rate of memory. Of that
     memory, most is reclaimed in the eden generation. However, transient data will overflow into
     survivor. Initially played with completely removing Survivor and had decent results, but does
-    result in transient data making its way to Old which is not good.Max Tenuring 1 ensures that we
+    result in transient data making its way to Old which is not good. Max Tenuring 1 ensures that we
     do not promote transient data to old generation, but anything that survives 2 passes of Garbage
     Collection is just going to be assumed as longer-lived.
 
@@ -181,7 +181,7 @@ up much space (5MB)
 
 14. **G1HeapRegionSize=8M+:** Default is auto calculated. SUPER important for Minecraft, especially
     1.15, as with low memory situations, the default calculation will in most times be too low. Any
-    memory allocation half of this size (4MB) will be treated as "Humongous" and promote straight to
+    memory allocation half of this size (4 MB) will be treated as "Humongous" and promote straight to
     old generation and is harder to free. If you allow java to use the default, you will be
     destroyed with a significant chunk of your memory getting treated as Humongous.
 

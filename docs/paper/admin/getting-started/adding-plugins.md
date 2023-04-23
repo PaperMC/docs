@@ -19,7 +19,7 @@ it is imperative that plugins only be installed from trusted sources. Be careful
 
 ## Finding Plugins
 
-Before installing a plugin, you'll need to find what you want to install. Most plugins can be found
+Before installing a plugin, you'll need to find what you want to install. The best place to find plugins is [Hangar](https://hangar.papermc.io), Papers plugin repository, but you can also find many plugins
 on [SpigotMC](https://www.spigotmc.org/resources/),
 [BukkitDev](https://dev.bukkit.org/bukkit-plugins), or the
 [PaperMC Forums](https://forums.papermc.io/forums/paper-plugin-releases/), while other plugins may

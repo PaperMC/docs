@@ -36,7 +36,7 @@ all required tools to successfully install Java.
 
 ```bash
 sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install software-properties-common ca-certificates apt-transport-https curl
+sudo apt-get install software-properties-common ca-certificates apt-transport-https gnupg curl
 ```
 
 Second, import the Amazon Corretto public key and apt repository.
@@ -46,11 +46,11 @@ curl https://apt.corretto.aws/corretto.key | sudo apt-key add -
 sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
 ```
 
-Then, install Java 17.
+Then, install Java 17 and other dependencies using the following command:
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y java-17-amazon-corretto-jdk
+sudo apt-get install -y java-17-amazon-corretto-jdk libxi6 libxtst6 libxrender1
 ```
 
 Proceed to [verify your installation](#verifying-installation).

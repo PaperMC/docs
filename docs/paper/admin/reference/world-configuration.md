@@ -206,7 +206,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **description**: Disable to prevent markers from ticking. This may affect how they behave as passengers
   of other entities.
 
-### behaviour
+### behavior
 
 #### baby-zombie-movement-modifier
 
@@ -509,17 +509,17 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **default**: `40`
 - **description**: Sets the maximum Y position for natural Slime spawn in Slime Chunks.
 
-##### swamp-biome
+##### surface-biome
 
 ###### maximum
 
 - **default**: `70`
-- **description**: Sets the maximum Y position for natural Slime spawn in Swamp Biomes.
+- **description**: Sets the maximum Y position for natural Slime spawn in Surface Biomes.
 
 ###### minimum
 
 - **default**: `50`
-- **description**: Sets the minimum Y position for natural Slime spawn in Swamp Biomes.
+- **description**: Sets the minimum Y position for natural Slime spawn in Surface Biomes.
 
 #### spawn-limits
 

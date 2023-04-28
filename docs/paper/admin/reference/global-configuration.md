@@ -125,7 +125,7 @@ function itself. For per-world configuration, see the
 
 ## console
 
-### enable-brigadier-completion
+### enable-brigadier-completions
 
 - **default**: `true`
 - **description**: Enables Mojang's Brigadier (advanced) command completions in the server console.
@@ -165,7 +165,7 @@ function itself. For per-world configuration, see the
 - **default**: `8192`
 - **description**: The maximum length of a book's author in characters.
 
-#### pages
+#### page
 
 - **default**: `16384`
 - **description**: The maximum length of a book's page in characters.
@@ -217,7 +217,7 @@ function itself. For per-world configuration, see the
 - **description**: Default message sent to players when they have insufficient permissions for an
   action. Plugins may override this for their commands.
 
-### use-display-name-in-quit-messages
+### use-display-name-in-quit-message
 
 - **default**: `false`
 - **description**: Whether the server should use the player's display name (set by plugins) or
@@ -279,7 +279,7 @@ function itself. For per-world configuration, see the
 - **default**: `256`
 - **description**: The maximum size of the region file cache.
 
-### use-alternative-luck-forumula
+### use-alternative-luck-formula
 
 - **default**: `false`
 - **description**: Use an

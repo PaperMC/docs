@@ -1007,11 +1007,11 @@ updates or even permanently if issues are found.
 ##### `<sensor-name>`
 
 - **description**: Sets the sensor tick rate of an entity. `-1` uses Vanilla. See timings for
-  thenames. Might change between updates!
+  the names. Might change between updates!
 
-### unsupported-settings
+## unsupported-settings
 
-#### fix-invulnerable-end-crystal-exploit
+### fix-invulnerable-end-crystal-exploit
 
 - **default**: `true`
 - **description**: If set to false, the creation of invulnerable end crystals will be allowed. Fixes

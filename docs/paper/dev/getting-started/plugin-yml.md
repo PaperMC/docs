@@ -170,7 +170,7 @@ commands:
 
 ## Dependencies:
 
-:::warning Dependency Loops
+:::warning[Dependency Loops]
 
 If a plugin is specified as a dependency, it will be loaded before your plugin.
 Be careful as these can cause plugin load issues if cyclical dependencies appear. A Cyclical dependency can be illustrated as follows:

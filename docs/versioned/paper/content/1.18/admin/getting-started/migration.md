@@ -5,7 +5,7 @@ title: Migrating to or from Paper
 
 It's simple to migrate your server to or from Paper. The steps below will help you get started.
 
-:::caution Backup your data before you start!
+:::caution[Backup your data before you start!]
 
 Before you begin, please ensure you have a full backup of your server.
 

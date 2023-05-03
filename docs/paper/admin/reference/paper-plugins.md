@@ -49,7 +49,7 @@ It is up to plugin developers to resolve these circular loading issues, however,
 absolutely are unable to resolve this loading loop.
 
 
-:::danger Legacy
+:::danger[Legacy]
 
 If your server **requires** this circular loading, you can enable this by adding the **-Dpaper.useLegacyPluginLoading=true** startup flag.
 Please note that this may not be supported in the future.

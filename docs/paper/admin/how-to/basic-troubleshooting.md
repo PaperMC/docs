@@ -6,7 +6,7 @@ slug: /basic-troubleshooting
 
 This guide will help you diagnose your server's problem before reporting it to PaperMC or the plugin's author.
 
-:::caution Stop Your Server And Take A Backup
+:::caution[Stop Your Server And Take A Backup]
 
 Before following this guide, stop your server first. Modifying server files while it is still running will corrupt them.  
 Only a full server shutdown can prevent this.

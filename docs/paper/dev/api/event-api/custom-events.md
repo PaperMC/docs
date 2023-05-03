@@ -14,7 +14,7 @@ An example of this is the BlockPistonEvent, which cannot be listened to directly
 
 This list is used to call the listeners when the event is called.
 
-:::info `getHandlerList`
+:::info[`getHandlerList`]
 
 Although it is not inherited from `Event`, you need to add a static `getHandlerList()` method and return the `HandlerList` for your event.
 Both methods are required for your event to work.
@@ -133,6 +133,7 @@ public class ExamplePlugin extends JavaPlugin {
 
 When an event is cancellable, `Event#callEvent` will return false if the event was cancelled. This allows you to directly use `callEvent`
 in your if statement, instead of having to check `Cancellable#isCancelled` manually.
+
 
 ```java title="ExamplePlugin.java"
 public class ExamplePlugin extends JavaPlugin {

@@ -21,7 +21,7 @@ the [Paper Global Configuration Reference](global-configuration.md)
 :::tip
 
 Recommended configuration for both `engine-mode` `1` and `2` can be found in the
-[Configuring Anti-Xray](../how-to/anti-xray.md) guide.
+[Configuring Anti-Xray](../how-to/anti-xray.mdx) guide.
 
 :::
 

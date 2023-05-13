@@ -7,7 +7,7 @@ slug: /dev/getting-started/paper-plugins
 Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to 
 expand the field of what the Paper API is able to introduce.
 
-:::info Experimental
+:::info[Experimental]
 
 This is experimental and may be subject to change.
 
@@ -52,7 +52,7 @@ Otherwise, your plugin will be loaded fine, in the same fashion as a plugin that
 
 If a dependency is marked as ``bootstrap``, this indicates that this dependency is required during bootstrapping, which currently does not serve a purpose.
 
-:::note Plugin Loading Order
+:::note[Plugin Loading Order]
 
 Note that [unlike Bukkit plugins](#load-order-logic-split), dependencies are independent of the plugin load order. 
 This means that although declaring a dependency will give you access to its classes, if you require it to be initialised before your plugin is loaded, see how to [declare load order](#load-order-declaration).
@@ -65,7 +65,7 @@ To declare the order in which plugins are loaded before/after your plugin, you a
 It should be noted that the load order for bootstrapping is independent, meaning that if you want to define the load order for bootstrappers
 you must set the ``bootstrap`` field to ``true``.
 
-:::note Cyclic Loading
+:::note[Cyclic Loading]
 
 Note that in certain cases plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
 Please read the [cyclic loading guide](docs/paper/admin/reference/paper-plugins.md#cyclic-plugin-loading) for more information.

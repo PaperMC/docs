@@ -1,5 +1,5 @@
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
-import vsDark from "prism-react-renderer/themes/vsDark";
+import { themes } from "prism-react-renderer";
 import isCI from "is-ci";
 import navbar from "./config/navbar.config";
 import footer from "./config/footer.config";
@@ -70,6 +70,14 @@ const config: Config = {
       }),
     },
   ],
+
+  markdown: {
+    mdx1Compat: {
+      comments: false,
+      admonitions: false,
+      headingIds: false,
+    },
+  },
 
   themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia"],
 
@@ -215,7 +223,7 @@ const config: Config = {
         "toml",
         "properties",
       ],
-      theme: vsDark,
+      theme: themes.vsDark,
     },
     algolia: {
       appId: "P1BCDPTG1Q",

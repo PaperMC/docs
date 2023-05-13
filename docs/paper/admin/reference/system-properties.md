@@ -2,11 +2,11 @@
 slug: /reference/system-properties
 ---
 
-# Paper System Properties 
+# Paper System Properties
 
 These system properties can be set when you start your server allowing for the configuration of various settings.
 
-:::danger Danger Ahead
+:::danger[Danger Ahead]
 
 Setting flags for the JVM can alter how it operates and the same goes for the Paper server.
 If you are unsure about what a flag does, it is recommended that you **do not use it**.

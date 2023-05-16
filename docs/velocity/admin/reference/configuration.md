@@ -42,11 +42,10 @@ These settings mostly cover the basic, most essential settings of the proxy.
 | `player-info-forwarding-mode` | Enum    | See [Configuring player information forwarding](../getting-started/forwarding.md) for more information.                                                                                                                                                            |
 | `prevent-client-proxy-connections` | Boolean | If client's ISP/AS sent from this proxy is different from the one from Mojang's authentication server, the player is kicked. This disallows some VPN and proxy connections but is a weak form of protection.                                                  |
 | `forwarding-secret-file`      | String  | The name of the file in which the forwarding secret is stored. This secret is used to ensure that player info forwarded by Velocity comes from your proxy and not from someone pretending to run Velocity. See the "Player info forwarding" section for more info. |
-| `forwarding-secret`           | String  | This setting is used as a secret to ensure that player info forwarded by Velocity comes from your proxy and not from someone pretending to run Velocity. See the "Player info forwarding" section for more info.                                                   |
 | `announce-forge`              | Boolean | This setting determines whether Velocity should present itself as a Forge/FML-compatible server. By default, this is disabled.                                                                                                                                     |
 | `kick-existing-players`       | Boolean | Allows restoring the vanilla behavior of kicking users on the proxy if they try to reconnect (e.g. lost internet connection briefly).                                                                                                                              |
 | `ping-passthrough`            | String  | Allows forwarding nothing (the default), the `MODS` (for Forge), the `DESCRIPTION`, or everything (`ALL`) from the `try` list (or forced host server connection order).                                                                                            |
-| `enable-player-address-logging` | Boolean | If not enabled (default is true) player IP addresses will be replaced by `<ip address withheld>` in logs.                                                                                                                                                        |
+| `enable-player-address-logging` | Boolean | If disabled (default is true), player IP addresses will be replaced by `<ip address withheld>` in logs.                                                                                                                                                          |
 
 ## `servers` section
 
@@ -87,11 +86,3 @@ These settings mostly cover the basic, most essential settings of the proxy.
 | `port`         | Number  | Specifies which port that Velocity should listen on for GameSpy 4 (Minecraft query protocol) requests.       |
 | `map`          | String  | Specifies the map name to be shown to clients.                                                               |
 | `show-plugins` | Boolean | Whether or not Velocity plugins are included in the query responses.                                         |
-
-## `metrics` section
-
-| Setting name  | Type    | Description                                                                                         |
-| ------------- | ------- | --------------------------------------------------------------------------------------------------- |
-| `enabled`     | Boolean | Whether or not Velocity should send metrics to bStats.                                              |
-| `id`          | UUID    | A randomly generated UUID that uniquely identifies your Velocity server. Do not alter this setting. |
-| `log-failure` | Boolean | Whether or not Velocity should log whenever it fails to connect to bStats.                          |

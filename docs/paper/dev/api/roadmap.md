@@ -2,7 +2,7 @@
 slug: /dev/roadmap
 ---
 
-# API Future
+# Roadmap
 
 Paper offers a rich API that has a wide range of features that can help you unlock the full potential of your server. 
 However, in order to make room for new features and improvements, some of the older APIs will be phased out. This page 
@@ -54,7 +54,7 @@ Teleport an entity with the `RETAIN_PASSENGERS` flag, allowing its passengers to
 entity.teleport(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
 ```
 
-## Deprecations
+## Deprecation Policy
 
 :::warning
 
@@ -67,58 +67,27 @@ You may also experience performance issues and other problems. To ensure the bes
 of your plugins, it is important to stay up-to-date with the latest API changes and avoid using any APIs
 that are marked for deprecation.
 
-#### Old API
-:::note
+### Old API
 
-API marked for deprecation in this section is generally expected to be removed in the
-next major update from when the deprecation was announced.
+As the game evolves, the API may represent concepts that no longer exist in the core game.
 
-:::
+Old API is no most likely not functional in newer versions of the game, which will behave unexpectedly on newer versions, 
+therefore may be scheduled for removal.
 
-
-As the game evolves, the API may represent concepts that no longer exist in the core game. 
-This section contains API that is no longer supported by the game and therefore may behave unexpectedly on newer versions.
-
-* [AsyncChatDecorateEvent#isPreview()](https://jd.papermc.io/paper/1.19/io/papermc/paper/event/player/AsyncChatDecorateEvent.html#isPreview())
-
-#### Duplicate API
-:::note
-
-Depending on the age of the API, it is expected that this API will function for ``~2`` major updates before being
-removed in favor of alternative API.
-
-:::
+### Duplicate API
 
 As Paper continues to upstream Spigot, it can occasionally include APIs that clash with what Paper already has. 
 Typically, Paper will deprecate Spigot’s API in favor of their own API. 
 
 However, in cases where upstream offers a more powerful API, Paper’s may be deprecated instead.
+While Paper is still upstreaming Spigot, any api introduced by spigot will continue to function, and will 
+not be removed.
 
-* [PlayerLocaleChangeEvent](https://jd.papermc.io/paper/1.19/com/destroystokyo/paper/event/player/PlayerLocaleChangeEvent.html)
-* [PlayerInitialSpawnEvent](https://jd.papermc.io/paper/1.19/com/destroystokyo/paper/event/player/PlayerInitialSpawnEvent.html)
-* [WorldBorder#isInBounds(Location)](https://jd.papermc.io/paper/1.19/org/bukkit/WorldBorder.html#isInBounds(org.bukkit.Location))
-* [EntityTransformedEvent](https://jd.papermc.io/paper/1.19/com/destroystokyo/paper/event/entity/EntityTransformedEvent.html)
-* [ItemStackRecipeChoice](https://jd.papermc.io/paper/1.19/com/destroystokyo/paper/inventory/ItemStackRecipeChoice.html)
-* [HeightmapType](https://jd.papermc.io/paper/1.19/com/destroystokyo/paper/HeightmapType.html)
-    * All associated methods in `Location` and `World`
-* All deprecated or removed `GoalKey`s in [VanillaGoal](https://jd.papermc.io/paper/1.19/com/destroystokyo/paper/entity/ai/VanillaGoal.html)
-* [StructureLocateEvent](https://jd.papermc.io/paper/1.19/io/papermc/paper/event/world/StructureLocateEvent.html) (not StructuresLocateEvent, different things)
-* Duplicate `Effect`s.
-* World API
-    * [World#hasSkylight()](https://jd.papermc.io/paper/1.19/org/bukkit/World.html#hasSkylight())
-    * [World#hasBedrockCeiling()](https://jd.papermc.io/paper/1.19/org/bukkit/World.html#hasBedrockCeiling())
-    * [World#doesBedWork()](https://jd.papermc.io/paper/1.19/org/bukkit/World.html#doesBedWork())
-    * [World#doesRespawnAnchorWork()](https://jd.papermc.io/paper/1.19/org/bukkit/World.html#doesRespawnAnchorWork())
-  
-#### Obsolete API
-:::note
-
-Obsolete API is expected for function for the far future, and may not be scheduled for removal 
-for a fair amount of time.
-
-:::
-
-
+### Obsolete API
 Paper strives to improve on APIs that may already be included. There may be some cases where we have built new 
-APIs to offer as a replacement to another. Typically, APIs marked in this section will continue to function much longer.
-However, it is encouraged to move away from said APIs.
+APIs to offer as a replacement to another.
+
+Obsolete API is expected for function for the far future, and may not be scheduled for removal
+for a fair amount of time. 
+
+*See [the API migration guide](docs/paper/dev/api/obsolete-api-migration/obsolete-migration.md) for more information*

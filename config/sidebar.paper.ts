@@ -98,6 +98,15 @@ const paper: SidebarsConfig = {
                 "dev/api/event-api/handler-lists",
               ],
             },
+            {
+              type: "category",
+              label: "API Migration",
+              collapsed: true,
+              items: [
+                "dev/api/obsolete-api-migration/adventure",
+                "dev/api/obsolete-api-migration/material",
+              ],
+            },
             "dev/api/roadmap",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",

@@ -90,4 +90,4 @@ APIs to offer as a replacement to another.
 Obsolete API is expected for function for the far future, and may not be scheduled for removal
 for a fair amount of time. 
 
-*See [the API migration guide](docs/paper/dev/api/obsolete-api-migration/obsolete-migration.md) for more information*
+*See [the API migration guide](docs/paper/dev/api/obsolete-api-migration/adventure.md) for more information*

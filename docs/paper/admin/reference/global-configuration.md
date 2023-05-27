@@ -75,6 +75,28 @@ function itself. For per-world configuration, see the
 - **default**: `100.0`
 - **description**: The maximum number of chunks sent to an individual player within one second.
 
+## chunk-system
+
+### gen-parallelism
+
+- **default**: `default`
+- **description**: Sets whether the server should use parallel chunk generation. The `default` value
+  will be used as `true`. Possible options are `true`, `on` and `enable` to make the server use the
+  system and `false`, `off` or `disabled` to disable.
+
+### io-threads
+
+- **default**: `-1`
+- **description**: Sets the number of threads to be used for read and write operations with chunks.
+  If any value below zero is set, only one thread will be used.
+
+### worker-threads
+
+- **default**: `-1`
+- **description**: Sets the number of threads to be used for parallel chunk generation. If any value below
+  zero is set, the server will determine the best number depending on the number of available CPU cores
+  _(important: **not** threads i.e. Hyper-Threading doesn't count)_ the runtime.
+
 ## collisions
 
 ### enable-player-collisions

@@ -4,9 +4,6 @@ slug: /dev/creating-your-first-plugin
 
 # Creating Your First Plugin
 
-import Tabs from "@theme/Tabs";
-import TabItem from "@theme/TabItem";
-
 It is very simple to create a plugin for Velocity. This section will teach you how to setup your
 IDE, your plugin identifiers, and give you an introduction to the basics of the Velocity API.
 

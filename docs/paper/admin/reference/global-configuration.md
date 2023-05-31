@@ -94,7 +94,8 @@ function itself. For per-world configuration, see the
 
 - **default**: `-1`
 - **description**: Sets the number of threads to be used for parallel chunk generation. If any value below
-  zero is set, the server will determine the best number depending on the number of available CPU cores
+  zero is set, the server will determine the best number depending on the number of available CPU cores.
+  This is capped at a quarter of available processors and can be less for systems with very few processors.
   _(important: **not** threads i.e. Hyper-Threading doesn't count)_ the runtime.
 
 ## collisions

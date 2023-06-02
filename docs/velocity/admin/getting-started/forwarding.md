@@ -90,6 +90,12 @@ supports the [BungeeGuard](https://www.spigotmc.org/resources/bungeeguard.79601/
 set the `player-info-forwarding` setting in `velocity.toml` to `bungeeguard`, then add the value in
 `forwarding-secret` to the token section in the BungeeGuard configuration.
 
+:::caution
+
+For `config-version` >= 2: `forwarding-secret` has been replaced by `forwarding-secret-file` which stores the path of the file storing the secret.
+
+:::
+
 ### Configuring legacy forwarding for Spigot / Paper
 
 To make Spigot or Paper understand the data forwarded from Velocity, set `settings.bungeecord` to

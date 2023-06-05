@@ -23,8 +23,6 @@ new ItemStack(Material.AIR);
 ```java
 ItemStack.of(ItemType.AIR);
 ```
-*Using static constructors is encouraged over the use of the built-in constructor.
-See [API plans](docs/paper/dev/api/roadmap.md#interface-itemstacks) for more information.*
 
 ## BlockType
 BlockType represents a type of Block that can only be placed in the physical world and does not have a corresponding 

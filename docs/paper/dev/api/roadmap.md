@@ -22,12 +22,18 @@ In the future, ItemStack will be converted to an interface that allows developer
 ItemStack directly instead of going through the API implementation.
 
 #### Precautions
-- Avoid using the ItemStack constructor, instead use the static constructors
-    - `ItemStack.of(ItemType.DIAMOND_PICKAXE);`
-      - The ``ItemStack`` constructor will be removed at some point.
 - Avoid directly extending the ``ItemStack`` class.
   - Custom implementations of this class are not supported
 
+
+### ServerPlayer Reusing    
+*Note: Only applies to NMS usage, will not apply to API.*
+
+Avoid directly storing player (ServerPlayer) entity instances. Currently the player instance is reused when switching 
+worlds, however, in the future, this behavior will be reverted to match vanilla behavior. API entities (wrappers) will
+continue to function and will have their underlying instance replaced automatically.
+
+This is being done to help reduce possible inconsistencies between world switching between Vanilla and Paper.
 
 ## Experimental API
 
@@ -58,7 +64,7 @@ entity.teleport(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
 
 :::warning
 
-It is highly recommended that you avoid using any APIs that are marked for deprecation.
+It is highly recommended that you avoid using any APIs that are marked as deprecated.
 
 :::
 
@@ -67,11 +73,42 @@ You may also experience performance issues and other problems. To ensure the bes
 of your plugins, it is important to stay up-to-date with the latest API changes and avoid using any APIs
 that are marked for deprecation.
 
+
+API marked with ``@Deprecated`` should not be used in your code base, as alternative API may be able to be used instead.
+While certain API may continue to function despite being deprecated, it **cannot** be promised that this API won't be marked 
+as deprecated for removal in the future.
+```java
+@Deprecated
+public void exampleMethod();
+```
+*Example deprecated method*
+
+### Deprecated for Removal
+
+In addition to being marked as ``@Deprecated``, api may be marked as `forRemoval` with a given ``@ScheduledForRemoval`` version.
+API scheduled for removal should only occur within major release versions of Minecraft.
+It is highly recommended you migrate away from API scheduled for removal. 
+
+It should be noted, that API scheduled for removal will be given adequate time to allow plugin developers to migrate
+away from said API.
+```java
+@ApiStatus.ScheduledForRemoval(inVersion = "1.20")
+@Deprecated(forRemoval = true)
+public void exampleMethod();
+```
+*Example method marked for removal in 1.20*
+
+
+## Deprecation Reasons
+
+There are many possible reasons why an API might be deprecated.
+Some of the common reasons why API can be deprecated is:
+
 ### Old API
 
 As the game evolves, the API may represent concepts that no longer exist in the core game.
 
-Old API is no most likely not functional in newer versions of the game, which will behave unexpectedly on newer versions, 
+Old API is no most likely not functional in newer versions of the game, which will behave unexpectedly on newer versions,
 therefore may be scheduled for removal.
 
 ### Duplicate API

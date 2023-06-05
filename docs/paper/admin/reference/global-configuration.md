@@ -12,17 +12,6 @@ Global configuration options exposed by Paper will affect all worlds on a server
 function itself. For per-world configuration, see the
 [Per World Configuration Reference](world-configuration.md)
 
-## async-chunks
-
-### threads
-
-- **default**: `-1`
-- **description**: The number of threads the server should use for world saving and chunk loading.
-  The default (`-1`) indicates that Paper will utilize half of your system's threads for chunk
-  loading unless otherwise specified. There is also a maximum default of 4 threads used for saving
-  and loading chunks. This can be overridden by adding `-Dpaper.maxChunkThreads=[number]` to your
-  startup arguments
-
 ## chunk-loading
 
 ### autoconfig-send-distance
@@ -85,6 +74,29 @@ function itself. For per-world configuration, see the
 
 - **default**: `100.0`
 - **description**: The maximum number of chunks sent to an individual player within one second.
+
+## chunk-system
+
+### gen-parallelism
+
+- **default**: `default`
+- **description**: Sets whether the server should use parallel chunk generation. The `default` value
+  will be used as `true`. Possible options are `true`, `on` and `enable` to make the server use the
+  system and `false`, `off` or `disabled` to disable.
+
+### io-threads
+
+- **default**: `-1`
+- **description**: Sets the number of threads to be used for read and write operations with chunks.
+  If any value below zero is set, only one thread will be used.
+
+### worker-threads
+
+- **default**: `-1`
+- **description**: Sets the number of threads to be used for parallel chunk generation. If any value below
+  zero is set, the server will determine the best number depending on the number of available CPU cores.
+  This is capped at a quarter of available processors and can be less for systems with very few processors.
+  _(Note: Hyper-Threaded threads **do not** count)_.
 
 ## collisions
 

@@ -251,7 +251,7 @@ function itself. For per-world configuration, see the
 ### fix-entity-position-desync
 
 - **default**: `true`
-- **description**: Causes the server to lose the same percision that the client does for entities
+- **description**: Causes the server to lose the same precision that the client does for entities
   preventing desync. Fixes [MC-4](https://bugs.mojang.com/browse/MC-4).
 
 ### lag-compensate-block-breaking

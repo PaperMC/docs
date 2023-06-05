@@ -239,13 +239,13 @@ differs by having the player in the world at the time of respawn.
 Portal teleport differs from simple teleportation as portalling does
 _not_ know the exact location of the teleport. Thus, the transform step
 does not update the entity position, but rather a new operation is inserted
-between transform and async place: async search/create which is responsible
+between transform and async place: an async search/create, which is responsible
 for finding and/or creating the exit portal.
 
-Additionally, the current Vanilla code can refuse a portal if the
+Additionally, the current Vanilla code can refuse a teleport if the
 entity is non-player and the nether exit portal does not already exist. But
 since the portal location is only determined by the async place, it is
-too late to abort - so, portal logic has been re-done so that there is no
+too late to abort - so, the portal logic has been re-done so that there is no
 difference between players and entities. Now both entities and players
 create exit portals, whether it be for the nether or end.
 
@@ -286,17 +286,17 @@ down, which may be critical in memory-constrained scenarios.
 For step 7, teleportations are completed differently depending on the type:
 simple or portal.
 
-Simple teleportations are completed by forcing
-the entity being teleported to be added to the entity chunk specified
-by the target location. This allows the entity to be saved at the target
+Simple teleportations are completed by ensuring the addition
+of the teleporting entity to the destination chunk specified
+by teleporation. This allows the entity to be saved at the target
 position, as if the teleportation did complete before shutdown.
 
-Portal teleportations are completed by forcing the entity being teleported
-to be added to the entity chunk specified from where the entity
-teleported _from_. Since the target location is not known, the entity
-can only be placed back at the origin. While this behavior is not ideal,
-the shutdown logic _must_ account for any broken world state - which means
-that finding or create the target exit portal may not be an option.
+Portal teleportations are completed by forcing the addition
+of the teleporting entity to the source chunk, from where the entity should
+have been teleported _from_. Since the target location is not known, the entity
+can only be placed back at the origin (no teleportation). While this behavior
+is not ideal, the shutdown logic _must_ account for any broken world state -
+which means that finding or creating the target exit portal may not be an option.
 
 The teleportation completion must be performed before the world save so that
 the teleport completed entities save.

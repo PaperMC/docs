@@ -4,14 +4,6 @@ slug: /reference/configuration
 
 # Paper Configuration
 
-:::note
-
-This guide currently only covers per-world configuration in `paper-world-defaults.yml`. Information
-about general configuration will be added in the future. In the meantime, please refer to the
-information in the [1.19 announcement forum post](https://forums.papermc.io/threads/paper-1-19.344).
-
-:::
-
 <!-- ## Global Configuration -->
 
 ## Per World Configuration

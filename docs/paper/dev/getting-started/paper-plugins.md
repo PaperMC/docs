@@ -29,7 +29,7 @@ name: Paper-Test-Plugin
 version: '1.0'
 main: io.papermc.testplugin.TestPlugin
 description: Paper Test Plugin
-api-version: '1.19'
+api-version: '1.20'
 bootstrapper: io.papermc.testplugin.TestPluginBootstrap
 loader: io.papermc.testplugin.TestPluginLoader
 ```

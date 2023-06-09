@@ -1,8 +1,8 @@
 ---
-slug: /configuration
+slug: /reference/configuration
 ---
 
-# Configuration
+# Paper Configuration
 
 :::note
 
@@ -108,9 +108,3 @@ Notice that `world_the_end/paper-world.yml` was never modified. Because of this,
 configuration options from `config/paper-world-defaults.yml`. Additionally, `keep-spawn-loaded` was
 only disabled in `resource_world/paper-world.yml` because in `config/paper-world-defaults.yml`,
 `keep-spawn-loaded` is set to `true`.
-
-<!-- ## System Properties -->
-
-<!-- ## Environment Variables -->
-
-<!-- ## Logging Configuration(?) -->

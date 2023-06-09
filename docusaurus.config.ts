@@ -103,7 +103,7 @@ const config: Config = {
         lastVersion: "current",
         versions: {
           current: {
-            label: "1.19",
+            label: "1.20",
             path: "",
           },
         },
@@ -120,7 +120,7 @@ const config: Config = {
         lastVersion: "current",
         versions: {
           current: {
-            label: "1.19",
+            label: "1.20",
             path: "",
           },
         },

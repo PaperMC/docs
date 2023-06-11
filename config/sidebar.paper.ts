@@ -23,7 +23,6 @@ const paper: SidebarsConfig = {
             "admin/getting-started/getting-started",
             "admin/getting-started/adding-plugins",
             "admin/getting-started/migration",
-            "admin/reference/paper-plugins",
           ],
         },
         {
@@ -35,7 +34,6 @@ const paper: SidebarsConfig = {
           },
           items: [
             "admin/how-to/basic-troubleshooting",
-            "admin/how-to/configuration",
             "admin/how-to/update",
             "admin/how-to/aikars-flags",
             "admin/how-to/anti-xray",
@@ -49,9 +47,20 @@ const paper: SidebarsConfig = {
             slug: "/cat/admin/reference",
           },
           items: [
-            "admin/reference/global-configuration",
-            "admin/reference/world-configuration",
+            {
+              type: "category",
+              label: "Paper Configuration",
+              link: {
+                type: "doc",
+                id: "admin/reference/configuration/README",
+              },
+              items: [
+                "admin/reference/configuration/global-configuration",
+                "admin/reference/configuration/world-configuration",
+              ],
+            },
             "admin/reference/system-properties",
+            "admin/reference/paper-plugins",
           ],
         },
       ],

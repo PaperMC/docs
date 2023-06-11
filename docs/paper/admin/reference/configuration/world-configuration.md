@@ -11,8 +11,8 @@ keywords:
 # Paper Per World Configuration
 
 Configuration options in `paper-world-defaults.yml` are configurable on a per-world basis. For more
-information, see the [Configuration Guide](../how-to/configuration.md) For global configuration, see
-the [Paper Global Configuration Reference](global-configuration.md)
+information, see the [Configuration Guide](./configuration) For global configuration, see
+the [Paper Global Configuration Reference](./global-configuration.md)
 
 ## anticheat
 
@@ -21,7 +21,7 @@ the [Paper Global Configuration Reference](global-configuration.md)
 :::tip
 
 Recommended configuration for both `engine-mode` `1` and `2` can be found in the
-[Configuring Anti-Xray](../how-to/anti-xray.mdx) guide.
+[Configuring Anti-Xray](../../how-to/anti-xray.mdx) guide.
 
 :::
 

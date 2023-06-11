@@ -1,16 +1,8 @@
 ---
-slug: /configuration
+slug: /reference/configuration
 ---
 
-# Configuration
-
-:::note
-
-This guide currently only covers per-world configuration in `paper-world-defaults.yml`. Information
-about general configuration will be added in the future. In the meantime, please refer to the
-information in the [1.19 announcement forum post](https://forums.papermc.io/threads/paper-1-19.344).
-
-:::
+# Paper Configuration
 
 <!-- ## Global Configuration -->
 
@@ -108,9 +100,3 @@ Notice that `world_the_end/paper-world.yml` was never modified. Because of this,
 configuration options from `config/paper-world-defaults.yml`. Additionally, `keep-spawn-loaded` was
 only disabled in `resource_world/paper-world.yml` because in `config/paper-world-defaults.yml`,
 `keep-spawn-loaded` is set to `true`.
-
-<!-- ## System Properties -->
-
-<!-- ## Environment Variables -->
-
-<!-- ## Logging Configuration(?) -->

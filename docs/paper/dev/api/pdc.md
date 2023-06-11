@@ -76,6 +76,7 @@ The PDC supports a wide range of data types, such as:
 - `Integer`, `Integer Array`
 - `Long`, `Long Array`
 - `Short`
+- `Boolean`
 - `String` 
 - There are also `Tag Containers`. Tag Containers are a way of nesting PDC's within each other. To create a new PersistentDataContainer, you can use:
   ```java

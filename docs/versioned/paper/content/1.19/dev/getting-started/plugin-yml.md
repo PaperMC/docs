@@ -31,7 +31,7 @@ main: io.papermc.testplugin.ExamplePlugin
 description: An example plugin
 author: PaperMC
 website: https://papermc.io
-api-version: '1.20'
+api-version: '1.19'
 ```
 
 ## Fields
@@ -89,8 +89,8 @@ This will be shown in the plugin info commands.
 
 The version of the Paper API that your plugin is using. This doesn't include the minor version.
 Servers with a version lower than the version specified here will refuse to load the plugin.
-The valid versions are 1.13 - 1.20.
-- `api-version: '1.20'`
+The valid versions are 1.13 - 1.19.
+- `api-version: '1.19'`
 
 :::info
 

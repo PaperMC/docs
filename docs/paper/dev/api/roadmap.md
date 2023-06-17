@@ -125,4 +125,6 @@ Paper strives to improve on APIs that may already be included. There may be some
 APIs to offer as a replacement to another.
 
 Obsolete API is expected for function for the far future, and may not be scheduled for removal
-for a fair amount of time.
+for a fair amount of time. 
+
+*See [the API migration guide](docs/paper/dev/api/obsolete-api-migration) for more information*

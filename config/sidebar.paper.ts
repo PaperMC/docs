@@ -100,12 +100,16 @@ const paper: SidebarsConfig = {
             },
             {
               type: "category",
-              label: "API Migration",
+              label: "Migration",
               collapsed: true,
               items: [
-                "dev/api/obsolete-api-migration/adventure",
-                "dev/api/obsolete-api-migration/material",
+                "dev/api/obsolete-migration/adventure",
+                "dev/api/obsolete-migration/material",
               ],
+              link: {
+                type: "doc",
+                id: "dev/api/obsolete-migration/README",
+              },
             },
             "dev/api/roadmap",
             "dev/api/pdc",

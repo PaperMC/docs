@@ -107,6 +107,7 @@ const paper: SidebarsConfig = {
                 "dev/api/event-api/handler-lists",
               ],
             },
+            "dev/api/roadmap",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
           ],

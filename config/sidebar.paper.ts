@@ -109,6 +109,7 @@ const paper: SidebarsConfig = {
             },
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
+            "dev/api/folia-support",
           ],
         },
       ],

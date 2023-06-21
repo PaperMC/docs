@@ -20,7 +20,7 @@ active on the proxy using `/velocity plugins`, including the name, authors, and 
 
 ### `/velocity version`
 
-Displays the version of Velocity running on the proxy.
+If the user has the `velocity.command.info` permission (by default, this is granted to all users), they can view the version of Velocity running on the proxy.
 
 ### `/velocity reload`
 

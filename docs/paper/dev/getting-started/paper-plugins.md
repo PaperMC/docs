@@ -36,9 +36,7 @@ loader: io.papermc.testplugin.TestPluginLoader
 
 ### Dependency Declaration
 
-Dependency declaration is specified a bit differently than Bukkit plugins, as you are
-able to define if a dependency is required during bootstrapping. This means that any bootstrapping
-logic for your dependencies will be run before yours is run.
+Paper Plugins change how to declare dependencies in your `paper-plugin.yml`:
 
 ```yml
 dependencies:
@@ -67,7 +65,7 @@ Let's Take a look at a Dependency:
 ```yml
 RegistryPlugin:
   load: BEFORE # Defaults to OMIT
-  required: true # Defaults to false
+  required: true # Defaults to true
   join-classpath: true # Defaults to true
 ```
 
@@ -85,13 +83,14 @@ Here are a couple of examples:
 ```yml
 # Suppose we require ProtocolLib to be loaded for our plugin
 ProtocolLib:
+  load: AFTER
   required: true
 
 # Now, we are going to register some details for a shop plugin
 # So our plugin should load before the shop plugin
 SuperShopsXUnlimited:
-  required: false
   load: AFTER
+  required: false
 
 # Now, we are going to need to access a plugins classpath
 # So that we can properly interact with it.
@@ -174,3 +173,20 @@ In order to better take advantage of classloading isolation, Paper plugins do **
 This was done for a variety of reasons, mostly to allow better control and allow plugins to properly share classloaders.
 
 See information on [declaring dependencies](#dependency-declaration) for more information on how to declare the load order of your plugin.
+
+### Cyclic Plugin Loading
+
+Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.
+With Paper plugins, cyclic loading will attempt to be automatically resolved.
+
+However, if Paper detects a loop that cannot be resolved, you will get an error that looks like this:
+```
+Circular plugin loading detected!
+Circular load order:
+ MyPlugin -> MyOtherPlugin -> MyWorldPlugin -> MyPlugin
+Please report this to the plugin authors of the first plugin of each loop or join the PaperMC Discord server for further help.
+If you would like to still load these plugins, acknowledging that there may be unexpected plugin loading issues, run the server with -Dpaper.useLegacyPluginLoading=true
+Failed to start the minecraft server
+```
+
+It is up to you to resolve these circular loading issues.

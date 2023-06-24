@@ -178,7 +178,7 @@ See information on [declaring dependencies](#dependency-declaration) for more in
 ### Cyclic Plugin Loading
 
 Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.
-Unlike Spigot plugins, Paper plugins will not attempt to resolve cyclic loading issues. This can look something like this:
+Unlike Spigot plugins, Paper plugins will not attempt to resolve cyclic loading issues.
 
 ![](./assets/cyclic-loading.png)
 

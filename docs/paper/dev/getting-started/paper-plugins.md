@@ -76,7 +76,7 @@ RegistryPlugin:
 :::note[Cyclic Loading]
 
 Note that in certain cases plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
-Please read the [cyclic loading guide](docs/paper/admin/reference/paper-plugins.md#cyclic-plugin-loading) for more information.
+Please read the [cyclic loading guide](#cyclic-plugin-loading) for more information.
 :::
 
 Here are a couple of examples:
@@ -154,8 +154,9 @@ Currently, you are able to add two different library types, ``JarLibrary``, and 
 ## Differences
 
 ### Bukkit Serialization System
-Paper plugins do not support the serialization system (``org.bukkit.configuration.serialization``) that Bukkit uses. Your classes will **not** be able to be
-serialized, vise versa. It is highly recommended to not use this system with Paper plugins.
+Paper plugins still support the serialization system (``org.bukkit.configuration.serialization``) that Bukkit uses. However, custom classes will not be
+automatically registered for serialization. In order to use `ConfigurationSection#getObject`, 
+you must call `ConfigurationSerialization.registerClass(Class)` before you attempt to fetch objects from configurations.
 
 ### Classloading Isolation
 Paper plugins have isolated classloaders, meaning that relocating dependencies will not be necessary.
@@ -177,16 +178,19 @@ See information on [declaring dependencies](#dependency-declaration) for more in
 ### Cyclic Plugin Loading
 
 Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.
-With Paper plugins, cyclic loading will attempt to be automatically resolved.
+Unlike Spigot plugins, Paper plugins will not attempt to resolve cyclic loading issues. This can look something like this:
+
+![](./assets/cyclic-loading.png)
 
 However, if Paper detects a loop that cannot be resolved, you will get an error that looks like this:
 ```
-Circular plugin loading detected!
-Circular load order:
- MyPlugin -> MyOtherPlugin -> MyWorldPlugin -> MyPlugin
-Please report this to the plugin authors of the first plugin of each loop or join the PaperMC Discord server for further help.
-If you would like to still load these plugins, acknowledging that there may be unexpected plugin loading issues, run the server with -Dpaper.useLegacyPluginLoading=true
-Failed to start the minecraft server
+[ERROR]: [LoadOrderTree] =================================
+[ERROR]: [LoadOrderTree] Circular plugin loading detected:
+[ERROR]: [LoadOrderTree] 1) Paper-Test-Plugin1 -> Paper-Test-Plugin -> Paper-Test-Plugin1
+[ERROR]: [LoadOrderTree]    Paper-Test-Plugin1 loadbefore: [Paper-Test-Plugin]
+[ERROR]: [LoadOrderTree]    Paper-Test-Plugin loadbefore: [Paper-Test-Plugin1]
+[ERROR]: [LoadOrderTree] Please report this to the plugin authors of the first plugin of each loop or join the PaperMC Discord server for further help.
+[ERROR]: [LoadOrderTree] =================================
 ```
 
 It is up to you to resolve these circular loading issues.

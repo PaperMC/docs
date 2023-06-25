@@ -8,7 +8,7 @@ It adds the ability to split the world into regions as outlined [here](/folia/re
 # Checking for Folia:
 
 Depending on what platform your plugin is running on, you may need to implement features differently. For this, you can
-use this utility method to check if the current server is running folia:
+use this utility method to check if the current server is running Folia:
 
 ```java
 
@@ -40,11 +40,8 @@ running Paper.
 The tasks that you run on the Global Scheduler will be executed on the global region, see [here](/folia/reference/overview#global-region) for
 more information. You should use this scheduler for any tasks that do not belong to any particular region. These can be fetched with:
 ```java
-GlobalRegionScheduler globalScheduler = Bukkit.getGlobalRegionScheduler();
-// or
 GlobalRegionScheduler globalScheduler = server.getGlobalRegionScheduler();
 ```
-
 
 ### Region Scheduler
 The region scheduler will be in charge of running tasks for the region that owns a certain location. Do not use this scheduler for 
@@ -52,7 +49,7 @@ operations on entities, as this scheduler is tied to the region. Each entity has
 which will follow it across regions. As an example, Let's say I want to set a block as beehive:
 ```java
 Location locationToChange = ...;
-RegionScheduler scheduler = Bukkit.getRegionScheduler();
+RegionScheduler scheduler = server.getRegionScheduler();
 
 scheduler.execute(plugin, locationToChange, () -> {
     locationToChange.getBlock().setType(Material.BEEHIVE);
@@ -64,8 +61,6 @@ We pass the location as a parameter to the `RegionScheduler` as it needs to work
 ### Async Scheduler
 The Async Scheduler can be used for running tasks independent of the server tick process. This can be fetched with:
 ```java
-AsyncScheduler asyncScheduler = Bukkit.getAsyncScheduler();
-// Or
 AsyncScheduler asyncScheduler = server.getAsyncScheduler();
 ```
 
@@ -75,6 +70,3 @@ these instead of the region schedulers.
 ```java
 EntityScheduler scheduler = entity.getScheduler();
 ```
-
-
-

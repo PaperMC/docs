@@ -21,6 +21,19 @@ const folia: SidebarsConfig = {
           },
           items: [
             "admin/reference/faq",
+            {
+              type: "category",
+              label: "Reference",
+              collapsed: true,
+              link: {
+                type: "generated-index",
+                slug: "/cat/dev/reference",
+              },
+              items: [
+                "admin/reference/overview",
+                "admin/reference/region-logic",
+              ],
+            },
           ],
         },
       ],
@@ -34,19 +47,8 @@ const folia: SidebarsConfig = {
         id: "dev/README",
       },
       items: [
-        {
-          type: "category",
-          label: "Reference",
-          collapsed: true,
-          link: {
-            type: "generated-index",
-            slug: "/cat/dev/reference",
-          },
-          items: [
-            "admin/reference/overview",
-            "admin/reference/region-logic",
-          ],
-        },
+          // Placed here until some guides exist
+          "dev/README",
       ],
     },
   ],

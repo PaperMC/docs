@@ -857,7 +857,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 ### disable-end-credits
 
 - **default**: `false`
-- **description**: Instructs the server to never send the end game credits when leaving the end.
+- **description**: Instructs the server to never send the end game credits when leaving the End.
 
 ### disable-relative-projectile-velocity
 

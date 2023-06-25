@@ -193,4 +193,4 @@ However, if Paper detects a loop that cannot be resolved, you will get an error 
 [ERROR]: [LoadOrderTree] =================================
 ```
 
-It is up to you to resolve these circular loading issues.
+It is up to you to resolve these cyclical loading issues.

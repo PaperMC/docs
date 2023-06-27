@@ -1,5 +1,5 @@
 ---
-slug: /dev/components/introduction
+slug: /dev/component-api/introduction
 ---
 
 # Introduction

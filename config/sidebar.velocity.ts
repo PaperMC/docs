@@ -99,7 +99,7 @@ const velocity: SidebarsConfig = {
               label: "Component API",
               collapsed: true,
               items: [
-                "dev/api/components/intro",
+                "dev/api/component-api/intro",
               ]
             },
             "dev/api/event",

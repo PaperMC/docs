@@ -109,10 +109,10 @@ const paper: SidebarsConfig = {
             },
             {
               type: "category",
-              label: "Adventure",
+              label: "Component API",
               collapsed: true,
               items: [
-                "dev/api/adventure/components",
+                "dev/api/components/intro",
               ]
             },
             "dev/api/roadmap",

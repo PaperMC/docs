@@ -1,8 +1,8 @@
 ---
-slug: /dev/components
+slug: /dev/components/introduction
 ---
 
-# Components
+# Introduction
 
 :::note
 

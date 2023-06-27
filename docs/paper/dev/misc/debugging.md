@@ -11,7 +11,7 @@ When debugging, you can use `System.out.println("");` to print to the console. I
 as it will be easier to know which plugin the log has come from. This can be done simply with:
 
 ```java
-plugin.getLogger().warning("SuperDuperBad Thing has happened");
+plugin.getComponentLogger().debug(Component.text("SuperDuperBad Thing has happened"));
 ```
 
 :::note[Logger Levels]
@@ -39,14 +39,15 @@ Then, click the `+` button in the top left and select `Remote JVM Debug`. You ca
 
 ![](./assets/config_add.png)
 
-Finally, copy the command line arguments from the window, and paste these into your server's startup script. Once you have done this, you can click `OK`.
+Finally, copy the command line arguments from the window, and paste these into your server's startup script. 
+These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`.
 Once your server is running, you can use the bug icon in the top right to connect your debugger to the server:
 
 ![](./assets/debugger_connect.png)
 
 #### Using the debugger
 
-Lets say we have this code:
+Let's say we have this code:
 
 ```java
 @EventHandler

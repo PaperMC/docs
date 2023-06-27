@@ -14,7 +14,7 @@ Since Minecraft 1.7, the game has utilized components to represent text to be di
 by clients. Components offer a number of benefits over plain text strings which are enumerated below.
 Paper and Velocity natively implements the Adventure API to add component support wherever possible.
 
-## Differences
+## Why you should use Components
 
 Previously, text was a linear structure with the only formatting options being
 confusing symbols like `§c` and `§k` to control basic colors and styles of text.
@@ -44,7 +44,7 @@ signal that a better alternative in Components is available and should be migrat
 
 :::
 
-## Components
+## Creating Components
 
 Components can be interacted with as objects. There are different interfaces for each type along with
 builders for all the types. These objects are immutable so when constructing more complex components, it's

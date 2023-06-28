@@ -142,10 +142,6 @@ html[data-theme="dark"] {
   margin-left: 20px;
 }
 
-.with-value {
-  cursor: pointer;
-}
-
 .description {
   white-space: pre-wrap;
   word-wrap: break-word;

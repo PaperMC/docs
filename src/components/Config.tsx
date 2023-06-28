@@ -18,13 +18,13 @@ const YamlNodeWithDescription: React.FC<{ name: string, node: YamlNode; indentLe
 
     return (
         <div
-            className={`indent with-value`}
+            className={`indent`}
             onClick={toggleDescription}
             style={{ paddingLeft: `${indentLevel * 20}px` }}
         >
             {showDescription ? (
                 <>
-                    <div>{`${name}`}</div>
+                    <div className={"with-value"}>{`${name}`}</div>
                     <div className="description" style={{ paddingLeft: `${(indentLevel + 1) * 20}px` }}>
                         Default: {node.default.toString()}
                     </div>
@@ -33,7 +33,7 @@ const YamlNodeWithDescription: React.FC<{ name: string, node: YamlNode; indentLe
                     </div>
                 </>
             ) : (
-                <div className="description">{`${name}`}: {`${node.default.toString()}`}</div>
+                <div className="description with-value">{`${name}`}: {`${node.default.toString()}`}</div>
             )}
         </div>
     );

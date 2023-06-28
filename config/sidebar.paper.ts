@@ -108,6 +108,14 @@ const paper: SidebarsConfig = {
                 "dev/api/event-api/handler-lists",
               ],
             },
+            {
+              type: "category",
+              label: "Component API",
+              collapsed: true,
+              items: [
+                "dev/api/component-api/intro",
+              ]
+            },
             "dev/api/roadmap",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",

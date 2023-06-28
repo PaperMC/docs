@@ -128,3 +128,25 @@ html[data-theme="dark"] {
   /* prevent text wrapping changes by shifting text to match new border */
   padding-left: calc(var(--ifm-menu-link-padding-horizontal) - var(--size));
 }
+
+.with-value {
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.with-value:hover {
+  color: #005db4;
+}
+
+.indent {
+  margin-left: 20px;
+}
+
+.with-value {
+  cursor: pointer;
+}
+
+.description {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}

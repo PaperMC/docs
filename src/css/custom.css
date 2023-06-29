@@ -146,3 +146,23 @@ html[data-theme="dark"] {
   white-space: pre-wrap;
   word-wrap: break-word;
 }
+
+.highlight {
+  background-color: #ffed63;
+  border-radius: 0.2em;
+}
+
+.search-input {
+  display: inline-block;
+  position: relative;
+  margin: 0 0 15px 0;
+}
+
+.search-input input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--ifm-color-primary);
+  border-radius: 4px;
+  font-size: 14px;
+  outline-color: var(--ifm-color-primary);
+}

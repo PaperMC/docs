@@ -40,6 +40,9 @@ const YamlNodeWithDescription: React.FC<{
 }> = ({ name, node, indentLevel = 0, searchString }) => {
     const [showDescription, setShowDescription] = useState(false);
 
+    node.default = node.default || 'N/A';
+    node.description = node.description || 'N/A';
+
     const toggleDescription = () => {
         setShowDescription(!showDescription);
     };
@@ -96,7 +99,7 @@ const renderYamlData = (
 
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object') {
-            if ('default' in value && 'description' in value) {
+            if ('default' in value || 'description' in value) {
                 renderedNodes.push(
                     <YamlNodeWithDescription
                         key={key}
@@ -111,7 +114,7 @@ const renderYamlData = (
                     <div
                         key={key}
                         className={`indent`}
-                        style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px` }}
+                        style={{ paddingLeft: `${(indentLevel + 1) * INDENT_SIZE}px` }}
                     >
                         {key}:
                         {renderYamlData(value as YamlData, indentLevel + 1, searchString)}

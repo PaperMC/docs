@@ -139,7 +139,7 @@ html[data-theme="dark"] {
 }
 
 .indent {
-  margin-left: 20px;
+  margin-left: 10px;
 }
 
 .description {
@@ -148,7 +148,7 @@ html[data-theme="dark"] {
 }
 
 .highlight {
-  background-color: #ffed63;
+  background-color: #5972d9;
   border-radius: 0.2em;
 }
 
@@ -156,6 +156,11 @@ html[data-theme="dark"] {
   display: inline-block;
   position: relative;
   margin: 0 0 15px 0;
+}
+
+.search-input input:focus {
+  border: 1px solid var(--ifm-color-primary);;
+  box-shadow: 0 0 10px #719ECE;
 }
 
 .search-input input {

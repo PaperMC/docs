@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import ReactMarkdown from 'react-markdown';
+
+const INDENT_SIZE = 15;
 
 interface YamlNode {
     default: string | number | boolean;
@@ -9,7 +12,11 @@ interface YamlData {
     [key: string]: YamlNode | YamlData;
 }
 
-const YamlNodeWithDescription: React.FC<{ name: string, node: YamlNode; indentLevel?: number }> = ({ name, node, indentLevel = 0 }) => {
+const YamlNodeWithDescription: React.FC<{
+    name: string;
+    node: YamlNode;
+    indentLevel?: number;
+}> = ({ name, node, indentLevel = 0 }) => {
     const [showDescription, setShowDescription] = useState(false);
 
     const toggleDescription = () => {
@@ -17,47 +24,47 @@ const YamlNodeWithDescription: React.FC<{ name: string, node: YamlNode; indentLe
     };
 
     return (
-        <div
-            className={`indent`}
-            onClick={toggleDescription}
-            style={{ paddingLeft: `${indentLevel * 20}px` }}
-        >
+        <div className={`indent`} style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px` }}>
             {showDescription ? (
                 <>
-                    <div className={"with-value"}>{`${name}`}</div>
-                    <div className="description" style={{ paddingLeft: `${(indentLevel + 1) * 20}px` }}>
-                        Default: {node.default.toString()}
-                    </div>
-                    <div className="description" style={{ paddingLeft: `${(indentLevel + 1) * 20}px` }}>
-                        Description: {node.description.toString()}
+                    <div className={'with-value'} onClick={toggleDescription} style={{marginBottom: 10}}>{name}:</div>
+                    <div
+                        className="description"
+                        style={{ paddingLeft: `${(indentLevel + 1) * INDENT_SIZE}px` }}
+                    >
+                        <ReactMarkdown children={"**Default**: " + node.default.toString()}/>
+                        <ReactMarkdown children={"**Description**: " + node.description.toString()}/>
                     </div>
                 </>
             ) : (
-                <div className="description with-value">{`${name}`}: {`${node.default.toString()}`}</div>
+                <div className="description with-value" onClick={toggleDescription}>
+                    {name}: {node.default.toString()}
+                </div>
             )}
         </div>
     );
-
 };
 
-const renderYamlData = (
-    data: YamlData,
-    indentLevel: number = 0
-): JSX.Element[] => {
+const renderYamlData = (data: YamlData, indentLevel: number = 0): JSX.Element[] => {
     const renderedNodes: JSX.Element[] = [];
 
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object') {
             if ('default' in value && 'description' in value) {
                 renderedNodes.push(
-                    <YamlNodeWithDescription key={key} name={key} node={value as YamlNode} indentLevel={indentLevel + 1} />
+                    <YamlNodeWithDescription
+                        key={key}
+                        name={key}
+                        node={value as YamlNode}
+                        indentLevel={indentLevel + 1}
+                    />
                 );
             } else {
                 renderedNodes.push(
                     <div
                         key={key}
                         className={`indent`}
-                        style={{ paddingLeft: `${indentLevel * 20}px` }}
+                        style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px` }}
                     >
                         {key}:
                         {renderYamlData(value as YamlData, indentLevel + 1)}

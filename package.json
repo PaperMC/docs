@@ -30,7 +30,8 @@
     "js-yaml": "4.1.0",
     "prism-react-renderer": "2.0.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-markdown": "8.0.7"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "0.0.0-5566",

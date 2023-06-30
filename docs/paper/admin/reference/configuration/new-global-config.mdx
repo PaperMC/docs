@@ -4,6 +4,14 @@ import React from 'react';
 import Config from '../../../../../src/components/Config';
 import yaml from 'js-yaml';
 
+:::info
+
+The below YAML shows you the structure and default values for the global configuration.
+
+Click on a leaf node to view the description for that setting.
+
+:::
+
 <Config
     data={yaml.load(`
 chunk-loading:
@@ -213,6 +221,8 @@ proxies:
   bungee-cord:
     online-mode:
       default: 'true'
+      description: Instructs the server how to handle player UUIDs and data when behind
+        BungeeCord.
   velocity:
     enabled:
       default: 'false'
@@ -306,7 +316,6 @@ watchdog:
     default: '5000'
     description: The interval in milliseconds between printed thread dumps while the
       server is
-
 `)}
 />
 

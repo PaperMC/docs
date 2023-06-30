@@ -66,15 +66,13 @@ const YamlNodeWithDescription: React.FC<{
         <div className={`indent`} style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px` }}>
             {showDescription ? (
                 <>
-                    <div className={'with-value'} onClick={toggleDescription} style={{marginBottom: 10}}>{highlightSearchString(name, searchString)}:</div>
+                    <div className={'with-value'} onClick={toggleDescription} style={{marginBottom: 10}}>
+                        {highlightSearchString(name, searchString)}: {node.default.toString()}
+                    </div>
                     <div
                         className="description"
                         style={{ paddingLeft: `${(indentLevel + 1) * INDENT_SIZE}px` }}
                     >
-                        <div className="description-section">
-                            <strong>Default:</strong>
-                            <ReactMarkdown>{node.default.toString()}</ReactMarkdown>
-                        </div>
                         <div className="description-section">
                             <strong>Description:</strong>
                             <ReactMarkdown>{node.description.toString()}</ReactMarkdown>

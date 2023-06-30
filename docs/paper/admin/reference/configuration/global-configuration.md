@@ -12,6 +12,20 @@ Global configuration options exposed by Paper will affect all worlds on a server
 function itself. For per-world configuration, see the
 [Per World Configuration Reference](world-configuration.md)
 
+## block-updates
+
+### disable-noteblock-updates
+- **default**: `false`
+- **description**: Whether to disable any form of block updates for note blocks on the server. Disabling block updates
+  leads to note blocks no longer updating their block state, allowing for technically invalid note blocks to remain in
+  the world, which might be useful for mapmakers.
+
+### disable-tripwire-updates
+- **default**: `false`
+- **description**: Whether to disable any form of block updates for tripwires on the server. Disabling block updates
+  leads to tripwires no longer updating their block state, allowing for technically invalid tripwires to remain in
+  the world, which might be useful for mapmakers.
+
 ## chunk-loading
 
 ### autoconfig-send-distance

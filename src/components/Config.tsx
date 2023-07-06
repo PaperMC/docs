@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import style from '../css/markdown-styles.module.css'
+import style from '../css/markdown-styles.module.css';
 import yaml from 'js-yaml';
 
 const INDENT_SIZE = 15;
@@ -16,9 +16,10 @@ interface YamlData {
 
 const YamlNodeWithDescription: React.FC<{
     name: string;
+    parentKey: string;
     node: YamlNode;
     indentLevel?: number;
-}> = ({ name, node, indentLevel = 0, /*searchString*/ }) => {
+}> = ({ name, node, indentLevel = 0 , parentKey}) => {
     const [showDescription, setShowDescription] = useState(false);
 
     node.default = node.default || 'N/A';
@@ -28,8 +29,18 @@ const YamlNodeWithDescription: React.FC<{
         setShowDescription(!showDescription);
     };
 
+    useEffect(() => {
+        if (window.location.hash === `#${parentKey + "_" + name.replace(/-/g, "_")}`) {
+            setShowDescription(true);
+            const element = document.getElementById(parentKey + "_" + name.replace(/-/g, "_"));
+            if (element) {
+                element.scrollIntoView();
+            }
+        }
+    }, [name]);
+
     return (
-        <div style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px`}}>
+        <div style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px`}} id={parentKey + "_" + name.replace(/-/g, "_")}>
             {showDescription ? (
                 <>
                     <div className={'with-value-active'} onClick={toggleDescription} style={{marginBottom: 10}}>
@@ -57,6 +68,7 @@ const YamlNodeWithDescription: React.FC<{
 const renderYamlData = (
     data: YamlData,
     indentLevel: number = 0,
+    parentKey?: string
 ): JSX.Element[] => {
     const renderedNodes: JSX.Element[] = [];
 
@@ -67,6 +79,7 @@ const renderYamlData = (
                     <YamlNodeWithDescription
                         key={key}
                         name={key}
+                        parentKey={parentKey}
                         node={value as YamlNode}
                         indentLevel={indentLevel + 1}
                     />
@@ -78,7 +91,8 @@ const renderYamlData = (
                         style={{ paddingLeft: `${(indentLevel + 1) * INDENT_SIZE}px` }}
                     >
                         {key}:
-                        {renderYamlData(value as YamlData, indentLevel + 1)}
+                        {renderYamlData(value as YamlData, indentLevel + 1,
+                            parentKey ? parentKey + "_" + key.replace(/-/g, "_") : key.replace(/-/g, "_"))}
                     </div>
                 );
             }
@@ -88,12 +102,12 @@ const renderYamlData = (
     return renderedNodes;
 };
 
-export default function Config({ data }: String): JSX.Element {
+export default function Config({ data }: { data: string }): JSX.Element {
     let ymlData: YamlData = yaml.load(data);
     return (
         <div>
-            <pre>{renderYamlData(ymlData, 0)}</pre>
-            <div style={{display: "none"}}>{data}</div>
+            <pre>{renderYamlData(ymlData, 0, "")}</pre>
+            <div style={{ display: 'none' }}>{data}</div>
         </div>
     );
 }

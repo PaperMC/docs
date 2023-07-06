@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Config from '../../../../../src/components/Config';
-import yaml from 'js-yaml';
 
 :::info
 
@@ -13,7 +12,7 @@ Click on a leaf node to view the description for that setting.
 :::
 
 <Config
-    data={yaml.load(`
+    data={`
 anticheat:
   anti-xray:
     enabled:
@@ -685,6 +684,6 @@ unsupported-settings:
     default: 'true'
     description: 'If set to false, the creation of invulnerable end crystals will
       be allowed. Fixes [MC-108513](https://bugs.mojang.com/browse/MC-108513). '
-`)}
+`}
 />
 

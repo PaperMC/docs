@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Config from '../../../../../src/components/Config';
-import yaml from 'js-yaml';
 
 :::info
 
@@ -13,7 +12,7 @@ Click on a leaf node to view the description for that setting.
 :::
 
 <Config
-    data={yaml.load(`
+    data={`
 chunk-loading:
   autoconfig-send-distance:
     default: 'true'
@@ -351,7 +350,6 @@ watchdog:
     default: '5000'
     description: 'The interval in milliseconds between printed thread dumps while
       the server is hanging. '
-
-`)}
+`}
 />
 

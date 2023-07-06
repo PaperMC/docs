@@ -135,11 +135,12 @@ html[data-theme="dark"] {
 }
 
 .with-value:hover {
-  color: #005db4;
+  color: var(--ifm-color-primary);
 }
 
-.indent {
-  margin-left: 10px;
+.with-value-active {
+  color: var(--ifm-color-primary);
+  cursor: pointer;
 }
 
 .indent-2 {
@@ -177,7 +178,7 @@ html[data-theme="dark"] {
 }
 
 .outlined-box {
-  border: 1px solid #ccc;
+  border: 2px solid #777777;
   border-radius: 4px;
   padding: 8px;
 }

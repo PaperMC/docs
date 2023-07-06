@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import style from '../css/markdown-styles.module.css'
+import yaml from 'js-yaml';
 
 const INDENT_SIZE = 15;
 
@@ -13,32 +14,11 @@ interface YamlData {
     [key: string]: YamlNode | YamlData;
 }
 
-function highlightSearchString(name, searchString) {
-    if (searchString.length === 0) {
-        return <span>{name}</span>;
-    }
-
-    const regex = new RegExp(`(${searchString})`, 'gi');
-    const parts = name.split(regex);
-
-    return (
-        <span>
-            {parts.map((part, index) => {
-                if (part.toLowerCase() === searchString.toLowerCase()) {
-                    return <span key={index} className="highlight">{part}</span>;
-                }
-                return part;
-            })}
-        </span>
-    );
-}
-
 const YamlNodeWithDescription: React.FC<{
     name: string;
     node: YamlNode;
     indentLevel?: number;
-    searchString: string;
-}> = ({ name, node, indentLevel = 0, searchString }) => {
+}> = ({ name, node, indentLevel = 0, /*searchString*/ }) => {
     const [showDescription, setShowDescription] = useState(false);
 
     node.default = node.default || 'N/A';
@@ -48,27 +28,12 @@ const YamlNodeWithDescription: React.FC<{
         setShowDescription(!showDescription);
     };
 
-    useEffect(() => {
-        const handleSearch = (event: KeyboardEvent) => {
-            if (searchString.length === 0) {
-                return;
-            }
-            setShowDescription(name.toLowerCase().includes(searchString.toLowerCase()));
-        };
-
-        document.addEventListener('keydown', handleSearch);
-
-        return () => {
-            document.removeEventListener('keydown', handleSearch);
-        };
-    }, [searchString, name]);
-
     return (
-        <div className={`indent`} style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px`}}>
+        <div style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px`}}>
             {showDescription ? (
                 <>
-                    <div className={'with-value'} onClick={toggleDescription} style={{marginBottom: 10}}>
-                        {highlightSearchString(name, searchString)}: {node.default.toString()}
+                    <div className={'with-value-active'} onClick={toggleDescription} style={{marginBottom: 10}}>
+                        {name}: {node.default.toString()}
                     </div>
                     <div
                         className="description indent-2"
@@ -82,7 +47,7 @@ const YamlNodeWithDescription: React.FC<{
                 </>
             ) : (
                 <div className="description with-value" onClick={toggleDescription}>
-                    {highlightSearchString(name, searchString)}: {node.default.toString()}
+                    {name}: {node.default.toString()}
                 </div>
             )}
         </div>
@@ -92,7 +57,6 @@ const YamlNodeWithDescription: React.FC<{
 const renderYamlData = (
     data: YamlData,
     indentLevel: number = 0,
-    searchString: string
 ): JSX.Element[] => {
     const renderedNodes: JSX.Element[] = [];
 
@@ -105,18 +69,16 @@ const renderYamlData = (
                         name={key}
                         node={value as YamlNode}
                         indentLevel={indentLevel + 1}
-                        searchString={searchString}
                     />
                 );
             } else {
                 renderedNodes.push(
                     <div
                         key={key}
-                        className={`indent`}
                         style={{ paddingLeft: `${(indentLevel + 1) * INDENT_SIZE}px` }}
                     >
                         {key}:
-                        {renderYamlData(value as YamlData, indentLevel + 1, searchString)}
+                        {renderYamlData(value as YamlData, indentLevel + 1)}
                     </div>
                 );
             }
@@ -126,36 +88,12 @@ const renderYamlData = (
     return renderedNodes;
 };
 
-interface ConfigProps {
-    data: YamlData;
-}
-
-export default function Config({ data }: ConfigProps): JSX.Element {
-    const [searchString, setSearchString] = useState('');
-    const inputRef = useRef<HTMLInputElement>(null);
-
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchString(event.target.value);
-    };
-
-    useEffect(() => {
-        if (inputRef.current) {
-            inputRef.current.focus();
-        }
-    }, []);
-
+export default function Config({ data }: String): JSX.Element {
+    let ymlData: YamlData = yaml.load(data);
     return (
         <div>
-            <div className="search-input">
-                <input
-                    ref={inputRef}
-                    type="text"
-                    value={searchString}
-                    onChange={handleSearchChange}
-                    placeholder="Search"
-                />
-            </div>
-            <pre>{renderYamlData(data, 0, searchString)}</pre>
+            <pre>{renderYamlData(ymlData, 0)}</pre>
+            <div style={{display: "none"}}>{data}</div>
         </div>
     );
 }

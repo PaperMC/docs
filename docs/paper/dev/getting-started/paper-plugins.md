@@ -61,7 +61,7 @@ With Paper Plugins, dependencies are split into two sections:
 - `bootstrap` - These are dependencies that you will be using in the [bootstrap](#bootstrapper).
 - `server` - These are dependencies that are used for the core functionality of your plugin, whilst the server is running.
 
-Let's Take a look at a Dependency:
+Let's take a look at a dependency:
 ```yml
 RegistryPlugin:
   load: BEFORE # Defaults to OMIT
@@ -75,7 +75,7 @@ RegistryPlugin:
 
 :::note[Cyclic Loading]
 
-Note that in certain cases plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
+Note that in certain cases, plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
 Please read the [cyclic loading guide](#cyclic-plugin-loading) for more information.
 :::
 

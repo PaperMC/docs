@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
+import style from '../css/markdown-styles.module.css'
 
 const INDENT_SIZE = 15;
 
@@ -63,19 +64,19 @@ const YamlNodeWithDescription: React.FC<{
     }, [searchString, name]);
 
     return (
-        <div className={`indent`} style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px` }}>
+        <div className={`indent`} style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px`}}>
             {showDescription ? (
                 <>
                     <div className={'with-value'} onClick={toggleDescription} style={{marginBottom: 10}}>
                         {highlightSearchString(name, searchString)}: {node.default.toString()}
                     </div>
                     <div
-                        className="description"
-                        style={{ paddingLeft: `${(indentLevel + 1) * INDENT_SIZE}px` }}
+                        className="description indent-2"
+                        style={{marginBottom: 10}}
                     >
-                        <div className="description-section">
+                        <div className="outlined-box description-section">
                             <strong>Description:</strong>
-                            <ReactMarkdown>{node.description.toString()}</ReactMarkdown>
+                            <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
                         </div>
                     </div>
                 </>

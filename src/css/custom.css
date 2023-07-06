@@ -142,6 +142,10 @@ html[data-theme="dark"] {
   margin-left: 10px;
 }
 
+.indent-2 {
+  margin-left: 20px;
+}
+
 .description {
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -170,4 +174,14 @@ html[data-theme="dark"] {
   border-radius: 4px;
   font-size: 14px;
   outline-color: var(--ifm-color-primary);
+}
+
+.outlined-box {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px;
+}
+
+.description-text {
+  margin-bottom: 0;
 }

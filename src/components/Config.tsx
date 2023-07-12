@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import style from '../css/markdown-styles.module.css';
 import yaml from 'js-yaml';
 
-const INDENT_SIZE = 15;
+const INDENT_SIZE = 30;
 
 interface YamlNode {
     default: string | number | boolean;
@@ -14,13 +14,21 @@ interface YamlData {
     [key: string]: YamlNode | YamlData;
 }
 
+const scrollIntoView = (id: string) => {
+    const yOffset = -60;
+    const element = document.getElementById(id);
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: 'smooth' });
+};
+
 const YamlNodeWithDescription: React.FC<{
     name: string;
     parentKey: string;
     node: YamlNode;
-    indentLevel?: number;
-}> = ({ name, node, indentLevel = 0 , parentKey}) => {
+}> = ({ name, node, parentKey }) => {
     const [showDescription, setShowDescription] = useState(false);
+    const [copied, setCopied] = useState(false);
 
     node.default = node.default || 'N/A';
     node.description = node.description || 'N/A';
@@ -29,28 +37,43 @@ const YamlNodeWithDescription: React.FC<{
         setShowDescription(!showDescription);
     };
 
+    const clickedHashCopy = () => {
+        const fullURL = window.location.href.split("#")[0];
+        const hash = parentKey + "_" + name.replace(/-/g, "_")
+        const hashUrlPart = `#${hash}`;
+        navigator.clipboard.writeText(fullURL + hashUrlPart);
+        setCopied(true);
+        scrollIntoView(hash);
+
+        // Hide the message after 2 seconds
+        setTimeout(() => {
+            setCopied(false);
+        }, 2000);
+    };
+
     useEffect(() => {
-        if (window.location.hash === `#${parentKey + "_" + name.replace(/-/g, "_")}`) {
+        const hash = parentKey + "_" + name.replace(/-/g, "_")
+        if (window.location.hash === `#${hash}`) {
             setShowDescription(true);
-            const element = document.getElementById(parentKey + "_" + name.replace(/-/g, "_"));
-            if (element) {
-                element.scrollIntoView();
-            }
+            scrollIntoView(hash);
         }
     }, [name]);
 
     return (
-        <div style={{ paddingLeft: `${indentLevel * INDENT_SIZE}px`}} id={parentKey + "_" + name.replace(/-/g, "_")}>
+        <div style={{ paddingLeft: `${INDENT_SIZE}px` }} id={parentKey + "_" + name.replace(/-/g, "_")}>
             {showDescription ? (
                 <>
-                    <div className={'with-value-active'} onClick={toggleDescription} style={{marginBottom: 10}}>
-                        {name}: {node.default.toString()}
+                    <div className={'with-value-active description'} style={{ marginBottom: 10 }}>
+                        <a onClick={toggleDescription}>{name}: {node.default.toString() + ' '}</a>
+                        <span className="config-anchor with-value-active-colour" onClick={clickedHashCopy}>#</span>
+                        {copied && <div className="copied-message">URL Copied!</div>}
                     </div>
+
                     <div
                         className="description indent-2"
-                        style={{marginBottom: 10}}
+                        style={{ marginBottom: 10 }}
                     >
-                        <div className="outlined-box description-section">
+                        <div className="outlined-box description-section colour-offset-box">
                             <strong>Description:</strong>
                             <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
                         </div>
@@ -67,7 +90,6 @@ const YamlNodeWithDescription: React.FC<{
 
 const renderYamlData = (
     data: YamlData,
-    indentLevel: number = 0,
     parentKey?: string
 ): JSX.Element[] => {
     const renderedNodes: JSX.Element[] = [];
@@ -81,18 +103,19 @@ const renderYamlData = (
                         name={key}
                         parentKey={parentKey}
                         node={value as YamlNode}
-                        indentLevel={indentLevel + 1}
                     />
                 );
             } else {
                 renderedNodes.push(
                     <div
                         key={key}
-                        style={{ paddingLeft: `${(indentLevel + 1) * INDENT_SIZE}px` }}
+                        style={{ paddingLeft: `${INDENT_SIZE}px` }}
                     >
                         {key}:
-                        {renderYamlData(value as YamlData, indentLevel + 1,
-                            parentKey ? parentKey + "_" + key.replace(/-/g, "_") : key.replace(/-/g, "_"))}
+                        {renderYamlData(
+                            value as YamlData,
+                            parentKey ? parentKey + "_" + key.replace(/-/g, "_") : key.replace(/-/g, "_")
+                        )}
                     </div>
                 );
             }
@@ -106,7 +129,7 @@ export default function Config({ data }: { data: string }): JSX.Element {
     let ymlData: YamlData = yaml.load(data);
     return (
         <div>
-            <pre>{renderYamlData(ymlData, 0, "")}</pre>
+            <pre>{renderYamlData(ymlData, "")}</pre>
             <div style={{ display: 'none' }}>{data}</div>
         </div>
     );

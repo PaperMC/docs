@@ -1,3 +1,7 @@
+---
+slug: /dev/reading-stacktraces
+---
+
 # Reading Stacktraces
 
 ## What is a stacktrace?
@@ -35,7 +39,9 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because "playe
         at java.lang.Thread.run(Thread.java:833) ~[?:?]
 ```
 
--   Firstly, we can see on the top line, the cause of the exception:
+-   Firstly, we can see that this certain error occurred when the `PluginEnableEvent` was being handled by the `TestPlugin`.
+
+-   Then we can see on the second line, the cause of the exception:
     > `java.lang.NullPointerException: Cannot invoke "Object.toString()" because "null" is null`
 
     This tells us that the exception was caused by a `NullPointerException`, 

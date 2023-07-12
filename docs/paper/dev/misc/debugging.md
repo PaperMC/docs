@@ -1,3 +1,7 @@
+---
+slug: /dev/debugging
+---
+
 # Debugging your plugin
 
 Debugging your plugin is vital to being able to fix bugs and issues in your plugin. This page will cover some of the most common debugging techniques.
@@ -39,8 +43,13 @@ Then, click the `+` button in the top left and select `Remote JVM Debug`. You ca
 
 ![](./assets/config_add.png)
 
-Finally, copy the command line arguments from the window, and paste these into your server's startup script. 
-These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`.
+Finally, copy the command line arguments from the window, and paste these into your server's startup script.
+These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`. For example:
+
+```bash
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-1.20.1.jar nogui
+```
+
 Once your server is running, you can use the bug icon in the top right to connect your debugger to the server:
 
 ![](./assets/debugger_connect.png)
@@ -75,3 +84,9 @@ This will pause the code when it reaches that line. You can then use the debugge
 You can inspect the values of each of the variables in the current scope. 
 You can also use the buttons in the top to step from one breakpoint to the next.
 If needed, you can also use the text box at the top to evaluate expressions for debugging purposes.
+
+### Using direct debugging
+
+Direct debugging will allow you to run the server directly from your IDE, and will allow you to use breakpoints and step through your code.
+We can achieve this by using [JPenilla's Gradle plugin](https://github.com/jpenilla/run-task) to run the server directly from the IDE.
+See [here](https://github.com/jpenilla/run-task#basic-usage) for instructions on how to set up the plugin.

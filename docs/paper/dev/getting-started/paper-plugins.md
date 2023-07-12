@@ -19,7 +19,7 @@ This is experimental and may be subject to change.
 
 ## How do I use them?
 Similarly to Bukkit plugins, you have to introduce a ``paper-plugin.yml`` file into your jar resources folder.
-This can act as a drop in replacement for ``plugin.yml``, allowing you to specifically target the Paper platform.
+This will not act as a drop in replacement for ``plugin.yml``, as some things, as outlined in this guide, need to be declared differently.
 
 It should be noted you still have the ability to include both ``paper-plugin.yml``and ``plugin.yml`` in the same jar.
 
@@ -41,7 +41,7 @@ Paper Plugins change how to declare dependencies in your `paper-plugin.yml`:
 ```yml
 dependencies:
   bootstrap:
-    # Lets say that RegistryPlugin has some registry elements that this plugin requires.
+    # Lets say that RegistryPlugin registers some data that your plugin needs to use
     # We don't need this during runtime, so it's not required in the server section. However
     # can be added to both if needed
     RegistryPlugin:
@@ -69,9 +69,9 @@ RegistryPlugin:
   join-classpath: true # Defaults to true
 ```
 
-- `load`: (`BEFORE`|`AFTER`|`OMIT`) Specifies whether this plugin should before or after **your** plugin.
+- `load`: (`BEFORE`|`AFTER`|`OMIT`) Specifies whether this plugin should before or after **your** plugin. Note: Omit has undefined ordering behavior.
 - `required`: Whether this plugin is required for your plugin to load.
-- `join-classpath`: Whether your plugin should have access to their classpath.
+- `join-classpath`: Whether your plugin should have access to their classpath. This is used for plugins that need to access other plugins internals directly.
 
 :::note[Cyclic Loading]
 
@@ -160,7 +160,7 @@ you must call `ConfigurationSerialization.registerClass(Class)` before you attem
 
 ### Classloading Isolation
 Paper plugins have isolated classloaders, meaning that relocating dependencies will not be necessary.
-Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc.
+Paper plugins are also not able to access each other unless given explicit access by depending on another plugin.
 This prevents plugins from accidentally accessing your dependencies, and in general helps minimise issues.
 
 You can declare this visibility inside the [dependencies](#dependency-declaration) section:

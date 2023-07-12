@@ -2,10 +2,10 @@
 
 Debugging your plugin is vital to being able to fix bugs and issues in your plugin. This page will cover some of the most common debugging techniques.
 
-### Randomly printing to the console
+### Printing to the console
 
-One of the most common debugging techniques is to print to the console. This is likely something you've done before as its very simple. 
-It has a few downsides though. It can be hard to find the print statements in the console, and it can be hard to remove them all when you're done debugging.
+One of the most common debugging techniques is to print to the console. This is likely something you've done before, as it's very simple. 
+This has a few downsides, though. It can be hard to find the print statements in the console, and it can be hard to remove them all when you're done debugging. Most notably, you have to recompile your plugin and restart the server to add or remove debugging.
 
 When debugging, you can use `System.out.println("");` to print to the console. It is recommended to use your plugin's logger instead though, 
 as it will be easier to know which plugin the log has come from. This can be done simply with:

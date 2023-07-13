@@ -27,7 +27,7 @@ public final class PluginMessagingSample extends JavaPlugin {
 
 Now that we're registered, we can send messages on the `bungeecord:main` channel.
 
-:::tip[The "bungeecord" and "bungeecord:main" channel]
+:::tip[The "bungeecord" and "bungeecord\:main" channel]
 
 Most plugins are setup for use in BungeeCord (or Waterfall) environments (communicating over a channel called `BungeeCord`).
 We recommend Velocity over BungeeCord, and to ease your transition to using Velocity, it will also respond on these channels as well.

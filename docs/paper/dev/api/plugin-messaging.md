@@ -1,0 +1,183 @@
+---
+slug: /dev/plugin-messaging
+---
+
+# Plugin Messaging
+
+First introduced in [2012](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/),
+Plugin messaging is a way for Paper plugins to communicate with clients. When your servers are behind a proxy, 
+it will allow your Paper plugins to communicate with the proxy server.
+
+## Sending Plugin Messages
+
+First, we're actually going take a look at your Paper server. Your Paper server plugin will need to register that it 
+will be sending on any given plugin channel. You'll should to do this alongside your other event listener registrations.
+
+```java
+public final class PluginMessagingSample extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "bungeecord:main");
+        // Blah blah blah...
+    }
+
+}
+```
+
+Now that we're registered, we can send messages on the `bungeecord:main` channel.
+
+:::tip[The "bungeecord" and "bungeecord:main" channel]
+
+Most plugins are setup for use in BungeeCord (or Waterfall) environments (communicating over a channel called `BungeeCord`).
+We recommend Velocity over BungeeCord, and to ease your transition to using Velocity, it will also respond on these channels as well.
+
+:::
+
+Plugin messages are formatted as byte arrays, and can be sent using the `sendPluginMessage` method on a `Player` object. 
+Let's take a look at an example of sending a plugin message to the `bungeecord:main` channel to send our player to another server.
+
+```java
+public final class PluginMessagingSample extends JavaPlugin implements Listener {
+
+    @Override
+    public void onEnable() {
+        getServer().getPluginManager().registerEvents(this, this);
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "bungeecord:main");
+    }
+
+    @EventHandler
+    public void onPlayerJump(PlayerJumpEvent event) {
+        Player player = event.getPlayer();
+
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Connect");
+        out.writeUTF("hub2");
+        player.sendPluginMessage(this, "bungeecord:main", out.toByteArray());
+    }
+  
+}
+```
+
+:::tip
+
+These channels rely on the Minecraft protocol, and are sent as a special type of packet called a 
+[Plugin Message](https://wiki.vg/Plugin_channels#Plugin_Messages). They piggyback on player connections, so if a player
+is not connected to the server, the server will not be able to send or receive plugin messages.
+
+:::
+
+### What did we just do?
+
+We sent a plugin message on the `bungeecord:main` channel! The message we sent was a byte array that contained two strings converted to bytes: `Connect` and `hub2`.
+
+Our proxy server received the message through the player who triggered the `PlayerJumpEvent` on our Java server. 
+Then, it recognized the channel as it's own, and in alignment with BungeeCord's format sent our player to the `hub2` server.
+
+For BungeeCord, we can think of this message as a case-sensitive command with arguments. 
+Here, our command is `Connect` and our only argument is `hub2` but some "commands" may have multiple arguments. 
+For other channels introduced by client side mods, refer to their documentation to best understand how to format your messages.
+
+### BungeeCord Plugin Message Types
+
+Although we sent a `Connect` message to the proxy there are a few other cases that proxies will act on. 
+These are the following:
+
+| Message Type      | Description                                            | Arguments                                                        | Response                                          |
+|:------------------|:-------------------------------------------------------|:-----------------------------------------------------------------|:--------------------------------------------------|
+| `Connect`         | Connects the player to the specified server.           | `server name`                                                    | N/A                                               |
+| `ConnectOther`    | Connects another player to the specified server.       | `player name`, `server name`                                     | N/A                                               |
+| `IP`              | Returns the IP of the specified player.                | `player name`                                                    | `IP`, `port`                                      |
+| `PlayerCount`     | Returns the number of players on the specified server. | `server name`                                                    | `server name`, player count`                      |
+| `PlayerList`      | Returns a list of players on the specified server.     | `server name`                                                    | `server name`, `CSV player names`                 |
+| `GetServers`      | Returns a list of all servers.                         | N/A                                                              | `CSV server names`                                |
+| `Message`         | Sends a message to the specified player.               | `player name`, `message`                                         | N/A                                               |
+| `GetServer`       | Returns the server the player is connected to.         | N/A                                                              | `server name`                                     |
+| `UUID`            | Returns the UUID of player.                            | N/A                                                              | `UUID`                                            |
+| `UUIDOther`       | Returns the UUID of the specified player.              | `player name`                                                    | `player name`, `UUID`                             |
+| `ServerIp`        | Returns the IP of the specified server.                | `server name`                                                    | `server name`, `IP`, `port`                       |
+| `KickPlayer`      | Kicks the specified player.                            | `player name`, `reason`                                          | N/A                                               |
+| `Forward`         | Forwards a plugin message to another server.           | `server`, `subchannel`, `size of plugin message`, `message`      | `subchannel`, `size of plugin message`, `message` |
+| `ForwardToPlayer` | Forwards a plugin message to another player.           | `player name`, `subchannel`, `size of plugin message`, `message` | `subchannel`, `size of plugin message`, `message` |
+
+##### Example: `PlayerCount`
+
+```java
+public class MyPlugin extends JavaPlugin implements PluginMessageListener {
+    
+    @Override
+    public void onEnable() {
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+        
+        Player player = ...;
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("PlayerCount");
+        out.writeUTF("lobby");
+        player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
+        // The response will be handled in onPluginMessageReceived
+    }
+
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        if (!channel.equals("BungeeCord")) {
+            return;
+        }
+        ByteArrayDataInput in = ByteStreams.newDataInput(message);
+        String subchannel = in.readUTF();
+        if (subchannel.equals("PlayerCount")) {
+            // This is our response to the PlayerCount request
+            String server = in.readUTF();
+            int playerCount = in.readInt();
+        }
+    }
+}
+```
+
+##### Example: `Forward`
+
+```java
+public class MyPlugin extends JavaPlugin implements PluginMessageListener {
+    
+    @Override
+    public void onEnable() {
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+        
+        Player player = ...;
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Forward");
+        out.writeUTF("ALL"); // This is the target server. "ALL" will message all servers appart from the one sending the message
+        out.writeUTF("SecretInternalChannel"); // This is the channel.
+
+        ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
+        DataOutputStream msgout = new DataOutputStream(msgbytes);
+        msgout.writeUTF("Paper is the meaning of life"); // You can do anything you want with msgout
+        msgout.writeShort(42);
+
+        out.writeShort(msgbytes.toByteArray().length); // This is the length.
+        out.write(msgbytes.toByteArray()); // This is the message.
+        
+        player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
+        // The response will be handled in onPluginMessageReceived
+    }
+
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        if (!channel.equals("BungeeCord")) {
+            return;
+        }
+        ByteArrayDataInput in = ByteStreams.newDataInput(message);
+        String subchannel = in.readUTF();
+        if (subchannel.equals("SecretInternalChannel")) {
+            short len = in.readShort();
+            byte[] msgbytes = new byte[len];
+            in.readFully(msgbytes);
+
+            DataInputStream msgIn = new DataInputStream(new ByteArrayInputStream(msgbytes));
+            String secretMessage = msgIn.readUTF(); // Read the data in the same way you wrote it
+            short meaningofLife = msgIn.readShort();
+        }
+    }
+}
+```

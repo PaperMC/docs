@@ -57,8 +57,6 @@ const paper: SidebarsConfig = {
               items: [
                 "admin/reference/configuration/global-configuration",
                 "admin/reference/configuration/world-configuration",
-                "admin/reference/configuration/new-world-config",
-                "admin/reference/configuration/new-global-config",
               ],
             },
             "admin/reference/system-properties",

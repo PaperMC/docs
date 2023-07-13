@@ -14,7 +14,7 @@ Java 17, [it's easy to download and install](/misc/java-install).
 :::
 
 | Paper Version  | Recommended Java Version |
-| -------------- | ------------------------ |
+|----------------|--------------------------|
 | 1.8 to 1.11    | Java 8                   |
 | 1.12 to 1.16.4 | Java 11                  |
 | 1.16.5         | Java 16                  |
@@ -54,8 +54,8 @@ disables Vanilla's GUI, so you don't get double interfaces when using the comman
 
 For more advanced Java tuning, see [Aikar's Flags](../how-to/aikars-flags.md).
 
-To configure your server, see the [Global Configuration](../reference/configuration/global-configuration.md) and
-[Per World Configuration](../reference/configuration/world-configuration.md) pages.
+To configure your server, see the [Global Configuration](../reference/configuration/global-configuration.mdx) and
+[Per World Configuration](../reference/configuration/world-configuration.mdx) pages.
 
 ## Updating The Server
 

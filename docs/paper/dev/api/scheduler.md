@@ -123,7 +123,7 @@ scheduler.runTaskLater(
 	20);
 ```
 
-#### Using `Consumer<BukkitTask>`
+#### Using `Consumer<BukkitTask>` {#using-consumerbukkittask}
 
 The `Consumer` interface is used for tasks that require a `BukkitTask` instance (usually in repeated tasks),
 e.g. when you want to cancel the task from inside it.
@@ -192,13 +192,6 @@ scheduler.runTaskTimer(plugin, () -> {
 
 ### A repeating task to be canceled later
 
-This task will run repeatedly, first time after 10 seconds, and then every 5 seconds. After 10 minutes
-the task will be canceled entirely.
-
-```java
-BukkitTask task = scheduler.runTaskTimer(plugin, () -> {
-	server.broadcast(Component.text("Hello, World!"));
-}, 10 * 20, 5 * 20);
-
-scheduler.runTaskLater(plugin, () -> task.cancel(), TimeUnit.MINUTES.toSeconds(10) * 20);
-```
+Cancelling a repeating task requires you to have an instance of a `BukkitTask`.
+After obtaining it, simply use the `cancel()` method.  
+The example on how to use a [`Consumer<BukkitTask>`](#using-consumerbukkittask) already shows exactly how to do it.

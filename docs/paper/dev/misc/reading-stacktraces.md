@@ -55,3 +55,12 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because "playe
 
 -   You can continue to work down the stacktrace, and see the exact path of execution that led to the error. In this case,
     it is server internals, so we can generally ignore it.
+
+## Omitted Stacktraces
+
+In JDK 5, the JVM started to omit stacktraces for certain exceptions. This was common when the JVM had optimised the code,
+and you could get `NullPointerException`s without a stacktrace. In order to fix this, you can pass the `-XX:-OmitStackTraceInFastThrow` flag to the JVM:
+
+```bash
+java -XX:-OmitStackTraceInFastThrow -jar paper.jar
+```

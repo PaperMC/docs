@@ -117,7 +117,7 @@ scheduler.runTaskLater(
 	plugin, 
 	// Lambda:
 	() -> {
-		this.plugin.getServer().broadcast(Component.text("Hello, World!")
+		this.plugin.getServer().broadcast(Component.text("Hello, World!"));
 	},
 	// End of the lambda
 	20);
@@ -141,8 +141,11 @@ public class MyConsumerTask implements Consumer<BukkitTask> {
 	
 	@Override
 	public void accept(BukkitTask task) {
-		if(this.entity.isDead()) task.cancel(); // The entity died, there's no point
-		                                        // in running the code anymore.
+		if(this.entity.isDead()) {
+			task.cancel(); // The entity died, there's no point
+			return;        // in running the code anymore.
+		}
+		
 		this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
 	}
 	
@@ -156,7 +159,10 @@ Or use a lambda expression which again is much cleaner for short and simple task
 
 ```java
 scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
-	if(this.entity.isDead()) task.cancel();
+	if(this.entity.isDead()) {
+		task.cancel();
+		return;
+	}
 	this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
 } /* End of the lambda */, 0, 20);
 ```

@@ -42,7 +42,7 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because "playe
 -   Firstly, we can see that this certain error occurred when the `PluginEnableEvent` was being handled by the `TestPlugin`.
 
 -   Then we can see on the second line, the cause of the exception:
-    > `java.lang.NullPointerException: Cannot invoke "Object.toString()" because "null" is null`
+    > `java.lang.NullPointerException: Cannot invoke "Object.toString()" because "player" is null`
 
     This tells us that the exception was caused by a `NullPointerException`, 
     and that the exception was caused because we tried to call the `toString()` method on a null "player" object.

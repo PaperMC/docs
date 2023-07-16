@@ -120,6 +120,19 @@ const paper: SidebarsConfig = {
             "dev/api/custom-inventory-holder",
           ],
         },
+        {
+          type: "category",
+          label: "Miscellaneous",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "dev/misc/README",
+          },
+          items: [
+            "dev/misc/reading-stacktraces",
+            "dev/misc/debugging",
+          ],
+        },
       ],
     },
   ],

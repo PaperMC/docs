@@ -11,7 +11,8 @@ Plugin messaging is a way for Paper plugins to communicate with clients.
 
 When your servers are behind a proxy, it will allow your Paper plugins to communicate with the proxy server.
 By default, your Velocity server will respond to the `bungeecord:main` channel unless you have disabled 
-`bungee-plugin-message-channel` in the Velocity configuration. Let's take a look at how plugin messaging works, and more importantly, how your Velocity server is already prepared to handle it.
+`bungee-plugin-message-channel` in the Velocity configuration. Let's take a look at how plugin messaging works, 
+and more importantly, how your Velocity server is already prepared to handle it.
 
 ## Sending Plugin Messages
 
@@ -19,7 +20,6 @@ Firstly, our Velocity server will need to register that it will be sending on an
 You should to do this alongside your other event listener registrations:
 
 ```java
-
 @Subscribe
 public void onProxyInitialization(ProxyInitializeEvent event) {
     proxyServer.getChannelRegistrar().register(MinecraftChannelIdentifier.from("bungeecord:main"));

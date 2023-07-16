@@ -18,24 +18,26 @@ public final class PluginMessagingSample extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getServer().getMessenger().registerOutgoingPluginChannel(this, "bungeecord:main");
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Blah blah blah...
     }
 
 }
 ```
 
-Now that we're registered, we can send messages on the `bungeecord:main` channel.
+Now that we're registered, we can send messages on the `BungeeCord` channel.
 
-:::tip[The "bungeecord" and "bungeecord\:main" channel]
+:::tip[The "BungeeCord" and "bungeecord\:main" channel]
 
 Most plugins are setup for use in BungeeCord (or Waterfall) environments (communicating over a channel called `BungeeCord`).
 We recommend Velocity over BungeeCord, and to ease your transition to using Velocity, it will also respond on these channels as well.
 
+`BungeeCord` and `bungeecord:main` will generally operate the same way, but we recommend using `BungeeCord` with Paper.
+
 :::
 
 Plugin messages are formatted as byte arrays and can be sent using the `sendPluginMessage` method on a `Player` object. 
-Let's take a look at an example of sending a plugin message to the `bungeecord:main` channel to send our player to another server.
+Let's take a look at an example of sending a plugin message to the `BungeeCord` channel to send our player to another server.
 
 ```java
 public final class PluginMessagingSample extends JavaPlugin implements Listener {
@@ -43,7 +45,7 @@ public final class PluginMessagingSample extends JavaPlugin implements Listener 
     @Override
     public void onEnable() {
         getServer().getPluginManager().registerEvents(this, this);
-        getServer().getMessenger().registerOutgoingPluginChannel(this, "bungeecord:main");
+        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     @EventHandler
@@ -53,7 +55,7 @@ public final class PluginMessagingSample extends JavaPlugin implements Listener 
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Connect");
         out.writeUTF("hub2");
-        player.sendPluginMessage(this, "bungeecord:main", out.toByteArray());
+        player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
     }
   
 }
@@ -69,7 +71,7 @@ player connected to the server, it will not be able to send or receive plugin me
 
 ### What did we just do?
 
-We sent a plugin message on the `bungeecord:main` channel! The message we sent was a byte array that contained two strings converted to bytes: `Connect` and `hub2`.
+We sent a plugin message on the `BungeeCord` channel! The message we sent was a byte array that contained two strings converted to bytes: `Connect` and `hub2`.
 
 Our proxy server received the message through the player who triggered the `PlayerJumpEvent` on our Java server. 
 Then, it recognized the channel as its own and in alignment with BungeeCord's format sent our player to the `hub2` server.

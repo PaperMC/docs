@@ -136,6 +136,16 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
 
 ##### Example: `Forward`
 
+Forwards a plugin message to another server. This is useful for server-to-server communication within a proxy network.
+For example, if a certain player is banned on one server, you can forward a message to all other servers to ban them there too.
+
+:::caution[Example of banning a player on all servers]
+
+This is not a recommended way to ban players due to the fact that there may not be anyone online on the target servers, 
+but it is an example of how this can be used.
+
+:::
+
 ```java
 public class MyPlugin extends JavaPlugin implements PluginMessageListener {
     
@@ -153,7 +163,7 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
         ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
         DataOutputStream msgout = new DataOutputStream(msgbytes);
         msgout.writeUTF("Paper is the meaning of life"); // You can do anything you want with msgout
-        msgout.writeShort(42);
+        msgout.writeShort(42); // Writing a random short
 
         out.writeShort(msgbytes.toByteArray().length); // This is the length.
         out.write(msgbytes.toByteArray()); // This is the message.

@@ -10,8 +10,8 @@ it will allow your Paper plugins to communicate with the proxy server.
 
 ## Sending Plugin Messages
 
-First, we're actually going take a look at your Paper server. Your Paper server plugin will need to register that it 
-will be sending on any given plugin channel. You'll should to do this alongside your other event listener registrations.
+First, we're going to take a look at your Paper server. Your Paper server plugin will need to register that it 
+will be sending on any given plugin channel. You should to do this alongside your other event listener registrations.
 
 ```java
 public final class PluginMessagingSample extends JavaPlugin {
@@ -27,14 +27,14 @@ public final class PluginMessagingSample extends JavaPlugin {
 
 Now that we're registered, we can send messages on the `bungeecord:main` channel.
 
-:::tip[The "bungeecord" and "bungeecord:main" channel]
+:::tip[The "bungeecord" and "bungeecord\:main" channel]
 
 Most plugins are setup for use in BungeeCord (or Waterfall) environments (communicating over a channel called `BungeeCord`).
 We recommend Velocity over BungeeCord, and to ease your transition to using Velocity, it will also respond on these channels as well.
 
 :::
 
-Plugin messages are formatted as byte arrays, and can be sent using the `sendPluginMessage` method on a `Player` object. 
+Plugin messages are formatted as byte arrays and can be sent using the `sendPluginMessage` method on a `Player` object. 
 Let's take a look at an example of sending a plugin message to the `bungeecord:main` channel to send our player to another server.
 
 ```java
@@ -62,8 +62,8 @@ public final class PluginMessagingSample extends JavaPlugin implements Listener 
 :::tip
 
 These channels rely on the Minecraft protocol, and are sent as a special type of packet called a 
-[Plugin Message](https://wiki.vg/Plugin_channels#Plugin_Messages). They piggyback on player connections, so if a player
-is not connected to the server, the server will not be able to send or receive plugin messages.
+[Plugin Message](https://wiki.vg/Plugin_channels#Plugin_Messages). They piggyback on player connections, so if there is no 
+player connected to the server, it will not be able to send or receive plugin messages.
 
 :::
 
@@ -72,15 +72,15 @@ is not connected to the server, the server will not be able to send or receive p
 We sent a plugin message on the `bungeecord:main` channel! The message we sent was a byte array that contained two strings converted to bytes: `Connect` and `hub2`.
 
 Our proxy server received the message through the player who triggered the `PlayerJumpEvent` on our Java server. 
-Then, it recognized the channel as it's own, and in alignment with BungeeCord's format sent our player to the `hub2` server.
+Then, it recognized the channel as its own and in alignment with BungeeCord's format sent our player to the `hub2` server.
 
 For BungeeCord, we can think of this message as a case-sensitive command with arguments. 
-Here, our command is `Connect` and our only argument is `hub2` but some "commands" may have multiple arguments. 
+Here, our command is `Connect` and our only argument is `hub2`, but some "commands" may have multiple arguments. 
 For other channels introduced by client side mods, refer to their documentation to best understand how to format your messages.
 
 ### BungeeCord Plugin Message Types
 
-Although we sent a `Connect` message to the proxy there are a few other cases that proxies will act on. 
+Although we sent a `Connect` message to the proxy, there are a few other cases that proxies will act on. 
 These are the following:
 
 | Message Type      | Description                                            | Arguments                                                        | Response                                          |

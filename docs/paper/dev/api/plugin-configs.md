@@ -114,4 +114,4 @@ method that takes a Map as a parameter and then returns an instance of the `Tele
 ## Configurate
 
 Configurate is a third party for working with configurations maintained by the Sponge project. This project is used internally by Paper
-for our configurations and offers many features that plain YAML files do not. See their docs [here](TODO) for more information.
+for our configurations and offers many features that plain YAML files do not. See their docs [here](https://github.com/SpongePowered/Configurate) for more information.

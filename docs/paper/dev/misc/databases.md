@@ -8,7 +8,7 @@ When you are storing larger amounts of data inside a plugin, we recommend using 
 
 ## MySQL vs SQLite
 
-There are two main types of database software that you could use: MySQL vs SQLite. They both have many pros and cons outlined [here](TODO)
+There are two main types of database software that you could use: MySQL vs SQLite. They both have many pros and cons outlined [here](https://www.hostinger.com/tutorials/sqlite-vs-mysql-whats-the-difference/)
 in more depth, however the main difference is that MySQL requires external database software running, whereas SQLite is the entire package. Both are explained below.
 
 ## SQLite
@@ -28,7 +28,9 @@ We will be recommending the JDBC connector which can be added to your project wi
 
 ### Kotlin Gradle:
 ```kotlin
-TODO
+dependencies {
+    compileOnly("org.xerial:sqlite-jdbc:3.40.0.0")
+}
 ```
 
 :::info
@@ -36,6 +38,8 @@ TODO
 The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it.
 
 :::
+
+### Usage
 
 From here, you must invoke a `Class.forName` on the driver to allow it to initialise and then create the connection to the database:
 
@@ -49,23 +53,12 @@ public class DatabaseManager {
 }
 ```
 
-This connection can be used to execute SQL operations on the database. Now, you can execute any operations you would like such as:
-```sql
-CREATE TABLE IF NOT EXISTS Bosses (id INTEGER PRIMARY KEY AUTOINCREMENT, uuid TEXT);
-```
-By just calling:
-```java
-connection.createStatement().execute(sqlString);
-```
-
-TODO: Add an example of reading / saving a basic DAO? 
-
-To learn more about the Java Database Connection, see [here](TODO)
+To learn more about the Java Database Connection, see [here](https://www.w3schools.blog/jdbc-tutorial)
 
 ## MySQL
 
 Working with MySQL requires a few more steps, however it can offer performance benefits for larger databases with 
-many tables and concurrent accesses. We will be focussing on the [Hikari](TODO) library for this tutorial. First, add the
+many tables and concurrent accesses. We will be focussing on the [Hikari](https://github.com/brettwooldridge/HikariCP) library for this tutorial. First, add the
 dependency to your project with the following dependency:
 
 ### Maven
@@ -76,4 +69,39 @@ dependency to your project with the following dependency:
     <version>4.0.3</version>
     <scope>compile</scope>
 </dependency>
+```
+
+### Gradle
+```kotlin
+dependencies {
+    implementation("com.zaxxer:HikariCP:4.0.3")
+}
+```
+
+### Usage
+
+Once you have the dependency added, we can work with the connector in our code:
+
+```java
+public class DatabaseManager {
+    
+    public void connect() {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc://mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
+        config.setUsername("username"); // Username
+        config.setPassword("password"); // Password
+        config.setMaximumPoolSize(10); // Pool size defaults to 10
+
+        config.addDataSourceProperty("", ""); // MISC settings to add
+        HikariDataSource dataSource = new HikariDataSource(config);
+
+        try (Connection connection = dataSource.getConnection()) {
+            // Use a try-with-resources here to autoclose the connection.
+            PreparedStatement sql = connection.prepareStatement("SQL");
+            // Execute statement
+        } catch (Exception e) {
+            // Handle any exceptions that arise from getting / handing the exception.
+        }
+    }
+}
 ```

@@ -64,6 +64,12 @@ by YAML. These can be fetched simply with `#getString` or `#getBoolean`.
 However, some more complex Bukkit data types are also supported. A few of these include `ItemStack`, `Location` and `Vector`s. 
 Here is an example of loading a value from the config for teleporting a player:
 
+:::info[Saving Configs]
+
+Whenever setting data in configurations, you must call `FileConfiguration#save` for the changes to persist on disk
+
+:::
+
 ```java
 public class TestPlugin extends JavaPlugin {
     public void teleportPlayer(Player player) {
@@ -111,7 +117,27 @@ Here we can see that we have an instance based `serialize` method which returns 
 method that takes a Map as a parameter and then returns an instance of the `TeleportOptions` Class. Finally, for this to work we must call:
 `ConfigurationSerialization.registerClass(TeleportOptions.class)`
 
+## Custom Configuration Files
+
+It is highly likely that you will have many different things to configure in your plugin. If you choose to split these across multiple different files you can
+still use the Bukkit `FileConfiguration` API to read the data from these. It is as simple as:
+
+```java
+File file = new File(plugin.getDataFolder(), "items.yml");
+YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+// Work with config here
+config.save(file);
+```
+
+This example reads the `items.yml` file from your plugin data directory. This file must exist and an error will be thrown if it doesn't.
+
+:::danger[Blocking I/O]
+
+Loading and saving files on the main thread will slow your server. `load` and `save` operations should be executed asynchronously.
+
+::: 
+
 ## Configurate
 
-Configurate is a third party for working with configurations maintained by the Sponge project. This project is used internally by Paper
-for our configurations and offers many features that plain YAML files do not. See their docs [here](https://github.com/SpongePowered/Configurate) for more information.
+Configurate is a third party library for working with configurations maintained by the Sponge project. This project is used internally by Paper
+for our configurations and offers many features that plain YAML files do not. See their project [here](https://github.com/SpongePowered/Configurate) for more information.

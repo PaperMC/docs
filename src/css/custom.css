@@ -212,17 +212,3 @@ html[data-theme="dark"] {
   font-size: 12px;
   color: var(--ifm-heading-color);
 }
-
-/* Add a CSS transition to fade in and out the "#" icon */
-.node-fade-in,
-.node-fade-out {
-  transition: opacity 0.2s ease;
-}
-
-.node-fade-in {
-  opacity: 1;
-}
-
-.node-fade-out {
-  opacity: 0;
-}

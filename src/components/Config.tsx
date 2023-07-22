@@ -29,27 +29,12 @@ const YamlNodeWithDescription: React.FC<{
 }> = ({ name, node, parentKey }) => {
     const [showDescription, setShowDescription] = useState(false);
     const [copied, setCopied] = useState(false);
-    const [isHovered, setIsHovered] = useState(false); // Track when the mouse is close to the end of the line
 
     node.default = node.default || 'N/A';
     node.description = node.description || 'N/A';
 
     const toggleDescription = () => {
         setShowDescription(!showDescription);
-    };
-
-    const clickedHashCopy = () => {
-        const fullURL = window.location.href.split("#")[0];
-        const hash = parentKey + "_" + name.replace(/-/g, "_");
-        const hashUrlPart = `#${hash}`;
-        navigator.clipboard.writeText(fullURL + hashUrlPart);
-        setCopied(true);
-        scrollIntoView(hash);
-
-        // Hide the message after 2 seconds
-        setTimeout(() => {
-            setCopied(false);
-        }, 2000);
     };
 
     useEffect(() => {
@@ -60,30 +45,29 @@ const YamlNodeWithDescription: React.FC<{
         }
     }, [name]);
 
+    const handleHashLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        const hash = parentKey + "_" + name.replace(/-/g, "_");
+        scrollIntoView(hash);
+    };
+
     return (
         <div
             style={{ paddingLeft: `${INDENT_SIZE}px` }}
             id={parentKey + "_" + name.replace(/-/g, "_")}
-            onMouseEnter={() => {setIsHovered(true)}}
-            onMouseLeave={() => {setIsHovered(false)}}
         >
             {showDescription ? (
                 <>
                     <div className={'with-value-active description'} style={{ marginBottom: 10 }}>
-                        <a onClick={toggleDescription}>{name}: {node.default.toString() + ' '}</a>
-                        <span
-                            className={`config-anchor with-value-active-colour ${isHovered ? 'node-fade-in' : 'node-fade-out'}`}
-                            onClick={clickedHashCopy}
-                        >
-                            #
-                        </span>
+                        <a onClick={toggleDescription}>{name}: {node.default.toString()}</a>
+                        <a
+                            className={`config-anchor with-value-active-colour hash-link`}
+                            href={`#${parentKey + "_" + name.replace(/-/g, "_")}`}
+                            onClick={handleHashLinkClick}
+                        ></a>
                         {copied && <div className="copied-message">URL Copied!</div>}
                     </div>
 
-                    <div
-                        className="description indent-2"
-                        style={{ marginBottom: 10 }}
-                    >
+                    <div className="description indent-2" style={{ marginBottom: 10 }}>
                         <div className="outlined-box description-section colour-offset-box">
                             <strong>Description:</strong>
                             <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
@@ -92,13 +76,12 @@ const YamlNodeWithDescription: React.FC<{
                 </>
             ) : (
                 <div className="description with-value" onClick={toggleDescription}>
-                    {name}: {node.default.toString() + ' '}
-                    <span
-                        className={`config-anchor with-value-active-colour ${isHovered ? 'node-fade-in' : 'node-fade-out'}`}
-                        onClick={clickedHashCopy}
-                    >
-                        #
-                    </span>
+                    {name}: {node.default.toString()}
+                    <a
+                        className={`config-anchor with-value-active-colour hash-link`}
+                        href={`#${parentKey + "_" + name.replace(/-/g, "_")}`}
+                        onClick={handleHashLinkClick}
+                    ></a>
                 </div>
             )}
         </div>

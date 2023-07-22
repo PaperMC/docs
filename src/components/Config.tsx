@@ -45,7 +45,6 @@ const YamlNodeWithDescription: React.FC<{
         const hash = parentKey + "_" + parseNameToHash(name);
         if (window.location.hash === `#${hash}`) {
             showAndScrollIntoView(hash);
-            console.log("scrolling to " + hash);
         }
     }, [name]);
 

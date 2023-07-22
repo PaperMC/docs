@@ -90,7 +90,8 @@ const YamlNodeWithDescription: React.FC<{
 
 const renderYamlData = (
     data: YamlData,
-    parentKey?: string
+    parentKey?: string,
+    root: boolean = false
 ): JSX.Element[] => {
     const renderedNodes: JSX.Element[] = [];
 
@@ -109,7 +110,7 @@ const renderYamlData = (
                 renderedNodes.push(
                     <div
                         key={key}
-                        style={{ paddingLeft: `${INDENT_SIZE}px` }}
+                        style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }}
                     >
                         {key}:
                         {renderYamlData(
@@ -129,7 +130,7 @@ export default function Config({ data }: { data: string }): JSX.Element {
     let ymlData: YamlData = yaml.load(data);
     return (
         <div>
-            <pre>{renderYamlData(ymlData, "")}</pre>
+            <pre>{renderYamlData(ymlData, "", true)}</pre>
             <div style={{ display: 'none' }}>{data}</div>
         </div>
     );

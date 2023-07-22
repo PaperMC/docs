@@ -93,6 +93,12 @@ but offer better performance than file-based databases. Some examples of standal
 There are many more, but these are some of the most popular ones. Each has their own advantages and disadvantages,
 so it is up to you to decide which one to use.
 
+The connectors for these databases often have connection pooling. Database connection pooling addresses this issue by
+creating a pool of pre-established and reusable database connections. Instead of opening a new connection every time a
+database operation is required, the application can request a connection from the pool, use it for the required task,
+and then return it back to the pool for future reuse. This significantly reduces the overhead of creating and tearing
+down connections repeatedly, leading to improved application performance and better scalability.
+
 <details>
     <summary>Simple MySQL Setup</summary>
 

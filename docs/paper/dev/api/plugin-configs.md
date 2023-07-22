@@ -4,13 +4,13 @@ slug: /dev/plugin-configurations
 
 # Plugin Configurations
 
-Configuration files allow users to change certain behaviour and functionality of Paper Plugins. This guide will outline how to use them.
+Configuration files allow users to change certain behaviour and functionality of Plugins. This guide will outline how to use them.
 
 ## Format
 
-By Default, plugins use a YAML configuration format (`.yml` file). Other formats such as JSON or TOML can be used, however these are not natively supported by Paper so will not be covered in this guide.
+By default, plugins use a YAML configuration format (`.yml` file). Other formats such as JSON or TOML can be used, however these are not natively supported by Paper so will not be covered in this guide.
 
-YAML works by having a tree-like key: value pair structure as you would have seen in your [plugin.yml](../getting-started/plugin-yml.md). An example would look like this:
+YAML works by having a tree-like `key: value` pair structure as you would have seen in your [plugin.yml](../getting-started/plugin-yml.md). An example would look like this:
 
 ```yaml
 root:
@@ -42,6 +42,11 @@ public class TestPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         saveResource("config.yml", /* replace */ false);
+        
+        // You can also use this for configuration files:
+        saveDefaultConfig();
+        // Where the default config.yml will be saved if it does not already exist
+
         // getConfig()...
     }
     

@@ -42,7 +42,7 @@ public class TestPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         saveResource("config.yml", /* replace */ false);
-        
+
         // You can also use this for configuration files:
         saveDefaultConfig();
         // Where the default config.yml will be saved if it does not already exist
@@ -86,12 +86,6 @@ public class TestPlugin extends JavaPlugin {
 
 This is possible as they implement `ConfigurationSerializable`. You can use this yourself, by implementing and registering a custom class.
 
-:::danger[Paper Plugins]
-
-This will not work when using a Paper Plugin and is here only for reference. We recommend implementing a system yourself going forward.
-
-:::
-
 ```java
 public class TeleportOptions implements ConfigurationSerializable {
     private int chunkX;
@@ -121,6 +115,13 @@ public class TeleportOptions implements ConfigurationSerializable {
 Here we can see that we have an instance based `serialize` method which returns a map and then a static `deserialize` 
 method that takes a Map as a parameter and then returns an instance of the `TeleportOptions` Class. Finally, for this to work we must call:
 `ConfigurationSerialization.registerClass(TeleportOptions.class)`
+
+:::warning
+
+If you do not call `ConfigurationSerialization.registerClass` with Paper Plugins,
+you will not be able to load / save your custom classes.
+
+:::
 
 ## Custom Configuration Files
 

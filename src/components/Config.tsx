@@ -5,6 +5,10 @@ import yaml from 'js-yaml';
 
 const INDENT_SIZE = 30;
 
+const parseNameToHash = (name: string) => {
+    return name.replace(/-/g, "_");
+}
+
 interface YamlNode {
     default: string | number | boolean;
     description: string;
@@ -38,22 +42,40 @@ const YamlNodeWithDescription: React.FC<{
     };
 
     useEffect(() => {
-        const hash = parentKey + "_" + name.replace(/-/g, "_");
+        const hash = parentKey + "_" + parseNameToHash(name);
         if (window.location.hash === `#${hash}`) {
-            setShowDescription(true);
-            scrollIntoView(hash);
+            showAndScrollIntoView(hash);
+            console.log("scrolling to " + hash);
         }
     }, [name]);
 
     const handleHashLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault(); // Prevent the default anchor tag behavior. This causes some UI issues with scrolling.
+
+        showAndScrollIntoView(parentKey + "_" + parseNameToHash(name));
+        history.pushState(null, null, event.currentTarget.hash);
+
+        const fullURL = window.location.href.split("#")[0];
         const hash = parentKey + "_" + name.replace(/-/g, "_");
+        navigator.clipboard.writeText(fullURL + "#" + hash);
+        setCopied(true);
         scrollIntoView(hash);
+
+        // Hide the message after 2 seconds
+        setTimeout(() => {
+            setCopied(false);
+        }, 2000);
     };
+
+    const showAndScrollIntoView = hash => {
+        setShowDescription(true);
+        scrollIntoView(hash);
+    }
 
     return (
         <div
             style={{ paddingLeft: `${INDENT_SIZE}px` }}
-            id={parentKey + "_" + name.replace(/-/g, "_")}
+            id={parentKey + "_" + parseNameToHash(name)}
         >
             {showDescription ? (
                 <>
@@ -61,7 +83,7 @@ const YamlNodeWithDescription: React.FC<{
                         <a onClick={toggleDescription}>{name}: {node.default.toString()}</a>
                         <a
                             className={`config-anchor with-value-active-colour hash-link`}
-                            href={`#${parentKey + "_" + name.replace(/-/g, "_")}`}
+                            href={`#${parentKey + "_" + parseNameToHash(name)}`}
                             onClick={handleHashLinkClick}
                         ></a>
                         {copied && <div className="copied-message">URL Copied!</div>}
@@ -79,7 +101,7 @@ const YamlNodeWithDescription: React.FC<{
                     {name}: {node.default.toString()}
                     <a
                         className={`config-anchor with-value-active-colour hash-link`}
-                        href={`#${parentKey + "_" + name.replace(/-/g, "_")}`}
+                        href={`#${parentKey + "_" + parseNameToHash(name)}`}
                         onClick={handleHashLinkClick}
                     ></a>
                 </div>
@@ -115,7 +137,7 @@ const renderYamlData = (
                         {key}:
                         {renderYamlData(
                             value as YamlData,
-                            parentKey ? parentKey + "_" + key.replace(/-/g, "_") : key.replace(/-/g, "_")
+                            parentKey ? parentKey + "_" + parseNameToHash(key) : parseNameToHash(key)
                         )}
                     </div>
                 );

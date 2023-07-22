@@ -118,6 +118,7 @@ const paper: SidebarsConfig = {
             "dev/api/roadmap",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
+            "dev/api/plugin-messaging",
           ],
         },
         {

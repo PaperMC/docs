@@ -89,6 +89,45 @@ function itself. For per-world configuration, see the
 - **default**: `100.0`
 - **description**: The maximum number of chunks sent to an individual player within one second.
 
+## chunk-loading-advanced
+
+### auto-config-send-distance
+
+- **default**: `true`
+- **description**: Set to true if the server will match the chunk send radius that clients have configured 
+  in their view distance settings if the client is less-than the server's send distance.
+
+### player-max-concurrent-chunk-generates
+
+- **default**: `0`
+- **description**: Specifies the maximum amount of concurrent chunk generations that an individual player can have.
+    Set to 0 to let the server configure it automatically per player, or set it to -1 to disable the limit.
+
+### player-max-concurrent-chunk-loads
+
+- **default**: `0`
+- **description**: Specifies the maximum amount of concurrent chunk loads that an individual player can have.
+    Set to 0 to let the server configure it automatically per player, or set it to -1 to disable the limit.
+
+## chunk-loading-basic
+
+### player-max-chunk-generate-rate
+
+- **default**: `-1.0`
+- **description**: The maximum rate at which chunks will generate for any individual player. Set to -1 to disable this limit.
+
+### player-max-chunk-load-rate
+
+- **default**: `100`
+- **description**: The maximum rate at which chunks will load for any individual player. 
+  Note that this setting also affects chunk generations, since a chunk load is always 
+  first issued to test if a chunk is already generated. Set to -1 to disable this limit.
+
+### player-max-chunk-send-rate
+
+- **default**: `75`
+- **description**: The maximum rate in chunks per second that the server will send to any individual player. Set to -1 to disable this limit.
+
 ## chunk-system
 
 ### gen-parallelism
@@ -521,8 +560,14 @@ named here use Mojang mappings regardless of the server.
 ### perform-username-validation
 
 - **default**: `true`
-- **default**: Whether the server should validate usernames. While this may allow users with special
+- **description**: Whether the server should validate usernames. While this may allow users with special
   characters in their name to join, it can also cause issues with commands and plugins.
+
+### compression-format
+
+- **default**: `ZLIB`
+- **description**: Allows the server to customize the format of saved region files. This supports `ZLIB`, `GLIB` and 
+  `NONE`, where `None` namely allows for compression to be disabled. 
 
 ## watchdog
 

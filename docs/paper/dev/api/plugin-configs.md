@@ -100,14 +100,14 @@ public class TeleportOptions implements ConfigurationSerializable {
         Map<String, Object> data = new HashMap<>();
 
         data.put("chunk-x", this.chunkX);
-        data.put("chunk-y", this.chunkZ);
+        data.put("chunk-z", this.chunkZ);
         data.put("name", this.name);
         
         return data;
     }
     
     public static TeleportOptions deserialize(Map<String, Object> args) {
-        return new TeleportOptions((int) args.get("chunk-x"), (int) args.get("chunk-y"), (String) args.get("name"));
+        return new TeleportOptions((int) args.get("chunk-x"), (int) args.get("chunk-z"), (String) args.get("name"));
     }
 }
 ```

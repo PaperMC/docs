@@ -32,7 +32,6 @@ const YamlNodeWithDescription: React.FC<{
     node: YamlNode;
 }> = ({ name, node, parentKey }) => {
     const [showDescription, setShowDescription] = useState(false);
-    const [copied, setCopied] = useState(false);
 
     node.default = node.default || 'N/A';
     node.description = node.description || 'N/A';
@@ -57,13 +56,7 @@ const YamlNodeWithDescription: React.FC<{
         const fullURL = window.location.href.split("#")[0];
         const hash = parentKey + "_" + name.replace(/-/g, "_");
         navigator.clipboard.writeText(fullURL + "#" + hash);
-        setCopied(true);
         scrollIntoView(hash);
-
-        // Hide the message after 2 seconds
-        setTimeout(() => {
-            setCopied(false);
-        }, 2000);
 
         event.stopPropagation();
     };
@@ -78,35 +71,30 @@ const YamlNodeWithDescription: React.FC<{
             style={{ paddingLeft: `${INDENT_SIZE}px` }}
             id={parentKey + "_" + parseNameToHash(name)}
         >
-            <div className={`description with-value${showDescription ? "-active" : ""}`}
+            <div className={`description_word_wrap`}
                  style={{ marginBottom: showDescription ? 10 : 0 }}
-                 onClick={toggleDescription}
             >
+                <a onClick={toggleDescription} className={`with-value${showDescription ? "-active": ""}`}>{name}: {node.default.toString()}</a>
                 {showDescription ? (
                     <>
-                        <a>{name}: {node.default.toString()}</a>
                         <a
                             className={`config-anchor with-value-active-colour hash-link`}
                             href={`#${parentKey + "_" + parseNameToHash(name)}`}
                             onClick={handleHashLinkClick}
                         ></a>
-                        {copied && <div className="copied-message">URL Copied!</div>}
 
-                        <div className="description indent-2" style={{ marginBottom: 10 }}>
-                            <div className="outlined-box description-section colour-offset-box">
+                        <div className="indent-2" style={{ marginBottom: 10 }}>
+                            <div className="outlined-box description-text colour-offset-box">
                                 <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
                             </div>
                         </div>
                     </>
                 ) : (
-                    <>
-                        {name}: {node.default.toString()}
-                        <a
-                            className={`config-anchor with-value-active-colour hash-link`}
-                            href={`#${parentKey + "_" + parseNameToHash(name)}`}
-                            onClick={handleHashLinkClick}
-                        ></a>
-                    </>
+                    <a
+                        className={`config-anchor with-value-active-colour hash-link`}
+                        href={`#${parentKey + "_" + parseNameToHash(name)}`}
+                        onClick={handleHashLinkClick}
+                    ></a>
                 )}
             </div>
         </div>

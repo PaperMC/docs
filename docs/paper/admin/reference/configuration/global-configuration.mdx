@@ -389,6 +389,14 @@ unsupported-settings:
       not control sand duplication. '
   perform-username-validation:
     default: 'true'
+    description: 'Whether the server should validate usernames. While this may allow
+      users with special characters in their name to join, it can also cause issues
+      with commands and plugins. '
+  compression-format:
+    default: ZLIB
+    description: 'Allows the server to customize the format of saved region files.
+      This supports ZLIB, GLIB and NONE, where None namely allows for compression
+      to be disabled. '
 watchdog:
   early-warning-delay:
     default: '10000'

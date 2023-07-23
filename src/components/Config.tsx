@@ -18,13 +18,26 @@ interface YamlData {
     [key: string]: YamlNode | YamlData;
 }
 
-const scrollIntoView = (id: string) => {
-    const yOffset = -60;
-    const element = document.getElementById(id);
-    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+const scrollIntoView = (id: string): void => {
+    const targetElement = document.getElementById(id);
 
-    window.scrollTo({ top: y, behavior: 'smooth' });
-};
+    if (!targetElement) {
+        console.error(`Element with ID "${id}" not found.`);
+        return;
+    }
+
+    const navbarHeightRems = 3.75;
+    const navbarHeightPixels = navbarHeightRems * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const targetElementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+    const adjustedScrollPosition = targetElementPosition - navbarHeightPixels;
+
+    setTimeout(() => {
+        window.scrollTo({
+            top: adjustedScrollPosition - 20,
+            behavior: 'smooth',
+        });
+    }, 1);
+}
 
 const YamlNodeWithDescription: React.FC<{
     name: string;
@@ -35,10 +48,6 @@ const YamlNodeWithDescription: React.FC<{
 
     node.default = node.default || 'N/A';
     node.description = node.description || 'N/A';
-
-    const toggleDescription = () => {
-        setShowDescription(!showDescription);
-    };
 
     useEffect(() => {
         const hash = parentKey + "_" + parseNameToHash(name);
@@ -74,7 +83,12 @@ const YamlNodeWithDescription: React.FC<{
             <div className={`description_word_wrap`}
                  style={{ marginBottom: showDescription ? 10 : 0 }}
             >
-                <a onClick={toggleDescription} className={`with-value${showDescription ? "-active": ""}`}>{name}: {node.default.toString()}</a>
+                <a
+                    onClick={() => {setShowDescription(!showDescription)}}
+                    className={`with-value${showDescription ? "-active": ""}`}
+                >
+                    {name}: {node.default.toString()}
+                </a>
                 {showDescription ? (
                     <>
                         <a

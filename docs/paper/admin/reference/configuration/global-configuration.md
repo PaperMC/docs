@@ -563,6 +563,12 @@ named here use Mojang mappings regardless of the server.
 - **default**: Whether the server should validate usernames. While this may allow users with special
   characters in their name to join, it can also cause issues with commands and plugins.
 
+### compression-format
+
+- **default**: `ZLIB`
+- **default**: Allows the server to customize the format of saved region files. This supports `GLIB` and `NONE`, which
+ namely allows for compression to be disabled. 
+
 ## watchdog
 
 ### early-warning-delay

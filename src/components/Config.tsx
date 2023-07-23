@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown';
-import style from '../css/markdown-styles.module.css';
+import style from '@site/src/css/markdown-styles.module.css';
 import yaml from 'js-yaml';
 
 const INDENT_SIZE = 30;
@@ -64,6 +64,8 @@ const YamlNodeWithDescription: React.FC<{
         setTimeout(() => {
             setCopied(false);
         }, 2000);
+
+        event.stopPropagation();
     };
 
     const showAndScrollIntoView = hash => {
@@ -76,35 +78,37 @@ const YamlNodeWithDescription: React.FC<{
             style={{ paddingLeft: `${INDENT_SIZE}px` }}
             id={parentKey + "_" + parseNameToHash(name)}
         >
-            {showDescription ? (
-                <>
-                    <div className={'with-value-active description'} style={{ marginBottom: 10 }}>
-                        <a onClick={toggleDescription}>{name}: {node.default.toString()}</a>
+            <div className={`description with-value${showDescription ? "-active" : ""}`}
+                 style={{ marginBottom: showDescription ? 10 : 0 }}
+                 onClick={toggleDescription}
+            >
+                {showDescription ? (
+                    <>
+                        <a>{name}: {node.default.toString()}</a>
                         <a
                             className={`config-anchor with-value-active-colour hash-link`}
                             href={`#${parentKey + "_" + parseNameToHash(name)}`}
                             onClick={handleHashLinkClick}
                         ></a>
                         {copied && <div className="copied-message">URL Copied!</div>}
-                    </div>
 
-                    <div className="description indent-2" style={{ marginBottom: 10 }}>
-                        <div className="outlined-box description-section colour-offset-box">
-                            <strong>Description:</strong>
-                            <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
+                        <div className="description indent-2" style={{ marginBottom: 10 }}>
+                            <div className="outlined-box description-section colour-offset-box">
+                                <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
+                            </div>
                         </div>
-                    </div>
-                </>
-            ) : (
-                <div className="description with-value" onClick={toggleDescription}>
-                    {name}: {node.default.toString()}
-                    <a
-                        className={`config-anchor with-value-active-colour hash-link`}
-                        href={`#${parentKey + "_" + parseNameToHash(name)}`}
-                        onClick={handleHashLinkClick}
-                    ></a>
-                </div>
-            )}
+                    </>
+                ) : (
+                    <>
+                        {name}: {node.default.toString()}
+                        <a
+                            className={`config-anchor with-value-active-colour hash-link`}
+                            href={`#${parentKey + "_" + parseNameToHash(name)}`}
+                            onClick={handleHashLinkClick}
+                        ></a>
+                    </>
+                )}
+            </div>
         </div>
     );
 };

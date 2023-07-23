@@ -43,28 +43,10 @@ Some examples of file-based databases are `SQLite` and `H2`.
 ## SQLite
 
 To work with SQLite you will need a driver to connect / initialise the database. 
-We will be recommending the JDBC connector which can be added to your project with the following dependency:
-
-### Maven:
-```xml
-<dependency>
-    <groupId>org.xerial</groupId>
-    <artifactId>sqlite-jdbc</artifactId>
-    <version>3.40.0.0</version>
-    <scope>provided</scope>
-</dependency>
-```
-
-### Kotlin Gradle:
-```kotlin
-dependencies {
-    compileOnly("org.xerial:sqlite-jdbc:3.40.0.0")
-}
-```
 
 :::note
 
-The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it.
+The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it in your plugin.
 
 :::
 

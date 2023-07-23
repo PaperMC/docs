@@ -125,7 +125,7 @@ const renderYamlData = (
                         key={key}
                         style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }}
                     >
-                        {key}:
+                        <div className={`config-auxiliary-node`}>{key}:</div>
                         {renderYamlData(
                             value as YamlData,
                             parentKey ? parentKey + "_" + parseNameToHash(key) : parseNameToHash(key)

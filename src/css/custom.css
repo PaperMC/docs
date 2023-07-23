@@ -206,3 +206,11 @@ html[data-theme="dark"] {
   text-decoration: underline;
   cursor: pointer;
 }
+
+[data-theme="dark"] .config-auxiliary-node {
+  filter: brightness(70%);
+}
+
+[data-theme="light"] .config-auxiliary-node {
+  filter: brightness(350%);
+}

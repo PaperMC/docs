@@ -2,9 +2,9 @@
 slug: /dev/scheduler
 ---
 
-# Task Scheduler
+# Using the Scheduler
 
-The `BukkitScheduler` can be used to schedule your code to be run later or run it repeatedly.
+The `BukkitScheduler` can be used to schedule your code to be run later or repeatedly.
 
 ## What is a tick?
 
@@ -43,10 +43,11 @@ public void onEnable() {
 ## Scheduling tasks
 
 Scheduling a task requires you to pass:
-- your plugin's instance,
-- the code to run, either with a `Runnable` or `Consumer<BukkitTask>`,
-- the delay in ticks before the task should run,
-- if you're scheduling a repeating task - the period in ticks between each execution of the task.
+
+- Your plugin's instance
+- The code to run, either with a `Runnable` or `Consumer<BukkitTask>`
+- The delay in ticks before the task should run for the first time
+- If you're scheduling a repeating task - the period in ticks between each execution of the task
 
 ### Difference between synchronous and asynchronous tasks
 
@@ -114,13 +115,9 @@ Or use a lambda expression which is great for simple and short tasks:
 
 ```java
 scheduler.runTaskLater(
-	plugin, 
-	// Lambda:
-	() -> {
-		this.plugin.getServer().broadcast(Component.text("Hello, World!"));
-	},
-	// End of the lambda
-	20);
+    plugin, /* Lambda: */ () -> {
+        this.plugin.getServer().broadcast(Component.text("Hello, World!"));
+    }, /* End of the lambda */ 20);
 ```
 
 #### Using `Consumer<BukkitTask>` {#using-consumerbukkittask}
@@ -159,7 +156,7 @@ Or use a lambda expression which again is much cleaner for short and simple task
 
 ```java
 scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
-	if(this.entity.isDead()) {
+	if (this.entity.isDead()) {
 		task.cancel();
 		return;
 	}

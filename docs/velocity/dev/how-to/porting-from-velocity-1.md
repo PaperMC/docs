@@ -9,9 +9,7 @@ document very carefully**.
 
 ## Minimum supported Java version bump
 
-Velocity 3.0.0 now requires Java 11 and above. The Velocity API is compiled for Java 8 for the
-convenience of plugins that want to run on older versions of Java, but we may decide to bump this in
-a future major release.
+Velocity 3.0.0 now requires Java 11 and above.
 
 ## Removal of legacy dependencies
 

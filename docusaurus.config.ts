@@ -1,5 +1,5 @@
 import remarkA11yEmoji from "@fec/remark-a11y-emoji";
-import vsDark from "prism-react-renderer/themes/vsDark";
+import { themes } from "prism-react-renderer";
 import isCI from "is-ci";
 import navbar from "./config/navbar.config";
 import footer from "./config/footer.config";
@@ -13,7 +13,8 @@ const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io
 
 const docsCommon: Options = {
   breadcrumbs: true,
-  editUrl: ({ versionDocsDirPath, docPath }) => `https://github.com/PaperMC/docs/blob/main/${versionDocsDirPath}/${docPath}`,
+  editUrl: ({ versionDocsDirPath, docPath }) =>
+    `https://github.com/PaperMC/docs/blob/main/${versionDocsDirPath}/${docPath}`,
   editCurrentVersion: true,
   remarkPlugins: [remarkA11yEmoji],
   showLastUpdateAuthor: true,
@@ -34,7 +35,7 @@ const config: Config = {
   noIndex: preview,
   baseUrlIssueBanner: false,
   clientModules: [
-    require.resolve("../src/css/custom.css"),
+    require.resolve("./src/css/custom.css"),
     require.resolve("@fontsource/jetbrains-mono/index.css"),
   ],
 
@@ -51,24 +52,32 @@ const config: Config = {
   headTags: [
     {
       tagName: "script",
-        attributes: {
-          type: "application/ld+json",
-        },
-        innerHTML: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          url,
-          potentialAction: {
-            "@type": "SearchAction",
-            target: {
-              "@type": "EntryPoint",
-              urlTemplate: `${url}/search?q={search_term_string}`,
-            },
-            "query-input": "required name=search_term_string",
+      attributes: {
+        type: "application/ld+json",
+      },
+      innerHTML: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        url,
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${url}/search?q={search_term_string}`,
           },
-        }),
+          "query-input": "required name=search_term_string",
+        },
+      }),
     },
   ],
+
+  markdown: {
+    mdx1Compat: {
+      comments: false,
+      admonitions: false,
+      headingIds: false,
+    },
+  },
 
   themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia"],
 
@@ -94,7 +103,24 @@ const config: Config = {
         lastVersion: "current",
         versions: {
           current: {
-            label: "1.19",
+            label: "1.20",
+            path: "",
+          },
+        },
+      },
+    ],
+    [
+      "content-docs",
+      {
+        ...docsCommon,
+        id: "folia",
+        path: "docs/folia",
+        routeBasePath: "folia",
+        sidebarPath: require.resolve("./config/sidebar.folia"),
+        lastVersion: "current",
+        versions: {
+          current: {
+            label: "1.20",
             path: "",
           },
         },
@@ -162,7 +188,7 @@ const config: Config = {
     colorMode: {
       respectPrefersColorScheme: true,
     },
-    image: "img/og-image.png",
+    image: "img/paper.png",
     metadata: [
       {
         name: "twitter:card",
@@ -197,7 +223,7 @@ const config: Config = {
         "toml",
         "properties",
       ],
-      theme: vsDark,
+      theme: themes.vsDark,
     },
     algolia: {
       appId: "P1BCDPTG1Q",

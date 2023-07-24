@@ -12,16 +12,19 @@ Global configuration options exposed by Paper will affect all worlds on a server
 function itself. For per-world configuration, see the
 [Per World Configuration Reference](world-configuration.md)
 
-## async-chunks
+## block-updates
 
-### threads
+### disable-noteblock-updates
+- **default**: `false`
+- **description**: Whether to disable any form of block updates for note blocks on the server. Disabling block updates
+  leads to note blocks no longer updating their block state, allowing for technically invalid note blocks to remain in
+  the world, which might be useful for mapmakers.
 
-- **default**: `-1`
-- **description**: The number of threads the server should use for world saving and chunk loading.
-  The default (`-1`) indicates that Paper will utilize half of your system's threads for chunk
-  loading unless otherwise specified. There is also a maximum default of 4 threads used for saving
-  and loading chunks. This can be overridden by adding `-Dpaper.maxChunkThreads=[number]` to your
-  startup arguments
+### disable-tripwire-updates
+- **default**: `false`
+- **description**: Whether to disable any form of block updates for tripwires on the server. Disabling block updates
+  leads to tripwires no longer updating their block state, allowing for technically invalid tripwires to remain in
+  the world, which might be useful for mapmakers.
 
 ## chunk-loading
 
@@ -86,6 +89,68 @@ function itself. For per-world configuration, see the
 - **default**: `100.0`
 - **description**: The maximum number of chunks sent to an individual player within one second.
 
+## chunk-loading-advanced
+
+### auto-config-send-distance
+
+- **default**: `true`
+- **description**: Set to true if the server will match the chunk send radius that clients have configured 
+  in their view distance settings if the client is less-than the server's send distance.
+
+### player-max-concurrent-chunk-generates
+
+- **default**: `0`
+- **description**: Specifies the maximum amount of concurrent chunk generations that an individual player can have.
+    Set to 0 to let the server configure it automatically per player, or set it to -1 to disable the limit.
+
+### player-max-concurrent-chunk-loads
+
+- **default**: `0`
+- **description**: Specifies the maximum amount of concurrent chunk loads that an individual player can have.
+    Set to 0 to let the server configure it automatically per player, or set it to -1 to disable the limit.
+
+## chunk-loading-basic
+
+### player-max-chunk-generate-rate
+
+- **default**: `-1.0`
+- **description**: The maximum rate at which chunks will generate for any individual player. Set to -1 to disable this limit.
+
+### player-max-chunk-load-rate
+
+- **default**: `100`
+- **description**: The maximum rate at which chunks will load for any individual player. 
+  Note that this setting also affects chunk generations, since a chunk load is always 
+  first issued to test if a chunk is already generated. Set to -1 to disable this limit.
+
+### player-max-chunk-send-rate
+
+- **default**: `75`
+- **description**: The maximum rate in chunks per second that the server will send to any individual player. Set to -1 to disable this limit.
+
+## chunk-system
+
+### gen-parallelism
+
+- **default**: `default`
+- **description**: Sets whether the server should use parallel chunk generation. The `default` value
+  will be used as `true`. Possible options are `true`, `on` and `enable` to make the server use the
+  system and `false`, `off` or `disabled` to disable.
+
+### io-threads
+
+- **default**: `-1`
+- **description**: Sets the number of threads to be used for read and write operations with chunks.
+  If any value below zero is set, only one thread will be used.
+
+### worker-threads
+
+- **default**: `-1`
+- **description**: Sets the number of threads to be used for parallel chunk generation. If any value below
+  zero is set, the server will determine the best number depending on the number of available CPU cores.
+  This is capped at a quarter of available processors and can be less for systems with very few processors.
+  _(Note: Hyper-Threaded threads **do not** count)_.
+
 ## collisions
 
 ### enable-player-collisions
@@ -125,7 +190,7 @@ function itself. For per-world configuration, see the
 
 ## console
 
-### enable-brigadier-completion
+### enable-brigadier-completions
 
 - **default**: `true`
 - **description**: Enables Mojang's Brigadier (advanced) command completions in the server console.
@@ -165,7 +230,7 @@ function itself. For per-world configuration, see the
 - **default**: `8192`
 - **description**: The maximum length of a book's author in characters.
 
-#### pages
+#### page
 
 - **default**: `16384`
 - **description**: The maximum length of a book's page in characters.
@@ -217,7 +282,7 @@ function itself. For per-world configuration, see the
 - **description**: Default message sent to players when they have insufficient permissions for an
   action. Plugins may override this for their commands.
 
-### use-display-name-in-quit-messages
+### use-display-name-in-quit-message
 
 - **default**: `false`
 - **description**: Whether the server should use the player's display name (set by plugins) or
@@ -251,7 +316,7 @@ function itself. For per-world configuration, see the
 ### fix-entity-position-desync
 
 - **default**: `true`
-- **description**: Causes the server to lose the same percision that the client does for entities
+- **description**: Causes the server to lose the same precision that the client does for entities
   preventing desync. Fixes [MC-4](https://bugs.mojang.com/browse/MC-4).
 
 ### lag-compensate-block-breaking
@@ -279,7 +344,7 @@ function itself. For per-world configuration, see the
 - **default**: `256`
 - **description**: The maximum size of the region file cache.
 
-### use-alternative-luck-forumula
+### use-alternative-luck-formula
 
 - **default**: `false`
 - **description**: Use an
@@ -376,7 +441,7 @@ named here use Mojang mappings regardless of the server.
 
 - **default**: ` `
 - **description**: The secret string that is shared by your Velocity proxy and this server. This
-  needs to match your proxy's `forwarding-secret` setting.
+  needs to match your proxy's secret as defined in the `forwarding.secret` file.
 
 ## scoreboards
 
@@ -495,8 +560,14 @@ named here use Mojang mappings regardless of the server.
 ### perform-username-validation
 
 - **default**: `true`
-- **default**: Whether the server should validate usernames. While this may allow users with special
+- **description**: Whether the server should validate usernames. While this may allow users with special
   characters in their name to join, it can also cause issues with commands and plugins.
+
+### compression-format
+
+- **default**: `ZLIB`
+- **description**: Allows the server to customize the format of saved region files. This supports `ZLIB`, `GLIB` and 
+  `NONE`, where `None` namely allows for compression to be disabled. 
 
 ## watchdog
 

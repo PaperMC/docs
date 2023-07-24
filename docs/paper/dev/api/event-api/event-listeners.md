@@ -39,10 +39,10 @@ public class ExampleListener implements Listener {
 }
 ```
 
-:::note Events
+:::note[Events]
 
 There is no list of events that can be listened to, however take a look 
-[here](https://jd.papermc.io/paper/1.19/org/bukkit/event/Event.html) to see all events that extend `Event`.
+[here](https://jd.papermc.io/paper/1.20/org/bukkit/event/Event.html) to see all events that extend `Event`.
 
 An event can only be listened to if it has a static `getHandlerList` method.
 

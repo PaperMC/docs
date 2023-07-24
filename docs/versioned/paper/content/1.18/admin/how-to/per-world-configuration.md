@@ -16,7 +16,7 @@ The only world generated out of the box is `default`. Any configuration option s
 to **all** loaded worlds, unless explicitly overridden. Any configuration change that does not need
 to be separated by world should be made in this section.
 
-:::info The main world
+:::info[The main world]
 
 The `default` section also serves as the place to configure per world settings for the main world
 (`level-name` in server.properties). An additional section created for the main world will not

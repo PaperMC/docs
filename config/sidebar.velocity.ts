@@ -84,7 +84,10 @@ const velocity: SidebarsConfig = {
             type: "generated-index",
             slug: "/cat/dev/how-to-guides",
           },
-          items: ["dev/how-to/dependencies", "dev/how-to/porting-from-velocity-1"],
+          items: [
+            "dev/how-to/dependencies",
+            "dev/how-to/porting-from-velocity-1",
+          ],
         },
         {
           type: "category",
@@ -93,7 +96,20 @@ const velocity: SidebarsConfig = {
             type: "generated-index",
             slug: "/cat/dev/api",
           },
-          items: ["dev/api/event", "dev/api/command", "dev/api/scheduler"],
+          items: [
+            {
+              type: "category",
+              label: "Component API",
+              collapsed: true,
+              items: [
+                "dev/api/component-api/intro",
+              ]
+            },
+            "dev/api/event",
+            "dev/api/command",
+            "dev/api/scheduler",
+            "dev/how-to/plugin-messaging",
+          ],
         },
       ],
     },

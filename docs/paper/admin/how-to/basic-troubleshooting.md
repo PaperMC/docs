@@ -6,7 +6,7 @@ slug: /basic-troubleshooting
 
 This guide will help you diagnose your server's problem before reporting it to PaperMC or the plugin's author.
 
-:::caution Stop Your Server And Take A Backup
+:::caution[Stop Your Server And Take A Backup]
 
 Before following this guide, stop your server first. Modifying server files while it is still running will corrupt them.  
 Only a full server shutdown can prevent this.
@@ -90,9 +90,9 @@ If you still experience problems, head to [Paper Documentation](#paper-documenta
 To efficiently search for the plugin that is causing the issue, you can do the following:
 
 1. **Split your plugins into two groups**  
-   The size of the two groups can be different, but it is ideal if the difference is minimal.
+   The size of the two groups can be different, but it is ideal if the difference is minimal. Make sure that plugins that depend on each other are grouped together.
 2. **Disable one of the two groups of plugins**  
-   You can disable them by changing their extension from `.jar` to `.jar-disabled`.
+   You can disable them by changing their extension from `.jar` to something else, such as `.jar-disabled`, or move them outside the `plugins` directory and into a temporary directory.
 3. **Run your server and check if the problem still exists**  
    If the problem is resolved, the plugin that caused the issue is one of the disabled plugins.  
    If the problem is not resolved, the plugin that is causing the issue is one of the active plugins.
@@ -125,8 +125,8 @@ Many plugins provide their own documentation about how to set them up properly. 
 
 Paper can also be configured in a variety of ways. Check these documents for detailed explanations about each configuration.
 
-* [Paper Global Config](../reference/global-configuration.md)
-* [Paper Per World Configuration](../reference/world-configuration.md)
+* [Paper Global Config](../reference/configuration/global-configuration.md)
+* [Paper Per World Configuration](../reference/configuration/world-configuration.md)
 
 ## Consult With Developer
 

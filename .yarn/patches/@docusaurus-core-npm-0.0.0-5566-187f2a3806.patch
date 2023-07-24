@@ -1,0 +1,13 @@
+diff --git a/lib/server/config.js b/lib/server/config.js
+index 4221450fb7f74028566aa57b3e90289d28b54ae6..b7cdb3b97904e6fb07e74c8d81b18ead5898424c 100644
+--- a/lib/server/config.js
++++ b/lib/server/config.js
+@@ -16,7 +16,7 @@ const utils_1 = require("@docusaurus/utils");
+ const configValidation_1 = require("./configValidation");
+ async function findConfig(siteDir) {
+     // We could support .mjs, .ts, etc. in the future
+-    const candidates = ['.js', '.cjs'].map((ext) => utils_1.DEFAULT_CONFIG_FILE_NAME + ext);
++    const candidates = ['.ts'/*'.js', '.cjs'*/,].map((ext) => utils_1.DEFAULT_CONFIG_FILE_NAME + ext);require('esbuild-register/dist/node').register() // Paper
+     const configPath = await (0, utils_1.findAsyncSequential)(candidates.map((file) => path_1.default.join(siteDir, file)), fs_extra_1.default.pathExists);
+     if (!configPath) {
+         logger_1.default.error('No config file found.');

@@ -6,7 +6,7 @@ slug: /dev/event-api
 
 Listening to events with Velocity's `@Subscribe` annotation is straightforward. You've already seen
 one such listener, using the ProxyInitializeEvent in your main class. Additional events can be found
-on the [Javadoc](https://jd.velocitypowered.com/3.0.0/).
+on the [Javadoc](https://jd.papermc.io/velocity/3.0.0/).
 
 ## Creating a listener method
 

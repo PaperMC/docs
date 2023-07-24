@@ -14,7 +14,7 @@ it before you continue. Velocity requires Java 11 or newer. See our
 
 ## Downloading Velocity
 
-Head over to the [downloads](https://papermc.io/downloads#Velocity) page to get the latest version
+Head over to the [downloads](https://papermc.io/downloads/velocity) page to get the latest version
 of Velocity. We recommend getting the latest stable version. After downloading Velocity, move the
 JAR file to a dedicated folder for just the proxy or upload it to your server.
 

@@ -15,17 +15,36 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       label: "Paper",
       to: "/paper",
       position: "left",
-      activeBaseRegex: "(\\/paper)(.+)?",
+      activeBaseRegex: "\\/paper.*",
       items: [
         {
           label: "Administration",
           to: "/paper/admin",
-          activeBaseRegex: "(\\/paper/)(?!dev)(.+)?",
+          activeBaseRegex: "\\/paper/(?!dev).*",
         },
         {
           label: "Development",
           to: "/paper/dev",
-          activeBaseRegex: "(\\/paper\\/dev)(.+)?",
+          activeBaseRegex: "\\/paper\\/dev.*",
+        },
+      ],
+    },
+    {
+      type: "dropdown",
+      label: "Folia",
+      to: "/folia",
+      position: "left",
+      activeBaseRegex: "(\\/folia)(.+)?",
+      items: [
+        {
+          label: "Administration",
+          to: "/folia/admin",
+          activeBaseRegex: "(\\/folia/)(?!dev)(.+)?",
+        },
+        {
+          label: "Development",
+          to: "/folia/dev",
+          activeBaseRegex: "\\/folia\\/dev.*",
         },
       ],
     },
@@ -34,17 +53,17 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       label: "Velocity",
       to: "/velocity",
       position: "left",
-      activeBaseRegex: "(\\/velocity)(.+)?",
+      activeBaseRegex: "\\/velocity.*",
       items: [
         {
           label: "Administration",
           to: "/velocity/admin",
-          activeBaseRegex: "(\\/velocity/)(?!dev)(.+)?",
+          activeBaseRegex: "\\/velocity/(?!dev).*",
         },
         {
           label: "Development",
           to: "/velocity/dev",
-          activeBaseRegex: "(\\/velocity\\/dev)(.+)?",
+          activeBaseRegex: "\\/velocity\\/dev.*",
         },
       ],
     },

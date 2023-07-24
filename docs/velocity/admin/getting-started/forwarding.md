@@ -50,7 +50,7 @@ First, you need to disable BungeeCord forwarding if you had it enabled beforehan
 `settings.bungeecord` is set to `false` in your `spigot.yml`.
 
 In `config/paper-global.yml`, set `proxies.velocity.enabled` to true and
-`proxies.velocity.secret`, to match the secret in your `velocity.toml`. You must also set
+`proxies.velocity.secret`, to match the secret in your `forwarding.secret` file. You must also set
 `proxies.velocity.online-mode` to the `online-mode` setting in your `velocity.toml`. Once
 you're done editing `paper-global.yml`, reboot your server.
 
@@ -88,7 +88,7 @@ player data sent by Velocity.
 To add some security, particularly for proxies hosted on shared hosting, Velocity optionally
 supports the [BungeeGuard](https://www.spigotmc.org/resources/bungeeguard.79601/) plugin. To use it,
 set the `player-info-forwarding` setting in `velocity.toml` to `bungeeguard`, then add the value in
-`forwarding-secret` to the token section in the BungeeGuard configuration.
+the `forwarding.secret` file to the token section in the BungeeGuard configuration.
 
 ### Configuring legacy forwarding for Spigot / Paper
 

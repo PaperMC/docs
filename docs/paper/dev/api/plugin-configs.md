@@ -4,7 +4,7 @@ slug: /dev/plugin-configurations
 
 # Plugin Configurations
 
-Configuration files allow users to change certain behaviour and functionality of Plugins. This guide will outline how to use them.
+Configuration files allow users to change certain behavior and functionality of Plugins. This guide will outline how to use them.
 
 ## Format
 
@@ -18,7 +18,7 @@ root:
   another-key: David
 ```
 
-When accessing indented values, you separate the levels with "."'s. For example, the key for the "David" string would be `root.another-key`
+When accessing indented values, you separate the levels with `.`'s. For example, the key for the "David" string would be `root.another-key`
 
 ## Creating a config.yml
 

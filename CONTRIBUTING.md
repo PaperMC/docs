@@ -16,13 +16,12 @@ The PaperMC Docs repository contains the documentation for the PaperMC project, 
 information, instructions, and guidelines to our users, developers, and contributors. Your contributions play a 
 significant role in improving and maintaining the quality of our documentation.
 
-We use Docosaurus to build and deploy the documentation website. The Docs Page is hosted on Vercel, which supports automatic
-CI/CD deployments from the main branch. The website is available at [https://docs.papermc.io](https://docs.papermc.io).
+We use [Docusaurus](https://docusaurus.io/) to build and deploy the documentation website. 
+Using Docusaurus means that there are guides for how to write the documentation. You can find the Docusaurus documentation
+[here](https://docusaurus.io/docs/category/guides).
 
-Using Docosaurus means that there are guides for how to write the documentation. You can find the Docosaurus documentation at
-[https://docusaurus.io/docs/category/guides](https://docusaurus.io/docs/category/guides). The documentation is written 
-in Markdown, which is a simple markup language that is easy to learn. Take a look at some of the existing documentation
-to get a feel for how it is written.
+Our Docs are written in Markdown, which is a simple markup language that is easy to learn. 
+Take a look at some of the existing documentation to get a feel for how it is written.
 
 ### Adding a page
 
@@ -63,6 +62,7 @@ If you wish to contribute to the PaperMC Docs, please follow these steps:
 4. Commit your changes and push them to your fork.
 
 5. Submit a pull request (PR) to the `main` branch of the Docs repository.
+   Vercel will automatically deploy a preview of your changes to the PR. The link to the preview will be available in a PR comment.
 
 6. Your PR will be reviewed, and feedback may be provided if necessary.
 
@@ -73,6 +73,8 @@ If you wish to contribute to the PaperMC Docs, please follow these steps:
 To maintain consistency and readability across the documentation, please adhere to the following style guidelines:
 
 1. **American English**: All documentation should be written in American English. Please use American spellings, grammar, and punctuation.
+   Take a look at [this guide](https://www.oxfordinternationalenglish.com/differences-in-british-and-american-spelling/) which outlines 
+   the differences between American and British English.
 
 2. **Markdown Format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
 

@@ -37,10 +37,12 @@ const scrollIntoView = (id: string): void => {
 
     setTimeout(() => {
         window.scrollTo({
-            top: adjustedScrollPosition - 20,
+            top: adjustedScrollPosition,
             behavior: 'smooth',
         });
-    }, 1);
+    }, navigator.userAgent.includes("Chrome") && navigator.vendor.includes("Google Inc") ? 0 : 1);
+    // Basically, if the user is using Chrome, we don't need to wait for the browser to be stupid and scroll to the wrong position.
+    // Cause chrome is, for once, better than Firefox and Safari etc. This is Hacky, but it works.
 }
 
 const YamlNodeWithDescription: React.FC<{

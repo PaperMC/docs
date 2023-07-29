@@ -16,11 +16,10 @@ The PaperMC Docs repository contains the documentation for the PaperMC project, 
 information, instructions, and guidelines to our users, developers, and contributors. Your contributions play a 
 significant role in improving and maintaining the quality of our documentation.
 
-We use [Docusaurus](https://docusaurus.io/) to build and deploy the documentation website. 
-Using Docusaurus means that there are guides for how to write the documentation. You can find the Docusaurus documentation
-[here](https://docusaurus.io/docs/category/guides).
+We use [Docusaurus](https://docusaurus.io/) to build and deploy the documentation website.
+Docusarus has [extensive documentation](https://docusaurus.io/docs/category/guides) detailing what is possible with it.
 
-Our Docs are written in Markdown, which is a simple markup language that is easy to learn. 
+The bulk of Paper's documentation is written with Markdown, which is a simple markup language that is easy to learn. 
 Take a look at some of the existing documentation to get a feel for how it is written.
 
 ### Adding a page

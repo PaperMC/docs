@@ -54,6 +54,10 @@ anticheat:
         permission plugins may struggle with the number of checks made. This should
         only be used with modern permission plugins. '
     hidden-blocks:
+      default: '[copper_ore, deepslate_copper_ore, gold_ore, deepslate_gold_ore, iron_ore,
+        deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
+        mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore,
+        deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]'
       description: 'With engine-mode: 1, these blocks will be replaced by stone (deepslate
         at y < 0), netherrack, or end_stone, based on the dimension. All types of
         air are ignored on this list.  With engine-mode: 2, these blocks will be randomly
@@ -62,6 +66,7 @@ anticheat:
         blocks may be added multiple times, increasing their chance of being placed.
         The default block states are placed. '
     replacement-blocks:
+      default: '[stone, oak_planks, deepslate]'
       description: 'With engine-mode: 1, replacement blocks are not used. Changing
         this list will have no effect.  With engine-mode: 2, both replacement-blocks
         and hidden-blocks are randomly replaced by hidden-blocks. While tile entities

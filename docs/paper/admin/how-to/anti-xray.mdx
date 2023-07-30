@@ -17,7 +17,7 @@ yourself with the [Configuration Guide](./reference/configuration).
 
 This guide is a step-by-step walk-through for configuring Anti-Xray. For reference documentation,
 refer to the Anti-Xray section of the
-[Per-World Configuration Reference](../reference/configuration/world-configuration.mdx).
+[Per-World Configuration Reference](../reference/configuration/world-configuration.mdx#anticheat_anti_xray).
 
 Anti-Xray has three different modes. `engine-mode: 1` replaces specified blocks (`hidden-blocks`) with
 other "fake" blocks, `stone` (`deepslate` at y < 0), `netherrack`, or `end_stone` based on the
@@ -63,7 +63,7 @@ included out of the box.
 generation. If the client is able to obtain the world seed, it is able to know the real location of
 every generated ore, completely bypassing Anti-Xray. This can be partially worked around by making
 it harder for the client to reverse the world seed with the
-[`feature-seeds` configuration](../reference/configuration/world-configuration.mdx), in conjunction
+[`feature-seeds` configuration](../reference/configuration/world-configuration.mdx#feature_seeds), in conjunction
 with the structure seed options in `spigot.yml`. Note that this is not a complete solution, and it
 may still be possible for a client to obtain the server's world seed. Using a different seed for
 each world may also be beneficial.

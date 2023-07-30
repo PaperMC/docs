@@ -140,10 +140,6 @@ html[data-theme="dark"] {
   color: var(--ifm-color-primary);
 }
 
-.with-value-active {
-  cursor: pointer;
-}
-
 .with-value-active-colour {
   color: var(--ifm-color-primary);
 }
@@ -155,31 +151,6 @@ html[data-theme="dark"] {
 .description_word_wrap {
   white-space: pre-wrap;
   word-wrap: break-word;
-}
-
-.highlight {
-  background-color: #5972d9;
-  border-radius: 0.2em;
-}
-
-.search-input {
-  display: inline-block;
-  position: relative;
-  margin: 0 0 15px 0;
-}
-
-.search-input input:focus {
-  border: 1px solid var(--ifm-color-primary);;
-  box-shadow: 0 0 10px #719ECE;
-}
-
-.search-input input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid var(--ifm-color-primary);
-  border-radius: 4px;
-  font-size: 14px;
-  outline-color: var(--ifm-color-primary);
 }
 
 .outlined-box {
@@ -212,12 +183,16 @@ html[data-theme="dark"] {
 }
 
 [data-theme="light"] .config-auxiliary-node {
-  color: rgb(148, 148, 148)
+  color: rgb(148, 148, 148);
 }
 
 @keyframes fadein {
-  from {background-color: rgba(0, 0, 0, 0);}
-  to {background-color: #3a76ff;}
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: #3a76ff;
+  }
 }
 
 [data-theme="light"] .highlight-config-node:hover > .config-auxiliary-node {
@@ -233,7 +208,6 @@ html[data-theme="dark"] {
   background-color: #3a76ff;
   border-radius: 0.2em;
   animation: fadein 0.4s;
-
   -moz-animation: fadein 0.4s;
   width: fit-content;
 }

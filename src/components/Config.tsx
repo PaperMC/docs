@@ -5,24 +5,15 @@ import yaml from 'js-yaml';
 
 const INDENT_SIZE = 30;
 
-const createUrlHash = (parent: string, name: string): string => {
-    return parent + "_" + parseUrlHash(name)
+const createUrlHash = (parent, name) => {
+    return parent + (parent ? '_' : '') + parseUrlHash(name);
 };
 
-const parseUrlHash = (name: string): string => {
-    return name.replace(/-/g, "_");
-}
+const parseUrlHash = (name) => {
+    return name.replace(/-/g, '_');
+};
 
-interface YamlNode {
-    default: string | number | boolean;
-    description: string;
-}
-
-interface YamlData {
-    [key: string]: YamlNode | YamlData;
-}
-
-const scrollIntoView = (id: string): void => {
+const scrollIntoView = (id) => {
     const targetElement = document.getElementById(id);
 
     if (!targetElement) {
@@ -31,7 +22,8 @@ const scrollIntoView = (id: string): void => {
     }
 
     const navbarHeightRems = 3.75;
-    const navbarHeightPixels = navbarHeightRems * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const navbarHeightPixels =
+        navbarHeightRems * parseFloat(getComputedStyle(document.documentElement).fontSize);
     const targetElementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
     const adjustedScrollPosition = targetElementPosition - navbarHeightPixels;
 
@@ -40,16 +32,10 @@ const scrollIntoView = (id: string): void => {
             top: adjustedScrollPosition,
             behavior: 'smooth',
         });
-    }, navigator.userAgent.includes("Chrome") && navigator.vendor.includes("Google Inc") ? 0 : 1);
-    // Basically, if the user is using Chrome, we don't need to wait for the browser to be stupid and scroll to the wrong position.
-    // Cause chrome is, for once, better than Firefox and Safari etc. This is Hacky, but it works.
-}
+    }, navigator.userAgent.includes('Chrome') && navigator.vendor.includes('Google Inc') ? 0 : 1);
+};
 
-const YamlNodeWithDescription: React.FC<{
-    name: string;
-    parentKey: string;
-    node: YamlNode;
-}> = ({ name, node, parentKey }) => {
+const YamlNodeWithDescription = ({ name, node, parentKey }) => {
     const [showDescription, setShowDescription] = useState(false);
 
     node.default = node.default || 'N/A';
@@ -62,46 +48,38 @@ const YamlNodeWithDescription: React.FC<{
         }
     }, [name]);
 
-    const handleHashLinkClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
-        event.preventDefault(); // Prevent the default anchor tag behavior. This causes some UI issues with scrolling.
-
+    const handleHashLinkClick = (event) => {
+        event.preventDefault();
         showAndScrollIntoView(createUrlHash(parentKey, name));
         history.pushState(null, null, event.currentTarget.hash);
 
-        const fullURL = window.location.href.split("#")[0];
+        const fullURL = window.location.href.split('#')[0];
         const hash = createUrlHash(parentKey, name);
-        navigator.clipboard.writeText(fullURL + "#" + hash);
+        navigator.clipboard.writeText(fullURL + '#' + hash);
         scrollIntoView(hash);
 
         event.stopPropagation();
     };
 
-    const showAndScrollIntoView = hash => {
+    const showAndScrollIntoView = (hash) => {
         setShowDescription(true);
         scrollIntoView(hash);
-    }
+    };
 
     return (
-        <div
-            style={{ paddingLeft: `${INDENT_SIZE}px` }}
-            id={createUrlHash(parentKey, name)}
-        >
-            <div className={`description_word_wrap`}
-                 style={{ marginBottom: showDescription ? 10 : 0 }}
-            >
+        <div style={{ paddingLeft: `${INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
+            <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
                 <a
-                    onClick={() => {setShowDescription(!showDescription)}}
-                    className={`with-value${showDescription ? "-active": ""}`}
+                    onClick={() => {
+                        setShowDescription(!showDescription);
+                    }}
+                    className={`with-value${showDescription ? '-active' : ''}`}
                 >
                     {name}: {node.default.toString()}
                 </a>
                 {showDescription ? (
                     <>
-                        <a
-                            className={`config-anchor with-value-active-colour hash-link`}
-                            href={`#${createUrlHash(parentKey, name)}`}
-                            onClick={handleHashLinkClick}
-                        ></a>
+                        <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
 
                         <div className="indent-2" style={{ marginBottom: 10 }}>
                             <div className="outlined-box description-text colour-offset-box">
@@ -110,33 +88,22 @@ const YamlNodeWithDescription: React.FC<{
                         </div>
                     </>
                 ) : (
-                    <a
-                        className={`config-anchor with-value-active-colour hash-link`}
-                        href={`#${createUrlHash(parentKey, name)}`}
-                        onClick={handleHashLinkClick}
-                    ></a>
+                    <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
                 )}
             </div>
         </div>
     );
 };
 
-const YamlTreeNode: React.FC<{
-    root: boolean;
-    key: string;
-    parentKey?: string;
-    value: YamlNode | YamlData;
-}> = ({ root, key, parentKey, value }) => {
-
-    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
-        event.preventDefault(); // Prevent the default anchor tag behavior. This causes some UI issues with scrolling.
-
+const YamlTreeNode = ({ root, key, parentKey, value }) => {
+    const handleClick = (event) => {
+        event.preventDefault();
         scrollIntoView(createUrlHash(parentKey, key));
         history.pushState(null, null, `#${createUrlHash(parentKey, key)}`);
 
-        const fullURL = window.location.href.split("#")[0];
+        const fullURL = window.location.href.split('#')[0];
         const hash = createUrlHash(parentKey, key);
-        navigator.clipboard.writeText(fullURL + "#" + hash);
+        navigator.clipboard.writeText(fullURL + '#' + hash);
         scrollIntoView(hash);
 
         event.stopPropagation();
@@ -150,48 +117,24 @@ const YamlTreeNode: React.FC<{
     }, [key]);
 
     return (
-        <div
-            key={key}
-            className={`highlight-config-node`}
-            style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }}
-            id={createUrlHash(parentKey, key)}
-        >
-            <div className={`config-auxiliary-node`} onClick={handleClick}>{key}:</div>
-            {renderYamlData(
-                value as YamlData,
-                parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key)
-            )}
+        <div key={key} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, key)}>
+            <div className={`config-auxiliary-node`} onClick={handleClick}>
+                {key}:
+            </div>
+            {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key))}
         </div>
     );
 };
 
-const renderYamlData = (
-    data: YamlData,
-    parentKey?: string,
-    root: boolean = false
-): JSX.Element[] => {
-    const renderedNodes: JSX.Element[] = [];
+const renderYamlData = (data, parentKey, root = false) => {
+    const renderedNodes = [];
 
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object') {
             if ('default' in value || 'description' in value) {
-                renderedNodes.push(
-                    <YamlNodeWithDescription
-                        key={key}
-                        name={key}
-                        parentKey={parentKey}
-                        node={value as YamlNode}
-                    />
-                );
+                renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} />);
             } else {
-                renderedNodes.push(
-                    YamlTreeNode({
-                        root,
-                        key,
-                        parentKey,
-                        value,
-                    })
-                );
+                renderedNodes.push(YamlTreeNode({ root, key, parentKey, value }));
             }
         }
     }
@@ -199,11 +142,11 @@ const renderYamlData = (
     return renderedNodes;
 };
 
-export default function Config({ data }: { data: string }): JSX.Element {
-    let ymlData: YamlData = yaml.load(data);
+export default function Config({ data }) {
+    let ymlData = yaml.load(data);
     return (
         <div>
-            <pre>{renderYamlData(ymlData, "", true)}</pre>
+            <pre>{renderYamlData(ymlData, '', true)}</pre>
             <div style={{ display: 'none' }}>{data}</div>
         </div>
     );

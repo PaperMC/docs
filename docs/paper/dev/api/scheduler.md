@@ -120,7 +120,7 @@ scheduler.runTaskLater(
     }, /* End of the lambda */ 20);
 ```
 
-#### Using `Consumer<BukkitTask>` {#using-consumerbukkittask}
+#### Using `Consumer<BukkitTask>`
 
 The `Consumer` interface is used for tasks that require a `BukkitTask` instance (usually in repeated tasks),
 e.g. when you want to cancel the task from inside it.
@@ -138,7 +138,7 @@ public class MyConsumerTask implements Consumer<BukkitTask> {
 	
 	@Override
 	public void accept(BukkitTask task) {
-		if(this.entity.isDead()) {
+		if (this.entity.isDead()) {
 			task.cancel(); // The entity died, there's no point
 			return;        // in running the code anymore.
 		}

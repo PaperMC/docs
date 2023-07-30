@@ -6,6 +6,12 @@ slug: /dev/scheduler
 
 The `BukkitScheduler` can be used to schedule your code to be run later or repeatedly.
 
+:::info[Folia]
+
+This guide is designed for Non-Folia Bukkit Servers. If you are using Folia, you should use its respective schedulers.
+
+:::
+
 ## What is a tick?
 
 Every game runs something called a game loop which essentially executes all the logic of the game over and over,
@@ -28,6 +34,9 @@ You can make your code more readable by using the
 enum, e.g. to convert 5 minutes to ticks and back:  
 `TimeUnit.MINUTES.toSeconds(5) * 20`  
 `TimeUnit.SECONDS.toMinutes(ticks / 20)`
+
+You can also use the `Tick` class from Paper to convert between human units and ticks, e.g. to convert 5 minutes to ticks:
+`Duration.ofMinutes(5).get(Tick.tick())` will yield `6000` ticks.
 
 ## Obtaining the scheduler
 
@@ -67,8 +76,8 @@ your server's performance.
 
 :::warning
 
-**You cannot safely access the Bukkit API from within asynchronous tasks**. If a method is not explicitly marked
-as thread-safe or isn't obviously designed to be used asynchronously **you will eventually encounter errors**.
+**Large portions of the Bukkit API are not safe to use from within asynchronous tasks**. If a method changes or 
+accesses the world state, it is not safe to be used from an asynchronous task.
 
 :::
 
@@ -83,7 +92,7 @@ You can follow [this guide](https://www.baeldung.com/java-executor-service-tutor
 
 :::
 
-### Difference between `Runnable` and `Consumer<BukkitTask>`
+### Different ways to schedule tasks
 
 #### Using `Runnable`
 
@@ -164,31 +173,35 @@ scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
 } /* End of the lambda */, 0, 20);
 ```
 
-## Examples of tasks on the main thread
+##### Using BukkitRunnable
 
-### A task to run later once
-
-This task will run a single time after the delay specified in ticks, in this case 1 second.
-
-```java
-scheduler.runTaskLater(plugin, () -> {
-	server.broadcast(Component.text("Hello, World!"));
-}, 20);
-```
-
-### A task to run later repeatedly
-
-This task will run repeatedly, first time after the delay specified in ticks - in this case 1 second -
-and then every period specified in ticks - in this case 5 seconds.
+The `BukkitRunnable` class is a class that implements `Runnable` and holds a `BukkitTask` instance. This means that you do
+not need to access the task from inside the `run()` method, you can simply use the `this.cancel` method:
 
 ```java
-scheduler.runTaskTimer(plugin, () -> {
-	server.broadcast(Component.text("Hello, World!"));
-}, 20, 5 * 20);
+public class CustomRunnable extends BukkitRunnable {
+
+    private final LivingEntity entity;
+
+    public CustomRunnable(LivingEntity entity) {
+        this.entity = entity;
+    }
+
+    @Override
+    public void run() {
+        if (this.entity.isDead()) {
+            this.cancel(); // The entity died, there's no point
+            return;        // in running the code anymore.
+        }
+
+        this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+    }
+}
 ```
 
-### A repeating task to be canceled later
+This simply adds a potion effect until the entity dies. 
 
-Cancelling a repeating task requires you to have an instance of a `BukkitTask`.
-After obtaining it, simply use the `cancel()` method.  
-The example on how to use a [`Consumer<BukkitTask>`](#using-consumerbukkittask) already shows exactly how to do it.
+#### Using a delay of 0 ticks
+
+A delay of 0 ticks is treated as you wanting to run the task on the next tick. If you schedule a task with a delay of 0 ticks
+whilst the server is starting / before it is enabled it will be executed before the server is enabled.

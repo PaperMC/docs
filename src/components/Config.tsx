@@ -121,6 +121,50 @@ const YamlNodeWithDescription: React.FC<{
     );
 };
 
+const YamlTreeNode: React.FC<{
+    root: boolean;
+    key: string;
+    parentKey?: string;
+    value: YamlNode | YamlData;
+}> = ({ root, key, parentKey, value }) => {
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.preventDefault(); // Prevent the default anchor tag behavior. This causes some UI issues with scrolling.
+
+        scrollIntoView(createUrlHash(parentKey, key));
+        history.pushState(null, null, `#${createUrlHash(parentKey, key)}`);
+
+        const fullURL = window.location.href.split("#")[0];
+        const hash = createUrlHash(parentKey, key);
+        navigator.clipboard.writeText(fullURL + "#" + hash);
+        scrollIntoView(hash);
+
+        event.stopPropagation();
+    };
+
+    useEffect(() => {
+        const hash = createUrlHash(parentKey, key);
+        if (window.location.hash === `#${hash}`) {
+            scrollIntoView(hash);
+        }
+    }, [key]);
+
+    return (
+        <div
+            key={key}
+            className={`highlight-config-node`}
+            style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }}
+            id={createUrlHash(parentKey, key)}
+        >
+            <div className={`config-auxiliary-node`} onClick={handleClick}>{key}:</div>
+            {renderYamlData(
+                value as YamlData,
+                parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key)
+            )}
+        </div>
+    );
+};
+
 const renderYamlData = (
     data: YamlData,
     parentKey?: string,
@@ -141,16 +185,12 @@ const renderYamlData = (
                 );
             } else {
                 renderedNodes.push(
-                    <div
-                        key={key}
-                        style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }}
-                    >
-                        <div className={`config-auxiliary-node`}>{key}:</div>
-                        {renderYamlData(
-                            value as YamlData,
-                            parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key)
-                        )}
-                    </div>
+                    YamlTreeNode({
+                        root,
+                        key,
+                        parentKey,
+                        value,
+                    })
                 );
             }
         }

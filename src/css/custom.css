@@ -208,9 +208,32 @@ html[data-theme="dark"] {
 }
 
 [data-theme="dark"] .config-auxiliary-node {
-  filter: brightness(70%);
+  color: rgb(128, 128, 128);
 }
 
 [data-theme="light"] .config-auxiliary-node {
-  filter: brightness(350%);
+  color: rgb(148, 148, 148)
+}
+
+@keyframes fadein {
+  from {background-color: rgba(0, 0, 0, 0);}
+  to {background-color: #3a76ff;}
+}
+
+[data-theme="light"] .highlight-config-node:hover > .config-auxiliary-node {
+  color: white;
+}
+
+[data-theme="dark"] .highlight-config-node:hover > .config-auxiliary-node {
+  color: black;
+}
+
+.highlight-config-node:hover > .config-auxiliary-node {
+  cursor: pointer;
+  background-color: #3a76ff;
+  border-radius: 0.2em;
+  animation: fadein 0.4s;
+
+  -moz-animation: fadein 0.4s;
+  width: fit-content;
 }

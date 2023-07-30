@@ -162,7 +162,7 @@ const YamlTreeNode = ({ root, key, parentKey, value }) => {
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
                 {parseItalics(key)}:
             </div>
-            <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleClick}></a>
+            <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, key)}`} onClick={handleClick}></a>
             {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key))}
         </div>
     );

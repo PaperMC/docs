@@ -35,6 +35,39 @@ const scrollIntoView = (id) => {
     }, navigator.userAgent.includes('Chrome') && navigator.vendor.includes('Google Inc') ? 0 : 1);
 };
 
+const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => {
+
+    if (value[0] === '[' && value[value.length - 1] === ']') {
+        const items = value.replace("[", "").replace("]", "").split(",").map((item) => {
+            return item.trim();
+        });
+        if (collapse && items.length > 2) {
+            items.length = 3;
+            items[2] = <i className={"expand-list-text"}>Click to expand</i>;
+        }
+        return (
+            <>
+                <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+                <div className="indent-2">
+                    <div>
+                        <ul className={"yaml-list-elem"}>
+                            {items.map((item) => {
+                                return <li key={item}>{item}</li>;
+                            })}
+                        </ul>
+                    </div>
+                </div>
+            </>
+        );
+    }
+    return (
+        <>
+            {" " + value}
+            <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+        </>
+    );
+}
+
 const YamlNodeWithDescription = ({ name, node, parentKey }) => {
     const [showDescription, setShowDescription] = useState(false);
 
@@ -50,7 +83,6 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
 
     const handleHashLinkClick = (event) => {
         event.preventDefault();
-        showAndScrollIntoView(createUrlHash(parentKey, name));
         history.pushState(null, null, event.currentTarget.hash);
 
         const fullURL = window.location.href.split('#')[0];
@@ -75,12 +107,10 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
                     }}
                     className={`with-value${showDescription ? '-active' : ''}`}
                 >
-                    {name}: {node.default.toString()}
+                    {name}:{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick)}
                 </a>
                 {showDescription ? (
                     <>
-                        <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
-
                         <div className="indent-2" style={{ marginBottom: 10 }}>
                             <div className="outlined-box description-text colour-offset-box">
                                 <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
@@ -88,7 +118,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
                         </div>
                     </>
                 ) : (
-                    <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+                    <></>
                 )}
             </div>
         </div>

@@ -103,10 +103,15 @@ chunks:
     default: 10s
     description: 'Delays chunk unloads by the specified time. '
   entity-per-chunk-save-limit:
-    default: '{experience_orb: -1...}'
-    description: 'Limits the number of any type of entity that will be saved/loaded
-      per chunk. A value of -1 disables the limit for a specific entity. Any entity
-      may be added to the list, beyond the enumerated defaults. '
+    experience_orb:
+      default: '-1'
+      description: "Limits the number of experience_orb's that will be saved/loaded
+        per chunk. A value of -1 disables the limit for a specific entity."
+    <entity-type>:
+      default: 'amount'
+      description: 'Limits the number of any type of entity that will be saved/loaded
+        per chunk. A value of -1 disables the limit for a specific entity. **Any entity
+        may be added to the list**, beyond the enumerated defaults. '
   fixed-chunk-inhabited-time:
     default: '-1'
     description: 'If 0 or greater, set the chunk inhabited time to a fixed number.
@@ -265,12 +270,16 @@ entities:
         default: 'false'
         description: 'Determines if items will have different despawn rates. '
       items:
-        default: '{ cobblestone: 300 }'
-        description: 'Determines how long each respective item despawns in ticks.
-          The item ids are the same as those used in the /give command. They can be
-          viewed by enabling advanced item tooltips in-game by pressing **F3 + H**;
-          the item id will appear at the bottom of the tooltip that appears when you
-          hover over an item. '
+        cobblestone:
+          default: '300'
+          description: 'Sets a custom despawn rate for cobblestone of 300 ticks. '
+        <item-type>:
+          default: 'amount'
+          description: 'Determines how long each respective item despawns in ticks.
+            The item ids are the same as those used in the /give command. They can be
+            viewed by enabling advanced item tooltips in-game by pressing **F3 + H**;
+            the item id will appear at the bottom of the tooltip that appears when you
+            hover over an item. '
     count-all-mobs-for-spawning:
       default: 'false'
       description: 'Determines whether spawner mobs and other misc mobs are counted

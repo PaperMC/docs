@@ -140,6 +140,10 @@ html[data-theme="dark"] {
   color: var(--ifm-color-primary);
 }
 
+.with-value-active {
+  cursor: pointer;
+}
+
 .with-value-active-colour {
   color: var(--ifm-color-primary);
 }
@@ -210,4 +214,24 @@ html[data-theme="dark"] {
   animation: fadein 0.4s;
   -moz-animation: fadein 0.4s;
   width: fit-content;
+}
+
+ul.yaml-list-elem {
+  margin: 0;
+  list-style-type: none;
+}
+ul.yaml-list-elem > li {
+  margin: 0;
+  text-indent: -15px;
+}
+ul.yaml-list-elem > li:before {
+  content: "- ";
+}
+
+[data-theme="dark"] .expand-list-text {
+  color: rgb(128, 128, 128);
+}
+
+[data-theme="light"] .expand-list-text {
+  color: rgb(148, 148, 148);
 }

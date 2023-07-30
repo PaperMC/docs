@@ -68,6 +68,17 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => 
     );
 }
 
+const parseItalics = (key) => {
+    if (key.startsWith('<') && key.endsWith('>')) {
+        return (
+            <>
+                <i>{key}</i>
+            </>
+        )
+    }
+    return key;
+}
+
 const YamlNodeWithDescription = ({ name, node, parentKey }) => {
     const [showDescription, setShowDescription] = useState(false);
 
@@ -107,7 +118,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
                     }}
                     className={`with-value${showDescription ? '-active' : ''}`}
                 >
-                    {name}:{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick)}
+                    {parseItalics(name)}:{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick)}
                 </a>
                 {showDescription ? (
                     <>
@@ -149,7 +160,7 @@ const YamlTreeNode = ({ root, key, parentKey, value }) => {
     return (
         <div key={key} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, key)}>
             <div className={`config-auxiliary-node`} onClick={handleClick}>
-                {key}:
+                {parseItalics(key)}:
             </div>
             {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key))}
         </div>

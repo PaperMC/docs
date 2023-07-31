@@ -1,4 +1,6 @@
 .reactMarkDown {
+    display: flex;
+    flex-direction: column;
 }
 
 .reactMarkDown p {
@@ -6,13 +8,12 @@
 }
 
 .reactMarkDown ul {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    margin: 0;
     list-style: disc outside none;
 }
 
-.reactMarkDown ul li {
-    margin-left: 2em;
+.reactMarkDown li {
+    margin: 0;
     display: list-item;
     text-align: -webkit-match-parent;
 }

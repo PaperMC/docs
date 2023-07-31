@@ -307,10 +307,16 @@ entities:
       mode:
         default: saferegen
         description: 'Specifies the method the server uses to resolve entities with
-          duplicate UUIDs. This can be one of the following values: - **saferegen**:
-          Regenerate a UUID for the entity, or delete it if they are close. - **delete**:
-          Delete the entity. - **silent**: Does nothing, not printing logs. - **warn**:
-          Does nothing, printing logs. '
+          duplicate UUIDs. This can be one of the following values:
+
+          - **saferegen**: Regenerate a UUID for the entity, or delete it if they are close.
+
+          - **delete**: Delete the entity.
+
+          - **silent**: Does nothing, not printing logs.
+
+          - **warn**: Does nothing, printing logs. '
+
       safe-regen-delete-range:
         default: '32'
         description: 'If multiple entities with duplicate UUIDs are within this many
@@ -318,7 +324,7 @@ entities:
     filter-bad-tile-entity-nbt-from-falling-blocks:
       default: 'true'
       description: 'Instructs the server to remove certain NBT data from falling blocks.
-        - **note**: Some adventure maps may require this to be turned off to function
+        **Note**: Some adventure maps may require this to be turned off to function
         correctly, but we do not recommend turning it off on a public server. '
     filtered-entity-tag-nbt-paths:
       default: '[Pos, Motion, SleepingX, SleepingY, SleepingZ]'
@@ -329,7 +335,7 @@ entities:
         the filter list will be ignored. The defaults are set to prevent entities
         from spawning or moving to a place other than the location they were placed.
         For example, if Pos wasn''t included, a spawn egg could place an entity at
-        any location. - **note**: Some adventure maps may require this to be an empty
+        any location. **Note**: Some adventure maps may require this to be an empty
         list to function correctly, but we do not recommend turning it off on a public
         server. '
     iron-golems-can-spawn-in-air:
@@ -396,12 +402,12 @@ entities:
     wateranimal-spawn-height:
       maximum:
         default: default
-        description: 'The maximum height at which water animals will spawn. - **note**:
+        description: 'The maximum height at which water animals will spawn. **Note**:
           The default value defers to Minecraft''s default setting, which as of 1.12
           is the sea level of the world (usually Y: 64). '
       minimum:
         default: default
-        description: 'The minimum height at which water animals will spawn. - **note**:
+        description: 'The minimum height at which water animals will spawn. **Note**:
           The default value defers to Minecraft''s default setting, which as of 1.12
           is the sea level of the world (usually Y: 64). '
 environment:
@@ -416,7 +422,7 @@ environment:
   disable-teleportation-suffocation-check:
     default: 'false'
     description: 'Disables the suffocation check the server performs before teleporting
-      a player. - **note**: While useful to keep your players out of walls, leaving
+      a player. **Note**: While useful to keep your players out of walls, leaving
       this feature on may allow players to teleport through solid materials by logging
       out in specific locations. '
   disable-thunder:
@@ -553,7 +559,7 @@ lootables:
       to constantly explore to generate new chunks. '
   max-refills:
     default: '-1'
-    description: 'Sets the maximum number of times a lootable may be refilled. - **note**:
+    description: 'Sets the maximum number of times a lootable may be refilled. **Note**:
       The default value will allow a lootable to refill an infinite number of times. '
   refresh-max:
     default: 2d
@@ -620,10 +626,17 @@ misc:
     description: 'Specifies the redstone implementation that the server uses. Alternative
       implementations can greatly reduce the lag caused by redstone dust by optimizing
       power calculations and reducing the number of block and shape updates emitted.
-      The following implementations are available: - **vanilla**: The Vanilla redstone
-      implementation. - **eigencraft**: The Eigencraft redstone implementation by
-      theosib. - **alternate-current**: The Alternate Current redstone implementation
-      by Space Walker. - **note:** Both the Eigencraft and Alternate Current implementations
+      The following implementations are available:
+
+      - **vanilla**: The Vanilla redstone implementation.
+
+      - **eigencraft**: The Eigencraft redstone implementation by theosib.
+
+      - **alternate-current**: The Alternate Current redstone implementation
+      by Space Walker.
+
+
+      **Note:** Both the Eigencraft and Alternate Current implementations
       change the behavior of redstone dust. You can read about how behavior is changed
       in each implementation''s respective documention: - Eigencraft: No official
       documentation available. However, [theosib''s comments](https://bugs.mojang.com/browse/MC-81098?focusedCommentId=420777#comment-420777)

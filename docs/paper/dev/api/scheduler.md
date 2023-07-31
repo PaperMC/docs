@@ -36,7 +36,7 @@ enum, e.g. to convert 5 minutes to ticks and back:
 `TimeUnit.SECONDS.toMinutes(ticks / 20)`
 
 You can also use the `Tick` class from Paper to convert between human units and ticks, e.g. to convert 5 minutes to ticks:
-`Duration.ofMinutes(5).get(Tick.tick())` will yield `6000` ticks.
+`Tick.tick().fromDuration(Duration.ofMinutes(5))` will yield `6000` ticks.
 
 ## Obtaining the scheduler
 
@@ -45,7 +45,7 @@ To obtain a scheduler you can use the instance method on the `Server` class, e.g
 ```java
 @Override
 public void onEnable() {
-	BukkitScheduler scheduler = this.getServer().getScheduler();
+    BukkitScheduler scheduler = this.getServer().getScheduler();
 }
 ```
 
@@ -103,16 +103,16 @@ You can either implement it in a separate class, e.g.:
 ```java
 public class MyRunnableTask implements Runnable {
 
-	private final MyPlugin plugin;
-	
-	public MyRunnableTask(MyPlugin plugin) {
-		this.plugin = plugin;
-	}
-	
-	@Override
-	public void run() {
-		this.plugin.getServer().broadcast(Component.text("Hello, World!"));
-	}
+    private final MyPlugin plugin;
+    
+    public MyRunnableTask(MyPlugin plugin) {
+        this.plugin = plugin;
+    }
+    
+    @Override
+    public void run() {
+        this.plugin.getServer().broadcast(Component.text("Hello, World!"));
+    }
 
 }
 ```
@@ -138,23 +138,23 @@ You can either implement it in a separate class similarly to the `Runnable`, e.g
 
 ```java
 public class MyConsumerTask implements Consumer<BukkitTask> {
-	
-	private final LivingEntity entity;
-	
-	public MyConsumerTask(LivingEntity entity) {
-		this.entity = entity;
-	}
-	
-	@Override
-	public void accept(BukkitTask task) {
-		if (this.entity.isDead()) {
-			task.cancel(); // The entity died, there's no point
-			return;        // in running the code anymore.
-		}
-		
-		this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
-	}
-	
+    
+    private final LivingEntity entity;
+    
+    public MyConsumerTask(LivingEntity entity) {
+        this.entity = entity;
+    }
+    
+    @Override
+    public void accept(BukkitTask task) {
+        if (this.entity.isDead()) {
+            task.cancel(); // The entity died, there's no point
+            return;        // in running the code anymore.
+        }
+        
+        this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+    }
+    
 }
 ```
 ```java
@@ -165,11 +165,11 @@ Or use a lambda expression which again is much cleaner for short and simple task
 
 ```java
 scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
-	if (this.entity.isDead()) {
-		task.cancel();
-		return;
-	}
-	this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+    if (this.entity.isDead()) {
+        task.cancel();
+        return;
+    }
+    this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
 } /* End of the lambda */, 0, 20);
 ```
 

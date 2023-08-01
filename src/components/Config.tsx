@@ -41,7 +41,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => 
         const items = value.replace("[", "").replace("]", "").split(",").map((item) => {
             return item.trim();
         });
-        if (collapse && items.length > 2) {
+        if (collapse && items.length > 3) {
             items.length = 3;
             items[2] = <i className={"expand-list-text"}>Click to expand</i>;
         }

@@ -136,7 +136,7 @@ html[data-theme="dark"] {
   text-decoration: none;
 }
 
-.with-value:hover {
+.with-value:hover .expand-list-text {
   color: var(--ifm-color-primary);
 }
 
@@ -208,7 +208,6 @@ html[data-theme="dark"] {
 }
 
 .highlight-config-node:hover > .config-auxiliary-node {
-  cursor: pointer;
   background-color: #3a76ff;
   border-radius: 0.2em;
   animation: fadein 0.4s;
@@ -220,12 +219,22 @@ ul.yaml-list-elem {
   margin: 0;
   list-style-type: none;
 }
+
 ul.yaml-list-elem > li {
   margin: 0;
   text-indent: -15px;
 }
+
 ul.yaml-list-elem > li:before {
   content: "- ";
+}
+
+.expand-list-text {
+  transition: color 0.3s;
+}
+
+.expand-list-text:hover {
+  color: var(--ifm-color-primary);
 }
 
 [data-theme="dark"] .expand-list-text {

@@ -75,10 +75,12 @@ anticheat:
       description: 'With engine-mode: 1, replacement blocks are not used. Changing
         this list will have no effect.
 
-        With engine-mode: 2, both replacement-blocks
-        and hidden-blocks are randomly replaced by hidden-blocks. While tile entities
-        are ignored in the hidden-blocks list, they may be added to the replacement-blocks
-        list. All types of air blocks are ignored here'
+        With engine-mode: 2, both replacement-blocks and hidden-blocks are randomly
+        replaced by hidden-blocks. While tile entities are ignored in the hidden-blocks list,
+        they may be added to the replacement-blocks list. All types of air blocks are ignored here.
+
+        With engine-mode: 3, the behavior is the same as engine-mode: 2, but the replacement-blocks
+        list is used to determine which blocks are used for each vertical chunk layer.'
   obfuscation:
     items:
       hide-durability:
@@ -297,16 +299,28 @@ entities:
       description: 'The rate, in ticks, at which arrows shot from players in creative
         mode are despawned'
     despawn-ranges:
-      soft:
-        default: '32'
-        description: 'The number of blocks away from a player in which each entity
-          type (set individually) will be randomly selected to be despawned. Takes
-          effect both horizontally and vertically'
-      hard:
-        default: '128'
-        description: 'The number of blocks away from a player in which each entity
-          type (set individually) will be forcibly despawned. Takes effect both horizontally
-          and vertically'
+      monster:
+        soft:
+          default: '32'
+          description: 'The number of blocks away from a player in which each entity
+            type (set individually) will be randomly selected to be despawned. Takes
+            effect both horizontally and vertically'
+        hard:
+          default: '128'
+          description: 'The number of blocks away from a player in which each entity
+            type (set individually) will be forcibly despawned. Takes effect both horizontally
+            and vertically'
+      <mob_category>:
+        soft:
+          default: ''
+          description: 'The number of blocks away from a player in which each entity
+            type (set individually) will be randomly selected to be despawned. Takes
+            effect both horizontally and vertically'
+        hard:
+            default: ''
+            description: 'The number of blocks away from a player in which each entity
+                type (set individually) will be forcibly despawned. Takes effect both horizontally
+                and vertically'
     disable-mob-spawner-spawn-egg-transformation:
       default: 'false'
       description: 'Whether to block players from changing the type of mob spawners
@@ -477,10 +491,6 @@ environment:
       description: 'If villagers should trade treasure maps and treasure maps from
         chests should lead to a feature'
     find-already-discovered:
-      description: 'Vanilla mechanics normally find the first undiscovered location,
-        which may lead to structures that were not fully looted, and can also fail
-        with a world border set. The options below allow configuring the default behavior
-        of maps obtained in different ways'
       loot-tables:
         default: default
         description: 'Overrides the loot table-configured check for undiscovered structures.
@@ -522,6 +532,7 @@ fixes:
     description: 'The height at which falling blocks will be removed from the server.
       A value of disabled will disable this feature'
   fix-curing-zombie-villager-discount-exploit:
+    default: 'true'
     description: 'Fixes the [exploit](https://bugs.mojang.com/browse/MC-181190) used
       to gain massive discounts by infecting and curing a zombie villager'
   fix-items-merging-through-walls:
@@ -708,6 +719,7 @@ tick-rates:
     description: 'Sets the delay, in ticks, at which the server attempts to spread
       grass. Higher values will result in a slower spread'
   mob-spawner:
+    default: '1'
     description: 'How often mob spawners should tick to calculate available spawn
       areas and spawn new entities into the world. A value of -1 will disable all
       spawners'

@@ -32,15 +32,15 @@ Converting from human units to ticks and back is as simple as:
 You can make your code more readable by using the
 [`TimeUnit`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/TimeUnit.html)
 enum, e.g. to convert 5 minutes to ticks and back:  
-`TimeUnit.MINUTES.toSeconds(5) * 20`  
-`TimeUnit.SECONDS.toMinutes(ticks / 20)`
+- `TimeUnit.MINUTES.toSeconds(5) * 20`  
+- `TimeUnit.SECONDS.toMinutes(ticks / 20)`
 
 You can also use the `Tick` class from Paper to convert between human units and ticks, e.g. to convert 5 minutes to ticks:
 `Tick.tick().fromDuration(Duration.ofMinutes(5))` will yield `6000` ticks.
 
 ## Obtaining the scheduler
 
-To obtain a scheduler you can use the instance method on the `Server` class, e.g. in your `onEnable` method:
+To obtain a scheduler you can use the `getScheduler` method on the `Server` class, e.g. in your `onEnable` method:
 
 ```java
 @Override

@@ -9,11 +9,11 @@ When you are storing larger amounts of data inside a plugin, we recommend using 
 ## What is a database?
 
 A database is a collection of information that is stored electronically on a computer system. There are many different types of databases,
-and the main two are SQL and NoSQL.
+and the main two categories are SQL and NoSQL.
 
 ### NoSQL vs SQL
 
-A NoSQL (Not Only SQL) database is a type of database management system that diverges from the traditional relational database model. 
+A NoSQL (Not Only SQL) database is a type of database management system that differs from the traditional relational database model.
 Unlike traditional SQL databases, which store data in structured tables with predefined schemas, NoSQL databases are schema-less 
 and offer flexible data models. 
 
@@ -29,7 +29,7 @@ allowing users to perform various operations like querying, inserting, updating,
 ## File-based vs Standalone Databases
 
 When working with databases, you have two options: file-based or standalone. File-based databases are stored in a file on the disk,
-and are usually used for smaller databases. Standalone databases are stored in a separate process, and are usually used for larger databases.
+and are usually used for smaller databases. Standalone databases operate in a separate process, and are usually used for larger data models.
 
 ### File-based Databases
 
@@ -52,7 +52,7 @@ The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it i
 
 ### Usage
 
-From here, you must invoke a `Class.forName` on the driver to allow it to initialise and then create the connection to the database:
+You must invoke a `Class.forName` on the driver to allow it to initialise and then create the connection to the database:
 
 ```java
 public class DatabaseManager {
@@ -64,19 +64,20 @@ public class DatabaseManager {
 }
 ```
 
+You then have access to a `Connection` object, which you can use to create a `Statement` and execute SQL queries.
 To learn more about the Java Database Connection, see [here](https://www.baeldung.com/java-jdbc)
 
 </details>
 
 ### Standalone Databases
 
-Standalone databases are stored in a separate process, and are usually used for larger databases. They are harder to set up and use,
+As previously mentioned, standalone databases operate in a separate process. They are harder to set up and use,
 but offer better performance than file-based databases. Some examples of standalone databases are `MySQL`, `MariaDB` and `PostgreSQL`.
 There are many more, but these are some of the most popular ones. Each has their own advantages and disadvantages,
 so it is up to you to decide which one to use.
 
-The connectors for these databases often have connection pooling. Database connection pooling addresses this issue by
-creating a pool of pre-established and reusable database connections. Instead of opening a new connection every time a
+The connectors for these databases often have connection pooling. Database connection pooling is where it creates
+a pool of pre-established and reusable database connections. Instead of opening a new connection every time a
 database operation is required, the application can request a connection from the pool, use it for the required task,
 and then return it back to the pool for future reuse. This significantly reduces the overhead of creating and tearing
 down connections repeatedly, leading to improved application performance and better scalability.

@@ -195,7 +195,7 @@ misc:
     description: 'Loads bukkit''s permission.yml file before plugins, allowing them
       to check information set there immediately on enable'
   max-joins-per-tick:
-    default: '3'
+    default: '5'
     description: 'Sets the maximum amount of players that may join the server in a
       single tick. If more players join, they will be postponed until later ticks
       to join but not kicked. This is not related to connection throttling found in
@@ -212,6 +212,18 @@ misc:
     default: 'false'
     description: 'Whether phantoms, wandering traders, etc. should be able to spawn
       in custom overworlds. Defaults to false in order to match vanilla behavior'
+  strict-advancement-dimension-check:
+    default: 'false'
+    description: 'Disables the attempts to translate worlds that use the
+      same generation as the Overworld, The Nether, or The End to general dimensions
+      rather than the specific dimension key of the world.'
+  chat-threads:
+    chat-executor-core-size:
+      default: '-1'
+      description: 'The minimum number of threads to keep in the chat thread pool'
+    chat-executor-max-size:
+      default: '-1'
+      description: 'The maximum number of threads to allow in the chat thread pool. The default value is -1, which means no maximum'
 packet-limiter:
   all-packets:
     action:
@@ -354,6 +366,10 @@ unsupported-settings:
     description: 'Allows the server to customize the format of saved region files.
       This supports ZLIB, GLIB and NONE, where None namely allows for compression
       to be disabled'
+  allow-grindstone-overstacking:
+    default: 'false'
+    description: 'Whether the server should allow players to overstack items in the
+      grindstone'
 watchdog:
   early-warning-delay:
     default: '10000'

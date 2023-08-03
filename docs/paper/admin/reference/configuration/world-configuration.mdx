@@ -133,13 +133,17 @@ chunks:
     default: 'false'
     description: 'Sets whether the server will prevent players from moving into unloaded
       chunks or not'
+  flush-chunks-on-save:
+    default: 'false'
+    description: 'Sets whether the server will flush chunks to disk when they are
+      saved. This may have a performance impact'
 collisions:
   allow-player-cramming-damage:
     default: 'false'
     description: 'Allows players to take damage from cramming when colliding with
       more entities than set in the maxEntityCramming game rule'
   allow-vehicle-collisions:
-    default: 'false'
+    default: 'true'
     description: 'Whether vehicles should also be able to collide while only-players-collide
       is enabled'
   fix-climbing-bypassing-cramming-rule:
@@ -204,10 +208,14 @@ entities:
         the server to use no max value, allowing them to merge down into a single
         orb. This is especially noticeable when defeating boss monsters'
     mobs-can-always-pick-up-loot:
-      default: 'false'
-      description: 'Controls whether zombies or skeletons (each configurable individually)
-        will always be able to pick up loot. If set to false, the probability that
-        a zombie picks up items depends on the world''s difficulty (vanilla behavior)'
+      zombie:
+        default: 'false'
+        description: "Instructs the server to allow zombies to pick up loot. If set to false, the probability that
+        a zombie picks up items depends on the world's difficulty (vanilla behavior)"
+      skeleton:
+        default: 'false'
+        description: "Instructs the server to allow skeletons to pick up loot. If set to false, the probability that
+        a skeleton picks up items depends on the world's difficulty (vanilla behavior)"
     nerf-pigmen-from-nether-portals:
       default: 'false'
       description: 'Removes AI from pigmen spawned via nether portals '
@@ -232,11 +240,19 @@ entities:
         default: '0.2'
         description: 'Modify the spawn changes for patrols'
       spawn-delay:
-        default: '12000'
-        description: 'Delay in ticks between spawn chance'
+        ticks:
+          default: '12000'
+          description: 'Delay in ticks between spawn chance'
+        per-player:
+          default: 'false'
+          description: 'Sets the delay to be independent for each player'
       start:
-        default: '5'
-        description: 'Days between raid spawns'
+        day:
+          default: '5'
+          description: 'Days between raid spawns'
+        per-player:
+          default: 'false'
+          description: 'Sets the start to be independent for each player'
     should-remove-dragon:
       default: 'false'
       description: 'Sets whether to remove the dragon if it exists without a portal'
@@ -255,6 +271,12 @@ entities:
       description: 'Sets whether zombies and zombified piglins should target turtle
         eggs. Setting this to false may help with performance, as they won''t search
         for nearby eggs'
+    phantoms-spawn-attempt-max-seconds:
+      default: '119'
+      description: 'Sets the maximum number of seconds between phantom spawn attempts'
+    phantoms-spawn-attempt-min-seconds:
+      default: '60'
+      description: 'Sets the minimum number of seconds between phantom spawn attempts'
   entities-target-with-follow-range:
     default: 'false'
     description: 'Sets whether the server should use follow range when targeting entities '
@@ -294,21 +316,21 @@ entities:
       description: 'Determines whether spawner mobs and other misc mobs are counted
         towards the global mob limit'
     creative-arrow-despawn-rate:
-      default: '-1'
+      default: 'default'
       description: 'The rate, in ticks, at which arrows shot from players in creative
         mode are despawned'
     despawn-ranges:
       monster:
         soft:
           default: '32'
-          description: 'The number of blocks away from a player in which each entity
-            type (set individually) will be randomly selected to be despawned. Takes
-            effect both horizontally and vertically'
+          description: 'The number of blocks away from a player in which each monster
+            type (set individually) will be randomly selected to be despawned.
+            This range takes effect both horizontally and vertically'
         hard:
           default: '128'
-          description: 'The number of blocks away from a player in which each entity
-            type (set individually) will be forcibly despawned. Takes effect both horizontally
-            and vertically'
+          description: 'The number of blocks away from a player in which each monster
+            type (set individually) will be forcibly despawned. This range takes effect
+            both horizontally and vertically'
       <mob_category>:
         soft:
           default: ''
@@ -385,18 +407,24 @@ entities:
         Setting this to false will make the ender dragon not spawn in the end, even
         with a new world'
     skeleton-horse-thunder-spawn-chance:
-      default: '0.01'
+      default: 'default'
       description: 'Sets the chance that a "Skeleton Trap" (4 skeleton horsemen) will
-        spawn in a thunderstorm'
+        spawn in a thunderstorm. Takes a double between 0 and 1, where 0 is 0% chance'
     slime-spawn-height:
       slime-chunk:
-        default: '40'
-        description: 'Sets the maximum Y position for natural Slime spawn in Slime
-          Chunks'
+        maximum:
+          default: '40'
+          description: 'Sets the maximum Y position for natural Slime spawn in Slime
+            Chunks'
       surface-biome:
-        default: '50'
-        description: 'Sets the minimum Y position for natural Slime spawn in Surface
-          Biomes'
+        minimum:
+          default: '50'
+          description: 'Sets the minimum Y position for natural Slime spawn in Surface
+            Biomes'
+        maximum:
+          default: '70'
+          description: 'Sets the maximum Y position for natural Slime spawn in Surface
+            Biomes'
     spawn-limits:
       default: '-1'
       description: 'The constant used to determine how many of each entity type (set
@@ -504,6 +532,9 @@ environment:
   water-over-lava-flow-speed:
     default: '5'
     description: 'Sets the speed at which water flows while over lava'
+  fire-tick-delay:
+    default: '30'
+    description: 'Sets the minimum delay between fire ticks'
 feature-seeds:
   generate-random-seeds-for-all:
     default: 'false'

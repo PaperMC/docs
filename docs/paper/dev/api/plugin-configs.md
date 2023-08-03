@@ -8,9 +8,11 @@ Configuration files allow users to change certain behavior and functionality of 
 
 ## Format
 
-By default, plugins use a YAML configuration format (`.yml` file). Other formats such as JSON or TOML can be used, however these are not natively supported by Paper so will not be covered in this guide.
+By default, plugins use a YAML configuration format (`.yml` file). Other formats such as JSON or TOML can be used, 
+however these are not natively supported by Paper so will not be covered in this guide.
 
-YAML works by having a tree-like `key: value` pair structure as you would have seen in your [plugin.yml](../getting-started/plugin-yml.md). An example would look like this:
+YAML works by having a tree-like `key: value` pair structure as you would have seen in your [plugin.yml](../getting-started/plugin-yml.md). 
+An example would look like this:
 
 ```yaml
 root:
@@ -22,7 +24,8 @@ When accessing indented values, you separate the levels with `.`'s. For example,
 
 ## Creating a config.yml
 
-By placing a `config.yml` file inside of your plugin, you can specify the default values for certain settings. This will be located in the `resources` directory:
+By placing a `config.yml` file inside your plugin, you can specify the default values for certain settings. 
+This will be located in the `resources` directory:
 ```
 example-plugin
 └── src
@@ -63,7 +66,7 @@ If set to true, the configuration will be overwritten on every call.
 ## Getting and setting data
 
 The `FileConfiguration` of the plugin can be fetched with `JavaPlugin#getConfig` once it has been saved. This will allow
-data to be fetched and set with the respective `#get...(key)` and `set(key, value)`. By Default, most basic data types are supported
+data to be fetched and set with the respective `#get...(key)` and `set(key, value)`. By default, most basic data types are supported
 by YAML. These can be fetched simply with `#getString` or `#getBoolean`. 
 
 However, some more complex Bukkit data types are also supported. A few of these include `ItemStack`, `Location` and `Vector`s. 
@@ -107,7 +110,11 @@ public class TeleportOptions implements ConfigurationSerializable {
     }
     
     public static TeleportOptions deserialize(Map<String, Object> args) {
-        return new TeleportOptions((int) args.get("chunk-x"), (int) args.get("chunk-z"), (String) args.get("name"));
+        return new TeleportOptions(
+                (int) args.get("chunk-x"), 
+                (int) args.get("chunk-z"), 
+                (String) args.get("name")
+        );
     }
 }
 ```
@@ -125,8 +132,9 @@ you will not be able to load / save your custom classes.
 
 ## Custom Configuration Files
 
-It is highly likely that you will have many different things to configure in your plugin. If you choose to split these across multiple different files you can
-still use the Bukkit `FileConfiguration` API to read the data from these. It is as simple as:
+It is highly likely that you will have many different things to configure in your plugin. If you choose to split these 
+across multiple different files you can still use the Bukkit `FileConfiguration` API to read the data from these. 
+It is as simple as:
 
 ```java
 File file = new File(plugin.getDataFolder(), "items.yml");
@@ -145,5 +153,6 @@ Loading and saving files on the main thread will slow your server. `load` and `s
 
 ## Configurate
 
-Configurate is a third party library for working with configurations maintained by the Sponge project. This project is used internally by Paper
-for our configurations and offers many features that plain YAML files do not. See their project [here](https://github.com/SpongePowered/Configurate) for more information.
+Configurate is a third party library for working with configurations maintained by the Sponge project. This project is 
+used internally by Paper for our configurations and offers many features that plain YAML files do not. See their project 
+[here](https://github.com/SpongePowered/Configurate) for more information.

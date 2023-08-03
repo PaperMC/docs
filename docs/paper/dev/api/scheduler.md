@@ -14,20 +14,20 @@ This guide is designed for Non-Folia Bukkit Servers. If you are using Folia, you
 
 ## What is a tick?
 
-Every game runs something called a game loop which essentially executes all the logic of the game over and over,
-a single execution of that loop is called a 'tick'.
+Every game runs something called a game loop which essentially executes all the logic of the game over and over.
+A single execution of that loop in Minecraft is called a 'tick'.
 
-In Minecraft's case the amount of ticks per second is 20, or one tick every 50 milliseconds,
-meaning that the game loop is executed 20 times per second. A tick taking more than 50ms to execute is the moment
-when your server starts to fall behind on its work and lag.
+In Minecraft there are 20 ticks per second, or one tick every 50 milliseconds. This means that the game loop is executed 
+20 times per second. A tick taking more than 50ms to execute is the moment when your server starts to fall behind on 
+its work and lag.
 
 ### Converting between human units and Minecraft ticks
 
 Every method of the scheduler that takes a delay or period uses ticks as a unit of time.
 
 Converting from human units to ticks and back is as simple as:  
-`ticks = seconds * 20`  
-`seconds = ticks / 20`
+- `ticks = seconds * 20`  
+- `seconds = ticks / 20`
 
 You can make your code more readable by using the
 [`TimeUnit`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/TimeUnit.html)

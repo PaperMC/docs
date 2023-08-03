@@ -156,4 +156,3 @@ Loading and saving files on the main thread will slow your server. `load` and `s
 Configurate is a third party library for working with configurations maintained by the Sponge project. This project is 
 used internally by Paper for our configurations and offers many features that plain YAML files do not. See their project 
 [here](https://github.com/SpongePowered/Configurate) for more information.
-

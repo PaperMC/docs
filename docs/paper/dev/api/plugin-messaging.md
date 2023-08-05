@@ -95,6 +95,7 @@ These are the following:
 | `PlayerList`      | Returns a list of players on the specified server.     | `server name`                                                    | `server name`, `CSV player names`                 |
 | `GetServers`      | Returns a list of all servers.                         | N/A                                                              | `CSV server names`                                |
 | `Message`         | Sends a message to the specified player.               | `player name`, `message`                                         | N/A                                               |
+| `MessageRaw`      | Sends a raw chat component to the specified player.    | `player name`, `JSON chat component`                             | N/A                                               |
 | `GetServer`       | Returns the server the player is connected to.         | N/A                                                              | `server name`                                     |
 | `UUID`            | Returns the UUID of player.                            | N/A                                                              | `UUID`                                            |
 | `UUIDOther`       | Returns the UUID of the specified player.              | `player name`                                                    | `player name`, `UUID`                             |
@@ -194,3 +195,27 @@ This is not a recommended way to ban players due to the fact that there may not 
 but it is an example of how this can be used.
 
 :::
+
+#### MessageRaw
+
+The `MessageRaw` message type is used to send a raw chat component to a player. This is useful for sending clickable messages to players,
+or messages with hover events.
+
+```java
+public class MyPlugin extends JavaPlugin {
+    
+    @Override
+    public void onEnable() {
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        
+        Player player = ...;
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("MessageRaw");
+        out.writeUTF("ALL");
+        out.writeUTF("{\"extra\":[{\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://www.google.com/\"},\"text\":\"Google\"}],\"text\":\"Clickthere:\"}");
+        player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
+    }
+}
+```
+
+This will send the player a message saying "Click there: Google" Where "Google" is clickable and will open the URL https://www.google.com/

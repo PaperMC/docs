@@ -182,6 +182,32 @@ html[data-theme="dark"] {
   cursor: pointer;
 }
 
+@keyframes text-fadein-black {
+  from {
+    color: rgba(128, 128, 128, 0);
+  }
+  to {
+    color: black;
+  }
+}
+
+@keyframes text-fadein-light {
+  from {
+    color: rgba(128, 128, 128, 0);
+  }
+  to {
+    color: white;
+  }
+}
+
+[data-theme="dark"] .highlight-config-node:hover > .config-auxiliary-node {
+  animation: text-fadein-black 0.55s;
+}
+
+[data-theme="light"] .highlight-config-node:hover > .config-auxiliary-node {
+  animation: text-fadein-light 0.55s;
+}
+
 [data-theme="dark"] .config-auxiliary-node {
   color: rgb(128, 128, 128);
 }
@@ -191,10 +217,13 @@ html[data-theme="dark"] {
 }
 
 @keyframes fadein {
-  from {
+  0% {
     background-color: rgba(0, 0, 0, 0);
   }
-  to {
+  15% {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  100% {
     background-color: #3a76ff;
   }
 }
@@ -210,8 +239,8 @@ html[data-theme="dark"] {
 .highlight-config-node:hover > .config-auxiliary-node {
   background-color: #3a76ff;
   border-radius: 0.2em;
-  animation: fadein 0.4s;
-  -moz-animation: fadein 0.4s;
+  animation: fadein 0.55s;
+  -moz-animation: fadein 0.55s;
   width: fit-content;
 }
 

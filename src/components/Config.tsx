@@ -62,7 +62,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => 
     }
     return (
         <>
-            {" " + value}
+            {value}
             <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
         </>
     );
@@ -79,7 +79,7 @@ const parseItalics = (key) => {
     return key;
 }
 
-const YamlNodeWithDescription = ({ name, node, parentKey }) => {
+const YamlNodeWithDescription = ({ name, node, parentKey, root, separator }) => {
     const [showDescription, setShowDescription] = useState(false);
 
     node.default = node.default || 'N/A';
@@ -110,7 +110,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
     };
 
     return (
-        <div style={{ paddingLeft: `${INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
+        <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
             <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
                 <a
                     onClick={() => {
@@ -118,7 +118,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
                     }}
                     className={`with-value${showDescription ? '-active' : ''}`}
                 >
-                    {parseItalics(name)}:{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick)}
+                    {parseItalics(name)}{separator}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick)}
                 </a>
                 {showDescription ? (
                     <>
@@ -136,7 +136,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
     );
 };
 
-const YamlTreeNode = ({ root, key, parentKey, value }) => {
+const YamlTreeNode = ({ root, key, parentKey, value, separator }) => {
     const handleClick = (event) => {
         event.preventDefault();
         scrollIntoView(createUrlHash(parentKey, key));
@@ -160,23 +160,23 @@ const YamlTreeNode = ({ root, key, parentKey, value }) => {
     return (
         <div key={key} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, key)}>
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
-                {parseItalics(key)}:
+                {parseItalics(key)}{separator}
             </div>
             <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, key)}`} onClick={handleClick}></a>
-            {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key))}
+            {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key), false, separator)}
         </div>
     );
 };
 
-const renderYamlData = (data, parentKey, root = false) => {
+const renderYamlData = (data, parentKey, root = false, separator) => {
     const renderedNodes = [];
 
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object') {
             if ('default' in value || 'description' in value) {
-                renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} />);
+                renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root} separator={separator} />);
             } else {
-                renderedNodes.push(YamlTreeNode({ root, key, parentKey, value }));
+                renderedNodes.push(YamlTreeNode({ root, key, parentKey, value, separator }));
             }
         }
     }
@@ -184,11 +184,11 @@ const renderYamlData = (data, parentKey, root = false) => {
     return renderedNodes;
 };
 
-export default function Config({ data }) {
+export default function Config({ data, separator = ': ' }) {
     let ymlData = yaml.load(data);
     return (
         <div>
-            <pre>{renderYamlData(ymlData, '', true)}</pre>
+            <pre>{renderYamlData(ymlData, '', true, separator)}</pre>
             <div style={{ display: 'none' }}>{data}</div>
         </div>
     );

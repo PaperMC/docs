@@ -44,7 +44,7 @@ This will place the page at the `/paper/reference/paper-plugins` URL on the webs
 folder structure of the documentation. The title is the name of the page that will be displayed on the website and in the sidebar.
 
 You must also add the page to the sidebar. In this instance we will go to the `config/sidebar.paper.ts` file and
-add the file to the `items` tag for that section. You must use the file structure for that file. One Example would be 
+add the file to the `items` tag for that section. You must use the file structure for that file. One example would be
 `admin/reference/paper-plugins` where you omit the file extension and use slashes to denote folders. Take a look at the 
 existing sidebar elements to get a feel for how it is structured.
 

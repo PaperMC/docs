@@ -158,8 +158,8 @@ html[data-theme="dark"] {
 }
 
 .outlined-box {
-  border: 2px solid #777777;
-  border-radius: 4px;
+  border-left: 5px solid #3a76ff;
+  border-radius: 10px;
   padding: 8px;
 }
 
@@ -168,7 +168,7 @@ html[data-theme="dark"] {
 }
 
 .description-text {
-  margin-top: 10px;
+  margin-top: 7px;
   margin-bottom: 0;
   width: fit-content;
 }

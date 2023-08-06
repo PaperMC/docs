@@ -18,7 +18,8 @@ Click on a property to learn more about it.
 <Config data={`
 allow-flight:
   default: 'false'
-  description: 'Allows users to use flight on your server while in Survival mode.'
+  description: 'Means that users will not be kicked if they fly whilst in Survival mode. This is likely to occur through
+    hacking however there can be false positives.'
 allow-nether:
   default: 'true'
   description: 'Allows users to travel to the Nether.'
@@ -65,7 +66,7 @@ entity-broadcast-range-percentage:
     be rendered from farther away, potentially causing more lag. This is expressed the percentage of the default
     value. For example, setting to 50 will make it half as usual. This mimics the function on the client video
     settings (not unlike Render Distance, which the client can customize so long as it''s under the server''s
-    setting). This must be between 10 and 100 percent.'
+    setting). This must be between 10 and 1000 percent.'
 force-gamemode:
   default: 'false'
   description: 'Force players to join in the default game mode. This will reset their previous game mode when they

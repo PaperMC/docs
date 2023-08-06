@@ -22,7 +22,8 @@ refer to the Anti-Xray section of the
 Anti-Xray has three different modes. `engine-mode: 1` replaces specified blocks (`hidden-blocks`) with
 other "fake" blocks, `stone` (`deepslate` at y < 0), `netherrack`, or `end_stone` based on the
 dimension. In contrast, `engine-mode: 2` will replace both `hidden-blocks` and `replacement-blocks`
-with randomly generated `hidden-blocks`. `engine-mode: 3` works the similarly to `engine-mode: 2`, but instead of randomizing every block, it only randomizes blocks per chunk layer.
+with randomly generated `hidden-blocks`. `engine-mode: 3` works similarly to `engine-mode: 2`, but instead of
+randomizing every block, it randomizes the block for each layer of a chunk.
 
 The following images[^1] show how each mode will look for a player using Xray with the recommended
 configuration in both the overworld and nether.

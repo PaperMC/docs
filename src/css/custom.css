@@ -7,6 +7,10 @@
 
   --ifm-font-family-monospace: "JetBrains Mono", "SFMono-Regular", "Menlo", "Consolas",
   "Liberation Mono", monospace;
+
+  /* Config Node */
+  --default-config-node-text-color: rgb(148, 148, 148);
+  --config-node-highlight-text-color: black;
 }
 
 html[data-theme="dark"] {
@@ -17,6 +21,10 @@ html[data-theme="dark"] {
   --ifm-toc-link-color: #dadada !important;
   --ifm-background-color: #151515;
   --ifm-heading-color: #ededed;
+
+  /* Config Node */
+  --default-config-node-text-color: rgb(128, 128, 128);
+  --config-node-highlight-text-color: white;
 }
 
 .header-icon-link::before {
@@ -182,58 +190,27 @@ html[data-theme="dark"] {
   cursor: pointer;
 }
 
-@keyframes text-fadein-black {
-  from {
-    color: rgba(128, 128, 128, 0);
-  }
-  to {
-    color: black;
-  }
-}
-
-@keyframes text-fadein-light {
-  from {
-    color: rgba(128, 128, 128, 0);
-  }
-  to {
-    color: white;
-  }
-}
-
-[data-theme="dark"] .highlight-config-node:hover > .config-auxiliary-node {
-  animation: text-fadein-black 0.55s;
-}
-
-[data-theme="light"] .highlight-config-node:hover > .config-auxiliary-node {
-  animation: text-fadein-light 0.55s;
-}
-
-[data-theme="dark"] .config-auxiliary-node {
-  color: rgb(128, 128, 128);
-}
-
-[data-theme="light"] .config-auxiliary-node {
-  color: rgb(148, 148, 148);
+.config-auxiliary-node {
+  color: var(--default-config-node-text-color);
 }
 
 @keyframes fadein {
   0% {
     background-color: rgba(0, 0, 0, 0);
+    color: var(--default-config-node-text-color);
   }
   15% {
     background-color: rgba(0, 0, 0, 0);
+    color: var(--default-config-node-text-color)
   }
   100% {
     background-color: #3a76ff;
+    color: var(--config-node-highlight-text-color);
   }
 }
 
-[data-theme="light"] .highlight-config-node:hover > .config-auxiliary-node {
-  color: white;
-}
-
-[data-theme="dark"] .highlight-config-node:hover > .config-auxiliary-node {
-  color: black;
+.highlight-config-node:hover > .config-auxiliary-node {
+  color: var(--config-node-highlight-text-color);
 }
 
 .highlight-config-node:hover > .config-auxiliary-node {

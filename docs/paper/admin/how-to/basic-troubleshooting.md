@@ -125,8 +125,8 @@ Many plugins provide their own documentation about how to set them up properly. 
 
 Paper can also be configured in a variety of ways. Check these documents for detailed explanations about each configuration.
 
-* [Paper Global Config](../reference/configuration/global-configuration.md)
-* [Paper Per World Configuration](../reference/configuration/world-configuration.md)
+* [Paper Global Config](../reference/configuration/global-configuration.mdx)
+* [Paper Per World Configuration](../reference/configuration/world-configuration.mdx)
 
 ## Consult With Developer
 

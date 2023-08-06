@@ -149,15 +149,13 @@ Paper plugins do not support the serialization system (``org.bukkit.configuratio
 serialized, vise versa. It is highly recommended to not use this system with Paper plugins.
 
 ### Classloading Isolation
-Paper plugins have isolated classloaders, meaning that relocating dependencies will not be necessary. Paper plugins are not able to access each other unless given explicit access
-by depending on another plugin, etc. This prevents plugins from accidentally accessing your dependencies, and in general helps ensure that plugins are only able to access your plugin
-if they explicitly say that they're depending on it.
+Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This helps prevent Paper plugins from accidentally accessing each others' dependencies, and in general helps ensure that plugins are only able to access what they explicitly say they're depending on.
 
-Paper plugins have the ability to bypass this, being able to access OTHER plugins classloaders by adding 
+Paper plugins have the ability to bypass this, being able to access OTHER plugins' classloaders by adding 
 ```yml
 has-open-classloader: true
 ```
-to your ``paper-plugin.yml``. Note, other plugins will still be unable to access your classloader.
+to your ``paper-plugin.yml``. Note, other Paper plugins will still be unable to access your classloader.
 
 
 ### Load Order Logic Split

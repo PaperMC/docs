@@ -212,10 +212,12 @@ public class MyPlugin extends JavaPlugin {
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("MessageRaw");
         out.writeUTF("ALL");
-        out.writeUTF("{\"extra\":[{\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://www.google.com/\"},\"text\":\"Google\"}],\"text\":\"Clickthere:\"}");
+        out.writeUTF(GsonComponentSerializer.gson().serialize(
+                Component.text("Click Me!").clickEvent(ClickEvent.openUrl("https://papermc.io"))
+        ));
         player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
     }
 }
 ```
 
-This will send the player a message saying "Click there: Google" Where "Google" is clickable and will open the URL https://www.google.com/
+This will send the player a message saying "Click Me!" Where it is clickable and will open the URL https://papermc.io

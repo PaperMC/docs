@@ -27,9 +27,11 @@
     "@fontsource/jetbrains-mono": "4.5.12",
     "@mdx-js/react": "2.3.0",
     "clsx": "1.2.1",
+    "js-yaml": "4.1.0",
     "prism-react-renderer": "2.0.3",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-markdown": "8.0.7"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "0.0.0-5566",
@@ -37,6 +39,7 @@
     "@fec/remark-a11y-emoji": "3.1.0",
     "@tsconfig/docusaurus": "1.0.7",
     "@types/is-ci": "3.0.0",
+    "@types/js-yaml": "^4",
     "@types/node": "17.0.45",
     "@types/prettier": "2.7.2",
     "esbuild-loader": "3.0.1",

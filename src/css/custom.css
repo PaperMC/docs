@@ -7,6 +7,10 @@
 
   --ifm-font-family-monospace: "JetBrains Mono", "SFMono-Regular", "Menlo", "Consolas",
   "Liberation Mono", monospace;
+
+  /* Config Node */
+  --default-config-node-text-color: rgb(148, 148, 148);
+  --config-node-highlight-text-color: black;
 }
 
 html[data-theme="dark"] {
@@ -17,6 +21,10 @@ html[data-theme="dark"] {
   --ifm-toc-link-color: #dadada !important;
   --ifm-background-color: #151515;
   --ifm-heading-color: #ededed;
+
+  /* Config Node */
+  --default-config-node-text-color: rgb(128, 128, 128);
+  --config-node-highlight-text-color: white;
 }
 
 .header-icon-link::before {
@@ -158,8 +166,8 @@ html[data-theme="dark"] {
 }
 
 .outlined-box {
-  border: 2px solid #777777;
-  border-radius: 4px;
+  border-left: 5px solid var(--ifm-color-primary);
+  border-radius: var(--ifm-alert-border-radius);
   padding: 8px;
 }
 
@@ -168,7 +176,7 @@ html[data-theme="dark"] {
 }
 
 .description-text {
-  margin-top: 10px;
+  margin-top: 7px;
   margin-bottom: 0;
   width: fit-content;
 }
@@ -182,36 +190,35 @@ html[data-theme="dark"] {
   cursor: pointer;
 }
 
-[data-theme="dark"] .config-auxiliary-node {
-  color: rgb(128, 128, 128);
-}
-
-[data-theme="light"] .config-auxiliary-node {
-  color: rgb(148, 148, 148);
+.config-auxiliary-node {
+  padding-left: 2px;
+  color: var(--default-config-node-text-color);
 }
 
 @keyframes fadein {
-  from {
+  0% {
     background-color: rgba(0, 0, 0, 0);
+    color: var(--default-config-node-text-color);
   }
-  to {
+  15% {
+    background-color: rgba(0, 0, 0, 0);
+    color: var(--default-config-node-text-color)
+  }
+  100% {
     background-color: #3a76ff;
+    color: var(--config-node-highlight-text-color);
   }
 }
 
-[data-theme="light"] .highlight-config-node:hover > .config-auxiliary-node {
-  color: white;
-}
-
-[data-theme="dark"] .highlight-config-node:hover > .config-auxiliary-node {
-  color: black;
+.highlight-config-node:hover > .config-auxiliary-node {
+  color: var(--config-node-highlight-text-color);
 }
 
 .highlight-config-node:hover > .config-auxiliary-node {
   background-color: #3a76ff;
   border-radius: 0.2em;
-  animation: fadein 0.4s;
-  -moz-animation: fadein 0.4s;
+  animation: fadein 0.55s;
+  -moz-animation: fadein 0.55s;
   width: fit-content;
 }
 

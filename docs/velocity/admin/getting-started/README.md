@@ -116,6 +116,10 @@ try = [
 ]
 ```
 
+:::note
+Make sure that all your servers have sequential ports relative to each other. 
+:::
+
 On the left side, you will specify a name for the server (for example, `lobby`) and on right is a
 string indicating the IP address and port for the server. You will now need to add your servers to
 the list. You can change the list of servers as needed.

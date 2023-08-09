@@ -31,7 +31,13 @@ Paper plugins are added the same as Bukkit plugins, therefore, you can follow [t
 With the introduction of Paper plugins, Paper introduces a new plugin loader that fixes some odd issues.
 However, as a result, this now causes [cyclic loading](#cyclic-plugin-loading) between plugins to no longer be supported. 
 
-![Cyclic Loading](assets/cyclic-loading.png)
+```mermaid
+graph LR;
+    A-->B;
+    B-->C;
+    C-->D;
+    D-->A;
+```
 
 Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.
 

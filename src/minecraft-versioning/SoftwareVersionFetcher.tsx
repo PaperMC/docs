@@ -11,7 +11,7 @@ class SoftwareVersionFetcher {
         // Refreshes every 5 minutes
         setInterval(() => {
             this.initVersions(true);
-        }, 60 * 5);
+        }, 60 * 5 * 1000);
     }
 
     private async initVersions(override: boolean = false) {

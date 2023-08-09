@@ -24,15 +24,17 @@ This can act as a drop in replacement for ``plugin.yml``, allowing you to specif
 It should be noted you still have the ability to include both ``paper-plugin.yml``and ``plugin.yml`` in the same jar.
 
 Here is an example configuration.
+<VersionFormattedCode>
 ```yml
 name: Paper-Test-Plugin
 version: '1.0'
 main: io.papermc.testplugin.TestPlugin
 description: Paper Test Plugin
-api-version: '1.20'
+api-version: '%%_MAJ_MC_%%'
 bootstrapper: io.papermc.testplugin.TestPluginBootstrap
 loader: io.papermc.testplugin.TestPluginLoader
 ```
+</VersionFormattedCode>
 
 ### Dependency Declaration
 

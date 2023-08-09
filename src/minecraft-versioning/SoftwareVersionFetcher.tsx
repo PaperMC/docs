@@ -14,7 +14,6 @@ class SoftwareVersionFetcher {
     }
 
     private async initVersions(override: boolean = false) {
-        this.paperVersion = localStorage.getItem("paper-docs.paper.version");
         if (override || !this.paperVersion || this.paperVersion === "undefined") {
             this.paperVersion = await this.getProjectVersion("paper");
         }
@@ -23,9 +22,7 @@ class SoftwareVersionFetcher {
     private async getProjectVersion(project: string): Promise<string> {
         try {
             const response = await axios.get(`https://api.papermc.io/v2/projects/${project}`);
-            const version = response.data.versions[response.data.versions.length - 1];
-            localStorage.setItem(`paper-docs.${project}.version`, version);
-            return version;
+            return response.data.versions[response.data.versions.length - 1];
         } catch (error) {
             console.error('Error fetching project version:', error);
             return '';

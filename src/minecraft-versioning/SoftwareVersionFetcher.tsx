@@ -34,6 +34,8 @@ class SoftwareVersionFetcher {
     }
 
     public getMajorPaperVersion(): string {
+        if (!this.paperVersion) return "";
+
         const parts = this.paperVersion.split(".");
         parts.length = 2;
         return parts.join(".");

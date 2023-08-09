@@ -6,7 +6,7 @@ slug: /reference/paper-plugins
 
 This documentation page serves to explain all the new semantics and possible confusions that Paper plugins may introduce.
 
-*As a developer, you can get more information [here](docs/paper/dev/getting-started/paper-plugins.md)*
+*As a developer, you can get more information [here](docs/paper/dev/getting-started/paper-plugins.mdx)*
 
 ## What are they?
 

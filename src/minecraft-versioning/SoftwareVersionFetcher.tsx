@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 class SoftwareVersionFetcher {
 
     public paperVersion: string;

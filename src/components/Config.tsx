@@ -47,7 +47,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => 
         }
         return (
             <>
-                <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+                <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
                 <div className="indent-2">
                     <div>
                         <ul className={"yaml-list-elem"}>
@@ -63,7 +63,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => 
     return (
         <>
             {" " + value}
-            <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+            <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
         </>
     );
 }
@@ -123,7 +123,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey }) => {
                 {showDescription ? (
                     <>
                         <div className="indent-2" style={{ marginBottom: 10 }}>
-                            <div className="outlined-box description-text colour-offset-box">
+                            <div className="outlined-box description-text color-offset-box">
                                 <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
                             </div>
                         </div>
@@ -162,7 +162,7 @@ const YamlTreeNode = ({ root, key, parentKey, value }) => {
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
                 {parseItalics(key)}:
             </div>
-            <a className={`config-anchor with-value-active-colour hash-link`} href={`#${createUrlHash(parentKey, key)}`} onClick={handleClick}></a>
+            <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, key)}`} onClick={handleClick}></a>
             {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key))}
         </div>
     );

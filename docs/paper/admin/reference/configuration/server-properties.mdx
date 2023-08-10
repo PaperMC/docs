@@ -52,7 +52,7 @@ enable-rcon:
   description: 'Enables remote access to the server console.'
 enable-status:
   default: 'true'
-  description: 'Makes the server appear on the server list and also enables the query listener to get server
+  description: 'Makes the server appear on the server list and also enables listener for getting server
     information. If turned off, server will appear offline but players will still be able to connect.'
 enforce-secure-profile:
   default: 'true'
@@ -148,7 +148,7 @@ player-idle-timeout:
 prevent-proxy-connections:
   default: 'false'
   description: 'If the ISP/AS sent from the server is different from the one from Mojang Studios'' authentication
-    server, the player is kicked.'
+    server, the player not allowed to join the server.'
 pvp:
   default: 'true'
   description: 'If set to false, players are not allowed to attack other players.'
@@ -203,7 +203,7 @@ spawn-npcs:
 spawn-protection:
   default: '16'
   description: 'Used to determine the side length of the spawn protection. The formula of 2x+1 is used. A value of 1
-    will result in a side length of 3 chunks. Setting this to 0 will disable spawn protection.'
+    will result in a side length of 3 **blocks**. Setting this to 0 will disable spawn protection.'
 sync-chunk-writes:
   default: 'true'
   description: 'Enables synchronous writing of chunk data.'

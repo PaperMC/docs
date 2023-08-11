@@ -152,7 +152,7 @@ html[data-theme="dark"] {
   cursor: pointer;
 }
 
-.with-value-active-colour {
+.with-value-active-color {
   color: var(--ifm-color-primary);
 }
 
@@ -171,7 +171,7 @@ html[data-theme="dark"] {
   padding: 8px;
 }
 
-.colour-offset-box {
+.color-offset-box {
   background-color: rgba(0, 0, 0, 0.1);
 }
 

@@ -29,7 +29,7 @@ unsupported-settings:
 
 :::danger[Sand and Gravity Blocks]
 
-**We will not and will never support sand and gravity block duping**. This is a form of resource duping and is **not** allowed.
+**We will not and will never support sand and gravity block duping**. This is a form of resource duping and is **not** supported by Paper.
 
 :::
 
@@ -45,6 +45,7 @@ unsupported-settings:
 ## Afterword
 
 If your server lags, crashes or has any other undesirable consequences from enabling these flags, you will not get support from Paper.
+These settings are also not guaranteed to be supported into the future and may have their behaviour changed or removed at any time.
 
 For reasoning behind no configuration options for sand (and MANY other duplication bugs), see: 
 [#3724](https://github.com/PaperMC/Paper/issues/3724)

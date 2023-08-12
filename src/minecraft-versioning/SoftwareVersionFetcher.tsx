@@ -21,6 +21,8 @@ class SoftwareVersionFetcher {
     }
 
     private async ensureURLVersionChanges() {
+        if (typeof document === 'undefined') return;
+
         let matchArray = document.location.pathname.match(SoftwareVersionFetcher.VERSION_PATTERN);
         if (matchArray) {
             // This means the new page is versioned, so we need to check if the version has changed
@@ -44,6 +46,9 @@ class SoftwareVersionFetcher {
     }
 
     private async checkVersion(response_data): Promise<string> {
+        if(typeof document === 'undefined')
+            return response_data.versions[response_data.versions.length - 1];
+
         // This looks for the version in the URL, and if it's not found, it uses the latest version
         let matchArray = document.location.pathname.match(SoftwareVersionFetcher.VERSION_PATTERN);
         let version = response_data.versions[response_data.versions.length - 1];

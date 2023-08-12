@@ -63,6 +63,17 @@ const paper: SidebarsConfig = {
             "admin/reference/paper-plugins",
           ],
         },
+        {
+          type: "category",
+          label: "Miscellaneous",
+          link: {
+            type: "generated-index",
+            slug: "/cat/admin/misc",
+          },
+          items: [
+            "admin/misc/paper-bug-fixes",
+          ],
+        },
       ],
     },
     {

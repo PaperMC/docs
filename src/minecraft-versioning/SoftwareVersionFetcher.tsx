@@ -4,8 +4,11 @@ class SoftwareVersionFetcher {
 
     private paperVersion: string;
     private maxPaperVersion: string;
-    private currentURLVersion: string = null;
+    private currentURLVersion: string | null = null;
     private static readonly VERSION_PATTERN: string = "\\/(\\d+\\.\\d+)(?:\\/|$)";
+
+    private initPromise: Promise<void> = null;
+    private initInProgress: boolean = false;
 
     constructor() {
         this.initVersions();
@@ -40,8 +43,22 @@ class SoftwareVersionFetcher {
     }
 
     private async initVersions(override: boolean = false) {
+        if (this.initInProgress) {
+            // If initialization is already in progress, wait for the ongoing process to complete
+            await this.initPromise;
+            return;
+        }
+
         if (override || !this.paperVersion || this.paperVersion === "undefined") {
-            this.paperVersion = await this.getProjectVersion("paper");
+            this.initInProgress = true;
+            this.initPromise = (async () => {
+                try {
+                    this.paperVersion = await this.getProjectVersion("paper");
+                } finally {
+                    this.initInProgress = false;
+                }
+            })();
+            await this.initPromise;
         }
     }
 
@@ -66,7 +83,7 @@ class SoftwareVersionFetcher {
         } else {
             this.currentURLVersion = null;
         }
-        console.log("[SoftwareVersioner] No versioned page detected, using latest version");
+        console.log("[SoftwareVersioner] No versioned page detected, using latest version " + version);
         return version;
     }
 
@@ -80,19 +97,26 @@ class SoftwareVersionFetcher {
         }
     }
 
-    public getMajorMinorPaperVersion(): string {
+    public async getMajorMinorPaperVersion(): Promise<string> {
+        if (!this.paperVersion)
+            await this.initVersions();
+
         return this.paperVersion;
     }
 
-    public getMajorPaperVersion(): string {
-        if (!this.paperVersion) return "";
+    public async getMajorPaperVersion(): Promise<string> {
+        if (!this.paperVersion)
+            await this.initVersions();
 
         const parts = this.paperVersion.split(".");
         parts.length = 2;
         return parts.join(".");
     }
 
-    public getMaxPaperVersion(): string {
+    public async getMaxPaperVersion(): Promise<string> {
+        if (!this.paperVersion)
+            await this.initVersions();
+
         return this.maxPaperVersion;
     }
 }

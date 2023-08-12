@@ -2,8 +2,6 @@
 slug: /dev/plugin-yml
 ---
 
-import SoftwareVersionFetcher from "@site/src/minecraft-versioning/SoftwareVersionFetcher";
-
 # Bukkit Plugin YML
 
 The plugin.yml file is the main configuration file for your plugin. 
@@ -93,7 +91,7 @@ This will be shown in the plugin info commands.
 
 The version of the Paper API that your plugin is using. This doesn't include the minor version.
 Servers with a version lower than the version specified here will refuse to load the plugin.
-The valid versions are 1.13 - { SoftwareVersionFetcher.getMajorPaperVersion() }.
+The valid versions are 1.13 - <SoftwareVersion versionType={"maj"}/>.
 - <VersionFormattedCode>`api-version: '%%_MAJ_MC_%%'`</VersionFormattedCode>
 
 :::info

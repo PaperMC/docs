@@ -2,40 +2,44 @@
 slug: /dev/userdev
 ---
 
-# Paperweight Userdev
+# paperweight-userdev
 
-**Paperweight** is the name of Paper's custom build tooling. The **Userdev** gradle plugin part of that
-provides access to non-api code (also called internals, or NMS) during development.
+**paperweight** is the name of Paper's custom build tooling. The **paperweight-userdev** Gradle plugin part of that
+provides access to internal code (also known as NMS) during development.
 
 :::note
-This guide is written using the Kotlin DSL for gradle and assumes you have some basic knowledge of gradle.
-If you want to see a fully-functioning plugin that uses **Userdev**,
+
+This guide is written using the Kotlin DSL for Gradle and assumes you have some basic knowledge of Gradle.
+If you want to see a fully-functioning plugin that uses **paperweight-userdev**,
 check out this [example plugin](https://github.com/PaperMC/paperweight-test-plugin).
+
 :::
 
-
 ## Why this is useful
-The Paper server provided through the **paperclip** jars on the downloads page and API
+The Paper server jars we provide on the downloads page through the API are **paperclip** jars. These
 use Spigot's mappings, which are essentially some type names, but fully obfuscated fields and methods.
 This can make it hard to work with in a development environment. This plugin lets you use fully deobfuscated
-types, names and fields during development, and then remaps the plugin so it can still be used with the obfuscated
+types, names and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
 server.
 
 :::caution
+
 The re-obfuscation does not apply to reflection. Look at something like [this library](https://github.com/jpenilla/reflection-remapper) to be able to
 use non-obfuscated names in reflection.
+
 :::
 
 ## Adding the plugin
 Add the plugin to your `build.gradle.kts` file.
 ```kotlin
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.5.5" // TODO auto fetch latest version
+    id("io.papermc.paperweight.userdev") version "1.5.5" // the latest version can be found on the Gradle Plugin Portal
 }
 ```
 
 :::info[Snapshots]
-**Userdev** releases are available through the gradle plugin portal, but if you
+
+**paperweight-userdev** releases are available through the Gradle plugin portal, but if you
 want to use SNAPSHOT versions, you must add Paper's maven repo to `settings.gradle.kts` with:
 ```kotlin
 pluginManagement {
@@ -44,10 +48,11 @@ pluginManagement {
     }
 }
 ```
+
 :::
 
-## Adding the devbundle dependency
-If you try to load your gradle project now, you will receive an error saying you have to declare
+## Adding the dev-bundle dependency
+If you try to load your Gradle project now, you will receive an error saying you have to declare
 a dev bundle dependency. You can do that by adding to your `dependencies` block in your `build.gradle.kts`
 file.
 
@@ -58,24 +63,28 @@ dependencies {
 }
 ```
 :::tip
+
 You can remove any dependency for the Paper API, as the dev bundle includes that.
+
 :::
 
 ## Gradle Tasks
 
 ### reobfJar
 
-Creates a plugin jar that is reobfuscated to spigot's runtime mappings, that is, it
+Creates a plugin jar that is re-obfuscated to spigot's runtime mappings, that is, it
 will work on standard servers.
 
 The output will be inside the `build/libs` folder. The jar whose filename includes `-dev`
-is mojang-mapped (not reobfuscated) and will not work on most servers.
+is mojang-mapped (not re-obfuscated) and will not work on most servers.
 
 :::info[Shadow]
-If you have the shadow gradle plugin applied in your build script, **Userdev** will
+
+If you have the shadow Gradle plugin applied in your build script, **paperweight-userdev** will
 detect that and use the shaded jar as the input for the `reobfJar` task.
 
-The `-dev-all.jar` file in `build/libs` is the shaded, but not reobfuscated jar.
+The `-dev-all.jar` file in `build/libs` is the shaded, but not re-obfuscated jar.
+
 :::
 
 You can make the `reobfJar` task run on the default `build` task with:

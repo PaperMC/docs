@@ -198,9 +198,9 @@ but it is an example of how this can be used.
 
 #### MessageRaw
 
-The `MessageRaw` message type is used to send a raw chat component to a player. This is useful for sending clickable messages to players,
-or messages with hover events. The target player is specified by the second parameter - Player name or "ALL" for all players. 
-This is also useful for sending messages to players who are on a different server within the proxied network.
+The `MessageRaw` message type is used to send a raw chat component to a player. The target player is specified 
+by the second parameter - Player name or "ALL" for all players. This is also useful for sending messages to 
+players who are on a different server within the proxied network.
 
 ```java
 public class MyPlugin extends JavaPlugin {

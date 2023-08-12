@@ -2,8 +2,6 @@
 slug: /dev/event-listeners
 ---
 
-import SoftwareVersionFetcher from '@site/src/minecraft-versioning/SoftwareVersionFetcher';
-
 # Event Listeners
 
 Events are an efficient way to listen for specific actions that happen in the game. They can be called by the server, or by plugins. 
@@ -43,8 +41,8 @@ public class ExampleListener implements Listener {
 
 :::note[Events]
 
-There is no list of events that can be listened to, however take a look 
-<a href={"https://jd.papermc.io/paper/" + SoftwareVersionFetcher.getMajorPaperVersion() + "/org/bukkit/event/Event.html"}>here</a>
+There is no list of events that can be listened to, however take a
+look { <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink> }
 to see all classes that extend `Event`.
 
 An event can only be listened to if it has a static `getHandlerList` method.

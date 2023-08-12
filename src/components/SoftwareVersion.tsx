@@ -5,7 +5,7 @@ export default function SoftwareVersion({ versionType }) {
     const [fetched, setFetched] = useState(null);
 
     useEffect(() => {
-        async function formatCode() {
+        async function fetchVersion() {
 
             let version = '';
 
@@ -20,7 +20,7 @@ export default function SoftwareVersion({ versionType }) {
             setFetched(version);
         }
 
-        formatCode();
+        fetchVersion();
     }, [versionType]);
 
     if (!fetched) {

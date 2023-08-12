@@ -72,8 +72,8 @@ You can remove any dependency for the Paper API, as the dev bundle includes that
 
 ### reobfJar
 
-Creates a plugin jar that is re-obfuscated to spigot's runtime mappings, that is, it
-will work on standard servers.
+This task creates a plugin jar that is re-obfuscated to Spigot's runtime mappings.
+This means it will work on standard Paper servers.
 
 The output will be inside the `build/libs` folder. The jar whose filename includes `-dev`
 is mojang-mapped (not re-obfuscated) and will not work on most servers.

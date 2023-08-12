@@ -11,7 +11,7 @@ Configuration files allow users to change certain behavior and functionality of 
 By default, plugins use a YAML configuration format (`.yml` file). Other formats such as JSON or TOML can be used, 
 however these are not natively supported by Paper so will not be covered in this guide.
 
-YAML works by having a tree-like `key: value` pair structure as you would have seen in your [plugin.yml](../getting-started/plugin-yml.md). 
+YAML works by having a tree-like `key: value` pair structure as you would have seen in your [plugin.yml](../getting-started/plugin-yml.mdx). 
 An example would look like this:
 
 ```yaml

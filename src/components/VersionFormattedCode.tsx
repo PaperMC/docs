@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
 import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
 
 export default function VersionFormattedCode({ language = "", title = "", showLineNumbers = false, children }) {
     const [formattedCode, setFormattedCode] = useState(null);
+    const mounted = useRef(true);
 
     useEffect(() => {
-        async function formatCode() {
+        (async () => {
             let code = children.props.children;
             let inline = true;
 
@@ -23,10 +24,13 @@ export default function VersionFormattedCode({ language = "", title = "", showLi
             code = code.toString().replace(/%%_MAJ_MC_%%/g, majorVersion);
             code = code.replace(/%%_MAJ_MIN_MC_%%/g, majorMinorVersion);
 
-            setFormattedCode({ code, inline });
-        }
-
-        formatCode();
+            if (mounted.current) {
+                setFormattedCode({code, inline});
+            }
+            return () => {
+                mounted.current = false;
+            }
+        })();
     }, [children]);
 
     if (!formattedCode) {

@@ -5,11 +5,9 @@ export default function VersionedJavaDocLink({ target, children }) {
     const [href, setHref] = useState(null);
 
     useEffect(() => {
-        async function fetchHrefLink() {
+        (async () => {
             setHref("https://jd.papermc.io/paper/" + await SoftwareVersionFetcher.getMajorPaperVersion() + target);
-        }
-
-        fetchHrefLink();
+        })();
     }, [target]);
 
     return (

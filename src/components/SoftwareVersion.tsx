@@ -5,7 +5,7 @@ export default function SoftwareVersion({ versionType }) {
     const [fetched, setFetched] = useState(null);
 
     useEffect(() => {
-        async function fetchVersion() {
+        (async () => {
 
             let version = '';
 
@@ -18,9 +18,8 @@ export default function SoftwareVersion({ versionType }) {
             }
 
             setFetched(version);
-        }
+        })();
 
-        fetchVersion();
     }, [versionType]);
 
     if (!fetched) {

@@ -47,8 +47,8 @@ Then, click the `+` button in the top left and select `Remote JVM Debug`. You ca
 Finally, copy the command line arguments from the window, and paste these into your server's startup script.
 These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`. For example:
 
-<VersionFormattedCode>
-```bash
+<VersionFormattedCode language={"bash"}>
+```
 java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-%%_MAJ_MIN_MC_%%.jar nogui
 ```
 </VersionFormattedCode>

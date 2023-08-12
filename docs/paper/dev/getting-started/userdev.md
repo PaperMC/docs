@@ -1,5 +1,6 @@
 ---
 slug: /dev/userdev
+sidebar_label: Paperweight Userdev
 ---
 
 # paperweight-userdev
@@ -58,7 +59,7 @@ file.
 
 ```kotlin
 dependencies {
-    // other deps
+    // Other Dependencies
     paperweight.paperDevBundle("1.20.1-R0.1-SNAPSHOT")
 }
 ```

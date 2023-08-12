@@ -84,6 +84,7 @@ const paper: SidebarsConfig = {
           },
           items: [
             "dev/getting-started/project-setup",
+            "dev/getting-started/userdev",
             "dev/getting-started/plugin-yml",
             "dev/getting-started/paper-plugins",
           ],

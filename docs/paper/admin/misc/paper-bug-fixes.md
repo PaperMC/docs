@@ -8,14 +8,25 @@ Paper fixes gameplay and mechanics inconsistencies. The most prevalent fixes bei
 
 ## Vanilla Bug Fixes
 
-Paper fixes many vanilla bugs that were not intended by Mojang. These bugs are patched to fix behaviour or prevent abuse and
+Paper fixes many vanilla bugs that were not intended by Mojang. These bugs are patched to fix behavior or prevent abuse and
 instability on the server. Many of our fixes are configurable as we understand that some servers may want to keep the
 vanilla behavior. You will find these configuration options in the [global configuration](/docs/paper/admin/reference/configuration/global-configuration.mdx)
 and the [world configuration](/docs/paper/admin/reference/configuration/world-configuration.mdx).
 
+### What is intended behavior vs a bug?
+
+When an issue is reported to us, we check Mojang's issue tracker. If the problem has been reported there, then we
+check to see if it:
+
+1) Has been confirmed as a bug
+2) Has an assigned priority to it
+
+If it meets these two criteria then we will accept changes to fix the bug as it can take a long time for Mojang to fix 
+them (Sometimes years). If an issue gets declined by Mojang, we normally do not "fix" it as it is intended behaviour.
+
 ## Duplication Bugs
 
-Paper Patches TNT, Carpet, Rail and Gravity Block (Sand, Gravel etc) Duplication bugs. These bugs are not intended and 
+Paper Patches TNT, Carpet, Rail and Gravity Block (Sand, Gravel, etc.) Duplication bugs. These bugs are not intended and 
 are patched to prevent abuse.
 
 Because TNT duping is considered a form of automated mining and not a resource dupe, we have provided an option to 
@@ -45,7 +56,7 @@ unsupported-settings:
 ## Afterword
 
 If your server lags, crashes or has any other undesirable consequences from enabling these flags, you will not get support from Paper.
-These settings are also not guaranteed to be supported into the future and may have their behaviour changed or removed at any time.
+These settings are also not guaranteed to be supported into the future and may have their behavior changed or removed at any time.
 
 For reasoning behind no configuration options for sand (and MANY other duplication bugs), see: 
 [#3724](https://github.com/PaperMC/Paper/issues/3724)

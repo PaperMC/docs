@@ -19,9 +19,9 @@ This is experimental and may be subject to change.
 
 ## How do I use them?
 Similarly to Bukkit plugins, you have to introduce a `paper-plugin.yml` file into your jar resources folder.
-This will not act as a drop in replacement for `plugin.yml`, as some things, as outlined in this guide, need to be declared differently.
+This will not act as a drop-in replacement for `plugin.yml`, as some things, as outlined in this guide, need to be declared differently.
 
-It should be noted you still have the ability to include both `paper-plugin.yml`and `plugin.yml` in the same jar.
+It should be noted you still have the ability to include both `paper-plugin.yml` and `plugin.yml` in the same jar.
 
 Here is an example configuration.
 ```yml
@@ -157,7 +157,9 @@ automatically registered for serialization. In order to use `ConfigurationSectio
 you **must** call `ConfigurationSerialization.registerClass(Class)` before you attempt to fetch objects from configurations.
 
 ### Classloading Isolation
-Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This helps prevent Paper plugins from accidentally accessing each others' dependencies, and in general helps ensure that plugins are only able to access what they explicitly say they're depending on.
+Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This
+helps prevent Paper plugins from accidentally accessing each other's dependencies, and in general helps ensure that 
+plugins are only able to access what they explicitly depend on.
 
 Paper plugins have the ability to bypass this, being able to access OTHER plugins' classloaders by adding 
 ```yml

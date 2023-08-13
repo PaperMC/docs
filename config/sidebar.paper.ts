@@ -115,7 +115,7 @@ const paper: SidebarsConfig = {
               collapsed: true,
               items: [
                 "dev/api/component-api/intro",
-                "dev/api/component-api/i18n"
+                "dev/api/component-api/i18n",
               ]
             },
             "dev/api/roadmap",

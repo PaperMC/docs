@@ -72,6 +72,7 @@ const config: Config = {
   ],
 
   markdown: {
+    mermaid: true,
     mdx1Compat: {
       comments: false,
       admonitions: false,
@@ -79,7 +80,7 @@ const config: Config = {
     },
   },
 
-  themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia"],
+  themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia", "@docusaurus/theme-mermaid"],
 
   plugins: [
     [
@@ -230,6 +231,9 @@ const config: Config = {
       apiKey: "34772712950f27c6e9c714ad2e6c5e16",
       indexName: "docs-papermc",
       contextualSearch: true,
+    },
+    mermaid: {
+      theme: {light: 'neutral', dark: 'dark'},
     },
   },
 };

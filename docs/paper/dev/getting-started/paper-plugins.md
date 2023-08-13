@@ -159,15 +159,15 @@ automatically registered for serialization. In order to use `ConfigurationSectio
 you must call `ConfigurationSerialization.registerClass(Class)` before you attempt to fetch objects from configurations.
 
 ### Classloading Isolation
-Paper plugins have isolated classloaders, meaning that relocating dependencies will not be necessary.
-Paper plugins are also not able to access each other unless given explicit access by depending on another plugin.
-This prevents plugins from accidentally accessing your dependencies, and in general helps minimise issues.
+Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This helps prevent Paper plugins from accidentally accessing each others' dependencies, and in general helps ensure that plugins are only able to access what they explicitly say they're depending on.
 
-You can declare this visibility inside the [dependencies](#dependency-declaration) section:
+Paper plugins have the ability to bypass this, being able to access OTHER plugins' classloaders by adding 
 ```yml
 Plugin:
   join-classpath: true # Means you have access to their classpath
 ```
+to your ``paper-plugin.yml``. Note, other Paper plugins will still be unable to access your classloader.
+
 
 ### Load Order Logic Split
 In order to better take advantage of classloading isolation, Paper plugins do **not** use the ``dependencies`` field to determine load order.

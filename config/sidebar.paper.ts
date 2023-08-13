@@ -57,6 +57,7 @@ const paper: SidebarsConfig = {
               items: [
                 "admin/reference/configuration/global-configuration",
                 "admin/reference/configuration/world-configuration",
+                "admin/reference/configuration/server-properties",
               ],
             },
             "admin/reference/system-properties",
@@ -84,6 +85,7 @@ const paper: SidebarsConfig = {
           },
           items: [
             "dev/getting-started/project-setup",
+            "dev/getting-started/userdev",
             "dev/getting-started/plugin-yml",
             "dev/getting-started/paper-plugins",
           ],
@@ -119,6 +121,7 @@ const paper: SidebarsConfig = {
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
             "dev/api/plugin-messaging",
+            "dev/api/plugin-configs",
           ],
         },
         {

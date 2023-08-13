@@ -55,7 +55,7 @@ unsupported-settings:
 
 ## Afterword
 
-If your server lags, crashes or has any other undesirable consequences from enabling these flags, you will not get support from Paper.
+We will not support you if you have issues whilst these settings are enabled. They can and might cause unintended side effects.
 These settings are also not guaranteed to be supported into the future and may have their behavior changed or removed at any time.
 
 For reasoning behind no configuration options for sand (and MANY other duplication bugs), see: 

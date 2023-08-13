@@ -18,10 +18,10 @@ This is experimental and may be subject to change.
 - [Differences](#differences)
 
 ## How do I use them?
-Similarly to Bukkit plugins, you have to introduce a ``paper-plugin.yml`` file into your jar resources folder.
-This will not act as a drop in replacement for ``plugin.yml``, as some things, as outlined in this guide, need to be declared differently.
+Similarly to Bukkit plugins, you have to introduce a `paper-plugin.yml` file into your jar resources folder.
+This will not act as a drop in replacement for `plugin.yml`, as some things, as outlined in this guide, need to be declared differently.
 
-It should be noted you still have the ability to include both ``paper-plugin.yml``and ``plugin.yml`` in the same jar.
+It should be noted you still have the ability to include both `paper-plugin.yml`and `plugin.yml` in the same jar.
 
 Here is an example configuration.
 ```yml
@@ -77,6 +77,7 @@ RegistryPlugin:
 
 Note that in certain cases, plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
 Please read the [cyclic loading guide](#cyclic-plugin-loading) for more information.
+
 :::
 
 Here are a couple of examples:
@@ -100,14 +101,13 @@ SuperDuperTacoParty:
 ```
 
 ## What is it used for?
-Paper plugins lay down the framework for some future API.
-Our goals are to open more modern API that better aligns with Vanilla.
-Paper plugins allow us to do just that by making a new way to load plugin resources
-before the server has started by using [Bootstrappers](#bootstrapper).
+Paper plugins lay down the framework for some future API. Our goals are to open more modern API that better aligns 
+with Vanilla. Paper plugins allow us to do just that by making a new way to load plugin resources before the server 
+has started by using [Bootstrappers](#bootstrapper).
 
 ## Bootstrapper
-Paper plugins are able to identify their own bootstrapper by implementing ``io.papermc.paper.plugin.bootstrap.PluginBootstrap`` and adding
-the class of your implementation to the bootstrapper field in the ``paper-plugin.yml``.
+Paper plugins are able to identify their own bootstrapper by implementing `io.papermc.paper.plugin.bootstrap.PluginBootstrap` and adding
+the class of your implementation to the bootstrapper field in the `paper-plugin.yml`.
 ```java
 public class TestPluginBootstrap implements PluginBootstrap {
 
@@ -127,8 +127,8 @@ A Bootstrapper allows you to also override how your plugin is initiated, allowin
 Currently, bootstrappers do not offer much new API, and are highly experimental. This may be subject to change once more API is introduced.
 
 ## Loaders
-Paper plugins are able to identify their own plugin loader by implementing ``io.papermc.paper.plugin.loader.PluginLoader`` and adding
-the class of your implementation to the loader field in the ``paper-plugin.yml``.
+Paper plugins are able to identify their own plugin loader by implementing `io.papermc.paper.plugin.loader.PluginLoader` and adding
+the class of your implementation to the loader field in the `paper-plugin.yml`.
 
 The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into.
 This, as of right now, only applies to creating the expected classpath for the plugin, e.g. supplying external libraries to the plugin.
@@ -146,17 +146,15 @@ public class TestPluginLoader implements PluginLoader {
         classpathBuilder.addLibrary(resolver);
     }
 }
-
 ```
-Currently, you are able to add two different library types, ``JarLibrary``, and ``MavenLibraryResolver``.
-
+Currently, you are able to add two different library types, `JarLibrary`, and `MavenLibraryResolver`.
 
 ## Differences
 
 ### Bukkit Serialization System
-Paper plugins still support the serialization system (``org.bukkit.configuration.serialization``) that Bukkit uses. However, custom classes will not be
+Paper plugins still support the serialization system (`org.bukkit.configuration.serialization`) that Bukkit uses. However, custom classes will not be
 automatically registered for serialization. In order to use `ConfigurationSection#getObject`, 
-you must call `ConfigurationSerialization.registerClass(Class)` before you attempt to fetch objects from configurations.
+you **must** call `ConfigurationSerialization.registerClass(Class)` before you attempt to fetch objects from configurations.
 
 ### Classloading Isolation
 Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This helps prevent Paper plugins from accidentally accessing each others' dependencies, and in general helps ensure that plugins are only able to access what they explicitly say they're depending on.
@@ -170,7 +168,7 @@ to your ``paper-plugin.yml``. Note, other Paper plugins will still be unable to 
 
 
 ### Load Order Logic Split
-In order to better take advantage of classloading isolation, Paper plugins do **not** use the ``dependencies`` field to determine load order.
+In order to better take advantage of classloading isolation, Paper plugins do **not** use the `dependencies` field to determine load order.
 This was done for a variety of reasons, mostly to allow better control and allow plugins to properly share classloaders.
 
 See [declaring dependencies](#dependency-declaration) for more information on how to declare the load order of your plugin.
@@ -180,7 +178,13 @@ See [declaring dependencies](#dependency-declaration) for more information on ho
 Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.
 Unlike Bukkit plugins, Paper plugins will not attempt to resolve cyclic loading issues.
 
-![](./assets/cyclic-loading.png)
+```mermaid
+graph LR;
+    A-->B;
+    B-->C;
+    C-->D;
+    D-->A;
+```
 
 However, if Paper detects a loop that cannot be resolved, you will get an error that looks like this:
 ```

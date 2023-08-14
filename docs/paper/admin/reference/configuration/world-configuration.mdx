@@ -109,7 +109,8 @@ chunks:
       in bukkit.yml'
   delay-chunk-unloads-by:
     default: 10s
-    description: 'Delays chunk unloads by the specified time'
+    description: 'Delays chunk unloads by the specified time. Formatted as a duration with
+      a single unit e.g. 10h or 25m. Supports d, h, m, and s.'
   entity-per-chunk-save-limit:
     experience_orb:
       default: '-1'
@@ -612,11 +613,13 @@ lootables:
       The default value will allow a lootable to refill an infinite number of times'
   refresh-max:
     default: 2d
-    description: 'The maximum amount of time that can pass before a lootable is refilled'
+    description: 'The maximum amount of time that can pass before a lootable is refilled. Formatted as a duration with
+      a single unit e.g. 10h or 25m. Supports d, h, m, and s.'
   refresh-min:
     default: 12h
     description: 'The minimum amount of time that must pass before a lootable will
-      be eligible to be refilled'
+      be eligible to be refilled. Formatted as a duration with
+      a single unit e.g. 10h or 25m. Supports d, h, m, and s.'
   reset-seed-on-fill:
     default: 'true'
     description: 'Resets the loot seed each time the lootable is refilled, effectively
@@ -625,6 +628,10 @@ lootables:
     default: 'true'
     description: 'Prevents the same players from coming back and re-looting the same
       containers over and over'
+  restrict-player-reloot-time:
+    default: 'disabled'
+    description: 'Per-player cooldown between reloots. Formatted as a duration with
+      a single unit e.g. 10h or 25m. Supports d, h, m, and s.'
 maps:
   item-frame-cursor-limit:
     default: '128'

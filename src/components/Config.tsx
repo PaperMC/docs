@@ -150,6 +150,13 @@ const YamlTreeNode = ({ root, key, parentKey, value, separator }) => {
         event.stopPropagation();
     };
 
+    const removeTrailingSpaces = (value) => {
+        if (value.endsWith(' ')) {
+            return removeTrailingSpaces(value.substring(0, value.length - 1));
+        }
+        return value;
+    }
+
     useEffect(() => {
         const hash = createUrlHash(parentKey, key);
         if (window.location.hash === `#${hash}`) {
@@ -160,7 +167,7 @@ const YamlTreeNode = ({ root, key, parentKey, value, separator }) => {
     return (
         <div key={key} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, key)}>
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
-                {parseItalics(key)}{separator}
+                {parseItalics(key)}{removeTrailingSpaces(separator)}
             </div>
             <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, key)}`} onClick={handleClick}></a>
             {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key), false, separator)}

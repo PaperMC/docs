@@ -39,7 +39,7 @@ public void onPlayerChat(PlayerChatEvent event) {
     ByteArrayDataOutput out = ByteStreams.newDataOutput();
     out.writeUTF("Connect");
     out.writeUTF("hub2");
-    player.sendPluginMessage(plugin, "bungeecord:main", out.toByteArray());
+    player.sendPluginMessage(MinecraftChannelIdentifier.from("bungeecord:main"), out.toByteArray());
 }
 ```
 

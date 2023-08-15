@@ -71,7 +71,7 @@ an asynchronous task.
 
 #### Asynchronous tasks (off the main thread)
 
-Asynchronous tasks are tasks that are executed on separate threads, therefore will not affect
+Asynchronous tasks are tasks that are executed on separate threads, therefore will not directly affect
 your server's performance.
 
 :::warning
@@ -138,38 +138,42 @@ You can either implement it in a separate class similarly to the `Runnable`, e.g
 
 ```java
 public class MyConsumerTask implements Consumer<BukkitTask> {
-    
-    private final LivingEntity entity;
-    
-    public MyConsumerTask(LivingEntity entity) {
-        this.entity = entity;
+
+    private final UUID entityId;
+
+    public MyConsumerTask(UUID uuid) {
+        this.entityId = uuid;
     }
-    
+
     @Override
     public void accept(BukkitTask task) {
-        if (this.entity.isDead()) {
-            task.cancel(); // The entity died, there's no point
-            return;        // in running the code anymore.
+        Entity entity = Bukkit.getServer().getEntity(this.entityId);
+
+        if (entity instanceof LivingEntity livingEntity) {
+            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+            return;
         }
-        
-        this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+
+        task.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
     }
-    
 }
 ```
 ```java
-scheduler.runTaskTimer(plugin, new MyConsumerTask(someEntity), 0, 20);
+scheduler.runTaskTimer(plugin, new MyConsumerTask(someEntityId), 0, 20);
 ```
 
 Or use a lambda expression which again is much cleaner for short and simple tasks:
 
 ```java
 scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
-    if (this.entity.isDead()) {
-        task.cancel();
+    Entity entity = Bukkit.getServer().getEntity(entityId);
+
+    if (entity instanceof LivingEntity livingEntity) {
+        livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
         return;
     }
-    this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+
+    task.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
 } /* End of the lambda */, 0, 20);
 ```
 
@@ -181,20 +185,22 @@ not need to access the task from inside the `run()` method, you can simply use t
 ```java
 public class CustomRunnable extends BukkitRunnable {
 
-    private final LivingEntity entity;
+    private final UUID entityId;
 
-    public CustomRunnable(LivingEntity entity) {
-        this.entity = entity;
+    public CustomRunnable(UUID uuid) {
+        this.entityId = uuid;
     }
 
     @Override
     public void run() {
-        if (this.entity.isDead()) {
-            this.cancel(); // The entity died, there's no point
-            return;        // in running the code anymore.
+        Entity entity = Bukkit.getServer().getEntity(this.entityId);
+
+        if (entity instanceof LivingEntity livingEntity) {
+            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+            return;
         }
 
-        this.entity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+        task.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
     }
 }
 ```

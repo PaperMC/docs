@@ -27,10 +27,11 @@ export default function VersionFormattedCode({ language = "", title = "", showLi
             if (mounted.current) {
                 setFormattedCode({code, inline});
             }
-            return () => {
-                mounted.current = false;
-            }
         })();
+
+        return () => {
+            mounted.current = false;
+        };
     }, [children]);
 
     if (!formattedCode) {

@@ -175,6 +175,11 @@ This was done for a variety of reasons, mostly to allow better control and allow
 
 See [declaring dependencies](#dependency-declaration) for more information on how to declare the load order of your plugin.
 
+### Commands
+Paper plugins do not use the `commands` field to register commands. This means that you do not need to include all 
+of your commands in the `paper-plugin.yml` file. Instead, you can register commands using the 
+[command map](https://jd.papermc.io/paper/1.20/org/bukkit/Server.html#getCommandMap()).
+
 ### Cyclic Plugin Loading
 
 Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.

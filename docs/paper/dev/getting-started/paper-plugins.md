@@ -41,7 +41,7 @@ Paper Plugins change how to declare dependencies in your `paper-plugin.yml`:
 ```yml
 dependencies:
   bootstrap:
-    # Lets say that RegistryPlugin registers some data that your plugin needs to use
+    # Let's say that RegistryPlugin registers some data that your plugin needs to use
     # We don't need this during runtime, so it's not required in the server section. However
     # can be added to both if needed
     RegistryPlugin:

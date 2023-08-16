@@ -4,10 +4,10 @@ slug: /dev/getting-started/paper-plugins
 
 # Paper Plugins
 
-Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to 
+Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to
 expand the field of what the Paper API is able to introduce.
 
-:::info[Experimental]
+:::warning[Experimental]
 
 This is experimental and may be subject to change.
 
@@ -18,10 +18,10 @@ This is experimental and may be subject to change.
 - [Differences](#differences)
 
 ## How do I use them?
-Similarly to Bukkit plugins, you have to introduce a ``paper-plugin.yml`` file into your jar resources folder.
-This can act as a drop in replacement for ``plugin.yml``, allowing you to specifically target the Paper platform.
+Similarly to Bukkit plugins, you have to introduce a `paper-plugin.yml` file into your jar resources folder.
+This will not act as a drop-in replacement for `plugin.yml`, as some things, as outlined in this guide, need to be declared differently.
 
-It should be noted you still have the ability to include both ``paper-plugin.yml``and ``plugin.yml`` in the same jar.
+It should be noted you still have the ability to include both `paper-plugin.yml` and `plugin.yml` in the same jar.
 
 Here is an example configuration.
 ```yml
@@ -36,92 +36,101 @@ loader: io.papermc.testplugin.TestPluginLoader
 
 ### Dependency Declaration
 
-Dependency declaration is specified a bit differently than Bukkit plugins, as you are
-able to define if a dependency is required during bootstrapping. This means that any bootstrapping
-logic for your dependencies will be run before yours is run. 
+Paper Plugins change how to declare dependencies in your `paper-plugin.yml`:
+
 ```yml
 dependencies:
-  - name: DependencyName
-    required: true
-    bootstrap: true
+  bootstrap:
+    # Let's say that RegistryPlugin registers some data that your plugin needs to use
+    # We don't need this during runtime, so it's not required in the server section. However
+    # can be added to both if needed
+    RegistryPlugin:
+      load: BEFORE
+      required: true
+      join-classpath: true # Defaults to true
+  server:
+    # Add a required "RequiredPlugin" dependency, which will load AFTER your plugin.
+    RequiredPlugin:
+      load: AFTER
+      required: true
+      # This means that your plugin will not have access to their classpath
+      join-classpath: false
 ```
 
-If a dependency is ``required`` it must be installed on the server or your plugin will fail to load. If marked otherwise, it will
-ignore if the dependency isn't found. 
-Otherwise, your plugin will be loaded fine, in the same fashion as a plugin that is a ``soft-depend`` in a Bukkit plugin.yml
+With Paper Plugins, dependencies are split into two sections:
+- `bootstrap` - These are dependencies that you will be using in the [bootstrap](#bootstrapper).
+- `server` - These are dependencies that are used for the core functionality of your plugin, whilst the server is running.
 
-If a dependency is marked as ``bootstrap``, this indicates that this dependency is required during bootstrapping, which currently does not serve a purpose.
+Let's take a look at a dependency:
+```yml
+RegistryPlugin:
+  load: BEFORE # Defaults to OMIT
+  required: true # Defaults to true
+  join-classpath: true # Defaults to true
+```
 
-:::note[Plugin Loading Order]
-
-Note that [unlike Bukkit plugins](#load-order-logic-split), dependencies are independent of the plugin load order. 
-This means that although declaring a dependency will give you access to its classes, if you require it to be initialised before your plugin is loaded, see how to [declare load order](#load-order-declaration).
-:::
-
-### Load Order Declaration
-
-To declare the order in which plugins are loaded before/after your plugin, you are able to define two sections in your ``paper-plugin.yml``.
-
-It should be noted that the load order for bootstrapping is independent, meaning that if you want to define the load order for bootstrappers
-you must set the ``bootstrap`` field to ``true``.
+- `load`: (`BEFORE`|`AFTER`|`OMIT`) Specifies whether this plugin should before or after **your** plugin. Note: Omit has undefined ordering behavior.
+- `required`: Whether this plugin is required for your plugin to load.
+- `join-classpath`: Whether your plugin should have access to their classpath. This is used for plugins that need to access other plugins internals directly.
 
 :::note[Cyclic Loading]
 
-Note that in certain cases plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
-Please read the [cyclic loading guide](docs/paper/admin/reference/paper-plugins.md#cyclic-plugin-loading) for more information.
+Note that in certain cases, plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
+Please read the [cyclic loading guide](#cyclic-plugin-loading) for more information.
+
 :::
 
-#### load-before
-You are able to define a list of plugins that your plugin should load before. 
+Here are a couple of examples:
 ```yml
-load-before:
-  - name: PluginName
-    bootstrap: false
-```
-This means that your plugin will load **before** ``PluginName`` is loaded. 
+# Suppose we require ProtocolLib to be loaded for our plugin
+ProtocolLib:
+  load: AFTER
+  required: true
 
-#### load-after
-You are then able to define a list of plugins that your plugin should load after.
-```yml
-load-after:
-  - name: PluginName
-    bootstrap: false
+# Now, we are going to register some details for a shop plugin
+# So our plugin should load before the shop plugin
+SuperShopsXUnlimited:
+  load: AFTER
+  required: false
+
+# Now, we are going to need to access a plugins classpath
+# So that we can properly interact with it.
+SuperDuperTacoParty:
+  required: true
+  join-classpath: true
 ```
-This means that your plugin will load **after** ``PluginName`` is loaded.
 
 ## What is it used for?
-Paper plugins lay down the framework for some future API.
-Our goals are to open more modern API that better aligns with Vanilla.
-Paper plugins allow us to do just that by making a new way to load plugin resources
-before the server has started by using [Bootstrappers](#bootstrapper).
-
+Paper plugins lay down the framework for some future API. Our goals are to open more modern API that better aligns 
+with Vanilla. Paper plugins allow us to do just that by making a new way to load plugin resources before the server 
+has started by using [Bootstrappers](#bootstrapper).
 
 ## Bootstrapper
-Paper plugins are able to identify their own bootstrapper by implementing ``io.papermc.paper.plugin.bootstrap.PluginBootstrap`` and adding
-the class of your implementation to the bootstrapper field in the ``paper-plugin.yml``.
+Paper plugins are able to identify their own bootstrapper by implementing `io.papermc.paper.plugin.bootstrap.PluginBootstrap` and adding
+the class of your implementation to the bootstrapper field in the `paper-plugin.yml`.
 ```java
 public class TestPluginBootstrap implements PluginBootstrap {
 
     @Override
-    public void bootstrap(@NotNull PluginProviderContext context) {
-        
+    public void bootstrap(@NotNull BootstrapContext context) {
+
     }
 
     @Override
     public @NotNull JavaPlugin createPlugin(@NotNull PluginProviderContext context) {
         return new TestPlugin("My custom parameter");
     }
-    
+
 }
 ```
 A Bootstrapper allows you to also override how your plugin is initiated, allowing you to pass values into your plugin constructor.
 Currently, bootstrappers do not offer much new API, and are highly experimental. This may be subject to change once more API is introduced.
 
 ## Loaders
-Paper plugins are able to identify their own plugin loader by implementing ``io.papermc.paper.plugin.loader.PluginLoader`` and adding
-the class of your implementation to the loader field in the ``paper-plugin.yml``.
+Paper plugins are able to identify their own plugin loader by implementing `io.papermc.paper.plugin.loader.PluginLoader` and adding
+the class of your implementation to the loader field in the `paper-plugin.yml`.
 
-The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into. 
+The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into.
 This, as of right now, only applies to creating the expected classpath for the plugin, e.g. supplying external libraries to the plugin.
 ```java
 public class TestPluginLoader implements PluginLoader {
@@ -137,29 +146,62 @@ public class TestPluginLoader implements PluginLoader {
         classpathBuilder.addLibrary(resolver);
     }
 }
-
 ```
-Currently, you are able to add two different library types, ``JarLibrary``, and ``MavenLibraryResolver``.
+Currently, you are able to add two different library types, `JarLibrary`, and `MavenLibraryResolver`.
 
-
-## Differences 
+## Differences
 
 ### Bukkit Serialization System
-Paper plugins do not support the serialization system (``org.bukkit.configuration.serialization``) that Bukkit uses. Your classes will not be able to be
-serialized, vise versa. It is highly recommended to not use this system with Paper plugins.
+Paper plugins still support the serialization system (`org.bukkit.configuration.serialization`) that Bukkit uses. However, custom classes will not be
+automatically registered for serialization. In order to use `ConfigurationSection#getObject`, 
+you **must** call `ConfigurationSerialization.registerClass(Class)` before you attempt to fetch objects from configurations.
 
 ### Classloading Isolation
-Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This helps prevent Paper plugins from accidentally accessing each others' dependencies, and in general helps ensure that plugins are only able to access what they explicitly say they're depending on.
+Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This
+helps prevent Paper plugins from accidentally accessing each other's dependencies, and in general helps ensure that 
+plugins are only able to access what they explicitly depend on.
 
 Paper plugins have the ability to bypass this, being able to access OTHER plugins' classloaders by adding 
 ```yml
-has-open-classloader: true
+Plugin:
+  join-classpath: true # Means you have access to their classpath
 ```
 to your ``paper-plugin.yml``. Note, other Paper plugins will still be unable to access your classloader.
 
 
 ### Load Order Logic Split
-In order to better take advantage of classloading isolation, Paper plugins do **not** use the ``dependencies`` field to determine load order.
+In order to better take advantage of classloading isolation, Paper plugins do **not** use the `dependencies` field to determine load order.
 This was done for a variety of reasons, mostly to allow better control and allow plugins to properly share classloaders.
 
-See information on [declaring load order](#load-order-declaration) for more information on how to declare the load order of your plugin.
+See [declaring dependencies](#dependency-declaration) for more information on how to declare the load order of your plugin.
+
+### Commands
+Paper plugins do not use the `commands` field to register commands. This means that you do not need to include all 
+of your commands in the `paper-plugin.yml` file. Instead, you can register commands using the 
+[command map](https://jd.papermc.io/paper/1.20/org/bukkit/Server.html#getCommandMap()).
+
+### Cyclic Plugin Loading
+
+Cyclic loading describes the phenomena when a plugin loading causes a loop which eventually will cycle back to the original plugin.
+Unlike Bukkit plugins, Paper plugins will not attempt to resolve cyclic loading issues.
+
+```mermaid
+graph LR;
+    A-->B;
+    B-->C;
+    C-->D;
+    D-->A;
+```
+
+However, if Paper detects a loop that cannot be resolved, you will get an error that looks like this:
+```
+[ERROR]: [LoadOrderTree] =================================
+[ERROR]: [LoadOrderTree] Circular plugin loading detected:
+[ERROR]: [LoadOrderTree] 1) Paper-Test-Plugin1 -> Paper-Test-Plugin -> Paper-Test-Plugin1
+[ERROR]: [LoadOrderTree]    Paper-Test-Plugin1 loadbefore: [Paper-Test-Plugin]
+[ERROR]: [LoadOrderTree]    Paper-Test-Plugin loadbefore: [Paper-Test-Plugin1]
+[ERROR]: [LoadOrderTree] Please report this to the plugin authors of the first plugin of each loop or join the PaperMC Discord server for further help.
+[ERROR]: [LoadOrderTree] =================================
+```
+
+It is up to you to resolve these cyclical loading issues.

@@ -16,40 +16,80 @@ Click on a leaf node to view the description for that setting.
 :::
 
 <Config data={`
-# This is the main configuration file for Spigot.
-# As you can see, there's tons to configure. Some options may impact gameplay, so use
-# with caution, and make sure you know what each option does before configuring.
-# For a reference for any variable inside this file, check out the Spigot wiki at
-# http://www.spigotmc.org/wiki/spigot-configuration/
-#
-# If you need help with the configuration or have any questions related to Spigot,
-# join us at the Discord or drop by our forums and leave a post.
-#
-# Discord: https://www.spigotmc.org/go/discord
-# Forums: http://www.spigotmc.org/
-
 settings:
-  debug: false
-  timeout-time: 60
-  restart-on-crash: true
-  restart-script: ./start.sh
-  bungeecord: false
-  sample-count: 12
-  player-shuffle: 0
-  user-cache-size: 1000
-  save-user-cache-on-stop-only: false
-  moved-wrongly-threshold: 0.0625
-  moved-too-quickly-multiplier: 10.0
-  netty-threads: 4
+  debug:
+    default: "false"
+    description: |
+      if enabled, sets log level to ALL
+  timeout-time:
+    default: 60
+    description: |
+      set how long before the watchdog says the server has stopped responding, and restarts
+  restart-on-crash:
+    default: true
+    description: |
+      whether to call restart-script when the server is killed by the watchdog
+      doesnt affect if it gets externally killed (OOM/similar)
+  restart-script:
+    default: ./start.sh
+    description: |
+      file that is called with:
+        "cmd /c start {restart-script}" (windows)
+        "sh {restart-script}" (linux/macos)
+      see [this gist](https://gist.github.com/Prof-Bloodstone/6367eb4016eaf9d1646a88772cdbbac5) if you have issues with the server starting in the background
+  bungeecord:
+    default: "false"
+    description: |
+      enabled proxy-online mode
+      support for unix domain socket binding,
+      support for bungee ip-forwarding
+  sample-count:
+    default: 12
+    description: |
+      Server Ping Player Sample Count
+      how many players to display in the client side-hover text in the server list
+  player-shuffle:
+    default: "0"
+    description: |
+      This prevents players from 'gaming' the server, and strategically relogging to increase their position in the tick order
+      <=0 = disable
+      >0 = every n ticks, the connections list is shuffled.
+      this can have a performance impact if enabled
+  user-cache-size:
+    default: 1000
+    description: how many players to keep in the user cache
+  save-user-cache-on-stop-only:
+    default: "false"
+    description: if false it saves the user-cache on every update
+  moved-wrongly-threshold:
+    default: 0.0625
+    description: unknown # TODO
+  moved-too-quickly-multiplier:
+    default: 10.0
+    description: unknown # TODO
+  netty-threads:
+    default: 4
+    description: |
+      instructs netty how many threads to use for the eventloop
   attribute:
     maxHealth:
-      max: 2048.0
+      max:
+        default: 2048.0
+        description: overrides the maximum for the maxHealth attribute
     movementSpeed:
-      max: 2048.0
+      max:
+        default: 2048.0
+        description: overrides the maximum for the movementSpeed attribute
     attackDamage:
-      max: 2048.0
-  log-villager-deaths: true
-  log-named-deaths: true
+      max:
+        default: 2048.0
+        description: overrides the maximum for the attackDamage attribute
+  log-villager-deaths:
+    default: true
+    description: "whether to log villager deaths + lightning strikes to console and latest.log"
+  log-named-deaths:
+    default: true
+    description: "whether to log deaths of entities with custom names to console and latest.log"
 messages:
   whitelist: You are not whitelisted on this server!
   unknown-command: Unknown command. Type "/help" for help.

@@ -8,6 +8,16 @@ Presumably, you have learned about what Velocity can do for you. But how does it
 other solutions out there? We're trying to convince you to use Velocity, after all, so this document
 may be somewhat biased in our favor.
 
+## Overview
+| Feature                           	   | BungeeCord | Waterfall | Velocity |
+|------------------------------------------|------------|-----------|----------|
+| BungeeCord plugins                       | ✅          | ✅         | ❌        |
+| Velocity plugins                         | ❌          | ❌         | ✅        |
+| Secure player information forwarding     | ❌          | ❌         | ✅        |
+| API supporting modern Minecraft features | ❌          | ❌         | ✅        |
+| Actively developed                       | ❓          | ❌         | ✅        |
+| Improved mod support                     | ❌          | ❌         | ✅        |
+
 ## BungeeCord and derivatives
 
 We can't discuss the full history of Minecraft proxy software deeply – we recommend

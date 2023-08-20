@@ -180,7 +180,7 @@ const renderYamlData = (data, parentKey, root = false, separator) => {
 
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object') {
-            if ('default' in value || 'description' in value) {
+            if (('default' in value && typeof value.default !== 'object') || ('description' in value && typeof value.description !== 'object')) {
                 renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root} separator={separator} />);
             } else {
                 renderedNodes.push(YamlTreeNode({ root, key, parentKey, value, separator }));

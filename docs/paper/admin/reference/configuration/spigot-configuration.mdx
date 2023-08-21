@@ -28,18 +28,34 @@ advancements:
         the literal "*"
         an resource location namespace i.e. "minecraft"
       if an advancement is disabled, without disabling any children, console errors occur on load
-commands: # TODO
-  log: true
+commands:
+  log:
+    default: true
+    description: whether to log commands executed by players in chat or on signs
   replace-commands:
-    - setblock
-    - summon
-    - testforblock
-    - tellraw
-  send-namespaced: true
-  silent-commandblock-console: false
+    default: "[setblock,summon,testforblock,tellraw]"
+    description: list of vanilla commands that should override any plugin commands
+  send-namespaced:
+    default: true
+    description: "whether to send namespaced commands to the client:"
+  silent-commandblock-console:
+    default: "false"
+    description: "whether to log vanilla command command feedback to console"
   spam-exclusions:
-    - /skill
-  tab-complete: 0
+    default: "[/skill]"
+    description: |
+      List of commands starting with "/", or chat prefixes,
+      that if a command / chat message starts with it,
+      doesnt count towards the built in spam filter
+  tab-complete:
+    default: "0"
+    description: |
+      how many characters need to be typed before tab completion works
+      < 0 tabcompletion is disabled
+      =0 always tabcompletes all avalible commands
+      >0 only tabcompletes after n characters are types.
+      LIMITATIONS: since the list of commands are all sent at once to the client,
+      this is only effective for fully disabling (or maybe with older clients?.
 messages:
   outdated-client:
     default: Outdated client! Please use {0}
@@ -154,9 +170,14 @@ settings:
   user-cache-size:
     default: 1000
     description: how many players to keep in the user cache
-stats: # TODO
-  disable-saving: false
-  forced-stats: {}
+stats:
+  disable-saving:
+    default: "false"
+    description: prevent saving stats
+  forced-stats:
+    default: "{}"
+    description: | # TODO test with non-custom stats (registries like block/item), test expected key/format
+      <namespacedkey>: <int>
 world-settings: # TODO
   default:
     arrow-despawn-rate: 1200

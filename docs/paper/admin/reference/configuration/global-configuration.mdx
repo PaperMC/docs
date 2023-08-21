@@ -184,12 +184,6 @@ misc:
     default: 'true'
     description: 'Causes the server to lose the same precision that the client does
       for entities preventing desync. Fixes [MC-4](https://bugs.mojang.com/browse/MC-4)'
-  lag-compensate-block-breaking:
-    default: 'true'
-    description: 'Whether the server should use time or TPS to determine block break
-      duration. The client assumes the server is always running at 20 TPS, causing
-      disagreement when a block is broken during server lag. This setting prevents
-      this desync'
   load-permissions-yml-before-plugins:
     default: 'true'
     description: 'Loads bukkit''s permission.yml file before plugins, allowing them

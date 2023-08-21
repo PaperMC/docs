@@ -15,6 +15,15 @@ Click on a leaf node to view the description for that setting.
 
 :::
 
+:::info
+
+To override a per-world option,
+
+create a new key under `world-settings` with the level-name (name of the folder)
+
+:::
+
+
 <Config data={`
 advancements:
   disable-saving:
@@ -178,120 +187,376 @@ stats:
     default: "{}"
     description: | # TODO test with non-custom stats (registries like block/item), test expected key/format
       <namespacedkey>: <int>
-world-settings: # TODO
+world-settings:
   default:
-    arrow-despawn-rate: 1200
-    below-zero-generation-in-existing-chunks: true
-    dragon-death-sound-radius: 0
-    enable-zombie-pigmen-portal-spawns: true
-    end-portal-sound-radius: 0
+    arrow-despawn-rate:
+      default: 1200
+      description: number of ticks before an arrow despawns
+    below-zero-generation-in-existing-chunks:
+      default: true
+      description: allows conversion of existing chunks to full height
+    dragon-death-sound-radius:
+      default: "0"
+      description: |
+        number of blocks that the dragon death sound is audible
+        0 is global (including cross-dimension)
+    enable-zombie-pigmen-portal-spawns:
+      default: true
+      description: |
+        allows zombified piglins to spawn inside netherportals.
+        does not affect portal travel for any mobs
+    end-portal-sound-radius:
+      default: 0
+      description: |
+        number of blocks that the end portal opening sound is audible
+        0 is global (including cross-dimension)
     entity-activation-range:
-      animals: 32
-      flying-monsters: 32
-      ignore-spectators: false
-      misc: 16
-      monsters: 32
-      raiders: 48
-      tick-inactive-villagers: true
-      villagers: 32
-      villagers-active-for-panic: true
-      villagers-work-immunity-after: 100
-      villagers-work-immunity-for: 20
+      animals:
+        default: 32
+        description: the entity activation range for animals
+      flying-monsters:
+        default: 32
+        description: the entity activation range for flying monsters
+      ignore-spectators:
+        default: "false"
+        description: whether spectators activate entities
+      misc:
+        default: 16
+        description: the entity activation range for misc entities
+      monsters:
+        default: 32
+        description: the entity activation range for monsters
+      raiders:
+        default: 48
+        description: the entity activation range for raiders
+      tick-inactive-villagers:
+        default: true
+        description: whether to keep ticking villagers outside of activation range.
+      villagers:
+        default: 32
+        description: the entity activation range for villagers
+      villagers-active-for-panic:
+        default: true
+        description: whether to activate villagers when they want to panic
+      villagers-work-immunity-after:
+        default: 100
+        description: time in ticks a villager has to be inactive and working to get woken up
+      villagers-work-immunity-for:
+        default: 20
+        description: how long a villager should be woken up for, in ticks, after villagers-work-immunity-after
       wake-up-inactive:
-        animals-every: 1200
-        animals-for: 100
-        animals-max-per-tick: 4
-        flying-monsters-every: 200
-        flying-monsters-for: 100
-        flying-monsters-max-per-tick: 8
-        monsters-every: 400
-        monsters-for: 100
-        monsters-max-per-tick: 8
-        villagers-every: 600
-        villagers-for: 100
-        villagers-max-per-tick: 4
-      water: 16
+        animals-every:
+          default: 1200
+          description: |
+            how often an inactive animal outside of range will be woken up
+            a minimum due to being limited to animals-max-per-tick
+            in ticks
+        animals-for:
+          default: 100
+          description: how long to wake an inactive animal up for, in ticks
+        animals-max-per-tick:
+          default: 4
+          description: a limit of how many inactive animals can be woken up on the same tick
+        flying-monsters-every:
+          default: 200
+          description: |
+            how often an inactive flying monster outside of range will be woken up
+            a minimum due to being limited to flying-monsters-max-per-tick
+            in ticks
+        flying-monsters-for:
+          default: 100
+          description: how long to wake an inactive flying monster up for, in ticks
+        flying-monsters-max-per-tick:
+          default: 8
+          description: a limit of how many inactive flying monsters can be woken up on the same tick
+        monsters-every:
+          default: 400
+          description: |
+            how often an inactive monster outside of range will be woken up
+            a minimum due to being limited to monsters-max-per-tick
+            in ticks
+        monsters-for:
+          default: 100
+          description: how long to wake an inactive monster up for, in ticks
+        monsters-max-per-tick:
+          default: 8
+          description: a limit of how many inactive monsters can be woken up on the same tick
+        villagers-every:
+          default: 600
+          description: |
+            how often an inactive villager outside of range will be woken up
+            a minimum due to being limited to villagers-max-per-tick
+            in ticks
+        villagers-for:
+          default: 100
+          description: how long to wake an inactive villager up for, in ticks
+        villagers-max-per-tick:
+          default: 4
+          description: a limit of how many inactive villagers can be woken up on the same tick
+      water:
+        default: 16
+        description: the entity activation range for water mobs
     entity-tracking-range:
-      animals: 48
-      display: 128
-      misc: 32
-      monsters: 48
-      other: 64
-      players: 48
+      animals:
+        default: 48
+        description: how far to send to track. scaled by entityBroadcastRangePercentage
+      display:
+        default: 128
+        description: how far to send to track. scaled by entityBroadcastRangePercentage
+      misc:
+        default: 32
+        description: how far to send to track. scaled by entityBroadcastRangePercentage
+      monsters:
+        default: 48
+        description: how far to send to track. scaled by entityBroadcastRangePercentage
+      other:
+        default: 64
+        description: how far to send to track. scaled by entityBroadcastRangePercentage
+      players:
+        default: 48
+        description: how far to send to track. scaled by entityBroadcastRangePercentage
     growth:
-      bamboo-modifier: 100
-      beetroot-modifier: 100
-      cactus-modifier: 100
-      cane-modifier: 100
-      carrot-modifier: 100
-      cavevines-modifier: 100
-      cocoa-modifier: 100
-      glowberry-modifier: 100
-      kelp-modifier: 100
-      melon-modifier: 100
-      mushroom-modifier: 100
-      netherwart-modifier: 100
-      pitcherplant-modifier: 100
-      potato-modifier: 100
-      pumpkin-modifier: 100
-      sapling-modifier: 100
-      sweetberry-modifier: 100
-      torchflower-modifier: 100
-      twistingvines-modifier: 100
-      vine-modifier: 100
-      weepingvines-modifier: 100
-      wheat-modifier: 100
-    hanging-tick-frequency: 100
-    hopper-amount: 1
-    hopper-can-load-chunks: false
+      bamboo-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      beetroot-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      cactus-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      cane-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      carrot-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      cavevines-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      cocoa-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      glowberry-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      kelp-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      melon-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      mushroom-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      netherwart-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      pitcherplant-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      potato-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      pumpkin-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      sapling-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      sweetberry-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      torchflower-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      twistingvines-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      vine-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      weepingvines-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+      wheat-modifier:
+        default: 100
+        description: |
+          growth modifier percentage, where vanilla is 100%
+    hanging-tick-frequency:
+      default: 100
+      description: only tick hanging entities every n ticks
+    hopper-amount:
+      default: 1
+      description: how many items a hopper can move at a time (limited to stack size)
+    hopper-can-load-chunks:
+      default: "false"
+      description: prevent hoppers from loading chunks
     hunger:
-      combat-exhaustion: 0.1
-      jump-sprint-exhaustion: 0.2
-      jump-walk-exhaustion: 0.05
-      other-multiplier: 0.0
-      regen-exhaustion: 6.0
-      sprint-multiplier: 0.1
-      swim-multiplier: 0.01
-    item-despawn-rate: 6000
+      combat-exhaustion:
+        default: 0.1
+        description: exhaustion from attacking
+      jump-sprint-exhaustion:
+        default: 0.2
+        description: exhaustion from sprint jumping
+      jump-walk-exhaustion:
+        default: 0.05
+        description: exhaustion from walking and jumping
+      other-multiplier:
+        default: "0.0"
+        description: exhaustion multiplier for normal walking and crouching
+      regen-exhaustion:
+        default: 6.0
+        description: exhaustion from regenerating health
+      sprint-multiplier:
+        default: 0.1
+        description: exhaustion multiplier for sprinting on the ground
+      swim-multiplier:
+        default: 0.01
+        description: |
+          exhastion multiplier for "swimming"
+            - actually swimming
+            - walking underwater (eyes below surface)
+            - walking on water (eyes above surface)
+    item-despawn-rate:
+      default: 6000
+      description: default item despawn rate. per-item rates are in paper-config
     max-tick-time:
-      entity: 50
-      tile: 50
-    max-tnt-per-tick: 100
+      entity:
+        default: 50
+        description: NO-OP, disabled by paper patch
+      tile:
+        default: 50
+        description: NO-OP, disabled by paper patch
+    max-tnt-per-tick:
+      default: 100
+      description: limit the number of tnt ticks per server tick. 0 to disable
     merge-radius:
-      exp: 3.0
-      item: 2.5
-    mob-spawn-range: 8
-    nerf-spawner-mobs: false
-    seed-ancientcity: 20083232
-    seed-buriedtreasure: 10387320
-    seed-desert: 14357617
-    seed-endcity: 10387313
-    seed-fossil: 14357921
-    seed-igloo: 14357618
-    seed-jungle: 14357619
-    seed-mansion: 10387319
-    seed-mineshaft: default
-    seed-monument: 10387313
-    seed-nether: 30084232
-    seed-ocean: 14357621
-    seed-outpost: 165745296
-    seed-portal: 34222645
-    seed-shipwreck: 165745295
-    seed-slime: 987234911
-    seed-stronghold: default
-    seed-swamp: 14357620
-    seed-trailruins: 83469867
-    seed-village: 10387312
-    simulation-distance: default
-    thunder-chance: 100000
+      exp:
+        default: 3.0
+        description: range in blocks that exp orbs will combine
+      item:
+        default: 2.5
+        description: range in blocks that items will combine
+    mob-spawn-range:
+      default: 8
+      description: limits the range in chunks from the player that mobs can spawn
+    nerf-spawner-mobs:
+      default: "false"
+      description: |
+        disable most ai for spawner spawned mobs.
+        can float, jump, take water damage, be pushed by water
+    seed-ancientcity:
+      default: 20083232
+      description: per-structure seed for ancient cities
+    seed-buriedtreasure:
+      default: 10387320
+      description: per-structure seed for buried treasure
+    seed-desert:
+      default: 14357617
+      description: per-structure seed for desert structures
+    seed-endcity:
+      default: 10387313
+      description: per-structure seed for end cities
+    seed-fossil:
+      default: 14357921
+      description: per-structure seed for fossils
+    seed-igloo:
+      default: 14357618
+      description: per-structure seed for igloos
+    seed-jungle:
+      default: 14357619
+      description: per-structure seed for jungle structures
+    seed-mansion:
+      default: 10387319
+      description: per-structure seed for mansions
+    seed-mineshaft:
+      default: default
+      description: per-structure seed for mineshafts
+    seed-monument:
+      default: 10387313
+      description: per-structure seed for monuments
+    seed-nether:
+      default: 30084232
+      description: per-structure seed for the nether structures
+    seed-ocean:
+      default: 14357621
+      description: per-structure seed for the ocean structures
+    seed-outpost:
+      default: 165745296
+      description: per-structure seed for outposts
+    seed-portal:
+      default: 34222645
+      description: per-structure seed for portals
+    seed-shipwreck:
+      default: 165745295
+      description: per-structure seed for shipwrecks
+    seed-slime:
+      default: 987234911
+      description: per-structure seed for slime chunks
+    seed-stronghold:
+      default: default
+      description: per-structure seed for strongholds
+    seed-swamp:
+      default: 14357620
+      description: per-structure seed for swamp structures
+    seed-trailruins:
+      default: 83469867
+      description: per-structure seed for trail ruins
+    seed-village:
+      default: 10387312
+      description: per-structure seed for villages
+    simulation-distance:
+      default: default
+      description: if -1 or "default", uses server.properties config. allows for overriding per world
+    thunder-chance:
+      default: 100000
+      description: change of lightning occurring during a thunderstorm. value is 1/n
     ticks-per:
-      hopper-check: 1
-      hopper-transfer: 8
-    trident-despawn-rate: 1200
-    verbose: false
-    view-distance: default
-    wither-spawn-sound-radius: 0
-    zombie-aggressive-towards-villager: true
+      hopper-check:
+        default: 1
+        description: ticks between checks to pull items
+      hopper-transfer:
+        default: 8
+        description: ticks between hopper item movements
+    trident-despawn-rate:
+      default: 1200
+      description: number of ticks before a trident despawns
+    verbose:
+      default: "false"
+      description: log world settings on startup
+    view-distance:
+      default: default
+      description: if -1 or "default", uses server.properties config. allows for overriding per world
+    wither-spawn-sound-radius:
+      default: "0"
+      description: |
+        number of blocks that the wither spawn sound is audible
+        0 is global (including cross-dimension)
+    zombie-aggressive-towards-villager:
+      default: true
+      description: whether zombies seek out and try to attack villagers
 config-version:
   default: 12
   description: "do not touch"

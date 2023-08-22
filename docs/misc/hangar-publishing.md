@@ -21,7 +21,7 @@ Your plugin project needs to use Gradle as its build tooling.
 If you are using
 Maven, [switching to a Gradle setup is easy](https://docs.gradle.org/current/userguide/migrating_from_maven.html) and in
 general recommended due to higher configurability and support for other plugins, such as
-when [compiling against an unobfuscated Minecraft server](docs/paper/dev/getting-started/userdev.md).
+when [compiling against an unobfuscated Minecraft server](docs/paper/dev/userdev.md).
 
 The provided examples use Kotlin DSL, but you can also do the same using Groovy. Online converters (even ChatGPT)
 are able to convert the example code.

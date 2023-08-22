@@ -37,12 +37,12 @@ your Hangar project's channel page first.
 
 ### Adding the HANGAR_API_TOKEN repository secret
 
-First, you need to create a Hangar API token. Go to your Hangar settings and click on "Api keys" on the left. Then, tick
+First, you need to create a Hangar API token. Go to your Hangar settings in the profile dropdown and click on "Api keys" on the left. Then, tick
 the `create_version` permission box, give the key a name and create it. **At the top**, you should be given your secret API
 token. **Do not share this with anyone**; you will need it in the next step.
 
-The GitHub Actions workflow provided uses a repository secret to store your Hangar API key. Go to your project settings,
-then click on "Secrets" under the Security tab and click the "New repository secret" button. Name the
+The GitHub Actions workflow provided uses a repository secret to store your Hangar API key. Go to your GitHub project settings,
+then click on "Actions" under the Security tab and click the "New repository secret" button. Name the
 secret `HANGAR_API_TOKEN` and paste the Hangar API token from the previous step into the Secret field.
 
 ![Action secrets](https://i.imgur.com/l11Bnx5.png)
@@ -80,7 +80,7 @@ plugins {
 }
 ```
 
-Then you simply need to configure the `hangarPublish` task:
+Then you simply need to add the `hangarPublish` configuration block:
 
 - If your plugin is not a Paper plugin, or supports Velocity/Waterfall as well, copy the register block with a different
   platform and change the property used instead of `paperVersion` (as declared in the `gradle.properties` file).

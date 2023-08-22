@@ -38,12 +38,12 @@ your Hangar project's channel page first.
 ### Adding the HANGAR_API_TOKEN repository secret
 
 First, you need to create a Hangar API token. Go to your Hangar settings and click on "Api keys" on the left. Then, tick
-the `create_version` permission box, give the key a name and create it. At the top, you should be given your secret API
-token. Do not share this with anyone; you will need it in the next step.
+the `create_version` permission box, give the key a name and create it. **At the top**, you should be given your secret API
+token. **Do not share this with anyone**; you will need it in the next step.
 
 The GitHub Actions workflow provided uses a repository secret to store your Hangar API key. Go to your project settings,
 then click on "Secrets" under the Security tab and click the "New repository secret" button. Name the
-secret `HANGAR_API_TOKEN` copy paste.
+secret `HANGAR_API_TOKEN` and paste the Hangar API token from the previous step into the Secret field.
 
 ![Action secrets](https://i.imgur.com/l11Bnx5.png)
 
@@ -223,5 +223,4 @@ jobs:
           # Make sure you have added a repository secret in the repository's settings
           HANGAR_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
         run: ./gradlew build publishPluginPublicationToHangar --stacktrace
-
 ```

@@ -6,7 +6,7 @@ description: How to automatically publish your plugin to Hangar on commits.
 If you want to automatically publish your plugin to [Hangar](https://hangar.papermc.io/) on commits, you can use
 our [Hangar publish Gradle plugin](https://github.com/HangarMC/hangar-publish-plugin).
 
-After you have properly configured the `hangarPublish` task, you can manually publish it by
+After you have added the required `hangarPublish` configuration, you can manually publish it by
 running `./gradlew build publishPluginPublicationToHangar`, or have GitHub Actions automatically publish a version on
 every commit.
 
@@ -21,7 +21,7 @@ Your plugin project needs to use Gradle as its build tooling.
 If you are using
 Maven, [switching to a Gradle setup is easy](https://docs.gradle.org/current/userguide/migrating_from_maven.html) and in
 general recommended due to higher configurability and support for other plugins, such as
-when [compiling against an unobfuscated Minecraft server](docs/paper/dev/userdev.md).
+when [compiling against an unobfuscated Minecraft server](/paper/dev/userdev).
 
 The provided examples use Kotlin DSL, but you can also do the same using Groovy. Online converters (even ChatGPT)
 are able to convert the example code.
@@ -80,13 +80,13 @@ plugins {
 }
 ```
 
-Then you simply need to add the `hangarPublish` configuration block:
+Then you simply need to add the `hangarPublish` configuration block and make sure you do the following:
 
 - If your plugin is not a Paper plugin, or supports Velocity/Waterfall as well, copy the register block with a different
   platform and change the property used instead of `paperVersion` (as declared in the `gradle.properties` file).
 - Insert the correct project namespace
 - Insert your plugin dependencies, if any
-- Make sure you have the `HANGAR_API_TOKEN` repository secret set up if you are using the Actions file below, or add the
+- You need to have the `HANGAR_API_TOKEN` repository secret set up if you are using the Actions file below, otherwise add the
   API key in some other way.
 
 ```kotlin

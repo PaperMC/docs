@@ -141,6 +141,18 @@ const paper: SidebarsConfig = {
         },
       ],
     },
+    {
+      type: "category",
+      label: "Contributing",
+      collapsed: true,
+      link: {
+        type: "doc",
+        id: "contributing/README",
+      },
+      items: [
+        "contributing/events",
+      ],
+    },
   ],
 };
 

@@ -76,7 +76,7 @@ In the plugins block of your `build.gradle.kts` build script, add the publish pl
 
 ```kotlin
 plugins {
-    id("io.papermc.hangar-publish-plugin") version "0.0.5"
+    id("io.papermc.hangar-publish-plugin") version "0.1.0"
 }
 ```
 
@@ -98,8 +98,8 @@ hangarPublish {
     publications.register("plugin") {
         version.set(project.version as String)
         channel.set("Snapshot") // We're using the 'Snapshot' channel
-        // TODO: Edit the namespace to match your Hangar project
-        namespace("hangar-user", "hangar-project")
+        // TODO: Edit the project name to match your Hangar project
+        id.set("hangar-project")
         apiKey.set(System.getenv("HANGAR_API_TOKEN"))
         platforms {
             // TODO: Use the correct platform(s) for your plugin
@@ -118,7 +118,7 @@ hangarPublish {
                 // TODO: Configure your plugin dependencies, if any
                 dependencies {
                     // Example for a dependency found on Hangar
-                    hangar("kennytv", "Test1") {
+                    hangar("Maintenance") {
                         required.set(false)
                     }
                     // Example for an external dependency

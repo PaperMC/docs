@@ -159,7 +159,7 @@ messages:
     default: "<red>I'm sorry, but you do not have permission to perform this command.
       Please contact the server administrators if you believe that this is in error."
     description: 'Default message sent to players when they have insufficient permissions
-      for an action. Plugins may override this for their commands'
+      for an action, formatted with [MiniMessage](https://docs.advntr.dev/minimessage/). Plugins may override this for their commands'
   use-display-name-in-quit-message:
     default: 'false'
     description: 'Whether the server should use the player''s display name (set by
@@ -168,28 +168,22 @@ messages:
     authentication-servers-down:
       default: <lang:multiplayer.disconnect.authservers_down>
       description: 'Message sent to players when Mojang''s authentication servers
-        are unreachable'
+        are unreachable. Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).'
     connection-throttle:
       default: Connection throttled! Please wait before reconnecting.
       description: 'Message sent to players when they are throttled for connecting
-        too frequently.'
+        too frequently. Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).'
     flying-player:
       default: <lang:multiplayer.disconnect.flying>
-      description: 'Message sent to players who are detected flying'
+      description: 'Message sent to players who are detected flying. Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).'
     flying-vehicle:
       default: <lang:multiplayer.disconnect.flying>
-      description: 'Message sent to players who are detected riding a flying vehicle'
+      description: 'Message sent to players who are detected riding a flying vehicle. Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).'
 misc:
   fix-entity-position-desync:
     default: 'true'
     description: 'Causes the server to lose the same precision that the client does
       for entities preventing desync. Fixes [MC-4](https://bugs.mojang.com/browse/MC-4)'
-  lag-compensate-block-breaking:
-    default: 'true'
-    description: 'Whether the server should use time or TPS to determine block break
-      duration. The client assumes the server is always running at 20 TPS, causing
-      disagreement when a block is broken during server lag. This setting prevents
-      this desync'
   load-permissions-yml-before-plugins:
     default: 'true'
     description: 'Loads bukkit''s permission.yml file before plugins, allowing them
@@ -239,7 +233,7 @@ packet-limiter:
       description: 'The number of packets allowed per player within the interval'
   kick-message:
     default: <red><lang:disconnect.exceeded_packet_rate>
-    description: 'The message players are kicked with for sending too many packets'
+    description: 'The message players are kicked with for sending too many packets. Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).'
   overrides:
     default: ServerboundPlaceRecipePacket
     description: 'Override the global configuration for any individual named packet.

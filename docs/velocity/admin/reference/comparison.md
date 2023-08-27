@@ -4,21 +4,22 @@ slug: /comparisons-to-other-proxies
 
 # Comparing With Other Proxies
 
-Presumably, you've read up about what Velocity can do for you. But how does it stack up against
-other solutions out there? We're biased, so we'll try to be as honest as possible by fully
-acknowledging our bias in advance. We are the developers of Velocity and we're trying to convince
-you to use Velocity, after all.
+Presumably, you have learned about what Velocity can do for you. But how does it stack up against
+other solutions out there? We're trying to convince you to use Velocity, after all, so this document
+may be somewhat biased in our favor.
 
 ## BungeeCord and derivatives
 
-We can't treat the full history of Minecraft proxy software with justice – we recommend
+We can't discuss the full history of Minecraft proxy software deeply – we recommend
 [Me4502's excellent article](https://madelinemiller.dev/blog/decade-of-minecraft-multiplayer/) that
-covers the multiplayer Minecraft world in great detail. Needless to say, Velocity was influenced by
-a desire to avoid all the faults we perceived that needed to be resolved with BungeeCord.
+covers the multiplayer Minecraft world in great detail.
 
 ### BungeeCord
 
-There are several reasons why we can't just "improve BungeeCord":
+The original author of Velocity, at the time of starting the project, had over 5 years of experience
+using BungeeCord, and knew its various quirks inside and out.
+
+There are several reasons why improving BungeeCord was a fool's game:
 
 - BungeeCord is very conservative with regard to API changes. If it breaks some plugin developed 5
   years ago from an inactive developer, you can forget about it.
@@ -26,7 +27,7 @@ There are several reasons why we can't just "improve BungeeCord":
   the API in substantial ways is frowned upon (witness the support for RGB colors in `ChatColor`).
 - The project is essentially run like a cathedral. In BungeeCord (and its sister project, Spigot),
   the word of md_5 is king. Contributing a simple security fix to BungeeCord earned the primary
-  developer of Velocity at least two beratings.
+  developer of Velocity at least two beratings from md_5.
 - BungeeCord is actively hostile to continued support for Minecraft modding.
 - We have seen new modding APIs for _Minecraft_ since the first version of BungeeCord released
   in 2012. It's time for a new and improved API that does not make the mistakes the BungeeCord API
@@ -34,12 +35,19 @@ There are several reasons why we can't just "improve BungeeCord":
 
 ### Waterfall
 
-The founder of the Velocity project also founded the Waterfall project. The natural question, then,
-is why they couldn't just have improved Waterfall. Why start on a new API with no plugins lined up
-and a very uncertain chance of success, let alone an user base willing to take their chances on such
-new software, when you can have access to the rich plugin ecosystem that BungeeCord boasts?
+:::danger
 
-Unfortunately, that attempt fell to the scythe of [Hyrum's Law](https://www.hyrumslaw.com/):
+**The Paper team strongly recommends using Velocity over Waterfall**. Waterfall is a legacy solution,
+and only receives critical updates and whatever is released from upstream BungeeCord. All future
+development by PaperMC is done on Velocity.
+
+:::
+
+Partly due to experience obtained by the author's own experience with BungeeCord, he founded the
+Waterfall project in 2016 as a fork of BungeeCord, modeled after Paper, with the explicit aim of
+improving BungeeCord. _We tried the obvious next step_.
+
+Meet [Hyrum's Law](https://www.hyrumslaw.com/):
 
 > With a sufficient number of users of an API, it does not matter what you promise in the contract:
 > all observable behaviors of your system will be depended on by somebody.
@@ -52,15 +60,14 @@ Here's Hyrum's law in comic format, in case that eases getting the point across:
 > [CC BY-NC 2.5](https://creativecommons.org/licenses/by-nc/2.5/)
 
 Most BungeeCord plugins are deeply dependent on the specific behaviors and quirks BungeeCord
-exposes, which Velocity cannot perfectly emulate. I'll use an example of a video game. One day, a
-game studio A publishes a video game X that you really like. You run it on operating system Y made
-by company B, and it works great. Sometime after, studio A goes out of business. You are sad but
-continue life because at least game X works just fine. One day, company B releases a new version of
-operating system Y. You upgrade to it and discover that your game doesn't work. Who are you going to
-blame, company B for breaking the game, or company A for shipping a defective project? Chances are,
-the average consumer will blame company B. This isn't new —
-[witness Raymond Chen, who documents the sad compatibility history of Windows, saying essentially the same thing](https://devblogs.microsoft.com/oldnewthing/20110131-00/?p=11633)
-.
+exposes, which Velocity cannot perfectly emulate. As a result, the number of changes one can make
+to BungeeCord and have plugins retain the same behavior is minimal.
+
+Suppose you have play a video game published by Company A. It runs on an operating system made by Company B.
+One day, Company B releases a new version of ther operating system, and you upgrade to it, only to recoil
+in horror as that video game no longer works. (Worse, Studio A might be out of business at that point, so
+no patch is forthcoming.) Who do you blame, Company A for producing a defective product, or Company B for
+breaking the game? [This isn't a hypothetical](https://devblogs.microsoft.com/oldnewthing/20110131-00/?p=11633).
 
 We can point to one example where
 [an attempt](https://github.com/PaperMC/Waterfall/commit/c8eb6aec7bac82fd309fa6d6113b8a0418317b01)
@@ -76,15 +83,13 @@ We are compelled to mention this briefly as this was a topic brought up in the e
 project. We could have based Velocity on the BungeeCord API (or a derivative thereof, such as the
 Waterfall API) instead.
 
-This is a fool's ploy. Let us revisit the video game example from earlier. One day, you discover a
-new operating system, Z. You really like it more than operating system Y, and it has tool T that can
-run programs meant for operating system Y. You install it and your favorite game, X. You then launch
-game X to be disappointed with all the glitched out textures and borderline broken gameplay. You
-feel quite hurt by it. This is a real world example too, just substitute Y for "Windows", Z for "any
-Linux distribution", and T for "Wine", and there you have it. We would essentially have to have a
-convincing decoy to pretend Velocity looked and smelled like a BungeeCord implementation to a
-plugin, while not actually being based on BungeeCord. This would force us to introduce ever more
-elaborate decoys to pretend to be bug-for-bug and binary compatible with BungeeCord, which would
-force us to spend time on ensuring compatibility with every BungeeCord plugin ever rather than
-delivering new features. At that point, Velocity winds up just being a slightly better optimized
-Waterfall.
+This has the same problems as Waterfall, perhaps more as we would need to emulate _all_ the behavior
+of the BungeeCord API independently. The Wine project has been trying over over 3 decades to provide
+a shim layer that allows Windows programs to run on Linux and other operating systems. Their efforts
+remain ongoing to this day. It is hard to emulate the behavior of another operating system's environment.
+The authors of ReactOS have it even worse, trying to emulate all the quirks of Windows, including its
+kernel, and they have set their baseline to a version of Windows that was released 2 decades ago. Their
+work is even further from completed than Wine's is.
+
+We would have to spend a lot of time pretending that Velocity looked and quacked just like BungeeCord.
+We intentionally rejected this approach. It's not worth doing.

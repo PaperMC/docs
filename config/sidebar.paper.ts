@@ -115,11 +115,13 @@ const paper: SidebarsConfig = {
               collapsed: true,
               items: [
                 "dev/api/component-api/intro",
+                "dev/api/component-api/i18n",
               ]
             },
             "dev/api/roadmap",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
+            "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
           ],
@@ -137,6 +139,18 @@ const paper: SidebarsConfig = {
             "dev/misc/debugging",
           ],
         },
+      ],
+    },
+    {
+      type: "category",
+      label: "Contributing",
+      collapsed: true,
+      link: {
+        type: "doc",
+        id: "contributing/README",
+      },
+      items: [
+        "contributing/events",
       ],
     },
   ],

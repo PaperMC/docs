@@ -25,7 +25,7 @@ private static boolean isFolia() {
 
 ## Schedulers
 
-In order to support Paper and Folia, you must use the correct scheduler. Folia has many different type of schedulers 
+In order to support Paper and Folia, you must use the correct scheduler. Folia has different types of schedulers 
 that can be used for different things. They are:
 
 - [Global Scheduler](#global-scheduler)
@@ -34,7 +34,7 @@ that can be used for different things. They are:
 - [Entity Scheduler](#entity-scheduler)
 
 When using these schedulers when running on Paper, they will be internally handled to provide the same functionality as if you were
-running Paper.
+running Folia.
 
 ### Global Scheduler
 The tasks that you run on the Global Scheduler will be executed on the global region, see [here](/folia/reference/overview#global-region) for
@@ -46,7 +46,7 @@ GlobalRegionScheduler globalScheduler = server.getGlobalRegionScheduler();
 ### Region Scheduler
 The region scheduler will be in charge of running tasks for the region that owns a certain location. Do not use this scheduler for 
 operations on entities, as this scheduler is tied to the region. Each entity has its [own scheduler](#entity-scheduler)
-which will follow it across regions. As an example, Let's say I want to set a block as beehive:
+which will follow it across regions. As an example, let's say I want to set a block to a beehive:
 ```java
 Location locationToChange = ...;
 RegionScheduler scheduler = server.getRegionScheduler();

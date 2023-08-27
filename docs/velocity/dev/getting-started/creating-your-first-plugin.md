@@ -37,9 +37,9 @@ Now we have created our project, we need configure our build system.
 
 ### Dependency
 
-| Group ID              | Artifact ID    | Version |
-| --------------------- | -------------- | ------- |
-| `com.velocitypowered` | `velocity-api` | `3.1.1` |
+| Group ID              | Artifact ID    | Version          |
+| --------------------- | -------------- | ---------------- |
+| `com.velocitypowered` | `velocity-api` | `3.2.0-SNAPSHOT` |
 
 ### Javadocs
 
@@ -72,7 +72,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
-            <version>3.1.1</version>
+            <version>3.2.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -91,8 +91,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:3.1.1")
-    annotationProcessor("com.velocitypowered:velocity-api:3.1.1")
+    compileOnly("com.velocitypowered:velocity-api:3.2.0-SNAPSHOT")
+    annotationProcessor("com.velocitypowered:velocity-api:3.2.0-SNAPSHOT")
 }
 ```
 
@@ -108,8 +108,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.velocitypowered:velocity-api:3.1.1'
-    annotationProcessor 'com.velocitypowered:velocity-api:3.1.1'
+    compileOnly 'com.velocitypowered:velocity-api:3.2.0-SNAPSHOT'
+    annotationProcessor 'com.velocitypowered:velocity-api:3.2.0-SNAPSHOT'
 }
 ```
 

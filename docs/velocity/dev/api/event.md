@@ -101,7 +101,6 @@ register yours with `register(Object plugin, Class<E> eventClass, EventHandler<E
 ```java
   server.getEventManager().register(this, PlayerChatEvent.class, event -> {
       // do something here
-      return null;
   });
 ```
 

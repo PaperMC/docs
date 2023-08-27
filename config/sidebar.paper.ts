@@ -57,6 +57,7 @@ const paper: SidebarsConfig = {
               items: [
                 "admin/reference/configuration/global-configuration",
                 "admin/reference/configuration/world-configuration",
+                "admin/reference/configuration/server-properties",
               ],
             },
             "admin/reference/system-properties",
@@ -84,6 +85,7 @@ const paper: SidebarsConfig = {
           },
           items: [
             "dev/getting-started/project-setup",
+            "dev/getting-started/userdev",
             "dev/getting-started/plugin-yml",
             "dev/getting-started/paper-plugins",
           ],
@@ -107,12 +109,49 @@ const paper: SidebarsConfig = {
                 "dev/api/event-api/handler-lists",
               ],
             },
+            {
+              type: "category",
+              label: "Component API",
+              collapsed: true,
+              items: [
+                "dev/api/component-api/intro",
+                "dev/api/component-api/i18n",
+              ]
+            },
             "dev/api/roadmap",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
+            "dev/api/scheduler",
+            "dev/api/plugin-messaging",
+            "dev/api/plugin-configs",
             "dev/api/folia-support",
           ],
         },
+        {
+          type: "category",
+          label: "Miscellaneous",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "dev/misc/README",
+          },
+          items: [
+            "dev/misc/reading-stacktraces",
+            "dev/misc/debugging",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Contributing",
+      collapsed: true,
+      link: {
+        type: "doc",
+        id: "contributing/README",
+      },
+      items: [
+        "contributing/events",
       ],
     },
   ],

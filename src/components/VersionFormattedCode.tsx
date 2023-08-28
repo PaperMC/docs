@@ -16,13 +16,10 @@ export default function VersionFormattedCode({ language = "", title = "", showLi
                 inline = false;
             }
 
-            // Fetch version data
-            const majorVersion = await SoftwareVersionFetcher.getMajorPaperVersion();
-            const majorMinorVersion = await SoftwareVersionFetcher.getMajorMinorPaperVersion();
-
             // Replace placeholders with fetched versions
-            code = code.toString().replace(/%%_MAJ_MC_%%/g, majorVersion);
-            code = code.replace(/%%_MAJ_MIN_MC_%%/g, majorMinorVersion);
+            code = code.toString().replace(/%%_MAJ_MC_%%/g, await SoftwareVersionFetcher.getMajorVersion("paper"));
+            code = code.replace(/%%_MAJ_MIN_MC_%%/g, await SoftwareVersionFetcher.getMajorMinorVersion("paper"));
+            code = code.replace(/%%_MAJ_MIN_VEL_%%/g, await SoftwareVersionFetcher.getMajorMinorVersion("velocity"));
 
             if (mounted.current) {
                 setFormattedCode({code, inline});

@@ -10,11 +10,11 @@ export default function SoftwareVersion({ versionType }) {
             let version = '';
 
             if (versionType === 'maj-min') {
-                version = await SoftwareVersionFetcher.getMajorMinorPaperVersion();
+                version = await SoftwareVersionFetcher.getMajorMinorVersion("paper");
             } else if (versionType === 'maj') {
-                version = await SoftwareVersionFetcher.getMajorPaperVersion();
+                version = await SoftwareVersionFetcher.getMajorVersion("paper");
             } else if (versionType === 'max') {
-                version = await SoftwareVersionFetcher.getMaxPaperVersion();
+                version = await SoftwareVersionFetcher.getMaxVersion("paper");
             }
 
             setFetched(version);

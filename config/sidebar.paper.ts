@@ -124,6 +124,7 @@ const paper: SidebarsConfig = {
             "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
+            "dev/api/folia-support",
           ],
         },
         {

@@ -21,7 +21,6 @@ To override a per-world option, create a new key under `world-settings` with the
 
 :::
 
-
 <Config data={`
 advancements:
   disable-saving:
@@ -155,12 +154,12 @@ settings:
   moved-too-quickly-multiplier:
     default: '10.0'
     description: 'Controls how fast a client can move in one packet.
-      If triggered, logs to console and prevents the move.'
+      If triggered, the server logs to console and prevents the move.'
   moved-wrongly-threshold:
     default: '0.0625'
     description: 'Controls how far the client can move per move-packet,
       defined as the distance in blocks squared.
-      If triggered, logs to console and prevents the move.'
+      If triggered, the server logs to console and prevents the move.'
   netty-threads:
     default: '4'
     description: 'Sets number of netty threads.'
@@ -447,23 +446,23 @@ world-settings:
     max-tick-time:
       entity:
         default: '50'
-        description: 'This option is a noop, and is non-functional upstream.'
+        description: 'This option does not operate, and is non-functional upstream.'
       tile:
         default: '50'
-        description: 'This option is a noop, as it is disabled by a paper patch.'
+        description: 'This option does not operate, as it is disabled by a paper patch.'
     max-tnt-per-tick:
       default: '100'
       description: 'How many TNT to process per server tick. Set to 0 to disable.'
     merge-radius:
       exp:
         default: '3.0'
-        description: 'The range in blocks that exp orbs will combine.'
+        description: 'The range, in blocks, that exp orbs will combine at.'
       item:
         default: '2.5'
-        description: 'The range in blocks that items will combine.'
+        description: 'The range, in blocks, that items will combine within.'
     mob-spawn-range:
       default: '8'
-      description: 'The range in chunks from the player, that mobs can spawn.'
+      description: 'The range, in chunks, from the player, that mobs can spawn.'
     nerf-spawner-mobs:
       default: 'false'
       description: 'Disable most AI for spawner spawned mobs.'
@@ -533,7 +532,7 @@ world-settings:
     thunder-chance:
       default: '100000'
       description: 'The chance of lightning occurring during a thunderstorm,
-        as a 1/<thunder-chance> chance each chunk each tick.'
+        as a probability of 1/<thunder-chance> per chunk, every tick.'
     ticks-per:
       hopper-check:
         default: '1'

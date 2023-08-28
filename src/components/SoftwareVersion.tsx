@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
 
-export default function SoftwareVersion({ versionType }) {
+export default function SoftwareVersion({ versionType, project = "paper" }) {
     const [fetched, setFetched] = useState(null);
 
     useEffect(() => {
@@ -10,11 +10,11 @@ export default function SoftwareVersion({ versionType }) {
             let version = '';
 
             if (versionType === 'maj-min') {
-                version = await SoftwareVersionFetcher.getMajorMinorVersion("paper");
+                version = await SoftwareVersionFetcher.getMajorMinorVersion(project);
             } else if (versionType === 'maj') {
-                version = await SoftwareVersionFetcher.getMajorVersion("paper");
+                version = await SoftwareVersionFetcher.getMajorVersion(project);
             } else if (versionType === 'max') {
-                version = await SoftwareVersionFetcher.getMaxVersion("paper");
+                version = await SoftwareVersionFetcher.getMaxVersion(project);
             }
 
             setFetched(version);

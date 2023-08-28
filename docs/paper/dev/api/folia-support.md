@@ -1,3 +1,7 @@
+---
+slug: /dev/folia-support
+---
+
 # Supporting Paper and Folia
 
 ![](/img/folia.png)
@@ -11,7 +15,6 @@ Depending on what platform your plugin is running on, you may need to implement 
 use this utility method to check if the current server is running Folia:
 
 ```java
-
 private static boolean isFolia() {
     try {
         Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
@@ -20,7 +23,6 @@ private static boolean isFolia() {
         return false;
     }
 }
-
 ```
 
 ## Schedulers
@@ -33,7 +35,7 @@ that can be used for different things. They are:
 - [Async Scheduler](#async-scheduler)
 - [Entity Scheduler](#entity-scheduler)
 
-When using these schedulers when running on Paper, they will be internally handled to provide the same functionality as if you were
+If you use these schedulers when running Paper, they will be internally handled to provide the same functionality as if you were
 running Folia.
 
 ### Global Scheduler

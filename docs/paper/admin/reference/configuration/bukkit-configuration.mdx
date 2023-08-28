@@ -1,0 +1,122 @@
+---
+slug: /reference/bukkit-configuration
+---
+
+# Bukkit Configuration
+
+import React from 'react';
+import Config from '@site/src/components/Config';
+
+:::info
+
+The below YAML shows you the structure and default values for `bukkit.yml`
+
+Click on a leaf node to view the description for that setting.
+
+:::
+
+<Config data={`
+aliases:
+  default: 'now-in-commands.yml'
+  description: 'Static value from converting old versions to the new commands.yml format.'
+chunk-gc:
+  period-in-ticks:
+    default: '600'
+    description: 'How long chunks loaded by plugins should last for.
+      capped by paper to be 20 ticks (1 second)'
+settings:
+  allow-end:
+    default: 'true'
+    description: 'Whether to load end-type dimensions.'
+  connection-throttle:
+    default: '4000'
+    description: 'How long of a delay to enforce between connections from an ip address.
+      Measured in Milliseconds since last attempt'
+  deprecated-verbose:
+    default: 'default'
+    description: 'Whether to warn for use of deprecated events.
+      If "default", the warning is printed if annotated with \`@Warning(true)\`.
+      Ignored if [system property paper.alwaysPrintWarningState](/paper/reference/system-properties#paperalwaysprintwarningstate) is true.
+
+      Valid values are "true", "false", or "default".'
+  minimum-api:
+    default: 'none'
+    description: 'Minimum plugin api-version. If below this, or not specified, the plugin is prevented from loading.'
+  permissions-file:
+    default: 'permissions.yml'
+    description: 'File to load Server permissions from.'
+  plugin-profiling:
+    default: 'false'
+    description: 'This option does not operate, as it is disabled by a paper patch.'
+  query-plugins:
+    default: 'true'
+    description: 'Whether to send plugins in the GS4 Query protocol response.'
+  shutdown-message:
+    default: 'Server closed'
+    description: 'The Kick message for the player when the server shuts down.
+
+      The message is formatted with legacy "§" style formatting'
+  update-folder:
+    default: 'update'
+    description: 'Path to replace new plugin versions with. [See Updating Plugins](https://docs.papermc.io/paper/updating#step-2-update-plugins) for more information.'
+  use-map-color-cache:
+    default: 'true'
+    description: 'Whether to cache map colors.'
+  warn-on-overload:
+    default: 'true'
+    description: 'Allows disabling the "Can''t keep up!" message.'
+spawn-limits:
+  ambient:
+    default: '15'
+    description: 'Set the spawn-limits for ambient mobs.
+      This can be overridden by the paper-world config.'
+  animals:
+    default: '10'
+    description: 'Set the spawn-limits for animals.
+      This can be overridden by the paper-world config.'
+  axolotls:
+    default: '5'
+    description: 'Set the spawn-limits for axolotls.
+      This can be overridden by the paper-world config.'
+  monsters:
+    default: '70'
+    description: 'Set the spawn-limits for monsters.
+      This can be overridden by the paper-world config.'
+  water-ambient:
+    default: '20'
+    description: 'Set the spawn-limits for water-ambient mobs.
+      This can be overridden by the paper-world config.'
+  water-animals:
+    default: '5'
+    description: 'Set the spawn-limits for water-animals.
+      This can be overridden by the paper-world config.'
+  water-underground-creature:
+    default: '5'
+    description: 'Set the spawn-limits for water-underground-creature.
+      This can be overridden by the paper-world config.'
+ticks-per:
+  ambient-spawns:
+    default: '1'
+    description: 'Number of ticks between each ambient mob spawn attempt. If -1, uses default.'
+  animal-spawns:
+    default: '400'
+    description: 'Number of ticks between each animal spawn attempt. If -1, uses default.'
+  autosave:
+    default: '6000'
+    description: 'Number of ticks between each full auto-save. Set to -1 to disable auto-save'
+  axolotl-spawns:
+    default: '1'
+    description: 'Number of ticks between each axolotl spawn attempt. If -1, uses default.'
+  monster-spawns:
+    default: '1'
+    description: 'Number of ticks between each monster spawn attempt. If -1, uses default.'
+  water-ambient-spawns:
+    default: '1'
+    description: 'Number of ticks between each water-ambient mob spawn attempt. If -1, uses default.'
+  water-spawns:
+    default: '1'
+    description: 'Number of ticks between each water-animal spawn attempt. If -1, uses default.'
+  water-underground-creature-spawns:
+    default: '1'
+    description: 'Number of ticks between each water-underground-creature spawn attempt. If -1, uses default.'
+`}></Config>

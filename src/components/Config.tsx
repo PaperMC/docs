@@ -200,7 +200,7 @@ export default function Config({ data, separator = ': ', showDescriptions = fals
     let ymlData = yaml.load(data);
     return (
         <div>
-            <pre className='relative-container'>
+            <pre className='config-container'>
                 <button onClick={() => setShowAllExpanded(!showAllDescriptions)} className={`config-button button button--secondary`}>{showAllDescriptions ? "Collapse All" : "Expand All"}</button>
                 {renderYamlData(ymlData, '', true, separator, showAllDescriptions)}
             </pre>

@@ -35,7 +35,7 @@ const scrollIntoView = (id) => {
     }, navigator.userAgent.includes('Chrome') && navigator.vendor.includes('Google Inc') ? 0 : 1);
 };
 
-const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => {
+const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, separator) => {
 
     if (value[0] === '[' && value[value.length - 1] === ']') {
         const items = value.replace("[", "").replace("]", "").split(",").map((item) => {
@@ -47,6 +47,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => 
         }
         return (
             <>
+                {separator.replace(/ /g, "")}
                 <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
                 <div className="indent-2">
                     <div>
@@ -62,7 +63,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick) => 
     }
     return (
         <>
-            {value}
+            {separator}{value}
             <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
         </>
     );
@@ -118,7 +119,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator }) => 
                     }}
                     className={`with-value${showDescription ? '-active' : ''}`}
                 >
-                    {parseItalics(name)}{separator}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick)}
+                    {parseItalics(name)}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick, separator)}
                 </a>
                 {showDescription ? (
                     <>

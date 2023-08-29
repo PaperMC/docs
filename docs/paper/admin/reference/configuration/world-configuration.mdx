@@ -9,7 +9,7 @@ import Config from '@site/src/components/Config';
 
 :::info
 
-The below YAML shows you the structure and default values for the world configuration.
+The below YAML shows you the structure and default values for the world configuration. (`config/paper-world-defaults.yml` and `<worldfolder>/paper-world.yml`)
 
 Click on a leaf node to view the description for that setting.
 
@@ -291,6 +291,14 @@ entities:
     undead-immune-to-certain-effects:
       default: 'true'
       description: 'If undead mobs should be immune to regeneration and poison'
+  sniffer:
+    boosted-hatch-time:
+      default: 'default'
+      description: 'The boosted hatch time, in ticks, a sniffer egg requires to hatch.
+      Boosted hatching occurs when planted on specific blocks.'
+    hatch-time:
+      default: 'default'
+      description: 'The non-boosted hatch time, in ticks, a sniffer egg requires to hatch.'
   spawning:
     all-chunks-are-slime-chunks:
       default: 'false'

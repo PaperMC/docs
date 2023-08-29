@@ -112,14 +112,14 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator }) => 
     return (
         <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
             <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
-                <a
+                <div
                     onClick={() => {
                         setShowDescription(!showDescription);
                     }}
                     className={`with-value${showDescription ? '-active' : ''}`}
                 >
                     {parseItalics(name)}{separator}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick)}
-                </a>
+                </div>
                 {showDescription ? (
                     <>
                         <div className="indent-2" style={{ marginBottom: 10 }}>

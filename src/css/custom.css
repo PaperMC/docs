@@ -199,7 +199,8 @@ html[data-theme="dark"] {
 
 .config-button {
   position: absolute;
-  width: 130px;
+  padding: 0px;
+  width: 90px;
   top: 10px;
   right: 10px;
 }

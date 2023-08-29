@@ -174,7 +174,7 @@ settings:
       Note: this setting doesn''t restart the server if it gets killed externally, like by the OS.'
   restart-script:
     default: './start.sh'
-    description: 'The Script file that is run when the server restarts.
+    description: 'The script file that is run when the server restarts.
 
       - On Windows this is passed to \`cmd /c start {restart-script}\`.
         Normally, this means specifying a Batch (*.bat) file to be run.
@@ -182,7 +182,7 @@ settings:
 
       - On other platforms, this is passed to \`sh {restart-script}\`.
         so the option specifies an absolute or relative path to a shell script (*.sh).
-        See your Operating System''s documentation for more information (e.g. [Man Pages](https://man.archlinux.org/man/sh.1p#command_file)).
+        See your operating system''s documentation for more information (e.g. [Man Pages](https://man.archlinux.org/man/sh.1p#command_file)).
 
 
       For more information on Spigot''s restart system, read [this](https://gist.github.com/Prof-Bloodstone/6367eb4016eaf9d1646a88772cdbbac5)'
@@ -208,7 +208,7 @@ stats:
     default: '{}'
     description: 'An Object, where:
 
-      - the Keys inside are any "Resource location" from [The Minecraft Fandom](https://minecraft.fandom.com/wiki/Statistics#List_of_custom_statistic_names)
+      - The Keys inside are any "Resource location" from [The Minecraft Fandom](https://minecraft.fandom.com/wiki/Statistics#List_of_custom_statistic_names).
 
       - The Value for each key is an integer to force the related stat to.'
 world-settings:
@@ -528,7 +528,7 @@ world-settings:
       description: 'The per-structure seed for villages.'
     simulation-distance:
       default: 'default'
-      description: 'Overrides the simulation distance. Set to -1 or "default" to use the value in server.properties'
+      description: 'Overrides the simulation distance. Set to -1 or "default" to use the value in server.properties.'
     thunder-chance:
       default: '100000'
       description: 'The chance of lightning occurring during a thunderstorm,
@@ -548,7 +548,7 @@ world-settings:
       description: 'Whether to log world settings on startup.'
     view-distance:
       default: 'default'
-      description: 'Overrides the View distance
+      description: 'Overrides the view distance.
         Set to -1 or "default" to use the value in server.properties'
     wither-spawn-sound-radius:
       default: '0'

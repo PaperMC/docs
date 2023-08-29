@@ -49,7 +49,7 @@ const paper: SidebarsConfig = {
           items: [
             {
               type: "category",
-              label: "Paper Configuration",
+              label: "Configuration",
               link: {
                 type: "doc",
                 id: "admin/reference/configuration/README",

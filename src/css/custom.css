@@ -181,6 +181,16 @@ html[data-theme="dark"] {
   width: fit-content;
 }
 
+.codeblock {
+  position: relative;
+}
+
+.config-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
 .config-anchor {
   text-decoration: none;
 }

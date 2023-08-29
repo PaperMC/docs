@@ -96,7 +96,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
 
     useEffect(() => {
         if (ignoreInitialRenderRef.current) {
-            setShowDescription(!showDescription);
+            setShowDescription(showAllDescriptions);
         } else {
             ignoreInitialRenderRef.current = true;
         }

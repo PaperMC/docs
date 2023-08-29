@@ -193,7 +193,7 @@ html[data-theme="dark"] {
   width: fit-content;
 }
 
-.codeblock {
+.config-button-parent {
   position: relative;
 }
 

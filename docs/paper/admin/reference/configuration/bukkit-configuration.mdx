@@ -44,7 +44,8 @@ settings:
     description: 'Minimum plugin api-version. If below this, or not specified, the plugin is prevented from loading.'
   permissions-file:
     default: 'permissions.yml'
-    description: 'File to load server permissions from.'
+    description: 'File to load server permissions from.
+      Use of this feature has mostly been replaced by permission plugins.'
   plugin-profiling:
     default: 'false'
     description: 'This option does not operate, as it is disabled by a paper patch.'
@@ -61,7 +62,7 @@ settings:
     description: 'Path to replace new plugin versions with. [See Updating Plugins](/paper/updating#step-2-update-plugins) for more information.'
   use-map-color-cache:
     default: 'true'
-    description: 'Whether to cache map colors.'
+    description: 'Whether to build and save mappings from RGB colors to the closest map palette color.'
   warn-on-overload:
     default: 'true'
     description: 'Allows disabling the "Can''t keep up!" message.'
@@ -69,54 +70,54 @@ spawn-limits:
   ambient:
     default: '15'
     description: 'Set the spawn-limits for ambient mobs.
-      This can be overridden by the paper-world config.'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
   animals:
     default: '10'
     description: 'Set the spawn-limits for animals.
-      This can be overridden by the paper-world config.'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
   axolotls:
     default: '5'
     description: 'Set the spawn-limits for axolotls.
-      This can be overridden by the paper-world config.'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
   monsters:
     default: '70'
     description: 'Set the spawn-limits for monsters.
-      This can be overridden by the paper-world config.'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
   water-ambient:
     default: '20'
     description: 'Set the spawn-limits for water-ambient mobs.
-      This can be overridden by the paper-world config.'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
   water-animals:
     default: '5'
     description: 'Set the spawn-limits for water-animals.
-      This can be overridden by the paper-world config.'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
   water-underground-creature:
     default: '5'
     description: 'Set the spawn-limits for water-underground-creature.
-      This can be overridden by the paper-world config.'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
 ticks-per:
   ambient-spawns:
     default: '1'
-    description: 'Number of ticks between each ambient mob spawn attempt. If -1, uses default.'
+    description: 'Number of ticks between each ambient mob spawn attempt. Set to -1 to use default.'
   animal-spawns:
     default: '400'
-    description: 'Number of ticks between each animal spawn attempt. If -1, uses default.'
+    description: 'Number of ticks between each animal spawn attempt. Set to -1 to use default.'
   autosave:
     default: '6000'
     description: 'Number of ticks between each full auto-save. Set to -1 to disable auto-save.'
   axolotl-spawns:
     default: '1'
-    description: 'Number of ticks between each axolotl spawn attempt. If -1, uses default.'
+    description: 'Number of ticks between each axolotl spawn attempt. Set to -1 to use default.'
   monster-spawns:
     default: '1'
-    description: 'Number of ticks between each monster spawn attempt. If -1, uses default.'
+    description: 'Number of ticks between each monster spawn attempt. Set to -1 to use default.'
   water-ambient-spawns:
     default: '1'
-    description: 'Number of ticks between each water-ambient mob spawn attempt. If -1, uses default.'
+    description: 'Number of ticks between each water-ambient mob spawn attempt. Set to -1 to use default.'
   water-spawns:
     default: '1'
-    description: 'Number of ticks between each water-animal spawn attempt. If -1, uses default.'
+    description: 'Number of ticks between each water-animal spawn attempt. Set to -1 to use default.'
   water-underground-creature-spawns:
     default: '1'
-    description: 'Number of ticks between each water-underground-creature spawn attempt. If -1, uses default.'
+    description: 'Number of ticks between each water-underground-creature spawn attempt. Set to -1 to use default.'
 `}></Config>

@@ -43,7 +43,7 @@ Should you ever want to go back to Vanilla, follow the [Vanilla Migration Guide]
 closely, as manual changes will be required.
 
 1. Stop your Vanilla server if it is running, and create a full backup.
-2. Downloads Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
+2. Download Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
    server jar with your freshly downloaded Paper jar.
 3. Start your new Paper server.
 

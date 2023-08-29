@@ -194,6 +194,7 @@ html[data-theme="dark"] {
 }
 
 .config-container {
+  font-variant-ligatures: no-contextual;
   position: relative;
 }
 

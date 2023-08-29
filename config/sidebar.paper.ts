@@ -49,7 +49,7 @@ const paper: SidebarsConfig = {
           items: [
             {
               type: "category",
-              label: "Paper Configuration",
+              label: "Configuration",
               link: {
                 type: "doc",
                 id: "admin/reference/configuration/README",
@@ -124,6 +124,7 @@ const paper: SidebarsConfig = {
             "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
+            "dev/api/folia-support",
           ],
         },
         {
@@ -137,6 +138,7 @@ const paper: SidebarsConfig = {
           items: [
             "dev/misc/reading-stacktraces",
             "dev/misc/debugging",
+            "dev/misc/databases",
           ],
         },
       ],

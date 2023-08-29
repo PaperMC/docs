@@ -130,17 +130,11 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
                 >
                     {parseItalics(name)}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick, separator)}
                 </a>
-                {showDescription ? (
-                    <>
-                        <div className="indent-2" style={{ marginBottom: 10 }}>
-                            <div className="outlined-box description-text color-offset-box">
-                                <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <></>
-                )}
+                <div className="indent-2" style={{ marginBottom: 10, display: !showDescription ? "none" : "" }}>
+                    <div className="outlined-box description-text color-offset-box">
+                        <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
+                    </div>
+                </div>
             </div>
         </div>
     );
@@ -210,7 +204,6 @@ export default function Config({ data, separator = ': ', showDescriptions = fals
                 <button onClick={() => setShowAllExpanded(!showAllDescriptions)} className={`config-button button button--secondary`}>{showAllDescriptions ? "Collapse All" : "Expand All"}</button>
                 {renderYamlData(ymlData, '', true, separator, showAllDescriptions)}
             </pre>
-            <div style={{ display: 'none' }}>{data}</div>
         </div>
     );
 }

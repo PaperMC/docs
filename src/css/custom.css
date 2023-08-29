@@ -193,7 +193,7 @@ html[data-theme="dark"] {
   width: fit-content;
 }
 
-.config-button-parent {
+.relative-container {
   position: relative;
 }
 

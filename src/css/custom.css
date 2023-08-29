@@ -1,6 +1,8 @@
 :root {
   --ifm-color-primary: #0240dc;
   --ifm-color-primary-dark: #033ed5;
+  --ifm-color-secondary: #868686;
+  --ifm-color-secondary-dark: #5f5f5f;
   --ifm-color-warning-contrast-background: #ffe39c;
 
   --ifm-code-font-size: 95%;
@@ -16,6 +18,8 @@
 html[data-theme="dark"] {
   --ifm-color-primary: #409efe;
   --ifm-color-primary-dark: #0175ec;
+  --ifm-color-secondary: #ebedf0;
+  --ifm-color-secondary-dark: #ededed;
 
   --ifm-menu-color: #dadada !important;
   --ifm-toc-link-color: #dadada !important;
@@ -25,6 +29,14 @@ html[data-theme="dark"] {
   /* Config Node */
   --default-config-node-text-color: rgb(128, 128, 128);
   --config-node-highlight-text-color: white;
+}
+
+.button.button--secondary {
+  color: #f6f7f8;
+}
+
+[data-theme="dark"] .button.button--secondary {
+  color: #1c1e21;
 }
 
 .header-icon-link::before {
@@ -187,6 +199,7 @@ html[data-theme="dark"] {
 
 .config-button {
   position: absolute;
+  width: 130px;
   top: 10px;
   right: 10px;
 }

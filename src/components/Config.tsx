@@ -196,7 +196,7 @@ export default function Config({ data, separator = ': ' }) {
     let ymlData = yaml.load(data);
     return (
         <div>
-            <pre style={{ fontVariantLigatures: "no-contextual" }}>{renderYamlData(ymlData, '', true, separator)}</pre>
+            <pre>{renderYamlData(ymlData, '', true, separator)}</pre>
             <div style={{ display: 'none' }}>{data}</div>
         </div>
     );

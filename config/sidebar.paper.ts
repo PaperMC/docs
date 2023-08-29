@@ -1,4 +1,4 @@
-import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
+import type {SidebarsConfig} from "@docusaurus/plugin-content-docs";
 
 const paper: SidebarsConfig = {
   primary: [
@@ -58,6 +58,7 @@ const paper: SidebarsConfig = {
                 "admin/reference/configuration/global-configuration",
                 "admin/reference/configuration/world-configuration",
                 "admin/reference/configuration/server-properties",
+                "admin/reference/configuration/commands-configuration",
               ],
             },
             "admin/reference/system-properties",

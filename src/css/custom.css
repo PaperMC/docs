@@ -149,6 +149,12 @@ html[data-theme="dark"] {
   padding-left: calc(var(--ifm-menu-link-padding-horizontal) - var(--size));
 }
 
+.config-node {
+  font: var(--ifm-font-size-base)/var(--ifm-pre-line-height) var(--ifm-font-family-monospace);
+  text-decoration: none !important; /* SHOULD work without !important, but doesn't... */
+  text-align: left;
+}
+
 .with-value {
   transition: color 0.3s;
   cursor: pointer;

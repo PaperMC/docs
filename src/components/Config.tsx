@@ -122,14 +122,14 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     return (
         <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
             <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
-                <a
+                <button
                     onClick={() => {
                         setShowDescription(!showDescription);
                     }}
-                    className={`with-value${showDescription ? '-active' : ''}`}
+                    className={`config-node with-value${showDescription ? '-active' : ''} clean-btn button--link`}
                 >
                     {parseItalics(name)}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick, separator)}
-                </a>
+                </button>
                 <div className="indent-2" style={{ marginBottom: 10, display: !showDescription ? "none" : "" }}>
                     <div className="outlined-box description-text color-offset-box">
                         <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>

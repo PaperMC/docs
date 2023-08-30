@@ -37,6 +37,8 @@ const scrollIntoView = (id) => {
 
 const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, separator) => {
 
+    const hash = createUrlHash(parentKey, name);
+
     if (value[0] === '[' && value[value.length - 1] === ']') {
         const items = value.replace("[", "").replace("]", "").split(",").map((item) => {
             return item.trim();
@@ -48,7 +50,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
         return (
             <>
                 {separator.replace(/ /g, "")}
-                <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+                <a className={`config-anchor with-value-active-color hash-link`} href={`#${hash}`} onClick={handleHashLinkClick}></a>
                 <div className="indent-2">
                     <div>
                         <ul className={"yaml-list-elem"}>
@@ -64,7 +66,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
     return (
         <>
             {separator}{value}
-            <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+            <a className={`config-anchor with-value-active-color hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} title={hash}></a>
         </>
     );
 }
@@ -173,7 +175,7 @@ const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescript
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
                 {parseItalics(name)}{removeTrailingSpaces(separator)}
             </div>
-            <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleClick}></a>
+            <a className={`config-anchor with-value-active-color hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleClick} title={createUrlHash(parentKey, name)}></a>
             {renderYamlData(value, parentKey ? createUrlHash(parentKey, name) : parseUrlHash(name), false, separator, showAllDescriptions, defaultValue)}
         </div>
     );

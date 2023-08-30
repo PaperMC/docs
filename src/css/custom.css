@@ -13,6 +13,7 @@
   /* Config Node */
   --default-config-node-text-color: rgb(148, 148, 148);
   --config-node-highlight-text-color: black;
+  --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.03);
 }
 
 html[data-theme="dark"] {
@@ -29,6 +30,7 @@ html[data-theme="dark"] {
   /* Config Node */
   --default-config-node-text-color: rgb(128, 128, 128);
   --config-node-highlight-text-color: white;
+  --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.1);
 }
 
 .button.button--secondary {
@@ -281,4 +283,27 @@ ul.yaml-list-elem > li:before {
 
 [data-theme="light"] .expand-list-text {
   color: rgb(148, 148, 148);
+}
+
+.config-explorer-file-node {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 3px 10px;
+  margin: 5px;
+  width: fit-content;
+  background-color: var(--config-explorer-file-node-text-color);
+}
+
+.config-explorer-file-node:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.config-explorer-file-folder-node {
+    display: flex;
+    align-items: center;
+    width: fit-content;
 }

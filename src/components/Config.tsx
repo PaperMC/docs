@@ -127,6 +127,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
                         setShowDescription(!showDescription);
                     }}
                     className={`config-node with-value${showDescription ? '-active' : ''} clean-btn button--link`}
+                    title={createUrlHash(parentKey, name)}
                 >
                     {parseItalics(name)}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick, separator)}
                 </button>

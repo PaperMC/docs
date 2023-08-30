@@ -178,10 +178,10 @@ settings:
 
       - On Windows this is passed to \`cmd /c start {restart-script}\`.
         Normally, this means specifying a Batch (*.bat) file to be run.
-        See the [Microsoft Documentation](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start) for specific options.
+        See Microsoft's [documentation](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/start) for specific options.
 
       - On other platforms, this is passed to \`sh {restart-script}\`.
-        so the option specifies an absolute or relative path to a shell script (*.sh).
+        The option is interpreted as an absolute or relative path to a shell script (*.sh).
         See your operating system''s documentation for more information (e.g. [Man Pages](https://man.archlinux.org/man/sh.1p#command_file)).
 
 
@@ -313,94 +313,174 @@ world-settings:
       animals:
         default: '48'
         description: 'Controls how far in blocks animals are tracked (sent to) the player.
-          This is scaled by entityBroadcastRangePercentage.'
+          This is scaled by the [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).'
       display:
         default: '128'
         description: 'Controls how far in blocks display entities are tracked (sent to) the player.
-          This is scaled by entityBroadcastRangePercentage.'
+          This is scaled by the [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).'
       misc:
         default: '32'
         description: 'Controls how far in blocks misc entities are tracked (sent to) the player.
-          This is scaled by entityBroadcastRangePercentage.'
+          This is scaled by the [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).'
       monsters:
         default: '48'
         description: 'Controls how far in blocks monsters are tracked (sent to) the player.
-          This is scaled by entityBroadcastRangePercentage.'
+          This is scaled by the [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).'
       other:
         default: '64'
         description: 'Controls how far in blocks other entities are tracked (sent to) the player.
-          This is scaled by entityBroadcastRangePercentage.'
+          This is scaled by the [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).'
       players:
         default: '48'
         description: 'Controls how far in blocks players are tracked (sent to) the player.
-          This is scaled by entityBroadcastRangePercentage.'
+          This is scaled by the [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).'
     growth:
       bamboo-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for bamboo, where vanilla speed is 100%.
+          This option is unable to disable growth at 0%, instead defaulting to 100%
+
+          The maximum effectiveness is 300%.'
       beetroot-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for beetroot, where vanilla speed is 100%.
+          This option is unable to disable growth at 0%, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%.'
       cactus-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for cactus, where vanilla speed is 100%.
+          This option is unable to disable growth at 0, instead defaulting to 100%
+
+          The maximum effectiveness is 1600%.
+
+          If this option is not set to 100%, different logic is used:
+
+          The block has a modifier/1600 probability of instantly growing regardless of stage,
+          and another modifier/1600 probability of growing 1 stage.
+
+          If this option is set to 100%, every random-tick this block receives will increment it 1 stage, up to a maximum of 15.'
       cane-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for sugarcane, where vanilla speed is 100%.
+          This option is unable to disable growth at 0%, instead defaulting to 100%
+
+          The maximum effectiveness is 1600%.
+
+          If this option is not set to 100%, different logic is used:
+
+          The block has a modifier/1600 probability of instantly growing regardless of stage,
+          and another modifier/1600 probability of growing 1 stage.
+
+          If this option is set to 100%, every random-tick this block receives will increment it 1 stage, up to a maximum of 15.'
       carrot-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for carrots, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%.'
       cavevines-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for cave-vines, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 1000%'
       cocoa-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for cocoa beans, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 500%'
       glowberry-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for glow-berries, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is roughly 910%'
       kelp-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for kelp, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is roughly 715%'
       melon-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for melons, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%'
       mushroom-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for mushrooms, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 2500%'
       netherwart-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for netherwart, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 1000%'
       pitcherplant-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for pitcherplants, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%'
       potato-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for potatoes, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%'
       pumpkin-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for pumpkins, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%'
       sapling-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for saplings, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 700%'
       sweetberry-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for sweet-berries, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 500%'
       torchflower-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for torchflowers, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%'
       twistingvines-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for twisting-vines, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 1000%'
       vine-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for vines, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 400%'
       weepingvines-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for weeping-vines, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 1000%'
       wheat-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where Vanilla is 100%.'
+        description: 'The growth modifier percentage for wheat, where vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%'
     hanging-tick-frequency:
       default: '100'
       description: 'How often to tick hanging entities, in ticks.'
@@ -442,7 +522,7 @@ world-settings:
     item-despawn-rate:
       default: '6000'
       description: 'The default time in ticks it takes an item to despawn.
-        Per-item rates are found in Paper''s [per-world config](/paper/reference/world-configuration).'
+        Per-item rates are found in Paper''s [per-world config](/paper/reference/world-configuration#entities_spawning_alt_item_despawn_rate).'
     max-tick-time:
       entity:
         default: '50'
@@ -456,7 +536,9 @@ world-settings:
     merge-radius:
       exp:
         default: '3.0'
-        description: 'The range, in blocks, that exp orbs will combine at.'
+        description: 'The range, in blocks, that exp orbs will combine at.
+          This Behaviour is not present in vanilla.
+          Set to 0 to disable.'
       item:
         default: '2.5'
         description: 'The range, in blocks, that items will combine within.'
@@ -528,7 +610,7 @@ world-settings:
       description: 'The per-structure seed for villages.'
     simulation-distance:
       default: 'default'
-      description: 'Overrides the simulation distance. Set to -1 or "default" to use the value in server.properties.'
+      description: 'Overrides the simulation distance. Set to -1 or "default" to use the value in [server.properties](/paper/reference/server-properties#simulation_distance).'
     thunder-chance:
       default: '100000'
       description: 'The chance of lightning occurring during a thunderstorm,
@@ -549,7 +631,7 @@ world-settings:
     view-distance:
       default: 'default'
       description: 'Overrides the view distance.
-        Set to -1 or "default" to use the value in server.properties'
+        Set to -1 or "default" to use the value in [server.properties](/paper/reference/server-properties#view_distance)'
     wither-spawn-sound-radius:
       default: '0'
       description: 'The number of blocks that the wither spawn sound is audible.

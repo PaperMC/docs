@@ -36,12 +36,14 @@ settings:
     default: 'default'
     description: 'Whether to warn for use of deprecated events.
       If "default", the warning is printed if annotated with \`@Warning(true)\`.
-      Ignored if [system property paper.alwaysPrintWarningState](/paper/reference/system-properties#paperalwaysprintwarningstate) is true.
+      Ignored if system property [paper.alwaysPrintWarningState](/paper/reference/system-properties#paperalwaysprintwarningstate) is true.
 
       Valid values are "true", "false", or "default".'
   minimum-api:
     default: 'none'
-    description: 'Minimum plugin api-version. If below this, or not specified, the plugin is prevented from loading.'
+    description: 'Minimum plugin [api-version](/paper/dev/plugin-yml#api-version).
+      A string containing the server version, ignoring minor part, from 1.13 to 1.20.
+      If below this, or not specified, the plugin is prevented from loading.'
   permissions-file:
     default: 'permissions.yml'
     description: 'File to load server permissions from.
@@ -70,31 +72,31 @@ spawn-limits:
   ambient:
     default: '15'
     description: 'Set the spawn-limits for ambient mobs.
-      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_ambient).'
   animals:
     default: '10'
     description: 'Set the spawn-limits for animals.
-      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_creature).'
   axolotls:
     default: '5'
     description: 'Set the spawn-limits for axolotls.
-      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_axolotls).'
   monsters:
     default: '70'
     description: 'Set the spawn-limits for monsters.
-      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_monster).'
   water-ambient:
     default: '20'
-    description: 'Set the spawn-limits for water-ambient mobs.
-      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
+    description: 'Set the spawn-limits for water ambient mobs.
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_water_ambient).'
   water-animals:
     default: '5'
-    description: 'Set the spawn-limits for water-animals.
-      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
+    description: 'Set the spawn-limits for water animals.
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_water_creature).'
   water-underground-creature:
     default: '5'
-    description: 'Set the spawn-limits for water-underground-creature.
-      This can be overridden by the [paper-world config](/paper/reference/world-configuration).'
+    description: 'Set the spawn-limits for water underground creatures.
+      This can be overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_underground_water_creature).'
 ticks-per:
   ambient-spawns:
     default: '1'

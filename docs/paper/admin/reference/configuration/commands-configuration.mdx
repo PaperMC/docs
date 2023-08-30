@@ -18,7 +18,7 @@ Click on a leaf node to view the description for that setting.
 <Config data={`
 command-block-overrides:
   default: '[<command to override>]'
-  description: 'Which vanilla commands should be prioritized over those provided by bukkit or plugins.
+  description: 'Which vanilla commands should be prioritized over those provided by Bukkit or plugins.
     Useful for compatibility with adventure maps built for vanilla command blocks.
 
     Use the literal ''*'' to always use the vanilla version in command blocks.
@@ -30,14 +30,14 @@ ignore-vanilla-permissions:
 aliases:
   '<alias name>':
     default: '[<commands to run>]'
-    description: 'A List of Strings which are target commands.
-      Alternatively, a String, which is a single target command.
+    description: 'A list of strings which are target commands.
+      Alternatively, a string, which is a single target command.
 
       A target command is a command that is run, when the alias is run.
 
       Replacements:
 
-        - ''\`$sender\`'' is replaced with the command sender''s name (Added by paper).
+        - ''\`$sender\`'' is replaced with the command sender''s name (Added by Paper).
 
         - \`$<n>\` is replaced by the n''th argument, 1-indexed.
 
@@ -48,7 +48,7 @@ aliases:
         - \`$$<n>-\` is replaced by the n''th argument and everything that follows, 1-indexed, failing if the n''th argument is not present.
 
 
-      Each alias registered cannot be (easily) be overridden by a plugin.'
+      Each alias registered cannot (easily) be overridden by a plugin.'
   icanhasbukkit:
     default: '[version $1-]'
     description: 'A built-in alias. Set aliases to an empty list ([]) to persistently remove.'

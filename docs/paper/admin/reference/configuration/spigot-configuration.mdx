@@ -28,17 +28,17 @@ advancements:
     description: 'Prevents saving of Advancements.'
   disabled:
     default: '[minecraft:story/disabled]'
-    description: 'A list of Strings, each being:
+    description: 'A list of strings, each being:
 
       - A namespace-including Advancement key,
         For example, "minecraft:adventure/avoid_vibration" would disable the Sneak 100 advancement.
-        [The Minecraft Fandom](https://minecraft.fandom.com/wiki/Advancement#List_of_advancements) has a list of all the vanilla advancements,
+        [The Minecraft Fandom](https://minecraft.fandom.com/wiki/Advancement#List_of_advancements) has a list of all the Vanilla advancements,
         which need the "minecraft:" namespace prepended to them.
 
       - The literal string "*", which disables *all* Advancements.
 
       - An Advancement key''s namespace, which disables all advancements inside it.
-        For example, "minecraft" would disable all vanilla advancements.
+        For example, "minecraft" would disable all Vanilla advancements.
 
 
       if an advancement is disabled without all of it''s children also being disabled
@@ -46,17 +46,17 @@ advancements:
 commands:
   log:
     default: 'true'
-    description: 'Whether to log commands executed by Players, in chat or on signs.
+    description: 'Whether to log commands executed by players, in chat or on signs.
       This _currently_ logs in the format "<playername> issued server command: <command>".'
   replace-commands:
     default: '[setblock,summon,testforblock,tellraw]'
-    description: 'List of vanilla commands that should override any plugin commands.'
+    description: 'List of Vanilla commands that should override any plugin commands.'
   send-namespaced:
     default: 'true'
     description: 'Whether to send commands with a namespace (like minecraft:give) to the client.'
   silent-commandblock-console:
     default: 'false'
-    description: 'Whether to log vanilla command feedback to the Console.'
+    description: 'Whether to log Vanilla command feedback to the Console.'
   spam-exclusions:
     default: '[/skill]'
     description: 'Any chat message or command that prefix matches an entry in this list
@@ -96,7 +96,7 @@ messages:
   server-full:
     default: 'The server is full!'
     description: 'The kick message for a player when they can''t join,
-      as the server not having any open slots (current-players >= max players)
+      as the server doesn''t have any open slots (current-players >= max players)
 
       The message is formatted with legacy "&" style formatting, and "\\n" for newlines.'
   unknown-command:
@@ -337,70 +337,70 @@ world-settings:
     growth:
       bamboo-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       beetroot-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       cactus-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       cane-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       carrot-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       cavevines-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       cocoa-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       glowberry-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       kelp-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       melon-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       mushroom-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       netherwart-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       pitcherplant-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       potato-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       pumpkin-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       sapling-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       sweetberry-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       torchflower-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       twistingvines-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       vine-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       weepingvines-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
       wheat-modifier:
         default: '100'
-        description: 'The growth modifier percentage, where vanilla is 100%.'
+        description: 'The growth modifier percentage, where Vanilla is 100%.'
     hanging-tick-frequency:
       default: '100'
       description: 'How often to tick hanging entities, in ticks.'
@@ -442,14 +442,14 @@ world-settings:
     item-despawn-rate:
       default: '6000'
       description: 'The default time in ticks it takes an item to despawn.
-        Per-item rates are found in paper''s per-world config.'
+        Per-item rates are found in Paper''s [per-world config](/paper/reference/world-configuration).'
     max-tick-time:
       entity:
         default: '50'
         description: 'This option does not operate, and is non-functional upstream.'
       tile:
         default: '50'
-        description: 'This option does not operate, as it is disabled by a paper patch.'
+        description: 'This option does not operate, as it is disabled by a Paper patch.'
     max-tnt-per-tick:
       default: '100'
       description: 'How many TNT to process per server tick. Set to 0 to disable.'

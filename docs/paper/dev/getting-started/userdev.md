@@ -45,6 +45,7 @@ want to use SNAPSHOT versions, you must add Paper's maven repo to `settings.grad
 ```kotlin
 pluginManagement {
     repositories {
+        gradlePluginPortal()
         maven("https://repo.papermc.io/repository/maven-public/")
     }
 }

@@ -288,12 +288,9 @@ ul.yaml-list-elem > li:before {
 .config-explorer-file-node {
   display: flex;
   align-items: center;
-  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 10px;
-  padding: 3px 10px;
   margin: 5px;
   width: fit-content;
-  background-color: var(--config-explorer-file-node-text-color);
 }
 
 .config-explorer-file-node:hover {
@@ -313,4 +310,21 @@ ul.yaml-list-elem > li:before {
   cursor: default;
   text-decoration: none;
   color: var(--config-node-highlight-text-color);
+}
+
+.config-explorer-popup-window {
+  position: absolute;
+  background-color: #1c1e21;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  z-index: 1000;
+  top: 100%;
+  left: 0;
+  width: fit-content;
+}
+
+.config-explorer-popup-window-open-tag:hover {
+  font-weight: bold;
+  cursor: pointer;
 }

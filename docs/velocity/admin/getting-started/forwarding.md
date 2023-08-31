@@ -46,7 +46,7 @@ to use Velocity forwarding.
 Paper 1.14+ and above, along with Paper 1.13.1/1.13.2 build 377 and above support Velocity modern
 forwarding natively.
 
-First, you need to disable the `online-mode` setting in the [`server.properties`](../../../paper/reference/server-properties) file. This prevents
+First, you need to disable the `online-mode` setting in the [`server.properties`](/paper/reference/server-properties#online_mode) file. This prevents
 the server from authenticating players, which the proxy will do instead.
 
 You also need to disable BungeeCord forwarding if you had it enabled beforehand. Make sure

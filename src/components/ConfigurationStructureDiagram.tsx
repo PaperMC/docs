@@ -9,7 +9,7 @@ const folderData = [
         ],
     },
     {
-        name: "world",
+        name: "<world>",
         children: [
             { name: "paper-world.yml", url: "/paper/reference/configuration#per-world-values" },
         ],

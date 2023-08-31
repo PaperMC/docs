@@ -303,7 +303,14 @@ ul.yaml-list-elem > li:before {
 }
 
 .config-explorer-file-folder-node {
-    display: flex;
-    align-items: center;
-    width: fit-content;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  color: var(--config-node-highlight-text-color);
+}
+
+.config-explorer-file-folder-node:hover {
+  cursor: default;
+  text-decoration: none;
+  color: var(--config-node-highlight-text-color);
 }

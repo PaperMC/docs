@@ -46,7 +46,10 @@ to use Velocity forwarding.
 Paper 1.14+ and above, along with Paper 1.13.1/1.13.2 build 377 and above support Velocity modern
 forwarding natively.
 
-First, you need to disable BungeeCord forwarding if you had it enabled beforehand. Make sure
+First, you need to disable the `online-mode` setting in the `server.properties` file. This prevents
+the server from authenticating players, which the proxy will do instead.
+
+You also need to disable BungeeCord forwarding if you had it enabled beforehand. Make sure
 `settings.bungeecord` is set to `false` in your `spigot.yml`.
 
 In `config/paper-global.yml`, set `proxies.velocity.enabled` to true and

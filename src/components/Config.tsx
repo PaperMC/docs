@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import style from '@site/src/css/markdown-styles.module.css';
 import yaml from 'js-yaml';
@@ -37,6 +37,8 @@ const scrollIntoView = (id) => {
 
 const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, separator) => {
 
+    const hash = createUrlHash(parentKey, name);
+
     if (value[0] === '[' && value[value.length - 1] === ']') {
         const items = value.replace("[", "").replace("]", "").split(",").map((item) => {
             return item.trim();
@@ -48,7 +50,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
         return (
             <>
                 {separator.replace(/ /g, "")}
-                <a className={`config-anchor with-value-active hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+                <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick}></a>
                 <div className="indent-2">
                     <div>
                         <ul className={"yaml-list-elem"}>
@@ -64,7 +66,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
     return (
         <>
             {separator}{value}
-            <a className={`config-anchor with-value-active hash-link`} href={`#${createUrlHash(parentKey, name)}`} onClick={handleHashLinkClick}></a>
+            <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} title={hash}></a>
         </>
     );
 }
@@ -80,10 +82,11 @@ const parseItalics = (key) => {
     return key;
 }
 
-const YamlNodeWithDescription = ({ name, node, parentKey, root, separator }) => {
-    const [showDescription, setShowDescription] = useState(false);
+const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showAllDescriptions, defaultValue }) => {
+    const ignoreInitialRenderRef = useRef(false);
+    const [showDescription, setShowDescription] = useState(showAllDescriptions);
 
-    node.default = node.default || 'N/A';
+    node.default = node.default || defaultValue;
     node.description = node.description || 'N/A';
 
     useEffect(() => {
@@ -93,9 +96,17 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator }) => 
         }
     }, [name]);
 
+    useEffect(() => {
+        if (ignoreInitialRenderRef.current) {
+            setShowDescription(showAllDescriptions);
+        } else {
+            ignoreInitialRenderRef.current = true;
+        }
+    }, [showAllDescriptions]);
+
     const handleHashLinkClick = (event) => {
         event.preventDefault();
-        history.pushState(null, null, event.currentTarget.hash);
+        history.pushState(null, "", event.currentTarget.hash);
 
         const fullURL = window.location.href.split('#')[0];
         const hash = createUrlHash(parentKey, name);
@@ -113,38 +124,32 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator }) => 
     return (
         <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
             <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
-                <span
+                <button
                     onClick={() => {
                         setShowDescription(!showDescription);
                     }}
-                    className={`with-value${showDescription ? '-active' : ''}`}
+                    className={`config-node with-value${showDescription ? '-active' : ''} clean-btn button--link`}
                 >
                     {parseItalics(name)}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick, separator)}
-                </span>
-                {showDescription ? (
-                    <>
-                        <div className="indent-2" style={{ marginBottom: 10 }}>
-                            <div className="outlined-box description-text color-offset-box">
-                                <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <></>
-                )}
+                </button>
+                <div className="indent-2" style={{ marginBottom: 10, display: !showDescription ? "none" : "" }}>
+                    <div className="outlined-box description-text color-offset-box">
+                        <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
+                    </div>
+                </div>
             </div>
         </div>
     );
 };
 
-const YamlTreeNode = ({ root, key, parentKey, value, separator }) => {
+const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescriptions, defaultValue }) => {
     const handleClick = (event) => {
         event.preventDefault();
-        scrollIntoView(createUrlHash(parentKey, key));
-        history.pushState(null, null, `#${createUrlHash(parentKey, key)}`);
+        scrollIntoView(createUrlHash(parentKey, name));
+        history.pushState(null, "", `#${createUrlHash(parentKey, name)}`);
 
         const fullURL = window.location.href.split('#')[0];
-        const hash = createUrlHash(parentKey, key);
+        const hash = createUrlHash(parentKey, name);
         navigator.clipboard.writeText(fullURL + '#' + hash);
         scrollIntoView(hash);
 
@@ -159,32 +164,34 @@ const YamlTreeNode = ({ root, key, parentKey, value, separator }) => {
     }
 
     useEffect(() => {
-        const hash = createUrlHash(parentKey, key);
+        const hash = createUrlHash(parentKey, name);
         if (window.location.hash === `#${hash}`) {
             scrollIntoView(hash);
         }
-    }, [key]);
+    }, [name]);
+
+    const hash = createUrlHash(parentKey, name);
 
     return (
-        <div key={key} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, key)}>
+        <div key={name} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={hash}>
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
-                {parseItalics(key)}{removeTrailingSpaces(separator)}
+                {parseItalics(name)}{removeTrailingSpaces(separator)}
             </div>
-            <a className={`config-anchor with-value-active hash-link`} href={`#${createUrlHash(parentKey, key)}`} onClick={handleClick}></a>
-            {renderYamlData(value, parentKey ? createUrlHash(parentKey, key) : parseUrlHash(key), false, separator)}
+            <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleClick} title={hash}></a>
+            {renderYamlData(value, parentKey ? hash : parseUrlHash(name), false, separator, showAllDescriptions, defaultValue)}
         </div>
     );
 };
 
-const renderYamlData = (data, parentKey, root = false, separator) => {
-    const renderedNodes = [];
+const renderYamlData = (data, parentKey, root = false, separator, showAllDescriptions, defaultValue) => {
+    const renderedNodes: JSX.Element[] = [];
 
     for (const [key, value] of Object.entries(data)) {
-        if (typeof value === 'object') {
+        if (typeof value === 'object' && value !== null) {
             if ('default' in value || 'description' in value) {
-                renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root} separator={separator} />);
+                renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);
             } else {
-                renderedNodes.push(YamlTreeNode({ root, key, parentKey, value, separator }));
+                renderedNodes.push(<YamlTreeNode root={root} key={key} name={key} parentKey={parentKey} value={value} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);
             }
         }
     }
@@ -192,12 +199,15 @@ const renderYamlData = (data, parentKey, root = false, separator) => {
     return renderedNodes;
 };
 
-export default function Config({ data, separator = ': ' }) {
+export default function Config({ data, separator = ': ', showDescriptions = false, defaultValue = 'N/A' }) {
+    const [showAllDescriptions, setShowAllExpanded] = useState(showDescriptions);
     let ymlData = yaml.load(data);
     return (
         <div>
-            <pre>{renderYamlData(ymlData, '', true, separator)}</pre>
-            <div style={{ display: 'none' }}>{data}</div>
+            <pre className='config-container'>
+                <button onClick={() => setShowAllExpanded(!showAllDescriptions)} className={`config-button button button--secondary`}>{showAllDescriptions ? "Collapse All" : "Expand All"}</button>
+                {renderYamlData(ymlData, '', true, separator, showAllDescriptions, defaultValue)}
+            </pre>
         </div>
     );
 }

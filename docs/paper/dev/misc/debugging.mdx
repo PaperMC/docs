@@ -8,16 +8,15 @@ Debugging your plugin is vital to being able to fix bugs and issues in your plug
 
 ### Printing to the console
 
-One of the most common debugging techniques is to print to the console. This is likely something you've done before, as it's very simple. 
+One of the most common debugging techniques is to print to the console. This is likely something you've done before, as it's very simple.
 This has a few downsides, though. It can be hard to find the print statements in the console, and it can be hard to remove them all when you're done debugging. Most notably, you have to recompile your plugin and restart the server to add or remove debugging.
 
-When debugging, you can use `System.out.println("");` to print to the console. It is recommended to use your plugin's logger instead though, 
+When debugging, you can use `System.out.println("");` to print to the console. It is recommended to use your plugin's logger instead though,
 as it will be easier to know which plugin the log has come from. This can be done simply with:
 
 ```java
 plugin.getComponentLogger().debug(Component.text("SuperDuperBad Thing has happened"));
 ```
-
 
 :::note[Logger Levels]
 
@@ -66,7 +65,7 @@ Let's say we have this code:
 public void onPlayerMove(PlayerMoveEvent event) {
     Player player = event.getPlayer();
     Location location = player.getLocation();
-    
+
     if (location.getWorld() == null)
         return;
 
@@ -84,7 +83,7 @@ This will pause the code when it reaches that line. You can then use the debugge
 
 ![](./assets/debugger_use.png)
 
-You can inspect the values of each of the variables in the current scope. 
+You can inspect the values of each of the variables in the current scope.
 You can also use the buttons in the top to step from one breakpoint to the next.
 If needed, you can also use the text box at the top to evaluate expressions for debugging purposes.
 

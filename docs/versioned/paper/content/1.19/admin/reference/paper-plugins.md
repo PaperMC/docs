@@ -6,7 +6,7 @@ slug: /reference/paper-plugins
 
 This documentation page serves to explain all the new semantics and possible confusions that Paper plugins may introduce.
 
-*As a developer, you can get more information [here](docs/versioned/paper/content/1.19/dev/getting-started/paper-plugins.md)*
+*As a developer, you can get more information [here](docs/paper/dev/getting-started/paper-plugins.md)*
 
 ## What are they?
 
@@ -24,7 +24,7 @@ Paper plugins only support being loaded by Paper's Plugin Loader and may use new
 
 ### How do I add Paper plugins?
 
-Paper plugins are added the same as Bukkit plugins, therefore, you can follow [this guide](docs/versioned/paper/content/1.19/admin/getting-started/adding-plugins.md)
+Paper plugins are added the same as Bukkit plugins, therefore, you can follow [this guide](docs/paper/admin/getting-started/adding-plugins.md)
 
 ### Cyclic Plugin Loading
 

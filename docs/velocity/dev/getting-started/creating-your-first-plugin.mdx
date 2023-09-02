@@ -32,14 +32,14 @@ Now we have created our project, we need configure our build system.
 ### Maven repository
 
 | Name      | URL                                                |
-| --------- | -------------------------------------------------- |
+|-----------|----------------------------------------------------|
 | `papermc` | `https://repo.papermc.io/repository/maven-public/` |
 
 ### Dependency
 
-| Group ID              | Artifact ID    | Version          |
-| --------------------- | -------------- | ---------------- |
-| `com.velocitypowered` | `velocity-api` | `3.2.0-SNAPSHOT` |
+| Group ID              | Artifact ID    | Version                                                          |
+|-----------------------|----------------|------------------------------------------------------------------|
+| `com.velocitypowered` | `velocity-api` | <VersionFormattedCode>`%%_MAJ_MIN_VEL_%%`</VersionFormattedCode> |
 
 ### Javadocs
 
@@ -59,7 +59,8 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
 <Tabs groupId="author-front-matter">
   <TabItem value="maven" label="Maven POM">
 
-```xml name="pom.xml"
+<VersionFormattedCode language={"xml"} title={"pom.xml"}>
+```
 <project>
     <repositories>
         <repository>
@@ -72,17 +73,19 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
-            <version>3.2.0-SNAPSHOT</version>
+            <version>%%_MAJ_MIN_VEL_%%</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
 ```
+</VersionFormattedCode>
 
   </TabItem>
   <TabItem value="gradle-kotlin" label="Gradle Kotlin DSL" default>
 
-```kotlin name="build.gradle.kts"
+<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
+```
 repositories {
     maven {
         name = "papermc"
@@ -91,15 +94,17 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:3.2.0-SNAPSHOT")
-    annotationProcessor("com.velocitypowered:velocity-api:3.2.0-SNAPSHOT")
+    compileOnly("com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%")
+    annotationProcessor("com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%")
 }
 ```
+</VersionFormattedCode>
 
   </TabItem>
   <TabItem value="gradle-groovy" label="Gradle Groovy DSL">
 
-```groovy name="build.gradle"
+<VersionFormattedCode language={"groovy"} title={"build.gradle"}>
+```
 repositories {
     maven {
         name = 'papermc'
@@ -108,10 +113,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.velocitypowered:velocity-api:3.2.0-SNAPSHOT'
-    annotationProcessor 'com.velocitypowered:velocity-api:3.2.0-SNAPSHOT'
+    compileOnly 'com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%'
+    annotationProcessor 'com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%'
 }
 ```
+</VersionFormattedCode>
 
   </TabItem>
 </Tabs>

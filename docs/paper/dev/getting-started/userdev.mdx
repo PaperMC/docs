@@ -58,12 +58,15 @@ If you try to load your Gradle project now, you will receive an error saying you
 a dev bundle dependency. You can do that by adding to your `dependencies` block in your `build.gradle.kts`
 file.
 
-```kotlin
+<VersionFormattedCode language={"kotlin"}>
+```
 dependencies {
     // Other Dependencies
-    paperweight.paperDevBundle("1.20.1-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("%%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT")
 }
 ```
+</VersionFormattedCode>
+
 :::tip
 
 You can remove any dependency for the Paper API, as the dev bundle includes that.

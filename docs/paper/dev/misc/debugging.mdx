@@ -18,6 +18,7 @@ as it will be easier to know which plugin the log has come from. This can be don
 plugin.getComponentLogger().debug(Component.text("SuperDuperBad Thing has happened"));
 ```
 
+
 :::note[Logger Levels]
 
 In some consoles, using the `warning` level will print the message in different colors.
@@ -46,9 +47,11 @@ Then, click the `+` button in the top left and select `Remote JVM Debug`. You ca
 Finally, copy the command line arguments from the window, and paste these into your server's startup script.
 These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`. For example:
 
-```bash
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-1.20.1.jar nogui
+<VersionFormattedCode language={"bash"}>
 ```
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-%%_MAJ_MIN_MC_%%.jar nogui
+```
+</VersionFormattedCode>
 
 Once your server is running, you can use the bug icon in the top right to connect your debugger to the server:
 

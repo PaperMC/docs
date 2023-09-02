@@ -24,20 +24,22 @@ You will land into the `build.gradle.kts` file where you can add your dependenci
 
 To add Paper as a dependency, you will need to add the Paper repository to your `build.gradle.kts` file as well as the dependency itself.
 
-```kotlin title=build.gradle.kts
+<VersionFormattedCode language={"kotlin"}>
+```
 repositories {
     mavenCentral()
     maven("https://repo.papermc.io/repository/maven-public/")
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.20.1-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:%%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT")
 }
 
 java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 }
 ```
+</VersionFormattedCode>
 
 ### Setting up the `src` directory
 

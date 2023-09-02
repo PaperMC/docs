@@ -164,15 +164,16 @@ html[data-theme="dark"] {
   text-decoration: none;
 }
 
-.with-value:hover .expand-list-text {
+.with-value:hover {
   color: var(--ifm-color-primary);
+}
+
+.with-value:hover .expand-list-text {
+    color: var(--ifm-color-primary);
 }
 
 .with-value-active {
   cursor: pointer;
-}
-
-.with-value-active-color {
   color: var(--ifm-color-primary);
 }
 

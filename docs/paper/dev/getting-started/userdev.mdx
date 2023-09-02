@@ -44,7 +44,8 @@ plugins {
 want to use SNAPSHOT versions, you must add Paper's maven repo to `settings.gradle.kts` with:
 ```kotlin
 pluginManagement {
-    repositores {
+    repositories {
+        gradlePluginPortal()
         maven("https://repo.papermc.io/repository/maven-public/")
     }
 }

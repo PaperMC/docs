@@ -49,7 +49,7 @@ const paper: SidebarsConfig = {
           items: [
             {
               type: "category",
-              label: "Paper Configuration",
+              label: "Configuration",
               link: {
                 type: "doc",
                 id: "admin/reference/configuration/README",
@@ -62,6 +62,17 @@ const paper: SidebarsConfig = {
             },
             "admin/reference/system-properties",
             "admin/reference/paper-plugins",
+          ],
+        },
+        {
+          type: "category",
+          label: "Miscellaneous",
+          link: {
+            type: "generated-index",
+            slug: "/cat/admin/misc",
+          },
+          items: [
+            "admin/misc/paper-bug-fixes",
           ],
         },
       ],
@@ -124,6 +135,7 @@ const paper: SidebarsConfig = {
             "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
+            "dev/api/folia-support",
           ],
         },
         {
@@ -137,6 +149,7 @@ const paper: SidebarsConfig = {
           items: [
             "dev/misc/reading-stacktraces",
             "dev/misc/debugging",
+            "dev/misc/databases",
           ],
         },
       ],

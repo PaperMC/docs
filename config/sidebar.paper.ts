@@ -59,6 +59,7 @@ const paper: SidebarsConfig = {
                 "admin/reference/configuration/world-configuration",
                 "admin/reference/configuration/server-properties",
                 "admin/reference/configuration/spigot-configuration",
+                "admin/reference/configuration/bukkit-configuration",
               ],
             },
             "admin/reference/system-properties",

@@ -290,11 +290,10 @@ ul.yaml-list-elem > li:before {
   display: flex;
   align-items: center;
   border-radius: 10px;
-  margin: 5px;
   width: fit-content;
 }
 
-.config-explorer-file-node:hover {
+.config-explorer-file-node-with-link:hover {
   background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
   text-decoration: none;

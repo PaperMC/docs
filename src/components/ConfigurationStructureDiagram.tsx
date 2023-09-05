@@ -83,9 +83,9 @@ export default function ConfigurationStructureDiagram({}) {
             cursor: hasDescription ? "pointer" : "auto",
         };
 
-        const handlePopupClick = (event) => {
+        const handleNodeOpening = (event) => {
             event.stopPropagation();
-            setPopupNode((prevNode) => (prevNode === node ? null : node));
+            setPopupNode(node);
         };
 
         return (
@@ -95,13 +95,13 @@ export default function ConfigurationStructureDiagram({}) {
                     <IndentationArrow level={level} />
                 )}
 
-                <a className={isFolder ? "config-explorer-file-folder-node" : "config-explorer-file-node"} href={node.url}
+                <a className={`${(isFolder ? "config-explorer-file-folder-node" : "config-explorer-file-node")} ${(!hasUrl ? "config-explorer-file-node" : "config-explorer-file-node-with-link")}`} href={node.url}
                    style={{cursor: hasUrl ? "pointer" : "default"}}>
 
                     <span style={iconStyle}>{isFolder ? "📁" : "📄"}</span>
                     <span style={{ margin: "0 5px 0 5px" }}>{node.name}</span>
                     {hasDescription && (
-                        <span className={"config-explorer-popup-window-open-tag"} onMouseEnter={handlePopupClick}>ⓘ</span>
+                        <span className={"config-explorer-popup-window-open-tag"} onMouseEnter={handleNodeOpening}>ⓘ</span>
                     )}
 
                 </a>

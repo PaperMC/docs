@@ -435,11 +435,48 @@ entities:
           description: 'Sets the maximum Y position for natural Slime spawn in Surface
             Biomes'
     spawn-limits:
-      default: '-1'
-      description: 'The constant used to determine how many of each entity type (set
-        individually) will be naturally spawned per world. This is identical to the
-        value set in bukkit.yml, except that it can be configured per world. A value
-        of -1 will use the value in bukkit.yml'
+      ambient:
+        default: '-1'
+        description: 'The constant used to determine how many ambient mobs will be naturally spawned per world.
+          This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_ambient), except that it can be configured per world.
+
+          A value of -1 will use the value in bukkit.yml'
+      axolotls:
+        default: '-1'
+        description: 'The constant used to determine how many axolotls will be naturally spawned per world.
+          This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_axolotls), except that it can be configured per world.
+
+          A value of -1 will use the value in bukkit.yml'
+      creature:
+        default: '-1'
+        description: 'The constant used to determine how many animals will be naturally spawned per world.
+          This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_animals), except that it can be configured per world, and the name.
+
+          A value of -1 will use the value in bukkit.yml'
+      monster:
+        default: '-1'
+        description: 'The constant used to determine how many monsters will be naturally spawned per world.
+          This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_monsters), except that it can be configured per world.
+
+          A value of -1 will use the value in bukkit.yml'
+      underground_water_creature:
+        default: '-1'
+        description: 'The constant used to determine how many underground water creatures will be naturally spawned per world.
+          This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_water_underground_creature), except that it can be configured per world.
+
+          A value of -1 will use the value in bukkit.yml'
+      water_ambient:
+        default: '-1'
+        description: 'The constant used to determine how many water ambient mobs will be naturally spawned per world.
+          This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_water_ambient), except that it can be configured per world.
+
+          A value of -1 will use the value in bukkit.yml'
+      water_creature:
+        default: '-1'
+        description: 'The constant used to determine how many water animals will be naturally spawned per world.
+          This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_water_animals), except that it can be configured per world.
+
+          A value of -1 will use the value in bukkit.yml'
     wandering-trader:
       spawn-chance-failure-increment:
         default: '25'

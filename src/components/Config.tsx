@@ -188,7 +188,7 @@ const renderYamlData = (data, parentKey, root = false, separator, showAllDescrip
 
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object' && value !== null) {
-            if ('default' in value || 'description' in value) {
+            if (('default' in value && typeof value.default !== 'object') || ('description' in value && typeof value.description !== 'object')) {
                 renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);
             } else {
                 renderedNodes.push(<YamlTreeNode root={root} key={key} name={key} parentKey={parentKey} value={value} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);

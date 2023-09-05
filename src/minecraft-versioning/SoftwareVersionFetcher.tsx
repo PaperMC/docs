@@ -11,17 +11,19 @@ class ProjectVersionData {
                 private readonly versionPattern: RegExp,
                 private readonly versionCache: Map<string, { version: string, timestamp: number }>) {}
 
-    public async init(override: boolean = false) {
+    public async init() {
         if (this.initInProgress) {
             await this.initPromise;
             return;
         }
 
-        if (override || !this.version) {
+        const cachedVersion = this.versionCache.get(this.projectName);
+
+        if (!this.version || (cachedVersion && Date.now() - cachedVersion.timestamp > 5 * 60 * 1000)) {
             this.initInProgress = true;
             this.initPromise = (async () => {
                 try {
-                    this.version = await this.getProjectVersion(this.projectName);
+                    this.version = await this.getProjectVersion();
                 } finally {
                     this.initInProgress = false;
                 }
@@ -30,18 +32,15 @@ class ProjectVersionData {
         }
     }
 
-    private async getProjectVersion(project: string): Promise<string> {
-        const cachedVersion = this.versionCache.get(project);
+    private async getProjectVersion(): Promise<string> {
 
-        if (cachedVersion && Date.now() - cachedVersion.timestamp <= 5 * 60 * 1000) {
-            return cachedVersion.version;
-        }
+        console.log(`Fetching version for project "${this.projectName}"...`)
 
         try {
-            const response = await axios.get(`https://api.papermc.io/v2/projects/${project}`);
+            const response = await axios.get(`https://api.papermc.io/v2/projects/${this.projectName}`);
             const version = await this.checkVersion(response.data);
 
-            this.versionCache.set(project, { version, timestamp: Date.now() });
+            this.versionCache.set(this.projectName, { version, timestamp: Date.now() });
             return version;
         } catch (error) {
             console.error('Error fetching project version:', error);

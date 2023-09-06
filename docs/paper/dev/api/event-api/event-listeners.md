@@ -33,7 +33,7 @@ Listeners take in a single parameter, which is the event that is being listened 
 public class ExampleListener implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerMove(PlayerMoveEvent event) {
         // ...
     }
 }
@@ -74,7 +74,7 @@ You can also specify the priority of the event.
 public class ExampleListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerMove(PlayerMoveEvent event) {
         // ...
     }
 }
@@ -106,7 +106,7 @@ Some events can be cancelled, preventing the given action from being completed. 
 public class ExampleListener implements Listener {
 
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerMove(PlayerMoveEvent event) {
         event.setCancelled(true);
     }
 }
@@ -127,7 +127,7 @@ Once an event is cancelled, it will continue to call any other listeners for tha
 public class ExampleListener implements Listener {
 
     @EventHandler(ignoreCancelled = true)
-    public void onPlayerJoin(PlayerJoinEvent event) {
+    public void onPlayerMove(PlayerMoveEvent event) {
         // ...
     }
 }

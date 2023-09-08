@@ -119,7 +119,7 @@ Always check the event before doing anything with it.
 
 :::
 
-The above example will cancel the event, meaning that the player will not be able to join the server.
+The above example will cancel the event, meaning that the player will not be able to move.
 Once an event is cancelled, it will continue to call any other listeners for that event unless they add 
 `ignoreCancelled = true` to the `@EventHandler` annotation to ignore cancelled events.
 

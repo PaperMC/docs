@@ -91,7 +91,7 @@ These are the following:
 | `Connect`         | Connects the player to the specified server.           | `server name`                                                    | N/A                                               |
 | `ConnectOther`    | Connects another player to the specified server.       | `player name`, `server name`                                     | N/A                                               |
 | `IP`              | Returns the IP of the specified player.                | `player name`                                                    | `IP`, `port`                                      |
-| `PlayerCount`     | Returns the number of players on the specified server. | `server name`                                                    | `server name`, player count`                      |
+| `PlayerCount`     | Returns the number of players on the specified server. | `server name`                                                    | `server name`, `player count`                     |
 | `PlayerList`      | Returns a list of players on the specified server.     | `server name`                                                    | `server name`, `CSV player names`                 |
 | `GetServers`      | Returns a list of all servers.                         | N/A                                                              | `CSV server names`                                |
 | `Message`         | Sends a message to the specified player.               | `player name`, `message`                                         | N/A                                               |

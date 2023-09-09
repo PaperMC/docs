@@ -23,14 +23,14 @@ const folderData = [
     },
     { name: "banned-ips.json", type: "file", description: "WIP" },
     { name: "banned-players.json", type: "file", description: "WIP" },
-    { name: "bukkit.yml", type: "file", url: "WIP" },
+    { name: "bukkit.yml", type: "file", url: "/paper/reference/bukkit-configuration" },
     { name: "commands.yml", type: "file", url: "WIP" },
-    { name: "eula.txt", type: "file", description: "WIP" },
+    { name: "eula.txt", type: "file", description: "This file is in place to allow you to accept the Minecraft EULA.\nThis is required to start the server." },
     { name: "help.yml", type: "file", url: "WIP" },
     { name: "ops.json", type: "file", description: "WIP" },
     { name: "permissions.yml", type: "file", url: "WIP" },
     { name: "server.properties", type: "file", url: "/paper/reference/server-properties" },
-    { name: "spigot.yml", type: "file", url: "WIP" },
+    { name: "spigot.yml", type: "file", url: "/paper/reference/spigot-configuration" },
     { name: "usercache.json", type: "file", description: "WIP" },
     { name: "whitelist.json", type: "file", description: "WIP" },
 ];
@@ -70,7 +70,6 @@ export default function ConfigurationStructureDiagram({}) {
         const nodeStyle = {
             alignItems: "center",
             position: "relative",
-            width: "50%",
         };
 
         if (level > 0) {
@@ -79,7 +78,6 @@ export default function ConfigurationStructureDiagram({}) {
 
         const iconStyle = {
             fontSize: "20px",
-            marginRight: "8px",
             cursor: hasDescription ? "pointer" : "auto",
         };
 
@@ -101,15 +99,17 @@ export default function ConfigurationStructureDiagram({}) {
                     <span style={iconStyle}>{isFolder ? "📁" : "📄"}</span>
                     <span style={{ margin: "0 5px 0 5px" }}>{node.name}</span>
                     {hasDescription && (
-                        <span className={"config-explorer-popup-window-open-tag"} onMouseEnter={handleNodeOpening}>ⓘ</span>
+                        <span style ={{ zIndex: 100 }} className={"config-explorer-popup-window-open-tag"} onMouseEnter={handleNodeOpening}>ⓘ</span>
                     )}
 
                 </a>
 
                 {hasDescription && (
-                    <div className={"config-explorer-popup-window"}
-                         style={{ marginLeft: iconStyle.marginRight, display: popupNode === node ? "block" : "none" }}>
-                        <strong>Description:</strong><br/>{node.description}
+                    <div className={"config-explorer-popup-window-container"}>
+                        <div className={"config-explorer-popup-window"}
+                             style={{ display: popupNode === node ? "block" : "none", marginLeft: "30px" }}>
+                            <strong>Description:</strong><br/>{node.description}
+                        </div>
                     </div>
                 )}
 

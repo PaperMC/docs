@@ -312,15 +312,20 @@ ul.yaml-list-elem > li:before {
   color: var(--config-node-highlight-text-color);
 }
 
-.config-explorer-popup-window {
+.config-explorer-popup-window-container {
   position: absolute;
+  z-index: 10;
+  top: 100%;
+  left: 0;
+  width: fit-content;
+}
+
+.config-explorer-popup-window {
   background-color: #1c1e21;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  z-index: 1000;
-  top: 100%;
-  left: 0;
+  margin-right: 100px;
   width: fit-content;
 }
 

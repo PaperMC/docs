@@ -189,3 +189,8 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `true`
 - **description**: Sets whether to parse comments in YAML files by default.
+
+#### Paper.IgnoreJavaVersion:
+
+- **default**: `false`
+- **description**: Allows you to bypass the Java version check. See [here](/paper/faq#unsupported-java-detected-what-do-i-do) for more info.

@@ -58,6 +58,8 @@ const paper: SidebarsConfig = {
                 "admin/reference/configuration/global-configuration",
                 "admin/reference/configuration/world-configuration",
                 "admin/reference/configuration/server-properties",
+                "admin/reference/configuration/spigot-configuration",
+                "admin/reference/configuration/bukkit-configuration",
               ],
             },
             "admin/reference/system-properties",
@@ -72,6 +74,7 @@ const paper: SidebarsConfig = {
             slug: "/cat/admin/misc",
           },
           items: [
+            "admin/misc/faq",
             "admin/misc/paper-bug-fixes",
           ],
         },

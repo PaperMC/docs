@@ -28,8 +28,10 @@ Paper retains full compatibility with all Spigot plugins, allowing a seamless tr
 
 :::info
 
-Your new Paper server will still use `bukkit.yml` and `spigot.yml`, only adding new configuration
-options in `paper.yml`.
+Your new Paper server will still use [`bukkit.yml`](../reference/configuration/bukkit-configuration.mdx)
+and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).  
+New configuration options can be found in [`paper-global.yml`](../reference/configuration/global-configuration.mdx)
+and [`paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
 
 :::
 

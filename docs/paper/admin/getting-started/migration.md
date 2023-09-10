@@ -28,8 +28,10 @@ Paper retains full compatibility with all Spigot plugins, allowing a seamless tr
 
 :::info
 
-Your new Paper server will still use `bukkit.yml` and `spigot.yml`, only adding new configuration
-options in `paper.yml`.
+Your new Paper server will still use [`bukkit.yml`](../reference/configuration/bukkit-configuration.mdx)
+and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).  
+New configuration options can be found in [`paper-global.yml`](../reference/configuration/global-configuration.mdx)
+and [`paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
 
 :::
 
@@ -43,7 +45,7 @@ Should you ever want to go back to Vanilla, follow the [Vanilla Migration Guide]
 closely, as manual changes will be required.
 
 1. Stop your Vanilla server if it is running, and create a full backup.
-2. Downloads Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
+2. Download Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
    server jar with your freshly downloaded Paper jar.
 3. Start your new Paper server.
 

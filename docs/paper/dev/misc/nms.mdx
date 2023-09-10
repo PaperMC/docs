@@ -18,7 +18,7 @@ some code to be used across multiple versions.
 ### Depending on NMS and CraftBukkit
 
 To access Paper internals, you can use the [paperweight-userdev](https://github.com/PaperMC/paperweight-test-plugin)
-repository. This will allow you to decompile the server and access the NMS and CraftBukkit code. You can
+gradle plugin. This will allow you to decompile the server and access the NMS and CraftBukkit code. You can
 then write your plugin against this code. This is the recommended way to use NMS and CraftBukkit code. You can find
 out more about this in the [Paperweight Userdev](/paper/dev/userdev) section.
 
@@ -36,12 +36,17 @@ version 1.20.1. You can access these classes easily with some reflection utiliti
 private static final String CRAFTBUKKIT_PACKAGE = Bukkit.getServer().getClass().getPackage().getName();
 
 public static String cbClass(String clazz) {
-    return CRAFTBUKKIT_PACKAGE + "." + clazz);
+    return CRAFTBUKKIT_PACKAGE + "." + clazz;
 }
 
 // You can then use this method to get the CraftBukkit class:
-Class.forName(cbClass("entity.CraftBee"))
+Class.forName(cbClass("entity.CraftBee"));
 ```
+
+Minecraft's code is obfuscated. This means that the names of classes and methods are changed to make it harder to
+understand. You can use a plugin like [Reflection Remapper](https://github.com/jpenilla/reflection-remapper) to
+automatically remap the code. This will allow you to use the deobfuscated names in your code. This is recommended as
+it makes the code easier to understand.
 
 ### Getting the current Minecraft version
 

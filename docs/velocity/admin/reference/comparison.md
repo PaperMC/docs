@@ -21,7 +21,7 @@ This is a quick overview of the differences between Velocity and other popular p
 | Improved mod support                     | ❌         | ❌        | ✅*\*    |
 
 \* _The Velocity API does not support plugins made for BungeeCord/Waterfall, but [Snap](https://hangar.papermc.io/Phoenix616/Snap) can be installed for experimental support.
- Snap is not maintained by the Velocity project._
+ Snap is not maintained by, or affiliated with, the Velocity project._
 
 \** _Full Forge support for 1.7 through 1.12.2, with support for newer versions in development._
 

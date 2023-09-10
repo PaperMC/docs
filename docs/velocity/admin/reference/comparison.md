@@ -8,6 +8,23 @@ Presumably, you have learned about what Velocity can do for you. But how does it
 other solutions out there? We're trying to convince you to use Velocity, after all, so this document
 may be somewhat biased in our favor.
 
+## Overview
+This is a quick overview of the differences between Velocity and other popular proxy software. Read below for more details.
+| Feature                                  | BungeeCord | Waterfall | Velocity |
+|------------------------------------------|------------|-----------|----------|
+| Resource efficient                       | ❌         | ✅        | ✅✅     |
+| Velocity plugins                         | ❌         | ❌        | ✅       |
+| BungeeCord plugins                       | ✅         | ✅        | 🟨*      |
+| Secure player information forwarding     | ❌         | ❌        | ✅       |
+| API supporting modern Minecraft features | ❌         | ❌        | ✅       |
+| Actively developed                       | ❓         | ❌        | ✅       |
+| Improved mod support                     | ❌         | ❌        | ✅*\*    |
+
+\* _The Velocity API does not support plugins made for BungeeCord/Waterfall, but [Snap](https://hangar.papermc.io/Phoenix616/Snap) can be installed for experimental support.
+ Snap is not maintained by, or affiliated with, the Velocity project._
+
+\** _Full Forge support for 1.7 through 1.12.2, with support for newer versions in development._
+
 ## BungeeCord and derivatives
 
 We can't discuss the full history of Minecraft proxy software deeply – we recommend

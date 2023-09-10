@@ -20,12 +20,17 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
         {
           label: "Administration",
           to: "/paper/admin",
-          activeBaseRegex: "\\/paper/(?!dev).*",
+          activeBaseRegex: "\\/paper/(?!(dev|contributing)).*",
         },
         {
           label: "Development",
           to: "/paper/dev",
           activeBaseRegex: "\\/paper\\/dev.*",
+        },
+        {
+          label: "Contributing",
+          to: "/paper/contributing",
+          activeBaseRegex: "\\/paper\\/contributing.*",
         },
       ],
     },

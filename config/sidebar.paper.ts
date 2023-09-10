@@ -153,6 +153,7 @@ const paper: SidebarsConfig = {
             "dev/misc/reading-stacktraces",
             "dev/misc/debugging",
             "dev/misc/databases",
+            "dev/misc/nms",
           ],
         },
       ],

@@ -1,0 +1,66 @@
+---
+slug: /dev/nms
+---
+
+# NMS
+
+NMS is an abbreviation for `net.minecraft.server`. It is the package that contains Mojang's classes that are used by the
+server. This is internal code which often changes between versions. For this reason, plugins that use NMS code are
+often version specific or require different code for different versions. It is often used to refer to CraftBukkit code
+as well.
+
+## Using NMS and CraftBukkit
+
+In order to use NMS and CraftBukkit code, you may either add the dependencies to your plugin or use reflection. Depending
+on the server dependencies is often the easiest way to use NMS and CraftBukkit code. However, reflection often allows
+some code to be used across multiple versions.
+
+### Depending on NMS and CraftBukkit
+
+To access Paper internals, you can use the [paperweight-userdev](https://github.com/PaperMC/paperweight-test-plugin)
+repository. This will allow you to decompile the server and access the NMS and CraftBukkit code. You can
+then write your plugin against this code. This is the recommended way to use NMS and CraftBukkit code. You can find
+out more about this in the [Paperweight Userdev](/paper/dev/userdev) section.
+
+### Reflection
+
+Reflection is a way to access code at runtime. This allows you to access code that may not be available at compile time.
+Reflection is often used to access NMS and CraftBukkit code across multiple versions. However, reflection does come
+with performance impacts if used improperly.
+
+The internal CraftBukkit code is relocated to `org.bukkit.craftbukkit.<version>`. This means that any attempts to reflect
+must include the version. For example, `org.bukkit.craftbukkit.v1_20_R1.CraftServer` is the class for the server in
+version 1.20.1. You can access these classes easily with some reflection utilities.
+
+```java
+private static final String CRAFTBUKKIT_PACKAGE = Bukkit.getServer().getClass().getPackage().getName();
+
+public static String cbClass(String clazz) {
+    return CRAFTBUKKIT_PACKAGE + "." + clazz);
+}
+
+// You can then use this method to get the CraftBukkit class:
+Class.forName(cbClass("entity.CraftBee"))
+```
+
+### Getting the current Minecraft version
+
+You can get the current Minecraft version to allow you to use the correct NMS and CraftBukkit code. This can be done
+with the following code:
+
+```java
+// Paper method that was added in 2020
+// Example value: 1.20.1
+String minecraftVersion = Bukkit.getServer().getMinecraftVersion();
+
+// Bukkit method that was added in 2011
+// Example value: 1.20.1-R0.1-SNAPSHOT
+String bukkitVersion = Bukkit.getServer().getBukkitVersion();
+```
+
+:::danger[Parsing the version]
+
+You should not parse the version from the package name of classes. This is because CraftBukkit may not be relocated
+in the future.
+
+:::

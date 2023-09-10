@@ -10,9 +10,9 @@ may be somewhat biased in our favor.
 
 ## Overview
 This is a quick overview of the differences between Velocity and other popular proxy software. Read below for more details.
-| Feature                           	   | BungeeCord | Waterfall | Velocity |
+| Feature                                  | BungeeCord | Waterfall | Velocity |
 |------------------------------------------|------------|-----------|----------|
-| Resource efficient					   | ❌         | ✅        | ✅✅     |
+| Resource efficient                       | ❌         | ✅        | ✅✅     |
 | Velocity plugins                         | ❌         | ❌        | ✅       |
 | BungeeCord plugins                       | ✅         | ✅        | 🟨*      |
 | Secure player information forwarding     | ❌         | ❌        | ✅       |

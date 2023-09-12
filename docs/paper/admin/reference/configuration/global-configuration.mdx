@@ -220,7 +220,10 @@ misc:
       description: 'The maximum number of threads to allow in the chat thread pool. The default value is -1, which means no maximum'
   compression-level:
     default: 'default'
-    description: 'A higher compression level means less data transmitted for the cost of more CPU time.'
+    description: 'A higher compression level means less data transmitted for the cost of more CPU time.
+      The default value is -1, which means that the server will use the default value of the defined compressor.
+      Note that Paper is currently using the Velocity compressor, which uses a default compression level of 6 as a middle ground
+      between performance and data transmission.'
 packet-limiter:
   all-packets:
     action:

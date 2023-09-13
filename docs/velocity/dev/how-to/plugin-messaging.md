@@ -5,11 +5,11 @@ slug: /dev/plugin-messaging
 # Plugin Messaging
 
 First introduced in [2012](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/),
-Plugin messaging is a way for Paper plugins to communicate with clients. 
+Plugin messaging is a way for Velocity plugins to communicate with clients and backend servers. 
 
 ## Compatibility with BungeeCord
 
-When your servers are behind a proxy, it will allow your Paper plugins to communicate with the proxy server.
+When your servers are behind a proxy, it will allow your Bukkit plugins to communicate with the proxy server.
 By default, your Velocity server will respond to the `bungeecord:main` channel unless you have disabled 
 `bungee-plugin-message-channel` in the Velocity configuration. Let's take a look at how plugin messaging works, 
 and more importantly, how your Velocity server is already prepared to handle it.

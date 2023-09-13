@@ -6,17 +6,23 @@ slug: /dev/internals
 
 The code that runs Minecraft is not open source. Bukkit is an API that allows plugins to interact with the server. This
 is implemented by CraftBukkit and interacts with the Minecraft code. You will often hear the terms NMS and CraftBukkit
-when talking about Minecraft internals. NMS stands for `net.minecraft.server` and refers to a Java package that contains
-a lot of Mojang's code.
+when talking about Minecraft internals.
 
 :::danger[Using Minecraft Internals]
 
 Using Minecraft internals is not recommended. This is because the using the internals directly is not guaranteed to be
 stable and they change often. This means that your plugin may break when a new version of Minecraft is released.
+Whenever possible, you should use API instead of internals.
 
 **PaperMC will offer no direct support for programming against Minecraft internals.**
 
 :::
+
+## What is NMS?
+
+NMS stands for `net.minecraft.server` and refers to a Java package that contains a lot of Mojang's code. This code is
+proprietary and is not open source. This code is not guaranteed to be stable when invoked externally and may change at
+any time.
 
 ## Accessing Minecraft Internals
 

@@ -1,7 +1,7 @@
 ---
 slug: /faq
 title: FAQ
-description: Some questions asked frequently by our community.
+description: Questions frequently asked by our community, answered by us!
 ---
 
 # FAQ

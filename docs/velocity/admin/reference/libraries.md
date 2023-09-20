@@ -1,5 +1,6 @@
 ---
 slug: /credits
+description: The credits for all the different libraries used by Velocity.
 ---
 
 # Libraries Used
@@ -7,13 +8,13 @@ slug: /credits
 Velocity uses a number of open-source libraries:
 
 | Name                                                                            | Author                                                                   | License                                                                                                      |
-| ------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+|---------------------------------------------------------------------------------|--------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|
 | [Guava](https://github.com/google/guava)                                        | [Google](https://github.com/google)                                      | [Apache License 2.0](https://github.com/google/guava/blob/master/COPYING)                                    |
 | [Gson](https://github.com/google/gson)                                          | [Google](https://github.com/google)                                      | [Apache License 2.0](https://github.com/google/gson/blob/master/LICENSE)                                     |
 | [Netty](https://github.com/netty/netty)                                         | [Netty Project](https://netty.io)                                        | [Apache License 2.0](https://github.com/netty/netty/blob/4.1/LICENSE.txt)                                    |
 | [libdeflate](https://github.com/ebiggers/libdeflate)                            | [Eric Biggers](https://github.com/ebiggers)                              | [MIT License](https://github.com/ebiggers/libdeflate/blob/master/COPYING)                                    |
 | [text](https://github.com/KyoriPowered/text)                                    | [KyoriPowered](https://github.com/KyoriPowered)                          | [MIT License](https://github.com/KyoriPowered/text/blob/master/license.txt)                                  |
-| [adventure](https://github.com/KyoriPowered/adventure)                               | [KyoriPowered](https://github.com/KyoriPowered)                          | [MIT License](https://github.com/KyoriPowered/adventure/blob/main/4/license.txt)                             |
+| [adventure](https://github.com/KyoriPowered/adventure)                          | [KyoriPowered](https://github.com/KyoriPowered)                          | [MIT License](https://github.com/KyoriPowered/adventure/blob/main/4/license.txt)                             |
 | [Brigadier](https://github.com/Mojang/brigadier)                                | [Mojang](https://www.minecraft.net)                                      | [MIT License](https://github.com/Mojang/brigadier/blob/master/LICENSE)                                       |
 | [event](https://github.com/KyoriPowered/event)                                  | [KyoriPowered](https://github.com/KyoriPowered)                          | [MIT License](https://github.com/KyoriPowered/event/blob/master/license.txt)                                 |
 | [ASM](http://asm.ow2.org/)                                                      | [OW2](https://www.ow2.org/)                                              | [BSD 3-Clause License](http://asm.ow2.io/license.html)                                                       |

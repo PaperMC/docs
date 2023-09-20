@@ -1,5 +1,6 @@
 ---
 slug: /dev/reading-stacktraces
+description: Stacktraces are produced by the JVM when an exception occurs. This guide will discuss the basics of how to read them.
 ---
 
 # Reading Stacktraces

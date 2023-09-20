@@ -1,6 +1,7 @@
 ---
 slug: /migration
 title: Migrating to or from Paper
+description: It's simple to migrate your server to or from Paper. This page will help you get started.
 ---
 
 It's simple to migrate your server to or from Paper. The steps below will help you get started.

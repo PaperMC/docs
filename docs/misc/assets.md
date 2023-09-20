@@ -1,3 +1,8 @@
+---
+slug: /assets
+description: This page provides the official PaperMC logomark and the terms under which you may use it.
+---
+
 # Art Assets
 
 This page provides the official PaperMC logomark and the terms under which you may use it.

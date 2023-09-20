@@ -1,5 +1,6 @@
 ---
 slug: /why-velocity
+description: An explanation for why you should run Velocity.
 ---
 
 # What Does Velocity Do For Me?

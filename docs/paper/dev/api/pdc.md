@@ -1,5 +1,6 @@
 ---
 slug: /dev/pdc
+description: A guide to the PDC API for storing data.
 ---
 
 # Persistent Data Container (PDC)

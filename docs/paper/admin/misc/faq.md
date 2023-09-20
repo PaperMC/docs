@@ -1,5 +1,6 @@
 ---
 slug: /faq
+description: Questions frequently asked by our community, answered by us!
 ---
 
 # Frequently Asked Questions

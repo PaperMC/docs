@@ -1,5 +1,6 @@
 ---
 slug: /dev/command-api
+description: How to create commands within Velocity.
 ---
 
 # The Command API

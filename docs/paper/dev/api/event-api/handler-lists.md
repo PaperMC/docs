@@ -1,5 +1,6 @@
 ---
 slug: /dev/handler-lists
+description: An explanation to what an event's HandlerList is.
 ---
 
 # Handler Lists

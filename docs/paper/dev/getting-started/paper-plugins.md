@@ -1,5 +1,6 @@
 ---
 slug: /dev/getting-started/paper-plugins
+description: A development guide for how to write Paper-specific plugins.
 ---
 
 # Paper Plugins

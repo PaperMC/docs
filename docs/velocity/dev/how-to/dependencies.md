@@ -1,5 +1,6 @@
 ---
 slug: /dev/dependency-management
+description: How to handle dependencies within your Velocity plugin.
 ---
 
 # Dependency Management

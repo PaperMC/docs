@@ -1,5 +1,6 @@
 ---
 slug: /dev/custom-inventory-holder
+description: How to use a custom InventoryHolder to identify custom inventories.
 ---
 
 # Custom InventoryHolder

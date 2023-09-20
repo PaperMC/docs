@@ -1,5 +1,6 @@
 ---
 slug: /comparisons-to-other-proxies
+description: A comparison of Velocity to the other proxy servers.
 ---
 
 # Comparing With Other Proxies

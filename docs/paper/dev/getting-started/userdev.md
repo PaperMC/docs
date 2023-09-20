@@ -1,6 +1,7 @@
 ---
 slug: /dev/userdev
 sidebar_label: Paperweight Userdev
+description: A guide on how to use the Paperweight Userdev Gradle plugin to access internal code.
 ---
 
 # paperweight-userdev

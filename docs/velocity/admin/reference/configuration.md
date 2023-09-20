@@ -1,5 +1,6 @@
 ---
 slug: /configuration
+description: Velocity is designed to be easy to configure and this guide will walk you through how to do so.
 ---
 
 # Configuring Velocity

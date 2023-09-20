@@ -1,5 +1,6 @@
 ---
 slug: /dev/plugin-messaging
+description: How to handle and send plugin messages on Velocity.
 ---
 
 # Plugin Messaging

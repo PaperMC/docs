@@ -1,5 +1,6 @@
 ---
 slug: /dev/event-listeners
+description: Developer guide for how to listen to the broadcasted events.
 ---
 
 # Event Listeners

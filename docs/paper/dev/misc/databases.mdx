@@ -1,5 +1,6 @@
 ---
 slug: dev/using-databases
+description: Databases are the recommended way to store a large amount of data. This guide outlines a few key details.
 ---
 
 # Using Databases
@@ -14,16 +15,16 @@ and the main two categories are SQL and NoSQL.
 ### NoSQL vs SQL
 
 A NoSQL (Not Only SQL) database is a type of database management system that differs from the traditional relational database model.
-Unlike traditional SQL databases, which store data in structured tables with predefined schemas, NoSQL databases are schema-less 
-and offer flexible data models. 
+Unlike traditional SQL databases, which store data in structured tables with predefined schemas, NoSQL databases are schema-less
+and offer flexible data models.
 
-They are designed to handle large volumes of unstructured or semi-structured data. 
-NoSQL databases use various data models, such as key-value, document, column-family, or graph, depending on 
+They are designed to handle large volumes of unstructured or semi-structured data.
+NoSQL databases use various data models, such as key-value, document, column-family, or graph, depending on
 the specific requirements of the application.
 
 On the other hand, an SQL database is a type of database management system that follows the relational database model.
-It organizes data into structured tables with predefined schemas, where each table represents an entity and columns 
-represent attributes of that entity. SQL (Structured Query Language) is used to interact with the database, 
+It organizes data into structured tables with predefined schemas, where each table represents an entity and columns
+represent attributes of that entity. SQL (Structured Query Language) is used to interact with the database,
 allowing users to perform various operations like querying, inserting, updating, and deleting data.
 
 ## File-based vs Standalone Databases
@@ -56,7 +57,7 @@ You must invoke a `Class.forName` on the driver to allow it to initialise and th
 
 ```java
 public class DatabaseManager {
-    
+
     public void connect() {
         Class.forName("org.sqlite.JDBC");
         Connection connection = DriverManager.getConnection("jdbc:sqlite:plugins/TestPlugin/database.db");
@@ -87,7 +88,7 @@ down connections repeatedly, leading to improved application performance and bet
 
 ## MySQL
 
-Working with MySQL requires a few more steps, however it can offer performance benefits for larger databases with 
+Working with MySQL requires a few more steps, however it can offer performance benefits for larger databases with
 many tables and concurrent accesses. This is a short setup guide for using the [Hikari](https://github.com/brettwooldridge/HikariCP) library with MySQL.
 
 :::note
@@ -129,7 +130,7 @@ Once you have the dependency added, we can work with the connector in our code:
 
 ```java
 public class DatabaseManager {
-    
+
     public void connect() {
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl("jdbc://mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
@@ -157,7 +158,7 @@ public class DatabaseManager {
 
 ### SQL Injection
 
-SQL injection is a malicious technique where attackers exploit improper input validation to execute unauthorized SQL commands, 
+SQL injection is a malicious technique where attackers exploit improper input validation to execute unauthorized SQL commands,
 potentially causing data breaches or damage to the database.
 
 For example, consider the following code:
@@ -186,6 +187,6 @@ but it can be used to do much more malicious things, such as deleting the entire
 
 ### Prepared Statements: Why They Matter
 
-Using prepared statements in Java with PreparedStatements helps prevent SQL injection. 
-They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands. 
+Using prepared statements in Java with PreparedStatements helps prevent SQL injection.
+They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection [here](https://www.baeldung.com/sql-injection).

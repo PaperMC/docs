@@ -1,5 +1,6 @@
 ---
 slug: /aikars-flags
+description: Aikar's flags are a set of JVM flags designed to improve the performance of your Paper server.
 ---
 
 # Aikar's Flags

@@ -1,5 +1,6 @@
 ---
 slug: /getting-started
+description: How to get started with downloading and setting up a Paper server.
 ---
 
 # Getting Started

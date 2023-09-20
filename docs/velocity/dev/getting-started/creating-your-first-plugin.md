@@ -1,5 +1,6 @@
 ---
 slug: /dev/creating-your-first-plugin
+description: How to create your first plugin with the Velocity API.
 ---
 
 # Creating Your First Plugin

@@ -1,5 +1,6 @@
 ---
 slug: /tuning
+description: How to tune Velocity to allow for even better performance.
 ---
 
 # Tuning Velocity

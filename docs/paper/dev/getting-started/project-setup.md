@@ -1,5 +1,6 @@
 ---
 slug: /dev/project-setup
+description: Step-by-step instructions on how to setup a plugin development environment.
 ---
 
 # Paper Project Setup

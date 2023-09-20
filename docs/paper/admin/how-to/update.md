@@ -1,5 +1,6 @@
 ---
 slug: /updating
+description: Paper has new features and fixes coming every day, this guide explains the updating process.
 ---
 
 # Updating Paper

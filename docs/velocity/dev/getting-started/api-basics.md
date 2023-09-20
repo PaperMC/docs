@@ -1,6 +1,6 @@
 ---
 slug: /dev/api-basics
-description: The basics of the Velocity API explained by us, Velocity.
+description: How to get started with the Velocity API.
 ---
 
 # Velocity Plugin Basics

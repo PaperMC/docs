@@ -1,7 +1,7 @@
 ---
 slug: /reference/region-logic
 title: Region Logic
-description: An overview to how Folia's Regionizer works.
+description: An overview to how Folia's regionizer works.
 ---
 
 ## Fundamental regionising logic

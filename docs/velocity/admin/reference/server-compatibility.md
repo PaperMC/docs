@@ -1,6 +1,6 @@
 ---
 slug: /server-compatibility
-description: A guide to the server compatability for Velocity.
+description: A guide to the server compatibility for Velocity.
 ---
 
 # Server Compatibility

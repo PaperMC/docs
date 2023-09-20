@@ -1,6 +1,6 @@
 ---
 slug: /downloads-api
-description: Paper provides a download API that you can use to access builds.
+description: Paper provides a downloads API that you can use to access builds.
 ---
 
 # Downloads API

@@ -11,7 +11,7 @@ a lot of Mojang's code.
 
 :::danger[Using Minecraft Internals]
 
-Using Minecraft internals is not recommended. This is because the using internals directly is not guaranteed to be
+Using Minecraft internals is not recommended. This is because using internals directly is not guaranteed to be
 stable and they change often. This means that your plugin may break when a new version of Minecraft is released.
 
 **PaperMC will offer no direct support for programming against Minecraft internals.**
@@ -35,8 +35,8 @@ with performance impacts if used improperly. For example, if you are accessing a
 you should cache the `Field`/`Method` to prevent the performance impact of looking up the field/method each time.
 
 The internal CraftBukkit code is relocated to `org.bukkit.craftbukkit.<version>`. This means that any attempts to reflect
-must include the version. For example, `org.bukkit.craftbukkit.v1_20_R1.CraftServer` is the class for the server in
-version 1.20.1. You can access these classes easily with some reflection utilities.
+must include the version. For example, `org.bukkit.craftbukkit.v1_20_R1.CraftServer` is the full class and package name
+for the CraftServer class in version 1.20.1. You can access these classes easily with some reflection utilities.
 
 ```java
 private static final String CRAFTBUKKIT_PACKAGE = Bukkit.getServer().getClass().getPackage().getName();
@@ -49,10 +49,10 @@ public static String cbClass(String clazz) {
 Class.forName(cbClass("entity.CraftBee"));
 ```
 
-Minecraft's code is obfuscated. This means that the names of classes and methods are changed to make it harder to
-understand. Paper deobfuscates these identifiers for development however in order to provide compatibility with legacy
-plugins, paper is re-obfuscated at runtime. You can use a plugin like [Reflection Remapper](https://github.com/jpenilla/reflection-remapper) to
-automatically remap the reflection references. This will allow you to use the de-obfuscated, Mojang-mapped, names in your code. This is recommended as
+Minecraft's code is obfuscated. This means that the names of classes and methods are changed to make them harder to
+understand. Paper deobfuscates these identifiers for development; however, to provide compatibility with legacy plugins,
+Paper is re-obfuscated at runtime. You can use a plugin like [Reflection Remapper](https://github.com/jpenilla/reflection-remapper) to automatically remap the
+reflection references. This will allow you to use the de-obfuscated, Mojang-mapped, names in your code. This is recommended as
 it makes the code easier to understand.
 
 ### Getting the current Minecraft version

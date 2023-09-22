@@ -40,8 +40,9 @@ Reflection is often used to access internal code across multiple versions. Howev
 with performance impacts if used improperly. For example, if you are accessing a method or field more than once,
 you should cache the `Field`/`Method` to prevent the performance impact of looking up the field/method each time.
 
-The internal CraftBukkit code is relocated to `org.bukkit.craftbukkit.<version>`. This means that any attempts to reflect
-must include the version. For example, `org.bukkit.craftbukkit.v1_20_R1.CraftServer` is the full class and package name
+The internal CraftBukkit code is relocated to `org.bukkit.craftbukkit.<version>` unless you run a Mojang-mapped version
+of Paper. This is unlikely to be the case in most production environments. This means that any attempts to reflect must
+include the version. For example, `org.bukkit.craftbukkit.v1_20_R1.CraftServer` is the full class and package name
 for the CraftServer class in version 1.20.1. You can access these classes easily with some reflection utilities.
 
 ```java

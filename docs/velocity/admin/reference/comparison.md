@@ -10,6 +10,15 @@ other solutions out there? We're trying to convince you to use Velocity, after a
 may be somewhat biased in our favor.
 
 ## Overview
+
+:::danger
+
+**The Paper team strongly recommends using Velocity over Waterfall and BungeeCord**. Waterfall is a legacy solution,
+and only receives critical updates and whatever is released from upstream BungeeCord. All future
+development by PaperMC is done on Velocity.
+
+:::
+
 This is a quick overview of the differences between Velocity and other popular proxy software. Read below for more details.
 | Feature                                  | BungeeCord | Waterfall | Velocity |
 |------------------------------------------|------------|-----------|----------|
@@ -52,14 +61,6 @@ There are several reasons why improving BungeeCord was a fool's game:
   makes, and to draw influence from the new modding APIs that Minecraft now boasts.
 
 ### Waterfall
-
-:::danger
-
-**The Paper team strongly recommends using Velocity over Waterfall**. Waterfall is a legacy solution,
-and only receives critical updates and whatever is released from upstream BungeeCord. All future
-development by PaperMC is done on Velocity.
-
-:::
 
 Partly due to experience obtained by the author's own experience with BungeeCord, he founded the
 Waterfall project in 2016 as a fork of BungeeCord, modeled after Paper, with the explicit aim of

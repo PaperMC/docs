@@ -81,7 +81,7 @@ public void onInventoryClick(InventoryClickEvent event) {
     Inventory inventory = event.getInventory();
     // Check if the holder is our MyInventory,
     // if yes, use instanceof pattern matching to store it in a variable immediately.
-    if (!(inventory.getHolder() instanceof MyInventory myInventory)) {
+    if (!(inventory.getHolder(false) instanceof MyInventory myInventory)) {
         // It's not our inventory, ignore it.
         return;
     }
@@ -139,7 +139,7 @@ public void onInventoryClick(InventoryClickEvent event) {
     // already has a stone in their inventory and clicks that one.
     Inventory inventory = event.getClickedInventory();
     // Add a null check in case the player clicked outside the window.
-    if (inventory == null || !(inventory.getHolder() instanceof MyInventory myInventory)) {
+    if (inventory == null || !(inventory.getHolder(false) instanceof MyInventory myInventory)) {
         return;
     }
 

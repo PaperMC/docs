@@ -1,17 +1,18 @@
 ---
 slug: /dev/internals
+description: A brief overview of how to use internals in your plugin.
 ---
 
 # Minecraft Internals
 
 The code that runs Minecraft is not open source. Bukkit is an API that allows plugins to interact with the server. This
-is implemented by CraftBukkit and interacts with the Minecraft code. You will often hear the terms NMS and CraftBukkit
+is implemented by CraftBukkit and interacts with Minecraft's code. You will often hear the terms NMS and CraftBukkit
 when talking about Minecraft internals.
 
 :::danger[Using Minecraft Internals]
 
-Using Minecraft internals is not recommended. This is because using internals directly is not guaranteed to be
-stable and they change often. This means that your plugin may break when a new version of Minecraft is released.
+Using Minecraft internals is not recommended. This is because using internal code directly is not guaranteed to be
+stable and it changes often. This means that your plugin may break when a new version of Minecraft is released.
 Whenever possible, you should use API instead of internals.
 
 **PaperMC will offer no direct support for programming against Minecraft internals.**

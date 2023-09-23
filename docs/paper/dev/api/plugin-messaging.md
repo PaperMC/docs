@@ -1,5 +1,6 @@
 ---
 slug: /dev/plugin-messaging
+description: Plugin messaging allows communication with clients. If running a proxy, you can also communicate with the proxy.
 ---
 
 # Plugin Messaging

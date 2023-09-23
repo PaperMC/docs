@@ -1,5 +1,6 @@
 ---
 slug: /built-in-commands
+description: A list of the built-in commands with explanations.
 ---
 
 # Built-In Commands

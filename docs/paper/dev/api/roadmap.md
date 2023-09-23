@@ -1,5 +1,6 @@
 ---
 slug: /dev/roadmap
+description: Outlines the future intents and plans of the Paper project.
 ---
 
 # Roadmap

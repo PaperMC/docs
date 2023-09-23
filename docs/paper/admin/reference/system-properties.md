@@ -1,5 +1,6 @@
 ---
 slug: /reference/system-properties
+description: Documentation for the system properties Paper may check.
 ---
 
 # Paper System Properties

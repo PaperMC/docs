@@ -1,5 +1,6 @@
 ---
 slug: /contributing/events
+description: A guide on how to add new events to Paper.
 ---
 
 # Events

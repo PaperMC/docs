@@ -1,5 +1,6 @@
 ﻿---
 slug: /dev/scheduler
+description: A guide on how to use the BukkitScheduler to run code at specific times.
 ---
 
 # Using the Scheduler

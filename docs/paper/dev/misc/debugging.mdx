@@ -1,5 +1,6 @@
 ---
 slug: /dev/debugging
+description: Debugging is common when writing code. This guide outlines the common ways to debug your plugin.
 ---
 
 # Debugging your plugin

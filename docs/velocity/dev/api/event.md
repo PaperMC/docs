@@ -1,5 +1,6 @@
 ---
 slug: /dev/event-api
+description: How to listen for events in Velocity.
 ---
 
 # Working With Events

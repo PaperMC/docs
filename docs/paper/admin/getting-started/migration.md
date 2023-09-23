@@ -1,6 +1,7 @@
 ---
 slug: /migration
 title: Migrating to or from Paper
+description: It's simple to migrate your server to or from Paper. This page will help you get started.
 ---
 
 It's simple to migrate your server to or from Paper. The steps below will help you get started.
@@ -28,8 +29,10 @@ Paper retains full compatibility with all Spigot plugins, allowing a seamless tr
 
 :::info
 
-Your new Paper server will still use `bukkit.yml` and `spigot.yml`, only adding new configuration
-options in `paper.yml`.
+Your new Paper server will still use [`bukkit.yml`](../reference/configuration/bukkit-configuration.mdx)
+and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).  
+New configuration options can be found in [`paper-global.yml`](../reference/configuration/global-configuration.mdx)
+and [`paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
 
 :::
 

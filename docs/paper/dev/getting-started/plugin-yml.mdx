@@ -1,5 +1,6 @@
 ---
 slug: /dev/plugin-yml
+description: A guide to Bukkit's plugin.yml file.
 ---
 
 # Bukkit Plugin YML

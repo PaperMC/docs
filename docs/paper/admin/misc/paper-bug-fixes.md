@@ -1,5 +1,6 @@
 ---
 slug: /misc/paper-bug-fixes
+description: An explanation of which Vanilla bugs we fix in Paper.
 ---
 
 # Paper Bug Fixes

@@ -1,5 +1,6 @@
 ---
 slug: /dev/plugin-configurations
+description: How to create configuration files for your plugins to customize behaviour.
 ---
 
 # Plugin Configurations

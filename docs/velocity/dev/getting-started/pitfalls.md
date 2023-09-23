@@ -1,5 +1,6 @@
 ---
 slug: /dev/pitfalls
+description: How to avoid common pitfalls within Velocity.
 ---
 
 # Common Pitfalls

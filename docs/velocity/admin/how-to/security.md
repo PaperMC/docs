@@ -1,5 +1,6 @@
 ---
 slug: /security
+description: An explanation of how to secure your servers.
 ---
 
 # Securing Your Servers

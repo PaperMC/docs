@@ -286,6 +286,10 @@ ul.yaml-list-elem > li:before {
   color: rgb(148, 148, 148);
 }
 
+.config-explorer-code-outer-container {
+  overflow: visible;
+}
+
 .config-explorer-file-node {
   display: flex;
   align-items: center;
@@ -312,21 +316,28 @@ ul.yaml-list-elem > li:before {
   color: var(--config-node-highlight-text-color);
 }
 
-.config-explorer-popup-window-container {
+.config-explorer-popup-window-container { /* Container */
   position: absolute;
-  z-index: 10;
+  margin-left: 30px;
+  transform: translateZ(0);
   top: 100%;
   left: 0;
   width: fit-content;
+  z-index: 10;
 }
 
-.config-explorer-popup-window {
+.config-explorer-popup-window { /* Inner */
   background-color: #1c1e21;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   margin-right: 100px;
   width: fit-content;
+  z-index: 20;
+}
+
+.config-explorer-popup-window-open-tag { /* (i) tag */
+  z-index: 15; /* Between container and popup window */
 }
 
 .config-explorer-popup-window-open-tag:hover {

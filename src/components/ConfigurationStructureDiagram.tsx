@@ -99,7 +99,7 @@ export default function ConfigurationStructureDiagram({}) {
                     <span style={iconStyle}>{isFolder ? "📁" : "📄"}</span>
                     <span style={{ margin: "0 5px 0 5px" }}>{node.name}</span>
                     {hasDescription && (
-                        <span style ={{ zIndex: 100 }} className={"config-explorer-popup-window-open-tag"} onMouseEnter={handleNodeOpening}>ⓘ</span>
+                        <span className={"config-explorer-popup-window-open-tag"} onMouseEnter={handleNodeOpening}>ⓘ</span>
                     )}
 
                 </a>
@@ -107,7 +107,7 @@ export default function ConfigurationStructureDiagram({}) {
                 {hasDescription && (
                     <div className={"config-explorer-popup-window-container"}>
                         <div className={"config-explorer-popup-window"}
-                             style={{ display: popupNode === node ? "block" : "none", marginLeft: "30px" }}>
+                             /*style={{ display: popupNode === node ? "block" : "none" }}*/>
                             <strong>Description:</strong><br/>{node.description}
                         </div>
                     </div>
@@ -125,7 +125,7 @@ export default function ConfigurationStructureDiagram({}) {
 
     return (
         <div>
-            <pre>
+            <pre className={"config-explorer-code-outer-container"}>
                 {folderData.map(item => renderNode(item))}
             </pre>
         </div>

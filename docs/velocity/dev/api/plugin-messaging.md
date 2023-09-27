@@ -62,7 +62,7 @@ There are two methods to send a plugin message to the backend, depending on what
 
 :::warning
 
-When Listening for these messages on a backend server, ensure you are actually talking to an (allowed) instance of your proxy plugin.
+When listening for these messages on a backend server, ensure you are actually talking to an (allowed) instance of your proxy plugin.
 
 If you don't, you run the risk that these can be spoofed by a player with a modded client.
 

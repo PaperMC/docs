@@ -15,13 +15,13 @@ This means Velocity plugins need to consider 4 main cases.
 
 ```mermaid
 flowchart LR
-    player -->|"1 (Incoming)"| velocity -->|"2 (Outgoing)"| backend
-    backend -->|"3 (Incoming)"| velocity -->|"4 (Outgoing)"| player
+    player -->|"1 (Incoming)"| Velocity -->|"2 (Outgoing)"| backend
+    backend -->|"3 (Incoming)"| Velocity -->|"4 (Outgoing)"| player
 ```
 
-Additionally, BungeeCord channel compatability is included, which may remove the need for a companion velocity plugin certain cases.
+Additionally, BungeeCord channel compatibility is included, which may remove the need for a companion Velocity plugin in certain cases.
 
-## Case 1: Receiving a Plugin Message from a Player
+## Case 1: Receiving a plugin message from a player
 
 When you need to handle or inspect the contents of a plugin message sent by a player.
 
@@ -54,7 +54,7 @@ public void onPluginMessageFromPlayer(PluginMessageEvent event) {
 ```
 
 
-## Case 2: Sending a Plugin Message to a Backend Server
+## Case 2: Sending a plugin message to a backend server
 
 When you need to send a message to a backend server.
 
@@ -68,7 +68,7 @@ If you don't, you run the risk that these can be spoofed by a player with a modd
 
 :::
 
-### Using any connected Player
+### Using any connected player
 
 This is useful if you just want to communicate something relevant to the entire server,
 or otherwise can be derived from its content.
@@ -102,9 +102,9 @@ public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdent
 }
 ```
 
-## Case 3: Receiving a Plugin Message from a Backend server
+## Case 3: Receiving a plugin message from a backend server
 
-When you need to Receive messages from your backend server.
+When you need to receive messages from your backend server.
 
 This requires registering with the ChannelRegistrar for the event to be fired.
 
@@ -133,7 +133,7 @@ public void onPluginMessageFromBackend(PluginMessageEvent event) {
     // handle packet data
 }
 ```
-## Case 4: Sending a Plugin Message to a Player
+## Case 4: Sending a plugin message to a player
 
 When you need to send a message to a player.
 

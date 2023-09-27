@@ -96,7 +96,7 @@ public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdent
     Optional<ServerConnection> connection = player.getCurrentServer();
     boolean success = false;
     if (connection.isPresent()) {
-        success = connection.get().serverConnection.sendPluginMessage(identifier, data);
+        success = connection.get().sendPluginMessage(identifier, data);
     }
     return success;
 }

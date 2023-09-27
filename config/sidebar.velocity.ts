@@ -108,7 +108,7 @@ const velocity: SidebarsConfig = {
             "dev/api/event",
             "dev/api/command",
             "dev/api/scheduler",
-            "dev/how-to/plugin-messaging",
+            "dev/api/plugin-messaging",
           ],
         },
       ],

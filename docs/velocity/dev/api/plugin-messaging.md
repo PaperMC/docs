@@ -51,15 +51,15 @@ public void onPluginMessageFromPlayer(PluginMessageEvent event) {
 
 ## Case 2: Sending a plugin message to a backend server
 
-This is for when you need to send a message to a backend server.
+This is for when you need to send a plugin message to a backend server.
 
 There are two methods to send a plugin message to the backend, depending on what you need to achieve
 
 :::warning
 
-When listening for these messages on a backend server, ensure you are actually talking to an (allowed) instance of your proxy plugin.
+On your backend server, only listen for plugin messages if you are sure only a trusted proxy can send them to your server.
 
-If you don't, you run the risk that these can be spoofed by a player with a modded client.
+Otherwise, a player can pretend to be your proxy, and spoof them.
 
 :::
 
@@ -97,7 +97,7 @@ public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdent
 
 ## Case 3: Receiving a plugin message from a backend server
 
-This is for when you need to receive messages from your backend server. It will require registering with the ChannelRegistrar for the event to be fired.
+This is for when you need to receive plugin messages from your backend server. It will require registering with the ChannelRegistrar for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.
 
@@ -126,7 +126,7 @@ public void onPluginMessageFromBackend(PluginMessageEvent event) {
 ```
 ## Case 4: Sending a plugin message to a player
 
-This is for when you need to send a message to a player.
+This is for when you need to send a plugin message to a player.
 
 An example use case could be instructing a client side mod to disable certain features.
 

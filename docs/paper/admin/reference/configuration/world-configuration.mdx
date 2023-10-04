@@ -396,8 +396,8 @@ entities:
       description: 'Sets whether iron golems can spawn in the air. Iron farms may
         break depending on this setting '
     monster-spawn-max-light-level:
-      default: '-1'
-      description: 'When set to -1, the Vanilla default will be used (=0). Set to
+      default: 'default'
+      description: 'When set to "default", the Vanilla default will be used (=0). Set to
         15 or greater to revert to pre-1.18 behavior'
     non-player-arrow-despawn-rate:
       default: default
@@ -478,6 +478,28 @@ entities:
           This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_water_animals), except that it can be configured per world.
 
           A value of -1 will use the value in bukkit.yml'
+    tracking-range-y:
+      enabled:
+        default: 'false'
+        description: 'Enables separate ranges for tracking ranges in the vertical (Y) direction.'
+      animal:
+        default: 'default'
+        description: 'Controls how far vertically in blocks animals are tracked (sent to) the player.'
+      display:
+        default: 'default'
+        description: 'Controls how far vertically in blocks display entities are tracked (sent to) the player.'
+      monster:
+        default: 'default'
+        description: 'Controls how far vertically in blocks monsters are tracked (sent to) the player.'
+      player:
+        default: 'default'
+        description: 'Controls how far vertically in blocks players are tracked (sent to) the player.'
+      misc:
+        default: 'default'
+        description: 'Controls how far vertically in blocks miscellaneous are tracked (sent to) the player.'
+      other:
+        default: 'default'
+        description: 'Controls how far vertically in blocks other entities are tracked (sent to) the player.'
     wandering-trader:
       spawn-chance-failure-increment:
         default: '25'

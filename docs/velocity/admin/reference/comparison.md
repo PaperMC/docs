@@ -27,7 +27,7 @@ This is a quick overview of the differences between Velocity and other popular p
 | BungeeCord plugins                       | ✅         | ✅        | 🟨*      |
 | Secure player information forwarding     | ❌         | ❌        | ✅       |
 | API supporting modern Minecraft features | ❌         | ❌        | ✅       |
-| Actively developed                       | ❓         | ❌        | ✅       |
+| Actively developed                       | ❓         | ❌        | ❌       |
 | Improved mod support                     | ❌         | ❌        | ✅*\*    |
 
 \* _The Velocity API does not support plugins made for BungeeCord/Waterfall, but [Snap](https://hangar.papermc.io/Phoenix616/Snap) can be installed for experimental support.

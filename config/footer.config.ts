@@ -28,10 +28,6 @@ const footer: Footer = {
           href: "https://papermc.io/javadocs",
         },
         {
-          label: "Docs",
-          href: "/",
-        },
-        {
           label: "Downloads API",
           href: "https://api.papermc.io/docs",
         },

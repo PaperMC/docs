@@ -1,9 +1,9 @@
 ---
-slug: /dev/project-setup
+slug: /dev/manual-project-setup
 description: Step-by-step instructions on how to setup a plugin development environment.
 ---
 
-# Paper Project Setup
+# Manual Paper Project Setup
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE. 
 However, the steps below should apply to other IDEs as well, with some minor changes.

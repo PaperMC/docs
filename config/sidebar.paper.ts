@@ -98,7 +98,8 @@ const paper: SidebarsConfig = {
             id: "dev/getting-started/README",
           },
           items: [
-            "dev/getting-started/project-setup",
+            "dev/getting-started/manual-project-setup",
+            "dev/getting-started/assisted-project-setup",
             "dev/getting-started/userdev",
             "dev/getting-started/plugin-yml",
             "dev/getting-started/paper-plugins",

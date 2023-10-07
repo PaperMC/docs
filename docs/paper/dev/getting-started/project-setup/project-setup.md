@@ -139,7 +139,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
 ### Setting up the `resources`
 
-The `resources` directory is where you will place your plugin's `plugin.yml` file. See the [Plugin YML](plugin-yml) page for more information.
+The `resources` directory is where you will place your plugin's `plugin.yml` file. See the [Plugin YML](../../plugin-yml) page for more information.
 
 ### Conclusion
 

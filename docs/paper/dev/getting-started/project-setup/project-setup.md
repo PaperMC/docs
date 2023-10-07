@@ -1,9 +1,9 @@
 ---
-slug: /dev/manual-project-setup
+slug: /dev/getting-started/project-setup/project-setup
 description: Step-by-step instructions on how to setup a plugin development environment.
 ---
 
-# Manual Paper Project Setup
+# Paper Project Setup
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE. 
 However, the steps below should apply to other IDEs as well, with some minor changes.
@@ -12,6 +12,13 @@ The Paper team uses [Gradle](https://gradle.org/) as its build system, and its t
 Most of the code below can be altered to work with other build systems, such as Maven, but this guide will only cover Gradle.
 
 Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from_maven.html) to learn how to migrate from Maven to Gradle.
+
+:::note
+
+If you are using IntelliJ IDEA, you can use the [Minecraft Development](https://plugins.jetbrains.com/plugin/8327-minecraft-development) plugin to set up a project.
+Click [here](./mcdev-project-setup.md) to learn how to use it.
+
+:::
 
 ### Creating a new project
 
@@ -141,7 +148,7 @@ All you have left to do now is to compile your plugin and run it on a Paper serv
 
 :::note
 
-If you want to streamline the process of testing a plugin, you can use the [Run-Paper](https://github.com/jpenilla/run-paper) Gradle task.
+If you want to streamline the process of testing a plugin, you can use the [Run-Task](https://github.com/jpenilla/run-task) Gradle plugin.
 It will automatically download a Paper server and run it for you.
 
 :::

@@ -1,6 +1,6 @@
 ---
 slug: /dev/getting-started/project-setup/mcdev-project-setup
-description: Step-by-step instructions on how to setup a plugin with the MinecraftDev plugin.
+description: Step-by-step instructions on how to setup a project with the MinecraftDev IntelliJ plugin.
 ---
 
 # MCDev Project Setup

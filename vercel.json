@@ -37,8 +37,8 @@
       "destination": "/paper/reference/configuration"
     },
     {
-      "source": "paper/dev/project-setup",
-      "destination": "paper/dev/getting-started/project-setup/project-setup"
+      "source": "/paper/dev/project-setup",
+      "destination": "/paper/dev/getting-started/project-setup/project-setup"
     }
   ],
   "headers": [

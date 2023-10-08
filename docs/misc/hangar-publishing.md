@@ -59,13 +59,13 @@ Create a `gradle.properties` file in your project root directory if it does not 
 platform versions your plugin is compatible with. Simply remove the platforms you don't need and put in the correct
 versions.
 
-Hangar allows version ranges (such as `1.19-1.20.1`) and wildcards (such as `1.20.x`).
+Hangar allows version ranges (such as `1.19-1.20.2`) and wildcards (such as `1.20.x`).
 
 ```properties
 # Specify the platform versions for Paper, Velocity, and Waterfall.
-# Hangar also allows version ranges (such as 1.19-1.20.1) and wildcards (such as 1.20.x).
+# Hangar also allows version ranges (such as 1.19-1.20.2) and wildcards (such as 1.20.x).
 # TODO: Remove the platforms you don't need and put in the correct versions.
-paperVersion=1.12.2, 1.16.5, 1.19-1.20.1
+paperVersion=1.12.2, 1.16.5, 1.19-1.20.2
 velocityVersion=3.2
 waterfallVersion=1.20
 ```

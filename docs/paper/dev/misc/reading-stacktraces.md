@@ -16,7 +16,7 @@ line of code that called that line of code, and so on. This is useful because it
 
 Here is an example of a stacktrace which has been caused due to a `NullPointerException`:
 
-```
+```javastacktrace
 [15:20:42 ERROR]: Could not pass event PluginEnableEvent to TestPlugin v1.0
 java.lang.NullPointerException: Cannot invoke "Object.toString()" because "player" is null
         at io.papermc.testplugin.TestPlugin.onPluginEnable(TestPlugin.java:23) ~[TestPlugin-1.0-SNAPSHOT.jar:?]

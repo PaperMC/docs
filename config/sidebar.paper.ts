@@ -98,19 +98,7 @@ const paper: SidebarsConfig = {
             id: "dev/getting-started/README",
           },
           items: [
-            {
-              type: "category",
-              label: "Project Setup",
-              collapsed: true,
-              link: {
-                type: "doc",
-                id: "dev/getting-started/project-setup/README",
-              },
-              items: [
-                "dev/getting-started/project-setup/project-setup",
-                "dev/getting-started/project-setup/mcdev-project-setup",
-                ]
-            },
+            "dev/getting-started/project-setup",
             "dev/getting-started/userdev",
             "dev/getting-started/plugin-yml",
             "dev/getting-started/paper-plugins",

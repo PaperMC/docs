@@ -1,5 +1,5 @@
 ---
-slug: /dev/getting-started/project-setup/project-setup
+slug: /dev/project-setup
 description: Step-by-step instructions on how to setup a plugin development environment.
 ---
 
@@ -16,7 +16,7 @@ Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from
 :::note
 
 If you are using IntelliJ IDEA, you can use the [Minecraft Development](https://plugins.jetbrains.com/plugin/8327-minecraft-development) plugin to set up a project.
-Click [here](./mcdev-project-setup.md) to learn how to use it.
+Click [here](../../misc/mcdev-project-setup) to learn how to use it.
 
 :::
 
@@ -139,7 +139,7 @@ public class ExamplePlugin extends JavaPlugin implements Listener {
 
 ### Setting up the `resources`
 
-The `resources` directory is where you will place your plugin's `plugin.yml` file. See the [Plugin YML](../../plugin-yml) page for more information.
+The `resources` directory is where you will place your plugin's `plugin.yml` file. See the [Plugin YML](plugin-yml) page for more information.
 
 ### Conclusion
 

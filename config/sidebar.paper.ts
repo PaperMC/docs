@@ -83,7 +83,8 @@ const paper: SidebarsConfig = {
         ],
       },
     ],
-  },],
+  },
+  ],
   development: [{
     type: "category",
     label: "Development",
@@ -161,7 +162,8 @@ const paper: SidebarsConfig = {
         ],
       },
     ],
-  },],
+  },
+  ],
   contributing: [{
     type: "category",
     label: "Contributing",
@@ -173,7 +175,8 @@ const paper: SidebarsConfig = {
     items: [
       "contributing/events",
     ],
-  },],
+  },
+  ],
 };
 
 export = paper;

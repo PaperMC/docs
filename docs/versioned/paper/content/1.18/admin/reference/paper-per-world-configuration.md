@@ -638,7 +638,7 @@ updates or even permanently if issues are found.
   - **default**: false
   - **description**: Determines if items will have different despawn rates.
 - items
-  - **default**: { cobblestone: 300 } (a list of mappings)
+  - **default**: \{ cobblestone: 300 \} (a list of mappings)
   - **description**: Determines how long each respective item despawns in ticks. The item ids are
     the same as those used in the /give command. They can be viewed by enabling advanced item
     tooltips in-game by pressing **F3 + H**; the item id will appear at the bottom of the tooltip

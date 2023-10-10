@@ -280,7 +280,7 @@ function itself. For per-world configuration, see the
 
 - hidden-config-entries
 
-  - **default**: { database, settings.bungeecord-addresses, settings.velocity-support.secret }
+  - **default**: \{ database, settings.bungeecord-addresses, settings.velocity-support.secret \}
   - **description**: Configuration entries to hide in Timings reports.
 
 - history-interval

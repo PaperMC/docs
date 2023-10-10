@@ -12,8 +12,6 @@ information in the [1.19 announcement forum post](https://forums.papermc.io/thre
 
 :::
 
-<!-- ## Global Configuration -->
-
 ## Per World Configuration
 
 One of the most powerful yet least understood features of the Paper configuration is setting
@@ -108,9 +106,3 @@ Notice that `world_the_end/paper-world.yml` was never modified. Because of this,
 configuration options from `config/paper-world-defaults.yml`. Additionally, `keep-spawn-loaded` was
 only disabled in `resource_world/paper-world.yml` because in `config/paper-world-defaults.yml`,
 `keep-spawn-loaded` is set to `true`.
-
-<!-- ## System Properties -->
-
-<!-- ## Environment Variables -->
-
-<!-- ## Logging Configuration(?) -->

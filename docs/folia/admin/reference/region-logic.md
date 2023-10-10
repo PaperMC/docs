@@ -152,7 +152,7 @@ region that owns x is pending a merge into the region that owns y.
 #### Region section chunk shift
 
 The region section chunk shift is simply log2(grid size N). Thus,
-N = 1 << region section chunk shift. The conversion from
+N = 1 \<< region section chunk shift. The conversion from
 chunk position to region section is additionally defined as
 region coordinate = chunk coordinate >> region section chunk shift.
 

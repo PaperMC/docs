@@ -337,7 +337,6 @@ function itself. For per-world configuration, see the
 - **description**: Override the global configuration for any individual named packet. You can find
 the names of every packet as they are displayed on timings. For more experienced users, packets
 named here use Mojang mappings regardless of the server.
-<!-- For more information about overrides, see the [Packet Limiter Guide]... -->
 
 ## player-auto-save
 

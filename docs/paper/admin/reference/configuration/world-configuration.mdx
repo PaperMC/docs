@@ -478,28 +478,6 @@ entities:
           This is identical to the value set in [bukkit.yml](/paper/reference/bukkit-configuration#spawn_limits_water_animals), except that it can be configured per world.
 
           A value of -1 will use the value in bukkit.yml'
-    tracking-range-y:
-      enabled:
-        default: 'false'
-        description: 'Enables separate ranges for tracking ranges in the vertical (Y) direction.'
-      animal:
-        default: 'default'
-        description: 'Controls how far vertically in blocks animals are tracked (sent to) the player.'
-      display:
-        default: 'default'
-        description: 'Controls how far vertically in blocks display entities are tracked (sent to) the player.'
-      monster:
-        default: 'default'
-        description: 'Controls how far vertically in blocks monsters are tracked (sent to) the player.'
-      player:
-        default: 'default'
-        description: 'Controls how far vertically in blocks players are tracked (sent to) the player.'
-      misc:
-        default: 'default'
-        description: 'Controls how far vertically in blocks miscellaneous are tracked (sent to) the player.'
-      other:
-        default: 'default'
-        description: 'Controls how far vertically in blocks other entities are tracked (sent to) the player.'
     wandering-trader:
       spawn-chance-failure-increment:
         default: '25'
@@ -528,6 +506,28 @@ entities:
         description: 'The minimum height at which water animals will spawn. **Note**:
           The default value defers to Minecraft''s default setting, which as of 1.12
           is the sea level of the world (usually Y: 64)'
+  tracking-range-y:
+    enabled:
+      default: 'false'
+      description: 'Enables separate ranges for tracking ranges in the vertical (Y) direction.'
+    animal:
+      default: 'default'
+      description: 'Controls how far vertically in blocks animals are tracked (sent to) the player.'
+    display:
+      default: 'default'
+      description: 'Controls how far vertically in blocks display entities are tracked (sent to) the player.'
+    monster:
+      default: 'default'
+      description: 'Controls how far vertically in blocks monsters are tracked (sent to) the player.'
+    player:
+      default: 'default'
+      description: 'Controls how far vertically in blocks players are tracked (sent to) the player.'
+    misc:
+      default: 'default'
+      description: 'Controls how far vertically in blocks miscellaneous are tracked (sent to) the player.'
+    other:
+      default: 'default'
+      description: 'Controls how far vertically in blocks other entities are tracked (sent to) the player.'
 environment:
   disable-explosion-knockback:
     default: 'false'

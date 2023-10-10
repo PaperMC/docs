@@ -3,6 +3,8 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 const folia: SidebarsConfig = {
   primary: [
     "README",
+  ],
+  administration: [
     {
       type: "category",
       label: "Administration",
@@ -38,6 +40,8 @@ const folia: SidebarsConfig = {
         },
       ],
     },
+  ],
+  development: [
     {
       type: "category",
       label: "Development",
@@ -47,8 +51,8 @@ const folia: SidebarsConfig = {
         id: "dev/README",
       },
       items: [
-          // Placed here until some guides exist
-          "dev/README",
+        // Placed here until some guides exist
+        "dev/README",
       ],
     },
   ],

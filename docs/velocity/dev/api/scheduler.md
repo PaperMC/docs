@@ -11,7 +11,7 @@ thus run asynchronously.
 
 ## Running a delayed task
 
-All scheduling works by using a `TaskBuilder` returned from the `Scheduler`. This fluent builder may
+All scheduling works by using a [TaskBuilder](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/scheduler/Scheduler.TaskBuilder.html) returned from the [Scheduler](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/scheduler/Scheduler.html). This fluent builder may
 be chained to configure the details of the scheduling.
 
 ```java
@@ -31,7 +31,7 @@ Time arguments are specified as a `long` with a `java.util.concurrent.TimeUnit`.
 makes scheduling delayed tasks more readable and allows for greater precision.
 `2L, TimeUnit.SECONDS` is far easier to understand than the ambiguous `2000L`.
 
-You can also use a `java.time.Duration` to specify the time arguments, e.g.: `Duration.ofSeconds(5L)`.
+You can also use a [java.time.Duration](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/time/Duration.html) to specify the time arguments, e.g.: `Duration.ofSeconds(5L)`.
 
 ## Running a repeating task
 
@@ -55,7 +55,7 @@ and _repeat_ methods of the TaskBuilder.
 
 ## Cancellation
 
-The `schedule()` method returns a `ScheduledTask`, which may then be used to cancel the task
+The `schedule()` method returns a [ScheduledTask](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/scheduler/ScheduledTask.html), which may then be used to cancel the task
 involved via the `cancel()` method. Tasks cannot be uncancelled.
 
 Additionally, `task.status()` returns the current status of the task.

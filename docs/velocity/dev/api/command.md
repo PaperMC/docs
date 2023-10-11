@@ -10,7 +10,7 @@ the console.
 
 ## Creating a command
 
-Each command class needs to implement a `Command` subinterface. The choice depends on the type of
+Each command class needs to implement a `[Command](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/command/Command.html)` subinterface. The choice depends on the type of
 arguments and the granularity of suggestions provided to the client. These include:
 
 ### `BrigadierCommand`

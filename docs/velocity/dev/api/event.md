@@ -114,7 +114,7 @@ asynchronously, however only some will explicitly wait for events to finish bein
 continuing.
 
 For an annotation-based listener, all that is needed to process an event asynchronously is to either
-return an `EventTask` or add a second `Continuation` parameter:
+return an `[EventTask](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/EventTask.html)` or add a second `[Continuation](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/Continuation.html)` parameter:
 
 ```java
   @Subscribe(order = PostOrder.EARLY)
@@ -131,7 +131,7 @@ return an `EventTask` or add a second `Continuation` parameter:
   }
 ```
 
-A functional listener simply needs to implement `AwaitingEventExecutor` and return an `EventTask`:
+A functional listener simply needs to implement `[AwaitingEventExecutor](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/AwaitingEventExecutor.html)` and return an `EventTask`:
 
 ```java
   server.getEventManager().register(this, PlayerChatEvent.class, (AwaitingEventExecutor) event -> {
@@ -208,7 +208,7 @@ You'll notice that your events don't need to extend or implement anything. They 
 ### Firing the Event
 
 To fire the event, you'll need to get the server's event manager and use the `fire` method. Note
-that this returns a `CompletableFuture`, so if you want to continue logic after the event is handled
+that this returns a `[CompletableFuture](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/CompletableFuture.html)`, so if you want to continue logic after the event is handled
 by all listeners, use a callback:
 
 ```java
@@ -220,11 +220,11 @@ server.getEventManager().fire(new PrivateMessageEvent(sender, recipient, message
 
 ### Using ResultedEvent
 
-Velocity uses the generalised `ResultedEvent` for events which have some sort of 'result'. The
+Velocity uses the generalised `[ResultedEvent](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/ResultedEvent.html)` for events which have some sort of 'result'. The
 result type of the event is defined by its generic type; for example.
 `PrivateMessageEvent implements ResultedEvent<ResultType>`.
 
-Some common result types are `GenericResult`, for simple allowed/denied results, and component
+Some common result types are `[GenericResult](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/ResultedEvent.GenericResult.html)`, for simple allowed/denied results, and component
 results, used for events where the result may be denied with an accompanying reason (such as in a
 login event).
 

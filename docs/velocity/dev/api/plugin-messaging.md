@@ -21,7 +21,7 @@ Additionally, BungeeCord channel compatibility is included, which may remove the
 
 ## Case 1: Receiving a plugin message from a player
 
-This is for when you need to handle or inspect the contents of a plugin message sent by a player. It will require registering with the ChannelRegistrar for the event to be fired. 
+This is for when you need to handle or inspect the contents of a plugin message sent by a player. It will require registering with the [ChannelRegistrar](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/proxy/messages/ChannelRegistrar.html) for the event to be fired. 
 
 An example use case could be logging messages from a mod that reports the enabled features.
 
@@ -97,7 +97,7 @@ public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdent
 
 ## Case 3: Receiving a plugin message from a backend server
 
-This is for when you need to receive plugin messages from your backend server. It will require registering with the ChannelRegistrar for the event to be fired.
+This is for when you need to receive plugin messages from your backend server. It will require registering with the [ChannelRegistrar](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/proxy/messages/ChannelRegistrar.html) for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.
 

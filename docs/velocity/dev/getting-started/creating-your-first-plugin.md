@@ -116,3 +116,77 @@ dependencies {
 
   </TabItem>
 </Tabs>
+
+## Using the Minecraft Development IntelliJ plugin
+
+Alternatively, you can use the [Minecraft Development IntelliJ plugin](https://plugins.jetbrains.com/plugin/8327-minecraft-development)
+to create a new project. To do that you need to install the plugin first.
+
+:::info
+
+This tutorial only works with IntelliJ IDEA. If you are using another IDE, please follow the manual project setup guide described above.
+
+:::
+
+### Installing the Minecraft Development plugin
+
+The first thing you need to do is install the [Minecraft Development](https://plugins.jetbrains.com/plugin/8327-minecraft-development) plugin.
+You can do this by going to `File > Settings > Plugins` and searching for `Minecraft Development` under the `Marketplace` section.
+
+![](assets/installing-plugin.png)
+
+Once you have installed the plugin, you will need to restart IntelliJ.
+To do that you can click the `Restart IDE` button that appears after installing the plugin.
+
+![](assets/restart-ide.png)
+
+### Creating a new project
+
+Now that you have installed the plugin, you can create a new project by going to `File > New > Project...` and selecting `Minecraft` from the list of options.
+
+### Setting up a Velocity project
+
+![](assets/new-project-velocity.png)
+
+You will be asked to provide some information about your project.
+
+| Field                | Explanation                                                                                                                                                                                                                                                               |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Name**             | The name of your project.                                                                                                                                                                                                                                                 |
+| **Location**         | The location of your project. This is where the project files will be stored.                                                                                                                                                                                             |
+| **Platform Type**    | The platform type you are developing for. This should be `Plugin`.                                                                                                                                                                                                        |
+| **Platform**         | The platform you are developing for. This should be `Velocity`.                                                                                                                                                                                                           |
+| **Velocity Version** | The version of Velocity you are developing for.                                                                                                                                                                                                                           |
+| **Plugin Id**        | The id of your plugin.                                                                                                                                                                                                                                                    |
+| **Plugin Name**      | The name of your plugin.                                                                                                                                                                                                                                                  |
+| **Main Class**       | The main class of your plugin. This class should have the `@Plugin` annotation.                                                                                                                                                                                           |
+| **Optional Setting** | Here you can define things like authors, website, description, etc. These are optional and not required for the plugin to work.                                                                                                                                           |
+| **Build System**     | The build system you want to use. Paper recommends using Gradle but you can use Maven if you prefer.                                                                                                                                                                      |
+| **Group ID**         | The group ID of your project. This is used for Maven and Gradle. This is usually your domain name in reverse. If you don't know what you should put here, you can use something like `io.github.<yourname>` or if you don't have GitHub you can just use `me.<yourname>`. |
+| **Artifact ID**      | The artifact ID of your project. This is used for Maven and Gradle. This is usually the name of your project. This is usually the same as the `Name` field.                                                                                                               |
+| **Version**          | The version of your project. This is used for Maven and Gradle. This is usually `1.0-SNAPSHOT` and does not really matter for now.                                                                                                                                        |
+| **JDK**              | The JDK you want to use. This can be anything from Java 11 and above.                                                                                                                                                                                                     |
+
+Now you can click on the `Create` button and IntelliJ will create the project for you.
+If everything went well, you should see something like this:
+
+![](assets/velocity-plugin-overview.png)
+
+## Conclusion
+
+You should now have a project set up with Velocity as a dependency.
+All you have left to do now is to compile your plugin and run it on a Velocity server.
+
+:::note
+
+If you want to streamline the process of testing a plugin, you can use the [Run-Task](https://github.com/jpenilla/run-task) Gradle plugin.
+It will automatically download a Velocity server and run it for you.
+
+:::
+
+:::info
+
+If you are using IntelliJ, you can use the Gradle GUI `Build` menu to compile your plugin - found on the top right of your IDE.
+The output jar of your plugin will be in the `build/libs` directory.
+
+:::

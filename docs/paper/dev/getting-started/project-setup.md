@@ -16,7 +16,7 @@ Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from
 :::note
 
 If you are using IntelliJ IDEA, you can use the [Minecraft Development](https://plugins.jetbrains.com/plugin/8327-minecraft-development) plugin to set up a project.
-Click [here](../../misc/mcdev-project-setup) to learn how to use it.
+Click [here](../misc/mcdev-project-setup) to learn how to use it.
 
 :::
 

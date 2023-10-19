@@ -1,5 +1,5 @@
 ---
-slug: /mcdev-project-setup
+slug: /dev/mcdev-project-setup
 description: Step-by-step instructions on how to setup a project with the MinecraftDev IntelliJ plugin.
 ---
 
@@ -45,7 +45,7 @@ You will be asked to provide some information about your project.
 | **Optional Settings** | Here you can define things like authors, website, description, etc. These are optional and not required for the plugin to work.                                                                                                                                           |
 | **Build System**      | The build system you want to use. Paper recommends using Gradle but you can use Maven if you prefer.                                                                                                                                                                      |
 | **Paper Manifest**    | Whether you want to use the new Paper plugins or not. For now this is not recommended as it is still in development.                                                                                                                                                      |
-| **Group ID**          | The group ID of your project. This is used for Maven and Gradle. This is usually your domain name in reverse. If you don't know what you should put here, you can use something like `io.github.<yourname>` or if you don't have GitHub you can just use `me.<yourname>`. |
+| **Group ID**          | The group ID of your project. This is used for Maven and Gradle. This is usually your domain name in reverse. If you don't know what you should put here, you can use something like `io.github.<yourname>` or if you don't have GitHub you can use `me.<yourname>`. |
 | **Artifact ID**       | The artifact ID of your project. This is used for Maven and Gradle. This is usually the name of your project. This is usually the same as the `Name` field.                                                                                                               |
 | **Version**           | The version of your project. This is used for Maven and Gradle. This is usually `1.0-SNAPSHOT` and does not really matter for now.                                                                                                                                        |
 | **JDK**               | The JDK you want to use. This can be anything from Java 17 and above.                                                                                                                                                                                                     |

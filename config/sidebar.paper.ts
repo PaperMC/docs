@@ -154,6 +154,7 @@ const paper: SidebarsConfig = {
             "dev/misc/debugging",
             "dev/misc/databases",
             "dev/misc/internal-code",
+            "mcdev-project-setup",
           ],
         },
       ],

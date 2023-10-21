@@ -34,7 +34,7 @@ anticheat:
       description: 'Sets the maximum height (y coordinate, starting from the bottom
         of the world) to which anti-xray will operate. Only integer multiples of 16
         are accepted. All other values will be rounded down. The [Minecraft Wiki page
-        about Ore](https://minecraft.fandom.com/wiki/Ore) may be helpful in determining
+        about Ore](https://minecraft.wiki/w/Ore) may be helpful in determining
         the best value for you'
     update-radius:
       default: '2'
@@ -396,8 +396,8 @@ entities:
       description: 'Sets whether iron golems can spawn in the air. Iron farms may
         break depending on this setting '
     monster-spawn-max-light-level:
-      default: '-1'
-      description: 'When set to -1, the Vanilla default will be used (=0). Set to
+      default: 'default'
+      description: 'When set to "default", the Vanilla default will be used (=0). Set to
         15 or greater to revert to pre-1.18 behavior'
     non-player-arrow-despawn-rate:
       default: default
@@ -506,6 +506,28 @@ entities:
         description: 'The minimum height at which water animals will spawn. **Note**:
           The default value defers to Minecraft''s default setting, which as of 1.12
           is the sea level of the world (usually Y: 64)'
+  tracking-range-y:
+    enabled:
+      default: 'false'
+      description: 'Enables separate ranges for tracking ranges in the vertical (Y) direction.'
+    animal:
+      default: 'default'
+      description: 'Controls how far vertically in blocks animals are tracked (sent to) the player.'
+    display:
+      default: 'default'
+      description: 'Controls how far vertically in blocks display entities are tracked (sent to) the player.'
+    monster:
+      default: 'default'
+      description: 'Controls how far vertically in blocks monsters are tracked (sent to) the player.'
+    player:
+      default: 'default'
+      description: 'Controls how far vertically in blocks players are tracked (sent to) the player.'
+    misc:
+      default: 'default'
+      description: 'Controls how far vertically in blocks miscellaneous are tracked (sent to) the player.'
+    other:
+      default: 'default'
+      description: 'Controls how far vertically in blocks other entities are tracked (sent to) the player.'
 environment:
   disable-explosion-knockback:
     default: 'false'

@@ -43,7 +43,7 @@ Recommended configuration for both `engine-mode` `1` and `2` can be found in the
 - **default**: `64`
 - **description**: Sets the maximum height (`y` coordinate, starting from the bottom of the world)
   to which anti-xray will operate. Only integer multiples of 16 are accepted. All other values will
-  be rounded down. The [Minecraft Wiki page about Ore](https://minecraft.fandom.com/wiki/Ore) may be
+  be rounded down. The [Minecraft Wiki page about Ore](https://minecraft.wiki/w/Ore) may be
   helpful in determining the best value for you.
 
 #### update-radius

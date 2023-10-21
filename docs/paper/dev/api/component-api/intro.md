@@ -131,7 +131,7 @@ of this format.
 
 :::info[In-Depth Documentation]
 
-The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). 
+The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.wiki/w/Raw_JSON_text_format). 
 
 :::
 

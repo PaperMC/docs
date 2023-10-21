@@ -4,7 +4,8 @@ const velocity: SidebarsConfig = {
   primary: [
     "README",
   ],
-  administration: [{
+  administration: [
+    {
       type: "category",
       label: "Administration",
       collapsed: true,
@@ -57,7 +58,8 @@ const velocity: SidebarsConfig = {
       ],
     },
   ],
-  development: [{
+  development: [
+    {
       type: "category",
       label: "Development",
       collapsed: true,

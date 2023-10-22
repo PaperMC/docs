@@ -48,7 +48,7 @@ Finally, copy the command line arguments from the window, and paste these into y
 These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`. For example:
 
 ```bash
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-1.20.1.jar nogui
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-1.20.2.jar nogui
 ```
 
 Once your server is running, you can use the bug icon in the top right to connect your debugger to the server:

@@ -198,4 +198,4 @@ It also remaps plugin CB calls to remove the version information.
 #### paperclip.patchonly:
 
 - **default**: `false`
-- **description**: Sets whether the server should patch the Vanilla server and download libraries without starting.
+- **description**: If the server is started via the Paperclip patch utility (the default distribution on the downloads page) then this sets whether it should only patch the Vanilla server and download libraries without starting the server.

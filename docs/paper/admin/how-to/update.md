@@ -1,5 +1,6 @@
 ---
 slug: /updating
+description: Paper has new features and fixes coming every day, this guide explains the updating process.
 ---
 
 # Updating Paper
@@ -8,7 +9,7 @@ Updating Paper is an important part of running every server. With new features a
 every day, we recommend updating at least once per week to keep your server patched for the latest
 bugs. Installing updates is very simple, but it's important to know how to do it correctly.
 
-:::caution Don't replace any JAR in a running server
+:::caution[Don't replace any JAR in a running server]
 
 Unless you know exactly what and why you're doing what you're doing, it's never a good idea to
 replace any JAR in a running server, be that plugins, or Paper itself.
@@ -60,9 +61,9 @@ To minimize downtime caused by updates, some server owners will, rather than rep
 JAR, upload a new one and set their start script to use the new one on the next restart. Both of
 these are valid update strategies.
 
-:::caution Automatic Updates
+:::caution[Automatic Updates]
 
-While it may be convenient to install updates automatically (and Paper's [downloads api] allows you
+While it may be convenient to install updates automatically (and Paper's [downloads api](https://api.papermc.io/docs) allows you
 to with ease), doing so is not recommended by Paper due to the possibility of plugin conflicts or
 other issues that you may not know about. Always be present during updates, and keep a careful watch
 on your server's log after the fact.

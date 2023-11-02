@@ -33,7 +33,7 @@ const paper: SidebarsConfig = {
             slug: "/cat/admin/how-to-guides",
           },
           items: [
-            "admin/how-to/configuration",
+            "admin/how-to/basic-troubleshooting",
             "admin/how-to/update",
             "admin/how-to/aikars-flags",
             "admin/how-to/anti-xray",
@@ -47,9 +47,35 @@ const paper: SidebarsConfig = {
             slug: "/cat/admin/reference",
           },
           items: [
-            "admin/reference/global-configuration",
-            "admin/reference/world-configuration",
+            {
+              type: "category",
+              label: "Configuration",
+              link: {
+                type: "doc",
+                id: "admin/reference/configuration/README",
+              },
+              items: [
+                "admin/reference/configuration/global-configuration",
+                "admin/reference/configuration/world-configuration",
+                "admin/reference/configuration/server-properties",
+                "admin/reference/configuration/spigot-configuration",
+                "admin/reference/configuration/bukkit-configuration",
+              ],
+            },
             "admin/reference/system-properties",
+            "admin/reference/paper-plugins",
+          ],
+        },
+        {
+          type: "category",
+          label: "Miscellaneous",
+          link: {
+            type: "generated-index",
+            slug: "/cat/admin/misc",
+          },
+          items: [
+            "admin/misc/faq",
+            "admin/misc/paper-bug-fixes",
           ],
         },
       ],
@@ -73,7 +99,9 @@ const paper: SidebarsConfig = {
           },
           items: [
             "dev/getting-started/project-setup",
+            "dev/getting-started/userdev",
             "dev/getting-started/plugin-yml",
+            "dev/getting-started/paper-plugins",
           ],
         },
         {
@@ -95,9 +123,51 @@ const paper: SidebarsConfig = {
                 "dev/api/event-api/handler-lists",
               ],
             },
+            {
+              type: "category",
+              label: "Component API",
+              collapsed: true,
+              items: [
+                "dev/api/component-api/intro",
+                "dev/api/component-api/i18n",
+              ]
+            },
+            "dev/api/roadmap",
             "dev/api/pdc",
+            "dev/api/custom-inventory-holder",
+            "dev/api/scheduler",
+            "dev/api/plugin-messaging",
+            "dev/api/plugin-configs",
+            "dev/api/folia-support",
           ],
         },
+        {
+          type: "category",
+          label: "Miscellaneous",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "dev/misc/README",
+          },
+          items: [
+            "dev/misc/reading-stacktraces",
+            "dev/misc/debugging",
+            "dev/misc/databases",
+            "dev/misc/internal-code",
+          ],
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Contributing",
+      collapsed: true,
+      link: {
+        type: "doc",
+        id: "contributing/README",
+      },
+      items: [
+        "contributing/events",
       ],
     },
   ],

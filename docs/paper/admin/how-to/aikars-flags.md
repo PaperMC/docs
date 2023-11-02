@@ -1,5 +1,6 @@
 ---
 slug: /aikars-flags
+description: Aikar's flags are a set of JVM flags designed to improve the performance of your Paper server.
 ---
 
 # Aikar's Flags
@@ -13,7 +14,7 @@ size of memory, even 500MB but modern Minecraft versions will not do well with s
 java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper.jar --nogui
 ```
 
-:::caution Do not allocate all of your available memory on a shared host!
+:::caution[Do not allocate all of your available memory on a shared host!]
 
 When setting the Xms and Xmx values, if your host says you have 8000M memory, DO NOT USE 8000M!
 Minecraft (and Java) needs additional memory on top of that Xmx parameter. It is recommended to

@@ -1,5 +1,6 @@
 ---
 slug: /built-in-commands
+description: A list of the built-in commands with explanations.
 ---
 
 # Built-In Commands
@@ -20,7 +21,7 @@ active on the proxy using `/velocity plugins`, including the name, authors, and 
 
 ### `/velocity version`
 
-Displays the version of Velocity running on the proxy.
+If the user has the `velocity.command.info` permission (by default, this is granted to all users), they can view the version of Velocity running on the proxy.
 
 ### `/velocity reload`
 
@@ -30,19 +31,23 @@ applied.
 
 ### `/velocity dump`
 
-:::caution
-
-This command will send some basic information to a web service maintained by the Velocity project
-(`dump.velocitypowered.com`). While we anonymize potentially sensitive details in the proxy such as
-external IP addresses and all dumps expire after 3 days, we do not take responsibility for any
-potential misuse of the data provided. Use this command with caution and after you have considered
-the privacy and security concerns.
-
-:::
-
 If the user has the `velocity.command.plugins` permission, they can use this command to get an
 anonymized dump of details on the proxy. This can be sent to the Velocity Discord to help us provide
 support.
+
+### `/velocity heap`
+
+:::caution
+
+This command generates a heap dump which contains detailed information about your Velocity instance
+which can be quite sensitive, be very careful to whom you share the generated heap dump.
+
+:::
+
+If the user has the `velocity.command.heap` permission, they will be able to generate a heap dump
+from the running Velocity instance, which will allow a detailed analysis of memory consumption.
+
+The generated heap dump will be found in the `dumps` folder.
 
 ## `/server`
 
@@ -58,10 +63,15 @@ If a server name has been provided, Velocity will attempt to connect to the serv
 
 When executed from the console, this will gracefully shut down the Velocity proxy. All players will
 be disconnected from the proxy and plugins will have a chance to finish up before the proxy shuts
-down. An optional reason can be given, either as JSON or with [MiniMessage Format](https://docs.adventure.kyori.net/minimessage/format.html).
+down. An optional reason can be given, either as JSON or with [MiniMessage Format](https://docs.advntr.dev/minimessage/format.html).
 
 ## `/glist`
 
 If the user has the `velocity.command.glist` permission (by default, this is granted to nobody),
 players can use this command to view the number of players currently on the proxy and use
 `/glist all` to get a listing of players per server.
+
+## `/send`
+
+If the user has the `velocity.command.send` permission, they can send other players (or all
+players on the proxy) to another server.

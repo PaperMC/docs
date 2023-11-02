@@ -1,12 +1,13 @@
 ---
 slug: /dev/event-api
+description: How to listen for events in Velocity.
 ---
 
 # Working With Events
 
 Listening to events with Velocity's `@Subscribe` annotation is straightforward. You've already seen
 one such listener, using the ProxyInitializeEvent in your main class. Additional events can be found
-on the [Javadoc](https://jd.velocitypowered.com/3.0.0/).
+on the [Javadoc](https://jd.papermc.io/velocity/3.0.0/).
 
 ## Creating a listener method
 
@@ -101,7 +102,6 @@ register yours with `register(Object plugin, Class<E> eventClass, EventHandler<E
 ```java
   server.getEventManager().register(this, PlayerChatEvent.class, event -> {
       // do something here
-      return null;
   });
 ```
 

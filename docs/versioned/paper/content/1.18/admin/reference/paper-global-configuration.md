@@ -114,7 +114,7 @@ function itself. For per-world configuration, see the
 
 - **default**: true
 - **description**: Collisions with boats and minecarts are often subject to client/server
-  disagreement, which may cause glitchy behaviour for players. This setting attempts to mitigate
+  disagreement, which may cause glitchy behavior for players. This setting attempts to mitigate
   this desync by sending precise locations for entities involved in collisions. Having this enabled
   will use more bandwidth; however, in the majority of cases, this is a worthy tradeoff.
 

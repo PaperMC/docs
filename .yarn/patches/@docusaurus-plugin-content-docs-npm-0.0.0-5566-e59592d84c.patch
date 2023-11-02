@@ -1,0 +1,59 @@
+diff --git a/lib/constants.js b/lib/constants.js
+index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..26547fc57dc6b902fef11bb52c9d9553cc892619 100644
+--- a/lib/constants.js
++++ b/lib/constants.js
+@@ -10,8 +10,8 @@ exports.VERSIONS_JSON_FILE = exports.VERSIONED_SIDEBARS_DIR = exports.VERSIONED_
+ /** The name of the version that's actively worked on (e.g. `website/docs`) */
+ exports.CURRENT_VERSION_NAME = 'current';
+ /** All doc versions are stored here by version names */
+-exports.VERSIONED_DOCS_DIR = 'versioned_docs';
++exports.VERSIONED_DOCS_DIR = 'content';
+ /** All doc versioned sidebars are stored here by version names */
+-exports.VERSIONED_SIDEBARS_DIR = 'versioned_sidebars';
++exports.VERSIONED_SIDEBARS_DIR = 'sidebars';
+ /** The version names. Should 1-1 map to the content of versioned docs dir. */
+-exports.VERSIONS_JSON_FILE = 'versions.json';
++exports.VERSIONED_BASE_DIR = 'docs/versioned';
+diff --git a/lib/versions/files.js b/lib/versions/files.js
+index deaadb4357a348c8071b70d72a3c6d9e4e61459f..66f369dc5d98550299d3a5778de38be3f084ed31 100644
+--- a/lib/versions/files.js
++++ b/lib/versions/files.js
+@@ -13,20 +13,20 @@ const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
+ const utils_1 = require("@docusaurus/utils");
+ const constants_1 = require("../constants");
+ const validation_1 = require("./validation");
+-/** Add a prefix like `community_version-1.0.0`. No-op for default instance. */
++/** Add a prefix like `community_version-1.0.0`. No-op for default instance.
+ function addPluginIdPrefix(fileOrDir, pluginId) {
+     return pluginId === utils_1.DEFAULT_PLUGIN_ID
+         ? fileOrDir
+         : `${pluginId}_${fileOrDir}`;
+-}
+-/** `[siteDir]/community_versioned_docs/version-1.0.0` */
++}*/ // Paper
++/** `[siteDir]/docs/versioned/paper/content/1.0.0` */ // Paper
+ function getVersionDocsDirPath(siteDir, pluginId, versionName) {
+-    return path_1.default.join(siteDir, addPluginIdPrefix(constants_1.VERSIONED_DOCS_DIR, pluginId), `version-${versionName}`);
++    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, pluginId, constants_1.VERSIONED_DOCS_DIR, versionName); // Paper
+ }
+ exports.getVersionDocsDirPath = getVersionDocsDirPath;
+-/** `[siteDir]/community_versioned_sidebars/version-1.0.0-sidebars.json` */
++/** `[siteDir]/docs/versioned/paper/sidebars/1.0.0.json` */ // Paper
+ function getVersionSidebarsPath(siteDir, pluginId, versionName) {
+-    return path_1.default.join(siteDir, addPluginIdPrefix(constants_1.VERSIONED_SIDEBARS_DIR, pluginId), `version-${versionName}-sidebars.json`);
++    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, pluginId, constants_1.VERSIONED_SIDEBARS_DIR, `${versionName}.json`);
+ }
+ exports.getVersionSidebarsPath = getVersionSidebarsPath;
+ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
+@@ -42,9 +42,9 @@ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
+     });
+ }
+ exports.getDocsDirPathLocalized = getDocsDirPathLocalized;
+-/** `community` => `[siteDir]/community_versions.json` */
++/** `community` => `[siteDir]/docs/versioned/paper.json` */ // Paper
+ function getVersionsFilePath(siteDir, pluginId) {
+-    return path_1.default.join(siteDir, addPluginIdPrefix(constants_1.VERSIONS_JSON_FILE, pluginId));
++    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, `${pluginId}.json`);
+ }
+ exports.getVersionsFilePath = getVersionsFilePath;
+ /**

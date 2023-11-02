@@ -1,12 +1,13 @@
 ---
 slug: /reference/system-properties
+description: Documentation for the system properties Paper may check.
 ---
 
-# Paper System Properties 
+# Paper System Properties
 
 These system properties can be set when you start your server allowing for the configuration of various settings.
 
-:::danger Danger Ahead
+:::danger[Danger Ahead]
 
 Setting flags for the JVM can alter how it operates and the same goes for the Paper server.
 If you are unsure about what a flag does, it is recommended that you **do not use it**.
@@ -23,7 +24,7 @@ java -Dpaper.log-level=FINE -jar paper.jar
 
 :::info
 
-Some of the paper system properties require have `.`'s in them. When using Windows Powershell, these will require wrapping in quotes.
+Some of the paper system properties contain a `.` character in their name. When using Windows Powershell, these will require wrapping in quotes.
 i.e. `"-Dpaper.log-level=FINE"`
 
 :::
@@ -185,11 +186,6 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `unset`
 - **description**: Always prints the warning state for the particular level.
 
-#### Paper.printStacktraceOnBadPluginClassAccess:
-
-- **default**: `unset`
-- **description**: Prints a stacktrace when a plugin attempts to access a class that is not a dependency of the plugin.
-
 #### Paper.parseYamlCommentsByDefault:
 
 - **default**: `true`
@@ -199,3 +195,8 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `false`
 - **description**: If the server is started via the Paperclip patch utility (the default distribution on the downloads page) then this sets whether it should only patch the Vanilla server and download libraries without starting the server.
+
+#### Paper.IgnoreJavaVersion:
+
+- **default**: `false`
+- **description**: Allows you to bypass the Java version check. See [here](/paper/faq#unsupported-java-detected-what-do-i-do) for more info.

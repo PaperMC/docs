@@ -1,6 +1,7 @@
 ---
 toc_max_heading_level: 4
 slug: /adding-plugins
+description: Plugins are the most powerful way to extend the functionality of Paper beyond the configuration files.
 ---
 
 # Adding Plugins
@@ -9,7 +10,7 @@ Plugins are the most powerful way to extend the functionality of Paper beyond th
 files. Functionality added by plugins can range from making milk restore hunger or dead bushes grow,
 to adding entirely new and original game modes or items.
 
-:::danger Malicious Plugins
+:::danger[Malicious Plugins]
 
 Ensure you fully trust the source of any plugin before installing it. Plugins are given **full and
 unrestricted** access to not only your server but also the machine that it runs on. Because of this,
@@ -19,7 +20,7 @@ it is imperative that plugins only be installed from trusted sources. Be careful
 
 ## Finding Plugins
 
-Before installing a plugin, you'll need to find what you want to install. Most plugins can be found
+Before installing a plugin, you'll need to find what you want to install. The best place to find plugins is [Hangar](https://hangar.papermc.io), Paper's plugin repository, but you can also find many plugins
 on [SpigotMC](https://www.spigotmc.org/resources/),
 [BukkitDev](https://dev.bukkit.org/bukkit-plugins), or the
 [PaperMC Forums](https://forums.papermc.io/forums/paper-plugin-releases/), while other plugins may
@@ -27,7 +28,7 @@ release on [GitHub](https://github.com). One of the best ways to find plugins is
 these sites directly but to search for plugins using a search engine. Searching for the function you
 desire followed by `Minecraft plugin` will often yield good results.
 
-:::tip Spigot and Bukkit Plugins
+:::tip[Spigot and Bukkit Plugins]
 
 Paper is compatible with both Spigot and Bukkit plugins. It's okay if a plugin does not explicitly
 mention Paper compatibility. It'll still work.

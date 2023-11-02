@@ -8,7 +8,7 @@ slug: /anti-xray
 
 Paper includes an obfuscation-based Anti-Xray with two modes, configurable per world in paper.yml.
 
-:::info Per World Configuration
+:::info[Per World Configuration]
 
 If you aren't already familiar with per world configuration, please take a moment to familiarize
 yourself with the [Per World Configuration Guide](per-world-configuration.md).
@@ -40,7 +40,7 @@ by solid blocks will be hidden. Ores exposed to air in caves or water from a lak
 hidden. With `engine-mode: 2`, fake ores obstruct the view of real blocks. If `air` is added to
 `hidden-blocks`, `engine-mode: 2` will effectively hide all ores, even those exposed to air.
 
-:::caution Anti-Xray Bypasses
+:::caution[Anti-Xray Bypasses]
 
 **Range Extension**: While Anti-Xray alone will prevent the majority of users from Xraying on your
 server, it is not by any means infallible. Because of how Anti-Xray is (and has to be) implemented,
@@ -68,7 +68,7 @@ some players.
 
 The recommended configuration for both `engine-mode: 1` and `engine-mode: 2` is as follows:
 
-:::tip Spacing
+:::tip[Spacing]
 
 YAML cares about whitespace! The example configuration below is already formatted correctly. Ensure
 formatting remains unchanged by using the "copy" button in the top right of each example.
@@ -90,7 +90,7 @@ following:
       engine-mode: 1
       # As of 1.18 some ores are generated much higher.
       # Please adjust the max-block-height setting at your own discretion.
-      # https://minecraft.fandom.com/wiki/Ore might be helpful.
+      # https://minecraft.wiki/w/Ore might be helpful.
       max-block-height: 64
       update-radius: 2
       lava-obscures: false
@@ -163,7 +163,7 @@ following:
       engine-mode: 2
       # As of 1.18 some ores are generated much higher.
       # Please adjust the max-block-height setting at your own discretion.
-      # https://minecraft.fandom.com/wiki/Ore might be helpful.
+      # https://minecraft.wiki/w/Ore might be helpful.
       max-block-height: 64
       update-radius: 2
       lava-obscures: false

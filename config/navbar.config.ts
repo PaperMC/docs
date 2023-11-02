@@ -5,8 +5,8 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
   logo: {
     src: "img/logo-marker-light.svg",
     srcDark: "img/logo-marker-dark.svg",
-    width: 130,
-    height: 32,
+    height: 42, // when changing here, also change css
+    width: 121,
     alt: "PaperMC Docs",
   },
   items: [
@@ -15,17 +15,41 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       label: "Paper",
       to: "/paper",
       position: "left",
-      activeBaseRegex: "(\\/paper)(.+)?",
+      activeBaseRegex: "\\/paper.*",
       items: [
         {
           label: "Administration",
           to: "/paper/admin",
-          activeBaseRegex: "(\\/paper/)(?!dev)(.+)?",
+          activeBaseRegex: "\\/paper/(?!(dev|contributing)).*",
         },
         {
           label: "Development",
           to: "/paper/dev",
-          activeBaseRegex: "(\\/paper\\/dev)(.+)?",
+          activeBaseRegex: "\\/paper\\/dev.*",
+        },
+        {
+          label: "Contributing",
+          to: "/paper/contributing",
+          activeBaseRegex: "\\/paper\\/contributing.*",
+        },
+      ],
+    },
+    {
+      type: "dropdown",
+      label: "Folia",
+      to: "/folia",
+      position: "left",
+      activeBaseRegex: "(\\/folia)(.+)?",
+      items: [
+        {
+          label: "Administration",
+          to: "/folia/admin",
+          activeBaseRegex: "(\\/folia/)(?!dev)(.+)?",
+        },
+        {
+          label: "Development",
+          to: "/folia/dev",
+          activeBaseRegex: "\\/folia\\/dev.*",
         },
       ],
     },
@@ -34,17 +58,17 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       label: "Velocity",
       to: "/velocity",
       position: "left",
-      activeBaseRegex: "(\\/velocity)(.+)?",
+      activeBaseRegex: "\\/velocity.*",
       items: [
         {
           label: "Administration",
           to: "/velocity/admin",
-          activeBaseRegex: "(\\/velocity/)(?!dev)(.+)?",
+          activeBaseRegex: "\\/velocity/(?!dev).*",
         },
         {
           label: "Development",
           to: "/velocity/dev",
-          activeBaseRegex: "(\\/velocity\\/dev)(.+)?",
+          activeBaseRegex: "\\/velocity\\/dev.*",
         },
       ],
     },

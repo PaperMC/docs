@@ -1,5 +1,6 @@
 ---
 slug: /dev/pdc
+description: A guide to the PDC API for storing data.
 ---
 
 # Persistent Data Container (PDC)
@@ -84,6 +85,13 @@ The PDC supports a wide range of data types, such as:
   // Create a new container
   PersistentDataContainer newContainer = container.getAdapterContext().newPersistentDataContainer();
   ```
+- `Boolean`
+
+:::info[Boolean PersistentDataType]
+
+The Boolean PDC type exists for convenience - you cannot make more complex types distill to a Boolean
+
+:::
   
 ### Custom Data Types
 

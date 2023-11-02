@@ -1,3 +1,8 @@
+---
+slug: /getting-started
+description: How to get started with running Waterfall.
+---
+
 # Getting Started
 
 ## What is Waterfall?
@@ -47,7 +52,7 @@ java -Xms512M -Xmx512M -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimen
 
 The amount of memory can be set by changing the numbers in the `-Xms` and `-Xmx` flags.
 
-To configure your proxy, see the [configuration](configuration.md) page.
+To configure your proxy, see the [configuration](configuration.mdx) page.
 
 ## Updating The Proxy
 

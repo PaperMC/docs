@@ -1,5 +1,6 @@
 ---
 slug: /dev/porting-plugins-from-velocity-1
+description: How to port your plugin from Velocity 1.x.x to modern API.
 ---
 
 # Porting Your Plugin from Velocity 1.x.x
@@ -9,14 +10,12 @@ document very carefully**.
 
 ## Minimum supported Java version bump
 
-Velocity 3.0.0 now requires Java 11 and above. The Velocity API is compiled for Java 8 for the
-convenience of plugins that want to run on older versions of Java, but we may decide to bump this in
-a future major release.
+Velocity 3.0.0 now requires Java 11 and above.
 
 ## Removal of legacy dependencies
 
 We removed all support for the old `text` 3 library. For `text` 3.x.x (and all the APIs that depend
-on it), direct equivalents are available in [Adventure](https://docs.adventure.kyori.net/) which was
+on it), direct equivalents are available in [Adventure](https://docs.advntr.dev/) which was
 introduced in Velocity 1.1.0.
 
 `toml4j`, deprecated in Velocity 1.1.0 (as it is no longer maintained), has not been removed to

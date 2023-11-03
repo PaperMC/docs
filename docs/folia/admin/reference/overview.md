@@ -72,7 +72,7 @@ given that the deadline for each tick is 50ms + the start time, it behaves
 identically to the EDF algorithm.
 
 The EDF-like algorithm is selected so that as long as the thread pool is
-not maximally utilised, that all regions that take \<= 50ms to tick will
+not maximally utilised, that all regions that take <= 50ms to tick will
 maintain 20TPS. However, the scheduling algorithm is neither NUMA aware
 nor CPU core aware - it will not make attempts (when n regions > m threads)
 to pin regions to certain cores.

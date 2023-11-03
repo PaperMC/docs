@@ -15,7 +15,7 @@ index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..db04a015ea2d4474339b1d02f6fbec75
 -exports.VERSIONS_JSON_FILE = 'versions.json';
 +exports.VERSIONED_BASE_DIR = 'docs/versioned';
 diff --git a/lib/versions/files.js b/lib/versions/files.js
-index deaadb4357a348c8071b70d72a3c6d9e4e61459f..1463819ce2df9777c16806d19dc56365b9ed8c05 100644
+index deaadb4357a348c8071b70d72a3c6d9e4e61459f..33f7604f2b93d579169681504b3656453c633fec 100644
 --- a/lib/versions/files.js
 +++ b/lib/versions/files.js
 @@ -13,20 +13,20 @@ const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
@@ -45,7 +45,7 @@ index deaadb4357a348c8071b70d72a3c6d9e4e61459f..1463819ce2df9777c16806d19dc56365
  }
  exports.getVersionSidebarsPath = getVersionSidebarsPath;
  function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
-@@ -42,10 +42,10 @@ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
+@@ -42,9 +42,9 @@ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
      });
  }
  exports.getDocsDirPathLocalized = getDocsDirPathLocalized;
@@ -53,9 +53,7 @@ index deaadb4357a348c8071b70d72a3c6d9e4e61459f..1463819ce2df9777c16806d19dc56365
 +/** `community` => `[siteDir]/docs/versioned/paper.json` */ // Paper
  function getVersionsFilePath(siteDir, pluginId) {
 -    return path_1.default.join(siteDir, addPluginIdPrefix(constants_1.VERSIONS_JSON_FILE, pluginId));
--}
 +    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, `${pluginId}.json`);
-+ }
+ }
  exports.getVersionsFilePath = getVersionsFilePath;
  /**
-  * Reads the plugin's respective `versions.json` file, and returns its content.

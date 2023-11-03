@@ -1,9 +1,0 @@
----
-slug: /dev/component-api/introduction
-description: An introduction to how components work.
-title: Introduction
----
-
-import Introduction from '../../../../paper/dev/api/component-api/intro.md';
-
-<Introduction/>

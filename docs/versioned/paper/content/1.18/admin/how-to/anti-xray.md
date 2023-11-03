@@ -83,6 +83,7 @@ formatting remains unchanged by using the "copy" button in the top right of each
 Replace the existing `anti-xray` block in `paper.yml` (under `world-settings.default`) with the
 following:
 
+<!-- prettier-ignore -->
 ```yaml title="paper.yml"
     anti-xray:
       enabled: true
@@ -131,6 +132,7 @@ Copy and paste this at the very bottom of `paper.yml`. See the
 [Per-World Configuration Guide](per-world-configuration.md) for more information. Remember to change
 the world names if your worlds are named differently!
 
+<!-- prettier-ignore -->
 ```yml title="paper.yml"
   world_nether:
    anti-xray:
@@ -154,6 +156,7 @@ the world names if your worlds are named differently!
 Replace the existing `anti-xray` block in `paper.yml` (under `world-settings.default`) with the
 following:
 
+<!-- prettier-ignore -->
 ```yaml title="paper.yml"
     anti-xray:
       enabled: true
@@ -215,6 +218,7 @@ Copy and paste this at the very bottom of `paper.yml`. See the
 [Per-World Configuration Guide](per-world-configuration.md) for more information. Remember to change
 the world names if your worlds are named differently!
 
+<!-- prettier-ignore -->
 ```yml title="paper.yml"
   world_nether:
     anti-xray:

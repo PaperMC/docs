@@ -1,3 +1,6 @@
+import DocCardList from "@theme/DocCardList";
+import { useCurrentSidebarCategory } from "@docusaurus/theme-common";
+
 # Welcome to the Waterfall Docs
 
 Waterfall is the BungeeCord fork that aims to improve performance and stability.
@@ -10,5 +13,6 @@ development by PaperMC is done on [Velocity](../velocity).
 
 :::
 
-- [Getting Started](getting-started.md)
-- [Configuration](configuration.mdx)
+---
+
+<DocCardList items={useCurrentSidebarCategory().items} />

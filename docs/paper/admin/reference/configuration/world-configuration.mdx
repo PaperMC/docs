@@ -55,8 +55,8 @@ anticheat:
         permission plugins may struggle with the number of checks made. This should
         only be used with modern permission plugins'
     hidden-blocks:
-      default: '[copper_ore, deepslate_copper_ore, gold_ore, deepslate_gold_ore, iron_ore,
-        deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
+      default: '[copper_ore, deepslate_copper_ore, raw_copper_block, gold_ore, deepslate_gold_ore,
+        iron_ore, deepslate_iron_ore, raw_iron_block, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
         mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore,
         deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]'
       description: 'With engine-mode: 1, these blocks will be replaced by stone (deepslate
@@ -630,10 +630,6 @@ fixes:
     default: disabled
     description: 'The height at which falling blocks will be removed from the server.
       A value of disabled will disable this feature'
-  fix-curing-zombie-villager-discount-exploit:
-    default: 'true'
-    description: 'Fixes the [exploit](https://bugs.mojang.com/browse/MC-181190) used
-      to gain massive discounts by infecting and curing a zombie villager'
   fix-items-merging-through-walls:
     default: 'false'
     description: 'Whether items should be prevented from merging through walls. Enabling

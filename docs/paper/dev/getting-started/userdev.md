@@ -45,7 +45,7 @@ Only the latest version of `paperweight-userdev` is officially supported, and we
 :::info[Snapshots]
 
 **paperweight-userdev** releases are available through the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev), but if you
-want to use SNAPSHOT versions, you must add Paper's maven repo to `settings.gradle.kts` with:
+want to use SNAPSHOT versions, you must add Paper's Maven repository to `settings.gradle.kts` with:
 ```kotlin
 pluginManagement {
     repositories {

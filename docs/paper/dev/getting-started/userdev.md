@@ -39,6 +39,9 @@ plugins {
 }
 ```
 
+The latest version of `paperweight-userdev` supports dev bundles for Minecraft 1.17.1 and newer, so it's best practice to keep it up to date!
+Only the latest version of `paperweight-userdev` is officially supported, and we will ask you to update first if you are having problems with old versions.
+
 :::info[Snapshots]
 
 **paperweight-userdev** releases are available through the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev), but if you
@@ -51,9 +54,6 @@ pluginManagement {
     }
 }
 ```
-
-The latest version of `paperweight-userdev` supports dev bundles for Minecraft 1.17.1 and newer, so it's best practice to keep it up to date!
-Only the latest version of `paperweight-userdev` is officially supported, and we will ask you to update first if you are having problems with old versions.
 
 :::
 

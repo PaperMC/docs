@@ -1,7 +1,7 @@
 ---
 slug: /dev/userdev
 sidebar_label: Paperweight Userdev
-description: A guide on how to use the Paperweight Userdev Gradle plugin to access internal code.
+description: A guide on how to use the paperweight-userdev Gradle plugin to access internal code.
 ---
 
 # paperweight-userdev
@@ -11,7 +11,7 @@ provides access to internal code (also known as NMS) during development.
 
 :::note
 
-This guide is written using the Kotlin DSL for Gradle and assumes you have some basic knowledge of Gradle.
+This guide is written using the Gradle Kotlin DSL and assumes you have some basic knowledge of Gradle.
 If you want to see a fully-functioning plugin that uses **paperweight-userdev**,
 check out this [example plugin](https://github.com/PaperMC/paperweight-test-plugin).
 
@@ -21,7 +21,7 @@ check out this [example plugin](https://github.com/PaperMC/paperweight-test-plug
 The Paper server jars we provide on the downloads page through the API are **paperclip** jars. These
 use Spigot's mappings, which are essentially some type names, but fully obfuscated fields and methods.
 This can make it hard to work with in a development environment. This plugin lets you use fully deobfuscated
-types, names and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
+types, names, and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
 server.
 
 :::caution
@@ -35,14 +35,17 @@ use non-obfuscated names in reflection.
 Add the plugin to your `build.gradle.kts` file.
 ```kotlin
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.5.5" // the latest version can be found on the Gradle Plugin Portal
+    id("io.papermc.paperweight.userdev") version "1.5.10" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
 }
 ```
 
+The latest version of `paperweight-userdev` supports dev bundles for Minecraft 1.17.1 and newer, so it's best practice to keep it up to date!
+Only the latest version of `paperweight-userdev` is officially supported, and we will ask you to update first if you are having problems with old versions.
+
 :::info[Snapshots]
 
-**paperweight-userdev** releases are available through the Gradle plugin portal, but if you
-want to use SNAPSHOT versions, you must add Paper's maven repo to `settings.gradle.kts` with:
+**paperweight-userdev** releases are available through the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev), but if you
+want to use SNAPSHOT versions, you must add Paper's Maven repository to `settings.gradle.kts` with:
 ```kotlin
 pluginManagement {
     repositories {
@@ -54,7 +57,7 @@ pluginManagement {
 
 :::
 
-## Adding the dev-bundle dependency
+## Adding the dev bundle dependency
 If you try to load your Gradle project now, you will receive an error saying you have to declare
 a dev bundle dependency. You can do that by adding to your `dependencies` block in your `build.gradle.kts`
 file.
@@ -67,7 +70,7 @@ dependencies {
 ```
 :::tip
 
-You can remove any dependency for the Paper API, as the dev bundle includes that.
+You should remove any dependency on the Paper API, as the dev bundle includes that.
 
 :::
 

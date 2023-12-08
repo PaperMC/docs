@@ -65,6 +65,6 @@
   },
   "packageManager": "yarn@3.5.0",
   "resolutions": {
-    "@docusaurus/plugin-content-docs@3.0.0": "patch:@docusaurus/plugin-content-docs@npm%3A3.0.0#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.0.0-a7f297e23e.patch"
+    "@docusaurus/plugin-content-docs@3.0.1": "patch:@docusaurus/plugin-content-docs@npm%3A3.0.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.0.1-cdc6e0ea68.patch"
   }
 }

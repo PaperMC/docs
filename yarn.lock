@@ -3957,6 +3957,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A3.0.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.0.1-cdc6e0ea68.patch::locator=docs%40workspace%3A.":
+  version: 3.0.1
+  resolution: "@docusaurus/plugin-content-docs@patch:@docusaurus/plugin-content-docs@npm%3A3.0.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.0.1-cdc6e0ea68.patch::version=3.0.1&hash=41dfad&locator=docs%40workspace%3A."
+  dependencies:
+    "@docusaurus/core": 3.0.1
+    "@docusaurus/logger": 3.0.1
+    "@docusaurus/mdx-loader": 3.0.1
+    "@docusaurus/module-type-aliases": 3.0.1
+    "@docusaurus/types": 3.0.1
+    "@docusaurus/utils": 3.0.1
+    "@docusaurus/utils-validation": 3.0.1
+    "@types/react-router-config": ^5.0.7
+    combine-promises: ^1.1.0
+    fs-extra: ^11.1.1
+    js-yaml: ^4.1.0
+    lodash: ^4.17.21
+    tslib: ^2.6.0
+    utility-types: ^3.10.0
+    webpack: ^5.88.1
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 0d240353799ffeeab294e3bc570ecee26273309307e45ee68cc83f5e15b9c9802ae09320be137e599d8f2e49ea87275228bbcbc20296f3690b784f51c43ed51e
+  languageName: node
+  linkType: hard
+
 "@docusaurus/plugin-content-pages@npm:3.0.1":
   version: 3.0.1
   resolution: "@docusaurus/plugin-content-pages@npm:3.0.1"

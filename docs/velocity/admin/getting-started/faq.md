@@ -1,5 +1,6 @@
 ---
 slug: /faq
+description: Frequently asked Velocity administration questions.
 ---
 
 # Frequently Asked Questions

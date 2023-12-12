@@ -1,9 +1,13 @@
+---
+slug: /contact
+description: There are many ways to contact us, see here for more information.
+---
+
 # Contact Us
 
 ## Discord
 
-The PaperMC project handles most communication via Discord. Use the following invite:
-https://discord.gg/papermc
+The PaperMC project handles most communication via Discord. Use the following invite: https://discord.gg/papermc
 
 ## IRC
 

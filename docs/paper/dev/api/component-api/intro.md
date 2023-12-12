@@ -1,8 +1,8 @@
 ---
 slug: /dev/component-api/introduction
+description: An introduction to how components work.
+title: Introduction
 ---
-
-# Introduction
 
 :::note
 
@@ -130,7 +130,7 @@ of this format.
 
 :::info[In-Depth Documentation]
 
-The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.fandom.com/wiki/Raw_JSON_text_format). 
+The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.wiki/w/Raw_JSON_text_format). 
 
 :::
 

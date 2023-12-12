@@ -1,6 +1,7 @@
 ---
 slug: /reference/overview
 title: Overview
+description: An overview to how Folia works.
 ---
 
 # Project overview

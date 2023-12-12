@@ -103,12 +103,13 @@ const velocity: SidebarsConfig = {
               collapsed: true,
               items: [
                 "dev/api/component-api/intro",
+                "dev/api/component-api/i18n",
               ]
             },
             "dev/api/event",
             "dev/api/command",
             "dev/api/scheduler",
-            "dev/how-to/plugin-messaging",
+            "dev/api/plugin-messaging",
           ],
         },
       ],

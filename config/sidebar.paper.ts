@@ -75,6 +75,7 @@ const paper: SidebarsConfig = {
             slug: "/cat/admin/misc",
           },
           items: [
+            "admin/misc/faq",
             "admin/misc/paper-bug-fixes",
           ],
         },
@@ -153,6 +154,7 @@ const paper: SidebarsConfig = {
             "dev/misc/reading-stacktraces",
             "dev/misc/debugging",
             "dev/misc/databases",
+            "dev/misc/internal-code",
           ],
         },
       ],

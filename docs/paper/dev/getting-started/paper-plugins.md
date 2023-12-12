@@ -1,5 +1,6 @@
 ---
 slug: /dev/getting-started/paper-plugins
+description: A development guide for how to write Paper-specific plugins.
 ---
 
 # Paper Plugins
@@ -69,7 +70,7 @@ RegistryPlugin:
   join-classpath: true # Defaults to true
 ```
 
-- `load`: (`BEFORE`|`AFTER`|`OMIT`) Specifies whether this plugin should before or after **your** plugin. Note: Omit has undefined ordering behavior.
+- `load`: (`BEFORE`|`AFTER`|`OMIT`) Specifies whether this plugin should load before or after **your** plugin. Note: Omit has undefined ordering behavior.
 - `required`: Whether this plugin is required for your plugin to load.
 - `join-classpath`: Whether your plugin should have access to their classpath. This is used for plugins that need to access other plugins internals directly.
 

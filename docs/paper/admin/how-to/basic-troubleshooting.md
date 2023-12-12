@@ -1,5 +1,6 @@
 ---
 slug: /basic-troubleshooting
+description: This guide will help you diagnose your server's problem before reporting it to PaperMC or the plugin's author.
 ---
 
 # Basic Troubleshooting
@@ -67,8 +68,6 @@ You tried to load the world generated with a higher version of Minecraft. You ca
 If you don't have any backup of your world before the chunk version update, you must use your updated world with a higher version of Minecraft.
 
 </details>
-
-<!-- Another examples -->
 
 ## Find Out What Plugin Is Causing The Problem
 

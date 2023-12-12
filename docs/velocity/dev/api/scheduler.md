@@ -1,5 +1,6 @@
 ---
 slug: /dev/scheduler-api
+description: A guide to the Scheduler API within Velocity allowing tasks to be run.
 ---
 
 # Using the Scheduler

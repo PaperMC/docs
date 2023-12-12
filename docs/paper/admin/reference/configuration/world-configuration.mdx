@@ -1,5 +1,6 @@
 ---
 slug: /reference/world-configuration
+description: An explanation of Paper's world configuration file.
 ---
 
 # World Configuration
@@ -33,7 +34,7 @@ anticheat:
       description: 'Sets the maximum height (y coordinate, starting from the bottom
         of the world) to which anti-xray will operate. Only integer multiples of 16
         are accepted. All other values will be rounded down. The [Minecraft Wiki page
-        about Ore](https://minecraft.fandom.com/wiki/Ore) may be helpful in determining
+        about Ore](https://minecraft.wiki/w/Ore) may be helpful in determining
         the best value for you'
     update-radius:
       default: '2'
@@ -54,8 +55,8 @@ anticheat:
         permission plugins may struggle with the number of checks made. This should
         only be used with modern permission plugins'
     hidden-blocks:
-      default: '[copper_ore, deepslate_copper_ore, gold_ore, deepslate_gold_ore, iron_ore,
-        deepslate_iron_ore, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
+      default: '[copper_ore, deepslate_copper_ore, raw_copper_block, gold_ore, deepslate_gold_ore,
+        iron_ore, deepslate_iron_ore, raw_iron_block, coal_ore, deepslate_coal_ore, lapis_ore, deepslate_lapis_ore,
         mossy_cobblestone, obsidian, chest, diamond_ore, deepslate_diamond_ore, redstone_ore,
         deepslate_redstone_ore, clay, emerald_ore, deepslate_emerald_ore, ender_chest]'
       description: 'With engine-mode: 1, these blocks will be replaced by stone (deepslate
@@ -262,9 +263,9 @@ entities:
       description: 'Determines if spawner nerfed mobs should attempt to float (jump)
         in water'
     zombie-villager-infection-chance:
-      default: '-1.0'
+      default: 'default'
       description: 'Sets the chance for villager conversion to zombie villager. Set
-        to -1.0 for default behavior based on game difficulty. Set to 0.0 to always
+        to "default" for default behavior based on game difficulty. Set to 0.0 to always
         have villagers die when killed by zombies. Set to 100.0 to always convert
         villagers to zombie villagers'
     zombies-target-turtle-eggs:
@@ -395,8 +396,8 @@ entities:
       description: 'Sets whether iron golems can spawn in the air. Iron farms may
         break depending on this setting '
     monster-spawn-max-light-level:
-      default: '-1'
-      description: 'When set to -1, the Vanilla default will be used (=0). Set to
+      default: 'default'
+      description: 'When set to "default", the Vanilla default will be used (=0). Set to
         15 or greater to revert to pre-1.18 behavior'
     non-player-arrow-despawn-rate:
       default: default
@@ -505,6 +506,28 @@ entities:
         description: 'The minimum height at which water animals will spawn. **Note**:
           The default value defers to Minecraft''s default setting, which as of 1.12
           is the sea level of the world (usually Y: 64)'
+  tracking-range-y:
+    enabled:
+      default: 'false'
+      description: 'Enables separate ranges for tracking ranges in the vertical (Y) direction.'
+    animal:
+      default: 'default'
+      description: 'Controls how far vertically in blocks animals are tracked (sent to) the player.'
+    display:
+      default: 'default'
+      description: 'Controls how far vertically in blocks display entities are tracked (sent to) the player.'
+    monster:
+      default: 'default'
+      description: 'Controls how far vertically in blocks monsters are tracked (sent to) the player.'
+    player:
+      default: 'default'
+      description: 'Controls how far vertically in blocks players are tracked (sent to) the player.'
+    misc:
+      default: 'default'
+      description: 'Controls how far vertically in blocks miscellaneous are tracked (sent to) the player.'
+    other:
+      default: 'default'
+      description: 'Controls how far vertically in blocks other entities are tracked (sent to) the player.'
 environment:
   disable-explosion-knockback:
     default: 'false'
@@ -607,10 +630,6 @@ fixes:
     default: disabled
     description: 'The height at which falling blocks will be removed from the server.
       A value of disabled will disable this feature'
-  fix-curing-zombie-villager-discount-exploit:
-    default: 'true'
-    description: 'Fixes the [exploit](https://bugs.mojang.com/browse/MC-181190) used
-      to gain massive discounts by infecting and curing a zombie villager'
   fix-items-merging-through-walls:
     default: 'false'
     description: 'Whether items should be prevented from merging through walls. Enabling

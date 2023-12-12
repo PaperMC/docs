@@ -1,5 +1,6 @@
 ---
 slug: /dev/folia-support
+description: How to support both Folia and Paper within your plugin.
 ---
 
 # Supporting Paper and Folia

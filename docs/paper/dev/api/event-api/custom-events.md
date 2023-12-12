@@ -1,5 +1,6 @@
 ---
 slug: /dev/custom-events
+description: A guide to show you how to add custom events to your plugin.
 ---
 
 # Custom Events

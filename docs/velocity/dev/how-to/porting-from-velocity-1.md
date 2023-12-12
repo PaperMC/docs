@@ -1,5 +1,6 @@
 ---
 slug: /dev/porting-plugins-from-velocity-1
+description: How to port your plugin from Velocity 1.x.x to modern API.
 ---
 
 # Porting Your Plugin from Velocity 1.x.x

@@ -90,7 +90,7 @@ following:
       engine-mode: 1
       # As of 1.18 some ores are generated much higher.
       # Please adjust the max-block-height setting at your own discretion.
-      # https://minecraft.fandom.com/wiki/Ore might be helpful.
+      # https://minecraft.wiki/w/Ore might be helpful.
       max-block-height: 64
       update-radius: 2
       lava-obscures: false
@@ -163,7 +163,7 @@ following:
       engine-mode: 2
       # As of 1.18 some ores are generated much higher.
       # Please adjust the max-block-height setting at your own discretion.
-      # https://minecraft.fandom.com/wiki/Ore might be helpful.
+      # https://minecraft.wiki/w/Ore might be helpful.
       max-block-height: 64
       update-radius: 2
       lava-obscures: false

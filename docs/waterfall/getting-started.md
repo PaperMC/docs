@@ -1,3 +1,8 @@
+---
+slug: /getting-started
+description: How to get started with running Waterfall.
+---
+
 # Getting Started
 
 ## What is Waterfall?

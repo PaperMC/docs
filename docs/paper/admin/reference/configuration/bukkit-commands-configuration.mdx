@@ -1,0 +1,63 @@
+---
+slug: /reference/bukkit-commands-configuration
+---
+
+# Bukkit Commands Configuration
+
+import React from 'react';
+import Config from '@site/src/components/Config';
+
+:::info
+
+The below YAML shows you the structure and default values for the legacy `commands.yml`.
+
+Click on a leaf node to view the description for that setting.
+
+:::
+
+:::warning
+
+The aliases defined in this legacy file do not support modern features
+- Tab completion
+- Permissions
+
+:::
+
+<Config data={`
+command-block-overrides:
+  default: '[<command to override>]'
+  description: 'Which vanilla commands should be prioritized over those provided by Bukkit or plugins.
+    Useful for compatibility with adventure maps built for vanilla command blocks.
+
+    Use the literal ''*'' to always use the vanilla version in command blocks.
+
+    By default, no commands are overridden.'
+ignore-vanilla-permissions:
+  default: 'false'
+  description: 'Whether to use vanilla permission levels when executing commands.'
+aliases:
+  '<alias name>':
+    default: '[<commands to run>]'
+    description: 'A list of strings which are target commands.
+      Alternatively, a string, which is a single target command.
+
+      A target command is a command that is run, when the alias is run.
+
+      Replacements:
+
+        - ''\`$sender\`'' is replaced with the command sender''s name (Added by Paper).
+
+        - \`$<n>\` is replaced by the n''th argument, 1-indexed.
+
+        - \`$$<n>\` is replaced by the n''th argument, 1-indexed, failing if the n''th argument is not present.
+
+        - \`$<n>-\` is replaced by the n''th argument and everything that follows, 1-indexed.
+
+        - \`$$<n>-\` is replaced by the n''th argument and everything that follows, 1-indexed, failing if the n''th argument is not present.
+
+
+      Each alias registered cannot (easily) be overridden by a plugin.'
+  icanhasbukkit:
+    default: '[version $1-]'
+    description: 'A built-in alias. Set aliases to an empty list ([]) to persistently remove.'
+`}/>

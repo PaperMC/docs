@@ -78,6 +78,7 @@ const config: Config = {
       admonitions: false,
       headingIds: false,
     },
+    format: "detect",
   },
 
   themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia", "@docusaurus/theme-mermaid"],

@@ -1,5 +1,5 @@
 diff --git a/lib/constants.js b/lib/constants.js
-index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..26547fc57dc6b902fef11bb52c9d9553cc892619 100644
+index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..db04a015ea2d4474339b1d02f6fbec75ba14c894 100644
 --- a/lib/constants.js
 +++ b/lib/constants.js
 @@ -10,8 +10,8 @@ exports.VERSIONS_JSON_FILE = exports.VERSIONED_SIDEBARS_DIR = exports.VERSIONED_
@@ -15,7 +15,7 @@ index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..26547fc57dc6b902fef11bb52c9d9553
 -exports.VERSIONS_JSON_FILE = 'versions.json';
 +exports.VERSIONED_BASE_DIR = 'docs/versioned';
 diff --git a/lib/versions/files.js b/lib/versions/files.js
-index deaadb4357a348c8071b70d72a3c6d9e4e61459f..66f369dc5d98550299d3a5778de38be3f084ed31 100644
+index deaadb4357a348c8071b70d72a3c6d9e4e61459f..33f7604f2b93d579169681504b3656453c633fec 100644
 --- a/lib/versions/files.js
 +++ b/lib/versions/files.js
 @@ -13,20 +13,20 @@ const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));

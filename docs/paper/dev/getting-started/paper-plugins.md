@@ -89,7 +89,7 @@ ProtocolLib:
   required: true
 
 # Now, we are going to register some details for a shop plugin
-# So our plugin should load before the shop plugin
+# So the shop plugin should load after our plugin
 SuperShopsXUnlimited:
   load: AFTER
   required: false

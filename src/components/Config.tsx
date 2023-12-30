@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import style from '@site/src/css/markdown-styles.module.css';
 import yaml from 'js-yaml';
+import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
+import VersionFormattedCode from "./VersionFormattedCode";
 
 const INDENT_SIZE = 30;
 
@@ -82,6 +84,10 @@ const parseItalics = (key) => {
     return key;
 }
 
+const parseDescriptionForVersioning = (description: String) => {
+    return VersionFormattedCode({ children: description, plainText: true});
+}
+
 const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showAllDescriptions, defaultValue }) => {
     const ignoreInitialRenderRef = useRef(false);
     const [showDescription, setShowDescription] = useState(showAllDescriptions);
@@ -134,7 +140,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
                 </button>
                 <div className="indent-2" style={{ marginBottom: 10, display: !showDescription ? "none" : "" }}>
                     <div className="outlined-box description-text color-offset-box">
-                        <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
+                        <ReactMarkdown className={style.reactMarkDown}>{parseDescriptionForVersioning(node.description.toString())}</ReactMarkdown>
                     </div>
                 </div>
             </div>

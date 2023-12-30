@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
 import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
 
-export default function VersionedJavaDocLink({ target, project = "paper", children }) {
-    const [href, setHref] = useState(null);
+export default function VersionedJavaDocLink({ target, project = "velocity", children }: VersionedJavaDocLinkProps) {
+    const [href, setHref] = useState<string>(null);
 
     useEffect(() => {
         (async () => {
             let version = await SoftwareVersionFetcher.getMajorVersion(project);
             if (project === "velocity") {
-                version = version[0] + ".0.0";
+                version = version.split(".")[0] + ".0.0";
             }
 
             setHref("https://jd.papermc.io/" + project + "/" + version + target);
@@ -18,4 +18,10 @@ export default function VersionedJavaDocLink({ target, project = "paper", childr
     return (
         <a href={href}>{children}</a>
     );
+}
+
+interface VersionedJavaDocLinkProps {
+    target: string,
+    project?: "paper" | "velocity",
+    children: any,
 }

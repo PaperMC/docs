@@ -85,7 +85,7 @@ Here are a couple of examples:
 ```yml
 # Suppose we require ProtocolLib to be loaded for our plugin
 ProtocolLib:
-  load: AFTER
+  load: BEFORE
   required: true
 
 # Now, we are going to register some details for a shop plugin

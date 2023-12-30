@@ -85,27 +85,26 @@ class SoftwareVersionFetcher {
         await Promise.all(this.projects.map(project => project.init()));
     }
 
-    public async getMajorMinorVersion(projectName: string): Promise<string> {
+    private async getProject(projectName: string): Promise<ProjectVersionData> {
         const project = this.projects.find(p => p.projectName === projectName);
         if (!project) throw new Error(`Project "${projectName}" not found.`);
 
         await project.init();
+        return project;
+    }
+
+    public async getMajorMinorVersion(projectName: string): Promise<string> {
+        const project = await this.getProject(projectName);
         return project.version;
     }
 
     public async getMajorVersion(projectName: string): Promise<string> {
-        const project = this.projects.find(p => p.projectName === projectName);
-        if (!project) throw new Error(`Project "${projectName}" not found.`);
-
-        await project.init();
+        const project = await this.getProject(projectName);
         return project.version.split('.', 2).join('.');
     }
 
     public async getMaxVersion(projectName: string): Promise<string> {
-        const project = this.projects.find(p => p.projectName === projectName);
-        if (!project) throw new Error(`Project "${projectName}" not found.`);
-
-        await project.init();
+        const project = await this.getProject(projectName);
         return project.maxVersion;
     }
 }

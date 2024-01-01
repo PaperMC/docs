@@ -136,7 +136,11 @@ loader: io.papermc.testplugin.TestPluginLoader
 ```
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
-for older versions. This is done by using yarn's docusaurus version command.
+for older versions. This is done by using yarn's docusaurus version command:
+
+```bash
+yarn docusaurus docs:version:paper "1.20"
+```
 
 ## Code of Conduct
 

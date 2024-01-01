@@ -48,7 +48,7 @@ class ProjectVersionData {
         }
     }
 
-    private async checkVersion(responseData): Promise<string> {
+    private async checkVersion(responseData: { versions: any[]; }): Promise<string> {
         if (typeof document === 'undefined') return responseData.versions[responseData.versions.length - 1];
 
         const matchArray = document.location.pathname.match(this.versionPattern);

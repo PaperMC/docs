@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
 
-export default function VersionedJavaDocLink({ target, project = "velocity", children }: VersionedJavaDocLinkProps) {
+export default function VersionedJavaDocLink({target, project = "velocity", children}: VersionedJavaDocLinkProps) {
     const [href, setHref] = useState<string>(null);
 
     useEffect(() => {

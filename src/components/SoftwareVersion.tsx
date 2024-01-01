@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from "react";
 import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
 
-export default function SoftwareVersion({ versionType, project = "paper" }: SoftwareVersionProps) {
+export default function SoftwareVersion({versionType, project = "paper"}: SoftwareVersionProps) {
     const [fetched, setFetched] = useState<String>(null);
 
     useEffect(() => {
         (async () => {
 
-            let version = '';
+            let version: string;
 
             if (versionType === 'maj-min') {
                 version = await SoftwareVersionFetcher.getMajorMinorVersion(project);
@@ -15,6 +15,8 @@ export default function SoftwareVersion({ versionType, project = "paper" }: Soft
                 version = await SoftwareVersionFetcher.getMajorVersion(project);
             } else if (versionType === 'max') {
                 version = await SoftwareVersionFetcher.getMaxVersion(project);
+            } else {
+                throw new Error("Invalid version type");
             }
 
             setFetched(version);

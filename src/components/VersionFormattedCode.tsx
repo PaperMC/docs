@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
 import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
 
-export default function VersionFormattedCode({ language = "", title = "", showLineNumbers = false, plainText = false, children }: VersionFormattedCodeProps) {
+export default function VersionFormattedCode({language = "", title = "", showLineNumbers = false, plainText = false, children}: VersionFormattedCodeProps) {
     const [formattedCode, setFormattedCode] = useState<FormattedCodeProps>(null);
     const mounted = useRef<Boolean>(true);
 

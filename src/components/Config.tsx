@@ -94,12 +94,18 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     node.default = node.default || defaultValue;
     node.description = node.description || 'N/A';
 
-    useEffect(() => {
+    const checkForHash = () => {
         const hash = createUrlHash(parentKey, name);
         if (window.location.hash === `#${hash}`) {
             showAndScrollIntoView(hash);
         }
+    }
+
+    useEffect(() => {
+        checkForHash()
     }, [name]);
+
+    window.addEventListener('hashchange', checkForHash);
 
     useEffect(() => {
         if (ignoreInitialRenderRef.current) {

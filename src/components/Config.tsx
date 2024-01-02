@@ -95,6 +95,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     node.description = node.description || 'N/A';
 
     const checkForHash = () => {
+        if (typeof window === 'undefined') return;
         const hash = createUrlHash(parentKey, name);
         if (window.location.hash === `#${hash}`) {
             showAndScrollIntoView(hash);
@@ -105,7 +106,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
         checkForHash()
     }, [name]);
 
-    window.addEventListener('hashchange', checkForHash);
+    if (typeof window !== 'undefined') window.addEventListener('hashchange', checkForHash);
 
     useEffect(() => {
         if (ignoreInitialRenderRef.current) {

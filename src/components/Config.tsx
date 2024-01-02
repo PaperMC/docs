@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import style from '@site/src/css/markdown-styles.module.css';
 import yaml from 'js-yaml';
-import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
 import VersionFormattedCode from "./VersionFormattedCode";
 
 const INDENT_SIZE = 30;
@@ -128,7 +127,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     };
 
     return (
-        <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
+        <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)} className={"config-tagged-for-algolia"}>
             <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
                 <button
                     onClick={() => {

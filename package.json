@@ -27,6 +27,7 @@
     "@docusaurus/theme-search-algolia": "3.0.1",
     "@fontsource/jetbrains-mono": "4.5.12",
     "@mdx-js/react": "3.0.0",
+    "axios": "1.6.3",
     "clsx": "1.2.1",
     "js-yaml": "4.1.0",
     "prism-react-renderer": "2.0.3",

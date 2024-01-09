@@ -9,8 +9,7 @@ description: How to get started with downloading and setting up a Paper server.
 
 :::tip
 
-With the release of Minecraft 1.18, Paper now requires **Java 21** to run. If you don't already have
-Java 21, [it's easy to download and install](/misc/java-install).
+With the release of Minecraft 1.18, Paper now requires **Java 17** to run. We recommend using **Java 21**, which [is easy to download and install](/misc/java-install).
 
 :::
 

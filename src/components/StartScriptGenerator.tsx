@@ -60,7 +60,7 @@ const StartScriptGenerator: React.FC = () => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [guiEnabled, setGuiEnabled] = useState(false);
     const [autoRestart, setAutoRestart] = useState(false);
-    const [platform, setPlatform] = useState("windows");
+    const [platform, setPlatform] = useState("linux");
     const dropdownRef = useRef(null);
 
     const handleClickOutside = (event: { target: EventTarget | null }) => {
@@ -125,7 +125,6 @@ const StartScriptGenerator: React.FC = () => {
                             onClick={() => setDropdownVisible(!dropdownVisible)}
                         >
                             {selectedFlag.label}
-                            <div>⬇️</div>
                         </div>
                         {dropdownVisible && (
                             <div className="dropdown-content">
@@ -162,11 +161,13 @@ const StartScriptGenerator: React.FC = () => {
                 <div className={"platform-selector"}>
                     <label>Platform:</label>
                     <select id={"platform-select"} onChange={event => setPlatform(event.target.value)}>
-                        <option value="windows">Windows</option>
                         <option value="linux">Linux/Mac</option>
+                        <option value="windows">Windows</option>
                     </select>
+                    {platform === "windows" &&
+                        <p className={"windows-warning"}>For optimal performance, we recommend running linux</p>
+                    }
                 </div>
-
             </div>
             <div className="config-section">
                 <label>Generated Command:</label>

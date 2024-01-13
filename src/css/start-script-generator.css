@@ -1,0 +1,198 @@
+.server-config-container {
+  background-color: #222;
+  border-radius: 10px;
+  padding: 20px;
+  color: #fff;
+  width: 100%;
+}
+
+.config-section {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.filename-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 15px;
+  height: 25px;
+  width: 40%;
+  padding: 20px 20px 20px 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.slider-markers {
+  position: relative;
+  width: 100%;
+  height: 10px;
+}
+
+.slider-marker {
+  position: absolute;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  color: #fff;
+  font-size: 12px;
+}
+
+input[type="text"],
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  outline: none;
+}
+
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
+  border: 1px solid var(--ifm-color-primary);
+}
+
+input[type="text"]::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: #999;
+}
+
+.memory-popup {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  border: 2px solid var(--ifm-color-primary);
+  background-color: var(--ifm-color-primary);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+
+input[type="range"]:focus::-webkit-slider-thumb {
+  box-shadow: 0 0 5px var(--ifm-color-primary);
+  border: 2px solid var(--ifm-color-primary);
+}
+
+.custom-dropdown {
+  position: relative;
+}
+
+.selected-flag {
+  width: 100%;
+  padding: 8px 8px 8px 10px;
+  font-size: 15px;
+  border: 1px solid #555;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  z-index: 1;
+  background-color: #343434;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+  outline: 1px solid white;
+}
+
+.dropdown-item:hover {
+  background-color: #484848;
+}
+
+.flag-label {
+  font-weight: bold;
+}
+
+.flag-description {
+  font-size: 12px;
+  color: #ffffff;
+}
+
+.middle-flex-wrapper {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+  background-color: rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  transition: all 0.3s;
+}
+
+.switch::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  top: 1px;
+  left: 1px;
+  transition: all 0.3s;
+}
+
+.checkbox:checked + .switch::after {
+  left: 20px;
+}
+
+.checkbox:checked + .switch {
+  background-color: var(--ifm-color-primary);
+}
+
+.checkbox {
+  display: none;
+}
+
+.gui-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.output_command {
+  resize: none;
+  height: auto;
+  width: 100%;
+  padding: 10px;
+  overflow: hidden;
+}

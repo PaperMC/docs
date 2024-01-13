@@ -17,6 +17,7 @@ const misc: SidebarsConfig = {
         "hangar-publishing",
         "assets",
         "contact",
+        "start-script-gen",
       ],
     }
   ],

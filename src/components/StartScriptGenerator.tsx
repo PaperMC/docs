@@ -1,0 +1,148 @@
+import React, { useEffect, useState, useRef } from 'react';
+import '@site/src/css/start-script-generator.css';
+
+const markerPoints = [4, 8, 12, 16, 20];
+
+type FlagType = {
+    label: string;
+    value: string;
+    description: string;
+};
+
+const FLAGS: { [key: string]: FlagType } = {
+    AIKARS: {
+        label: 'Aikar\'s',
+        value: '-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20',
+        description: 'Optimized Minecraft flags by Aikar for better server performance.',
+    },
+    NONE: { label: 'None', value: '', description: 'No additional flags.' },
+    VELOCITY: {
+        label: 'Velocity',
+        value: '-XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15',
+        description: 'Flags recommended for use with the Velocity proxy server.',
+    },
+};
+
+const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean) => {
+    setTimeout(resizeOutput, 0);
+    return `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value} -jar ${filename} ${guiEnabled ? '' : '--nogui'}`;
+};
+
+const resizeOutput = () => {
+    const element = document.getElementById("output-command-text");
+    if (!element) return;
+
+    element.style.height = 'auto';
+    const scrollHeight = element.scrollHeight;
+
+    requestAnimationFrame(() => {
+        element.style.height = `${scrollHeight}px`;
+    });
+};
+
+const StartScriptGenerator: React.FC = () => {
+    const [memory, setMemory] = useState(4.0);
+    const [filename, setFilename] = useState('server.jar');
+    const [selectedFlag, setSelectedFlag] = useState(FLAGS.AIKARS);
+    const [dropdownVisible, setDropdownVisible] = useState(false);
+    const [guiEnabled, setGuiEnabled] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const handleClickOutside = (event: { target: EventTarget | null }) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setDropdownVisible(false);
+        }
+    };
+
+    useEffect(() => {
+        resizeOutput();
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [memory, filename, selectedFlag, guiEnabled]);
+
+    return (
+        <div className="server-config-container">
+            <h2>Server Configuration</h2>
+            <div className="config-section" style={{ width: "100%" }}>
+                <label id="memory-slider-label" className="sr-only">Memory Usage: {memory}GB</label>
+                <input
+                    id="memory-slider"
+                    type="range"
+                    min={0.5}
+                    max={24}
+                    step={0.5}
+                    value={memory}
+                    onChange={(e) => setMemory(parseFloat(e.target.value))}
+                    aria-labelledby="memory-slider-label"
+                />
+                <div className="slider-markers">
+                    {markerPoints.map((point) => (
+                        <div
+                            key={point}
+                            className="slider-marker"
+                            style={{ left: `${((point - 0.5) / 23.5) * 100}%` }}
+                        >
+                            {point}GB
+                        </div>
+                    ))}
+                </div>
+            </div>
+            <div className={"middle-flex-wrapper"}>
+                <div className="config-section" style={{ width: "40%" }}>
+                    <label htmlFor="filename-input">Filename:</label>
+                    <input
+                        id="filename-input"
+                        type="text"
+                        value={filename}
+                        onChange={(e) => setFilename(e.target.value)}
+                        className={"filename-input"}
+                    />
+                </div>
+                <div className="config-section" style={{ width: "40%" }}>
+                    <label htmlFor="flags-dropdown">Flags:</label>
+                    <div className="custom-dropdown" ref={dropdownRef}>
+                        <div
+                            className="selected-flag"
+                            onClick={() => setDropdownVisible(!dropdownVisible)}
+                        >
+                            {selectedFlag.label}
+                        </div>
+                        {dropdownVisible && (
+                            <div className="dropdown-content">
+                                {Object.values(FLAGS).map((flag) => (
+                                    <div
+                                        key={flag.label}
+                                        className={`dropdown-item ${flag === selectedFlag ? 'selected' : ''}`}
+                                        onClick={() => {
+                                            setSelectedFlag(flag);
+                                            setDropdownVisible(false);
+                                        }}
+                                    >
+                                        <div className="flag-label">{flag.label}</div>
+                                        <div className="flag-description">{flag.description}</div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+            </div>
+            <div className="config-section">
+                <div className={"gui-container"}>
+                    <label htmlFor="gui-toggle" style={{ marginRight: "10px" }}>GUI:</label>
+                    <input type="checkbox" id="toggle" className="checkbox" onChange={() => setGuiEnabled(!guiEnabled)} />
+                    <label htmlFor="toggle" className="switch"></label>
+                </div>
+            </div>
+            <div className="config-section">
+                <label>Generated Command:</label>
+                <textarea value={generateStartCommand(memory, selectedFlag, filename, guiEnabled)} id={"output-command-text"} readOnly className={"output_command"} />
+            </div>
+        </div>
+    );
+};
+
+export default StartScriptGenerator;

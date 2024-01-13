@@ -9,6 +9,9 @@ type FlagType = {
     description: string;
 };
 
+const WINDOWS_AUTO_RESTART = ":start\n%%CONTENT%%\n\necho Server restarting...\necho Press CTRL + C to stop.\ngoto :start";
+const LINUX_AUTO_RESTART = "while [ true ]; do\n    %%CONTENT%%\n    echo Server restarting...\n    echo Press CTRL + C to stop.\ndone";
+
 const FLAGS: { [key: string]: FlagType } = {
     AIKARS: {
         label: 'Aikar\'s',
@@ -25,9 +28,16 @@ const FLAGS: { [key: string]: FlagType } = {
 
 const isServerSide = typeof document === 'undefined';
 
-const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean) => {
+const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean, autoRestartEnabled: boolean, platform: string) => {
     setTimeout(resizeOutput, 0);
-    return `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value} -jar ${filename} ${guiEnabled ? '' : '--nogui'}`;
+    let content = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value} -jar ${filename} ${guiEnabled ? '' : '--nogui'}`;
+    if (autoRestartEnabled)
+        content = platform === "windows" ? WINDOWS_AUTO_RESTART.replace("%%CONTENT%%", content) : LINUX_AUTO_RESTART.replace("%%CONTENT%%", content);
+
+    if (platform === "linux")
+        content = "#!/bin/bash\n\n" + content;
+
+    return content;
 };
 
 const resizeOutput = () => {
@@ -49,6 +59,8 @@ const StartScriptGenerator: React.FC = () => {
     const [selectedFlag, setSelectedFlag] = useState(FLAGS.AIKARS);
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [guiEnabled, setGuiEnabled] = useState(false);
+    const [autoRestart, setAutoRestart] = useState(false);
+    const [platform, setPlatform] = useState("windows");
     const dropdownRef = useRef(null);
 
     const handleClickOutside = (event: { target: EventTarget | null }) => {
@@ -59,18 +71,18 @@ const StartScriptGenerator: React.FC = () => {
 
     useEffect(() => {
         resizeOutput();
-        if (!isServerSide) return;
+        if (isServerSide) return;
         document.addEventListener('mousedown', handleClickOutside);
 
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [memory, filename, selectedFlag, guiEnabled]);
+    }, [memory, filename, selectedFlag, guiEnabled, autoRestart]);
 
     return (
         <div className="server-config-container">
             <h2>Server Configuration</h2>
-            <div className="config-section" style={{ width: "100%" }}>
+            <div className="config-section">
                 <label id="memory-slider-label" className="sr-only">Memory Usage: {memory}GB</label>
                 <input
                     id="memory-slider"
@@ -95,7 +107,7 @@ const StartScriptGenerator: React.FC = () => {
                 </div>
             </div>
             <div className={"middle-flex-wrapper"}>
-                <div className="config-section" style={{ width: "40%" }}>
+                <div className="config-section">
                     <label htmlFor="filename-input">Filename:</label>
                     <input
                         id="filename-input"
@@ -105,7 +117,7 @@ const StartScriptGenerator: React.FC = () => {
                         className={"filename-input"}
                     />
                 </div>
-                <div className="config-section" style={{ width: "40%" }}>
+                <div className="config-section">
                     <label htmlFor="flags-dropdown">Flags:</label>
                     <div className="custom-dropdown" ref={dropdownRef}>
                         <div
@@ -113,6 +125,7 @@ const StartScriptGenerator: React.FC = () => {
                             onClick={() => setDropdownVisible(!dropdownVisible)}
                         >
                             {selectedFlag.label}
+                            <div>⬇️</div>
                         </div>
                         {dropdownVisible && (
                             <div className="dropdown-content">
@@ -136,14 +149,30 @@ const StartScriptGenerator: React.FC = () => {
             </div>
             <div className="config-section">
                 <div className={"gui-container"}>
-                    <label htmlFor="gui-toggle" style={{ marginRight: "10px" }}>GUI:</label>
-                    <input type="checkbox" id="toggle" className="checkbox" onChange={() => setGuiEnabled(!guiEnabled)} />
-                    <label htmlFor="toggle" className="switch"></label>
+                    <label style={{marginRight: "10px"}}>GUI:</label>
+                    <input type="checkbox" id="gui-toggle" className="checkbox" onChange={() => setGuiEnabled(!guiEnabled)}/>
+                    <label htmlFor="gui-toggle" className="switch"></label>
                 </div>
+                <div className={"gui-container"}>
+                    <label style={{marginRight: "10px"}}>Auto-Restart:</label>
+                    <input type="checkbox" id="restart-toggle" className="checkbox" onChange={() => setAutoRestart(!autoRestart)}/>
+                    <label htmlFor="restart-toggle" className="switch"></label>
+                </div>
+
+                <div className={"platform-selector"}>
+                    <label>Platform:</label>
+                    <select id={"platform-select"} onChange={event => setPlatform(event.target.value)}>
+                        <option value="windows">Windows</option>
+                        <option value="linux">Linux/Mac</option>
+                    </select>
+                </div>
+
             </div>
             <div className="config-section">
                 <label>Generated Command:</label>
-                <textarea value={generateStartCommand(memory, selectedFlag, filename, guiEnabled)} id={"output-command-text"} readOnly className={"output_command"} />
+                <textarea className={"output-command"}
+                          value={generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)}
+                          id={"output-command-text"} readOnly/>
             </div>
         </div>
     );

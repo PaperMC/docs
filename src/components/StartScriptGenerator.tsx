@@ -23,12 +23,15 @@ const FLAGS: { [key: string]: FlagType } = {
     },
 };
 
+const isServerSide = typeof document === 'undefined';
+
 const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean) => {
     setTimeout(resizeOutput, 0);
     return `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value} -jar ${filename} ${guiEnabled ? '' : '--nogui'}`;
 };
 
 const resizeOutput = () => {
+    if (isServerSide) return;
     const element = document.getElementById("output-command-text");
     if (!element) return;
 
@@ -56,6 +59,7 @@ const StartScriptGenerator: React.FC = () => {
 
     useEffect(() => {
         resizeOutput();
+        if (!isServerSide) return;
         document.addEventListener('mousedown', handleClickOutside);
 
         return () => {

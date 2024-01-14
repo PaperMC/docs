@@ -189,15 +189,6 @@ up much space (5MB)
 15. **+PerfDisableSharedMem:** Causes GC to write to file system which can cause major latency if
     disk IO is high -- See https://www.evanjones.ca/jvm-mmap-pause.html
 
-## Using Large Pages
-
-For Large Pages -- It's even more important to use -Xms = -Xmx! Large Pages needs to have all the
-memory specified for it, or you could end up without the gains. This memory will not be used by the
-OS anyway, so use it.
-
-Additionally, use these flags (Metaspace is Java 8 Only, don't use it for Java7):
-`-XX:+UseLargePagesInMetaspace`
-
 ### Transparent Huge Pages
 
 Controversial feature but may be usable if you can not configure your host for real HugeTLBFS. Try

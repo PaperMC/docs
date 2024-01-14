@@ -1,17 +1,16 @@
 ---
 slug: /dev/event-api
 description: How to listen for events in Velocity.
+title: Working With Events
 ---
 
-# Working With Events
-
-Listening to events with Velocity's `@Subscribe` annotation is straightforward. You've already seen
+Listening to events with Velocity's <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/Subscribe.html"}>`@Subscribe`</VersionedJavaDocLink> annotation is straightforward. You've already seen
 one such listener, using the ProxyInitializeEvent in your main class. Additional events can be found
 on the [Javadoc](https://jd.papermc.io/velocity/3.0.0/).
 
 ## Creating a listener method
 
-To listen to an event, mark the method with `@Subscribe`, like shown. This works similarly to
+To listen to an event, mark the method with <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/Subscribe.html"}>`@Subscribe`</VersionedJavaDocLink>, like shown. This works similarly to
 annotation-driven event listening in other APIs you may be familiar with; it's the equivalent of
 Bukkit's/Bungee's `@EventHandler` and Sponge's `@Listener`.
 
@@ -96,7 +95,7 @@ public class MyListener {
 
 ### Registering a functional-style listener
 
-As an alternative to `@Subscribe`, you can also use the functional `EventHandler` interface and
+As an alternative to `@Subscribe`, you can also use the functional <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/EventHandler.html"}>`@EventHandler`</VersionedJavaDocLink> interface and
 register yours with `register(Object plugin, Class<E> eventClass, EventHandler<E> handler)`:
 
 ```java
@@ -114,7 +113,7 @@ asynchronously, however only some will explicitly wait for events to finish bein
 continuing.
 
 For an annotation-based listener, all that is needed to process an event asynchronously is to either
-return an [`EventTask`](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/EventTask.html) or add a second [`Continuation`](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/Continuation.html) parameter:
+return an <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/EventTask.html"}>`EventTask`</VersionedJavaDocLink> or add a second <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/Continuation.html"}>`Continuation`</VersionedJavaDocLink> parameter:
 
 ```java
   @Subscribe(order = PostOrder.EARLY)
@@ -131,7 +130,7 @@ return an [`EventTask`](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered
   }
 ```
 
-A functional listener simply needs to implement [`AwaitingEventExecutor`](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/AwaitingEventExecutor.html) and return an `EventTask`:
+A functional listener simply needs to implement <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/AwaitingEventExecutor.html"}>`AwaitingEventExecutor`</VersionedJavaDocLink> and return an <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/EventTask.html"}>`EventTask`</VersionedJavaDocLink>:
 
 ```java
   server.getEventManager().register(this, PlayerChatEvent.class, (AwaitingEventExecutor) event -> {
@@ -208,7 +207,7 @@ You'll notice that your events don't need to extend or implement anything. They 
 ### Firing the Event
 
 To fire the event, you'll need to get the server's event manager and use the `fire` method. Note
-that this returns a [`CompletableFuture`](https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/concurrent/CompletableFuture.html), so if you want to continue logic after the event is handled
+that this returns a [`CompletableFuture`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/CompletableFuture.html), so if you want to continue logic after the event is handled
 by all listeners, use a callback:
 
 ```java
@@ -220,11 +219,11 @@ server.getEventManager().fire(new PrivateMessageEvent(sender, recipient, message
 
 ### Using ResultedEvent
 
-Velocity uses the generalised [`ResultedEvent`](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/ResultedEvent.html) for events which have some sort of 'result'. The
+Velocity uses the generalised <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/ResultedEvent.html"}>`ResultedEvent`</VersionedJavaDocLink> for events which have some sort of 'result'. The
 result type of the event is defined by its generic type; for example.
 `PrivateMessageEvent implements ResultedEvent<ResultType>`.
 
-Some common result types are [`GenericResult`](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/event/ResultedEvent.GenericResult.html), for simple allowed/denied results, and component
+Some common result types are <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/event/GenericResult.html"}>`GenericResult`</VersionedJavaDocLink>, for simple allowed/denied results, and component
 results, used for events where the result may be denied with an accompanying reason (such as in a
 login event).
 

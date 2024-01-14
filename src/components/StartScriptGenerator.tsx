@@ -30,9 +30,13 @@ const isServerSide = typeof document === 'undefined';
 
 const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean, autoRestartEnabled: boolean, platform: string) => {
     setTimeout(resizeOutput, 0);
-    let content = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value} -jar ${filename} ${guiEnabled ? '' : '--nogui'}`;
+    let content = "";
+    const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value} -jar ${filename} ${guiEnabled ? '' : '--nogui'}`;
+
     if (autoRestartEnabled)
-        content = platform === "windows" ? WINDOWS_AUTO_RESTART.replace("%%CONTENT%%", content) : LINUX_AUTO_RESTART.replace("%%CONTENT%%", content);
+        content = (platform === "windows" ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace("%%CONTENT%%", command);
+    else
+        content = command;
 
     if (platform === "linux")
         content = "#!/bin/bash\n\n" + content;
@@ -69,16 +73,28 @@ const StartScriptGenerator: React.FC = () => {
         }
     };
 
+    const handleGreenButtonHighlight = (element: HTMLElement | null) => {
+        if (!element) return;
+        element.classList.add('success');
+        setTimeout(function() {
+            element.classList.remove('success');
+        }, 500);
+    }
+
     const handleCopyToClipboard = () => {
         navigator.clipboard.writeText(generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform));
-        const copyButton = document.querySelector('.copy-button button');
-
-        if (!copyButton) return;
-        copyButton.classList.add('success');
-        setTimeout(function() {
-            copyButton.classList.remove('success');
-        }, 500);
+        handleGreenButtonHighlight(document.getElementById('clipboard-copy-button'));
     };
+
+    const handleDownload = () => {
+        handleGreenButtonHighlight(document.getElementById('contents-download-button'));
+        const blob = new Blob([generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'start.' + (platform === "windows" ? "bat" : "sh");
+        link.click()
+        link.remove();
+    }
 
     useEffect(() => {
         resizeOutput();
@@ -176,7 +192,7 @@ const StartScriptGenerator: React.FC = () => {
                         <option value="windows">Windows</option>
                     </select>
                     {platform === "windows" &&
-                        <p className={"windows-warning"}>For optimal performance, we recommend running linux</p>
+                        <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
                     }
                 </div>
             </div>
@@ -186,8 +202,11 @@ const StartScriptGenerator: React.FC = () => {
                           value={generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)}
                           id={"output-command-text"} readOnly/>
                 <div className={"copy-button"}>
-                    <button onClick={handleCopyToClipboard}>
+                    <button id={"clipboard-copy-button"} onClick={handleCopyToClipboard}>
                         Copy to Clipboard
+                    </button>
+                    <button id={"contents-download-button"} onClick={handleDownload}>
+                        Download
                     </button>
                 </div>
             </div>

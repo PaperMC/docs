@@ -237,9 +237,9 @@ input[type="range"]:focus::-webkit-slider-thumb {
   color: var(--gen-text-color);
   cursor: pointer;
   font-size: 15px;
-  margin-top: 10px;
   width: fit-content;
   transition: background-color 0.4s ease-out, color 0.4s ease-out, opacity 1s ease-in-out;
+  margin: 5px 5px 0 0;
 }
 
 .copy-button button:hover {

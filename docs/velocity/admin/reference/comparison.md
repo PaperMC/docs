@@ -83,7 +83,7 @@ exposes, which Velocity cannot perfectly emulate. As a result, the number of cha
 to BungeeCord and have plugins retain the same behavior is minimal.
 
 Suppose you have play a video game published by Company A. It runs on an operating system made by Company B.
-One day, Company B releases a new version of ther operating system, and you upgrade to it, only to recoil
+One day, Company B releases a new version of their operating system, and you upgrade to it, only to recoil
 in horror as that video game no longer works. (Worse, Studio A might be out of business at that point, so
 no patch is forthcoming.) Who do you blame, Company A for producing a defective product, or Company B for
 breaking the game? [This isn't a hypothetical](https://devblogs.microsoft.com/oldnewthing/20110131-00/?p=11633).

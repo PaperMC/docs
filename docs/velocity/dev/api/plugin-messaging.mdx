@@ -1,12 +1,11 @@
 ---
 slug: /dev/plugin-messaging
 description: How to handle and send plugin messages on Velocity.
+title: Plugin Messaging
 ---
 
-# Plugin Messaging
-
 First introduced in [2012](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/),
-Plugin messaging is a way for Velocity plugins to communicate with clients and backend servers. 
+Plugin messaging is a way for Velocity plugins to communicate with clients and backend servers.
 
 Velocity manages connections in both directions, for both the client and backend server.
 This means Velocity plugins need to consider 4 main cases:
@@ -21,7 +20,7 @@ Additionally, BungeeCord channel compatibility is included, which may remove the
 
 ## Case 1: Receiving a plugin message from a player
 
-This is for when you need to handle or inspect the contents of a plugin message sent by a player. It will require registering with the [ChannelRegistrar](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/proxy/messages/ChannelRegistrar.html) for the event to be fired. 
+This is for when you need to handle or inspect the contents of a plugin message sent by a player. It will require registering with the <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/proxy/messages/ChannelRegistrar.html"}>ChannelRegistrar</VersionedJavaDocLink> for the event to be fired.
 
 An example use case could be logging messages from a mod that reports the enabled features.
 
@@ -35,15 +34,14 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 
 @Subscribe
 public void onPluginMessageFromPlayer(PluginMessageEvent event) {
-    if (!(event.getSource() instanceof Player)) {
+    if (!(event.getSource() instanceof Player player)) {
         return;
     }
-    Player player = (Player) event.getSource();
     // Ensure the identifier is what you expect before trying to handle the data
     if (event.getIdentifier() != IDENTIFIER) {
         return;
     }
-    
+
     ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
     // handle packet data
 }
@@ -97,7 +95,7 @@ public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdent
 
 ## Case 3: Receiving a plugin message from a backend server
 
-This is for when you need to receive plugin messages from your backend server. It will require registering with the [ChannelRegistrar](https://jd.papermc.io/velocity/3.0.0/com/velocitypowered/api/proxy/messages/ChannelRegistrar.html) for the event to be fired.
+This is for when you need to receive plugin messages from your backend server. It will require registering with the <VersionedJavaDocLink project={"velocity"} target={"/com/velocitypowered/api/proxy/messages/ChannelRegistrar.html"}>ChannelRegistrar</VersionedJavaDocLink> for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.
 
@@ -111,10 +109,9 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 
 @Subscribe
 public void onPluginMessageFromBackend(PluginMessageEvent event) {
-    if (!(event.getSource() instanceof ServerConnection)) {
+    if (!(event.getSource() instanceof ServerConnection backend)) {
         return;
     }
-    ServerConnection backend = (ServerConnection) event.getSource();
     // Ensure the identifier is what you expect before trying to handle the data
     if (event.getIdentifier() != IDENTIFIER) {
         return;

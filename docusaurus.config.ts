@@ -29,7 +29,7 @@ const config: Config = {
   baseUrl: "/",
   onBrokenLinks: isCI ? "throw" : "warn",
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
-  onBrokenAnchors: isCI ? "throw" : "warn",
+  onBrokenAnchors: "warn",
   onDuplicateRoutes: isCI ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: false,

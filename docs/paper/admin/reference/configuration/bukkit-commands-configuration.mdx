@@ -1,0 +1,27 @@
+---
+slug: /reference/bukkit-commands-configuration
+---
+
+# Bukkit Commands Configuration
+
+import React from 'react';
+import Config from '@site/src/components/Config';
+import BukkitCommandsSpec from '!!raw-loader!@site/config-specs/paper/commands.yml';
+
+:::info
+
+The below YAML shows you the structure and default values for the legacy `commands.yml`.
+
+Click on a leaf node to view the description for that setting.
+
+:::
+
+:::warning
+
+The aliases defined in this legacy file do not support modern features
+- Tab completion
+- Permissions
+
+:::
+
+<Config data={BukkitCommandsSpec}/>

@@ -1,9 +1,8 @@
 ---
 slug: /dev/component-api/introduction
 description: An introduction to how components work.
+title: Introduction
 ---
-
-# Introduction
 
 :::note
 

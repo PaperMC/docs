@@ -4,8 +4,6 @@ slug: /reference/configuration
 
 # Paper Configuration
 
-<!-- ## Global Configuration -->
-
 ## Per World Configuration
 
 One of the most powerful yet least understood features of the Paper configuration is setting

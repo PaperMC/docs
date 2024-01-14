@@ -172,6 +172,14 @@ collisions:
   only-players-collide:
     default: 'false'
     description: Only calculate collisions if a player is one of the two entities colliding
+command-blocks:
+  permissions-level:
+    default: '2'
+    description: 'Default vanilla permission level for command blocks.'
+  force-follow-perm-level:
+    default: 'true'
+    description: 'Require that command blocks meet both the Bukkit permission requirements
+      and the vanilla permission level. Otherwise, only 1 of those is required.'
 entities:
   armor-stands:
     do-collision-entity-lookups:

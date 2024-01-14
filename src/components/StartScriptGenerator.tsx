@@ -69,6 +69,17 @@ const StartScriptGenerator: React.FC = () => {
         }
     };
 
+    const handleCopyToClipboard = () => {
+        navigator.clipboard.writeText(generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform));
+        const copyButton = document.querySelector('.copy-button button');
+
+        if (!copyButton) return;
+        copyButton.classList.add('success');
+        setTimeout(function() {
+            copyButton.classList.remove('success');
+        }, 500);
+    };
+
     useEffect(() => {
         resizeOutput();
         if (isServerSide) return;
@@ -174,6 +185,11 @@ const StartScriptGenerator: React.FC = () => {
                 <textarea className={"output-command"}
                           value={generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)}
                           id={"output-command-text"} readOnly/>
+                <div className={"copy-button"}>
+                    <button onClick={handleCopyToClipboard}>
+                        Copy to Clipboard
+                    </button>
+                </div>
             </div>
         </div>
     );

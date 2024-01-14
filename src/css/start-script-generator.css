@@ -68,12 +68,6 @@ textarea:focus {
   border: 1px solid var(--ifm-color-primary);
 }
 
-input[type="text"]::placeholder,
-select::placeholder,
-textarea::placeholder {
-  color: #999;
-}
-
 input[type="range"]::-webkit-slider-thumb {
   border: 2px solid var(--ifm-color-primary);
   background-color: var(--ifm-color-primary);
@@ -155,7 +149,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
 .middle-flex-wrapper {
   margin-top: 20px;
   display: flex;
-  gap: 10rem;
+  gap: 2rem;
   justify-content: space-between;
 }
 
@@ -206,9 +200,9 @@ input[type="range"]:focus::-webkit-slider-thumb {
   height: auto;
   width: 100%;
   padding: 10px;
-  overflow: hidden;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  min-height: 40px;
+  max-height: 150px;
 }
 
 .platform-selector {
@@ -228,4 +222,32 @@ input[type="range"]:focus::-webkit-slider-thumb {
   font-weight: bold;
   font-size: 12px;
   margin: 0;
+}
+
+.copy-button {
+  display: flex;
+  justify-content: center;
+}
+
+.copy-button button {
+  background-color: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--background-gen-color-active);
+  border-radius: 5px;
+  padding: 10px;
+  color: var(--gen-text-color);
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 10px;
+  width: fit-content;
+  transition: background-color 0.4s ease-out, color 0.4s ease-out, opacity 1s ease-in-out;
+}
+
+.copy-button button:hover {
+  background-color: var(--background-gen-color-active);
+}
+
+.copy-button button.success {
+  background-color: green;
+  color: white;
+  opacity: 0;
 }

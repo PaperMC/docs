@@ -99,6 +99,10 @@ html[data-theme="dark"] {
 
 .footer__col {
   flex-basis: 30% !important;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .homePageSearch {

@@ -1,1 +1,0 @@
-../../../../paper/dev/api/component-api/intro.md

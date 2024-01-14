@@ -128,7 +128,11 @@ public void onPluginMessageFromBackend(PluginMessageEvent event) {
 
 This is for when you need to send a plugin message to a player.
 
-An example use case could be instructing a client side mod to disable certain features.
+:::tip
+
+This is only really useful for when you are making client-side mods. Otherwise, the player likely will just ignore the message.
+
+:::
 
 ```java
 public boolean sendPluginMessageToPlayer(Player player, ChannelIdentifier identifier, byte[] data) {

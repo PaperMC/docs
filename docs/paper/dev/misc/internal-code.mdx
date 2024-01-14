@@ -27,12 +27,12 @@ any time.
 
 ## Accessing Minecraft Internals
 
-In order to use Mojang and CraftBukkit code, you may either use the Paperweight Userdev plugin or use reflection.
-The [Paperweight Userdev](https://github.com/PaperMC/paperweight-test-plugin) plugin is the recommended way to access internal code
+In order to use Mojang and CraftBukkit code, you may either use the `paperweight-userdev` Gradle plugin or use reflection.
+[`paperweight-userdev`](https://github.com/PaperMC/paperweight-test-plugin) is the recommended way to access internal code
 as it is easier to use due to being able to have the remapped code in your IDE. You can find
-out more about this in the [Paperweight Userdev](/paper/dev/userdev) section.
+out more about this in the [`paperweight-userdev`](/paper/dev/userdev) section.
 
-However, if you are unable to use the Userdev plugin, you can use reflection.
+However, if you are unable to use `paperweight-userdev`, you can use reflection.
 
 ### Reflection
 
@@ -59,7 +59,7 @@ Class.forName(cbClass("entity.CraftBee"));
 
 Minecraft's code is obfuscated. This means that the names of classes and methods are changed to make them harder to
 understand. Paper deobfuscates these identifiers for development; however, to provide compatibility with legacy plugins,
-Paper is re-obfuscated at runtime. You can use a plugin like [Reflection Remapper](https://github.com/jpenilla/reflection-remapper) to automatically remap the
+Paper is re-obfuscated at runtime. You can use a library like [reflection-remapper](https://github.com/jpenilla/reflection-remapper) to automatically remap the
 reflection references. This will allow you to use the de-obfuscated, Mojang-mapped, names in your code. This is recommended as
 it makes the code easier to understand.
 
@@ -68,7 +68,7 @@ it makes the code easier to understand.
 Running a Mojang-Mapped (moj-map) server is an excellent way to streamline your processes because you can develop using
 the same mappings that will be present at runtime. This eliminates the need for remapping in your compilation. If you
 are creating custom plugins for your server, we highly recommend running a moj-map server. It simplifies debugging and
-allows for you to hotswap plugins.
+allows you to hotswap plugins.
 
 In the future, the Paper server will no longer undergo remapping. By adopting Mojang mappings now, you can ensure that
 your plugin won't require internal remapping when we make the switch.
@@ -76,7 +76,7 @@ your plugin won't require internal remapping when we make the switch.
 ### Getting the current Minecraft version
 
 You can get the current Minecraft version to allow you to use the correct code for a specific version. This can be done
-with the one of the following methods:
+with one of the following methods:
 
 ```java
 // Example value: 1.20.2

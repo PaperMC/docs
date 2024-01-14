@@ -25,15 +25,17 @@ This will not act as a drop-in replacement for `plugin.yml`, as some things, as 
 It should be noted you still have the ability to include both `paper-plugin.yml` and `plugin.yml` in the same jar.
 
 Here is an example configuration.
-```yml
+<VersionFormattedCode language={"yaml"}>
+```
 name: Paper-Test-Plugin
 version: '1.0'
 main: io.papermc.testplugin.TestPlugin
 description: Paper Test Plugin
-api-version: '1.20'
+api-version: '%%_MAJ_MC_%%'
 bootstrapper: io.papermc.testplugin.TestPluginBootstrap
 loader: io.papermc.testplugin.TestPluginLoader
 ```
+</VersionFormattedCode>
 
 ### Dependency Declaration
 
@@ -70,7 +72,7 @@ RegistryPlugin:
   join-classpath: true # Defaults to true
 ```
 
-- `load`: (`BEFORE`|`AFTER`|`OMIT`) Specifies whether this plugin should before or after **your** plugin. Note: Omit has undefined ordering behavior.
+- `load`: (`BEFORE`|`AFTER`|`OMIT`) Specifies whether this plugin should load before or after **your** plugin. Note: Omit has undefined ordering behavior.
 - `required`: Whether this plugin is required for your plugin to load.
 - `join-classpath`: Whether your plugin should have access to their classpath. This is used for plugins that need to access other plugins internals directly.
 
@@ -85,11 +87,11 @@ Here are a couple of examples:
 ```yml
 # Suppose we require ProtocolLib to be loaded for our plugin
 ProtocolLib:
-  load: AFTER
+  load: BEFORE
   required: true
 
 # Now, we are going to register some details for a shop plugin
-# So our plugin should load before the shop plugin
+# So the shop plugin should load after our plugin
 SuperShopsXUnlimited:
   load: AFTER
   required: false

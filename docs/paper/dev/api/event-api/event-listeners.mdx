@@ -11,7 +11,7 @@ Plugins are able to call custom events, such as a player completing a quest, for
 
 ## Your listener class
 
-To listen for events, you need to create a class that implements `Listener`.
+To listen for events, you need to create a class that implements <VersionedJavaDocLink target={"/org/bukkit/event/Listener.html"}>`Listener`</VersionedJavaDocLink>.
 This class can be called anything you want, but it is recommended to name it something related to the events you are listening for.
 
 ```java title="ExampleListener.java"
@@ -22,7 +22,7 @@ public class ExampleListener implements Listener {
 
 ## `@EventHandler`
 
-To listen for an event, you need to create a method that is annotated with `@EventHandler`.
+To listen for an event, you need to create a method that is annotated with <VersionedJavaDocLink target={"/org/bukkit/event/EventHandler.html"}>`@EventHandler`</VersionedJavaDocLink>.
 This method can be named anything you want, but it is recommended to name it something meaningful related to the event it is listening for.
 
 ## The listener method

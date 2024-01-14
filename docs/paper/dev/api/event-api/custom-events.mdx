@@ -1,16 +1,15 @@
 ---
 slug: /dev/custom-events
 description: A guide to show you how to add custom events to your plugin.
+title: Custom Events
 ---
 
-# Custom Events
-
-Creating custom events is a great way to add functionality to your plugin. 
+Creating custom events is a great way to add functionality to your plugin.
 This will allow other plugins to listen to your custom events and add functionality to your plugin.
 
 ## Creating a custom event
 
-To create a custom event, you need to create a class that extends `Event`. Each event requires a `HandlerList` that will contain all the listeners that are listening to that event. The only exception to this requirement is when you have an event class that cannot be fired, but serves as a parent for other events instead.
+To create a custom event, you need to create a class that extends <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>`Event`</VersionedJavaDocLink>. Each event requires a <VersionedJavaDocLink target={"/org/bukkit/event/HandlerList.html"}>`HandlerList`</VersionedJavaDocLink> that will contain all the listeners that are listening to that event. The only exception to this requirement is when you have an event class that cannot be fired, but serves as a parent for other events instead.
 An example of this is the BlockPistonEvent, which cannot be listened to directly.
 
 This list is used to call the listeners when the event is called.
@@ -38,7 +37,7 @@ public class PaperIsCoolEvent extends Event {
 }
 ```
 
-Now that we have created our event, we can add some functionality to it. 
+Now that we have created our event, we can add some functionality to it.
 Perhaps this will contain a message that will be broadcast to the server when the event is called.
 
 ```java title="PaperIsCoolEvent.java"
@@ -63,7 +62,7 @@ public class PaperIsCoolEvent extends Event {
     public Component getMessage() {
         return this.message;
     }
-    
+
     public void setMessage(Component message) {
         this.message = message;
     }
@@ -83,7 +82,7 @@ public class ExamplePlugin extends JavaPlugin {
         PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"));
         coolEvent.callEvent();
         // Plugins could have changed the message from inside their listeners here. So we need to get the message again.
-        // This event structure allows for other plugins to change the message to their taste. 
+        // This event structure allows for other plugins to change the message to their taste.
         // Like, for example, a plugin that adds a prefix to all messages.
         Bukkit.broadcast(coolEvent.getMessage());
     }
@@ -92,7 +91,7 @@ public class ExamplePlugin extends JavaPlugin {
 
 ## Implementing cancellation
 
-If you want to allow your event to be cancelled, you can implement the `Cancellable` interface.
+If you want to allow your event to be cancelled, you can implement the <VersionedJavaDocLink target={"/org/bukkit/event/Cancellable.html"}>`Cancellable`</VersionedJavaDocLink> interface.
 
 ```java title="PaperIsCoolEvent.java"
 public class PaperIsCoolEvent extends Event implements Cancellable {

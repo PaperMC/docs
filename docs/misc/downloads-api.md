@@ -7,3 +7,47 @@ description: Paper provides a downloads API that you can use to access builds.
 
 PaperMC provides a downloads API to facilitate automated downloads access. Full documentation can be
 found on the [Downloads API Docs](https://api.papermc.io/docs).
+
+## Getting Highest Stable Build Number
+
+```shell
+#!/bin/bash
+
+LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
+    jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
+    
+echo "Latest build is $LATEST_BUILD"
+```
+
+This will get the latest build for the given project and Minecraft version.
+
+## Downloading Latest Stable Build
+
+```shell
+#!/bin/bash
+
+LATEST_VERSION=$(curl -s https://api.papermc.io/v2/projects/paper | \
+    jq -r '.versions' | \
+    jq -r '.[-1]')
+
+LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
+    jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
+
+JAR_NAME=paper-${LATEST_VERSION}-${LATEST_BUILD}.jar
+
+PAPERMC_URL="https://api.papermc.io/v2/projects/paper/versions/${LATEST_VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}"
+
+# Download the latest PaperMC version
+wget -O server.jar "$PAPERMC_URL"
+echo "Downloads completed"
+```
+
+This is the most common use case for the API. It will download the highest stable build for the given project and 
+Minecraft version. You should always serve & use the stable builds as experimental builds are prone to error and 
+do not receive support.
+
+:::danger
+
+We emphatically **do not recommend** using unstable builds or auto-updaters within production environments.
+
+:::

@@ -9,8 +9,8 @@ type FlagType = {
     description: string;
 };
 
-const WINDOWS_AUTO_RESTART = ":start\n%%CONTENT%%\n\necho Server restarting...\necho Press CTRL + C to stop.\ngoto :start";
-const LINUX_AUTO_RESTART = "while [ true ]; do\n    %%CONTENT%%\n    echo Server restarting...\n    echo Press CTRL + C to stop.\ndone";
+const WINDOWS_AUTO_RESTART = ':start\n%%CONTENT%%\n\necho Server restarting...\necho Press CTRL + C to stop.\ngoto :start';
+const LINUX_AUTO_RESTART = 'while [ true ]; do\n    %%CONTENT%%\n    echo Server restarting...\n    echo Press CTRL + C to stop.\ndone';
 
 const FLAGS: { [key: string]: FlagType } = {
     AIKARS: {
@@ -62,23 +62,23 @@ const isServerSide = typeof document === 'undefined';
 
 const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean, autoRestartEnabled: boolean, platform: string) => {
     setTimeout(resizeOutput, 0);
-    let content = "";
+    let content = '';
     const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? '' : ' '}-jar ${filename === '' ? 'server.jar' : filename} ${guiEnabled ? '' : '--nogui'}`;
 
     if (autoRestartEnabled)
-        content = (platform === "windows" ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace("%%CONTENT%%", command);
+        content = (platform === 'windows' ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace('%%CONTENT%%', command);
     else
         content = command;
 
-    if (platform === "linux")
-        content = "#!/bin/bash\n\n" + content;
+    if (platform === 'linux')
+        content = '#!/bin/bash\n\n' + content;
 
     return content;
 };
 
 const resizeOutput = () => {
     if (isServerSide) return;
-    const element = document.getElementById("output-command-text");
+    const element = document.getElementById('output-command-text');
     if (!element) return;
 
     element.style.height = 'auto';
@@ -96,7 +96,7 @@ const StartScriptGenerator: React.FC = () => {
     const [dropdownVisible, setDropdownVisible] = useState(false);
     const [guiEnabled, setGuiEnabled] = useState(false);
     const [autoRestart, setAutoRestart] = useState(false);
-    const [platform, setPlatform] = useState("linux");
+    const [platform, setPlatform] = useState('linux');
     const dropdownRef = useRef(null);
 
     const handleClickOutside = (event: { target: EventTarget | null }) => {
@@ -123,7 +123,7 @@ const StartScriptGenerator: React.FC = () => {
         const blob = new Blob([generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)], { type: 'text/plain' });
         const link = document.createElement('a');
         link.href = URL.createObjectURL(blob);
-        link.download = 'start.' + (platform === "windows" ? "bat" : "sh");
+        link.download = 'start.' + (platform === 'windows' ? 'bat' : 'sh');
         link.click()
         link.remove();
     }
@@ -139,25 +139,25 @@ const StartScriptGenerator: React.FC = () => {
     }, [memory, filename, selectedFlag, guiEnabled, autoRestart]);
 
     return (
-        <div className="server-config-container">
+        <div className='server-config-container'>
             <h2>Server Configuration</h2>
-            <div className="config-section">
-                <label id="memory-slider-label" className="sr-only">Memory Usage: {memory}GB</label>
+            <div className='config-section'>
+                <label id='memory-slider-label' className='sr-only'>Memory Usage: {memory}GB</label>
                 <input
-                    id="memory-slider"
-                    type="range"
+                    id='memory-slider'
+                    type='range'
                     min={0.5}
                     max={24}
                     step={0.5}
                     value={memory}
                     onChange={(e) => setMemory(parseFloat(e.target.value))}
-                    aria-labelledby="memory-slider-label"
+                    aria-labelledby='memory-slider-label'
                 />
-                <div className="slider-markers">
+                <div className='slider-markers'>
                     {markerPoints.map((point) => (
                         <div
                             key={point}
-                            className="slider-marker"
+                            className='slider-marker'
                             style={{ left: `${((point - 0.5) / 23.5) * 100}%` }}
                         >
                             {point}GB
@@ -165,29 +165,29 @@ const StartScriptGenerator: React.FC = () => {
                     ))}
                 </div>
             </div>
-            <div className={"middle-flex-wrapper"}>
-                <div className="config-section">
-                    <label htmlFor="filename-input">Filename:</label>
+            <div className={'middle-flex-wrapper'}>
+                <div className='config-section'>
+                    <label htmlFor='filename-input'>Filename:</label>
                     <input
-                        id="filename-input"
-                        type="text"
+                        id='filename-input'
+                        type='text'
                         value={filename}
-                        placeholder={"server.jar"}
+                        placeholder={'server.jar'}
                         onChange={(e) => setFilename(e.target.value)}
-                        className={"filename-input"}
+                        className={'filename-input'}
                     />
                 </div>
-                <div className="config-section">
-                    <label htmlFor="flags-dropdown">Flags:</label>
-                    <div className="custom-dropdown" ref={dropdownRef}>
+                <div className='config-section'>
+                    <label htmlFor='flags-dropdown'>Flags:</label>
+                    <div className='custom-dropdown' ref={dropdownRef}>
                         <div
-                            className="selected-flag"
+                            className='selected-flag'
                             onClick={() => setDropdownVisible(!dropdownVisible)}
                         >
                             {selectedFlag.label}
                         </div>
                         {dropdownVisible && (
-                            <div className="dropdown-content">
+                            <div className='dropdown-content'>
                                 {Object.values(FLAGS).map((flag) => (
                                     <div
                                         key={flag.label}
@@ -197,8 +197,8 @@ const StartScriptGenerator: React.FC = () => {
                                             setDropdownVisible(false);
                                         }}
                                     >
-                                        <div className="flag-label">{flag.label}</div>
-                                        <div className="flag-description">{flag.description}</div>
+                                        <div className='flag-label'>{flag.label}</div>
+                                        <div className='flag-description'>{flag.description}</div>
                                     </div>
                                 ))}
                             </div>
@@ -206,39 +206,39 @@ const StartScriptGenerator: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="config-section">
-                <div className={"gui-container"}>
-                    <label style={{marginRight: "10px"}}>GUI:</label>
-                    <input type="checkbox" id="gui-toggle" className="checkbox" onChange={() => setGuiEnabled(!guiEnabled)}/>
-                    <label htmlFor="gui-toggle" className="switch"></label>
+            <div className='config-section'>
+                <div className={'gui-container'}>
+                    <label style={{marginRight: '10px'}}>GUI:</label>
+                    <input type='checkbox' id='gui-toggle' className='checkbox' onChange={() => setGuiEnabled(!guiEnabled)}/>
+                    <label htmlFor='gui-toggle' className='switch'></label>
                 </div>
-                <div className={"gui-container"}>
-                    <label style={{marginRight: "10px"}}>Auto-Restart:</label>
-                    <input type="checkbox" id="restart-toggle" className="checkbox" onChange={() => setAutoRestart(!autoRestart)}/>
-                    <label htmlFor="restart-toggle" className="switch"></label>
+                <div className={'gui-container'}>
+                    <label style={{marginRight: '10px'}}>Auto-Restart:</label>
+                    <input type='checkbox' id='restart-toggle' className='checkbox' onChange={() => setAutoRestart(!autoRestart)}/>
+                    <label htmlFor='restart-toggle' className='switch'></label>
                 </div>
 
-                <div className={"platform-selector"}>
+                <div className={'platform-selector'}>
                     <label>Platform:</label>
-                    <select id={"platform-select"} onChange={event => setPlatform(event.target.value)}>
-                        <option value="linux">Linux/Mac</option>
-                        <option value="windows">Windows</option>
+                    <select id={'platform-select'} onChange={event => setPlatform(event.target.value)}>
+                        <option value='linux'>Linux/Mac</option>
+                        <option value='windows'>Windows</option>
                     </select>
-                    {platform === "windows" &&
-                        <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
+                    {platform === 'windows' &&
+                        <p className={'windows-warning'}>For optimal performance, we recommend running Linux</p>
                     }
                 </div>
             </div>
-            <div className="config-section">
+            <div className='config-section'>
                 <label>Generated Command:</label>
-                <textarea className={"output-command"}
+                <textarea className={'output-command'}
                           value={generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)}
-                          id={"output-command-text"} readOnly/>
-                <div className={"copy-button"}>
-                    <button id={"clipboard-copy-button"} onClick={handleCopyToClipboard}>
+                          id={'output-command-text'} readOnly/>
+                <div className={'copy-button'}>
+                    <button id={'clipboard-copy-button'} onClick={handleCopyToClipboard}>
                         Copy to Clipboard
                     </button>
-                    <button id={"contents-download-button"} onClick={handleDownload}>
+                    <button id={'contents-download-button'} onClick={handleDownload}>
                         Download
                     </button>
                 </div>

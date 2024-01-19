@@ -8,7 +8,7 @@ description: Paper provides a downloads API that you can use to access builds.
 PaperMC provides a downloads API to facilitate automated downloads access. Full documentation can be
 found on the [Downloads API Docs](https://api.papermc.io/docs).
 
-## Getting Highest Stable Build Number
+## Getting Latest Stable Build Number
 
 <VersionFormattedCode language={"shell"}>
 ```
@@ -47,13 +47,13 @@ JAR_NAME=paper-${LATEST_VERSION}-${LATEST_BUILD}.jar
 PAPERMC_URL="https://api.papermc.io/v2/projects/paper/versions/${LATEST_VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}"
 
 # Download the latest PaperMC version
-wget -O server.jar "$PAPERMC_URL"
+curl -o server.jar $PAPERMC_URL
 echo "Downloads completed"
 ```
 </VersionFormattedCode>
 
 This is the most common use case for the API. It will download the highest stable build for the given project and
-Minecraft version. You should always serve & use the stable builds as experimental builds are prone to error and
+Minecraft version. You should always serve & use the stable builds. Experimental builds are prone to error and
 do not receive support.
 
 :::danger

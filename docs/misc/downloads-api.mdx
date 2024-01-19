@@ -8,6 +8,12 @@ description: Paper provides a downloads API that you can use to access builds.
 PaperMC provides a downloads API to facilitate automated downloads access. Full documentation can be
 found on the [Downloads API Docs](https://api.papermc.io/docs).
 
+:::danger
+
+We emphatically **do not recommend** using unstable builds or auto-updaters within production environments.
+
+:::
+
 ## Getting Latest Stable Build Number
 
 <VersionFormattedCode language={"shell"}>
@@ -18,7 +24,7 @@ PROJECT="paper"
 MINECRAFT_VERSION="%%_MAJ_MIN_MC_%%"
 
 LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
-    jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
+    jq '.builds | map(select(.channel == "default") | .build) | .[-1]')
 
 echo "Latest build is $LATEST_BUILD"
 ```
@@ -36,8 +42,7 @@ PROJECT="paper"
 MINECRAFT_VERSION="%%_MAJ_MIN_MC_%%"
 
 LATEST_VERSION=$(curl -s https://api.papermc.io/v2/projects/paper | \
-    jq -r '.versions' | \
-    jq -r '.[-1]')
+    jq -r '.versions[-1]'
 
 LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
     jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
@@ -52,12 +57,6 @@ echo "Downloads completed"
 ```
 </VersionFormattedCode>
 
-This is the most common use case for the API. It will download the highest stable build for the given project and
+This is the most common use case for the API. It will download the latest stable build for the given project and
 Minecraft version. You should always serve & use the stable builds. Experimental builds are prone to error and
 do not receive support.
-
-:::danger
-
-We emphatically **do not recommend** using unstable builds or auto-updaters within production environments.
-
-:::

@@ -39,10 +39,21 @@ const FLAGS: { [key: string]: FlagType } = {
         ].join(' '),
         description: 'Optimized Minecraft flags by Aikar for better server performance.',
     },
-    NONE: { label: 'None', value: '', description: 'No additional flags.' },
+    NONE: {
+        label: 'None',
+        value: '',
+        description: 'No additional flags.'
+    },
     VELOCITY: {
         label: 'Velocity',
-        value: '-XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15',
+        value: [
+            '-XX:+UseG1GC',
+            '-XX:G1HeapRegionSize=4M',
+            '-XX:+UnlockExperimentalVMOptions',
+            '-XX:+ParallelRefProcEnabled',
+            '-XX:+AlwaysPreTouch',
+            '-XX:MaxInlineLevel=15'
+            ].join(' '),
         description: 'Flags recommended for use with the Velocity proxy server.',
     },
 };

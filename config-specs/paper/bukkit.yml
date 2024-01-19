@@ -137,3 +137,19 @@ ticks-per:
     description: >-
       Number of ticks between each water-underground-creature spawn attempt. Set
       to -1 to use default.
+worlds:
+  <world>:
+    biome-provider:
+      default: 'N/A'
+      description: >-
+        The biome provider to use for this world. Plugins must register a BiomeProvider
+        to be used here. The format is *plugin-name:extra-parameters* or *plugin-name*
+        if no extra parameters are needed. The plugin name is as defined in the
+        plugin.yml or paper-plugin.yml.
+    generator:
+      default: 'N/A'
+      description: >-
+        The generator to use for this world. Plugins must register a ChunkGenerator
+        to be used here. The format is *plugin-name:extra-parameters* or
+        *plugin-name* if no extra parameters are needed. The plugin name is as defined
+        in the plugin.yml or paper-plugin.yml.

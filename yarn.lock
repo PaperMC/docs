@@ -4232,7 +4232,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@docusaurus/utils-validation@npm:3.1.0":
+"@docusaurus/utils-validation@npm:3.1.0, @docusaurus/utils-validation@npm:^3":
   version: 3.1.0
   resolution: "@docusaurus/utils-validation@npm:3.1.0"
   dependencies:
@@ -4452,6 +4452,15 @@ __metadata:
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
   checksum: 4059f790e2d07bf3c3ff3e0fec0daa8144fe35c1f6e0111c9921bd32106adaa97a4ab096ad7dab1e28ee6a9060083c4d1a4ada42a7f5f3f7a96b8812e2b757c1
+  languageName: node
+  linkType: hard
+
+"@gracefullight/docusaurus-plugin-vercel-analytics@npm:1.0.0":
+  version: 1.0.0
+  resolution: "@gracefullight/docusaurus-plugin-vercel-analytics@npm:1.0.0"
+  dependencies:
+    "@docusaurus/utils-validation": ^3
+  checksum: a07d468b5c10d5b4a957e2a8e98a9160d3e60494d86efdc0a83b8b7231f11512f9afdb4370ac45a2ec62a744f12e63ed9c0b4f0dd8d191afd3193152e1d5813b
   languageName: node
   linkType: hard
 
@@ -8037,6 +8046,7 @@ __metadata:
     "@docusaurus/types": 3.1.0
     "@fec/remark-a11y-emoji": 3.1.0
     "@fontsource/jetbrains-mono": 4.5.12
+    "@gracefullight/docusaurus-plugin-vercel-analytics": 1.0.0
     "@mdx-js/react": 3.0.0
     "@tsconfig/docusaurus": 1.0.7
     "@types/is-ci": 3.0.0

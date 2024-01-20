@@ -185,6 +185,7 @@ const config: Config = {
       },
     ],
     "@docusaurus/plugin-debug",
+    "@gracefullight/docusaurus-plugin-vercel-analytics",
   ],
 
   themeConfig: {

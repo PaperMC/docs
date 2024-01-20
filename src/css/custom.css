@@ -95,6 +95,8 @@ html[data-theme="dark"] {
 .footer__copyright {
   color: var(--ifm-color-emphasis-900);
   font-size: 95%;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer__col {

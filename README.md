@@ -61,4 +61,4 @@ inherit a license from any of the projects it represents.
 ## Special Thanks
 
 Preview and production hosting for this project has been provided for free by [Vercel]. Thank you!
-[![Vercel](https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg)][vercel]
+[![Vercel](static/img/powered-by-vercel.svg)][vercel]

@@ -36,14 +36,14 @@ all required tools to successfully install Java.
 
 ```bash
 sudo apt-get update && sudo apt-get upgrade
-sudo apt-get install software-properties-common ca-certificates apt-transport-https gnupg curl
+sudo apt-get install ca-certificates apt-transport-https gnupg wget
 ```
 
 Second, import the Amazon Corretto public key and apt repository.
 
 ```bash
-curl https://apt.corretto.aws/corretto.key | sudo apt-key add -
-sudo add-apt-repository 'deb https://apt.corretto.aws stable main'
+wget -O - https://apt.corretto.aws/corretto.key | sudo gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg && \
+echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | sudo tee /etc/apt/sources.list.d/corretto.list
 ```
 
 Then, install Java 21 and other dependencies using the following command:

@@ -4480,6 +4480,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@iconify/react@npm:4.1.1":
+  version: 4.1.1
+  resolution: "@iconify/react@npm:4.1.1"
+  dependencies:
+    "@iconify/types": ^2.0.0
+  peerDependencies:
+    react: ">=16"
+  checksum: 43b71a0eb4312cf0fa7412b568369e75b8a327b8b7d9fc3dce42b2d047326e39dd17541a8d915fb80b87b20a56eba1a9b52304410624b5814fdf3ad17da9196a
+  languageName: node
+  linkType: hard
+
+"@iconify/types@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "@iconify/types@npm:2.0.0"
+  checksum: 029f58542c160e9d4a746869cf2e475b603424d3adf3994c5cc8d0406c47e6e04a3b898b2707840c1c5b9bd5563a1660a34b110d89fce43923baca5222f4e597
+  languageName: node
+  linkType: hard
+
 "@jest/schemas@npm:^29.4.3":
   version: 29.4.3
   resolution: "@jest/schemas@npm:29.4.3"
@@ -8047,6 +8065,7 @@ __metadata:
     "@fec/remark-a11y-emoji": 3.1.0
     "@fontsource/jetbrains-mono": 4.5.12
     "@gracefullight/docusaurus-plugin-vercel-analytics": 1.0.0
+    "@iconify/react": 4.1.1
     "@mdx-js/react": 3.0.0
     "@tsconfig/docusaurus": 1.0.7
     "@types/is-ci": 3.0.0

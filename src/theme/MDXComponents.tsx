@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from '@iconify/react';
 import MDXComponents from '@theme-original/MDXComponents';
 import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
@@ -15,4 +16,5 @@ export default {
     VersionFormattedCode,
     SoftwareVersion,
     VersionedJavaDocLink,
+    Icon: Icon,
 };

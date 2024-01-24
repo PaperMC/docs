@@ -99,11 +99,12 @@ const velocity: SidebarsConfig = {
           items: [
             {
               type: "category",
-              label: "Component API",
+              label: "Component API (Adventure)",
               collapsed: true,
               items: [
                 "dev/api/component-api/intro",
                 "dev/api/component-api/i18n",
+                "dev/api/component-api/audiences",
               ]
             },
             "dev/api/event",

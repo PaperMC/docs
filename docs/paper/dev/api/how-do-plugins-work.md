@@ -7,9 +7,9 @@ description: How plugins work in Paper.
 
 ## Introduction
 
-Plugins are a way to extend the functionality of a Minecraft server. They are written in Java and can be loaded and 
-unloaded at runtime. Plugins are loaded from the `plugins` folder in the server directory. Plugins can be loaded from a 
-`.jar` file or from a folder. 
+Plugins are a way to extend the functionality of a Minecraft server. They are written in JVM-based language such as 
+Java, Kotlin, Groovy or Scala and can be loaded and unloaded at runtime. Plugins are loaded from the `plugins` folder 
+in the server directory. Plugins will be loaded from a `.jar` file. 
 
 ## Plugin Lifecycle
 
@@ -19,7 +19,8 @@ unloaded, it is disabled and finalized.
 ### Initialization
 
 When a plugin is loaded, it is initialized. This means that the plugin is loaded into memory and its `onLoad` 
-method is called. This method is used to initialize the plugin and set up any resources that it needs.
+method is called. This method is used to initialize the plugin and set up any resources that it needs. Most of the
+Bukkit API is not available at this point, so it is not safe to interact with it.
 
 ### Enabling
 
@@ -28,11 +29,14 @@ needs to run. This method is called when the plugin is initialized but before th
 safe to register event listeners and other resources that the plugin needs to run, however often not safe to interact 
 with a lot of APIs.
 
+This is when you can also open database connections, start threads, and other things that are not safe to do in the
+`onLoad` method.
+
 ### Disabling
 
 When a plugin is disabled, its `onDisable` method is called. This method is used to clean up any resources that the 
 plugin has allocated. This method is called before all plugins are unloaded, and is meant for any cleanup that needs to
-be done before the plugin is unloaded.
+be done before the plugin is unloaded. This may include saving data to disk or closing connections to databases.
 
 ## Event Listeners
 
@@ -42,11 +46,10 @@ when a player joins the server. Plugins can listen to this event and run code wh
 performant way to run code when something happens, as opposed to constantly checking if something has happened.
 
 Some events are cancellable. This means that when the event is fired, it can be cancelled. For example, the
-`PlayerMoveEvent` is cancellable. This means that when the event is fired, it can be cancelled. This means that the
-player will not move. This is useful for things like anti-cheat, where you want to cancel the event if the player is
-moving too fast.
+`PlayerMoveEvent` is cancellable. This means that when it is cancelled, the player will not move. This is useful for 
+things like anti-cheat, where you want to cancel the event if the player is moving too fast.
 
-It is important to think about how hot an event is when writing event listeners. A hot event is an event that is fired
+It is important to think about how "hot" an event is when writing event listeners. A "hot" event is an event that is fired
 very often. For example, the `PlayerMoveEvent` is fired every time a player moves. This means that if you have a lot of
 expensive code in your event listener, it will be run every time a player moves. This can cause a lot of lag. It is
 important to keep event listeners as lightweight as possible.
@@ -54,29 +57,27 @@ important to keep event listeners as lightweight as possible.
 ## Commands
 
 Commands are a way for players to run code on the server. Commands are registered by plugins and can be run by players.
-For example,[update.md](..%2F..%2Fadmin%2Fhow-to%2Fupdate.md) the `/help` command is registered by the server and can be run by players. Commands can be run by players
+For example, the `/help` command is registered by the server and can be run by players. Commands can be run by players
 by typing them in the chat or by running them from a command block. Commands can also be run by other plugins.
 
 Commands can have arguments. For example, the `/give` command takes an argument for the player to give the item to and
-an argument for the item to give. Commands can also have flags. For example, the `/give` command has a flag for the
-amount of items to give. Commands can also have subcommands. For example, the `/help` command has subcommands for
-different pages of the help menu.
+an argument for the item to give. Arguments are separated by spaces. For example, the command `/give Notch diamond` will
+give the player named Notch a diamond. Note here that the arguments are `["Notch", "diamond"]`.
 
 ### Permissions
 
-Permissions are a way to control who can run commands and who can listen to events. Permissions are registered by
-plugins and can be checked by other plugins. Permissions can be granted to players and groups. Permissions can also be
-granted to other permissions. For example, the `paper.command.help` permission is granted to the `paper.command`
-permission. This means that if a player has the `paper.command` permission, they will also have the `paper.command.help`
-permission.
+Permissions a powerful tool and can be used to control who can run commands and who can listen to events. Permissions 
+are registered by plugins and can be checked by other plugins. Permissions can be granted to players and groups. 
+Permissions can also be granted to other permissions. For example, the `paper.command.help` permission is granted to the 
+`paper.command`permission. This means that if a player has the `paper.command` permission, they will also have the 
+`paper.command.help`permission.
 
 ## Configuration
 
 Plugins can have configuration files. These files are used to store data that the plugin needs to run. For example, a
 plugin that adds a new block to the game might have a configuration file that stores the block's ID. Configuration files
 are stored in the `plugins` folder in the server directory. Configuration files are written in YAML. See 
-[here](/paper
-/dev/plugin-configurations) for more information.+
+[here](/paper/dev/plugin-configurations) for more information.
 
 ## Scheduling Tasks
 

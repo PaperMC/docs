@@ -13,11 +13,11 @@ The `AsyncChatEvent` is an improved version of the old `AsyncPlayerChatEvent` th
 
 #### AsyncChatEvent vs ChatEvent
 
-The key difference between the `AsyncChatEvent` and the `ChatEvent` is that the `AsyncChatEvent` is fired asynchronously 
-which means that it does not block the main thread and delays the chat message.
-Be aware that using the Bukkit API in the event might cause errors. 
-If you need to use the Bukkit API, use the `ChatEvent` instead.
-Alternatively you can use the [`BukkitScheduler`](../scheduler.md).
+The key difference between the `AsyncChatEvent` and the `ChatEvent` is that the `AsyncChatEvent` is fired asynchronously.
+This means that it does not block the main thread and sends the chat message when the listener has completed.
+Be aware that using the Bukkit API in the event might cause errors.
+If you need to use the Bukkit API, you can use the `ChatEvent`. 
+However, we recommend using the [`BukkitScheduler`](../scheduler.md).
 
 :::
 
@@ -39,16 +39,12 @@ public @NotNull Component render(@NotNull Player source, @NotNull Component sour
 - The `message` parameter is the message that was sent.
 - The `viewer` parameter is the player that is receiving the message.
 
-:::tip
-
-#### ChatRenderer.ViewerUnaware
+:::tip[ChatRenderer.ViewerUnaware]
 
 If your renderer does not need to know about the viewer, you can use the `ChatRenderer.ViewerUnaware` interface instead of the `ChatRenderer` interface. 
-This will benefit performance as the message will only be rendered once instead of once for each viewer.
+This will benefit performance as the message will only be rendered once instead of each individual player.
 
 :::
-
-Now that we understand how the renderer works, we can start using it.
 
 ## Using the renderer
 
@@ -78,7 +74,6 @@ public class ChatListener implements Listener, ChatRenderer { // Implement the C
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
         // ...
     }
-    
 }
 ```
 
@@ -102,7 +97,6 @@ public class ChatListener implements Listener {
             // ...
         });
     }
-
 }
 ```
 
@@ -119,13 +113,14 @@ To do this, we need to return a new `Component` that contains the message we wan
 ```java title="ChatListener.java"
 public class ChatListener implements Listener, ChatRenderer {
 
+    // Listener logic
+    
     @Override
     public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
         return sourceDisplayName 
                 .append(Component.text(": ")) 
                 .append(message); 
     }
-
 }
 ```
 

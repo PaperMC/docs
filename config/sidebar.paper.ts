@@ -140,6 +140,7 @@ const paper: SidebarsConfig = {
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
             "dev/api/folia-support",
+            "dev/api/client-side-entities",
           ],
         },
         {

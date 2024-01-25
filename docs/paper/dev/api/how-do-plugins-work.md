@@ -7,9 +7,9 @@ description: How plugins work in Paper.
 
 ## Introduction
 
-Plugins are a way to extend the functionality of a Minecraft server. They are written in JVM-based language such as 
-Java, Kotlin, Groovy or Scala and can be loaded and unloaded at runtime. Plugins are loaded from the `plugins` folder 
-in the server directory. Plugins will be loaded from a `.jar` file. 
+Plugins are a way to extend the functionality of a Minecraft server. They are written in JVM-based languages such as 
+Java, Kotlin, Groovy or Scala. Plugins are loaded from the `plugins` folder in the server directory. Plugins will be 
+loaded from a `.jar` file. 
 
 ## Plugin Lifecycle
 
@@ -40,14 +40,13 @@ be done before the plugin is unloaded. This may include saving data to disk or c
 
 ## Event Listeners
 
-Events are a way for plugins to listen to things that happen in the server. Events are fired when something happens,
-and plugins can listen to these events and run code when they are fired. For example, the `PlayerJoinEvent` is fired 
-when a player joins the server. Plugins can listen to this event and run code when it is fired. This is a more 
-performant way to run code when something happens, as opposed to constantly checking if something has happened.
+Events are a way for plugins to listen to things that happen in the server and run code when they are fired. For 
+example, the `PlayerJoinEvent` is fired when a player joins the server. This is a more performant way to run code when 
+something happens, as opposed to constantly checking.
 
-Some events are cancellable. This means that when the event is fired, it can be cancelled. For example, the
-`PlayerMoveEvent` is cancellable. This means that when it is cancelled, the player will not move. This is useful for 
-things like anti-cheat, where you want to cancel the event if the player is moving too fast.
+Some events are cancellable. This means that when the event is fired, it can be cancelled which negates or stops the 
+effect of the event. For example, the `PlayerMoveEvent` is cancellable. This means that when it is cancelled, the player 
+will not move. This is useful for things like anti-cheat, where you want to cancel the event if the player is moving too fast.
 
 It is important to think about how "hot" an event is when writing event listeners. A "hot" event is an event that is fired
 very often. For example, the `PlayerMoveEvent` is fired every time a player moves. This means that if you have a lot of
@@ -66,11 +65,11 @@ give the player named Notch a diamond. Note here that the arguments are `["Notch
 
 ### Permissions
 
-Permissions a powerful tool and can be used to control who can run commands and who can listen to events. Permissions 
+Permissions are a way to control who can run commands and who can listen to events. Permissions 
 are registered by plugins and can be checked by other plugins. Permissions can be granted to players and groups. 
-Permissions can also be granted to other permissions. For example, the `paper.command.help` permission is granted to the 
-`paper.command`permission. This means that if a player has the `paper.command` permission, they will also have the 
-`paper.command.help`permission.
+Permissions have a hierarchical nature. For example, the `paper.command.help` permission is a sub-permission to 
+`paper.command`. This means that if a player has the `paper.command` permission, they will also have the 
+`paper.command.help` permission.
 
 ## Configuration
 
@@ -83,10 +82,11 @@ are stored in the `plugins` folder in the server directory. Configuration files 
 
 Plugins can schedule tasks to run at a later time. This is useful for things like running code after a certain amount
 of time has passed. For example, a plugin might want to run code after 5 seconds. This can be done by scheduling a task
-to run after 100 ticks. It is important to note that tasks might be delayed if the server is lagging. For example, if 
-the server is only running at 10 ticks per second, a task that is scheduled to run after 100 ticks will take 10 seconds.
+to run after 100 ticks - one second is 20 ticks during normal operation. It is important to note that tasks might be 
+delayed if the server is lagging. For example, if the server is only running at 10 ticks per second, a task that is 
+scheduled to run after 100 ticks will take 10 seconds.
 
-In Java, typically you could use `Thread.sleep()` to delay the execution of code. However, if code is running on the main
+In Java, typically you could use `Thread.sleep()` to delay the execution of code. However, if the code is running on the main
 thread, this will cause the server to pause for the delay. Instead, you should use the `Scheduler` API to schedule tasks
 to run later. Learn more about the `Scheduler` API [here](/paper/dev/scheduler).
 

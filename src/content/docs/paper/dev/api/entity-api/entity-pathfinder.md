@@ -13,11 +13,11 @@ To access the pathfinder for a Mob, you need to call `getPathfinder()` on the Mo
 
 :::important
 
-The pathfinder is only available for Mobs, not for all entities.
+The pathfinder is only available for entities that implement `Mob`.
 
 :::
 
-Lets say that we have a `Cow` and we want it to move to a specific `Player`'s location. We can do this by getting the
+Let's say that we have a `Cow` and we want it to move to a specific `Player`'s location. We can do this by getting the
 pathfinder for the cow and then setting the path to the player's location:
 
 ```java
@@ -49,7 +49,7 @@ Much of the way that the Pathfinder works is dictated by the limitations of the 
 For example, a Polar Bear cannot fly. This means that if you set a path for a Polar Bear to a location that is in the air,
 it will not be able to reach it.
 
-There are some attributes that can be set on the pathfinder to change the way that the pathfinder works. These are:
+Some attributes can be set on the pathfinder to change the way that the pathfinder works. These are:
 - `setCanOpenDoors(boolean)`: Whether the entity can open doors.
 - `setCanPassDoors(boolean)`: Whether the entity can pass through open doors.
 - `setCanFloat(boolean)`: Whether the entity can float in water.
@@ -57,5 +57,5 @@ These all have respective getters as well.
 
 ## Stopping the Pathfinder
 
-To stop the pathfinder, you can call `stopPathfinding()` on the pathfinder. This will stop the pathfinder and clear the
-current path. You can use `hasPath()` to check if the pathfinder is currently running.
+You can call `stopPathfinding()` on the pathfinder to stop the pathfinder. This will stop the pathfinder and clear the
+current path. You can use `hasPath()` to check if the pathfinder is running.

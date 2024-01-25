@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import style from '@site/src/css/markdown-styles.module.css';
 import yaml from 'js-yaml';
 import VersionFormattedCode from "./VersionFormattedCode";
+import Link from "@docusaurus/Link";
+import useBrokenLinks from "@docusaurus/core/lib/client/exports/useBrokenLinks";
 
 const INDENT_SIZE = 30;
 
@@ -39,6 +41,7 @@ const scrollIntoView = (id) => {
 const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, separator) => {
 
     const hash = createUrlHash(parentKey, name);
+    useBrokenLinks().collectAnchor(hash);
 
     if (value[0] === '[' && value[value.length - 1] === ']') {
         const items = value.replace("[", "").replace("]", "").split(",").map((item) => {
@@ -51,7 +54,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
         return (
             <>
                 {separator.replace(/ /g, "")}
-                <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick}></a>
+                <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} />
                 <div className="indent-2">
                     <div>
                         <ul className={"yaml-list-elem"}>
@@ -67,7 +70,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
     return (
         <>
             {separator}{value}
-            <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} title={hash}></a>
+            <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} title={hash} />
         </>
     );
 }
@@ -183,13 +186,14 @@ const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescript
     }, [name]);
 
     const hash = createUrlHash(parentKey, name);
+    useBrokenLinks().collectAnchor(hash);
 
     return (
         <div key={name} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={hash}>
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
                 {parseItalics(name)}{removeTrailingSpaces(separator)}
             </div>
-            <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleClick} title={hash}></a>
+            <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleClick} title={hash} />
             {renderYamlData(value, parentKey ? hash : parseUrlHash(name), false, separator, showAllDescriptions, defaultValue)}
         </div>
     );

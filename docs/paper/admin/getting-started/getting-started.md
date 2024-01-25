@@ -54,6 +54,8 @@ disables Vanilla's GUI, so you don't get double interfaces when using the comman
 
 For more advanced Java tuning, see [Aikar's Flags](../how-to/aikars-flags.md).
 
+Use our [Startup Script Generator](/misc/tools/start-script-gen) to generate a startup script for your server.
+
 To configure your server, see the [Global Configuration](../reference/configuration/global-configuration.mdx) and
 [Per World Configuration](../reference/configuration/world-configuration.mdx) pages.
 

@@ -29,6 +29,7 @@ const config: Config = {
   baseUrl: "/",
   onBrokenLinks: isCI ? "throw" : "warn",
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
+  onBrokenAnchors: isCI ? "throw" : "warn",
   onDuplicateRoutes: isCI ? "throw" : "warn",
   favicon: "img/favicon.ico",
   trailingSlash: false,
@@ -184,6 +185,7 @@ const config: Config = {
       },
     ],
     "@docusaurus/plugin-debug",
+    "@gracefullight/docusaurus-plugin-vercel-analytics",
   ],
 
   themeConfig: {

@@ -10,7 +10,7 @@ document very carefully**.
 
 ## Minimum supported Java version bump
 
-Velocity 3.0.0 now requires Java 11 and above.
+Velocity 3.3.x now requires Java 17 and above.
 
 ## Removal of legacy dependencies
 

@@ -27,9 +27,6 @@ them (sometimes years). If an issue gets declined by Mojang, we normally do not 
 
 ## Duplication Bugs
 
-Paper patches TNT, carpet, rail and gravity block (sand, gravel, etc.) duplication bugs. These bugs are not intended and
-are patched to prevent abuse.
-
 Because TNT duping is considered a form of automated mining and not a resource dupe, we have provided an option to 
 restore it. This, undesirably, also re-enables carpet and rail duping, which normally we would not provide a config for, 
 but it's the same bug for those, so we have no choice. However, the config option is as follows:
@@ -39,11 +36,12 @@ unsupported-settings:
   allow-piston-duplication: true
 ```
 
-:::danger[Sand and Gravity Blocks]
-
-**We will not and will never support sand and gravity block duping**. This is a form of resource duping and is **not** supported by Paper.
-
-:::
+We also allow you to restore the ability to duplicate gravity blocks, such as sand, using end portals. This is not
+recommended, as it can cause issues with the server, but we do provide a config option to restore this functionality:
+```yaml
+unsupported-settings:
+  allow-unsafe-end-portal-teleportation: true
+```
 
 ## Block Breaking
 
@@ -59,7 +57,5 @@ unsupported-settings:
 We will not support you if you have issues whilst these settings are enabled, as they can cause unintended side effects.
 These settings are also not guaranteed to be supported in the future and may have their behavior changed, or removed, at any time.
 
-For reasoning behind not having configuration options for sand (and MANY other) duplication bugs, see:
+For reasoning behind not having configuration options for many duplication bugs, see:
 [#3724](https://github.com/PaperMC/Paper/issues/3724)
-
-Please do not create any further discussion on config options for sand duping. The decision is final.

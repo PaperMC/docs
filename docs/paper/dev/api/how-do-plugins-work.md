@@ -52,7 +52,7 @@ be done before the plugin is unloaded. This may include saving data to disk or c
 
 Events are a way for plugins to listen to things that happen in the server and run code when they are fired. For 
 example, the `PlayerJoinEvent` is fired when a player joins the server. This is a more performant way to run code when 
-something happens, as opposed to constantly checking. See our [event listener page](/dev/event-listeners) for more.
+something happens, as opposed to constantly checking. See our [event listener page](/paper/dev/event-listeners) for more.
 
 Some events are cancellable. This means that when the event is fired, it can be cancelled which negates or stops the 
 effect of the event. For example, the `PlayerMoveEvent` is cancellable. This means that when it is cancelled, the player 

@@ -122,6 +122,7 @@ const paper: SidebarsConfig = {
                 "dev/api/event-api/event-listeners",
                 "dev/api/event-api/custom-events",
                 "dev/api/event-api/handler-lists",
+                "dev/api/event-api/chat-event",
               ],
             },
             {

@@ -22,6 +22,10 @@ In Minecraft there are 20 ticks per second, or one tick every 50 milliseconds. T
 20 times per second. A tick taking more than 50ms to execute is the moment when your server starts to fall behind on 
 its work and lag.
 
+A task that should run after 100 ticks will run after 5 seconds (100 ticks / 20 ticks per second = 5 seconds). However,
+if the server is only running at 10 ticks per second, a task that is scheduled to run after 100 ticks will take 10
+seconds.
+
 ### Converting between human units and Minecraft ticks
 
 Every method of the scheduler that takes a delay or period uses ticks as a unit of time.

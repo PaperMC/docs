@@ -9,7 +9,17 @@ description: How plugins work in Paper.
 
 Plugins are a way to extend the functionality of a Minecraft server. They are written in JVM-based languages such as 
 Java, Kotlin, Groovy or Scala. Plugins are loaded from the `plugins` folder in the server directory. Plugins will be 
-loaded from a `.jar` file. 
+loaded from a `.jar` file.  Each plugin has a main class that is specified in the plugin's `plugin.yml` file. This
+class must extend JavaPlugin, and is the entry point for the plugin and is where the plugin's lifecycle methods are 
+defined.
+
+:::warning
+
+We do not recommend writing code inside your main class's constructor as there are no guarantees about what
+API is available at that point. Instead, you should use the `onLoad` method to initialize your plugin. Also,
+do not call your plugin's constructor directly. This will cause issues with your plugin.
+
+:::
 
 ## Plugin Lifecycle
 
@@ -42,7 +52,7 @@ be done before the plugin is unloaded. This may include saving data to disk or c
 
 Events are a way for plugins to listen to things that happen in the server and run code when they are fired. For 
 example, the `PlayerJoinEvent` is fired when a player joins the server. This is a more performant way to run code when 
-something happens, as opposed to constantly checking.
+something happens, as opposed to constantly checking. See our [event listener page](/dev/event-listeners) for more.
 
 Some events are cancellable. This means that when the event is fired, it can be cancelled which negates or stops the 
 effect of the event. For example, the `PlayerMoveEvent` is cancellable. This means that when it is cancelled, the player 
@@ -51,13 +61,15 @@ will not move. This is useful for things like anti-cheat, where you want to canc
 It is important to think about how "hot" an event is when writing event listeners. A "hot" event is an event that is fired
 very often. For example, the `PlayerMoveEvent` is fired every time a player moves. This means that if you have a lot of
 expensive code in your event listener, it will be run every time a player moves. This can cause a lot of lag. It is
-important to keep event listeners as lightweight as possible.
+important to keep event listeners as lightweight as possible. One possible way is to quickly check if the event should
+be handled, and if not, return. For example, if you only want to handle the event if the player is moving from one block
+to another, you can check if the player's location has changed blocks. If it hasn't, you can return from the listener.
 
 ## Commands
 
-Commands are a way for players to run code on the server. Commands are registered by plugins and can be run by players.
-For example, the `/help` command is registered by the server and can be run by players. Commands can be run by players
-by typing them in the chat or by running them from a command block. Commands can also be run by other plugins.
+Commands are a way for players, the console, RCON and command blocks to run code on the server. Commands are registered
+by plugins and can be run by command senders. For example, the `/help` command is registered by the server and can be
+run by players. Commands can be run by players by typing them in the chat or by running them from a command block.
 
 Commands can have arguments. For example, the `/give` command takes an argument for the player to give the item to and
 an argument for the item to give. Arguments are separated by spaces. For example, the command `/give Notch diamond` will

@@ -428,7 +428,7 @@ unsupported-settings:
     default: 'false'
     description: >-
       This setting allows for exploits related to end portal teleportation to be
-      possible. This includes sand duplication, and other exploits. This
+      possible, for example sand duplication. This
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
 watchdog:

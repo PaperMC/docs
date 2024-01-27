@@ -50,7 +50,8 @@ For example, a Polar Bear cannot fly. This means that if you set a path for a Po
 it will not be able to reach it.
 
 Some attributes can be set on the pathfinder to change the way that the pathfinder works. These are:
-- `setCanOpenDoors(boolean)`: Whether the entity can open doors.
+- `setCanOpenDoors(boolean)`: Whether the entity can open doors. This is relevant for Zombies breaking down doors, and 
+Villagers opening doors.
 - `setCanPassDoors(boolean)`: Whether the entity can pass through open doors.
 - `setCanFloat(boolean)`: Whether the entity can float in water.
 These all have respective getters as well.

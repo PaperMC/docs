@@ -21,7 +21,7 @@ server.getMobGoals().addGoal(cow, 0, goal); // 0 is the priority, lower numbers 
 :::tip
 
 You can access the Vanilla goals from the `VanillaGoal` class. These are the goals that are used by Vanilla Minecraft.
-They are specific to each mob type, so you can't use a cow goal on a zombie for example.
+They are specific to each mob type, so you can't use `VanillaGoal.BEE_ATTACK` on a Zombie, for example.
 
 :::
 
@@ -107,9 +107,9 @@ public class CamelFollowPlayerGoal implements Goal<Camel> {
 }
 ```
 
-## Stopping a Goal
+## Removing a Goal
 
-To stop a goal, you need to get the goal key and then call `stop()` on the goal:
+To remove a goal, you need to get the goal key and then call the `removeGoal` method:
 
 ```java
 Cow cow = ...;

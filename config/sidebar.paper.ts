@@ -100,9 +100,9 @@ const paper: SidebarsConfig = {
           },
           items: [
             "dev/getting-started/project-setup",
-            "dev/getting-started/userdev",
             "dev/getting-started/plugin-yml",
             "dev/getting-started/paper-plugins",
+            "dev/getting-started/userdev",
           ],
         },
         {
@@ -134,13 +134,14 @@ const paper: SidebarsConfig = {
                 "dev/api/component-api/i18n",
               ]
             },
-            "dev/api/roadmap",
+            "dev/api/how-do-plugins-work",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
             "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
             "dev/api/folia-support",
+            "dev/api/roadmap",
           ],
         },
         {

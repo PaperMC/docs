@@ -5,6 +5,7 @@ import yaml from 'js-yaml';
 import VersionFormattedCode from "./VersionFormattedCode";
 import Link from "@docusaurus/Link";
 import useBrokenLinks from "@docusaurus/core/lib/client/exports/useBrokenLinks";
+import Admonition from "@theme/Admonition";
 
 const INDENT_SIZE = 30;
 
@@ -157,7 +158,10 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     );
 };
 
-const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescriptions, defaultValue }) => {
+const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescriptions, defaultValue , warning}) => {
+
+    if (name === 'inline-docs-warning') return null;
+
     const handleClick = (event) => {
         event.preventDefault();
         scrollIntoView(createUrlHash(parentKey, name));
@@ -194,6 +198,15 @@ const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescript
                 {parseItalics(name)}{removeTrailingSpaces(separator)}
             </div>
             <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleClick} title={hash} />
+            {warning &&
+                <div className={`inline-admonition-warning`}>
+                    <Admonition
+                        type={"danger"}
+                        title={warning.title}
+                        children={<p style={{ whiteSpace: "initial" }}>{warning.message}</p>}
+                    />
+                </div>
+            }
             {renderYamlData(value, parentKey ? hash : parseUrlHash(name), false, separator, showAllDescriptions, defaultValue)}
         </div>
     );
@@ -205,9 +218,19 @@ const renderYamlData = (data, parentKey, root = false, separator, showAllDescrip
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object' && value !== null) {
             if (('default' in value && typeof value.default !== 'object') || ('description' in value && typeof value.description !== 'object')) {
-                renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);
+                renderedNodes.push(
+                    <YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root}
+                                             separator={separator} showAllDescriptions={showAllDescriptions}
+                                             defaultValue={defaultValue}
+                    />
+                );
             } else {
-                renderedNodes.push(<YamlTreeNode root={root} key={key} name={key} parentKey={parentKey} value={value} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);
+                renderedNodes.push(
+                    <YamlTreeNode root={root} key={key} name={key} parentKey={parentKey} value={value}
+                                  separator={separator} showAllDescriptions={showAllDescriptions}
+                                  defaultValue={defaultValue} warning={'inline-docs-warning' in value ? value["inline-docs-warning"] : null}
+                    />
+                );
             }
         }
     }

@@ -1,17 +1,14 @@
 import React from 'react';
+import configuredProperties from '@site/config-specs/properties/properties.json';
 
-const CONFIGURED_PROPERTIES = {
-    MIN_VELOCITY_JAVA: "17",
-}
-
-const CONFIGURED_PROPERTY_NAMES = Object.keys(CONFIGURED_PROPERTIES);
+const CONFIGURED_PROPERTY_NAMES = Object.keys(configuredProperties);
 
 export function isConfiguredProperty(propertyKey: string): boolean {
     return CONFIGURED_PROPERTY_NAMES.includes(propertyKey);
 }
 
 export function getConfiguredProperty(propertyKey: string): string {
-    return CONFIGURED_PROPERTIES[propertyKey];
+    return configuredProperties[propertyKey];
 }
 
 export default function ConfiguredProperty({ propertyKey }) {

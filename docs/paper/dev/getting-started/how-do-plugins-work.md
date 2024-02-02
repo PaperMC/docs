@@ -86,8 +86,8 @@ Permissions have a hierarchical nature. For example, the `paper.command.help` pe
 
 Plugins can have configuration files. These files are used to store data that the plugin needs to run. For example, a
 plugin that adds a new block to the game might have a configuration file that stores the block's ID. Configuration files
-should be stored in the `plugins` folder in the server directory. The server offers a YAML configuration API that can be
-used to read and write configuration files. See [here](/paper/dev/plugin-configurations) for more information.
+should be stored in the plugin's data folder, within the `plugins` folder. The server offers a YAML configuration API 
+that can be used to read and write configuration files. See [here](/paper/dev/plugin-configurations) for more information.
 
 ## Scheduling Tasks
 

@@ -80,15 +80,14 @@ give the player named Notch a diamond. Note here that the arguments are `["Notch
 Permissions are a way to control who can run commands and who can listen to events. Permissions 
 are registered by plugins and can be checked by other plugins. Permissions can be granted to players and groups. 
 Permissions have a hierarchical nature. For example, the `paper.command.help` permission is a sub-permission to 
-`paper.command`. This means that if a player has the `paper.command` permission, they will also have the 
-`paper.command.help` permission.
+`paper.command`. This provides a nice way to group permissions together.
 
 ## Configuration
 
 Plugins can have configuration files. These files are used to store data that the plugin needs to run. For example, a
 plugin that adds a new block to the game might have a configuration file that stores the block's ID. Configuration files
-are stored in the `plugins` folder in the server directory. Configuration files are written in YAML. See 
-[here](/paper/dev/plugin-configurations) for more information.
+should be stored in the `plugins` folder in the server directory. The server offers a YAML configuration API that can be
+used to read and write configuration files. See [here](/paper/dev/plugin-configurations) for more information.
 
 ## Scheduling Tasks
 

@@ -101,6 +101,7 @@ const paper: SidebarsConfig = {
           items: [
             "dev/getting-started/project-setup",
             "dev/getting-started/plugin-yml",
+            "dev/getting-started/how-do-plugins-work",
             "dev/getting-started/paper-plugins",
             "dev/getting-started/userdev",
           ],
@@ -135,7 +136,6 @@ const paper: SidebarsConfig = {
                 "dev/api/component-api/audiences",
               ]
             },
-            "dev/api/how-do-plugins-work",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
             "dev/api/scheduler",

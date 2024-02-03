@@ -5,7 +5,7 @@ const markerPoints = [4, 8, 12, 16, 20];
 
 type FlagType = {
     label: string;
-    value: string;
+    value: (memory: number) => string;
     description: string;
 };
 
@@ -15,38 +15,52 @@ const LINUX_AUTO_RESTART = 'while [ true ]; do\n    %%CONTENT%%\n    echo Server
 const FLAGS: { [key: string]: FlagType } = {
     AIKARS: {
         label: 'Aikar\'s',
-        value: [
-            '-XX:+AlwaysPreTouch',
-            '-XX:+DisableExplicitGC',
-            '-XX:+ParallelRefProcEnabled',
-            '-XX:+PerfDisableSharedMem',
-            '-XX:+UnlockExperimentalVMOptions',
-            '-XX:+UseG1GC',
-            '-XX:G1HeapRegionSize=8M',
-            '-XX:G1HeapWastePercent=5',
-            '-XX:G1MaxNewSizePercent=40',
-            '-XX:G1MixedGCCountTarget=4',
-            '-XX:G1MixedGCLiveThresholdPercent=90',
-            '-XX:G1NewSizePercent=30',
-            '-XX:G1RSetUpdatingPauseTimePercent=5',
-            '-XX:G1ReservePercent=20',
-            '-XX:InitiatingHeapOccupancyPercent=15',
-            '-XX:MaxGCPauseMillis=200',
-            '-XX:MaxTenuringThreshold=1',
-            '-XX:SurvivorRatio=32',
-            '-Dusing.aikars.flags=https://mcflags.emc.gs',
-            '-Daikars.new.flags=true'
-        ].join(' '),
+        value: (memory: number) => {
+            const baseFlags = [
+                '-XX:+AlwaysPreTouch',
+                '-XX:+DisableExplicitGC',
+                '-XX:+ParallelRefProcEnabled',
+                '-XX:+PerfDisableSharedMem',
+                '-XX:+UnlockExperimentalVMOptions',
+                '-XX:+UseG1GC',
+                '-XX:G1HeapWastePercent=5',
+                '-XX:G1MixedGCCountTarget=4',
+                '-XX:G1MixedGCLiveThresholdPercent=90',
+                '-XX:SurvivorRatio=32',
+                '-Dusing.aikars.flags=https://mcflags.emc.gs',
+                '-Daikars.new.flags=true'
+            ];
+
+            if (memory >= 12) {
+                baseFlags.push(
+                    '-XX:G1NewSizePercent=40',
+                    '-XX:G1MaxNewSizePercent=50',
+                    '-XX:G1HeapRegionSize=16M',
+                    '-XX:G1ReservePercent=15',
+                    '-XX:InitiatingHeapOccupancyPercent=20'
+                );
+            } else {
+                baseFlags.push(
+                    '-XX:G1NewSizePercent=30',
+                    '-XX:G1MaxNewSizePercent=40',
+                    '-XX:G1HeapRegionSize=8M',
+                    '-XX:G1ReservePercent=20',
+                    '-XX:InitiatingHeapOccupancyPercent=15'
+                );
+            }
+
+            return baseFlags.join(' ');
+        },
         description: 'Optimized Minecraft flags by Aikar for better server performance.',
     },
     NONE: {
         label: 'None',
-        value: '',
+        value: (memory: number) => '',
         description: 'No additional flags.'
     },
     VELOCITY: {
         label: 'Velocity',
-        value: [
+        value: (memory: number) => [
             '-XX:+AlwaysPreTouch',
             '-XX:+ParallelRefProcEnabled',
             '-XX:+UnlockExperimentalVMOptions',
@@ -63,7 +77,7 @@ const isServerSide = typeof document === 'undefined';
 const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean, autoRestartEnabled: boolean, platform: string) => {
     setTimeout(resizeOutput, 0);
     let content = '';
-    const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? '' : ' '}-jar ${filename === '' ? 'server.jar' : filename} ${guiEnabled ? '' : '--nogui'}`;
+    const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value(memory)}${selectedFlag === FLAGS.NONE ? '' : ' '}-jar ${filename === '' ? 'server.jar' : filename} ${guiEnabled ? '' : '--nogui'}`;
 
     if (autoRestartEnabled)
         content = (platform === 'windows' ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace('%%CONTENT%%', command);

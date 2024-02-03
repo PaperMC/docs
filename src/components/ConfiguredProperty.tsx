@@ -1,4 +1,3 @@
-import React from 'react';
 import configuredProperties from '@site/config-specs/properties/properties.json';
 
 const CONFIGURED_PROPERTY_NAMES = Object.keys(configuredProperties);
@@ -17,11 +16,5 @@ export default function ConfiguredProperty({ propertyKey }) {
         return null;
     }
 
-    const value = getConfiguredProperty(propertyKey);
-
-    return (
-        <span className="configured-property">
-            {value}
-        </span>
-    );
+    return getConfiguredProperty(propertyKey);
 }

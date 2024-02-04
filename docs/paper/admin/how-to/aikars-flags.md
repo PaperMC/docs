@@ -11,7 +11,7 @@ Use these flags exactly, only changing `Xmx` and `Xms`. These flags work and sca
 size of memory.
 
 For an automated script to generate these flags for you, see
-[Our Script Generator](/misc/tools/start-script-gen).
+our [Script Generator](/misc/tools/start-script-gen).
 
 ```bash
 java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 

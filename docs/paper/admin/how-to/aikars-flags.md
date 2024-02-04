@@ -8,7 +8,7 @@ description: Aikar's flags are a set of JVM flags designed to improve the perfor
 ## Recommended JVM Startup Flags
 
 Use these flags exactly, only changing `Xmx` and `Xms`. These flags work and scale accordingly to any
-size of memory, even 500MB but modern Minecraft versions will not do well with such low memory.
+size of memory.
 
 For an automated script to generate these flags for you, see
 [Our Script Generator](/misc/tools/start-script-gen).

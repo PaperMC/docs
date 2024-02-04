@@ -7,7 +7,7 @@ description: Aikar's flags are a set of JVM flags designed to improve the perfor
 
 ## Recommended JVM Startup Flags
 
-Use these flags exactly, only changing Xmx and Xms. These flags work and scale accordingly to any
+Use these flags exactly, only changing `Xmx` and `Xms`. These flags work and scale accordingly to any
 size of memory, even 500MB but modern Minecraft versions will not do well with such low memory.
 
 For an automated script to generate these flags for you, see
@@ -24,13 +24,16 @@ java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMill
 -Daikars.new.flags=true -jar paper.jar --nogui
 ```
 
-:::caution[Do not allocate all of your available memory on a shared host!]
+:::danger[Do not allocate all of your available memory on a shared host!]
 
-When setting the Xms and Xmx values, if your host says you have 8000M memory, DO NOT USE 8000M!
-Minecraft (and Java) needs additional memory on top of that Xmx parameter. It is recommended to
-reduce your Xmx/Xms by about **1000-1500M** to avoid running out of memory or "OOMKiller" hitting
-your server. This also leaves room for the Operating System to use memory too. **Have 8000M memory?
-Use 6500M for safety.** _But you may also ask your host if they will cover this overhead for you and
+When setting the `Xms` and `Xmx` values, if your host says you have 8GB of memory, **do not use 8GB**!
+
+Minecraft (and Java) needs additional memory on top of that `Xmx` parameter. It is recommended to
+**reduce your `Xmx` and `Xms` by about 1000-1500MB** to avoid running out of memory or `OOMKiller` killing
+your server. This also leaves room for the operating system to use memory too.
+
+Do you have 8GB of memory? Use 6500MB for safety.  
+_But you may also ask your host if they will cover this overhead for you and
 give you 9500M instead. Some hosts will! Just ask._
 
 :::

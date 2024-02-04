@@ -48,8 +48,6 @@ However, more memory does not mean better performance above a certain point. Eve
 a point of diminishing returns. Going out and getting 32GB of RAM for a server will only waste your
 money with minimal returns.
 
-If you are running with 12GB or less memory for MC, you should not adjust these parameters.
-
 ## Java GC Logging
 
 Are you having old gen issues with these flags? Add the following flags based on your java version

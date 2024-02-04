@@ -40,32 +40,6 @@ money with minimal returns.
 
 If you are running with 12GB or less memory for MC, you should not adjust these parameters.
 
-### If you are using an Xmx value greater than 12G
-
-If you have and use more than 12GB of memory, adjust the following:
-
-- `-XX:G1NewSizePercent=40`
-- `-XX:G1MaxNewSizePercent=50`
-- `-XX:G1HeapRegionSize=16M`
-- `-XX:G1ReservePercent=15`
-- `-XX:InitiatingHeapOccupancyPercent=20`
-
-:::tip
-
-If you see increase in old generation collections after this, revert to the base flags!
-
-:::
-
-Explanation of these changes:
-
-- Base flag set aims for 30/40 to reduce risk of to space issues. With more memory, less of an
-  issue. We can give more to new generation with 40/50, as well as reduce reserve percent since the
-  default reserve will already be larger.
-- Region Size increase helps reduce humongous allocations, and speeds up remarking. We need a
-  smaller region size at smaller heaps to ensure an adequate amount of regions available
-- We can start looking for old generation memory to reclaim with more of a delay with IHOP at 20
-  since we have more old generation available to space on CPU.
-
 ## Java GC Logging
 
 Are you having old gen issues with these flags? Add the following flags based on your java version

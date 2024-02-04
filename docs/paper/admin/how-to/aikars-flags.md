@@ -92,9 +92,9 @@ up much space (5MB)
 
 3.  **G1NewSizePercent:** These are the important ones. You now can specify percentages of an
     overall desired range for the new generation. With these settings, we tell G1 to not use its
-    default 5% for new gen, and instead give it 40%! **Minecraft has an extremely high a memory
-    allocation rate, ranging to at least 800MB/second on a 30 player server! And this is
-    mostly short-lived objects (Block Position).**
+    default 5% for new gen, and instead give it 40%! **Minecraft has an extremely high memory
+    allocation rate**, ranging to at least 800MB/second on a 30 player server! And this is
+    mostly short-lived objects (Block Position).
 
     Now, this means Minecraft **really** needs more focus on new gen to be able to even support this
     allocation rate. If your new gen is too small, you will be running new gen collections 1-2+

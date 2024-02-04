@@ -42,7 +42,7 @@ java -Xmx4G -Xms4G -jar paper.jar --nogui
 Ensure you navigated your terminal to the directory of your server
 and that you have replaced `paper.jar` with the name of the jar you have downloaded.
 
-The amount of RAM can be set by changing the numbers in the `XmX` and `Xms` arguments.  
+The amount of RAM can be set by changing the numbers in the `Xmx` and `Xms` arguments.  
 `--nogui` disables Vanilla's GUI, so you don't get double interfaces when using the command line.
 
 To configure your server, see the [Global Configuration](../reference/configuration/global-configuration.mdx) and

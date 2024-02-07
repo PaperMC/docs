@@ -57,7 +57,7 @@ public class TestPlugin extends JavaPlugin {
 }
 ```
 
-:::info[`replace` parameter]
+:::info
 
 The boolean `replace` parameter specifies whether it should replace an existing file if one exists. 
 If set to true, the configuration will be overwritten on every call.

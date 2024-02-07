@@ -63,7 +63,7 @@ const isServerSide = typeof document === 'undefined';
 const generateStartCommand = (memory: number, selectedFlag: FlagType, filename: string, guiEnabled: boolean, autoRestartEnabled: boolean, platform: string) => {
     setTimeout(resizeOutput, 0);
     let content = '';
-    const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? '' : ' '}-jar ${filename === '' ? 'server.jar' : filename} ${guiEnabled ? '' : '--nogui'}`;
+    const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? '' : ' '}-jar ${filename === '' ? 'server.jar' : filename} ${guiEnabled || selectedFlag === FLAGS.VELOCITY ? '' : '--nogui'}`;
 
     if (autoRestartEnabled)
         content = (platform === 'windows' ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace('%%CONTENT%%', command);

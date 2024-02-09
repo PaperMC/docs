@@ -1,7 +1,7 @@
 name: "Spell Check Documentation"
 
 env:
-  match-regex: "accessorise|aluminium|analyse|armour|authorise|behoves|cancelled|catalogue|centre|civilisation|colour|defence|gramme|grey|honour|kerb|labour|licence|manoeuvres|metre|modelled|neighbour|organisation|organise|practise|recognise|routeing|serialise|tonne|travelling"
+  match-regex: "accessorise|aluminium|analyse|armour|authorise|behoves|catalogue|centre|civilisation|colour|defence|gramme|grey|honour|kerb|labour|licence|manoeuvres|metre|modelled|neighbour|organisation|organise|practise|recognise|routeing|serialise|tonne|travelling"
 
 on:
   push:

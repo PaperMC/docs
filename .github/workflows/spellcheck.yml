@@ -1,0 +1,73 @@
+name: "Spell Check Documentation"
+
+env:
+  match-regex: "accessorise|aluminium|analyse|armour|authorise|behoves|cancelled|catalogue|centre|civilisation|colour|defence|gramme|grey|honour|kerb|labour|licence|manoeuvres|metre|modelled|neighbour|organisation|organise|practise|recognise|routeing|serialise|tonne|travelling"
+
+on:
+  push:
+    paths: ["**/*.js","**/*.jsx","**/*.ts","**/*.tsx","**/*.md","**/*.mdx","**/*.yaml","**/*.yml"]
+  pull_request:
+    paths: ["**/*.js","**/*.jsx","**/*.ts","**/*.tsx","**/*.md","**/*.mdx","**/*.yaml","**/*.yml"]
+
+jobs:
+  checker:
+    if: "${{(github.event_name != 'pull_request') || (github.event.pull_request.head.repo.full_name != github.event.pull_request.base.repo.full_name)}}"
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: ripgrep
+
+      - uses: actions/checkout@v4
+
+      - name: Search, saving results to a json lines file
+        run: rg -i "${{env.match-regex}}" ./ -g "*.{js,jsx,ts,tsx,md,mdx,yaml,yml}" --json | tee matches.jsonl | sed -e "s/^/::debug::/" -
+
+      - name: Parse Results
+        run: |
+          # Gets Results from rg json output, formats it how github wants.
+          echo ::debug::"Starting parsing"
+          matches=0
+          while IFS="" read -r json || [ -n "$json" ]; do
+
+            # only for match types (ignoring start file, end file, summary)
+            type=$(echo "$json" | jq -r '.type')
+            echo "::debug::got line of type=${type}"
+            if [ "$type" != "match" ]; then
+              echo "::debug::skipping..."
+              continue
+            fi
+
+            # Extracting information using jq
+            file_name=$(echo "$json" | jq -r '.data.path.text')
+            line_number=$(echo "$json" | jq -r '.data.line_number')
+
+            # Looping over submatches
+            submatches_count=$(echo "$json" | jq -r '.data.submatches | length')
+            echo "::debug::got n=${submatches_count} matches for line=${line_number} in file=${file_name}"
+            if [ "$submatches_count" -gt 0 ]; then
+              for index in $(seq 0 $((submatches_count - 1))); do
+                matched_text=$(echo "$json" | jq -r --argjson index "$index" '.data.submatches[$index].match.text')
+                col_start=$(echo "$json" | jq -r --argjson index "$index" '.data.submatches[$index].start')
+                col_end=$(echo "$json" | jq -r --argjson index "$index" '.data.submatches[$index].end')
+                echo "::debug::for submatch i=${index} / n=${submatches_count}: text=${matched_text} col=${col_start}:${col_end}"
+
+                echo "::error file=${file_name},line=${line_number},endLine=${line_number},col=${col_start},endColumn=${col_end},title=Wrong spelling found: \"${matched_text}\"::\"${matched_text}\" found in ${file_name}#${line_number}. (try looking in a dictionary for the american alternative)" || true
+                ((matches++)) || true
+              done
+            else
+              # should never happen
+              echo ::error title=Unexpected Data::Unexpected Data found: match json has empty sub-matches ${json}
+            fi
+          done < matches.jsonl
+          echo "::debug::Completed."
+          if [ "$matches" -eq 0 ]; then
+            # success
+            echo "Success: No matches found!"
+            exit 0
+          else
+            # run fail
+            echo "${matches} matches found."
+            exit 1
+          fi

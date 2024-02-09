@@ -112,7 +112,7 @@ to also support them. We recommend sticking to the predefined Brigadier types pr
 
 ### `SimpleCommand`
 
-Modelled after the convention popularized by Bukkit and BungeeCord, a `SimpleCommand` has three
+Modeled after the convention popularized by Bukkit and BungeeCord, a `SimpleCommand` has three
 methods: one for when the command is executed, one to provide suggestions for tab completion, and
 one to check a `CommandSource` has permission to use the command. All methods receive a
 `SimpleCommand.Invocation` object, which contains the `CommandSource` that executed the command and

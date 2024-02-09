@@ -101,7 +101,7 @@ level-type:
 max-chained-neighbor-updates:
   default: '1000000'
   description: >
-    Limits the number of consecutive neighbour updates before skipping subsequent updates. Negative
+    Limits the number of consecutive neighbor updates before skipping subsequent updates. Negative
     values will disable the limit.
 max-players:
   default: '20'

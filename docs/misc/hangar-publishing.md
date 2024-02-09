@@ -191,7 +191,7 @@ hangarPublish {
 
 You don't necessarily need to publish via GitHub Actions, but it is an easy way to do so. If you want to use it, create
 a `publish.yml` file in the `.github/workflows` directory of your project root folder and make sure
-you [add the repository secret](#adding-the-hangarapitoken-repository-secret).
+you [add the repository secret](#adding-the-hangar_api_token-repository-secret).
 
 You can add and remove branches to be published by editing the `branches` section.
 

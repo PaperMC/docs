@@ -260,6 +260,10 @@ html[data-theme="dark"] {
   width: fit-content;
 }
 
+.inline-admonition-warning {
+  margin-top: 1em;
+}
+
 ul.yaml-list-elem {
   margin: 0;
   list-style-type: none;

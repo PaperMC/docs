@@ -392,6 +392,11 @@ timings:
       Instructs Timings to provide more specific information in its reports. For
       example, specific entity types causing lag rather than just "entities"
 unsupported-settings:
+  inline-docs-warning:
+    title: 'Unsupported Settings'
+    message: >-
+      The following settings are provided by Paper but are not officially
+      supported. Use them at your own risk and they may be removed at any time.
   allow-headless-pistons:
     default: 'false'
     description: >-

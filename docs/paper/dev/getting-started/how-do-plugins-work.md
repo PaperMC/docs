@@ -77,10 +77,23 @@ give the player named Notch a diamond. Note here that the arguments are `["Notch
 
 ### Permissions
 
-Permissions are a way to control who can run commands and who can listen to events. Permissions 
-are registered by plugins and can be checked by other plugins. Permissions can be granted to players and groups. 
-Permissions have a hierarchical nature. For example, the `paper.command.help` permission is a sub-permission to 
-`paper.command`. This provides a nice way to group permissions together.
+Permissions are a way to control who can run commands and who can listen to events. Permissions
+are registered by plugins and can be checked by other plugins. Permissions can be granted to players and groups.
+Permissions can have a hierarchical nature, if defined so by the plugin in their `plugin.yml`. For example, a
+plugin can define `example.command.help` as a sub-permission of `example.command`. This means that if a player
+has the `example.command` permission, they will also have the `example.command.help` permission.
+
+::: note
+
+Permission plugins can allow the usage of wildcard permissions using the `*` character to grant any permission
+or sub-permission available, allowing hierarchical permissions even if not set by the plugin itself. For example,
+granting `example.command.*` through a permission plugin with wildcard support will grant access to all permissions
+starting with `example.command.` itself.
+
+It is **not** recommended to use wildcard permissions, especially `*` (All permissions), as it can be a huge
+security risk, as well as potentially causing unwanted side effects to a player. Use with caution.
+
+:::
 
 ## Configuration
 

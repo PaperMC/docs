@@ -152,7 +152,7 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
         Player player = ...;
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Forward");
-        out.writeUTF("ALL"); // This is the target server. "ALL" will message all servers appart from the one sending the message
+        out.writeUTF("ALL"); // This is the target server. "ALL" will message all servers apart from the one sending the message
         out.writeUTF("SecretInternalChannel"); // This is the channel.
 
         ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();

@@ -1,7 +1,7 @@
 ---
 slug: /reference/region-logic
 title: Region Logic
-description: An overview to how Folia's regionizer works.
+description: An overview to how Folia's regioniser works.
 ---
 
 ## Fundamental regionising logic
@@ -28,7 +28,7 @@ a single independent region.
 ## Guarantees the regioniser provides
 
 The regioniser provides a set of important invariants that allows
-regions to tick in parallel without race condtions:
+regions to tick in parallel without race conditions:
 
 ### First invariant
 
@@ -75,7 +75,7 @@ while the "transient" state is used as a state for a region that may
 not tick. The "dead" state is used to mark regions which should
 not be use.
 
-The states transistions are explained later, as it ties in
+The states transitions are explained later, as it ties in
 with the regioniser's merge and split logic.
 
 ## Regioniser implementation

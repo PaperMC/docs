@@ -1,0 +1,16 @@
+name: "Spell check"
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Spell check
+        uses: crate-ci/typos@v1.18.2
+        with:
+          config: ./.typos.toml

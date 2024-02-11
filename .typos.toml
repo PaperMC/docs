@@ -1,3 +1,6 @@
+[files]
+extend-exclude = ["docs/versioned"] # don't check ./docs/versioned
+
 [default.extend-words]
 accessorise = "accessorize"
 aluminium = "aluminum"

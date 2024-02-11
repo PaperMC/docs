@@ -1,6 +1,12 @@
 [files]
 extend-exclude = ["docs/versioned"] # don't check ./docs/versioned
 
+[default]
+locale = "en-us"
+
+[default.extend-identifiers]
+"Paper.FilterThreshhold" = "Paper.FilterThreshhold" # ignore error, it is actually "Threshhold" in Paper
+
 [default.extend-words]
 accessorise = "accessorize"
 aluminium = "aluminum"

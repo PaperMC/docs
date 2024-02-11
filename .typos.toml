@@ -61,9 +61,7 @@ tonne = "ton"
 tonnes = "tons"
 traveller = "traveler"
 travelling = "traveling"
-
-# British spelling is wanted here for consistency with Folia code
-regionize = "regionise"
-regionizer = "regioniser"
-regionizing = "regionising"
-regionized = "regionised"
+regionise = "regionize"
+regioniser = "regionizer"
+regionising = "regionizing"
+regionised = "regionized"

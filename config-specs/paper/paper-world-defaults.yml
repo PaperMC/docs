@@ -888,7 +888,7 @@ misc:
 
       **Note:** Both the Eigencraft and Alternate Current implementations change
       the behavior of redstone dust. You can read about how behavior is changed
-      in each implementation's respective documention:
+      in each implementation's respective documentation:
 
       - Eigencraft: No official documentation available. However,
       [theosib's comments](https://bugs.mojang.com/browse/MC-81098?focusedCommentId=420777#comment-420777)

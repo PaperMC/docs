@@ -101,7 +101,7 @@ level-type:
 max-chained-neighbor-updates:
   default: '1000000'
   description: >
-    Limits the number of consecutive neighbour updates before skipping subsequent updates. Negative
+    Limits the number of consecutive neighbor updates before skipping subsequent updates. Negative
     values will disable the limit.
 max-players:
   default: '20'
@@ -174,7 +174,7 @@ resource-pack-prompt:
 resource-pack-sha1:
   default: ''
   description: >
-    The hash of the resource pack, used for verification. This is reccomended to be set to ensure
+    The hash of the resource pack, used for verification. This is recommended to be set to ensure
     players are downloading the correct pack.
 server-ip:
   default: ''

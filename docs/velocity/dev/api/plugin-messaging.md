@@ -141,7 +141,7 @@ public boolean sendPluginMessageToPlayer(Player player, ChannelIdentifier identi
 }
 ```
 
-## BungeeCord Channel Compatability
+## BungeeCord Channel Compatibility
 
 This allows your backend servers to communicate with Velocity
 in a way compatible with BungeeCord

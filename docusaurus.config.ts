@@ -31,7 +31,7 @@ const config: Config = {
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
   onBrokenAnchors: isCI ? "throw" : "warn",
   onDuplicateRoutes: isCI ? "throw" : "warn",
-  favicon: "favicon.ico",
+  favicon: "/favicon.ico",
   trailingSlash: false,
   noIndex: preview,
   baseUrlIssueBanner: false,

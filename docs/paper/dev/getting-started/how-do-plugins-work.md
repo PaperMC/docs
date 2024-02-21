@@ -77,18 +77,30 @@ give the player named Notch a diamond. Note here that the arguments are `["Notch
 
 ### Permissions
 
-Permissions are a way to control who can run commands and who can listen to events. Permissions 
-are registered by plugins and can be checked by other plugins. Permissions can be granted to players and groups. 
-Permissions have a hierarchical nature. For example, the `paper.command.help` permission is a sub-permission to 
-`paper.command`. This means that if a player has the `paper.command` permission, they will also have the 
-`paper.command.help` permission.
+Permissions are a way to control who can run commands and who can listen to events. Permissions
+are registered by plugins and can be checked by other plugins. Permissions can be granted to players and groups.
+Permissions can have a hierarchical nature, if defined so by the plugin in their `plugin.yml`. For example, a
+plugin can define `example.command.help` as a sub-permission of `example.command`. This means that if a player
+has the `example.command` permission, they will also have the `example.command.help` permission.
+
+::: note
+
+Permission plugins can allow the usage of wildcard permissions using the `*` character to grant any permission
+or sub-permission available, allowing hierarchical permissions even if not set by the plugin itself. For example,
+granting `example.command.*` through a permission plugin with wildcard support will grant access to all permissions
+starting with `example.command.` itself.
+
+It is **not** recommended to use wildcard permissions, especially `*` (All permissions), as it can be a huge
+security risk, as well as potentially causing unwanted side effects to a player. Use with caution.
+
+:::
 
 ## Configuration
 
 Plugins can have configuration files. These files are used to store data that the plugin needs to run. For example, a
 plugin that adds a new block to the game might have a configuration file that stores the block's ID. Configuration files
-are stored in the `plugins` folder in the server directory. Configuration files are written in YAML. See 
-[here](/paper/dev/plugin-configurations) for more information.
+should be stored in the plugin's data folder, within the `plugins` folder. The server offers a YAML configuration API 
+that can be used to read and write configuration files. See [here](/paper/dev/plugin-configurations) for more information.
 
 ## Scheduling Tasks
 

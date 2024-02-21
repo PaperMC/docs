@@ -1,5 +1,6 @@
 ---
 slug: /built-in-commands
+description: A list of the built-in commands with explanations.
 ---
 
 # Built-In Commands
@@ -69,3 +70,8 @@ down. An optional reason can be given, either as JSON or with [MiniMessage Forma
 If the user has the `velocity.command.glist` permission (by default, this is granted to nobody),
 players can use this command to view the number of players currently on the proxy and use
 `/glist all` to get a listing of players per server.
+
+## `/send`
+
+If the user has the `velocity.command.send` permission, they can send other players (or all
+players on the proxy) to another server.

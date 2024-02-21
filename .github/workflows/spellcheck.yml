@@ -1,0 +1,19 @@
+name: "Spell check"
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  check:
+    # run on all push events or on PR syncs not from the same repo
+    if: github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Spell check
+        uses: crate-ci/typos@v1.18.2
+        with:
+          config: ./.typos.toml

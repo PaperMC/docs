@@ -29,8 +29,9 @@ const config: Config = {
   baseUrl: "/",
   onBrokenLinks: isCI ? "throw" : "warn",
   onBrokenMarkdownLinks: isCI ? "throw" : "warn",
+  onBrokenAnchors: isCI ? "throw" : "warn",
   onDuplicateRoutes: isCI ? "throw" : "warn",
-  favicon: "img/favicon.ico",
+  favicon: "/favicon.ico",
   trailingSlash: false,
   noIndex: preview,
   baseUrlIssueBanner: false,
@@ -78,6 +79,7 @@ const config: Config = {
       admonitions: false,
       headingIds: false,
     },
+    format: "detect",
   },
 
   themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia", "@docusaurus/theme-mermaid"],
@@ -183,6 +185,7 @@ const config: Config = {
       },
     ],
     "@docusaurus/plugin-debug",
+    "@gracefullight/docusaurus-plugin-vercel-analytics",
   ],
 
   themeConfig: {

@@ -92,6 +92,56 @@ To maintain consistency and readability across the documentation, please adhere 
 
 9. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
 
+## Automatic Doc Versioning
+
+There are components and methods in order to embed the current Project Version into the documentation. This is done one
+of a few ways:
+
+1) SoftwareVersion component
+   This component is used to embed the current version of the software into the documentation. An example of this would be:
+ ```jsx
+<SoftwareVersion versionType={"maj-min"}/> // E.g 1.19.2
+<SoftwareVersion versionType={"maj"}/> // E.g 1.19
+<SoftwareVersion versionType={"max"}/> // E.g 1.20.4
+
+// You can set the project name to be used for the versioning:
+<SoftwareVersion versionType={"maj-min"} project={"velocity"}/> // Project defaults to Paper
+ ```
+2) VersionedJavaDocLink component
+    This component is used to embed a link to the current version of the JavaDocs. An example of this would be:
+  ```jsx
+<VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink>
+// The project can also be set here, and defaults to Paper
+  ```
+3) VersionFormattedCode component
+    This component is used to embed a code block with the current version of the software. An example of this would be:
+```jsx
+<VersionFormattedCode language={"yaml"}>
+```⠀
+name: Paper-Test-Plugin
+version: '1.0'
+main: io.papermc.testplugin.TestPlugin
+description: Paper Test Plugin
+api-version: '%%_MAJ_MC_%%'
+bootstrapper: io.papermc.testplugin.TestPluginBootstrap
+loader: io.papermc.testplugin.TestPluginLoader
+```⠀
+</VersionFormattedCode>
+
+// The possible placeholders are:
+%%_MAJ_MC_%%  - Major Paper Version (E.g 1.20)
+%%_MAJ_MIN_MC_%% - Major-Minor Paper Version (E.g 1.20.4)
+%%_MAJ_VEL_%% - Major Velocity Version (E.g 3.3)
+%%_MAJ_MIN_VEL_%% - Major-Minor Velocity Version (E.g 3.3.0)
+```
+
+When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
+for older versions. This is done by using yarn's docusaurus version command:
+
+```bash
+yarn docusaurus docs:version:paper "1.20"
+```
+
 ## Code of Conduct
 
 Contributors are expected to follow the [Community Guidelines](https://papermc.io/community/guidelines) of the PaperMC organization in all 

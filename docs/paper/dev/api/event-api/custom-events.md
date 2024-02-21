@@ -1,5 +1,6 @@
 ---
 slug: /dev/custom-events
+description: A guide to show you how to add custom events to your plugin.
 ---
 
 # Custom Events
@@ -14,9 +15,9 @@ An example of this is the BlockPistonEvent, which cannot be listened to directly
 
 This list is used to call the listeners when the event is called.
 
-:::info[`getHandlerList`]
+:::info
 
-Although it is not inherited from `Event`, you need to add a static `getHandlerList()` method and return the `HandlerList` for your event.
+Although `getHandlerList` is not inherited from `Event`, you need to add a static `getHandlerList()` method and return the `HandlerList` for your event.
 Both methods are required for your event to work.
 
 :::

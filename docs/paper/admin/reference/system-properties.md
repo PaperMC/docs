@@ -1,5 +1,6 @@
 ---
 slug: /reference/system-properties
+description: Documentation for the system properties Paper may check.
 ---
 
 # Paper System Properties
@@ -189,6 +190,11 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `true`
 - **description**: Sets whether to parse comments in YAML files by default.
+
+#### paperclip.patchonly:
+
+- **default**: `false`
+- **description**: If the server is started via the Paperclip patch utility (the default distribution on the downloads page) then this sets whether it should only patch the Vanilla server and download libraries without starting the server.
 
 #### Paper.IgnoreJavaVersion:
 

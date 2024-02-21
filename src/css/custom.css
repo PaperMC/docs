@@ -97,10 +97,16 @@ html[data-theme="dark"] {
 .footer__copyright {
   color: var(--ifm-color-emphasis-900);
   font-size: 95%;
+  display: flex;
+  flex-direction: column;
 }
 
 .footer__col {
   flex-basis: 30% !important;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
 }
 
 .homePageSearch {
@@ -254,6 +260,10 @@ html[data-theme="dark"] {
   animation: fadein 0.55s;
   -moz-animation: fadein 0.55s;
   width: fit-content;
+}
+
+.inline-admonition-warning {
+  margin-top: 1em;
 }
 
 ul.yaml-list-elem {

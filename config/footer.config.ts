@@ -28,10 +28,6 @@ const footer: Footer = {
           href: "https://papermc.io/javadocs",
         },
         {
-          label: "Docs",
-          href: "/",
-        },
-        {
           label: "Downloads API",
           href: "https://api.papermc.io/docs",
         },
@@ -51,7 +47,7 @@ const footer: Footer = {
       ],
     },
   ],
-  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus. <a href="https://vercel.com/?utm_source=papermc&utm_campaign=oss" style="text-decoration:underline;color:inherit;">Powered by ▲ Vercel</a>`,
+  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.<a href="https://vercel.com/?utm_source=papermc&utm_campaign=oss" style="text-decoration:underline;color:inherit;margin-top:10px;"><img src="/img/powered-by-vercel.svg" alt="vercel"/></a>`,
 };
 
 export default footer;

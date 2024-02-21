@@ -1,5 +1,6 @@
 ---
 slug: /migration
+description: How to migrate your proxy between different Velocity versions.
 ---
 
 # Migration Guide

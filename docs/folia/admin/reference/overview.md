@@ -1,6 +1,7 @@
 ---
 slug: /reference/overview
 title: Overview
+description: An overview to how Folia works.
 ---
 
 # Project overview
@@ -15,12 +16,12 @@ operations, and then inter region operations.
 
 In order to ensure that regions are independent, the rules for
 maintaining regions must ensure that a ticking region
-has no directly adjacent neighbour regions which are ticking.
+has no directly adjacent neighbor regions which are ticking.
 The following rules guarantee the invariant is upheld:
 1. Any ticking region may not grow while it is ticking.
 2. Any ticking region must initially own a small buffer of chunks outside
    its perimeter.
-3. Regions may not _begin_ to tick if they have a neighbouring adjacent
+3. Regions may not _begin_ to tick if they have a neighboring adjacent
    region.
 4. Adjacent regions must eventually merge to form a single region.
 

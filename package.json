@@ -15,28 +15,32 @@
     "format": "prettier . --write"
   },
   "dependencies": {
-    "@docusaurus/core": "0.0.0-5566",
-    "@docusaurus/plugin-content-docs": "0.0.0-5566",
-    "@docusaurus/plugin-content-pages": "0.0.0-5566",
-    "@docusaurus/plugin-debug": "0.0.0-5566",
-    "@docusaurus/plugin-pwa": "0.0.0-5566",
-    "@docusaurus/plugin-sitemap": "0.0.0-5566",
-    "@docusaurus/theme-classic": "0.0.0-5566",
-    "@docusaurus/theme-common": "0.0.0-5566",
-    "@docusaurus/theme-mermaid": "0.0.0-5566",
-    "@docusaurus/theme-search-algolia": "0.0.0-5566",
+    "@docusaurus/core": "3.1.1",
+    "@docusaurus/plugin-content-docs": "3.1.1",
+    "@docusaurus/plugin-content-pages": "3.1.1",
+    "@docusaurus/plugin-debug": "3.1.1",
+    "@docusaurus/plugin-pwa": "3.1.1",
+    "@docusaurus/plugin-sitemap": "3.1.1",
+    "@docusaurus/theme-classic": "3.1.1",
+    "@docusaurus/theme-common": "3.1.1",
+    "@docusaurus/theme-mermaid": "3.1.1",
+    "@docusaurus/theme-search-algolia": "3.1.1",
     "@fontsource/jetbrains-mono": "4.5.12",
-    "@mdx-js/react": "2.3.0",
+    "@gracefullight/docusaurus-plugin-vercel-analytics": "1.0.0",
+    "@iconify/react": "4.1.1",
+    "@mdx-js/react": "3.0.0",
+    "axios": "1.6.3",
     "clsx": "1.2.1",
     "js-yaml": "4.1.0",
     "prism-react-renderer": "2.0.3",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "raw-loader": "4.0.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
     "react-markdown": "8.0.7"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "0.0.0-5566",
-    "@docusaurus/types": "0.0.0-5566",
+    "@docusaurus/module-type-aliases": "3.1.1",
+    "@docusaurus/types": "3.1.1",
     "@fec/remark-a11y-emoji": "3.1.0",
     "@tsconfig/docusaurus": "1.0.7",
     "@types/is-ci": "3.0.0",
@@ -65,7 +69,6 @@
   },
   "packageManager": "yarn@3.5.0",
   "resolutions": {
-    "@docusaurus/core@0.0.0-5566": "patch:@docusaurus/core@npm%3A0.0.0-5566#./.yarn/patches/@docusaurus-core-npm-0.0.0-5566-187f2a3806.patch",
-    "@docusaurus/plugin-content-docs@0.0.0-5566": "patch:@docusaurus/plugin-content-docs@npm%3A0.0.0-5566#./.yarn/patches/@docusaurus-plugin-content-docs-npm-0.0.0-5566-e59592d84c.patch"
+    "@docusaurus/plugin-content-docs@3.1.1": "patch:@docusaurus/plugin-content-docs@npm%3A3.1.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.1.1-7bedb7ec1c.patch"
   }
 }

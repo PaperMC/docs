@@ -2,6 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import style from '@site/src/css/markdown-styles.module.css';
 import yaml from 'js-yaml';
+import VersionFormattedCode from "./VersionFormattedCode";
+import Link from "@docusaurus/Link";
+import useBrokenLinks from "@docusaurus/core/lib/client/exports/useBrokenLinks";
+import Admonition from "@theme/Admonition";
 
 const INDENT_SIZE = 30;
 
@@ -38,6 +42,7 @@ const scrollIntoView = (id) => {
 const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, separator) => {
 
     const hash = createUrlHash(parentKey, name);
+    useBrokenLinks().collectAnchor(hash);
 
     if (value[0] === '[' && value[value.length - 1] === ']') {
         const items = value.replace("[", "").replace("]", "").split(",").map((item) => {
@@ -50,7 +55,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
         return (
             <>
                 {separator.replace(/ /g, "")}
-                <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick}></a>
+                <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} />
                 <div className="indent-2">
                     <div>
                         <ul className={"yaml-list-elem"}>
@@ -66,7 +71,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
     return (
         <>
             {separator}{value}
-            <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} title={hash}></a>
+            <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleHashLinkClick} title={hash} />
         </>
     );
 }
@@ -82,6 +87,10 @@ const parseItalics = (key) => {
     return key;
 }
 
+const parseDescriptionForVersioning = (description: String) => {
+    return VersionFormattedCode({ children: description, plainText: true});
+}
+
 const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showAllDescriptions, defaultValue }) => {
     const ignoreInitialRenderRef = useRef(false);
     const [showDescription, setShowDescription] = useState(showAllDescriptions);
@@ -89,12 +98,19 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     node.default = node.default || defaultValue;
     node.description = node.description || 'N/A';
 
-    useEffect(() => {
+    const checkForHash = () => {
+        if (typeof window === 'undefined') return;
         const hash = createUrlHash(parentKey, name);
         if (window.location.hash === `#${hash}`) {
             showAndScrollIntoView(hash);
         }
+    }
+
+    useEffect(() => {
+        checkForHash()
     }, [name]);
+
+    if (typeof window !== 'undefined') window.addEventListener('hashchange', checkForHash);
 
     useEffect(() => {
         if (ignoreInitialRenderRef.current) {
@@ -122,7 +138,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     };
 
     return (
-        <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)}>
+        <div style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={createUrlHash(parentKey, name)} className={"config-tagged-for-algolia"}>
             <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
                 <button
                     onClick={() => {
@@ -134,7 +150,7 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
                 </button>
                 <div className="indent-2" style={{ marginBottom: 10, display: !showDescription ? "none" : "" }}>
                     <div className="outlined-box description-text color-offset-box">
-                        <ReactMarkdown className={style.reactMarkDown}>{node.description.toString()}</ReactMarkdown>
+                        <ReactMarkdown className={style.reactMarkDown}>{parseDescriptionForVersioning(node.description.toString())}</ReactMarkdown>
                     </div>
                 </div>
             </div>
@@ -142,7 +158,10 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
     );
 };
 
-const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescriptions, defaultValue }) => {
+const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescriptions, defaultValue , warning}) => {
+
+    if (name === 'inline-docs-warning') return null;
+
     const handleClick = (event) => {
         event.preventDefault();
         scrollIntoView(createUrlHash(parentKey, name));
@@ -171,13 +190,23 @@ const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescript
     }, [name]);
 
     const hash = createUrlHash(parentKey, name);
+    useBrokenLinks().collectAnchor(hash);
 
     return (
         <div key={name} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={hash}>
             <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
                 {parseItalics(name)}{removeTrailingSpaces(separator)}
             </div>
-            <a className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleClick} title={hash}></a>
+            <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleClick} title={hash} />
+            {warning &&
+                <div className={`inline-admonition-warning`}>
+                    <Admonition
+                        type={"danger"}
+                        title={warning.title}
+                        children={<p style={{ whiteSpace: "initial" }}>{warning.message}</p>}
+                    />
+                </div>
+            }
             {renderYamlData(value, parentKey ? hash : parseUrlHash(name), false, separator, showAllDescriptions, defaultValue)}
         </div>
     );
@@ -189,9 +218,19 @@ const renderYamlData = (data, parentKey, root = false, separator, showAllDescrip
     for (const [key, value] of Object.entries(data)) {
         if (typeof value === 'object' && value !== null) {
             if (('default' in value && typeof value.default !== 'object') || ('description' in value && typeof value.description !== 'object')) {
-                renderedNodes.push(<YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);
+                renderedNodes.push(
+                    <YamlNodeWithDescription key={key} name={key} parentKey={parentKey} node={value} root={root}
+                                             separator={separator} showAllDescriptions={showAllDescriptions}
+                                             defaultValue={defaultValue}
+                    />
+                );
             } else {
-                renderedNodes.push(<YamlTreeNode root={root} key={key} name={key} parentKey={parentKey} value={value} separator={separator} showAllDescriptions={showAllDescriptions} defaultValue={defaultValue} />);
+                renderedNodes.push(
+                    <YamlTreeNode root={root} key={key} name={key} parentKey={parentKey} value={value}
+                                  separator={separator} showAllDescriptions={showAllDescriptions}
+                                  defaultValue={defaultValue} warning={'inline-docs-warning' in value ? value["inline-docs-warning"] : null}
+                    />
+                );
             }
         }
     }

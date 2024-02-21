@@ -1,5 +1,6 @@
 ---
 slug: /dev/porting-plugins-from-velocity-1
+description: How to port your plugin from Velocity 1.x.x to modern API.
 ---
 
 # Porting Your Plugin from Velocity 1.x.x
@@ -9,7 +10,7 @@ document very carefully**.
 
 ## Minimum supported Java version bump
 
-Velocity 3.0.0 now requires Java 11 and above.
+Velocity 3.3.x now requires Java 17 and above.
 
 ## Removal of legacy dependencies
 

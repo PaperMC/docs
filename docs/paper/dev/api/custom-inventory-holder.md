@@ -1,5 +1,6 @@
 ---
 slug: /dev/custom-inventory-holder
+description: How to use a custom InventoryHolder to identify custom inventories.
 ---
 
 # Custom InventoryHolder
@@ -34,17 +35,17 @@ If you wish, you can use the static method `Bukkit.createInventory(InventoryHold
 ```java
 public class MyInventory implements InventoryHolder {
 
-	private final Inventory inventory;
+    private final Inventory inventory;
 
-	public MyInventory(MyPlugin plugin) {
-		// Create an Inventory with 9 slots, `this` here is our InventoryHolder.
-		this.inventory = plugin.getServer().createInventory(this, 9);
-	}
+    public MyInventory(MyPlugin plugin) {
+        // Create an Inventory with 9 slots, `this` here is our InventoryHolder.
+        this.inventory = plugin.getServer().createInventory(this, 9);
+    }
 
-	@Override
-	public Inventory getInventory() {
-		return this.inventory;
-	}
+    @Override
+    public Inventory getInventory() {
+        return this.inventory;
+    }
 
 }
 ```
@@ -77,15 +78,15 @@ returns an instance of our `MyInventory`.
 ```java
 @EventHandler
 public void onInventoryClick(InventoryClickEvent event) {
-	Inventory inventory = event.getInventory();
-	// Check if the holder is our MyInventory,
-	// if yes, use instanceof pattern matching to store it in a variable immediately.
-	if (!(inventory.getHolder() instanceof MyInventory myInventory)) {
-		// It's not our inventory, ignore it.
-		return;
-	}
+    Inventory inventory = event.getInventory();
+    // Check if the holder is our MyInventory,
+    // if yes, use instanceof pattern matching to store it in a variable immediately.
+    if (!(inventory.getHolder(false) instanceof MyInventory myInventory)) {
+        // It's not our inventory, ignore it.
+        return;
+    }
 
-	// Do what we need in the event.
+    // Do what we need in the event.
 }
 ```
 
@@ -99,32 +100,32 @@ First let's modify our `MyInventory` class a little:
 ```java
 public class MyInventory implements InventoryHolder {
 
-	private final Inventory inventory;
+    private final Inventory inventory;
 
-	private int clicks = 0; // Store the amount of clicks.
+    private int clicks = 0; // Store the amount of clicks.
 
-	public MyInventory(MyPlugin plugin) {
-		this.inventory = plugin.getServer().createInventory(this, 9);
+    public MyInventory(MyPlugin plugin) {
+        this.inventory = plugin.getServer().createInventory(this, 9);
 
-		// Set the stone that we're going to be clicking.
-		this.inventory.setItem(0, new ItemStack(Material.STONE));
-	}
+        // Set the stone that we're going to be clicking.
+        this.inventory.setItem(0, new ItemStack(Material.STONE));
+    }
 
-	// A method we will call in the listener whenever the player clicks the stone.
-	public void addClick() {
-		this.clicks++;
-		this.updateCounter();
-	}
+    // A method we will call in the listener whenever the player clicks the stone.
+    public void addClick() {
+        this.clicks++;
+        this.updateCounter();
+    }
 
-	// A method that will update the counter item.
-	private void updateCounter() {
-		this.inventory.setItem(8, new ItemStack(Material.BEDROCK, this.clicks));
-	}
+    // A method that will update the counter item.
+    private void updateCounter() {
+        this.inventory.setItem(8, new ItemStack(Material.BEDROCK, this.clicks));
+    }
 
-	@Override
-	public Inventory getInventory() {
-		return this.inventory;
-	}
+    @Override
+    public Inventory getInventory() {
+        return this.inventory;
+    }
 
 }
 ```
@@ -134,23 +135,23 @@ Now, we can modify our listener to check if the player clicked the stone, and if
 ```java
 @EventHandler
 public void onInventoryClick(InventoryClickEvent event) {
-	// We're getting the clicked inventory to avoid situations where the player
-	// already has a stone in their inventory and clicks that one.
-	Inventory inventory = event.getClickedInventory();
-	// Add a null check in case the player clicked outside the window.
-	if (inventory == null || !(inventory.getHolder() instanceof MyInventory myInventory)) {
-		return;
-	}
+    // We're getting the clicked inventory to avoid situations where the player
+    // already has a stone in their inventory and clicks that one.
+    Inventory inventory = event.getClickedInventory();
+    // Add a null check in case the player clicked outside the window.
+    if (inventory == null || !(inventory.getHolder(false) instanceof MyInventory myInventory)) {
+        return;
+    }
 
-	event.setCancelled(true);
+    event.setCancelled(true);
 
-	ItemStack clicked = event.getCurrentItem();
-	// Check if the player clicked the stone.
-	if (clicked != null && clicked.getType() == Material.STONE) {
-		// Use the method we have on MyInventory to increment the field
-		// and update the counter.
-		myInventory.addClick();
-	}
+    ItemStack clicked = event.getCurrentItem();
+    // Check if the player clicked the stone.
+    if (clicked != null && clicked.getType() == Material.STONE) {
+        // Use the method we have on MyInventory to increment the field
+        // and update the counter.
+        myInventory.addClick();
+    }
 }
 ```
 

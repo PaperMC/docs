@@ -1,5 +1,6 @@
 ---
 slug: /comparisons-to-other-proxies
+description: A comparison of Velocity to other proxies.
 ---
 
 # Comparing With Other Proxies
@@ -7,6 +8,32 @@ slug: /comparisons-to-other-proxies
 Presumably, you have learned about what Velocity can do for you. But how does it stack up against
 other solutions out there? We're trying to convince you to use Velocity, after all, so this document
 may be somewhat biased in our favor.
+
+## Overview
+
+:::danger
+
+**The Paper team strongly recommends using Velocity over Waterfall and BungeeCord**. Waterfall is a legacy solution,
+and only receives critical updates and whatever is released from upstream BungeeCord. All future
+development by PaperMC is done on Velocity.
+
+:::
+
+This is a quick overview of the differences between Velocity and other popular proxy software. Read below for more details.
+| Feature                                  | BungeeCord | Waterfall | Velocity |
+|------------------------------------------|------------|-----------|----------|
+| Resource efficient                       | ❌         | ✅        | ✅✅     |
+| Velocity plugins                         | ❌         | ❌        | ✅       |
+| BungeeCord plugins                       | ✅         | ✅        | 🟨*      |
+| Secure player information forwarding     | ❌         | ❌        | ✅       |
+| API supporting modern Minecraft features | ❌         | ❌        | ✅       |
+| Actively developed                       | ❓         | ❌        | ✅       |
+| Improved mod support                     | ❌         | ❌        | ✅*\*    |
+
+\* _The Velocity API does not support plugins made for BungeeCord/Waterfall, but [Snap](https://hangar.papermc.io/Phoenix616/Snap) can be installed for experimental support.
+ Snap is not maintained by, or affiliated with, the Velocity project._
+
+\** _Full Forge support for 1.7 through 1.12.2, with support for newer versions in development._
 
 ## BungeeCord and derivatives
 
@@ -35,14 +62,6 @@ There are several reasons why improving BungeeCord was a fool's game:
 
 ### Waterfall
 
-:::danger
-
-**The Paper team strongly recommends using Velocity over Waterfall**. Waterfall is a legacy solution,
-and only receives critical updates and whatever is released from upstream BungeeCord. All future
-development by PaperMC is done on Velocity.
-
-:::
-
 Partly due to experience obtained by the author's own experience with BungeeCord, he founded the
 Waterfall project in 2016 as a fork of BungeeCord, modeled after Paper, with the explicit aim of
 improving BungeeCord. _We tried the obvious next step_.
@@ -64,7 +83,7 @@ exposes, which Velocity cannot perfectly emulate. As a result, the number of cha
 to BungeeCord and have plugins retain the same behavior is minimal.
 
 Suppose you have play a video game published by Company A. It runs on an operating system made by Company B.
-One day, Company B releases a new version of ther operating system, and you upgrade to it, only to recoil
+One day, Company B releases a new version of their operating system, and you upgrade to it, only to recoil
 in horror as that video game no longer works. (Worse, Studio A might be out of business at that point, so
 no patch is forthcoming.) Who do you blame, Company A for producing a defective product, or Company B for
 breaking the game? [This isn't a hypothetical](https://devblogs.microsoft.com/oldnewthing/20110131-00/?p=11633).

@@ -1,5 +1,6 @@
 ---
 slug: /dev/command-api
+description: How to create commands within Velocity.
 ---
 
 # The Command API
@@ -24,8 +25,6 @@ package com.example.velocityplugin;
 
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.Command;
-import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.builder.RequiredArgumentBuilder;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.velocitypowered.api.command.BrigadierCommand;
 import com.velocitypowered.api.command.CommandSource;
@@ -37,8 +36,7 @@ import net.kyori.adventure.text.format.NamedTextColor;
 public final class TestBrigadierCommand {
 
     public static BrigadierCommand createBrigadierCommand(final ProxyServer proxy) {
-        LiteralCommandNode<CommandSource> helloNode = LiteralArgumentBuilder
-            .<CommandSource>literal("test")
+        LiteralCommandNode<CommandSource> helloNode = BrigadierCommand.literalArgumentBuilder("test")
             // Here you can filter the subjects that can execute the command.
             // This is the ideal place to do "hasPermission" checks
             .requires(source -> source.hasPermission("test.permission"))
@@ -55,13 +53,13 @@ public final class TestBrigadierCommand {
                 // Returning BrigadierCommand.FORWARD will send the command to the server
                 return Command.SINGLE_SUCCESS;
             })
-            // Using the "then" method, you can add subarguments to the command.
+            // Using the "then" method, you can add sub-arguments to the command.
             // For example, this subcommand will be executed when using the command "/test <some argument>"
             // A RequiredArgumentBuilder is a type of argument in which you can enter some undefined data
             // of some kind. For example, this example uses a StringArgumentType.word() that requires
             // a single word to be entered, but you can also use different ArgumentTypes provided by Brigadier
             // that return data of type Boolean, Integer, Float, other String types, etc
-            .then(RequiredArgumentBuilder.<CommandSource, String>argument("argument", StringArgumentType.word())
+            .then(BrigadierCommand.requiredArgumentBuilder("argument", StringArgumentType.word())
                 // Here you can define the hints to be provided in case the ArgumentType does not provide them.
                 // In this example, the names of all connected players are provided
                 .suggests((ctx, builder) -> {
@@ -71,11 +69,16 @@ public final class TestBrigadierCommand {
                             player.getUsername(),
                             // A VelocityBrigadierMessage takes a component.
                             // In this case, the player's name is provided with a rainbow
-                            // gradient created by MiniMessage (Library available since Velocity 3.1.2+)
+                            // gradient created using MiniMessage.
                             VelocityBrigadierMessage.tooltip(
                                     MiniMessage.miniMessage().deserialize("<rainbow>" + player.getUsername())
                             )
                     ));
+                    // If you do not need to add a tooltip to the hint
+                    // or your command is intended only for versions lower than Minecraft 1.13,
+                    // you can omit adding the tooltip, since for older clients,
+                    // the tooltip will not be displayed.
+                    builder.suggest("all");
                     return builder.buildFuture();
                 })
                 // Here the logic of the command "/test <some argument>" is executed
@@ -109,7 +112,7 @@ to also support them. We recommend sticking to the predefined Brigadier types pr
 
 ### `SimpleCommand`
 
-Modelled after the convention popularized by Bukkit and BungeeCord, a `SimpleCommand` has three
+Modeled after the convention popularized by Bukkit and BungeeCord, a `SimpleCommand` has three
 methods: one for when the command is executed, one to provide suggestions for tab completion, and
 one to check a `CommandSource` has permission to use the command. All methods receive a
 `SimpleCommand.Invocation` object, which contains the `CommandSource` that executed the command and
@@ -134,7 +137,7 @@ public final class TestCommand implements SimpleCommand {
         // Get the arguments after the command alias
         String[] args = invocation.arguments();
 
-        source.sendMessage(Component.text("Hello World!").color(NamedTextColor.AQUA));
+        source.sendMessage(Component.text("Hello World!", NamedTextColor.AQUA));
     }
 
     // This method allows you to control who can execute the command.

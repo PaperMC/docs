@@ -326,7 +326,8 @@ ul.yaml-list-elem > li:before {
   color: var(--config-node-highlight-text-color);
 }
 
-.config-explorer-popup-window-container { /* Container */
+.config-explorer-popup-window-container {
+  /* Container */
   position: absolute;
   margin-left: 30px;
   transform: translateZ(0);
@@ -336,7 +337,8 @@ ul.yaml-list-elem > li:before {
   z-index: 10;
 }
 
-.config-explorer-popup-window { /* Inner */
+.config-explorer-popup-window {
+  /* Inner */
   background-color: #1c1e21;
   padding: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -346,11 +348,27 @@ ul.yaml-list-elem > li:before {
   z-index: 20;
 }
 
-.config-explorer-popup-window-open-tag { /* (i) tag */
-  z-index: 15; /* Between container and popup window */
+.config-explorer-popup-window-open-tag {
+  /* (i) tag */
+  z-index: 5;
 }
 
 .config-explorer-popup-window-open-tag:hover {
   font-weight: bold;
   cursor: pointer;
+}
+
+.config-explorer-node-icon {
+  font-size: 20px;
+}
+
+.config-explorer-node {
+  align-items: center;
+  position: relative;
+  display: flex;
+}
+
+.config-explorer-node-noflex {
+  align-items: center;
+  position: relative;
 }

@@ -297,7 +297,8 @@ ul.yaml-list-elem > li:before {
 }
 
 .config-explorer-code-outer-container {
-  overflow: visible;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .config-explorer-file-node {
@@ -305,6 +306,8 @@ ul.yaml-list-elem > li:before {
   align-items: center;
   border-radius: 10px;
   width: fit-content;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .config-explorer-file-node-with-link:hover {
@@ -335,6 +338,7 @@ ul.yaml-list-elem > li:before {
   left: 0;
   width: fit-content;
   z-index: 10;
+  white-space: normal;
 }
 
 .config-explorer-popup-window {
@@ -346,6 +350,7 @@ ul.yaml-list-elem > li:before {
   margin-right: 100px;
   width: fit-content;
   z-index: 20;
+  white-space: pre-wrap;
 }
 
 .config-explorer-popup-window-open-tag {
@@ -366,6 +371,8 @@ ul.yaml-list-elem > li:before {
   align-items: center;
   position: relative;
   display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .config-explorer-node-noflex {

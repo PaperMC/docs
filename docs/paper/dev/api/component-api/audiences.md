@@ -1,9 +1,8 @@
 ---
 slug: /dev/component-api/audiences
 description: How to use Adventure's Audiences.
+title: Audiences
 ---
-
-# Audiences
 
 Audiences wrap a collection of recipients that can receive messages. They can be used to send messages to individual 
 players, groups of players, or even the entire server (including the console).

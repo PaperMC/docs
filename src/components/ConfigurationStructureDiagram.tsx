@@ -55,12 +55,12 @@ const IndentationArrow: React.FC<IndentationArrowProps> = ({ level }) => {
 
     return (
         <span className={"indentation-arrow"}>
-      {level > 0 && "→".repeat(level)}
-    </span>
+            {level > 0 && "→".repeat(level)}
+        </span>
     );
 };
 
-export default function ConfigurationStructureDiagram({}) {
+export default function ConfigurationStructureDiagram() {
     const [popupNode, setPopupNode] = useState<ExplorerNode | null>(null);
 
     const renderNode = (node: ExplorerNode, level: number = 0) => {

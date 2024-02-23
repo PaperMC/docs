@@ -27,7 +27,7 @@ const folderData: ExplorerNode[] = [
         name: "<world>",
         type: "folder",
         children: [
-            { name: "paper-world.yml", type: "file", url: "/paper/reference/configuration#per-world-values" },
+            { name: "paper-world.yml", type: "file", url: "/paper/reference/configuration#per-world-values", description: "Every world folder will have this file. The values here only apply to this world." },
         ],
     },
     { name: "banned-ips.json", type: "file", description: "This file stores all the banned IP addresses on the server." },

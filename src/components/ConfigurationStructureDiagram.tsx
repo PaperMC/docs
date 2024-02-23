@@ -21,7 +21,7 @@ const folderData: ExplorerNode[] = [
     {
         name: "plugins",
         type: "folder",
-        description: "Plugin jars go here.",
+        description: "You can place your plugin jars here.",
     },
     {
         name: "<world>",
@@ -76,16 +76,20 @@ export default function ConfigurationStructureDiagram({}) {
         return (
             <div key={node.name} className={level > 0 ? "config-explorer-node" : "config-explorer-node-noflex"} onMouseLeave={() => {setPopupNode(null)}}>
 
-                {level > 0 && (
+                {level > 0 &&
                     <IndentationArrow level={level} />
-                )}
+                }
 
-                <a className={`${(isFolder ? "config-explorer-file-folder-node" : "config-explorer-file-node")} 
+                <a className={`${("config-explorer-file-" + (isFolder ? "folder-" : "") + "node")} 
                    ${(!hasUrl ? "config-explorer-file-node" : "config-explorer-file-node-with-link")}`} href={node.url}
                    style={{cursor: hasUrl ? "pointer" : "default"}}>
 
-                    <span style={{cursor: hasDescription ? "pointer" : "auto"}} className={"config-explorer-node-icon"}>{isFolder ? "📁" : "📄"}</span>
-                    <span style={{ margin: "0 5px 0 5px" }}>{node.name}</span>
+                    <span style={{cursor: hasDescription ? "pointer" : "auto"}} className={"config-explorer-node-icon"}>
+                        {isFolder ? "📁" : "📄"}
+                    </span>
+                    <span style={{ margin: "0 5px 0 5px" }}>
+                        {node.name}
+                    </span>
                     {hasDescription && (
                         <span className={"config-explorer-popup-window-open-tag"} onMouseEnter={handleNodeOpening}>ⓘ</span>
                     )}

@@ -1,0 +1,89 @@
+.config-explorer-code-outer-container {
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.config-explorer-file-node {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  width: fit-content;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.config-explorer-file-node-with-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.config-explorer-file-folder-node {
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  color: var(--config-node-highlight-text-color);
+}
+
+.config-explorer-file-folder-node:hover {
+  cursor: default;
+  text-decoration: none;
+  color: var(--config-node-highlight-text-color);
+}
+
+.config-explorer-popup-window-container {
+  /* Container */
+  position: absolute;
+  margin-left: 30px;
+  transform: translateZ(0);
+  top: 100%;
+  left: 0;
+  width: fit-content;
+  z-index: 10;
+  white-space: normal;
+}
+
+.config-explorer-popup-window {
+  /* Inner */
+  background-color: #1c1e21;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-right: 100px;
+  width: fit-content;
+  z-index: 20;
+  white-space: pre-wrap;
+}
+
+.config-explorer-popup-window-open-tag {
+  /* (i) tag */
+  z-index: 5;
+}
+
+.config-explorer-popup-window-open-tag:hover {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.indentation-arrow {
+  font-size: 14px;
+  color: #bbbbbb;
+  margin: 0 8px 0 8px;
+}
+
+.config-explorer-node-icon {
+  font-size: 20px;
+}
+
+.config-explorer-node {
+  align-items: center;
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.config-explorer-node-noflex {
+  align-items: center;
+  position: relative;
+}

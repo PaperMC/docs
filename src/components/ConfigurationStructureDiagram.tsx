@@ -1,12 +1,21 @@
 import React, {useState} from "react";
+import "@site/src/css/configuration-explorer-layout.css";
 
-const folderData = [
+interface ExplorerNode {
+    name: string;
+    type: "folder" | "file";
+    children?: ExplorerNode[];
+    description?: string;
+    url?: string;
+}
+
+const folderData: ExplorerNode[] = [
     {
         name: "config",
         type: "folder",
         children: [
-            { name: "paper-global.yml", url: "/paper/reference/global-configuration" },
-            { name: "paper-world-defaults.yml", url: "/paper/reference/world-configuration" },
+            { name: "paper-global.yml", type: "file", url: "/paper/reference/global-configuration" },
+            { name: "paper-world-defaults.yml", type: "file", url: "/paper/reference/world-configuration" },
         ],
     },
     {
@@ -18,7 +27,7 @@ const folderData = [
         name: "<world>",
         type: "folder",
         children: [
-            { name: "paper-world.yml", url: "/paper/reference/configuration#per-world-values" },
+            { name: "paper-world.yml", type: "file", url: "/paper/reference/configuration#per-world-values" },
         ],
     },
     { name: "banned-ips.json", type: "file", description: "This file stores all the banned IP addresses on the server." },
@@ -35,45 +44,37 @@ const folderData = [
     { name: "whitelist.json", type: "file", description: "This is is a server configuration file that stores the usernames of players who have been whitelisted on a server." },
 ];
 
-const IndentationArrow = ({ level }) => {
+interface IndentationArrowProps {
+    level: number;
+}
 
+const IndentationArrow: React.FC<IndentationArrowProps> = ({ level }) => {
     if (level === 0) {
         return null;
     }
 
-    const arrowStyle = {
-        fontSize: "14px",
-        color: "#bbbbbb",
-        marginRight: "8px",
-        marginLeft: `8px`,
-    };
-
     return (
-        <span style={arrowStyle}>
-            {level > 0 && "→".repeat(level)}
-        </span>
+        <span className={"indentation-arrow"}>
+      {level > 0 && "→".repeat(level)}
+    </span>
     );
 };
 
 export default function ConfigurationStructureDiagram({}) {
-    const [popupNode, setPopupNode] = useState(null);
+    const [popupNode, setPopupNode] = useState<ExplorerNode | null>(null);
 
-    const closePopup = () => {
-        setPopupNode(null);
-    };
-
-    const renderNode = (node, level = 0) => {
+    const renderNode = (node: ExplorerNode, level: number = 0) => {
         const isFolder = node.type === "folder";
         const hasDescription = "description" in node;
         const hasUrl = "url" in node;
 
-        const handleNodeOpening = (event) => {
+        const handleNodeOpening = (event: React.MouseEvent) => {
             event.stopPropagation();
             setPopupNode(node);
         };
 
         return (
-            <div key={node.name} className={level > 0 ? "config-explorer-node" : "config-explorer-node-noflex"} onMouseLeave={closePopup}>
+            <div key={node.name} className={level > 0 ? "config-explorer-node" : "config-explorer-node-noflex"} onMouseLeave={() => {setPopupNode(null)}}>
 
                 {level > 0 && (
                     <IndentationArrow level={level} />
@@ -112,7 +113,7 @@ export default function ConfigurationStructureDiagram({}) {
     return (
         <div>
             <pre className={"config-explorer-code-outer-container"}>
-                {folderData.map(item => renderNode(item))}
+                {folderData.map((item) => renderNode(item))}
             </pre>
         </div>
     );

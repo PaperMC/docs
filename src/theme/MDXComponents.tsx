@@ -6,7 +6,7 @@ import Tabs from '@theme/Tabs';
 import VersionFormattedCode from '@site/src/components/VersionFormattedCode';
 import SoftwareVersion from '@site/src/components/SoftwareVersion';
 import VersionedJavaDocLink from '../components/VersionedJavaDocLink';
-import ConfiguredProperty from '@site/src/components/ConfiguredProperty';
+import Property from '@site/src/components/Property';
 
 export default {
     // Re-use the default mapping
@@ -17,6 +17,6 @@ export default {
     VersionFormattedCode,
     SoftwareVersion,
     VersionedJavaDocLink,
-    ConfiguredProperty,
+    Property,
     Icon: Icon,
 };

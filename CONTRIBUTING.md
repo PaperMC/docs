@@ -145,17 +145,17 @@ yarn docusaurus docs:version:paper "1.20"
 ## Magic Value Handling
 
 When writing documentation, it is important to avoid using "magic values" in the documentation. This may be slightly less
-obscure than in code, but it is still important to avoid using them. For example, these values may end up being used in 
+obscure than in code, but it is still important to avoid using them. For example, these values may end up being used in
 multiple places, and if they change, it is important to change them in all places. This is why it is important to use
-our ConfiguredProperty component to embed these values into the documentation. An example of this would be:
+our `Property` component to embed these values into the documentation. An example of this would be:
 
 ```jsx
-<ConfiguredProperty propertyKey="RECOMMENDED_PAPER_JAVA" />
+<Property name="PAPER_JAVA_RECOMMENDED" />
 ```
 
 This will embed the value of the property into the documentation, and if it changes, it will be changed in all places.
 
-These values are stored in the `config-spec/properties/properties.json` file. If you need to add a new property, you can
+These values are stored in the `config-specs/properties.json` file. If you need to add a new property, you can
 add it to this file, and it will be available to use in the documentation.
 
 ## Code of Conduct

@@ -144,7 +144,8 @@ const YamlNodeWithDescription = ({ name, node, parentKey, root, separator, showA
                     onClick={() => {
                         setShowDescription(!showDescription);
                     }}
-                    className={`config-node with-value${showDescription ? '-active' : ''} clean-btn button--link`}
+                    className={`config-node with-value${showDescription ? '-active' : ''} clean-btn button--link notranslate`}
+                    translate={"no"}
                 >
                     {parseItalics(name)}{parseDefault(node.default.toString(), !showDescription, parentKey, name, handleHashLinkClick, separator)}
                 </button>
@@ -194,7 +195,7 @@ const YamlTreeNode = ({ root, name, parentKey, value, separator, showAllDescript
 
     return (
         <div key={name} className={`highlight-config-node`} style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} id={hash}>
-            <div className={`config-auxiliary-node`} style={{display: "inline-flex"}}>
+            <div className={`config-auxiliary-node notranslate`} style={{display: "inline-flex"}} translate={"no"}>
                 {parseItalics(name)}{removeTrailingSpaces(separator)}
             </div>
             <Link className={`config-anchor with-value-active hash-link`} href={`#${hash}`} onClick={handleClick} title={hash} />

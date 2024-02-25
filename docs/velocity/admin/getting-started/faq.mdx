@@ -105,3 +105,15 @@ First, double-check that you properly set up DNS records pointing to your proxy 
 you have selected. Forced hosts are _not_ compatible with SRV records, so if you are relying on SRV
 records to direct the player to the proxy, you will need to find a way to get the proxy running on
 the default Minecraft port, 25565.
+
+### Plugins unable to modify messages or commands
+
+```
+A plugin tried to cancel a signed chat message. This is no longer possible in 1.19.1 and newer. Disconnecting player <player>
+```
+
+Starting with Minecraft 1.19.1, Mojang implemented a new chat system that encrypts each message with
+the signed key that each player has. Velocity does not yet have full support for canceling or modifying
+this type of messages and commands, so you can install the [SignedVelocity](https://hangar.papermc.io/4drian3d/SignedVelocity) plugin,
+which will allow the message or command to be transmitted to your server, which, upon receiving it on the server,
+will apply the result computed in Velocity.

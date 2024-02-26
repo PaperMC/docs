@@ -1,5 +1,8 @@
 [files]
-extend-exclude = ["docs/versioned"] # don't check ./docs/versioned
+extend-exclude = [
+    "docs/versioned", # old documentation shouldn't be checked
+    "*.json"          # mostly configuration, not worth checking
+]
 
 [default]
 locale = "en-us"

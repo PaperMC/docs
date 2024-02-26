@@ -15,10 +15,6 @@ armour = "armor"
 authorise = "authorize"
 authorised = "authorized"
 authorising = "authorizing"
-cancelled = "canceled"
-cancelling = "canceling"
-cancellable = "cancelable"
-cancellation = "cancelation"
 catalogue = "catalog"
 centre = "center"
 civilisation = "civilization"
@@ -69,3 +65,11 @@ regionise = "regionize"
 regioniser = "regionizer"
 regionising = "regionizing"
 regionised = "regionized"
+
+# exceptions:
+
+# use British spelling to stay consistent with Bukkit
+canceled = "cancelled"
+canceling = "cancelling"
+cancelable = "cancellable"
+cancelation = "cancellation"

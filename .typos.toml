@@ -1,5 +1,8 @@
 [files]
-extend-exclude = ["docs/versioned"] # don't check ./docs/versioned
+extend-exclude = [
+    "docs/versioned", # old documentation shouldn't be checked
+    "*.json"          # mostly configuration, not worth checking
+]
 
 [default]
 locale = "en-us"
@@ -15,7 +18,6 @@ armour = "armor"
 authorise = "authorize"
 authorised = "authorized"
 authorising = "authorizing"
-cancelling = "canceling"
 catalogue = "catalog"
 centre = "center"
 civilisation = "civilization"
@@ -66,3 +68,11 @@ regionise = "regionize"
 regioniser = "regionizer"
 regionising = "regionizing"
 regionised = "regionized"
+
+# exceptions:
+
+# use British spelling to stay consistent with Bukkit
+canceled = "cancelled"
+canceling = "cancelling"
+cancelable = "cancellable"
+cancelation = "cancellation"

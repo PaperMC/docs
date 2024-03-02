@@ -31,6 +31,18 @@ html[data-theme="dark"] {
   --config-node-highlight-text-color: white;
 }
 
+.sunset-message {
+  width: 100%;
+  height: 5rem;
+  margin: 20px 0 20px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 4px solid rgb(101 38 0);
+  background-color: #853200;
+}
+
 .button.button--secondary {
   color: #f6f7f8;
 }

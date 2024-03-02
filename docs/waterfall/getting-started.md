@@ -1,6 +1,8 @@
 ---
 slug: /getting-started
 description: How to get started with running Waterfall.
+sunsetted: true
+sunsettingMessage: We recommend you transition to Velocity.
 ---
 
 # Getting Started

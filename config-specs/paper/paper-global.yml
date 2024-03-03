@@ -429,6 +429,13 @@ unsupported-settings:
     description: >-
       Whether the server should allow players to overstack items in the
       grindstone
+  allow-unsafe-end-portal-teleportation:
+    default: 'false'
+    description: >-
+      This setting allows for exploits related to end portal teleportation to be
+      possible, for example sand duplication. This
+      setting is not recommended to be enabled, but is provided for those who
+      wish to use it.
 watchdog:
   early-warning-delay:
     default: '10000'

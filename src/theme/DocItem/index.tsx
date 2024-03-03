@@ -8,11 +8,11 @@ import style from '@site/src/css/markdown-styles.module.css';
 import type {Props} from '@theme/DocItem';
 
 function SunsettedPage(message: string) {
-  return (
-      <div className={"sunset-message"}>
-          <ReactMarkdown className={style.reactMarkDown} >{"**" + message + "**"}</ReactMarkdown>
-      </div>
-  );
+    return (
+        <div className={"sunset-message"}>
+            <ReactMarkdown className={style.reactMarkDown} >{"**" + message + "**"}</ReactMarkdown>
+        </div>
+    );
 }
 
 export default function DocItem(props: Props): JSX.Element {
@@ -26,14 +26,14 @@ export default function DocItem(props: Props): JSX.Element {
             <HtmlClassNameProvider className={docHtmlClassName}>
                 <DocItemMetadata/>
                 <DocItemLayout>
-            <>
-                {
-                    sunsettedPage && SunsettedPage(sunsettingMessage)
-                }
-                <MDXComponent />
-            </>
-        </DocItemLayout>
-      </HtmlClassNameProvider>
-    </DocProvider>
-  );
+                    <>
+                        {
+                            sunsettedPage && SunsettedPage(sunsettingMessage)
+                        }
+                        <MDXComponent />
+                    </>
+                </DocItemLayout>
+            </HtmlClassNameProvider>
+        </DocProvider>
+    );
 }

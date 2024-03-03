@@ -3,14 +3,14 @@ import {HtmlClassNameProvider} from '@docusaurus/theme-common';
 import {DocProvider} from '@docusaurus/theme-common/internal';
 import DocItemMetadata from '@theme/DocItem/Metadata';
 import DocItemLayout from '@theme/DocItem/Layout';
+import ReactMarkdown from 'react-markdown';
+import style from '@site/src/css/markdown-styles.module.css';
 import type {Props} from '@theme/DocItem';
 
 function SunsettedPage(message: string) {
   return (
       <div className={"sunset-message"}>
-          <strong>
-            {message}
-          </strong>
+          <ReactMarkdown className={style.reactMarkDown} >{"**" + message + "**"}</ReactMarkdown>
       </div>
   );
 }

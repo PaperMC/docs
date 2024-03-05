@@ -1,10 +1,4 @@
-/.docusaurus
-/.vscode
-/.yarn
-/build
-/node_modules
-/.pnp*
-/*.js
-/*.js.map
-/config/*.js
-/.meta
+.yarn
+docs/versioned
+*.md
+*.mdx

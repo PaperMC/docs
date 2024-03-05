@@ -9,8 +9,8 @@ export function getProperty(key: string): string | null {
 }
 
 interface PropertyProps {
-    name: string;
-    defaultValue?: string;
+  name: string;
+  defaultValue?: string;
 }
 
 export default function Property({ name, defaultValue = "<placeholder>" }: PropertyProps) {

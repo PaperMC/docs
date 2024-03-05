@@ -82,7 +82,11 @@ const config: Config = {
     format: "detect",
   },
 
-  themes: ["@docusaurus/theme-classic", "@docusaurus/theme-search-algolia", "@docusaurus/theme-mermaid"],
+  themes: [
+    "@docusaurus/theme-classic",
+    "@docusaurus/theme-search-algolia",
+    "@docusaurus/theme-mermaid",
+  ],
 
   plugins: [
     [
@@ -236,7 +240,7 @@ const config: Config = {
       contextualSearch: true,
     },
     mermaid: {
-      theme: {light: 'neutral', dark: 'dark'},
+      theme: { light: "neutral", dark: "dark" },
     },
   },
 };

@@ -33,7 +33,7 @@ html[data-theme="dark"] {
   --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.1);
 }
 
-.sunset-message {
+.eol-message {
   width: 100%;
   min-height: 5rem;
   margin: 10px 0 20px 0;
@@ -42,8 +42,8 @@ html[data-theme="dark"] {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  border-left: 5px solid #fa383e;
-  background-color: rgb(75, 17, 19);
+  border-left: 5px solid rgb(246, 29, 29);
+  background-color: rgb(239, 68, 68);
   text-align: center;
 }
 

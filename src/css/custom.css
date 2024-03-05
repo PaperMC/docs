@@ -42,7 +42,6 @@ html[data-theme="dark"] {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  border-left: 5px solid rgb(246, 29, 29);
   background-color: rgb(239, 68, 68);
   text-align: center;
 }

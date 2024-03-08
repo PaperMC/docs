@@ -74,10 +74,7 @@ const paper: SidebarsConfig = {
             type: "generated-index",
             slug: "/cat/admin/misc",
           },
-          items: [
-            "admin/misc/faq",
-            "admin/misc/paper-bug-fixes",
-          ],
+          items: ["admin/misc/faq", "admin/misc/paper-bug-fixes"],
         },
       ],
     },
@@ -134,7 +131,7 @@ const paper: SidebarsConfig = {
                 "dev/api/component-api/intro",
                 "dev/api/component-api/i18n",
                 "dev/api/component-api/audiences",
-              ]
+              ],
             },
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
@@ -170,9 +167,7 @@ const paper: SidebarsConfig = {
         type: "doc",
         id: "contributing/README",
       },
-      items: [
-        "contributing/events",
-      ],
+      items: ["contributing/events"],
     },
   ],
 };

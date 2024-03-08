@@ -11,11 +11,8 @@ const waterfall: SidebarsConfig = {
         type: "doc",
         id: "README",
       },
-      items: [
-        "configuration",
-        "getting-started",
-      ],
-    }
+      items: ["configuration", "getting-started"],
+    },
   ],
 };
 

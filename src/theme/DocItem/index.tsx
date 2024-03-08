@@ -19,7 +19,7 @@ export default function DocItem(props: Props): JSX.Element {
     const docHtmlClassName = `docs-doc-id-${props.content.metadata.id}`;
     const MDXComponent = props.content;
     const eolPage = props.content?.frontMatter?.eol === true;
-    const eolMessage = "This project has reached and of life and is no longer maintained. " + props.content?.frontMatter?.eolMessage || "";
+    const eolMessage = "This project has reached end of life and is no longer maintained. " + props.content?.frontMatter?.eolMessage || "";
 
     return (
         <DocProvider content={props.content}>

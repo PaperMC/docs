@@ -14,6 +14,9 @@
   --default-config-node-text-color: rgb(148, 148, 148);
   --config-node-highlight-text-color: black;
   --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.03);
+
+  /* EOL Message */
+  --eol-message-background-color: #ff5f5f;
 }
 
 html[data-theme="dark"] {
@@ -30,7 +33,10 @@ html[data-theme="dark"] {
   /* Config Node */
   --default-config-node-text-color: rgb(128, 128, 128);
   --config-node-highlight-text-color: white;
-  --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.1);
+  --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.03);
+
+  /* EOL Message */
+  --eol-message-background-color: #ab2929;
 }
 
 .eol-message {
@@ -42,8 +48,13 @@ html[data-theme="dark"] {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  background-color: #b93c3c;
+  background-color: var(--eol-message-background-color);
   text-align: center;
+  flex-direction: column;
+}
+
+.eol-message p {
+  margin: 0;
 }
 
 .button.button--secondary {

@@ -7,9 +7,12 @@ import ReactMarkdown from 'react-markdown';
 import style from '@site/src/css/markdown-styles.module.css';
 import type {Props} from '@theme/DocItem';
 
-function EOLPage(message: string) {
+function EOLMessage(message: string): JSX.Element {
     return (
         <div className={"eol-message"}>
+            <p>
+                <strong>This project has reached end of life and is no longer maintained.</strong>
+            </p>
             <ReactMarkdown className={style.reactMarkDown} >{"**" + message + "**"}</ReactMarkdown>
         </div>
     );
@@ -19,7 +22,7 @@ export default function DocItem(props: Props): JSX.Element {
     const docHtmlClassName = `docs-doc-id-${props.content.metadata.id}`;
     const MDXComponent = props.content;
     const eolPage = props.content?.frontMatter?.eol === true;
-    const eolMessage = "This project has reached end of life and is no longer maintained. " + props.content?.frontMatter?.eolMessage || "";
+    const eolMessage = props.content?.frontMatter?.eol_message || "";
 
     return (
         <DocProvider content={props.content}>
@@ -28,7 +31,7 @@ export default function DocItem(props: Props): JSX.Element {
                 <DocItemLayout>
                     <>
                         {
-                            eolPage && EOLPage(eolMessage)
+                            eolPage && EOLMessage(eolMessage)
                         }
                         <MDXComponent />
                     </>

@@ -14,6 +14,10 @@
   white-space: nowrap;
 }
 
+.config-explorer-file-node-with-link {
+  font-weight: bold;
+}
+
 .config-explorer-file-node-with-link:hover {
   background-color: rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -86,10 +90,25 @@
   display: flex;
   flex-shrink: 0;
   white-space: nowrap;
+  margin: 5px;
 }
 
 /* Node without Flex */
 .config-explorer-node-noflex {
   align-items: center;
   position: relative;
+  margin: 5px;
+}
+
+.config-node-contents-wrapper {
+  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+}
+
+.config-explorer-icon {
+  /* Make it go back to the original color */
+  color: var(--config-node-highlight-text-color);
+  margin-right: 5px;
 }

@@ -1,5 +1,9 @@
 import React, {useState} from "react";
 import "@site/src/css/configuration-explorer-layout.css";
+import { Icon } from '@iconify/react';
+
+const folderIcon = "mdi:folder";
+const fileIcon = "mdi:file";
 
 interface ExplorerNode {
     name: string;
@@ -48,7 +52,7 @@ interface IndentationArrowProps {
     level: number;
 }
 
-const IndentationArrow: React.FC<IndentationArrowProps> = ({ level }) => {
+const IndentationArrow = ({ level } : IndentationArrowProps): null | JSX.Element => {
     if (level === 0) {
         return null;
     }
@@ -60,7 +64,7 @@ const IndentationArrow: React.FC<IndentationArrowProps> = ({ level }) => {
     );
 };
 
-export default function ConfigurationStructureDiagram() {
+export default function ConfigurationStructureDiagram() : JSX.Element {
     const [popupNode, setPopupNode] = useState<ExplorerNode | null>(null);
 
     const renderNode = (node: ExplorerNode, level: number = 0) => {
@@ -74,7 +78,9 @@ export default function ConfigurationStructureDiagram() {
         };
 
         return (
-            <div key={node.name} className={level > 0 ? "config-explorer-node" : "config-explorer-node-noflex"} onMouseLeave={() => {setPopupNode(null)}}>
+            <div key={node.name} className={level > 0 ? "config-explorer-node" : "config-explorer-node-noflex"}
+                 onMouseLeave={() => {setPopupNode(null)}}
+            >
 
                 {level > 0 &&
                     <IndentationArrow level={level} />
@@ -84,10 +90,8 @@ export default function ConfigurationStructureDiagram() {
                    ${(!hasUrl ? "config-explorer-file-node" : "config-explorer-file-node-with-link")}`} href={node.url}
                    style={{cursor: hasUrl ? "pointer" : "default"}}>
 
-                    <span style={{cursor: hasDescription ? "pointer" : "auto"}} className={"config-explorer-node-icon"}>
-                        {isFolder ? "📁" : "📄"}
-                    </span>
-                    <span style={{ margin: "0 5px 0 5px" }}>
+                    <span className={"config-node-contents-wrapper"}>
+                        <Icon icon={isFolder ? folderIcon : fileIcon} className={"config-explorer-icon config-explorer-node-icon"}/>
                         {node.name}
                     </span>
                     {hasDescription && (

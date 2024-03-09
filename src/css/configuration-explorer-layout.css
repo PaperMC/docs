@@ -80,7 +80,7 @@
 
 /* Node Icon */
 .config-explorer-node-icon {
-  font-size: 20px;
+  font-size: 23px;
 }
 
 /* Node */
@@ -97,7 +97,7 @@
 .config-explorer-node-noflex {
   align-items: center;
   position: relative;
-  margin: 5px;
+  margin: 5px 0 5px 0;
 }
 
 .config-node-contents-wrapper {

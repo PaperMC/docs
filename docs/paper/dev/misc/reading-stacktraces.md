@@ -9,7 +9,7 @@ description: Stacktraces are produced by the JVM when an exception occurs. This 
 In Java, a stacktrace shows the call stack of a thread. The call stack is the path of execution that led to the current point in the program.
 Usually, the stacktrace will be printed to the console when an exception is not handled correctly.
 
-Stacktraces are a useful tool for debugging your code. They show you the exact line of code that caused an error, and the 
+Stacktraces are a useful tool for debugging your code. They show you the exact line of code that caused an error, and the
 line of code that called that line of code, and so on. This is useful because it allows you to see the exact path of execution that led to the error.
 
 ### Example:
@@ -45,13 +45,13 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because "playe
 -   Then we can see on the second line, the cause of the exception:
     > `java.lang.NullPointerException: Cannot invoke "Object.toString()" because "player" is null`
 
-    This tells us that the exception was caused by a `NullPointerException`, 
+    This tells us that the exception was caused by a `NullPointerException`,
     and that the exception was caused because we tried to call the `toString()` method on a null "player" object.
 
--   From here, as we work down the stacktrace, we can see the exact path of execution that led to the error. In this case, 
+-   From here, as we work down the stacktrace, we can see the exact path of execution that led to the error. In this case,
     the next line of the stacktrace is:
     > `at io.papermc.testplugin.TestPlugin.onPluginEnable(TestPlugin.java:23) ~[TestPlugin-1.0-SNAPSHOT.jar:?]`
-    
+
     Which tells us that the error was thrown at line 23 of `TestPlugin.java`.
 
 -   You can continue to work down the stacktrace, and see the exact path of execution that led to the error. In this case,
@@ -59,7 +59,7 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because "playe
 
 ## Omitted Stacktraces
 
-In JDK 5, the JVM started to omit stacktraces for certain exceptions. This was common when the JVM had optimised the code,
+In JDK 5, the JVM started to omit stacktraces for certain exceptions. This was common when the JVM had optimized the code,
 and you could get `NullPointerException`s without a stacktrace. In order to fix this, you can pass the `-XX:-OmitStackTraceInFastThrow` flag to the JVM:
 
 ```bash

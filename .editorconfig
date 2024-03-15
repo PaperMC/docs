@@ -1,18 +1,10 @@
 root = true
 
 [*]
-insert_final_newline = true
 charset = utf-8
 end_of_line = lf
 indent_style = space
-
-[*.{ts,md,mdx,css,json,yml}]
 indent_size = 2
-tab_width = 2
-
-[*.{ts,mdx,css,json,yml}]
+max_line_length = 100
+insert_final_newline = true
 trim_trailing_whitespace = true
-
-[*.md]
-trim_trailing_whitespace = false
-

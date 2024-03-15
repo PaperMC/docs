@@ -17,9 +17,7 @@ const misc: SidebarsConfig = {
           label: "Tools",
           collapsed: false,
           collapsible: true,
-          items: [
-            "tools/start-script-gen",
-          ],
+          items: ["tools/start-script-gen"],
         },
         "java-install",
         "downloads-api",
@@ -27,7 +25,7 @@ const misc: SidebarsConfig = {
         "assets",
         "contact",
       ],
-    }
+    },
   ],
 };
 

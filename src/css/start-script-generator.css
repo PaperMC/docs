@@ -165,7 +165,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
 }
 
 .switch::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 18px;
   height: 18px;
@@ -238,7 +238,10 @@ input[type="range"]:focus::-webkit-slider-thumb {
   cursor: pointer;
   font-size: 15px;
   width: fit-content;
-  transition: background-color 0.4s ease-out, color 0.4s ease-out, opacity 1s ease-in-out;
+  transition:
+    background-color 0.4s ease-out,
+    color 0.4s ease-out,
+    opacity 1s ease-in-out;
   margin: 5px 5px 0 0;
 }
 

@@ -32,7 +32,7 @@ impersonating your Velocity proxy. However, it is only available for Minecraft 1
 
 :::caution
 
-Modern forwarding is incompatible with Minecraft versions below 1.13, Minecraft Forge, and the
+Modern forwarding is incompatible with Minecraft versions below 1.13 and the
 ProtocolSupport plugin. If you use any of these, you will need to use legacy BungeeCord-compatible
 forwarding instead.
 
@@ -68,6 +68,11 @@ If you are using Paper 1.18.2 or lower, you will find these options as `settings
 
 A mod called [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) allows you to use
 Velocity modern forwarding with a modded server using Fabric.
+
+## Configuring modern forwarding for Forge
+
+A mod called [ProxyCompatibleForge](https://modrinth.com/mod/proxy-compatible-forge) allows you to use
+Velocity modern forwarding with a modded server using Forge 1.16.5 or higher. 
 
 ## Configuring legacy BungeeCord-compatible forwarding
 

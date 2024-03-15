@@ -1,34 +1,20 @@
-import React, {type ReactNode} from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import {
-  findFirstSidebarItemLink,
-  useDocById,
-} from '@docusaurus/theme-common/internal';
-import isInternalUrl from '@docusaurus/isInternalUrl';
-import {translate} from '@docusaurus/Translate';
+import React, { type ReactNode } from "react";
+import clsx from "clsx";
+import Link from "@docusaurus/Link";
+import { findFirstSidebarItemLink, useDocById } from "@docusaurus/theme-common/internal";
+import isInternalUrl from "@docusaurus/isInternalUrl";
+import { translate } from "@docusaurus/Translate";
 
-import type {Props} from '@theme/DocCard';
-import Heading from '@theme/Heading';
-import type {
-  PropSidebarItemCategory,
-  PropSidebarItemLink,
-} from '@docusaurus/plugin-content-docs';
+import type { Props } from "@theme/DocCard";
+import Heading from "@theme/Heading";
+import type { PropSidebarItemCategory, PropSidebarItemLink } from "@docusaurus/plugin-content-docs";
 
-import styles from './styles.module.css';
-import { Icon } from '@iconify/react';
+import styles from "./styles.module.css";
+import { Icon } from "@iconify/react";
 
-function CardContainer({
-  href,
-  children,
-}: {
-  href: string;
-  children: ReactNode;
-}): JSX.Element {
+function CardContainer({ href, children }: { href: string; children: ReactNode }): JSX.Element {
   return (
-    <Link
-      href={href}
-      className={clsx('card padding--lg', styles.cardContainer)}>
+    <Link href={href} className={clsx("card padding--lg", styles.cardContainer)}>
       {children}
     </Link>
   );
@@ -47,16 +33,11 @@ function CardLayout({
 }): JSX.Element {
   return (
     <CardContainer href={href}>
-      <Heading
-        as="h2"
-        className={clsx('text--truncate', styles.cardTitle)}
-        title={title}>
+      <Heading as="h2" className={clsx("text--truncate", styles.cardTitle)} title={title}>
         {icon} {title}
       </Heading>
       {description && (
-        <p
-          className={clsx('text--truncate', styles.cardDescription)}
-          title={description}>
+        <p className={clsx("text--truncate", styles.cardDescription)} title={description}>
           {description}
         </p>
       )}
@@ -64,11 +45,7 @@ function CardLayout({
   );
 }
 
-function CardCategory({
-  item,
-}: {
-  item: PropSidebarItemCategory;
-}): JSX.Element | null {
+function CardCategory({ item }: { item: PropSidebarItemCategory }): JSX.Element | null {
   const href = findFirstSidebarItemLink(item);
 
   // Unexpected: categories that don't have a link have been filtered upfront
@@ -85,12 +62,12 @@ function CardCategory({
         item.description ??
         translate(
           {
-            message: '{count} items',
-            id: 'theme.docs.DocCard.categoryDescription',
+            message: "{count} items",
+            id: "theme.docs.DocCard.categoryDescription",
             description:
-              'The default description for a category card in the generated index about how many items this category includes',
+              "The default description for a category card in the generated index about how many items this category includes",
           },
-          {count: item.items.length},
+          { count: item.items.length }
         )
       }
     />
@@ -98,13 +75,17 @@ function CardCategory({
 }
 
 type EmojiPropsSidebarItemLink = PropSidebarItemLink & {
-    customEmoji?: string;
+  customEmoji?: string;
 };
 
-function CardLink({item}: {item: EmojiPropsSidebarItemLink}): JSX.Element {
-  const icon = item.customEmoji ?
-      <Icon style={{marginRight: "8px"}} icon={item.customEmoji} height={25}/> :
-      (isInternalUrl(item.href) ? '📄️' : '🔗');
+function CardLink({ item }: { item: EmojiPropsSidebarItemLink }): JSX.Element {
+  const icon = item.customEmoji ? (
+    <Icon style={{ marginRight: "8px" }} icon={item.customEmoji} height={25} />
+  ) : isInternalUrl(item.href) ? (
+    "📄️"
+  ) : (
+    "🔗"
+  );
   const doc = useDocById(item.docId ?? undefined);
   return (
     <CardLayout
@@ -116,11 +97,11 @@ function CardLink({item}: {item: EmojiPropsSidebarItemLink}): JSX.Element {
   );
 }
 
-export default function DocCard({item}: Props): JSX.Element {
+export default function DocCard({ item }: Props): JSX.Element {
   switch (item.type) {
-    case 'link':
+    case "link":
       return <CardLink item={item} />;
-    case 'category':
+    case "category":
       return <CardCategory item={item} />;
     default:
       throw new Error(`unknown item type ${JSON.stringify(item)}`);

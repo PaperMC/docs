@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 
 const folderIcon = "mdi:folder";
 const fileIcon = "mdi:file";
+const infoIcon = "mdi:information-outline";
 
 interface ExplorerNode {
     name: string;
@@ -14,6 +15,11 @@ interface ExplorerNode {
 }
 
 const folderData: ExplorerNode[] = [
+    {
+        name: "logs",
+        type: "folder",
+        description: "This folder contains all the logs for the server. It compresses old logs into .gz files, but holds the most recent log as a .txt file.",
+    },
     {
         name: "config",
         type: "folder",
@@ -40,7 +46,7 @@ const folderData: ExplorerNode[] = [
     { name: "commands.yml", type: "file", url: "/paper/reference/bukkit-commands-configuration" },
     { name: "eula.txt", type: "file", description: "This file is in place to allow you to accept the Minecraft EULA.\nThis is required to start the server." },
     { name: "help.yml", type: "file", description: "This file provides you with a wide variety of ways to configure the /help system in your Paper Server." },
-    { name: "ops.json", type: "file", description: "ops.json is a JSON file located in the root directory of a server containing a list of players with operator status." },
+    { name: "ops.json", type: "file", description: "This file stores a list of all players with operator status." },
     { name: "permissions.yml", type: "file", description: "The permissions.yml file allows creating of permission nodes so that server admins can easily distribute permissions." },
     { name: "server.properties", type: "file", url: "/paper/reference/server-properties" },
     { name: "spigot.yml", type: "file", url: "/paper/reference/spigot-configuration" },
@@ -59,7 +65,7 @@ const IndentationArrow = ({ level } : IndentationArrowProps): null | JSX.Element
 
     return (
         <span className={"indentation-arrow"}>
-            {level > 0 && "→".repeat(level)}
+            {level > 0 && "└─".repeat(level)}
         </span>
     );
 };
@@ -86,7 +92,7 @@ export default function ConfigurationStructureDiagram() : JSX.Element {
                     <IndentationArrow level={level} />
                 }
 
-                <a className={`${("config-explorer-file-" + (isFolder ? "folder-" : "") + "node")} 
+                <a className={`${("config-explorer-file-" + (isFolder ? "folder-" : "") + "node")}
                    ${(!hasUrl ? "config-explorer-file-node" : "config-explorer-file-node-with-link")}`} href={node.url}
                    style={{cursor: hasUrl ? "pointer" : "default"}}>
 

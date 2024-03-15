@@ -75,7 +75,7 @@
 .indentation-arrow {
   font-size: 14px;
   color: #bbbbbb;
-  margin: 0 8px 0 8px;
+  margin: 0 8px 0 2px;
 }
 
 /* Node Icon */
@@ -101,7 +101,7 @@
 }
 
 .config-node-contents-wrapper {
-  margin: 0 5px;
+  margin: 0 5px 0 0;
   display: flex;
   align-items: center;
   font-size: 15px;

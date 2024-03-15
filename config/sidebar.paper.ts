@@ -21,6 +21,7 @@ const paper: SidebarsConfig = {
           },
           items: [
             "admin/getting-started/getting-started",
+            "admin/getting-started/setup-next-steps",
             "admin/getting-started/adding-plugins",
             "admin/getting-started/migration",
           ],

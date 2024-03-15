@@ -21,7 +21,14 @@ replace any JAR in a running server, be that plugins, or Paper itself.
 This is the most important step, and yet the most frequently skipped. While it is unlikely that
 updating Paper itself will cause any issues requiring you to restore from a backup, plugin
 malfunctions or other accidents might! Updating is a great time to work in a backup. Having
-functioning backups is essential to every server, big or small.
+functioning backups is essential to every server, big or small. The main things to back up are:
+
+- The world folders
+- Server Configuration Files
+- Plugin Configuration Files & Plugin JARs
+
+You should aim to have backups from multiple times, and keep them in a safe place. A common approach
+is to keep rolling backups, so you always have a certain number of backups from a set amount of time.
 
 ## Step 2. Update Plugins
 

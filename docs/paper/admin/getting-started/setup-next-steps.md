@@ -40,18 +40,16 @@ plugins such as [LuckPerms](https://luckperms.net/) to manage the permissions wh
 ## Backups
 
 It's important to keep backups of your server. If something goes wrong, you can restore your server to a
-previous state. We cover how to do this in the [Updating](/paper/updating) guide. These backups should
-be stored in a safe place, and you should have multiple backups from different times. A common approach
-is to keep rolling backups, so you always have a certain number of backups from a set amount of time ago.
+previous state. We cover how to do this in the [Updating](/paper/updating) guide.
 
-## Optimisation
+## Optimization
 
-Out of the box, Paper is optimised for performance. However, there are many things you can do to further
-optimise your server. One of the most common things to do is to make sure that you are running the
+Out of the box, Paper is optimized for performance. However, there are many things you can do to further
+optimize your server. One of the most common things to do is to make sure that you are running the
 correct startup flags for your server. We have a tool that allows you to automatically generate a
 startup script with the correct flags for your server. You can find this tool
 [here](/misc/tools/start-script-gen). Beyond this, a guide such as [this one](https://paper-chan.moe/paper-optimization/)
-will help you to further optimise your server.
+will help you to further optimize your server.
 
 ## Making your server public
 

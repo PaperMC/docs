@@ -140,10 +140,10 @@ of a few ways:
    </VersionFormattedCode>
 
    // The possible placeholders are:
-   %%_MAJ_MC_%%  - Major Paper Version (E.g 1.20)
-   %%_MAJ_MIN_MC_%% - Major-Minor Paper Version (E.g 1.20.4)
-   %%_MAJ_VEL_%% - Major Velocity Version (E.g 3.3)
-   %%_MAJ_MIN_VEL_%% - Major-Minor Velocity Version (E.g 3.3.0)
+   %%_MAJ_MC_%%  - Major Paper Version (E.g. 1.20)
+   %%_MAJ_MIN_MC_%% - Major-Minor Paper Version (E.g. 1.20.4)
+   %%_MAJ_VEL_%% - Major Velocity Version (E.g. 3.3)
+   %%_MAJ_MIN_VEL_%% - Major-Minor Velocity Version (E.g. 3.3.0)
    ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation

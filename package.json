@@ -12,7 +12,8 @@
     "swizzle": "docusaurus swizzle --typescript",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "dependencies": {
     "@docusaurus/core": "3.1.1",

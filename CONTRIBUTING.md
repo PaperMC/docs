@@ -1,9 +1,10 @@
 # Contributing to PaperMC Docs
 
-Thank you for considering contributing to the PaperMC Docs repository! We appreciate your help in making our documentation better. 
+Thank you for considering contributing to the PaperMC Docs repository! We appreciate your help in making our documentation better.
 To ensure a smooth and collaborative contribution process, please follow the guidelines below.
 
 ## Table of Contents
+
 1. [Introduction](#introduction)
 2. [How to add a page](#adding-a-page)
 3. [Submitting Contributions](#submitting-contributions)
@@ -12,20 +13,20 @@ To ensure a smooth and collaborative contribution process, please follow the gui
 
 ## Introduction
 
-The PaperMC Docs repository contains the documentation for the PaperMC project, which is used to provide essential 
-information, instructions, and guidelines to our users, developers, and contributors. Your contributions play a 
+The PaperMC Docs repository contains the documentation for the PaperMC project, which is used to provide essential
+information, instructions, and guidelines to our users, developers, and contributors. Your contributions play a
 significant role in improving and maintaining the quality of our documentation.
 
 We use [Docusaurus](https://docusaurus.io/) to build and deploy the documentation website.
-Docusarus has [extensive documentation](https://docusaurus.io/docs/category/guides) detailing what is possible with it.
+Docusaurus has [extensive documentation](https://docusaurus.io/docs/category/guides) detailing what is possible with it.
 
-The bulk of Paper's documentation is written with Markdown, which is a simple markup language that is easy to learn. 
+The bulk of Paper's documentation is written with Markdown, which is a simple markup language that is easy to learn.
 Take a look at some of the existing documentation to get a feel for how it is written.
 
 ### Adding a page
 
 To add a new page to the documentation, create a new Markdown file in the appropriate folder. For example, if you want to add
-a new page to the Paper Admin docs, create a new Markdown file in the `docs/paper/admin/` folder. The file name should be in 
+a new page to the Paper Admin docs, create a new Markdown file in the `docs/paper/admin/` folder. The file name should be in
 lowercase and use hyphens to separate words. For example, `my-new-page.md`.
 
 The page should start with a slug and title. For example:
@@ -40,12 +41,12 @@ slug: /reference/paper-plugins
 This documentation page serves to explain all the new semantics and possible confusions that Paper plugins may introduce.
 ```
 
-This will place the page at the `/paper/reference/paper-plugins` URL on the website. The slug should be unique and follow the   
+This will place the page at the `/paper/reference/paper-plugins` URL on the website. The slug should be unique and follow the
 folder structure of the documentation. The title is the name of the page that will be displayed on the website and in the sidebar.
 
 You must also add the page to the sidebar. In this instance we will go to the `config/sidebar.paper.ts` file and
 add the file to the `items` tag for that section. You must use the file structure for that file. One example would be
-`admin/reference/paper-plugins` where you omit the file extension and use slashes to denote folders. Take a look at the 
+`admin/reference/paper-plugins` where you omit the file extension and use slashes to denote folders. Take a look at the
 existing sidebar elements to get a feel for how it is structured.
 
 ## Submitting Contributions
@@ -72,7 +73,7 @@ If you wish to contribute to the PaperMC Docs, please follow these steps:
 To maintain consistency and readability across the documentation, please adhere to the following style guidelines:
 
 1. **American English**: All documentation should be written in American English. Please use American spellings, grammar, and punctuation.
-   Take a look at [this guide](https://www.oxfordinternationalenglish.com/differences-in-british-and-american-spelling/) which outlines 
+   Take a look at [this guide](https://www.oxfordinternationalenglish.com/differences-in-british-and-american-spelling/) which outlines
    the differences between American and British English.
 
 2. **Markdown Format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
@@ -88,52 +89,62 @@ To maintain consistency and readability across the documentation, please adhere 
 
 7. **Images**: Include images if necessary to illustrate concepts. Ensure the images are clear and relevant to the content.
 
-8. **Keep It Concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
+8. **Format Code**: After you've made changes, don't forget to run the formatting script with `yarn format`.
 
-9. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
+9. **Keep It Concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
+
+10. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
 
 ## Automatic Doc Versioning
 
 There are components and methods in order to embed the current Project Version into the documentation. This is done one
 of a few ways:
 
-1) SoftwareVersion component
+1. `SoftwareVersion` component
+
    This component is used to embed the current version of the software into the documentation. An example of this would be:
- ```jsx
-<SoftwareVersion versionType={"maj-min"}/> // E.g 1.19.2
-<SoftwareVersion versionType={"maj"}/> // E.g 1.19
-<SoftwareVersion versionType={"max"}/> // E.g 1.20.4
 
-// You can set the project name to be used for the versioning:
-<SoftwareVersion versionType={"maj-min"} project={"velocity"}/> // Project defaults to Paper
- ```
-2) VersionedJavaDocLink component
-    This component is used to embed a link to the current version of the JavaDocs. An example of this would be:
-  ```jsx
-<VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink>
-// The project can also be set here, and defaults to Paper
-  ```
-3) VersionFormattedCode component
-    This component is used to embed a code block with the current version of the software. An example of this would be:
-```jsx
-<VersionFormattedCode language={"yaml"}>
-```⠀
-name: Paper-Test-Plugin
-version: '1.0'
-main: io.papermc.testplugin.TestPlugin
-description: Paper Test Plugin
-api-version: '%%_MAJ_MC_%%'
-bootstrapper: io.papermc.testplugin.TestPluginBootstrap
-loader: io.papermc.testplugin.TestPluginLoader
-```⠀
-</VersionFormattedCode>
+   ```jsx
+   <SoftwareVersion versionType={"maj-min"}/> // E.g 1.19.2
+   <SoftwareVersion versionType={"maj"}/> // E.g 1.19
+   <SoftwareVersion versionType={"max"}/> // E.g 1.20.4
 
-// The possible placeholders are:
-%%_MAJ_MC_%%  - Major Paper Version (E.g 1.20)
-%%_MAJ_MIN_MC_%% - Major-Minor Paper Version (E.g 1.20.4)
-%%_MAJ_VEL_%% - Major Velocity Version (E.g 3.3)
-%%_MAJ_MIN_VEL_%% - Major-Minor Velocity Version (E.g 3.3.0)
-```
+   // You can set the project name to be used for the versioning:
+   <SoftwareVersion versionType={"maj-min"} project={"velocity"}/> // Project defaults to Paper
+   ```
+
+2. `VersionedJavaDocLink` component
+
+   This component is used to embed a link to the current version of the JavaDocs. An example of this would be:
+
+   ```jsx
+   <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink>
+   // The project can also be set here, and defaults to Paper
+   ```
+
+3. `VersionFormattedCode` component
+
+   This component is used to embed a code block with the current version of the software. An example of this would be:
+
+   ````jsx
+   <VersionFormattedCode language={"yaml"}>
+   ```⠀
+   name: Paper-Test-Plugin
+   version: '1.0'
+   main: io.papermc.testplugin.TestPlugin
+   description: Paper Test Plugin
+   api-version: '%%_MAJ_MC_%%'
+   bootstrapper: io.papermc.testplugin.TestPluginBootstrap
+   loader: io.papermc.testplugin.TestPluginLoader
+   ```⠀
+   </VersionFormattedCode>
+
+   // The possible placeholders are:
+   %%_MAJ_MC_%%  - Major Paper Version (E.g 1.20)
+   %%_MAJ_MIN_MC_%% - Major-Minor Paper Version (E.g 1.20.4)
+   %%_MAJ_VEL_%% - Major Velocity Version (E.g 3.3)
+   %%_MAJ_MIN_VEL_%% - Major-Minor Velocity Version (E.g 3.3.0)
+   ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
 for older versions. This is done by using yarn's docusaurus version command:
@@ -160,9 +171,9 @@ add it to this file, and it will be available to use in the documentation.
 
 ## Code of Conduct
 
-Contributors are expected to follow the [Community Guidelines](https://papermc.io/community/guidelines) of the PaperMC organization in all 
+Contributors are expected to follow the [Community Guidelines](https://papermc.io/community/guidelines) of the PaperMC organization in all
 interactions related to this repository.
 
-Thank you for contributing to the PaperMC Docs! Your dedication helps improve the documentation for the entire 
+Thank you for contributing to the PaperMC Docs! Your dedication helps improve the documentation for the entire
 community. If you have any questions or need further assistance, feel free to reach out to us on the PaperMC Discord server
 or create an issue on the repository.

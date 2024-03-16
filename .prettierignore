@@ -2,3 +2,5 @@
 docs/versioned
 *.md
 *.mdx
+!README.md
+!CONTRIBUTING.md

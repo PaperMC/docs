@@ -19,10 +19,10 @@ jobs:
           node-version: 20
           cache: "yarn"
       - name: Install dependencies
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v5
         with:
           cmd: install
       - name: Check format
-        uses: borales/actions-yarn@v4
+        uses: borales/actions-yarn@v5
         with:
           cmd: format:check

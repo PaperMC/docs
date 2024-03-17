@@ -22,7 +22,7 @@ In the past, developers resorted to a variety of methods to store custom data on
 - Lore and display names: Prone to collisions as well as slow to access.
 
 The benefit of the PDC is that it allows for a more reliable and performant way to store arbitrary data on objects.
-It also doesn't rely on accessing server internals, so it's less likely to break on future versions. It also removes the need to 
+It also doesn't rely on accessing server internals, so it's less likely to break on future versions. It also removes the need to
 manually track the data lifecycle, as, for example with an entity, the PDC will be saved when the entity unloads.
 
 ## Adding Data
@@ -77,7 +77,7 @@ The PDC supports a wide range of data types, such as:
 - `Integer`, `Integer Array`
 - `Long`, `Long Array`
 - `Short`
-- `String` 
+- `String`
 - There are also `Tag Containers`. Tag Containers are a way of nesting PDC's within each other. To create a new PersistentDataContainer, you can use:
   ```java
   // Get the existing container
@@ -86,17 +86,34 @@ The PDC supports a wide range of data types, such as:
   PersistentDataContainer newContainer = container.getAdapterContext().newPersistentDataContainer();
   ```
 - `Boolean`
+- `Lists`. Represent lists of data that can be stored via another persistent data type. You may create them via:
+  ```java
+  // Storing a list of strings in a container by verbosely creating
+  // a list data type wrapping the string data type.
+  container.set(
+    key,
+    PersistentDataType.LIST.listTypeFrom(PersistentDataType.STRING),
+    List.of("a", "list", "of", "strings")
+  );
+
+  // Storing a list of strings in a container by using the api
+  // provided pre-definitions of commonly used list types.
+  container.set(key, PersistentDataType.LIST.strings(), List.of("a", "list", "of", "strings"));
+
+  // Retrieving a list of strings from the container.
+  List<String> strings = container.get(key, PersistentDataType.LIST.strings());
+  ```
 
 :::info[Boolean PersistentDataType]
 
 The Boolean PDC type exists for convenience - you cannot make more complex types distill to a Boolean
 
 :::
-  
+
 ### Custom Data Types
 
 You can store a wide range of data in the PDC with the native adapters, however, if you need a more complex data type you can
-implement your own `PersistentDataType` and use that instead. 
+implement your own `PersistentDataType` and use that instead.
 The `PersistentDataType`'s job is to "deconstruct" a complex data type into something that is natively supported (see above) and then vice-versa.
 
 Here is an example of how to do that for a UUID:
@@ -149,7 +166,7 @@ container.set(key, new UUIDDataType(), uuid);
 - ##### Entity
     - `Entity#getPersistentDataContainer()`
 - ##### TileState
-    - This is slightly more complicated, as you need to cast the block to something that extends `TileState`. 
+    - This is slightly more complicated, as you need to cast the block to something that extends `TileState`.
       This does not work for all blocks, only those that have a tile entity. F.E:
       ```java
         Block block = ...;

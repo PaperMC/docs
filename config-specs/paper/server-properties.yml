@@ -98,6 +98,11 @@ level-type:
   description: >
     Defines the type of the world generator. (Allowed values: "normal", "flat", "large_biomes",
     "amplified", "single_biome_surface", "buffet", "default_1_1", "customized")
+log-ips:
+  default: "true"
+  description: >-
+    Whether player IP addresses should be logged by the server. This does not
+    impact the ability of plugins to log the IP addresses of players
 max-chained-neighbor-updates:
   default: "1000000"
   description: >

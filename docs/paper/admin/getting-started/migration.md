@@ -22,8 +22,9 @@ It's easy to migrate from CraftBukkit or Spigot to Paper. Follow the steps below
 
 1. Stop your server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads).
-3. Replace your existing server jar with your freshly downloaded Paper jar.
-4. Start your new server.
+3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
+4. Replace your existing jar file with your freshly downloaded Paper jar.
+5. Start your new server.
 
 Paper retains full compatibility with all Spigot plugins, allowing a seamless transition.
 
@@ -31,8 +32,8 @@ Paper retains full compatibility with all Spigot plugins, allowing a seamless tr
 
 Your new Paper server will still use [`bukkit.yml`](../reference/configuration/bukkit-configuration.mdx)
 and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).  
-New configuration options can be found in [`paper-global.yml`](../reference/configuration/global-configuration.mdx)
-and [`paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
+New configuration options can be found in [`config/paper-global.yml`](../reference/configuration/global-configuration.mdx)
+and [`config/paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
 
 :::
 
@@ -48,7 +49,8 @@ closely, as manual changes will be required.
 1. Stop your Vanilla server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
    server jar with your freshly downloaded Paper jar.
-3. Start your new Paper server.
+3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
+4. Start your new Paper server.
 
 You have now successfully migrated to Paper. If you encounter any issues, do not hesitate to reach
 out for support on [our Discord server](https://discord.gg/papermc) (`#paper-help` channel).

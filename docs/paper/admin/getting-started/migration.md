@@ -49,7 +49,7 @@ closely, as manual changes will be required.
 1. Stop your Vanilla server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
    server jar with your freshly downloaded Paper jar.
-3. Rename the downloaded file to match the name specified in the [start command](../getting-started/getting-started.mdx#running-the-server).
+3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
 4. Start your new Paper server.
 
 You have now successfully migrated to Paper. If you encounter any issues, do not hesitate to reach

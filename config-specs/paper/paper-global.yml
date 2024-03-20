@@ -154,11 +154,6 @@ logging:
     description: >-
       Whether to remap Spigot mapped stacktraces to Mojang mappings in logging.
       Has no impact on Mojang mapped servers
-  log-player-ip-addresses:
-    default: "true"
-    description: >-
-      Whether player IP addresses should be logged by the server. This does not
-      impact the ability of plugins to log the IP addresses of players
 messages:
   no-permission:
     default: >-

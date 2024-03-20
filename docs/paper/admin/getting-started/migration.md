@@ -22,7 +22,7 @@ It's easy to migrate from CraftBukkit or Spigot to Paper. Follow the steps below
 
 1. Stop your server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads).
-3. Rename the downloaded file to match the name specified in the [start command](../getting-started/getting-started.mdx#running-the-server).
+3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
 4. Replace your existing jar file with your freshly downloaded Paper jar.
 5. Start your new server.
 

@@ -66,7 +66,7 @@ Updating Paper itself is very simple.
 
 1. Download a new JAR from [our downloads page](https://papermc.io/downloads).
 2. Stop your server. It is not recommended and may cause issues to replace your Paper JAR while the server is running.
-3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
+3. Rename the downloaded file to match the name specified in the [start command](../getting-started/getting-started.mdx#running-the-server).
 4. Replace your old Paper JAR file with the new renamed one.
 5. Start your server. Watch the startup log to ensure everything goes to plan. If there are any
    plugin conflicts or issues, you will see them here.

@@ -18,6 +18,13 @@ replace any JAR in a running server, be that plugins, or Paper itself.
 
 ## Step 1. Backup
 
+:::tip
+
+If you are using a shared host, your host may provide a built-in way to backup. Consult their
+documentation before continuing.
+
+:::
+
 This is the most important step, and yet the most frequently skipped. While it is unlikely that
 updating Paper itself will cause any issues requiring you to restore from a backup, plugin
 malfunctions or other accidents might! Updating is a great time to work in a backup. Having
@@ -57,11 +64,11 @@ documentation before continuing.
 
 Updating Paper itself is very simple.
 
-1. Download a new JAR from [our downloads page](https://papermc.io/downloads)
-2. Stop your server. It is not recommended and may cause issues to replace your Paper JAR while the
-   server is running.
-3. Replace your old Paper JAR file with the new one.
-4. Start your server. Watch the startup log to ensure everything goes to plan. If there are any
+1. Download a new JAR from [our downloads page](https://papermc.io/downloads).
+2. Stop your server. It is not recommended and may cause issues to replace your Paper JAR while the server is running.
+3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
+4. Replace your old Paper JAR file with the new renamed one.
+5. Start your server. Watch the startup log to ensure everything goes to plan. If there are any
    plugin conflicts or issues, you will see them here.
 
 To minimize downtime caused by updates, some server owners will, rather than replacing their server

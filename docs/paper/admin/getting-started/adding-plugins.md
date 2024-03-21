@@ -66,8 +66,8 @@ the beginning of this file to see when plugins were loaded.
 If you see something like this:
 
 ```log
-Could not load 'plugins/MyAwesomePlugin-1.0.0.jar' in folder 'plugins'
-org.bukkit.plugin.UnknownDependencyException: Unknown/missing dependency plugins: [Vault]. Please download and install these plugins to run 'MyAwesomePlugin'.
+[00:00:00] [Server thread/WARN] Could not load 'plugins/MyAwesomePlugin-1.0.0.jar' in folder 'plugins'
+[00:00:00] [Server thread/WARN] org.bukkit.plugin.UnknownDependencyException: Unknown/missing dependency plugins: [Vault]. Please download and install these plugins to run 'MyAwesomePlugin'.
 ```
 
 This means that the plugin you tried to install is missing a dependency. A dependency, in this case,
@@ -75,7 +75,7 @@ is another plugin that you must install for the first to function. While you wil
 error, the important line to look at is
 
 ```log
-Unknown/missing dependency plugins: [Vault]. Please download and install these plugins to run 'MyAwesomePlugin'.
+[00:00:00] [Server thread/WARN] Unknown/missing dependency plugins: [Vault]. Please download and install these plugins to run 'MyAwesomePlugin'.
 ```
 
 This is telling you that in order to load `MyAwesomePlugin`, you must first install `Vault`.
@@ -85,8 +85,8 @@ This is telling you that in order to load `MyAwesomePlugin`, you must first inst
 If you see something closer to this:
 
 ```log
-Could not load 'plugins/MyAwesomePlugin-1.0.0.jar' in folder 'plugins'
-org.bukkit.plugin.InvalidDescriptionException: Invalid plugin.yml
+[00:00:00] [Server thread/WARN] Could not load 'plugins/MyAwesomePlugin-1.0.0.jar' in folder 'plugins'
+[00:00:00] [Server thread/WARN] org.bukkit.plugin.InvalidDescriptionException: Invalid plugin.yml
 ```
 
 This means that what you have downloaded isn't a valid Paper plugin. This is generally caused by one
@@ -105,7 +105,7 @@ of the following:
 If you see something like this:
 
 ```log
-Ambiguous plugin name `Essentials' for files `plugins/EssentialsX-2.19.4.jar' and `plugins/Essentialsx-2.20.0-dev.jar' in `plugins'
+[00:00:00] [Server thread/WARN] Ambiguous plugin name `Essentials' for files `plugins/EssentialsX-2.19.4.jar' and `plugins/Essentialsx-2.20.0-dev.jar' in `plugins'
 ```
 
 This means you have two plugins with the same name, which is not supported. In this case, two

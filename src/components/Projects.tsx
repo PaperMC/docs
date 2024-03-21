@@ -1,6 +1,7 @@
 import Link from "@docusaurus/Link";
 import React from "react";
-import styles from "../css/projects.module.css";
+import { Icon } from "@iconify/react";
+import "../css/projects.css";
 
 const projects: Project[] = [
   {
@@ -23,30 +24,33 @@ const projects: Project[] = [
     link: "/velocity",
   },
   {
-    title: "Waterfall",
-    description: "BungeeCord proxy fork that aims to improve performance and stability.",
-    repo: "PaperMC/Waterfall",
-    link: "/waterfall",
-  },
-  {
     title: "Miscellaneous",
     description: "Documentation that does not apply to any specific project.",
     repo: "PaperMC",
     link: "/misc",
   },
+  {
+    title: "Waterfall",
+    description: "A Discontinued BungeeCord proxy fork that aimed to improve performance and stability.",
+    repo: "PaperMC/Waterfall",
+    link: "/waterfall",
+    eol: true,
+  },
 ];
 
 function Project(project: Project) {
   return (
-    <div className={styles.project}>
-      <div className={styles.flex}>
-        <Link className={styles.projectGitHub} to={`https://github.com/${project.repo}`}>
-          {project.title}
+    <div className={"project"}>
+      <div className={"flex"}>
+        <Link className={"projectGitHub archivedProjectTitle"} to={`https://github.com/${project.repo}`}>
+          {project.title}{
+            project.eol && <Icon style={{ marginLeft: "8px" }} icon={"mdi:archive"} height={25} />
+          }
         </Link>
         <p>{project.description}</p>
       </div>
       <div>
-        <Link className="button button--primary" to={project.link}>
+        <Link className={"button button--primary archivedProjectButton"} to={project.link}>
           Go
         </Link>
       </div>
@@ -56,8 +60,8 @@ function Project(project: Project) {
 
 export default function Projects(): JSX.Element {
   return (
-    <section className={styles.projects}>
-      <div className={styles.projectsContainer}>
+    <section className={"projects"}>
+      <div className={"projectsContainer"}>
         {projects.map((project, index) => (
           <Project key={index} {...project} />
         ))}
@@ -71,4 +75,5 @@ interface Project {
   description: string;
   repo: string;
   link: string;
+  eol?: boolean;
 }

@@ -22,6 +22,16 @@
   font-size: 1rem;
   margin-bottom: 0.25rem;
   font-weight: bold;
+  display: flex;
+}
+
+.archivedProjectTitle:hover {
+  color: rgb(239,68,68);
+}
+
+.archivedProjectButton:hover {
+  background-color: rgb(239,68,68);
+  border: 1px solid rgb(239,68,68);
 }
 
 .projects {

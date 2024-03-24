@@ -1,0 +1,47 @@
+should-remove-dragon:
+  default: "true"
+maps:
+  item-frame-cursor-limit:
+    default: "2147483647"
+    description: >-
+      Note that a high number can eventually cause clients to lag.
+      The actual default value would be infinity. 2147483647 is the closest to infinity.
+fixes:
+  disable-unloaded-chunk-enderpearl-exploit:
+    default: "false"
+entities:
+  spawning:
+    duplicate-uuid:
+      mode:
+        default: "<empty>"
+        description: >-
+          [Why this setting exists](https://github.com/PaperMC/Paper/blob/b6001403e9703cadaa6e8c8558e732b91c3c6d6e/patches/server/0310-Duplicate-UUID-Resolve-Option.patch#L6-L8)
+
+          [Documentation](https://docs.papermc.io/paper/reference/world-configuration#entities_spawning_duplicate_uuid_mode)
+    count-all-mobs-for-spawning:
+      default: "true"
+  behavior:
+    phantoms-only-attack-insomniacs:
+      default: "false"
+    phantoms-do-not-spawn-on-creative-players:
+      default: "false"
+misc:
+  light-queue-size:
+    default: "5"
+collisions:
+  allow-player-cramming-damage:
+    default: "true"
+  max-entity-collisions:
+    default: "2147483647"
+    description: The actual default value would be infinity. 2147483647 is the closest to infinity.
+scoreboards:
+  allow-non-player-entities-on-scoreboards:
+    default: "true"
+  use-vanilla-world-scoreboard-name-coloring:
+    default: "true"
+unsupported-settings:
+  fix-invulnerable-end-crystal-exploit:
+    default: "false"
+chunks:
+  delay-chunk-unloads-by:
+    default: "0"

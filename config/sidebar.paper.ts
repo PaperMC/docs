@@ -139,6 +139,8 @@ const paper: SidebarsConfig = {
             "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
+            "dev/api/mob-goals",
+            "dev/api/entity-pathfinder",
             "dev/api/folia-support",
             "dev/api/roadmap",
           ],

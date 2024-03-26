@@ -13,9 +13,8 @@ may be somewhat biased in our favor.
 
 :::danger
 
-**The Paper team strongly recommends using Velocity over Waterfall and BungeeCord**. Waterfall is a legacy solution,
-and only receives critical updates and whatever is released from upstream BungeeCord. All future
-development by PaperMC is done on Velocity.
+**The Paper team strongly recommends using Velocity over Waterfall and BungeeCord**. Waterfall has reached end of life. All future
+development by PaperMC is done on Velocity. For more information, see the [announcement](https://forums.papermc.io/threads/1088/).
 
 :::
 

@@ -26,12 +26,12 @@
 }
 
 .archivedProjectTitle:hover {
-  color: rgb(239,68,68);
+  color: rgb(239, 68, 68);
 }
 
 .archivedProjectButton:hover {
-  background-color: rgb(239,68,68);
-  border: 1px solid rgb(239,68,68);
+  background-color: rgb(239, 68, 68);
+  border: 1px solid rgb(239, 68, 68);
 }
 
 .projects {

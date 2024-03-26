@@ -31,7 +31,8 @@ const projects: Project[] = [
   },
   {
     title: "Waterfall",
-    description: "A Discontinued BungeeCord proxy fork that aimed to improve performance and stability.",
+    description:
+      "A Discontinued BungeeCord proxy fork that aimed to improve performance and stability.",
     repo: "PaperMC/Waterfall",
     link: "/waterfall",
     eol: true,
@@ -42,10 +43,12 @@ function Project(project: Project) {
   return (
     <div className={"project"}>
       <div className={"flex"}>
-        <Link className={"projectGitHub archivedProjectTitle"} to={`https://github.com/${project.repo}`}>
-          {project.title}{
-            project.eol && <Icon style={{ marginLeft: "8px" }} icon={"mdi:archive"} height={25} />
-          }
+        <Link
+          className={"projectGitHub archivedProjectTitle"}
+          to={`https://github.com/${project.repo}`}
+        >
+          {project.title}
+          {project.eol && <Icon style={{ marginLeft: "8px" }} icon={"mdi:archive"} height={25} />}
         </Link>
         <p>{project.description}</p>
       </div>

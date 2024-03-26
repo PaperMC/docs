@@ -1,6 +1,8 @@
 ---
 slug: /getting-started
 description: How to get started with running Waterfall.
+eol: true
+eol_message: We recommend you transition to [Velocity](https://papermc.io/software/velocity). For more information, see the [announcement](https://forums.papermc.io/threads/1088/).
 ---
 
 # Getting Started

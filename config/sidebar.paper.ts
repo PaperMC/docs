@@ -38,6 +38,7 @@ const paper: SidebarsConfig = {
             "admin/how-to/update",
             "admin/how-to/aikars-flags",
             "admin/how-to/anti-xray",
+            "admin/how-to/get-to-vanilla",
           ],
         },
         {

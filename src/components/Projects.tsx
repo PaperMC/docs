@@ -53,7 +53,10 @@ function Project(project: Project) {
         <p>{project.description}</p>
       </div>
       <div>
-        <Link className={"button button--primary " + (project.eol ? "archivedProjectButton" : "")} to={project.link}>
+        <Link
+          className={"button button--primary " + (project.eol ? "archivedProjectButton" : "")}
+          to={project.link}
+        >
           Go
         </Link>
       </div>

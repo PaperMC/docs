@@ -208,7 +208,10 @@ const StartScriptGenerator: React.FC = () => {
                 {Object.values(FLAGS).map((flag) => (
                   <div
                     key={flag.label}
-                    className={clsx("dropdown-item", flag === selectedFlag && "selected")} // TODO: there is no "selected" (or "dropdown-item-selected"?) class. mistake?
+                    className={clsx(
+                      "dropdown-item",
+                      flag === selectedFlag && "dropdown-item-selected"
+                    )}
                     onClick={() => {
                       setSelectedFlag(flag);
                       setDropdownVisible(false);

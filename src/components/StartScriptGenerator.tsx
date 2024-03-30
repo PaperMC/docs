@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import "@site/src/css/start-script-generator.css";
+import clsx from "clsx";
 
 const markerPoints = [4, 8, 12, 16, 20];
 
@@ -177,7 +178,7 @@ const StartScriptGenerator: React.FC = () => {
             <div
               key={point}
               className="slider-marker"
-              style={{ left: `${((point - 0.5) / 23.5) * 100}%` }}
+              style={{ left: `${((point - 0.5) / 23.5) * 100}%` }} // TODO: dynamic class
             >
               {point}GB
             </div>
@@ -207,7 +208,7 @@ const StartScriptGenerator: React.FC = () => {
                 {Object.values(FLAGS).map((flag) => (
                   <div
                     key={flag.label}
-                    className={`dropdown-item ${flag === selectedFlag ? "selected" : ""}`}
+                    className={clsx("dropdown-item", flag === selectedFlag && "selected")} // TODO: there is no "selected" (or "dropdown-item-selected"?) class. mistake?
                     onClick={() => {
                       setSelectedFlag(flag);
                       setDropdownVisible(false);
@@ -224,7 +225,7 @@ const StartScriptGenerator: React.FC = () => {
       </div>
       <div className="config-section">
         <div className={"gui-container"}>
-          <label style={{ marginRight: "10px" }}>GUI:</label>
+          <label className={"margin-right--sm"}>GUI:</label>
           <input
             type="checkbox"
             id="gui-toggle"
@@ -234,7 +235,7 @@ const StartScriptGenerator: React.FC = () => {
           <label htmlFor="gui-toggle" className="switch"></label>
         </div>
         <div className={"gui-container"}>
-          <label style={{ marginRight: "10px" }}>Auto-Restart:</label>
+          <label className={"margin-right--sm"}>Auto-Restart:</label>
           <input
             type="checkbox"
             id="restart-toggle"

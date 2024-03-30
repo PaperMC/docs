@@ -211,6 +211,10 @@ html[data-theme="dark"] {
   margin-left: 20px;
 }
 
+.display--none {
+  display: none !important;
+}
+
 .description_word_wrap {
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -255,6 +259,7 @@ html[data-theme="dark"] {
 }
 
 .config-auxiliary-node {
+  display: inline-flex;
   padding-left: 2px;
   color: var(--default-config-node-text-color);
 }
@@ -288,6 +293,7 @@ html[data-theme="dark"] {
 
 .inline-admonition-warning {
   margin-top: 1em;
+  white-space: initial;
 }
 
 ul.yaml-list-elem {

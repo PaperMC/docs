@@ -49,7 +49,7 @@ function Project(project: Project) {
           to={`https://github.com/${project.repo}`}
         >
           {project.title}
-          {project.eol && <Icon style={{ marginLeft: "8px" }} icon={"mdi:archive"} height={25} />}
+          {project.eol && <Icon className={"margin-left--sm"} icon={"mdi:archive"} height={25} />}
         </Link>
         <p>{project.description}</p>
       </div>

@@ -12,6 +12,7 @@
   width: fit-content;
   flex-shrink: 0;
   white-space: nowrap;
+  cursor: default;
 }
 
 .config-explorer-file-node-with-link {

@@ -80,7 +80,7 @@ type EmojiPropsSidebarItemLink = PropSidebarItemLink & {
 
 function CardLink({ item }: { item: EmojiPropsSidebarItemLink }): JSX.Element {
   const icon = item.customEmoji ? (
-    <Icon style={{ marginRight: "8px" }} icon={item.customEmoji} height={25} />
+    <Icon className={"margin-right--sm"} icon={item.customEmoji} height={25} />
   ) : isInternalUrl(item.href) ? (
     "📄️"
   ) : (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "@site/src/css/configuration-explorer-layout.css";
 import { Icon } from "@iconify/react";
+import Link from "@docusaurus/Link";
 
 const folderIcon = "mdi:folder";
 const fileIcon = "mdi:file";
@@ -137,10 +138,10 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
       >
         {level > 0 && <IndentationArrow level={level} />}
 
-        <a
+        <Link
           className={`${"config-explorer-file-" + (isFolder ? "folder-" : "") + "node"}
                    ${!hasUrl ? "config-explorer-file-node" : "config-explorer-file-node-with-link"}`}
-          href={node.url}
+          to={node.url}
           style={{ cursor: hasUrl ? "pointer" : "default" }}
         >
           <span className={"config-node-contents-wrapper"}>
@@ -158,7 +159,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
               ⓘ
             </span>
           )}
-        </a>
+        </Link>
 
         {hasDescription && (
           <div className={"config-explorer-popup-window-container"}>

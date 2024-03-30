@@ -173,12 +173,8 @@ const YamlNodeWithDescription = ({
             setShowDescription(!showDescription);
           }}
           className={clsx(
-            "config-node",
-            "with-value",
-            showDescription && "with-value-active",
-            "clean-btn",
-            "button--link",
-            "notranslate"
+            "config-node with-value clean-btn button--link notranslate",
+            showDescription && "with-value-active"
           )}
           translate={"no"}
         >

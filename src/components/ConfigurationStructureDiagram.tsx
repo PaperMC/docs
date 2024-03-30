@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "@site/src/css/configuration-explorer-layout.css";
 import { Icon } from "@iconify/react";
+import Link from "@docusaurus/Link";
 import clsx from "clsx";
 
 const folderIcon = "mdi:folder";
@@ -138,13 +139,13 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
       >
         {level > 0 && <IndentationArrow level={level} />}
 
-        <a
+        <Link
           className={clsx(
             !isFolder && "config-explorer-file-node",
             isFolder && "config-explorer-file-folder-node",
             hasUrl && "config-explorer-file-node-with-link"
           )}
-          href={node.url}
+          to={node.url}
         >
           <span className={"config-node-contents-wrapper"}>
             <Icon
@@ -161,7 +162,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
               ⓘ
             </span>
           )}
-        </a>
+        </Link>
 
         {hasDescription && (
           <div className={"config-explorer-popup-window-container"}>

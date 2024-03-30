@@ -164,9 +164,8 @@ const YamlNodeWithDescription = ({
 
   return (
     <div
-      style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} // TODO: dynamic class
       id={createUrlHash(parentKey, name)}
-      className={"config-tagged-for-algolia"}
+      className={clsx("config-tagged-for-algolia", !root && "config-node-indent-size")}
     >
       <div className={"description_word_wrap"}>
         <button
@@ -250,8 +249,7 @@ const YamlTreeNode = ({
   return (
     <div
       key={name}
-      className={`highlight-config-node`}
-      style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }} // TODO: dynamic class
+      className={clsx("highlight-config-node", !root && "config-node-indent-size")}
       id={hash}
     >
       <div className={"config-auxiliary-node notranslate"} translate={"no"}>

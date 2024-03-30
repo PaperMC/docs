@@ -1,4 +1,5 @@
 import Link from "@docusaurus/Link";
+import clsx from "clsx";
 import React from "react";
 import { Icon } from "@iconify/react";
 import "../css/projects.css";
@@ -44,7 +45,7 @@ function Project(project: Project) {
     <div className={"project"}>
       <div className={"flex"}>
         <Link
-          className={"projectGitHub " + (project.eol ? "archivedProjectTitle" : "")}
+          className={clsx("projectGitHub", project.eol && "archivedProjectTitle")}
           to={`https://github.com/${project.repo}`}
         >
           {project.title}
@@ -54,7 +55,7 @@ function Project(project: Project) {
       </div>
       <div>
         <Link
-          className={"button button--primary " + (project.eol ? "archivedProjectButton" : "")}
+          className={clsx("button button--primary", project.eol && "archivedProjectButton")}
           to={project.link}
         >
           Go

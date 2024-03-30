@@ -44,7 +44,7 @@ function Project(project: Project) {
     <div className={"project"}>
       <div className={"flex"}>
         <Link
-          className={"projectGitHub archivedProjectTitle"}
+          className={"projectGitHub " + (project.eol ? "archivedProjectTitle" : "")}
           to={`https://github.com/${project.repo}`}
         >
           {project.title}
@@ -53,7 +53,10 @@ function Project(project: Project) {
         <p>{project.description}</p>
       </div>
       <div>
-        <Link className={"button button--primary archivedProjectButton"} to={project.link}>
+        <Link
+          className={"button button--primary " + (project.eol ? "archivedProjectButton" : "")}
+          to={project.link}
+        >
           Go
         </Link>
       </div>

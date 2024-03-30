@@ -175,11 +175,7 @@ const StartScriptGenerator: React.FC = () => {
         />
         <div className="slider-markers">
           {markerPoints.map((point) => (
-            <div
-              key={point}
-              className="slider-marker"
-              style={{ left: `${((point - 0.5) / 23.5) * 100}%` }} // TODO: dynamic class
-            >
+            <div key={point} className="slider-marker">
               {point}GB
             </div>
           ))}

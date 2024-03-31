@@ -18,6 +18,11 @@ export default class ColorGenerator {
   static darkMode: boolean =
     typeof localStorage !== "undefined" ? localStorage.getItem("theme") === "dark" : false;
 
+  public static isAprilFools() {
+    const today = new Date();
+    return today >= new Date(today.getFullYear(), 3, 1) && today < new Date(today.getFullYear(), 3, 2);
+  }
+
   public static enable() {
     ColorGenerator.setColors();
   }

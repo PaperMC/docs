@@ -5,7 +5,7 @@ import ColorGenerator from "@site/src/april-fools/ColorGenerator";
 
 export default function Navbar(): JSX.Element {
 
-  const foolsMode = localStorage.getItem("foolsMode");
+  const foolsMode = typeof localStorage !== "undefined" ? localStorage.getItem("foolsMode") : false;
 
   // Check to see if it is April Fools Day
   const today = new Date();

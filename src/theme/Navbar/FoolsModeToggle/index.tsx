@@ -8,7 +8,7 @@ export default function FoolsModeToggle({
   className,
 }: Props): JSX.Element | null {
   const navbarStyle = useThemeConfig().navbar.style;
-  const [colorMode, setColorMode] = useState(localStorage.getItem("foolsMode") === "true");
+  const [colorMode, setColorMode] = useState(typeof localStorage !== "undefined" ? localStorage.getItem("foolsMode") === "true": false);
 
   return (
     <FoolsModeToggleButton
@@ -20,7 +20,7 @@ export default function FoolsModeToggle({
       onChange={value => {
         setColorMode(value === "light");
 
-        localStorage.setItem("foolsMode", localStorage.getItem("foolsMode") === "true" ? "false" : "true");
+        localStorage.setItem("foolsMode", (typeof localStorage !== "undefined" ? (localStorage.getItem("foolsMode") === "true") : false) ? "false" : "true");
         location.reload();
       }}
     />

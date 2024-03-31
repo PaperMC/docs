@@ -11,7 +11,7 @@ export default class ColorGenerator {
   ];
 
   static ENABLED : boolean = false;
-  static darkMode: boolean = localStorage.getItem("theme") === "dark";
+  static darkMode: boolean = typeof localStorage !== "undefined" ? localStorage.getItem("theme") === "dark" : false;
 
 
   public static enable() {

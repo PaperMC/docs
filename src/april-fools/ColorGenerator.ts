@@ -1,18 +1,22 @@
-import {ColorMode} from "@docusaurus/theme-common";
+import { ColorMode } from "@docusaurus/theme-common";
 
 export default class ColorGenerator {
-
-  static PROPERTIES : string[] = [
-    "--ifm-color-primary", "--ifm-color-primary-dark",
-    "--ifm-color-secondary", "--ifm-color-secondary-dark",
-    "--ifm-color-warning-contrast-background", "--ifm-heading-color",
-    "--ifm-menu-color", "--ifm-color-content",
-    "--ifm-color-emphasis-800", "--ifm-menu-color",
+  static PROPERTIES: string[] = [
+    "--ifm-color-primary",
+    "--ifm-color-primary-dark",
+    "--ifm-color-secondary",
+    "--ifm-color-secondary-dark",
+    "--ifm-color-warning-contrast-background",
+    "--ifm-heading-color",
+    "--ifm-menu-color",
+    "--ifm-color-content",
+    "--ifm-color-emphasis-800",
+    "--ifm-menu-color",
   ];
 
-  static ENABLED : boolean = false;
-  static darkMode: boolean = typeof localStorage !== "undefined" ? localStorage.getItem("theme") === "dark" : false;
-
+  static ENABLED: boolean = false;
+  static darkMode: boolean =
+    typeof localStorage !== "undefined" ? localStorage.getItem("theme") === "dark" : false;
 
   public static enable() {
     ColorGenerator.setColors();
@@ -27,7 +31,6 @@ export default class ColorGenerator {
   }
 
   static setColors() {
-
     if (ColorGenerator.ENABLED) return;
 
     const root = document.documentElement;
@@ -50,8 +53,11 @@ export default class ColorGenerator {
     const blue = Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
 
     // Convert RGB values to hex string
-    return '#' + red.toString(16).padStart(2, '0') +
-      green.toString(16).padStart(2, '0') +
-      blue.toString(16).padStart(2, '0');
+    return (
+      "#" +
+      red.toString(16).padStart(2, "0") +
+      green.toString(16).padStart(2, "0") +
+      blue.toString(16).padStart(2, "0")
+    );
   }
 }

@@ -20,7 +20,13 @@ export default function NavbarColorModeToggle({ className }: Props): JSX.Element
       buttonClassName={navbarStyle === "dark" ? styles.darkNavbarColorModeToggle : undefined}
       value={colorMode}
       onChange={(value) => {
-        if (ColorGenerator.isAprilFools()) ColorGenerator.colorThemeChanged(value);
+        if (
+          ColorGenerator.isAprilFools() &&
+          (typeof localStorage !== "undefined"
+            ? localStorage.getItem("foolsMode") === "true"
+            : false)
+        )
+          ColorGenerator.colorThemeChanged(value);
         setColorMode(value);
       }}
     />

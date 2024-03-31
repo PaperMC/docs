@@ -22,11 +22,11 @@ export default function FoolsModeToggle({ className }: Props): JSX.Element | nul
           "foolsMode",
           (
             typeof localStorage !== "undefined"
-              ? localStorage.getItem("foolsMode") === "true"
+              ? localStorage.getItem("foolsMode") === "false"
               : false
           )
-            ? "false"
-            : "true"
+            ? "true"
+            : "false"
         );
         location.reload();
       }}

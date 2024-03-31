@@ -20,7 +20,9 @@ export default class ColorGenerator {
 
   public static isAprilFools() {
     const today = new Date();
-    return today >= new Date(today.getFullYear(), 3, 1) && today < new Date(today.getFullYear(), 3, 2);
+    return (
+      today >= new Date(today.getFullYear(), 3, 1) && today < new Date(today.getFullYear(), 3, 2)
+    );
   }
 
   public static enable() {

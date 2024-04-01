@@ -2,6 +2,8 @@
   --background-gen-color: #e8e8e8;
   --background-gen-color-active: #cccccc;
   --gen-text-color: #000;
+  --slider-marker-count: 5;
+  --slider-marker-offset: 5px;
 }
 
 html[data-theme="dark"] {
@@ -35,17 +37,24 @@ html[data-theme="dark"] {
 }
 
 .slider-markers {
-  width: 100%;
   height: 10px;
   display: flex;
-  justify-content: space-evenly;
 }
 
 .slider-marker {
-  flex-direction: column;
-  align-items: center;
   color: var(--gen-text-color);
   font-size: 12px;
+  display: inline-block;
+  width: calc(100% / (var(--slider-marker-count) + 1));
+  text-align: center;
+}
+
+.slider-marker:first-child {
+  width: calc((100% / (var(--slider-marker-count) + 1) / 2) - var(--slider-marker-offset));
+}
+
+.slider-marker:last-child {
+  width: calc((100% / (var(--slider-marker-count) + 1) / 2));
 }
 
 input[type="text"],

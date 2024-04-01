@@ -169,17 +169,20 @@ const StartScriptGenerator: React.FC = () => {
           min={0.5}
           max={24}
           step={0.5}
+          list="slide-markers-datalist"
           value={memory}
           onChange={(e) => setMemory(parseFloat(e.target.value))}
           aria-labelledby="memory-slider-label"
         />
-        <div className="slider-markers">
+        <datalist id="slide-markers-datalist" className="slider-markers">
+          <option className="slider-marker"></option>
           {markerPoints.map((point) => (
-            <div key={point} className="slider-marker">
+            <option key={point} className="slider-marker">
               {point}GB
-            </div>
+            </option>
           ))}
-        </div>
+          <option className="slider-marker"></option>
+        </datalist>
       </div>
       <div className={"middle-flex-wrapper"}>
         <div className="config-section">

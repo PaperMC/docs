@@ -58,7 +58,7 @@ Depending on the complexity of your renderer you may want to use one or the othe
 
 The first way of using the renderer is by implementing the <VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html"}>`ChatRenderer`</VersionedJavaDocLink> interface in a class.
 In this example, we will be using our ChatListener class.
-Next, we need to tell the event to use the renderer by using the <VersionedJavaDocLink target={"/1.20/io/papermc/paper/event/player/AbstractChatEvent.html#renderer()"}>`renderer`</VersionedJavaDocLink> method.
+Next, we need to tell the event to use the renderer by using the <VersionedJavaDocLink target={"/io/papermc/paper/event/player/AbstractChatEvent.html#renderer()"}>`renderer`</VersionedJavaDocLink> method.
 
 ```java title="ChatListener.java"
 public class ChatListener implements Listener, ChatRenderer { // Implement the ChatRenderer and Listener interface

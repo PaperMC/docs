@@ -81,8 +81,7 @@ const generateStartCommand = (
     );
   else content = platform === "windows" ? command + "\n\npause" : command;
 
-  if (platform === "linux") content = "#!/bin/bash\n\n" + content;
-  if (platform === "windows") content = "@echo off\n\n" + content;
+  content = (platform === "linux" ? "#!/bin/bash\n\n" : "@echo off\n\n") + content;
 
   return content;
 };

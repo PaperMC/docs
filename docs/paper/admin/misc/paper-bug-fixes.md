@@ -48,6 +48,8 @@ Similarly, we also allow you to enable string-based duplication bugs with the fo
 unsupported-settings:
   allow-tripwire-disarming-exploits : true
 ```
+This is a [long term bug](https://bugs.mojang.com/browse/MC-129055) that has not yet been fixed by Mojang. We have
+fixed it in Paper, but we provide a config option to restore vanilla behaviour.
 
 ## Block Breaking
 

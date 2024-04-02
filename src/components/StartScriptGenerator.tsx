@@ -72,16 +72,16 @@ const generateStartCommand = (
 ) => {
   setTimeout(resizeOutput, 0);
   let content = "";
-  const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === FLAGS.VELOCITY ? "" : "--nogui"}`;
+  const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === FLAGS.VELOCITY ? "" : "nogui"}`;
 
   if (autoRestartEnabled)
     content = (platform === "windows" ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(
       "%%CONTENT%%",
       command
     );
-  else content = command;
+  else content = platform === "windows" ? command + "\n\npause" : command;
 
-  if (platform === "linux") content = "#!/bin/bash\n\n" + content;
+  content = (platform === "linux" ? "#!/bin/bash\n\n" : "@echo off\n\n") + content;
 
   return content;
 };

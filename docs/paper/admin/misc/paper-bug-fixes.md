@@ -22,13 +22,13 @@ check to see if it:
 1) Has been confirmed as a bug
 2) Has an assigned priority to it
 
-If it meets these two criteria then we will accept changes to fix the bug, as it can take a long time for Mojang to fix 
+If it meets these two criteria then we will accept changes to fix the bug, as it can take a long time for Mojang to fix
 them (sometimes years). If an issue gets declined by Mojang, we normally do not "fix" it as it is intended behaviour.
 
 ## Duplication Bugs
 
-Because TNT duping is considered a form of automated mining and not a resource dupe, we have provided an option to 
-restore it. This, undesirably, also re-enables carpet and rail duping, which normally we would not provide a config for, 
+Because TNT duping is considered a form of automated mining and not a resource dupe, we have provided an option to
+restore it. This, undesirably, also re-enables carpet and rail duping, which normally we would not provide a config for,
 but it's the same bug for those, so we have no choice. However, the config option is as follows:
 
 ```yaml
@@ -42,6 +42,14 @@ recommended, as it can cause issues with the server, but we do provide a config 
 unsupported-settings:
   allow-unsafe-end-portal-teleportation: true
 ```
+
+Similarly, we also allow you to enable string-based duplication bugs with the following config option:
+```yaml
+unsupported-settings:
+  allow-tripwire-disarming-exploits : true
+```
+This is a [long term bug](https://bugs.mojang.com/browse/MC-129055) that has not yet been fixed by Mojang. We have
+fixed it in Paper, but we provide a config option to restore vanilla behaviour.
 
 ## Block Breaking
 
@@ -57,5 +65,5 @@ unsupported-settings:
 We will not support you if you have issues whilst these settings are enabled, as they can cause unintended side effects.
 These settings are also not guaranteed to be supported in the future and may have their behavior changed, or removed, at any time.
 
-For reasoning behind not having configuration options for many duplication bugs, see:
+For legacy reasoning behind not having configuration options for many duplication bugs, see:
 [#3724](https://github.com/PaperMC/Paper/issues/3724)

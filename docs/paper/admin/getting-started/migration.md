@@ -10,7 +10,7 @@ It's simple to migrate your server to or from Paper. The steps below will help y
 
 Before you begin, please ensure you have a full backup of your server.
 
-[//]: # "See our [Backup Guide](/backup) for more information."
+See our [Backup Guide](/paper/updating#step-1-backup) for more information.
 
 :::
 

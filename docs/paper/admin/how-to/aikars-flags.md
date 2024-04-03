@@ -88,7 +88,7 @@ up much space (5MB)
     differently and does not suffer from too large of heaps, and this is industry-wide accepted
     information that under G1 to keep Xms and Xmx the same!
 
-2.  **UnlockExperimentalVMOptions** -- needed for some the below options
+2.  **UnlockExperimentalVMOptions:** needed for some the below options
 
 3.  **G1NewSizePercent:** These are the important ones. You now can specify percentages of an
     overall desired range for the new generation. With these settings, we tell G1 to not use its
@@ -177,6 +177,6 @@ up much space (5MB)
 ### Transparent Huge Pages
 
 Controversial feature but may be usable if you can not configure your host for real HugeTLBFS. Try
-adding `-XX:+UseTransparentHugePages` but it's extremely important you also have AlwaysPreTouch set.
+adding `-XX:+UseTransparentHugePages` but it's extremely important you also have `AlwaysPreTouch` set.
 Otherwise, THP will likely hurt you. We have not measured how THP works for Minecraft or its impact with
-AlwaysPreTouch, so this section is for the advanced users who want to experiment.
+`AlwaysPreTouch`, so this section is for the advanced users who want to experiment.

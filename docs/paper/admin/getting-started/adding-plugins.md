@@ -72,7 +72,7 @@ If you see something like this:
 
 This means that the plugin you tried to install is missing a dependency. A dependency, in this case,
 is another plugin that you must install for the first to function. While you will get a big scary
-error, the important line to look at is
+error, the important line to look at is:
 
 ```log
 [00:00:00] [Server thread/WARN] Unknown/missing dependency plugins: [Vault]. Please download and install these plugins to run 'MyAwesomePlugin'.
@@ -113,8 +113,8 @@ versions of EssentialsX are installed. Both the release `2.19.4`, and a developm
 `2.20.0`. Ensure you only have one version of each plugin installed at one time. Delete the older
 version of the duplicate plugin, and restart your server.
 
-[//]: # "To prevent accidentally installing two versions of one plugin while updating, you can use"
-[//]: # "the `update` folder as described in the [Update Guide](/paper/how-to/update)."
+To prevent accidentally installing two versions of one plugin while updating, you can use
+the `update` folder as described in the [Update Guide](/paper/updating#step-2-update-plugins).
 
 #### Something Else
 

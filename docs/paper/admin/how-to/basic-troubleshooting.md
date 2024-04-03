@@ -32,7 +32,7 @@ The first thing you have to do is diagnose those messages.
 
 If your error message looks like this, **do not blindly report it to PaperMC** as it says:
 
-```plaintext
+```
 [00:00:00] [Paper Watchdog Thread/ERROR]: --- DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH - git-Paper-366 (MC: 1.19.3) ---
 [00:00:00] [Paper Watchdog Thread/ERROR]: The server has not responded for 10 seconds! Creating thread dump
 [00:00:00] [Paper Watchdog Thread/ERROR]: ------------------------------
@@ -60,7 +60,7 @@ Here are some examples of stack trace.
 <details>
   <summary>Example 01: Server attempted to load chunk saved with newer version of minecraft!</summary>
 
-```plaintext
+```
 [00:00:00 WARN]: java.lang.RuntimeException: Server attempted to load chunk saved with newer version of minecraft! 3218 > 3120
 ```
 

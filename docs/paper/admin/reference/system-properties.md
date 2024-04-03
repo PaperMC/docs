@@ -24,7 +24,7 @@ java -Dpaper.log-level=FINE -jar paper.jar
 
 :::info
 
-Some of the paper system properties contain a `.` character in their name. When using Windows Powershell, these will require wrapping in quotes.
+Some of the paper system properties contain a `.` character in their name. When using PowerShell, these will require wrapping in quotes.
 i.e. `"-Dpaper.log-level=FINE"`
 
 :::

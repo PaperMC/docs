@@ -9,7 +9,7 @@ The `BukkitScheduler` can be used to schedule your code to be run later or repea
 
 :::info[Folia]
 
-This guide is designed for Non-Folia Bukkit Servers. If you are using Folia, you should use its respective schedulers.
+This guide is designed for non-Folia Bukkit servers. If you are using Folia, you should use its respective schedulers.
 
 :::
 

@@ -37,7 +37,7 @@ their own data object that may only be accessed while ticking the region and
 by the thread ticking the region. Also, there are callbacks to merging
 or splitting regions so that the data object may be updated appropriately.
 
-The implementation of these rules is described in [Region Logic](/folia/reference/region-logic).
+The implementation of these rules is described in [Region Logic](region-logic.md).
 
 The end result of applying these rules is that a ticking region can ensure that
 only the current thread has write access to any data contained within the region,

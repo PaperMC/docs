@@ -12,7 +12,7 @@ your servers.
 
 This guide will explore the various options for securing your backend servers so only your proxy can
 connect to them. Note that this is an _exploration_ of options, aiming to review the various options
-and give you advantages and disadvantages to them so you can make an informed decision.
+and give you advantages and disadvantages to them, so you can make an informed decision.
 
 This list is not in any particular order, and almost all of these methods can be combined as needed.
 

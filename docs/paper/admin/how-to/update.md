@@ -20,7 +20,7 @@ replace any JAR in a running server, be that plugins, or Paper itself.
 
 :::tip
 
-If you are using a shared host, your host may provide a built-in way to backup. Consult their
+If you are using a shared host, your host may provide a built-in way to back up. Consult their
 documentation before continuing.
 
 :::

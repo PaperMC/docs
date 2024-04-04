@@ -62,7 +62,7 @@ when the ticking region finishes ticking.
 
 Both of the second invariant and third invariant combined allow 
 the regionizer to guarantee that a ticking region may create
-and then access chunk holders around it (i.e sync loading) without
+and then access chunk holders around it (i.e. sync loading) without
 the possibility that it steps on another region's toes.
 
 ### Fourth invariant
@@ -166,7 +166,7 @@ Additionally, `ThreadedRegion#tryMarkTicking` can be used by a caller
 that attempts to move a region from the "ready" state to the "ticking"
 state. It is vital to note that this function will return false if 
 the region is not in the "ready" state, as it is possible
-that even a region considered to be "ready" in the past (i.e scheduled
+that even a region considered to be "ready" in the past (i.e. scheduled
 to tick) may be unexpectedly marked as "transient." Thus, the caller
 needs to handle such cases. The caller that successfully marks 
 a region as ticking must mark it as non-ticking by using

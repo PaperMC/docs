@@ -215,4 +215,4 @@ This simply adds a potion effect until the entity dies.
 #### Using a delay of 0 ticks
 
 A delay of 0 ticks is treated as you wanting to run the task on the next tick. If you schedule a task with a delay of 0 ticks
-while the server is starting or before it is enabled, it will be executed before the server is enabled.
+while the server is starting, or before it is enabled, it will be executed before the server is enabled.

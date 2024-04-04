@@ -12,7 +12,7 @@ This guide will help you diagnose your server's problem before reporting it to P
 Before following this guide, stop your server first. Modifying server files while it is still running will corrupt them.  
 Only a full server shutdown can prevent this.
 
-Also, if you don't follow this guide carefully or make a mistake while following this guide, you might corrupt your server. It is highly advised to backup your server before following this guide.  
+Also, if you don't follow this guide carefully or make a mistake while following this guide, you might corrupt your server. It is highly advised to back up your server before following this guide.  
 It would be ideal to create a test server by copying your production server's file, but that's not always possible.
 
 :::
@@ -129,7 +129,7 @@ Paper can also be configured in a variety of ways. Check these documents for det
 
 ## Consult With Developer
 
-If your problem is related to a plugin you use and you still don't know how to solve it, you can try to reach out to the plugin's author.  
+If your problem is related to a plugin you use, and you still don't know how to solve it, you can try to reach out to the plugin's author.  
 Many plugins have a way to contact their author, like a GitHub issue tracker, Discord support guild, Gitter, IRC, etc.  
 
 If your problem isn't related to any plugin, you can come to PaperMC's Discord server and ask for help, or create a new issue on our GitHub issue tracker.

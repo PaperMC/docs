@@ -135,6 +135,6 @@ needed for the server to load a plugin are as follows:
    be a plugin. Note that some plugins distribute multiple JARs as `.zip` files. If this is the
    case, you have to extract them before installing the plugin.
 
-If both of these are true and you still see no logs please reach out for support on our
+If both of these are true, and you still see no logs, please reach out for support on our
 [Discord](https://discord.gg/papermc) server in the `#paper-help` channel. We will be happy to
 assist you.

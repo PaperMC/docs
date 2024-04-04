@@ -31,7 +31,7 @@ Paper retains full compatibility with all Spigot plugins, allowing a seamless tr
 :::info
 
 Your new Paper server will still use [`bukkit.yml`](../reference/configuration/bukkit-configuration.mdx)
-and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).  
+and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).
 New configuration options can be found in [`config/paper-global.yml`](../reference/configuration/global-configuration.mdx)
 and [`config/paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
 
@@ -66,7 +66,7 @@ Additionally, note that Paper does not support Fabric or Forge mods. You will ne
 replacements. Any hybrids that attempt to support both mods and plugins are fundamentally flawed and
 not recommended for use.
 
-## Migrating From Paper
+## Migrating from Paper
 
 ### To Vanilla
 

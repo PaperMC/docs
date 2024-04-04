@@ -47,7 +47,7 @@ secret `HANGAR_API_TOKEN` and paste the Hangar API token from the previous step 
 
 ![Action secrets](https://i.imgur.com/l11Bnx5.png)
 
-## Project Files
+## Project files
 
 The files below are simple examples that require little manual changes for you to use, but you can still adapt them
 depending on your needs. Take a look at the comments and especially the TODOs to figure out what you still need to

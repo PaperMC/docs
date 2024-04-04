@@ -5,7 +5,7 @@ description: Aikar's flags are a set of JVM flags designed to improve the perfor
 
 # Aikar's Flags
 
-## Recommended JVM Startup Flags
+## Recommended JVM startup flags
 
 Use these flags exactly, only changing `Xmx` and `Xms`. These flags work and scale accordingly to any
 size of memory.
@@ -14,13 +14,13 @@ For an automated script to generate these flags for you, see
 our [Script Generator](/misc/tools/start-script-gen).
 
 ```bash
-java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 
--XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch 
--XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M 
--XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 
--XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 
--XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem 
--XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs 
+java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200
+-XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch
+-XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M
+-XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4
+-XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90
+-XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem
+-XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs
 -Daikars.new.flags=true -jar paper.jar --nogui
 ```
 
@@ -32,13 +32,13 @@ Minecraft (and Java) needs additional memory on top of that `Xmx` parameter. It 
 **reduce your `Xmx` and `Xms` by about 1000-1500MB** to avoid running out of memory or `OOMKiller` killing
 your server. This also leaves room for the operating system to use memory too.
 
-Do you have 8GB of memory? Use 6500MB for safety.  
+Do you have 8GB of memory? Use 6500MB for safety.
 _But you may also ask your host if they will cover this overhead for you and
 give you 9500M instead. Some hosts will! Just ask._
 
 :::
 
-## Recommended Memory
+## Recommended memory
 
 **We recommend using at least 6-10GB**, no matter how few players! If you can't afford 10GB of
 memory, give as much as you can, but ensure you leave the operating system some memory too. G1GC
@@ -48,10 +48,10 @@ However, more memory does not mean better performance above a certain point. Eve
 a point of diminishing returns. Going out and getting 32GB of RAM for a server will only waste your
 money with minimal returns.
 
-## Java GC Logging
+## Java GC logging
 
-Are you having old gen issues with these flags? Add the following flags based on your java version
-to enable GC Logging:
+Are you having old gen issues with these flags? Add the following flags based on your Java version
+to enable GC logging:
 
 **Java 8-10**
 
@@ -69,7 +69,7 @@ to enable GC Logging:
 GC logging does not hurt your performance and can be left on at all times. The files will not take
 up much space (5MB)
 
-## Technical Explanation of the Flags
+## Technical explanation of the flags
 
 1.  **-Xms matching -Xmx - why:** You should never run your server with the case that `Xmx` can run
     the system completely out of memory. Your server should always be expected to use the entire
@@ -122,7 +122,7 @@ up much space (5MB)
     memory, most is reclaimed in the eden generation. However, transient data will overflow into
     survivor. Initially played with completely removing survivor and had decent results, but does
     result in transient data making its way to old which is not good. Max Tenuring 1 ensures that we
-    do not promote transient data to old generation, but anything that survives 2 passes of GC is 
+    do not promote transient data to old generation, but anything that survives 2 passes of GC is
     just going to be assumed as longer-lived.
 
     Doing this greatly reduces pause times in young collections as copying data up to 15 times in
@@ -174,7 +174,7 @@ up much space (5MB)
 15. **+PerfDisableSharedMem:** Causes GC to write to file system which can cause major latency if
     disk IO is high - see https://www.evanjones.ca/jvm-mmap-pause.html
 
-### Transparent Huge Pages
+### Transparent huge pages
 
 Controversial feature but may be usable if you can not configure your host for real HugeTLBFS. Try
 adding `-XX:+UseTransparentHugePages` but it's extremely important you also have `AlwaysPreTouch` set.

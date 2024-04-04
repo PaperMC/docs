@@ -37,7 +37,7 @@ Where a system property is stated as `unset`, setting it as `true` will work to 
 
 :::
 
-## List of System Properties
+## List of system properties
 
 #### paper.playerconnection.keepalive:
 
@@ -122,7 +122,7 @@ Where a system property is stated as `unset`, setting it as `true` will work to 
 #### debug.rewriteForIde:
 
 - **default**: `unset`
-- **description**: Removes the NMS revision from the stack trace to allow for easier debugging in IDEs. 
+- **description**: Removes the NMS revision from the stack trace to allow for easier debugging in IDEs.
 It also remaps plugin CB calls to remove the version information.
 
 #### convertLegacySigns:

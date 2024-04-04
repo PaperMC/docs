@@ -26,7 +26,7 @@ Constructors that are being replaced, if they aren't being removed, should be ma
 Certain API types are "mutable" which can lead to unexpected behavior within events. Mutable types like
 `Location` and `Vector` should therefore be cloned when returned from a "getter" in an event.
 
-### HandlerList
+### `HandlerList`
 For an event class or any subclass of it to be listened to, a `HandlerList` field must be present with an instance and static method
 to retrieve it. See the docs for <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>`Event`</VersionedJavaDocLink> for specifics. This field should be static and
 final and named `HANDLER_LIST`.

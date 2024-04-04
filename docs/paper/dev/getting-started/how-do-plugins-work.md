@@ -21,7 +21,7 @@ do not call your plugin's constructor directly. This will cause issues with your
 
 :::
 
-## Plugin Lifecycle
+## Plugin lifecycle
 
 Plugins are loaded and unloaded at runtime. When a plugin is loaded, it is initialized and enabled. When a plugin is
 unloaded, it is disabled and finalized.
@@ -48,7 +48,7 @@ When a plugin is disabled, its `onDisable` method is called. This method is used
 plugin has allocated. This method is called before all plugins are unloaded, and is meant for any cleanup that needs to
 be done before the plugin is unloaded. This may include saving data to disk or closing connections to databases.
 
-## Event Listeners
+## Event listeners
 
 Events are a way for plugins to listen to things that happen in the server and run code when they are fired. For
 example, the `PlayerJoinEvent` is fired when a player joins the server. This is a more performant way to run code when
@@ -102,7 +102,7 @@ plugin that adds a new block to the game might have a configuration file that st
 should be stored in the plugin's data folder, within the `plugins` folder. The server offers a YAML configuration API
 that can be used to read and write configuration files. See [here](/paper/dev/plugin-configurations) for more information.
 
-## Scheduling Tasks
+## Scheduling tasks
 
 Plugins can schedule tasks to run at a later time. This is useful for things like running code after a certain amount
 of time has passed. For example, a plugin might want to run code after 5 seconds. This can be done by scheduling a task

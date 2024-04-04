@@ -77,15 +77,15 @@ You should remove any dependency on the Paper API, as the dev bundle includes th
 
 :::
 
-## Gradle Tasks
+## Gradle tasks
 
-### reobfJar
+### `reobfJar`
 
 This task creates a plugin JAR that is re-obfuscated to Spigot's runtime mappings.
 This means it will work on standard Paper servers.
 
 The output will be inside the `build/libs` folder. The JAR whose filename includes `-dev`
-is mojang-mapped (not re-obfuscated) and will not work on most servers.
+is Mojang-mapped (not re-obfuscated) and will not work on most servers.
 
 :::info[Shadow]
 

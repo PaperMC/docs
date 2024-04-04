@@ -27,12 +27,12 @@ It organizes data into structured tables with predefined schemas, where each tab
 represent attributes of that entity. SQL (Structured Query Language) is used to interact with the database,
 allowing users to perform various operations like querying, inserting, updating, and deleting data.
 
-## File-based vs Standalone Databases
+## File-based vs standalone databases
 
 When working with databases, you have two options: file-based or standalone. File-based databases are stored in a file on the disk,
 and are usually used for smaller databases. Standalone databases operate in a separate process, and are usually used for larger data models.
 
-### File-based Databases
+### File-based databases
 
 File-based databases are all stored within a single file on the disk. They are usually used for smaller databases, as they are easier to set up and use.
 They can be created and handled from within your plugin code, but offer lesser performance than standalone databases.
@@ -41,7 +41,7 @@ Some examples of file-based databases are `SQLite` and `H2`.
 <details>
     <summary>Simple SQLite Setup</summary>
 
-## SQLite
+#### SQLite
 
 To work with SQLite, you will need a driver to connect / initialize the database.
 
@@ -51,7 +51,7 @@ The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it i
 
 :::
 
-### Usage
+##### Usage
 
 You must invoke a `Class.forName` on the driver to allow it to initialize and then create the connection to the database:
 
@@ -70,7 +70,7 @@ To learn more about the Java Database Connection, see [here](https://www.baeldun
 
 </details>
 
-### Standalone Databases
+### Standalone databases
 
 As previously mentioned, standalone databases operate in a separate process. They are harder to set up and use,
 but offer better performance than file-based databases. Some examples of standalone databases are `MySQL`, `MariaDB` and `PostgreSQL`.
@@ -86,7 +86,7 @@ down connections repeatedly, leading to improved application performance and bet
 <details>
     <summary>Simple MySQL Setup</summary>
 
-## MySQL
+#### MySQL
 
 Working with MySQL requires a few more steps, however it can offer performance benefits for larger databases with
 many tables and concurrent accesses. This is a short setup guide for using the [Hikari](https://github.com/brettwooldridge/HikariCP) library with MySQL.
@@ -99,7 +99,7 @@ This will require a running MySQL database to connect to.
 
 First, add the dependency to your project with the following dependency:
 
-### Maven
+##### Maven
 ```xml
 <dependency>
     <groupId>com.zaxxer</groupId>
@@ -109,7 +109,7 @@ First, add the dependency to your project with the following dependency:
 </dependency>
 ```
 
-### Gradle
+##### Gradle
 ```kotlin
 dependencies {
     implementation("com.zaxxer:HikariCP:4.0.3")
@@ -118,13 +118,13 @@ dependencies {
 
 :::caution
 
-The Hikari library is not bundled with Paper, so you will need to shade/relocate it. In Gradle, you will need to use the shadow task.
-Alternatively, you can use the Library loader with your paper plugin to load the library at runtime. See [here](../getting-started/paper-plugins.mdx#loaders)
+The Hikari library is not bundled with Paper, so you will need to shade/relocate it. In Gradle, you will need to use the [Shadow plugin](https://imperceptiblethoughts.com/shadow/).
+Alternatively, you can use the library loader with your Paper plugin to load the library at runtime. See [here](../getting-started/paper-plugins.mdx#loaders)
 for more information on how to use this.
 
 :::
 
-### Usage
+##### Usage
 
 Once you have the dependency added, we can work with the connector in our code:
 
@@ -154,7 +154,7 @@ public class DatabaseManager {
 
 </details>
 
-## SQL Injection and Prepared Statements in Java
+## Security
 
 ### SQL Injection
 
@@ -185,9 +185,9 @@ SELECT * FROM users WHERE username = '' OR 1=1; -- AND password = 'password'
 This will return all users in the database, regardless of the password they entered. This is a simple example,
 but it can be used to do much more malicious things, such as deleting the entire database or stealing user data.
 
-### Prepared Statements: Why They Matter
+### Prepared statements
 
-Using prepared statements in Java with PreparedStatements helps prevent SQL injection.
+Using prepared statements in Java with `PreparedStatement`s helps prevent SQL injection.
 They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection
 [here](https://www.baeldung.com/sql-injection).

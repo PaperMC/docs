@@ -18,7 +18,7 @@ it is imperative that plugins only be installed from trusted sources. Be careful
 
 :::
 
-## Finding Plugins
+## Finding plugins
 
 Before installing a plugin, you'll need to find what you want to install. The best place to find plugins is [Hangar](https://hangar.papermc.io), Paper's plugin repository, but you can also find many plugins
 on [SpigotMC](https://www.spigotmc.org/resources/),
@@ -35,7 +35,7 @@ mention Paper compatibility. It'll still work.
 
 :::
 
-## Installing Plugins
+## Installing plugins
 
 1. Once you've found the plugin you'd like to install, download it. Ensure the file you have
    downloaded ends in `.jar`. Some plugins also distribute as `.zip` files, in which case you will
@@ -61,7 +61,7 @@ The first step to troubleshooting installing plugins is to check the log of your
 server's most recent logs will be stored to the `logs/latest.log` file. You may need to scroll near
 the beginning of this file to see when plugins were loaded.
 
-#### Missing Dependencies
+#### Missing dependencies
 
 If you see something like this:
 
@@ -80,7 +80,7 @@ error, the important line to look at is:
 
 This is telling you that in order to load `MyAwesomePlugin`, you must first install `Vault`.
 
-#### Invalid plugin.yml
+#### Invalid `plugin.yml`
 
 If you see something closer to this:
 
@@ -116,7 +116,7 @@ version of the duplicate plugin, and restart your server.
 To prevent accidentally installing two versions of one plugin while updating, you can use
 the `update` folder as described in the [Update Guide](/paper/updating#step-2-update-plugins).
 
-#### Something Else
+#### Something else
 
 If you see an error, but it isn't similar to one of the above, attempt to read it yourself. While
 the full error may be large and scary, you likely only have to read the first one or two lines to

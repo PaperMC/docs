@@ -37,7 +37,7 @@ functioning backups is essential to every server, big or small. The main things 
 You should aim to have backups from multiple times, and keep them in a safe place. A common approach
 is to keep rolling backups, so you always have a certain number of backups from a set amount of time.
 
-## Step 2. Update Plugins
+## Step 2. Update plugins
 
 Just like it's important to update Paper, it's equally important to keep plugins up to date. You
 never know what plugin authors may be working on, be it bugfixes or new features.

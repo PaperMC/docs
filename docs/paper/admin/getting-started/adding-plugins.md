@@ -132,7 +132,7 @@ needed for the server to load a plugin are as follows:
    usually the same folder as the server JAR file. **Subdirectories of the `plugins` folder will not
    be checked.** All plugins must be in the root folder.
 2. The file ends in `.jar`. If your plugin does not end in `.jar`, what you have downloaded may not
-   be a plugin. Note that some plugins distribute multiple jars as `.zip` files. If this is the
+   be a plugin. Note that some plugins distribute multiple JARs as `.zip` files. If this is the
    case, you have to extract them before installing the plugin.
 
 If both of these are true and you still see no logs please reach out for support on our

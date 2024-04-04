@@ -37,7 +37,7 @@ const folderData: ExplorerNode[] = [
   {
     name: "plugins",
     type: "folder",
-    description: "You can place your plugin jars here.",
+    description: "You can place your plugin JARs here.",
   },
   {
     name: "<world>",

@@ -23,7 +23,7 @@ It's easy to migrate from CraftBukkit or Spigot to Paper. Follow the steps below
 1. Stop your server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads).
 3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
-4. Replace your existing jar file with your freshly downloaded Paper jar.
+4. Replace your existing JAR file with your freshly downloaded Paper JAR.
 5. Start your new server.
 
 Paper retains full compatibility with all Spigot plugins, allowing a seamless transition.
@@ -48,7 +48,7 @@ closely, as manual changes will be required.
 
 1. Stop your Vanilla server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
-   server jar with your freshly downloaded Paper jar.
+   server JAR with your freshly downloaded Paper JAR.
 3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
 4. Start your new Paper server.
 
@@ -98,7 +98,7 @@ case for you, replace `world` with your `level-name` for all steps below.
 3. Copy the `/world_nether/DIM-1` folder into the `/world` folder.
 4. Copy the `/world_the_end/DIM1` folder into the `/world` folder.
 5. Delete both the `/world_nether` and `/world_the_end` folders.
-6. Replace your Paper jar with a Vanilla server jar.
+6. Replace your Paper JAR with a Vanilla server JAR.
 7. Start your Vanilla server.
 
 ### To CraftBukkit or Spigot

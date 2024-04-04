@@ -18,7 +18,7 @@ check out this [example plugin](https://github.com/PaperMC/paperweight-test-plug
 :::
 
 ## Why this is useful
-The Paper server jars we provide on the downloads page through the API are **paperclip** jars. These
+The Paper server JARs we provide on the downloads page through the API are **paperclip** JARs. These
 use Spigot's mappings, which are essentially some type names, but fully obfuscated fields and methods.
 This can make it hard to work with in a development environment. This plugin lets you use fully deobfuscated
 types, names, and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
@@ -81,18 +81,18 @@ You should remove any dependency on the Paper API, as the dev bundle includes th
 
 ### reobfJar
 
-This task creates a plugin jar that is re-obfuscated to Spigot's runtime mappings.
+This task creates a plugin JAR that is re-obfuscated to Spigot's runtime mappings.
 This means it will work on standard Paper servers.
 
-The output will be inside the `build/libs` folder. The jar whose filename includes `-dev`
+The output will be inside the `build/libs` folder. The JAR whose filename includes `-dev`
 is mojang-mapped (not re-obfuscated) and will not work on most servers.
 
 :::info[Shadow]
 
 If you have the shadow Gradle plugin applied in your build script, **paperweight-userdev** will
-detect that and use the shaded jar as the input for the `reobfJar` task.
+detect that and use the shaded JAR as the input for the `reobfJar` task.
 
-The `-dev-all.jar` file in `build/libs` is the shaded, but not re-obfuscated jar.
+The `-dev-all.jar` file in `build/libs` is the shaded, but not re-obfuscated JAR.
 
 :::
 

@@ -32,7 +32,7 @@ configuration.
 
 ## Getting A Proxy Jar
 
-Paper provides runnable proxy jars directly from our [downloads page](https://papermc.io/downloads#Waterfall).
+Paper provides runnable proxy JARs directly from our [downloads page](https://papermc.io/downloads#Waterfall).
 
 Click on the build number to download a file.
 
@@ -59,4 +59,4 @@ To configure your proxy, see the [configuration](configuration.mdx) page.
 ## Updating The Proxy
 
 To update the proxy, first stop it safely by executing the `end` command. Then replace the old proxy
-jar with a new one, and start the proxy. That's it.
+JAR with a new one, and start the proxy. That's it.

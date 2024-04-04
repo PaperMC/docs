@@ -9,9 +9,9 @@ Paper fixes many gameplay and technical issues within Minecraft. The most preval
 
 ## Vanilla Bug Fixes
 
-Paper fixes many vanilla bugs that were not intended by Mojang. These bugs are patched to fix behavior or prevent abuse and
+Paper fixes many Vanilla bugs that were not intended by Mojang. These bugs are patched to fix behavior or prevent abuse and
 instability on the server. Some of our fixes are configurable, as we understand that some servers may want to keep the
-vanilla behavior. You will find these configuration options in the [global configuration](/docs/paper/admin/reference/configuration/global-configuration.mdx)
+Vanilla behavior. You will find these configuration options in the [global configuration](/docs/paper/admin/reference/configuration/global-configuration.mdx)
 and the [world configuration](/docs/paper/admin/reference/configuration/world-configuration.mdx).
 
 ### What is intended behavior vs a bug?
@@ -23,7 +23,7 @@ check to see if it:
 2) Has an assigned priority to it
 
 If it meets these two criteria then we will accept changes to fix the bug, as it can take a long time for Mojang to fix
-them (sometimes years). If an issue gets declined by Mojang, we normally do not "fix" it as it is intended behaviour.
+them (sometimes years). If an issue gets declined by Mojang, we normally do not "fix" it as it is intended behavior.
 
 ## Duplication Bugs
 
@@ -49,7 +49,7 @@ unsupported-settings:
   allow-tripwire-disarming-exploits: true
 ```
 This is a [long term bug](https://bugs.mojang.com/browse/MC-129055) that has not yet been fixed by Mojang. We have
-fixed it in Paper, but we provide a config option to restore vanilla behaviour.
+fixed it in Paper, but we provide a config option to restore Vanilla behavior.
 
 ## Block Breaking
 

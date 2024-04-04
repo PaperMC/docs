@@ -30,7 +30,7 @@ In the future, `ItemStack` will be converted to an interface that allows develop
 *Note: Only applies to NMS usage, will not apply to API.*
 
 Avoid directly storing player (`ServerPlayer`) entity instances. Currently, the player instance is reused when switching
-worlds, however, in the future, this behavior will be reverted to match vanilla behavior. API entities (wrappers) will
+worlds, however, in the future, this behavior will be reverted to match Vanilla behavior. API entities (wrappers) will
 continue to function and will have their underlying instance replaced automatically.
 
 This is done to help reduce possible inconsistencies between world switching between Vanilla and Paper.

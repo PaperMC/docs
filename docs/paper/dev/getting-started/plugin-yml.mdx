@@ -5,11 +5,11 @@ description: A guide to Bukkit's plugin.yml file.
 
 # Plugin YML
 
-The plugin.yml file is the main configuration file for your plugin.
+The `plugin.yml` file is the main configuration file for your plugin.
 It contains information about your plugin, such as its name, version, and description.
 It also contains information about the plugin's dependencies, permissions, and commands.
 
-The plugin.yml file is located in the `resources` directory of your project.
+The `plugin.yml` file is located in the `resources` directory of your project.
 ```
 example-plugin
 ├── build.gradle.kts
@@ -115,11 +115,11 @@ The prefix of the plugin. This is what will be displayed in the log instead of t
 
 :::warning
 
-The use of this feature is *currently* against maven central's TOS. However, this feature is very likely to stay.
+The use of this feature is *currently* against Maven Central's TOS. However, this feature is very likely to stay.
 
 :::
 
-This is a list of libraries that your plugin depends on. These libraries will be downloaded from the Maven central repository and added to the classpath.
+This is a list of libraries that your plugin depends on. These libraries will be downloaded from the Maven Central repository and added to the classpath.
 This removes the need to shade and relocate the libraries.
 
 ```yaml
@@ -144,12 +144,13 @@ permissions :
 ```
 
 The description is the description of the permission node. This is what will be displayed in the permissions list.
-The default is the default value of the permission node. This can be `op`/`not op`, or `true`/`false`. This defaults to the value of `default-permission` if not specified. (Which defaults to `op` if not specified)
-Each permission node can have children. When set to `true` it will inherit the parent permission.
+The default is the default value of the permission node. This can be `op`/`not op` or `true`/`false`.
+This defaults to the value of `default-permission` if not specified, which in turn defaults to `op`.
+Each permission node can have children. When set to `true`, it will inherit the parent permission.
 
 ### default-permission
 
-The default value that permissions that don't have a `default` specified will have. This can be `op`/`not op`, or `true`/`false`.
+The default value that permissions that don't have a `default` specified will have. This can be `op`/`not op` or `true`/`false`.
 - `default-permission: true`
 
 ## Commands
@@ -165,22 +166,28 @@ commands:
         permission-message: "You do not have permission to use this command"
 ```
 
-- The __description__ is the description of the command. This gives a brief description of what the command does.
-- The __usage__ is the usage of the command. This is what will be displayed when the player uses `/help <command>`.
-- The __aliases__ are a list of aliases that the command can be used with. This is useful for shortening the command.
-- __permission__ is the permission node that the player needs to use the command. Note: Players will only see commands they have permission to use.
-- __permission-message__ is the message that will be displayed when the player does not have permission to use the command.
+- `description` is the description of the command. This gives a brief description of what the command does.
+- `usage` is the usage of the command. This is what will be displayed when the player uses `/help <command>`.
+- `aliases` are a list of aliases that the command can be used with. This is useful for shortening the command.
+- `permission` is the permission node that the player needs to use the command. Note: Players will only see commands they have permission to use.
+- `permission-message` is the message that will be displayed when the player does not have permission to use the command.
 
-## Dependencies:
+## Dependencies
 
 :::warning[Dependency Loops]
 
 If a plugin is specified as a dependency, it will be loaded before your plugin.
-Be careful as these can cause plugin load issues if cyclical dependencies appear. A Cyclical dependency can be illustrated as follows:
+Be careful as these can cause plugin load issues if cyclical dependencies appear. A cyclical dependency can be illustrated as follows:
 
-PluginA -> PluginB -> PluginA -> PluginB... etc.
+```mermaid
+graph LR;
+    PluginA-->PluginB;
+    PluginB-->PluginC;
+    PluginC-->PluginD;
+    PluginD-->PluginA;
+```
 
-Where PluginA and PluginB are plugins that depend on each other.
+Where `PluginA` and `PluginB` are plugins that depend on each other.
 
 :::
 

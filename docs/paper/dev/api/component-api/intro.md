@@ -6,7 +6,7 @@ title: Introduction
 
 :::note
 
-This documentation page applies to both the Paper and Velocity projects
+This documentation page applies to both the Paper and Velocity projects.
 
 :::
 
@@ -30,9 +30,9 @@ representations in the legacy string format.
 
 ## Usage
 
-Representing text as Components is now the supported way of representing text for Paper and Velocity. They are used
+Representing text as components is now the supported way of representing text for Paper and Velocity. They are used
 for almost all aspects of text being displayed to clients. Text like item names, lore, boss bars, team prefixes and
-suffixes, custom names, and much more all support Components in respective APIs.
+suffixes, custom names, and much more all support components in respective APIs.
 [Mojang has stated](https://bugs.mojang.com/browse/MC-190605?focusedId=993040&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-993040)
 that client support for the legacy format with `§` will be removed in the future.
 
@@ -40,7 +40,7 @@ that client support for the legacy format with `§` will be removed in the futur
 :::tip
 
 In the Paper API, there are lots of deprecated methods and types that deal with this legacy format. This is to
-signal that a better alternative in Components is available and should be migrated to going forward.
+signal that a better alternative in components is available and should be migrated to going forward.
 
 :::
 
@@ -51,7 +51,7 @@ builders for all the types. These objects are immutable so when constructing mor
 recommended to use builders to avoid creating new Component instances with every change.
 
 ```java
-// This is a sub-optimimal construction of the
+// This is a sub-optimal construction of the
 // component as each change creates a new component
 final Component component = Component.text("Hello")
     .color(TextColor.color(0x13f832))
@@ -98,14 +98,14 @@ MiniMessage is a part of Adventure, and you can find its documentation on [Adven
 
 :::tip
 
-MiniMessage has a [WebViewer](https://webui.advntr.dev/) which is useful for constructing more complicated components and seeing the results in real time
+MiniMessage has a [web viewer](https://webui.advntr.dev/), which is useful for constructing more complicated components and seeing the results in real time.
 
 :::
 
 ## JSON Format
 
 Components can be serialized and deserialized from a standard JSON format. This format is used
-in vanilla in various commands which accept component arguments like `/tellraw`. Below is a simple example
+in Vanilla in various commands which accept component arguments like `/tellraw`. Below is a simple example
 of this format.
 
 ```json
@@ -142,12 +142,12 @@ There are online tools to make generating this format much easier like [JSON Tex
 
 ## Serializers
 
-Paper and Velocity come bundled with different serializers for converting between Components and other forms
+Paper and Velocity come bundled with different serializers for converting between `Component`s and other forms
 of serialized text.
 
 ### [GsonComponentSerializer](https://jd.advntr.dev/text-serializer-gson/latest)
 
-Converts between `Component` and JSON-formatted strings with convenience methods to directly deal with gson `JsonElement`.
+Converts between `Component` and JSON-formatted strings with convenience methods to directly deal with Gson's `JsonElement`.
 This conversion is lossless and is the preferred form of serialization
 for components that do not have to be edited by users regularly.
 
@@ -155,14 +155,13 @@ for components that do not have to be edited by users regularly.
 
 Converts between `Component` and a MiniMessage-formatted string. This conversion is lossless and is the preferred form of
 serialization for components that have to be edited by users. There is also extensive customization you can add to the
-serializer which is [documented here](https://docs.advntr.dev/minimessage/api.html#getting-started).
+serializer, which is [documented here](https://docs.advntr.dev/minimessage/api.html#getting-started).
 
 ### [PlainTextComponentSerializer](https://jd.advntr.dev/text-serializer-plain/latest)
 
 Serializes a `Component` into a plain text string. This is very lossy as all style information as well as most other
 types of components will lose information. There may be special handling for `TranslatableComponent`s to be serialized
-into a default language but generally this shouldn't be used except in certain circumstances like logging to a text file.
-
+into a default language, but generally this shouldn't be used except in certain circumstances, like logging to a text file.
 
 ### [LegacyComponentSerializer](https://jd.advntr.dev/text-serializer-legacy/latest)
 
@@ -179,7 +178,7 @@ A more useful use case is converting legacy text to MiniMessage format in a migr
 ```java
 final String legacyString = ChatColor.RED + "This is a legacy " + ChatColor.GOLD + "string";
 
-// this just runs the legacy string through two serializers to 
+// runs the legacy string through two serializers to convert legacy -> MiniMessage
 final String miniMessageString = MiniMessage.miniMessage().serialize(
     LegacyComponentSerializer.legacySection().deserialize(legacyString)
 );
@@ -187,6 +186,8 @@ final String miniMessageString = MiniMessage.miniMessage().serialize(
 
 :::note
 
-There are 2 built in legacy serializers, one dealing with `§` symbols and the other for
-`&` symbols. They have their own instances available with `LegacyComponentSerializer#legacySection()`
-and `LegacyComponentSerializer#legacyAmpersand()`
+There are 2 built-in legacy serializers, one dealing with `§` symbols and the other for
+`&` symbols. They have their own instances available through `LegacyComponentSerializer#legacySection()`
+and `LegacyComponentSerializer#legacyAmpersand()`.
+
+:::

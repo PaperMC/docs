@@ -9,11 +9,11 @@ players, groups of players, or even the entire server (including the console).
 
 ## Who is an Audience?
 
-All `CommandSender`'s are single audiences. This includes players, the console, and command blocks. `Server`, `Team` and 
+All `CommandSender`s are single audiences. This includes players, the console, and command blocks. `Server`, `Team` and
 `World` are all forwarding audiences. This means that they are made up of multiple audiences. For example, the server is
 made up of all online players and the console.
 
-This means that all the Audience methods are available on `CommandSender`'s, `Server`, `Team`, and `World`.
+This means that all the Audience methods are available on `CommandSender`, `Server`, `Team` and `World`.
 
 ## ForwardingAudience
 

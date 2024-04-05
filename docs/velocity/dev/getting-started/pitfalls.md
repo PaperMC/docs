@@ -18,7 +18,7 @@ have a valid plugin registration, but Velocity can't register the plugin until t
 constructed.
 
 To break this cycle, you should always wait for initialization, which is indicated when Velocity
-fires the ProxyInitializeEvent. We can do things on initialization by adding a listener for this
+fires the `ProxyInitializeEvent`. We can do things on initialization by adding a listener for this
 event, as shown below. Note that Velocity automatically registers your plugin main class as a
 listener.
 

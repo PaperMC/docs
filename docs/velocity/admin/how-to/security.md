@@ -16,7 +16,7 @@ and give you advantages and disadvantages to them, so you can make an informed d
 
 This list is not in any particular order, and almost all of these methods can be combined as needed.
 
-## Operating System Firewalls
+## Operating system firewalls
 
 When properly configured, using the firewall facilities provided by your server's operating system
 is a highly effective way to protect your servers. The Velocity project **strongly recommends the
@@ -40,7 +40,7 @@ Instructions for your operating system may vary. Solutions for major server OSes
 - Firewall configuration must be kept in sync with new servers and proxies
 - Not viable on a shared host
 
-## Velocity Modern Forwarding
+## Velocity modern forwarding
 
 If your server only supports Minecraft 1.13 and above, Velocity's modern forwarding can forward
 player information to your servers and provide a second layer of protection against someone trying
@@ -65,7 +65,7 @@ firewall with any Minecraft proxy setup.
 - Requires Paper 1.13 or above, or FabricProxy-Lite if you use Fabric
 - Relies on the forwarding secret being kept secret
 
-## Binding To `localhost`
+## Binding to `localhost`
 
 If you are hosting your proxy on the same physical computer as your other servers (and nobody else
 is hosting servers on them), binding your servers to `localhost` is a very simple way of protecting
@@ -89,9 +89,9 @@ Afterwards, open your `velocity.toml` file and ensure all the servers are pointi
   server)
 - Not viable on a shared host
 
-## Using an Encrypted Tunnel
+## Using an encrypted tunnel
 
-This is a variation on "Binding To `localhost`", but instead of hosting all your servers on a single
+This is a variation of binding to `localhost`, but instead of hosting all your servers on a single
 physical server, you will set up an encrypted tunnel between each of your servers, and make sure the
 server only listens for incoming connections from the tunnel. There are many different solutions,
 ranging from VPN solutions such as [WireGuard](https://www.wireguard.com),
@@ -109,7 +109,7 @@ each of these solutions.
 - Very complex setup
 - Impossible to use on a shared host
 
-## IP Whitelisting Plugins
+## IP whitelisting plugins
 
 As a last line of defense, you can choose to restrict logins to users on an IP whitelist using a
 plugin like [IPWhitelist](https://www.spigotmc.org/resources/ipwhitelist.61/).
@@ -122,7 +122,7 @@ plugin like [IPWhitelist](https://www.spigotmc.org/resources/ipwhitelist.61/).
 
 - Vulnerable to attack if the attacker can get a server on the same node as your proxy is on
 
-## Other Important Security Advice
+## Other important security advice
 
 This common-sense general advice goes without saying:
 

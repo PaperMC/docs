@@ -6,7 +6,7 @@ description: How to handle and send plugin messages on Velocity.
 # Plugin Messaging
 
 First introduced in [2012](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/),
-Plugin messaging is a way for Velocity plugins to communicate with clients and backend servers. 
+Plugin messaging is a way for Velocity plugins to communicate with clients and backend servers.
 
 Velocity manages connections in both directions, for both the client and backend server.
 This means Velocity plugins need to consider 4 main cases:
@@ -21,7 +21,8 @@ Additionally, BungeeCord channel compatibility is included, which may remove the
 
 ## Case 1: Receiving a plugin message from a player
 
-This is for when you need to handle or inspect the contents of a plugin message sent by a player. It will require registering with the ChannelRegistrar for the event to be fired. 
+This is for when you need to handle or inspect the contents of a plugin message sent by a player.
+It will require registering with the ChannelRegistrar for the event to be fired.
 
 An example use case could be logging messages from a mod that reports the enabled features.
 
@@ -43,7 +44,7 @@ public void onPluginMessageFromPlayer(PluginMessageEvent event) {
     if (event.getIdentifier() != IDENTIFIER) {
         return;
     }
-    
+
     ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
     // handle packet data
 }
@@ -53,7 +54,7 @@ public void onPluginMessageFromPlayer(PluginMessageEvent event) {
 
 This is for when you need to send a plugin message to a backend server.
 
-There are two methods to send a plugin message to the backend, depending on what you need to achieve
+There are two methods to send a plugin message to the backend, depending on what you need to achieve.
 
 :::warning
 
@@ -97,7 +98,7 @@ public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdent
 
 ## Case 3: Receiving a plugin message from a backend server
 
-This is for when you need to receive plugin messages from your backend server. It will require registering with the ChannelRegistrar for the event to be fired.
+This is for when you need to receive plugin messages from your backend server. It will require registering with the `ChannelRegistrar` for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.
 
@@ -124,6 +125,7 @@ public void onPluginMessageFromBackend(PluginMessageEvent event) {
     // handle packet data
 }
 ```
+
 ## Case 4: Sending a plugin message to a player
 
 This is for when you need to send a plugin message to a player.
@@ -141,12 +143,12 @@ public boolean sendPluginMessageToPlayer(Player player, ChannelIdentifier identi
 }
 ```
 
-## BungeeCord Channel Compatibility
+## BungeeCord channel compatibility
 
 This allows your backend servers to communicate with Velocity
-in a way compatible with BungeeCord
+in a way compatible with BungeeCord.
 
-By default, your Velocity server will respond to the `bungeecord:main` channel if `bungee-plugin-message-channel` is enabled in [the configuration](/velocity/configuration#advanced-section).
+By default, your Velocity server will respond to the `bungeecord:main` channel, if `bungee-plugin-message-channel` is enabled in [the configuration](/velocity/configuration#advanced-section).
 
 :::tip[The "bungeecord" specification]
 

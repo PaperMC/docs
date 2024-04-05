@@ -25,18 +25,18 @@ Waterfall focuses on three main areas:
 Waterfall requires **Java 8** or newer to run. The Paper team recommends you run on Java 11 or
 higher. Generally, LTS versions of Java are targeted, though you may have luck on newer versions.
 
-## Migrating From BungeeCord
+## Migrating from BungeeCord
 
 Waterfall is a drop in replacements for BungeeCord, you don't need to make any changes to your
 configuration.
 
-## Getting A Proxy Jar
+## Getting a proxy JAR
 
 Paper provides runnable proxy JARs directly from our [downloads page](https://papermc.io/downloads#Waterfall).
 
 Click on the build number to download a file.
 
-## Running The Proxy
+## Running the proxy
 
 To run the proxy, simply start it up like any other Java application.
 
@@ -56,7 +56,7 @@ The amount of memory can be set by changing the numbers in the `-Xms` and `-Xmx`
 
 To configure your proxy, see the [configuration](configuration.mdx) page.
 
-## Updating The Proxy
+## Updating the proxy
 
 To update the proxy, first stop it safely by executing the `end` command. Then replace the old proxy
 JAR with a new one, and start the proxy. That's it.

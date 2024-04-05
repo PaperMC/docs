@@ -78,16 +78,18 @@ your plugin won't require internal remapping when we make the switch.
 You can get the current Minecraft version to allow you to use the correct code for a specific version. This can be done
 with one of the following methods:
 
-```java
-// Example value: 1.20.2
+<VersionFormattedCode language={"java"}>
+```
+// Example value: %%_MAJ_MIN_MC_%%
 String minecraftVersion = Bukkit.getServer().getMinecraftVersion();
 
-// Example value: 1.20.2-R0.1-SNAPSHOT
+// Example value: %%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT
 String bukkitVersion = Bukkit.getServer().getBukkitVersion();
 
 // Example value for 1.20.1: 3465
 int dataVersion = Bukkit.getUnsafe().getDataVersion();
 ```
+</VersionFormattedCode>
 
 :::danger[Parsing the version]
 

@@ -431,6 +431,11 @@ unsupported-settings:
       possible, for example sand duplication. This
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
+  allow-tripwire-disarming-exploits:
+    default: "false"
+    description: >-
+      Whether the server should allow tripwire disarming exploits. This allows
+      the duplication of string.
 watchdog:
   early-warning-delay:
     default: "10000"

@@ -29,7 +29,7 @@ Paper plugins only support being loaded by Paper's Plugin Loader and may use new
 
 ### How do I add Paper plugins?
 
-Paper plugins are added the same as Bukkit plugins, therefore, you can follow [this guide](docs/paper/admin/getting-started/adding-plugins.md)
+Paper plugins are added the same as Bukkit plugins, therefore, you can follow [this guide](docs/paper/admin/getting-started/adding-plugins.md).
 
 ### Cyclic Plugin Loading
 

@@ -167,14 +167,15 @@ const YamlNodeWithDescription = ({
       id={createUrlHash(parentKey, name)}
       className={clsx("config-tagged-for-algolia", !root && "config-node-indent-size")}
     >
-      <div className={"description_word_wrap"}>
+      <div className={clsx("description_word_wrap", showDescription && "margin-bottom--sm")}>
         <button
           onClick={() => {
             setShowDescription(!showDescription);
           }}
           className={clsx(
-            "config-node with-value clean-btn button--link notranslate",
-            showDescription && "with-value-active"
+            "config-node clean-btn button--link notranslate",
+            showDescription && "with-value-active",
+            !showDescription && "with-value"
           )}
           translate={"no"}
         >

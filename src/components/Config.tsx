@@ -189,7 +189,7 @@ const YamlNodeWithDescription = ({
             separator
           )}
         </button>
-        <div className={clsx("indent-2", "margin-bottom--sm", !showDescription && "display--none")}>
+        <div className={clsx("indent-2 margin-bottom--sm", !showDescription && "display--none")}>
           <div className="outlined-box description-text color-offset-box">
             <ReactMarkdown className={style.reactMarkDown}>
               {parseDescriptionForVersioning(node.description.toString())}

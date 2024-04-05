@@ -200,3 +200,8 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `false`
 - **description**: Allows you to bypass the Java version check. See [here](/paper/faq#unsupported-java-detected-what-do-i-do) for more info.
+
+#### paper.useLegacyPluginLoading:
+
+- **default**: `false`
+- **description**: Allows cyclic plugin loading. See [here](paper-plugins.md#cyclic-plugin-loading) for more info.

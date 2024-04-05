@@ -40,7 +40,7 @@ If Paper detects a loop, your server will be shut down with an error.
 
 :::danger[Legacy]
 
-If your server **requires** this circular loading, you can enable this by adding the **-Dpaper.useLegacyPluginLoading=true** startup flag.
+If your server **requires** this circular loading, you can enable this by adding the [`-Dpaper.useLegacyPluginLoading=true`](system-properties.md#paperuselegacypluginloading) startup flag.
 Please note that this may not be supported in the future.
 
 :::

@@ -6,7 +6,8 @@ eol_message: We recommend you transition to [Velocity](https://papermc.io/softwa
 ---
 
 import React from 'react';
-import Config from '@site/src/components/Config';
+import ConfigDocBlock from '@site/src/components/config/ConfigDocBlock';
+import WaterfallConfigSpec from '!!raw-loader!@site/config-specs/waterfall/waterfall-config.yml';
 
 # Configuration
 
@@ -24,40 +25,4 @@ Click on a leaf node to view the description for that setting.
 
 :::
 
-<Config
-    data={`
-use_netty_dns_resolver:
-  default: 'true'
-  description: 'Sets whether Netty''s async DNS resolver is used for account authentication. '
-disable_modern_tab_limiter:
-  default: 'true'
-  description: 'Disables the tab completion limit for 1.13+ clients. '
-log_initial_handler_connections:
-  default: 'true'
-  description: 'Sets whether to log InitialHandler connections. '
-throttling:
-  default: '1000'
-  description: 'How often tab-complete packets can be sent in milliseconds. '
-game_version:
-  default: ''
-  description: 'The supported versions displayed to the client. Default is a comma
-    separated list of supported versions. For example 1.8.x, 1.9.x, 1.10.x '
-disable_tab_list_rewrite:
-  default: 'true'
-  description: 'This setting disables tablist rewriting, which may resolve issues
-    setting player profiles when Waterfall is in offline mode. '
-disable_entity_metadata_rewrite:
-  default: 'false'
-  description: 'This setting disables entity metadata rewriting in favor of sending
-    a join packet to the client. It offers a more robust solution for modded environments
-    but can cause plugins to break. '
-plugin_channel_name_limit:
-  default: '128'
-  description: 'The maximum channel identifier length. May be useful for certain broken
-    mods. '
-registered_plugin_channels_limit:
-  default: '128'
-  description: The maximum number of registered plugin channels for a connection.
-    Used by mods and some plugins. May be useful to fix certain broken modpacks.
-`}
-/>
+<ConfigDocBlock data={WaterfallConfigSpec} />

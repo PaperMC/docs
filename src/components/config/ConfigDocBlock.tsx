@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import style from "@site/src/css/markdown-styles.module.css";
 import yaml from "js-yaml";
-import VersionFormattedCode from "./VersionFormattedCode";
+import VersionFormattedCode from "../versioning/VersionFormattedCode";
 import Link from "@docusaurus/Link";
 import useBrokenLinks from "@docusaurus/core/lib/client/exports/useBrokenLinks";
 import Admonition from "@theme/Admonition";
@@ -277,12 +277,12 @@ const YamlTreeNode = ({
 };
 
 const renderYamlData = (
-  data,
-  parentKey,
+  data: unknown,
+  parentKey: string,
   root = false,
-  separator,
-  showAllDescriptions,
-  defaultValue
+  separator: string,
+  showAllDescriptions: boolean,
+  defaultValue: string
 ) => {
   const renderedNodes: JSX.Element[] = [];
 

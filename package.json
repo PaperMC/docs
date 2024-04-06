@@ -16,16 +16,16 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
-    "@docusaurus/core": "3.2.0",
-    "@docusaurus/plugin-content-docs": "3.2.0",
-    "@docusaurus/plugin-content-pages": "3.2.0",
-    "@docusaurus/plugin-debug": "3.2.0",
-    "@docusaurus/plugin-pwa": "3.2.0",
-    "@docusaurus/plugin-sitemap": "3.2.0",
-    "@docusaurus/theme-classic": "3.2.0",
-    "@docusaurus/theme-common": "3.2.0",
-    "@docusaurus/theme-mermaid": "3.2.0",
-    "@docusaurus/theme-search-algolia": "3.2.0",
+    "@docusaurus/core": "3.2.1",
+    "@docusaurus/plugin-content-docs": "3.2.1",
+    "@docusaurus/plugin-content-pages": "3.2.1",
+    "@docusaurus/plugin-debug": "3.2.1",
+    "@docusaurus/plugin-pwa": "3.2.1",
+    "@docusaurus/plugin-sitemap": "3.2.1",
+    "@docusaurus/theme-classic": "3.2.1",
+    "@docusaurus/theme-common": "3.2.1",
+    "@docusaurus/theme-mermaid": "3.2.1",
+    "@docusaurus/theme-search-algolia": "3.2.1",
     "@fontsource/jetbrains-mono": "4.5.12",
     "@gracefullight/docusaurus-plugin-vercel-analytics": "1.0.0",
     "@iconify/react": "4.1.1",
@@ -40,8 +40,8 @@
     "react-markdown": "8.0.7"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.2.0",
-    "@docusaurus/types": "3.2.0",
+    "@docusaurus/module-type-aliases": "3.2.1",
+    "@docusaurus/types": "3.2.1",
     "@fec/remark-a11y-emoji": "3.1.0",
     "@tsconfig/docusaurus": "1.0.7",
     "@types/is-ci": "3.0.0",
@@ -69,6 +69,6 @@
   },
   "packageManager": "yarn@3.5.0",
   "resolutions": {
-    "@docusaurus/plugin-content-docs@3.2.0": "patch:@docusaurus/plugin-content-docs@npm%3A3.2.0#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.0-7bedb7ec1c.patch"
+    "@docusaurus/plugin-content-docs@3.2.1": "patch:@docusaurus/plugin-content-docs@npm%3A3.2.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.1-7bedb7ec1c.patch"
   }
 }

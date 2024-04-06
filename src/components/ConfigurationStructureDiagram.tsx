@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "@site/src/css/configuration-explorer-layout.css";
 import { Icon } from "@iconify/react";
 import Link from "@docusaurus/Link";
+import clsx from "clsx";
 
 const folderIcon = "mdi:folder";
 const fileIcon = "mdi:file";
@@ -139,10 +140,12 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
         {level > 0 && <IndentationArrow level={level} />}
 
         <Link
-          className={`${"config-explorer-file-" + (isFolder ? "folder-" : "") + "node"}
-                   ${!hasUrl ? "config-explorer-file-node" : "config-explorer-file-node-with-link"}`}
+          className={clsx(
+            !isFolder && "config-explorer-file-node",
+            isFolder && "config-explorer-file-folder-node",
+            hasUrl && "config-explorer-file-node-with-link"
+          )}
           to={node.url}
-          style={{ cursor: hasUrl ? "pointer" : "default" }}
         >
           <span className={"config-node-contents-wrapper"}>
             <Icon
@@ -164,8 +167,10 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
         {hasDescription && (
           <div className={"config-explorer-popup-window-container"}>
             <div
-              className={"config-explorer-popup-window"}
-              style={{ display: popupNode === node ? "block" : "none" }}
+              className={clsx(
+                "config-explorer-popup-window",
+                popupNode !== node && "display--none"
+              )}
             >
               <strong>Description:</strong>
               <br />

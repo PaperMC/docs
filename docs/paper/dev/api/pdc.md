@@ -106,7 +106,7 @@ The PDC supports a wide range of data types, such as:
 
 :::info
 
-The boolean PDC type exists for convenience - you cannot make more complex types distill to a boolean.
+The `Boolean` PDC type exists for convenience - you cannot make more complex types distill to a `Boolean`.
 
 :::
 

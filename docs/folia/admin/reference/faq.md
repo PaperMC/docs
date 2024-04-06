@@ -50,7 +50,7 @@ will need to tune it based on usage of the threads that you end up seeing.
 
 ## What commands does Folia disable?
 Folia currently disables a handful of commands. These are them:
-- Boss bar commands
+- Bossbar commands
 - Clone commands
 - Data commands
 - Datapack

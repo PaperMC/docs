@@ -31,7 +31,7 @@ representations in the legacy string format.
 ## Usage
 
 Representing text as components is now the supported way of representing text for Paper and Velocity. They are used
-for almost all aspects of text being displayed to clients. Text like item names, lore, boss bars, team prefixes and
+for almost all aspects of text being displayed to clients. Text like item names, lore, bossbars, team prefixes and
 suffixes, custom names, and much more all support components in respective APIs.
 [Mojang has stated](https://bugs.mojang.com/browse/MC-190605?focusedId=993040&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-993040)
 that client support for the legacy format with `§` will be removed in the future.
@@ -59,7 +59,7 @@ final Component component = Component.text("Hello")
 
 /* This is an optimal use of the builder to create
    the same component. Also note that Adventure
-   Components are designed for use with static method imports 
+   Components are designed for use with static method imports
    to make code less verbose */
 final Component component = text()
     .content("Hello").color(color(0x13f832))
@@ -130,7 +130,7 @@ of this format.
 
 :::info[In-Depth Documentation]
 
-The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.wiki/w/Raw_JSON_text_format). 
+The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.wiki/w/Raw_JSON_text_format).
 
 :::
 

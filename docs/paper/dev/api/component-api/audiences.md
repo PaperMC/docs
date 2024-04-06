@@ -32,7 +32,7 @@ Audience audience = Audience.audience(Audience...);
 
 ## What do `Audience`s do?
 
-Audiences are used for interacting with players. They can be used to send messages, play sounds, show boss bars, and more.
+Audiences are used for interacting with players. They can be used to send messages, play sounds, show bossbars, and more.
 They are mostly used for sending other parts of the API to players. For example, you can send a `Component` to a player
 using `Audience#sendMessage(Component)`.
 

@@ -33,5 +33,5 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 
 ## Audience operations not supported
 
-Velocity only supports sending chat messages, action bar messages, titles, and boss bars through the
+Velocity only supports sending chat messages, action bar messages, titles, and bossbars through the
 Adventure API. No other operations are supported.

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
+import SoftwareVersionFetcher from "../../minecraft-versioning/SoftwareVersionFetcher";
 
 export default function VersionedJavaDocLink({
   target,

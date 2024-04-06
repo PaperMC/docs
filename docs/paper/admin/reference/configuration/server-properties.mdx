@@ -6,7 +6,7 @@ description: An explanation of Minecraft's server.properties file.
 # Server Properties
 
 import React from 'react';
-import Config from '@site/src/components/Config';
+import ConfigDocBlock from '@site/src/components/config/ConfigDocBlock';
 import ServerPropertiesSpec from '!!raw-loader!@site/config-specs/paper/server-properties.yml';
 
 :::info
@@ -17,5 +17,5 @@ Click on a property to learn more about it.
 
 :::
 
-<Config data={ServerPropertiesSpec} separator={"="} defaultValue={""}/>
+<ConfigDocBlock data={ServerPropertiesSpec} separator={"="} defaultValue={""}/>
 

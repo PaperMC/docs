@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
+import { useEffect, useState } from "react";
+import SoftwareVersionFetcher from "../../minecraft-versioning/SoftwareVersionFetcher";
 
 export default function SoftwareVersion({ versionType, project = "paper" }: SoftwareVersionProps) {
   const [fetched, setFetched] = useState<String>(null);

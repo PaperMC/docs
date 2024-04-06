@@ -6,7 +6,6 @@ import clsx from "clsx";
 
 const folderIcon = "mdi:folder";
 const fileIcon = "mdi:file";
-const infoIcon = "mdi:information-outline";
 
 interface ExplorerNode {
   name: string;

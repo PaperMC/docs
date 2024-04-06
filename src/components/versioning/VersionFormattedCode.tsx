@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
-import SoftwareVersionFetcher from "../minecraft-versioning/SoftwareVersionFetcher";
+import SoftwareVersionFetcher from "../../minecraft-versioning/SoftwareVersionFetcher";
 
 export default function VersionFormattedCode({
   language = "",

@@ -2,10 +2,11 @@ import React, { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 import style from "@site/src/css/markdown-styles.module.css";
 import yaml from "js-yaml";
-import VersionFormattedCode from "./VersionFormattedCode";
+import VersionFormattedCode from "../versioning/VersionFormattedCode";
 import Link from "@docusaurus/Link";
 import useBrokenLinks from "@docusaurus/core/lib/client/exports/useBrokenLinks";
 import Admonition from "@theme/Admonition";
+import clsx from "clsx";
 
 const INDENT_SIZE = 30;
 
@@ -163,16 +164,19 @@ const YamlNodeWithDescription = ({
 
   return (
     <div
-      style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }}
       id={createUrlHash(parentKey, name)}
-      className={"config-tagged-for-algolia"}
+      className={clsx("config-tagged-for-algolia", !root && "config-node-indent-size")}
     >
-      <div className={`description_word_wrap`} style={{ marginBottom: showDescription ? 10 : 0 }}>
+      <div className={"description_word_wrap"}>
         <button
           onClick={() => {
             setShowDescription(!showDescription);
           }}
-          className={`config-node with-value${showDescription ? "-active" : ""} clean-btn button--link notranslate`}
+          className={clsx(
+            "config-node clean-btn button--link notranslate",
+            showDescription && "with-value-active",
+            !showDescription && "with-value"
+          )}
           translate={"no"}
         >
           {parseItalics(name)}
@@ -185,10 +189,7 @@ const YamlNodeWithDescription = ({
             separator
           )}
         </button>
-        <div
-          className="indent-2"
-          style={{ marginBottom: 10, display: !showDescription ? "none" : "" }}
-        >
+        <div className={clsx("indent-2 margin-bottom--sm", !showDescription && "display--none")}>
           <div className="outlined-box description-text color-offset-box">
             <ReactMarkdown className={style.reactMarkDown}>
               {parseDescriptionForVersioning(node.description.toString())}
@@ -245,15 +246,10 @@ const YamlTreeNode = ({
   return (
     <div
       key={name}
-      className={`highlight-config-node`}
-      style={{ paddingLeft: `${root ? 0 : INDENT_SIZE}px` }}
+      className={clsx("highlight-config-node", !root && "config-node-indent-size")}
       id={hash}
     >
-      <div
-        className={`config-auxiliary-node notranslate`}
-        style={{ display: "inline-flex" }}
-        translate={"no"}
-      >
+      <div className={"config-auxiliary-node notranslate"} translate={"no"}>
         {parseItalics(name)}
         {removeTrailingSpaces(separator)}
       </div>
@@ -265,11 +261,7 @@ const YamlTreeNode = ({
       />
       {warning && (
         <div className={`inline-admonition-warning`}>
-          <Admonition
-            type={"danger"}
-            title={warning.title}
-            children={<p style={{ whiteSpace: "initial" }}>{warning.message}</p>}
-          />
+          <Admonition type={"danger"} title={warning.title} children={<p>{warning.message}</p>} />
         </div>
       )}
       {renderYamlData(
@@ -285,12 +277,12 @@ const YamlTreeNode = ({
 };
 
 const renderYamlData = (
-  data,
-  parentKey,
+  data: unknown,
+  parentKey: string,
   root = false,
-  separator,
-  showAllDescriptions,
-  defaultValue
+  separator: string,
+  showAllDescriptions: boolean,
+  defaultValue: string
 ) => {
   const renderedNodes: JSX.Element[] = [];
 

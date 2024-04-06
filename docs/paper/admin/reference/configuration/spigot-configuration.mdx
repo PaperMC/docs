@@ -6,7 +6,7 @@ description: An explanation of Spigot's configuration file.
 # Spigot Configuration
 
 import React from 'react';
-import Config from '@site/src/components/Config';
+import ConfigDocBlock from '@site/src/components/config/ConfigDocBlock';
 import SpigotConfigSpec from '!!raw-loader!@site/config-specs/paper/spigot.yml';
 
 :::info
@@ -23,4 +23,4 @@ To override a per-world option, create a new key under `world-settings` with the
 
 :::
 
-<Config data={SpigotConfigSpec}/>
+<ConfigDocBlock data={SpigotConfigSpec}/>

@@ -152,6 +152,6 @@ By default, your Velocity server will respond to the `bungeecord:main` channel, 
 
 :::tip[The "bungeecord" specification]
 
-See [here](/paper/dev/plugin-messaging#bungeecord-plugin-message-types) for a list of all the built-in plugin messages that BungeeCord / Velocity supports.
+See [here](/paper/dev/plugin-messaging#plugin-message-types) for a list of all the built-in plugin messages that BungeeCord / Velocity supports.
 
 :::

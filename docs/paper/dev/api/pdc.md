@@ -159,13 +159,13 @@ container.set(key, new UUIDDataType(), uuid);
 
 ## Storing on different objects
 
-- **Chunk**
+- ##### `Chunk`
     - `Chunk#getPersistentDataContainer()`
-- **World**
+- ##### `World`
     - `World#getPersistentDataContainer()`
-- **Entity**
+- ##### `Entity`
     - `Entity#getPersistentDataContainer()`
-- **TileState**
+- ##### `TileState`
     - This is slightly more complicated, as you need to cast the block to something that extends `TileState`.
       This does not work for all blocks, only those that have a tile entity.
       ```java
@@ -175,7 +175,7 @@ container.set(key, new UUIDDataType(), uuid);
             chest.update();
         }
       ```
-- **Structure**
+- ##### `Structure`
     - `Structure#getPersistentDataContainer()`
-- **ItemMeta**
+- ##### `ItemMeta`
     - `ItemMeta#getPersistentDataContainer()`

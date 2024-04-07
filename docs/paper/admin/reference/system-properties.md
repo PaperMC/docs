@@ -24,7 +24,7 @@ java -Dpaper.log-level=FINE -jar paper.jar
 
 :::info
 
-Some of the paper system properties contain a `.` character in their name. When using PowerShell, these will require wrapping in quotes.
+Some of Paper's system properties contain a `.` character in their name. When using PowerShell, these will require wrapping in quotes.
 i.e. `"-Dpaper.log-level=FINE"`
 
 :::
@@ -164,7 +164,7 @@ It also remaps plugin CB calls to remove the version information.
 #### io.papermc.paper.suppress.sout.nags:
 
 - **default**: `unset`
-- **description**: Suppresses the nag message about using System.out/System.err in a plugin.
+- **description**: Suppresses the nag message about using `System.out`/`System.err` in a plugin.
 
 #### paper.strict-thread-checks:
 
@@ -174,7 +174,7 @@ It also remaps plugin CB calls to remove the version information.
 #### Paper.skipServerPropertiesComments:
 
 - **default**: `unset`
-- **description**: Skips the comments in the server.properties file.
+- **description**: Skips the comments in the `server.properties` file.
 
 #### Paper.debugInvalidSkullProfiles:
 

@@ -48,7 +48,7 @@ Almost every problem you encounter will print error message lines, which are cal
 
 The stack trace starts with the error message, exception type, and exception message.
 
-Both error messages and exception messages were put there by the developer of either your plugin or paper server. These messages tell you what problem your server experienced.
+Both error messages and exception messages were put there by the developer of either your plugin or Paper. These messages tell you what problem your server experienced.
 An exception type like `java.lang.RuntimeException` tells you the type of the exception. This will help the developer (and you) understand the type of problem.
 
 Many lines beginning with `at` may appear beneath the exception message. These are the body of the stack trace. These lines tell you where the problem starts. The top line of the body of the stack trace will tell you exactly where the problem occurred and, if possible, display where it came from.
@@ -82,7 +82,7 @@ You can disable all of your plugins by renaming the `plugins` directory to somet
 After that, try to run your server.
 
 If the problem is resolved after removing the plugins, you know that it was a plugin that caused the issue.
-If you still experience problems, head to [Paper Documentation](#paper-documentation). Maybe your paper server is misconfigured, and that is creating issues.
+If you still experience problems, head to [Paper Documentation](#paper-documentation). Maybe your server is misconfigured, and that is creating issues.
 
 ### Binary search
 

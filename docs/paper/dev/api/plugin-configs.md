@@ -12,7 +12,7 @@ Configuration files allow users to change certain behavior and functionality of 
 By default, plugins use a YAML configuration format (`.yml` file). Other formats, such as JSON or TOML, can be used;
 however, these are not natively supported by Paper, so they will not be covered in this guide.
 
-YAML works by having a tree-like `key: value` pair structure, as you would have seen in your [plugin.yml](../getting-started/plugin-yml.mdx).
+YAML works by having a tree-like `key: value` pair structure, as you would have seen in your [`plugin.yml`](../getting-started/plugin-yml.mdx).
 An example would look like this:
 
 ```yaml
@@ -25,7 +25,7 @@ When accessing indented values, you separate the levels with dots (`.`). For exa
 
 ## Creating a `config.yml`
 
-By placing a `config.yml` file inside your plugin, you can specify the default values for certain settings. 
+By placing a `config.yml` file inside your plugin, you can specify the default values for certain settings.
 This will be located in the `resources` directory:
 ```
 example-plugin
@@ -42,7 +42,7 @@ Here is an example of how you would do this in your plugin's `onEnable`:
 
 ```java
 public class TestPlugin extends JavaPlugin {
-    
+
     @Override
     public void onEnable() {
         saveResource("config.yml", /* replace */ false);
@@ -53,13 +53,13 @@ public class TestPlugin extends JavaPlugin {
 
         // getConfig()...
     }
-    
+
 }
 ```
 
 :::info
 
-The boolean `replace` parameter specifies whether it should replace an existing file if one exists. 
+The boolean `replace` parameter specifies whether it should replace an existing file if one exists.
 If set to true, the configuration will be overwritten on every call.
 
 :::
@@ -68,9 +68,9 @@ If set to true, the configuration will be overwritten on every call.
 
 The `FileConfiguration` of the plugin can be fetched with `JavaPlugin#getConfig` once it has been saved. This will allow
 data to be fetched and set with the respective `#get...(key)` and `set(key, value)`. By default, most basic data types are supported
-by YAML. These can be fetched simply with `#getString` or `#getBoolean`. 
+by YAML. These can be fetched simply with `#getString` or `#getBoolean`.
 
-However, some more complex Bukkit data types are also supported. A few of these include `ItemStack`, `Location` and `Vector`s. 
+However, some more complex Bukkit data types are also supported. A few of these include `ItemStack`, `Location` and `Vector`s.
 Here is an example of loading a value from the config for teleporting a player:
 
 :::info[Saving Configs]
@@ -95,25 +95,25 @@ public class TeleportOptions implements ConfigurationSerializable {
     private int chunkX;
     private int chunkZ;
     private String name;
-    
+
     public TeleportOptions(int chunkX, int chunkZ, String name) {
         // Set the values
     }
-    
+
     public Map<String, Object> serialize() {
         Map<String, Object> data = new HashMap<>();
 
         data.put("chunk-x", this.chunkX);
         data.put("chunk-z", this.chunkZ);
         data.put("name", this.name);
-        
+
         return data;
     }
-    
+
     public static TeleportOptions deserialize(Map<String, Object> args) {
         return new TeleportOptions(
-                (int) args.get("chunk-x"), 
-                (int) args.get("chunk-z"), 
+                (int) args.get("chunk-x"),
+                (int) args.get("chunk-z"),
                 (String) args.get("name")
         );
     }
@@ -133,7 +133,7 @@ you will not be able to load nor save your custom classes.
 
 ## Custom configuration files
 
-It is highly likely that you will have many different things to configure in your plugin. If you choose to split these 
+It is highly likely that you will have many different things to configure in your plugin. If you choose to split these
 across multiple different files, you can still use the Bukkit `FileConfiguration` API to read the data from these.
 It is as simple as:
 
@@ -150,7 +150,7 @@ This example reads the `items.yml` file from your plugin's data directory. This 
 
 Loading and saving files on the main thread will slow your server. `load` and `save` operations should be executed asynchronously.
 
-::: 
+:::
 
 ## Configurate
 

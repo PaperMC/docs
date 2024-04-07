@@ -3,6 +3,10 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 const velocity: SidebarsConfig = {
   primary: [
     "README",
+    "admin/README",
+    "dev/README",
+  ],
+  administration: [
     {
       type: "category",
       label: "Administration",
@@ -55,6 +59,8 @@ const velocity: SidebarsConfig = {
         },
       ],
     },
+  ],
+  development: [
     {
       type: "category",
       label: "Development",

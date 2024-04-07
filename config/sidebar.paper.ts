@@ -3,6 +3,11 @@ import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 const paper: SidebarsConfig = {
   primary: [
     "README",
+    "admin/README",
+    "dev/README",
+    "contributing/README",
+  ],
+  administration: [
     {
       type: "category",
       label: "Administration",
@@ -79,6 +84,8 @@ const paper: SidebarsConfig = {
         },
       ],
     },
+  ],
+  development: [
     {
       type: "category",
       label: "Development",
@@ -160,6 +167,8 @@ const paper: SidebarsConfig = {
         },
       ],
     },
+  ],
+  contributing: [
     {
       type: "category",
       label: "Contributing",

@@ -102,7 +102,7 @@ Permission: `bukkit.command.paper.dumplisteners` <br>
 Usage: `/paper dumplisteners tofile|<className>`
 
 :::tip
-The command is useful for debugging when some of your plugins is a suspect for canceling an event.
+The command is useful for debugging when some of your plugins is a suspect for cancelling an event.
 :::
 
 When executed dumps information about plugin listeners. It takes a name of the listener and dumps information about what plugins that  are listening to that event.

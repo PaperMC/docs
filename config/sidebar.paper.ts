@@ -64,6 +64,7 @@ const paper: SidebarsConfig = {
                 "admin/reference/configuration/bukkit-commands-configuration",
               ],
             },
+            "admin/reference/built-in-commands",
             "admin/reference/system-properties",
             "admin/reference/paper-plugins",
           ],

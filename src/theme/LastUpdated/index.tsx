@@ -3,6 +3,7 @@ import Translate from "@docusaurus/Translate";
 import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
 import type { Props } from "@theme/LastUpdated";
+import Link from "@docusaurus/Link";
 
 function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.Element {
   const atDate = new Date(lastUpdatedAt);
@@ -41,7 +42,12 @@ function LastUpdatedByUser({ lastUpdatedBy }: { lastUpdatedBy: string }): JSX.El
       id="theme.lastUpdated.byUser"
       description="The words used to describe by who the page has been last updated"
       values={{
-        user: <b>{lastUpdatedBy}</b>,
+        // user: <b>{lastUpdatedBy}</b>,
+        user: (
+          <b>
+            <Link to={"https://github.com/" + lastUpdatedBy}>{lastUpdatedBy}</Link>
+          </b>
+        ),
       }}
     >
       {" by {user}"}
@@ -55,7 +61,13 @@ function LastCommitIn({ lastCommitIn }: { lastCommitIn: string }): JSX.Element {
       id="theme.lastUpdated.inCommit"
       description="The words used to describe in what commit was used"
       values={{
-        commit: <b>{lastCommitIn}</b>,
+        commit: (
+          <b>
+            <Link to={"https://github.com/PaperMC/docs/commit/" + lastCommitIn}>
+              {lastCommitIn}
+            </Link>
+          </b>
+        ),
       }}
     >
       {" in {commit}"}

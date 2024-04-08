@@ -6,6 +6,7 @@ import footer from "./config/footer.config";
 import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
+import { getFileCommitHash } from "./src/util/gitUtils";
 
 const preview = env.VERCEL_ENV === "preview";
 
@@ -80,6 +81,18 @@ const config: Config = {
       headingIds: false,
     },
     format: "detect",
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      const author = await getFileCommitHash(params.filePath);
+
+      return {
+        ...result,
+        frontMatter: {
+          ...result.frontMatter,
+          author,
+        },
+      };
+    },
   },
 
   themes: [

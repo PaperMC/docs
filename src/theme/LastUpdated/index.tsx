@@ -4,13 +4,9 @@ import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
 import type { Props } from "@theme/LastUpdated";
 import Link from "@docusaurus/Link";
-import { Octokit } from "@octokit/rest";
+import { GitHubCommit } from "@site/src/util/GitHubStuff";
 
 const usernameCache: Map<string, string> = new Map();
-const octokit = new Octokit({
-  userAgent: "PaperMC-Docs",
-  // auth: "GITHUB_TOKEN",
-});
 
 function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.Element {
   const atDate = new Date(lastUpdatedAt);
@@ -61,17 +57,23 @@ function LastUpdatedByUser({
             `[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`
           );
           if (usernameFromCache === undefined) {
-            const commitResponse = await octokit.repos.getCommit({
-              owner: "PaperMC",
-              repo: "docs",
-              ref: commit,
+            // probably need to handle rate limit or sum
+            const response1 = await fetch(`https://api.github.com/repos/PaperMC/docs/commits/${commit}`, {
+              headers: {
+                Accept: "application/vnd.github.v3+json",
+                // `X-GitHub-Api-Version`: "2022-11-28", // ???
+              },
             });
 
-            usernameCache.set(commit, commitResponse.data.author.login);
+            const data = await response1.json() as GitHubCommit;
+
+
+            usernameCache.set(commit, data.author.login);
+            // usernameCache.set(commit, commitResponse.data.author.login);
             console.log(
-              `[${usernameCache.size}] ${commit} -> ${username} (${commitResponse.headers["x-ratelimit-remaining"]}/${commitResponse.headers["x-ratelimit-limit"]})`
+              `[${usernameCache.size}] ${commit} -> ${username} (${response1.headers["x-ratelimit-remaining"]}/${response1.headers["x-ratelimit-limit"]})`
             );
-            setUsername(commitResponse.data.author.login);
+            setUsername(data.author.login);
           }
         } catch (error) {
           // silent

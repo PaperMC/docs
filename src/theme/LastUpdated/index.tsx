@@ -53,35 +53,35 @@ function LastUpdatedByUser({
   let usernameFromCache = usernameCache.get(commit);
   const [username, setUsername] = useState(usernameFromCache ?? "ghost");
 
-  useEffect(() => {
-    const run = async () => {
-      try {
-        console.log(
-          `[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`
-        );
-        if (usernameFromCache === undefined) {
-          const commitResponse = await octokit.repos.getCommit({
-            owner: "PaperMC",
-            repo: "docs",
-            ref: commit,
-          });
-
-          usernameCache.set(commit, commitResponse.data.author.login);
+  if (process.env.NODE_ENV !== "development") {
+    useEffect(() => {
+      const run = async () => {
+        try {
           console.log(
-            `[${usernameCache.size}] ${commit} -> ${username} (${commitResponse.headers["x-ratelimit-remaining"]}/${commitResponse.headers["x-ratelimit-limit"]})`
+            `[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`
           );
-          setUsername(commitResponse.data.author.login);
-        }
-      } catch (error) {
-        // silent
-        console.error(error);
-      }
-    };
+          if (usernameFromCache === undefined) {
+            const commitResponse = await octokit.repos.getCommit({
+              owner: "PaperMC",
+              repo: "docs",
+              ref: commit,
+            });
 
-    if (process.env.NODE_ENV !== "development") {
+            usernameCache.set(commit, commitResponse.data.author.login);
+            console.log(
+              `[${usernameCache.size}] ${commit} -> ${username} (${commitResponse.headers["x-ratelimit-remaining"]}/${commitResponse.headers["x-ratelimit-limit"]})`
+            );
+            setUsername(commitResponse.data.author.login);
+          }
+        } catch (error) {
+          // silent
+          console.error(error);
+        }
+      };
+
       run();
-    }
-  }, []);
+    }, []);
+  }
 
   return (
     <Translate

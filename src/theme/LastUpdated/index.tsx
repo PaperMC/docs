@@ -4,8 +4,18 @@ import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
 import type { Props } from "@theme/LastUpdated";
 import Link from "@docusaurus/Link";
-import { GitHubCommit } from "@site/src/util/GitHubStuff";
+import { Endpoints } from "@octokit/types";
+import axios from "axios";
 
+type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
+
+const axiosInstance = axios.create({
+  baseURL: "https://api.github.com/repos/PaperMC/docs/commits/",
+  headers: {
+    Accept: "application/vnd.github.v3+json",
+    "User-Agent": "PaperMC-Docs",
+  },
+});
 const usernameCache: Map<string, string> = new Map();
 
 function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.Element {
@@ -57,24 +67,13 @@ function LastUpdatedByUser({
             `[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`
           );
           if (usernameFromCache === undefined) {
-            // probably need to handle rate limit or sum
-            const response1 = await fetch(
-              `https://api.github.com/repos/PaperMC/docs/commits/${commit}`,
-              {
-                headers: {
-                  Accept: "application/vnd.github.v3+json",
-                  // `X-GitHub-Api-Version`: "2022-11-28", // ???
-                },
-              }
-            );
+            const response = (await axiosInstance.get(commit)) as endpoint["response"];
 
-            const data = (await response1.json()) as GitHubCommit;
-
-            usernameCache.set(commit, data.author.login);
+            usernameCache.set(commit, response.data.author.login);
             console.log(
-              `[${usernameCache.size}] ${commit} -> ${username} (${response1.headers["x-ratelimit-remaining"]}/${response1.headers["x-ratelimit-limit"]})`
+              `[${usernameCache.size}] ${commit} -> ${response.data.author.login} (${response.headers["x-ratelimit-remaining"]}/${response.headers["x-ratelimit-limit"]})`
             );
-            setUsername(data.author.login);
+            setUsername(response.data.author.login);
           }
         } catch (error) {
           // silent

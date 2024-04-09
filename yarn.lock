@@ -4746,6 +4746,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/openapi-types@npm:^22.0.1":
+  version: 22.0.1
+  resolution: "@octokit/openapi-types@npm:22.0.1"
+  checksum: f361764bf965081bb94facc33a171a98c4d94285e5c218ca6355a5aea35d1ec732ab7fa7ac941034ca249601d768cfa5205bcbef0980c0c6faa2b842efeed2ec
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:13.4.0":
+  version: 13.4.0
+  resolution: "@octokit/types@npm:13.4.0"
+  dependencies:
+    "@octokit/openapi-types": ^22.0.1
+  checksum: 71d1e61e82ca10cb7f9e79d15158b7a9e84a6fe815fa865e7adbafee225963a18919316d7f0d7c96bc9e6751cf0f1663da056da468e8d5cebcbdaf44316cafba
+  languageName: node
+  linkType: hard
+
 "@pnpm/config.env-replace@npm:^1.1.0":
   version: 1.1.0
   resolution: "@pnpm/config.env-replace@npm:1.1.0"
@@ -8108,6 +8124,7 @@ __metadata:
     "@gracefullight/docusaurus-plugin-vercel-analytics": 1.0.0
     "@iconify/react": 4.1.1
     "@mdx-js/react": 3.0.0
+    "@octokit/types": 13.4.0
     "@tsconfig/docusaurus": 1.0.7
     "@types/is-ci": 3.0.0
     "@types/js-yaml": ^4

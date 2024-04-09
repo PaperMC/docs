@@ -7,13 +7,6 @@ import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
 import { getFileCommitHash } from "./src/util/gitUtils";
-import { Octokit } from "@octokit/rest";
-
-const usernameCache: Map<string, string> = new Map();
-const octokit = new Octokit({
-  userAgent: "PaperMC-Docs",
-  // auth: "GITHUB_TOKEN",
-});
 
 const preview = env.VERCEL_ENV === "preview";
 
@@ -92,27 +85,11 @@ const config: Config = {
       const result = await params.defaultParseFrontMatter(params);
       let author = {
         commit: "1b3d5f7",
-        username: "ghost",
       };
       if (process.env.NODE_ENV !== "development") {
         const { commit } = await getFileCommitHash(params.filePath);
-        let username = usernameCache.get(commit);
-        // console.log(`[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`);
-        if (username == undefined) {
-          const commitResponse = await octokit.repos.getCommit({
-            owner: "PaperMC",
-            repo: "docs",
-            ref: commit,
-          });
-
-          username = commitResponse.data.author.login;
-          usernameCache.set(commit, username);
-          // console.log(`[${usernameCache.size}] ${commit} -> ${username} (${commitResponse.headers["x-ratelimit-remaining"]}/${commitResponse.headers["x-ratelimit-limit"]})`);
-        }
-
         author = {
           commit: commit,
-          username: username,
         };
       }
 

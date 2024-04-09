@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Translate from "@docusaurus/Translate";
 import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
 import type { Props } from "@theme/LastUpdated";
 import Link from "@docusaurus/Link";
+import { Octokit } from "@octokit/rest";
+
+const usernameCache: Map<string, string> = new Map();
+const octokit = new Octokit({
+  userAgent: "PaperMC-Docs",
+  // auth: "GITHUB_TOKEN",
+});
 
 function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.Element {
   const atDate = new Date(lastUpdatedAt);
@@ -38,11 +45,44 @@ function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.El
 
 function LastUpdatedByUser({
   lastUpdatedBy,
-  username,
+  commit,
 }: {
   lastUpdatedBy: string;
-  username: string;
+  commit: string;
 }): JSX.Element {
+  let usernameFromCache = usernameCache.get(commit);
+  const [username, setUsername] = useState(usernameFromCache ?? "ghost");
+
+  useEffect(() => {
+    const run = async () => {
+      try {
+        console.log(
+          `[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`
+        );
+        if (usernameFromCache === undefined) {
+          const commitResponse = await octokit.repos.getCommit({
+            owner: "PaperMC",
+            repo: "docs",
+            ref: commit,
+          });
+
+          usernameCache.set(commit, commitResponse.data.author.login);
+          console.log(
+            `[${usernameCache.size}] ${commit} -> ${username} (${commitResponse.headers["x-ratelimit-remaining"]}/${commitResponse.headers["x-ratelimit-limit"]})`
+          );
+          setUsername(commitResponse.data.author.login);
+        }
+      } catch (error) {
+        // silent
+        console.error(error);
+      }
+    };
+
+    if (process.env.NODE_ENV !== "development") {
+      run();
+    }
+  }, []);
+
   return (
     <Translate
       id="theme.lastUpdated.byUser"
@@ -85,7 +125,6 @@ export default function LastUpdated({ lastUpdatedAt, lastUpdatedBy }: Props): JS
 
   const author = (doc.frontMatter as any).author as {
     commit: string;
-    username: string;
   };
 
   return (
@@ -96,7 +135,7 @@ export default function LastUpdated({ lastUpdatedAt, lastUpdatedBy }: Props): JS
         values={{
           atDate: lastUpdatedAt ? <LastUpdatedAtDate lastUpdatedAt={lastUpdatedAt} /> : "",
           byUser: lastUpdatedBy ? (
-            <LastUpdatedByUser lastUpdatedBy={lastUpdatedBy} username={author.username} />
+            <LastUpdatedByUser lastUpdatedBy={lastUpdatedBy} commit={author.commit} />
           ) : (
             ""
           ),

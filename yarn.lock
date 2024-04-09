@@ -4304,7 +4304,7 @@ __metadata:
 
 "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::locator=docs%40workspace%3A.":
   version: 3.2.1
-  resolution: "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::version=3.2.1&hash=c4afa7&locator=docs%40workspace%3A."
+  resolution: "@docusaurus/utils@patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch::version=3.2.1&hash=df994c&locator=docs%40workspace%3A."
   dependencies:
     "@docusaurus/logger": 3.2.1
     "@docusaurus/utils-common": 3.2.1
@@ -4330,7 +4330,7 @@ __metadata:
   peerDependenciesMeta:
     "@docusaurus/types":
       optional: true
-  checksum: 52dc5386e879be5381dc2aadc4f9147946e4d95e4c43d8d937fca07a85a12df512224065af4c3a4b42489b447c131a99903c01f56a4ab7a8108176f5a22966a6
+  checksum: c5fe525c64cf7446309cab22a8b1d95d39f5fb31ade5619b86155f7899992d86c9c1c963072df71f4b2d161cdb11a4cc5a00928de908731e12f6563a312be4cc
   languageName: node
   linkType: hard
 

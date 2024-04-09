@@ -7,6 +7,12 @@ import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
 import { getFileCommitHash } from "./src/util/gitUtils";
+import { Octokit } from "@octokit/rest";
+
+const usernameCache: Map<string, string> = new Map();
+const octokit = new Octokit({
+  userAgent: "PaperMC-Docs",
+});
 
 const preview = env.VERCEL_ENV === "preview";
 
@@ -83,7 +89,29 @@ const config: Config = {
     format: "detect",
     parseFrontMatter: async (params) => {
       const result = await params.defaultParseFrontMatter(params);
-      const author = await getFileCommitHash(params.filePath);
+      let author = {
+        commit: "1b3d5f7",
+        username: "ghost",
+      };
+      if (process.env.NODE_ENV !== "development") {
+        const { commit } = await getFileCommitHash(params.filePath);
+        let username = usernameCache.get(commit);
+        if (username == undefined) {
+          const commitResponse = await octokit.repos.getCommit({
+            owner: "PaperMC",
+            repo: "docs",
+            ref: commit,
+          });
+
+          username = commitResponse.data.author.login;
+          usernameCache.set(commit, username);
+        }
+
+        author = {
+          commit: commit,
+          username: username,
+        };
+      }
 
       return {
         ...result,

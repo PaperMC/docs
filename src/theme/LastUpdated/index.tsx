@@ -36,16 +36,21 @@ function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.El
   );
 }
 
-function LastUpdatedByUser({ lastUpdatedBy }: { lastUpdatedBy: string }): JSX.Element {
+function LastUpdatedByUser({
+  lastUpdatedBy,
+  username,
+}: {
+  lastUpdatedBy: string;
+  username: string;
+}): JSX.Element {
   return (
     <Translate
       id="theme.lastUpdated.byUser"
       description="The words used to describe by who the page has been last updated"
       values={{
-        // user: <b>{lastUpdatedBy}</b>,
         user: (
           <b>
-            <Link to={"https://github.com/" + lastUpdatedBy}>{lastUpdatedBy}</Link>
+            <Link to={"https://github.com/" + username}>{lastUpdatedBy}</Link>
           </b>
         ),
       }}
@@ -80,6 +85,7 @@ export default function LastUpdated({ lastUpdatedAt, lastUpdatedBy }: Props): JS
 
   const author = (doc.frontMatter as any).author as {
     commit: string;
+    username: string;
   };
 
   return (
@@ -89,12 +95,12 @@ export default function LastUpdated({ lastUpdatedAt, lastUpdatedBy }: Props): JS
         description="The sentence used to display when a page has been last updated, and by who"
         values={{
           atDate: lastUpdatedAt ? <LastUpdatedAtDate lastUpdatedAt={lastUpdatedAt} /> : "",
-          byUser: lastUpdatedBy ? <LastUpdatedByUser lastUpdatedBy={lastUpdatedBy} /> : "",
-          inCommit: (
-            <LastCommitIn
-              lastCommitIn={process.env.NODE_ENV === "development" ? "1b3d5f7" : author.commit}
-            />
+          byUser: lastUpdatedBy ? (
+            <LastUpdatedByUser lastUpdatedBy={lastUpdatedBy} username={author.username} />
+          ) : (
+            ""
           ),
+          inCommit: <LastCommitIn lastCommitIn={author.commit} />,
         }}
       >
         {"Last updated{atDate}{byUser}{inCommit}"}

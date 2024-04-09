@@ -30,6 +30,7 @@
     "@gracefullight/docusaurus-plugin-vercel-analytics": "1.0.0",
     "@iconify/react": "4.1.1",
     "@mdx-js/react": "3.0.0",
+    "@octokit/rest": "20.1.0",
     "axios": "1.6.3",
     "clsx": "1.2.1",
     "js-yaml": "4.1.0",

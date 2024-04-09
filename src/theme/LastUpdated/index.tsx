@@ -4,19 +4,6 @@ import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
 import type { Props } from "@theme/LastUpdated";
 import Link from "@docusaurus/Link";
-import { Endpoints } from "@octokit/types";
-import axios from "axios";
-
-type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
-
-const axiosInstance = axios.create({
-  baseURL: "https://api.github.com/repos/PaperMC/docs/commits/",
-  headers: {
-    Accept: "application/vnd.github.v3+json",
-    "User-Agent": "PaperMC-Docs",
-  },
-});
-const usernameCache: Map<string, string> = new Map();
 
 function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.Element {
   const atDate = new Date(lastUpdatedAt);
@@ -51,40 +38,11 @@ function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.El
 
 function LastUpdatedByUser({
   lastUpdatedBy,
-  commit,
+  username,
 }: {
   lastUpdatedBy: string;
-  commit: string;
+  username: string;
 }): JSX.Element {
-  let usernameFromCache = usernameCache.get(commit);
-  const [username, setUsername] = useState(usernameFromCache ?? "ghost");
-
-  if (process.env.NODE_ENV !== "development") {
-    useEffect(() => {
-      const run = async () => {
-        try {
-          console.log(
-            `[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`
-          );
-          if (usernameFromCache === undefined) {
-            const response = (await axiosInstance.get(commit)) as endpoint["response"];
-
-            usernameCache.set(commit, response.data.author.login);
-            console.log(
-              `[${usernameCache.size}] ${commit} -> ${response.data.author.login} (${response.headers["x-ratelimit-remaining"]}/${response.headers["x-ratelimit-limit"]})`
-            );
-            setUsername(response.data.author.login);
-          }
-        } catch (error) {
-          // silent
-          console.error(error);
-        }
-      };
-
-      run();
-    }, []);
-  }
-
   return (
     <Translate
       id="theme.lastUpdated.byUser"
@@ -127,6 +85,7 @@ export default function LastUpdated({ lastUpdatedAt, lastUpdatedBy }: Props): JS
 
   const author = (doc.frontMatter as any).author as {
     commit: string;
+    username: string;
   };
 
   return (
@@ -137,7 +96,7 @@ export default function LastUpdated({ lastUpdatedAt, lastUpdatedBy }: Props): JS
         values={{
           atDate: lastUpdatedAt ? <LastUpdatedAtDate lastUpdatedAt={lastUpdatedAt} /> : "",
           byUser: lastUpdatedBy ? (
-            <LastUpdatedByUser lastUpdatedBy={lastUpdatedBy} commit={author.commit} />
+            <LastUpdatedByUser lastUpdatedBy={lastUpdatedBy} username={author.username} />
           ) : (
             ""
           ),

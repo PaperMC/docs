@@ -8,6 +8,20 @@ import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
 import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
 
+import { Endpoints } from "@octokit/types";
+import axios, { Axios, AxiosError } from "axios";
+import { useEffect, useState } from "react";
+
+type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
+const axiosInstance = axios.create({
+  baseURL: "https://api.github.com/repos/PaperMC/docs/commits/",
+  headers: {
+    Accept: "application/vnd.github.v3+json",
+    "User-Agent": "PaperMC-Docs",
+  },
+});
+const usernameCache: Map<string, string> = new Map();
+
 const preview = env.VERCEL_ENV === "preview";
 
 const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
@@ -85,11 +99,38 @@ const config: Config = {
       const result = await params.defaultParseFrontMatter(params);
       let author = {
         commit: "1b3d5f7",
+        username: "ghost",
       };
       if (process.env.NODE_ENV !== "development") {
         const { commit } = await getFileCommitHash(params.filePath);
+        let usernameFromCache = usernameCache.get(commit);
+
+        try {
+          console.log(
+            `[${usernameCache.size}] "${commit}" -> "${usernameFromCache} (${usernameCache.get(commit)})"`
+          );
+          if (usernameFromCache === undefined) {
+            const response = (await axiosInstance.get(commit)) as endpoint["response"];
+
+            usernameCache.set(commit, response.data.author.login);
+            usernameFromCache = response.data.author.login;
+            console.log(
+              `[${usernameCache.size}] ${commit} -> ${response.data.author.login} (${response.headers["x-ratelimit-remaining"]}/${response.headers["x-ratelimit-limit"]})`
+            );
+          }
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            error as AxiosError;
+            console.error(error.response.data);
+          } else {
+            // silent
+            console.error(error);
+          }
+        }
+
         author = {
           commit: commit,
+          username: usernameFromCache,
         };
       }
 

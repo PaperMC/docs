@@ -70,6 +70,8 @@
   },
   "packageManager": "yarn@3.5.0",
   "resolutions": {
-    "@docusaurus/plugin-content-docs@3.2.1": "patch:@docusaurus/plugin-content-docs@npm%3A3.2.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.1-7bedb7ec1c.patch"
+    "@docusaurus/plugin-content-docs@3.2.1": "patch:@docusaurus/plugin-content-docs@npm%3A3.2.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.1-7bedb7ec1c.patch",
+    "@docusaurus/utils@3.2.1": "patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch",
+    "@docusaurus/utils@3.1.0": "patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch"
   }
 }

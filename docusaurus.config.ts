@@ -12,6 +12,7 @@ import { Octokit } from "@octokit/rest";
 const usernameCache: Map<string, string> = new Map();
 const octokit = new Octokit({
   userAgent: "PaperMC-Docs",
+  // auth: "GITHUB_TOKEN",
 });
 
 const preview = env.VERCEL_ENV === "preview";
@@ -96,6 +97,7 @@ const config: Config = {
       if (process.env.NODE_ENV !== "development") {
         const { commit } = await getFileCommitHash(params.filePath);
         let username = usernameCache.get(commit);
+        // console.log(`[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`);
         if (username == undefined) {
           const commitResponse = await octokit.repos.getCommit({
             owner: "PaperMC",
@@ -105,6 +107,7 @@ const config: Config = {
 
           username = commitResponse.data.author.login;
           usernameCache.set(commit, username);
+          // console.log(`[${usernameCache.size}] ${commit} -> ${username} (${commitResponse.headers["x-ratelimit-remaining"]}/${commitResponse.headers["x-ratelimit-limit"]})`);
         }
 
         author = {

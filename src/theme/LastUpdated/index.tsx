@@ -58,18 +58,19 @@ function LastUpdatedByUser({
           );
           if (usernameFromCache === undefined) {
             // probably need to handle rate limit or sum
-            const response1 = await fetch(`https://api.github.com/repos/PaperMC/docs/commits/${commit}`, {
-              headers: {
-                Accept: "application/vnd.github.v3+json",
-                // `X-GitHub-Api-Version`: "2022-11-28", // ???
-              },
-            });
+            const response1 = await fetch(
+              `https://api.github.com/repos/PaperMC/docs/commits/${commit}`,
+              {
+                headers: {
+                  Accept: "application/vnd.github.v3+json",
+                  // `X-GitHub-Api-Version`: "2022-11-28", // ???
+                },
+              }
+            );
 
-            const data = await response1.json() as GitHubCommit;
-
+            const data = (await response1.json()) as GitHubCommit;
 
             usernameCache.set(commit, data.author.login);
-            // usernameCache.set(commit, commitResponse.data.author.login);
             console.log(
               `[${usernameCache.size}] ${commit} -> ${username} (${response1.headers["x-ratelimit-remaining"]}/${response1.headers["x-ratelimit-limit"]})`
             );

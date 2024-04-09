@@ -9,8 +9,7 @@ import { Options } from "@docusaurus/plugin-content-docs";
 import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
 
 import { Endpoints } from "@octokit/types";
-import axios, { Axios, AxiosError } from "axios";
-import { useEffect, useState } from "react";
+import axios, { AxiosError } from "axios";
 
 type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
 const axiosInstance = axios.create({

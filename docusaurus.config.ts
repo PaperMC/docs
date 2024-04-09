@@ -6,7 +6,7 @@ import footer from "./config/footer.config";
 import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
-import { getFileCommitHash } from "./src/util/gitUtils";
+import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
 
 const preview = env.VERCEL_ENV === "preview";
 

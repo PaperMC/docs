@@ -60,12 +60,12 @@ function LastUpdatedByUser({
   );
 }
 
-function LastCommitIn({ lastCommitIn }: { lastCommitIn: string }): JSX.Element {
+function LastUpdatedInCommit({ lastUpdatedIn }: { lastUpdatedIn: string }): JSX.Element {
   return (
     <>
       <span> in </span>
       <b>
-        <Link to={"https://github.com/PaperMC/docs/commit/" + lastCommitIn}>{lastCommitIn}</Link>
+        <Link to={"https://github.com/PaperMC/docs/commit/" + lastUpdatedIn}>{lastUpdatedIn}</Link>
       </b>
     </>
   );
@@ -91,7 +91,7 @@ export default function LastUpdated({ lastUpdatedAt, lastUpdatedBy }: Props): JS
           ) : (
             ""
           ),
-          inCommit: <LastCommitIn lastCommitIn={author.commit} />,
+          inCommit: <LastUpdatedInCommit lastUpdatedIn={author.commit} />,
         }}
       >
         {"Last updated{atDate}{byUser}{inCommit}"}

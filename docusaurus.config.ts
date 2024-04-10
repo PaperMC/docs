@@ -148,7 +148,7 @@ const config: Config = {
             if (error.code === "ERR_CANCELED") {
               author.username = error.config.data.username;
               console.log(
-                `[${usernameCache.size}] ${commit} - request was canceled, found ${author.username} { hits: ${++total} }`
+                `[${usernameCache.size}] ${commit} - request was cancelled, found ${author.username} { hits: ${++total} }`
               );
             } else {
               console.error(error.response?.data ?? error.response);

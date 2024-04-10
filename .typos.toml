@@ -79,3 +79,4 @@ canceled = "cancelled"
 canceling = "cancelling"
 cancelable = "cancellable"
 cancelation = "cancellation"
+ERR_CANCELED = "ERR_CANCELED" # Axios Error

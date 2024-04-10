@@ -35,7 +35,7 @@ async function cacheUsernameFromCommit(commit: string) {
   try {
     const response = (await axiosInstance.get(commit)) as endpoint["response"];
     const username = response.data.author.login;
-    
+
     commitCache.set(commit, username);
   } catch (error) {
     if (axios.isAxiosError(error)) {

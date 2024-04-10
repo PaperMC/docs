@@ -45,7 +45,6 @@ axios1.interceptors.request.use((config) => {
 
 const axiosInstance = axiosRateLimit(axios1, { maxRequests: 1, perMilliseconds: 50 });
 
-
 if (process.env.GITHUB_TOKEN !== undefined) {
   axiosInstance.defaults.headers.common.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 }

@@ -62,21 +62,12 @@ function LastUpdatedByUser({
 
 function LastCommitIn({ lastCommitIn }: { lastCommitIn: string }): JSX.Element {
   return (
-    <Translate
-      id="theme.lastUpdated.inCommit"
-      description="The words used to describe in what commit was used"
-      values={{
-        commit: (
-          <b>
-            <Link to={"https://github.com/PaperMC/docs/commit/" + lastCommitIn}>
-              {lastCommitIn}
-            </Link>
-          </b>
-        ),
-      }}
-    >
-      {" in {commit}"}
-    </Translate>
+    <>
+      <span> in </span>
+      <b>
+        <Link to={"https://github.com/PaperMC/docs/commit/" + lastCommitIn}>{lastCommitIn}</Link>
+      </b>
+    </>
   );
 }
 

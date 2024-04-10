@@ -4539,6 +4539,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@hokify/axios-rate-limit@npm:2.0.5":
+  version: 2.0.5
+  resolution: "@hokify/axios-rate-limit@npm:2.0.5"
+  peerDependencies:
+    axios: "*"
+  checksum: 8a9c1feb3af7c5a426c64f203d69719cc9df36a34ae5ec2ed70e6f681c26d34ccea624dd4b52bd32ca7e3b1781076183b7764ddeb7c1bdb4c404240a2d0fa5ff
+  languageName: node
+  linkType: hard
+
 "@iconify/react@npm:4.1.1":
   version: 4.1.1
   resolution: "@iconify/react@npm:4.1.1"
@@ -8122,6 +8131,7 @@ __metadata:
     "@fec/remark-a11y-emoji": 3.1.0
     "@fontsource/jetbrains-mono": 4.5.12
     "@gracefullight/docusaurus-plugin-vercel-analytics": 1.0.0
+    "@hokify/axios-rate-limit": 2.0.5
     "@iconify/react": 4.1.1
     "@mdx-js/react": 3.0.0
     "@octokit/types": 13.4.0

@@ -22,7 +22,8 @@ When executed, a file with info for the server will be generated in the `debug` 
 
 ### `/paper mobcaps`
 Permission: `bukkit.command.paper.mobcaps` <br>
-Usage: `/paper mobcaps [world]` Replace [world] with a specific world name.
+Usage: `/paper mobcaps [world]` 
+**Replace [world] with a specific world name.**
 
 Not done
 
@@ -30,10 +31,9 @@ Not done
 ### `/paper syncloadinfo`
 Permission: `bukkit.command.paper.syncloadinfo`
 :::note
-This command requires the `-Dpaper.debug-sync-loads=true` startup flag.
+This command requires the [`-Dpaper.debug-sync-loads=true`](system-properties#paperdebug-sync-loads) startup flag.
 :::
 
-If the user has the `bukkit.command.paper.syncloadinfo` permission, they can use the command.
 When executed it dumps a file from the sync chunk load debugging system. The file can be found in the `debug` folder.
 
 
@@ -60,7 +60,8 @@ Previous version: git-Paper-448 (MC: 1.20.4)
 
 ### `/paper chunkinfo`
 Permission: `bukkit.command.paper.chunkinfo` <br>
-Usage: `/paper chunkinfo [world]` Replace [world] with a specific world name or leave it empty to see chunk info for all worlds.
+Usage: `/paper chunkinfo [world]` <br>
+**Replace [world] with a specific world name or leave it empty to see chunk info for all worlds.**
 
 Gives info for all chunks in a specified world or in all worlds.
 
@@ -112,7 +113,7 @@ When executed dumps information about plugin listeners. It takes a name of the l
 Permission: `bukkit.command.paper.dumpitem` <br>
 Usage: `/paper dumpitem`
 
-Dumps info about the item that the player is holding. It can only be used by plyers!
+Dumps info about the item that the player is holding. Can only be used by players!
 
 Example Dump: ![Example Dump](assets/example-item-dump.png)
 
@@ -138,7 +139,7 @@ Example Output:
 ### `/paper heap`
 Permission: `bukkit.command.paper.heap`
 :::warning
-The heap dump contains detailed information about your server, which can is sensitive.
+The heap dump contains detailed information about your server, which can be sensitive.
 Be very careful with who you share the generated heap dump!
 :::
 
@@ -146,12 +147,12 @@ When executed it creates a heap dump in the `dumps` folder.
 
 
 ### `/paper entity`
+Permission: `bukkit.command.paper.entity` <br>
 Usage: `/paper entity list [filter] [world]`
 **Replace [world] with a specific world name and [filter] with a entity type.**
-Example: `/paper entity list minecraft:wolf world`
 
 
-When executed it dumps shows info for a specified entity (or all entities) in a specific world.
+When executed it shows info for a specific entity (or all entities) in the specified world.
 
 Example Output:
 ```

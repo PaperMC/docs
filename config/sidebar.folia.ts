@@ -1,11 +1,7 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const folia: SidebarsConfig = {
-  primary: [
-    "README",
-    "admin/README",
-    "dev/README",
-  ],
+  primary: ["README", "admin/README", "dev/README"],
   administration: [
     {
       type: "category",

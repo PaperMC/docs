@@ -1,24 +1,27 @@
-import React, {type ReactNode} from 'react';
-import {useThemeConfig, ErrorCauseBoundary} from '@docusaurus/theme-common';
-import {
-  splitNavbarItems,
-  useNavbarMobileSidebar,
-} from '@docusaurus/theme-common/internal';
-import NavbarItem, {type Props as NavbarItemConfig} from '@theme/NavbarItem';
-import NavbarColorModeToggle from '@theme/Navbar/ColorModeToggle';
-import SearchBar from '@theme/SearchBar';
-import NavbarMobileSidebarToggle from '@theme/Navbar/MobileSidebar/Toggle';
-import NavbarLogo from '@theme/Navbar/Logo';
-import NavbarSearch from '@theme/Navbar/Search';
+import React, { type ReactNode } from "react";
+import { useThemeConfig, ErrorCauseBoundary } from "@docusaurus/theme-common";
+import { splitNavbarItems, useNavbarMobileSidebar } from "@docusaurus/theme-common/internal";
+import NavbarItem, { type Props as NavbarItemConfig } from "@theme/NavbarItem";
+import NavbarColorModeToggle from "@theme/Navbar/ColorModeToggle";
+import SearchBar from "@theme/SearchBar";
+import NavbarMobileSidebarToggle from "@theme/Navbar/MobileSidebar/Toggle";
+import NavbarLogo from "@theme/Navbar/Logo";
+import NavbarSearch from "@theme/Navbar/Search";
 
-import styles from './styles.module.css';
+import styles from "./styles.module.css";
+
+export type ExtendedNavbarItemConfig = NavbarItemConfig & {
+  activeBaseRegex?: string;
+  items?: ExtendedNavbarItemConfig[];
+  label?: string;
+  to?: string;
+};
 
 function useNavbarItems() {
-  // TODO temporary casting until ThemeConfig type is improved
-  return useThemeConfig().navbar.items as NavbarItemConfig[];
+  return useThemeConfig().navbar.items as ExtendedNavbarItemConfig[];
 }
 
-function NavbarItems({items}: {items: NavbarItemConfig[]}): JSX.Element {
+function NavbarItems({ items }: { items: ExtendedNavbarItemConfig[] }): JSX.Element {
   return (
     <>
       {items.map((item, i) => (
@@ -29,9 +32,10 @@ function NavbarItems({items}: {items: NavbarItemConfig[]}): JSX.Element {
               `A theme navbar item failed to render.
 Please double-check the following navbar item (themeConfig.navbar.items) of your Docusaurus config:
 ${JSON.stringify(item, null, 2)}`,
-              {cause: error},
+              { cause: error }
             )
-          }>
+          }
+        >
           <NavbarItem {...item} />
         </ErrorCauseBoundary>
       ))}
@@ -39,13 +43,7 @@ ${JSON.stringify(item, null, 2)}`,
   );
 }
 
-function NavbarContentLayout({
-  left,
-  right,
-}: {
-  left: ReactNode;
-  right: ReactNode;
-}) {
+function NavbarContentLayout({ left, right }: { left: ReactNode; right: ReactNode }) {
   return (
     <div className="navbar__inner">
       <div className="navbar__items">{left}</div>
@@ -60,22 +58,26 @@ export default function NavbarContent(): JSX.Element {
   const items = useNavbarItems();
   let [leftItems, rightItems] = splitNavbarItems(items);
 
-
-  for (let item of useNavbarItems()) {
-    if (item.activeBaseRegex && new RegExp(item.activeBaseRegex).test(location.pathname)) {
-      const items = [];
-      for (let category of item.items) {
-        items.push({
-          label: category.label,
-          to: category.to,
-          position: category.position,
-        })
+  if (typeof document !== "undefined") {
+    for (let item of useNavbarItems()) {
+      if (
+        item.activeBaseRegex &&
+        new RegExp(item.activeBaseRegex).test(document.location.pathname)
+      ) {
+        const items = [];
+        for (let category of item.items) {
+          items.push({
+            label: category.label,
+            to: category.to,
+            position: category.position,
+          });
+        }
+        leftItems = items;
       }
-      leftItems = items;
     }
   }
 
-  const searchBarItem = items.find((item) => item.type === 'search');
+  const searchBarItem = items.find((item) => item.type === "search");
 
   return (
     <NavbarContentLayout

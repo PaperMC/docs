@@ -1,12 +1,7 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const paper: SidebarsConfig = {
-  primary: [
-    "README",
-    "admin/README",
-    "dev/README",
-    "contributing/README",
-  ],
+  primary: ["README", "admin/README", "dev/README", "contributing/README"],
   administration: [
     {
       type: "category",

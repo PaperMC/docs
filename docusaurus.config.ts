@@ -7,47 +7,10 @@ import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
 import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
+import { AUTHOR_FALLBACK, AuthorData, commitCache, processing } from "./src/util/authorUtils";
 
-import { Endpoints } from "@octokit/types";
-import axios, { AxiosError } from "axios";
-import axiosRateLimit from "@hokify/axios-rate-limit";
-
-type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
-let axios1 = axios.create({
-  baseURL: "https://api.github.com/repos/PaperMC/docs/commits/",
-  headers: {
-    Accept: "application/vnd.github.v3+json",
-    "User-Agent": "PaperMC-Docs",
-  },
-});
-
-const usernameCache: Map<string, string> = new Map();
-let total = 0;
-let count = 0;
-axios1.interceptors.request.use((config) => {
-  const controller = new AbortController();
-  const commit = config.url;
-  let username = usernameCache.get(commit);
-  if (username !== undefined) {
-    controller.abort("Username is cached");
-    config.data = { username: username };
-  } else {
-    console.log(
-      `[${usernameCache.size}] "${commit}" -> "${username} (${usernameCache.get(commit)})"`
-    );
-  }
-
-  return {
-    ...config,
-    signal: controller.signal,
-  };
-}, Promise.reject);
-
-const axiosInstance = axiosRateLimit(axios1, { maxRequests: 1, perMilliseconds: 50 });
-
-if (process.env.GITHUB_TOKEN !== undefined) {
-  axiosInstance.defaults.headers.common.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
-}
+// TODO: move to a better spot & better name
+processing();
 
 const preview = env.VERCEL_ENV === "preview";
 
@@ -124,52 +87,25 @@ const config: Config = {
     format: "detect",
     parseFrontMatter: async (params) => {
       const result = await params.defaultParseFrontMatter(params);
-      let author = {
-        commit: "1b3d5f7",
-        username: "ghost",
+      let author: AuthorData = {
+        ...AUTHOR_FALLBACK,
       };
       if (process.env.NODE_ENV !== "development") {
         const { commit } = await getFileCommitHash(params.filePath);
-        let usernameFromCache = usernameCache.get(commit);
-        try {
-          const response = (await axiosInstance.get(commit)) as endpoint["response"];
-
-          console.log(response.status);
-
-          usernameCache.set(commit, response.data.author.login);
-          author.username = response.data.author.login;
-          console.log(
-            `[${usernameCache.size}] ${commit} -> ${response.data.author.login} (${response.headers["x-ratelimit-remaining"]}/${response.headers["x-ratelimit-limit"]}) { hits: ${++total} } { ping: ${++count} }`
-          );
-        } catch (error) {
-          if (axios.isAxiosError(error)) {
-            error as AxiosError;
-
-            if (error.code === AxiosError.ERR_CANCELED) {
-              author.username = error.config.data.username;
-              console.log(
-                `[${usernameCache.size}] ${commit} - request was cancelled, found ${author.username} { hits: ${++total} }`
-              );
-            } else {
-              console.error(error.response?.data ?? error.response);
-            }
-          } else {
-            // silent
-            console.error(error);
-          }
+        let username = commitCache.get(commit);
+        if (username !== undefined) {
+          author = {
+            commit,
+            username,
+          };
         }
-
-        author = {
-          commit: commit,
-          username: usernameFromCache,
-        };
       }
 
       return {
         ...result,
         frontMatter: {
           ...result.frontMatter,
-          author,
+          author: author,
         },
       };
     },

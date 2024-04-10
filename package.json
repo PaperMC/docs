@@ -28,7 +28,6 @@
     "@docusaurus/theme-search-algolia": "3.2.1",
     "@fontsource/jetbrains-mono": "4.5.12",
     "@gracefullight/docusaurus-plugin-vercel-analytics": "1.0.0",
-    "@hokify/axios-rate-limit": "2.0.5",
     "@iconify/react": "4.1.1",
     "@mdx-js/react": "3.0.0",
     "@octokit/types": "13.4.0",

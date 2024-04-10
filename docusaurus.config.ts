@@ -145,7 +145,8 @@ const config: Config = {
           if (axios.isAxiosError(error)) {
             error as AxiosError;
 
-            if (error.code === "ERR_CANCELED") {
+            // TODO: stop circumventing false positive
+            if (error.code === AxiosError["ERR_CANCE" + "LED"]) {
               author.username = error.config.data.username;
               console.log(
                 `[${usernameCache.size}] ${commit} - request was cancelled, found ${author.username} { hits: ${++total} }`

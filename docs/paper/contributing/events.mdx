@@ -17,21 +17,21 @@ All new events should go in the package (sub-package of) `io.papermc.paper.event
 
 ### Constructors
 
-All new constructors added should be annotated with `ApiStatus.Internal` to signify that they are not considered
+All new constructors added should be annotated with `@ApiStatus.Internal` to signify that they are not considered
 API and can change at any time without warning.
 
-Constructors that are being replaced, if they aren't being removed, should be marked with `Deprecated` and `DoNotUse`.
+Constructors that are being replaced, if they aren't being removed, should be marked with `@Deprecated` and `@DoNotUse`.
 
 ### Mutability
 Certain API types are "mutable" which can lead to unexpected behavior within events. Mutable types like
 `Location` and `Vector` should therefore be cloned when returned from a "getter" in an event.
 
-### HandlerList
+### `HandlerList`
 For an event class or any subclass of it to be listened to, a `HandlerList` field must be present with an instance and static method
 to retrieve it. See the docs for <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>`Event`</VersionedJavaDocLink> for specifics. This field should be static and
 final and named `HANDLER_LIST`.
 
-Also consider not putting a `HandlerList` on every event, just a "common parent" event so that a plugin can listen to the 
+Also consider not putting a `HandlerList` on every event, just a "common parent" event so that a plugin can listen to the
 parent event and capture any child events but also listen to the child event separately.
 
 ### Miscellaneous

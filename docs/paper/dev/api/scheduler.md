@@ -9,16 +9,16 @@ The `BukkitScheduler` can be used to schedule your code to be run later or repea
 
 :::info[Folia]
 
-This guide is designed for Non-Folia Bukkit Servers. If you are using Folia, you should use its respective schedulers.
+This guide is designed for non-Folia Bukkit servers. If you are using Folia, you should use its respective schedulers.
 
 :::
 
 ## What is a tick?
 
-Every game runs something called a game loop which essentially executes all the logic of the game over and over.
+Every game runs something called a game loop ,which essentially executes all the logic of the game over and over.
 A single execution of that loop in Minecraft is called a 'tick'.
 
-In Minecraft there are 20 ticks per second, or one tick every 50 milliseconds. This means that the game loop is executed 
+In Minecraft, there are 20 ticks per second or in other words, one tick every 50 milliseconds. This means that the game loop is executed
 20 times per second. A tick taking more than 50ms to execute is the moment when your server starts to fall behind on 
 its work and lag.
 
@@ -45,7 +45,7 @@ You can also use the `Tick` class from Paper to convert between human units and 
 
 ## Obtaining the scheduler
 
-To obtain a scheduler you can use the `getScheduler` method on the `Server` class, e.g. in your `onEnable` method:
+To obtain a scheduler, you can use the `getScheduler` method on the `Server` class, e.g. in your `onEnable` method:
 
 ```java
 @Override
@@ -61,7 +61,7 @@ Scheduling a task requires you to pass:
 - Your plugin's instance
 - The code to run, either with a `Runnable` or `Consumer<BukkitTask>`
 - The delay in ticks before the task should run for the first time
-- If you're scheduling a repeating task - the period in ticks between each execution of the task
+- The period in ticks between each execution of the task, if you're scheduling a repeating task
 
 ### Difference between synchronous and asynchronous tasks
 
@@ -71,7 +71,7 @@ Synchronous tasks are tasks that are executed on the main server thread. This is
 thread that handles all game logic.
 
 All tasks scheduled on the main thread will affect the server's performance. If your task
-is making web requests, accessing files, databases or otherwise time-consuming operations you should consider using 
+is making web requests, accessing files, databases or otherwise time-consuming operations, you should consider using
 an asynchronous task.
 
 #### Asynchronous tasks (off the main thread)
@@ -91,7 +91,7 @@ accesses the world state, it is not safe to be used from an asynchronous task.
 While the tasks are executed on separate threads, they are still started from the main thread
 and will be affected if the server is lagging, an example would be 20 ticks not being exactly 1 second.
 
-If you need a scheduler that runs independently of the server consider using your own
+If you need a scheduler that runs independently of the server, consider using your own
 [`ScheduledExecutorService`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html).
 You can follow [this guide](https://www.baeldung.com/java-executor-service-tutorial#ScheduledExecutorService) to learn how to use it.
 
@@ -125,7 +125,7 @@ public class MyRunnableTask implements Runnable {
 scheduler.runTaskLater(plugin, new MyRunnableTask(plugin), 20);
 ```
 
-Or use a lambda expression which is great for simple and short tasks:
+Or use a lambda expression, which is great for simple and short tasks:
 
 ```java
 scheduler.runTaskLater(
@@ -167,7 +167,7 @@ public class MyConsumerTask implements Consumer<BukkitTask> {
 scheduler.runTaskTimer(plugin, new MyConsumerTask(someEntityId), 0, 20);
 ```
 
-Or use a lambda expression which again is much cleaner for short and simple tasks:
+Or use a lambda expression, which again is much cleaner for short and simple tasks:
 
 ```java
 scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
@@ -184,7 +184,7 @@ scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
 
 ##### Using BukkitRunnable
 
-The `BukkitRunnable` class is a class that implements `Runnable` and holds a `BukkitTask` instance. This means that you do
+`BukkitRunnable` is a class that implements `Runnable` and holds a `BukkitTask` instance. This means that you do
 not need to access the task from inside the `run()` method, you can simply use the `this.cancel` method:
 
 ```java
@@ -215,4 +215,4 @@ This simply adds a potion effect until the entity dies.
 #### Using a delay of 0 ticks
 
 A delay of 0 ticks is treated as you wanting to run the task on the next tick. If you schedule a task with a delay of 0 ticks
-whilst the server is starting / before it is enabled it will be executed before the server is enabled.
+while the server is starting, or before it is enabled, it will be executed before the server is enabled.

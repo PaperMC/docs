@@ -18,7 +18,7 @@ it is imperative that plugins only be installed from trusted sources. Be careful
 
 :::
 
-## Finding Plugins
+## Finding plugins
 
 Before installing a plugin, you'll need to find what you want to install. The best place to find plugins is [Hangar](https://hangar.papermc.io), Paper's plugin repository, but you can also find many plugins
 on [SpigotMC](https://www.spigotmc.org/resources/),
@@ -35,7 +35,7 @@ mention Paper compatibility. It'll still work.
 
 :::
 
-## Installing Plugins
+## Installing plugins
 
 1. Once you've found the plugin you'd like to install, download it. Ensure the file you have
    downloaded ends in `.jar`. Some plugins also distribute as `.zip` files, in which case you will
@@ -61,7 +61,7 @@ The first step to troubleshooting installing plugins is to check the log of your
 server's most recent logs will be stored to the `logs/latest.log` file. You may need to scroll near
 the beginning of this file to see when plugins were loaded.
 
-#### Missing Dependencies
+#### Missing dependencies
 
 If you see something like this:
 
@@ -72,7 +72,7 @@ If you see something like this:
 
 This means that the plugin you tried to install is missing a dependency. A dependency, in this case,
 is another plugin that you must install for the first to function. While you will get a big scary
-error, the important line to look at is
+error, the important line to look at is:
 
 ```log
 [00:00:00] [Server thread/WARN] Unknown/missing dependency plugins: [Vault]. Please download and install these plugins to run 'MyAwesomePlugin'.
@@ -80,7 +80,7 @@ error, the important line to look at is
 
 This is telling you that in order to load `MyAwesomePlugin`, you must first install `Vault`.
 
-#### Invalid plugin.yml
+#### Invalid `plugin.yml`
 
 If you see something closer to this:
 
@@ -113,10 +113,10 @@ versions of EssentialsX are installed. Both the release `2.19.4`, and a developm
 `2.20.0`. Ensure you only have one version of each plugin installed at one time. Delete the older
 version of the duplicate plugin, and restart your server.
 
-[//]: # "To prevent accidentally installing two versions of one plugin while updating, you can use"
-[//]: # "the `update` folder as described in the [Update Guide](/paper/how-to/update)."
+To prevent accidentally installing two versions of one plugin while updating, you can use
+the `update` folder as described in the [Update Guide](/paper/updating#step-2-update-plugins).
 
-#### Something Else
+#### Something else
 
 If you see an error, but it isn't similar to one of the above, attempt to read it yourself. While
 the full error may be large and scary, you likely only have to read the first one or two lines to
@@ -132,9 +132,9 @@ needed for the server to load a plugin are as follows:
    usually the same folder as the server JAR file. **Subdirectories of the `plugins` folder will not
    be checked.** All plugins must be in the root folder.
 2. The file ends in `.jar`. If your plugin does not end in `.jar`, what you have downloaded may not
-   be a plugin. Note that some plugins distribute multiple jars as `.zip` files. If this is the
+   be a plugin. Note that some plugins distribute multiple JARs as `.zip` files. If this is the
    case, you have to extract them before installing the plugin.
 
-If both of these are true and you still see no logs please reach out for support on our
+If both of these are true, and you still see no logs, please reach out for support on our
 [Discord](https://discord.gg/papermc) server in the `#paper-help` channel. We will be happy to
 assist you.

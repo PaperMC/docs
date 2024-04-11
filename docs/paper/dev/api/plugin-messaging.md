@@ -1,27 +1,27 @@
 ---
 slug: /dev/plugin-messaging
-description: Plugin messaging allows communication with clients. If running a proxy, you can also communicate with the proxy.
+description: How to communicate with clients or proxies.
 ---
 
 # Plugin Messaging
 
 First introduced in [2012](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/),
-Plugin messaging is a way for Paper plugins to communicate with clients. When your servers are behind a proxy, 
-it will allow your Paper plugins to communicate with the proxy server.
+Plugin messaging is a way for plugins to communicate with clients. When your servers are behind a proxy,
+it will allow your plugins to communicate with the proxy server.
 
-## BungeeCord Channel
+## BungeeCord channel
 
-The BungeeCord channel is used for communication between your Paper server and a BungeeCord (Or protocol supporting) proxy.
+The BungeeCord channel is used for communication between your Paper server and a BungeeCord (or a BungeeCord-compatible) proxy.
 
 Originally, the channel supported by the BungeeCord proxy was called `BungeeCord`. In versions 1.13 and above,
 the channel was renamed to `bungeecord:main` to create a key structure for plugin messaging channels.
 
-Paper handles this change internally, and automatically changes any messages sent on the `BungeeCord` channel 
-to the `bungeecord:main` channel. This means that your Paper plugins should continue to use the `BungeeCord` channel.
+Paper handles this change internally and automatically changes any messages sent on the `BungeeCord` channel
+to the `bungeecord:main` channel. This means that your plugins should continue to use the `BungeeCord` channel.
 
-## Sending Plugin Messages
+## Sending plugin messages
 
-First, we're going to take a look at your Paper server. Your Paper plugin will need to register that it 
+First, we're going to take a look at your Paper server. Your plugin will need to register that it
 will be sending on any given plugin channel. You should to do this alongside your other event listener registrations.
 
 ```java
@@ -38,7 +38,7 @@ public final class PluginMessagingSample extends JavaPlugin {
 
 Now that we're registered, we can send messages on the `BungeeCord` channel.
 
-Plugin messages are formatted as byte arrays and can be sent using the `sendPluginMessage` method on a `Player` object. 
+Plugin messages are formatted as byte arrays and can be sent using the `sendPluginMessage` method on a `Player` object.
 Let's take a look at an example of sending a plugin message to the `BungeeCord` channel to send our player to another server.
 
 ```java
@@ -59,14 +59,14 @@ public final class PluginMessagingSample extends JavaPlugin implements Listener 
         out.writeUTF("hub2");
         player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
     }
-  
+
 }
 ```
 
 :::tip
 
-These channels rely on the Minecraft protocol, and are sent as a special type of packet called a 
-[Plugin Message](https://wiki.vg/Plugin_channels#Plugin_Messages). They piggyback on player connections, so if there is no 
+These channels rely on the Minecraft protocol, and are sent as a special type of packet called a
+[Plugin Message](https://wiki.vg/Plugin_channels#Plugin_Messages). They piggyback on player connections, so if there is no
 player connected to the server, it will not be able to send or receive plugin messages.
 
 :::
@@ -75,16 +75,16 @@ player connected to the server, it will not be able to send or receive plugin me
 
 We sent a plugin message on the `BungeeCord` channel! The message we sent was a byte array that contained two strings converted to bytes: `Connect` and `hub2`.
 
-Our proxy server received the message through the player who triggered the `PlayerJumpEvent` on our Java server. 
-Then, it recognized the channel as its own and in alignment with BungeeCord's format sent our player to the `hub2` server.
+Our proxy server received the message through the player who triggered the `PlayerJumpEvent` on our Java server.
+Then, it recognized the channel as its own and, in alignment with BungeeCord's protocol, sent our player to the `hub2` server.
 
-For BungeeCord, we can think of this message as a case-sensitive command with arguments. 
-Here, our command is `Connect` and our only argument is `hub2`, but some "commands" may have multiple arguments. 
+For BungeeCord, we can think of this message as a case-sensitive command with arguments.
+Here, our command is `Connect` and our only argument is `hub2`, but some "commands" may have multiple arguments.
 For other channels introduced by client side mods, refer to their documentation to best understand how to format your messages.
 
-### BungeeCord Plugin Message Types
+### Plugin message types
 
-Although we sent a `Connect` message to the proxy, there are a few other cases that proxies will act on. 
+Although we sent a `Connect` message to the proxy, there are a few other cases that BungeeCord-compatible proxies will act on.
 These are the following:
 
 | Message Type      | Description                                            | Arguments                                                        | Response                                          |
@@ -105,16 +105,16 @@ These are the following:
 | `Forward`         | Forwards a plugin message to another server.           | `server`, `subchannel`, `size of plugin message`, `message`      | `subchannel`, `size of plugin message`, `message` |
 | `ForwardToPlayer` | Forwards a plugin message to another player.           | `player name`, `subchannel`, `size of plugin message`, `message` | `subchannel`, `size of plugin message`, `message` |
 
-#### Example: `PlayerCount`
+#### `PlayerCount`
 
 ```java
 public class MyPlugin extends JavaPlugin implements PluginMessageListener {
-    
+
     @Override
     public void onEnable() {
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
-        
+
         Player player = ...;
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("PlayerCount");
@@ -139,16 +139,16 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
 }
 ```
 
-#### Example: `Forward`
+#### `Forward`
 
 ```java
 public class MyPlugin extends JavaPlugin implements PluginMessageListener {
-    
+
     @Override
     public void onEnable() {
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
-        
+
         Player player = ...;
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("Forward");
@@ -162,7 +162,7 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
 
         out.writeShort(msgbytes.toByteArray().length); // This is the length.
         out.write(msgbytes.toByteArray()); // This is the message.
-        
+
         player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
         // The response will be handled in onPluginMessageReceived
     }
@@ -192,24 +192,24 @@ For example, if a certain player is banned on one server, you can forward a mess
 
 :::caution[Example of banning a player on all servers]
 
-This is not a recommended way to ban players due to the fact that there may not be anyone online on the target servers,
+This is not a recommended way to ban players, due to the fact that there may not be anyone online on the target servers,
 but it is an example of how this can be used.
 
 :::
 
-#### MessageRaw
+#### `MessageRaw`
 
-The `MessageRaw` message type is used to send a raw chat component to a player. The target player is specified 
-by the second parameter - Player name or "ALL" for all players. This is also useful for sending messages to 
+The `MessageRaw` message type is used to send a raw chat component to a player. The target player is specified
+by the second parameter - Player name or "ALL" for all players. This is also useful for sending messages to
 players who are on a different server within the proxied network.
 
 ```java
 public class MyPlugin extends JavaPlugin {
-    
+
     @Override
     public void onEnable() {
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
-        
+
         Player player = ...;
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF("MessageRaw");
@@ -222,4 +222,4 @@ public class MyPlugin extends JavaPlugin {
 }
 ```
 
-This will send the player a message saying "Click Me!" Where it is clickable and will open the URL https://papermc.io
+This will send the player a clickable message saying "Click Me!" that opens `https://papermc.io` upon clicking.

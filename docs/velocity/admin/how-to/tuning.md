@@ -15,7 +15,7 @@ Velocity comes with high-performance, specially tuned native libraries for compr
 encryption, along with including native transports from Netty. However, due to support constraints,
 the compiled natives are only verified to work on Linux x86_64 and aarch64. While Velocity does not
 require the natives to work, you will suffer from degraded performance. For this reason, we strongly
-recommend that all production deployments of Velocity run on x86-64 Linux.
+recommend that all production deployments of Velocity run on x86_64 Linux.
 
 ## Allocate server resources appropriately
 
@@ -63,7 +63,7 @@ to the proxy. Not doing this can induce lag and in severe cases may result in th
 terminated by the Java Virtual Machine because it ran out of memory.
 
 The general rule of thumb is that you allocate 512MB per 500 players, plus some extra to allow for
-some room for error ( typically 1GB extra). For instance, if you want to handle 1,000 on a single
+some room for error (typically 1GB extra). For instance, if you want to handle 1,000 on a single
 proxy, plan to allocate 2GB of heap.
 
 ### Special notes for containers

@@ -43,7 +43,7 @@ public class ExampleListener implements Listener {
 :::note[Events]
 
 There is no list of events that can be listened to, however take a
-look { <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink> }
+look <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink>
 to see all classes that extend `Event`.
 
 An event can only be listened to if it has a static `getHandlerList` method.
@@ -90,7 +90,7 @@ There are six different priorities that you can use:
 - `EventPriority.MONITOR`
 
 The order of the priorities is somewhat counter-intuitive. The **higher** the priority, the **later** the event is called.
-For example, If it is important that your plugin has the last say in a certain event - to avoid it being changed - you
+For example, if it is important that your plugin has the last say in a certain event - to avoid it being changed - you
 should use `EventPriority.HIGHEST`.
 
 :::note

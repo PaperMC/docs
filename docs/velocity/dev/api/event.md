@@ -163,12 +163,12 @@ are urged to make the transition now.
 
 :::
 
-## Creating Events
+## Creating events
 
 Creating events on Velocity is somewhat different than on other platforms. However, it is very
 similar for the most part.
 
-### Creating the Event Class
+### Creating the event class
 
 First we need to create a class for our event. In this tutorial we'll assume you're making a private
 messaging plugin, and thus use a `PrivateMessageEvent`. Most of this part is boilerplate.
@@ -218,9 +218,9 @@ server.getEventManager().fire(new PrivateMessageEvent(sender, recipient, message
 });
 ```
 
-### Using ResultedEvent
+### Using `ResultedEvent`
 
-Velocity uses the generalised `ResultedEvent` for events which have some sort of 'result'. The
+Velocity uses the generalized `ResultedEvent` for events which have some sort of 'result'. The
 result type of the event is defined by its generic type; for example.
 `PrivateMessageEvent implements ResultedEvent<ResultType>`.
 

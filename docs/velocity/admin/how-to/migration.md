@@ -6,7 +6,7 @@ description: How to migrate your proxy between different Velocity versions.
 # Migration Guide
 
 New to Velocity, or upgrading to a new version of Velocity? This page will briefly explore what you
-need to be aware of for a successful migration
+need to be aware of for a successful migration.
 
 ## Migrating from Velocity 1.0.x to Velocity 1.1.0
 

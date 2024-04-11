@@ -18,7 +18,7 @@ It contains many subcommands.
 Permission: `bukkit.command.paper.debug` <br>
 Usage: `/paper debug chunks`
 
-When executed, a file with info for the server will be generated in the `debug` folder.
+When executed, a file with info for the server chuks will be generated in the `debug` folder.
 
 
 ### `/paper mobcaps`

@@ -1,5 +1,5 @@
 diff --git a/src/gitUtils.ts b/src/gitUtils.ts
-index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..ef5db81a035634ff572c00c3a22feab6943c5a51 100644
+index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..c3116d7a725d4a5420286baac8147f4e821e5631 100644
 --- a/src/gitUtils.ts
 +++ b/src/gitUtils.ts
 @@ -95,6 +95,13 @@ export async function getFileCommitDate(
@@ -8,7 +8,7 @@ index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..ef5db81a035634ff572c00c3a22feab6
  }> {
 +  await throwGitErrors(file);
 +  const regex = retrieveCorrectRegex(includeAuthor);
-+  const result = await runGitCommandOnFile(file, createArgs("", includeAuthor, age));
++  const result = await runGitCommandOnFile(file, createArgs('', includeAuthor, age));
 +  const match = matchFromRegex(file, regex, result);
 +  return matchDateAndTimestamp(match, includeAuthor);
 +}
@@ -121,7 +121,7 @@ index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..ef5db81a035634ff572c00c3a22feab6
 +  commit: string;
 +}> {
 +  throwGitErrors(file);
-+  const result = await runGitCommandOnFile(file, createArgs("RESULT:%h", undefined, "newest"))
++  const result = await runGitCommandOnFile(file, createArgs('RESULT:%h', undefined, 'newest'))
 +  const regex = /(?:^|\n)RESULT:(?<commit>\w+)(?:$|\n)/;
 +  const match = matchFromRegex(file, regex, result);
 +  return {commit: match.groups!.commit!};

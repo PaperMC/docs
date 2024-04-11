@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Translate from "@docusaurus/Translate";
 import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
 import type { Props } from "@theme/LastUpdated";
 import Link from "@docusaurus/Link";
-import { AUTHOR_FALLBACK } from "@site/src/util/authorUtils";
 
 function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.Element {
   const atDate = new Date(lastUpdatedAt);
@@ -51,7 +50,7 @@ function LastUpdatedByUser({
       values={{
         user: (
           <b>
-            {username !== AUTHOR_FALLBACK.username ? (
+            {username !== "ghost" ? (
               <Link to={"https://github.com/" + username}>{lastUpdatedBy}</Link>
             ) : (
               lastUpdatedBy

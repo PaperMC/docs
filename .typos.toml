@@ -9,7 +9,6 @@ locale = "en-us"
 
 [default.extend-identifiers]
 FilterThreshhold = "FilterThreshhold" # ignore error, it is actually "Paper.FilterThreshhold" in Paper
-ERR_CANCELED = "ERR_CANCELED" # axios error enum
 
 [default.extend-words]
 accessorise = "accessorize"

@@ -4,6 +4,7 @@ import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
 import type { Props } from "@theme/LastUpdated";
 import Link from "@docusaurus/Link";
+import { AUTHOR_FALLBACK } from "@site/src/util/authorUtils";
 
 function LastUpdatedAtDate({ lastUpdatedAt }: { lastUpdatedAt: number }): JSX.Element {
   const atDate = new Date(lastUpdatedAt);
@@ -50,7 +51,11 @@ function LastUpdatedByUser({
       values={{
         user: (
           <b>
-            <Link to={"https://github.com/" + username}>{lastUpdatedBy}</Link>
+            {username !== AUTHOR_FALLBACK.username ? (
+              <Link to={"https://github.com/" + username}>{lastUpdatedBy}</Link>
+            ) : (
+              lastUpdatedBy
+            )}
           </b>
         ),
       }}

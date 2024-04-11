@@ -24,9 +24,8 @@ When executed, a file with info for the server will be generated in the `debug` 
 ### `/paper mobcaps`
 Permission: `bukkit.command.paper.mobcaps` <br>
 Usage: `/paper mobcaps [world]` 
-**Replace [world] with a specific world name.**
 
-Not done
+This command provides about the world specified within `[world]`.
 
 
 ### `/paper syncloadinfo`
@@ -62,9 +61,8 @@ Previous version: git-Paper-448 (MC: 1.20.4)
 ### `/paper chunkinfo`
 Permission: `bukkit.command.paper.chunkinfo` <br>
 Usage: `/paper chunkinfo [world]` <br>
-**Replace [world] with a specific world name or leave it empty to see chunk info for all worlds.**
 
-Gives info for all chunks in a specified world or in all worlds.
+This command provides chunk info about the world specified within `[world]`.
 
 Example Output from the console:
 ```
@@ -150,10 +148,9 @@ When executed it creates a heap dump in the `dumps` folder.
 ### `/paper entity`
 Permission: `bukkit.command.paper.entity` <br>
 Usage: `/paper entity list [filter] [world]`
-**Replace [world] with a specific world name and [filter] with a entity type.**
 
 
-When executed it shows info for a specific entity (or all entities) in the specified world.
+This command provides entity list about the world and filter specified within `[world]` and `[filter]`. If a `[filter]` is not specified then info for ALL entities will be shown
 
 Example Output:
 ```

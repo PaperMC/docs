@@ -79,6 +79,8 @@ To maintain consistency and readability across the documentation, please adhere 
 2. **Markdown Format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
 
 3. **Heading Structure**: Use `h1` (#) for the main title, `h2` (##) for section headings, and follow this pattern for subsequent subheadings.
+   Capitalize the first letter of each word in a h1, however, only capitalize the first letter of the first word in h2 and h3 unless~
+   it is a proper noun.
 
 4. **Code Blocks**: When including code snippets or terminal commands, use fenced code blocks with the appropriate syntax highlighting.
 
@@ -94,6 +96,8 @@ To maintain consistency and readability across the documentation, please adhere 
 9. **Keep It Concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
 
 10. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
+
+11. **Capitalise Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
 
 ## Automatic Doc Versioning
 

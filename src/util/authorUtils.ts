@@ -47,7 +47,7 @@ async function cacheUsernameFromCommit(commit: string) {
   }
 }
 
-export async function processing() {
+export async function cacheAuthorData() {
   // TODO: dirty hack to make sure it's only run before `parseFrontMatter` call
   if (!new Error().stack.includes("async loadSite")) {
     return;

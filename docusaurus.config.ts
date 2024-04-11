@@ -7,10 +7,9 @@ import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
 import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
-import { AUTHOR_FALLBACK, AuthorData, commitCache, processing } from "./src/util/authorUtils";
+import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData } from "./src/util/authorUtils";
 
-// TODO: move to a better spot & better name
-processing();
+cacheAuthorData();
 
 const preview = env.VERCEL_ENV === "preview";
 

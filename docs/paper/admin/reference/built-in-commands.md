@@ -1,5 +1,6 @@
 ---
 slug: /reference/built-in-commands
+description: All `/paper` commands
 ---
 
 

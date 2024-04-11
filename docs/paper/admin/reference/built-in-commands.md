@@ -1,6 +1,6 @@
 ---
 slug: /reference/built-in-commands
-description: All `/paper` commands
+description: All /paper commands
 ---
 
 
@@ -11,8 +11,7 @@ Paper includes a few commands by default.
 ## The `/paper` command
 Permission: `bukkit.command.paper`
 
-It contains many subcommands.
-
+This command, accessible with permission `bukkit.command.paper`, offers a variety of subcommands for your Paper server.
 
 ### `/paper debug`
 Permission: `bukkit.command.paper.debug` <br>

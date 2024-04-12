@@ -97,7 +97,7 @@ To maintain consistency and readability across the documentation, please adhere 
 
 10. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
 
-11. **Capitalise Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
+11. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
 
 ## Automatic Doc Versioning
 

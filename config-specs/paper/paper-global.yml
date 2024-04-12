@@ -305,7 +305,7 @@ proxies:
       default: "false"
       description: Whether the server should accept Velocity Modern Forwarding
     online-mode:
-      default: "false"
+      default: "true"
       description: >-
         Instructs the server how to handle player UUIDs and data when behind
         Velocity. Always set to match your proxy's online-mode setting

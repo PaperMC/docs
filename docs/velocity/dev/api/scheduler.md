@@ -5,7 +5,7 @@ description: A guide to the Scheduler API within Velocity allowing tasks to be r
 
 # Using the Scheduler
 
-The Velocity Scheduler lets you decide when and how your plugin tasks run, allowing fine control
+The Velocity scheduler lets you decide when and how your plugin tasks run, allowing fine control
 over execution. On Velocity, there is no main thread. All tasks run using the Velocity Scheduler are
 thus run asynchronously.
 

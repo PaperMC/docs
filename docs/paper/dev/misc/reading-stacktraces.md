@@ -12,9 +12,9 @@ Usually, the stacktrace will be printed to the console when an exception is not 
 Stacktraces are a useful tool for debugging your code. They show you the exact line of code that caused an error, and the
 line of code that called that line of code, and so on. This is useful because it allows you to see the exact path of execution that led to the error.
 
-### Example:
+### Example
 
-Here is an example of a stacktrace which has been caused due to a `NullPointerException`:
+Here is an example of a stacktrace, which has been caused due to a `NullPointerException`:
 
 ```javastacktrace
 [15:20:42 ERROR]: Could not pass event PluginEnableEvent to TestPlugin v1.0
@@ -57,7 +57,7 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because "playe
 -   You can continue to work down the stacktrace, and see the exact path of execution that led to the error. In this case,
     it is server internals, so we can generally ignore it.
 
-## Omitted Stacktraces
+## Omitted stacktraces
 
 In JDK 5, the JVM started to omit stacktraces for certain exceptions. This was common when the JVM had optimized the code,
 and you could get `NullPointerException`s without a stacktrace. In order to fix this, you can pass the `-XX:-OmitStackTraceInFastThrow` flag to the JVM:

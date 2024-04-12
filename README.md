@@ -28,7 +28,7 @@ $ git clone https://github.com/PaperMC/docs
 $ pnpm install
 ```
 
-3. Start the development server
+3. Start the development server.
 
 ```bash
 $ pnpm run dev
@@ -41,7 +41,7 @@ your browser. Edit away!
 ### Building
 
 ```bash
-$ pnpm build
+$ pnpm run build
 ```
 
 This command builds a production-ready deployment into the `build` directory. These files are ready

@@ -15,7 +15,7 @@
   },
   "extensions": ["esbenp.prettier-vscode"],
   "forwardPorts": [3000],
-  "postCreateCommand": ["yarn", "install"],
+  "postCreateCommand": ["pnpm", "install"],
   "waitFor": "postCreateCommand",
   "features": {
     "node": {

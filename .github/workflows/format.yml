@@ -13,18 +13,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Enable corepack
-        run: corepack enable
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: "yarn"
+          cache: "pnpm"
       - name: Install dependencies
-        uses: borales/actions-yarn@v5
-        with:
-          cmd: install
+        run: pnpm install
       - name: Check format
-        uses: borales/actions-yarn@v5
-        with:
-          cmd: format:check
+        run: pnpm run format:check

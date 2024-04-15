@@ -9,9 +9,9 @@ import { Options } from "@docusaurus/plugin-content-docs";
 import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
 import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData } from "./src/util/authorUtils";
 
-cacheAuthorData();
-
 const preview = env.VERCEL_ENV === "preview";
+cacheAuthorData(preview);
+
 
 const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
 

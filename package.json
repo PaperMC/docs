@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "docusaurus start --no-open --no-minify",
-    "start": "yarn build && yarn serve",
+    "start": "pnpm run build && pnpm run serve",
     "build": "docusaurus build",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve --no-open",
@@ -22,19 +22,18 @@
     "@docusaurus/plugin-debug": "3.2.1",
     "@docusaurus/plugin-pwa": "3.2.1",
     "@docusaurus/plugin-sitemap": "3.2.1",
+    "@docusaurus/plugin-vercel-analytics": "3.2.1",
     "@docusaurus/theme-classic": "3.2.1",
     "@docusaurus/theme-common": "3.2.1",
     "@docusaurus/theme-mermaid": "3.2.1",
     "@docusaurus/theme-search-algolia": "3.2.1",
-    "@fontsource/jetbrains-mono": "4.5.12",
-    "@gracefullight/docusaurus-plugin-vercel-analytics": "1.0.0",
+    "@fontsource/jetbrains-mono": "5.0.19",
     "@iconify/react": "4.1.1",
     "@mdx-js/react": "3.0.0",
-    "@octokit/types": "13.4.0",
-    "axios": "1.6.3",
-    "clsx": "1.2.1",
+    "axios": "1.6.8",
+    "clsx": "2.1.0",
     "js-yaml": "4.1.0",
-    "prism-react-renderer": "2.0.3",
+    "prism-react-renderer": "^2.3.0",
     "raw-loader": "4.0.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
@@ -43,17 +42,20 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.2.1",
     "@docusaurus/types": "3.2.1",
-    "@fec/remark-a11y-emoji": "3.1.0",
-    "@tsconfig/docusaurus": "1.0.7",
-    "@types/is-ci": "3.0.0",
-    "@types/js-yaml": "^4",
-    "@types/node": "17.0.45",
-    "esbuild-loader": "3.0.1",
-    "esbuild-register": "3.4.2",
+    "@fec/remark-a11y-emoji": "4.0.2",
+    "@tsconfig/docusaurus": "2.0.3",
+    "@types/is-ci": "3.0.4",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "20.12.7",
+    "@types/react": "^18.1.0",
+    "esbuild": "^0.20.0",
+    "esbuild-loader": "4.1.0",
+    "esbuild-register": "3.5.0",
     "is-ci": "3.0.1",
     "prettier": "3.2.5",
-    "regenerator-runtime": "0.13.11",
-    "typescript": "5.0.2"
+    "regenerator-runtime": "0.14.1",
+    "typescript": "5.4.5",
+    "webpack": "^5.88.1"
   },
   "browserslist": {
     "production": [
@@ -68,10 +70,11 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "yarn@4.1.1",
-  "resolutions": {
-    "@docusaurus/plugin-content-docs@3.2.1": "patch:@docusaurus/plugin-content-docs@npm%3A3.2.1#./.yarn/patches/@docusaurus-plugin-content-docs-npm-3.2.1-7bedb7ec1c.patch",
-    "@docusaurus/utils@3.2.1": "patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch",
-    "@docusaurus/utils@3.1.0": "patch:@docusaurus/utils@npm%3A3.2.1#./.yarn/patches/@docusaurus-utils-npm-3.2.1-cfade3be35.patch"
+  "packageManager": "pnpm@8.15.6+sha256.01c01eeb990e379b31ef19c03e9d06a14afa5250b82e81303f88721c99ff2e6f",
+  "pnpm": {
+    "patchedDependencies": {
+      "@docusaurus/plugin-content-docs@3.2.1": "patches/@docusaurus__plugin-content-docs@3.2.1.patch",
+      "@docusaurus/utils@3.2.1": "patches/@docusaurus__utils@3.2.1.patch"
+    }
   }
 }

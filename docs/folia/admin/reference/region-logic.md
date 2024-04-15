@@ -17,7 +17,7 @@ the region z owns the chunk position y.
 ## Regionizer
 
 Each world has its own regionizer. The regionizer is a term used 
-to describe the logic that the class "ThreadedRegionizer" executes 
+to describe the logic that the class `ThreadedRegionizer` executes
 to create, maintain, and destroy regions. Maintenance of regions is 
 done by merging nearby regions together, marking which regions 
 are eligible to be ticked, and finally by splitting any regions 
@@ -62,7 +62,7 @@ when the ticking region finishes ticking.
 
 Both of the second invariant and third invariant combined allow 
 the regionizer to guarantee that a ticking region may create
-and then access chunk holders around it (i.e sync loading) without
+and then access chunk holders around it (i.e. sync loading) without
 the possibility that it steps on another region's toes.
 
 ### Fourth invariant
@@ -81,7 +81,7 @@ with the regionizer's merge and split logic.
 ## Regionizer implementation
 
 The regionizer implementation is a description of how
-the class "ThreadedRegionizer" adheres to the four invariants
+the class `ThreadedRegionizer` adheres to the four invariants
 described previously.
 
 ### Splitting the world into sections
@@ -158,19 +158,19 @@ region coordinate = chunk coordinate >> region section chunk shift.
 
 ### Operation
 
-The regionizer is operated by invoking ThreadedRegionizer#addChunk(x, z) 
-or ThreadedRegionizer#removeChunk(x, z) when a chunk holder is created 
+The regionizer is operated by invoking `ThreadedRegionizer#addChunk(x, z)`
+or `ThreadedRegionizer#removeChunk(x, z)` when a chunk holder is created
 or destroyed. 
 
-Additionally, ThreadedRegion#tryMarkTicking can be used by a caller
+Additionally, `ThreadedRegion#tryMarkTicking` can be used by a caller
 that attempts to move a region from the "ready" state to the "ticking"
 state. It is vital to note that this function will return false if 
 the region is not in the "ready" state, as it is possible
-that even a region considered to be "ready" in the past (i.e scheduled
+that even a region considered to be "ready" in the past (i.e. scheduled
 to tick) may be unexpectedly marked as "transient." Thus, the caller
 needs to handle such cases. The caller that successfully marks 
 a region as ticking must mark it as non-ticking by using
-ThreadedRegion#markNotTicking.
+`ThreadedRegion#markNotTicking`.
 
 The function ThreadedRegion#markNotTicking returns true if the
 region was migrated from "ticking" state to "ready" state, and false
@@ -192,7 +192,7 @@ allows the recalculation logic of a region to be delayed until the region
 contains enough dead sections. However, dead sections are still 
 considered to belong to the region that owns them just as alive sections.
 
-### Addition of chunks (addChunk)
+### Addition of chunks (`addChunk`)
 
 The addition of chunks to the regionizer boils down to two cases:
 
@@ -262,19 +262,19 @@ the region y should be marked as transient if region x contained
 merge later targets that were not y. The downgrading to transient is 
 required to adhere to the second invariant.
 
-### Removal of chunks (removeChunk)
+### Removal of chunks (`removeChunk`)
 
 Removal of chunks from region sections simple updates
 the region sections state to "dead" or "alive", as well as the
 region sections in the empty creation radius. It will not update
 any region state, and nor will it purge region sections.
 
-### Region tick start (tryMarkTicking)
+### Region tick start (`tryMarkTicking`)
 
 The tick start simply migrates the state to ticking, so that
 invariants #2 and #3 can be met. 
 
-### Region tick end (markNotTicking)
+### Region tick end (`markNotTicking`)
 
 At the end of a tick, the region's new state is not immediately known.
 
@@ -289,4 +289,3 @@ to split into smaller regions. Note that it is guaranteed
 that if a region can be possibly split, it must remove dead sections,
 otherwise, this would contradict the rules used to build the region 
 in the first place.
-

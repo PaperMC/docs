@@ -45,8 +45,8 @@ public class VelocityTest {
 The id of the dependency is the same as the other plugin's `id` from its `@Plugin` annotation. This
 is why having a stable plugin ID is important.
 
-That's it! Now, your plugin will require wonderplugin to load, and when it does, it will load
-_after_ wonderplugin.
+That's it! Now, your plugin will require `wonderplugin` to load, and when it does, it will load
+_after_ `wonderplugin`.
 
 To specify multiple dependencies, separate them by commas:
 `dependencies = {@Dependency(id = "wonderplugin"), @Dependency(id = "otherplugin")}`
@@ -82,5 +82,5 @@ Dependencies on other libraries aren't handled by Velocity. You will need to add
 build system.
 
 If your plugin does not shade its dependencies, but rather attaches them from a directory, you may
-use the PluginManager's `addToClasspath` method instead of using reflection to access the
-ClassLoader.
+use the `PluginManager`'s `addToClasspath` method instead of using reflection to access the
+`ClassLoader`.

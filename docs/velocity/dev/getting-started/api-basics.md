@@ -46,7 +46,7 @@ bits:
 public class VelocityTest {
 ```
 
-This tells Velocity that this class contains your plugin (myfirstplugin) so that it can be loaded
+This tells Velocity that this class contains your plugin (`myfirstplugin`) so that it can be loaded
 once the proxy starts up. Velocity will detect where the plugin will reside when you compile your
 plugin.
 
@@ -63,14 +63,14 @@ public VelocityTest(ProxyServer server, Logger logger) {
 ```
 
 This looks like magic! How is Velocity doing this? The answer lies in the `@Inject`, which indicates
-that Velocity should inject a ProxyServer and the Logger when constructing your plugin. These two
+that Velocity should inject a `ProxyServer` and the `Logger` when constructing your plugin. These two
 interfaces will help you out as you begin working with Velocity. We won't talk too much about
 dependency injection: all you need to know is that Velocity will do this.
 
 All you need to do is build your plugin, put it in your `plugins/` directory, and try it! Isn't that
 nice? In the next section you'll learn more about how to use the API.
 
-## Choosing `@Plugin` Information
+## Choosing `@Plugin` information
 
 Choose your plugin's ID wisely. Other plugins will use this ID to depend on yours. If you change it,
 you could break compatibility.
@@ -110,7 +110,7 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 }
 ```
 
-## Getting your Plugin's Directory
+## Getting your plugin's directory
 
 At some point you may need your plugin's directory. To do this, add
 `@DataDirectory Path dataDirectory` to your plugin's constructor parameters:

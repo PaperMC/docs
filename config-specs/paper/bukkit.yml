@@ -51,7 +51,7 @@ settings:
     default: update
     description: >-
       Path to replace new plugin versions with.
-      [See Updating Plugins](/paper/updating#step-2-update-plugins) for more information.
+      See [Updating Plugins](/paper/updating#step-2-update-plugins) for more information.
   use-map-color-cache:
     default: "true"
     description: >-
@@ -65,37 +65,37 @@ spawn-limits:
     default: "15"
     description: >-
       Set the spawn-limits for ambient mobs. This can be overridden by the
-      [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_ambient).
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_ambient).
   animals:
     default: "10"
     description: >-
       Set the spawn-limits for animals. This can be overridden by the
-      [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_creature).
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_creature).
   axolotls:
     default: "5"
     description: >-
       Set the spawn-limits for axolotls. This can be overridden by the
-      [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_axolotls).
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_axolotls).
   monsters:
     default: "70"
     description: >-
       Set the spawn-limits for monsters. This can be overridden by the
-      [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_monster).
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_monster).
   water-ambient:
     default: "20"
     description: >-
       Set the spawn-limits for water ambient mobs. This can be overridden by the
-      [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_water_ambient).
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_water_ambient).
   water-animals:
     default: "5"
     description: >-
       Set the spawn-limits for water animals. This can be overridden by the
-      [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_water_creature).
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_water_creature).
   water-underground-creature:
     default: "5"
     description: >-
       Set the spawn-limits for water underground creatures. This can be
-      overridden by the [paper-world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_underground_water_creature).
+      overridden by the [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_underground_water_creature).
 ticks-per:
   ambient-spawns:
     default: "1"
@@ -142,14 +142,14 @@ worlds:
     biome-provider:
       default: "N/A"
       description: >-
-        The biome provider to use for this world. Plugins must register a BiomeProvider
+        The biome provider to use for this world. Plugins must register a `BiomeProvider`
         to be used here. The format is *plugin-name:extra-parameters* or *plugin-name*
         if no extra parameters are needed. The plugin name is as defined in the
-        plugin.yml or paper-plugin.yml.
+        `plugin.yml` or `paper-plugin.yml`.
     generator:
       default: "N/A"
       description: >-
-        The generator to use for this world. Plugins must register a ChunkGenerator
+        The generator to use for this world. Plugins must register a `ChunkGenerator`
         to be used here. The format is *plugin-name:extra-parameters* or
         *plugin-name* if no extra parameters are needed. The plugin name is as defined
-        in the plugin.yml or paper-plugin.yml.
+        in the `plugin.yml` or `paper-plugin.yml`.

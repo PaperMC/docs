@@ -79,6 +79,8 @@ To maintain consistency and readability across the documentation, please adhere 
 2. **Markdown Format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
 
 3. **Heading Structure**: Use `h1` (#) for the main title, `h2` (##) for section headings, and follow this pattern for subsequent subheadings.
+   Capitalize the first letter of each word in a h1, however, only capitalize the first letter of the first word in h2 and h3 unless~
+   it is a proper noun.
 
 4. **Code Blocks**: When including code snippets or terminal commands, use fenced code blocks with the appropriate syntax highlighting.
 
@@ -89,11 +91,13 @@ To maintain consistency and readability across the documentation, please adhere 
 
 7. **Images**: Include images if necessary to illustrate concepts. Ensure the images are clear and relevant to the content.
 
-8. **Format Code**: After you've made changes, don't forget to run the formatting script with `yarn format`.
+8. **Format Code**: After you've made changes, don't forget to run the formatting script with `pnpm run format`.
 
 9. **Keep It Concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
 
 10. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
+
+11. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
 
 ## Automatic Doc Versioning
 
@@ -147,10 +151,10 @@ of a few ways:
    ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
-for older versions. This is done by using yarn's docusaurus version command:
+for older versions. This is done by using Docusaurus's `version` command:
 
 ```bash
-yarn docusaurus docs:version:paper "1.20"
+pnpm docusaurus docs:version:paper "1.20"
 ```
 
 ## Magic Value Handling

@@ -10,7 +10,9 @@ This will allow other plugins to listen to your custom events and add functional
 
 ## Creating a custom event
 
-To create a custom event, you need to create a class that extends `Event`. Each event requires a `HandlerList` that will contain all the listeners that are listening to that event. The only exception to this requirement is when you have an event class that cannot be fired, but serves as a parent for other events instead.
+To create a custom event, you need to create a class that extends `Event`.
+Each event requires a `HandlerList` that will contain all the listeners that are listening to that event.
+The only exception to this requirement is when you have an event class that cannot be fired, but serves as a parent for other events instead.
 An example of this is the BlockPistonEvent, which cannot be listened to directly.
 
 This list is used to call the listeners when the event is called.
@@ -133,8 +135,7 @@ public class ExamplePlugin extends JavaPlugin {
 ```
 
 When an event is cancellable, `Event#callEvent` will return false if the event was cancelled. This allows you to directly use `callEvent`
-in your if statement, instead of having to check `Cancellable#isCancelled` manually.
-
+in your `if` statement, instead of having to check `Cancellable#isCancelled` manually.
 
 ```java title="ExamplePlugin.java"
 public class ExamplePlugin extends JavaPlugin {

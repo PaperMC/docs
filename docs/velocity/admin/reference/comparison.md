@@ -81,7 +81,7 @@ Most BungeeCord plugins are deeply dependent on the specific behaviors and quirk
 exposes, which Velocity cannot perfectly emulate. As a result, the number of changes one can make
 to BungeeCord and have plugins retain the same behavior is minimal.
 
-Suppose you have play a video game published by Company A. It runs on an operating system made by Company B.
+Suppose you have played a video game published by Company A. It runs on an operating system made by Company B.
 One day, Company B releases a new version of their operating system, and you upgrade to it, only to recoil
 in horror as that video game no longer works. (Worse, Studio A might be out of business at that point, so
 no patch is forthcoming.) Who do you blame, Company A for producing a defective product, or Company B for
@@ -102,7 +102,7 @@ project. We could have based Velocity on the BungeeCord API (or a derivative the
 Waterfall API) instead.
 
 This has the same problems as Waterfall, perhaps more as we would need to emulate _all_ the behavior
-of the BungeeCord API independently. The Wine project has been trying over over 3 decades to provide
+of the BungeeCord API independently. The Wine project has been trying for over 3 decades to provide
 a shim layer that allows Windows programs to run on Linux and other operating systems. Their efforts
 remain ongoing to this day. It is hard to emulate the behavior of another operating system's environment.
 The authors of ReactOS have it even worse, trying to emulate all the quirks of Windows, including its

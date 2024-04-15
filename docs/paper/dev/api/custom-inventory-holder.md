@@ -3,32 +3,28 @@ slug: /dev/custom-inventory-holder
 description: How to use a custom InventoryHolder to identify custom inventories.
 ---
 
-# Custom InventoryHolder
+# Custom `InventoryHolder`
 
-Custom InventoryHolders can be used to identify your plugin's inventories in events.
+`InventoryHolder`s are a way to identify your plugin's inventories in events.
 
-## Why use an InventoryHolder?
+## Why use an `InventoryHolder`?
 
-Custom InventoryHolders simplify the steps you need to do to make sure an inventory was created by your plugin.
+`InventoryHolder`s simplify the steps you need to do to make sure an inventory was created by your plugin.
 
-:::info
+Using inventory names for identification is unreliable, as other plugins, or even players, can create inventories with names the exact same as yours.
+With components, you also need to make sure the name is exactly the same or serialize it to other formats.
 
-Using inventory names for identification is unreliable as other plugins can create inventories with names exactly as yours
-and with components you need to make sure the name is exactly the same or serialize it to other formats.
+Custom `InventoryHolder`s have no such downsides and by using them you're guaranteed to have methods available to handle your inventory.
 
-Custom InventoryHolders have no such downsides and by using them you're guaranteed to have methods available to handle your inventory.
+## Creating a custom holder
 
-:::
-
-## Creating a custom InventoryHolder
-
-InventoryHolder is an interface that we must implement.
+The first step is to implement the `InventoryHolder` interface.
 We can do this the following way: create a new class that will create our `Inventory` in the constructor.
 
 :::info
 
 The constructor takes your main plugin class as an argument in order to create the `Inventory`.
-If you wish, you can use the static method `Bukkit.createInventory(InventoryHolder, int)` instead and remove the argument.
+If you wish, you can use the static method `Bukkit#createInventory(InventoryHolder, int)` instead and remove the argument.
 
 :::
 
@@ -90,12 +86,12 @@ public void onInventoryClick(InventoryClickEvent event) {
 }
 ```
 
-## Storing data on the custom InventoryHolder
+## Storing data on the holder
 
-You can store extra data for your inventories on the custom InventoryHolder by adding fields and methods to your class.
+You can store extra data for your inventories on the `InventoryHolder` by adding fields and methods to your class.
 
 Let's make an inventory that counts the amount of times we clicked a stone inside it.
-First let's modify our `MyInventory` class a little:
+First, let's modify our `MyInventory` class a little:
 
 ```java
 public class MyInventory implements InventoryHolder {

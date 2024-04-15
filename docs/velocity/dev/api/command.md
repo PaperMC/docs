@@ -5,12 +5,12 @@ description: How to create commands within Velocity.
 
 # The Command API
 
-The Command API lets you create commands that can be executed by a player connected to the proxy or
+The command API lets you create commands that can be executed by a player connected to the proxy or
 the console.
 
 ## Creating a command
 
-Each command class needs to implement a `Command` subinterface. The choice depends on the type of
+Each command class needs to implement a `Command` sub-interface. The choice depends on the type of
 arguments and the granularity of suggestions provided to the client. These include:
 
 ### `BrigadierCommand`
@@ -105,7 +105,7 @@ public final class TestBrigadierCommand {
 }
 ```
 
-Brigadier commands have full backwards-compatibility with 1.12.2 and lower versions.
+Brigadier commands have full backward compatibility with 1.12.2 and lower versions.
 
 Custom plugin command argument types are not supported in Velocity, as they would require the client
 to also support them. We recommend sticking to the predefined Brigadier types provided.

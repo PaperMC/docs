@@ -20,7 +20,7 @@ replace any JAR in a running server, be that plugins, or Paper itself.
 
 :::tip
 
-If you are using a shared host, your host may provide a built-in way to backup. Consult their
+If you are using a shared host, your host may provide a built-in way to back up. Consult their
 documentation before continuing.
 
 :::
@@ -37,7 +37,7 @@ functioning backups is essential to every server, big or small. The main things 
 You should aim to have backups from multiple times, and keep them in a safe place. A common approach
 is to keep rolling backups, so you always have a certain number of backups from a set amount of time.
 
-## Step 2. Update Plugins
+## Step 2. Update plugins
 
 Just like it's important to update Paper, it's equally important to keep plugins up to date. You
 never know what plugin authors may be working on, be it bugfixes or new features.
@@ -77,7 +77,7 @@ these are valid update strategies.
 
 :::caution[Automatic Updates]
 
-While it may be convenient to install updates automatically (and Paper's [downloads api](https://api.papermc.io/docs) allows you
+While it may be convenient to install updates automatically (and Paper's [downloads API](/misc/downloads-api) allows you
 to with ease), doing so is not recommended by Paper due to the possibility of plugin conflicts or
 other issues that you may not know about. Always be present during updates, and keep a careful watch
 on your server's log after the fact.

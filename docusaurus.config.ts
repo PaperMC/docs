@@ -12,7 +12,6 @@ import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData } from "./src
 const preview = env.VERCEL_ENV === "preview";
 cacheAuthorData(preview);
 
-
 const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {

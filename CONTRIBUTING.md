@@ -91,7 +91,7 @@ To maintain consistency and readability across the documentation, please adhere 
 
 7. **Images**: Include images if necessary to illustrate concepts. Ensure the images are clear and relevant to the content.
 
-8. **Format Code**: After you've made changes, don't forget to run the formatting script with `yarn format`.
+8. **Format Code**: After you've made changes, don't forget to run the formatting script with `pnpm run format`.
 
 9. **Keep It Concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
 
@@ -151,10 +151,10 @@ of a few ways:
    ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
-for older versions. This is done by using yarn's docusaurus version command:
+for older versions. This is done by using Docusaurus's `version` command:
 
 ```bash
-yarn docusaurus docs:version:paper "1.20"
+pnpm docusaurus docs:version:paper "1.20"
 ```
 
 ## Magic Value Handling

@@ -1,4 +1,4 @@
-.yarn
+pnpm-lock.yaml
 docs/versioned
 *.md
 *.mdx

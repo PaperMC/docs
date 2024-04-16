@@ -48,7 +48,7 @@ async function cacheUsernameFromCommit(commit: string) {
 }
 
 export async function cacheAuthorData(isPreview: boolean) {
-  // TODO: dirty hack to make sure it's only run before `parseFrontMatter` call
+  // Only Render in Production and not cache in every invocation of importing docusaurus.config.ts
   if (isPreview || !new Error().stack.includes("async loadSite")) {
     return;
   }

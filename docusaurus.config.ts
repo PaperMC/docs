@@ -90,7 +90,7 @@ const config: Config = {
       };
       if (process.env.NODE_ENV !== "development") {
         const { commit } = await getFileCommitHash(params.filePath);
-        let username = commitCache.get(commit);
+        const username = commitCache.get(commit);
         author = {
           commit,
           username: username ?? AUTHOR_FALLBACK.username,

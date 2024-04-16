@@ -6,8 +6,11 @@ import footer from "./config/footer.config";
 import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
+import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
+import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData } from "./src/util/authorUtils";
 
 const preview = env.VERCEL_ENV === "preview";
+cacheAuthorData(preview);
 
 const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
 
@@ -80,6 +83,28 @@ const config: Config = {
       headingIds: false,
     },
     format: "detect",
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      let author: AuthorData = {
+        ...AUTHOR_FALLBACK,
+      };
+      if (process.env.NODE_ENV !== "development") {
+        const { commit } = await getFileCommitHash(params.filePath);
+        const username = commitCache.get(commit);
+        author = {
+          commit,
+          username: username ?? AUTHOR_FALLBACK.username,
+        };
+      }
+
+      return {
+        ...result,
+        frontMatter: {
+          ...result.frontMatter,
+          author: author,
+        },
+      };
+    },
   },
 
   themes: [

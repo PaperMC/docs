@@ -642,6 +642,11 @@ environment:
   disable-thunder:
     default: "false"
     description: Disables thunderstorms
+  locate-structures-outside-world-border:
+    default: "false"
+    description: >-
+      If the server should be able to locate structures in chunks that are outside
+      the world border.
   frosted-ice:
     delay:
       max:

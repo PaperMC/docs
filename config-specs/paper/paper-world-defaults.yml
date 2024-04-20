@@ -642,6 +642,11 @@ environment:
   disable-thunder:
     default: "false"
     description: Disables thunderstorms
+  find-structures-outside-world-border:
+    default: "false"
+    description: >-
+      If items such as treasure maps or ender eyes should lead to structures outside
+      the world border
   frosted-ice:
     delay:
       max:

@@ -17,7 +17,15 @@ const misc: SidebarsConfig = {
           label: "Tools",
           collapsed: false,
           collapsible: true,
-          items: ["tools/start-script-gen"],
+          link: {
+            type: "doc",
+            id: "tools/index",
+          },
+          items: [
+            "tools/start-script-gen",
+            "tools/minimessage-web-editor",
+            "tools/item-command-converter"
+          ],
         },
         "java-install",
         "downloads-api",

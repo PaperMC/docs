@@ -235,29 +235,3 @@ input[type="range"]:focus::-webkit-slider-thumb {
   display: flex;
   justify-content: center;
 }
-
-.copy-button button {
-  background-color: rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--background-gen-color-active);
-  border-radius: 5px;
-  padding: 10px;
-  color: var(--gen-text-color);
-  cursor: pointer;
-  font-size: 15px;
-  width: fit-content;
-  transition:
-    background-color 0.4s ease-out,
-    color 0.4s ease-out,
-    opacity 1s ease-in-out;
-  margin: 5px 5px 0 0;
-}
-
-.copy-button button:hover {
-  background-color: var(--background-gen-color-active);
-}
-
-.copy-button button.success {
-  background-color: green;
-  color: white;
-  opacity: 0;
-}

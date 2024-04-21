@@ -40,6 +40,7 @@ const config: Config = {
   baseUrlIssueBanner: false,
   clientModules: [
     require.resolve("./src/css/custom.css"),
+    require.resolve("./src/css/ui.css"),
     require.resolve("@fontsource/jetbrains-mono/index.css"),
   ],
 

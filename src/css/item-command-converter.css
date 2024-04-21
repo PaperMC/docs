@@ -1,0 +1,17 @@
+.item-command-converter {
+  background-color: var(--background-gen-color);
+  border-radius: 10px;
+  padding: 20px;
+  color: var(--gen-text-color);
+  width: 100%;
+}
+
+.item-command-converter label {
+  display: block;
+  margin-top: 10px;
+}
+
+.item-command-converter textarea {
+  padding: 10px;
+  margin-block: 10px;
+}

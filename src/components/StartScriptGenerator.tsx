@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import "@site/src/css/start-script-generator.css";
 import clsx from "clsx";
+import Button from "@site/src/components/ui/Button";
 
 const markerPoints = [4, 8, 12, 16, 20];
 
@@ -109,6 +110,8 @@ const StartScriptGenerator: React.FC = () => {
   const [autoRestart, setAutoRestart] = useState(false);
   const [platform, setPlatform] = useState("linux");
   const dropdownRef = useRef(null);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
 
   const handleClickOutside = (event: { target: EventTarget | null }) => {
     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -116,11 +119,10 @@ const StartScriptGenerator: React.FC = () => {
     }
   };
 
-  const handleGreenButtonHighlight = (element: HTMLElement | null) => {
-    if (!element) return;
-    element.classList.add("success");
+  const handleGreenButtonHighlight = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setState(true)
     setTimeout(function () {
-      element.classList.remove("success");
+      setState(false)
     }, 500);
   };
 
@@ -128,11 +130,11 @@ const StartScriptGenerator: React.FC = () => {
     navigator.clipboard.writeText(
       generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)
     );
-    handleGreenButtonHighlight(document.getElementById("clipboard-copy-button"));
+    handleGreenButtonHighlight(setCopySuccess);
   };
 
   const handleDownload = () => {
-    handleGreenButtonHighlight(document.getElementById("contents-download-button"));
+    handleGreenButtonHighlight(setDownloadSuccess);
     const blob = new Blob(
       [generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)],
       {
@@ -273,13 +275,9 @@ const StartScriptGenerator: React.FC = () => {
           id={"output-command-text"}
           readOnly
         />
-        <div className={"copy-button"}>
-          <button id={"clipboard-copy-button"} onClick={handleCopyToClipboard}>
-            Copy to Clipboard
-          </button>
-          <button id={"contents-download-button"} onClick={handleDownload}>
-            Download
-          </button>
+        <div className="copy-button">
+          <Button label="Copy to Clipboard" onClick={handleCopyToClipboard} id="clipboard-copy-button" success={copySuccess} />
+          <Button label="Download" onClick={handleDownload} id="contents-download-button" success={downloadSuccess} />
         </div>
       </div>
     </div>

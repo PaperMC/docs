@@ -120,9 +120,9 @@ const StartScriptGenerator: React.FC = () => {
   };
 
   const handleGreenButtonHighlight = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
-    setState(true)
+    setState(true);
     setTimeout(function () {
-      setState(false)
+      setState(false);
     }, 500);
   };
 
@@ -276,8 +276,18 @@ const StartScriptGenerator: React.FC = () => {
           readOnly
         />
         <div className="copy-button">
-          <Button label="Copy to Clipboard" onClick={handleCopyToClipboard} id="clipboard-copy-button" success={copySuccess} />
-          <Button label="Download" onClick={handleDownload} id="contents-download-button" success={downloadSuccess} />
+          <Button
+            label="Copy to Clipboard"
+            onClick={handleCopyToClipboard}
+            id="clipboard-copy-button"
+            success={copySuccess}
+          />
+          <Button
+            label="Download"
+            onClick={handleDownload}
+            id="contents-download-button"
+            success={downloadSuccess}
+          />
         </div>
       </div>
     </div>

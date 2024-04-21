@@ -11,9 +11,9 @@ const ItemCommandConverter: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const toggleState = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
-    setState(true)
+    setState(true);
     setTimeout(function () {
-      setState(false)
+      setState(false);
     }, 500);
   };
 
@@ -23,13 +23,15 @@ const ItemCommandConverter: React.FC = () => {
     try {
       const response = await fetch("https://item-converter.papermc.io/convert-command", {
         method: "POST",
-        body: input
+        body: input,
       });
       if (response.status === 200) {
         setOutput(await response.text());
         toggleState(setConvertSuccess);
       } else {
-        console.warn("Failed to convert command: " + response.status + ": " + await response.text());
+        console.warn(
+          "Failed to convert command: " + response.status + ": " + (await response.text())
+        );
         toggleState(setConvertError);
       }
     } catch (error) {
@@ -44,17 +46,28 @@ const ItemCommandConverter: React.FC = () => {
     toggleState(setCopySuccess);
   };
 
-  return (<div className="item-command-converter">
+  return (
+    <div className="item-command-converter">
       <label>
         Input:
-        <textarea placeholder="Enter your pre 1.20.5 command here..." value={input} onChange={(event) => setInput(event.target.value)} />
+        <textarea
+          placeholder="Enter your pre 1.20.5 command here..."
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+        />
       </label>
-      <Button label="Convert" success={convertSuccess} error={convertError} onClick={convert} disabled={loading}/>
+      <Button
+        label="Convert"
+        success={convertSuccess}
+        error={convertError}
+        onClick={convert}
+        disabled={loading}
+      />
       <label>
         Output:
         <textarea placeholder={"Press 'Convert' to convert the command."} readOnly value={output} />
       </label>
-      <Button label="Copy output" success={copySuccess} onClick={copy} disabled={loading}/>
+      <Button label="Copy output" success={copySuccess} onClick={copy} disabled={loading} />
     </div>
   );
 };

@@ -24,7 +24,7 @@ const misc: SidebarsConfig = {
           items: [
             "tools/start-script-gen",
             "tools/minimessage-web-editor",
-            "tools/item-command-converter"
+            "tools/item-command-converter",
           ],
         },
         "java-install",

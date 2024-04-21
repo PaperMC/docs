@@ -27,16 +27,16 @@
     "@docusaurus/theme-common": "3.2.1",
     "@docusaurus/theme-mermaid": "3.2.1",
     "@docusaurus/theme-search-algolia": "3.2.1",
-    "@fontsource/jetbrains-mono": "5.0.19",
+    "@fontsource/jetbrains-mono": "5.0.20",
     "@iconify/react": "4.1.1",
-    "@mdx-js/react": "3.0.0",
+    "@mdx-js/react": "3.0.1",
     "axios": "1.6.8",
     "clsx": "2.1.0",
     "js-yaml": "4.1.0",
-    "prism-react-renderer": "^2.3.0",
+    "prism-react-renderer": "^2.3.1",
     "raw-loader": "4.0.2",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-markdown": "8.0.7"
   },
   "devDependencies": {
@@ -47,15 +47,15 @@
     "@types/is-ci": "3.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "20.12.7",
-    "@types/react": "^18.1.0",
-    "esbuild": "^0.20.0",
+    "@types/react": "^18.2.79",
+    "esbuild": "^0.20.2",
     "esbuild-loader": "4.1.0",
     "esbuild-register": "3.5.0",
     "is-ci": "3.0.1",
     "prettier": "3.2.5",
     "regenerator-runtime": "0.14.1",
     "typescript": "5.4.5",
-    "webpack": "^5.88.1"
+    "webpack": "^5.91.0"
   },
   "browserslist": {
     "production": [

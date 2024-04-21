@@ -1,5 +1,6 @@
 ---
 slug: /tools/minimessage-web-editor
+title: MiniMessage Web Editor
 description: A web-based editor for creating and previewing MiniMessage-formatted text.
 ---
 
@@ -8,4 +9,4 @@ description: A web-based editor for creating and previewing MiniMessage-formatte
 The MiniMessage Web Editor is a web-based editor for creating and previewing MiniMessage-formatted text.<br />
 It is hosted here: [MiniMessage Web Editor](https://webui.advntr.dev/).
 
-![Image of adventure webui](/img/adventure-webui.png)
+![Image of adventure webui](./assets/adventure-webui.png)

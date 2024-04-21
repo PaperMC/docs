@@ -8,6 +8,9 @@
 
 .item-command-converter label {
   display: block;
+}
+
+.item-command-converter label:nth-child(3) {
   margin-top: 10px;
 }
 

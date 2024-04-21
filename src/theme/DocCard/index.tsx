@@ -7,18 +7,14 @@ import { translate } from "@docusaurus/Translate";
 
 import type { Props } from "@theme/DocCard";
 import Heading from "@theme/Heading";
-import type { PropSidebarItemCategory, PropSidebarItemLink } from "@docusaurus/plugin-content-docs";
+import type {
+  PropSidebarItemCategory,
+  PropSidebarItemHtml,
+  PropSidebarItemLink,
+} from "@docusaurus/plugin-content-docs";
 
 import styles from "./styles.module.css";
 import { Icon } from "@iconify/react";
-
-function CardContainer({ href, children }: { href: string; children: ReactNode }): JSX.Element {
-  return (
-    <Link href={href} className={clsx("card padding--lg", styles.cardContainer)}>
-      {children}
-    </Link>
-  );
-}
 
 function CardLayout({
   href,
@@ -32,16 +28,23 @@ function CardLayout({
   description?: string;
 }): JSX.Element {
   return (
-    <CardContainer href={href}>
-      <Heading as="h2" className={clsx("text--truncate", styles.cardTitle)} title={title}>
-        {icon} {title}
-      </Heading>
-      {description && (
-        <p className={clsx("text--truncate", styles.cardDescription)} title={description}>
-          {description}
-        </p>
-      )}
-    </CardContainer>
+    <Link href={href} className={clsx("padding-horiz--md", styles.cardContainer)}>
+      {icon}
+      <div className={clsx("padding-left--md")}>
+        <Heading
+          as="h2"
+          className={clsx("margin-bottom--sm", styles.linkBlue, styles.cardTitle)}
+          title={title}
+        >
+          {title}
+        </Heading>
+        {description && (
+          <p className={clsx(styles.cardDescription)} title={description}>
+            {description}
+          </p>
+        )}
+      </div>
+    </Link>
   );
 }
 
@@ -56,7 +59,13 @@ function CardCategory({ item }: { item: PropSidebarItemCategory }): JSX.Element 
   return (
     <CardLayout
       href={href}
-      icon="🗃️"
+      icon={
+        <Icon
+          className={clsx("margin-right--sm", styles.cardIcon)}
+          icon="mdi:format-list-bulleted"
+          width={24}
+        />
+      }
       title={item.label}
       description={
         item.description ??
@@ -80,11 +89,23 @@ type EmojiPropsSidebarItemLink = PropSidebarItemLink & {
 
 function CardLink({ item }: { item: EmojiPropsSidebarItemLink }): JSX.Element {
   const icon = item.customEmoji ? (
-    <Icon className={"margin-right--sm"} icon={item.customEmoji} height={25} />
+    <Icon
+      className={clsx("margin-right--sm", styles.cardIcon)}
+      icon={item.customEmoji}
+      width={24}
+    />
   ) : isInternalUrl(item.href) ? (
-    "📄️"
+    <Icon
+      className={clsx("margin-right--sm", styles.cardIcon)}
+      icon="mdi:paper-outline"
+      width={24}
+    />
   ) : (
-    "🔗"
+    <Icon
+      className={clsx("margin-right--sm", styles.cardIcon)}
+      icon="mdi:format-list-bulleted"
+      width={24}
+    />
   );
   const doc = useDocById(item.docId ?? undefined);
   return (
@@ -97,12 +118,18 @@ function CardLink({ item }: { item: EmojiPropsSidebarItemLink }): JSX.Element {
   );
 }
 
+function Header({ item }: { item: PropSidebarItemHtml }): JSX.Element {
+  return <h2>{item.value}</h2>;
+}
+
 export default function DocCard({ item }: Props): JSX.Element {
   switch (item.type) {
     case "link":
       return <CardLink item={item} />;
     case "category":
       return <CardCategory item={item} />;
+    case "html":
+      return <Header item={item} />;
     default:
       throw new Error(`unknown item type ${JSON.stringify(item)}`);
   }

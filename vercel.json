@@ -35,6 +35,18 @@
     {
       "source": "/paper/configuration",
       "destination": "/paper/reference/configuration"
+    },
+    {
+      "source": "/paper/dev/getting-started",
+      "destination": "/paper/dev"
+    },
+    {
+      "source": "/paper/dev/api",
+      "destination": "/paper/dev"
+    },
+    {
+      "source": "/paper/dev/misc",
+      "destination": "/paper/dev"
     }
   ],
   "headers": [

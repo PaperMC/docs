@@ -46,6 +46,35 @@ html[data-theme="dark"] {
   --eol-message-background-color: rgb(92, 15, 18);
 }
 
+.theme-doc-sidebar-item-link > a::before,
+.theme-doc-sidebar-item-category > div > a::before {
+  margin-right: 0.3rem;
+  height: 24px;
+  width: 24px;
+}
+
+.theme-doc-sidebar-item-link > a::before {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iYmxhY2siIGQ9Ik0xNCAySDZhMiAyIDAgMCAwLTIgMnYxNmEyIDIgMCAwIDAgMiAyaDEyYTIgMiAwIDAgMCAyLTJWOHptNCAxOEg2VjRoN3Y1aDV6Ii8+PC9zdmc+);
+}
+
+.theme-doc-sidebar-item-category > div > a::before {
+  content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0iYmxhY2siIGQ9Ik03IDVoMTR2Mkg3em0wIDh2LTJoMTR2MnpNNCA0LjVBMS41IDEuNSAwIDAgMSA1LjUgNkExLjUgMS41IDAgMCAxIDQgNy41QTEuNSAxLjUgMCAwIDEgMi41IDZBMS41IDEuNSAwIDAgMSA0IDQuNW0wIDZBMS41IDEuNSAwIDAgMSA1LjUgMTJBMS41IDEuNSAwIDAgMSA0IDEzLjVBMS41IDEuNSAwIDAgMSAyLjUgMTJBMS41IDEuNSAwIDAgMSA0IDEwLjVNNyAxOXYtMmgxNHYyem0tMy0yLjVBMS41IDEuNSAwIDAgMSA1LjUgMThBMS41IDEuNSAwIDAgMSA0IDE5LjVBMS41IDEuNSAwIDAgMSAyLjUgMThBMS41IDEuNSAwIDAgMSA0IDE2LjUiLz48L3N2Zz4=);
+}
+
+@media (prefers-color-scheme: dark) {
+  .theme-doc-sidebar-item-link > a::before {
+    content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik0xNCAySDZhMiAyIDAgMCAwLTIgMnYxNmEyIDIgMCAwIDAgMiAyaDEyYTIgMiAwIDAgMCAyLTJWOHptNCAxOEg2VjRoN3Y1aDV6Ii8+PC9zdmc+);
+  }
+
+  .theme-doc-sidebar-item-category > div > a::before {
+    content: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0id2hpdGUiIGQ9Ik03IDVoMTR2Mkg3em0wIDh2LTJoMTR2MnpNNCA0LjVBMS41IDEuNSAwIDAgMSA1LjUgNkExLjUgMS41IDAgMCAxIDQgNy41QTEuNSAxLjUgMCAwIDEgMi41IDZBMS41IDEuNSAwIDAgMSA0IDQuNW0wIDZBMS41IDEuNSAwIDAgMSA1LjUgMTJBMS41IDEuNSAwIDAgMSA0IDEzLjVBMS41IDEuNSAwIDAgMSAyLjUgMTJBMS41IDEuNSAwIDAgMSA0IDEwLjVNNyAxOXYtMmgxNHYyem0tMy0yLjVBMS41IDEuNSAwIDAgMSA1LjUgMThBMS41IDEuNSAwIDAgMSA0IDE5LjVBMS41IDEuNSAwIDAgMSAyLjUgMThBMS41IDEuNSAwIDAgMSA0IDE2LjUiLz48L3N2Zz4=);
+  }
+}
+
+.theme-doc-sidebar-menu > li:first-child > a::before {
+  display: none;
+}
+
 .eol-message {
   width: 100%;
   min-height: 5rem;
@@ -62,6 +91,11 @@ html[data-theme="dark"] {
 
 .eol-message p {
   margin: 0;
+}
+
+.sidebarTitle {
+  font-size: 0.8rem;
+  font-weight: bold;
 }
 
 .button.button--secondary {

@@ -51,7 +51,7 @@ const ItemCommandConverter: React.FC = () => {
       <label>
         Input:
         <textarea
-          placeholder="Enter your pre 1.20.5 command here..."
+          placeholder="Enter your pre 1.20.4 command here..."
           value={input}
           onChange={(event) => setInput(event.target.value)}
         />

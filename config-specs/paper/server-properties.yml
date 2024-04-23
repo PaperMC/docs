@@ -1,3 +1,6 @@
+accept-transfers:
+  default: "false"
+  description: "Whether this server accepts transfers from other servers using the transfer command/packet. If this is set to false, the server will disconnect the client."
 allow-flight:
   default: "false"
   description: >
@@ -167,6 +170,11 @@ rcon.password:
 rcon.port:
   default: "25575"
   description: "The port to start the rcon server on."
+region-file-compression:
+  default: "deflate"
+  description: >
+    Specifies the compression type used to compress region files. Possible values are: "deflate", "lz4" and "none".
+    If set to "none", region files will take up significantly more disk space, but it might make sense together with filesystem-level compression.
 require-resource-pack:
   default: "false"
   description: "If true, a player must have the given resource pack to connect. They will be kicked if they do not have it."

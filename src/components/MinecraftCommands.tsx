@@ -56,7 +56,7 @@ export const commands: CommandData[] = [
   ["place", [], 2],
   ["playsound", [], 2],
   ["publish", [], 4],
-  ["random", [], "yes without sequence argument, no with sequence argument"],
+  ["random", [], "Yes without sequence argument, No with sequence argument."],
   ["recipe", [], 2],
   ["reload", [], 2],
   ["return", [], 2],
@@ -128,7 +128,7 @@ export function CommandsPermissionsTable({ data }: CommandsPermissionsTableProps
           </td>
           <td>{listAliases(x[1])}</td>
           <td>minecraft.command.{x[0]}</td>
-          <td>{typeof x[2] === "string" ? x[2] : x[2] == 0 ? "yes" : "no"}</td>
+          <td>{typeof x[2] === "string" ? x[2] : x[2] == 0 ? "Yes" : "No"}</td>
         </tr>
       ))}
     </table>

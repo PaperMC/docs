@@ -17,4 +17,6 @@
 .item-command-converter textarea {
   padding: 10px;
   margin-block: 10px;
+  resize: vertical;
+  min-height: 100px;
 }

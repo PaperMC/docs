@@ -8,9 +8,9 @@
   font-size: 15px;
   width: fit-content;
   transition:
-    background-color 0.4s ease-out,
-    color 0.4s ease-out,
-    opacity 1s ease-in-out;
+    background-color 0.2s ease-out,
+    color 0.2s ease-out,
+    opacity 0.2s ease-out;
   margin: 5px 5px 0 0;
 }
 
@@ -21,10 +21,11 @@
 .btn.success {
   background-color: green;
   color: white;
-  opacity: 0;
+  opacity: 1;
 }
+
 .btn.error {
   background-color: red;
   color: white;
-  opacity: 0;
+  opacity: 1;
 }

@@ -165,7 +165,7 @@ multiple places, and if they change, it is important to change them in all place
 our `Property` component to embed these values into the documentation. An example of this would be:
 
 ```jsx
-<Property name="PAPER_JAVA_RECOMMENDED" />
+<Property name="PAPER_JAVA_MIN" />
 ```
 
 This will embed the value of the property into the documentation, and if it changes, it will be changed in all places.

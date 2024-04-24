@@ -205,3 +205,8 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `false`
 - **description**: Allows cyclic plugin loading. See [here](paper-plugins.md#cyclic-plugin-loading) for more info.
+
+#### Paper.DisableCommandConverter:
+
+- **default**: `false`
+- **description**: Disables Paper's automatic upgrading of commands, including items with custom data defined in command blocks and other places that may contain commands, to the new component format introduced in version 1.20.5.

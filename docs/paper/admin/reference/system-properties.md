@@ -210,3 +210,8 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `false`
 - **description**: Disables Paper's automatic upgrading of commands, including items with custom data defined in command blocks and other places that may contain commands, to the new component format introduced in version 1.20.5.
+
+#### paper.disable-plugin-rewriting
+
+- **default**: `false`
+- **description**: Disables plugin remapping and everything involving automatic plugin conversion by commodore.

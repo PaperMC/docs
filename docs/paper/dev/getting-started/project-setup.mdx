@@ -191,23 +191,23 @@ If everything went well, you should see something like this:
 
 As of 1.20.5, Paper will be shipping with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
 If you are using Spigot/Bukkit plugins, your plugin will automatically be remapped to Spigot mappings.
-This means that the server will have to deobfuscate and remap the plugin jar every time it is loaded for the first time.
+This means that the server will have to deobfuscate and remap the plugin JAR every time it is loaded for the first time.
 If you want to skip remapping, you need to add the following code to your `build.gradle(.kts)`.
 
 :::note[Paper plugins]
 
-if you are using paper plugins this step is not needed as plugins will be assumed to be Mojang-mapped.
+If you are using Paper plugins, this step is not needed as plugins will be assumed to be Mojang-mapped.
 
 :::
 
-```groovy title="build.gradle(.kts)"
+```kotlin title="build.gradle.kts"
 tasks.jar {
     manifest {
         attributes["paperweight-mappings-namespace"] = "mojang"
     }
 }
 
-//if you have shadowJar configured
+// if you have shadowJar configured
 tasks.shadowJar {
     manifest {
         attributes["paperweight-mappings-namespace"] = "mojang"

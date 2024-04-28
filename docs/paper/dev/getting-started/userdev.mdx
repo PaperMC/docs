@@ -26,8 +26,8 @@ server.
 
 :::caution[1.20.5]
 
-As of Minecraft version 1.20.5 Paper will be shipped with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings as we have traditionally done since Paper 1.17.
-See [Mojang-Mappings](#1205) for more details.
+As of Minecraft version 1.20.5, Paper will be shipped with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings as we have traditionally done since Paper 1.17.
+See [here](#1205) for more details.
 :::
 
 :::caution
@@ -110,17 +110,17 @@ tasks.assemble {
 ```
 
 ## 1.20.5
-As of 1.20.5 Paper will be shipping with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings as we have traditionally done since Paper 1.17.
-Additionally. CraftBukkit classes will no longer be relocated into a versioned package.
+As of 1.20.5, Paper will be shipping with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings as we have traditionally done since Paper 1.17.
+Additionally, CraftBukkit classes will no longer be relocated into a versioned package.
 This requires plugins to be deobfuscated before loading when necessary.
 
 Most of this process is done automatically by paperweight but there are some important things to know when using NMS from now on.
 
-### Default Mappings Assumption
+### Default mappings assumption
 * By default, all Spigot/Bukkit plugins will be assumed to be Spigot-mapped if they do not specify their mappings namespace in the manifest. Conversely, all Paper plugins will be assumed to be Mojang-mapped if they do not specify their mappings namespace in the manifest.
 * Spigot-mapped plugins will need to be deobfuscated on first load, Mojang-mapped plugins will not.
 
-If you want to map your plugin to Mojang-mappings you need to add the following code to your build script:
+If you want to map your plugin with Mojang mappings, you need to add the following code to your build script:
 
 :::note
 
@@ -128,8 +128,8 @@ If you still want to target Spigot, you do not have to change anything.
 
 :::
 
-```kotlin title="build.gadle.kts"
+```kotlin title="build.gradle.kts"
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 ```
 
-additionally you need to remove all `dependsOn(reobfJar)` lines.
+Additionally, you need to remove all `dependsOn(reobfJar)` lines.

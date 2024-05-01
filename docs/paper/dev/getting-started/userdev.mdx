@@ -125,7 +125,7 @@ If you want to map your plugin with Mojang mappings, you need to add the followi
 
 :::note
 
-You only have to change this setting if you are using Bukkit/Spigot plugins. Paper plugins are already assumed to be mojang mapped.
+You only have to change this setting if you are using Bukkit/Spigot plugins. Paper plugins are already assumed to be Mojang-mapped.
 
 :::
 
@@ -136,7 +136,7 @@ paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArt
 Additionally, you need to remove all `dependsOn(reobfJar)` lines.
 
 ### Spigot mappings
-If you are using Paper plugins but want to explicitly use spigot mappings, you need to change the property to:
+If you are using Paper plugins but want to explicitly use Spigot mappings, you need to change the property to:
 
 ```kotlin title="build.gradle.kts"
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION

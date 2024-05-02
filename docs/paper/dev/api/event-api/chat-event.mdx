@@ -1,27 +1,27 @@
 ---
 slug: /dev/chat-events
-description: An outline on the AsyncChatEvent and how to handle it
+description: An outline on AsyncChatEvent and how to handle it.
 ---
 
 # Chat Events
 
 The chat event has evolved a few times over the years.
-This guide will explain how to properly use the new <VersionedJavaDocLink target={"/io/papermc/paper/event/player/AsyncChatEvent.html"}>`AsyncChatEvent`</VersionedJavaDocLink>
-and its <VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html"}>`ChatRenderer`</VersionedJavaDocLink>.
-The <VersionedJavaDocLink target={"/io/papermc/paper/event/player/AsyncChatEvent.html"}>`AsyncChatEvent`</VersionedJavaDocLink>
-is an improved version of the old <VersionedJavaDocLink target={"/org/bukkit/event/player/AsyncPlayerChatEvent.html"}>`AsyncPlayerChatEvent`</VersionedJavaDocLink>
+This guide will explain how to properly use the new <Javadoc name={"io.papermc.paper.event.player.AsyncChatEvent"}>`AsyncChatEvent`</Javadoc>
+and its <Javadoc name={"io.papermc.paper.chat.ChatRenderer"}>`ChatRenderer`</Javadoc>.
+The <Javadoc name={"io.papermc.paper.event.player.AsyncChatEvent"}>`AsyncChatEvent`</Javadoc>
+is an improved version of the old <Javadoc name={"org.bukkit.event.player.AsyncPlayerChatEvent"}>`AsyncPlayerChatEvent`</Javadoc>
 that allows you to render chat messages individually for each player.
 
 :::note[`AsyncChatEvent` vs `ChatEvent`]
 
-The key difference between <VersionedJavaDocLink target={"/io/papermc/paper/event/player/AsyncChatEvent.html"}>`AsyncChatEvent`</VersionedJavaDocLink>
-and <VersionedJavaDocLink target={"/io/papermc/paper/event/player/ChatEvent.html"}>`ChatEvent`</VersionedJavaDocLink> is that
-<VersionedJavaDocLink target={"/io/papermc/paper/event/player/AsyncChatEvent.html"}>`AsyncChatEvent`</VersionedJavaDocLink> is fired asynchronously.
+The key difference between <Javadoc name={"io.papermc.paper.event.player.AsyncChatEvent"}>`AsyncChatEvent`</Javadoc>
+and <Javadoc name={"io.papermc.paper.event.player.ChatEvent"}>`ChatEvent`</Javadoc> is that
+<Javadoc name={"io.papermc.paper.event.player.AsyncChatEvent"}>`AsyncChatEvent`</Javadoc> is fired asynchronously.
 
 This means that it does not block the main thread and sends the chat message when the listener has completed.
 Be aware that using the Bukkit API in an asynchronous context (i.e. the event handler) is unsafe and exceptions may be thrown.
-If you need to use the Bukkit API, you can use <VersionedJavaDocLink target={"/io/papermc/paper/event/player/ChatEvent.html"}>`ChatEvent`</VersionedJavaDocLink>.
-However, we recommend using [`BukkitScheduler`](../scheduler.md).
+If you need to use the Bukkit API, you can use <Javadoc name={"io.papermc.paper.event.player.ChatEvent"}>`ChatEvent`</Javadoc>.
+However, we recommend using [`BukkitScheduler`](../scheduler.mdx).
 
 :::
 
@@ -29,10 +29,10 @@ However, we recommend using [`BukkitScheduler`](../scheduler.md).
 
 Before we can start using the new chat event, we need to understand how the new renderer works.
 The renderer is Paper's way of allowing plugins to modify the chat message before it is sent to the player.
-This is done by using the <VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html"}>`ChatRenderer`</VersionedJavaDocLink> interface with its
-<VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)"}>`render`</VersionedJavaDocLink>
-method. Previously, this was done by using the <VersionedJavaDocLink target={"/org/bukkit/event/player/AsyncPlayerChatEvent.html"}>`AsyncPlayerChatEvent`</VersionedJavaDocLink>
-with its <VersionedJavaDocLink target={"/org/bukkit/event/player/AsyncPlayerChatEvent.html#setFormat(java.lang.String)"}>`setFormat`</VersionedJavaDocLink> method.
+This is done by using the <Javadoc name={"io.papermc.paper.chat.ChatRenderer"}>`ChatRenderer`</Javadoc> interface with its
+<Javadoc name={"io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)"}>`render`</Javadoc>
+method. Previously, this was done by using the <Javadoc name={"org.bukkit.event.player.AsyncPlayerChatEvent"}>`AsyncPlayerChatEvent`</Javadoc>
+with its <Javadoc name={"org.bukkit.event.player.AsyncPlayerChatEvent#setFormat(java.lang.String)"}>`setFormat`</Javadoc> method.
 
 ```java title="ChatRenderer#render"
 public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
@@ -40,7 +40,7 @@ public @NotNull Component render(@NotNull Player source, @NotNull Component sour
 }
 ```
 
-- The <VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)"}>`render`</VersionedJavaDocLink> method is called when a chat message is sent to the player.
+- The <Javadoc name={"io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)"}>`render`</Javadoc> method is called when a chat message is sent to the player.
 - The `source` parameter is the player that sent the message.
 - The `sourceDisplayName` parameter is the display name of the player that sent the message.
 - The `message` parameter is the message that was sent.
@@ -49,8 +49,8 @@ public @NotNull Component render(@NotNull Player source, @NotNull Component sour
 :::tip[`ChatRenderer.ViewerUnaware`]
 
 If your renderer does not need to know about the viewer, you can use the
-<VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.ViewerUnaware.html"}>`ChatRenderer.ViewerUnaware`</VersionedJavaDocLink>
-interface instead of the <VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html"}>`ChatRenderer`</VersionedJavaDocLink> interface.
+<Javadoc name={"io.papermc.paper.chat.ChatRenderer$ViewerUnaware"}>`ChatRenderer.ViewerUnaware`</Javadoc>
+interface instead of the <Javadoc name={"io.papermc.paper.chat.ChatRenderer"}>`ChatRenderer`</Javadoc> interface.
 This will benefit performance as the message will only be rendered once instead of each individual player.
 
 :::
@@ -58,18 +58,18 @@ This will benefit performance as the message will only be rendered once instead 
 ## Using the renderer
 
 There are two ways to use the renderer.
-1. Implementing the <VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html"}>`ChatRenderer`</VersionedJavaDocLink> interface in a class.
+1. Implementing the <Javadoc name={"io.papermc.paper.chat.ChatRenderer"}>`ChatRenderer`</Javadoc> interface in a class.
 2. Using a lambda expression.
 
 Depending on the complexity of your renderer, you may want to use one or the other.
 
 ### Implementing the `ChatRenderer` interface
 
-The first way of using the renderer is by implementing the <VersionedJavaDocLink target={"/io/papermc/paper/chat/ChatRenderer.html"}>`ChatRenderer`</VersionedJavaDocLink>
+The first way of using the renderer is by implementing the <Javadoc name={"io.papermc.paper.chat.ChatRenderer"}>`ChatRenderer`</Javadoc>
 interface in a class. In this example, we will be using our `ChatListener` class.
 
 Next, we need to tell the event to use the renderer by using the
-<VersionedJavaDocLink target={"/io/papermc/paper/event/player/AbstractChatEvent.html#renderer()"}>`renderer`</VersionedJavaDocLink> method.
+<Javadoc name={"io.papermc.paper.event.player.AbstractChatEvent#renderer()"}>`renderer`</Javadoc> method.
 
 ```java title="ChatListener.java"
 public class ChatListener implements Listener, ChatRenderer { // Implement the ChatRenderer and Listener interface

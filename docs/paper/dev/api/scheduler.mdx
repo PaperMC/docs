@@ -35,7 +35,7 @@ Converting from human units to ticks and back is as simple as:
 - `seconds = ticks / 20`
 
 You can make your code more readable by using the
-[`TimeUnit`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/TimeUnit.html)
+<Javadoc name={"java.util.concurrent.TimeUnit"} project={"java"}>`TimeUnit`</Javadoc>
 enum, e.g. to convert 5 minutes to ticks and back:  
 - `TimeUnit.MINUTES.toSeconds(5) * 20`  
 - `TimeUnit.SECONDS.toMinutes(ticks / 20)`
@@ -92,7 +92,7 @@ While the tasks are executed on separate threads, they are still started from th
 and will be affected if the server is lagging, an example would be 20 ticks not being exactly 1 second.
 
 If you need a scheduler that runs independently of the server, consider using your own
-[`ScheduledExecutorService`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/concurrent/ScheduledExecutorService.html).
+<Javadoc name={"java.util.concurrent.ScheduledExecutorService"} project={"java"}>`ScheduledExecutorService`</Javadoc>.
 You can follow [this guide](https://www.baeldung.com/java-executor-service-tutorial#ScheduledExecutorService) to learn how to use it.
 
 :::

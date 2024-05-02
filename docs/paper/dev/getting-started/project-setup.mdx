@@ -190,8 +190,8 @@ If everything went well, you should see something like this:
 ## Plugin remapping
 
 As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
-If you are using Spigot/Bukkit plugins, your plugin will automatically be remapped to Spigot mappings.
-This means that the server will have to deobfuscate and remap the plugin JAR every time it is loaded for the first time.
+If you are using Spigot/Bukkit plugins, your plugin will be assumed to be Spigot-mapped.
+This means that the server will have to deobfuscate and remap the plugin JAR when it's loaded for the first time.
 
 :::info
 

@@ -110,7 +110,8 @@ tasks.assemble {
 ```
 
 ## 1.20.5
-As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings as we have traditionally done since Paper 1.17.
+
+As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
 Additionally, CraftBukkit classes will no longer be relocated into a versioned package.
 This requires plugins to be deobfuscated before loading when necessary.
 
@@ -121,6 +122,7 @@ Most of this process is done automatically by paperweight but there are some imp
 * Spigot-mapped plugins will need to be deobfuscated on first load, Mojang-mapped plugins will not.
 
 ### Mojang mappings
+
 If you want to map your plugin with Mojang mappings, you need to add the following code to your build script:
 
 :::note
@@ -136,6 +138,7 @@ paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArt
 Additionally, you need to remove all `dependsOn(reobfJar)` lines.
 
 ### Spigot mappings
+
 If you are using Paper plugins but want to explicitly use Spigot mappings, you need to change the property to:
 
 ```kotlin title="build.gradle.kts"

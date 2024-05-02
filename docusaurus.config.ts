@@ -10,7 +10,7 @@ import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
 import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData } from "./src/util/authorUtils";
 
 const preview = env.VERCEL_ENV === "preview";
-cacheAuthorData(preview);
+cacheAuthorData(preview || process.env.NODE_ENV === "development");
 
 const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
 

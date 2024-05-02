@@ -59,16 +59,17 @@ export async function cacheAuthorData(isPreview: boolean) {
   }
 
   const pagesFiles = await Globby("docs/**/*.md*");
-  const commits = await Promise.all(pagesFiles.map((f) => {
-    return getFileCommitHash(f)
-      .catch((e) => {
+  const commits = await Promise.all(
+    pagesFiles.map((f) => {
+      return getFileCommitHash(f).catch((e) => {
         if (e instanceof FileNotTrackedError) {
           return null;
         }
 
         throw e; // different error, rethrow
-      })
-  }));
+      });
+    })
+  );
 
   const commitsSet = new Set(commits.filter(Boolean).map((value) => value.commit));
   await Promise.all(Array.from(commitsSet).map(cacheUsernameFromCommit));

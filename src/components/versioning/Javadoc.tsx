@@ -10,7 +10,7 @@ const createProjectTarget = (project: string, majorOnly: boolean = false): Targe
     if (majorOnly) {
       version = version.split(".")[0] + ".0.0";
     }
-    
+
     return `https://jd.papermc.io/${project}/${version}`;
   };
 };
@@ -28,7 +28,7 @@ const targets: { [project: string]: TargetResolver } = {
 const formatName = (name: string): string => {
   let [name0, hash] = name.split("#", 2);
   name0 = name0.replaceAll(".", "/").replaceAll("$", ".");
-  
+
   return `${name0}.html` + (hash ? `#${hash}` : "");
 };
 
@@ -40,7 +40,7 @@ export default function Javadoc({ name, module, project = "paper", children }: J
       const resolve = targets[project];
       if (resolve) {
         const target = await resolve(module);
-        
+
         setHref(`${target}/${formatName(name)}`);
       }
     })();

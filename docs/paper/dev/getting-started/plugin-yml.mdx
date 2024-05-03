@@ -219,5 +219,6 @@ This is useful if you want to load your plugin before another plugin for the oth
 ### provides
 
 This can be used to tell the server that this plugin will provide the functionality of some library or other plugin (like an alias system).
-Plugins that (soft)depend on the other plugin will treat your plugin as if the other plugin exists when resolving dependencies or using `PluginManager#getPlugin(String)`.
+Plugins that (soft)depend on the other plugin will treat your plugin as if the other plugin exists when resolving dependencies or using
+<Javadoc name={"org.bukkit.plugin.PluginManager#getPlugin(java.lang.String)"}>`PluginManager#getPlugin(String)`</Javadoc>.
 - `provides: [SomeOtherPlugin]`

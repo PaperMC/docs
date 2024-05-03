@@ -40,12 +40,13 @@ java.lang.NullPointerException: Cannot invoke "Object.toString()" because "playe
         at java.lang.Thread.run(Thread.java:833) ~[?:?]
 ```
 
--   Firstly, we can see that this certain error occurred when the `PluginEnableEvent` was being handled by the `TestPlugin`.
+-   Firstly, we can see that this certain error occurred when a <Javadoc name={"org.bukkit.event.server.PluginEnableEvent"}>`PluginEnableEvent`</Javadoc>
+    was being handled by the `TestPlugin`.
 
 -   Then we can see on the second line, the cause of the exception:
     > `java.lang.NullPointerException: Cannot invoke "Object.toString()" because "player" is null`
 
-    This tells us that the exception was caused by a `NullPointerException`,
+    This tells us that the exception was caused by a <Javadoc name={"java.lang.NullPointerException"} project={"java"}>`NullPointerException`</Javadoc>,
     and that the exception was caused because we tried to call the `toString()` method on a null "player" object.
 
 -   From here, as we work down the stacktrace, we can see the exact path of execution that led to the error. In this case,

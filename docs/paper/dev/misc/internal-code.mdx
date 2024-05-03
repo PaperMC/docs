@@ -39,7 +39,9 @@ However, if you are unable to use `paperweight-userdev`, you can use reflection.
 Reflection is a way to access code at runtime. This allows you to access code that may not be available at compile time.
 Reflection is often used to access internal code across multiple versions. However, reflection does come
 with performance impacts if used improperly. For example, if you are accessing a method or field more than once,
-you should cache the `Field`/`Method` to prevent the performance impact of looking up the field/method each time.
+you should cache the <Javadoc name={"java.lang.reflect.Field"} project={"java"}>`Field`</Javadoc>/
+<Javadoc name={"java.lang.reflect.Method"} project={"java"}>`Method`</Javadoc> to prevent the performance
+impact of looking up the field/method each time.
 
 The internal CraftBukkit code is relocated to `org.bukkit.craftbukkit.<version>` unless you run a Mojang-mapped version
 of Paper. This is unlikely to be the case in most production environments. This means that any attempts to reflect must

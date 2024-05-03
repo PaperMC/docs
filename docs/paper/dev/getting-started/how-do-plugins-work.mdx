@@ -51,15 +51,17 @@ be done before the plugin is unloaded. This may include saving data to disk or c
 ## Event listeners
 
 Events are a way for plugins to listen to things that happen in the server and run code when they are fired. For
-example, the `PlayerJoinEvent` is fired when a player joins the server. This is a more performant way to run code when
-something happens, as opposed to constantly checking. See our [event listener page](/paper/dev/event-listeners) for more.
+example, <Javadoc name={"org.bukkit.event.player.PlayerJoinEvent"}>`PlayerJoinEvent`</Javadoc> is fired when a player
+joins the server. This is a more performant way to run code when something happens, as opposed to constantly checking.
+See our [event listener page](/paper/dev/event-listeners) for more.
 
 Some events are cancellable. This means that when the event is fired, it can be cancelled which negates or stops the
-effect of the event. For example, the `PlayerMoveEvent` is cancellable. This means that when it is cancelled, the player
-will not move. This is useful for things like anti-cheat, where you want to cancel the event if the player is moving too fast.
+effect of the event. For example, <Javadoc name={"org.bukkit.event.player.PlayerMoveEvent"}>`PlayerMoveEvent`</Javadoc>
+is cancellable. This means that when it is cancelled, the player will not move. This is useful for things like anti-cheat,
+where you want to cancel the event if the player is moving too fast.
 
 It is important to think about how "hot" an event is when writing event listeners. A "hot" event is an event that is fired
-very often. For example, the `PlayerMoveEvent` is fired every time a player moves. This means that if you have a lot of
+very often. For example, `PlayerMoveEvent` is fired every time a player moves. This means that if you have a lot of
 expensive code in your event listener, it will be run every time a player moves. This can cause a lot of lag. It is
 important to keep event listeners as lightweight as possible. One possible way is to quickly check if the event should
 be handled, and if not, return. For example, if you only want to handle the event if the player is moving from one block
@@ -110,13 +112,14 @@ to run after 100 ticks - one second is 20 ticks during normal operation. It is i
 delayed if the server is lagging. For example, if the server is only running at 10 ticks per second, a task that is
 scheduled to run after 100 ticks will take 10 seconds.
 
-In Java, typically you could use `Thread.sleep()` to delay the execution of code. However, if the code is running on the main
-thread, this will cause the server to pause for the delay. Instead, you should use the `Scheduler` API to schedule tasks
-to run later. Learn more about the `Scheduler` API [here](/paper/dev/scheduler).
+In Java, typically you could use <Javadoc name={"java.lang.Thread#sleep(long)"} project={"java"}>`Thread#sleep()`</Javadoc> to delay
+the execution of code. However, if the code is running on the main thread, this will cause the server to pause for the
+delay. Instead, you should use the `Scheduler` API to schedule tasks to run later.
+Learn more about the `Scheduler` API [here](/paper/dev/scheduler).
 
 ## Components
 
-Since Minecraft 1.7 and the introduction of the `Component` API, plugins can now send messages to players that contain
+Since Minecraft 1.7 and the introduction of "components", plugins can now send messages to players that contain
 rich text. This means that plugins can send messages that contain things like colors, bold text, and clickable links.
 Colors were always possible, but only through the use of legacy color codes.
 

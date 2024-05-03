@@ -109,8 +109,9 @@ with Vanilla. Paper plugins allow us to do just that by making a new way to load
 has started by using [bootstrappers](#bootstrapper).
 
 ## Bootstrapper
-Paper plugins are able to identify their own bootstrapper by implementing `io.papermc.paper.plugin.bootstrap.PluginBootstrap` and adding
-the class of your implementation to the bootstrapper field in the `paper-plugin.yml`.
+Paper plugins are able to identify their own bootstrapper by implementing
+<Javadoc name={"io.papermc.paper.plugin.bootstrap.PluginBootstrap"}>`PluginBootstrap`</Javadoc>
+and adding the class of your implementation to the bootstrapper field in the `paper-plugin.yml`.
 ```java
 public class TestPluginBootstrap implements PluginBootstrap {
 
@@ -130,8 +131,9 @@ A bootstrapper also allows you to change the way your plugin is initialized, all
 Currently, bootstrappers do not offer much new API and are highly experimental. This may be subject to change once more API is introduced.
 
 ## Loaders
-Paper plugins are able to identify their own plugin loader by implementing `io.papermc.paper.plugin.loader.PluginLoader` and adding
-the class of your implementation to the loader field in the `paper-plugin.yml`.
+Paper plugins are able to identify their own plugin loader by implementing
+<Javadoc name={"io.papermc.paper.plugin.loader.PluginLoader"}>`PluginLoader`</Javadoc>
+and adding the class of your implementation to the loader field in the `paper-plugin.yml`.
 
 The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into.
 This, as of right now, only applies to creating the expected classpath for the plugin, e.g. supplying external libraries to the plugin.
@@ -150,14 +152,17 @@ public class TestPluginLoader implements PluginLoader {
     }
 }
 ```
-Currently, you are able to add two different library types: `JarLibrary` and `MavenLibraryResolver`.
+Currently, you are able to add two different library types:
+<Javadoc name={"io.papermc.paper.plugin.loader.library.impl.JarLibrary"}>`JarLibrary`</Javadoc> and
+<Javadoc name={"io.papermc.paper.plugin.loader.library.impl.MavenLibraryResolver"}>`MavenLibraryResolver`</Javadoc>.
 
 ## Differences
 
 ### Bukkit serialization system
 Paper plugins still support the serialization system (`org.bukkit.configuration.serialization`) that Bukkit uses. However, custom classes will not be
-automatically registered for serialization. In order to use `ConfigurationSection#getObject`,
-you **must** call `ConfigurationSerialization.registerClass(Class)` before you attempt to fetch objects from configurations.
+automatically registered for serialization. In order to use <Javadoc name={"org.bukkit.configuration.ConfigurationSection#getObject(java.lang.String,java.lang.Class)"}>`ConfigurationSection#getObject`</Javadoc>,
+you **must** call <Javadoc name={"org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class)"}>`ConfigurationSerialization#registerClass(Class)`</Javadoc>
+before you attempt to fetch objects from configurations.
 
 ### Classloading isolation
 Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This

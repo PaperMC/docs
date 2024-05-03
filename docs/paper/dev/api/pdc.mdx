@@ -26,8 +26,9 @@ It also doesn't rely on accessing server internals, so it's less likely to break
 manually track the data lifecycle, as, for example with an entity, the PDC will be saved when the entity unloads.
 
 ## Adding data
-To store data in the PDC, there are a few things you need first. The first is a `NamespacedKey`, which is used to identify the data.
-The second is a `PersistentDataContainer`, which is the object you want to store the data on. The third is the data itself.
+To store data in the PDC, there are a few things you need first. The first is a <Javadoc name={"org.bukkit.NamespacedKey"}>`NamespacedKey`</Javadoc>,
+which is used to identify the data. The second is a <Javadoc name={"org.bukkit.persistence.PersistentDataContainer"}>`PersistentDataContainer`</Javadoc>,
+which is the object you want to store the data on. The third is the data itself.
 
 ```java
 // Create a NamespacedKey
@@ -43,8 +44,8 @@ item.setItemMeta(meta);
 :::info
 
 It is considered good practice to reuse `NamespacedKey` objects. They can be constructed with either:
-- A `Plugin` instance and a `String` identifier
-- A `String` namespace and a `String` identifier
+- A <Javadoc name={"org.bukkit.plugin.Plugin"}>`Plugin`</Javadoc> instance and a <Javadoc name={"java.lang.String"} project={"java"}>`String`</Javadoc> identifier
+- A <Javadoc name={"java.lang.String"} project={"java"}>`String`</Javadoc> namespace and a <Javadoc name={"java.lang.String"} project={"java"}>`String`</Javadoc> identifier
 
 The first option is often preferred as it will automatically use the plugin's namespace; however, the second option can be used if you
 want to use a different namespace or access the data from another plugin.
@@ -106,14 +107,15 @@ The PDC supports a wide range of data types, such as:
 
 :::info[Boolean `PersistentDataType`]
 
-The `Boolean` PDC type exists for convenience - you cannot make more complex types distill to a `Boolean`.
+The <Javadoc name={"org.bukkit.persistence.PersistentDataType#BOOLEAN"}>`Boolean`</Javadoc> PDC type exists for convenience
+- you cannot make more complex types distill to a `Boolean`.
 
 :::
 
 ### Custom data types
 
 You can store a wide range of data in the PDC with the native adapters; however, if you need a more complex data type, you can
-implement your own `PersistentDataType` and use that instead.
+implement your own <Javadoc name={"org.bukkit.persistence.PersistentDataType"}>`PersistentDataType`</Javadoc> and use that instead.
 The `PersistentDataType`'s job is to "deconstruct" a complex data type into something that is natively supported (see above) and then vice-versa.
 
 Here is an example of how to do that for a UUID:
@@ -150,7 +152,10 @@ public class UUIDDataType implements PersistentDataType<byte[], UUID> {
 
 :::note
 
-In order to use your own `PersistentDataType`, you must pass an instance of it to the `get`/`set`/`has` methods.
+In order to use your own `PersistentDataType`, you must pass an instance of it to the
+<Javadoc name={"org.bukkit.persistence.PersistentDataContainer#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)"}>`get`</Javadoc>/
+<Javadoc name={"org.bukkit.persistence.PersistentDataContainer#set(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C)"}>`set`</Javadoc>/
+<Javadoc name={"org.bukkit.persistence.PersistentDataContainer#has(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)"}>`has`</Javadoc> methods.
 ```java
 container.set(key, new UUIDDataType(), uuid);
 ```
@@ -159,13 +164,16 @@ container.set(key, new UUIDDataType(), uuid);
 
 ## Storing on different objects
 
-- ##### `Chunk`
+Objects that can have a PDC implement the <Javadoc name={"org.bukkit.persistence.PersistentDataHolder"}>`PersistentDataHolder`</Javadoc> interface
+and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.PersistentDataHolder#getPersistentDataContainer()"}>`PersistentDataHolder#getPersistentDataContainer()`</Javadoc>.
+
+- ##### <Javadoc name={"org.bukkit.Chunk"}>`Chunk`</Javadoc>
     - `Chunk#getPersistentDataContainer()`
-- ##### `World`
+- ##### <Javadoc name={"org.bukkit.World"}>`World`</Javadoc>
     - `World#getPersistentDataContainer()`
-- ##### `Entity`
+- ##### <Javadoc name={"org.bukkit.entity.Entity"}>`Entity`</Javadoc>
     - `Entity#getPersistentDataContainer()`
-- ##### `TileState`
+- ##### <Javadoc name={"org.bukkit.block.TileState"}>`TileState`</Javadoc>
     - This is slightly more complicated, as you need to cast the block to something that extends `TileState`.
       This does not work for all blocks, only those that have a tile entity.
       ```java
@@ -175,7 +183,7 @@ container.set(key, new UUIDDataType(), uuid);
             chest.update();
         }
       ```
-- ##### `Structure`
+- ##### <Javadoc name={"org.bukkit.structure.Structure"}>`Structure`</Javadoc>
     - `Structure#getPersistentDataContainer()`
-- ##### `ItemMeta`
+- ##### <Javadoc name={"org.bukkit.inventory.meta.ItemMeta"}>`ItemMeta`</Javadoc>
     - `ItemMeta#getPersistentDataContainer()`

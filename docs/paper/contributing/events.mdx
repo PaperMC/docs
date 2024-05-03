@@ -17,23 +17,29 @@ All new events should go in the package (sub-package of) `io.papermc.paper.event
 
 ### Constructors
 
-All new constructors added should be annotated with `@ApiStatus.Internal` to signify that they are not considered
-API and can change at any time without warning.
+All new constructors added should be annotated with
+[`@ApiStatus.Internal`](https://javadoc.io/doc/org.jetbrains/annotations/latest/org/jetbrains/annotations/ApiStatus.Internal.html)
+to signify that they are not considered API and can change at any time without warning.
 
-Constructors that are being replaced, if they aren't being removed, should be marked with `@Deprecated` and `@DoNotUse`.
+Constructors that are being replaced, if they aren't being removed, should be marked with
+<Javadoc name={"java.lang.Deprecated"} project={"java"}>`@Deprecated`</Javadoc> and
+<Javadoc name={"io.papermc.paper.annotation.DoNotUse"}>`@DoNotUse`</Javadoc>.
 
 ### Mutability
 Certain API types are "mutable" which can lead to unexpected behavior within events. Mutable types like
-`Location` and `Vector` should therefore be cloned when returned from a "getter" in an event.
+<Javadoc name={"org.bukkit.Location"}>`Location`</Javadoc> and <Javadoc name={"org.bukkit.util.Vector"}>`Vector`</Javadoc>
+should therefore be cloned when returned from a "getter" in an event.
 
 ### `HandlerList`
-For an event class or any subclass of it to be listened to, a `HandlerList` field must be present with an instance and static method
-to retrieve it. See the docs for <Javadoc name={"org.bukkit.event.Event"}>`Event`</Javadoc> for specifics. This field should be static and
-final and named `HANDLER_LIST`.
+For an event class or any subclass of it to be listened to, a <Javadoc name={"org.bukkit.event.HandlerList"}>`HandlerList`</Javadoc>
+field must be present with an instance and static method to retrieve it.
+See the docs for <Javadoc name={"org.bukkit.event.Event"}>`Event`</Javadoc> for specifics.
+This field should be static and final and named `HANDLER_LIST`.
 
 Also consider not putting a `HandlerList` on every event, just a "common parent" event so that a plugin can listen to the
 parent event and capture any child events but also listen to the child event separately.
 
 ### Miscellaneous
 
-* New parameters or method returns of type `ItemStack` should be `@NotNull`.
+* New parameters or method returns of type <Javadoc name={"org.bukkit.inventory.ItemStack"}>`ItemStack`</Javadoc>
+should be [`@NotNull`](https://javadoc.io/doc/org.jetbrains/annotations/latest/org/jetbrains/annotations/NotNull.html).

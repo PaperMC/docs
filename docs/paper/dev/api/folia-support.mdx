@@ -59,7 +59,8 @@ scheduler.execute(plugin, locationToChange, () -> {
 });
 ```
 
-We pass the location as a parameter to the `RegionScheduler` as it needs to work out which region to execute on.
+We pass the location as a parameter to the <Javadoc name={"io.papermc.paper.threadedregions.scheduler.RegionScheduler"}>`RegionScheduler`</Javadoc>
+as it needs to work out which region to execute on.
 
 ### Async scheduler
 The async scheduler can be used for running tasks independent of the server tick process. This can be fetched with:

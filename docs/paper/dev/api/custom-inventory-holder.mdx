@@ -18,13 +18,13 @@ Custom `InventoryHolder`s have no such downsides and by using them you're guaran
 
 ## Creating a custom holder
 
-The first step is to implement the `InventoryHolder` interface.
-We can do this the following way: create a new class that will create our `Inventory` in the constructor.
+The first step is to implement the <Javadoc name={"org.bukkit.inventory.InventoryHolder"}>`InventoryHolder`</Javadoc> interface.
+We can do this the following way: create a new class that will create our <Javadoc name={"org.bukkit.inventory.Inventory"}>`Inventory`</Javadoc> in the constructor.
 
 :::info
 
 The constructor takes your main plugin class as an argument in order to create the `Inventory`.
-If you wish, you can use the static method `Bukkit#createInventory(InventoryHolder, int)` instead and remove the argument.
+If you wish, you can use the static method <Javadoc name={"org.bukkit.Bukkit#createInventory(org.bukkit.inventory.InventoryHolder,int)"}>`Bukkit#createInventory(InventoryHolder, int)`</Javadoc> instead and remove the argument.
 
 :::
 
@@ -68,8 +68,8 @@ player.openInventory(myInventory.getInventory());
 
 ## Listening to an event
 
-Once we have the inventory open, we can listen to any inventory events we like and check if the `Inventory#getHolder()`
-returns an instance of our `MyInventory`.
+Once we have the inventory open, we can listen to any inventory events we like and check if
+<Javadoc name={"org.bukkit.inventory.Inventory#getHolder()"}>`Inventory#getHolder()`</Javadoc> returns an instance of our `MyInventory`.
 
 ```java
 @EventHandler

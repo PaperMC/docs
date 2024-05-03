@@ -1,22 +1,17 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "@site/src/css/start-script-generator.css";
-import clsx from "clsx";
+import Button from "@site/src/components/ui/Button";
+import Select, { Option } from "@site/src/components/ui/Select";
 
 const markerPoints = [4, 8, 12, 16, 20];
-
-type FlagType = {
-  label: string;
-  value: string;
-  description: string;
-};
 
 const WINDOWS_AUTO_RESTART =
   ":start\n%%CONTENT%%\n\necho Server restarting...\necho Press CTRL + C to stop.\ngoto :start";
 const LINUX_AUTO_RESTART =
   "while [ true ]; do\n    %%CONTENT%%\n    echo Server restarting...\n    echo Press CTRL + C to stop.\ndone";
 
-const FLAGS: { [key: string]: FlagType } = {
-  AIKARS: {
+const FLAGS: Option[] = [
+  {
     label: "Aikar's",
     value: [
       "-XX:+AlwaysPreTouch",
@@ -42,12 +37,12 @@ const FLAGS: { [key: string]: FlagType } = {
     ].join(" "),
     description: "Optimized Minecraft flags by Aikar for better server performance.",
   },
-  NONE: {
+  {
     label: "None",
     value: "",
     description: "No additional flags.",
   },
-  VELOCITY: {
+  {
     label: "Velocity",
     value: [
       "-XX:+AlwaysPreTouch",
@@ -59,13 +54,16 @@ const FLAGS: { [key: string]: FlagType } = {
     ].join(" "),
     description: "Flags recommended for use with the Velocity proxy server.",
   },
-};
+];
+const AIKARS = FLAGS[0];
+const NONE = FLAGS[1];
+const VELOCITY = FLAGS[2];
 
 const isServerSide = typeof document === "undefined";
 
 const generateStartCommand = (
   memory: number,
-  selectedFlag: FlagType,
+  selectedFlag: Option,
   filename: string,
   guiEnabled: boolean,
   autoRestartEnabled: boolean,
@@ -73,7 +71,7 @@ const generateStartCommand = (
 ) => {
   setTimeout(resizeOutput, 0);
   let content = "";
-  const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === FLAGS.VELOCITY ? "" : "nogui"}`;
+  const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === VELOCITY ? "" : "nogui"}`;
 
   if (autoRestartEnabled)
     content = (platform === "windows" ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(
@@ -103,24 +101,17 @@ const resizeOutput = () => {
 const StartScriptGenerator: React.FC = () => {
   const [memory, setMemory] = useState(4.0);
   const [filename, setFilename] = useState("server.jar");
-  const [selectedFlag, setSelectedFlag] = useState(FLAGS.AIKARS);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedFlag, setSelectedFlag] = useState(AIKARS);
   const [guiEnabled, setGuiEnabled] = useState(false);
   const [autoRestart, setAutoRestart] = useState(false);
   const [platform, setPlatform] = useState("linux");
-  const dropdownRef = useRef(null);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
 
-  const handleClickOutside = (event: { target: EventTarget | null }) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setDropdownVisible(false);
-    }
-  };
-
-  const handleGreenButtonHighlight = (element: HTMLElement | null) => {
-    if (!element) return;
-    element.classList.add("success");
+  const handleGreenButtonHighlight = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setState(true);
     setTimeout(function () {
-      element.classList.remove("success");
+      setState(false);
     }, 500);
   };
 
@@ -128,11 +119,11 @@ const StartScriptGenerator: React.FC = () => {
     navigator.clipboard.writeText(
       generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)
     );
-    handleGreenButtonHighlight(document.getElementById("clipboard-copy-button"));
+    handleGreenButtonHighlight(setCopySuccess);
   };
 
   const handleDownload = () => {
-    handleGreenButtonHighlight(document.getElementById("contents-download-button"));
+    handleGreenButtonHighlight(setDownloadSuccess);
     const blob = new Blob(
       [generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)],
       {
@@ -148,12 +139,6 @@ const StartScriptGenerator: React.FC = () => {
 
   useEffect(() => {
     resizeOutput();
-    if (isServerSide) return;
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, [memory, filename, selectedFlag, guiEnabled, autoRestart]);
 
   return (
@@ -198,44 +183,22 @@ const StartScriptGenerator: React.FC = () => {
         </div>
         <div className="config-section">
           <label htmlFor="flags-dropdown">Flags:</label>
-          <div className="custom-dropdown" ref={dropdownRef}>
-            <div className="selected-flag" onClick={() => setDropdownVisible(!dropdownVisible)}>
-              {selectedFlag.label}
-            </div>
-            {dropdownVisible && (
-              <div className="dropdown-content">
-                {Object.values(FLAGS).map((flag) => (
-                  <div
-                    key={flag.label}
-                    className={clsx(
-                      "dropdown-item",
-                      flag === selectedFlag && "dropdown-item-selected"
-                    )}
-                    onClick={() => {
-                      setSelectedFlag(flag);
-                      setDropdownVisible(false);
-                    }}
-                  >
-                    <div className="flag-label">{flag.label}</div>
-                    <div className="flag-description">{flag.description}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <Select options={FLAGS} value={selectedFlag} onSelect={setSelectedFlag} />
         </div>
       </div>
       <div className="config-section">
-        <div className={"gui-container"}>
-          <label className={"margin-right--sm"}>GUI:</label>
-          <input
-            type="checkbox"
-            id="gui-toggle"
-            className="checkbox"
-            onChange={() => setGuiEnabled(!guiEnabled)}
-          />
-          <label htmlFor="gui-toggle" className="switch"></label>
-        </div>
+        {selectedFlag != VELOCITY && (
+          <div className={"gui-container"}>
+            <label className={"margin-right--sm"}>GUI:</label>
+            <input
+              type="checkbox"
+              id="gui-toggle"
+              className="checkbox"
+              onChange={() => setGuiEnabled(!guiEnabled)}
+            />
+            <label htmlFor="gui-toggle" className="switch"></label>
+          </div>
+        )}
         <div className={"gui-container"}>
           <label className={"margin-right--sm"}>Auto-Restart:</label>
           <input
@@ -273,13 +236,19 @@ const StartScriptGenerator: React.FC = () => {
           id={"output-command-text"}
           readOnly
         />
-        <div className={"copy-button"}>
-          <button id={"clipboard-copy-button"} onClick={handleCopyToClipboard}>
-            Copy to Clipboard
-          </button>
-          <button id={"contents-download-button"} onClick={handleDownload}>
-            Download
-          </button>
+        <div className="copy-button">
+          <Button
+            label="Copy to Clipboard"
+            onClick={handleCopyToClipboard}
+            id="clipboard-copy-button"
+            success={copySuccess}
+          />
+          <Button
+            label="Download"
+            onClick={handleDownload}
+            id="contents-download-button"
+            success={downloadSuccess}
+          />
         </div>
       </div>
     </div>

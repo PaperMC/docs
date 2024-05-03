@@ -3,7 +3,7 @@ import path from "path";
 import { Endpoints } from "@octokit/types";
 import axios from "axios";
 
-import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
+import { getFileCommitHash, FileNotTrackedError } from "@docusaurus/utils/src/gitUtils";
 import { Globby } from "@docusaurus/utils/src/globUtils";
 
 type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
@@ -59,8 +59,18 @@ export async function cacheAuthorData(isPreview: boolean) {
   }
 
   const pagesFiles = await Globby("docs/**/*.md*");
-  const commits = await Promise.all(pagesFiles.map(getFileCommitHash));
-  const commitsSet = new Set(commits.map((value) => value.commit));
+  const commits = await Promise.all(
+    pagesFiles.map((f) => {
+      return getFileCommitHash(f).catch((e) => {
+        if (e instanceof FileNotTrackedError) {
+          return null;
+        }
 
+        throw e; // different error, rethrow
+      });
+    })
+  );
+
+  const commitsSet = new Set(commits.filter(Boolean).map((value) => value.commit));
   await Promise.all(Array.from(commitsSet).map(cacheUsernameFromCommit));
 }

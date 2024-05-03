@@ -40,7 +40,7 @@ const config: Config = {
   baseUrlIssueBanner: false,
   clientModules: [
     require.resolve("./src/css/custom.css"),
-    require.resolve("./src/css/ui.css"),
+    require.resolve("./src/css/ui.scss"),
     require.resolve("@fontsource/jetbrains-mono/index.css"),
   ],
 
@@ -216,6 +216,7 @@ const config: Config = {
     ],
     "@docusaurus/plugin-debug",
     "@docusaurus/plugin-vercel-analytics",
+    "docusaurus-plugin-sass",
   ],
 
   themeConfig: {

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import Button from "@site/src/components/ui/Button";
+import Select, { Option } from "@site/src/components/ui/Select";
 import "@site/src/css/item-command-converter.css";
+
+const MODES: Option[] = [
+  { label: "Command", value: "command" },
+  { label: "Item Argument", value: "item-argument" },
+  { label: "Component Argument", value: "component-argument" },
+];
 
 const ItemCommandConverter: React.FC = () => {
   const [convertSuccess, setConvertSuccess] = useState(false);
@@ -8,7 +15,7 @@ const ItemCommandConverter: React.FC = () => {
   const [copySuccess, setCopySuccess] = useState(false);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [mode, setMode] = useState("command");
+  const [mode, setMode] = useState(MODES[0]);
   const [loading, setLoading] = useState(false);
 
   const toggleState = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
@@ -22,7 +29,7 @@ const ItemCommandConverter: React.FC = () => {
     setOutput("");
     setLoading(true);
     try {
-      const response = await fetch("https://item-converter.papermc.io/convert-" + mode, {
+      const response = await fetch("https://item-converter.papermc.io/convert-" + mode.value, {
         method: "POST",
         body: input,
       });
@@ -67,11 +74,7 @@ const ItemCommandConverter: React.FC = () => {
         />
         <label>
           Mode:
-          <select value={mode} onChange={(event) => setMode(event.target.value)}>
-            <option value="command">Command</option>
-            <option value="item-argument">Item Argument</option>
-            <option value="component-argument">Component Argument</option>
-          </select>
+          <Select options={MODES} value={mode} onSelect={setMode} />
         </label>
       </div>
       <label>

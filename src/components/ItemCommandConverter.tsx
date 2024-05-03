@@ -8,6 +8,7 @@ const ItemCommandConverter: React.FC = () => {
   const [copySuccess, setCopySuccess] = useState(false);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
+  const [mode, setMode] = useState("command");
   const [loading, setLoading] = useState(false);
 
   const toggleState = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
@@ -21,7 +22,7 @@ const ItemCommandConverter: React.FC = () => {
     setOutput("");
     setLoading(true);
     try {
-      const response = await fetch("https://item-converter.papermc.io/convert-command", {
+      const response = await fetch("https://item-converter.papermc.io/convert-" + mode, {
         method: "POST",
         body: input,
       });
@@ -56,13 +57,23 @@ const ItemCommandConverter: React.FC = () => {
           onChange={(event) => setInput(event.target.value)}
         />
       </label>
-      <Button
-        label="Convert"
-        success={convertSuccess}
-        error={convertError}
-        onClick={convert}
-        disabled={loading}
-      />
+      <div className="item-command-converter__action">
+        <Button
+          label="Convert"
+          success={convertSuccess}
+          error={convertError}
+          onClick={convert}
+          disabled={loading}
+        />
+        <label>
+          Mode:
+          <select value={mode} onChange={(event) => setMode(event.target.value)}>
+            <option value="command">Command</option>
+            <option value="item-argument">Item Argument</option>
+            <option value="component-argument">Component Argument</option>
+          </select>
+        </label>
+      </div>
       <label>
         Output:
         <textarea placeholder={"Press 'Convert' to convert the command."} readOnly value={output} />

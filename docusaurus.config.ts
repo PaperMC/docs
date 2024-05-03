@@ -6,7 +6,13 @@ import footer from "./config/footer.config";
 import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
-import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData, getFileCommitHashSafe } from "./src/util/authorUtils";
+import {
+  AUTHOR_FALLBACK,
+  AuthorData,
+  commitCache,
+  cacheAuthorData,
+  getFileCommitHashSafe,
+} from "./src/util/authorUtils";
 
 const preview = env.VERCEL_ENV === "preview";
 cacheAuthorData(preview || process.env.NODE_ENV === "development");

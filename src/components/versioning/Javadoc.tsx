@@ -52,6 +52,6 @@ export default function Javadoc({ name, module, project = "paper", children }: J
 interface JavadocProps {
   name: string;
   module?: string;
-  project?: "paper" | "velocity" | "java" | "adventure" | "jb-annotations";
+  project?: "paper" | "velocity" | "java";
   children: any;
 }

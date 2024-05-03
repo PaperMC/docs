@@ -47,6 +47,18 @@ async function cacheUsernameFromCommit(commit: string) {
   }
 }
 
+export const getFileCommitHashSafe = async (file: string): Promise<{ commit: string } | null> => {
+  try {
+    return await getFileCommitHash(file);
+  } catch (e) {
+    if (e instanceof FileNotTrackedError) {
+      return null;
+    }
+
+    throw e; // different error, rethrow
+  }
+};
+
 export async function cacheAuthorData(isPreview: boolean) {
   // Only Render in Production and not cache in every invocation of importing docusaurus.config.ts
   if (isPreview || !new Error().stack.includes("async loadSite")) {
@@ -59,18 +71,8 @@ export async function cacheAuthorData(isPreview: boolean) {
   }
 
   const pagesFiles = await Globby("docs/**/*.md*");
-  const commits = await Promise.all(
-    pagesFiles.map((f) => {
-      return getFileCommitHash(f).catch((e) => {
-        if (e instanceof FileNotTrackedError) {
-          return null;
-        }
-
-        throw e; // different error, rethrow
-      });
-    })
-  );
-
+  const commits = await Promise.all(pagesFiles.map(getFileCommitHashSafe));
   const commitsSet = new Set(commits.filter(Boolean).map((value) => value.commit));
+
   await Promise.all(Array.from(commitsSet).map(cacheUsernameFromCommit));
 }

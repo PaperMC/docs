@@ -66,6 +66,7 @@ const paper: SidebarsConfig = {
             },
             "admin/reference/system-properties",
             "admin/reference/paper-plugins",
+            "admin/reference/vanilla-command-permissions",
           ],
         },
         {

@@ -78,6 +78,7 @@ These settings mostly cover the basic, most essential settings of the proxy.
 | `failover-on-unexpected-server-disconnect` | Boolean | This setting allows you to determine if the proxy should failover or disconnect the user in the event of an unclean disconnect.                                                                         |
 | `log-command-executions`                   | Boolean | Determines whether or not the proxy should log all commands run by the user.                                                                                                                            |
 | `log-player-connections`                   | Boolean | Enables logging of player connections when connecting to the proxy, switching servers and disconnecting from the proxy.                                                                                 |
+| `accepts-transfers`                        | Boolean | Determines whether or not the proxy accepts incoming transfers from other servers. If disabled, the proxy will disconnect transferred clients.                                                          |
 
 ## `query` section
 

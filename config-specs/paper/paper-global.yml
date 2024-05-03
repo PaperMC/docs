@@ -317,7 +317,7 @@ proxies:
         forwarding.secret file
 scoreboards:
   save-empty-scoreboard-teams:
-    default: "false"
+    default: "true"
     description: >-
       Some scoreboard plugins leave hundreds of empty scoreboard teams around,
       dramatically slowing down login times. This sets whether the server should

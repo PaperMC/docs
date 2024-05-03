@@ -6,8 +6,7 @@ import footer from "./config/footer.config";
 import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
-import { getFileCommitHash } from "@docusaurus/utils/src/gitUtils";
-import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData } from "./src/util/authorUtils";
+import { AUTHOR_FALLBACK, AuthorData, commitCache, cacheAuthorData, getFileCommitHashSafe } from "./src/util/authorUtils";
 
 const preview = env.VERCEL_ENV === "preview";
 cacheAuthorData(preview || process.env.NODE_ENV === "development");
@@ -89,12 +88,14 @@ const config: Config = {
         ...AUTHOR_FALLBACK,
       };
       if (process.env.NODE_ENV !== "development") {
-        const { commit } = await getFileCommitHash(params.filePath);
-        const username = commitCache.get(commit);
-        author = {
-          commit,
-          username: username ?? AUTHOR_FALLBACK.username,
-        };
+        const data = await getFileCommitHashSafe(params.filePath);
+        if (data) {
+          const username = commitCache.get(data.commit);
+          author = {
+            commit: data.commit,
+            username: username ?? AUTHOR_FALLBACK.username,
+          };
+        }
       }
 
       return {

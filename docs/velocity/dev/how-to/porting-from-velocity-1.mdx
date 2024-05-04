@@ -31,6 +31,6 @@ model.
 
 Existing event handlers will continue to work unmodified on Velocity 3.0.0, as all event handlers
 are assumed to be asynchronous blocking handlers by default. However, there are some new APIs
-introduced for handling continuations - see the [event API page](../api/event.md) for more
+introduced for handling continuations - see the [event API page](../api/event.mdx) for more
 information. However, you are encouraged to migrate your event listeners to the new event API
 paradigms.

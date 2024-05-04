@@ -1,13 +1,44 @@
 ---
-slug: /reference/vanilla-command-permissions
-description: Vanilla Minecraft commands and their associated permissions.
+slug: /reference/permissions
+description: All permissions available in the default Paper server.
 ---
 
-# Vanilla Command Permissions
-
-The following is a list of permissions for Vanilla commands.
+# Permissions
 
 import React from "react";
-import { CommandsPermissionsTable, commands } from "@site/src/components/MinecraftCommands";
+import { CommandsPermissionsTable, PermissionsTable } from "@site/src/components/permission/Permissions";
+import {vanillaCommands, bukkitCommands, paperCommands, vanillaPermissions, bukkitPermissions, paperPermissions} from "@site/src/components/permission/PermissionSpec";
 
-<CommandsPermissionsTable data={commands} />
+This page lists all permissions that are included in the default Paper server.
+
+## Vanilla command permissions
+
+The following is a list of permissions for Vanilla commands.
+<CommandsPermissionsTable data={vanillaCommands} />
+
+
+## Bukkit command permissions
+
+The following is a list of permissions for Bukkit commands.
+<CommandsPermissionsTable data={bukkitCommands} />
+
+## Paper command permissions
+
+The following is a list of permissions for Paper commands.
+<CommandsPermissionsTable data={paperCommands} />
+
+## Vanilla permissions
+
+The following is a list of all additional Vanilla Permissions.
+<PermissionsTable data={vanillaPermissions}/>
+
+## Bukkit permissions
+
+The following is a list of all additional Bukkit Permissions.
+<PermissionsTable data={bukkitPermissions}/>
+
+## Paper permissions
+
+The following is a list of all additional Paper Permissions.
+<PermissionsTable data={paperPermissions}/>
+

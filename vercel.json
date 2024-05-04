@@ -35,6 +35,10 @@
     {
       "source": "/paper/configuration",
       "destination": "/paper/reference/configuration"
+    },
+    {
+      "source": "/paper/reference/vanilla-command-permissions",
+      "destination": "/paper/reference/permissions"
     }
   ],
   "headers": [

@@ -3,6 +3,10 @@ slug: /dev/project-setup
 description: Step-by-step instructions on how to set up a plugin development environment.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
 # Paper Project Setup
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE.
@@ -209,70 +213,77 @@ If you are using Paper plugins, this step is not needed as plugins will be assum
 
 :::
 
-```kotlin title="build.gradle.kts"
-tasks.jar {
-    manifest {
+<Tabs groupId="author-front-matter">
+  <TabItem value="gradle" label="Gradle Kotlin DSL" default>
+    ```kotlin
+    tasks.jar {
+      manifest {
         attributes["paperweight-mappings-namespace"] = "mojang"
+      }
     }
-}
-
-// if you have shadowJar configured
-tasks.shadowJar {
-    manifest {
+    // if you have shadowJar configured
+    tasks.shadowJar {
+      manifest {
         attributes["paperweight-mappings-namespace"] = "mojang"
+      }
     }
-}
-```
-
-```xml title="pom.xml"
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-jar-plugin</artifactId>
-    <version>3.4.1</version>
-    <configuration>
+    ```
+  </TabItem>
+  <TabItem value="maven" label="Maven POM">
+    ```xml
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.4.1</version>
+      <configuration>
         <archive>
-            <manifestEntries>
-                <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
-            </manifestEntries>
+          <manifestEntries>
+            <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
+          </manifestEntries>
         </archive>
-    </configuration>
-</plugin>
-```
+      </configuration>
+    </plugin>
+    ```
+  </TabItem>
+</Tabs>
 
 ### Spigot mappings
 
 If you explicitly want to tell the server that your plugin is Spigot-mapped, you need to add the following code to your build script:
 
-```kotlin title="build.gradle.kts"
-tasks.jar {
-    manifest {
+<Tabs groupId="author-front-matter">
+  <TabItem value="gradle" label="Gradle Kotlin DSL">
+    ```kotlin
+    tasks.jar {
+      manifest {
         attributes["paperweight-mappings-namespace"] = "spigot"
+      }
     }
-}
-
-// if you have shadowJar configured
-tasks.shadowJar {
-    manifest {
+    // if you have shadowJar configured
+    tasks.shadowJar {
+      manifest {
         attributes["paperweight-mappings-namespace"] = "spigot"
+      }
     }
-}
-```
-
-```xml title="pom.xml"
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-jar-plugin</artifactId>
-    <version>3.4.1</version>
-    <configuration>
+    ```
+  </TabItem>
+  <TabItem value="maven" label="Maven POM">
+    ```xml
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.4.1</version>
+      <configuration>
         <archive>
-            <manifestEntries>
-                <paperweight-mappings-namespace>spigot</paperweight-mappings-namespace>
-            </manifestEntries>
+          <manifestEntries>
+            <paperweight-mappings-namespace>spigot</paperweight-mappings-namespace>
+          </manifestEntries>
         </archive>
-    </configuration>
-</plugin>
-```
-
+      </configuration>
+    </plugin>
+    ```
+  </TabItem>
+</Tabs>
 
 ## Conclusion
 

@@ -11,8 +11,9 @@ effectively.
 
 ## Plugin dependencies
 
-Adding a dependency on another plugin is done with the `@Plugin` annotation in your main class.
-Let's revisit that briefly:
+Adding a dependency on another plugin is done with the
+<Javadoc name={"com.velocitypowered.api.plugin.Plugin"} project={"velocity"}>`@Plugin`</Javadoc>
+annotation in your main class. Let's revisit that briefly:
 
 ```java
 @Plugin(
@@ -82,5 +83,7 @@ Dependencies on other libraries aren't handled by Velocity. You will need to add
 build system.
 
 If your plugin does not shade its dependencies, but rather attaches them from a directory, you may
-use the `PluginManager`'s `addToClasspath` method instead of using reflection to access the
-`ClassLoader`.
+use the <Javadoc name={"com.velocitypowered.api.plugin.PluginManager"} project={"velocity"}>`PluginManager`</Javadoc>'s
+<Javadoc name={"com.velocitypowered.api.plugin.PluginManager#addToClasspath(java.lang.Object,java.nio.file.Path)"} project={"velocity"}>`addToClasspath`</Javadoc>
+method instead of using reflection to access the
+<Javadoc name={"java.lang.ClassLoader"} project={"java"}>`ClassLoader`</Javadoc>.

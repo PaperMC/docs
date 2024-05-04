@@ -3,6 +3,10 @@ slug: /dev/project-setup
 description: Step-by-step instructions on how to set up a plugin development environment.
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+
 # Paper Project Setup
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE.
@@ -186,6 +190,100 @@ Now you can click on the `Create` button and IntelliJ will create the project fo
 If everything went well, you should see something like this:
 
 ![](assets/paper-plugin-overview.png)
+
+## Plugin remapping
+
+As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+If you are using Spigot/Bukkit plugins, your plugin will be assumed to be Spigot-mapped.
+This means that the server will have to deobfuscate and remap the plugin JAR when it's loaded for the first time.
+
+:::info
+
+`paperweight-userdev` already sets this attribute automatically. For more information see the [userdev](./userdev) documentation.
+
+:::
+
+### Mojang mappings
+
+To tell the server that your plugin is Mojang-mapped, you need to add the following code to your build script:
+
+:::note[Paper plugins]
+
+If you are using Paper plugins, this step is not needed as plugins will be assumed to be Mojang-mapped.
+
+:::
+
+<Tabs groupId="author-front-matter">
+  <TabItem value="gradle" label="Gradle Kotlin DSL" default>
+    ```kotlin
+    tasks.jar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "mojang"
+      }
+    }
+    // if you have shadowJar configured
+    tasks.shadowJar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "mojang"
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem value="maven" label="Maven POM">
+    ```xml
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.4.1</version>
+      <configuration>
+        <archive>
+          <manifestEntries>
+            <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
+          </manifestEntries>
+        </archive>
+      </configuration>
+    </plugin>
+    ```
+  </TabItem>
+</Tabs>
+
+### Spigot mappings
+
+If you explicitly want to tell the server that your plugin is Spigot-mapped, you need to add the following code to your build script:
+
+<Tabs groupId="author-front-matter">
+  <TabItem value="gradle" label="Gradle Kotlin DSL">
+    ```kotlin
+    tasks.jar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "spigot"
+      }
+    }
+    // if you have shadowJar configured
+    tasks.shadowJar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "spigot"
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem value="maven" label="Maven POM">
+    ```xml
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.4.1</version>
+      <configuration>
+        <archive>
+          <manifestEntries>
+            <paperweight-mappings-namespace>spigot</paperweight-mappings-namespace>
+          </manifestEntries>
+        </archive>
+      </configuration>
+    </plugin>
+    ```
+  </TabItem>
+</Tabs>
 
 ## Conclusion
 

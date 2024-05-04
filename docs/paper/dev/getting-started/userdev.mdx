@@ -24,6 +24,13 @@ This can make it hard to work with in a development environment. This plugin let
 types, names, and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
 server.
 
+:::caution[1.20.5]
+
+As of Minecraft version 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+See [here](#1205) for more details.
+
+:::
+
 :::caution
 
 The re-obfuscation does not apply to reflection. Look at something like [this library](https://github.com/jpenilla/reflection-remapper) to be able to
@@ -35,7 +42,7 @@ use non-obfuscated names in reflection.
 Add the plugin to your `build.gradle.kts` file.
 ```kotlin
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.5.12" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
+    id("io.papermc.paperweight.userdev") version "1.7.0" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
 }
 ```
 
@@ -102,4 +109,41 @@ tasks.assemble {
     dependsOn(reobfJar)
 }
 ```
+
+## 1.20.5
+
+As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+Additionally, CraftBukkit classes will no longer be relocated into a versioned package.
+This requires plugins to be deobfuscated before loading when necessary.
+
+Most of this process is done automatically by paperweight but there are some important things to know when using NMS from now on.
+
+### Default mappings assumption
+* By default, all Spigot/Bukkit plugins will be assumed to be Spigot-mapped if they do not specify their mappings namespace in the manifest. Conversely, all Paper plugins will be assumed to be Mojang-mapped if they do not specify their mappings namespace in the manifest.
+* Spigot-mapped plugins will need to be deobfuscated on first load, Mojang-mapped plugins will not.
+
+### Mojang mappings
+
+If you want to map your plugin with Mojang mappings, you need to add the following code to your build script:
+
+:::note
+
+You only have to change this setting if you are using Bukkit/Spigot plugins. Paper plugins are already assumed to be Mojang-mapped.
+
+:::
+
+```kotlin title="build.gradle.kts"
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
+```
+
+Additionally, you need to remove all `dependsOn(reobfJar)` lines.
+
+### Spigot mappings
+
+If you are using Paper plugins but want to explicitly use Spigot mappings, you need to change the property to:
+
+```kotlin title="build.gradle.kts"
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
+```
+
 

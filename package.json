@@ -27,6 +27,7 @@
     "@docusaurus/theme-common": "3.2.1",
     "@docusaurus/theme-mermaid": "3.2.1",
     "@docusaurus/theme-search-algolia": "3.2.1",
+    "@floating-ui/react": "^0.26.13",
     "@fontsource/jetbrains-mono": "5.0.20",
     "@iconify/react": "4.1.1",
     "@mdx-js/react": "3.0.1",

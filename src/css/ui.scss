@@ -45,6 +45,7 @@
     background-color: rgba(0, 0, 0, 0.1);
     color: var(--gen-text-color);
     cursor: pointer;
+    line-height: 24px;
 
     &::after {
       content: "▾";
@@ -70,7 +71,24 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
   }
+}
 
+.autocomplete {
+  padding: 8px;
+  font-size: 15px;
+  line-height: 24px;
+
+  &-portal {
+    background-color: var(--background-gen-color);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+  }
+}
+
+.custom-dropdown,
+.autocomplete-portal {
   &__item {
     padding: 10px;
     cursor: pointer;

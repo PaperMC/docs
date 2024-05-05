@@ -53,7 +53,8 @@ The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it i
 
 ##### Usage
 
-You must invoke a `Class.forName` on the driver to allow it to initialize and then create the connection to the database:
+You must invoke a <Javadoc name={"java.lang.Class#forName(java.lang.String)"} project={"java"}>`Class#forName(String)`</Javadoc>
+on the driver to allow it to initialize and then create the connection to the database:
 
 ```java
 public class DatabaseManager {
@@ -65,8 +66,9 @@ public class DatabaseManager {
 }
 ```
 
-You then have access to a `Connection` object, which you can use to create a `Statement` and execute SQL queries.
-To learn more about the Java Database Connection, see [here](https://www.baeldung.com/java-jdbc)
+You then have access to a <Javadoc name={"java.sql.Connection"} module={"java.sql"} project={"java"}>`Connection`</Javadoc> object,
+which you can use to create a <Javadoc name={"java.sql.Statement"} module={"java.sql"} project={"java"}>`Statement`</Javadoc> and execute SQL queries.
+To learn more about the Java Database Connectivity API, see [here](https://www.baeldung.com/java-jdbc)
 
 </details>
 
@@ -187,7 +189,7 @@ but it can be used to do much more malicious things, such as deleting the entire
 
 ### Prepared statements
 
-Using prepared statements in Java with `PreparedStatement`s helps prevent SQL injection.
-They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
+Using prepared statements in Java with <Javadoc name={"java.sql.PreparedStatement"} module={"java.sql"} project={"java"}>`PreparedStatement`</Javadoc>s
+helps prevent SQL injection. They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection
 [here](https://www.baeldung.com/sql-injection).

@@ -5,7 +5,8 @@ description: An explanation to what an event's HandlerList is.
 
 # Handler Lists
 
-Every `Event` that can be listened to has a `HandlerList` containing all the listeners that are listening to that event. 
+Every <Javadoc name={"org.bukkit.event.Event"}>`Event`</Javadoc> that can be listened to has a
+<Javadoc name={"org.bukkit.event.HandlerList"}>`HandlerList`</Javadoc> containing all the listeners that are listening to that event.
 This list is used to call the listeners when the event is called.
 
 ## Getting the handler list for an event
@@ -56,5 +57,7 @@ public class ExampleListener implements Listener {
 }
 ```
 
-You can unregister based on `Listener` or `Plugin` for more convenience.
-Likewise, you can also unregister all listeners for a specific event by calling `unregisterAll()` on the `HandlerList`.
+You can unregister based on <Javadoc name={"org.bukkit.event.Listener"}>`Listener`</Javadoc>
+or <Javadoc name={"org.bukkit.plugin.Plugin"}>`Plugin`</Javadoc> for more convenience.
+Likewise, you can also unregister all listeners for a specific event by calling
+<Javadoc name={"org.bukkit.event.HandlerList#unregisterAll()"}>`unregisterAll()`</Javadoc> on the `HandlerList`.

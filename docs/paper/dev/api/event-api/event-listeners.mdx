@@ -11,7 +11,7 @@ Plugins are able to call custom events, such as a player completing a quest, for
 
 ## Your listener class
 
-To listen for events, you need to create a class that implements `Listener`.
+To listen for events, you need to create a class that implements <Javadoc name={"org.bukkit.event.Listener"}>`Listener`</Javadoc>.
 This class can be called anything you want, but it is recommended to name it something related to the events you are listening for.
 
 ```java title="ExampleListener.java"
@@ -22,7 +22,7 @@ public class ExampleListener implements Listener {
 
 ## `@EventHandler`
 
-To listen for an event, you need to create a method that is annotated with `@EventHandler`.
+To listen for an event, you need to create a method that is annotated with <Javadoc name={"org.bukkit.event.EventHandler"}>`@EventHandler`</Javadoc>.
 This method can be named anything you want, but it is recommended to name it something meaningful related to the event it is listening for.
 
 ## The listener method
@@ -43,7 +43,7 @@ public class ExampleListener implements Listener {
 :::note[Events]
 
 There is no list of events that can be listened to, however take a
-look <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink>
+look <Javadoc name={"org.bukkit.event.Event"}>here</Javadoc>
 to see all classes that extend `Event`.
 
 An event can only be listened to if it has a static `getHandlerList` method.
@@ -82,12 +82,12 @@ public class ExampleListener implements Listener {
 }
 ```
 There are six different priorities that you can use:
-- `EventPriority.LOWEST`
-- `EventPriority.LOW`
-- `EventPriority.NORMAL`
-- `EventPriority.HIGH`
-- `EventPriority.HIGHEST`
-- `EventPriority.MONITOR`
+- <Javadoc name={"org.bukkit.event.EventPriority#LOWEST"}>`EventPriority.LOWEST`</Javadoc>
+- <Javadoc name={"org.bukkit.event.EventPriority#LOW"}>`EventPriority.LOW`</Javadoc>
+- <Javadoc name={"org.bukkit.event.EventPriority#NORMAL"}>`EventPriority.NORMAL`</Javadoc>
+- <Javadoc name={"org.bukkit.event.EventPriority#HIGH"}>`EventPriority.HIGH`</Javadoc>
+- <Javadoc name={"org.bukkit.event.EventPriority#HIGHEST"}>`EventPriority.HIGHEST`</Javadoc>
+- <Javadoc name={"org.bukkit.event.EventPriority#MONITOR"}>`EventPriority.MONITOR`</Javadoc>
 
 The order of the priorities is somewhat counter-intuitive. The **higher** the priority, the **later** the event is called.
 For example, if it is important that your plugin has the last say in a certain event - to avoid it being changed - you
@@ -102,7 +102,8 @@ This means you can get the result of any plugin interaction such as cancellation
 
 ## Event cancellation
 
-Some events can be cancelled, preventing the given action from being completed. These events implement `Cancellable`.
+Some events can be cancelled, preventing the given action from being completed.
+These events implement <Javadoc name={"org.bukkit.event.Cancellable"}>`Cancellable`</Javadoc>.
 
 ```java title="ExampleListener.java"
 public class ExampleListener implements Listener {

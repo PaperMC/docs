@@ -38,7 +38,8 @@ public final class PluginMessagingSample extends JavaPlugin {
 
 Now that we're registered, we can send messages on the `BungeeCord` channel.
 
-Plugin messages are formatted as byte arrays and can be sent using the `sendPluginMessage` method on a `Player` object.
+Plugin messages are formatted as byte arrays and can be sent using the <Javadoc name={"org.bukkit.plugin.messaging.PluginMessageRecipient#sendPluginMessage(org.bukkit.plugin.Plugin,java.lang.String,byte[])"}>`sendPluginMessage`</Javadoc>
+method on a <Javadoc name={"org.bukkit.entity.Player"}>`Player`</Javadoc> object.
 Let's take a look at an example of sending a plugin message to the `BungeeCord` channel to send our player to another server.
 
 ```java
@@ -75,7 +76,7 @@ player connected to the server, it will not be able to send or receive plugin me
 
 We sent a plugin message on the `BungeeCord` channel! The message we sent was a byte array that contained two strings converted to bytes: `Connect` and `hub2`.
 
-Our proxy server received the message through the player who triggered the `PlayerJumpEvent` on our Java server.
+Our proxy server received the message through the player who triggered the <Javadoc name={"com.destroystokyo.paper.event.player.PlayerJumpEvent"}>`PlayerJumpEvent`</Javadoc> on our Java server.
 Then, it recognized the channel as its own and, in alignment with BungeeCord's protocol, sent our player to the `hub2` server.
 
 For BungeeCord, we can think of this message as a case-sensitive command with arguments.

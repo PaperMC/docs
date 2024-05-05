@@ -117,12 +117,12 @@ of a few ways:
    <SoftwareVersion versionType={"maj-min"} project={"velocity"}/> // Project defaults to Paper
    ```
 
-2. `VersionedJavaDocLink` component
+2. `Javadoc` component
 
-   This component is used to embed a link to the current version of the JavaDocs. An example of this would be:
+   This component is used to embed a link to the current version of the corresponding Javadoc. An example of this would be:
 
    ```jsx
-   <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink>
+   <Javadoc name={"org.bukkit.event.Event"}>here</Javadoc>
    // The project can also be set here, and defaults to Paper
    ```
 

@@ -122,7 +122,8 @@ export function PermissionsTable({ data }: PermissionTableProps): JSX.Element {
               ? permission.requiresOp === undefined
                 ? permission.defaultComment
                 : permission.requiresOp
-                  ? "Yes" : "No"
+                  ? "Yes"
+                  : "No"
               : permission.opLevel == 0
                 ? "Yes"
                 : "No"}

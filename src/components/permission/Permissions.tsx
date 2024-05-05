@@ -9,7 +9,9 @@ interface Command {
    * If a number: the default OP level required for a command as registered by Minecraft code.
    * If a string: an explanation of when the command is accessible to players by default and when it's not
    */
-  opLevel: number | string;
+  opLevel?: number;
+  /** A comment explaining when a command is usable */
+  defaultComment?: string;
 }
 
 export interface CommandData {
@@ -33,7 +35,11 @@ interface Permission {
    * If a string: an explanation of when the command is accessible to players by default and when it's not.
    * If a boolean: the boolean will determine if "Yes" or "No" will be shown.
    */
-  opLevel: number | string | boolean;
+  opLevel?: number;
+  /** Weather the permission is granted by default for Operators */
+  requiresOp?: boolean;
+  /** A comment explaining when a permissions is granted by default */
+  defaultComment?: string;
 }
 
 export interface PermissionData {
@@ -60,15 +66,15 @@ function listAliases(aliases: string[]): AliasList {
     .reduce((prev, curr) => [prev, <span>, </span>, curr]);
 }
 
-function getCommand(data: CommandData, x1: string) {
+function getCommand(data: CommandData, command: string) {
   if (data.permissionPrefix === "minecraft.command") {
     return (
-      <a href={`https://minecraft.wiki/w/Commands/${x1}`}>
-        <span className={"no-wrap"}>{x1}</span>
+      <a href={`https://minecraft.wiki/w/Commands/${command}`}>
+        <span className={"no-wrap"}>{command}</span>
       </a>
     );
   } else {
-    return <span className={"no-wrap"}>{x1}</span>;
+    return <span className={"no-wrap"}>{command}</span>;
   }
 }
 
@@ -87,8 +93,8 @@ export function CommandsPermissionsTable({ data }: CommandsPermissionsTableProps
           <td>{listAliases(command.aliases)}</td>
           <td>{`${data.permissionPrefix}.${command.name}`}</td>
           <td>
-            {typeof command.opLevel === "string"
-              ? command.opLevel
+            {command.opLevel === undefined
+              ? command.defaultComment
               : command.opLevel == 0
                 ? "Yes"
                 : "No"}
@@ -112,15 +118,14 @@ export function PermissionsTable({ data }: PermissionTableProps): JSX.Element {
           <td>{`${data.permissionPrefix}${permission.permission === "" ? "" : "." + permission.permission}`}</td>
           <td>{permission.description}</td>
           <td>
-            {typeof permission.opLevel === "boolean"
-              ? permission.opLevel
+            {permission.opLevel === undefined
+              ? permission.requiresOp === undefined
+                ? permission.defaultComment
+                : permission.requiresOp
+                  ? "Yes" : "No"
+              : permission.opLevel == 0
                 ? "Yes"
-                : "No"
-              : typeof permission.opLevel === "string"
-                ? permission.opLevel
-                : permission.opLevel == 0
-                  ? "Yes"
-                  : "No"}
+                : "No"}
           </td>
         </tr>
       ))}

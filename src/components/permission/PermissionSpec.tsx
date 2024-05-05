@@ -49,7 +49,7 @@ export const vanillaCommands: CommandData = {
     {
       name: "random",
       aliases: [],
-      opLevel: "Yes without sequence argument, No with sequence argument.",
+      defaultComment: "Yes without sequence argument, No with sequence argument.",
     },
     { name: "recipe", aliases: [], opLevel: 2 },
     { name: "reload", aliases: [], opLevel: 2 },
@@ -135,7 +135,7 @@ export const vanillaPermissions: PermissionData = {
     {
       permission: "debugstick.always",
       description: "Gives the user the ability to use the debug stick in all game modes.",
-      opLevel: false,
+      requiresOp: false,
     },
     {
       permission: "commandblock",

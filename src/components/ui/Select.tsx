@@ -30,6 +30,7 @@ export default function Button({ options, value, onSelect }: SelectProps) {
 
   const { refs, floatingStyles, context } = useFloating<HTMLInputElement>({
     whileElementsMounted: autoUpdate,
+    placement: "bottom-start",
     open,
     onOpenChange: setOpen,
     middleware: [
@@ -37,7 +38,7 @@ export default function Button({ options, value, onSelect }: SelectProps) {
       size({
         apply({ rects, availableHeight, elements }) {
           Object.assign(elements.floating.style, {
-            width: `${rects.reference.width}px`,
+            minWidth: `${rects.reference.width}px`,
             maxHeight: `${availableHeight}px`,
           });
         },

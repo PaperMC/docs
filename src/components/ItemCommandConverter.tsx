@@ -163,10 +163,6 @@ const ItemCommandConverter: React.FC = () => {
           onClick={convert}
           disabled={loading}
         />
-        <label>
-          Mode:
-          <Select options={MODES} value={mode} onSelect={setMode} />
-        </label>
         {mode === MODES[3] && (
           <label>
             <span>Entity Type:</span>
@@ -178,6 +174,10 @@ const ItemCommandConverter: React.FC = () => {
             />
           </label>
         )}
+        <label>
+          Mode:
+          <Select options={MODES} value={mode} onSelect={setMode} />
+        </label>
       </div>
       <label className="item-command-converter__output">
         Output:

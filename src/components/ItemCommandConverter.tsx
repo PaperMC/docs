@@ -9,7 +9,11 @@ const MODES: Option[] = [
   { label: "Item Argument", value: "item-argument" },
   { label: "Component Argument", value: "component-argument" },
   { label: "Entity Argument", value: "entity-argument" },
+  { label: "Commands/Function", value: "commands" },
 ];
+const MODE_COMMAND = MODES[0];
+const MODE_ENTITY = MODES[3];
+const MODE_FUNCTION = MODES[4];
 
 const ENTITY_TYPES: Option[] = [
   "item",
@@ -103,7 +107,7 @@ const ItemCommandConverter: React.FC = () => {
   const [copySuccess, setCopySuccess] = useState(false);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
-  const [mode, setMode] = useState(MODES[0]);
+  const [mode, setMode] = useState(MODE_COMMAND);
   const [entityType, setEntityType] = useState<Option>();
   const [loading, setLoading] = useState(false);
 
@@ -116,16 +120,35 @@ const ItemCommandConverter: React.FC = () => {
     setOutput("");
     setLoading(true);
     try {
-      const query = mode === MODES[3] ? "?entityType=" + entityType?.value : "";
-      const response = await fetch(
-        "https://item-converter.papermc.io/convert-" + mode.value + query,
-        {
+      let response: Response;
+      if (mode === MODE_FUNCTION) {
+        const commands = input
+          .split("\n")
+          .map((command) => command.trim())
+          .filter((command) => command.length > 0)
+          .filter((command) => !command.startsWith("#") && !command.startsWith("$"));
+        response = await fetch("https://item-converter.papermc.io/convert-commands", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            commands,
+          }),
+        });
+      } else {
+        const query = mode === MODE_ENTITY ? "?entityType=" + entityType?.value : "";
+        response = await fetch("https://item-converter.papermc.io/convert-" + mode.value + query, {
           method: "POST",
           body: input,
-        }
-      );
+        });
+      }
       if (response.status === 200) {
-        setOutput(await response.text());
+        if (mode === MODE_FUNCTION) {
+          setOutput((await response.json()).join("\n"));
+        } else {
+          setOutput(await response.text());
+        }
         toggleState(setConvertSuccess);
       } else {
         console.warn(
@@ -150,7 +173,11 @@ const ItemCommandConverter: React.FC = () => {
       <label>
         Input:
         <textarea
-          placeholder="Enter your 1.20.4 command here..."
+          placeholder={
+            mode !== MODE_FUNCTION
+              ? "Enter your 1.20.4 command here..."
+              : "Enter your 1.20.4 commands or function here..."
+          }
           value={input}
           onChange={(event) => setInput(event.target.value)}
         />
@@ -163,7 +190,7 @@ const ItemCommandConverter: React.FC = () => {
           onClick={convert}
           disabled={loading}
         />
-        {mode === MODES[3] && (
+        {mode === MODE_ENTITY && (
           <label>
             <span>Entity Type:</span>
             <AutoComplete

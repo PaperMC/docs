@@ -10,6 +10,11 @@ const WINDOWS_AUTO_RESTART =
 const LINUX_AUTO_RESTART =
   "while [ true ]; do\n    %%CONTENT%%\n    echo Server restarting...\n    echo Press CTRL + C to stop.\ndone";
 
+const PLATFORMS: Option[] = [
+  { label: "Linux/Mac", value: "linux" },
+  { label: "Windows", value: "windows" },
+];
+
 const FLAGS: Option[] = [
   {
     label: "Aikar's",
@@ -212,10 +217,7 @@ const StartScriptGenerator: React.FC = () => {
 
         <div className={"platform-selector"}>
           <label>Platform:</label>
-          <select id={"platform-select"} onChange={(event) => setPlatform(event.target.value)}>
-            <option value="linux">Linux/Mac</option>
-            <option value="windows">Windows</option>
-          </select>
+          <Select options={PLATFORMS} value={platform} onSelect={setPlatform} />
           {platform === "windows" && (
             <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
           )}

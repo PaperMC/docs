@@ -27,6 +27,12 @@ html[data-theme="dark"] {
   margin-bottom: 10px;
 }
 
+.toggles {
+  flex-direction: row;
+  gap: 1rem;
+
+}
+
 .filename-input {
   display: flex;
   flex-direction: row;

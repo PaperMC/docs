@@ -189,12 +189,19 @@ const StartScriptGenerator: React.FC = () => {
             className={"filename-input"}
           />
         </div>
+        <div className={"config-section"}>
+          <label htmlFor="platform-dropdown">Platform:</label>
+          <Select options={PLATFORMS} value={platform} onSelect={setPlatform} />
+          {platform === WINDOWS && (
+            <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
+          )}
+        </div>
         <div className="config-section">
           <label htmlFor="flags-dropdown">Flags:</label>
           <Select options={FLAGS} value={selectedFlag} onSelect={setSelectedFlag} />
         </div>
       </div>
-      <div className="config-section">
+      <div className="config-section toggles">
         {selectedFlag != VELOCITY && (
           <div className={"gui-container"}>
             <label className={"margin-right--sm"}>GUI:</label>
@@ -216,14 +223,6 @@ const StartScriptGenerator: React.FC = () => {
             onChange={() => setAutoRestart(!autoRestart)}
           />
           <label htmlFor="restart-toggle" className="switch"></label>
-        </div>
-
-        <div className={"platform-selector"}>
-          <label>Platform:</label>
-          <Select options={PLATFORMS} value={platform} onSelect={setPlatform} />
-          {platform === WINDOWS && (
-            <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
-          )}
         </div>
       </div>
       <div className="config-section">

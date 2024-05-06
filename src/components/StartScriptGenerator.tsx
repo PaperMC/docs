@@ -88,7 +88,7 @@ const generateStartCommand = (
     );
   else content = platform === WINDOWS ? command + "\n\npause" : command;
 
-  content = (platform === LINUX ? "#!/bin/bash\n\n" : "@echo off\n\n") + content;
+  content = (platform === LINUX ? "#!/usr/bin/env sh\n\n" : "@echo off\n\n") + content;
 
   return content;
 };

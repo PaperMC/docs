@@ -1,5 +1,5 @@
 diff --git a/src/gitUtils.ts b/src/gitUtils.ts
-index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..c3116d7a725d4a5420286baac8147f4e821e5631 100644
+index 39a3ad754a0c5ab27cfb78c7b44a9f0be3785a62..c3116d7a725d4a5420286baac8147f4e821e5631 100755
 --- a/src/gitUtils.ts
 +++ b/src/gitUtils.ts
 @@ -95,6 +95,13 @@ export async function getFileCommitDate(
@@ -16,26 +16,26 @@ index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..c3116d7a725d4a5420286baac8147f4e
    if (!hasGit()) {
      throw new GitNotFoundError(
        `Failed to retrieve git history for "${file}" because git is not installed.`,
-@@ -106,22 +113,39 @@ export async function getFileCommitDate(
+@@ -106,19 +113,28 @@ export async function getFileCommitDate(
        `Failed to retrieve git history for "${file}" because the file does not exist.`,
      );
    }
 +}
-+
+
 +function createArgs(format: string, includeAuthor?: boolean, age: 'oldest' | 'newest' = 'oldest') {
-+  // We add a "RESULT:" prefix to make parsing easier
-+  // See why: https://github.com/facebook/docusaurus/pull/10022
-+  const resultFormat = includeAuthor ? 'RESULT:%ct,%an' : 'RESULT:%ct';
- 
+   // We add a "RESULT:" prefix to make parsing easier
+   // See why: https://github.com/facebook/docusaurus/pull/10022
+   const resultFormat = includeAuthor ? 'RESULT:%ct,%an' : 'RESULT:%ct';
+
    const args = [
--    `--format=%ct${includeAuthor ? ',%an' : ''}`,
+-    `--format=${resultFormat}`,
 +    `--format=${includeAuthor === undefined ? format : resultFormat}`,
      '--max-count=1',
      age === 'oldest' ? '--follow --diff-filter=A' : undefined,
    ]
      .filter(Boolean)
      .join(' ');
- 
+
 +  return args;
 +}
 +async function runGitCommandOnFile(file: string, args: string): Promise<{
@@ -43,49 +43,32 @@ index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..c3116d7a725d4a5420286baac8147f4e
 +  stdout: string;
 +  stderr: string;
 +}> {
-+  const command = `git -c log.showSignature=false log ${args} -- "${path.basename(
-+    file,
-+  )}"`;
-+
-   const result = await new Promise<{
-     code: number;
-     stdout: string;
-     stderr: string;
-   }>((resolve) => {
-     shell.exec(
--      `git log ${args} -- "${path.basename(file)}"`,
-+      command,
-       {
-         // Setting cwd is important, see: https://github.com/facebook/docusaurus/pull/5048
-         cwd: path.dirname(file),
-@@ -138,11 +162,19 @@ export async function getFileCommitDate(
-       `Failed to retrieve the git history for file "${file}" with exit code ${result.code}: ${result.stderr}`,
+   const command = `git -c log.showSignature=false log ${args} -- "${path.basename(
+     file,
+   )}"`;
+@@ -147,12 +163,18 @@ export async function getFileCommitDate(
      );
    }
--  let regex = /^(?<timestamp>\d+)$/;
--  if (includeAuthor) {
--    regex = /^(?<timestamp>\d+),(?<author>.+)$/;
--  }
- 
+
 +  return result;
 +}
 +function retrieveCorrectRegex(includeAuthor: boolean) {
-+  // We only parse the output line starting with our "RESULT:" prefix
-+  // See why https://github.com/facebook/docusaurus/pull/10022
-+  const regex = includeAuthor
-+    ? /(?:^|\n)RESULT:(?<timestamp>\d+),(?<author>.+)(?:$|\n)/
-+    : /(?:^|\n)RESULT:(?<timestamp>\d+)(?:$|\n)/;
-+
+   // We only parse the output line starting with our "RESULT:" prefix
+   // See why https://github.com/facebook/docusaurus/pull/10022
+   const regex = includeAuthor
+     ? /(?:^|\n)RESULT:(?<timestamp>\d+),(?<author>.+)(?:$|\n)/
+     : /(?:^|\n)RESULT:(?<timestamp>\d+)(?:$|\n)/;
+
 +  return regex;
 +}
 +function matchFromRegex(file: string, regex: RegExp, result: { code: number; stdout: string; stderr: string; }): RegExpMatchArray {
    const output = result.stdout.trim();
- 
+
    if (!output) {
-@@ -159,6 +191,13 @@ export async function getFileCommitDate(
+@@ -169,6 +191,13 @@ export async function getFileCommitDate(
      );
    }
- 
+
 +  return match;
 +}
 +function matchDateAndTimestamp(match: RegExpMatchArray, includeAuthor: boolean): {
@@ -96,7 +79,7 @@ index 869982b2241c30629df3b83c7c75b9ce9f6a35d1..c3116d7a725d4a5420286baac8147f4e
    const timestampInSeconds = Number(match.groups!.timestamp);
    const timestamp = timestampInSeconds * 1_000;
    const date = new Date(timestamp);
-@@ -168,3 +207,29 @@ export async function getFileCommitDate(
+@@ -178,3 +207,29 @@ export async function getFileCommitDate(
    }
    return {date, timestamp};
  }

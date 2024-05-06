@@ -151,7 +151,7 @@ const StartScriptGenerator: React.FC = () => {
 
   return (
     <div className="server-config-container">
-      <h2>Server Configuration</h2>
+      <h4>Server Configuration</h4>
       <div className="config-section">
         <label id="memory-slider-label" className="sr-only">
           Memory Usage: {memory}GB
@@ -192,9 +192,6 @@ const StartScriptGenerator: React.FC = () => {
         <div className={"config-section"}>
           <label htmlFor="platform-dropdown">Platform:</label>
           <Select options={PLATFORMS} value={platform} onSelect={setPlatform} />
-          {platform === WINDOWS && (
-            <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
-          )}
         </div>
         <div className="config-section">
           <label htmlFor="flags-dropdown">Flags:</label>
@@ -226,7 +223,7 @@ const StartScriptGenerator: React.FC = () => {
         </div>
       </div>
       <div className="config-section">
-        <label>Generated Command:</label>
+        <h4>Generated Command</h4>
         <textarea
           className={"output-command"}
           value={generateStartCommand(

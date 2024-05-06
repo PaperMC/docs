@@ -15,7 +15,8 @@ html[data-theme="dark"] {
 .server-config-container {
   background-color: var(--background-gen-color);
   border-radius: 10px;
-  padding: 20px;
+  padding-inline: 20px;
+  padding-block: 20px 10px;
   color: var(--gen-text-color);
   width: 100%;
 }
@@ -30,7 +31,6 @@ html[data-theme="dark"] {
 .toggles {
   flex-direction: row;
   gap: 1rem;
-
 }
 
 .filename-input {
@@ -152,6 +152,7 @@ input[type="range"]:focus::-webkit-slider-thumb {
   border-radius: 5px;
   min-height: 40px;
   max-height: 150px;
+  margin-bottom: 1rem;
 }
 
 .platform-selector {
@@ -176,4 +177,5 @@ input[type="range"]:focus::-webkit-slider-thumb {
 .copy-button {
   display: flex;
   justify-content: center;
+
 }

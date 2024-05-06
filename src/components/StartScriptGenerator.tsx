@@ -15,6 +15,9 @@ const PLATFORMS: Option[] = [
   { label: "Windows", value: "windows" },
 ];
 
+const LINUX = PLATFORMS[0];
+const WINDOWS = PLATFORMS[1];
+
 const FLAGS: Option[] = [
   {
     label: "Aikar's",
@@ -72,20 +75,20 @@ const generateStartCommand = (
   filename: string,
   guiEnabled: boolean,
   autoRestartEnabled: boolean,
-  platform: string
+  platform: Option
 ) => {
   setTimeout(resizeOutput, 0);
   let content = "";
   const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === VELOCITY ? "" : "nogui"}`;
 
   if (autoRestartEnabled)
-    content = (platform === "windows" ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(
+    content = (platform === WINDOWS ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(
       "%%CONTENT%%",
       command
     );
-  else content = platform === "windows" ? command + "\n\npause" : command;
+  else content = platform === WINDOWS ? command + "\n\npause" : command;
 
-  content = (platform === "linux" ? "#!/bin/bash\n\n" : "@echo off\n\n") + content;
+  content = (platform === LINUX ? "#!/bin/bash\n\n" : "@echo off\n\n") + content;
 
   return content;
 };
@@ -109,7 +112,7 @@ const StartScriptGenerator: React.FC = () => {
   const [selectedFlag, setSelectedFlag] = useState(AIKARS);
   const [guiEnabled, setGuiEnabled] = useState(false);
   const [autoRestart, setAutoRestart] = useState(false);
-  const [platform, setPlatform] = useState("linux");
+  const [platform, setPlatform] = useState(LINUX);
   const [copySuccess, setCopySuccess] = useState(false);
   const [downloadSuccess, setDownloadSuccess] = useState(false);
 
@@ -137,7 +140,7 @@ const StartScriptGenerator: React.FC = () => {
     );
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "start." + (platform === "windows" ? "bat" : "sh");
+    link.download = "start." + (platform === WINDOWS ? "bat" : "sh");
     link.click();
     link.remove();
   };
@@ -218,7 +221,7 @@ const StartScriptGenerator: React.FC = () => {
         <div className={"platform-selector"}>
           <label>Platform:</label>
           <Select options={PLATFORMS} value={platform} onSelect={setPlatform} />
-          {platform === "windows" && (
+          {platform === WINDOWS && (
             <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
           )}
         </div>

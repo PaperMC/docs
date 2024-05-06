@@ -138,6 +138,7 @@ const paper: SidebarsConfig = {
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
             "dev/api/scheduler",
+            "dev/api/entity-teleport",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
             "dev/api/folia-support",

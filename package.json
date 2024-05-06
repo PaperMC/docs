@@ -16,17 +16,17 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
-    "@docusaurus/core": "3.2.1",
-    "@docusaurus/plugin-content-docs": "3.2.1",
-    "@docusaurus/plugin-content-pages": "3.2.1",
-    "@docusaurus/plugin-debug": "3.2.1",
-    "@docusaurus/plugin-pwa": "3.2.1",
-    "@docusaurus/plugin-sitemap": "3.2.1",
-    "@docusaurus/plugin-vercel-analytics": "3.2.1",
-    "@docusaurus/theme-classic": "3.2.1",
-    "@docusaurus/theme-common": "3.2.1",
-    "@docusaurus/theme-mermaid": "3.2.1",
-    "@docusaurus/theme-search-algolia": "3.2.1",
+    "@docusaurus/core": "3.3.2",
+    "@docusaurus/plugin-content-docs": "3.3.2",
+    "@docusaurus/plugin-content-pages": "3.3.2",
+    "@docusaurus/plugin-debug": "3.3.2",
+    "@docusaurus/plugin-pwa": "3.3.2",
+    "@docusaurus/plugin-sitemap": "3.3.2",
+    "@docusaurus/plugin-vercel-analytics": "3.3.2",
+    "@docusaurus/theme-classic": "3.3.2",
+    "@docusaurus/theme-common": "3.3.2",
+    "@docusaurus/theme-mermaid": "3.3.2",
+    "@docusaurus/theme-search-algolia": "3.3.2",
     "@floating-ui/react": "^0.26.13",
     "@fontsource/jetbrains-mono": "5.0.20",
     "@iconify/react": "4.1.1",
@@ -43,8 +43,8 @@
     "sass": "^1.76.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.2.1",
-    "@docusaurus/types": "3.2.1",
+    "@docusaurus/module-type-aliases": "3.3.2",
+    "@docusaurus/types": "3.3.2",
     "@fec/remark-a11y-emoji": "4.0.2",
     "@tsconfig/docusaurus": "2.0.3",
     "@types/is-ci": "3.0.4",
@@ -76,8 +76,8 @@
   "packageManager": "pnpm@8.15.6+sha256.01c01eeb990e379b31ef19c03e9d06a14afa5250b82e81303f88721c99ff2e6f",
   "pnpm": {
     "patchedDependencies": {
-      "@docusaurus/plugin-content-docs@3.2.1": "patches/@docusaurus__plugin-content-docs@3.2.1.patch",
-      "@docusaurus/utils@3.2.1": "patches/@docusaurus__utils@3.2.1.patch"
+      "@docusaurus/plugin-content-docs@3.3.2": "patches/@docusaurus__plugin-content-docs@3.3.2.patch",
+      "@docusaurus/utils@3.3.2": "patches/@docusaurus__utils@3.3.2.patch"
     }
   }
 }

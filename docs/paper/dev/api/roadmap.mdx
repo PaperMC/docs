@@ -35,33 +35,6 @@ continue to function and will have their underlying instance replaced automatica
 
 This is done to help reduce possible inconsistencies between world switching between Vanilla and Paper.
 
-## Experimental API
-
-### Teleport flags
-
-Teleport flags offer a way to teleport entities whilst being able to customize behavior.
-This allows you to do things like teleport players using relative flags and being able to retain passengers.
-
-This API is currently finalized and will be marked as stable in a future release.
-
-#### Player teleportation
-Teleport a player relatively, preventing velocity from being reset in the X, Y and Z axes.
-```java
-player.teleport(
-    location,
-    TeleportFlag.Relative.X,
-    TeleportFlag.Relative.Y,
-    TeleportFlag.Relative.Z
-);
-```
-
-#### Vehicle teleportation
-Teleport an entity with the <Javadoc name={"io.papermc.paper.entity.TeleportFlag$EntityState#RETAIN_PASSENGERS"}>`RETAIN_PASSENGERS`</Javadoc> flag,
-allowing its passengers to be transferred with the entity.
-```java
-entity.teleport(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
-```
-
 ## Deprecation policy
 
 :::warning

@@ -32,7 +32,7 @@ applied.
 
 ### `/velocity dump`
 
-If the user has the `velocity.command.plugins` permission, they can use this command to get an
+If the user has the `velocity.command.dump` permission, they can use this command to get an
 anonymized dump of details on the proxy. This can be sent to the PaperMC Discord to help us provide
 support.
 

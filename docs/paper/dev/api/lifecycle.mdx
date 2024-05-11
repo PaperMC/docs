@@ -1,0 +1,107 @@
+---
+slug: /dev/lifecycle
+description: A guide to Paper's Lifecycle API
+---
+
+# Lifecycle API
+
+The lifecycle API can be used for lifecycle-related registration, such as commands, the Registry Modification API and other similar resources.
+
+## LifecycleEventManager
+
+The <Javadoc name={"io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager"}>LifecycleEventManager</Javadoc> is tied
+to either a <Javadoc name={"org.bukkit.plugin.Plugin"}>Plugin</Javadoc> instance or a
+<Javadoc name={"io.papermc.paper.plugin.bootstrap.BootstrapContext"}>BootstrapContext</Javadoc> depending on where you access it from. For example in your plugin's main class:
+
+```java title="TestPlugin.java"
+@Override
+public void onEnable() {
+  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+}
+```
+
+Or, with a bootstrapper:
+
+```java title="TestPluginBootstrap.java"
+@Override
+public void bootstrap(@NotNull BootstrapContext context) {
+  final LifecycleEventManager<BootstrapContext> lifecycleManager = context.getLifecycleManager();
+}
+```
+
+## LifecycleEvents
+
+After obtaining the correct `LifecycleEventManager`, create a event handler by selecting an
+event type from <Javadoc name={"io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents"}>LifecycleEvents</Javadoc>:
+```java title="TestPlugin.java"
+@Override
+public void onEnable() {
+  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+  PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+    // Handler for the event
+  });
+}
+```
+
+### Configuration
+
+Each handler created can be configured in several ways. The available configuration options
+depend on the event type itself and will vary from event type to event type.
+
+#### Priority
+Setting the priority of a handler can determine where it runs relative to other handlers
+on the same event type. The lower the number, the earlier it will be run. The default priority
+is 0.
+
+#### Monitor
+Marking the handler as a monitor will cause it to be called after all other non-monitor handlers
+have been called. Only use this to inspect some state in the event. Do not modify any state in
+the handler.
+
+The priority and monitor state are exclusive options, setting one will reset the other.
+
+```java title="TestPlugin.java"
+@Override
+public void onEnable() {
+  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+  PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+    // Handler for the event
+  });
+  config.priority(10); // sets a priority of 10
+  // or
+  config.monitor(); // marks the handler as a monitor
+}
+```
+
+### Registering
+
+Once the handler has been configured, it can be registered with the lifecycle manager:
+
+```java title="TestPlugin.java"
+@Override
+public void onEnable() {
+  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+  PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+    // Handler for the event
+  }).priority(10);
+  lifecycleManager.registerEventHandler(config);
+}
+```
+There is also a shorthand way to register just the handler without doing any configuration:
+
+```java title="TestPlugin.java"
+@Override
+public void onEnable() {
+  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+  lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS, (event) -> {
+    // Handler for the event
+  });
+}
+```
+
+:::note
+Some event types have special behaviors that restrict certain mechanics. The reloading plugins
+functionality (via `/bukkit:reload` or `Server#reload()`) is disabled if plugins register handlers
+in certain situations. This is due to the plugin reloads having to fully unload the plugin and its
+classes which is an issue if an event has to run while the plugin is unloaded.
+:::

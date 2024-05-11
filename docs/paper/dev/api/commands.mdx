@@ -13,3 +13,36 @@ powerful and flexible way to define commands and arguments.
 Paper's command system is still experimental and may change in the future.
 
 :::
+
+## Defining a Command
+
+Commands can be easily defined within your plugin's onEnable method. This can be done like so:
+
+```java
+class YourPluginClass extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
+        manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            final Commands commands = event.registrar();
+            commands.register(
+                Commands.literal("new-command")
+                    .executes(ctx -> {
+                        ctx.getSource().getSender().sendPlainMessage("some message");
+                        return Command.SINGLE_SUCCESS;
+                    })
+                    .build(),
+                "some bukkit help description string",
+                List.of("an-alias")
+            );
+        });
+    }
+}
+```
+
+:::note
+
+This uses our `LifecycleEventManager` to register the command. See the [Lifecycle Events](/dev/lifecycle) (WIP) page for more information.
+
+:::

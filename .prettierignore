@@ -1,10 +1,6 @@
-/.docusaurus
-/.vscode
-/.yarn
-/build
-/node_modules
-/.pnp*
-/*.js
-/*.js.map
-/config/*.js
-/.meta
+pnpm-lock.yaml
+docs/versioned
+*.md
+*.mdx
+!README.md
+!CONTRIBUTING.md

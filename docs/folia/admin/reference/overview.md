@@ -1,7 +1,7 @@
 ---
 slug: /reference/overview
 title: Overview
-description: An overview to how Folia works.
+description: An overview of how Folia works.
 ---
 
 # Project overview
@@ -31,21 +31,21 @@ one independent area must be eventually split into independent regions
 when possible.
 
 Finally, to ensure that ticking regions may store and maintain data
-about the current region (i.e tick count, entities within the region, chunks
+about the current region (i.e. tick count, entities within the region, chunks
 within the region, block/fluid tick lists, and more), regions have
 their own data object that may only be accessed while ticking the region and
 by the thread ticking the region. Also, there are callbacks to merging
 or splitting regions so that the data object may be updated appropriately.
 
-The implementation of these rules is described in [Region Logic](/folia/reference/region-logic).
+The implementation of these rules is described in [Region Logic](region-logic.md).
 
 The end result of applying these rules is that a ticking region can ensure that
 only the current thread has write access to any data contained within the region,
 and that at any given time the number of independent regions is close to maximum.
 
-## Intra region operations
+## Intra-region operations
 
-Intra region operations refer to any operations that only deal with data
+Intra-region operations refer to any operations that only deal with data
 for a single region by the owning region, or to merge/split logic.
 
 ### Ticking for independent regions
@@ -65,8 +65,8 @@ It is important to note that at no time was B's schedule affected by the fact th
 A fell behind its 20TPS target.
 
 To implement the described behavior, each region maintains a repeating
-task on a scheduled executor (See SchedulerThreadPool) that schedules
-tasks according to an earliest start time first scheduling algorithm. The
+task on a scheduled executor (see `SchedulerThreadPool`) that schedules
+tasks according to an earliest-start-time-first scheduling algorithm. The
 algorithm is similar to EDF, but schedules according to start time. However,
 given that the deadline for each tick is 50ms + the start time, it behaves
 identically to the EDF algorithm.
@@ -140,7 +140,7 @@ in region y, so that the relative tick deadline is maintained. We can
 achieve this by applying an offset o to d1 so that d1 + o = d2, and the
 offset used is o = tick to - tick from. This offset must be calculated
 for redstone tick and current tick separately, since the logic to increase
-redstone tick can be turned off by the Level#tickTime field.
+redstone tick can be turned off by the `Level#tickTime` field.
 
 Finally, the split case is easy - when a split occurs,
 the independent regions from the split inherit the redstone/current tick
@@ -152,34 +152,34 @@ remain unaffected when regions split or merge as the relative deadline
 is maintained by applying an offset in the merge case and by copying
 the tick number in the split case.
 
-## Inter region operations
+## Inter-region operations
 
-Inter region refer to operations that work with other regions that are not
+Inter-region operations refer to operations that work with other regions that are not
 the current ticking region that are in a completely unknown state. These
 regions may be transient, may be ticking, or may not even exist.
 
 ### Utilities to assist operations
 
 In order to assist in inter region operations, several utilities are provided.
-In NMS, these utilities are the EntityScheduler, the RegionizedTaskQueue,
+In NMS, these utilities are the `EntityScheduler`, the `RegionizedTaskQueue`,
 the global region task queue, and the region-local data provider
-RegionizedData. The Folia API has similar analogues, but does not have
+`RegionizedData`. The Folia API has similar analogues, but does not have
 a region-local data provider as the NMS data provider holds critical
 locks and is invoked in critical areas of code when performing any
 callback logic and is thus highly susceptible to fatal plugin errors
 involving lengthy I/O or world state modification.
 
-#### EntityScheduler
+#### `EntityScheduler`
 
-The EntityScheduler allows tasks to be scheduled to be executed on the
+The `EntityScheduler` allows tasks to be scheduled to be executed on the
 region that owns the entity. This is particularly useful when dealing
 with entity teleportation, as once an entity begins an asynchronous
 teleport the entity cannot tick until the teleport has completed, and
 the timing is undefined.
 
-#### RegionizedTaskQueue
+#### `RegionizedTaskQueue`
 
-The RegionizedTaskQueue allows tasks to be scheduled to be executed on
+The `RegionizedTaskQueue` allows tasks to be scheduled to be executed on
 the next tick of a region that owns a specific location, or creating
 such region if it does not exist. This is useful for tasks that may
 need to edit or retrieve world/block/chunk data outside the current region.
@@ -190,15 +190,14 @@ The global region task queue is simply used to perform edits on data
 that the global region owns, such as game rules, day time, weather,
 or to execute commands using the console command sender.
 
-#### RegionizedData
+#### `RegionizedData`
 
-The RegionizedData class allows regions to define region-local data,
+The `RegionizedData` class allows regions to define region-local data,
 which allow regions to store data without having to consider concurrent
 data access from other regions. For example, current per region
 entity/chunk/block/fluid tick lists are maintained so that regions do not
 need to consider concurrent access to these data sets.
 
-<br></br>
 The utilities allow various cross-region issues to be resolved in a
 simple fashion, such as editing block/entity/world state from any region
 by using tasks queues, or by avoiding concurrency issues by using
@@ -206,12 +205,12 @@ RegionizedData. More advanced operations such as teleportation,
 player respawning, and portalling, all make use of these utilities
 to ensure the operation is thread-safe.
 
-### Entity intra and inter dimension teleports
+### Entity intra- and inter-dimension teleports
 
 Entities need special logic in order to teleport safely between
 other regions or other dimensions. In all cases however, the call to
 teleport/place an entity must be invoked on the region owning the entity.
-The EntityScheduler can be used to easily schedule code to execute in such
+The `EntityScheduler` can be used to easily schedule code to execute in such
 a context.
 
 #### Simple teleportation
@@ -221,7 +220,7 @@ and the target location and dimension are known.
 This operation is split into two parts: transform and async place.
 In this case, the transform operation removes the entity from the current
 world, then adjusts the position. The async place operation schedules a task
-to the target location using the RegionizedTaskQueue to add the entity to
+to the target location using the `RegionizedTaskQueue` to add the entity to
 the target dimension at the target position.
 
 The various implementation details such as non-player entities being
@@ -271,7 +270,7 @@ which then runs the shutdown logic:
 8. Save all players
 9. Shutting down the resource manager
 10. Releasing the level lock
-11. Halting remaining executors (Util executor, region I/O threads, etc)
+11. Halting remaining executors (Util executor, region I/O threads, etc.)
 
 
 The important differences to Vanilla is that the player kick and

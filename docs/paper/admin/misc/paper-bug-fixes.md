@@ -7,11 +7,11 @@ description: An explanation of which Vanilla bugs we fix in Paper.
 
 Paper fixes many gameplay and technical issues within Minecraft. The most prevalent fixes are to TNT duplication and bedrock breaking.
 
-## Vanilla Bug Fixes
+## Vanilla bug fixes
 
-Paper fixes many vanilla bugs that were not intended by Mojang. These bugs are patched to fix behavior or prevent abuse and
+Paper fixes many Vanilla bugs that were not intended by Mojang. These bugs are patched to fix behavior or prevent abuse and
 instability on the server. Some of our fixes are configurable, as we understand that some servers may want to keep the
-vanilla behavior. You will find these configuration options in the [global configuration](/docs/paper/admin/reference/configuration/global-configuration.mdx)
+Vanilla behavior. You will find these configuration options in the [global configuration](/docs/paper/admin/reference/configuration/global-configuration.mdx)
 and the [world configuration](/docs/paper/admin/reference/configuration/world-configuration.mdx).
 
 ### What is intended behavior vs a bug?
@@ -22,16 +22,13 @@ check to see if it:
 1) Has been confirmed as a bug
 2) Has an assigned priority to it
 
-If it meets these two criteria then we will accept changes to fix the bug, as it can take a long time for Mojang to fix 
-them (sometimes years). If an issue gets declined by Mojang, we normally do not "fix" it as it is intended behaviour.
+If it meets these two criteria then we will accept changes to fix the bug, as it can take a long time for Mojang to fix
+them (sometimes years). If an issue gets declined by Mojang, we normally do not "fix" it as it is intended behavior.
 
-## Duplication Bugs
+## Duplication bugs
 
-Paper patches TNT, carpet, rail and gravity block (sand, gravel, etc.) duplication bugs. These bugs are not intended and
-are patched to prevent abuse.
-
-Because TNT duping is considered a form of automated mining and not a resource dupe, we have provided an option to 
-restore it. This, undesirably, also re-enables carpet and rail duping, which normally we would not provide a config for, 
+Because TNT duping is considered a form of automated mining and not a resource dupe, we have provided an option to
+restore it. This, undesirably, also re-enables carpet and rail duping, which normally we would not provide a config for,
 but it's the same bug for those, so we have no choice. However, the config option is as follows:
 
 ```yaml
@@ -39,13 +36,22 @@ unsupported-settings:
   allow-piston-duplication: true
 ```
 
-:::danger[Sand and Gravity Blocks]
+We also allow you to restore the ability to duplicate gravity blocks, such as sand, using end portals. This is not
+recommended, as it can cause issues with the server, but we do provide a config option to restore this functionality:
+```yaml
+unsupported-settings:
+  allow-unsafe-end-portal-teleportation: true
+```
 
-**We will not and will never support sand and gravity block duping**. This is a form of resource duping and is **not** supported by Paper.
+Similarly, we also allow you to enable string-based duplication bugs with the following config option:
+```yaml
+unsupported-settings:
+  allow-tripwire-disarming-exploits: true
+```
+This is a [long term bug](https://bugs.mojang.com/browse/MC-129055) that has not yet been fixed by Mojang. We have
+fixed it in Paper, but we provide a config option to restore Vanilla behavior.
 
-:::
-
-## Block Breaking
+## Block breaking
 
 We also fix the ability to break Bedrock and End Portal frames. We do also provide a config option to restore this
 functionality, but it is not recommended:
@@ -59,7 +65,5 @@ unsupported-settings:
 We will not support you if you have issues whilst these settings are enabled, as they can cause unintended side effects.
 These settings are also not guaranteed to be supported in the future and may have their behavior changed, or removed, at any time.
 
-For reasoning behind not having configuration options for sand (and MANY other) duplication bugs, see:
+For legacy reasoning behind not having configuration options for many duplication bugs, see:
 [#3724](https://github.com/PaperMC/Paper/issues/3724)
-
-Please do not create any further discussion on config options for sand duping. The decision is final.

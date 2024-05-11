@@ -1,0 +1,26 @@
+name: "Format check"
+
+on:
+  - push
+  - pull_request
+
+jobs:
+  format:
+    # run on all push events or on PR syncs not from the same repo
+    if: github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install
+      - name: Check format
+        run: pnpm run format:check

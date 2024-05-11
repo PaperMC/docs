@@ -24,7 +24,7 @@ java -Dpaper.log-level=FINE -jar paper.jar
 
 :::info
 
-Some of the paper system properties contain a `.` character in their name. When using Windows Powershell, these will require wrapping in quotes.
+Some of Paper's system properties contain a `.` character in their name. When using PowerShell, these will require wrapping in quotes.
 i.e. `"-Dpaper.log-level=FINE"`
 
 :::
@@ -37,7 +37,7 @@ Where a system property is stated as `unset`, setting it as `true` will work to 
 
 :::
 
-## List of System Properties
+## List of system properties
 
 #### paper.playerconnection.keepalive:
 
@@ -122,7 +122,7 @@ Where a system property is stated as `unset`, setting it as `true` will work to 
 #### debug.rewriteForIde:
 
 - **default**: `unset`
-- **description**: Removes the NMS revision from the stack trace to allow for easier debugging in IDEs. 
+- **description**: Removes the NMS revision from the stack trace to allow for easier debugging in IDEs.
 It also remaps plugin CB calls to remove the version information.
 
 #### convertLegacySigns:
@@ -164,7 +164,7 @@ It also remaps plugin CB calls to remove the version information.
 #### io.papermc.paper.suppress.sout.nags:
 
 - **default**: `unset`
-- **description**: Suppresses the nag message about using System.out/System.err in a plugin.
+- **description**: Suppresses the nag message about using `System.out`/`System.err` in a plugin.
 
 #### paper.strict-thread-checks:
 
@@ -174,7 +174,7 @@ It also remaps plugin CB calls to remove the version information.
 #### Paper.skipServerPropertiesComments:
 
 - **default**: `unset`
-- **description**: Skips the comments in the server.properties file.
+- **description**: Skips the comments in the `server.properties` file.
 
 #### Paper.debugInvalidSkullProfiles:
 
@@ -200,3 +200,18 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `false`
 - **description**: Allows you to bypass the Java version check. See [here](/paper/faq#unsupported-java-detected-what-do-i-do) for more info.
+
+#### paper.useLegacyPluginLoading:
+
+- **default**: `false`
+- **description**: Allows cyclic plugin loading. See [here](paper-plugins.md#cyclic-plugin-loading) for more info.
+
+#### Paper.DisableCommandConverter:
+
+- **default**: `false`
+- **description**: Disables Paper's automatic upgrading of commands, including items with custom data defined in command blocks and other places that may contain commands, to the new component format introduced in version 1.20.5.
+
+#### paper.disable-plugin-rewriting
+
+- **default**: `false`
+- **description**: Disables plugin remapping introduced in 1.20.5 and everything involving automatic plugin conversion by commodore. For more information see the [userdev](../../dev/getting-started/userdev.mdx#1205) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).

@@ -84,10 +84,7 @@ const velocity: SidebarsConfig = {
             type: "generated-index",
             slug: "/cat/dev/how-to-guides",
           },
-          items: [
-            "dev/how-to/dependencies",
-            "dev/how-to/porting-from-velocity-1",
-          ],
+          items: ["dev/how-to/dependencies", "dev/how-to/porting-from-velocity-1"],
         },
         {
           type: "category",
@@ -105,7 +102,7 @@ const velocity: SidebarsConfig = {
                 "dev/api/component-api/intro",
                 "dev/api/component-api/i18n",
                 "dev/api/component-api/audiences",
-              ]
+              ],
             },
             "dev/api/event",
             "dev/api/command",

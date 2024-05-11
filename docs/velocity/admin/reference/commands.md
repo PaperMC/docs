@@ -10,7 +10,7 @@ based on how generally useful they are to most users.
 
 Of course, you can always install plugins to add more commands if you want.
 
-## The `/velocity` command
+## `/velocity`
 
 The `/velocity` command contains a number of subcommands to manage the proxy.
 
@@ -21,7 +21,8 @@ active on the proxy using `/velocity plugins`, including the name, authors, and 
 
 ### `/velocity version`
 
-If the user has the `velocity.command.info` permission (by default, this is granted to all users), they can view the version of Velocity running on the proxy.
+If the user has the `velocity.command.info` permission (by default, this is granted to all users),
+they can view the version of Velocity running on the proxy.
 
 ### `/velocity reload`
 
@@ -31,8 +32,8 @@ applied.
 
 ### `/velocity dump`
 
-If the user has the `velocity.command.plugins` permission, they can use this command to get an
-anonymized dump of details on the proxy. This can be sent to the Velocity Discord to help us provide
+If the user has the `velocity.command.dump` permission, they can use this command to get an
+anonymized dump of details on the proxy. This can be sent to the PaperMC Discord to help us provide
 support.
 
 ### `/velocity heap`

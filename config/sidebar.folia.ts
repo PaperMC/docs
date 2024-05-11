@@ -29,10 +29,7 @@ const folia: SidebarsConfig = {
                 type: "generated-index",
                 slug: "/cat/dev/reference",
               },
-              items: [
-                "admin/reference/overview",
-                "admin/reference/region-logic",
-              ],
+              items: ["admin/reference/overview", "admin/reference/region-logic"],
             },
           ],
         },
@@ -47,8 +44,8 @@ const folia: SidebarsConfig = {
         id: "dev/README",
       },
       items: [
-          // Placed here until some guides exist
-          "dev/README",
+        // Placed here until some guides exist
+        "dev/README",
       ],
     },
   ],

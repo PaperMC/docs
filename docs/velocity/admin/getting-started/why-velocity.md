@@ -15,7 +15,7 @@ This page is our answer to that question.
 The founder and primary developer of Velocity (Tux) has been active in developing proxy software for
 _Minecraft: Java Edition_ since 2013. They created the RedisBungee plugin, contributed to BungeeCord
 from 2014 to 2017, and also founded the Waterfall project and led it from 2016 to 2017. In fact, the
-current maintainer of Waterfall helped encourage them to start a brand new proxy from the ground up!
+current maintainer of Waterfall helped encourage them to start a brand-new proxy from the ground up!
 
 ## Leading performance
 
@@ -84,7 +84,6 @@ Unlike certain platforms which only provide lip service to the modding community
 hostile to them), Velocity embraces the richness of the platform Minecraft provides. As just a small
 example, we have a Fabric mod that
 [helps bridge the gap between Velocity itself and mods that extend the Minecraft protocol](https://www.curseforge.com/minecraft/mc-mods/crossstitch)
-and feature full Forge support for 1.7 through 1.12.2, with support for newer versions in
-development. Velocity also supports emerging standard libraries in the community such as Kyori's
-[Adventure](https://github.com/KyoriPowered/adventure) library. We collaborate with the Minecraft
-modding community.
+and feature full Forge support for 1.7 through 1.12.2 and 1.20.2 or higher. Velocity also supports emerging
+standard libraries in the community such as Kyori's [Adventure](https://github.com/KyoriPowered/adventure) library.
+We collaborate with the Minecraft modding community.

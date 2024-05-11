@@ -21,6 +21,7 @@ const paper: SidebarsConfig = {
           },
           items: [
             "admin/getting-started/getting-started",
+            "admin/getting-started/setup-next-steps",
             "admin/getting-started/adding-plugins",
             "admin/getting-started/migration",
           ],
@@ -65,6 +66,7 @@ const paper: SidebarsConfig = {
             },
             "admin/reference/system-properties",
             "admin/reference/paper-plugins",
+            "admin/reference/vanilla-command-permissions",
           ],
         },
         {
@@ -74,10 +76,7 @@ const paper: SidebarsConfig = {
             type: "generated-index",
             slug: "/cat/admin/misc",
           },
-          items: [
-            "admin/misc/faq",
-            "admin/misc/paper-bug-fixes",
-          ],
+          items: ["admin/misc/faq", "admin/misc/paper-bug-fixes"],
         },
       ],
     },
@@ -101,6 +100,7 @@ const paper: SidebarsConfig = {
           items: [
             "dev/getting-started/project-setup",
             "dev/getting-started/plugin-yml",
+            "dev/getting-started/how-do-plugins-work",
             "dev/getting-started/paper-plugins",
             "dev/getting-started/userdev",
           ],
@@ -133,12 +133,12 @@ const paper: SidebarsConfig = {
                 "dev/api/component-api/intro",
                 "dev/api/component-api/i18n",
                 "dev/api/component-api/audiences",
-              ]
+              ],
             },
-            "dev/api/how-do-plugins-work",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
             "dev/api/scheduler",
+            "dev/api/entity-teleport",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
             "dev/api/lifecycle",
@@ -171,9 +171,7 @@ const paper: SidebarsConfig = {
         type: "doc",
         id: "contributing/README",
       },
-      items: [
-        "contributing/events",
-      ],
+      items: ["contributing/events"],
     },
   ],
 };

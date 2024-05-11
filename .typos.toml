@@ -1,5 +1,8 @@
 [files]
-extend-exclude = ["docs/versioned"] # don't check ./docs/versioned
+extend-exclude = [
+    "docs/versioned", # old documentation shouldn't be checked
+    "*.json"          # mostly configuration, not worth checking
+]
 
 [default]
 locale = "en-us"
@@ -15,6 +18,8 @@ armour = "armor"
 authorise = "authorize"
 authorised = "authorized"
 authorising = "authorizing"
+behaviour = "behavior"
+capitalise = "capitalize"
 catalogue = "catalog"
 centre = "center"
 civilisation = "civilization"
@@ -22,11 +27,16 @@ civilised = "civilized"
 colour = "color"
 colours = "colors"
 defence = "defense"
+generalise = "generalize"
+generalised = "generalized"
 gramme = "gram"
 grammes = "grams"
 grey = "gray"
 honour = "honor"
 honours = "honors"
+initialise = "initialize"
+initialised = "initialized"
+initialiser = "initializer"
 kerb = "curb"
 kerbs = "curbs"
 labour = "labor"
@@ -40,6 +50,9 @@ modelled = "modeled"
 neighbour = "neighbor"
 neighbours = "neighbors"
 neighbouring = "neighboring"
+optimise = "optimize"
+optimised = "optimized"
+optimisation = "optimization"
 organisation = "organization"
 organise = "organize"
 organised = "organized"
@@ -65,3 +78,11 @@ regionise = "regionize"
 regioniser = "regionizer"
 regionising = "regionizing"
 regionised = "regionized"
+
+# exceptions:
+
+# use British spelling to stay consistent with Bukkit
+canceled = "cancelled"
+canceling = "cancelling"
+cancelable = "cancellable"
+cancelation = "cancellation"

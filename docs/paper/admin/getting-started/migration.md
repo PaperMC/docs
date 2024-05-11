@@ -10,7 +10,7 @@ It's simple to migrate your server to or from Paper. The steps below will help y
 
 Before you begin, please ensure you have a full backup of your server.
 
-[//]: # "See our [Backup Guide](/backup) for more information."
+See our [Backup Guide](/paper/updating#step-1-backup) for more information.
 
 :::
 
@@ -22,17 +22,18 @@ It's easy to migrate from CraftBukkit or Spigot to Paper. Follow the steps below
 
 1. Stop your server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads).
-3. Replace your existing server jar with your freshly downloaded Paper jar.
-4. Start your new server.
+3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
+4. Replace your existing JAR file with your freshly downloaded Paper JAR.
+5. Start your new server.
 
 Paper retains full compatibility with all Spigot plugins, allowing a seamless transition.
 
 :::info
 
 Your new Paper server will still use [`bukkit.yml`](../reference/configuration/bukkit-configuration.mdx)
-and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).  
-New configuration options can be found in [`paper-global.yml`](../reference/configuration/global-configuration.mdx)
-and [`paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
+and [`spigot.yml`](../reference/configuration/spigot-configuration.mdx).
+New configuration options can be found in [`config/paper-global.yml`](../reference/configuration/global-configuration.mdx)
+and [`config/paper-world-defaults.yml`](../reference/configuration/world-configuration.mdx).
 
 :::
 
@@ -47,8 +48,9 @@ closely, as manual changes will be required.
 
 1. Stop your Vanilla server if it is running, and create a full backup.
 2. Download Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
-   server jar with your freshly downloaded Paper jar.
-3. Start your new Paper server.
+   server JAR with your freshly downloaded Paper JAR.
+3. Rename the downloaded file to match the name specified in the [start command](getting-started.mdx#running-the-server).
+4. Start your new Paper server.
 
 You have now successfully migrated to Paper. If you encounter any issues, do not hesitate to reach
 out for support on [our Discord server](https://discord.gg/papermc) (`#paper-help` channel).
@@ -64,7 +66,7 @@ Additionally, note that Paper does not support Fabric or Forge mods. You will ne
 replacements. Any hybrids that attempt to support both mods and plugins are fundamentally flawed and
 not recommended for use.
 
-## Migrating From Paper
+## Migrating from Paper
 
 ### To Vanilla
 
@@ -96,7 +98,7 @@ case for you, replace `world` with your `level-name` for all steps below.
 3. Copy the `/world_nether/DIM-1` folder into the `/world` folder.
 4. Copy the `/world_the_end/DIM1` folder into the `/world` folder.
 5. Delete both the `/world_nether` and `/world_the_end` folders.
-6. Replace your Paper jar with a Vanilla server jar.
+6. Replace your Paper JAR with a Vanilla server JAR.
 7. Start your Vanilla server.
 
 ### To CraftBukkit or Spigot

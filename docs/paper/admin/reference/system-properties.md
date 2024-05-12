@@ -214,4 +214,4 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.disable-plugin-rewriting
 
 - **default**: `false`
-- **description**: Disables plugin remapping introduced in 1.20.5 and everything involving automatic plugin conversion by commodore. For more information see the [userdev](../../dev/getting-started/userdev.mdx#1205) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
+- **description**: Disables plugin remapping introduced in 1.20.5 and everything involving automatic plugin conversion by commodore. For more information see the [userdev](../../dev/getting-started/userdev.mdx#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).

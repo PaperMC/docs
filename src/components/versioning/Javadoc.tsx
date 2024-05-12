@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { getProperty } from "../Property";
-import SoftwareVersionFetcher from "../../minecraft-versioning/SoftwareVersionFetcher";
+import { getProjectVersion, VersionType, type Project } from "../../util/projectUtils";
 
 type TargetResolver = (module?: string) => Promise<string>;
 
-const createProjectTarget = (project: string, majorOnly: boolean = false): TargetResolver => {
+const createProjectTarget = (
+  project: string,
+  versionType: VersionType = VersionType.MajorMinorPatch
+): TargetResolver => {
   return async () => {
-    let version = await SoftwareVersionFetcher.getMajorVersion(project);
-    if (majorOnly) {
-      version = version.split(".")[0] + ".0.0";
-    }
+    const version = await getProjectVersion(project, versionType);
 
     return `https://jd.papermc.io/${project}/${version}`;
   };
@@ -17,7 +17,7 @@ const createProjectTarget = (project: string, majorOnly: boolean = false): Targe
 
 const targets: { [project: string]: TargetResolver } = {
   paper: createProjectTarget("paper"),
-  velocity: createProjectTarget("velocity", true),
+  velocity: createProjectTarget("velocity", VersionType.MajorZeroed),
   java: async (module) => {
     const version = getProperty("DOCS_JAVA") ?? "21";
 
@@ -52,6 +52,6 @@ export default function Javadoc({ name, module, project = "paper", children }: J
 interface JavadocProps {
   name: string;
   module?: string;
-  project?: "paper" | "velocity" | "java";
+  project?: Project | "java";
   children: any;
 }

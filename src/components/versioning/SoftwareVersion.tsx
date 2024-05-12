@@ -1,35 +1,30 @@
 import { useEffect, useState } from "react";
-import SoftwareVersionFetcher from "../../minecraft-versioning/SoftwareVersionFetcher";
+import { getProjectVersion, VersionType, type Project } from "../../util/projectUtils";
 
-export default function SoftwareVersion({ versionType, project = "paper" }: SoftwareVersionProps) {
+export default function SoftwareVersion({
+  versionType = "maj-min-pat",
+  project = "paper",
+}: SoftwareVersionProps) {
   const [fetched, setFetched] = useState<String>(null);
 
   useEffect(() => {
     (async () => {
-      let version: string;
-
-      if (versionType === "maj-min") {
-        version = await SoftwareVersionFetcher.getMajorMinorVersion(project);
-      } else if (versionType === "maj") {
-        version = await SoftwareVersionFetcher.getMajorVersion(project);
-      } else if (versionType === "max") {
-        version = await SoftwareVersionFetcher.getMaxVersion(project);
-      } else {
-        throw new Error("Invalid version type");
+      let enumType = VersionType.MajorMinorPatch;
+      switch (versionType) {
+        case "maj-min":
+          enumType = VersionType.MajorMinor;
+        case "maj":
+          enumType = VersionType.Major;
       }
 
-      setFetched(version);
+      setFetched(await getProjectVersion(project, enumType));
     })();
   }, [versionType]);
-
-  if (!fetched) {
-    return null;
-  }
 
   return fetched;
 }
 
 interface SoftwareVersionProps {
-  versionType: "maj-min" | "maj" | "max"; // maj-min is major.minor, maj is major, max is max version
-  project?: "paper" | "velocity";
+  versionType: "maj-min-pat" | "maj-min" | "maj";
+  project?: Project;
 }

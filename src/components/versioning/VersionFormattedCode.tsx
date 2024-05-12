@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
-import SoftwareVersionFetcher from "../../minecraft-versioning/SoftwareVersionFetcher";
+import { getProjectVersion, VersionType } from "../../util/projectUtils";
 
 export default function VersionFormattedCode({
   language = "",
@@ -31,19 +31,13 @@ export default function VersionFormattedCode({
       // Replace placeholders with fetched versions
       code = code
         .toString()
-        .replace(/%%_MAJ_MC_%%/g, await SoftwareVersionFetcher.getMajorVersion("paper"));
-      code = code.replace(
-        /%%_MAJ_MIN_MC_%%/g,
-        await SoftwareVersionFetcher.getMajorMinorVersion("paper")
-      );
-      code = code.replace(
-        /%%_MAJ_VEL_%%/g,
-        await SoftwareVersionFetcher.getMajorVersion("velocity")
-      );
+        .replace(/%%_MAJ_MIN_MC_%%/g, await getProjectVersion("paper", VersionType.MajorMinor));
+      code = code.replace(/%%_MAJ_MIN_PAT_MC_%%/g, await getProjectVersion("paper"));
       code = code.replace(
         /%%_MAJ_MIN_VEL_%%/g,
-        await SoftwareVersionFetcher.getMajorMinorVersion("velocity")
+        await getProjectVersion("velocity", VersionType.MajorMinorZeroed)
       );
+      code = code.replace(/%%_MAJ_MIN_PAT_VEL_%%/g, await getProjectVersion("velocity"));
 
       if (mounted.current) {
         setFormattedCode({ code, inline });

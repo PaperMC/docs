@@ -27,7 +27,7 @@ server.
 :::caution[1.20.5]
 
 As of Minecraft version 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
-See [here](#1205) for more details.
+See [here](#1205-and-beyond) for more details.
 
 :::
 
@@ -42,7 +42,7 @@ use non-obfuscated names in reflection.
 Add the plugin to your `build.gradle.kts` file.
 ```kotlin
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.7.0" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
+    id("io.papermc.paperweight.userdev") version "1.7.1" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
 }
 ```
 
@@ -110,7 +110,7 @@ tasks.assemble {
 }
 ```
 
-## 1.20.5
+## 1.20.5 and beyond
 
 As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
 Additionally, CraftBukkit classes will no longer be relocated into a versioned package.

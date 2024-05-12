@@ -47,11 +47,15 @@ MINECRAFT_VERSION="%%_MAJ_MIN_PAT_MC_%%"
 LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
     jq '.builds | map(select(.channel == "default") | .build) | .[-1]')
 
-echo "Latest build is $LATEST_BUILD"
+if [[ "$LATEST_BUILD" != "null" ]]; then
+    echo "Latest stable build is $LATEST_BUILD"
+else
+    echo "No stable build for version $MINECRAFT_VERSION found :("
+fi
 ```
 </VersionFormattedCode>
 
-This will get the latest stable build for the given project and Minecraft version.
+This will get the latest stable build for the given project and Minecraft version, if it's available.
 
 ## Downloading the latest stable build
 
@@ -65,13 +69,16 @@ MINECRAFT_VERSION="%%_MAJ_MIN_PAT_MC_%%"
 LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
     jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
 
-JAR_NAME=${PROJECT}-${MINECRAFT_VERSION}-${LATEST_BUILD}.jar
+if [[ "$LATEST_BUILD" != "null" ]]; then
+    JAR_NAME=${PROJECT}-${MINECRAFT_VERSION}-${LATEST_BUILD}.jar
+    PAPERMC_URL="https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}"
 
-PAPERMC_URL="https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}"
-
-# Download the latest PaperMC version
-curl -o server.jar $PAPERMC_URL
-echo "Downloads completed"
+    # Download the latest Paper version
+    curl -o server.jar $PAPERMC_URL
+    echo "Download completed"
+else
+    echo "No stable build for version $MINECRAFT_VERSION found :("
+fi
 ```
 </VersionFormattedCode>
 

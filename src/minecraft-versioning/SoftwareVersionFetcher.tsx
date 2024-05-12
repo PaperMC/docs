@@ -1,5 +1,3 @@
-import axios from "axios";
-
 class ProjectVersionData {
   public version: string = "";
   public maxVersion: string = "";
@@ -38,8 +36,8 @@ class ProjectVersionData {
     console.log(`Fetching version for project "${this.projectName}"...`);
 
     try {
-      const response = await axios.get(`https://api.papermc.io/v2/projects/${this.projectName}`);
-      const version = await this.checkVersion(response.data);
+      const response = await fetch(`https://api.papermc.io/v2/projects/${this.projectName}`);
+      const version = await this.checkVersion(await response.json());
 
       this.versionCache.set(this.projectName, { version, timestamp: Date.now() });
       return version;

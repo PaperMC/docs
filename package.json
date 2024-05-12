@@ -31,7 +31,6 @@
     "@fontsource/jetbrains-mono": "5.0.20",
     "@iconify/react": "4.1.1",
     "@mdx-js/react": "3.0.1",
-    "axios": "1.6.8",
     "clsx": "2.1.0",
     "docusaurus-plugin-sass": "^0.2.5",
     "js-yaml": "4.1.0",

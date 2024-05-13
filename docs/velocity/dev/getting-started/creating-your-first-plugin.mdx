@@ -41,9 +41,9 @@ Now we have created our project, we need configure our build system.
 
 ### Dependency
 
-| Group ID              | Artifact ID    | Version                                                          |
-|-----------------------|----------------|------------------------------------------------------------------|
-| `com.velocitypowered` | `velocity-api` | <VersionFormattedCode>`%%_MAJ_MIN_VEL_%%`</VersionFormattedCode> |
+| Group ID              | Artifact ID    | Version                                                              |
+|-----------------------|----------------|----------------------------------------------------------------------|
+| `com.velocitypowered` | `velocity-api` | <VersionFormattedCode>`%%_MAJ_MIN_PAT_VEL_%%`</VersionFormattedCode> |
 
 ### Javadocs
 
@@ -77,7 +77,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
-            <version>%%_MAJ_MIN_VEL_%%</version>
+            <version>%%_MAJ_MIN_PAT_VEL_%%</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -98,8 +98,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%")
-    annotationProcessor("com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%")
+    compileOnly("com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%")
+    annotationProcessor("com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%")
 }
 ```
 </VersionFormattedCode>
@@ -117,8 +117,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%'
-    annotationProcessor 'com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%'
+    compileOnly 'com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%'
+    annotationProcessor 'com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%'
 }
 ```
 </VersionFormattedCode>

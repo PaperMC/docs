@@ -1,22 +1,19 @@
 import fs from "fs-extra";
 import path from "path";
 import { Endpoints } from "@octokit/types";
-import axios from "axios";
 
 import { getFileCommitHash, FileNotTrackedError } from "@docusaurus/utils/src/gitUtils";
 import { Globby } from "@docusaurus/utils/src/globUtils";
 
 type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
-let axiosInstance = axios.create({
-  baseURL: "https://api.github.com/repos/PaperMC/docs/commits/",
-  headers: {
-    Accept: "application/vnd.github.v3+json",
-    "User-Agent": "PaperMC-Docs",
-  },
-});
+
+const headers = {
+  Accept: "application/vnd.github.v3+json",
+  "User-Agent": "PaperMC-Docs",
+};
 
 if (process.env.GITHUB_TOKEN !== undefined) {
-  axiosInstance.defaults.headers.common.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
+  headers.Authorization = `Bearer ${process.env.GITHUB_TOKEN}`;
 }
 
 export type AuthorData = {
@@ -33,17 +30,21 @@ export const commitCache: Map<string, string> = new Map();
 
 async function cacheUsernameFromCommit(commit: string) {
   try {
-    const response = (await axiosInstance.get(commit)) as endpoint["response"];
-    const username = response.data.author.login;
+    const response = await fetch(`https://api.github.com/repos/PaperMC/docs/commits/${commit}`, {
+      headers,
+    });
+    if (!response.ok) {
+      console.error(await response.text());
+      throw new Error(`Received error status code ${response.status} (${response.statusText})`);
+    }
+
+    const body = (await response.json()) as endpoint["response"];
+    const username = body.author.login;
 
     commitCache.set(commit, username);
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      console.error(error.response?.data ?? error.response);
-    } else {
-      // silent
-      console.error(error);
-    }
+    // silent
+    console.error(error);
   }
 }
 

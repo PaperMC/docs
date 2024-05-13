@@ -16,7 +16,18 @@ Paper's command system is still experimental and may change in the future.
 
 ## Defining a Command
 
-Commands can be easily defined within your plugin's onEnable method. This can be done like so:
+:::note
+
+This uses our `LifecycleEventManager` to register the command. See the [Lifecycle Events](./lifecycle.mdx) page for more information.
+
+:::
+
+### JavaPlugin
+Commands can be registered inside the <Javadoc name={"org.bukkit.plugin.java.JavaPlugin#onEnable()"}>onEnable</Javadoc>
+method of your plugin. Commands registered here will not be available to datapack functions because
+functions are loaded by the server before plugins are loaded. If you want your commands to be
+available to datapacks, you should register them via the
+<Javadoc name={"io.papermc.paper.plugin.bootstrap.PluginBootstrap#bootstrap(io.papermc.paper.plugin.bootstrap.BootstrapContext)"}>PluginBootstrap</Javadoc>.
 
 ```java
 class YourPluginClass extends JavaPlugin {
@@ -41,8 +52,54 @@ class YourPluginClass extends JavaPlugin {
 }
 ```
 
+### PluginBootstrap
+
 :::note
 
-This uses our `LifecycleEventManager` to register the command. See the [Lifecycle Events](/dev/lifecycle) (WIP) page for more information.
+If any plugin on the server registers a handler for the `LifecycleEvents.COMMANDS` event, the
+server will disable Bukkit's plugin reload functionality. This is a limitation with how
+the plugin reload system works in conjunction with the plugin bootstrapper system. The `/reload`
+functionality should never be used regardless.
 
 :::
+
+Commands are registered in the same way in a plugin's bootstrapper. The benefit of registering
+commands here is that they will be available to datapack functions because the command registration
+happens early enough.
+
+```java
+class YourPluginBootstrap implements PluginBootstrap {
+
+    @Override
+    public void bootstrap(BootstrapContext context) {
+        LifecycleEventManager<BootstrapContext> manager = context.getLifecycleManager();
+        // the same as JavaPlugin above
+    }
+}
+```
+
+### BasicCommand
+
+Paper provides a simple <Javadoc name={"io.papermc.paper.command.brigadier.BasicCommand"}>BasicCommand</Javadoc>
+interface which can be used to define a command in a similar way to Bukkit's `CommandExecutor`.
+There are methods on the <Javadoc name={"io.papermc.paper.command.brigadier.Commands"}>Commands</Javadoc> interface
+to register such commands.
+
+## Arguments
+
+### Built-in Arguments
+
+Vanilla has lots of built-in arguments that the client also supports. These can provide better
+syntax and error-checking before even executing the commands. <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>
+has all the argument types available to the API.
+
+### Custom Arguments
+
+You can create custom arguments by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc>
+interface. See the javadocs for more information on those they work.
+
+## Lifecycle
+
+Commands are not just registered once at the start, anytime a reload happens, either via bukkit's
+reload command (which you should never use) or Minecraft's `/reload` command (which you can use),
+the commands are re-registered by having the event handlers called again.

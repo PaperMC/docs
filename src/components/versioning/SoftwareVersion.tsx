@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getProjectVersion, VersionType, type Project } from "../../util/projectUtils";
+import { useDocsVersion } from "@docusaurus/theme-common/internal";
 
 export default function SoftwareVersion({
   versionType = "maj-min-pat",
@@ -7,6 +8,7 @@ export default function SoftwareVersion({
 }: SoftwareVersionProps) {
   const [fetched, setFetched] = useState<String>(null);
 
+  const versionMeta = useDocsVersion();
   useEffect(() => {
     (async () => {
       let enumType = VersionType.MajorMinorPatch;
@@ -17,7 +19,7 @@ export default function SoftwareVersion({
           enumType = VersionType.Major;
       }
 
-      setFetched(await getProjectVersion(project, enumType));
+      setFetched(await getProjectVersion(project, versionMeta, enumType));
     })();
   }, [versionType]);
 

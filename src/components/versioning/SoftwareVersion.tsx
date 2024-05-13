@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProjectVersion, VersionType, type Project } from "../../util/projectUtils";
+import { getProjectVersion, VersionType, type Project } from "../../util/versionUtils";
 import { useDocsVersion } from "@docusaurus/theme-common/internal";
 
 export default function SoftwareVersion({

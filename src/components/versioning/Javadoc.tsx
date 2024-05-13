@@ -5,17 +5,20 @@ import {
   VersionType,
   type Project,
   type DocusaurusVersion,
-} from "../../util/projectUtils";
+} from "../../util/versionUtils";
 import { useDocsVersion } from "@docusaurus/theme-common/internal";
 
-type TargetResolver = (baseVersion: DocusaurusVersion | null, module?: string) => Promise<string>;
+type TargetResolver = (
+  currentVersion: DocusaurusVersion | null,
+  module?: string
+) => Promise<string>;
 
 const createProjectTarget = (
   project: Project,
   versionType: VersionType = VersionType.MajorMinorPatch
 ): TargetResolver => {
-  return async (baseVersion) => {
-    const version = await getProjectVersion(project, baseVersion, versionType);
+  return async (currentVersion) => {
+    const version = await getProjectVersion(project, currentVersion, versionType);
 
     return `https://jd.papermc.io/${project}/${version}`;
   };

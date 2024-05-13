@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
-import { getProjectVersion, VersionType } from "../../util/projectUtils";
+import { getProjectVersion, VersionType } from "../../util/versionUtils";
 import { useDocsVersion } from "@docusaurus/theme-common/internal";
 
 export default function VersionFormattedCode({

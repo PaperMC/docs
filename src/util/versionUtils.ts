@@ -58,7 +58,7 @@ export interface DocusaurusVersion {
 
 export const getProjectVersion = async (
   project: Project,
-  baseVersion: DocusaurusVersion | null,
+  currentVersion: DocusaurusVersion | null,
   versionType: VersionType = VersionType.MajorMinorPatch
 ): Promise<string | null> => {
   const versionsValue = projects[project];
@@ -67,9 +67,9 @@ export const getProjectVersion = async (
   }
 
   let versions = await versionsValue.value();
-  if (baseVersion && baseVersion.pluginId === project && !baseVersion.isLast) {
+  if (currentVersion && currentVersion.pluginId === project && !currentVersion.isLast) {
     // restrict version lookup to the newest patch of the base version
-    versions = versions.filter((v) => v.startsWith(baseVersion.version));
+    versions = versions.filter((v) => v.startsWith(currentVersion.version));
   }
 
   const version = versions[versions.length - 1];

@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, ReactNode} from "react";
+import React, { useState, useEffect, useRef, ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 import style from "@site/src/css/markdown-styles.module.css";
 import yaml from "js-yaml";
@@ -8,11 +8,11 @@ import useBrokenLinks from "@docusaurus/core/lib/client/exports/useBrokenLinks";
 import Admonition from "@theme/Admonition";
 import clsx from "clsx";
 
-const createUrlHash = (parent: string | number, name: any) : string => {
+const createUrlHash = (parent: string | number, name: any): string => {
   return parent + (parent ? "_" : "") + parseUrlHash(name);
 };
 
-const parseUrlHash = (name: string) : string => {
+const parseUrlHash = (name: string): string => {
   return name.replace(/-/g, "_");
 };
 
@@ -48,14 +48,21 @@ const copyAndScroll = (parentKey: string, name: string): void => {
     console.error("Failed to copy to clipboard: ", error);
   });
   scrollIntoView(hash);
-}
+};
 
-const parseDefault = (value: string, collapse: boolean, parentKey: string, name: string, handleHashLinkClick, separator: string) : ReactNode => {
+const parseDefault = (
+  value: string,
+  collapse: boolean,
+  parentKey: string,
+  name: string,
+  handleHashLinkClick,
+  separator: string
+): ReactNode => {
   const hash = createUrlHash(parentKey, name);
   useBrokenLinks().collectAnchor(hash);
 
   if (value[0] === "[" && value[value.length - 1] === "]") {
-    const items : (string | ReactNode)[]  = value
+    const items: (string | ReactNode)[] = value
       .replace("[", "")
       .replace("]", "")
       .split(",")
@@ -100,7 +107,7 @@ const parseDefault = (value: string, collapse: boolean, parentKey: string, name:
   );
 };
 
-const parseItalics = (key : string) => {
+const parseItalics = (key: string) => {
   if (key.startsWith("<") && key.endsWith(">")) {
     return (
       <>
@@ -116,14 +123,14 @@ const parseDescriptionForVersioning = (description: String) => {
 };
 
 const YamlNodeWithDescription = ({
-                                   name,
-                                   node,
-                                   parentKey,
-                                   root,
-                                   separator,
-                                   showAllDescriptions,
-                                   defaultValue,
-                                 }) => {
+  name,
+  node,
+  parentKey,
+  root,
+  separator,
+  showAllDescriptions,
+  defaultValue,
+}) => {
   const ignoreInitialRenderRef = useRef(false);
   const [showDescription, setShowDescription] = useState(showAllDescriptions);
 
@@ -204,15 +211,15 @@ const YamlNodeWithDescription = ({
 };
 
 const YamlTreeNode = ({
-                        root,
-                        name,
-                        parentKey,
-                        value,
-                        separator,
-                        showAllDescriptions,
-                        defaultValue,
-                        warning,
-                      }) : ReactNode => {
+  root,
+  name,
+  parentKey,
+  value,
+  separator,
+  showAllDescriptions,
+  defaultValue,
+  warning,
+}): ReactNode => {
   if (name === "inline-docs-warning") return null;
 
   const handleClick = (event) => {
@@ -280,7 +287,7 @@ const renderYamlData = (
   separator: string,
   showAllDescriptions: boolean,
   defaultValue: string
-) : ReactNode => {
+): ReactNode => {
   const renderedNodes: JSX.Element[] = [];
 
   for (const [key, value] of Object.entries(data)) {
@@ -323,11 +330,11 @@ const renderYamlData = (
 };
 
 export default function Config({
-                                 data,
-                                 separator = ": ",
-                                 showDescriptions = false,
-                                 defaultValue = "N/A",
-                               }) : ReactNode {
+  data,
+  separator = ": ",
+  showDescriptions = false,
+  defaultValue = "N/A",
+}): ReactNode {
   const [showAllDescriptions, setShowAllExpanded] = useState(showDescriptions);
   let ymlData = yaml.load(data);
   return (

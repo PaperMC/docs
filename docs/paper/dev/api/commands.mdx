@@ -24,6 +24,7 @@ to register the command. See the [Lifecycle Events](./lifecycle.mdx) page for mo
 :::
 
 ### JavaPlugin
+
 Commands can be registered inside the <Javadoc name={"org.bukkit.plugin.java.JavaPlugin#onEnable()"}>onEnable</Javadoc>
 method of the plugin. Commands registered here will not be available to datapack functions because
 functions are loaded by the server before plugins are loaded. To make commands available to
@@ -64,9 +65,16 @@ command should never be used regardless.
 :::
 
 Commands are registered in the same way in a
-<Javadoc name={"io.papermc.paper.plugin.bootstrap.PluginBootstrap#bootstrap(io.papermc.paper.plugin.bootstrap.BootstrapContext)"}>plugin's bootstrapper</Javadoc>.
-The benefit of registering commands here is that they will be available to datapack functions because
-the command registration happens early enough.
+
+<Javadoc
+  name={
+    "io.papermc.paper.plugin.bootstrap.PluginBootstrap#bootstrap(io.papermc.paper.plugin.bootstrap.BootstrapContext)"
+  }
+>
+  plugin's bootstrapper
+</Javadoc>
+. The benefit of registering commands here is that they will be available to datapack functions
+because the command registration happens early enough.
 
 ```java
 class YourPluginBootstrap implements PluginBootstrap {
@@ -87,6 +95,7 @@ There are methods on the <Javadoc name={"io.papermc.paper.command.brigadier.Comm
 to register such commands.
 
 Example registration and implementation of a BasicCommand:
+
 ```java
 LifecycleEventManager<BootstrapContext> manager = context.getLifecycleManager();
 manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
@@ -94,6 +103,7 @@ manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
     commands.register("fun", "some help description string", new FunCommand());
 });
 ```
+
 ```java
 class FunCommand implements BasicCommand {
 

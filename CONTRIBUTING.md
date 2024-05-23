@@ -109,12 +109,12 @@ of a few ways:
    This component is used to embed the current version of the software into the documentation. An example of this would be:
 
    ```jsx
-   <SoftwareVersion versionType={"maj-min"}/> // E.g 1.19.2
-   <SoftwareVersion versionType={"maj"}/> // E.g 1.19
-   <SoftwareVersion versionType={"max"}/> // E.g 1.20.4
+   <SoftwareVersion versionType={"maj-min-pat"}/> // e.g. 1.19.2
+   <SoftwareVersion versionType={"maj-min"}/> // e.g. 1.19
+   <SoftwareVersion versionType={"maj"}/> // e.g. 1
 
-   // You can set the project name to be used for the versioning:
-   <SoftwareVersion versionType={"maj-min"} project={"velocity"}/> // Project defaults to Paper
+   // You can set the project name to be used for the versioning (defaults to paper):
+   <SoftwareVersion versionType={"maj-min-pat"} project={"velocity"}/> // e.g. 3.3.0-SNAPSHOT
    ```
 
 2. `Javadoc` component
@@ -137,17 +137,17 @@ of a few ways:
    version: '1.0'
    main: io.papermc.testplugin.TestPlugin
    description: Paper Test Plugin
-   api-version: '%%_MAJ_MC_%%'
+   api-version: '%%_MAJ_MIN_PAT_MC_%%'
    bootstrapper: io.papermc.testplugin.TestPluginBootstrap
    loader: io.papermc.testplugin.TestPluginLoader
    ```⠀
    </VersionFormattedCode>
 
    // The possible placeholders are:
-   %%_MAJ_MC_%%  - Major Paper Version (E.g. 1.20)
-   %%_MAJ_MIN_MC_%% - Major-Minor Paper Version (E.g. 1.20.4)
-   %%_MAJ_VEL_%% - Major Velocity Version (E.g. 3.3)
-   %%_MAJ_MIN_VEL_%% - Major-Minor Velocity Version (E.g. 3.3.0)
+   %%_MAJ_MIN_MC_%%  - Major-Minor Paper Version (E.g. 1.20)
+   %%_MAJ_MIN_PAT_MC_%% - Major-Minor-Patch Paper Version (E.g. 1.20.4)
+   %%_MAJ_MIN_VEL_%% - Major Velocity Version (E.g. 3.1.0)
+   %%_MAJ_MIN_PAT_VEL_%% - Major-Minor-Patch Velocity Version (E.g. 3.1.1-SNAPSHOT)
    ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation

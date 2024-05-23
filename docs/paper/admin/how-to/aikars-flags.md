@@ -7,21 +7,15 @@ description: Aikar's flags are a set of JVM flags designed to improve the perfor
 
 ## Recommended JVM startup flags
 
-Use these flags exactly, only changing `Xmx` and `Xms`. These flags work and scale accordingly to any
-size of memory.
+:::warning[Script Generator]
 
-For an automated script to generate these flags for you, see
-our [Script Generator](/misc/tools/start-script-gen).
+**This page only serves as an explanation page.** If you want to generate a start script, please visit
+our **[Script Generator](/misc/tools/start-script-gen)**.
+
+:::
 
 ```bash
-java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200
--XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch
--XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M
--XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4
--XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90
--XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem
--XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs
--Daikars.new.flags=true -jar paper.jar --nogui
+java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper.jar --nogui
 ```
 
 :::danger[Do not allocate all of your available memory on a shared host!]

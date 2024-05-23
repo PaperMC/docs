@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, {useState, useEffect, useRef, ReactNode} from "react";
 import ReactMarkdown from "react-markdown";
 import style from "@site/src/css/markdown-styles.module.css";
 import yaml from "js-yaml";
@@ -8,17 +8,15 @@ import useBrokenLinks from "@docusaurus/core/lib/client/exports/useBrokenLinks";
 import Admonition from "@theme/Admonition";
 import clsx from "clsx";
 
-const INDENT_SIZE = 30;
-
-const createUrlHash = (parent, name) => {
+const createUrlHash = (parent: string | number, name: any) : string => {
   return parent + (parent ? "_" : "") + parseUrlHash(name);
 };
 
-const parseUrlHash = (name) => {
+const parseUrlHash = (name: string) : string => {
   return name.replace(/-/g, "_");
 };
 
-const scrollIntoView = (id) => {
+const scrollIntoView = (id: string): void => {
   const targetElement = document.getElementById(id);
 
   if (!targetElement) {
@@ -29,7 +27,7 @@ const scrollIntoView = (id) => {
   const navbarHeightRems = 3.75;
   const navbarHeightPixels =
     navbarHeightRems * parseFloat(getComputedStyle(document.documentElement).fontSize);
-  const targetElementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+  const targetElementPosition = targetElement.getBoundingClientRect().top + window.scrollY;
   const adjustedScrollPosition = targetElementPosition - navbarHeightPixels;
 
   setTimeout(
@@ -43,12 +41,21 @@ const scrollIntoView = (id) => {
   );
 };
 
-const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, separator) => {
+const copyAndScroll = (parentKey: string, name: string): void => {
+  const fullURL = window.location.href.split("#")[0];
+  const hash = createUrlHash(parentKey, name);
+  navigator.clipboard.writeText(fullURL + "#" + hash).catch((error) => {
+    console.error("Failed to copy to clipboard: ", error);
+  });
+  scrollIntoView(hash);
+}
+
+const parseDefault = (value: string, collapse: boolean, parentKey: string, name: string, handleHashLinkClick, separator: string) : ReactNode => {
   const hash = createUrlHash(parentKey, name);
   useBrokenLinks().collectAnchor(hash);
 
   if (value[0] === "[" && value[value.length - 1] === "]") {
-    const items = value
+    const items : (string | ReactNode)[]  = value
       .replace("[", "")
       .replace("]", "")
       .split(",")
@@ -71,7 +78,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
           <div>
             <ul className={"yaml-list-elem"}>
               {items.map((item) => {
-                return <li key={item}>{item}</li>;
+                return <li key={item.toString()}>{item}</li>;
               })}
             </ul>
           </div>
@@ -93,7 +100,7 @@ const parseDefault = (value, collapse, parentKey, name, handleHashLinkClick, sep
   );
 };
 
-const parseItalics = (key) => {
+const parseItalics = (key : string) => {
   if (key.startsWith("<") && key.endsWith(">")) {
     return (
       <>
@@ -109,14 +116,14 @@ const parseDescriptionForVersioning = (description: String) => {
 };
 
 const YamlNodeWithDescription = ({
-  name,
-  node,
-  parentKey,
-  root,
-  separator,
-  showAllDescriptions,
-  defaultValue,
-}) => {
+                                   name,
+                                   node,
+                                   parentKey,
+                                   root,
+                                   separator,
+                                   showAllDescriptions,
+                                   defaultValue,
+                                 }) => {
   const ignoreInitialRenderRef = useRef(false);
   const [showDescription, setShowDescription] = useState(showAllDescriptions);
 
@@ -148,16 +155,11 @@ const YamlNodeWithDescription = ({
   const handleHashLinkClick = (event) => {
     event.preventDefault();
     history.pushState(null, "", event.currentTarget.hash);
-
-    const fullURL = window.location.href.split("#")[0];
-    const hash = createUrlHash(parentKey, name);
-    navigator.clipboard.writeText(fullURL + "#" + hash);
-    scrollIntoView(hash);
-
+    copyAndScroll(parentKey, name);
     event.stopPropagation();
   };
 
-  const showAndScrollIntoView = (hash) => {
+  const showAndScrollIntoView = (hash: string) => {
     setShowDescription(true);
     scrollIntoView(hash);
   };
@@ -202,31 +204,26 @@ const YamlNodeWithDescription = ({
 };
 
 const YamlTreeNode = ({
-  root,
-  name,
-  parentKey,
-  value,
-  separator,
-  showAllDescriptions,
-  defaultValue,
-  warning,
-}) => {
+                        root,
+                        name,
+                        parentKey,
+                        value,
+                        separator,
+                        showAllDescriptions,
+                        defaultValue,
+                        warning,
+                      }) : ReactNode => {
   if (name === "inline-docs-warning") return null;
 
   const handleClick = (event) => {
     event.preventDefault();
     scrollIntoView(createUrlHash(parentKey, name));
     history.pushState(null, "", `#${createUrlHash(parentKey, name)}`);
-
-    const fullURL = window.location.href.split("#")[0];
-    const hash = createUrlHash(parentKey, name);
-    navigator.clipboard.writeText(fullURL + "#" + hash);
-    scrollIntoView(hash);
-
+    copyAndScroll(parentKey, name);
     event.stopPropagation();
   };
 
-  const removeTrailingSpaces = (value) => {
+  const removeTrailingSpaces = (value: string) => {
     if (value.endsWith(" ")) {
       return removeTrailingSpaces(value.substring(0, value.length - 1));
     }
@@ -283,7 +280,7 @@ const renderYamlData = (
   separator: string,
   showAllDescriptions: boolean,
   defaultValue: string
-) => {
+) : ReactNode => {
   const renderedNodes: JSX.Element[] = [];
 
   for (const [key, value] of Object.entries(data)) {
@@ -326,11 +323,11 @@ const renderYamlData = (
 };
 
 export default function Config({
-  data,
-  separator = ": ",
-  showDescriptions = false,
-  defaultValue = "N/A",
-}) {
+                                 data,
+                                 separator = ": ",
+                                 showDescriptions = false,
+                                 defaultValue = "N/A",
+                               }) : ReactNode {
   const [showAllDescriptions, setShowAllExpanded] = useState(showDescriptions);
   let ymlData = yaml.load(data);
   return (

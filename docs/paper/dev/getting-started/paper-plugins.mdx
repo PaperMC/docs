@@ -3,12 +3,12 @@ slug: /dev/getting-started/paper-plugins
 description: A development guide for how to write Paper-specific plugins.
 ---
 
-# Paper Plugins
+# Paper Plugins (Experimental)
 
 Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to
 expand the field of what the Paper API is able to introduce.
 
-:::warning[Experimental]
+:::danger[Experimental]
 
 This is experimental and may be subject to change.
 
@@ -31,7 +31,7 @@ name: Paper-Test-Plugin
 version: '1.0'
 main: io.papermc.testplugin.TestPlugin
 description: Paper Test Plugin
-api-version: '%%_MAJ_MC_%%'
+api-version: '%%_MAJ_MIN_PAT_MC_%%'
 bootstrapper: io.papermc.testplugin.TestPluginBootstrap
 loader: io.papermc.testplugin.TestPluginLoader
 ```

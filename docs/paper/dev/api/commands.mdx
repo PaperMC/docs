@@ -64,16 +64,9 @@ command should never be used regardless.
 
 :::
 
-Commands are registered in the same way in a
-
-<Javadoc
-  name={
-    "io.papermc.paper.plugin.bootstrap.PluginBootstrap#bootstrap(io.papermc.paper.plugin.bootstrap.BootstrapContext)"
-  }
->
-  plugin's bootstrapper
-</Javadoc>
-. The benefit of registering commands here is that they will be available to datapack functions
+Commands are registered in the same way in a plugin's
+<Javadoc name={"io.papermc.paper.plugin.bootstrap.PluginBootstrap#bootstrap(io.papermc.paper.plugin.bootstrap.BootstrapContext)"}>bootstrapper</Javadoc>.
+The benefit of registering commands here is that they will be available to datapack functions
 because the command registration happens early enough.
 
 ```java
@@ -82,7 +75,7 @@ class YourPluginBootstrap implements PluginBootstrap {
     @Override
     public void bootstrap(BootstrapContext context) {
         LifecycleEventManager<BootstrapContext> manager = context.getLifecycleManager();
-        // the same as JavaPlugin above
+        // Same as for JavaPlugin
     }
 }
 ```
@@ -128,8 +121,8 @@ For now, you can find specific examples of arguments, among other things, on the
 
 ### Custom arguments
 
-To create custom arguments by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc>
-interface. See the javadocs for more information on those they work.
+Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc>
+interface. See the Javadocs for more information on how they work.
 
 ## Lifecycle
 

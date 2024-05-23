@@ -139,6 +139,7 @@ const paper: SidebarsConfig = {
             "dev/api/custom-inventory-holder",
             "dev/api/scheduler",
             "dev/api/entity-teleport",
+            "dev/api/display-entities",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
             "dev/api/lifecycle",

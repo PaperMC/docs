@@ -1,0 +1,42 @@
+---
+slug: /dev/display-entities
+description: The display entity API and how to use it.
+---
+
+# Display Entities
+
+Added in 1.19.4, display entities are a way to display various things in the world,
+like blocks, items and text.
+
+By default, these entities have no hitbox, don't move, make sounds or take damage,
+making them the perfect for all kinds of applications, like holograms.
+
+## Types
+
+### Text
+
+Text can be displayed via a <Javadoc name={"org.bukkit.entity.TextDisplay"}>`TextDisplay`</Javadoc>
+entity.
+
+```java
+TextDisplay display = world.spawn(location, TextDisplay.class, entity -> {
+    // customize the entity!
+    entity.text(Component.text("Some awesome content", NamedTextColor.BLACK));
+    entity.setBillboard(Display.Billboard.VERTICAL); // pivot only around the vertical axis
+    entity.setBackgroundColor(Color.RED); // make the background red
+
+    // see the Display and TextDisplay Javadoc, there are many more options
+});
+```
+
+### Items
+
+Items can be displayed via an <Javadoc name={"org.bukkit.entity.ItemDisplay"}>`ItemDisplay`</Javadoc>
+entity.
+
+```java
+ItemDisplay display = world.spawn(location, ItemDisplay.class, entity -> {
+    // customize the entity!
+    entity.setItemStack(new ItemStack(Material.SKELETON_SKULL));
+});
+```

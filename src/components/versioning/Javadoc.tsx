@@ -26,7 +26,7 @@ const createProjectTarget = (
 
 const targets: { [project: string]: TargetResolver } = {
   paper: createProjectTarget("paper"),
-  velocity: createProjectTarget("velocity", VersionType.MajorZeroed),
+  velocity: createProjectTarget("velocity", VersionType.MajorMinorZeroed),
   java: async (_, module) => {
     const version = getProperty("DOCS_JAVA") ?? "21";
 
@@ -51,7 +51,7 @@ export default function Javadoc({ name, module, project = "paper", children }: J
       if (resolve) {
         const target = await resolve(versionMeta, module);
 
-        setHref(`${target}/${formatName(name)}`);
+        setHref(name ? `${target}/${formatName(name)}` : target);
       }
     })();
   }, [name]);
@@ -60,7 +60,7 @@ export default function Javadoc({ name, module, project = "paper", children }: J
 }
 
 interface JavadocProps {
-  name: string;
+  name?: string;
   module?: string;
   project?: Project | "java";
   children: any;

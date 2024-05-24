@@ -5,13 +5,37 @@ description: The display entity API and how to use it.
 
 # Display Entities
 
-Added in 1.19.4, display entities are a way to display various things in the world,
-like blocks, items and text.
+Added in 1.19.4, [display entities](https://minecraft.wiki/w/Display) are a way to display various
+things in the world, like blocks, items and text.
 
 By default, these entities have no hitbox, don't move, make sounds or take damage,
 making them the perfect for all kinds of applications, like holograms.
 
 ## Types
+
+:::tip[Decorative displays]
+
+Use the <Javadoc name={"org.bukkit.entity.Entity#setVisibleByDefault(boolean)"}>`Entity#setVisibleByDefault()`</Javadoc>
+and <Javadoc name={"org.bukkit.entity.Player#showEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#showEntity()`</Javadoc>/
+<Javadoc name={"org.bukkit.entity.Player#hideEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#hideEntity()`</Javadoc>
+methods to make displays visible to only specific players.
+
+If you plan to use the display only temporarily, e.g. for decoration purposes, make sure to remove
+it with <Javadoc name={"org.bukkit.entity.Entity#remove()"}>`Entity#remove()`</Javadoc> afterward.
+
+```java
+TextDisplay display = player.getWorld().spawn(player.getLocation(), TextDisplay.class, entity -> {
+    // ...
+
+    entity.setVisibleByDefault(false); // hide it for everyone
+    entity.setPersistent(false); // don't save the entity, it's temporary
+});
+
+player.showEntity(plugin, display); // show it to our player
+display.remove(); // done with the entity
+```
+
+:::
 
 ### Text
 
@@ -40,3 +64,17 @@ ItemDisplay display = world.spawn(location, ItemDisplay.class, entity -> {
     entity.setItemStack(new ItemStack(Material.SKELETON_SKULL));
 });
 ```
+
+### Blocks
+
+Blocks can be displayed via an <Javadoc name={"org.bukkit.entity.BlockDisplay"}>`BlockDisplay`</Javadoc>
+entity.
+
+```java
+BlockDisplay display = world.spawn(location, BlockDisplay.class, entity -> {
+    // customize the entity!
+    entity.setBlock(Material.GRASS_BLOCK.createBlockData());
+});
+```
+
+

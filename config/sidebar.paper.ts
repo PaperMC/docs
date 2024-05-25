@@ -129,10 +129,7 @@ const paper: SidebarsConfig = {
               type: "category",
               label: "Entity API",
               collapsed: true,
-              items: [
-                "dev/api/entity-api/entity-teleport",
-                "dev/api/entity-api/display-entities",
-              ],
+              items: ["dev/api/entity-api/entity-teleport", "dev/api/entity-api/display-entities"],
             },
             {
               type: "category",

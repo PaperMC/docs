@@ -53,21 +53,9 @@ TextDisplay display = world.spawn(location, TextDisplay.class, entity -> {
 });
 ```
 
-### Items
-
-Items can be displayed via an <Javadoc name={"org.bukkit.entity.ItemDisplay"}>`ItemDisplay`</Javadoc>
-entity.
-
-```java
-ItemDisplay display = world.spawn(location, ItemDisplay.class, entity -> {
-    // customize the entity!
-    entity.setItemStack(new ItemStack(Material.SKELETON_SKULL));
-});
-```
-
 ### Blocks
 
-Blocks can be displayed via an <Javadoc name={"org.bukkit.entity.BlockDisplay"}>`BlockDisplay`</Javadoc>
+Blocks can be displayed via a <Javadoc name={"org.bukkit.entity.BlockDisplay"}>`BlockDisplay`</Javadoc>
 entity.
 
 ```java
@@ -77,12 +65,28 @@ BlockDisplay display = world.spawn(location, BlockDisplay.class, entity -> {
 });
 ```
 
+### Items
+
+Items can be displayed via an <Javadoc name={"org.bukkit.entity.ItemDisplay"}>`ItemDisplay`</Javadoc>
+entity.
+
+Despite its name, an _item_ display can also display _blocks_, with the difference being the
+position in the model - an item display has its position in the center, whereas a block display has
+its position in the corner of the block (this can be seen with the hitbox debug mode - F3+B).
+
+```java
+ItemDisplay display = world.spawn(location, ItemDisplay.class, entity -> {
+    // customize the entity!
+    entity.setItemStack(new ItemStack(Material.SKELETON_SKULL));
+});
+```
+
 ## Transformation
 
 Displays can have an arbitrary affine transformation applied to them, allowing you to position and
 warp them as you choose in 3D space.
 
-Transformations are applied in this order:
+Transformations are applied to the display in this order:
 
 ```mermaid
 flowchart LR;
@@ -116,6 +120,8 @@ world.spawn(location, BlockDisplay.class, entity -> {
 });
 ```
 
+![Scaling example](./assets/display-scale.png)
+
 ### Rotation
 
 You can also rotate it, let's tip it on its corner:
@@ -136,6 +142,8 @@ world.spawn(location, BlockDisplay.class, entity -> {
 });
 ```
 
+![Rotation example](./assets/display-rotation.png)
+
 ### Translation
 
 Finally, we can also apply a translation transformation (position offset) to the display, for example:
@@ -155,6 +163,8 @@ world.spawn(location, BlockDisplay.class, entity -> {
 });
 ```
 
+![Translation example](./assets/display-trans.png)
+
 ## Interpolation
 
 A transformation can be linearly interpolated by the client to create a smooth animation,
@@ -165,7 +175,7 @@ An example of this would be smoothly rotating a block/item/text in-place. In con
 making the display spin indefinitely:
 
 ```java
-ItemDisplay display = loc.getWorld().spawn(loc, ItemDisplay.class, entity -> {
+ItemDisplay display = location.getWorld().spawn(location, ItemDisplay.class, entity -> {
     entity.setItemStack(new ItemStack(Material.GOLDEN_SWORD));
 });
 
@@ -190,3 +200,5 @@ Bukkit.getScheduler().runTaskTimer(plugin, task -> {
     display.setInterpolationDuration(duration); // set the duration of the interpolated rotation
 }, 1 /* delay the initial transformation by one tick from display creation */, duration);
 ```
+
+![Interpolation example](./assets/display-interp.gif)

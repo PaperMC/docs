@@ -12,7 +12,7 @@ import styles from "./styles.module.css";
 
 export type ExtendedNavbarItemConfig = NavbarItemConfig & {
   activeBaseRegex?: string;
-  items?: ExtendedNavbarItemConfig[];
+  modules?: ExtendedNavbarItemConfig[];
   label?: string;
   to?: string;
 };
@@ -58,21 +58,18 @@ export default function NavbarContent(): JSX.Element {
   const items = useNavbarItems();
   let [leftItems, rightItems] = splitNavbarItems(items);
 
+  // What we are doing here is going through each of the root level NavbarItems,
+  // and checking if the activeBaseRegex matches the current location. If it does
+  // we set the leftItems to the modules of that NavbarItem. This does not happen
+  // if that project does not have submodules.
   if (typeof document !== "undefined") {
-    for (let item of useNavbarItems()) {
+    for (let item of items) {
       if (
-        item.activeBaseRegex &&
+        item.activeBaseRegex && item.modules &&
         new RegExp(item.activeBaseRegex).test(document.location.pathname)
       ) {
-        const items = [];
-        for (let category of item.items) {
-          items.push({
-            label: category.label,
-            to: category.to,
-            position: category.position,
-          });
-        }
-        leftItems = items;
+        console.log("NavbarContent: item.activeBaseRegex", item.activeBaseRegex)
+        leftItems = item.modules;
       }
     }
   }

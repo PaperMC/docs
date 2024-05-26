@@ -11,12 +11,11 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
   },
   items: [
     {
-      type: "dropdown",
-      label: "Paper",
       to: "/paper",
+      label: "Paper",
       position: "left",
       activeBaseRegex: "\\/paper.*",
-      items: [
+      modules: [
         {
           label: "Administration",
           to: "/paper/admin",
@@ -35,12 +34,11 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       ],
     },
     {
-      type: "dropdown",
-      label: "Folia",
       to: "/folia",
+      label: "Folia",
       position: "left",
       activeBaseRegex: "(\\/folia)(.+)?",
-      items: [
+      modules: [
         {
           label: "Administration",
           to: "/folia/admin",
@@ -54,12 +52,11 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       ],
     },
     {
-      type: "dropdown",
-      label: "Velocity",
       to: "/velocity",
+      label: "Velocity",
       position: "left",
       activeBaseRegex: "\\/velocity.*",
-      items: [
+      modules: [
         {
           label: "Administration",
           to: "/velocity/admin",

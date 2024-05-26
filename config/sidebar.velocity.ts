@@ -6,7 +6,7 @@ const velocity: SidebarsConfig = {
     {
       type: "category",
       label: "Administration",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "admin/README",
@@ -60,7 +60,7 @@ const velocity: SidebarsConfig = {
     {
       type: "category",
       label: "Development",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "dev/README",

@@ -6,7 +6,7 @@ const paper: SidebarsConfig = {
     {
       type: "category",
       label: "Administration",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "admin/README",
@@ -85,7 +85,7 @@ const paper: SidebarsConfig = {
     {
       type: "category",
       label: "Development",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "dev/README",
@@ -176,7 +176,7 @@ const paper: SidebarsConfig = {
     {
       type: "category",
       label: "Contributing",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "contributing/README",

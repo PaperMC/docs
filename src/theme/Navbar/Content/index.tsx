@@ -65,7 +65,8 @@ export default function NavbarContent(): JSX.Element {
   if (typeof document !== "undefined") {
     for (let item of items) {
       if (
-        item.activeBaseRegex && item.modules &&
+        item.activeBaseRegex &&
+        item.modules &&
         new RegExp(item.activeBaseRegex).test(document.location.pathname)
       ) {
         leftItems = item.modules;

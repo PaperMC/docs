@@ -117,6 +117,11 @@ world.spawn(location, BlockDisplay.class, entity -> {
                 new AxisAngle4f() // no right rotation
         )
     );
+    // or set a raw transformation matrix from JOML
+    // entity.setTransformationMatrix(
+    //         new Matrix4f()
+    //                 .scale(2) // scale up by a factor of 2 on all axes
+    // );
 });
 ```
 
@@ -139,6 +144,18 @@ world.spawn(location, BlockDisplay.class, entity -> {
                 new AxisAngle4f((float) Math.toRadians(45), 0, 0, 1) // rotate +45 degrees on the Z axis
         )
     );
+    // or set a raw transformation matrix from JOML
+    // entity.setTransformationMatrix(
+    //         new Matrix4f()
+    //                 .scale(2) // scale up by a factor of 2 on all axes
+                       // highlight-start
+    //                 .rotateXYZ(
+    //                         (float) Math.toRadians(360 - 45), // rotate -45 degrees on the X axis
+    //                         0,
+    //                         (float) Math.toRadians(45) // rotate +45 degrees on the Z axis
+    //                 )
+                       // highlight-end
+    // );
 });
 ```
 
@@ -160,6 +177,18 @@ world.spawn(location, BlockDisplay.class, entity -> {
                 new AxisAngle4f((float) Math.toRadians(45), 0, 0, 1) // rotate +45 degrees on the Z axis
         )
     );
+    // or set a raw transformation matrix from JOML
+    // entity.setTransformationMatrix(
+    //         new Matrix4f()
+                       // highlight-next-line
+    //                 .translate(0.5F, 0.5F, 0.5F) // offset by half a block on all axes
+    //                 .scale(2) // scale up by a factor of 2 on all axes
+    //                 .rotateXYZ(
+    //                         (float) Math.toRadians(360 - 45), // rotate -45 degrees on the X axis
+    //                         0,
+    //                         (float) Math.toRadians(45) // rotate +45 degrees on the Z axis
+    //                 )
+    // );
 });
 ```
 
@@ -181,21 +210,14 @@ ItemDisplay display = location.getWorld().spawn(location, ItemDisplay.class, ent
 
 int duration = 5 * 20; // duration of half a revolution (5 * 20 ticks = 5 seconds)
 
-Quaternionf rotation = new Quaternionf();
+Matrix4f mat = new Matrix4f().scale(0.5F); // scale to 0.5x - smaller item
 Bukkit.getScheduler().runTaskTimer(plugin, task -> {
     if (!display.isValid()) { // display was removed from the world, abort task
         task.cancel();
         return;
     }
 
-    display.setTransformation(
-            new Transformation(
-                    new Vector3f(), // no translation
-                    rotation,
-                    new Vector3f(1, 1, 1), // no scaling
-                    rotation.rotateY(((float) Math.toRadians(180)) + 0.1F /* prevent the client from interpolating in reverse */)
-            )
-    );
+    display.setTransformationMatrix(mat.rotateY(((float) Math.toRadians(180)) + 0.1F /* prevent the client from interpolating in reverse */));
     display.setInterpolationDelay(0); // no delay to the interpolation
     display.setInterpolationDuration(duration); // set the duration of the interpolated rotation
 }, 1 /* delay the initial transformation by one tick from display creation */, duration);

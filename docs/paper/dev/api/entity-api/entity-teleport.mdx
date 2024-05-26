@@ -9,10 +9,18 @@ Entities can be instantaneously teleported to specific positions, synchronously 
 <Javadoc name={"org.bukkit.entity.Entity#teleport(org.bukkit.Location)"}>`teleport`</Javadoc> and
 <Javadoc name={"org.bukkit.entity.Entity#teleportAsync(org.bukkit.Location)"}>`teleportAsync`</Javadoc> API.
 
-```java
-entity.teleport(location); // teleports the entity synchronously
+:::tip[Performance]
 
-entity.teleportAsync(location).thenAccept(success -> { // teleports the entity asynchronously
+If you expect to teleport into unloaded chunks, it is recommended to use the `teleportAsync` API,
+as it avoids doing synchronous chunk loads, which put a lot of stress on the server's main thread -
+hurting overall performance.
+
+:::
+
+```java
+entity.teleport(location); // loads chunks synchronously and teleports the entity
+
+entity.teleportAsync(location).thenAccept(success -> { // loads chunks asynchronously and teleports the entity
     // this code is ran when the teleport completes
     // the Future is completed on the main thread, so it is safe to use the API here
 
@@ -21,6 +29,13 @@ entity.teleportAsync(location).thenAccept(success -> { // teleports the entity a
     }
 });
 ```
+
+:::danger
+
+You should **NEVER** call `.get()`/`.join()` on the `teleportAsync` `Future` on the main thread,
+as it **WILL** deadlock your server, if the chunk you're teleporting into is not loaded.
+
+:::
 
 ## Look at
 

@@ -1,22 +1,25 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import "@site/src/css/start-script-generator.css";
-import clsx from "clsx";
+import Button from "@site/src/components/ui/Button";
+import Select, { Option } from "@site/src/components/ui/Select";
 
 const markerPoints = [4, 8, 12, 16, 20];
-
-type FlagType = {
-  label: string;
-  value: string;
-  description: string;
-};
 
 const WINDOWS_AUTO_RESTART =
   ":start\n%%CONTENT%%\n\necho Server restarting...\necho Press CTRL + C to stop.\ngoto :start";
 const LINUX_AUTO_RESTART =
   "while [ true ]; do\n    %%CONTENT%%\n    echo Server restarting...\n    echo Press CTRL + C to stop.\ndone";
 
-const FLAGS: { [key: string]: FlagType } = {
-  AIKARS: {
+const PLATFORMS: Option[] = [
+  { label: "Linux/Mac", value: "linux" },
+  { label: "Windows", value: "windows" },
+];
+
+const LINUX = PLATFORMS[0];
+const WINDOWS = PLATFORMS[1];
+
+const FLAGS: Option[] = [
+  {
     label: "Aikar's",
     value: [
       "-XX:+AlwaysPreTouch",
@@ -42,12 +45,12 @@ const FLAGS: { [key: string]: FlagType } = {
     ].join(" "),
     description: "Optimized Minecraft flags by Aikar for better server performance.",
   },
-  NONE: {
+  {
     label: "None",
     value: "",
     description: "No additional flags.",
   },
-  VELOCITY: {
+  {
     label: "Velocity",
     value: [
       "-XX:+AlwaysPreTouch",
@@ -59,30 +62,33 @@ const FLAGS: { [key: string]: FlagType } = {
     ].join(" "),
     description: "Flags recommended for use with the Velocity proxy server.",
   },
-};
+];
+const AIKARS = FLAGS[0];
+const NONE = FLAGS[1];
+const VELOCITY = FLAGS[2];
 
 const isServerSide = typeof document === "undefined";
 
 const generateStartCommand = (
   memory: number,
-  selectedFlag: FlagType,
+  selectedFlag: Option,
   filename: string,
   guiEnabled: boolean,
   autoRestartEnabled: boolean,
-  platform: string
+  platform: Option
 ) => {
   setTimeout(resizeOutput, 0);
   let content = "";
-  const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === FLAGS.NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === FLAGS.VELOCITY ? "" : "nogui"}`;
+  const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === VELOCITY ? "" : "nogui"}`;
 
   if (autoRestartEnabled)
-    content = (platform === "windows" ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(
+    content = (platform === WINDOWS ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(
       "%%CONTENT%%",
       command
     );
-  else content = platform === "windows" ? command + "\n\npause" : command;
+  else content = platform === WINDOWS ? command + "\n\npause" : command;
 
-  content = (platform === "linux" ? "#!/bin/bash\n\n" : "@echo off\n\n") + content;
+  content = (platform === LINUX ? "#!/usr/bin/env sh\n\n" : "@echo off\n\n") + content;
 
   return content;
 };
@@ -103,24 +109,17 @@ const resizeOutput = () => {
 const StartScriptGenerator: React.FC = () => {
   const [memory, setMemory] = useState(4.0);
   const [filename, setFilename] = useState("server.jar");
-  const [selectedFlag, setSelectedFlag] = useState(FLAGS.AIKARS);
-  const [dropdownVisible, setDropdownVisible] = useState(false);
+  const [selectedFlag, setSelectedFlag] = useState(AIKARS);
   const [guiEnabled, setGuiEnabled] = useState(false);
   const [autoRestart, setAutoRestart] = useState(false);
-  const [platform, setPlatform] = useState("linux");
-  const dropdownRef = useRef(null);
+  const [platform, setPlatform] = useState(LINUX);
+  const [copySuccess, setCopySuccess] = useState(false);
+  const [downloadSuccess, setDownloadSuccess] = useState(false);
 
-  const handleClickOutside = (event: { target: EventTarget | null }) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-      setDropdownVisible(false);
-    }
-  };
-
-  const handleGreenButtonHighlight = (element: HTMLElement | null) => {
-    if (!element) return;
-    element.classList.add("success");
+  const handleGreenButtonHighlight = (setState: React.Dispatch<React.SetStateAction<boolean>>) => {
+    setState(true);
     setTimeout(function () {
-      element.classList.remove("success");
+      setState(false);
     }, 500);
   };
 
@@ -128,11 +127,11 @@ const StartScriptGenerator: React.FC = () => {
     navigator.clipboard.writeText(
       generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)
     );
-    handleGreenButtonHighlight(document.getElementById("clipboard-copy-button"));
+    handleGreenButtonHighlight(setCopySuccess);
   };
 
   const handleDownload = () => {
-    handleGreenButtonHighlight(document.getElementById("contents-download-button"));
+    handleGreenButtonHighlight(setDownloadSuccess);
     const blob = new Blob(
       [generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)],
       {
@@ -141,24 +140,18 @@ const StartScriptGenerator: React.FC = () => {
     );
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
-    link.download = "start." + (platform === "windows" ? "bat" : "sh");
+    link.download = "start." + (platform === WINDOWS ? "bat" : "sh");
     link.click();
     link.remove();
   };
 
   useEffect(() => {
     resizeOutput();
-    if (isServerSide) return;
-    document.addEventListener("mousedown", handleClickOutside);
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
   }, [memory, filename, selectedFlag, guiEnabled, autoRestart]);
 
   return (
     <div className="server-config-container">
-      <h2>Server Configuration</h2>
+      <h4>Server Configuration</h4>
       <div className="config-section">
         <label id="memory-slider-label" className="sr-only">
           Memory Usage: {memory}GB
@@ -196,46 +189,28 @@ const StartScriptGenerator: React.FC = () => {
             className={"filename-input"}
           />
         </div>
+        <div className={"config-section"}>
+          <label htmlFor="platform-dropdown">Platform:</label>
+          <Select options={PLATFORMS} value={platform} onSelect={setPlatform} />
+        </div>
         <div className="config-section">
           <label htmlFor="flags-dropdown">Flags:</label>
-          <div className="custom-dropdown" ref={dropdownRef}>
-            <div className="selected-flag" onClick={() => setDropdownVisible(!dropdownVisible)}>
-              {selectedFlag.label}
-            </div>
-            {dropdownVisible && (
-              <div className="dropdown-content">
-                {Object.values(FLAGS).map((flag) => (
-                  <div
-                    key={flag.label}
-                    className={clsx(
-                      "dropdown-item",
-                      flag === selectedFlag && "dropdown-item-selected"
-                    )}
-                    onClick={() => {
-                      setSelectedFlag(flag);
-                      setDropdownVisible(false);
-                    }}
-                  >
-                    <div className="flag-label">{flag.label}</div>
-                    <div className="flag-description">{flag.description}</div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
+          <Select options={FLAGS} value={selectedFlag} onSelect={setSelectedFlag} />
         </div>
       </div>
-      <div className="config-section">
-        <div className={"gui-container"}>
-          <label className={"margin-right--sm"}>GUI:</label>
-          <input
-            type="checkbox"
-            id="gui-toggle"
-            className="checkbox"
-            onChange={() => setGuiEnabled(!guiEnabled)}
-          />
-          <label htmlFor="gui-toggle" className="switch"></label>
-        </div>
+      <div className="config-section toggles">
+        {selectedFlag != VELOCITY && (
+          <div className={"gui-container"}>
+            <label className={"margin-right--sm"}>GUI:</label>
+            <input
+              type="checkbox"
+              id="gui-toggle"
+              className="checkbox"
+              onChange={() => setGuiEnabled(!guiEnabled)}
+            />
+            <label htmlFor="gui-toggle" className="switch"></label>
+          </div>
+        )}
         <div className={"gui-container"}>
           <label className={"margin-right--sm"}>Auto-Restart:</label>
           <input
@@ -246,20 +221,9 @@ const StartScriptGenerator: React.FC = () => {
           />
           <label htmlFor="restart-toggle" className="switch"></label>
         </div>
-
-        <div className={"platform-selector"}>
-          <label>Platform:</label>
-          <select id={"platform-select"} onChange={(event) => setPlatform(event.target.value)}>
-            <option value="linux">Linux/Mac</option>
-            <option value="windows">Windows</option>
-          </select>
-          {platform === "windows" && (
-            <p className={"windows-warning"}>For optimal performance, we recommend running Linux</p>
-          )}
-        </div>
       </div>
       <div className="config-section">
-        <label>Generated Command:</label>
+        <h4>Generated Command</h4>
         <textarea
           className={"output-command"}
           value={generateStartCommand(
@@ -273,13 +237,19 @@ const StartScriptGenerator: React.FC = () => {
           id={"output-command-text"}
           readOnly
         />
-        <div className={"copy-button"}>
-          <button id={"clipboard-copy-button"} onClick={handleCopyToClipboard}>
-            Copy to Clipboard
-          </button>
-          <button id={"contents-download-button"} onClick={handleDownload}>
-            Download
-          </button>
+        <div className="copy-button">
+          <Button
+            label="Copy to Clipboard"
+            onClick={handleCopyToClipboard}
+            id="clipboard-copy-button"
+            success={copySuccess}
+          />
+          <Button
+            label="Download"
+            onClick={handleDownload}
+            id="contents-download-button"
+            success={downloadSuccess}
+          />
         </div>
       </div>
     </div>

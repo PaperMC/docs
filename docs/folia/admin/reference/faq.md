@@ -7,7 +7,7 @@ description: Questions frequently asked by our community, answered by us!
 # FAQ
 
 ## What server types can benefit from Folia?
-Server types that naturally spread players out, 
+Server types that naturally spread players out,
 like skyblock or SMP, will benefit the most from Folia. The server
 should have a sizeable player count, too.
 
@@ -20,12 +20,12 @@ of chunk system worker threads required is reduced greatly.
 
 The following is a _very rough_ estimation based off of the testing
 done before Folia was released on the test server we ran that
-had ~330 players peak. So, it is not exact and will require further tuning - 
+had ~330 players peak. So, it is not exact and will require further tuning -
 just take it as a starting point.
 
-The total number of cores on the machine available should be 
-taken into account. Then, allocate threads for: 
-- netty IO :~4 per 200-300 players
+The total number of cores on the machine available should be
+taken into account. Then, allocate threads for:
+- netty IO: ~4 per 200-300 players
 - chunk system io threads: ~3 per 200-300 players
 - chunk system workers if pre-generated, ~2 per 200-300 players
 - There is no best guess for chunk system workers if not pre-generated, as
@@ -38,14 +38,14 @@ taken into account. Then, allocate threads for:
 
 After all of that allocation, the remaining cores on the system until 80%
 allocation (total threads allocated < 80% of cpus available) can be
-allocated to tickthreads (under global config, threaded-regions.threads). 
+allocated to tickthreads (under global config, `threaded-regions.threads`).
 
 The reason you should not allocate more than 80% of the cores is due to the
-fact that plugins or even the server may make use of additional threads 
+fact that plugins or even the server may make use of additional threads
 that you cannot configure or even predict.
 
 Additionally, the above is all a rough guess based on player count, but
-it is very likely that the thread allocation will not be ideal, and you 
+it is very likely that the thread allocation will not be ideal, and you
 will need to tune it based on usage of the threads that you end up seeing.
 
 ## What commands does Folia disable?

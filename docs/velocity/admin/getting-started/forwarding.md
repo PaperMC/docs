@@ -60,7 +60,8 @@ you're done editing `paper-global.yml`, reboot your server.
 
 :::info
 
-If you are using Paper 1.18.2 or lower, you will find these options as `settings.velocity-support.enabled`, `settings.velocity-support.secret` and `settings.velocity-support.online-mode` in the `paper.yml` file.
+If you are using Paper 1.18.2 or lower, you will find these options as `settings.velocity-support.enabled`,
+`settings.velocity-support.secret` and `settings.velocity-support.online-mode` in the `paper.yml` file.
 
 :::
 
@@ -72,7 +73,7 @@ Velocity modern forwarding with a modded server using Fabric.
 ## Configuring modern forwarding for Forge
 
 A mod called [ProxyCompatibleForge](https://modrinth.com/mod/proxy-compatible-forge) allows you to use
-Velocity modern forwarding with a modded server using Forge 1.16.5 or higher. 
+Velocity modern forwarding with a modded server using Forge 1.16.5 or higher.
 
 ## Configuring legacy BungeeCord-compatible forwarding
 

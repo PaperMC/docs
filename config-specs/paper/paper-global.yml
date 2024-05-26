@@ -81,7 +81,7 @@ collisions:
     default: "true"
     description: >-
       Collisions with boats and minecarts are often subject to client/server
-      disagreement, which may cause glitchy behaviour for players. This setting
+      disagreement, which may cause glitchy behavior for players. This setting
       attempts to mitigate this desync by sending precise locations for entities
       involved in collisions. Having this enabled will use more bandwidth;
       however, in the majority of cases, this is a worthy tradeoff
@@ -225,7 +225,7 @@ misc:
     default: "false"
     description: >-
       Whether phantoms, wandering traders, etc. should be able to spawn in
-      custom overworlds. Defaults to false in order to match vanilla behavior
+      custom overworlds. Defaults to false in order to match Vanilla behavior
   strict-advancement-dimension-check:
     default: "false"
     description: >-
@@ -305,7 +305,7 @@ proxies:
       default: "false"
       description: Whether the server should accept Velocity Modern Forwarding
     online-mode:
-      default: "false"
+      default: "true"
       description: >-
         Instructs the server how to handle player UUIDs and data when behind
         Velocity. Always set to match your proxy's online-mode setting
@@ -317,7 +317,7 @@ proxies:
         forwarding.secret file
 scoreboards:
   save-empty-scoreboard-teams:
-    default: "false"
+    default: "true"
     description: >-
       Some scoreboard plugins leave hundreds of empty scoreboard teams around,
       dramatically slowing down login times. This sets whether the server should
@@ -400,7 +400,7 @@ unsupported-settings:
   allow-permanent-block-break-exploits:
     default: "false"
     description: >-
-      Whether unbreakable blocks can be broken with vanilla exploits. This
+      Whether unbreakable blocks can be broken with Vanilla exploits. This
       includes bedrock, end portal frames, end portal blocks, and more
   allow-piston-duplication:
     default: "false"

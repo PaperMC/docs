@@ -175,11 +175,11 @@ collisions:
 command-blocks:
   permissions-level:
     default: "2"
-    description: "Default vanilla permission level for command blocks."
+    description: "Default Vanilla permission level for command blocks."
   force-follow-perm-level:
     default: "true"
     description: "Require that command blocks meet both the Bukkit permission requirements
-      and the vanilla permission level. Otherwise, only 1 of those is required."
+      and the Vanilla permission level. Otherwise, only 1 of those is required."
 entities:
   armor-stands:
     do-collision-entity-lookups:
@@ -240,13 +240,13 @@ entities:
         description: >-
           Instructs the server to allow zombies to pick up loot. If set to
           false, the probability that a zombie picks up items depends on the
-          world's difficulty (vanilla behavior)
+          world's difficulty (Vanilla behavior)
       skeleton:
         default: "false"
         description: >-
           Instructs the server to allow skeletons to pick up loot. If set to
           false, the probability that a skeleton picks up items depends on the
-          world's difficulty (vanilla behavior)
+          world's difficulty (Vanilla behavior)
     nerf-pigmen-from-nether-portals:
       default: "false"
       description: "Removes AI from pigmen spawned via nether portals "
@@ -429,9 +429,9 @@ entities:
     filtered-entity-tag-nbt-paths:
       default: "[Pos, Motion, SleepingX, SleepingY, SleepingZ]"
       description: >-
-        A list of nbt tags that will be removed from the EntityTag tag on items
+        A list of NBT tags that will be removed from the EntityTag tag on items
         which spawn entities. The format of these strings follows the same
-        format used to select nbt tags in vanilla commands. If the spawning was
+        format used to select NBT tags in Vanilla commands. If the spawning was
         directly caused by a player and the player has the minecraft.nbt.place
         permission, the filter list will be ignored. The defaults are set to
         prevent entities from spawning or moving to a place other than the
@@ -642,6 +642,11 @@ environment:
   disable-thunder:
     default: "false"
     description: Disables thunderstorms
+  locate-structures-outside-world-border:
+    default: "false"
+    description: >-
+      If the server should be able to locate structures in chunks that are outside
+      the world border.
   frosted-ice:
     delay:
       max:
@@ -660,7 +665,7 @@ environment:
     default: disabled
     description: >-
       Sets the level above which players in the nether will take void damage.
-      This is a vanilla-friendly way to restrict players from using the nether
+      This is a Vanilla-friendly way to restrict players from using the nether
       ceiling as a buildable area. Setting to disabled disables this feature
   optimize-explosions:
     default: "false"
@@ -680,7 +685,7 @@ environment:
       portal. If it can't find one in that range, it will generate a new one
   portal-search-vanilla-dimension-scaling:
     default: "true"
-    description: Whether to apply vanilla dimension scaling to portal-search-radius
+    description: Whether to apply Vanilla dimension scaling to portal-search-radius
   treasure-maps:
     enabled:
       default: "true"
@@ -693,7 +698,7 @@ environment:
         description: >-
           Overrides the loot table-configured check for undiscovered structures.
           default allows loot tables to individually determine if the map should
-          allow discovered locations in its search. All vanilla loot tables
+          allow discovered locations in its search. All Vanilla loot tables
           default to skipping discovered locations so changing this to false
           would override that behavior and force them to search discovered
           locations
@@ -923,8 +928,8 @@ scoreboards:
   use-vanilla-world-scoreboard-name-coloring:
     default: "false"
     description: >-
-      Instructs the server to use the vanilla scoreboard for player nickname
-      coloring. Useful when playing on adventure maps made for the vanilla
+      Instructs the server to use the Vanilla scoreboard for player nickname
+      coloring. Useful when playing on adventure maps made for the Vanilla
       server and client
 spawn:
   allow-using-signs-inside-spawn-protection:

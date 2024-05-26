@@ -15,7 +15,7 @@ This page is our answer to that question.
 The founder and primary developer of Velocity (Tux) has been active in developing proxy software for
 _Minecraft: Java Edition_ since 2013. They created the RedisBungee plugin, contributed to BungeeCord
 from 2014 to 2017, and also founded the Waterfall project and led it from 2016 to 2017. In fact, the
-current maintainer of Waterfall helped encourage them to start a brand new proxy from the ground up!
+current maintainer of Waterfall helped encourage them to start a brand-new proxy from the ground up!
 
 ## Leading performance
 

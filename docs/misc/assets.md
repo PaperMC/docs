@@ -22,7 +22,7 @@ You may:
   attention to the project.
 - Use the PaperMC logomark to represent Paper-Server in downloads, server selectors, and similar
   places.
-- Crop out extra transparent canvas space behind the PaperMC logomark so it fits better next to
+- Crop out extra transparent canvas space behind the PaperMC logomark, so it fits better next to
   other content.
 
 You may not:
@@ -33,7 +33,7 @@ You may not:
 - Add your own project images or branding to the PaperMC logomark.
 - Claim the logomark as your own work or use it as a representation of your own projects.
 - Sell the PaperMC logomark on its own or as part of other products without explicit permission.
-- Alter the transparency of any of the elements in the PaperMC logomark.
+- Alter the transparency of any elements within the PaperMC logomark.
 
 ![PaperMC logomark](papermc-logomark-512.png)
 

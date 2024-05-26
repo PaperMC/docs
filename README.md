@@ -12,7 +12,7 @@ How to get docs running on your local machine for development.
 ### Prerequisites
 
 - [node](https://nodejs.org)
-- [yarn](https://yarnpkg.com/getting-started/install)
+- [pnpm](https://pnpm.io/installation)
 
 ### Local Development
 
@@ -25,13 +25,13 @@ $ git clone https://github.com/PaperMC/docs
 2. Install all required dependencies.
 
 ```bash
-$ yarn
+$ pnpm install
 ```
 
-3. Start the development server
+3. Start the development server.
 
 ```bash
-$ yarn dev
+$ pnpm run dev
 ```
 
 This will start a local development server and open a browser window. The majority of changes will
@@ -41,7 +41,7 @@ your browser. Edit away!
 ### Building
 
 ```bash
-$ yarn build
+$ pnpm run build
 ```
 
 This command builds a production-ready deployment into the `build` directory. These files are ready

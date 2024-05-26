@@ -1,5 +1,5 @@
 {
-  "PAPER_JAVA_MIN": "17",
-  "PAPER_JAVA_RECOMMENDED": "21",
+  "DOCS_JAVA": "21",
+  "PAPER_JAVA_MIN": "21",
   "VELOCITY_JAVA_MIN": "17"
 }

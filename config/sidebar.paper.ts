@@ -66,6 +66,7 @@ const paper: SidebarsConfig = {
             },
             "admin/reference/system-properties",
             "admin/reference/paper-plugins",
+            "admin/reference/vanilla-command-permissions",
           ],
         },
         {
@@ -128,6 +129,12 @@ const paper: SidebarsConfig = {
             },
             {
               type: "category",
+              label: "Entity API",
+              collapsed: true,
+              items: ["dev/api/entity-api/entity-teleport", "dev/api/entity-api/display-entities"],
+            },
+            {
+              type: "category",
               label: "Component API (Adventure)",
               collapsed: true,
               items: [
@@ -138,9 +145,11 @@ const paper: SidebarsConfig = {
             },
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
+            "dev/api/commands",
             "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
+            "dev/api/lifecycle",
             "dev/api/folia-support",
             "dev/api/roadmap",
           ],

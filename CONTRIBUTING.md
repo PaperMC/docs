@@ -79,6 +79,8 @@ To maintain consistency and readability across the documentation, please adhere 
 2. **Markdown Format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
 
 3. **Heading Structure**: Use `h1` (#) for the main title, `h2` (##) for section headings, and follow this pattern for subsequent subheadings.
+   Capitalize the first letter of each word in a h1, however, only capitalize the first letter of the first word in h2 and h3 unless~
+   it is a proper noun.
 
 4. **Code Blocks**: When including code snippets or terminal commands, use fenced code blocks with the appropriate syntax highlighting.
 
@@ -89,11 +91,13 @@ To maintain consistency and readability across the documentation, please adhere 
 
 7. **Images**: Include images if necessary to illustrate concepts. Ensure the images are clear and relevant to the content.
 
-8. **Format Code**: After you've made changes, don't forget to run the formatting script with `yarn format`.
+8. **Format Code**: After you've made changes, don't forget to run the formatting script with `pnpm run format`.
 
 9. **Keep It Concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
 
 10. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
+
+11. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
 
 ## Automatic Doc Versioning
 
@@ -105,20 +109,20 @@ of a few ways:
    This component is used to embed the current version of the software into the documentation. An example of this would be:
 
    ```jsx
-   <SoftwareVersion versionType={"maj-min"}/> // E.g 1.19.2
-   <SoftwareVersion versionType={"maj"}/> // E.g 1.19
-   <SoftwareVersion versionType={"max"}/> // E.g 1.20.4
+   <SoftwareVersion versionType={"maj-min-pat"}/> // e.g. 1.19.2
+   <SoftwareVersion versionType={"maj-min"}/> // e.g. 1.19
+   <SoftwareVersion versionType={"maj"}/> // e.g. 1
 
-   // You can set the project name to be used for the versioning:
-   <SoftwareVersion versionType={"maj-min"} project={"velocity"}/> // Project defaults to Paper
+   // You can set the project name to be used for the versioning (defaults to paper):
+   <SoftwareVersion versionType={"maj-min-pat"} project={"velocity"}/> // e.g. 3.3.0-SNAPSHOT
    ```
 
-2. `VersionedJavaDocLink` component
+2. `Javadoc` component
 
-   This component is used to embed a link to the current version of the JavaDocs. An example of this would be:
+   This component is used to embed a link to the current version of the corresponding Javadoc. An example of this would be:
 
    ```jsx
-   <VersionedJavaDocLink target={"/org/bukkit/event/Event.html"}>here</VersionedJavaDocLink>
+   <Javadoc name={"org.bukkit.event.Event"}>here</Javadoc>
    // The project can also be set here, and defaults to Paper
    ```
 
@@ -133,24 +137,24 @@ of a few ways:
    version: '1.0'
    main: io.papermc.testplugin.TestPlugin
    description: Paper Test Plugin
-   api-version: '%%_MAJ_MC_%%'
+   api-version: '%%_MAJ_MIN_PAT_MC_%%'
    bootstrapper: io.papermc.testplugin.TestPluginBootstrap
    loader: io.papermc.testplugin.TestPluginLoader
    ```⠀
    </VersionFormattedCode>
 
    // The possible placeholders are:
-   %%_MAJ_MC_%%  - Major Paper Version (E.g. 1.20)
-   %%_MAJ_MIN_MC_%% - Major-Minor Paper Version (E.g. 1.20.4)
-   %%_MAJ_VEL_%% - Major Velocity Version (E.g. 3.3)
-   %%_MAJ_MIN_VEL_%% - Major-Minor Velocity Version (E.g. 3.3.0)
+   %%_MAJ_MIN_MC_%%  - Major-Minor Paper Version (E.g. 1.20)
+   %%_MAJ_MIN_PAT_MC_%% - Major-Minor-Patch Paper Version (E.g. 1.20.4)
+   %%_MAJ_MIN_VEL_%% - Major Velocity Version (E.g. 3.1.0)
+   %%_MAJ_MIN_PAT_VEL_%% - Major-Minor-Patch Velocity Version (E.g. 3.1.1-SNAPSHOT)
    ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
-for older versions. This is done by using yarn's docusaurus version command:
+for older versions. This is done by using Docusaurus's `version` command:
 
 ```bash
-yarn docusaurus docs:version:paper "1.20"
+pnpm docusaurus docs:version:paper "1.20"
 ```
 
 ## Magic Value Handling
@@ -161,7 +165,7 @@ multiple places, and if they change, it is important to change them in all place
 our `Property` component to embed these values into the documentation. An example of this would be:
 
 ```jsx
-<Property name="PAPER_JAVA_RECOMMENDED" />
+<Property name="PAPER_JAVA_MIN" />
 ```
 
 This will embed the value of the property into the documentation, and if it changes, it will be changed in all places.

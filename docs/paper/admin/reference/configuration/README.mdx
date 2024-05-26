@@ -4,11 +4,11 @@ slug: /reference/configuration
 
 # Paper Configuration
 
-import ConfigurationStructureDiagram from '@site/src/components/config/ConfigurationStructureDiagram';
+import ConfigurationStructureDiagram from "@site/src/components/config/ConfigurationStructureDiagram";
 
 ---
 
-## Paper Configuration Files
+## Paper configuration files
 
 :::info
 
@@ -19,20 +19,20 @@ If this is not the case, they offer a brief explanation to what they are.
 
 <ConfigurationStructureDiagram/>
 
-## Per World Configuration
+## Per-world configuration
 
 One of the most powerful yet least understood features of the Paper configuration is setting
 configuration options per world. While you can not override every config option per world,
 everything stored within `paper-world-defaults.yml` can be.
 
-### Default Values
+### Default values
 
 Paper sets no per-world overrides out of the box, storing all default values in
 `config/paper-world-defaults.yml`. Everything in this file can be overridden per world but isn't by
 default. Changing something in `paper-world-defaults.yml` will change the value for all worlds where
 you have not manually overridden it.
 
-### Per World Values
+### Per-world values
 
 To set a value for a specific world, edit `paper-world.yml` within the world folder. For example, if
 you wanted to disable `spawn.keep-spawn-loaded` for a world named `resource`, you would edit
@@ -99,7 +99,7 @@ This example demonstrates the concept of inheritance. For each world, this is th
 configuration which will be applied:
 
 | Configuration Key                                           | world  | world_nether | world_the_end | resource_world |
-| ----------------------------------------------------------- | ------ | ------------ | ------------- | -------------- |
+|-------------------------------------------------------------|--------|--------------|---------------|----------------|
 | `entities.spawning.spawn-limits.ambient`                    | `15`   | `15`         | `15`          | `15`           |
 | `entities.spawning.spawn-limits.axolotls`                   | `5`    | `5`          | `5`           | `8`            |
 | `entities.spawning.spawn-limits.creature`                   | `10`   | `10`         | `10`          | `15`           |

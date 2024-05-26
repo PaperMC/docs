@@ -6,8 +6,16 @@ import footer from "./config/footer.config";
 import { env } from "process";
 import { Config } from "@docusaurus/types";
 import { Options } from "@docusaurus/plugin-content-docs";
+import {
+  AUTHOR_FALLBACK,
+  AuthorData,
+  commitCache,
+  cacheAuthorData,
+  getFileCommitHashSafe,
+} from "./src/util/authorUtils";
 
 const preview = env.VERCEL_ENV === "preview";
+cacheAuthorData(preview || process.env.NODE_ENV === "development");
 
 const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
 
@@ -37,6 +45,7 @@ const config: Config = {
   baseUrlIssueBanner: false,
   clientModules: [
     require.resolve("./src/css/custom.css"),
+    require.resolve("./src/css/ui.scss"),
     require.resolve("@fontsource/jetbrains-mono/index.css"),
   ],
 
@@ -80,6 +89,30 @@ const config: Config = {
       headingIds: false,
     },
     format: "detect",
+    parseFrontMatter: async (params) => {
+      const result = await params.defaultParseFrontMatter(params);
+      let author: AuthorData = {
+        ...AUTHOR_FALLBACK,
+      };
+      if (process.env.NODE_ENV !== "development") {
+        const data = await getFileCommitHashSafe(params.filePath);
+        if (data) {
+          const username = commitCache.get(data.commit);
+          author = {
+            commit: data.commit,
+            username: username ?? AUTHOR_FALLBACK.username,
+          };
+        }
+      }
+
+      return {
+        ...result,
+        frontMatter: {
+          ...result.frontMatter,
+          author: author,
+        },
+      };
+    },
   },
 
   themes: [
@@ -189,7 +222,8 @@ const config: Config = {
       },
     ],
     "@docusaurus/plugin-debug",
-    "@gracefullight/docusaurus-plugin-vercel-analytics",
+    "@docusaurus/plugin-vercel-analytics",
+    "docusaurus-plugin-sass",
   ],
 
   themeConfig: {

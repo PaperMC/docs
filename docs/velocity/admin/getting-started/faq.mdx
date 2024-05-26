@@ -31,7 +31,7 @@ natively by the latest versions of Velocity.
 
 There are a few common causes for why you can't connect to the server.
 
-### Basic Troubleshooting
+### Basic troubleshooting
 
 As a first step, you should verify:
 
@@ -39,7 +39,7 @@ As a first step, you should verify:
 - that the proxy is started
 - that the server and proxy are bound to the appropriate port and IP
 
-### Improper Player Information Forwarding Errors
+### Improper player information forwarding errors
 
 ```
 Can't connect to server lobby: If you wish to use IP forwarding, please enable it in your Bungeecord config as well!
@@ -53,18 +53,16 @@ These errors are result of improper configuration. See
 [Player Information Forwarding](forwarding.md) to learn how to properly set up player information
 forwarding.
 
-### Improper Modern Player Information Forwarding
-
 ```
 Can't connect to server lobby: This server requires you to connect with Velocity.
 ```
 
-This error is a result of enabling Velocity modern forwarding on your backend server but not
+This error is a result of enabling Velocity modern forwarding on your backend server, but not
 enabling it in Velocity. To fix this error, ensure that you have set up the correct player
 information forwarding method on the proxy. See [Player Information Forwarding](forwarding.md) for
 more information.
 
-### Invalid Payload Register
+### Invalid payload `REGISTER`
 
 ```
 [server connection] player1 -> hub has connected
@@ -73,9 +71,10 @@ more information.
 
 This error typically occurs on Spigot-based servers when someone connects with a modded client. You
 can fix this issue if you use Paper (or a fork of Paper) 1.12.2 or above by adding the startup flag
-`-Dpaper.disableChannelLimit=true` to the server's startup flags and restarting the server.
+[`-Dpaper.disableChannelLimit=true`](/paper/reference/system-properties#paperdisablechannellimit)
+to the server's startup flags and restarting the server.
 
-### Argument type identifier XXX unknown
+### Argument type identifier unknown
 
 ```
 Argument type identifier <namespace>:<name> unknown.
@@ -86,7 +85,7 @@ Fabric 1.16+ and above, update to at least Velocity 1.1.2 and install
 [CrossStitch](https://www.curseforge.com/minecraft/mc-mods/crossstitch). (If you are running any
 other kind of modded server and have it working with Velocity, let us know!)
 
-If you receive this message but run a vanilla server,
+If you receive this message but run a Vanilla server,
 [please report a bug to the Velocity issue tracker](https://github.com/PaperMC/Velocity/issues/new).
 
 ### Read time out while switching to a Forge server

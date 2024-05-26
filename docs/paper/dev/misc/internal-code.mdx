@@ -39,12 +39,21 @@ However, if you are unable to use `paperweight-userdev`, you can use reflection.
 Reflection is a way to access code at runtime. This allows you to access code that may not be available at compile time.
 Reflection is often used to access internal code across multiple versions. However, reflection does come
 with performance impacts if used improperly. For example, if you are accessing a method or field more than once,
-you should cache the `Field`/`Method` to prevent the performance impact of looking up the field/method each time.
+you should cache the <Javadoc name={"java.lang.reflect.Field"} project={"java"}>`Field`</Javadoc>/
+<Javadoc name={"java.lang.reflect.Method"} project={"java"}>`Method`</Javadoc> to prevent the performance
+impact of looking up the field/method each time.
 
 The internal CraftBukkit code is relocated to `org.bukkit.craftbukkit.<version>` unless you run a Mojang-mapped version
 of Paper. This is unlikely to be the case in most production environments. This means that any attempts to reflect must
 include the version. For example, `org.bukkit.craftbukkit.v1_20_R2.CraftServer` is the full class and package name
 for the CraftServer class in version 1.20.2. You can access these classes easily with some reflection utilities.
+
+:::warning[Removal of relocation in 1.20.5]
+
+As of 1.20.5, the versioned relocation of the CraftBukkit package was removed and
+CraftBukkit packages are now located in `org.bukkit.craftbukkit` and not in `org.bukkit.craftbukkit.<version>`.
+
+:::
 
 ```java
 private static final String CRAFTBUKKIT_PACKAGE = Bukkit.getServer().getClass().getPackage().getName();
@@ -65,6 +74,13 @@ it makes the code easier to understand.
 
 ### Mojang-Mapped Servers
 
+:::info[Mojang-mapped runtime as of 1.20.5]
+
+As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+For more information, see the [plugin remapping](./project-setup#plugin-remapping) section and [userdev](./userdev#1205-and-beyond) documentation covering these changes.
+
+:::
+
 Running a Mojang-Mapped (moj-map) server is an excellent way to streamline your processes because you can develop using
 the same mappings that will be present at runtime. This eliminates the need for remapping in your compilation. If you
 are creating custom plugins for your server, we highly recommend running a moj-map server. It simplifies debugging and
@@ -80,10 +96,10 @@ with one of the following methods:
 
 <VersionFormattedCode language={"java"}>
 ```
-// Example value: %%_MAJ_MIN_MC_%%
+// Example value: %%_MAJ_MIN_PAT_MC_%%
 String minecraftVersion = Bukkit.getServer().getMinecraftVersion();
 
-// Example value: %%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT
+// Example value: %%_MAJ_MIN_PAT_MC_%%-R0.1-SNAPSHOT
 String bukkitVersion = Bukkit.getServer().getBukkitVersion();
 
 // Example value for 1.20.1: 3465
@@ -93,7 +109,7 @@ int dataVersion = Bukkit.getUnsafe().getDataVersion();
 
 :::danger[Parsing the version]
 
-You should not parse the version from the package name of classes. This is because CraftBukkit may not be relocated
-in the future.
+Parsing the version from the package name of classes is no longer possible as of 1.20.5 as Paper stopped relocating the CraftBukkit package.
+See the [reflection](#reflection) section for more information.
 
 :::

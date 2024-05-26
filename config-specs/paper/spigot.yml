@@ -65,7 +65,7 @@ messages:
       than the client version.
 
       The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines. Additionally, it replaces {0} with "%%_MAJ_MIN_MC_%%" (the current server
+      newlines. Additionally, it replaces {0} with "%%_MAJ_MIN_PAT_MC_%%" (the current server
       version)
   outdated-server:
     default: "Outdated server! I'm still on {0}"
@@ -74,7 +74,7 @@ messages:
       than the client version.
 
       The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines. Additionally, it replaces {0} with "%%_MAJ_MIN_MC_%%" (the current server
+      newlines. Additionally, it replaces {0} with "%%_MAJ_MIN_PAT_MC_%%" (the current server
       version)
   restart:
     default: Server is restarting
@@ -394,7 +394,7 @@ world-settings:
       bamboo-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for bamboo, where vanilla speed is
+          The growth modifier percentage for bamboo, where Vanilla speed is
           100%. This option is unable to disable growth at 0%, instead
           defaulting to 100%
 
@@ -402,7 +402,7 @@ world-settings:
       beetroot-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for beetroot, where vanilla speed is
+          The growth modifier percentage for beetroot, where Vanilla speed is
           100%. This option is unable to disable growth at 0%, instead
           defaulting to 100%
 
@@ -410,7 +410,7 @@ world-settings:
       cactus-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for cactus, where vanilla speed is
+          The growth modifier percentage for cactus, where Vanilla speed is
           100%. This option is unable to disable growth at 0, instead defaulting
           to 100%
 
@@ -418,7 +418,7 @@ world-settings:
       cane-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for sugarcane, where vanilla speed is
+          The growth modifier percentage for sugarcane, where Vanilla speed is
           100%. This option is unable to disable growth at 0%, instead
           defaulting to 100%
 
@@ -426,7 +426,7 @@ world-settings:
       carrot-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for carrots, where vanilla speed is
+          The growth modifier percentage for carrots, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -434,7 +434,7 @@ world-settings:
       cavevines-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for cave-vines, where vanilla speed is
+          The growth modifier percentage for cave-vines, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -442,7 +442,7 @@ world-settings:
       cocoa-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for cocoa beans, where vanilla speed is
+          The growth modifier percentage for cocoa beans, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -450,7 +450,7 @@ world-settings:
       glowberry-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for glow-berries, where vanilla speed
+          The growth modifier percentage for glow-berries, where Vanilla speed
           is 100%. This option is unable to disable growth, instead defaulting
           to 100%
 
@@ -458,14 +458,14 @@ world-settings:
       kelp-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for kelp, where vanilla speed is 100%.
+          The growth modifier percentage for kelp, where Vanilla speed is 100%.
           This option is unable to disable growth, instead defaulting to 100%
 
           The maximum effectiveness is roughly 715%
       melon-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for melons, where vanilla speed is
+          The growth modifier percentage for melons, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -473,7 +473,7 @@ world-settings:
       mushroom-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for mushrooms, where vanilla speed is
+          The growth modifier percentage for mushrooms, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -481,7 +481,7 @@ world-settings:
       netherwart-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for netherwart, where vanilla speed is
+          The growth modifier percentage for netherwart, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -489,7 +489,7 @@ world-settings:
       pitcherplant-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for pitcherplants, where vanilla speed
+          The growth modifier percentage for pitcherplants, where Vanilla speed
           is 100%. This option is unable to disable growth, instead defaulting
           to 100%
 
@@ -497,7 +497,7 @@ world-settings:
       potato-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for potatoes, where vanilla speed is
+          The growth modifier percentage for potatoes, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -505,7 +505,7 @@ world-settings:
       pumpkin-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for pumpkins, where vanilla speed is
+          The growth modifier percentage for pumpkins, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -513,7 +513,7 @@ world-settings:
       sapling-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for saplings, where vanilla speed is
+          The growth modifier percentage for saplings, where Vanilla speed is
           100%. This option is unable to disable growth, instead defaulting to
           100%
 
@@ -521,7 +521,7 @@ world-settings:
       sweetberry-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for sweet-berries, where vanilla speed
+          The growth modifier percentage for sweet-berries, where Vanilla speed
           is 100%. This option is unable to disable growth, instead defaulting
           to 100%
 
@@ -529,7 +529,7 @@ world-settings:
       torchflower-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for torchflowers, where vanilla speed
+          The growth modifier percentage for torchflowers, where Vanilla speed
           is 100%. This option is unable to disable growth, instead defaulting
           to 100%
 
@@ -537,7 +537,7 @@ world-settings:
       twistingvines-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for twisting-vines, where vanilla speed
+          The growth modifier percentage for twisting-vines, where Vanilla speed
           is 100%. This option is unable to disable growth, instead defaulting
           to 100%
 
@@ -545,14 +545,14 @@ world-settings:
       vine-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for vines, where vanilla speed is 100%.
+          The growth modifier percentage for vines, where Vanilla speed is 100%.
           This option is unable to disable growth, instead defaulting to 100%
 
           The maximum effectiveness is 400%
       weepingvines-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for weeping-vines, where vanilla speed
+          The growth modifier percentage for weeping-vines, where Vanilla speed
           is 100%. This option is unable to disable growth, instead defaulting
           to 100%
 
@@ -560,7 +560,7 @@ world-settings:
       wheat-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for wheat, where vanilla speed is 100%.
+          The growth modifier percentage for wheat, where Vanilla speed is 100%.
           This option is unable to disable growth, instead defaulting to 100%
 
           The maximum effectiveness is 5100%
@@ -624,7 +624,7 @@ world-settings:
         default: "3.0"
         description: >-
           The range, in blocks, that exp orbs will combine at on initial spawn.
-          This behavior is not present in vanilla and doesn't impact the usual
+          This behavior is not present in Vanilla and doesn't impact the usual
           merge range once spawned. Set to 0 to disable.
       item:
         default: "2.5"

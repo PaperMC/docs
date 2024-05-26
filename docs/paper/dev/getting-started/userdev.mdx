@@ -18,11 +18,18 @@ check out this [example plugin](https://github.com/PaperMC/paperweight-test-plug
 :::
 
 ## Why this is useful
-The Paper server jars we provide on the downloads page through the API are **paperclip** jars. These
+The Paper server JARs we provide on the downloads page through the API are **paperclip** JARs. These
 use Spigot's mappings, which are essentially some type names, but fully obfuscated fields and methods.
 This can make it hard to work with in a development environment. This plugin lets you use fully deobfuscated
 types, names, and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
 server.
+
+:::caution[1.20.5]
+
+As of Minecraft version 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+See [here](#1205-and-beyond) for more details.
+
+:::
 
 :::caution
 
@@ -35,7 +42,7 @@ use non-obfuscated names in reflection.
 Add the plugin to your `build.gradle.kts` file.
 ```kotlin
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.5.12" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
+    id("io.papermc.paperweight.userdev") version "1.7.1" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
 }
 ```
 
@@ -66,7 +73,7 @@ file.
 ```
 dependencies {
     // Other Dependencies
-    paperweight.paperDevBundle("%%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT")
+    paperweight.paperDevBundle("%%_MAJ_MIN_PAT_MC_%%-R0.1-SNAPSHOT")
 }
 ```
 </VersionFormattedCode>
@@ -77,22 +84,22 @@ You should remove any dependency on the Paper API, as the dev bundle includes th
 
 :::
 
-## Gradle Tasks
+## Gradle tasks
 
-### reobfJar
+### `reobfJar`
 
-This task creates a plugin jar that is re-obfuscated to Spigot's runtime mappings.
+This task creates a plugin JAR that is re-obfuscated to Spigot's runtime mappings.
 This means it will work on standard Paper servers.
 
-The output will be inside the `build/libs` folder. The jar whose filename includes `-dev`
-is mojang-mapped (not re-obfuscated) and will not work on most servers.
+The output will be inside the `build/libs` folder. The JAR whose filename includes `-dev`
+is Mojang-mapped (not re-obfuscated) and will not work on most servers.
 
 :::info[Shadow]
 
 If you have the shadow Gradle plugin applied in your build script, **paperweight-userdev** will
-detect that and use the shaded jar as the input for the `reobfJar` task.
+detect that and use the shaded JAR as the input for the `reobfJar` task.
 
-The `-dev-all.jar` file in `build/libs` is the shaded, but not re-obfuscated jar.
+The `-dev-all.jar` file in `build/libs` is the shaded, but not re-obfuscated JAR.
 
 :::
 
@@ -102,4 +109,41 @@ tasks.assemble {
     dependsOn(reobfJar)
 }
 ```
+
+## 1.20.5 and beyond
+
+As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+Additionally, CraftBukkit classes will no longer be relocated into a versioned package.
+This requires plugins to be deobfuscated before loading when necessary.
+
+Most of this process is done automatically by paperweight but there are some important things to know when using NMS from now on.
+
+### Default mappings assumption
+* By default, all Spigot/Bukkit plugins will be assumed to be Spigot-mapped if they do not specify their mappings namespace in the manifest. Conversely, all Paper plugins will be assumed to be Mojang-mapped if they do not specify their mappings namespace in the manifest.
+* Spigot-mapped plugins will need to be deobfuscated on first load, Mojang-mapped plugins will not.
+
+### Mojang mappings
+
+If you want to map your plugin with Mojang mappings, you need to add the following code to your build script:
+
+:::note
+
+You only have to change this setting if you are using Bukkit/Spigot plugins. Paper plugins are already assumed to be Mojang-mapped.
+
+:::
+
+```kotlin title="build.gradle.kts"
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
+```
+
+Additionally, you need to remove all `dependsOn(reobfJar)` lines.
+
+### Spigot mappings
+
+If you are using Paper plugins but want to explicitly use Spigot mappings, you need to change the property to:
+
+```kotlin title="build.gradle.kts"
+paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
+```
+
 

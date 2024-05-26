@@ -1,7 +1,11 @@
 ---
 slug: /dev/project-setup
-description: Step-by-step instructions on how to setup a plugin development environment.
+description: Step-by-step instructions on how to set up a plugin development environment.
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 
 # Paper Project Setup
 
@@ -16,7 +20,7 @@ Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from
 ## Creating a new project
 
 Open your IDE and select the option to create a new project.
-In Intellij, you will get the option to select the type of project you want to create - select `New Project`.
+In IntelliJ, you will get the option to select the type of project you want to create - select `New Project`.
 Select `Gradle - Kotlin DSL` and click `Create`.
 
 You will land into the `build.gradle.kts` file where you can add your dependencies.
@@ -33,11 +37,11 @@ repositories {
 }
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:%%_MAJ_MIN_MC_%%-R0.1-SNAPSHOT")
+    compileOnly("io.papermc.paper:paper-api:%%_MAJ_MIN_PAT_MC_%%-R0.1-SNAPSHOT")
 }
 
 java {
-    toolchain.languageVersion.set(JavaLanguageVersion.of(17))
+    toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 ```
 </VersionFormattedCode>
@@ -104,7 +108,8 @@ This allows for a unique package name for every plugin.
 
 ### The _main_ class
 
-The main class is the entry point to your plugin and will be the only class that extends `JavaPlugin` in your plugin.
+The main class is the entry point to your plugin and will be the only class that extends
+<Javadoc name={"org.bukkit.plugin.java.JavaPlugin"}>`JavaPlugin`</Javadoc> in your plugin.
 This is an example of what your `ExamplePlugin` class could look like:
 
 ```java
@@ -187,6 +192,100 @@ If everything went well, you should see something like this:
 
 ![](assets/paper-plugin-overview.png)
 
+## Plugin remapping
+
+As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+If you are using Spigot/Bukkit plugins, your plugin will be assumed to be Spigot-mapped.
+This means that the server will have to deobfuscate and remap the plugin JAR when it's loaded for the first time.
+
+:::info
+
+`paperweight-userdev` already sets this attribute automatically. For more information see the [userdev](./userdev) documentation.
+
+:::
+
+### Mojang mappings
+
+To tell the server that your plugin is Mojang-mapped, you need to add the following code to your build script:
+
+:::note[Paper plugins]
+
+If you are using Paper plugins, this step is not needed as plugins will be assumed to be Mojang-mapped.
+
+:::
+
+<Tabs groupId="author-front-matter">
+  <TabItem value="gradle" label="Gradle Kotlin DSL" default>
+    ```kotlin
+    tasks.jar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "mojang"
+      }
+    }
+    // if you have shadowJar configured
+    tasks.shadowJar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "mojang"
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem value="maven" label="Maven POM">
+    ```xml
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.4.1</version>
+      <configuration>
+        <archive>
+          <manifestEntries>
+            <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
+          </manifestEntries>
+        </archive>
+      </configuration>
+    </plugin>
+    ```
+  </TabItem>
+</Tabs>
+
+### Spigot mappings
+
+If you explicitly want to tell the server that your plugin is Spigot-mapped, you need to add the following code to your build script:
+
+<Tabs groupId="author-front-matter">
+  <TabItem value="gradle" label="Gradle Kotlin DSL">
+    ```kotlin
+    tasks.jar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "spigot"
+      }
+    }
+    // if you have shadowJar configured
+    tasks.shadowJar {
+      manifest {
+        attributes["paperweight-mappings-namespace"] = "spigot"
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem value="maven" label="Maven POM">
+    ```xml
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-jar-plugin</artifactId>
+      <version>3.4.1</version>
+      <configuration>
+        <archive>
+          <manifestEntries>
+            <paperweight-mappings-namespace>spigot</paperweight-mappings-namespace>
+          </manifestEntries>
+        </archive>
+      </configuration>
+    </plugin>
+    ```
+  </TabItem>
+</Tabs>
+
 ## Conclusion
 
 You should now have a project set up with Paper as a dependency.
@@ -202,6 +301,6 @@ It will automatically download a Paper server and run it for you.
 :::info
 
 If you are using IntelliJ, you can use the Gradle GUI `Build` menu to compile your plugin - found on the top right of your IDE.
-The output jar of your plugin will be in the `build/libs` directory.
+The output JAR of your plugin will be in the `build/libs` directory.
 
 :::

@@ -8,7 +8,7 @@ import TabItem from '@theme/TabItem';
 
 # Creating Your First Plugin
 
-It is very simple to create a plugin for Velocity. This section will teach you how to setup your
+It is very simple to create a plugin for Velocity. This section will teach you how to set up your
 IDE, your plugin identifiers, and give you an introduction to the basics of the Velocity API.
 
 ## Before you continue...
@@ -41,17 +41,17 @@ Now we have created our project, we need configure our build system.
 
 ### Dependency
 
-| Group ID              | Artifact ID    | Version                                                          |
-|-----------------------|----------------|------------------------------------------------------------------|
-| `com.velocitypowered` | `velocity-api` | <VersionFormattedCode>`%%_MAJ_MIN_VEL_%%`</VersionFormattedCode> |
+| Group ID              | Artifact ID    | Version                                                              |
+|-----------------------|----------------|----------------------------------------------------------------------|
+| `com.velocitypowered` | `velocity-api` | <VersionFormattedCode>`%%_MAJ_MIN_PAT_VEL_%%`</VersionFormattedCode> |
 
 ### Javadocs
 
-Javadocs are available at [jd.papermc.io/velocity/3.0.0](https://jd.papermc.io/velocity/3.0.0).
+Javadocs are available at <Javadoc project={"velocity"}>jd.papermc.io</Javadoc>.
 
 ## Set up your build system
 
-You will need to setup a build system before you continue. While it is possible to write Velocity
+You will need to set up a build system before you continue. While it is possible to write Velocity
 plugins without one, having a build system will make your life a lot less difficult.
 
 How to set up a build system is outside the scope of this page, but you can look at your build
@@ -77,7 +77,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
         <dependency>
             <groupId>com.velocitypowered</groupId>
             <artifactId>velocity-api</artifactId>
-            <version>%%_MAJ_MIN_VEL_%%</version>
+            <version>%%_MAJ_MIN_PAT_VEL_%%</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -98,8 +98,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly("com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%")
-    annotationProcessor("com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%")
+    compileOnly("com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%")
+    annotationProcessor("com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%")
 }
 ```
 </VersionFormattedCode>
@@ -117,8 +117,8 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%'
-    annotationProcessor 'com.velocitypowered:velocity-api:%%_MAJ_MIN_VEL_%%'
+    compileOnly 'com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%'
+    annotationProcessor 'com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%'
 }
 ```
 </VersionFormattedCode>
@@ -196,6 +196,6 @@ It will automatically download a Velocity server and run it for you.
 :::info
 
 If you are using IntelliJ, you can use the Gradle GUI `Build` menu to compile your plugin - found on the top right of your IDE.
-The output jar of your plugin will be in the `build/libs` directory.
+The output JAR of your plugin will be in the `build/libs` directory.
 
 :::

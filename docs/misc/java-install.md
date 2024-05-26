@@ -129,10 +129,16 @@ prompt you to update like this:
 ![Pterodactyl Automatic Prompt](pterodactyl-prompt.png)
 
 If this does not show up for you, the Java version can be manually changed. Navigate to the
-"Startup" tab of your server, select `ghcr.io/pterodactyl/yolks:java_17` from the "Docker Image"
+"Startup" tab of your server, select `Java 21` from the "Docker Image"
 dropdown as shown in the image below.
 
 ![Pterodactyl Manual Java Version Change](pterodactyl-manual.png)
+
+:::note
+
+If you don't see `Java 21` in the dropdown, an administrator account is required to update the Paper egg.
+
+:::
 
 The Verifying Installation section does not apply for Pterodactyl.
 

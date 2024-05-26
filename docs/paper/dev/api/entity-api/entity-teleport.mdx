@@ -9,8 +9,15 @@ Entities can be instantaneously teleported to specific positions, synchronously 
 <Javadoc name={"org.bukkit.entity.Entity#teleport(org.bukkit.Location)"}>`teleport`</Javadoc> and
 <Javadoc name={"org.bukkit.entity.Entity#teleportAsync(org.bukkit.Location)"}>`teleportAsync`</Javadoc> API.
 
+:::danger[Performance]
+
+It is strongly recommended to use the `teleportAsync` API, as it avoids doing synchronous chunk
+loads, which put a lot of stress on the server's main thread - hurting overall performance.
+
+:::
+
 ```java
-entity.teleport(location); // teleports the entity synchronously
+entity.teleport(location); // teleports the entity synchronously, NEEDS to be run on the main thread!
 
 entity.teleportAsync(location).thenAccept(success -> { // teleports the entity asynchronously
     // this code is ran when the teleport completes
@@ -52,7 +59,7 @@ All available teleport flags can be found in the <Javadoc name={"io.papermc.pape
 Teleport a player relatively, preventing velocity from being reset in the X, Y and Z axes.
 
 ```java
-player.teleport(
+player.teleportAsync(
     location,
     TeleportFlag.Relative.X,
     TeleportFlag.Relative.Y,
@@ -66,5 +73,5 @@ Teleport an entity with the <Javadoc name={"io.papermc.paper.entity.TeleportFlag
 allowing its passengers to be transferred with the entity.
 
 ```java
-entity.teleport(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
+entity.teleportAsync(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
 ```

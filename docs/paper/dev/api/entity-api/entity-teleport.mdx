@@ -11,17 +11,24 @@ Entities can be instantaneously teleported to specific positions, synchronously 
 
 :::danger[Performance]
 
-It is strongly recommended to use the `teleportAsync` API, as it avoids doing synchronous chunk
-loads, which put a lot of stress on the server's main thread - hurting overall performance.
+It is strongly recommended to use the `teleportAsync` API in most cases, as it avoids doing
+synchronous chunk loads, which put a lot of stress on the server's main thread - hurting
+overall performance.
+
+However, if you know that the chunk you're teleporting into is loaded, _it is recommended
+to use `teleport`_ to prevent the parallelization overhead.
 
 :::
 
 ```java
-entity.teleport(location); // teleports the entity synchronously, NEEDS to be run on the main thread!
+entity.teleport(location); // loads chunks synchronously and teleports the entity
 
-entity.teleportAsync(location).thenAccept(success -> { // teleports the entity asynchronously
+entity.teleportAsync(location).thenAccept(success -> { // loads chunks asynchronously and teleports the entity
     // this code is ran when the teleport completes
     // the Future is completed on the main thread, so it is safe to use the API here
+
+    // you should NEVER call .get()/.join() on the Future on the main thread
+    // it WILL deadlock your server if the chunk is not loaded!
 
     if (success) {
         // the entity was teleported successfully!
@@ -59,7 +66,7 @@ All available teleport flags can be found in the <Javadoc name={"io.papermc.pape
 Teleport a player relatively, preventing velocity from being reset in the X, Y and Z axes.
 
 ```java
-player.teleportAsync(
+player.teleport(
     location,
     TeleportFlag.Relative.X,
     TeleportFlag.Relative.Y,
@@ -73,5 +80,5 @@ Teleport an entity with the <Javadoc name={"io.papermc.paper.entity.TeleportFlag
 allowing its passengers to be transferred with the entity.
 
 ```java
-entity.teleportAsync(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
+entity.teleport(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
 ```

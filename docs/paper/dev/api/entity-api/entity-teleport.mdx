@@ -24,9 +24,6 @@ entity.teleportAsync(location).thenAccept(success -> { // loads chunks asynchron
     // this code is ran when the teleport completes
     // the Future is completed on the main thread, so it is safe to use the API here
 
-    // 
-    // it WILL deadlock your server if the chunk is not loaded!
-
     if (success) {
         // the entity was teleported successfully!
     }

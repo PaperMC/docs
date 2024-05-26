@@ -5,44 +5,13 @@ description: The display entity API and how to use it.
 
 # Display Entities
 
-Added in 1.19.4, [display entities](https://minecraft.wiki/w/Display) are a way to display various
-things in the world, like blocks, items and text.
+Added in 1.19.4, [display entities](https://minecraft.wiki/w/Display) are a powerful way to display
+various things in the world, like blocks, items and text.
 
 By default, these entities have no hitbox, don't move, make sounds or take damage,
 making them the perfect for all kinds of applications, like holograms.
 
 ## Types
-
-:::tip[Decorative displays]
-
-Use the <Javadoc name={"org.bukkit.entity.Entity#setVisibleByDefault(boolean)"}>`Entity#setVisibleByDefault()`</Javadoc>
-and <Javadoc name={"org.bukkit.entity.Player#showEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#showEntity()`</Javadoc>/
-<Javadoc name={"org.bukkit.entity.Player#hideEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#hideEntity()`</Javadoc>
-methods to make displays visible to only specific players.
-
-Displays can also be added as passengers to entities with the
-<Javadoc name={"org.bukkit.entity.Entity#addPassenger(org.bukkit.entity.Entity)"}>`Entity#addPassenger()`</Javadoc>/
-<Javadoc name={"org.bukkit.entity.Entity#removePassenger(org.bukkit.entity.Entity)"}>`Entity#removePassenger()`</Javadoc>
-methods, useful for making styled name tags!
-
-If you plan to use the display only temporarily, make sure to remove it with
-<Javadoc name={"org.bukkit.entity.Entity#remove()"}>`Entity#remove()`</Javadoc> afterward.
-
-```java
-TextDisplay display = player.getWorld().spawn(player.getLocation(), TextDisplay.class, entity -> {
-    // ...
-
-    entity.setVisibleByDefault(false); // hide it for everyone
-    entity.setPersistent(false); // don't save the entity, it's temporary
-});
-
-player.addPassenger(display); // mount it on top of the player's head
-player.showEntity(plugin, display); // show it to the player
-// ...
-display.remove(); // done with the entity
-```
-
-:::
 
 ### Text
 
@@ -231,3 +200,43 @@ Bukkit.getScheduler().runTaskTimer(plugin, task -> {
 ```
 
 ![Interpolation example](./assets/display-interp.gif)
+
+## Use cases
+
+Displays have many different use cases, ranging from stationary decoration to complex animation.
+
+A popular, simple use case is to make a decoration that's visible to only specific players,
+which can be achieved using standard entity API - <Javadoc name={"org.bukkit.entity.Entity#setVisibleByDefault(boolean)"}>`Entity#setVisibleByDefault()`</Javadoc>
+and <Javadoc name={"org.bukkit.entity.Player#showEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#showEntity()`</Javadoc>/
+<Javadoc name={"org.bukkit.entity.Player#hideEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#hideEntity()`</Javadoc>.
+
+:::warning
+
+If the display is only used temporarily, its persistence can be disabled with
+<Javadoc name={"org.bukkit.entity.Entity#setPersistent(boolean)"}>`Entity#setPersistent()`</Javadoc>,
+meaning it will disappear when the chunk unloads.
+
+_However, if the display is located in a chunk that never unloads, i.e. a spawn chunk, it will never
+be removed, creating a resource leak. Make sure to remove the display afterward with
+<Javadoc name={"org.bukkit.entity.Entity#remove()"}>`Entity#remove()`</Javadoc>._
+
+:::
+
+They can also be added as passengers to entities with the
+<Javadoc name={"org.bukkit.entity.Entity#addPassenger(org.bukkit.entity.Entity)"}>`Entity#addPassenger()`</Javadoc>/
+<Javadoc name={"org.bukkit.entity.Entity#removePassenger(org.bukkit.entity.Entity)"}>`Entity#removePassenger()`</Javadoc>
+methods, useful for making styled name tags!
+
+```java
+TextDisplay display = world.spawn(location, TextDisplay.class, entity -> {
+    // ...
+
+    entity.setVisibleByDefault(false); // hide it for everyone
+    entity.setPersistent(false); // don't save the display, it's temporary
+});
+
+entity.addPassenger(display); // mount it on top of an entity's head
+player.showEntity(plugin, display); // show it to a player
+// ...
+display.remove(); // done with the display
+```

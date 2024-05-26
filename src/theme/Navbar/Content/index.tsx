@@ -68,7 +68,6 @@ export default function NavbarContent(): JSX.Element {
         item.activeBaseRegex && item.modules &&
         new RegExp(item.activeBaseRegex).test(document.location.pathname)
       ) {
-        console.log("NavbarContent: item.activeBaseRegex", item.activeBaseRegex)
         leftItems = item.modules;
       }
     }

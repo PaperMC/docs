@@ -20,8 +20,13 @@ and <Javadoc name={"org.bukkit.entity.Player#showEntity(org.bukkit.plugin.Plugin
 <Javadoc name={"org.bukkit.entity.Player#hideEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#hideEntity()`</Javadoc>
 methods to make displays visible to only specific players.
 
-If you plan to use the display only temporarily, e.g. for decoration purposes, make sure to remove
-it with <Javadoc name={"org.bukkit.entity.Entity#remove()"}>`Entity#remove()`</Javadoc> afterward.
+Displays can also be added as passengers to entities with the
+<Javadoc name={"org.bukkit.entity.Entity#addPassenger(org.bukkit.entity.Entity)"}>`Entity#addPassenger()`</Javadoc>/
+<Javadoc name={"org.bukkit.entity.Entity#removePassenger(org.bukkit.entity.Entity)"}>`Entity#removePassenger()`</Javadoc>
+methods, useful for making styled name tags!
+
+If you plan to use the display only temporarily, make sure to remove it with
+<Javadoc name={"org.bukkit.entity.Entity#remove()"}>`Entity#remove()`</Javadoc> afterward.
 
 ```java
 TextDisplay display = player.getWorld().spawn(player.getLocation(), TextDisplay.class, entity -> {
@@ -31,7 +36,9 @@ TextDisplay display = player.getWorld().spawn(player.getLocation(), TextDisplay.
     entity.setPersistent(false); // don't save the entity, it's temporary
 });
 
-player.showEntity(plugin, display); // show it to our player
+player.addPassenger(display); // mount it on top of the player's head
+player.showEntity(plugin, display); // show it to the player
+// ...
 display.remove(); // done with the entity
 ```
 

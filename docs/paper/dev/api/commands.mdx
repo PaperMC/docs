@@ -31,7 +31,7 @@ functions are loaded by the server before plugins are loaded. To make commands a
 datapacks, register them via the [PluginBootstrap](#pluginbootstrap).
 
 ```java
-class YourPluginClass extends JavaPlugin {
+public class YourPluginClass extends JavaPlugin {
 
     @Override
     public void onEnable() {
@@ -70,7 +70,7 @@ The benefit of registering commands here is that they will be available to datap
 because the command registration happens early enough.
 
 ```java
-class YourPluginBootstrap implements PluginBootstrap {
+public class YourPluginBootstrap implements PluginBootstrap {
 
     @Override
     public void bootstrap(BootstrapContext context) {

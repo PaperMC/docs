@@ -935,12 +935,6 @@ spawn:
   allow-using-signs-inside-spawn-protection:
     default: "false"
     description: Allows players to use signs while inside spawn protection
-  keep-spawn-loaded:
-    default: "true"
-    description: Instructs the server to keep the spawn chunks loaded at all times
-  keep-spawn-loaded-range:
-    default: "10"
-    description: The range in chunks around spawn to keep loaded
 tick-rates:
   behavior:
     villager:

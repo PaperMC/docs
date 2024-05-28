@@ -974,6 +974,10 @@ tick-rates:
           Sets the sensor tick rate of an entity. -1 uses Vanilla. See timings
           for the names. Might change between updates!
 unsupported-settings:
+  disable-world-ticking-when-empty:
+    default: "false"
+    description: >-
+      idk descrption here
   fix-invulnerable-end-crystal-exploit:
     default: "true"
     description: >-

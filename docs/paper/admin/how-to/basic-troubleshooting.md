@@ -100,10 +100,10 @@ To efficiently search for the plugin that is causing the issue, you can do the f
 
 :::danger
 
-Some plugins that you install are not a typical plugin, but libraries. These function like plugins,
-however are relied upon by other plugins for its functionality. If you disable a plugin that is a
-library, the plugin that depends on it will not work properly. Common examples of these libraries
-are ProtocolLib, Vault providers, permission plugins, etc.
+Some plugins that you install are not a typical plugin, but a library. These are installed like plugins,
+however tend to offer few user-facing features and are relied upon by other plugins for their
+functionality. If you disable a library, plugins that depend on it will not work properly. Common
+examples of these libraries are ProtocolLib, Vault providers, permission plugins, etc.
 
 :::
 

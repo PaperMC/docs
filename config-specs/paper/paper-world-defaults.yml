@@ -977,7 +977,8 @@ unsupported-settings:
   disable-world-ticking-when-empty:
     default: "false"
     description: >-
-      idk descrption here
+      Stops the ticking of the world when there are no players or force loaded chunks present in
+      the world.
   fix-invulnerable-end-crystal-exploit:
     default: "true"
     description: >-

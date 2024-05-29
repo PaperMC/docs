@@ -69,7 +69,7 @@ If you don't have any backup of your world before the chunk version update, you 
 
 </details>
 
-## Find the culprit
+## Finding the culprit
 
 If you can't find the name of any plugin in the thread dump or stack trace, try these steps.
 
@@ -97,6 +97,15 @@ To efficiently search for the plugin that is causing the issue, you can do the f
    If the problem is not resolved, the plugin that is causing the issue is one of the active plugins.
 4. **Repeat from the start with the suspect plugin group**
    Repeat the steps above with groups that have the plugin that is causing the issue.
+
+:::danger
+
+Some plugins that you install are not a typical plugin, but a library. These are installed like plugins,
+however tend to offer few user-facing features and are relied upon by other plugins for their
+functionality. If you disable a library, plugins that depend on it will not work properly. Common
+examples of these libraries are ProtocolLib, Vault providers, permission plugins, etc.
+
+:::
 
 ## Check plugin updates
 

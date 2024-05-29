@@ -98,12 +98,12 @@ To efficiently search for the plugin that is causing the issue, you can do the f
 4. **Repeat from the start with the suspect plugin group**
    Repeat the steps above with groups that have the plugin that is causing the issue.
 
-:::tip
+:::danger
 
-Some plugins that you install are not actually plugins, but libraries. These libraries are required
-for the plugin to work properly. If you disable a plugin that is a library, the plugin that depends
-on it will not work properly. Common examples of these libraries are ProtocolLib, Vault providers,
-permission plugins, etc.
+Some plugins that you install are not a typical plugin, but libraries. These function like plugins,
+however are relied upon by other plugins for its functionality. If you disable a plugin that is a
+library, the plugin that depends on it will not work properly. Common examples of these libraries
+are ProtocolLib, Vault providers, permission plugins, etc.
 
 :::
 

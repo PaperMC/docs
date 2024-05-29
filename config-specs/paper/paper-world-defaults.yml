@@ -935,12 +935,6 @@ spawn:
   allow-using-signs-inside-spawn-protection:
     default: "false"
     description: Allows players to use signs while inside spawn protection
-  keep-spawn-loaded:
-    default: "true"
-    description: Instructs the server to keep the spawn chunks loaded at all times
-  keep-spawn-loaded-range:
-    default: "10"
-    description: The range in chunks around spawn to keep loaded
 tick-rates:
   behavior:
     villager:
@@ -980,6 +974,11 @@ tick-rates:
           Sets the sensor tick rate of an entity. -1 uses Vanilla. See timings
           for the names. Might change between updates!
 unsupported-settings:
+  disable-world-ticking-when-empty:
+    default: "false"
+    description: >-
+      Stops the ticking of the world when there are no players or force loaded chunks present in
+      the world.
   fix-invulnerable-end-crystal-exploit:
     default: "true"
     description: >-

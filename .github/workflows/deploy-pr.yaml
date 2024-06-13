@@ -37,6 +37,10 @@ jobs:
         run: "pnpm install"
       - name: "build"
         run: "pnpm run build"
+      - name: "copy cloudflare configuration files to build directory"
+        run: |
+          cp _headers build/
+          cp _redirects build/
       - name: "publish (push)"
         id: "cloudflare-publish"
         uses: "cloudflare/pages-action@v1"

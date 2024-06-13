@@ -1,6 +1,6 @@
 name: "Deploy to Cloudflare Pages"
 
-on: [push]
+on: [pull_request, push]
 
 jobs:
   deploy:
@@ -8,7 +8,21 @@ jobs:
     permissions:
       contents: read
       deployments: write
+      pull-requests: write
     steps:
+      - name: "add comment"
+        if: github.event_name != 'push'
+        uses: mshick/add-pr-comment@v2
+        with:
+          message-id: "cloudflare-pages-preview"
+          message: |
+            ## Deploying with  [<img alt="Cloudflare Pages" width="16" src="https://user-images.githubusercontent.com/23264/106598434-9e719e00-654f-11eb-9e59-6167043cfa01.png">](https://pages.dev)  Cloudflare Pages
+
+            🚀 This branch can be previewed at ${{ steps.cloudflare-publish.outputs.url }}
+            |  Latest commit: | ${{ github.sha }} |
+            |---------------------------------|------------------------|
+            | Status: | 🔨  Building... |
+            ---
       - name: "checkout"
         uses: "actions/checkout@v4"
         with:
@@ -25,6 +39,7 @@ jobs:
       - name: "build"
         run: "pnpm run build"
       - name: "publish"
+        id: "cloudflare-publish"
         uses: "cloudflare/pages-action@v1"
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -32,3 +47,17 @@ jobs:
           projectName: "papermc-docs"
           directory: "build"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: "add comment"
+        uses: "mshick/add-pr-comment@v2"
+        with:
+          message-id: "cloudflare-pages-preview"
+          message: |
+            ## Deploying with  [<img alt="Cloudflare Pages" width="16" src="https://user-images.githubusercontent.com/23264/106598434-9e719e00-654f-11eb-9e59-6167043cfa01.png">](https://pages.dev)  Cloudflare Pages
+
+            🚀 This branch can be previewed at ${{ steps.cloudflare-publish.outputs.url }}
+            |  Latest commit: | ${{ github.sha }} |
+            |---------------------------------|------------------------|
+            | Status: | ✅  Deploy successful! |
+            | Preview URL: | [${{ steps.cloudflare.outputs.url }}](${{ steps.cloudflare.outputs.url }}) |
+
+            [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})

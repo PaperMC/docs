@@ -14,6 +14,7 @@ import {
   getFileCommitHashSafe,
 } from "./src/util/authorUtils";
 
+// replace
 const preview = env.VERCEL_ENV === "preview";
 cacheAuthorData(preview || process.env.NODE_ENV === "development");
 
@@ -222,7 +223,6 @@ const config: Config = {
       },
     ],
     "@docusaurus/plugin-debug",
-    "@docusaurus/plugin-vercel-analytics",
     "docusaurus-plugin-sass",
   ],
 

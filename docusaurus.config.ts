@@ -14,7 +14,6 @@ import {
   getFileCommitHashSafe,
 } from "./src/util/authorUtils";
 
-// replace
 const preview = env.CF_PAGES_BRANCH !== "main";
 cacheAuthorData(preview || process.env.NODE_ENV === "development");
 

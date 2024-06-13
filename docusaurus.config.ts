@@ -15,7 +15,7 @@ import {
 } from "./src/util/authorUtils";
 
 // replace
-const preview = env.CF_PAGES_BRANCH !== "main"
+const preview = env.CF_PAGES_BRANCH !== "main";
 cacheAuthorData(preview || process.env.NODE_ENV === "development");
 
 const url = (preview && `https://${env.CF_PAGES_URL}`) || "https://docs.papermc.io";

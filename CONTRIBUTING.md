@@ -62,7 +62,7 @@ If you wish to contribute to the PaperMC Docs, please follow these steps:
 4. Commit your changes and push them to your fork.
 
 5. Submit a pull request (PR) to the `main` branch of the Docs repository.
-   Vercel will automatically deploy a preview of your changes to the PR. The link to the preview will be available in a PR comment.
+   Cloudflare Pages will automatically deploy a preview of your changes to the PR. The link to the preview will be available in a PR comment.
 
 6. Your PR will be reviewed, and feedback may be provided if necessary.
 

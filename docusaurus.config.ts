@@ -18,7 +18,7 @@ import {
 const preview = env.VERCEL_ENV === "preview";
 cacheAuthorData(preview || process.env.NODE_ENV === "development");
 
-const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
+const url = (preview && `https://${env.CF_PAGES_URL}`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,

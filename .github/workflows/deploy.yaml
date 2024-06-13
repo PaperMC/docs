@@ -23,13 +23,12 @@ jobs:
         uses: "actions/setup-node@v4"
         with:
           cache: "pnpm"
-          node-version: 18
+          node-version: 20
       - name: "install dependencies"
         run: "pnpm install"
       - name: "build"
         run: "pnpm run build"
       - name: "publish (push)"
-        if: "github.repository == github.event.pull_request.head.repo.full_name"
         id: "cloudflare-publish"
         uses: "cloudflare/pages-action@v1"
         with:

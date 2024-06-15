@@ -34,10 +34,11 @@ jobs:
           cp _redirects build/
       - name: "publish (push)"
         id: "cloudflare-publish"
-        uses: "cloudflare/pages-action@v1"
+        uses: "AdrianGonz97/refined-cf-pages-action@v1"
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: "papermc-docs"
+          deploymentName: "Production"
           directory: "build"
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

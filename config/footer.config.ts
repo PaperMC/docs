@@ -1,4 +1,13 @@
 import type { Footer } from "@docusaurus/theme-common";
+import { execSync } from "child_process";
+
+let currentCommit: string;
+try {
+  currentCommit = execSync("git rev-parse HEAD").toString().slice(0, 7).trim();
+} catch (error) {
+  console.error("Failed to get the current commit:", error);
+  currentCommit = "unknown";
+}
 
 const footer: Footer = {
   style: "dark",
@@ -47,7 +56,7 @@ const footer: Footer = {
       ],
     },
   ],
-  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.`,
+  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.<div><a href="https://github.com/PaperMC/docs/">PaperMC/docs</a> @ <a href="https://github.com/PaperMC/docs/commit/${currentCommit}">${currentCommit}</a></div>`,
 };
 
 export default footer;

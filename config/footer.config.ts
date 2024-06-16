@@ -4,11 +4,10 @@ import { Icon } from "@iconify/react";
 
 let currentCommit: string;
 try {
-  currentCommit = execSync('git rev-parse HEAD')
-    .toString().slice(0, 7).trim();
+  currentCommit = execSync("git rev-parse HEAD").toString().slice(0, 7).trim();
 } catch (error) {
-  console.error('Failed to get the current commit:', error);
-  currentCommit = 'unknown';
+  console.error("Failed to get the current commit:", error);
+  currentCommit = "unknown";
 }
 
 const footer: Footer = {

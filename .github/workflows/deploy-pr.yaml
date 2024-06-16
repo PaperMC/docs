@@ -10,22 +10,12 @@ jobs:
       deployments: write
       pull-requests: write
     steps:
-      - name: "add comment"
-        if: github.event_name != 'push'
-        uses: mshick/add-pr-comment@v2
-        with:
-          message-id: "cloudflare-pages-preview"
-          message: |
-            ## Deploying with  [<img alt="Cloudflare Pages" width="16" src="https://user-images.githubusercontent.com/23264/106598434-9e719e00-654f-11eb-9e59-6167043cfa01.png">](https://pages.dev)  Cloudflare Pages
-
-            |  Latest commit: | ${{ github.sha }} |
-            |---------------------------------|------------------------|
-            | Status: | 🔨  Building... |
-            ---
       - name: "checkout"
         uses: "actions/checkout@v4"
         with:
           fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: "setup pnpm"
         uses: "pnpm/action-setup@v4"
       - name: "setup node"
@@ -49,17 +39,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: "papermc-docs"
           deploymentName: "Preview"
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           directory: "build"
-      - name: "add comment"
-        uses: "mshick/add-pr-comment@v2"
-        with:
-          message-id: "cloudflare-pages-preview"
-          message: |
-            ## Deploying with  [<img alt="Cloudflare Pages" width="16" src="https://user-images.githubusercontent.com/23264/106598434-9e719e00-654f-11eb-9e59-6167043cfa01.png">](https://pages.dev)  Cloudflare Pages
-
-            |  Latest commit: | ${{ github.sha }} |
-            |---------------------------------|------------------------|
-            | Status: | ✅  Deploy successful! |
-            | Preview URL: | [${{ steps.cloudflare-publish.outputs.url }}](${{ steps.cloudflare-publish.outputs.url }}) |
-
-            [View logs](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})

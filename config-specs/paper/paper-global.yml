@@ -412,7 +412,7 @@ unsupported-settings:
     description: >-
       Whether the server should skip damage ticks when entities are blocking damage
       via a shield. While Vanilla does process a damage tick, this behavior was a long
-      standing bug in paper. Enabling this option means that the damage tick will be
+      standing bug in Paper. Enabling this option means that the damage tick will be
       skipped, which may result in rapid damage on shields due to the missing invulnerability.
   perform-username-validation:
     default: "true"

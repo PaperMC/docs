@@ -1,6 +1,5 @@
 import type { Footer } from "@docusaurus/theme-common";
 import { execSync } from "child_process";
-import { Icon } from "@iconify/react";
 
 let currentCommit: string;
 try {

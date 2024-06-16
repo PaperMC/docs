@@ -57,7 +57,7 @@ const footer: Footer = {
       ],
     },
   ],
-  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.<br> <a href="https://github.com/PaperMC/docs/">PaperMC/docs</a> @ <a href="https://github.com/PaperMC/docs/commit/${currentCommit}">${currentCommit}</a>`,
+  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.<div> <a href="https://github.com/PaperMC/docs/">PaperMC/docs</a> @ <a href="https://github.com/PaperMC/docs/commit/${currentCommit}">${currentCommit}</a></div>`,
 };
 
 export default footer;

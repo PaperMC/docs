@@ -132,7 +132,7 @@ public class TestPluginBootstrap implements PluginBootstrap {
                 // Plugins should use their own namespace instead of minecraft or papermc
                 TypedKey.create(RegistryKey.ENCHANTMENT, Key.key("papermc:pointy")),
                 b -> b.description(Component.text("Pointy"))
-                    .supportedItems(h.getOrCreateTag(ItemTypeTagKeys.SWORDS))
+                    .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.SWORDS))
                     .anvilCost(1)
                     .maxLevel(25)
                     .weight(10)

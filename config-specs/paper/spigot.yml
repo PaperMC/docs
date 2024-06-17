@@ -230,6 +230,9 @@ stats:
       - The Value for each key is an integer to force the related stat to.
 world-settings:
   default:
+    unload-frozen-chunks:
+      default: "false"
+      description: Experimental option that controls whether chunks can unload whilst ticks are frozen via /tick freeze.
     arrow-despawn-rate:
       default: "1200"
       description: The number of ticks before an arrow despawns.

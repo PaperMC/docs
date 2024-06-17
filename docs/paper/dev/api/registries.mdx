@@ -116,7 +116,7 @@ Modification of a registry can take two different forms.
 
 Creating new entries is done via the <Javadoc name={"io.papermc.paper.registry.event.RegistryEventProvider#freeze"}>`freeze` lifecycle event</Javadoc>
 on the respective registries.
-The freeze event is called right before a registries content is frozen in-place, meaning all Vanilla entries are registered.
+The freeze event is called right before a registry's content is frozen in-place, meaning all Vanilla entries are registered.
 Plugins can hence register their own entries at this point.
 The following example shows how to create a new enchantment:
 

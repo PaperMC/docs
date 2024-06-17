@@ -1,0 +1,9 @@
+/intro /
+/java-install-update /misc/java-install
+/papermc/* /misc/*
+/velocity/developers/* /velocity/dev/*
+/paper/reference/paper-per-world-configuration /paper/reference/world-configuration
+/paper/reference/paper-global-configuration /paper/reference/global-configuration
+/paper/per-world-configuration /paper/configuration
+/paper/configuration /paper/reference/configuration
+/paper/reference/vanilla-command-permissions /paper/reference/permissions

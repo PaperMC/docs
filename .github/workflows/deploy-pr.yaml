@@ -1,0 +1,43 @@
+name: "Deploy to Cloudflare Pages (Preview)"
+
+on: [pull_request_target]
+
+jobs:
+  deploy:
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+    steps:
+      - name: "checkout"
+        uses: "actions/checkout@v4"
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+      - name: "setup pnpm"
+        uses: "pnpm/action-setup@v4"
+      - name: "setup node"
+        uses: "actions/setup-node@v4"
+        with:
+          cache: "pnpm"
+          node-version: 20
+      - name: "install dependencies"
+        run: "pnpm install"
+      - name: "build"
+        run: "pnpm run build"
+      - name: "copy cloudflare configuration files to build directory"
+        run: |
+          cp _headers build/
+          cp _redirects build/
+      - name: "publish (push)"
+        id: "cloudflare-publish"
+        uses: "AdrianGonz97/refined-cf-pages-action@v1"
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: "papermc-docs"
+          deploymentName: "Preview"
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          directory: "build"

@@ -407,6 +407,13 @@ unsupported-settings:
     description: >-
       Whether to allow duplication of TNT, carpets, and rails. This does not
       control sand duplication
+  skip-vanilla-damage-tick-when-shield-blocked:
+    default: "false"
+    description: >-
+      Whether the server should skip damage ticks when entities are blocking damage
+      via a shield. While Vanilla does process a damage tick, this behavior was a long
+      standing bug in Paper. Enabling this option means that the damage tick will be
+      skipped, which may result in rapid damage on shields due to the missing invulnerability.
   perform-username-validation:
     default: "true"
     description: >-

@@ -1,0 +1,44 @@
+name: "Deploy to Cloudflare Pages (Production)"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: read
+      deployments: write
+      pull-requests: write
+    steps:
+      - name: "checkout"
+        uses: "actions/checkout@v4"
+        with:
+          fetch-depth: 0
+      - name: "setup pnpm"
+        uses: "pnpm/action-setup@v4"
+      - name: "setup node"
+        uses: "actions/setup-node@v4"
+        with:
+          cache: "pnpm"
+          node-version: 20
+      - name: "install dependencies"
+        run: "pnpm install"
+      - name: "build"
+        run: "pnpm run build"
+      - name: "copy cloudflare configuration files to build directory"
+        run: |
+          cp _headers build/
+          cp _redirects build/
+      - name: "publish (push)"
+        id: "cloudflare-publish"
+        uses: "AdrianGonz97/refined-cf-pages-action@v1"
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: "papermc-docs"
+          deploymentName: "Production"
+          directory: "build"
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}

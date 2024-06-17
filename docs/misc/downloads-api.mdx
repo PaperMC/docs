@@ -47,7 +47,7 @@ MINECRAFT_VERSION="%%_MAJ_MIN_PAT_MC_%%"
 LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
     jq '.builds | map(select(.channel == "default") | .build) | .[-1]')
 
-if [[ "$LATEST_BUILD" != "null" ]]; then
+if [ "$LATEST_BUILD" != "null" ]; then
     echo "Latest stable build is $LATEST_BUILD"
 else
     echo "No stable build for version $MINECRAFT_VERSION found :("
@@ -69,7 +69,7 @@ MINECRAFT_VERSION="%%_MAJ_MIN_PAT_MC_%%"
 LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
     jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
 
-if [[ "$LATEST_BUILD" != "null" ]]; then
+if [ "$LATEST_BUILD" != "null" ]; then
     JAR_NAME=${PROJECT}-${MINECRAFT_VERSION}-${LATEST_BUILD}.jar
     PAPERMC_URL="https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}"
 

@@ -14,10 +14,10 @@ import {
   getFileCommitHashSafe,
 } from "./src/util/authorUtils";
 
-const preview = env.VERCEL_ENV === "preview";
+const preview = env.CF_PAGES_BRANCH !== "main";
 cacheAuthorData(preview || process.env.NODE_ENV === "development");
 
-const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
+const url = (preview && `https://${env.CF_PAGES_URL}`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,
@@ -143,7 +143,7 @@ const config: Config = {
         lastVersion: "current",
         versions: {
           current: {
-            label: "1.20",
+            label: "1.21",
             path: "",
           },
         },
@@ -222,7 +222,6 @@ const config: Config = {
       },
     ],
     "@docusaurus/plugin-debug",
-    "@docusaurus/plugin-vercel-analytics",
     "docusaurus-plugin-sass",
   ],
 

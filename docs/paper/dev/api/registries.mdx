@@ -148,7 +148,7 @@ public class TestPluginBootstrap implements PluginBootstrap {
 ### Modifying existing entries
 
 Modification of existing entries is useful for plugins that aim to change the way Vanilla entries
-behave. For this the <Javadoc name={"io.papermc.paper.registry.event.RegistryEventProvider#entryAdd"}>`entryAdd` lifecycle event</Javadoc>.
+behave. For this, use the <Javadoc name={"io.papermc.paper.registry.event.RegistryEventProvider#entryAdd()"}>`entryAdd` lifecycle event</Javadoc>.
 The event is called for <u>*any*</u> entry added to a registry, however the API provides an easy way to target a specific entry for modification.
 The following example shows how to increase the maximum level of the sharpness enchantment.
 

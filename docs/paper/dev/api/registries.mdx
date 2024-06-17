@@ -52,7 +52,7 @@ final Enchantment enchantment = enchantmentRegistry.getOrThrow(TypedKey.create(
 );
 
 // Same as above, but using generated typed keys.
-// Only vanilla entries have generated keys, for custom entries, the above method must be used.
+// Only Vanilla entries have generated keys, for custom entries, the above method must be used.
 final Enchantment enchantment = enchantmentRegistry.getOrThrow(EnchantmentKeys.SHARPNESS);
 ```
 
@@ -86,7 +86,7 @@ final RegistryKeySet<@NotNull Enchantment> bestEnchantments = RegistrySet.keySet
 A <Javadoc name={"io. papermc. paper. registry. tag.Tag"}>`Tag`</Javadoc> follows up the concept
 of a <Javadoc name={"io.papermc.paper.registry.set.RegistryKeySet"}>`RegistryKeySet`</Javadoc>
 but is itself named and can hence be referenced.
-A list of vanilla tags can be found <a href="https://minecraft.wiki/w/Tag#Java_Edition_2">on the minecraft wiki</a>.
+A list of Vanilla tags can be found <a href="https://minecraft.wiki/w/Tag#Java_Edition_2">on the minecraft wiki</a>.
 
 ## Mutating registries
 
@@ -116,7 +116,7 @@ Modification of a registry can take two different forms.
 
 Creating new entries is done via the <Javadoc name={"io.papermc.paper.registry.event.RegistryEventProvider#freeze"}>`freeze` lifecycle event</Javadoc>
 on the respective registries.
-The freeze event is called right before a registries content is frozen in-place, meaning all vanilla entries are registered.
+The freeze event is called right before a registries content is frozen in-place, meaning all Vanilla entries are registered.
 Plugins can hence register their own entries at this point.
 The following example shows how to create a new enchantment:
 
@@ -158,7 +158,7 @@ public void bootstrap(@NotNull BootstrapContext context) {
     context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.entryAdd()
         // Increase the max level to 20
         .newHandler(event -> event.builder().maxLevel(20))
-        // Configure the handled to only be called for the vanilla sharpness enchantment.
+        // Configure the handled to only be called for the Vanilla sharpness enchantment.
         .filter(EnchantmentKeys.SHARPNESS)
     );
 }

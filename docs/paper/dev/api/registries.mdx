@@ -96,7 +96,7 @@ Beyond plain reading access to registries, Paper also offers a way for plugins t
 Mutating registries needs to be done during the server's bootstrap phase.
 As such, this section is only applicable to [Paper plugins](../getting-started/paper-plugins.mdx).
 
-**Exceptions** thrown by plugins during this phase will cause the server to shutdown before loading
+**Exceptions** thrown by plugins during this phase will cause the server to shutdown before loading,
 as missing values or modifications to the registries would otherwise cause data loss.
 :::
 

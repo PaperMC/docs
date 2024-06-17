@@ -126,7 +126,8 @@ public class TestPluginBootstrap implements PluginBootstrap {
         context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.freeze().newHandler(event -> {
             event.registry().register(
                 // The key of the registry
-                TypedKey.create(RegistryKey.ENCHANTMENT, Key.key("papermc:pointy")), // Plugins should use their own namespace instead of minecraft or papermc
+                // Plugins should use their own namespace instead of minecraft or papermc
+                TypedKey.create(RegistryKey.ENCHANTMENT, Key.key("papermc:pointy")),
                 b -> b.description(Component.text("Pointy"))
                     .supportedItems(h.getOrCreateTag(ItemTypeTagKeys.SWORDS))
                     .anvilCost(1)

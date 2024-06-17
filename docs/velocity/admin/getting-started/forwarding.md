@@ -38,7 +38,7 @@ forwarding instead.
 
 :::
 
-To use modern forwarding with any supported server implementation, set the `player-info-forwarding`
+To use modern forwarding with any supported server implementation, set the `player-info-forwarding-mode`
 setting in `velocity.toml` to `modern`. Then, you need to ensure your server is properly configured
 to use Velocity forwarding.
 
@@ -91,13 +91,13 @@ server implementations. It has excellent compatibility (supporting versions as o
 released in 2013) and will work with Forge if you also install SpongeForge on your modded server and
 configure it correctly. However, it is not secure.
 
-If you must use BungeeCord-compatible forwarding, simply set your `player-info-forwarding` setting
+If you must use BungeeCord-compatible forwarding, simply set your `player-info-forwarding-mode` setting
 in `velocity.toml` to `legacy`. You will also need to make sure your server can accept the forwarded
 player data sent by Velocity.
 
 To add some security, particularly for proxies hosted on shared hosting, Velocity optionally
 supports the [BungeeGuard](https://www.spigotmc.org/resources/bungeeguard.79601/) plugin. To use it,
-set the `player-info-forwarding` setting in `velocity.toml` to `bungeeguard`, then add the value in
+set the `player-info-forwarding-mode` setting in `velocity.toml` to `bungeeguard`, then add the value in
 the `forwarding.secret` file to the token section in the BungeeGuard configuration.
 
 ### Configuring legacy forwarding for Spigot / Paper

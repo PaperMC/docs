@@ -23,10 +23,6 @@ const footer: Footer = {
           label: "Forums",
           href: "https://forums.papermc.io",
         },
-        {
-          label: "IRC",
-          href: "https://webchat.esper.net/?channels=paper",
-        },
       ],
     },
     {

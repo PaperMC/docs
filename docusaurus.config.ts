@@ -14,10 +14,12 @@ import {
   getFileCommitHashSafe,
 } from "./src/util/authorUtils";
 
-const preview = env.CF_PAGES_BRANCH !== "main";
-cacheAuthorData(preview || process.env.NODE_ENV === "development");
+const preview = isCI && env.CI_ENV === "preview";
+cacheAuthorData(preview || env.NODE_ENV === "development");
 
-const url = (preview && `https://${env.CF_PAGES_URL}`) || "https://docs.papermc.io";
+const pagesId =
+  `${env.GITHUB_PR_HEAD_OWNER}-${env.GITHUB_HEAD_REF || env.GITHUB_REF_NAME}`.substring(0, 28);
+const url = (preview && `https://${pagesId}.papermc-docs.pages.dev`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,

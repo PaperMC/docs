@@ -13,13 +13,12 @@ import {
   cacheAuthorData,
   getFileCommitHashSafe,
 } from "./src/util/authorUtils";
+import { preview, deploymentID } from "./src/util/pagesUtils";
 
-const preview = isCI && env.CI_ENV === "preview";
 cacheAuthorData(preview || env.NODE_ENV === "development");
 
-const pagesId =
-  `${env.GITHUB_PR_HEAD_OWNER}-${env.GITHUB_HEAD_REF || env.GITHUB_REF_NAME}`.substring(0, 28);
-const url = (preview && `https://${pagesId}.papermc-docs.pages.dev`) || "https://docs.papermc.io";
+const url =
+  (preview && `https://${deploymentID}.papermc-docs.pages.dev`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,

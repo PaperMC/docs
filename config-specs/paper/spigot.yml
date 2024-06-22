@@ -692,6 +692,9 @@ world-settings:
     seed-swamp:
       default: "14357620"
       description: The per-structure seed for swamp structures.
+    seed-trialchambers:
+      default: "94251327"
+      description: The per-structure seed for trial chambers.
     seed-trailruins:
       default: "83469867"
       description: The per-structure seed for trail ruins.

@@ -13,11 +13,12 @@ import {
   cacheAuthorData,
   getFileCommitHashSafe,
 } from "./src/util/authorUtils";
+import { preview, deploymentID } from "./src/util/pagesUtils";
 
-const preview = env.CF_PAGES_BRANCH !== "main";
-cacheAuthorData(preview || process.env.NODE_ENV === "development");
+cacheAuthorData(preview || env.NODE_ENV === "development");
 
-const url = (preview && `https://${env.CF_PAGES_URL}`) || "https://docs.papermc.io";
+const url =
+  (preview && `https://${deploymentID}.papermc-docs.pages.dev`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,

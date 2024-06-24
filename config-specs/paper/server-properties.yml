@@ -17,7 +17,7 @@ broadcast-rcon-to-ops:
   description: "Send rcon command output to all online operators."
 bug-report-link:
   default: ""
-  description: "A URL value creates and populates a Report Server Bugs button in the Server Links menu"
+  description: "A URL value used for the Report Server Bugs button in the Server Links client menu."
 debug:
   default: "false"
   description: "Enables the server's debug mode."

@@ -186,7 +186,7 @@ resource-pack:
   description: "The URL to the server's resource pack. "
 resource-pack-id:
   default: ""
-  description: "The UUID of the server resource pack to use. "
+  description: "The UUID of the server resource pack to use."
 resource-pack-prompt:
   default: ""
   description: "The message that is displayed when the client is prompted to download the resource pack."

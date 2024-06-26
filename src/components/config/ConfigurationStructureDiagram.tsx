@@ -38,6 +38,9 @@ const folderData: ExplorerNode[] = [
     name: "plugins",
     type: "folder",
     description: "You can place your plugin JARs here.",
+    children: [
+      { name: ".paper-remapped", type: "folder", description: "Used to store remapped plugins. (Learn more)", url: "https://forums.papermc.io/threads/important-dev-psa-future-removal-of-cb-package-relocation.1106/" }
+    ]
   },
   {
     name: "<world>",

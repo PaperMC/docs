@@ -279,4 +279,20 @@ const config: Config = {
   },
 };
 
+module.exports = {
+  plugins: [
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/dev/commands-api/commands',
+            from: '/dev/api/commands',
+          },
+        ],
+      },
+    ],
+  ],
+};
+
 export = config;

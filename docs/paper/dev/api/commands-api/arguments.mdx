@@ -18,8 +18,7 @@ Paper's command system is still experimental and may change in the future.
 
 You can add arguments to a command by doing the following:
 ```java
-    public class YourPluginClass extends JavaPlugin {
-
+public class YourPluginClass extends JavaPlugin {
     @Override
     public void onEnable() {
         LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
@@ -40,7 +39,6 @@ You can add arguments to a command by doing the following:
         });
     }
 }
-
 ```
 This command has one argument of the Enchantment datatype. The advantage of using
 Brigadier over the `TabExecutor` interface is that you don't have to convert the
@@ -53,20 +51,21 @@ the user will get an error.
 
 ## Enchantment types
 
-By default, many argument types are already available through the [Registry](../registries).
-In the example above, we used the Enchantment Argument type but there are many others:
+By default, you can use [registries](../registries) to get simple argument types like
+blocks, items, potions and many more. In the example above, we used the Enchantment 
+Argument type but there are many others:
 
 ### Predefined types (Registry)
 
 | Registry key name   | Return datatype class | Description                                                                                                                                                                                                                                                                                  |
 |---------------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GAME_EVENT          | GameEvent             | Events in the game (eating, flying with an elytra etc.)                                                                                                                                                                                                                                      |
-| STRUCTURE_TYPE      | StructureType         | [Structures](https://minecraft.wiki/w/Structure) Beware that as of Paper 1.20.6-147, there is also a Registry key named `STRUCTURE` that is not recognized by the client and makes it unable to connect. This has been reported to Paper developers and will be fixed in a future release. |
+| STRUCTURE_TYPE      | StructureType         | [Structures](https://minecraft.wiki/w/Structure#Overworld) - Beware that, as of Paper 1.20.6-147, there is also a Registry named `STRUCTURE` that is not recognized by the client and makes it unable to connect. This has been reported to Paper developers and will be fixed in a future release. |
 | INSTRUMENT          | CraftMusicInstrument  | [Note block instrument](https://minecraft.wiki/w/Note_Block)                                                                                                                                                                                                                                 |
-| ENCHANTMENT         | Enchantment           | [Enchantment type](https://minecraft.wiki/w/Enchantment)                                                                                                                                                                                                                                     |
-| MOB_EFFECT          | PotionEffectType      | [Potion effect](https://minecraft.wiki/w/Effect)                                                                                                                                                                                                                                             |
-| BLOCK               | BlockType             | Internal! Block type                                                                                                                                                                                                                                                                         |
-| ITEM                | ItemType              | Internal! Item type                                                                                                                                                                                                                                                                          |
+| ENCHANTMENT         | Enchantment           | [Enchantment type](https://minecraft.wiki/w/Enchanting#Summary_of_enchantments)                                                                                                                                                                                                                                     |
+| MOB_EFFECT          | PotionEffectType      | [Potion effect](https://minecraft.wiki/w/Effect#List)                                                                                                                                                                                                                                             |
+| BLOCK               | BlockType             | [Block type - not modifyable](https://minecraft.wiki/w/Block#List_of_blocks)                                                                                                                                                                                                                                                          |
+| ITEM                | ItemType              | [Item type - not modifyable](https://minecraft.wiki/w/Item#List_of_items)                                                                                                                                                                                                                                                                            |
 | BIOME               | Biome                 | [Biome type](https://minecraft.wiki/w/Biome#Biome_types)                                                                                                                                                                                                                                     |
 | TRIM_MATERIAL       | TrimMaterial          | [Materials used to trim armor](https://minecraft.wiki/w/Smithing#Material)                                                                                                                                                                                                                   |
 | TRIM_PATTERN        | TrimPattern           | [Trim patterns](https://minecraft.wiki/w/Smithing#Trimming)                                                                                                                                                                                                                                  |
@@ -76,8 +75,8 @@ In the example above, we used the Enchantment Argument type but there are many o
 | ATTRIBUTE           | Attribute             | [Entity attribute](https://minecraft.wiki/w/Attribute)                                                                                                                                                                                                                                       |
 | BANNER_PATTERN      | PatternType           | [Armor Pattern type](https://minecraft.wiki/w/Banner_Pattern#Variants)                                                                                                                                                                                                                       |
 | CAT_VARIANT         | Cat.Type              | [Cat variants](https://minecraft.wiki/w/Cat#Appearance)                                                                                                                                                                                                                                      |
-| ENTITY_TYPE         | EntityType            | [Every entity type](https://minecraft.wiki/w/Entity)                                                                                                                                                                                                                                         |
-| PARTICLE_TYPE       | Particle              | [Every particle type](https://minecraft.wiki/w/Particles_(Java_Edition))                                                                                                                                                                                                                     |
+| ENTITY_TYPE         | EntityType            | [Every entity type](https://minecraft.wiki/w/Entity#Types_of_entities)                                                                                                                                                                                                                                         |
+| PARTICLE_TYPE       | Particle              | [Every particle type](https://minecraft.wiki/w/Particles_(Java_Edition)#Types_of_particles)                                                                                                                                                                                                                     |
 | POTION              | PotionType            | [Every potion type](https://minecraft.wiki/w/Potion#Effect_potions)                                                                                                                                                                                                                          |
 | SOUND_EVENT         | Sound                 | [Events that trigger sound effects](https://minecraft.wiki/w/Sounds.json#Sound_events)                                                                                                                                                                                                       |
 | VILLAGER_PROFESSION | Villager.Profession   | [Villager professions](https://minecraft.wiki/w/Villager#Professions)                                                                                                                                                                                                                        |
@@ -94,4 +93,98 @@ Brigadier itself also specifies many argument types. For more information on the
 ### Custom types
 
 Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc> 
-interface.
+interface. The advantage custom types have over string-based argument systems like
+Bukkit's `TabExecutor` is that we can work with our own types and the completions list 
+is not sorted alphanumerically. This may sound insignificant but when you want an input 
+of the type integer and suggest the number 0-10, for example, your list will look like this:
+`0, 1, 10, 2, 3, ...`. Looks awful, right?
+
+Now, lets say that we want to implement a command which lets you order ice cream. For that,
+we add a 
+
+```java 
+public enum IceCreamType {
+    VANILLA,
+    CHOCOLATE,
+    STRAWBERRY,
+    MINT,
+    COOKIES
+}
+```
+Now, we have to define the argument itself. We do this by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType.Converted</Javadoc> interface:
+
+```java
+public class IceCreamTypeArgument implements CustomArgumentType.Converted<IceCreamType, String> {
+
+    @Override
+    public @NotNull IceCreamType convert(String nativeType) throws CommandSyntaxException {
+        try {
+            return IceCreamType.valueOf(nativeType.toUpperCase());
+        } catch (Exception e) {
+            Message message = MessageComponentSerializer.message().serialize(Component.text("Invalid flavor %s!".formatted(nativeType), NamedTextColor.RED));
+
+            throw new CommandSyntaxException(new SimpleCommandExceptionType(message), message);
+        }
+    }
+
+    @Override
+    public @NotNull ArgumentType<String> getNativeType() {
+        return StringArgumentType.word();
+    }
+
+    @Override
+    public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
+        for (IceCreamType flavor : IceCreamType.values()) {
+            builder.suggest(flavor.name(), MessageComponentSerializer.message().serialize(Component.text("look at this cool green tooltip!", NamedTextColor.GREEN)));
+        }
+
+        return CompletableFuture.completedFuture(
+                builder.build()
+        );
+    }
+}
+```
+
+That's a lot of code, so let's start from the top. We implemented the `CustomArgumentType.Converted`
+interface. This interface takes two type arguments: our custom enum, T, and a type that is native to 
+Minecraft, such as String, Integer, etc., called N. The native Type exists so that the client can use
+the input data, as it doesn't know what our custom `IceCreamType` is.
+
+The first method called `convert()` converts the native type (in this case `String`)
+into our own custom type called `IceCreamType`, as the name suggests. This is so we 
+can keep using our custom type internally. If we wouldn't do that, there would be no point in using a 
+custom type. If the specified input isn't found in our enum of available flavors, we
+output an error.
+
+The second method called `getNativeType()` returns the type of string that our command argument uses.
+In our case, we're using a single word, so we return `StringArgumentType.word()`.
+
+In the last method, `listSuggestions()`, we return `CompletableFuture<Suggestions>` so that the client
+can suggest all available options. We can even add tooltips to the suggestions to explain them in greater
+detail. 
+
+As a last step, we need to register the Command:
+
+```java
+public void onEnable() {
+    LifecycleEventManager manager = this.getLifecycleManager();
+    manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+        final Commands commands = event.registrar();
+        commands.register(Commands.literal("ordericecream")
+            .then(
+                Commands.argument("flavor", new IceCreamTypeArgument()).executes((commandContext -> {
+                    IceCreamType argumentResponse = commandContext.getArgument("flavor", IceCreamType.class); // Gets the raw argument
+                    commandContext.getSource().getSender().sendMessage(Component.text("You ordered: " + argumentResponse));
+                    return 1;
+                }))
+            ).build()
+        );
+    });
+}
+```
+
+Now that we have registered the command, we can execute it ingame:
+
+![command argument example](./assets/icecreamargument.gif)
+
+Look, we can even see our tooltip! 

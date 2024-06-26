@@ -20,7 +20,7 @@ const folderData: ExplorerNode[] = [
     name: "logs",
     type: "folder",
     description:
-      "This folder contains all the logs for the server. It compresses old logs into .gz files, but holds the most recent log as a .txt file.",
+      "This folder contains all the logs for the server. It compresses old logs into .gz files, but holds the most recent log as a latest.log file.",
   },
   {
     name: "config",

@@ -145,7 +145,6 @@
                 "dev/api/component-api/audiences"
               ]
             },
-
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
             "dev/api/commands",

@@ -127,7 +127,7 @@ const paper: SidebarsConfig = {
             },
             {
               type: "category",
-              label: "Command API (Brigadier)",
+              label: "Brigadier Command API",
               collapsed: true,
               items: ["dev/api/commands-api/commands", "dev/api/commands-api/arguments"],
             },

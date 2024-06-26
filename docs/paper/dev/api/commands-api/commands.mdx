@@ -3,18 +3,10 @@ slug: /dev/commands
 description: A guide to Paper's Brigadier command API.
 ---
 
-# Command API
+# Commands
 
 Paper's command system is built on top of Minecraft's Brigadier command system. This system is a
 powerful and flexible way to define commands and arguments.
-
-:::note
-
-As this documentation is incomplete at the moment, see [the test Paper plugin](https://github.com/PaperMC/Paper/tree/master/test-plugin) 
-in the project's main repository for information on how to use Paper Brigadier commands. 
-And don't worry, this page is currently being worked on.
-
-:::
 
 :::danger[Experimental]
 
@@ -116,21 +108,6 @@ class FunCommand implements BasicCommand {
     }
 }
 ```
-
-## Arguments
-
-### Built-in arguments
-
-Vanilla has lots of built-in arguments that the client also supports. These can provide better
-syntax and error-checking before even executing the commands. <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>
-has all the argument types available to the API.
-
-For now, you can find specific examples of arguments, among other things, on the [Fabric Wiki](https://fabricmc.net/wiki/tutorial:commands).
-
-### Custom arguments
-
-Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc>
-interface. See the Javadocs for more information on how they work.
 
 ## Lifecycle
 

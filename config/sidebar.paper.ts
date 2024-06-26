@@ -127,6 +127,15 @@ const paper: SidebarsConfig = {
             },
             {
               type: "category",
+              label: "Command API (Brigadier)",
+              collapsed: true,
+              items: [
+                "dev/api/commands-api/commands",
+                "dev/api/commands-api/arguments"
+              ]
+            },
+            {
+              type: "category",
               label: "Entity API",
               collapsed: true,
               items: ["dev/api/entity-api/entity-teleport", "dev/api/entity-api/display-entities"],
@@ -143,7 +152,6 @@ const paper: SidebarsConfig = {
             },
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
-            "dev/api/commands",
             "dev/api/scheduler",
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",

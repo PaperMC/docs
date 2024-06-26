@@ -1,0 +1,97 @@
+---
+slug: /dev/commands-api/arguments
+description: A guide to Paper's Brigadier command API.
+---
+
+# Arguments
+
+Arguments are suggestions for the execution of a command. They are passed when
+registering a Paper Brigadier command.
+
+:::danger[Experimental]
+
+Paper's command system is still experimental and may change in the future.
+
+:::
+
+## Basic usage of arguments
+
+You can add arguments to a command by doing the following:
+```java
+    public class YourPluginClass extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
+        manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+            final Commands commands = event.registrar();
+            commands.register(
+                Commands.literal("enchantmentargumentcommand")
+                .then(
+                    Commands.argument("enchantmentargument", ArgumentTypes.resource(RegistryKey.ENCHANTMENT))
+                        .executes(ctx -> {
+                            ctx.getSource().getSender().sendPlainMessage(
+                                ctx.getArgument("enchantmentargument", Enchantment.class).getKey().asString()
+                            );
+                            return Command.SINGLE_SUCCESS;
+                        })
+                ).build()
+            );
+        });
+    }
+}
+
+```
+This command has one argument of the Enchantment datatype. The advantage of using
+Brigadier over the `TabExecutor` interface is that you don't have to convert the
+string that is passed to the `CommandExecutor#onCommand` function as an argument to 
+an enchantment in this case because `ctx.getArgument("enchantmentargument", Enchantment.class)`
+returns a value of the `Enchantment` datatype. Additionally, you don't have to write 
+error handling functionality yourself as the client checks whether the argument the
+user wrote in the chat is one of the `minecraft:enchantment` type and if it isn't,
+the user will get an error.
+
+## Enchantment types
+
+By default, many argument types are already available through the [Registry](../registries).
+In the example above, we used the Enchantment Argument type but there are many others:
+
+### Predefined types (Registry)
+
+| Registry key name   | Return datatype class | Description                                                                                                                                                                                                                                                                                  |
+|---------------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| GAME_EVENT          | GameEvent             | Events in the game (eating, flying with an elytra etc.)                                                                                                                                                                                                                                      |
+| STRUCTURE_TYPE      | StructureType         | [Structures](https://minecraft.wiki/w/Structure) Beware that as of Paper 1.20.6-147, there is also a Registry key named `STRUCTURE` that is not recognized by the client and makes it unable to connect. This has been reported to Paper developers and will be fixed in a future release. |
+| INSTRUMENT          | CraftMusicInstrument  | [Note block instrument](https://minecraft.wiki/w/Note_Block)                                                                                                                                                                                                                                 |
+| ENCHANTMENT         | Enchantment           | [Enchantment type](https://minecraft.wiki/w/Enchantment)                                                                                                                                                                                                                                     |
+| MOB_EFFECT          | PotionEffectType      | [Potion effect](https://minecraft.wiki/w/Effect)                                                                                                                                                                                                                                             |
+| BLOCK               | BlockType             | Internal! Block type                                                                                                                                                                                                                                                                         |
+| ITEM                | ItemType              | Internal! Item type                                                                                                                                                                                                                                                                          |
+| BIOME               | Biome                 | [Biome type](https://minecraft.wiki/w/Biome#Biome_types)                                                                                                                                                                                                                                     |
+| TRIM_MATERIAL       | TrimMaterial          | [Materials used to trim armor](https://minecraft.wiki/w/Smithing#Material)                                                                                                                                                                                                                   |
+| TRIM_PATTERN        | TrimPattern           | [Trim patterns](https://minecraft.wiki/w/Smithing#Trimming)                                                                                                                                                                                                                                  |
+| DAMAGE_TYPE         | DamageType            | [All types of damage dealt to an entity](https://minecraft.wiki/w/Damage_type)                                                                                                                                                                                                               |
+| WOLF_VARIANT        | Wolf.Variant          | [Wolf variants since 1.20.5](https://minecraft.wiki/w/Wolf#Variants)                                                                                                                                                                                                                         |
+| PAINTING_VARIANT    | Art                   | [All paintings](https://minecraft.wiki/w/Painting#Canvases)                                                                                                                                                                                                                                  |
+| ATTRIBUTE           | Attribute             | [Entity attribute](https://minecraft.wiki/w/Attribute)                                                                                                                                                                                                                                       |
+| BANNER_PATTERN      | PatternType           | [Armor Pattern type](https://minecraft.wiki/w/Banner_Pattern#Variants)                                                                                                                                                                                                                       |
+| CAT_VARIANT         | Cat.Type              | [Cat variants](https://minecraft.wiki/w/Cat#Appearance)                                                                                                                                                                                                                                      |
+| ENTITY_TYPE         | EntityType            | [Every entity type](https://minecraft.wiki/w/Entity)                                                                                                                                                                                                                                         |
+| PARTICLE_TYPE       | Particle              | [Every particle type](https://minecraft.wiki/w/Particles_(Java_Edition))                                                                                                                                                                                                                     |
+| POTION              | PotionType            | [Every potion type](https://minecraft.wiki/w/Potion#Effect_potions)                                                                                                                                                                                                                          |
+| SOUND_EVENT         | Sound                 | [Events that trigger sound effects](https://minecraft.wiki/w/Sounds.json#Sound_events)                                                                                                                                                                                                       |
+| VILLAGER_PROFESSION | Villager.Profession   | [Villager professions](https://minecraft.wiki/w/Villager#Professions)                                                                                                                                                                                                                        |
+| VILLAGER_TYPE       | Villager.Type         | [Villager biome specific type](https://minecraft.wiki/w/Villager#Professions)                                                                                                                                                                                                                |
+| MEMORY_MODULE_TYPE  | MemoryKey             | Keys for saving per-entity data                                                                                                                                                                                                                                                              |
+| FROG_VARIANT        | Frog.Variant          | [Frog variants](https://minecraft.wiki/w/Frog)                                                                                                                                                                                                                                               |
+| MAP_DECORATION_TYPE | MapCursor.Type        | [Types of sprites displayed on a map](https://minecraft.wiki/w/Map#Map_icons)                                                                                                                                                                                                                |
+| FLUID               | Fluid                 | [Fluid types](https://minecraft.wiki/w/Fluid)     
+
+### Predefined types (in Brigadier itself)
+
+Brigadier itself also specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>LifecycleEventManager</Javadoc>
+
+### Custom types
+
+Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc> 
+interface.

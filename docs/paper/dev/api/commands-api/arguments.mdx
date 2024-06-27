@@ -110,7 +110,7 @@ public enum IceCreamType {
     COOKIES
 }
 ```
-Now, we have to define the argument itself. We do this by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType.Converted</Javadoc> interface:
+Now, we have to define the argument itself. We do this by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType$Converted"}>CustomArgumentType.Converted</Javadoc> interface:
 
 ```java
 public class IceCreamTypeArgument implements CustomArgumentType.Converted<IceCreamType, String> {

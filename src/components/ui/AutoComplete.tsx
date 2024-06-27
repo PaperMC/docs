@@ -74,7 +74,7 @@ export default function AutoComplete({ options, value, onSelect, placeholder }: 
   const items = options.filter(
     (item) =>
       item.value.toLowerCase().startsWith(inputValue?.toLowerCase()) ||
-      item.label?.toLowerCase()?.startsWith?.(inputValue?.toLowerCase())
+      item.label?.toLowerCase()?.startsWith?.(inputValue?.toLowerCase()),
   );
 
   return (
@@ -115,7 +115,7 @@ export default function AutoComplete({ options, value, onSelect, placeholder }: 
                   {...getItemProps({
                     className: clsx(
                       "autocomplete-portal__item",
-                      activeIndex === index && "autocomplete-portal__item--selected"
+                      activeIndex === index && "autocomplete-portal__item--selected",
                     ),
                     key: item.value,
                     ref(node) {

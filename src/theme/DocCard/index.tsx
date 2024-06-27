@@ -67,7 +67,7 @@ function CardCategory({ item }: { item: PropSidebarItemCategory }): JSX.Element 
             description:
               "The default description for a category card in the generated index about how many items this category includes",
           },
-          { count: item.items.length }
+          { count: item.items.length },
         )
       }
     />

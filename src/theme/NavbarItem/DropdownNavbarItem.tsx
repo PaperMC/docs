@@ -26,7 +26,7 @@ function isItemActive(item: LinkLikeNavbarItemProps, localPathname: string): boo
 
 function containsActiveItems(
   items: readonly LinkLikeNavbarItemProps[],
-  localPathname: string
+  localPathname: string,
 ): boolean {
   return items.some((item) => isItemActive(item, localPathname));
 }

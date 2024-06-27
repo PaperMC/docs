@@ -142,7 +142,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
           className={clsx(
             !isFolder && "config-explorer-file-node",
             isFolder && "config-explorer-file-folder-node",
-            hasUrl && "config-explorer-file-node-with-link"
+            hasUrl && "config-explorer-file-node-with-link",
           )}
           to={node.url}
         >
@@ -168,7 +168,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
             <div
               className={clsx(
                 "config-explorer-popup-window",
-                popupNode !== node && "display--none"
+                popupNode !== node && "display--none",
               )}
             >
               <strong>Description:</strong>

@@ -122,14 +122,14 @@ const ItemCommandConverter: React.FC = () => {
         {
           method: "POST",
           body: input,
-        }
+        },
       );
       if (response.status === 200) {
         setOutput(await response.text());
         toggleState(setConvertSuccess);
       } else {
         console.warn(
-          "Failed to convert command: " + response.status + ": " + (await response.text())
+          "Failed to convert command: " + response.status + ": " + (await response.text()),
         );
         toggleState(setConvertError);
       }

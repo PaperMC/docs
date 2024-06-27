@@ -75,7 +75,7 @@ const generateStartCommand = (
   filename: string,
   guiEnabled: boolean,
   autoRestartEnabled: boolean,
-  platform: Option
+  platform: Option,
 ) => {
   setTimeout(resizeOutput, 0);
   let content = "";
@@ -84,7 +84,7 @@ const generateStartCommand = (
   if (autoRestartEnabled)
     content = (platform === WINDOWS ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(
       "%%CONTENT%%",
-      command
+      command,
     );
   else content = platform === WINDOWS ? command + "\n\npause" : command;
 
@@ -125,7 +125,7 @@ const StartScriptGenerator: React.FC = () => {
 
   const handleCopyToClipboard = () => {
     navigator.clipboard.writeText(
-      generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)
+      generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform),
     );
     handleGreenButtonHighlight(setCopySuccess);
   };
@@ -136,7 +136,7 @@ const StartScriptGenerator: React.FC = () => {
       [generateStartCommand(memory, selectedFlag, filename, guiEnabled, autoRestart, platform)],
       {
         type: "text/plain",
-      }
+      },
     );
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -232,7 +232,7 @@ const StartScriptGenerator: React.FC = () => {
             filename,
             guiEnabled,
             autoRestart,
-            platform
+            platform,
           )}
           id={"output-command-text"}
           readOnly

@@ -37,7 +37,7 @@ const scrollIntoView = (id: string): void => {
         behavior: "smooth",
       });
     },
-    navigator.userAgent.includes("Chrome") && navigator.vendor.includes("Google Inc") ? 0 : 1
+    navigator.userAgent.includes("Chrome") && navigator.vendor.includes("Google Inc") ? 0 : 1,
   );
 };
 
@@ -56,7 +56,7 @@ const parseDefault = (
   parentKey: string,
   name: string,
   handleHashLinkClick,
-  separator: string
+  separator: string,
 ): ReactNode => {
   const hash = createUrlHash(parentKey, name);
   useBrokenLinks().collectAnchor(hash);
@@ -184,7 +184,7 @@ const YamlNodeWithDescription = ({
           className={clsx(
             "config-node clean-btn button--link notranslate",
             showDescription && "with-value-active",
-            !showDescription && "with-value"
+            !showDescription && "with-value",
           )}
           translate={"no"}
         >
@@ -195,7 +195,7 @@ const YamlNodeWithDescription = ({
             parentKey,
             name,
             handleHashLinkClick,
-            separator
+            separator,
           )}
         </button>
         <div className={clsx("indent-2 margin-bottom--sm", !showDescription && "display--none")}>
@@ -274,7 +274,7 @@ const YamlTreeNode = ({
         false,
         separator,
         showAllDescriptions,
-        defaultValue
+        defaultValue,
       )}
     </div>
   );
@@ -286,7 +286,7 @@ const renderYamlData = (
   root = false,
   separator: string,
   showAllDescriptions: boolean,
-  defaultValue: string
+  defaultValue: string,
 ): ReactNode => {
   const renderedNodes: JSX.Element[] = [];
 
@@ -306,7 +306,7 @@ const renderYamlData = (
             separator={separator}
             showAllDescriptions={showAllDescriptions}
             defaultValue={defaultValue}
-          />
+          />,
         );
       } else {
         renderedNodes.push(
@@ -320,7 +320,7 @@ const renderYamlData = (
             showAllDescriptions={showAllDescriptions}
             defaultValue={defaultValue}
             warning={"inline-docs-warning" in value ? value["inline-docs-warning"] : null}
-          />
+          />,
         );
       }
     }

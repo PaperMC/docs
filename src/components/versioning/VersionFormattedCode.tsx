@@ -35,16 +35,16 @@ export default function VersionFormattedCode({
         .toString()
         .replace(
           /%%_MAJ_MIN_MC_%%/g,
-          await getProjectVersion("paper", versionMeta, VersionType.MajorMinor)
+          await getProjectVersion("paper", versionMeta, VersionType.MajorMinor),
         );
       code = code.replace(/%%_MAJ_MIN_PAT_MC_%%/g, await getProjectVersion("paper", versionMeta));
       code = code.replace(
         /%%_MAJ_MIN_VEL_%%/g,
-        await getProjectVersion("velocity", versionMeta, VersionType.MajorMinorZeroed)
+        await getProjectVersion("velocity", versionMeta, VersionType.MajorMinorZeroed),
       );
       code = code.replace(
         /%%_MAJ_MIN_PAT_VEL_%%/g,
-        await getProjectVersion("velocity", versionMeta)
+        await getProjectVersion("velocity", versionMeta),
       );
 
       if (mounted.current) {

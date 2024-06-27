@@ -24,11 +24,11 @@ class ExpiringValue<T> {
 
 const createProjectVersionsValue = (
   project: string,
-  ttl: number = 5 * 60 * 1000
+  ttl: number = 5 * 60 * 1000,
 ): ExpiringValue<string[]> => {
   return new ExpiringValue(ttl, async () => {
     const result = await fetch(`https://api.papermc.io/v2/projects/${project}`).then((r) =>
-      r.json()
+      r.json(),
     );
 
     return result.versions;
@@ -59,7 +59,7 @@ export interface DocusaurusVersion {
 export const getProjectVersion = async (
   project: Project,
   currentVersion: DocusaurusVersion | null,
-  versionType: VersionType = VersionType.MajorMinorPatch
+  versionType: VersionType = VersionType.MajorMinorPatch,
 ): Promise<string | null> => {
   const versionsValue = projects[project];
   if (!versionsValue) {

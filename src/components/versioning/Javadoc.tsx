@@ -10,12 +10,12 @@ import { useDocsVersion } from "@docusaurus/theme-common/internal";
 
 type TargetResolver = (
   currentVersion: DocusaurusVersion | null,
-  module?: string
+  module?: string,
 ) => Promise<string>;
 
 const createProjectTarget = (
   project: Project,
-  versionType: VersionType = VersionType.MajorMinorPatch
+  versionType: VersionType = VersionType.MajorMinorPatch,
 ): TargetResolver => {
   return async (currentVersion) => {
     const version = await getProjectVersion(project, currentVersion, versionType);

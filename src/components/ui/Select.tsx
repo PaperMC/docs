@@ -19,7 +19,7 @@ export default function Button({ options, value, onSelect }: SelectProps) {
   const [open, setOpen] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(
-    value && options.indexOf(value)
+    value && options.indexOf(value),
   );
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export default function Button({ options, value, onSelect }: SelectProps) {
                   {...getItemProps({
                     className: clsx(
                       "custom-dropdown__item",
-                      activeIndex === index && "custom-dropdown__item--selected"
+                      activeIndex === index && "custom-dropdown__item--selected",
                     ),
                     key: option.value,
                     ref(node) {

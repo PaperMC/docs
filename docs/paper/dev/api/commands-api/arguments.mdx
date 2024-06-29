@@ -13,7 +13,7 @@ Paper's command system is still experimental and may change in the future.
 
 :::
 
-## Basic usage of arguments
+## Basic usage
 
 You can add arguments to a command by doing the following:
 ```java title="YourPluginClass.java"
@@ -50,11 +50,11 @@ sender will get a message containing the key of the enchantment they selected.
 - Custom types
 - Non alphanumerical sorting
 
-## Enchantment types
+## Types
 
-By default, you can use [registries](../registries) to get simple argument types like
-blocks, items, potions and many more. In the example above, we used the Enchantment 
-Argument type but there are many others:
+By default, you can use [the registry API](../registries.mdx) to get simple argument types like
+blocks, items, potions and many more. In the example above, we used the `Enchantment` 
+argument type, but there are many others:
 
 ### Predefined types (Registry)
 
@@ -89,14 +89,14 @@ Argument type but there are many others:
 
 ### Predefined types (in Brigadier itself)
 
-Brigadier itself also specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>LifecycleEventManager</Javadoc>
+Brigadier itself also specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>.
 
 ### Custom types
 
 Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc> 
 interface. 
 
-Now, lets say that we want to implement a command which lets you order ice cream. For that,
+Now, let's say that we want to implement a command which lets you order ice cream. For that,
 we add an enum that specifies all available values for our custom type.
 
 ```java 
@@ -160,7 +160,7 @@ In the last method, `listSuggestions()`, we return `CompletableFuture<Suggestion
 can suggest all available options. We can even add tooltips to the suggestions to explain them in greater
 detail. 
 
-As a last step, we need to register the Command:
+As a last step, we need to register the command:
 
 ```java
 public void onEnable() {
@@ -180,9 +180,9 @@ public void onEnable() {
 }
 ```
 
-Now that we have registered the command, we can execute it ingame:
+Now that we have registered the command, we can execute it in-game:
 
 ![command with suggestions](./assets/icecreamargument.gif)
-Look, we can even see our tooltip and if we execute the command, we get the message we specified
+Look, we can even see our tooltip and if we execute the command, we get the message we specified:
 
 ![executed command](./assets/command-executed.gif)

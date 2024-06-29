@@ -39,18 +39,16 @@ public class YourPluginClass extends JavaPlugin {
     }
 }
 ```
-This command has one argument of the `Enchantment` datatype. The advantage of using
-Brigadier over the `TabExecutor` interface is that you don't have to convert the
-string that is passed to the `CommandExecutor#onCommand()` function as an argument to 
-an enchantment in this case because `ctx.getArgument("enchantmentargument", Enchantment.class)`
-returns a value of the `Enchantment` datatype. Additionally, you don't have to write 
-error handling functionality yourself as the client checks whether the argument the
-user wrote in the chat is one of the `minecraft:enchantment` type and if it isn't,
-the user will get an error. Another advantage `ArgumentTypes` have over string-based argument systems like
-Bukkit's `TabExecutor` is that we can work with our own types and the completions list 
-is not always sorted alphanumerically. This may sound insignificant but when you want an input 
-of the type integer and suggest the numbers 0-10, for example, your list will look like this because
-it needs to be converted to strings:`0, 1, 10, 2, 3, ...`. Looks awful, right?
+
+This command has one argument of the `Enchantment` datatype. When the command is executed, the command
+sender will get a message containing the key of the enchantment they selected.
+
+## Advantage over string-based arguments
+
+- Direct conversion to usable type
+- Client-side error handling
+- Custom types
+- Non alphanumerical sorting
 
 ## Enchantment types
 

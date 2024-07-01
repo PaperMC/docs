@@ -265,7 +265,8 @@ const config: Config = {
         "toml",
         "properties",
       ],
-      theme: themes.vsDark,
+      theme: themes.vsLight,
+      darkTheme: themes.vsDark,
     },
     algolia: {
       appId: "P1BCDPTG1Q",

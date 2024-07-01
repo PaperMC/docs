@@ -1,4 +1,7 @@
 :root {
+  /* adjusted for VS Light theme */
+  --docusaurus-highlighted-code-line-bg: rgb(0 0 0 / 10%);
+
   --ifm-color-primary: #0240dc;
   --ifm-color-primary-dark: #033ed5;
   --ifm-color-secondary: #868686;
@@ -21,6 +24,9 @@
 }
 
 html[data-theme="dark"] {
+  /* adjusted for VS Dark theme */
+  --docusaurus-highlighted-code-line-bg: rgb(66 66 66 / 35%);
+
   --ifm-color-primary: #409efe;
   --ifm-color-primary-dark: #0175ec;
   --ifm-color-secondary: #ebedf0;

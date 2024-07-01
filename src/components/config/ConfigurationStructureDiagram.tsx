@@ -155,7 +155,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
             !isFolder && "config-explorer-file-node",
             isFolder && "config-explorer-file-folder-node",
             hasUrl && "config-explorer-file-node-with-link",
-            isExternal && "config-explorer-file-folder-node-with-link",
+            isExternal && "config-explorer-file-folder-node-with-link"
           )}
           to={node.url}
         >

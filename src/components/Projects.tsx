@@ -10,19 +10,29 @@ const projects: Project[] = [
     description:
       "High performance Minecraft server that aims to fix gameplay and mechanics inconsistencies.",
     repo: "PaperMC/Paper",
-    link: "/paper",
+    modules: [
+      { name: "Administration", link: "/paper/admin" },
+      { name: "Development", link: "/paper/dev" },
+      { name: "Contributing", link: "/paper/contributing" },
+    ],
   },
   {
     title: "Folia",
     description: "A fork of Paper which adds regionized multithreading to the dedicated server.",
     repo: "PaperMC/Folia",
-    link: "/folia",
+    modules: [
+      { name: "Administration", link: "/folia/admin" },
+      { name: "Development", link: "/folia/dev" },
+    ],
   },
   {
     title: "Velocity",
     description: "The modern, next-generation Minecraft server proxy.",
     repo: "PaperMC/Velocity",
-    link: "/velocity",
+    modules: [
+      { name: "Administration", link: "/velocity/admin" },
+      { name: "Development", link: "/velocity/dev" },
+    ],
   },
   {
     title: "Miscellaneous",
@@ -43,7 +53,7 @@ const projects: Project[] = [
 function Project(project: Project) {
   return (
     <div className={"project"}>
-      <div className={"flex"}>
+      <div>
         <Link
           className={clsx("projectGitHub", project.eol && "archivedProjectTitle")}
           to={`https://github.com/${project.repo}`}
@@ -54,12 +64,16 @@ function Project(project: Project) {
         <p>{project.description}</p>
       </div>
       <div>
-        <Link
-          className={clsx("button button--primary", project.eol && "archivedProjectButton")}
-          to={project.link}
-        >
-          Go
-        </Link>
+        {project.modules?.map((module, index) => (
+          <Link key={index} className={"button button--primary"} to={module.link}>
+            {module.name}
+          </Link>
+        ))}
+        {project.link && (
+          <Link className={"button button--primary"} to={project.link}>
+            Go
+          </Link>
+        )}
       </div>
     </div>
   );
@@ -81,6 +95,12 @@ interface Project {
   title: string;
   description: string;
   repo: string;
-  link: string;
+  link?: string;
+  modules?: Module[];
   eol?: boolean;
+}
+
+interface Module {
+  name: string;
+  link: string;
 }

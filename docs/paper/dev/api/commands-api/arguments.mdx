@@ -13,7 +13,7 @@ Paper's command system is still experimental and may change in the future.
 
 :::
 
-## Basic usage
+## Basic usage of arguments
 
 You can add arguments to a command by doing the following:
 ```java title="YourPluginClass.java"
@@ -50,18 +50,18 @@ sender will get a message containing the key of the enchantment they selected.
 - Custom types
 - Non alphanumerical sorting
 
-## Types
+## Enchantment types
 
-By default, you can use [the registry API](../registries.mdx) to get simple argument types like
-blocks, items, potions and many more. In the example above, we used the `Enchantment` 
-argument type, but there are many others:
+By default, you can use [registries](../registries) to get simple argument types like
+blocks, items, potions and many more. In the example above, we used the Enchantment 
+Argument type but there are many others:
 
 ### Predefined types (Registry)
 
 | Registry key name   | Return datatype class | Description                                                                                                                                                                                                                                                                                  |
 |---------------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | GAME_EVENT          | GameEvent             | Events in the game (eating, flying with an elytra etc.)                                                                                                                                                                                                                                      |
-| STRUCTURE_TYPE      | StructureType         | [Structures](https://minecraft.wiki/w/Structure#Overworld) - Beware that, as of Paper 1.20.6-147, there is also a Registry named `STRUCTURE` that is not recognized by the client and makes it unable to connect. This has been reported to Paper developers and will be fixed in a future release. |
+| STRUCTURE_TYPE      | StructureType         | [Structures](https://minecraft.wiki/w/Structure#Overworld)
 | INSTRUMENT          | CraftMusicInstrument  | [Note block instrument](https://minecraft.wiki/w/Note_Block)                                                                                                                                                                                                                                 |
 | ENCHANTMENT         | Enchantment           | [Enchantment type](https://minecraft.wiki/w/Enchanting#Summary_of_enchantments)                                                                                                                                                                                                                                     |
 | MOB_EFFECT          | PotionEffectType      | [Potion effect](https://minecraft.wiki/w/Effect#List)                                                                                                                                                                                                                                             |
@@ -87,16 +87,14 @@ argument type, but there are many others:
 | MAP_DECORATION_TYPE | MapCursor.Type        | [Types of sprites displayed on a map](https://minecraft.wiki/w/Map#Map_icons)                                                                                                                                                                                                                |
 | FLUID               | Fluid                 | [Fluid types](https://minecraft.wiki/w/Fluid)     
 
-### Predefined types (in Brigadier itself)
-
-Brigadier itself also specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>.
+Brigadier itself also specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>LifecycleEventManager</Javadoc>
 
 ### Custom types
 
 Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc> 
 interface. 
 
-Now, let's say that we want to implement a command which lets you order ice cream. For that,
+Now, lets say that we want to implement a command which lets you order ice cream. For that,
 we add an enum that specifies all available values for our custom type.
 
 ```java 
@@ -142,7 +140,7 @@ public class IceCreamTypeArgument implements CustomArgumentType.Converted<IceCre
 }
 ```
 
-That's a lot of code, so let's start from the top. We implemented the `CustomArgumentType.Converted`
+That's a lot of code, so let's start from the top. We implemented the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType$Converted"}>CustomArgumentType.Converted</Javadoc>
 interface. This interface takes two type arguments: our custom enum, T, and a type that is native to 
 Minecraft, such as String, Integer, etc., called N. The native type exists so that the client can use
 the input data, as it doesn't know what our custom `IceCreamType` is.
@@ -160,7 +158,7 @@ In the last method, `listSuggestions()`, we return `CompletableFuture<Suggestion
 can suggest all available options. We can even add tooltips to the suggestions to explain them in greater
 detail. 
 
-As a last step, we need to register the command:
+As a last step, we need to register the Command:
 
 ```java
 public void onEnable() {
@@ -170,7 +168,7 @@ public void onEnable() {
         commands.register(Commands.literal("ordericecream")
             .then(
                 Commands.argument("flavor", new IceCreamTypeArgument()).executes((commandContext -> {
-                    IceCreamType argumentResponse = commandContext.getArgument("flavor", IceCreamType.class); // Gets the raw argument
+                    IceCreamType argumentResponse = commandContext.getArgument("flavor", IceCreamType.class); 
                     commandContext.getSource().getSender().sendMessage(Component.text("You ordered: " + argumentResponse));
                     return 1;
                 }))
@@ -180,9 +178,9 @@ public void onEnable() {
 }
 ```
 
-Now that we have registered the command, we can execute it in-game:
+Now that we have registered the command, we can execute it ingame:
 
 ![command with suggestions](./assets/icecreamargument.gif)
-Look, we can even see our tooltip and if we execute the command, we get the message we specified:
+Look, we can even see our tooltip and if we execute the command, we get the message we specified
 
 ![executed command](./assets/command-executed.gif)

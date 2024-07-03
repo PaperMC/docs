@@ -38,6 +38,9 @@ hopper:
 maps:
   item-frame-cursor-limit:
     default: "2147483647"
+scoreboards:
+  use-vanilla-world-scoreboard-name-coloring:
+    default: "true"
 unsupported-settings:
   disable-world-ticking-when-empty:
     default: "true"

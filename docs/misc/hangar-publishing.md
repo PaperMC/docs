@@ -67,6 +67,7 @@ Hangar allows version ranges (such as `1.19-1.20.2`) and wildcards (such as `1.2
 # TODO: Remove the platforms you don't need and put in the correct versions.
 paperVersion=1.12.2, 1.16.5, 1.19-1.20.2
 velocityVersion=3.2
+waterfallVersion=1.20
 ```
 
 ### `build.gradle.kts`
@@ -81,7 +82,7 @@ plugins {
 
 Then you simply need to add the `hangarPublish` configuration block and make sure you do the following:
 
-- If your plugin is not a Paper plugin, or supports Velocity as well, copy the register block with a different
+- If your plugin is not a Paper plugin, or supports Velocity/Waterfall as well, copy the register block with a different
   platform and change the property used instead of `paperVersion` (as declared in the `gradle.properties` file).
 - Insert the correct project namespace
 - Insert your plugin dependencies, if any

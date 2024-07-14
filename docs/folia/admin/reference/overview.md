@@ -288,7 +288,7 @@ simple or portal.
 
 Simple teleportations are completed by ensuring the addition
 of the teleporting entity to the destination chunk specified
-by teleporation. This allows the entity to be saved at the target
+by teleportation. This allows the entity to be saved at the target
 position, as if the teleportation did complete before shutdown.
 
 Portal teleportations are completed by forcing the addition

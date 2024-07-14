@@ -39,6 +39,19 @@
   color: var(--config-node-highlight-text-color);
 }
 
+/* File Folder Node with Link */
+.config-explorer-file-folder-node-with-link {
+  font-weight: bold;
+  color: var(--ifm-link-color);
+}
+
+.config-explorer-file-folder-node-with-link:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  text-decoration: none;
+  color: var(--ifm-link-color);
+}
+
 /* Popup Window Container */
 .config-explorer-popup-window-container {
   position: absolute;

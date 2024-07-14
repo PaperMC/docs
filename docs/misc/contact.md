@@ -9,12 +9,6 @@ description: There are many ways to contact us, see here for more information.
 
 The PaperMC project handles most communication via Discord. Use the following invite: https://discord.gg/papermc
 
-## IRC
-
-Some of our Discord channels are bridged to IRC.
-
-- [#paper on irc.esper.net](https://webchat.esper.net/?channels=paper)
-
 ## Forums
 
 Reach out for support, or contact us on our forums.

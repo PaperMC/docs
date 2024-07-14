@@ -79,7 +79,7 @@ const generateStartCommand = (
 ) => {
   setTimeout(resizeOutput, 0);
   let content = "";
-  const command = `java -Xmx${memory * 1024}M -Xms${memory * 1024}M ${selectedFlag.value}${selectedFlag === NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === VELOCITY ? "" : "nogui"}`;
+  const command = `java -Xms${memory * 1024}M -Xmx${memory * 1024}M ${selectedFlag.value}${selectedFlag === NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === VELOCITY ? "" : "nogui"}`;
 
   if (autoRestartEnabled)
     content = (platform === WINDOWS ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(

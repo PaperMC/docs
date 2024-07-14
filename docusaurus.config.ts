@@ -13,11 +13,12 @@ import {
   cacheAuthorData,
   getFileCommitHashSafe,
 } from "./src/util/authorUtils";
+import { preview, deploymentID } from "./src/util/pagesUtils";
 
-const preview = env.VERCEL_ENV === "preview";
-cacheAuthorData(preview || process.env.NODE_ENV === "development");
+cacheAuthorData(preview || env.NODE_ENV === "development");
 
-const url = (preview && `https://${env.VERCEL_URL}`) || "https://docs.papermc.io";
+const url =
+  (preview && `https://${deploymentID}.papermc-docs.pages.dev`) || "https://docs.papermc.io";
 
 const docsCommon: Options = {
   breadcrumbs: true,
@@ -32,7 +33,7 @@ const docsCommon: Options = {
 const config: Config = {
   title: "PaperMC Docs",
   tagline:
-    "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
+    "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Folia.",
   url: url,
   baseUrl: "/",
   onBrokenLinks: isCI ? "throw" : "warn",
@@ -143,7 +144,7 @@ const config: Config = {
         lastVersion: "current",
         versions: {
           current: {
-            label: "1.20",
+            label: "1.21",
             path: "",
           },
         },
@@ -222,7 +223,6 @@ const config: Config = {
       },
     ],
     "@docusaurus/plugin-debug",
-    "@docusaurus/plugin-vercel-analytics",
     "docusaurus-plugin-sass",
   ],
 

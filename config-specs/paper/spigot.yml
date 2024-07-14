@@ -230,6 +230,9 @@ stats:
       - The Value for each key is an integer to force the related stat to.
 world-settings:
   default:
+    unload-frozen-chunks:
+      default: "false"
+      description: Experimental option that controls whether chunks can unload whilst ticks are frozen via /tick freeze.
     arrow-despawn-rate:
       default: "1200"
       description: The number of ticks before an arrow despawns.
@@ -270,7 +273,7 @@ world-settings:
         default: "32"
         description: The entity activation range for monsters.
       raiders:
-        default: "48"
+        default: "64"
         description: The entity activation range for raiders.
       tick-inactive-villagers:
         default: "true"
@@ -355,7 +358,7 @@ world-settings:
         description: The entity activation range for water mobs.
     entity-tracking-range:
       animals:
-        default: "48"
+        default: "96"
         description: >-
           Controls how far in blocks animals are tracked (sent to) the player.
           This is scaled by the
@@ -367,13 +370,13 @@ world-settings:
           player. This is scaled by the
           [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
       misc:
-        default: "32"
+        default: "96"
         description: >-
           Controls how far in blocks misc entities are tracked (sent to) the
           player. This is scaled by the
           [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
       monsters:
-        default: "48"
+        default: "96"
         description: >-
           Controls how far in blocks monsters are tracked (sent to) the player.
           This is scaled by the
@@ -385,7 +388,7 @@ world-settings:
           player. This is scaled by the
           [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
       players:
-        default: "48"
+        default: "128"
         description: >-
           Controls how far in blocks players are tracked (sent to) the player.
           This is scaled by the
@@ -621,13 +624,13 @@ world-settings:
       description: How many TNT to process per server tick. Set to 0 to disable.
     merge-radius:
       exp:
-        default: "3.0"
+        default: "-1"
         description: >-
           The range, in blocks, that exp orbs will combine at on initial spawn.
           This behavior is not present in Vanilla and doesn't impact the usual
-          merge range once spawned. Set to 0 to disable.
+          merge range once spawned. Set to 0 or less to disable.
       item:
-        default: "2.5"
+        default: "0.5"
         description: "The range, in blocks, that items will combine within."
     mob-spawn-range:
       default: "8"
@@ -689,6 +692,9 @@ world-settings:
     seed-swamp:
       default: "14357620"
       description: The per-structure seed for swamp structures.
+    seed-trialchambers:
+      default: "94251327"
+      description: The per-structure seed for trial chambers.
     seed-trailruins:
       default: "83469867"
       description: The per-structure seed for trail ruins.

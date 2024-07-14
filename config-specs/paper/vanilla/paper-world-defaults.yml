@@ -1,0 +1,48 @@
+chunks:
+  delay-chunk-unloads-by:
+    default: "0s"
+  max-auto-save-chunks-per-tick:
+    default: "200"
+collisions:
+  allow-player-cramming-damage:
+    default: "true"
+  max-entity-collisions:
+    default: "2147483647"
+    description: >-
+      The actual default value would be infinity. 2147483647 is the closest to infinity.
+entities:
+  behavior:
+    phantoms-do-not-spawn-on-creative-players:
+      default: "false"
+    phantoms-only-attack-insomniacs:
+      default: "false"
+  spawning:
+    count-all-mobs-for-spawning:
+      default: "true"
+    per-player-mob-spawns:
+      default: "false"
+    duplicate-uuid:
+      mode:
+        default: "NOTHING"
+    filter-bad-tile-entity-nbt-from-falling-blocks:
+      default: "false"
+    filtered-entity-tag-nbt-paths:
+      default: "<expand>"
+      description: "The default value is: []"
+fixes:
+  disable-unloaded-chunk-enderpearl-exploit:
+    default: "false"
+hopper:
+  cooldown-when-full:
+    default: "false"
+maps:
+  item-frame-cursor-limit:
+    default: "2147483647"
+scoreboards:
+  use-vanilla-world-scoreboard-name-coloring:
+    default: "true"
+unsupported-settings:
+  disable-world-ticking-when-empty:
+    default: "true"
+  fix-invulnerable-end-crystal-exploit:
+    default: "false"

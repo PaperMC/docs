@@ -38,6 +38,7 @@ const paper: SidebarsConfig = {
             "admin/how-to/update",
             "admin/how-to/aikars-flags",
             "admin/how-to/anti-xray",
+            "admin/how-to/get-to-vanilla",
           ],
         },
         {
@@ -148,6 +149,7 @@ const paper: SidebarsConfig = {
             "dev/api/plugin-messaging",
             "dev/api/plugin-configs",
             "dev/api/lifecycle",
+            "dev/api/registries",
             "dev/api/recipes",
             "dev/api/folia-support",
             "dev/api/roadmap",

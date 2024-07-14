@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "@site/src/css/configuration-explorer-layout.css";
+// @ts-ignore
 import { Icon } from "@iconify/react";
 import Link from "@docusaurus/Link";
 import clsx from "clsx";
@@ -13,6 +14,7 @@ interface ExplorerNode {
   children?: ExplorerNode[];
   description?: string;
   url?: string;
+  external?: boolean;
 }
 
 const folderData: ExplorerNode[] = [
@@ -20,7 +22,7 @@ const folderData: ExplorerNode[] = [
     name: "logs",
     type: "folder",
     description:
-      "This folder contains all the logs for the server. It compresses old logs into .gz files, but holds the most recent log as a .txt file.",
+      "This folder contains all the logs for the server. It compresses old logs into .gz files, but holds the most recent log as a latest.log file.",
   },
   {
     name: "config",
@@ -38,6 +40,15 @@ const folderData: ExplorerNode[] = [
     name: "plugins",
     type: "folder",
     description: "You can place your plugin JARs here.",
+    children: [
+      {
+        name: ".paper-remapped",
+        type: "folder",
+        description: "Used to store remapped plugins. (Learn more)",
+        url: "https://forums.papermc.io/threads/important-dev-psa-future-removal-of-cb-package-relocation.1106/",
+        external: true,
+      },
+    ],
   },
   {
     name: "<world>",
@@ -122,6 +133,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
     const isFolder = node.type === "folder";
     const hasDescription = "description" in node;
     const hasUrl = "url" in node;
+    const isExternal = node.external;
 
     const handleNodeOpening = (event: React.MouseEvent) => {
       event.stopPropagation();
@@ -142,7 +154,8 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
           className={clsx(
             !isFolder && "config-explorer-file-node",
             isFolder && "config-explorer-file-folder-node",
-            hasUrl && "config-explorer-file-node-with-link"
+            hasUrl && "config-explorer-file-node-with-link",
+            isExternal && "config-explorer-file-folder-node-with-link"
           )}
           to={node.url}
         >

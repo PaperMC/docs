@@ -135,7 +135,7 @@ public class DatabaseManager {
 
     public void connect() {
         HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc://mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
         config.setUsername("username"); // Username
         config.setPassword("password"); // Password
         config.setMaximumPoolSize(10); // Pool size defaults to 10

@@ -18,23 +18,20 @@ check out this [example plugin](https://github.com/PaperMC/paperweight-test-plug
 :::
 
 ## Why this is useful
-The Paper server JARs we provide on the downloads page through the API are **paperclip** JARs. These
-use Spigot's mappings, which are essentially some type names, but fully obfuscated fields and methods.
-This can make it hard to work with in a development environment. This plugin lets you use fully deobfuscated
-types, names, and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
-server.
+This is the only supported way of accessing server internals, as redistributing the server JAR is against the
+Minecraft EULA and general license assumption. Even if you manually depended on the patched server, you would be
+hindering other people working on your project and would be missing deployed API javadocs/sources in your IDE.
 
-:::caution[1.20.5]
+On top of that, Spigot and pre-1.20.5 Paper versions still use Spigot mappings, which are a mix of obfuscated fields/methods
+and mapped as well as custom named classes. This can make it hard to work with in a development environment. This plugin lets you use
+fully deobfuscated types, names, and fields during development, and then remaps your plugin, so it can still be used with the obfuscated
+server. However, this does not apply to reflection. Look at something like [this library](https://github.com/jpenilla/reflection-remapper) to be able to
+use non-obfuscated names in reflection if you want to support obfuscated servers.
 
-As of Minecraft version 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+:::info[1.20.5 Mojang-mapped runtime]
+
+As of Minecraft version 1.20.5, Paper ships with a Mojang-mapped runtime instead of re-obfuscating the server to Spigot mappings.
 See [here](#1205-and-beyond) for more details.
-
-:::
-
-:::caution
-
-The re-obfuscation does not apply to reflection. Look at something like [this library](https://github.com/jpenilla/reflection-remapper) to be able to
-use non-obfuscated names in reflection.
 
 :::
 
@@ -112,38 +109,39 @@ tasks.assemble {
 
 ## 1.20.5 and beyond
 
-As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
+As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of re-obfuscating the server to Spigot mappings.
 Additionally, CraftBukkit classes will no longer be relocated into a versioned package.
 This requires plugins to be deobfuscated before loading when necessary.
 
-Most of this process is done automatically by paperweight but there are some important things to know when using NMS from now on.
+Most of this process is done automatically by paperweight, but there are some important things to know when using server internals (or "NMS") from now on.
 
 ### Default mappings assumption
-* By default, all Spigot/Bukkit plugins will be assumed to be Spigot-mapped if they do not specify their mappings namespace in the manifest. Conversely, all Paper plugins will be assumed to be Mojang-mapped if they do not specify their mappings namespace in the manifest.
+* By default, all Spigot/Bukkit plugins will be assumed to be Spigot-mapped if they do not specify their mappings namespace in the manifest.
+  The other way around, all Paper plugins will be assumed to be Mojang-mapped if they do not specify their mappings namespace in the manifest.
 * Spigot-mapped plugins will need to be deobfuscated on first load, Mojang-mapped plugins will not.
 
-### Mojang mappings
+### Compiling to Mojang mappings
 
-If you want to map your plugin with Mojang mappings, you need to add the following code to your build script:
+:::info
 
-:::note
-
-You only have to change this setting if you are using Bukkit/Spigot plugins. Paper plugins are already assumed to be Mojang-mapped.
+This is the preferred option, as the one-time plugin remapping process during server startup will be skipped and it
+may allow you to keep version compatibility across smaller updates without changes or additional modules.
+However, this makes your plugin incompatible with Spigot servers.
 
 :::
+
+If you want your main output to use Mojang mappings, you need to remove all `dependsOn(reobfJar)` lines and add the following code to your build script:
 
 ```kotlin title="build.gradle.kts"
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 ```
 
-Additionally, you need to remove all `dependsOn(reobfJar)` lines.
+### Compiling to Spigot mappings
 
-### Spigot mappings
-
-If you are using Paper plugins but want to explicitly use Spigot mappings, you need to change the property to:
+If you want your main output to use Spigot mappings, add the following code to your build script:
 
 ```kotlin title="build.gradle.kts"
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 ```
 
-
+This is useful for plugins that have loaders for both Spigot and Paper and want to keep compatibility with both.

@@ -258,7 +258,7 @@ function itself. For per-world configuration, see the
 
 - enabled
 
-  - **default**: true
+  - **default**: false
   - **description**: Controls the global enable state of the Timings platform.
 
 - verbose

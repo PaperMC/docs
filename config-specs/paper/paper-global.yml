@@ -357,7 +357,7 @@ spam-limiter:
       kicks the player for spam
 timings:
   enabled:
-    default: "true"
+    default: "false"
     description: Controls the global enable state of Timings
   hidden-config-entries:
     default: "[database, proxies.velocity.secret]"

@@ -1,6 +1,6 @@
 ---
 slug: /profiling
-description: How to profile your Minecraft server.
+description: How to profile your Paper server.
 ---
 
 # Profiling
@@ -8,6 +8,12 @@ description: How to profile your Minecraft server.
 Profiling is a way to diagnose performance problems with your server.
 A profiler measures certain characteristics of a running server, e.g. how often a method is called
 and how much time it takes up in a single tick, how long and often the garbage collector runs and much more.
+
+:::warning
+
+_For profiling to be effective, the issue you are diagnosing must be actively occurring._
+
+:::
 
 ## Timings
 
@@ -28,12 +34,6 @@ To start profiling your server, run this command:
 
 After 10 minutes, this will return a URL with a profiler report, which you can analyze yourself or provide
 to a developer of a plugin or the Paper support chats.
-
-:::warning
-
-_For the profiling to be effective, the issue you are diagnosing must be actively occurring._
-
-:::
 
 This is only a fraction of what Spark can do, so if you want to learn about the different features of Spark
 or learn to analyze reports yourself, check out Spark's documentation [here](https://spark.lucko.me/docs/).

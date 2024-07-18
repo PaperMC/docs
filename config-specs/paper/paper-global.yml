@@ -355,6 +355,10 @@ spam-limiter:
     description: >-
       The number that the internal tab spam counter can reach until the server
       kicks the player for spam
+spark:
+  enabled:
+    default: "true"
+    description: Whether the spark profiler should be enabled.
 timings:
   enabled:
     default: "false"

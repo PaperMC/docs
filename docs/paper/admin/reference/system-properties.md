@@ -215,13 +215,3 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `false`
 - **description**: Disables plugin remapping introduced in 1.20.5 and everything involving automatic plugin conversion by commodore. For more information see the [userdev](../../dev/getting-started/userdev.mdx#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
-
-#### paper.enableSparkImmediately
-
-- **default**: `false`
-- **description**: Enables the spark profiler as soon as possible when set to true. Otherwise, it is enabled once the server has finished starting up (when the `Done (X.XXXs)! For help, type "help"` message is sent in the console).
-
-#### paper.preferSparkPlugin
-
-- **default**: `false`
-- **description**: Disables the bundled spark profiler in favor of a standalone plugin when set to true. If the spark plugin is not found, the bundled version will be loaded regardless, unless it is disabled [in the configuration](./configuration/global-configuration.mdx#spark_enabled).

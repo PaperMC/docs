@@ -48,6 +48,14 @@ const folderData: ExplorerNode[] = [
         url: "https://forums.papermc.io/threads/important-dev-psa-future-removal-of-cb-package-relocation.1106/",
         external: true,
       },
+      {
+        name: "spark",
+        type: "folder",
+        description:
+          "Used to store configuration and data for the bundled spark profiler. (Learn more)",
+        url: "https://spark.lucko.me/docs/Configuration",
+        external: true,
+      },
     ],
   },
   {

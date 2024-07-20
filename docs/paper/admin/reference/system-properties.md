@@ -221,3 +221,7 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](../../dev/getting-started/userdev.mdx#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
 
+#### paper.preferSparkPlugin
+
+- **default**: `false`
+- **description**: Whether the bundled spark profiler should be disabled in favor of a standalone plugin. If the spark plugin is not found, the bundled version will be loaded regardless of the setting, unless it is [explicitly disabled](/paper/reference/global-configuration#spark_enabled).

@@ -364,11 +364,6 @@ spark:
     description: >-
       Whether the bundled spark profiler should be enabled as soon as possible. This can be useful for profiling the server during startup.
       By default, spark is enabled once the server has finished starting up (when the **Done (X.XXXs)! For help, type "help"** message is sent in the console).
-  prefer-spark-plugin:
-    default: "false"
-    description: >-
-      Whether the bundled spark profiler should be disabled in favor of a standalone plugin.
-      If the spark plugin is not found, the bundled version will be loaded regardless of the setting, unless it is [explicitly disabled](#spark_enabled).
 timings:
   enabled:
     default: "false"

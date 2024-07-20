@@ -37,7 +37,7 @@ or learn to analyze reports yourself, check out spark's documentation [here](htt
 :::tip
 
 If you want to use a version of spark newer than the bundled one, simply place a standalone spark plugin JAR
-into the `plugins` directory and set the [`paper.preferSparkPlugin`](../reference/system-properties#paperprefersparkplugin)
+into the `plugins` directory and set the [`paper.preferSparkPlugin`](../reference/system-properties.md#paperprefersparkplugin)
 system property to `true`.
 
 :::

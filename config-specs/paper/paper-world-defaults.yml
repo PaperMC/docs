@@ -713,6 +713,18 @@ environment:
   fire-tick-delay:
     default: "30"
     description: Sets the minimum delay between fire ticks
+  max-fluid-ticks:
+    default: "65536"
+    description: >-
+      The maximum number of fluid ticks that can be processed in a single tick.
+      This is a safety measure to prevent the server from hanging when there is
+      a large number of fluid updates.
+  max-block-ticks:
+    default: "65536"
+    description: >-
+      The maximum number of block ticks that can be processed in a single tick.
+      This is a safety measure to prevent the server from hanging when there is
+      a large amount of block updates.
 feature-seeds:
   generate-random-seeds-for-all:
     default: "false"

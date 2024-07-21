@@ -140,25 +140,18 @@ public class IceCreamTypeArgument implements CustomArgumentType.Converted<IceCre
 }
 ```
 
-That's a lot of code, so let's start from the top. We implemented the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType$Converted"}>CustomArgumentType.Converted</Javadoc>
-interface. This interface takes two type arguments: our custom enum, T, and a type that is native to 
-Minecraft, such as String, Integer, etc., called N. The native type exists so that the client can use
-the input data, as it doesn't know what our custom `IceCreamType` is.
+We implemented the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType$Converted"}>CustomArgumentType.Converted</Javadoc>
+interface. This interface takes two type arguments: our custom enum, T, and a native Java type called N.
 
-The first method called `convert()` converts the native type (in this case `String`)
-into our own custom type called `IceCreamType`, as the name suggests. This is so we 
-can keep using our custom type internally. If we wouldn't do that, there would be no point in using a 
-custom type. If the specified input isn't found in our enum of available flavors, we
-output an error.
+- `convert()` converts the native type (in this case `String`) into our custom type.
 
-The second method called `getNativeType()` returns the type of string that our command argument uses.
-In our case, we're using a single word, so we return `StringArgumentType.word()`.
+-  `getNativeType()` returns the type of string that our command argument uses. This uses a single word, so we return `StringArgumentType.word()`.
 
-In the last method, `listSuggestions()`, we return `CompletableFuture<Suggestions>` so that the client
+- `listSuggestions()` returns `CompletableFuture<Suggestions>` so that the client
 can suggest all available options. We can even add tooltips to the suggestions to explain them in greater
 detail. 
 
-As a last step, we need to register the Command:
+We then need to register the command:
 
 ```java
 public void onEnable() {

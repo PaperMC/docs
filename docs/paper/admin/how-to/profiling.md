@@ -40,6 +40,10 @@ If you want to use a version of spark newer than the bundled one, simply place a
 into the `plugins` directory and set the [`paper.preferSparkPlugin`](../reference/system-properties.md#paperprefersparkplugin)
 system property to `true`.
 
+If you want to use PlaceholderAPI [placeholders](https://spark.lucko.me/docs/misc/Placeholders)
+from the bundled spark version, you need to install the [spark expansion](https://api.extendedclip.com/expansions/spark/)
+from PAPI's eCloud (`/papi ecloud download spark` and `/papi reload`).
+
 :::
 
 ## Timings

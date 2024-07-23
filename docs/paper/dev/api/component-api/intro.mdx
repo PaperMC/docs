@@ -86,6 +86,21 @@ final Component component = MiniMessage.miniMessage().deserialize(
     "applied to all children.\n<u><!b>This is the first child, " +
     "which is rendered after the parent</!b></u><key:key.inventory></b></#438df2>"
 );
+
+
+// if the syntax above is too verbose for you, create a helper method!
+
+public final class Components {
+  public static Component mm(String miniMessageString) { // mm, short for MiniMessage
+    return MiniMessage.miniMessage().deserialize(miniMessageString);
+  }
+}
+
+// ...
+
+import static io.papermc.docs.util.Components.mm;
+
+final Component component = mm("<blue>Hello <red>World!");
 ```
 
 We recommend using this format for user-facing input such as commands or configuration values.

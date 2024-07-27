@@ -241,6 +241,11 @@ misc:
       description: >-
         The maximum number of threads to allow in the chat thread pool. The
         default value is -1, which means no maximum
+  client-interaction-leniency-distance:
+    default: default
+    description: >-
+      Defines the leniency distance added on the server to the interaction range of a
+      player when validating interact packets.
   compression-level:
     default: default
     description: >-

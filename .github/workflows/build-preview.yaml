@@ -1,21 +1,18 @@
-name: "Deploy to Cloudflare Pages (Preview)"
+name: "Build Preview Deployment"
 
-on: [pull_request_target]
+on:
+  pull_request:
+    types: [opened, synchronize]
 
 jobs:
-  deploy:
+  build-preview:
     runs-on: "ubuntu-latest"
-    permissions:
-      contents: read
-      deployments: write
-      pull-requests: write
+    name: "Build Preview Site and Upload Build Artifact"
     steps:
       - name: "checkout"
         uses: "actions/checkout@v4"
         with:
           fetch-depth: 0
-          ref: ${{ github.event.pull_request.head.ref }}
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: "setup pnpm"
         uses: "pnpm/action-setup@v4"
       - name: "setup node"
@@ -34,13 +31,9 @@ jobs:
         run: |
           cp _headers build/
           cp _redirects build/
-      - name: "publish (push)"
-        id: "cloudflare-publish"
-        uses: "AdrianGonz97/refined-cf-pages-action@v1"
+      # Uploads the build directory as a workflow artifact
+      - name: "upload build artifact"
+        uses: "actions/upload-artifact@v4"
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: "papermc-docs"
-          deploymentName: "Preview"
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          directory: "build"
+          name: "preview-build"
+          path: "build"

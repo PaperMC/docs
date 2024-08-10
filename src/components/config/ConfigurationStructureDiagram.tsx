@@ -159,8 +159,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
         {level > 0 && <IndentationArrow level={level} />}
 
         <div
-          className="config-explorer-node-content"
-          style={{ display: "flex", alignItems: "center" }}
+          className="config-explorer-node-content config-explorer-node"
         >
           {hasUrl ? (
             <Link
@@ -171,7 +170,6 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
                 isExternal && "config-explorer-file-folder-node-with-link"
               )}
               to={node.url}
-              style={{ display: "flex", alignItems: "center" }}
             >
               <Icon
                 icon={isFolder ? folderIcon : fileIcon}
@@ -185,7 +183,6 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
                 !isFolder && "config-explorer-file-node",
                 isFolder && "config-explorer-file-folder-node"
               )}
-              style={{ display: "flex", alignItems: "center" }}
             >
               <Icon
                 icon={isFolder ? folderIcon : fileIcon}
@@ -198,7 +195,6 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
             <span
               className={"config-explorer-popup-window-open-tag"}
               onMouseEnter={handleNodeOpening}
-              style={{ marginLeft: "3px" }}
             >
               ⓘ
             </span>

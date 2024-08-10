@@ -158,31 +158,52 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
       >
         {level > 0 && <IndentationArrow level={level} />}
 
-        <Link
-          className={clsx(
-            !isFolder && "config-explorer-file-node",
-            isFolder && "config-explorer-file-folder-node",
-            hasUrl && "config-explorer-file-node-with-link",
-            isExternal && "config-explorer-file-folder-node-with-link"
-          )}
-          to={node.url}
+        <div
+          className="config-explorer-node-content"
+          style={{ display: "flex", alignItems: "center" }}
         >
-          <span className={"config-node-contents-wrapper"}>
-            <Icon
-              icon={isFolder ? folderIcon : fileIcon}
-              className={"config-explorer-icon config-explorer-node-icon"}
-            />
-            {node.name}
-          </span>
+          {hasUrl ? (
+            <Link
+              className={clsx(
+                !isFolder && "config-explorer-file-node",
+                isFolder && "config-explorer-file-folder-node",
+                "config-explorer-file-node-with-link",
+                isExternal && "config-explorer-file-folder-node-with-link"
+              )}
+              to={node.url}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <Icon
+                icon={isFolder ? folderIcon : fileIcon}
+                className={"config-explorer-icon config-explorer-node-icon"}
+              />
+              <span className={"config-node-contents-wrapper"}>{node.name}</span>
+            </Link>
+          ) : (
+            <span
+              className={clsx(
+                !isFolder && "config-explorer-file-node",
+                isFolder && "config-explorer-file-folder-node"
+              )}
+              style={{ display: "flex", alignItems: "center" }}
+            >
+              <Icon
+                icon={isFolder ? folderIcon : fileIcon}
+                className={"config-explorer-icon config-explorer-node-icon"}
+              />
+              <span className={"config-node-contents-wrapper"}>{node.name}</span>
+            </span>
+          )}
           {hasDescription && (
             <span
               className={"config-explorer-popup-window-open-tag"}
               onMouseEnter={handleNodeOpening}
+              style={{ marginLeft: "3px" }}
             >
               ⓘ
             </span>
           )}
-        </Link>
+        </div>
 
         {hasDescription && (
           <div className={"config-explorer-popup-window-container"}>

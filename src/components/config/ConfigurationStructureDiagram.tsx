@@ -158,9 +158,7 @@ export default function ConfigurationStructureDiagram(): JSX.Element {
       >
         {level > 0 && <IndentationArrow level={level} />}
 
-        <div
-          className="config-explorer-node-content config-explorer-node"
-        >
+        <div className="config-explorer-node-content config-explorer-node">
           {hasUrl ? (
             <Link
               className={clsx(

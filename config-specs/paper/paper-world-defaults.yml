@@ -250,6 +250,11 @@ entities:
     nerf-pigmen-from-nether-portals:
       default: "false"
       description: "Removes AI from pigmen spawned via nether portals "
+    only-merge-items-horizontally:
+      default: "false"
+      description: >-
+        Prevents merging items that are not on the same y level, preventing potential
+        visual artifacts.
     parrots-are-unaffected-by-player-movement:
       default: "false"
       description: >-

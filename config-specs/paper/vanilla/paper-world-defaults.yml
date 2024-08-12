@@ -12,6 +12,8 @@ collisions:
       The actual default value would be infinity. 2147483647 is the closest to infinity.
 entities:
   behavior:
+    only-merge-items-horizontally:
+      default: "true"
     phantoms-do-not-spawn-on-creative-players:
       default: "false"
     phantoms-only-attack-insomniacs:

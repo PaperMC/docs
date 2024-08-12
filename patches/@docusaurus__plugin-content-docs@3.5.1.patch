@@ -1,3 +1,14 @@
+diff --git a/lib/client/docsSearch.js b/lib/client/docsSearch.js
+index fb1fb547238f704c3f27b4cc40af1e55766702df..2543ba879f86fa967b123b8ba55deb8186ac7fc9 100755
+--- a/lib/client/docsSearch.js
++++ b/lib/client/docsSearch.js
+@@ -35,5 +35,5 @@ export function useDocsContextualSearchTags() {
+         const version = activeVersion ?? preferredVersion ?? latestVersion;
+         return getDocsVersionSearchTag(pluginId, version.name);
+     }
+-    return [...Object.keys(allDocsData).map(getDocPluginTags)];
++    return [...(activePluginAndVersion ? [activePluginAndVersion.activePlugin.pluginId] : Object.keys(allDocsData)).map(getDocPluginTags)];
+ }
 diff --git a/lib/constants.js b/lib/constants.js
 index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..db04a015ea2d4474339b1d02f6fbec75ba14c894 100755
 --- a/lib/constants.js
@@ -15,10 +26,10 @@ index f91e43f00e1f9160afa6a34ed1df71c90fe45a28..db04a015ea2d4474339b1d02f6fbec75
 -exports.VERSIONS_JSON_FILE = 'versions.json';
 +exports.VERSIONED_BASE_DIR = 'docs/versioned';
 diff --git a/lib/versions/files.js b/lib/versions/files.js
-index deaadb4357a348c8071b70d72a3c6d9e4e61459f..33f7604f2b93d579169681504b3656453c633fec 100755
+index f63cbb295242437ca8b417d3c32e228e370944e9..396b08c66bec0e4b8b455d32171196fcdd71aa1f 100755
 --- a/lib/versions/files.js
 +++ b/lib/versions/files.js
-@@ -13,20 +13,20 @@ const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
+@@ -19,19 +19,19 @@ const fs_extra_1 = tslib_1.__importDefault(require("fs-extra"));
  const utils_1 = require("@docusaurus/utils");
  const constants_1 = require("../constants");
  const validation_1 = require("./validation");
@@ -36,24 +47,23 @@ index deaadb4357a348c8071b70d72a3c6d9e4e61459f..33f7604f2b93d579169681504b365645
 -    return path_1.default.join(siteDir, addPluginIdPrefix(constants_1.VERSIONED_DOCS_DIR, pluginId), `version-${versionName}`);
 +    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, pluginId, constants_1.VERSIONED_DOCS_DIR, versionName); // Paper
  }
- exports.getVersionDocsDirPath = getVersionDocsDirPath;
 -/** `[siteDir]/community_versioned_sidebars/version-1.0.0-sidebars.json` */
 +/** `[siteDir]/docs/versioned/paper/sidebars/1.0.0.json` */ // Paper
  function getVersionSidebarsPath(siteDir, pluginId, versionName) {
 -    return path_1.default.join(siteDir, addPluginIdPrefix(constants_1.VERSIONED_SIDEBARS_DIR, pluginId), `version-${versionName}-sidebars.json`);
 +    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, pluginId, constants_1.VERSIONED_SIDEBARS_DIR, `${versionName}.json`);
  }
- exports.getVersionSidebarsPath = getVersionSidebarsPath;
  function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
-@@ -42,9 +42,9 @@ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
+     return (0, utils_1.getPluginI18nPath)({
+@@ -45,9 +45,9 @@ function getDocsDirPathLocalized({ localizationDir, pluginId, versionName, }) {
+         ],
      });
  }
- exports.getDocsDirPathLocalized = getDocsDirPathLocalized;
 -/** `community` => `[siteDir]/community_versions.json` */
 +/** `community` => `[siteDir]/docs/versioned/paper.json` */ // Paper
  function getVersionsFilePath(siteDir, pluginId) {
 -    return path_1.default.join(siteDir, addPluginIdPrefix(constants_1.VERSIONS_JSON_FILE, pluginId));
 +    return path_1.default.join(siteDir, constants_1.VERSIONED_BASE_DIR, `${pluginId}.json`);
  }
- exports.getVersionsFilePath = getVersionsFilePath;
  /**
+  * Reads the plugin's respective `versions.json` file, and returns its content.

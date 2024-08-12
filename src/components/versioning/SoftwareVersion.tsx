@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getProjectVersion, VersionType, type Project } from "../../util/versionUtils";
-import { useDocsVersion } from "@docusaurus/theme-common/internal";
+import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 
 export default function SoftwareVersion({
   versionType = "maj-min-pat",

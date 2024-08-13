@@ -388,17 +388,31 @@ entities:
             effect both horizontally and vertically
       <mob_category>:
         soft:
-          default: ""
-          description: >-
-            The number of blocks away from a player in which each entity type
-            (set individually) will be randomly selected to be despawned. Takes
-            effect both horizontally and vertically
+          horizontal:
+            default: ""
+            description: >-
+              The number of blocks away from a player in which each entity type
+              (set individually) will be randomly selected to be despawned. Takes
+              effect horizontally
+          vertical:
+            default: ""
+            description: >-
+              The number of blocks away from a player in which each entity type
+              (set individually) will be randomly selected to be despawned. Takes
+              effect vertically
         hard:
-          default: ""
-          description: >-
-            The number of blocks away from a player in which each entity type
-            (set individually) will be forcibly despawned. Takes effect both
-            horizontally and vertically
+          horizontal:
+            default: ""
+            description: >-
+              The number of blocks away from a player in which each entity type
+              (set individually) will be forcibly despawned. Takes effect
+              horizontally
+          vertical:
+            default: ""
+            description: >-
+              The number of blocks away from a player in which each entity type
+              (set individually) will be forcibly despawned. Takes effect
+              vertically
     disable-mob-spawner-spawn-egg-transformation:
       default: "false"
       description: >-

@@ -130,11 +130,11 @@ const YamlNodeWithDescription = ({
   separator,
   showAllDescriptions,
   defaultValue,
+  showVanillaValues,
 }) => {
   const ignoreInitialRenderRef = useRef(false);
   const [showDescription, setShowDescription] = useState(showAllDescriptions);
-
-  node.default = node.default || defaultValue;
+  node.default = showVanillaValues ? node.vanilla : node.default || defaultValue;
   node.description = node.description || "N/A";
 
   const checkForHash = () => {
@@ -219,6 +219,7 @@ const YamlTreeNode = ({
   showAllDescriptions,
   defaultValue,
   warning,
+  showVanillaValues,
 }): ReactNode => {
   if (name === "inline-docs-warning") return null;
 
@@ -275,10 +276,29 @@ const YamlTreeNode = ({
         false,
         separator,
         showAllDescriptions,
-        defaultValue
+        defaultValue,
+        showVanillaValues
       )}
     </div>
   );
+};
+
+const filterYamlNodeForVanilla = (node: any): any => {
+  if (node?.vanilla) {
+    return node;
+  }
+
+  const filteredNode = {};
+  for (const [key, value] of Object.entries(node)) {
+    if (typeof value === "object" && value !== null) {
+      const child = filterYamlNodeForVanilla(value);
+      if (child !== null) {
+        filteredNode[key] = child;
+      }
+    }
+  }
+
+  return Object.keys(filteredNode).length > 0 ? filteredNode : null;
 };
 
 const renderYamlData = (
@@ -287,10 +307,13 @@ const renderYamlData = (
   root = false,
   separator: string,
   showAllDescriptions: boolean,
-  defaultValue: string
+  defaultValue: string,
+  showVanillaValues = false
 ): ReactNode => {
   const renderedNodes: JSX.Element[] = [];
-
+  if (showVanillaValues) {
+    data = filterYamlNodeForVanilla(data);
+  }
   for (const [key, value] of Object.entries(data)) {
     if (typeof value === "object" && value !== null) {
       if (
@@ -307,6 +330,7 @@ const renderYamlData = (
             separator={separator}
             showAllDescriptions={showAllDescriptions}
             defaultValue={defaultValue}
+            showVanillaValues={showVanillaValues}
           />
         );
       } else {
@@ -321,6 +345,7 @@ const renderYamlData = (
             showAllDescriptions={showAllDescriptions}
             defaultValue={defaultValue}
             warning={"inline-docs-warning" in value ? value["inline-docs-warning"] : null}
+            showVanillaValues={showVanillaValues}
           />
         );
       }
@@ -335,6 +360,7 @@ export default function Config({
   separator = ": ",
   showDescriptions = false,
   defaultValue = "N/A",
+  showVanillaValues = false,
 }): ReactNode {
   const [showAllDescriptions, setShowAllExpanded] = useState(showDescriptions);
   let ymlData = yaml.load(data);
@@ -347,7 +373,15 @@ export default function Config({
         >
           {showAllDescriptions ? "Collapse All" : "Expand All"}
         </button>
-        {renderYamlData(ymlData, "", true, separator, showAllDescriptions, defaultValue)}
+        {renderYamlData(
+          ymlData,
+          "",
+          true,
+          separator,
+          showAllDescriptions,
+          defaultValue,
+          showVanillaValues
+        )}
       </pre>
     </div>
   );

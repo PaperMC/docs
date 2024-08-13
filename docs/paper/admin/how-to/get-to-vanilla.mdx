@@ -7,10 +7,10 @@ description: This page lists all changes that result in a different experience t
 
 import React from 'react';
 import ConfigDocBlock from '@site/src/components/config/ConfigDocBlock';
-import VanillaWorldDefaults from '!!raw-loader!@site/config-specs/paper/vanilla/paper-world-defaults.yml'
-import VanillaGlobalDefaults from '!!raw-loader!@site/config-specs/paper/vanilla/paper-global.yml'
-import SpigotChanges from '!!raw-loader!@site/config-specs/paper/vanilla/spigot.yml'
-import ServerProperties from '!!raw-loader!@site/config-specs/paper/vanilla/server-properties.yml'
+import VanillaWorldDefaults from '!!raw-loader!@site/config-specs/paper/paper-world-defaults.yml'
+import VanillaGlobalDefaults from '!!raw-loader!@site/config-specs/paper/paper-global.yml'
+import SpigotChanges from '!!raw-loader!@site/config-specs/paper/spigot.yml'
+import ServerProperties from '!!raw-loader!@site/config-specs/paper/server-properties.yml'
 
 Due to the way the Bukkit API is implemented in Paper, the gameplay experience between Vanilla and Paper can have inconsistencies.
 This can be furthered by efforts to fix bugs present in Vanilla Minecraft.
@@ -31,16 +31,16 @@ Unfortunately, it currently is not possible to get a 100% Vanilla experience in 
 
 :::
 ## server.properties
-<ConfigDocBlock data={ServerProperties}/>
+<ConfigDocBlock data={ServerProperties} showVanillaValues={true}/>
 
 ## paper-world-defaults.yml
-<ConfigDocBlock data={VanillaWorldDefaults}/>
+<ConfigDocBlock data={VanillaWorldDefaults} showVanillaValues={true}/>
 
 ## paper-global.yml
-<ConfigDocBlock data={VanillaGlobalDefaults}/>
+<ConfigDocBlock data={VanillaGlobalDefaults} showVanillaValues={true}/>
 
 ## spigot.yml
-<ConfigDocBlock data={SpigotChanges}/>
+<ConfigDocBlock data={SpigotChanges} showVanillaValues={true}/>
 
 ## Further considerations
 

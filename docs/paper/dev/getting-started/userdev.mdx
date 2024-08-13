@@ -136,6 +136,12 @@ If you want your main output to use Mojang mappings, you need to remove all `dep
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.MOJANG_PRODUCTION
 ```
 
+:::note
+
+If you are using Gradle with Groovy syntax, you should use the `getMOJANG_PRODUCTION()` static method instead of the `MOJANG_PRODUCTION` static member.
+
+:::
+
 ### Compiling to Spigot mappings
 
 If you want your main output to use Spigot mappings, add the following code to your build script:
@@ -143,5 +149,11 @@ If you want your main output to use Spigot mappings, add the following code to y
 ```kotlin title="build.gradle.kts"
 paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.REOBF_PRODUCTION
 ```
+
+:::note
+
+If you are using Gradle with Groovy syntax, you should use the `getREOBF_PRODUCTION()` static method instead of the `REOBF_PRODUCTION` static member.
+
+:::
 
 This is useful for plugins that have loaders for both Spigot and Paper and want to keep compatibility with both.

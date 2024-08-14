@@ -377,42 +377,36 @@ entities:
         soft:
           default: "32"
           description: >-
-            The number of blocks away from a player in which each monster type
-            (set individually) will be randomly selected to be despawned. This
-            range takes effect both horizontally and vertically
+            The horizontal and vertical number of blocks away from a player in which each monster
+            type (set individually) will be randomly selected to be despawned.
         hard:
           default: "128"
           description: >-
-            The number of blocks away from a player in which each monster type
-            (set individually) will be forcibly despawned. This range takes
-            effect both horizontally and vertically
+            The horizontal and vertical number of blocks away from a player in which each monster
+            type (set individually) will be forcibly despawned.
       <mob_category>:
         soft:
           horizontal:
-            default: ""
+            default: "<expand>"
             description: >-
-              The number of blocks away from a player in which each entity type
-              (set individually) will be randomly selected to be despawned. Takes
-              effect horizontally
+              The horizontal number of blocks away from a player in which each entity type
+              (set individually) will be randomly selected to be despawned.
           vertical:
-            default: ""
+            default: "<expand>"
             description: >-
-              The number of blocks away from a player in which each entity type
-              (set individually) will be randomly selected to be despawned. Takes
-              effect vertically
+              The vertical number of blocks away from a player in which each entity type
+              (set individually) will be randomly selected to be despawned.
         hard:
           horizontal:
-            default: ""
+            default: "<expand>"
             description: >-
-              The number of blocks away from a player in which each entity type
-              (set individually) will be forcibly despawned. Takes effect
-              horizontally
+              The horizontal number of blocks away from a player in which each entity type
+              (set individually) will be forcibly despawned.
           vertical:
-            default: ""
+            default: "<expand>"
             description: >-
-              The number of blocks away from a player in which each entity type
-              (set individually) will be forcibly despawned. Takes effect
-              vertically
+              The vertical number of blocks away from a player in which each entity type
+              (set individually) will be forcibly despawned.
     disable-mob-spawner-spawn-egg-transformation:
       default: "false"
       description: >-

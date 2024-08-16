@@ -226,6 +226,6 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Whether the bundled spark profiler should be disabled in favor of a standalone plugin. If the spark plugin is not found, the bundled version will be loaded regardless of the setting, unless it is [explicitly disabled](/paper/reference/global-configuration#spark_enabled).
 
-#### paper.disableSymlinkValidation
+#### paper.disableWorldSymlinkValidation
 - **default**: `false`
-- **description**: Disables the folder walk and symlink validation when loading a world. Significantly improves world loading speed on massive worlds (>1TB).
+- **description**: Disables the folder walk and symlink validation when loading a world. Significantly improves world loading speed on massive worlds (>1TB). This does not disable symlink verification of datapacks.

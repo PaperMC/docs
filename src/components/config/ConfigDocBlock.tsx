@@ -254,7 +254,8 @@ const YamlTreeNode = ({
       id={hash}
     >
       <div className={"config-auxiliary-node notranslate"} translate={"no"}>
-        {parseItalics(name.replace(/_+$/, ""))} {/* regex to remove trailing underscores */}
+        {/* regex to remove trailing underscores */}
+        {parseItalics(name.replace(/_+$/, ""))}
         {removeTrailingSpaces(separator)}
       </div>
       <Link

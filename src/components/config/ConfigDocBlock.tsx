@@ -237,6 +237,13 @@ const YamlTreeNode = ({
     return value;
   };
 
+  const removeTrailingUnderscores = (key: string) => {
+    if (key.endsWith("_")) {
+      return removeTrailingUnderscores(key.substring(0, key.length - 1));
+    }
+    return key;
+  };
+
   useEffect(() => {
     const hash = createUrlHash(parentKey, name);
     if (window.location.hash === `#${hash}`) {
@@ -254,7 +261,7 @@ const YamlTreeNode = ({
       id={hash}
     >
       <div className={"config-auxiliary-node notranslate"} translate={"no"}>
-        {parseItalics(name)}
+        {parseItalics(removeTrailingUnderscores(name))}
         {removeTrailingSpaces(separator)}
       </div>
       <Link

@@ -375,12 +375,12 @@ entities:
     despawn-ranges:
       monster:
         soft:
-          default: "32"
+          default: "default"
           description: >-
             The horizontal and vertical number of blocks away from a player in which each monster
             type (set individually) will be randomly selected to be despawned.
         hard:
-          default: "128"
+          default: "default"
           description: >-
             The horizontal and vertical number of blocks away from a player in which each monster
             type (set individually) will be forcibly despawned.

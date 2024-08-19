@@ -141,7 +141,8 @@ item-validation:
       default: "2560"
       description: >-
         The max number of bytes a single page in a book can contribute to the
-        allowed byte total for a book
+        allowed byte total for a book, or "disabled" to disable non-vanilla restrictions on
+        the book size.
     total-multiplier:
       default: "0.98"
       description: >-

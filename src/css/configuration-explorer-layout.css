@@ -78,6 +78,7 @@
 
 .config-explorer-popup-window-open-tag {
   z-index: 5;
+  margin-left: 3px;
 }
 
 .config-explorer-popup-window-open-tag:hover {
@@ -105,6 +106,11 @@
   flex-shrink: 0;
   white-space: nowrap;
   margin: 5px;
+}
+
+.config-explorer-node-content {
+  display: flex;
+  align-items: center;
 }
 
 /* Node without Flex */

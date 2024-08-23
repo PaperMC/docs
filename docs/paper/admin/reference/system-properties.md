@@ -153,8 +153,8 @@ It also remaps plugin CB calls to remove the version information.
 
 #### Paper.WorkerThreadCount:
 
-- **default**: `8` or `number of cpus - 2`. Whichever is lower
-- **description**: Sets the number of worker threads to use for chunk loading.
+- **default**: half of available physical (**not logical**) cores or `1` if 3 or fewer cores are available
+- **description**: Sets the number of worker threads to use for chunk loading. See [here](./configuration/global-configuration.mdx#chunk_system_worker_threads) for more info.
 
 #### Paper.excessiveTELimit:
 

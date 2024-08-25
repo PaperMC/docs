@@ -909,10 +909,10 @@ misc:
       world should be. Vanilla uses 5, but this causes issues especially with
       plugins such as WorldEdit
   max-leash-distance:
-    default: "10.0"
+    default: "default"
     description: >-
       Configure the maximum distance of a leash. If the distance to the leashed
-      entity is greater, the leash will break
+      entity is greater, the leash will break.
   redstone-implementation:
     default: vanilla
     description: >-

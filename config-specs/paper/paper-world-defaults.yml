@@ -378,7 +378,7 @@ entities:
         The shape of the despawn range. Can be one of the following values:
 
         - **ELLIPSOID**: The despawn range is an ellipsoid, with the horizontal
-        and vertical despawn ranges being separate. This is the default minecraft
+        and vertical despawn ranges being separate. This is the default Minecraft
         behavior.
 
         - **CYLINDER**: The vertical despawn range is checked separately from

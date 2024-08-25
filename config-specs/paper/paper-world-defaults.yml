@@ -372,6 +372,18 @@ entities:
       description: >-
         The rate, in ticks, at which arrows shot from players in creative mode
         are despawned
+    despawn-range-shape:
+      default: ELLIPSOID
+      description: >-
+        The shape of the despawn range. Can be one of the following values:
+
+        - **ELLIPSOID**: The despawn range is an ellipsoid, with the horizontal
+        and vertical despawn ranges being separate. This is the default minecraft
+        behavior.
+
+        - **CYLINDER**: The vertical despawn range is checked separately from
+        the horizontal despawn range, but the horizontal despawn range is a
+        circle.
     despawn-ranges:
       <mob_category>:
         hard:

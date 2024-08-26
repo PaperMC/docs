@@ -942,7 +942,7 @@ misc:
     default: HORIZONTAL_FIRST_OUTWARD
     description: >-
       Controls the order in which Alternate Current updates wires and neighboring blocks.
-      Only has an effect when using the "alternate-current" redstoneimplementation.
+      Only has an effect when using the "alternate-current" redstone implementation.
       This can be one of the following values:
 
       - **HORIZONTAL_FIRST_OUTWARD**

@@ -108,7 +108,7 @@ To make Spigot or Paper understand the data forwarded from Velocity, set `settin
 ### Configuring legacy forwarding for Sponge
 
 To configure Sponge to understand the data forwarded from Velocity, you will need to stop the server
-first, set `modules.bungeecord` to `true` and `bungeecord.ip-forwarding` to true in your
+first, set `modules.bungeecord` to `true` and `bungeecord.ip-forwarding` to `true` in your
 `config/sponge/global.conf` file, and then restart your Sponge server.
 
 ### Configuring legacy forwarding for Fabric

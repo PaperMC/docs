@@ -164,6 +164,14 @@ container.set(key, new UUIDDataType(), uuid);
 
 ## Storing on different objects
 
+:::warning
+
+Data is **not** copied across holders for you, and needs to be **manually** copied if 'moving' between PersistentDataHolders.
+
+E.g. Placing an ItemStack as a Block (with a TileState) ***does not*** copy over PDC data.
+
+:::
+
 Objects that can have a PDC implement the <Javadoc name={"org.bukkit.persistence.PersistentDataHolder"}>`PersistentDataHolder`</Javadoc> interface
 and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.PersistentDataHolder#getPersistentDataContainer()"}>`PersistentDataHolder#getPersistentDataContainer()`</Javadoc>.
 

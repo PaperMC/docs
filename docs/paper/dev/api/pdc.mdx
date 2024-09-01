@@ -182,7 +182,7 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
 - ##### <Javadoc name={"org.bukkit.entity.Entity"}>`Entity`</Javadoc>
     - `Entity#getPersistentDataContainer()`
 - ##### <Javadoc name={"org.bukkit.block.TileState"}>`TileState`</Javadoc>
-    - This is slightly more complicated, as you need to cast the block to something that extends `TileState`.
+    - This is slightly more complicated, as you need to cast the block's state to something that extends `TileState`.
       This does not work for all blocks, only those that have a tile entity.
       ```java
         Block block = ...;

@@ -37,9 +37,17 @@ See [here](#1205-and-beyond) for more details.
 
 ## Adding the plugin
 Add the plugin to your `build.gradle.kts` file.
-```kotlin
+
+:::info
+
+You can find the latest release of **paperweight-userdev** on the [Gradle Plugin
+Portal](https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev).
+
+:::
+
+```kotlin title="build.gradle.kts"
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.7.1" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
+    id("io.papermc.paperweight.userdev") version "<insert_latest_version>"
 }
 ```
 
@@ -48,9 +56,8 @@ Only the latest version of `paperweight-userdev` is officially supported, and we
 
 :::info[Snapshots]
 
-**paperweight-userdev** releases are available through the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev), but if you
-want to use SNAPSHOT versions, you must add Paper's Maven repository to `settings.gradle.kts` with:
-```kotlin
+**paperweight-userdev** SNAPSHOT (pre-release) versions are only available through Paper's Maven repository.
+```kotlin title="settings.gradle.kts"
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -66,7 +73,7 @@ If you try to load your Gradle project now, you will receive an error saying you
 a dev bundle dependency. You can do that by adding to your `dependencies` block in your `build.gradle.kts`
 file.
 
-<VersionFormattedCode language={"kotlin"}>
+<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
 ```
 dependencies {
     // Other Dependencies

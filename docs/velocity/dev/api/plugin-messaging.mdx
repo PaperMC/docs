@@ -17,6 +17,20 @@ flowchart LR
     backend -->|"3 (Incoming)"| Velocity -->|"4 (Outgoing)"| player
 ```
 
+:::warning
+
+When listening to PluginMessageEvent, ensure sure the result is
+<Javadoc name={"com/velocitypowered/api/event/connection/PluginMessageEvent$ForwardResult#handled()"} project={"velocity"}>`ForwardResult.handled()`</Javadoc>
+if you do not intend the client to participate.
+
+If the result is forwarded, Players can spoof the proxy to your backends.
+
+Additonally, ensure the result is set correct after actually handling correct messages, to prevent them from being leaked to the other party.
+
+This can be achieved with unconditionally setting the result between checking the identifier and checking the source, as shown in the examples.
+
+:::
+
 Additionally, BungeeCord channel compatibility is included, which may remove the need for a companion Velocity plugin in certain cases.
 
 ## Case 1: Receiving a plugin message from a player
@@ -25,6 +39,19 @@ This is for when you need to handle or inspect the contents of a plugin message 
 It will require registering with the ChannelRegistrar for the event to be fired.
 
 An example use case could be logging messages from a mod that reports the enabled features.
+
+```mermaid
+flowchart LR
+  subgraph handle from player
+    direction LR
+    a[player] --> b[Velocity] ~~~ c[backend]
+  end
+  subgraph forward from player
+    direction LR
+    d[player] --> e[Velocity] --> f[backend]
+  end
+```
+
 
 ```java
 public static final MinecraftChannelIdentifier IDENTIFIER = MinecraftChannelIdentifier.from("custom:main");
@@ -36,12 +63,23 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 
 @Subscribe
 public void onPluginMessageFromPlayer(PluginMessageEvent event) {
-    if (!(event.getSource() instanceof Player)) {
+    // Check if Identifier matches first, no matter the source.
+    if (!IDENTIFIER.equals(event.getIdentifier())) {
         return;
     }
-    Player player = (Player) event.getSource();
-    // Ensure the identifier is what you expect before trying to handle the data
-    if (event.getIdentifier() != IDENTIFIER) {
+
+    // mark PluginMessage as handled, indicating that the contents
+    // should not be forwarding to their original destination.
+    event.setResult(PluginMessageEvent.ForwardResult.handled());
+
+    // Alternatively:
+
+    // mark PluginMessage as forwarded, indicating that the contents
+    // should be passed through, as if velocity is not present.
+    //event.setResult(PluginMessageEvent.ForwardResult.forward());
+
+    // only attempt parsing the data if the source is a player
+    if (!(event.getSource() instanceof Player player)) {
         return;
     }
 
@@ -63,6 +101,15 @@ On your backend server, only listen for plugin messages if you are sure only a t
 Otherwise, a player can pretend to be your proxy, and spoof them.
 
 :::
+
+```mermaid
+flowchart LR
+  subgraph Send to Backend
+  direction LR
+    player ~~~ Velocity --> backend
+  end
+```
+
 
 ### Using any connected player
 
@@ -104,6 +151,18 @@ for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.
 
+```mermaid
+flowchart LR
+subgraph handle from backend
+    direction RL
+    a[backend] --> b[Velocity] ~~~ c[ player]
+end
+subgraph forward from backend
+    direction RL
+    d[backend] --> e[Velocity] --> f[player]
+end
+```
+
 ```java
 public static final MinecraftChannelIdentifier IDENTIFIER = MinecraftChannelIdentifier.from("custom:main");
 
@@ -114,12 +173,28 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 
 @Subscribe
 public void onPluginMessageFromBackend(PluginMessageEvent event) {
-    if (!(event.getSource() instanceof ServerConnection)) {
+    // Check if Identifier matches first, no matter the source.
+    // this allows setting all messages to IDENTIFIER as handled,
+    // preventing any client-originating messages from being forwarded.
+    if (!IDENTIFIER.equals(event.getIdentifier())) {
         return;
     }
-    ServerConnection backend = (ServerConnection) event.getSource();
-    // Ensure the identifier is what you expect before trying to handle the data
-    if (event.getIdentifier() != IDENTIFIER) {
+
+    // mark PluginMessage as handled, indicating that the contents
+    // should not be forwarding to their original destination.
+    event.setResult(PluginMessageEvent.ForwardResult.handled());
+
+    // Alternatively:
+
+    // mark PluginMessage as forwarded, indicating that the contents
+    // should be passed through, as if velocity is not present.
+    //
+    // this should be used with extreme caution,
+    // as any client can freely send whatever it wants, pretending to be the proxy
+    //event.setResult(PluginMessageEvent.ForwardResult.forward());
+
+    // only attempt parsing the data if the source is a backend server
+    if (!(event.getSource() instanceof ServerConnection backend)) {
         return;
     }
 
@@ -137,6 +212,14 @@ This is for when you need to send a plugin message to a player.
 This is only really useful for when you are making client-side mods. Otherwise, the player likely will just ignore the message.
 
 :::
+
+```mermaid
+flowchart RL
+    subgraph Send to Player
+    direction RL
+    backend ~~~ Velocity --> player
+    end
+```
 
 ```java
 public boolean sendPluginMessageToPlayer(Player player, ChannelIdentifier identifier, byte[] data) {

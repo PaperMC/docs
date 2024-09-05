@@ -19,13 +19,13 @@ flowchart LR
 
 :::warning
 
-When listening to PluginMessageEvent, ensure sure the result is
+When listening to `PluginMessageEvent`, ensure the result is
 <Javadoc name={"com/velocitypowered/api/event/connection/PluginMessageEvent$ForwardResult#handled()"} project={"velocity"}>`ForwardResult.handled()`</Javadoc>
 if you do not intend the client to participate.
 
-If the result is forwarded, Players can spoof the proxy to your backends.
+If the result is forwarded, players can impersonate the proxy to your backend servers.
 
-Additionally, ensure the result is set correct after actually handling correct messages, to prevent them from being leaked to the other party.
+Additionally, ensure the result is set correctly after actually handling correct messages, to prevent them from being leaked to the other party.
 
 This can be achieved with unconditionally setting the result between checking the identifier and checking the source, as shown in the examples.
 
@@ -63,7 +63,7 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 
 @Subscribe
 public void onPluginMessageFromPlayer(PluginMessageEvent event) {
-    // Check if Identifier matches first, no matter the source.
+    // Check if the identifier matches first, no matter the source.
     if (!IDENTIFIER.equals(event.getIdentifier())) {
         return;
     }
@@ -75,7 +75,7 @@ public void onPluginMessageFromPlayer(PluginMessageEvent event) {
     // Alternatively:
 
     // mark PluginMessage as forwarded, indicating that the contents
-    // should be passed through, as if velocity is not present.
+    // should be passed through, as if Velocity is not present.
     //event.setResult(PluginMessageEvent.ForwardResult.forward());
 
     // only attempt parsing the data if the source is a player
@@ -173,7 +173,7 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 
 @Subscribe
 public void onPluginMessageFromBackend(PluginMessageEvent event) {
-    // Check if Identifier matches first, no matter the source.
+    // Check if the identifier matches first, no matter the source.
     // this allows setting all messages to IDENTIFIER as handled,
     // preventing any client-originating messages from being forwarded.
     if (!IDENTIFIER.equals(event.getIdentifier())) {
@@ -187,7 +187,7 @@ public void onPluginMessageFromBackend(PluginMessageEvent event) {
     // Alternatively:
 
     // mark PluginMessage as forwarded, indicating that the contents
-    // should be passed through, as if velocity is not present.
+    // should be passed through, as if Velocity is not present.
     //
     // this should be used with extreme caution,
     // as any client can freely send whatever it wants, pretending to be the proxy

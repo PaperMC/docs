@@ -827,7 +827,8 @@ lootables:
     description: >-
       Instructs the server to automatically replenish lootable containers. This
       feature is useful for long-term worlds in which players are not expected
-      to constantly explore to generate new chunks
+      to constantly explore to generate new chunks. Breaking such lootable containers
+      disables replenishing after their initial looting.
   max-refills:
     default: "-1"
     description: >-

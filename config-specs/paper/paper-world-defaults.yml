@@ -861,6 +861,13 @@ lootables:
     description: >-
       Per-player cooldown between reloots. Formatted as a duration with a single
       unit e.g. 10h or 25m. Supports d, h, m, and s.
+  retain-unlooted-shulker-box-loot-table-on-non-player-break:
+    default: "true"
+    description: >-
+      Configures if breaking a shulker box via non-player means e.g. a piston, should retain
+      the shulker boxes loot table if the shulker box has not been looted yet. Setting this option
+      to `false` prevents players from moving shulker boxes with potentially refilling loot tables
+      to new locations by breaking them via the likes of pistons.
 maps:
   item-frame-cursor-limit:
     default: "128"

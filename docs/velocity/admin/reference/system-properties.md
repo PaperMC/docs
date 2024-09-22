@@ -41,52 +41,52 @@ The default value shown may not be set for the property but will only be used by
 
 ## List of system properties
 
-#### auth.forceSecureProfiles:
+#### auth.forceSecureProfiles
 
 - **default**: `true`
 - **description**: Overrides `force-key-authentication` from the config. If not set, it will be automatically set to the current config value.
 
-#### velocity.natives-tmpdir:
+#### velocity.natives-tmpdir
 
 - **default**: `unset`
 - **description**: Temporary directory for Velocity native files. (If set, it will also define `io.netty.native.workdir`)
 
-#### velocity.max-known-packs:
+#### velocity.max-known-packs
 
 - **default**: `64`
 - **description**: Limits known packs to the Vanilla default to prevent crashing Velocity.
 
-#### velocity.max-packets-per-flush:
+#### velocity.max-packets-per-flush
 
 - **default**: `8192`
 - **description**: The max amount of packets before the queue is flushed automatically.
 
-#### velocity.log-server-backpressure:
+#### velocity.log-server-backpressure
 
 - **default**: `false`
 - **description**: Whether Velocity should log if the server connection is writable and thus if the player connection will be auto-read.
 
-#### velocity.packet-decode-logging:
+#### velocity.packet-decode-logging
 
 - **default**: `false`
 - **description**: Whether packet decoding errors should be logged extensively.
 
-#### velocity.increased-compression-cap:
+#### velocity.increased-compression-cap
 
 - **default**: `false`
 - **description**: Whether the maximum uncompressed packet size should be set to its maximum supported limit (128 MiB) instead of the Vanilla limit (8 MiB).
 
-#### velocity.disable-native-transport:
+#### velocity.disable-native-transport
 
 - **default**: `false`
 - **description**: Whether to disable Netty's native transport methods like Epoll. If set to true, Velocity will use Java's NIO transport instead.
 
-#### velocity.natives-disabled:
+#### velocity.natives-disabled
 
 - **default**: `false`
 - **description**: Whether native functionality for specific operating systems should be disabled.
 
-#### velocity.strictErrorHandling:
+#### velocity.strictErrorHandling
 
 - **default**: `true`
 - **description**: Whether the client should disconnect on packet errors. Temporarily added in MC 1.20.5 to help modded servers transition to this change.

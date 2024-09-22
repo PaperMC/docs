@@ -1,11 +1,11 @@
 ---
 slug: /reference/system-properties
-description: Documentation for the system properties Paper may check.
+description: Documentation for the system properties and environment variables Paper may check.
 ---
 
 # Paper System Properties
 
-These system properties can be set when you start your server allowing for the configuration of various settings.
+These system properties and environment variables can be set when you start your server allowing for the configuration of various settings.
 
 :::danger[Danger Ahead]
 
@@ -36,6 +36,11 @@ Where a `-D` is used to set a system property, and the system property is `paper
 Where a system property is stated as `unset`, setting it as `true` will work to enable it.
 
 :::
+
+[Environment variables](https://en.wikipedia.org/wiki/Environment_variable) are another way to pass values to Paper.
+They can be set in various ways, depending on your operating system and how you start Paper.
+
+In most cases, you will not need to use these, unless you are running Paper in a (Docker) container or such.
 
 ## List of system properties
 
@@ -224,3 +229,10 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `false`
 - **description**: Disables the folder walk and symlink validation when loading a world. Significantly improves world loading speed on massive worlds (>1TB). This does not disable symlink verification of datapacks.
+
+## List of environment variables
+
+#### PAPER_VELOCITY_SECRET
+
+- **default**: `unset`
+- **description**: Overrides the [`proxies.velocity.secret`](./configuration/global-configuration.mdx#proxies_velocity_secret) global configuration option.

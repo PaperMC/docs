@@ -732,6 +732,19 @@ environment:
         description: >-
           Instructs the server to target the first treasure location found for
           maps obtained via trading with villagers
+  void-damage:
+    enabled:
+      default: "true"
+      description: Enables void damage
+    damage:
+      amount:
+        default: 4.0
+        description: The applied amount of void damage
+      min-build-height-offset:
+        default: -64
+        description: >-
+          Value is added to the world's minimum build height to determine
+          the threshold to begin applying void damage.
   water-over-lava-flow-speed:
     default: "5"
     description: Sets the speed at which water flows while over lava

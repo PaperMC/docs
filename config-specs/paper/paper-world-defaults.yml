@@ -737,7 +737,7 @@ environment:
     description: >-
       The amount of void damage dealt per void damage attempt.
       May be set to `disabled` to completely disable void damage in the world.
-  void-min-build-height-offset:
+  void-damage-min-build-height-offset:
     default: -64
     description: >-
       The offset from a world's minimum build height at which entities should receive void

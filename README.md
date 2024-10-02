@@ -9,8 +9,8 @@ How to get docs running on your local machine for development.
 
 ### Prerequisites
 
-- [node](https://nodejs.org)
-- [pnpm](https://pnpm.io/installation)
+-   [node](https://nodejs.org)
+-   [pnpm](https://pnpm.io/installation)
 
 ### Local Development
 

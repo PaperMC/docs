@@ -956,6 +956,20 @@ misc:
       on the Mojira bug tracker give an overview of the Eigencraft implementation.
 
       - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
+  alternate-current-update-order:
+    default: HORIZONTAL_FIRST_OUTWARD
+    description: >-
+      Controls the order in which Alternate Current updates wires and neighboring blocks.
+      Only has an effect when using the "alternate-current" redstone implementation.
+      This can be one of the following values:
+
+      - **HORIZONTAL_FIRST_OUTWARD**
+
+      - **HORIZONTAL_FIRST_INWARD**
+
+      - **VERTICAL_FIRST_OUTWARD**
+
+      - **VERTICAL_FIRST_INWARD**
   shield-blocking-delay:
     default: "5"
     description: >-

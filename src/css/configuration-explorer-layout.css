@@ -66,9 +66,9 @@
 
 /* Popup Window */
 .config-explorer-popup-window {
-  background-color: #1c1e21;
+  background-color: var(--config-node-popup-background-color);
   padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   margin-right: 100px;
   width: fit-content;

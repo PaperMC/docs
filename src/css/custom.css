@@ -16,6 +16,7 @@
   /* Config Node */
   --default-config-node-text-color: rgb(148, 148, 148);
   --config-node-highlight-text-color: black;
+  --config-node-popup-background-color: white;
   --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.03);
   --config-node-indent-size: 30px;
 
@@ -40,6 +41,7 @@ html[data-theme="dark"] {
   /* Config Node */
   --default-config-node-text-color: rgb(128, 128, 128);
   --config-node-highlight-text-color: white;
+  --config-node-popup-background-color: #1c1e21;
   --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.03);
 
   /* EOL Message */

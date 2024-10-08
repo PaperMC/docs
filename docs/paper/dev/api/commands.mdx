@@ -124,6 +124,42 @@ For now, you can find specific examples of arguments, among other things, on the
 Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc>
 interface. See the Javadocs for more information on how they work.
 
+### Command suggestions
+
+Custom command suggestions can be supplied by either overriding the
+<Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType#listSuggestions(com.mojang.brigadier.context.CommandContext,com.mojang.brigadier.suggestion.SuggestionsBuilder)"}>listSuggestions</Javadoc>
+method in `CustomArgumentType`, or using the `suggests(SuggestionProvider)` method to define a `SuggestionProvider` for the argument.
+
+An example suggestion provider might look like this:
+```java
+Commands.argument("count", IntegerArgumentType.integer())
+    .suggests((ctx, builder) -> {
+        builder.suggest(1);
+        builder.suggest(10);
+        return builder.buildFuture();
+    })
+```
+
+Suggestions can also be contextual since they have access to the `CommandContext`.
+
+:::note
+
+To access other arguments when building suggestions, make sure the correct `CommandContext`
+is obtained with `CommandContext.getLastChild()`.
+
+:::
+
+An example contextual suggestion provider:
+```java
+Commands.argument("min", IntegerArgumentType.integer())
+    .then(Commands.argument("max", IntegerArgumentType.integer())
+        .suggests((ctx, builder) -> {
+            int min = ctx.getLastChild().getArgument("min", Integer.class);
+            builder.suggest(min + 1);
+            return builder.buildFuture();
+        }))
+```
+
 ## Lifecycle
 
 Commands are not just registered once at the start, but anytime a reload happens. This can be

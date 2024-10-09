@@ -1,9 +1,9 @@
 ---
-slug: /dev/commands
+slug: /dev/command-api/commands
 description: A guide to Paper's Brigadier command API.
 ---
 
-# Command API
+# Commands
 
 Paper's command system is built on top of Minecraft's Brigadier command system. This system is a
 powerful and flexible way to define commands and arguments.
@@ -19,7 +19,7 @@ Paper's command system is still experimental and may change in the future.
 :::note
 
 This uses the <Javadoc name={"io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager"}>LifecycleEventManager</Javadoc>
-to register the command. See the [Lifecycle Events](./lifecycle.mdx) page for more information.
+to register the command. See the [Lifecycle Events](../lifecycle.mdx) page for more information.
 
 :::
 
@@ -107,57 +107,6 @@ class FunCommand implements BasicCommand {
         }
     }
 }
-```
-
-## Arguments
-
-### Built-in arguments
-
-Vanilla has lots of built-in arguments that the client also supports. These can provide better
-syntax and error-checking before even executing the commands. <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>
-has all the argument types available to the API.
-
-For now, you can find specific examples of arguments, among other things, on the [Fabric Wiki](https://fabricmc.net/wiki/tutorial:commands).
-
-### Custom arguments
-
-Custom arguments can be created by implementing the <Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType"}>CustomArgumentType</Javadoc>
-interface. See the Javadocs for more information on how they work.
-
-### Command suggestions
-
-Custom command suggestions can be supplied by either overriding the
-<Javadoc name={"io.papermc.paper.command.brigadier.argument.CustomArgumentType#listSuggestions(com.mojang.brigadier.context.CommandContext,com.mojang.brigadier.suggestion.SuggestionsBuilder)"}>listSuggestions</Javadoc>
-method in `CustomArgumentType`, or using the `suggests(SuggestionProvider)` method to define a `SuggestionProvider` for the argument.
-
-An example suggestion provider might look like this:
-```java
-Commands.argument("count", IntegerArgumentType.integer())
-    .suggests((ctx, builder) -> {
-        builder.suggest(1);
-        builder.suggest(10);
-        return builder.buildFuture();
-    })
-```
-
-Suggestions can also be contextual since they have access to the `CommandContext`.
-
-:::note
-
-To access other arguments when building suggestions, make sure the correct `CommandContext`
-is obtained with `CommandContext.getLastChild()`.
-
-:::
-
-An example contextual suggestion provider:
-```java
-Commands.argument("min", IntegerArgumentType.integer())
-    .then(Commands.argument("max", IntegerArgumentType.integer())
-        .suggests((ctx, builder) -> {
-            int min = ctx.getLastChild().getArgument("min", Integer.class);
-            builder.suggest(min + 1);
-            return builder.buildFuture();
-        }))
 ```
 
 ## Lifecycle

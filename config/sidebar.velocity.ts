@@ -47,6 +47,7 @@ const velocity: SidebarsConfig = {
           },
           items: [
             "admin/reference/configuration",
+            "admin/reference/system-properties",
             "admin/reference/commands",
             "admin/reference/server-compatibility",
             "admin/reference/comparison",

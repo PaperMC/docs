@@ -33,7 +33,7 @@ const docsCommon: Options = {
 const config: Config = {
   title: "PaperMC Docs",
   tagline:
-    "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Waterfall.",
+    "Documentation for all projects under the PaperMC umbrella, including Paper, Velocity, and Folia.",
   url: url,
   baseUrl: "/",
   onBrokenLinks: isCI ? "throw" : "warn",
@@ -265,7 +265,8 @@ const config: Config = {
         "toml",
         "properties",
       ],
-      theme: themes.vsDark,
+      theme: themes.vsLight,
+      darkTheme: themes.vsDark,
     },
     algolia: {
       appId: "P1BCDPTG1Q",

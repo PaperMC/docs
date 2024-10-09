@@ -250,6 +250,11 @@ entities:
     nerf-pigmen-from-nether-portals:
       default: "false"
       description: "Removes AI from pigmen spawned via nether portals "
+    only-merge-items-horizontally:
+      default: "false"
+      description: >-
+        Prevents merging items that are not on the same y level, preventing potential
+        visual artifacts.
     parrots-are-unaffected-by-player-movement:
       default: "false"
       description: >-
@@ -367,33 +372,53 @@ entities:
       description: >-
         The rate, in ticks, at which arrows shot from players in creative mode
         are despawned
+    despawn-range-shape:
+      default: ELLIPSOID
+      description: >-
+        The shape of the despawn range. Can be one of the following values:
+
+        - **ELLIPSOID**: The despawn range is an ellipsoid, with the horizontal
+        and vertical despawn ranges being separate. This is the default Minecraft
+        behavior.
+
+        - **CYLINDER**: The vertical despawn range is checked separately from
+        the horizontal despawn range, but the horizontal despawn range is a
+        circle.
     despawn-ranges:
-      monster:
-        soft:
-          default: "32"
-          description: >-
-            The number of blocks away from a player in which each monster type
-            (set individually) will be randomly selected to be despawned. This
-            range takes effect both horizontally and vertically
-        hard:
-          default: "128"
-          description: >-
-            The number of blocks away from a player in which each monster type
-            (set individually) will be forcibly despawned. This range takes
-            effect both horizontally and vertically
       <mob_category>:
-        soft:
-          default: ""
-          description: >-
-            The number of blocks away from a player in which each entity type
-            (set individually) will be randomly selected to be despawned. Takes
-            effect both horizontally and vertically
         hard:
-          default: ""
+          default: "default"
           description: >-
-            The number of blocks away from a player in which each entity type
-            (set individually) will be forcibly despawned. Takes effect both
-            horizontally and vertically
+            The horizontal and vertical number of blocks away from a player in which each monster
+            type (set individually) will be forcibly despawned.
+        soft:
+          default: "default"
+          description: >-
+            The horizontal and vertical number of blocks away from a player in which each monster
+            type (set individually) will be randomly selected to be despawned.
+      <mob_category>_:
+        hard:
+          horizontal:
+            default: "default"
+            description: >-
+              The horizontal number of blocks away from a player in which each entity type
+              (set individually) will be forcibly despawned.
+          vertical:
+            default: "default"
+            description: >-
+              The vertical number of blocks away from a player in which each entity type
+              (set individually) will be forcibly despawned.
+        soft:
+          horizontal:
+            default: "default"
+            description: >-
+              The horizontal number of blocks away from a player in which each entity type
+              (set individually) will be randomly selected to be despawned.
+          vertical:
+            default: "default"
+            description: >-
+              The vertical number of blocks away from a player in which each entity type
+              (set individually) will be randomly selected to be despawned.
     disable-mob-spawner-spawn-egg-transformation:
       default: "false"
       description: >-
@@ -707,12 +732,34 @@ environment:
         description: >-
           Instructs the server to target the first treasure location found for
           maps obtained via trading with villagers
+  void-damage-amount:
+    default: 4.0
+    description: >-
+      The amount of void damage dealt per void damage attempt.
+      May be set to `disabled` to completely disable void damage in the world.
+  void-damage-min-build-height-offset:
+    default: -64
+    description: >-
+      The offset from a world's minimum build height at which entities should receive void
+      damage.
   water-over-lava-flow-speed:
     default: "5"
     description: Sets the speed at which water flows while over lava
   fire-tick-delay:
     default: "30"
     description: Sets the minimum delay between fire ticks
+  max-fluid-ticks:
+    default: "65536"
+    description: >-
+      The maximum number of fluid ticks that can be processed in a single tick.
+      This is a safety measure to prevent the server from hanging when there is
+      a large number of fluid updates.
+  max-block-ticks:
+    default: "65536"
+    description: >-
+      The maximum number of block ticks that can be processed in a single tick.
+      This is a safety measure to prevent the server from hanging when there is
+      a large amount of block updates.
 feature-seeds:
   generate-random-seeds-for-all:
     default: "false"
@@ -790,7 +837,8 @@ lootables:
     description: >-
       Instructs the server to automatically replenish lootable containers. This
       feature is useful for long-term worlds in which players are not expected
-      to constantly explore to generate new chunks
+      to constantly explore to generate new chunks. Breaking such lootable containers
+      disables replenishing after their initial looting.
   max-refills:
     default: "-1"
     description: >-
@@ -823,6 +871,13 @@ lootables:
     description: >-
       Per-player cooldown between reloots. Formatted as a duration with a single
       unit e.g. 10h or 25m. Supports d, h, m, and s.
+  retain-unlooted-shulker-box-loot-table-on-non-player-break:
+    default: "true"
+    description: >-
+      Configures if breaking a shulker box via non-player means, e.g. a piston, should retain
+      the shulker box's loot table if the shulker box has not been looted yet. Setting this option
+      to `false` prevents players from moving shulker boxes with potentially refilling loot tables
+      to new locations by breaking them via the likes of pistons.
 maps:
   item-frame-cursor-limit:
     default: "128"
@@ -863,7 +918,8 @@ misc:
     default: "false"
     description: >-
       Determines if the server will interrupt a sprinting player if they are
-      attacked
+      attacked. When set to true, you may be subject to a Vanilla bug where
+      sprinting is stopped and started when attacking players.
   light-queue-size:
     default: "20"
     description: >-
@@ -871,10 +927,10 @@ misc:
       world should be. Vanilla uses 5, but this causes issues especially with
       plugins such as WorldEdit
   max-leash-distance:
-    default: "10.0"
+    default: "default"
     description: >-
       Configure the maximum distance of a leash. If the distance to the leashed
-      entity is greater, the leash will break
+      entity is greater, the leash will break.
   redstone-implementation:
     default: vanilla
     description: >-
@@ -900,6 +956,20 @@ misc:
       on the Mojira bug tracker give an overview of the Eigencraft implementation.
 
       - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
+  alternate-current-update-order:
+    default: HORIZONTAL_FIRST_OUTWARD
+    description: >-
+      Controls the order in which Alternate Current updates wires and neighboring blocks.
+      Only has an effect when using the "alternate-current" redstone implementation.
+      This can be one of the following values:
+
+      - **HORIZONTAL_FIRST_OUTWARD**
+
+      - **HORIZONTAL_FIRST_INWARD**
+
+      - **VERTICAL_FIRST_OUTWARD**
+
+      - **VERTICAL_FIRST_INWARD**
   shield-blocking-delay:
     default: "5"
     description: >-

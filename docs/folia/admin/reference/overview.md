@@ -72,7 +72,7 @@ given that the deadline for each tick is 50ms + the start time, it behaves
 identically to the EDF algorithm.
 
 The EDF-like algorithm is selected so that as long as the thread pool is
-not maximally utilised, that all regions that take <= 50ms to tick will
+not maximally utilized, that all regions that take <= 50ms to tick will
 maintain 20TPS. However, the scheduling algorithm is neither NUMA aware
 nor CPU core aware - it will not make attempts (when n regions > m threads)
 to pin regions to certain cores.
@@ -288,7 +288,7 @@ simple or portal.
 
 Simple teleportations are completed by ensuring the addition
 of the teleporting entity to the destination chunk specified
-by teleporation. This allows the entity to be saved at the target
+by teleportation. This allows the entity to be saved at the target
 position, as if the teleportation did complete before shutdown.
 
 Portal teleportations are completed by forcing the addition

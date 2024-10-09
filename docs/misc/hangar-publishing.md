@@ -62,7 +62,7 @@ versions.
 Hangar allows version ranges (such as `1.19-1.20.2`) and wildcards (such as `1.20.x`).
 
 ```properties
-# Specify the platform versions for Paper, Velocity, and Waterfall.
+# Specify the platform versions for Paper and Velocity.
 # Hangar also allows version ranges (such as 1.19-1.20.2) and wildcards (such as 1.20.x).
 # TODO: Remove the platforms you don't need and put in the correct versions.
 paperVersion=1.12.2, 1.16.5, 1.19-1.20.2
@@ -76,7 +76,7 @@ In the plugins block of your `build.gradle.kts` build script, add the publish pl
 
 ```kotlin
 plugins {
-    id("io.papermc.hangar-publish-plugin") version "0.1.0"
+    id("io.papermc.hangar-publish-plugin") version "0.1.2"
 }
 ```
 

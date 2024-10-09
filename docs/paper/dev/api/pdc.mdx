@@ -5,7 +5,7 @@ description: A guide to the PDC API for storing data.
 
 # Persistent Data Container (PDC)
 
-The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and blocks.
+The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and block entities.
 The full list of classes that support the PDC are:
 
 - [`Chunk`](#chunk)
@@ -164,6 +164,14 @@ container.set(key, new UUIDDataType(), uuid);
 
 ## Storing on different objects
 
+:::caution
+
+Data is **not** copied across holders for you, and needs to be **manually** copied if 'moving' between PersistentDataHolders.
+
+E.g. Placing an ItemStack as a Block (with a TileState) ***does not*** copy over PDC data.
+
+:::
+
 Objects that can have a PDC implement the <Javadoc name={"org.bukkit.persistence.PersistentDataHolder"}>`PersistentDataHolder`</Javadoc> interface
 and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.PersistentDataHolder#getPersistentDataContainer()"}>`PersistentDataHolder#getPersistentDataContainer()`</Javadoc>.
 
@@ -174,7 +182,7 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
 - ##### <Javadoc name={"org.bukkit.entity.Entity"}>`Entity`</Javadoc>
     - `Entity#getPersistentDataContainer()`
 - ##### <Javadoc name={"org.bukkit.block.TileState"}>`TileState`</Javadoc>
-    - This is slightly more complicated, as you need to cast the block to something that extends `TileState`.
+    - This is slightly more complicated, as you need to cast the block's state to something that extends `TileState`.
       This does not work for all blocks, only those that have a tile entity.
       ```java
         Block block = ...;
@@ -187,3 +195,7 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
     - `Structure#getPersistentDataContainer()`
 - ##### <Javadoc name={"org.bukkit.inventory.meta.ItemMeta"}>`ItemMeta`</Javadoc>
     - `ItemMeta#getPersistentDataContainer()`
+- ##### <Javadoc name={"org.bukkit.generator.structure.GeneratedStructure"}>`GeneratedStructure`</Javadoc>
+    - `GeneratedStructure#getPersistentDataContainer()`
+- ##### <Javadoc name={"org.bukkit.Raid"}>`Raid`</Javadoc>
+    - `Raid#getPersistentDataContainer()`

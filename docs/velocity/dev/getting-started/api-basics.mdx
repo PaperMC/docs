@@ -93,6 +93,8 @@ Dependencies on other plugins are also to be specified there, but we'll get to t
 
 ### A word of caution
 
+:::caution
+
 In Velocity, plugin loading is split into two steps: construction and initialization. The code in
 your plugin's constructor is part of the construction phase. There is very little you can do safely
 during construction, especially as the API does not specify which operations are safe to run during
@@ -113,6 +115,8 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
     server.getEventManager().register(this, new PluginListener());
 }
 ```
+
+:::
 
 ## Getting your plugin's directory
 

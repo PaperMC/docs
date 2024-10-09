@@ -65,11 +65,12 @@ chunk-system:
   worker-threads:
     default: "-1"
     description: >-
-      Sets the number of threads to be used for parallel chunk generation. If
-      any value below zero is set, the server will determine the best number
-      depending on the number of available CPU cores. This is capped at a
-      quarter of available processors and can be less for systems with very few
-      processors. _(Note: Hyper-Threaded threads **do not** count)_.
+      Sets the number of threads to be used for parallel chunk generation.
+      If a value below zero is set, the server will automatically determine the
+      optimal number of threads based on the available physical CPU cores
+      (**not logical cores**). For systems with 3 or fewer physical cores,
+      only 1 thread will be used. In all other cases, the number of threads
+      is capped at half of the physical cores.
 collisions:
   enable-player-collisions:
     default: "true"
@@ -141,7 +142,8 @@ item-validation:
       default: "2560"
       description: >-
         The max number of bytes a single page in a book can contribute to the
-        allowed byte total for a book
+        allowed byte total for a book, or "disabled" to disable non-vanilla restrictions on
+        the book size.
     total-multiplier:
       default: "0.98"
       description: >-
@@ -241,6 +243,11 @@ misc:
       description: >-
         The maximum number of threads to allow in the chat thread pool. The
         default value is -1, which means no maximum
+  client-interaction-leniency-distance:
+    default: default
+    description: >-
+      Defines the leniency distance added on the server to the interaction range of a
+      player when validating interact packets.
   compression-level:
     default: default
     description: >-
@@ -355,9 +362,18 @@ spam-limiter:
     description: >-
       The number that the internal tab spam counter can reach until the server
       kicks the player for spam
-timings:
+spark:
   enabled:
     default: "true"
+    description: Whether the bundled spark profiler should be enabled.
+  enable-immediately:
+    default: "false"
+    description: >-
+      Whether the bundled spark profiler should be enabled as soon as possible. This can be useful for profiling the server during startup.
+      By default, spark is enabled once the server has finished starting up (when the **Done (X.XXXs)! For help, type "help"** message is sent in the console).
+timings:
+  enabled:
+    default: "false"
     description: Controls the global enable state of Timings
   hidden-config-entries:
     default: "[database, proxies.velocity.secret]"

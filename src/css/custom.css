@@ -1,4 +1,7 @@
 :root {
+  /* adjusted for VS Light theme */
+  --docusaurus-highlighted-code-line-bg: rgb(0 0 0 / 10%);
+
   --ifm-color-primary: #0240dc;
   --ifm-color-primary-dark: #033ed5;
   --ifm-color-secondary: #868686;
@@ -13,6 +16,7 @@
   /* Config Node */
   --default-config-node-text-color: rgb(148, 148, 148);
   --config-node-highlight-text-color: black;
+  --config-node-popup-background-color: white;
   --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.03);
   --config-node-indent-size: 30px;
 
@@ -21,6 +25,9 @@
 }
 
 html[data-theme="dark"] {
+  /* adjusted for VS Dark theme */
+  --docusaurus-highlighted-code-line-bg: rgb(66 66 66 / 35%);
+
   --ifm-color-primary: #409efe;
   --ifm-color-primary-dark: #0175ec;
   --ifm-color-secondary: #ebedf0;
@@ -34,6 +41,7 @@ html[data-theme="dark"] {
   /* Config Node */
   --default-config-node-text-color: rgb(128, 128, 128);
   --config-node-highlight-text-color: white;
+  --config-node-popup-background-color: #1c1e21;
   --config-explorer-file-node-text-color: rgba(0, 0, 0, 0.03);
 
   /* EOL Message */

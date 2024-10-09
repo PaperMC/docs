@@ -39,7 +39,7 @@ mention Paper compatibility. It'll still work.
 
 1. Once you've found the plugin you'd like to install, download it. Ensure the file you have
    downloaded ends in `.jar`. Some plugins also distribute as `.zip` files, in which case you will
-   need to extract the file and locate the `.jar` for your platform, often labelled `bukkit` or
+   need to extract the file and locate the `.jar` for your platform, often labeled `bukkit` or
    `paper`.
 2. Once you have the plugin downloaded locally, locate the `plugins` folder from the root directory
    of your Paper server.

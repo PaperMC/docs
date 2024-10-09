@@ -36,6 +36,7 @@ const paper: SidebarsConfig = {
           items: [
             "admin/how-to/basic-troubleshooting",
             "admin/how-to/update",
+            "admin/how-to/profiling",
             "admin/how-to/aikars-flags",
             "admin/how-to/anti-xray",
             "admin/how-to/get-to-vanilla",

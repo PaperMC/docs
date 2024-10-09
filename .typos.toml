@@ -1,14 +1,13 @@
 [files]
 extend-exclude = [
-    "docs/versioned", # old documentation shouldn't be checked
-    "*.json"          # mostly configuration, not worth checking
+    "docs/versioned" # old documentation shouldn't be checked
 ]
 
 [default]
 locale = "en-us"
 
 [default.extend-identifiers]
-FilterThreshhold = "FilterThreshhold" # ignore error, it is actually "Paper.FilterThreshhold" in Paper
+Spectre = "Spectre" # ignore error, the vulnerability is named Spectre
 
 [default.extend-words]
 accessorise = "accessorize"

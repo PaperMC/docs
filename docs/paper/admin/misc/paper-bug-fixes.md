@@ -11,8 +11,8 @@ Paper fixes many gameplay and technical issues within Minecraft. The most preval
 
 Paper fixes many Vanilla bugs that were not intended by Mojang. These bugs are patched to fix behavior or prevent abuse and
 instability on the server. Some of our fixes are configurable, as we understand that some servers may want to keep the
-Vanilla behavior. You will find these configuration options in the [global configuration](/docs/paper/admin/reference/configuration/global-configuration.mdx)
-and the [world configuration](/docs/paper/admin/reference/configuration/world-configuration.mdx).
+Vanilla behavior. You will find these configuration options in the [global configuration](../reference/configuration/global-configuration.mdx)
+and the [world configuration](../reference/configuration/world-configuration.mdx).
 
 ### What is intended behavior vs a bug?
 
@@ -31,20 +31,20 @@ Because TNT duping is considered a form of automated mining and not a resource d
 restore it. This, undesirably, also re-enables carpet and rail duping, which normally we would not provide a config for,
 but it's the same bug for those, so we have no choice. However, the config option is as follows:
 
-```yaml
+```yaml title="config/paper-global.yml"
 unsupported-settings:
   allow-piston-duplication: true
 ```
 
 We also allow you to restore the ability to duplicate gravity blocks, such as sand, using end portals. This is not
 recommended, as it can cause issues with the server, but we do provide a config option to restore this functionality:
-```yaml
+```yaml title="config/paper-global.yml"
 unsupported-settings:
   allow-unsafe-end-portal-teleportation: true
 ```
 
 Similarly, we also allow you to enable string-based duplication bugs with the following config option:
-```yaml
+```yaml title="config/paper-global.yml"
 unsupported-settings:
   allow-tripwire-disarming-exploits: true
 ```
@@ -55,7 +55,7 @@ fixed it in Paper, but we provide a config option to restore Vanilla behavior.
 
 We also fix the ability to break Bedrock and End Portal frames. We do also provide a config option to restore this
 functionality, but it is not recommended:
-```yaml
+```yaml title="config/paper-global.yml"
 unsupported-settings:
   allow-permanent-block-break-exploits: true
 ```

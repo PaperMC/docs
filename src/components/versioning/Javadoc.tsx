@@ -6,7 +6,7 @@ import {
   type Project,
   type DocusaurusVersion,
 } from "../../util/versionUtils";
-import { useDocsVersion } from "@docusaurus/theme-common/internal";
+import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 
 type TargetResolver = (
   currentVersion: DocusaurusVersion | null,

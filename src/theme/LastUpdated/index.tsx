@@ -1,7 +1,8 @@
 import React from "react";
 import Translate from "@docusaurus/Translate";
 import { ThemeClassNames } from "@docusaurus/theme-common";
-import { useDateTimeFormat, useDoc } from "@docusaurus/theme-common/internal";
+import { useDateTimeFormat } from "@docusaurus/theme-common/internal";
+import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import type { Props } from "@theme/LastUpdated";
 import Link from "@docusaurus/Link";
 

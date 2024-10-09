@@ -16,16 +16,16 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
-    "@docusaurus/core": "3.4.0",
-    "@docusaurus/plugin-content-docs": "3.4.0",
-    "@docusaurus/plugin-content-pages": "3.4.0",
-    "@docusaurus/plugin-debug": "3.4.0",
-    "@docusaurus/plugin-pwa": "3.4.0",
-    "@docusaurus/plugin-sitemap": "3.4.0",
-    "@docusaurus/theme-classic": "3.4.0",
-    "@docusaurus/theme-common": "3.4.0",
-    "@docusaurus/theme-mermaid": "3.4.0",
-    "@docusaurus/theme-search-algolia": "3.4.0",
+    "@docusaurus/core": "3.5.2",
+    "@docusaurus/plugin-content-docs": "3.5.2",
+    "@docusaurus/plugin-content-pages": "3.5.2",
+    "@docusaurus/plugin-debug": "3.5.2",
+    "@docusaurus/plugin-pwa": "3.5.2",
+    "@docusaurus/plugin-sitemap": "3.5.2",
+    "@docusaurus/theme-classic": "3.5.2",
+    "@docusaurus/theme-common": "3.5.2",
+    "@docusaurus/theme-mermaid": "3.5.2",
+    "@docusaurus/theme-search-algolia": "3.5.2",
     "@floating-ui/react": "^0.26.16",
     "@fontsource/jetbrains-mono": "5.0.20",
     "@iconify/react": "5.0.1",
@@ -40,10 +40,10 @@
     "react-markdown": "8.0.7"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.4.0",
-    "@docusaurus/types": "3.4.0",
+    "@docusaurus/module-type-aliases": "3.5.2",
+    "@docusaurus/types": "3.5.2",
+    "@docusaurus/tsconfig": "3.5.2",
     "@fec/remark-a11y-emoji": "4.0.2",
-    "@tsconfig/docusaurus": "2.0.3",
     "@types/is-ci": "3.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "20.14.2",
@@ -70,11 +70,11 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "pnpm@9.2.0+sha256.94fab213df221c55b6956b14a2264c21c6203cca9f0b3b95ff2fe9b84b120390",
+  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b",
   "pnpm": {
     "patchedDependencies": {
-      "@docusaurus/plugin-content-docs@3.4.0": "patches/@docusaurus__plugin-content-docs@3.4.0.patch",
-      "@docusaurus/utils@3.4.0": "patches/@docusaurus__utils@3.4.0.patch"
+      "@docusaurus/utils@3.5.2": "patches/@docusaurus__utils@3.5.2.patch",
+      "@docusaurus/plugin-content-docs@3.5.2": "patches/@docusaurus__plugin-content-docs@3.5.2.patch"
     }
   }
 }

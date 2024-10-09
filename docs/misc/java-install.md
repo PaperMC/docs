@@ -4,8 +4,8 @@ description: How to install or update to Java 21 on Linux (apt/rpm), Windows, or
 toc_max_heading_level: 5
 ---
 
-Installing Java is a critical first step to using or developing plugins for Paper, Velocity, and
-Waterfall. This guide will walk you through the recommended installation steps for most major
+Installing Java is a critical first step to using or developing plugins for Paper and Velocity. 
+This guide will walk you through the recommended installation steps for most major
 platforms.
 
 :::caution[Do not use headless variants of Java!]

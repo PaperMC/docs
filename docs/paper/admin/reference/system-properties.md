@@ -109,11 +109,6 @@ In most cases, you will not need to use these, unless you are running Paper in a
 - **default**: `unset`
 - **description**: Ignores the world data version when loading a world. This is not recommended and will likely cause issues.
 
-#### debug.entities
-
-- **default**: `unset`
-- **description**: Enables debug log messages for entity information.
-
 #### Paper.bypassHostCheck
 
 - **default**: `unset`

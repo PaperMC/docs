@@ -35,15 +35,15 @@ you have not manually overridden it.
 ### Per-world values
 
 To set a value for a specific world, edit `paper-world.yml` within the world folder. For example, if
-you wanted to disable `spawn.keep-spawn-loaded` for a world named `resource`, you would edit
+you wanted to enable `lootables.auto-replenish` for a world named `resource`, you would edit
 `paper-world.yml` within the `resource` folder like so:
 
 ```yaml title=resource/paper-world.yml
 _version: 28
 
 # highlight-start
-spawn:
-  keep-spawn-loaded: false
+lootables:
+  auto-replenish: true
 # highlight-end
 ```
 
@@ -59,10 +59,12 @@ individual `paper-world.yml`. You **do not need to and should not** copy the ent
 `paper-world-default.yml` file into each `paper-world.yml` file you want to modify. Only copy the
 exact value you want to change.
 
-For a more complex real-world example: setting both different `spawn-limits` and `keep-spawn-loaded`
+For a more complex real-world example: setting both different `spawn-limits` and `auto-replenish`
 in two worlds.
 
 ```yaml title="paper-world-defaults.yml"
+lootables:
+  auto-replenish: true
 entities:
   spawning:
     spawn-limits:
@@ -73,8 +75,6 @@ entities:
       underground_water_creature: 5
       water_ambient: 5
       water_creature: 20
-spawn:
-  keep-spawn-loaded: true
 ```
 
 ```yaml title="world_nether/paper-world.yml"
@@ -85,14 +85,14 @@ entities:
 ```
 
 ```yaml title="resource_world/paper-world.yml"
+lootables:
+  auto-replenish: false
 entities:
   spawning:
     spawn-limits:
       axolotls: 8
       creature: 15
       monster: 2
-spawn:
-  keep-spawn-loaded: false
 ```
 
 This example demonstrates the concept of inheritance. For each world, this is the effective
@@ -100,6 +100,7 @@ configuration which will be applied:
 
 | Configuration Key                                           | world  | world_nether | world_the_end | resource_world |
 |-------------------------------------------------------------|--------|--------------|---------------|----------------|
+| `lootables.auto-replenish`                                  | `true` | `true`       | `true`        | `false`        |
 | `entities.spawning.spawn-limits.ambient`                    | `15`   | `15`         | `15`          | `15`           |
 | `entities.spawning.spawn-limits.axolotls`                   | `5`    | `5`          | `5`           | `8`            |
 | `entities.spawning.spawn-limits.creature`                   | `10`   | `10`         | `10`          | `15`           |
@@ -107,9 +108,8 @@ configuration which will be applied:
 | `entities.spawning.spawn-limits.underground_water_creature` | `5`    | `5`          | `5`           | `5`            |
 | `entities.spawning.spawn-limits.water_ambient`              | `20`   | `20`         | `20`          | `20`           |
 | `entities.spawning.spawn-limits.water_creature`             | `5`    | `5`          | `5`           | `5`            |
-| `spawn.keep-spawn-loaded`                                   | `true` | `true`       | `true`        | `false`        |
 
 Notice that `world_the_end/paper-world.yml` was never modified. Because of this, it inherits all the
-configuration options from `config/paper-world-defaults.yml`. Additionally, `keep-spawn-loaded` was
+configuration options from `config/paper-world-defaults.yml`. Additionally, `auto-replenish` was
 only disabled in `resource_world/paper-world.yml` because in `config/paper-world-defaults.yml`,
-`keep-spawn-loaded` is set to `true`.
+`auto-replenish` is set to `true`.

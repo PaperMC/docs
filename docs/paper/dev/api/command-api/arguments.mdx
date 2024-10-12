@@ -20,7 +20,7 @@ You can add arguments to a command by doing the following:
 public class YourPluginClass extends JavaPlugin {
     @Override
     public void onEnable() {
-        LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
+        final LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
         manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             final Commands commands = event.registrar();
             commands.register(
@@ -29,7 +29,7 @@ public class YourPluginClass extends JavaPlugin {
                     Commands.argument("enchantmentargument", ArgumentTypes.resource(RegistryKey.ENCHANTMENT))
                         .executes(ctx -> {
                             ctx.getSource().getSender().sendPlainMessage(
-                                ctx.getArgument("enchantmentargument", Enchantment.class).getKey().asString()
+                                ctx.getArgument("enchantmentargument", Enchantment.class).getKey().toString()
                             );
                             return Command.SINGLE_SUCCESS;
                         })
@@ -60,34 +60,37 @@ Argument type, but there are many others:
 
 | Registry key name   | Return datatype class | Description                                                                                                                                                                                                                                                                                  |
 |---------------------|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| GAME_EVENT          | GameEvent             | Events in the game (eating, flying with an elytra etc.)                                                                                                                                                                                                                                      |
-| STRUCTURE_TYPE      | StructureType         | [Structures](https://minecraft.wiki/w/Structure#Overworld)
-| INSTRUMENT          | CraftMusicInstrument  | [Note block instrument](https://minecraft.wiki/w/Note_Block)                                                                                                                                                                                                                                 |
-| ENCHANTMENT         | Enchantment           | [Enchantment type](https://minecraft.wiki/w/Enchanting#Summary_of_enchantments)                                                                                                                                                                                                                                     |
-| MOB_EFFECT          | PotionEffectType      | [Potion effect](https://minecraft.wiki/w/Effect#List)                                                                                                                                                                                                                                             |
-| BLOCK               | BlockType             | [Block type - not modifiable](https://minecraft.wiki/w/Block#List_of_blocks)                                                                                                                                                                                                                                                          |
-| ITEM                | ItemType              | [Item type - not modifiable](https://minecraft.wiki/w/Item#List_of_items)                                                                                                                                                                                                                                                                            |
-| BIOME               | Biome                 | [Biome type](https://minecraft.wiki/w/Biome#Biome_types)                                                                                                                                                                                                                                     |
+| GAME_EVENT          | GameEvent             | [Game events](https://minecraft.wiki/w/Sculk_Sensor#Vibration_frequencies)                                                                                                                                                                                                                   |
+| STRUCTURE_TYPE      | StructureType         | [Structure types](https://minecraft.wiki/w/Structure#Overworld)                                                                                                                                                                                                                              |
+| INSTRUMENT          | MusicInstrument       | [Goat horns](https://minecraft.wiki/w/Goat_Horn#Playing)                                                                                                                                                                                                                                     |
+| MOB_EFFECT          | PotionEffectType      | [Potion effect](https://minecraft.wiki/w/Effect#List)                                                                                                                                                                                                                                        |
+| BLOCK               | BlockType             | [Block type](https://minecraft.wiki/w/Block#List_of_blocks)                                                                                                                                                                                                                                  |
+| ITEM                | ItemType              | [Item type](https://minecraft.wiki/w/Item#List_of_items)                                                                                                                                                                                                                                     |
+| CAT_VARIANT         | Cat.Type              | [Cat variants](https://minecraft.wiki/w/Cat#Appearance)                                                                                                                                                                                                                                      |
+| FROG_VARIANT        | Frog.Variant          | [Frog variants](https://minecraft.wiki/w/Frog)                                                                                                                                                                                                                                               |
+| VILLAGER_PROFESSION | Villager.Profession   | [Villager professions](https://minecraft.wiki/w/Villager#Professions)                                                                                                                                                                                                                        |
+| VILLAGER_TYPE       | Villager.Type         | [Villager biome specific type](https://minecraft.wiki/w/Villager#Professions)                                                                                                                                                                                                                |
+| MAP_DECORATION_TYPE | MapCursor.Type        | [Types of sprites displayed on a map](https://minecraft.wiki/w/Map#Map_icons)                                                                                                                                                                                                                |
+| MENU                | MenuType              | [Menu type](https://wiki.vg/Inventory)                                                                                                                                                                                                                                                       |
+| STRUCTURE           | Structure             | [Structures](https://minecraft.wiki/w/Structure#Overworld)                                                                                                                                                                                                                                   |
 | TRIM_MATERIAL       | TrimMaterial          | [Materials used to trim armor](https://minecraft.wiki/w/Smithing#Material)                                                                                                                                                                                                                   |
 | TRIM_PATTERN        | TrimPattern           | [Trim patterns](https://minecraft.wiki/w/Smithing#Trimming)                                                                                                                                                                                                                                  |
 | DAMAGE_TYPE         | DamageType            | [All types of damage dealt to an entity](https://minecraft.wiki/w/Damage_type)                                                                                                                                                                                                               |
-| WOLF_VARIANT        | Wolf.Variant          | [Wolf variants since 1.20.5](https://minecraft.wiki/w/Wolf#Variants)                                                                                                                                                                                                                         |
-| PAINTING_VARIANT    | Art                   | [All paintings](https://minecraft.wiki/w/Painting#Canvases)                                                                                                                                                                                                                                  |
+| ENCHANTMENT         | Enchantment           | [Enchantment type](https://minecraft.wiki/w/Enchanting#Summary_of_enchantments)                                                                                                                                                                                                              |
+| JUKEBOX_SONG        | JukeboxSong           | Music disc songs                                                                                                                                                                                                                                                                             |
+| WOLF_VARIANT        | Wolf.Variant          | [Wolf variants](https://minecraft.wiki/w/Wolf#Variants)                                                                                                                                                                                                                                      |
+| BANNER_PATTERN      | PatternType           | [Banner patterns](https://minecraft.wiki/w/Banner_Pattern#Variants)                                                                                                                                                                                                                          |
+| BIOME               | Biome                 | [Biome type](https://minecraft.wiki/w/Biome#Biome_types)                                                                                                                                                                                                                                     |
+| PAINTING_VARIANT    | Art                   | [Painting variants](https://minecraft.wiki/w/Painting#Canvases)                                                                                                                                                                                                                              |
 | ATTRIBUTE           | Attribute             | [Entity attribute](https://minecraft.wiki/w/Attribute)                                                                                                                                                                                                                                       |
-| BANNER_PATTERN      | PatternType           | [Armor Pattern type](https://minecraft.wiki/w/Banner_Pattern#Variants)                                                                                                                                                                                                                       |
-| CAT_VARIANT         | Cat.Type              | [Cat variants](https://minecraft.wiki/w/Cat#Appearance)                                                                                                                                                                                                                                      |
-| ENTITY_TYPE         | EntityType            | [Every entity type](https://minecraft.wiki/w/Entity#Types_of_entities)                                                                                                                                                                                                                                         |
-| PARTICLE_TYPE       | Particle              | [Every particle type](https://minecraft.wiki/w/Particles_(Java_Edition)#Types_of_particles)                                                                                                                                                                                                                     |
+| ENTITY_TYPE         | EntityType            | [Every entity type](https://minecraft.wiki/w/Entity#Types_of_entities)                                                                                                                                                                                                                       |
+| PARTICLE_TYPE       | Particle              | [Every particle type](https://minecraft.wiki/w/Particles_(Java_Edition)#Types_of_particles)                                                                                                                                                                                                  |
 | POTION              | PotionType            | [Every potion type](https://minecraft.wiki/w/Potion#Effect_potions)                                                                                                                                                                                                                          |
 | SOUND_EVENT         | Sound                 | [Events that trigger sound effects](https://minecraft.wiki/w/Sounds.json#Sound_events)                                                                                                                                                                                                       |
-| VILLAGER_PROFESSION | Villager.Profession   | [Villager professions](https://minecraft.wiki/w/Villager#Professions)                                                                                                                                                                                                                        |
-| VILLAGER_TYPE       | Villager.Type         | [Villager biome specific type](https://minecraft.wiki/w/Villager#Professions)                                                                                                                                                                                                                |
 | MEMORY_MODULE_TYPE  | MemoryKey             | Keys for saving per-entity data                                                                                                                                                                                                                                                              |
-| FROG_VARIANT        | Frog.Variant          | [Frog variants](https://minecraft.wiki/w/Frog)                                                                                                                                                                                                                                               |
-| MAP_DECORATION_TYPE | MapCursor.Type        | [Types of sprites displayed on a map](https://minecraft.wiki/w/Map#Map_icons)                                                                                                                                                                                                                |
-| FLUID               | Fluid                 | [Fluid types](https://minecraft.wiki/w/Fluid)     
+| FLUID               | Fluid                 | [Fluid types](https://minecraft.wiki/w/Fluid)                                                                                                                                                                                                                                                |
 
-Minecraft itself also specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>
+Paper specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>
 
 ### Custom types
 
@@ -114,8 +117,8 @@ public class IceCreamTypeArgument implements CustomArgumentType.Converted<IceCre
     @Override
     public @NotNull IceCreamType convert(String nativeType) throws CommandSyntaxException {
         try {
-            return IceCreamType.valueOf(nativeType.toUpperCase());
-        } catch (Exception e) {
+            return IceCreamType.valueOf(nativeType.toUpperCase(Locale.ENGLISH));
+        } catch (IllegalArgumentException ignored) {
             Message message = MessageComponentSerializer.message().serialize(Component.text("Invalid flavor %s!".formatted(nativeType), NamedTextColor.RED));
 
             throw new CommandSyntaxException(new SimpleCommandExceptionType(message), message);
@@ -133,9 +136,7 @@ public class IceCreamTypeArgument implements CustomArgumentType.Converted<IceCre
             builder.suggest(flavor.name(), MessageComponentSerializer.message().serialize(Component.text("look at this cool green tooltip!", NamedTextColor.GREEN)));
         }
 
-        return CompletableFuture.completedFuture(
-                builder.build()
-        );
+        return builder.buildFuture();
     }
 }
 ```
@@ -145,7 +146,7 @@ interface. This interface takes two type arguments: our custom enum, T, and a na
 
 - `convert()` converts the native type (in this case `String`) into our custom type.
 
--  `getNativeType()` returns the type of string that our command argument uses. This uses a single word, so we return `StringArgumentType.word()`.
+- `getNativeType()` returns the type of string that our command argument uses. This uses a single word, so we return `StringArgumentType.word()`.
 
 - `listSuggestions()` returns `CompletableFuture<Suggestions>` so that the client
 can suggest all available options. We can even add tooltips to the suggestions to explain them in greater
@@ -155,16 +156,17 @@ We then need to register the command:
 
 ```java
 public void onEnable() {
-    LifecycleEventManager manager = this.getLifecycleManager();
+    final LifecycleEventManager<Plugin> manager = this.getLifecycleManager();
     manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
         final Commands commands = event.registrar();
         commands.register(Commands.literal("ordericecream")
             .then(
-                Commands.argument("flavor", new IceCreamTypeArgument()).executes((commandContext -> {
-                    IceCreamType argumentResponse = commandContext.getArgument("flavor", IceCreamType.class); 
-                    commandContext.getSource().getSender().sendMessage(Component.text("You ordered: " + argumentResponse));
-                    return 1;
-                }))
+                Commands.argument("flavor", new IceCreamTypeArgument())
+                    .executes(commandContext -> {
+                        IceCreamType argumentResponse = commandContext.getArgument("flavor", IceCreamType.class);
+                        commandContext.getSource().getSender().sendMessage(Component.text("You ordered: " + argumentResponse));
+                        return Command.SINGLE_SUCCESS;
+                    })
             ).build()
         );
     });

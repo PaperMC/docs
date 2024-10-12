@@ -158,7 +158,7 @@ public void bootstrap(@NotNull BootstrapContext context) {
     context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.entryAdd()
         // Increase the max level to 20
         .newHandler(event -> event.builder().maxLevel(20))
-        // Configure the handled to only be called for the Vanilla sharpness enchantment.
+        // Configure the handler to only be called for the Vanilla sharpness enchantment.
         .filter(EnchantmentKeys.SHARPNESS)
     );
 }

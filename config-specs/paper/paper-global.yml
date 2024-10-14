@@ -442,11 +442,6 @@ unsupported-settings:
       Allows the server to customize the format of saved region files. This
       supports ZLIB, GZIP and NONE, where None namely allows for compression to
       be disabled
-  allow-grindstone-overstacking:
-    default: "false"
-    description: >-
-      Whether the server should allow players to overstack items in the
-      grindstone
   allow-unsafe-end-portal-teleportation:
     default: "false"
     description: >-

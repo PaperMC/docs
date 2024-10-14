@@ -102,10 +102,10 @@ anticheat:
           this will affect how certain items look when held by another player
 chunks:
   auto-save-interval:
-    default: "-1"
+    default: default
     description: >-
       Configures the world saving interval in ticks. Overrides
-      ticks-per.autosave in bukkit.yml for this world. A value of -1 will use
+      ticks-per.autosave in bukkit.yml for this world. By default it will use
       the global ticks-per.autosave in bukkit.yml
   delay-chunk-unloads-by:
     default: 10s
@@ -141,7 +141,7 @@ chunks:
     description: >-
       Sets whether the server will prevent players from moving into unloaded
       chunks or not
-  flush-chunks-on-save:
+  flush-regions-on-save:
     default: "false"
     description: >-
       Sets whether the server will flush chunks to disk when they are saved.
@@ -235,13 +235,13 @@ entities:
         into a single orb. This is especially noticeable when defeating boss
         monsters
     mobs-can-always-pick-up-loot:
-      zombie:
+      zombies:
         default: "false"
         description: >-
           Instructs the server to allow zombies to pick up loot. If set to
           false, the probability that a zombie picks up items depends on the
           world's difficulty (Vanilla behavior)
-      skeleton:
+      skeletons:
         default: "false"
         description: >-
           Instructs the server to allow skeletons to pick up loot. If set to
@@ -327,9 +327,6 @@ entities:
     spiders-immune-to-poison-effect:
       default: "true"
       description: If spiders should be immune to poison
-    undead-immune-to-certain-effects:
-      default: "true"
-      description: If undead mobs should be immune to regeneration and poison
   sniffer:
     boosted-hatch-time:
       default: default
@@ -426,19 +423,19 @@ entities:
         spawn egg
     duplicate-uuid:
       mode:
-        default: saferegen
+        default: SAFE_REGEN
         description: >-
           Specifies the method the server uses to resolve entities with
           duplicate UUIDs. This can be one of the following values:
 
-          - **saferegen**: Regenerate a UUID for the entity, or delete it if
+          - **SAFE_REGEN**: Regenerate a UUID for the entity, or delete it if
           they are close.
 
-          - **delete**: Delete the entity.
+          - **DELETE**: Delete the entity.
 
-          - **silent**: Does nothing, not printing logs.
+          - **NOTHING**: Does nothing, not printing logs.
 
-          - **warn**: Does nothing, printing logs
+          - **WARN**: Does nothing, printing logs
       safe-regen-delete-range:
         default: "32"
         description: >-
@@ -932,18 +929,18 @@ misc:
       Configure the maximum distance of a leash. If the distance to the leashed
       entity is greater, the leash will break.
   redstone-implementation:
-    default: vanilla
+    default: VANILLA
     description: >-
       Specifies the redstone implementation that the server uses. Alternative
       implementations can greatly reduce the lag caused by redstone dust by
       optimizing power calculations and reducing the number of block and shape
       updates emitted. The following implementations are available:
 
-      - **vanilla**: The Vanilla redstone implementation.
+      - **VANILLA**: The Vanilla redstone implementation.
 
-      - **eigencraft**: The Eigencraft redstone implementation by theosib.
+      - **EIGENCRAFT**: The Eigencraft redstone implementation by theosib.
 
-      - **alternate-current**: The Alternate Current redstone implementation by
+      - **ALTERNATE_CURRENT**: The Alternate Current redstone implementation by
       Space Walker.
 
 

@@ -50,7 +50,7 @@ sender will get a message containing the key of the enchantment they selected.
 - Custom types
 - Non alphanumerical sorting
 
-## Enchantment types
+## Argument types
 
 By default, you can use [the registry API](../registries) to get simple argument types like
 blocks, items, potions and many more. In the example above, we used the Enchantment 
@@ -90,7 +90,7 @@ Argument type, but there are many others:
 | MEMORY_MODULE_TYPE  | MemoryKey             | Keys for saving per-entity data                                                                                                                                                                                                                                                              |
 | FLUID               | Fluid                 | [Fluid types](https://minecraft.wiki/w/Fluid)                                                                                                                                                                                                                                                |
 
-Paper specifies many argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>
+Paper specifies many more argument types. For more information on them, see <Javadoc name={"io.papermc.paper.command.brigadier.argument.ArgumentTypes"}>ArgumentTypes</Javadoc>
 
 ### Custom types
 
@@ -162,9 +162,9 @@ public void onEnable() {
         commands.register(Commands.literal("ordericecream")
             .then(
                 Commands.argument("flavor", new IceCreamTypeArgument())
-                    .executes(commandContext -> {
-                        IceCreamType argumentResponse = commandContext.getArgument("flavor", IceCreamType.class);
-                        commandContext.getSource().getSender().sendMessage(Component.text("You ordered: " + argumentResponse));
+                    .executes(ctx -> {
+                        IceCreamType argumentResponse = ctx.getArgument("flavor", IceCreamType.class);
+                        ctx.getSource().getSender().sendMessage(Component.text("You ordered: " + argumentResponse));
                         return Command.SINGLE_SUCCESS;
                     })
             ).build()

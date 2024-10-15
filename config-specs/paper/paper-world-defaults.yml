@@ -384,35 +384,35 @@ entities:
     despawn-ranges:
       <mob_category>:
         hard:
-          default: "default"
+          default: default
           description: >-
             The horizontal and vertical number of blocks away from a player in which each monster
             type (set individually) will be forcibly despawned.
         soft:
-          default: "default"
+          default: default
           description: >-
             The horizontal and vertical number of blocks away from a player in which each monster
             type (set individually) will be randomly selected to be despawned.
       <mob_category>_:
         hard:
           horizontal:
-            default: "default"
+            default: default
             description: >-
               The horizontal number of blocks away from a player in which each entity type
               (set individually) will be forcibly despawned.
           vertical:
-            default: "default"
+            default: default
             description: >-
               The vertical number of blocks away from a player in which each entity type
               (set individually) will be forcibly despawned.
         soft:
           horizontal:
-            default: "default"
+            default: default
             description: >-
               The horizontal number of blocks away from a player in which each entity type
               (set individually) will be randomly selected to be despawned.
           vertical:
-            default: "default"
+            default: default
             description: >-
               The vertical number of blocks away from a player in which each entity type
               (set individually) will be randomly selected to be despawned.
@@ -924,7 +924,7 @@ misc:
       world should be. Vanilla uses 5, but this causes issues especially with
       plugins such as WorldEdit
   max-leash-distance:
-    default: "default"
+    default: default
     description: >-
       Configure the maximum distance of a leash. If the distance to the leashed
       entity is greater, the leash will break.
@@ -957,7 +957,7 @@ misc:
     default: HORIZONTAL_FIRST_OUTWARD
     description: >-
       Controls the order in which Alternate Current updates wires and neighboring blocks.
-      Only has an effect when using the "alternate-current" redstone implementation.
+      Only has an effect when using the "ALTERNATE_CURRENT" redstone implementation.
       This can be one of the following values:
 
       - **HORIZONTAL_FIRST_OUTWARD**

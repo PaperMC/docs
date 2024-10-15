@@ -13,15 +13,13 @@ item-validation:
       default: "2147483647"
     page:
       default: "2147483647"
-  display-name:
-    default: "2147483647"
   book-size:
     page-max:
-      default: "2147483647"
-    total-multiplier:
-      default: "1.0"
-    lore-line:
-      default: "2147483647"
+      default: disabled
+  display-name:
+    default: "2147483647"
+  lore-line:
+    default: "2147483647"
   resolve-selectors-in-books:
     default: "true"
 misc:
@@ -51,11 +49,9 @@ unsupported-settings:
     default: "true"
   allow-piston-duplication:
     default: "true"
-  perform-username-validation:
-    default: "false"
-  allow-grindstone-overstacking:
-    default: "true"
   allow-unsafe-end-portal-teleportation:
     default: "true"
   allow-tripwire-disarming-exploits:
     default: "true"
+  perform-username-validation:
+    default: "false"

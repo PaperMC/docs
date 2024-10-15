@@ -225,6 +225,17 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Disables the folder walk and symlink validation when loading a world. Significantly improves world loading speed on massive worlds (>1TB). This does not disable symlink verification of datapacks.
 
+#### minecraft.api.session.host
+
+- **default**: `https://sessionserver.mojang.com`
+- **description**: Allows specifying of a custom session server URL e.g. for caching. [`minecraft.api.services.host`](#minecraftapiserviceshost) needs to be set too for this to apply.
+
+#### minecraft.api.services.host
+
+- **default**: `https://api.minecraftservices.com`
+- **description**: Allows specifying of a custom services API URL e.g. for caching. [`minecraft.api.session.host`](#minecraftapisessionhost) needs to be set too for this to apply.
+
+
 ## List of environment variables
 
 #### PAPER_VELOCITY_SECRET

@@ -235,7 +235,6 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `https://api.minecraftservices.com`
 - **description**: Allows specifying of a custom services API URL e.g. for caching. [`minecraft.api.session.host`](#minecraftapisessionhost) needs to be set too for this to apply.
 
-
 ## List of environment variables
 
 #### PAPER_VELOCITY_SECRET

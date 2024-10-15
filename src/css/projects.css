@@ -8,13 +8,23 @@
   border: 1px solid var(--ifm-color-emphasis-300);
   padding: var(--ifm-global-spacing);
   margin: 24px 0;
-  align-items: center;
+  justify-content: space-between;
 }
 
 .project p {
   padding-right: 0.8em;
   color: var(--ifm-color-emphasis-800);
   margin: 0;
+}
+
+.project div {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.project a + a {
+  margin-top: 0.5em;
 }
 
 .projectGitHub {

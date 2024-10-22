@@ -69,3 +69,4 @@ Folia currently disables a handful of commands. These are them:
 - WorldBorder
 - Perf
 - SaveAll
+- Restart

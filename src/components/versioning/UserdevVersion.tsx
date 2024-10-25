@@ -2,9 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
 
 async function getUserdevVersion(): Promise<string> {
-  const response = await fetch(
-    "https://api.github.com/repos/PaperMC/paperweight/tags"
-  );
+  const response = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags");
 
   if (!response.ok) {
     return "<insert_latest_version>";
@@ -63,11 +61,7 @@ export default function UserdevVersionCode({
   ) : inline ? (
     <code>{code}</code>
   ) : (
-    <CodeBlock
-      language={language}
-      title={title}
-      showLineNumbers={showLineNumbers}
-    >
+    <CodeBlock language={language} title={title} showLineNumbers={showLineNumbers}>
       {code}
     </CodeBlock>
   );

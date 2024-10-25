@@ -35,7 +35,17 @@ const createProjectVersionsValue = (
   });
 };
 
-export type Project = "paper" | "velocity";
+const createUserdevVersionsValue = (ttl: number = 5 * 60 * 1000): ExpiringValue<string[]> => {
+  return new ExpiringValue(ttl, async () => {
+    const json = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags").then((r) =>
+      r.json()
+    );
+
+    return json.map((e) => e.name.substring(1)).reverse();
+  });
+};
+
+export type Project = "paper" | "velocity" | "userdev";
 
 export enum VersionType {
   Major,
@@ -48,6 +58,7 @@ export enum VersionType {
 const projects: Record<Project, ExpiringValue<string[]>> = {
   paper: createProjectVersionsValue("paper"),
   velocity: createProjectVersionsValue("velocity"),
+  userdev: createUserdevVersionsValue(),
 };
 
 export interface DocusaurusVersion {

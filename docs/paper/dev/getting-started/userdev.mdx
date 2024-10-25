@@ -38,18 +38,13 @@ See [here](#1205-and-beyond) for more details.
 ## Adding the plugin
 Add the plugin to your `build.gradle.kts` file.
 
-:::info
-
-You can find the latest release of **paperweight-userdev** on the [Gradle Plugin
-Portal](https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev).
-
-:::
-
-```kotlin title="build.gradle.kts"
+<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
+```
 plugins {
-    id("io.papermc.paperweight.userdev") version "<insert_latest_version>"
+    id("io.papermc.paperweight.userdev") version "%%_MAJ_MIN_PAT_USERDEV_%%"
 }
 ```
+</VersionFormattedCode>
 
 The latest version of `paperweight-userdev` supports dev bundles for Minecraft 1.17.1 and newer, so it's best practice to keep it up to date!
 Only the latest version of `paperweight-userdev` is officially supported, and we will ask you to update first if you are having problems with old versions.

@@ -47,6 +47,11 @@ export default function VersionFormattedCode({
         await getProjectVersion("velocity", versionMeta)
       );
 
+      code = code.replace(
+        /%%_MAJ_MIN_PAT_USERDEV_%%/g,
+        await getProjectVersion("userdev", versionMeta)
+      );
+
       if (mounted.current) {
         setFormattedCode({ code, inline });
       }

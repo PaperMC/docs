@@ -17,7 +17,7 @@ export default function UserdevVersionCode({
   title = "",
   showLineNumbers = false,
   plainText = false,
-  children
+  children,
 }: UserdevVersionFormattedCodeProps) {
   const [formattedCode, setFormattedCode] = useState<FormattedCodeProps>(null);
   const mounted = useRef<Boolean>(true);

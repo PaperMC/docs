@@ -148,7 +148,7 @@ of a few ways:
     %%_MAJ_MIN_PAT_MC_%% - Major-Minor-Patch Paper Version (E.g. 1.20.4)
     %%_MAJ_MIN_VEL_%% - Major Velocity Version (E.g. 3.1.0)
     %%_MAJ_MIN_PAT_VEL_%% - Major-Minor-Patch Velocity Version (E.g. 3.1.1-SNAPSHOT)
-    %%_USERDEV_VER_%% - Latest Paperweight-Userdev Version (E.g. 1.7.3)
+    %%_MAJ_MIN_PAT_USERDEV_%% - Latest Paperweight-Userdev Version (E.g. 1.7.3)
     ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation

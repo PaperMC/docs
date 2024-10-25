@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
-import { getProjectVersion, VersionType, getUserdevVersion } from "../../util/versionUtils";
+import { getProjectVersion, VersionType } from "../../util/versionUtils";
 import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 
 export default function VersionFormattedCode({
@@ -47,7 +47,10 @@ export default function VersionFormattedCode({
         await getProjectVersion("velocity", versionMeta)
       );
 
-      code = code.replace(/%%_USERDEV_VER_%%/g, await getUserdevVersion().value());
+      code = code.replace(
+        /%%_MAJ_MIN_PAT_USERDEV_%%/g,
+        await getProjectVersion("userdev", versionMeta)
+      );
 
       if (mounted.current) {
         setFormattedCode({ code, inline });

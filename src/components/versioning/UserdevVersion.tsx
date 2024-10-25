@@ -19,7 +19,7 @@ export default function UserdevVersionCode({
   title = "",
   showLineNumbers = false,
   plainText = false,
-  children,
+  children
 }: UserdevVersionFormattedCodeProps) {
   const [formattedCode, setFormattedCode] = useState<FormattedCodeProps>(null);
   const mounted = useRef<Boolean>(true);
@@ -63,11 +63,7 @@ export default function UserdevVersionCode({
   ) : inline ? (
     <code>{code}</code>
   ) : (
-    <CodeBlock
-      language={language}
-      title={title}
-      showLineNumbers={showLineNumbers}
-    >
+    <CodeBlock language={language} title={title} showLineNumbers={showLineNumbers}>
       {code}
     </CodeBlock>
   );

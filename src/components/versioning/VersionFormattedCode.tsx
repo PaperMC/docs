@@ -1,18 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
-import { getProjectVersion, VersionType } from "../../util/versionUtils";
+import { getProjectVersion, VersionType, getUserdevVersion } from "../../util/versionUtils";
 import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
-
-async function getUserdevVersion(): Promise<string> {
-  const response = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags");
-
-  if (!response.ok) {
-    return "<insert_latest_version>";
-  }
-
-  const json = await response.json();
-  return json[0].name.substring(1);
-}
 
 export default function VersionFormattedCode({
   language = "",
@@ -58,7 +47,7 @@ export default function VersionFormattedCode({
         await getProjectVersion("velocity", versionMeta)
       );
 
-      code = code.replace(/%%_USERDEV_VER_%%/g, await getUserdevVersion());
+      code = code.replace(/%%_USERDEV_VER_%%/g, await getUserdevVersion().value());
 
       if (mounted.current) {
         setFormattedCode({ code, inline });

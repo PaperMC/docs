@@ -86,3 +86,16 @@ export const getProjectVersion = async (
 
   return version;
 };
+
+export const getUserdevVersion = (ttl: number = 5 * 60 * 1000): ExpiringValue<string> => {
+  return new ExpiringValue(ttl, async () => {
+    const response = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags");
+
+    if (!response.ok) {
+      return "<insert_latest_version>";
+    }
+
+    const json = await response.json();
+    return json[0].name.substring(1);
+  });
+};

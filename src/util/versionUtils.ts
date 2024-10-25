@@ -21,17 +21,12 @@ class ExpiringValue<T> {
     return this._value;
   }
 }
-
-const requestHeaders = { "User-Agent": "PaperMC-Docs" };
-
 const createProjectVersionsValue = (
   project: string,
   ttl: number = 5 * 60 * 1000
 ): ExpiringValue<string[]> => {
   return new ExpiringValue(ttl, async () => {
-    const result = await fetch(`https://api.papermc.io/v2/projects/${project}`, {
-      headers: requestHeaders,
-    }).then((r) => r.json());
+    const result = await fetch(`https://api.papermc.io/v2/projects/${project}`).then((r) => r.json());
 
     return result.versions;
   });
@@ -39,9 +34,7 @@ const createProjectVersionsValue = (
 
 const createUserdevVersionsValue = (ttl: number = 5 * 60 * 1000): ExpiringValue<string[]> => {
   return new ExpiringValue(ttl, async () => {
-    const json = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags", {
-      headers: requestHeaders,
-    }).then((r) => r.json());
+    const json = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags").then((r) => r.json());
 
     return json.map((e) => e.name.substring(1)).reverse();
   });

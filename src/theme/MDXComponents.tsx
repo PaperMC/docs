@@ -4,7 +4,6 @@ import TabItem from "@theme/TabItem";
 import Tabs from "@theme/Tabs";
 import VersionFormattedCode from "@site/src/components/versioning/VersionFormattedCode";
 import SoftwareVersion from "@site/src/components/versioning/SoftwareVersion";
-import UserdevVersionCode from "@site/src/components/versioning/UserdevVersion";
 import Javadoc from "../components/versioning/Javadoc";
 import Property from "@site/src/components/Property";
 
@@ -16,7 +15,6 @@ export default {
   // Add a custom mapping
   VersionFormattedCode,
   SoftwareVersion,
-  UserdevVersionCode,
   Javadoc,
   Property,
   Icon: Icon,

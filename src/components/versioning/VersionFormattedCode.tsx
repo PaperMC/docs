@@ -3,6 +3,17 @@ import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
 import { getProjectVersion, VersionType } from "../../util/versionUtils";
 import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 
+async function getUserdevVersion(): Promise<string> {
+  const response = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags");
+
+  if (!response.ok) {
+    return "<insert_latest_version>";
+  }
+
+  const json = await response.json();
+  return json[0].name.substring(1);
+}
+
 export default function VersionFormattedCode({
   language = "",
   title = "",
@@ -46,6 +57,8 @@ export default function VersionFormattedCode({
         /%%_MAJ_MIN_PAT_VEL_%%/g,
         await getProjectVersion("velocity", versionMeta)
       );
+
+      code = code.replace(/%%_USERDEV_VER_%%/g, await getUserdevVersion());
 
       if (mounted.current) {
         setFormattedCode({ code, inline });

@@ -72,7 +72,7 @@ When run, this will gracefully shut down the Velocity proxy.
 All players will be disconnected from the proxy, and plugins will have a chance to finish up before the proxy shuts down.
 An optional reason can be given, either as JSON or with [MiniMessage Format](https://docs.advntr.dev/minimessage/format.html).
 
-If the message provided starts with `"`, `[`, or `{`, Then the message will tried to be parsed as JSON.
+If the provided message starts with `"`, `[`, or `{`, then the message is attempted to be parsed as JSON.
 If this parsing fails, or the message starts with anything else, the message will be parsed as MiniMessage.
 
 

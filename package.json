@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "3.6.0",
+    "@docusaurus/faster": "^3.6.0",
     "@docusaurus/plugin-content-docs": "3.6.0",
     "@docusaurus/plugin-content-pages": "3.6.0",
     "@docusaurus/plugin-debug": "3.6.0",
@@ -48,14 +49,10 @@
     "@types/js-yaml": "^4.0.9",
     "@types/node": "20.14.2",
     "@types/react": "^18.2.79",
-    "esbuild": "^0.20.2",
-    "esbuild-loader": "4.1.0",
-    "esbuild-register": "3.5.0",
     "is-ci": "3.0.1",
     "prettier": "3.3.1",
     "regenerator-runtime": "0.14.1",
-    "typescript": "5.4.5",
-    "webpack": "^5.91.0"
+    "typescript": "5.4.5"
   },
   "browserslist": {
     "production": [

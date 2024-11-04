@@ -50,14 +50,8 @@ const config: Config = {
     require.resolve("@fontsource/jetbrains-mono/index.css"),
   ],
 
-  webpack: {
-    jsLoader: (isServer) => ({
-      loader: require.resolve("esbuild-loader"),
-      options: {
-        loader: "tsx",
-        target: isServer ? "node12" : "es2017",
-      },
-    }),
+  future: {
+    experimental_faster: true,
   },
 
   headTags: [

@@ -1,5 +1,5 @@
 diff --git a/src/gitUtils.ts b/src/gitUtils.ts
-index 39a3ad754a0c5ab27cfb78c7b44a9f0be3785a62..c3116d7a725d4a5420286baac8147f4e821e5631 100644
+index 39a3ad754a0c5ab27cfb78c7b44a9f0be3785a62..c3116d7a725d4a5420286baac8147f4e821e5631 100755
 --- a/src/gitUtils.ts
 +++ b/src/gitUtils.ts
 @@ -95,6 +95,13 @@ export async function getFileCommitDate(
@@ -21,12 +21,12 @@ index 39a3ad754a0c5ab27cfb78c7b44a9f0be3785a62..c3116d7a725d4a5420286baac8147f4e
      );
    }
 +}
- 
+
 +function createArgs(format: string, includeAuthor?: boolean, age: 'oldest' | 'newest' = 'oldest') {
    // We add a "RESULT:" prefix to make parsing easier
    // See why: https://github.com/facebook/docusaurus/pull/10022
    const resultFormat = includeAuthor ? 'RESULT:%ct,%an' : 'RESULT:%ct';
- 
+
    const args = [
 -    `--format=${resultFormat}`,
 +    `--format=${includeAuthor === undefined ? format : resultFormat}`,
@@ -35,7 +35,7 @@ index 39a3ad754a0c5ab27cfb78c7b44a9f0be3785a62..c3116d7a725d4a5420286baac8147f4e
    ]
      .filter(Boolean)
      .join(' ');
- 
+
 +  return args;
 +}
 +async function runGitCommandOnFile(file: string, args: string): Promise<{
@@ -49,7 +49,7 @@ index 39a3ad754a0c5ab27cfb78c7b44a9f0be3785a62..c3116d7a725d4a5420286baac8147f4e
 @@ -147,12 +163,18 @@ export async function getFileCommitDate(
      );
    }
- 
+
 +  return result;
 +}
 +function retrieveCorrectRegex(includeAuthor: boolean) {
@@ -58,17 +58,17 @@ index 39a3ad754a0c5ab27cfb78c7b44a9f0be3785a62..c3116d7a725d4a5420286baac8147f4e
    const regex = includeAuthor
      ? /(?:^|\n)RESULT:(?<timestamp>\d+),(?<author>.+)(?:$|\n)/
      : /(?:^|\n)RESULT:(?<timestamp>\d+)(?:$|\n)/;
- 
+
 +  return regex;
 +}
 +function matchFromRegex(file: string, regex: RegExp, result: { code: number; stdout: string; stderr: string; }): RegExpMatchArray {
    const output = result.stdout.trim();
- 
+
    if (!output) {
 @@ -169,6 +191,13 @@ export async function getFileCommitDate(
      );
    }
- 
+
 +  return match;
 +}
 +function matchDateAndTimestamp(match: RegExpMatchArray, includeAuthor: boolean): {

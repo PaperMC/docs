@@ -16,16 +16,17 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
-    "@docusaurus/core": "3.5.2",
-    "@docusaurus/plugin-content-docs": "3.5.2",
-    "@docusaurus/plugin-content-pages": "3.5.2",
-    "@docusaurus/plugin-debug": "3.5.2",
-    "@docusaurus/plugin-pwa": "3.5.2",
-    "@docusaurus/plugin-sitemap": "3.5.2",
-    "@docusaurus/theme-classic": "3.5.2",
-    "@docusaurus/theme-common": "3.5.2",
-    "@docusaurus/theme-mermaid": "3.5.2",
-    "@docusaurus/theme-search-algolia": "3.5.2",
+    "@docusaurus/core": "3.6.0",
+    "@docusaurus/faster": "^3.6.0",
+    "@docusaurus/plugin-content-docs": "3.6.0",
+    "@docusaurus/plugin-content-pages": "3.6.0",
+    "@docusaurus/plugin-debug": "3.6.0",
+    "@docusaurus/plugin-pwa": "3.6.0",
+    "@docusaurus/plugin-sitemap": "3.6.0",
+    "@docusaurus/theme-classic": "3.6.0",
+    "@docusaurus/theme-common": "3.6.0",
+    "@docusaurus/theme-mermaid": "3.6.0",
+    "@docusaurus/theme-search-algolia": "3.6.0",
     "@floating-ui/react": "^0.26.16",
     "@fontsource/jetbrains-mono": "5.0.20",
     "@iconify/react": "5.0.1",
@@ -40,22 +41,18 @@
     "react-markdown": "8.0.7"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.5.2",
-    "@docusaurus/types": "3.5.2",
-    "@docusaurus/tsconfig": "3.5.2",
+    "@docusaurus/module-type-aliases": "3.6.0",
+    "@docusaurus/tsconfig": "3.6.0",
+    "@docusaurus/types": "3.6.0",
     "@fec/remark-a11y-emoji": "4.0.2",
     "@types/is-ci": "3.0.4",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "20.14.2",
     "@types/react": "^18.2.79",
-    "esbuild": "^0.20.2",
-    "esbuild-loader": "4.1.0",
-    "esbuild-register": "3.5.0",
     "is-ci": "3.0.1",
     "prettier": "3.3.1",
     "regenerator-runtime": "0.14.1",
-    "typescript": "5.4.5",
-    "webpack": "^5.91.0"
+    "typescript": "5.4.5"
   },
   "browserslist": {
     "production": [
@@ -70,11 +67,11 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "pnpm@9.11.0+sha512.0a203ffaed5a3f63242cd064c8fb5892366c103e328079318f78062f24ea8c9d50bc6a47aa3567cabefd824d170e78fa2745ed1f16b132e16436146b7688f19b",
+  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee",
   "pnpm": {
     "patchedDependencies": {
-      "@docusaurus/utils@3.5.2": "patches/@docusaurus__utils@3.5.2.patch",
-      "@docusaurus/plugin-content-docs@3.5.2": "patches/@docusaurus__plugin-content-docs@3.5.2.patch"
+      "@docusaurus/plugin-content-docs@3.6.0": "patches/@docusaurus__plugin-content-docs@3.6.0.patch",
+      "@docusaurus/utils@3.6.0": "patches/@docusaurus__utils@3.6.0.patch"
     }
   }
 }

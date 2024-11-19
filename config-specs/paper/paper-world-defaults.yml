@@ -420,7 +420,7 @@ entities:
       <entity-type>:
         default: "disabled"
         description: >-
-          A server introduced despawn time after which the entity is forcefully despawned.
+          A server-introduced despawn time after which the entity is forcefully despawned.
           If disabled or not specified, the entity will simply despawn according to Vanilla rules.
     disable-mob-spawner-spawn-egg-transformation:
       default: "false"

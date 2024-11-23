@@ -416,6 +416,12 @@ entities:
             description: >-
               The vertical number of blocks away from a player in which each entity type
               (set individually) will be randomly selected to be despawned.
+    despawn-time:
+      <entity-type>:
+        default: "disabled"
+        description: >-
+          A server-introduced despawn time after which the entity is forcefully despawned.
+          If disabled or not specified, the entity will simply despawn according to Vanilla rules.
     disable-mob-spawner-spawn-egg-transformation:
       default: "false"
       description: >-

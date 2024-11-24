@@ -209,7 +209,7 @@ public class CustomRunnable extends BukkitRunnable {
             return;
         }
 
-        task.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
+        this.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
     }
 }
 ```

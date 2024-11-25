@@ -4,7 +4,7 @@ slug: paper/dev/mob-goals
 description: A guide to the mob goal API.
 ---
 
-The Mob Goal API is a way of controlling the behaviour of mobs in Minecraft. It allows you to set a goal for a mob to perform, such as
+The Mob Goal API is a way of controlling the behavior of mobs in Minecraft. It allows you to set a goal for a mob to perform, such as
 attacking a player, or moving to a location. It also allows you to create your own custom goals.
 
 ## Registering a Goal on an Entity

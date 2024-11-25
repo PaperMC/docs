@@ -11,7 +11,7 @@ for an entity to follow, such as moving to a location, or following a player.
 
 To access the pathfinder for a Mob, you need to call `getPathfinder()` on the Mob. This will return an instance of `Pathfinder`.
 
-:::important
+:::note
 
 The pathfinder is only available for entities that implement `Mob`.
 

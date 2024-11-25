@@ -29,7 +29,7 @@ Pathfinder pathfinder = cow.getPathfinder();
 boolean success = pathfinder.moveTo(player.getLocation());
 ```
 
-If we want to access the current Path for the cow, we can call `getCurrentPath()` on the pathfinder:
+If we want to access the current path for the cow, we can call `getCurrentPath()` on the pathfinder:
 
 ```java
 PathResult path = pathfinder.getCurrentPath();
@@ -50,7 +50,7 @@ For example, a Polar Bear cannot fly. This means that if you set a path for a Po
 it will not be able to reach it.
 
 Some attributes can be set on the pathfinder to change the way that the pathfinder works. These are:
-- `setCanOpenDoors(boolean)`: Whether the entity can open doors. This is relevant for Zombies breaking down doors, and 
+- `setCanOpenDoors(boolean)`: Whether the entity can open doors. This is relevant for Zombies breaking down doors, and
 Villagers opening doors.
 - `setCanPassDoors(boolean)`: Whether the entity can pass through open doors.
 - `setCanFloat(boolean)`: Whether the entity can float in water.

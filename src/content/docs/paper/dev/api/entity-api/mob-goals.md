@@ -1,7 +1,7 @@
 ---
 title: Mob Goal API
 slug: paper/dev/mob-goals
-description: A guide to the Mob Goal API.
+description: A guide to the mob goal API.
 ---
 
 The Mob Goal API is a way of controlling the behaviour of mobs in Minecraft. It allows you to set a goal for a mob to perform, such as
@@ -87,11 +87,11 @@ public class CamelFollowPlayerGoal implements Goal<Camel> {
     @Override
     public void stop() {
         // This is called when the goal stops. In this case, we just send a message to the player.
-        player.sendMessage(text("I Stopped following you!"));
+        player.sendMessage(text("I stopped following you!"));
     }
 
     @Override
-    public @NotNull GoalKey<Camel> getKey() {
+    public GoalKey<Camel> getKey() {
         // This is the key for the goal. It is used to identify the goal and is used to determine if two goals are the same.
         // It requires the class of the entity and a NamespacedKey. The NamespacedKey is used to identify the goal.
         // You should use the plugin's namespace for the NamespacedKey, not Minecraft or Bukkit.

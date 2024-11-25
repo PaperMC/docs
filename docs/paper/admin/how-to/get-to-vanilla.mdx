@@ -10,6 +10,7 @@ import ConfigDocBlock from '@site/src/components/config/ConfigDocBlock';
 import VanillaWorldDefaults from '!!raw-loader!@site/config-specs/paper/vanilla/paper-world-defaults.yml'
 import VanillaGlobalDefaults from '!!raw-loader!@site/config-specs/paper/vanilla/paper-global.yml'
 import SpigotChanges from '!!raw-loader!@site/config-specs/paper/vanilla/spigot.yml'
+import ServerProperties from '!!raw-loader!@site/config-specs/paper/vanilla/server-properties.yml'
 
 Due to the way the Bukkit API is implemented in Paper, the gameplay experience between Vanilla and Paper can have inconsistencies.
 This can be furthered by efforts to fix bugs present in Vanilla Minecraft.
@@ -29,6 +30,8 @@ This guide will only help you to get as close to Vanilla as possible.
 Unfortunately, it currently is not possible to get a 100% Vanilla experience in Paper.
 
 :::
+## server.properties
+<ConfigDocBlock data={ServerProperties}/>
 
 ## paper-world-defaults.yml
 <ConfigDocBlock data={VanillaWorldDefaults}/>

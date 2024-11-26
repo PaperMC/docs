@@ -144,6 +144,11 @@ online-mode:
 op-permission-level:
   default: "4"
   description: "Sets the default permission level for ops when using /op. (Allowed values: 0, 1, 2, 3, 4)"
+pause-when-empty-seconds:
+  default: "-1"
+  description: >
+    How many seconds have to pass after no player has been online before the server is paused.
+    This is disabled by default because it is incompatible with what plugins expect and might do with no players online.
 player-idle-timeout:
   default: "0"
   description: >

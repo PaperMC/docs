@@ -51,7 +51,5 @@ unsupported-settings:
     default: "true"
   allow-unsafe-end-portal-teleportation:
     default: "true"
-  allow-tripwire-disarming-exploits:
-    default: "true"
   perform-username-validation:
     default: "false"

@@ -35,7 +35,7 @@ method. Previously, this was done by using the <Javadoc name={"org.bukkit.event.
 with its <Javadoc name={"org.bukkit.event.player.AsyncPlayerChatEvent#setFormat(java.lang.String)"}>`setFormat`</Javadoc> method.
 
 ```java title="ChatRenderer#render"
-public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
+public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
     // ...
 }
 ```
@@ -82,7 +82,7 @@ public class ChatListener implements Listener, ChatRenderer { // Implement the C
 
     // Override the render method
     @Override
-    public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
+    public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
         // ...
     }
 }
@@ -127,7 +127,7 @@ public class ChatListener implements Listener, ChatRenderer {
     // Listener logic
 
     @Override
-    public @NotNull Component render(@NotNull Player source, @NotNull Component sourceDisplayName, @NotNull Component message, @NotNull Audience viewer) {
+    public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
         return sourceDisplayName
                 .append(Component.text(": "))
                 .append(message);

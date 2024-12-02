@@ -25,7 +25,7 @@ to either a <Javadoc name={"org.bukkit.plugin.Plugin"}>Plugin</Javadoc> instance
 ```java title="TestPlugin.java"
 @Override
 public void onEnable() {
-  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+    final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
 }
 ```
 
@@ -33,8 +33,8 @@ Or, with a bootstrapper:
 
 ```java title="TestPluginBootstrap.java"
 @Override
-public void bootstrap(@NotNull BootstrapContext context) {
-  final LifecycleEventManager<BootstrapContext> lifecycleManager = context.getLifecycleManager();
+public void bootstrap(BootstrapContext context) {
+    final LifecycleEventManager<BootstrapContext> lifecycleManager = context.getLifecycleManager();
 }
 ```
 
@@ -45,10 +45,10 @@ event type from <Javadoc name={"io.papermc.paper.plugin.lifecycle.event.types.Li
 ```java title="TestPlugin.java"
 @Override
 public void onEnable() {
-  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-  PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
-    // Handler for the event
-  });
+    final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+    PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+        // Handler for the event
+    });
 }
 ```
 
@@ -74,13 +74,13 @@ The priority and monitor state are exclusive options, setting one will reset the
 ```java title="TestPlugin.java"
 @Override
 public void onEnable() {
-  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-  PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
-    // Handler for the event
-  });
-  config.priority(10); // sets a priority of 10
-  // or
-  config.monitor(); // marks the handler as a monitor
+    final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+    PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+        // Handler for the event
+    });
+    config.priority(10); // sets a priority of 10
+    // or
+    config.monitor(); // marks the handler as a monitor
 }
 ```
 
@@ -91,11 +91,11 @@ Once the handler has been configured, it can be registered with the lifecycle ma
 ```java title="TestPlugin.java"
 @Override
 public void onEnable() {
-  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-  PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
-    // Handler for the event
-  }).priority(10);
-  lifecycleManager.registerEventHandler(config);
+    final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+    PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+        // Handler for the event
+    }).priority(10);
+    lifecycleManager.registerEventHandler(config);
 }
 ```
 There is also a shorthand way to register just the handler without doing any configuration:
@@ -103,10 +103,10 @@ There is also a shorthand way to register just the handler without doing any con
 ```java title="TestPlugin.java"
 @Override
 public void onEnable() {
-  final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-  lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS, (event) -> {
-    // Handler for the event
-  });
+    final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
+    lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS, (event) -> {
+        // Handler for the event
+    });
 }
 ```
 

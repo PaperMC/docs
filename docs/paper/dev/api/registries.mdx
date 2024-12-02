@@ -54,7 +54,9 @@ final Enchantment enchantment = enchantmentRegistry.getOrThrow(TypedKey.create(
 // Same as above, but using generated create method
 // available for data-driven registries or "writable" ones
 // (those bound to a lifecycle event in RegistryEvents).
-final Enchantment enchantment = enchantmentRegistry.getOrThrow(EnchantmentKeys.create(Key.key("minecraft:sharpness")));
+final Enchantment enchantment = enchantmentRegistry.getOrThrow(
+    EnchantmentKeys.create(Key.key("minecraft:sharpness"))
+);
 
 // Same as above too, but using generated typed keys.
 // Only Vanilla entries have generated keys, for custom entries, the above method must be used.

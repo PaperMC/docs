@@ -51,7 +51,14 @@ final Enchantment enchantment = enchantmentRegistry.getOrThrow(TypedKey.create(
     RegistryKey.ENCHANTMENT, Key.key("minecraft:sharpness"))
 );
 
-// Same as above, but using generated typed keys.
+// Same as above, but using generated create method
+// available for data-driven registries or "writable" ones
+// (those bound to a lifecycle event in RegistryEvents).
+final Enchantment enchantment = enchantmentRegistry.getOrThrow(
+    EnchantmentKeys.create(Key.key("minecraft:sharpness"))
+);
+
+// Same as above too, but using generated typed keys.
 // Only Vanilla entries have generated keys, for custom entries, the above method must be used.
 final Enchantment enchantment = enchantmentRegistry.getOrThrow(EnchantmentKeys.SHARPNESS);
 ```
@@ -75,11 +82,11 @@ A <Javadoc name={"io.papermc.paper.registry.set.RegistryKeySet"}>`RegistryKeySet
 created via the factory methods on <Javadoc name={"io.papermc.paper.registry.set.RegistrySet"}>`RegistrySet`</Javadoc> like this:
 ```java
 // Create a new registry key set that holds a collection enchantments
-final RegistryKeySet<@NotNull Enchantment> bestEnchantments = RegistrySet.keySet(
+final RegistryKeySet<Enchantment> bestEnchantments = RegistrySet.keySet(
     RegistryKey.ENCHANTMENT,
     // Arbitrary keys of enchantments to store in the key set.
     EnchantmentKeys.CHANNELING,
-    TypedKey.create(RegistryKey.ENCHANTMENT, Key.key("papermc:softspoon"))
+    EnchantmentKeys.create(Key.key("papermc:softspoon"))
 );
 ```
 
@@ -120,17 +127,17 @@ The freeze event is called right before a registry's content is frozen in-place,
 Plugins can hence register their own entries at this point.
 The following example shows how to create a new enchantment:
 
-```java
+```java title="TestPluginBootstrap.java"
 public class TestPluginBootstrap implements PluginBootstrap {
 
     @Override
-    public void bootstrap(@NotNull BootstrapContext context) {
-        // Register a new handled for the freeze lifecycle event on the enchantment registry
+    public void bootstrap(BootstrapContext context) {
+        // Register a new handler for the freeze lifecycle event on the enchantment registry
         context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.freeze().newHandler(event -> {
             event.registry().register(
                 // The key of the registry
                 // Plugins should use their own namespace instead of minecraft or papermc
-                TypedKey.create(RegistryKey.ENCHANTMENT, Key.key("papermc:pointy")),
+                EnchantmentKeys.create(Key.key("papermc:pointy")),
                 b -> b.description(Component.text("Pointy"))
                     .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.SWORDS))
                     .anvilCost(1)
@@ -154,7 +161,7 @@ The following example shows how to increase the maximum level of the `Sharpness`
 
 ```java
 @Override
-public void bootstrap(@NotNull BootstrapContext context) {
+public void bootstrap(BootstrapContext context) {
     context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.entryAdd()
         // Increase the max level to 20
         .newHandler(event -> event.builder().maxLevel(20))

@@ -30,7 +30,7 @@ method of the plugin. Commands registered here will not be available to datapack
 functions are loaded by the server before plugins are loaded. To make commands available to
 datapacks, register them via the [PluginBootstrap](#pluginbootstrap).
 
-```java
+```java title="YourPluginClass.java"
 public class YourPluginClass extends JavaPlugin {
 
     @Override
@@ -69,7 +69,7 @@ Commands are registered in the same way in a plugin's
 The benefit of registering commands here is that they will be available to datapack functions
 because the command registration happens early enough.
 
-```java
+```java title="YourPluginBootstrap.java"
 public class YourPluginBootstrap implements PluginBootstrap {
 
     @Override
@@ -97,11 +97,11 @@ manager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
 });
 ```
 
-```java
+```java title="FunCommand.java"
 class FunCommand implements BasicCommand {
 
     @Override
-    public void execute(@NotNull CommandSourceStack stack, @NotNull String[] args) {
+    public void execute(CommandSourceStack stack, String[] args) {
         if (args.length == 1 && args[0].equalsIgnoreCase("start")) {
             stack.getSender().sendRichMessage("<rainbow>Fun activated!");
         }

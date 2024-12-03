@@ -213,15 +213,9 @@ simulation-distance:
     updated by the server, measured in chunks in each direction of the player (radius, not diameter).
     If entities are outside this radius, then they will not be ticked by the server nor will they be
     visible to players. Must be between 3 and 32 inclusive.
-spawn-animals:
-  default: "true"
-  description: "Determines if animals will be able to spawn."
 spawn-monsters:
   default: "true"
   description: "Determines if monsters will be spawned."
-spawn-npcs:
-  default: "true"
-  description: "Determines if villagers will be spawned."
 spawn-protection:
   default: "16"
   description: >

@@ -784,7 +784,7 @@ fishing-time-range:
     description: The minimum number of RNG ticks needed to catch a fish
 fixes:
   disable-unloaded-chunk-enderpearl-exploit:
-    default: "true"
+    default: "false"
     description: Prevent enderpearls from storing the thrower when in an unloaded chunk
   falling-block-height-nerf:
     default: disabled

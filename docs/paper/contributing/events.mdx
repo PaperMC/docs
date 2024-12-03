@@ -42,4 +42,5 @@ parent event and capture any child events but also listen to the child event sep
 ### Miscellaneous
 
 * New parameters or method returns of type <Javadoc name={"org.bukkit.inventory.ItemStack"}>`ItemStack`</Javadoc>
-should be [`@NotNull`](https://javadoc.io/doc/org.jetbrains/annotations/latest/org/jetbrains/annotations/NotNull.html).
+should not be [`@Nullable`](https://javadoc.io/doc/org.jspecify/jspecify/latest/org/jspecify/annotations/Nullable.html)
+in most case and instead accept an empty itemStack.

@@ -56,7 +56,7 @@ The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it i
 You must invoke a <Javadoc name={"java.lang.Class#forName(java.lang.String)"} project={"java"}>`Class#forName(String)`</Javadoc>
 on the driver to allow it to initialize and then create the connection to the database:
 
-```java
+```java title="DatabaseManager.java"
 public class DatabaseManager {
 
     public void connect() {
@@ -130,7 +130,7 @@ for more information on how to use this.
 
 Once you have the dependency added, we can work with the connector in our code:
 
-```java
+```java title="DatabaseManager.java"
 public class DatabaseManager {
 
     public void connect() {

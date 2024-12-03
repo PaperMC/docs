@@ -53,6 +53,14 @@ public class PaperIsCoolEvent extends Event {
         this.message = message;
     }
 
+    public Component getMessage() {
+        return this.message;
+    }
+
+    public void setMessage(Component message) {
+        this.message = message;
+    }
+
     public static HandlerList getHandlerList() {
         return HANDLER_LIST;
     }
@@ -60,14 +68,6 @@ public class PaperIsCoolEvent extends Event {
     @Override
     public HandlerList getHandlers() {
         return HANDLER_LIST;
-    }
-
-    public Component getMessage() {
-        return this.message;
-    }
-    
-    public void setMessage(Component message) {
-        this.message = message;
     }
 }
 ```

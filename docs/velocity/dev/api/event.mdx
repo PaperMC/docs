@@ -33,20 +33,21 @@ and _not_ in `com.google.common.eventbus`.
 
 ## Orders
 
-Every listener has a <Javadoc name={"com.velocitypowered.api.event.PostOrder"} project={"velocity"}>`PostOrder`</Javadoc>.
-When an event is fired, the order in which listeners are invoked is defined by their `PostOrder`.
-Listeners using `PostOrder.FIRST` are called first, then `EARLY`, `NORMAL`, etc.
+Every listener has a <Javadoc name={"com.velocitypowered.api.event.Subscribe"} project={"velocity"}>`priority`</Javadoc>.
+When an event is fired, the order in which listeners are invoked is defined by their `priority`.
+The higher the priority, the earlier the event handler will be called. 
 
 State the desired order in the `@Subscribe` annotation:
 
 ```java
-@Subscribe(order = PostOrder.NORMAL)
+@Subscribe(priority = 0, order = PostOrder.CUSTOM)
 public void onPlayerChat(PlayerChatEvent event) {
 	// do stuff
 }
 ```
 
-`NORMAL` is the default value if you do not specify an order.
+`-32768` is the default value if you do not specify an order.
+Note that due to compatibility constraints, you must specify <Javadoc name={"com.velocitypowered.api.event.PostOrder"} project={"velocity"}>`PostOrder.CUSTOM`</Javadoc> in order to use this field.
 
 ## Registering listeners
 
@@ -121,12 +122,12 @@ return an <Javadoc name={"com.velocitypowered.api.event.EventTask"} project={"ve
 or add a second return an <Javadoc name={"com.velocitypowered.api.event.Continuation"} project={"velocity"}>`Continuation`</Javadoc> parameter:
 
 ```java
-  @Subscribe(order = PostOrder.EARLY)
+  @Subscribe(priority = 100,order = PostOrder.CUSTOM)
   public void onLogin(LoginEvent event, Continuation continuation) {
     doSomeAsyncProcessing().addListener(continuation::resume, continuation::resumeWithException);
   }
 
-  @Subscribe(order = PostOrder.EARLY)
+  @Subscribe(priority = 100,order = PostOrder.CUSTOM)
   public EventTask onPlayerChat(PlayerChatEvent event) {
     if (mustFurtherProcess(event)) {
       return EventTask.async(() => ...);

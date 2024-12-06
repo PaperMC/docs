@@ -131,7 +131,7 @@ or add a second return an <Javadoc name={"com.velocitypowered.api.event.Continua
     doSomeAsyncProcessing().addListener(continuation::resume, continuation::resumeWithException);
   }
 
-  @Subscribe(priority = 100,order = PostOrder.CUSTOM)
+  @Subscribe(priority = 100, order = PostOrder.CUSTOM)
   public EventTask onPlayerChat(PlayerChatEvent event) {
     if (mustFurtherProcess(event)) {
       return EventTask.async(() => ...);

@@ -126,7 +126,7 @@ return an <Javadoc name={"com.velocitypowered.api.event.EventTask"} project={"ve
 or add a second return an <Javadoc name={"com.velocitypowered.api.event.Continuation"} project={"velocity"}>`Continuation`</Javadoc> parameter:
 
 ```java
-  @Subscribe(priority = 100,order = PostOrder.CUSTOM)
+  @Subscribe(priority = 100, order = PostOrder.CUSTOM)
   public void onLogin(LoginEvent event, Continuation continuation) {
     doSomeAsyncProcessing().addListener(continuation::resume, continuation::resumeWithException);
   }

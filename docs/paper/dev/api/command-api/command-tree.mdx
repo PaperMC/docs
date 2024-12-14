@@ -1,0 +1,235 @@
+---
+slug: /dev/command-api/command-tree
+description: An extensive guide to building up a command tree
+---
+
+import Tree from './assets/forest/tree.png'
+import DescribedTree from './assets/forest/tree-descriptions.png'
+
+# Brigadier Command Trees
+What is a command tree? What does this weird `then-then-then-executes-then` structure even mean? In case you are confused, this is the page for you! Here we will take an extensive 
+look at everything you need to know to perfect your command tree!
+
+:::note
+
+This is meant as a full-on course about the structure of Brigadier commands. It is suggested that you look in here if you are new to brigadier programming.
+
+:::
+
+## So - What is a tree?
+When talking about trees, the first that comes to mind is a tree in the wild. One that may look like this:
+
+<CenteredImage src={Tree} width={400}/>
+So, what does this have to do with our commands now? Well imagine a command that looks like this: 
+```yml title="A Generic Command"
+/customplugin reload
+/customplugin tphere
+/customplugin killall
+```
+<br></br>
+For the sake of simplicity, we will refer to `/customplugin` (without any arguments) as our "command" or "tree" root. Each argument after our "root" is referred to as a "branch".
+You can visualize this on our generic tree like this:
+
+<CenteredImage src={DescribedTree} width={400}/>
+
+That's nice and all, but how does that look in-code? Well, we can define our root like this:
+```java title="CustomPluginCommand.java"
+Commands.literal("customplugin");
+```
+<br></br>
+This method returns a `LiteralArgumentBuilder<CommandSourceStack>`. What that means is not too important for us right now. The more important part is the fact that we can add "branches"
+to our "root", like this:
+```java title="CustomPluginCommand.java"
+LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("customplugin");
+root.then(Commands.literal("reload"));
+root.then(Commands.literal("tphere"));
+root.then(Commands.literal("killall"));
+```
+<br></br>
+Each of these `.then(...)` methods adds a new branch to our root. You may have noticed the repeated use of `Commands.literal(String)` here. It does not only define the root of the root
+of our command, but also our "subcommands" (`reload`, `tphere`, and `killall`). Each "child" literal is referred to as a subcommand of its parent. So as example, here, `b` would be
+considered a subcommand of `a`:
+```java title="Subcommands"
+LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("a");
+root.then(Commands.literal("b"));
+```
+<br></br>
+But what if we want a more complex command? Let's say we want to define the following command:
+```yml title="Advanced Command"
+/advanced
+ ┣━┳ killall
+ ┃ ┣━━ entities
+ ┃ ┣━━ players
+ ┃ ┗━━ zombies
+ ┗━┳ eat
+   ┣━━ ice-cream
+   ┗━━ main-dish
+```
+That sure is a very complicated command. Let us visualize it as a tree graph first, so we have a better understanding on what is going on:
+
+<p align="center">
+```mermaid
+stateDiagram-v2
+    advanced  --> killall
+    advanced  --> eat
+    killall   --> entities
+    killall   --> players
+    killall   --> zombies
+    eat       --> ice#45;cream
+    eat       --> main#45;dish
+```
+</p>
+
+Having defined our target command, how can we go about this now? There is a few possible ways, but the simplest one is defining **furthest from root** first. That means we are first
+defining the last branches of our entire tree. So those, which have no subcommands:
+```java title="AdvancedCommand.java"
+LiteralArgumentBuilder<CommandSourceStack> entities = Commands.literal("entities");
+LiteralArgumentBuilder<CommandSourceStack> players = Commands.literal("players");
+LiteralArgumentBuilder<CommandSourceStack> zombies = Commands.literal("zombies");
+
+LiteralArgumentBuilder<CommandSourceStack> iceCream = Commands.literal("ice-cream");
+LiteralArgumentBuilder<CommandSourceStack> mainDish = Commands.literal("main-dish");
+```
+This grants us the deepest elements in our tree.
+<p align="center">
+```mermaid
+stateDiagram-v2
+    entities
+    players
+    zombies
+    ice#45;cream
+    main#45;dish
+```
+</p><br></br>
+
+Now, we can define the next layer of literals: So the `killall` and `eat` ones:
+```java title="AdvancedCommand.java"
+LiteralArgumentBuilder<CommandSourceStack> killall = Commands.literal("killall");
+LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat");
+```
+Visualized in our tree graph:
+<p align="center">
+```mermaid
+stateDiagram-v2
+    killall
+    eat
+```
+</p><br></br>
+
+With these defined, we can add our child elements to their parent element, like this:
+```java title="AdvancedCommand.java"
+killall.then(entities);
+killall.then(players);
+killall.then(zombies);
+
+eat.then(iceCream);
+eat.then(mainDish);
+```
+Which gives us this, somewhat tree-like structure
+<p align="center">
+```mermaid
+stateDiagram-v2
+    killall --> entities
+    killall --> players
+    killall --> zombies
+    eat     --> ice#45;cream
+    eat     --> main#45;dish
+```
+</p><br></br>
+
+Finally, we can create our **root node** and add our `killall` and `eat` subcommands to it:
+```java title="AdvancedCommand.java"
+LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced");
+advancedCommandRoot.then(killall);
+advancedCommandRoot.then(eat);
+```
+And this returns the final command tree:
+<p align="center">
+```mermaid
+stateDiagram-v2
+    killall --> entities
+    killall --> players
+    killall --> zombies
+    eat     --> ice#45;cream
+    eat     --> main#45;dish
+    advanced --> killall
+    advanced --> eat
+```
+</p><br></br>
+
+And we are done! You might have noticed though, that it feels unnecessarily verbose to have to store every child node in its own variable. But here is where the `.then()` argument
+comes to rescue. It returns the same element as it was called on. That means if we were to run this code:
+```java title="AdvancedCommand.java"
+LiteralArgumentBuilder<CommandSourceStack> value = killall.then(entities);
+if (value == killall) {
+    logger.info("The return value is the same as killall");
+}
+```
+<br></br>
+We would always have "The return value is the same as killall" printed out. And we can take advantage of that by **chaining the `then(...)` calls together**, like this:
+```java title="AdvancedCommand.java"
+killall
+    .then(entities)
+    .then(players)
+    .then(zombies);
+```
+<br></br>
+With this, we also do not have to store every single literal in its own variable, instead we can directly pass them into the `.then(...)` method:
+```java title="AdvancedCommand.java"
+killall
+    .then(Commands.literal("entities"))
+    .then(Commands.literal("players"))
+    .then(Commands.literal("zombies"));
+```
+<br></br>
+The same can be done for the `eat` subcommand:
+```java title="AdvancedCommand.java"
+eat
+    .then(Commands.literal("ice-cream"))
+    .then(Commands.literal("main-dish"));
+```
+<br></br>
+
+Taking even more advantage of the **builder pattern of the .then() method**, we can put these chained branches directly on the initial creation of our subcommand. Like this:
+```java title="AdvancedCommand.java"
+LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat")
+    .then(Commands.literal("ice-cream"))
+    .then(Commands.literal("main-dish"));
+
+LiteralArgumentBuilder<CommandSourceStack> killall = Commands.literal("eat")
+    .then(Commands.literal("entities"))
+    .then(Commands.literal("players"))
+    .then(Commands.literal("zombies"));
+
+
+LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced");
+advancedCommandRoot.then(killall);
+advancedCommandRoot.then(eat);
+```
+<br></br>
+Now then, you might know where we are going with this. As our root node also registers its branches using the `.then(...)` method, we can do the same there:
+```java title="AdvancedCommand.java"
+LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced")
+    .then(Commands.literal("eat")
+        .then(Commands.literal("ice-cream"))
+        .then(Commands.literal("main-dish"))
+    )
+    .then(Commands.literal("eat")
+        .then(Commands.literal("entities"))
+        .then(Commands.literal("players"))
+        .then(Commands.literal("zombies"))
+    );
+```
+
+:::warning
+
+You have to be extremely careful when nesting branches, as the command turns into a completely different one when you misplace a bracket. __Click here__ for more information
+on that (WIP)
+
+:::
+
+## And that's about it
+Hopefully, you understand Brigadier's tree structure now. For more resources on Brigadier, check out these other sites:
+* **Arguments and Literals**
+* **Advanced Usages of Literals**
+* **FAQ**

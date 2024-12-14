@@ -33,13 +33,13 @@ You can visualize this on our generic tree like this:
 <CenteredImage src={DescribedTree} width={400}/>
 
 That's nice and all, but how does that look in-code? Well, we can define our root like this:
-```java title="CustomPluginCommand.java"
+```java
 Commands.literal("customplugin");
 ```
 <br></br>
 This method returns a `LiteralArgumentBuilder<CommandSourceStack>`. What that means is not too important for us right now. The more important part is the fact that we can add "branches"
 to our "root", like this:
-```java title="CustomPluginCommand.java"
+```java
 LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("customplugin");
 root.then(Commands.literal("reload"));
 root.then(Commands.literal("tphere"));
@@ -82,7 +82,7 @@ stateDiagram-v2
 
 Having defined our target command, how can we go about this now? There is a few possible ways, but the simplest one is defining **furthest from root** first. That means we are first
 defining the last branches of our entire tree. So those, which have no subcommands:
-```java title="AdvancedCommand.java"
+```java
 LiteralArgumentBuilder<CommandSourceStack> entities = Commands.literal("entities");
 LiteralArgumentBuilder<CommandSourceStack> players = Commands.literal("players");
 LiteralArgumentBuilder<CommandSourceStack> zombies = Commands.literal("zombies");
@@ -103,7 +103,7 @@ stateDiagram-v2
 </p><br></br>
 
 Now, we can define the next layer of literals: So the `killall` and `eat` ones:
-```java title="AdvancedCommand.java"
+```java
 LiteralArgumentBuilder<CommandSourceStack> killall = Commands.literal("killall");
 LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat");
 ```
@@ -117,7 +117,7 @@ stateDiagram-v2
 </p><br></br>
 
 With these defined, we can add our child elements to their parent element, like this:
-```java title="AdvancedCommand.java"
+```java
 killall.then(entities);
 killall.then(players);
 killall.then(zombies);
@@ -138,7 +138,7 @@ stateDiagram-v2
 </p><br></br>
 
 Finally, we can create our **root node** and add our `killall` and `eat` subcommands to it:
-```java title="AdvancedCommand.java"
+```java
 LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced");
 advancedCommandRoot.then(killall);
 advancedCommandRoot.then(eat);
@@ -159,7 +159,7 @@ stateDiagram-v2
 
 And we are done! You might have noticed though, that it feels unnecessarily verbose to have to store every child node in its own variable. But here is where the `.then()` argument
 comes to rescue. It returns the same element as it was called on. That means if we were to run this code:
-```java title="AdvancedCommand.java"
+```java
 LiteralArgumentBuilder<CommandSourceStack> value = killall.then(entities);
 if (value == killall) {
     logger.info("The return value is the same as killall");
@@ -167,7 +167,7 @@ if (value == killall) {
 ```
 <br></br>
 We would always have "The return value is the same as killall" printed out. And we can take advantage of that by **chaining the `then(...)` calls together**, like this:
-```java title="AdvancedCommand.java"
+```java
 killall
     .then(entities)
     .then(players)
@@ -175,7 +175,7 @@ killall
 ```
 <br></br>
 With this, we also do not have to store every single literal in its own variable, instead we can directly pass them into the `.then(...)` method:
-```java title="AdvancedCommand.java"
+```java
 killall
     .then(Commands.literal("entities"))
     .then(Commands.literal("players"))
@@ -183,7 +183,7 @@ killall
 ```
 <br></br>
 The same can be done for the `eat` subcommand:
-```java title="AdvancedCommand.java"
+```java
 eat
     .then(Commands.literal("ice-cream"))
     .then(Commands.literal("main-dish"));
@@ -191,7 +191,7 @@ eat
 <br></br>
 
 Taking even more advantage of the **builder pattern of the .then() method**, we can put these chained branches directly on the initial creation of our subcommand. Like this:
-```java title="AdvancedCommand.java"
+```java
 LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat")
     .then(Commands.literal("ice-cream"))
     .then(Commands.literal("main-dish"));
@@ -208,7 +208,7 @@ advancedCommandRoot.then(eat);
 ```
 <br></br>
 Now then, you might know where we are going with this. As our root node also registers its branches using the `.then(...)` method, we can do the same there:
-```java title="AdvancedCommand.java"
+```java
 LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced")
     .then(Commands.literal("eat")
         .then(Commands.literal("ice-cream"))

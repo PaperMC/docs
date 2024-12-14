@@ -3,10 +3,14 @@ slug: /dev/command-api/comparison
 description: A comparison between Brigadier commands and Bukkit commands
 ---
 
+import BukkitPartyCommandImage from './assets/bukkitparty-command.png'
+import PaperPartyCommandImage from './assets/paperparty-command.png'
+
 # Comparison Brigadier and Bukkit Commands
 
 ## Registering commands
 ### The old Bukkit way
+
 In order to register Bukkit commands, you would define a class that extends BukkitCommand, and implements the execute(...) and tabComplete(...)
 methods. This might look like this:
 ```java title="BukkitPartyCommand.java"
@@ -52,10 +56,10 @@ this.getServer().getCommandMap().register(
 ```
 
 As you can see, you have to do a lot of manual checking in order to register a single, very simple command. But how does
-Paper's brigadier system do it?
+the Brigadier api do it?
 
 ### The new Paper way
-First, we need to retrieve a `LiteralCommandNode<CommandSourceStack>`. That's a special brigadier class that holds some sort of command tree.
+First, we need to retrieve a `LiteralCommandNode<CommandSourceStack>`. That's a special Brigadier class that holds some sort of [command tree](./command-tree). 
 In our case, it is the root of our command. We can do that by running `Commands.literal(final String literal)`, which returns a 
 `LiteralArgumentBuilder<CommandSourceStack>`, where we can define some arguments and executors. Once we are done, we can call
 `LiteralArgumentBuilder#build()` to retrieve our build `LiteralCommandNode`, which we can then register. That sounds complicated at first,
@@ -93,5 +97,7 @@ this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, comman
 
 And we are done! As you can see here, both commands do the same thing:
 
-![bukkit command](./assets/bukkitparty-command.png)
-![paper command](./assets/paperparty-command.png)
+<div style={{display: 'inline-block'}}>
+    <img src={BukkitPartyCommandImage} style={{float: 'left', width: '50%'}}/>
+    <img src={PaperPartyCommandImage} style={{float: 'right', width: '50%'}}/>
+</div>

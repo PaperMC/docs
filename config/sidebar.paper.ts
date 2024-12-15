@@ -136,6 +136,7 @@ const paper: SidebarsConfig = {
                 "dev/api/command-api/comparison",
                 "dev/api/command-api/command-tree",
                 "dev/api/command-api/arguments-and-literals",
+                "dev/api/command-api/command-execution",
               ],
             },
             {

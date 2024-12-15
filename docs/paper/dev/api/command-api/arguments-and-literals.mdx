@@ -69,7 +69,7 @@ Commands.literal("gamemode")
 You may have noticed the use of the `.executes(...)` method. This method defines the execution logic of a node. If the player sends `/gamemode`, without any arguments, it
 will not even run, as our root node does not have a executor defined. Contrary, if the player executes `/gamemode creative`, it will run the code in the first `executes` method.
 We are not going to go into detail of the stuff that you can do inside a `execute` method, as that is out of scope for this site. If you want to read up on those, you should
-check out the [Extensive Guide on Command Execution](./command-execution) after you finish reading this.
+check out the [Extensive Guide on Command Execution](./command-executors) after you finish reading this.
 
 ## Arguments
 Arguments are slightly more complex. They also define a new branch in a tree, but they are not directly predictable. Each argument is created using `Commands.argument(String, ArgumentType<T>)`.
@@ -140,7 +140,7 @@ But if we input a too small or too big float, it would throw an error **on the c
 <div style={{display: 'inline-block', width: '100%'}}>
     <img src={SmallFloatInput} style={{float: 'left', width: '50%'}}/>
     <img src={BigFloatInput} style={{float: 'right', width: '50%'}}/>
-</div><br></br><br></br>
+</div><br/><br/>
 
 This is the main advantage of native arguments: The client itself performs simple error checking on the arguments, which makes user experience whilst running a command
 way better, as they can see invalid input without sending the command to the server.
@@ -178,10 +178,10 @@ Here you can see the arguments in action:
 </div>
 
 ## Further reference
-It is suggested that you visit our [Extensive Guide on Command Execution](./command-execution) in order to read more about the `.executes(...)` method. It contains a lot of useful information
+It is suggested that you visit our [Extensive Guide on Command Execution](./command-executors) in order to read more about the `.executes(...)` method. It contains a lot of useful information
 that is required for fully understanding Brigadier commands. 
 
-### Paper arguments
+### Minecraft arguments
 Apart from these build-in Brigadier arguments, countless custom arguments are defined by Paper as well. These can be accessed in a static context with the `ArgumentTypes` class. You
 can read more about these **here**. (WIP).
 

@@ -208,7 +208,6 @@ if (value == killall) {
     logger.info("The return value is the same as killall");
 }
 ```
-<br></br>
 We would always have "The return value is the same as killall" printed out. And we can take advantage of that by **chaining the `then(...)` calls together**, like this:
 ```java
 killall.then(entities).then(players).then(zombies);

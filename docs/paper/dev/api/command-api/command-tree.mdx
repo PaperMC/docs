@@ -7,12 +7,13 @@ import Tree from './assets/forest/tree.png'
 import DescribedTree from './assets/forest/tree-descriptions.png'
 
 # Brigadier Command Trees
-What is a command tree? What does this weird `then-then-then-executes-then` structure even mean? In case you are confused, this is the page for you! Here we will take an extensive 
-look at everything you need to know to perfect your command tree!
+What is a command tree and in what way does it have anything to do with the usage of .then(...)? If you are confused, this is the page for you! Here we will take an 
+extensive look at everything you need to know to understands command tree!
 
 :::note
 
-This is meant as a full-on course about the structure of Brigadier commands. It is suggested that you look in here if you are new to Brigadier programming.
+This is meant as a full-on course about the structure of Brigadier commands. This site provides no information about executing branches or general arguments, only literals.
+It is suggested that you look in here if you are new to Brigadier programming.
 
 :::
 
@@ -31,14 +32,45 @@ For the sake of simplicity, we will refer to `/customplugin` (without any argume
 You can visualize this on our generic tree like this:
 
 <CenteredImage src={DescribedTree} width={400}/>
+<br></br>
 
-That's nice and all, but how does that look in-code? Well, we can define our root like this:
+Having to draw a tree each time like this is exhausting and usually does not get to the point though. We can visualize trees using a **tree diagram**. This would look like this:
+<p align="center">
+```mermaid
+stateDiagram-v2
+    customplugin --> reload
+    customplugin --> tphere
+    customplugin --> killall
+```
+</p>
+
+It is way easier to understand the root/branch relationship of elements now. The root is the element that does is not owned by another element. Which is 'customplugin' here.
+The other elements have an arrow pointing **at** then. That means they are a branch of that element, also called a child. Visualizing trees as a parent/child relationships can be quite
+useful for understand it too. They follow a similar structure:
+<p align="center">
+```mermaid
+stateDiagram-v2
+    parents --> first#32;child
+    parents --> second#32;child
+    parents --> third#32;child
+    second#32;child --> first#32;grandchild
+    third#32;child --> second#32;grandchild
+    third#32;child --> third#32;grandchild
+```
+</p><br></br>
+
+It is important to remember that this tree-like structure is not only important for Brigadier. It is a fairly often used concept. Paper's included **Adventure API** also operates using
+a tree. Why is this important for using Brigadier though? Well, it allows for explicit command declaration. Being at a node, you know exactly where you are. That means you do not have
+to, like in standard Bukkit way, first check whether the amount of arguments is 2 and the first argument is `tphere`. Because you are at that exact `tphere` node, you can just start writing
+your logic. If you want to learn more about the execute logic of Brigadier commands, it is suggested that you check out our [Extensive Guide on Command Execution](./command-execution.mdx).
+
+## How can we visualize a tree in-code?
+Well, we can define our root like this:
 ```java
 Commands.literal("customplugin");
 ```
 <br></br>
-This method returns a `LiteralArgumentBuilder<CommandSourceStack>`. What that means is not too important for us right now. The more important part is the fact that we can add "branches"
-to our "root", like this:
+This method returns a `LiteralArgumentBuilder<CommandSourceStack>`. That is a class that allows us to add branches to it using the `.then(...)` method, like this:
 ```java
 LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("customplugin");
 root.then(Commands.literal("reload"));
@@ -50,10 +82,10 @@ Each of these `.then(...)` methods adds a new branch to our root. You may have n
 of our command, but also our "subcommands" (`reload`, `tphere`, and `killall`). Each "child" literal is referred to as a subcommand of its parent. So as example, here, `b` would be
 considered a subcommand of `a`:
 ```java title="Subcommands"
-LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("a");
-root.then(Commands.literal("b"));
+Commands.literal("a").then(Commands.literal("b"));
 ```
-<br></br>
+
+## Creating a more advanced command
 But what if we want a more complex command? Let's say we want to define the following command:
 ```yml title="Advanced Command"
 /advanced
@@ -65,7 +97,16 @@ But what if we want a more complex command? Let's say we want to define the foll
    ┣━━ ice-cream
    ┗━━ main-dish
 ```
-That sure is a very complicated command. Let us visualize it as a tree graph first, so we have a better understanding on what is going on:
+Which allows for the following command executions in-game:
+```
+/advanced killall entities
+/advanced killall players
+/advanced killall zombies
+/advanced eat ice-cream
+/advanced eat main-dish
+```
+
+As this is a fairly complicated command, we can visualize it as a tree graph first in order to we have a better understanding on what is going on:
 
 <p align="center">
 ```mermaid
@@ -156,8 +197,10 @@ stateDiagram-v2
     advanced --> eat
 ```
 </p><br></br>
+And we are done!
 
-And we are done! You might have noticed though, that it feels unnecessarily verbose to have to store every child node in its own variable. But here is where the `.then()` argument
+## Chaining 'then' method calls together
+You might have noticed that it feels unnecessarily verbose to have to store every child node in its own variable. But here is where the `.then()` argument
 comes to rescue. It returns the same element as it was called on. That means if we were to run this code:
 ```java
 LiteralArgumentBuilder<CommandSourceStack> value = killall.then(entities);
@@ -168,12 +211,17 @@ if (value == killall) {
 <br></br>
 We would always have "The return value is the same as killall" printed out. And we can take advantage of that by **chaining the `then(...)` calls together**, like this:
 ```java
+killall.then(entities).then(players).then(zombies);
+```
+Due to the unreadable nature of chained method calls, we should give each branch a new line:
+```java
 killall
     .then(entities)
     .then(players)
     .then(zombies);
 ```
 <br></br>
+
 With this, we also do not have to store every single literal in its own variable, instead we can directly pass them into the `.then(...)` method:
 ```java
 killall
@@ -228,7 +276,7 @@ on that (WIP)
 
 :::
 
-## And that's about it
+## Additional resources
 Hopefully, you understand Brigadier's tree structure now. For more resources on Brigadier, check out these other sites:
 * **Arguments and Literals**
 * **Advanced Usages of Literals**

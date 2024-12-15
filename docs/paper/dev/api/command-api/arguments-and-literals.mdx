@@ -148,7 +148,7 @@ way better, as they can see invalid input without sending the command to the ser
 ### String arguments
 There is three string arguments: `word`, `string`, and `greedyString`.
 
-The word string argument is the simplest one of these. It only accepts a single word without any quotes or special characters. The only special character you can use is a underscore.
+The `word` string argument is the simplest one of these. It only accepts a single word without any quotes or special characters. The only special character you can use is a underscore.
 * ✅ `this_is_valid_input`
 * ❌ `this is invalid input`
 * ❌ `"also_invalid"`
@@ -156,8 +156,9 @@ The word string argument is the simplest one of these. It only accepts a single 
 * ❌ `@_@`
 
 The `string` argument is slightly more complicated. If unquoted, it follows the same rules as the `word` argument. Only letters and underscores. But if you put your string into quotes,
-you can enter any combination of unicode characters you want to. Special characters, like quotes `"`, can be escaped using a backspace `\`.
+you can enter any combination of unicode characters you want to. Special characters, like quotes `"`, can be escaped using a backslash `\`.
 * ✅ `this_is_valid_input`
+* ✅ `"\"quotes\""`
 * ❌ `this is invalid input`
 * ✅ `"this is valid input again"`
 * ✅ `"also_valid"`
@@ -176,14 +177,13 @@ Here you can see the arguments in action:
     <img src={StringArguments} style={{float: 'left', width: '100%'}}/>
 </div>
 
+## Further reference
+It is suggested that you visit our [Extensive Guide on Command Execution](./command-execution) in order to read more about the `.executes(...)` method. It contains a lot of useful information
+that is required for fully understanding Brigadier commands. 
+
 ### Paper arguments
 Apart from these build-in Brigadier arguments, countless custom arguments are defined by Paper as well. These can be accessed in a static context with the `ArgumentTypes` class. You
 can read more about these **here**. (WIP).
 
 ### Custom arguments
 Sometimes you want to define your own, custom arguments. For that you can implement the `CustomArgumentType<T, N>` interface. For more details, you should check out **this** site. (WIP).
-
-
-## Further references
-It is suggested that you visit our [Extensive Guide on Command Execution](./command-execution) in order to read more about the `.executes(...)` method. It contains a lot of useful information
-that is required for fully understanding Brigadier commands. 

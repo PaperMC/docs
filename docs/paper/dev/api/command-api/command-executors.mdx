@@ -77,8 +77,8 @@ Commands.literal("flyspeed")
     );
 ```
 
-There is a lot to unpack about this, so let's break it down, top to bottom:
-
+### Explanation
+There is a lot to unpack, so let's break it down, top to bottom:
 
 The first lines define a `/flyspeed` command root, with a float argument named "speed", which only allows values between 0 and 1.
 We then add an executes clause to our argument branch and retrieves the speed argument. We put in `float.class` so that the return value (from the `V getArgument(String, Class<V>)` 
@@ -111,10 +111,10 @@ We can even run it as another player, using `/execute as`:
 </div>
 
 
-## Logic separation
-Sometimes, if the command is big enough, or due to personal preference, you might not want to have your logic code in your executes method, as it might be unreadable
-because of the amount of indentations. In such an event, we can, instead of defining our logic in the lambda statement, use a method reference instead. For that we
-define a method in the same context and class as our command declaration. This might look like this:
+### Logic separation
+Sometimes, if the command is too big or due to personal preference, you might not want to have your logic code in your executes method, as it might be unreadable
+due of the amount of indentations. In such an event we can, instead of defining our logic in the lambda statement, use a method reference instead. For that we
+define a method a pass a reference to that to the executes method. This might look like this:
 ```java title="FlightSpeedCommand.java"
 public class FlightSpeedCommand {
 
@@ -151,3 +151,8 @@ public class FlightSpeedCommand {
 ```
 
 As you can see, we have made our command tree way easily readable whilst preserving the same functionality.
+
+## Additional resources
+If you haven't already, you should check out **Command Registration** (WIP) next. So far we have declared commands, but we haven't looked at how to register them.
+
+For a quick reference on the `executes` method, check out **Quick Reference/Executes** (WIP).

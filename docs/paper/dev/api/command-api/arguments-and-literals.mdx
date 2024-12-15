@@ -40,10 +40,10 @@ We can represent this gamemode command using the following tree:
 <p align="center">
 ```mermaid
 stateDiagram-v2
-    creative --> gamemode
-    survival --> gamemode
-    spectator --> gamemode
-    adventure --> gamemode
+    gamemode --> creative
+    gamemode --> survival
+    gamemode --> spectator
+    gamemode --> adventure
 ```
 </p><br></br>
 In code, it would look like this:

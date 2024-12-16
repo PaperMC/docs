@@ -1,6 +1,7 @@
 ---
 slug: /profiling
 description: How to profile your Paper server.
+targetVersion: 1.21
 ---
 
 # Profiling

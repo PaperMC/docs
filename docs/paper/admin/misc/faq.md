@@ -1,13 +1,14 @@
 ---
 slug: /faq
 description: Questions frequently asked by our community, answered by us!
+targetVersion: 1.21
 ---
 
 # Frequently Asked Questions
 
 ## Unsupported Java detected, what do I do?!
 
-Unsupported, early-access, or internal versions of Java are often missing features, have known issues or be straight up broken. 
+Unsupported, early-access, or internal versions of Java are often missing features, have known issues or be straight up broken.
 As such, we cannot provide support for servers running such versions.
 You should install a supported version of Java as explained [here](/misc/java-install).
 

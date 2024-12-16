@@ -1,6 +1,7 @@
 ---
 slug: /misc/paper-bug-fixes
 description: An explanation of which Vanilla bugs we fix in Paper.
+targetVersion: 1.21
 ---
 
 # Paper Bug Fixes

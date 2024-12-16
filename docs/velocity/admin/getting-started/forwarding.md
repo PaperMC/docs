@@ -1,6 +1,7 @@
 ---
 slug: /player-information-forwarding
 description: How to configure information forwarding on Velocity.
+targetVersion: 1.21
 ---
 
 # Configuring player information forwarding

@@ -1,6 +1,7 @@
 ---
 slug: /dev/event-api
 description: How to listen for events in Velocity.
+targetVersion: 1.21
 ---
 
 # Working With Events
@@ -35,7 +36,7 @@ and _not_ in `com.google.common.eventbus`.
 
 Every listener has a <Javadoc name={"com.velocitypowered.api.event.Subscribe#priority()"} project={"velocity"}>`priority`</Javadoc>.
 When an event is fired, the order in which listeners are invoked is defined by their `priority`.
-The higher the priority, the earlier the event handler will be called. 
+The higher the priority, the earlier the event handler will be called.
 
 State the desired order in the `@Subscribe` annotation:
 

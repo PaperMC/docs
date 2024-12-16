@@ -1,6 +1,7 @@
 ---
 slug: /reference/paper-plugins
 description: A guide to the ins and outs of Paper plugins.
+targetVersion: 1.21
 ---
 
 # Paper Plugins

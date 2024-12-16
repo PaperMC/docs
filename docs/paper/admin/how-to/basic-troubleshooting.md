@@ -1,6 +1,7 @@
 ---
 slug: /basic-troubleshooting
 description: This guide will help you diagnose your server's problem before reporting it to PaperMC or the plugin's author.
+targetVersion: 1.21
 ---
 
 # Basic Troubleshooting

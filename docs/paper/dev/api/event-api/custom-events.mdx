@@ -1,11 +1,12 @@
 ---
 slug: /dev/custom-events
 description: A guide to show you how to add custom events to your plugin.
+targetVersion: 1.21
 ---
 
 # Custom Events
 
-Creating custom events is a great way to add functionality to your plugin. 
+Creating custom events is a great way to add functionality to your plugin.
 This will allow other plugins to listen to your custom events and add functionality to your plugin.
 
 ## Creating a custom event
@@ -40,7 +41,7 @@ public class PaperIsCoolEvent extends Event {
 }
 ```
 
-Now that we have created our event, we can add some functionality to it. 
+Now that we have created our event, we can add some functionality to it.
 Perhaps this will contain a message that will be broadcast to the server when the event is called.
 
 ```java title="PaperIsCoolEvent.java"
@@ -85,7 +86,7 @@ public class ExamplePlugin extends JavaPlugin {
         PaperIsCoolEvent coolEvent = new PaperIsCoolEvent(Component.text("Paper is cool!"));
         coolEvent.callEvent();
         // Plugins could have changed the message from inside their listeners here. So we need to get the message again.
-        // This event structure allows for other plugins to change the message to their taste. 
+        // This event structure allows for other plugins to change the message to their taste.
         // Like, for example, a plugin that adds a prefix to all messages.
         Bukkit.broadcast(coolEvent.getMessage());
     }

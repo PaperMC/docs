@@ -1,6 +1,7 @@
 ---
 slug: /migration
 description: How to migrate your proxy between different Velocity versions.
+targetVersion: 1.21
 ---
 
 # Migration Guide

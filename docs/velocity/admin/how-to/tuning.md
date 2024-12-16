@@ -1,6 +1,7 @@
 ---
 slug: /tuning
 description: How to tune Velocity to allow for even better performance.
+targetVersion: 1.21
 ---
 
 # Tuning Velocity

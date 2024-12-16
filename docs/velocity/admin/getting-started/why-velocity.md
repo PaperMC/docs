@@ -1,6 +1,7 @@
 ---
 slug: /why-velocity
 description: An explanation for why you should run Velocity.
+targetVersion: 1.21
 ---
 
 # What Does Velocity Do For Me?

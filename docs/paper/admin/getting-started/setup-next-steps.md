@@ -1,6 +1,7 @@
 ---
 slug: /next-steps
 description: How to proceed after starting your server.
+targetVersion: 1.21
 ---
 
 # Next Steps

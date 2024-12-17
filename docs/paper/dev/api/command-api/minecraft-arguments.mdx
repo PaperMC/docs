@@ -1,0 +1,207 @@
+---
+slug: /dev/command-api/minecraft-arguments
+description: Everything regarding the arguments retrievable from the ArgumentTypes class
+---
+
+import BlockPositionGif from "./assets/vanilla-arguments/blockposition.gif"
+import BlockStateGif from "./assets/vanilla-arguments/blockstate.gif"
+import ComponentGif from "./assets/vanilla-arguments/component.gif"
+
+# Minecraft arguments
+The [Arguments and Literals](./arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
+in a static context using the `ArgumentTypes` class. We will go over all of those here.
+
+## Quick overview
+You might as well use this a quick reference or a table of contents. The arguments are explained in more detail after this table:
+
+|               Method Name               |          Return Value          |                             Quick Link                             |
+|-----------------------------------------|--------------------------------|--------------------------------------------------------------------|
+| `blockPosition()`                       | BlockPositionResolver          | [blockPosition argument](#blockposition-argument)                  |
+| `blockState()`                          | BlockState                     | [blockState argument](#blockstate-argument)                        |
+| `component()`                           | Component (Kyori)              | [component argument](#component-argument)                          |
+| `doubleRange()`                         | DoubleRangeProvider            | [doubleRange argument](#doublerange-argument)                      |
+| `entity()`                              | EntitySelectorArgumentResolver | [entity argument](#entity-argument)                                |
+| `entities()`                            | EntitySelectorArgumentResolver | [entities argument](#entities-argument)                            |
+| `entityAnchor()`                        | LookAnchor                     | [entityAnchor argument](#entityanchor-argument)                    |
+| `finePosition()`                        | FinePositionResolver           | [finePosition argument](#fineposition-argument)                    |
+| `finePosition(boolean centerIntegers)`  | FinePositionResolver           | [finePosition argument](#fineposition-argument)                    |
+| `gameMode()`                            | GameMode                       | [gameMode argument](#gamemode-argument)                            |
+| `heightMap()`                           | HeightMap                      | [heightMap argument](#heightmap-argument)                          |
+| `integerRange()`                        | IntegerRangeProvider           | [integerRange argument](#integerrange-argument)                    |
+| `itemPredicate()`                       | ItemStackPredicate             | [itemPredicate argument](#itempredicate-argument)                  |
+| `itemStack()`                           | ItemStack                      | [itemStack argument](#itemstack-argument)                          |
+| `key()`                                 | Key (Kyori)                    | [key argument](#key-argument)                                      |
+| `namedColor()`                          | NamedTextColor (Kyori)         | [namedColor argument](#namedcolor-argument)                        |
+| `namespacedKey()`                       | NamespacedKey (Bukkit)         | [namespacedKey argument](#namespacedkey-argument)                  |
+| `objectiveCriteria()`                   | Criteria                       | [objectiveCriteria argument](#objectivecriteria-argument)          |
+| `player()`                              | PlayerSelectorArgumentResolver | [player argument](#player-argument)                                |
+| `players()`                             | PlayerSelectorArgumentResolver | [players argument](#players-argument)                              |
+| `playerProfiles()`                      | PlayerProfileListResolver      | [playerProfiles argument](#playerprofiles-argument)                |
+| `resource(RegistryKey)`                 | (Depends on RegistryKey)       | [resource argument](#resource-argument)                            |
+| `resourceKey(RegistryKey)`              | (Depends on RegistryKey)       | [resourceKey argument](#resourcekey-argument)                      |
+| `style()`                               | Style (Kyori)                  | [style argument](#style-argument)                                  |
+| `signedMessage()`                       | SignedMessageResolver          | [signedMessage argument](#signedmessage-argument)                  |
+| `scoreboardDisplaySlot()`               | DisplaySlot                    | [scoreboardDisplaySlot argument](#scoreboarddisplaySlot-argument)  |
+| `time()`                                | Integer                        | [time argument](#time-argument)                                    |
+| `templateMirror()`                      | Mirror                         | [templateMirror argument](#templatemirror-argument)                |
+| `templateRotation()`                    | StructureRotation              | [templateRotation argument](#templaterotation-argument)            |
+| `uuid()`                                | UUID                           | [uuid argument](#uuid-argument)                                    |
+| `world()`                               | World                          | [world argument](#world-argument)                                  |
+
+
+## blockPosition argument
+The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` vanilla command.
+In order to retrieve the BlockPosition variable from the `BlockPositionResolver`, we have to resolve it using the command source.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
+    return Commands.literal("blockpositionargument")
+        .then(Commands.argument("arg", ArgumentTypes.blockPosition())
+            .executes(ctx -> {
+                final BlockPositionResolver blockPositionResolver = ctx.getArgument("arg", BlockPositionResolver.class);
+                final BlockPosition blockPosition = blockPositionResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendMessage("Put in " + blockPosition.x() + " " + blockPosition.y() + " " + blockPosition.z());
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<img style={{width: '100%'}} src={BlockPositionGif}/>
+
+
+## blockState argument
+The block state argument is a very useful argument for getting use input on an exact block type and its data. It is particularly useful for commands that modify blocks
+in some way, which requires precise input.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
+    return Commands.literal("blockstateargument")
+        .then(Commands.argument("arg", ArgumentTypes.blockState())
+            .executes(ctx -> {
+                final BlockState blockState = ctx.getArgument("arg", BlockState.class);
+                
+                ctx.getSource().getSender().sendMessage("You specified a " + blockState.getType() + "!");
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<img style={{width: '100%'}} src={BlockStateGif}/>
+
+
+## component argument
+The component argument is a very complicated command for the user, which is why it should not be used for usual user input. It follows the same format as the `/tellraw <player> <msg>`
+command for its second argument. It accepts a text component as its json representation, returning it as an Adventure component to work with.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> componentArgument() {
+    return Commands.literal("componentargument")
+        .then(Commands.argument("arg", ArgumentTypes.component())
+            .executes(ctx -> {
+                final Component component = ctx.getArgument("arg", Component.class);
+
+                ctx.getSource().getSender().sendRichMessage(
+                    "Your message: <input>",
+                    Placeholder.component("input", component)
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<img style={{width: '100%'}} src={ComponentGif}/>
+
+
+## doubleRange argument
+
+
+## entity argument
+
+
+## entities argument
+
+
+## entityAnchor argument
+
+
+## finePosition argument
+
+
+## finePosition argument
+
+
+## gameMode argument
+
+
+## heightMap argument
+
+
+## integerRange argument
+
+
+## itemPredicate argument
+
+
+## itemStack argument
+
+
+## key argument
+
+
+## namedColor argument
+
+
+## namespacedKey argument
+
+
+## objectiveCriteria argument
+
+
+## player argument
+
+
+## players argument
+
+
+## playerProfiles argument
+
+
+## resource argument
+
+
+## resourceKey argument
+
+
+## style argument
+
+
+## signedMessage argument
+
+
+## scoreboardDisplaySlot argument
+
+
+## time argument
+
+
+## templateMirror argument
+
+
+## templateRotation argument
+
+
+## uuid argument
+
+
+## world argument
+

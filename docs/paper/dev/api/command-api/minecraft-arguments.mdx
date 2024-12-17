@@ -6,6 +6,10 @@ description: Everything regarding the arguments retrievable from the ArgumentTyp
 import BlockPositionGif from "./assets/vanilla-arguments/blockposition.gif"
 import BlockStateGif from "./assets/vanilla-arguments/blockstate.gif"
 import ComponentGif from "./assets/vanilla-arguments/component.gif"
+import DoubleRangeGif from "./assets/vanilla-arguments/doublerange.gif"
+import EntityOppedGif from "./assets/vanilla-arguments/entity-opped.gif"
+import EntityUnoppedGif from "./assets/vanilla-arguments/entity-unopped.gif"
+import EntitiesGif from "./assets/vanilla-arguments/entities.gif"
 
 # Minecraft arguments
 The [Arguments and Literals](./arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
@@ -123,12 +127,97 @@ public static LiteralCommandNode<CommandSourceStack> componentArgument() {
 
 
 ## doubleRange argument
+The double range argument is another very niche argument. With it you can define a double, or a range/amount of doubles, which can act as a predicate for numbers. This
+could be used for an argument which kill all enemies in a specific range or for clearing items in a range of slots. As this argument is also rather technical, it is
+not used very often.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> doubleRange() {
+    return Commands.literal("doublerange")
+        .then(Commands.argument("arg", ArgumentTypes.doubleRange())
+            .executes(ctx -> {
+                final DoubleRangeProvider doubleRangeProvider = ctx.getArgument("arg", DoubleRangeProvider.class);
+                final CommandSender sender = ctx.getSource().getSender();
+
+                for (int i = 0; i < 5; i++) {
+                    sender.sendRichMessage("Is <index> in bounds? <result>",
+                        Placeholder.unparsed("index", Integer.toString(i)),
+                        Placeholder.unparsed("result", Boolean.toString(doubleRangeProvider.range().test((double) i)))
+                    );
+                }
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<img style={{width: '100%'}} src={DoubleRangeGif}/>
 
 
 ## entity argument
+The entity argument has some strange behavior. If the executing sender is opped, they have access to not only players as valid arguments, but also entity selectors (like `@e` or `@r`).
+Though if the executing sender is not opped, they do not have access to entity selectors. Due to this mechanic, it is suggested to only use this argument if you are sure that
+the executing sender has operator permissions. This could be achieve with a `.requires(ctx -> ctx.getSender().isOp())` predicate on the command root.
+
+This argument, after resolving its `EntitySelectorArgumentResolver` returns a list of exactly one, no more and no less, Entities. It is safe to call `List#getFirst()` to retrieve that
+entity. 
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entity() {
+    return Commands.literal("entityarg")
+        .requires(ctx -> ctx.getSender().isOp())
+        .then(Commands.argument("arg", ArgumentTypes.entity())
+            .executes(ctx -> {
+                final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
+                final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Found a <entitytype>",
+                    Placeholder.unparsed("entitytype", entities.getFirst().getType().name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+If the executing player is not opped:
+<img style={{width: '100%'}} src={EntityUnoppedGif}/>
+
+If the executing player is opped:
+<img style={{width: '100%'}} src={EntityOppedGif}/>
 
 
 ## entities argument
+Similar to the single entity argument, this argument also requires the executing sender to be opped in order to view useful suggestions.
+
+In contrast to the single entity argument, this multi entity argument accepts any amount of entities, with the minimum amount of entities being 1.
+They can, once again, be resolved using `EntitySelectorArgumentResolver#resolve(CommandSourceStack)`, which returns a `List<Entity>`.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entities() {
+    return Commands.literal("entitiesarg")
+        .requires(ctx -> ctx.getSender().isOp())
+        .then(Commands.argument("arg", ArgumentTypes.entities())
+            .executes(ctx -> {
+                final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
+                final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Found the following entities: <entitytypes>",
+                    Placeholder.unparsed("entitytypes", String.join(", ", entities.stream().map(Entity::getType).map(EntityType::name).toList()))
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+## In-game preview
+<img style={{width: '100%'}} src={EntitiesGif}/>
 
 
 ## entityAnchor argument

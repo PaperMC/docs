@@ -144,7 +144,7 @@ const paper: SidebarsConfig = {
               type: "category",
               label: "Old Brigadier Command API",
               collapsed: true,
-              items: ["dev/api/command-api/commands", "dev/api/command-api/arguments"],
+              items: ["dev/api/command-api-old/commands", "dev/api/command-api-old/arguments"],
             },
             {
               type: "category",

@@ -13,7 +13,7 @@ worry about handling various server reload events, like `/reload`. Instead, what
 But how does one get access to a `LifecycleEventManager` capable of registering commands? There are two "contexts" in which you can use a LifecycleEventManager. The first one,
 and preferred one, is in the `PluginBootstrap` class of our plugin. 
 
-### Using a PluginBootstrap
+### Using the PluginBootstrap
 :::note
 
 This requires you to use a `paper-plugin.yml` plugin. You can read more on that
@@ -55,7 +55,7 @@ The `ReloadableRegistrarEvent<Commands>` class has two methods: `ReloadableRegis
 the `registrar` one. With it we can register our commands.
 
 
-### Using a JavaPlugin
+### Using the JavaPlugin
 Getting access to a `LifecycleEventManager` for commands inside our plugin's main class is very similar to how you access it inside the PluginBootstrap class, with the difference
 that instead of getting the `LifecycleEventManager` using the `BootstrapContext` provided to us in the bootstrap method of our PluginBootstrap class, we can just retrieve it using
 `JavaPlugin#getLifecycleManager`.

@@ -7,6 +7,7 @@ import SoftwareVersion from "@site/src/components/versioning/SoftwareVersion";
 import Javadoc from "../components/versioning/Javadoc";
 import Property from "@site/src/components/Property";
 import CenteredImage from "@site/src/components/ui/CenteredImage";
+import FullWidthVideo from "@site/src/components/ui/FullWidthVideo";
 
 export default {
   // Re-use the default mapping
@@ -20,4 +21,5 @@ export default {
   Property,
   Icon: Icon,
   CenteredImage,
+  FullWidthVideo,
 };

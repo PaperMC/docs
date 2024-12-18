@@ -3,13 +3,13 @@ slug: /dev/command-api/minecraft-arguments
 description: Everything regarding the arguments retrievable from the ArgumentTypes class
 ---
 
-import BlockPositionGif from "./assets/vanilla-arguments/blockposition.gif"
-import BlockStateGif from "./assets/vanilla-arguments/blockstate.gif"
-import ComponentGif from "./assets/vanilla-arguments/component.gif"
-import DoubleRangeGif from "./assets/vanilla-arguments/doublerange.gif"
-import EntityOppedGif from "./assets/vanilla-arguments/entity-opped.gif"
-import EntityUnoppedGif from "./assets/vanilla-arguments/entity-unopped.gif"
-import EntitiesGif from "./assets/vanilla-arguments/entities.gif"
+import BlockPositionMp4 from "./assets/vanilla-arguments/blockposition.mp4"
+import BlockStateMp4 from "./assets/vanilla-arguments/blockstate.mp4"
+import ComponentMp4 from "./assets/vanilla-arguments/component.mp4"
+import DoubleRangeMp4 from "./assets/vanilla-arguments/doublerange.mp4"
+import EntityOppedMp4 from "./assets/vanilla-arguments/entity-opped.mp4"
+import EntityUnoppedMp4 from "./assets/vanilla-arguments/entity-unopped.mp4"
+import EntitiesMp4 from "./assets/vanilla-arguments/entities.mp4"
 
 # Minecraft arguments
 The [Arguments and Literals](./arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
@@ -74,8 +74,7 @@ public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
 ```
 
 ### In-game preview
-<img style={{width: '100%'}} src={BlockPositionGif}/>
-
+<FullWidthVideo src={BlockPositionMp4}/>
 
 ## blockState argument
 The block state argument is a very useful argument for getting use input on an exact block type and its data. It is particularly useful for commands that modify blocks
@@ -97,7 +96,7 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
 ```
 
 ### In-game preview
-<img style={{width: '100%'}} src={BlockStateGif}/>
+<FullWidthVideo src={BlockStateMp4}/>
 
 
 ## component argument
@@ -123,7 +122,7 @@ public static LiteralCommandNode<CommandSourceStack> componentArgument() {
 ```
 
 ### In-game preview
-<img style={{width: '100%'}} src={ComponentGif}/>
+<FullWidthVideo src={ComponentMp4}/>
 
 
 ## doubleRange argument
@@ -153,7 +152,7 @@ public static LiteralCommandNode<CommandSourceStack> doubleRange() {
 ```
 
 ### In-game preview
-<img style={{width: '100%'}} src={DoubleRangeGif}/>
+<FullWidthVideo src={DoubleRangeMp4}/>
 
 
 ## entity argument
@@ -185,10 +184,10 @@ public static LiteralCommandNode<CommandSourceStack> entity() {
 
 ### In-game preview
 If the executing player is not opped:
-<img style={{width: '100%'}} src={EntityUnoppedGif}/>
+<FullWidthVideo src={EntityUnoppedMp4}/>
 
 If the executing player is opped:
-<img style={{width: '100%'}} src={EntityOppedGif}/>
+<FullWidthVideo src={EntityOppedMp4}/>
 
 
 ## entities argument
@@ -217,7 +216,7 @@ public static LiteralCommandNode<CommandSourceStack> entities() {
 ```
 
 ## In-game preview
-<img style={{width: '100%'}} src={EntitiesGif}/>
+<FullWidthVideo src={EntitiesMp4}/>
 
 
 ## entityAnchor argument

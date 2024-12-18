@@ -10,6 +10,15 @@ import DoubleRangeMp4 from "./assets/vanilla-arguments/doublerange.mp4"
 import EntityOppedMp4 from "./assets/vanilla-arguments/entity-opped.mp4"
 import EntityUnoppedMp4 from "./assets/vanilla-arguments/entity-unopped.mp4"
 import EntitiesMp4 from "./assets/vanilla-arguments/entities.mp4"
+import EntityAnchorMp4 from "./assets/vanilla-arguments/entityanchor.mp4"
+import FinePositionMp4 from "./assets/vanilla-arguments/fineposition.mp4"
+import GameModeMp4 from "./assets/vanilla-arguments/gamemode.mp4"
+import HeightMapMp4 from "./assets/vanilla-arguments/heightmap.mp4"
+import IntegerRangeMp4 from "./assets/vanilla-arguments/integerrange.mp4"
+import ItemPredicateMp4 from "./assets/vanilla-arguments/itempredicate.mp4"
+import ItemStackMp4 from "./assets/vanilla-arguments/itemstack.mp4"
+import KeyMp4 from "./assets/vanilla-arguments/key.mp4"
+import NamedColorMp4 from "./assets/vanilla-arguments/namedcolor.mp4"
 
 # Minecraft arguments
 The [Arguments and Literals](./arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
@@ -220,34 +229,265 @@ public static LiteralCommandNode<CommandSourceStack> entities() {
 
 
 ## entityAnchor argument
+The entity anchor argument has two valid inputs: `feet` and `eyes`. The resulting `LookAnchor` is mainly used for methods like `Player#lookAt(Position, LookAnchor)` or 
+`Player#lookAt(Entity, LookAnchor, LookAnchor)`.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entityAnchorArgument() {
+    return Commands.literal("entityanchor")
+        .then(Commands.argument("arg", ArgumentTypes.entityAnchor())
+            .executes(ctx -> {
+                final LookAnchor lookAnchor = ctx.getArgument("arg", LookAnchor.class);
+
+                ctx.getSource().getSender().sendRichMessage("You chose <aqua><anchor></aqua>!",
+                    Placeholder.unparsed("anchor", lookAnchor.name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={EntityAnchorMp4}/>
 
 
 ## finePosition argument
+The fine position argument works similarly to the block position argument, with the only difference being that it can accept decimal (precise) location input. The optional
+overload (`ArgumentTypes.finePosition(boolean centerIntegers)`), which defaults to false if not set, will center whole input, meaning 5 becomes 5.5, as that is the "middle"
+of a block. This only applies to X/Z. The y coordinate is untouched by this operation.
 
+This argument returns a `FinePositionResolver`. You can resolve that by running `FinePositionResolver#resolve(CommandSourceStack)` to get the resulting `FinePosition`.
 
-## finePosition argument
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> finePositionArgument() {
+    return Commands.literal("fineposition")
+        .then(Commands.argument("arg", ArgumentTypes.finePosition(true))
+            .executes(ctx -> {
+                final FinePositionResolver resolver = ctx.getArgument("arg", FinePositionResolver.class);
+                final FinePosition finePosition = resolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Position: <red><x></red> <green><y></green> <blue><z></blue>",
+                    Placeholder.unparsed("x", Double.toString(finePosition.x())),
+                    Placeholder.unparsed("y", Double.toString(finePosition.y())),
+                    Placeholder.unparsed("z", Double.toString(finePosition.z()))
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={FinePositionMp4}/>
 
 
 ## gameMode argument
+The game mode argument works the same way as the first argument of the vanilla `/gamemode <gamemode>` command. It accepts any of the 4 valid game modes, returning
+a `GameMode` enum to use in code.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> gameModeArgument() {
+    return Commands.literal("gamemodearg")
+        .then(Commands.argument("arg", ArgumentTypes.gameMode())
+            .executes(ctx -> {
+                final GameMode gamemode = ctx.getArgument("arg", GameMode.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.setGameMode(gamemode);
+                    player.sendRichMessage("Your gamemode has been set to <red><gamemode></red>!",
+                        Placeholder.component("gamemode", Component.translatable(gamemode.translationKey()))
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("This command requires a player!");
+                }
+                
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={GameModeMp4}/>
 
 
 ## heightMap argument
+Despite its complicated sounding name, the height map argument is, similar to the game mode argument, just another enum argument, consisting of the following, valid inputs:
+`motion_blocking`, `motion_blocking_no_leaves`, `ocean_floor`, and `world_surface`. It returns a `HeightMap` enum value, which I honest to god have no fucking idea what it
+can be used for. But it's there, so you might as well use it as a meme.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> heightMapArgument() {
+    return Commands.literal("heightmap")
+        .then(Commands.argument("arg", ArgumentTypes.heightMap())
+            .executes(ctx -> {
+                final HeightMap heightMap = ctx.getArgument("arg", HeightMap.class);
+
+                ctx.getSource().getSender().sendRichMessage("You selected <gold><selection></gold>",
+                    Placeholder.unparsed("selection", heightMap.name())
+                );
+                
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={HeightMapMp4}/>
 
 
 ## integerRange argument
+This argument works very similarly to the double range argument, with the only difference being that this argument only accepts integers.
+
+### Example usage
+```java title="MinecraftArguments.java"
+public static LiteralCommandNode<CommandSourceStack> integerRangeArgument() {
+    return Commands.literal("integerrange")
+        .then(Commands.argument("range", ArgumentTypes.integerRange())
+            .then(Commands.argument("tested_integer", IntegerArgumentType.integer())
+                .executes(MinecraftArguments::runIntegerRangeCommand)))
+        .build();
+}
+
+private static int runIntegerRangeCommand(final CommandContext<CommandSourceStack> ctx) {
+    final IntegerRangeProvider integerRangeProvider = ctx.getArgument("range", IntegerRangeProvider.class);
+    final int integerToTest = ctx.getArgument("tested_integer", int.class);
+
+    if (integerRangeProvider.range().contains(integerToTest)) {
+        ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <green>is</green> inside the specified range!",
+            Placeholder.unparsed("input", Integer.toString(integerToTest))
+        );
+    }
+    else {
+        ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <red>is not</red> inside the specified range!",
+            Placeholder.unparsed("input", Integer.toString(integerToTest))
+        );
+    }
+
+    return Command.SINGLE_SUCCESS;
+}
+```
+
+### In-game preview
+<FullWidthVideo src={IntegerRangeMp4}/>
 
 
 ## itemPredicate argument
+This argument allows for checking whether an item fits some predicate. It is useful for filtering out certain items based on some criteria.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> itemPredicateArgument() {
+    return Commands.literal("itempredicate")
+        .then(Commands.argument("predicate", ArgumentTypes.itemPredicate())
+            .executes(ctx -> {
+                final ItemStackPredicate predicate = ctx.getArgument("predicate", ItemStackPredicate.class);
+                final ItemStack defaultWoodenSword = ItemType.WOODEN_SWORD.createItemStack();
+
+                ctx.getSource().getSender().sendRichMessage("Is default wooden sword? <result>.",
+                    Placeholder.parsed("result", predicate.test(defaultWoodenSword) ? "<green>true" : "<red>false")
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ItemPredicateMp4}/>
 
 
 ## itemStack argument
+The item stack argument is a way to retrieve an `ItemStack` following the same argument format as the vanilla `/give <player> <item> [<amount>]` command as its second argument.
+
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
+    return Commands.literal("itemstack")
+        .then(Commands.argument("stack", ArgumentTypes.itemStack())
+            .executes(ctx -> {
+                final ItemStack itemStack = ctx.getArgument("stack", ItemStack.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.getInventory().addItem(itemStack);
+                    ctx.getSource().getSender().sendRichMessage("<green>Successfully gave <player> a <item>",
+                        Placeholder.component("player", player.name()),
+                        Placeholder.component("item", Component.translatable(itemStack.translationKey()))
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("<red>This argument requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ItemStackMp4}/>
 
 
 ## key argument
+The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a `net.kyori.adventure.key.Key` from the adventure library, which
+can be used at various other places in the Bukkit/Paper API.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> keyArgument() {
+    return Commands.literal("key")
+        .then(Commands.argument("key_input", ArgumentTypes.key())
+            .executes(ctx -> {
+                final Key key = ctx.getArgument("key_input", Key.class);
+
+                ctx.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
+                    Placeholder.unparsed("key", key.asString())
+                );                    
+                
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={KeyMp4}/>
 
 
 ## namedColor argument
+This argument provides the user with the ability to select between the 16 build-in "named" text colors. This argument returns a `net.kyori.adventure.text.format.NamedtextColor` that
+you can use for styling components.
 
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
+    return Commands.literal("namedcolor")
+        .then(Commands.argument("color", ArgumentTypes.namedColor())
+            .then(Commands.argument("message", StringArgumentType.greedyString())
+                .executes(ctx -> {
+                    final NamedTextColor color = ctx.getArgument("color", NamedTextColor.class);
+                    final String msg = ctx.getArgument("message", String.class);
+
+                    ctx.getSource().getSender().sendMessage(
+                        Component.text(msg).color(color)
+                    );
+                    return Command.SINGLE_SUCCESS;
+                })))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={NamedColorMp4}/>
 
 ## namespacedKey argument
 

@@ -23,6 +23,17 @@ import KeyMp4 from "./assets/vanilla-arguments/key.mp4"
 import NamedColorMp4 from "./assets/vanilla-arguments/namedcolor.mp4"
 import NamespacedKeyMp4 from "./assets/vanilla-arguments/namespacedkey.mp4"
 import ObjectiveCriteriaMp4 from "./assets/vanilla-arguments/objectivecriteria.mp4"
+import PlayerMp4 from "./assets/vanilla-arguments/player.mp4"
+import PlayersMp4 from "./assets/vanilla-arguments/players.mp4"
+import PlayerProfilesMp4 from "./assets/vanilla-arguments/playerprofiles.mp4"
+import StyleMp4 from "./assets/vanilla-arguments/style.mp4"
+import SignedMessageMp4 from "./assets/vanilla-arguments/signedmessage.mp4"
+import ScoreboardDisplaySlotMp4 from "./assets/vanilla-arguments/scoreboarddisplayslot.mp4"
+import TimeMp4 from "./assets/vanilla-arguments/time.mp4"
+import TemplateMirrorMp4 from "./assets/vanilla-arguments/templatemirror.mp4"
+import TemplateRotationMp4 from "./assets/vanilla-arguments/templaterotation.mp4"
+import UuidMp4 from "./assets/vanilla-arguments/uuid.mp4"
+import WorldMp4 from "./assets/vanilla-arguments/world.mp4"
 
 # Minecraft arguments
 The [Arguments and Literals](./arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
@@ -321,8 +332,8 @@ public static LiteralCommandNode<CommandSourceStack> gameModeArgument() {
 
 ## HeightMap Argument
 Despite its complicated sounding name, the height map argument is, similar to the game mode argument, just another enum argument, consisting of the following, valid inputs:
-`motion_blocking`, `motion_blocking_no_leaves`, `ocean_floor`, and `world_surface`. It returns a `HeightMap` enum value, which I honest to god have no fucking idea what it
-can be used for. But it's there, so you might as well use it as a meme.
+`motion_blocking`, `motion_blocking_no_leaves`, `ocean_floor`, and `world_surface`. It returns a `HeightMap` enum value, which is often used for declaring relative positioning
+for data packs or the `/execute positioned over <height_map>` command. E.g. `world_surface` would mean that the surface of the world.
 
 ### Example usage
 ```java
@@ -545,40 +556,355 @@ public static LiteralCommandNode<CommandSourceStack> objectiveCriteriaArgument()
 
 
 ## Player Argument
+The player argument allows you to be given some player input. Similar as with the entity argument, this argument also only provides selectors if the executing player is opped.
+Running `ctx.getArgument` return a `PlayerSelectorArgumentResolver` for player arguments. For the "one player" argument (this one), you can safely get the target player by running
+`PlayerSelectorArgumentResolver.resolve(ctx.getSource()).getFirst()`, which returns a Bukkit `Player` object.
+
+### Example usage
+This command yeets the targeted player into the air!
+```java
+public static LiteralCommandNode<CommandSourceStack> playerArgument() {
+    return Commands.literal("player")
+        .then(Commands.argument("target", ArgumentTypes.player())
+            .executes(ctx -> {
+                final PlayerSelectorArgumentResolver targetResolver = ctx.getArgument("target", PlayerSelectorArgumentResolver.class);
+                final Player target = targetResolver.resolve(ctx.getSource()).getFirst();
+
+                target.setVelocity(new Vector(0, 100, 0));
+                target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+                ctx.getSource().getSender().sendRichMessage("Yeeted <target>!",
+                    Placeholder.component("target", target.name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={PlayerMp4}/>
 
 
 ## Players Argument
+The "multiple players" argument works similarly to the Player argument, also returning a `PlayerSelectorArgumentResolver`. Instead of just resolving to exactly one `Player`, this
+one can resolve to more than just one player - which you should account for in case of using this argument. `PlayerSelectorArgumentResolver.resolve(ctx.getSource())` returns a
+`List<Player>`, which you can just iterate through.
+
+### Example usage
+Extending the "single player" yeet command to support multiple targets
+```java
+public static LiteralCommandNode<CommandSourceStack> playersArgument() {
+    return Commands.literal("players")
+        .then(Commands.argument("targets", ArgumentTypes.players())
+            .executes(ctx -> {
+                final PlayerSelectorArgumentResolver targetResolver = ctx.getArgument("targets", PlayerSelectorArgumentResolver.class);
+                final List<Player> targets = targetResolver.resolve(ctx.getSource());
+                final CommandSender sender = ctx.getSource().getSender();
+
+                for (final Player target : targets) {
+                    target.setVelocity(new Vector(0, 100, 0));
+                    target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+                    sender.sendRichMessage("Yeeted <target>!",
+                        Placeholder.component("target", target.name())
+                    );
+                }
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={PlayersMp4}/>
 
 
 ## Player Profiles Argument
+The player profiles argument is a very powerful argument which can retrieve both offline and online players. It returns the result of the argument as a `PlayerProfileListResolver`,
+which resolves to a `Collection<PlayerProfile>`. This collection can be iterated to get the resulting profile(s). Usually, it only returns a single `PlayerProfile` if retrieving
+a player by name, but it can return multiple if using the entity selectors (like `@a` on online players). Thus it always makes sense to run whatever operation you want to run on
+all entries in the collection instead of just the first one.
+
+Sometimes, the API call to players, which are currently offline and have no yet logged onto the server, may fail. This is also visible in the in-game preview down below. This
+weird behavior also explains why the `/whitelist add` command fails, so now you know 🚀.
+
+### Example usage - Player lookup command
+```java
+public static LiteralCommandNode<CommandSourceStack> playerProfilesArgument() {
+    return Commands.literal("lookup")
+        .then(Commands.argument("profile", ArgumentTypes.playerProfiles())
+            .executes(ctx -> {
+                final PlayerProfileListResolver profilesResolver = ctx.getArgument("profile", PlayerProfileListResolver.class);
+                final Collection<PlayerProfile> foundProfiles = profilesResolver.resolve(ctx.getSource());
+
+                for (final PlayerProfile profile : foundProfiles) {
+                    ctx.getSource().getSender().sendMessage("Found " + profile.getName());
+                }
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={PlayerProfilesMp4}/>
 
 
 ## Resource Argument
+This argument is explained in detail on its own page: **Registry Arguments** (WIP).
 
 
 ## Resource Key Argument
+This argument is explained in detail on its own page: **Registry Arguments** (WIP).
 
 
 ## Adventure Style Argument
+:::note
+
+Similar to the component argument, this argument is not really appropriate for general user input, as it also follows the json format for displaying components. Most users
+do not know how to use that format and thus its public usage is not advised.
+
+:::
+
+The style argument returns its value in form of an `net.kyori.adventure.text.format.Style` object. This can be applied to any component using `Component#style(Style)`.
+
+Whilst the json input allows for the `text` field, it does not actually do anything.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> styleArgument() {
+    return Commands.literal("style")
+        .then(Commands.argument("style", ArgumentTypes.style())
+            .then(Commands.argument("message", StringArgumentType.greedyString())
+                .executes(ctx -> {
+                    final Style style = ctx.getArgument("style", Style.class);
+                    final String message = ctx.getArgument("message", String.class);
+
+                    ctx.getSource().getSender().sendRichMessage("Your input: <input>",
+                        Placeholder.component("input", Component.text(message).style(style))
+                    );
+                    return Command.SINGLE_SUCCESS;
+                })))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={StyleMp4}/>
 
 
 ## Signed Message Argument
+The signed message argument allows a player (not a console!!) to send an argument in form of a **signed message** to the server. This signed message is a special type - it
+allows the server to send that message, without the ability to directly modify it, to any player. The visible difference is that unsigned messages have a white bar at the left,
+whilst signed messages don't.
+
+A signed message argument returns a `SignedMessageResolver`. In order to call its `#resolve` method, you have to pass in two parameters:
+* The argument name
+* The `CommandContext<CommandSourceStack>` object
+
+You then get returned with a `CompletableFuture<SignedMessage>`. In order to work with the resulting `SignedMessage`, you can call `CompletableFuture<T>#thenAccept(Consumer<T>)`
+on that resulting completable future. Inside of that, you can send the signed message to players or work with it in other ways.
+
+:::warning
+
+The use of thread unsafe Bukkit API inside the `.thenAccept` method is not supported, as this is an asynchronous method, which does not run on the main thread.
+If you need to use Bukkit API, you can schedule a task to be run on the next available tick. You can read up on that [here](../scheduler.mdx).
+
+:::
+
+### Example usage
+```java title="MinecraftArguments.java"
+public static LiteralCommandNode<CommandSourceStack> signedMessageArgument() {
+    return Commands.literal("signedmessage")
+        .then(Commands.argument("target", ArgumentTypes.player())
+            .then(Commands.argument("message", ArgumentTypes.signedMessage())
+                .executes(MinecraftArguments::executeSignedMessageCommand)))
+        .build();
+}
+
+private static int executeSignedMessageCommand(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+    final Player target = ctx.getArgument("target", PlayerSelectorArgumentResolver.class).resolve(ctx.getSource()).getFirst();
+    final SignedMessageResolver messageResolver = ctx.getArgument("message", SignedMessageResolver.class);
+
+    messageResolver.resolveSignedMessage("message", ctx).thenAccept(msg -> {
+        target.sendMessage(msg, ChatType.CHAT.bind(ctx.getSource().getSender().name()));
+    });
+
+
+    return Command.SINGLE_SUCCESS;
+}
+```
+
+### In-game preview
+<FullWidthVideo src={SignedMessageMp4}/>
 
 
 ## Scoreboard Display Slot Argument
+This argument allows you to retrieve a `DisplaySlot` enum value from the user.
 
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> scoreboardDisplaySlotArgument() {
+    return Commands.literal("scoreboarddisplayslot")
+        .then(Commands.argument("slot", ArgumentTypes.scoreboardDisplaySlot())
+            .executes(ctx -> {
+                final DisplaySlot slot = ctx.getArgument("slot", DisplaySlot.class);
+                
+                ctx.getSource().getSender().sendMessage("You selected: " + slot.getId());
+                
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ScoreboardDisplaySlotMp4}/>
 
 ## Time Argument
+The time argument allows the user to define a time frame, similar to the vanilla `/time <set|time> <time>` time argument. The user has 4 possible ways of inputting time:
+* Just as a number: This resolves to as usual ticks (`/timearg 1` --> 1 tick)
+* With a `t` suffix: This also resolves to ticks (`/timearg 1t` --> 1 tick)
+* With a `s` suffix: This resolves as irl seconds, meaning multiplying the first number by 20. (`/timearg 1s` --> 20 ticks)
+* With a `d` suffix. This resolves as in-game days, meaning multiplying the first number by 24000. (`/timearg 1d` --> 24000 ticks)
+
+If you choose to use this argument, it is advised to explain to the users what these suffixes mean, as here irl time (`s` suffix) is mixed with in-game time (`t` and `d` suffix).
+
+The `ArgumentType.time()` method has one additional overload: `ArgumentType.time(float mintime)`. This allows to set the minimum required amount of time. By default, this value
+is set to 0.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> timeArgument() {
+    return Commands.literal("timearg")
+        .then(Commands.argument("time", ArgumentTypes.time())
+            .executes(ctx -> {
+                final int timeInTicks = ctx.getArgument("time", int.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.getWorld().setFullTime(player.getWorld().getFullTime() + timeInTicks);
+                    player.sendRichMessage("Moved time forward by " + timeInTicks + " ticks!");
+                }
+                else {
+                    ctx.getSource().getSender().sendMessage("This argument requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={TimeMp4}/>
 
 
 ## Template Mirror Argument
+This argument is a very simple enum argument. The user has 3 valid input possibilities: `front_back`, `left_right`, and `none`. You can retrieve the result of the argument as a
+`Mirror` enum value.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> templateMirrorArgument() {
+    return Commands.literal("templatemirror")
+        .then(Commands.argument("mirror", ArgumentTypes.templateMirror())
+            .executes(ctx -> {
+                final Mirror mirror = ctx.getArgument("mirror", Mirror.class);
+
+                ctx.getSource().getSender().sendMessage("You selected: " + mirror.name());
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={TemplateMirrorMp4}/>
 
 
 ## Template Rotation Argument
+This argument is also a very simple enum argument. The user has 4 valid input possibilities: `180`, `clockwise_90`, `counterclockwise_90`, and `none`. You can retrieve the result 
+of the argument as a `StructureRotation` enum value.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> templateRotationArgument() {
+    return Commands.literal("templaterotation")
+        .then(Commands.argument("rotation", ArgumentTypes.templateRotation())
+            .executes(ctx -> {
+                final StructureRotation rotation = ctx.getArgument("rotation", StructureRotation.class);
+
+                ctx.getSource().getSender().sendMessage("You selected: " + rotation.name());
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={TemplateRotationMp4}/>
 
 
 ## UUID Argument
+The uuid argument allows the user to input a valid uuid. You can retrieve that value as a `UUID` object, which is used in various places, like `Bukkit.getOfflinePlayer(UUID)`.
+This argument is also not very user-friendly, which is why it is suggested to only use this as a moderation or debug argument. For user input regarding offline player
+retrieval, the player profiles argument is preferred, as it allows by-name lookup.
 
+### Example usage - Lookup command
+```java
+public static LiteralCommandNode<CommandSourceStack> uuidArgument() {
+    return Commands.literal("uuid-lookup")
+        .then(Commands.argument("uuid", ArgumentTypes.uuid())
+            .executes(ctx -> {
+                final UUID uuid = ctx.getArgument("uuid", UUID.class);
+                final OfflinePlayer result = Bukkit.getOfflinePlayer(uuid);
+
+                ctx.getSource().getSender().sendRichMessage("Has <aqua><uuid></aqua> played before: <result>",
+                    Placeholder.unparsed("uuid", uuid.toString()),
+                    Placeholder.parsed("result", result.hasPlayedBefore() ? "<green>true</green>" : "<red>false</red>")
+                );
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={UuidMp4}/>
 
 ## World Argument
+The world argument is the final argument of the predefined ones - it allows the user to select one of the currently loaded world. You can retrieve the result of that as a generic
+Bukkit `World` object.
 
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> worldArgument() {
+    return Commands.literal("teleport-to-world")
+        .then(Commands.argument("world", ArgumentTypes.world())
+            .executes(ctx -> {
+                final World world = ctx.getArgument("world", World.class);
+                
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.teleport(world.getSpawnLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
+                    ctx.getSource().getSender().sendRichMessage("Successfully teleported <player> to <aqua><world></aqua>",
+                        Placeholder.component("player", player.name()),
+                        Placeholder.unparsed("world", world.getName())
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={WorldMp4}/>

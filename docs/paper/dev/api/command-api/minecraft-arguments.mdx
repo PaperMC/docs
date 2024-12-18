@@ -31,42 +31,41 @@ in a static context using the `ArgumentTypes` class. We will go over all of thos
 ## Quick overview
 You might as well use this a quick reference or a table of contents. The arguments are explained in more detail after this table:
 
-|               Method Name               |          Return Value          |                             Quick Link                             |
-|-----------------------------------------|--------------------------------|--------------------------------------------------------------------|
-| `blockPosition()`                       | BlockPositionResolver          | [blockPosition argument](#blockposition-argument)                  |
-| `blockState()`                          | BlockState                     | [blockState argument](#blockstate-argument)                        |
-| `component()`                           | Component (Kyori)              | [component argument](#component-argument)                          |
-| `doubleRange()`                         | DoubleRangeProvider            | [doubleRange argument](#doublerange-argument)                      |
-| `entity()`                              | EntitySelectorArgumentResolver | [entity argument](#entity-argument)                                |
-| `entities()`                            | EntitySelectorArgumentResolver | [entities argument](#entities-argument)                            |
-| `entityAnchor()`                        | LookAnchor                     | [entityAnchor argument](#entityanchor-argument)                    |
-| `finePosition()`                        | FinePositionResolver           | [finePosition argument](#fineposition-argument)                    |
-| `finePosition(boolean centerIntegers)`  | FinePositionResolver           | [finePosition argument](#fineposition-argument)                    |
-| `gameMode()`                            | GameMode                       | [gameMode argument](#gamemode-argument)                            |
-| `heightMap()`                           | HeightMap                      | [heightMap argument](#heightmap-argument)                          |
-| `integerRange()`                        | IntegerRangeProvider           | [integerRange argument](#integerrange-argument)                    |
-| `itemPredicate()`                       | ItemStackPredicate             | [itemPredicate argument](#itempredicate-argument)                  |
-| `itemStack()`                           | ItemStack                      | [itemStack argument](#itemstack-argument)                          |
-| `key()`                                 | Key (Kyori)                    | [key argument](#key-argument)                                      |
-| `namedColor()`                          | NamedTextColor (Kyori)         | [namedColor argument](#namedcolor-argument)                        |
-| `namespacedKey()`                       | NamespacedKey (Bukkit)         | [namespacedKey argument](#namespacedkey-argument)                  |
-| `objectiveCriteria()`                   | Criteria                       | [objectiveCriteria argument](#objectivecriteria-argument)          |
-| `player()`                              | PlayerSelectorArgumentResolver | [player argument](#player-argument)                                |
-| `players()`                             | PlayerSelectorArgumentResolver | [players argument](#players-argument)                              |
-| `playerProfiles()`                      | PlayerProfileListResolver      | [playerProfiles argument](#playerprofiles-argument)                |
-| `resource(RegistryKey)`                 | (Depends on RegistryKey)       | [resource argument](#resource-argument)                            |
-| `resourceKey(RegistryKey)`              | (Depends on RegistryKey)       | [resourceKey argument](#resourcekey-argument)                      |
-| `style()`                               | Style (Kyori)                  | [style argument](#style-argument)                                  |
-| `signedMessage()`                       | SignedMessageResolver          | [signedMessage argument](#signedmessage-argument)                  |
-| `scoreboardDisplaySlot()`               | DisplaySlot                    | [scoreboardDisplaySlot argument](#scoreboarddisplayslot-argument)  |
-| `time()`                                | Integer                        | [time argument](#time-argument)                                    |
-| `templateMirror()`                      | Mirror                         | [templateMirror argument](#templatemirror-argument)                |
-| `templateRotation()`                    | StructureRotation              | [templateRotation argument](#templaterotation-argument)            |
-| `uuid()`                                | UUID                           | [uuid argument](#uuid-argument)                                    |
-| `world()`                               | World                          | [world argument](#world-argument)                                  |
+|               Method Name               |          Return Value          |                               Quick Link                               |
+|-----------------------------------------|--------------------------------|------------------------------------------------------------------------|
+| `blockPosition()`                       | BlockPositionResolver          | [Block Position Argument](#block-position-argument)                    |
+| `blockState()`                          | BlockState                     | [Block State Argument](#block-state-argument)                          |
+| `component()`                           | Component (Kyori)              | [Adventure Component Argument](#adventure-component-argument)          |
+| `doubleRange()`                         | DoubleRangeProvider            | [Double Range argument](#double-range-argument)                        |
+| `entity()`                              | EntitySelectorArgumentResolver | [Entity Argument](#entity-argument)                                    |
+| `entities()`                            | EntitySelectorArgumentResolver | [Entities Argument](#entities-argument)                                |
+| `entityAnchor()`                        | LookAnchor                     | [Entity Anchor Argument](#entity-anchor-argument)                      |
+| `finePosition(boolean centerIntegers)`  | FinePositionResolver           | [Fine Position Argument](#fine-position-argument)                      |
+| `gameMode()`                            | GameMode                       | [GameMode Argument](#gamemode-argument)                                |
+| `heightMap()`                           | HeightMap                      | [HeightMap Argument](#heightmap-argument)                              |
+| `integerRange()`                        | IntegerRangeProvider           | [Integer Range Argument](#integer-range-argument)                      |
+| `itemPredicate()`                       | ItemStackPredicate             | [Item Predicate Argument](#item-predicate-argument)                    |
+| `itemStack()`                           | ItemStack                      | [ItemStack Argument](#itemstack-argument)                              |
+| `key()`                                 | Key (Kyori)                    | [Adventure Key Argument](#adventure-key-argument)                      |
+| `namedColor()`                          | NamedTextColor (Kyori)         | [Named Color Argument](#named-color-argument)                          |
+| `namespacedKey()`                       | NamespacedKey (Bukkit)         | [Bukkit NamespacedKey Argument](#bukkit-namespacedkey-argument)        |
+| `objectiveCriteria()`                   | Criteria                       | [Objective Criteria Argument](#objective-criteria-argument)            |
+| `player()`                              | PlayerSelectorArgumentResolver | [Player Argument](#player-argument)                                    |
+| `players()`                             | PlayerSelectorArgumentResolver | [Players Argument](#players-argument)                                  |
+| `playerProfiles()`                      | PlayerProfileListResolver      | [Player Profiles Argument](#playerprofiles-argument)                   |
+| `resource(RegistryKey)`                 | (Depends on RegistryKey)       | [Resource Argument](#resource-argument)                                |
+| `resourceKey(RegistryKey)`              | (Depends on RegistryKey)       | [Resource Key Argument](#resource-key-argument)                        |
+| `style()`                               | Style (Kyori)                  | [Adventure Style Argument](#style-argument)                            |
+| `signedMessage()`                       | SignedMessageResolver          | [Signed Message Argument](#signed-message-argument)                    |
+| `scoreboardDisplaySlot()`               | DisplaySlot                    | [Scoreboard Display Slot Argument](#scoreboard-display-slot-argument)  |
+| `time()`                                | Integer                        | [Time Argument](#time-argument)                                        |
+| `templateMirror()`                      | Mirror                         | [Template Mirror Argument](#template-mirror-argument)                  |
+| `templateRotation()`                    | StructureRotation              | [Template Rotation Argument](#template-rotation-argument)              |
+| `uuid()`                                | UUID                           | [UUID Argument](#uuid-argument)                                        |
+| `world()`                               | World                          | [World Argument](#world-argument)                                      |
 
 
-## blockPosition argument
+## Block Position Argument
 The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` vanilla command.
 In order to retrieve the BlockPosition variable from the `BlockPositionResolver`, we have to resolve it using the command source.
 
@@ -89,7 +88,7 @@ public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
 ### In-game preview
 <FullWidthVideo src={BlockPositionMp4}/>
 
-## blockState argument
+## Block State Argument
 The block state argument is a very useful argument for getting use input on an exact block type and its data. It is particularly useful for commands that modify blocks
 in some way, which requires precise input.
 
@@ -112,7 +111,7 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
 <FullWidthVideo src={BlockStateMp4}/>
 
 
-## component argument
+## Adventure Component Argument
 The component argument is a very complicated command for the user, which is why it should not be used for usual user input. It follows the same format as the `/tellraw <player> <msg>`
 command for its second argument. It accepts a text component as its json representation, returning it as an Adventure component to work with.
 
@@ -138,7 +137,7 @@ public static LiteralCommandNode<CommandSourceStack> componentArgument() {
 <FullWidthVideo src={ComponentMp4}/>
 
 
-## doubleRange argument
+## Double Range argument
 The double range argument is another very niche argument. With it you can define a double, or a range/amount of doubles, which can act as a predicate for numbers. This
 could be used for an argument which kill all enemies in a specific range or for clearing items in a range of slots. As this argument is also rather technical, it is
 not used very often.
@@ -168,7 +167,7 @@ public static LiteralCommandNode<CommandSourceStack> doubleRange() {
 <FullWidthVideo src={DoubleRangeMp4}/>
 
 
-## entity argument
+## Entity Argument
 The entity argument has some strange behavior. If the executing sender is opped, they have access to not only players as valid arguments, but also entity selectors (like `@e` or `@r`).
 Though if the executing sender is not opped, they do not have access to entity selectors. Due to this mechanic, it is suggested to only use this argument if you are sure that
 the executing sender has operator permissions. This could be achieve with a `.requires(ctx -> ctx.getSender().isOp())` predicate on the command root.
@@ -203,7 +202,7 @@ If the executing player is opped:
 <FullWidthVideo src={EntityOppedMp4}/>
 
 
-## entities argument
+## Entities Argument
 Similar to the single entity argument, this argument also requires the executing sender to be opped in order to view useful suggestions.
 
 In contrast to the single entity argument, this multi entity argument accepts any amount of entities, with the minimum amount of entities being 1.
@@ -232,7 +231,7 @@ public static LiteralCommandNode<CommandSourceStack> entities() {
 <FullWidthVideo src={EntitiesMp4}/>
 
 
-## entityAnchor argument
+## Entity Anchor Argument
 The entity anchor argument has two valid inputs: `feet` and `eyes`. The resulting `LookAnchor` is mainly used for methods like `Player#lookAt(Position, LookAnchor)` or 
 `Player#lookAt(Entity, LookAnchor, LookAnchor)`.
 
@@ -257,7 +256,7 @@ public static LiteralCommandNode<CommandSourceStack> entityAnchorArgument() {
 <FullWidthVideo src={EntityAnchorMp4}/>
 
 
-## finePosition argument
+## Fine Position Argument
 The fine position argument works similarly to the block position argument, with the only difference being that it can accept decimal (precise) location input. The optional
 overload (`ArgumentTypes.finePosition(boolean centerIntegers)`), which defaults to false if not set, will center whole input, meaning 5 becomes 5.5, as that is the "middle"
 of a block. This only applies to X/Z. The y coordinate is untouched by this operation.
@@ -288,7 +287,7 @@ public static LiteralCommandNode<CommandSourceStack> finePositionArgument() {
 <FullWidthVideo src={FinePositionMp4}/>
 
 
-## gameMode argument
+## GameMode Argument
 The game mode argument works the same way as the first argument of the vanilla `/gamemode <gamemode>` command. It accepts any of the 4 valid game modes, returning
 a `GameMode` enum to use in code.
 
@@ -320,7 +319,7 @@ public static LiteralCommandNode<CommandSourceStack> gameModeArgument() {
 <FullWidthVideo src={GameModeMp4}/>
 
 
-## heightMap argument
+## HeightMap Argument
 Despite its complicated sounding name, the height map argument is, similar to the game mode argument, just another enum argument, consisting of the following, valid inputs:
 `motion_blocking`, `motion_blocking_no_leaves`, `ocean_floor`, and `world_surface`. It returns a `HeightMap` enum value, which I honest to god have no fucking idea what it
 can be used for. But it's there, so you might as well use it as a meme.
@@ -347,7 +346,7 @@ public static LiteralCommandNode<CommandSourceStack> heightMapArgument() {
 <FullWidthVideo src={HeightMapMp4}/>
 
 
-## integerRange argument
+## Integer Range Argument
 This argument works very similarly to the double range argument, with the only difference being that this argument only accepts integers.
 
 ### Example usage
@@ -383,7 +382,7 @@ private static int runIntegerRangeCommand(final CommandContext<CommandSourceStac
 <FullWidthVideo src={IntegerRangeMp4}/>
 
 
-## itemPredicate argument
+## Item Predicate Argument
 This argument allows for checking whether an item fits some predicate. It is useful for filtering out certain items based on some criteria.
 
 ### Example usage
@@ -408,7 +407,7 @@ public static LiteralCommandNode<CommandSourceStack> itemPredicateArgument() {
 <FullWidthVideo src={ItemPredicateMp4}/>
 
 
-## itemStack argument
+## ItemStack Argument
 The item stack argument is a way to retrieve an `ItemStack` following the same argument format as the vanilla `/give <player> <item> [<amount>]` command as its second argument.
 
 
@@ -441,7 +440,7 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
 <FullWidthVideo src={ItemStackMp4}/>
 
 
-## key argument
+## Adventure Key Argument
 The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a `net.kyori.adventure.key.Key` from the adventure library, which
 can be used at various other places in the Bukkit/Paper API.
 
@@ -467,7 +466,7 @@ public static LiteralCommandNode<CommandSourceStack> keyArgument() {
 <FullWidthVideo src={KeyMp4}/>
 
 
-## namedColor argument
+## Named Color Argument
 This argument provides the user with the ability to select between the 16 build-in "named" text colors. This argument returns a `net.kyori.adventure.text.format.NamedtextColor` that
 you can use for styling components.
 
@@ -494,7 +493,7 @@ public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
 <FullWidthVideo src={NamedColorMp4}/>
 
 
-## namespacedKey argument
+## Bukkit NamespacedKey Argument
 Similar to the **Key** argument, this argument allows the user to provide any artificial (namespaced) key. The difference is that the return value of this argument is instead
 `org.bukkit.NamespacedKey`, which makes it particularly useful when dealing with Bukkit API.
 
@@ -519,7 +518,7 @@ public static LiteralCommandNode<CommandSourceStack> namespacedKeyArgument() {
 <FullWidthVideo src={NamespacedKeyMp4}/>
 
 
-## objectiveCriteria argument
+## Objective Criteria Argument
 This argument has wide usage when dealing with scoreboard objectives and scores. You can retrieve the argument value as a `org.bukkit.scoreboard.Criteria` object,
 which can be used with Scoreboard objects.
 
@@ -545,41 +544,41 @@ public static LiteralCommandNode<CommandSourceStack> objectiveCriteriaArgument()
 <FullWidthVideo src={ObjectiveCriteriaMp4}/>
 
 
-## player argument
+## Player Argument
 
 
-## players argument
+## Players Argument
 
 
-## playerProfiles argument
+## Player Profiles Argument
 
 
-## resource argument
+## Resource Argument
 
 
-## resourceKey argument
+## Resource Key Argument
 
 
-## style argument
+## Adventure Style Argument
 
 
-## signedMessage argument
+## Signed Message Argument
 
 
-## scoreboardDisplaySlot argument
+## Scoreboard Display Slot Argument
 
 
-## time argument
+## Time Argument
 
 
-## templateMirror argument
+## Template Mirror Argument
 
 
-## templateRotation argument
+## Template Rotation Argument
 
 
-## uuid argument
+## UUID Argument
 
 
-## world argument
+## World Argument
 

@@ -1,21 +1,23 @@
 ---
-slug: /dev/command-api/arguments-and-literals
+slug: /dev/command-api/arguments/arguments-and-literals
 description: An extensive guide to commands arguments and literals
 ---
 
-import ValidFloatInput from "./assets/in-game/valid-float.png"
-import SmallFloatInput from "./assets/in-game/small-float.png"
-import BigFloatInput from "./assets/in-game/big-float.png"
-import StringArguments from "./assets/in-game/string-arguments.gif"
+import ValidFloatInput from "./assets/valid-float.png"
+import SmallFloatInput from "./assets/small-float.png"
+import BigFloatInput from "./assets/big-float.png"
+import StringArguments from "./assets/string-arguments.gif"
 
 # Arguments and Literals
 
 :::note
 
-In the previous site we have looked at the structure of Brigadier commands and how to build up a command tree. If you haven't looked at that site yet, we really recommend doing that
-before reading about arguments and literals. You can check out that site [by clicking here](./command-tree)
+In the command-tree site we have looked at the structure of Brigadier commands and how to build up a command tree. If you haven't looked at that site yet, we really recommend doing
+that before reading about arguments and literals.
 
 :::
+
+## Introduction
 
 Each `.then(...)` method of a `LiteralArgumentBuilder<CommandSourceStack>` takes in an abstract `ArgumentBuilder<CommandSourceStack, ?>` object. That abstract ArgumentBuilder
 has two implementations: `RequiredArgumentBuilder` and `LiteralArgumentBuilder`. When coding with Brigadier, we create these objects by running either `Commands.literal(String)`

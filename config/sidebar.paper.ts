@@ -132,13 +132,34 @@ const paper: SidebarsConfig = {
               label: "Brigadier Command API",
               collapsed: true,
               items: [
-                "dev/api/command-api/introduction",
-                "dev/api/command-api/comparison",
-                "dev/api/command-api/command-tree",
-                "dev/api/command-api/arguments-and-literals",
-                "dev/api/command-api/command-executors",
-                "dev/api/command-api/registering",
-                "dev/api/command-api/minecraft-arguments",
+                {
+                  type: "category",
+                  label: "Basics",
+                  collapsed: false,
+                  items: [
+                    "dev/api/command-api/basics/introduction",
+                    "dev/api/command-api/basics/command-tree",
+                    "dev/api/command-api/basics/command-executors",
+                    "dev/api/command-api/basics/command-registration",
+                  ]
+                },
+                {
+                  type: "category",
+                  label: "Arguments",
+                  collapsed: true,
+                  items: [
+                    "dev/api/command-api/arguments/arguments-and-literals",
+                    "dev/api/command-api/arguments/minecraft-arguments"
+                  ]
+                },
+                {
+                  type: "category",
+                  label: "Misc",
+                  collapsed: true,
+                  items: [
+                    "dev/api/command-api/misc/comparison-bukkit-brigadier"
+                  ]
+                },
               ],
             },
             {

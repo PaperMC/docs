@@ -1,6 +1,7 @@
 ---
 slug: /security
 description: An explanation of how to secure your servers.
+targetVersion: 1.21
 ---
 
 # Securing Your Servers

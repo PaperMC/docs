@@ -89,4 +89,4 @@ The default value shown may not be set for the property but will only be used by
 #### velocity.strictErrorHandling
 
 - **default**: `true`
-- **description**: Whether the client should disconnect on packet errors. Temporarily added in MC 1.20.5 to help modded servers transition to this change.
+- **description**: Whether the client should disconnect on packet errors. Temporarily added in MC 1.20.5 and removed in 1.21.2 to help modded servers transition to this change.

@@ -135,10 +135,11 @@ const paper: SidebarsConfig = {
                 {
                   type: "category",
                   label: "Basics",
-                  collapsed: false,
+                  collapsed: true,
                   items: [
                     "dev/api/command-api/basics/introduction",
                     "dev/api/command-api/basics/command-tree",
+                    "dev/api/command-api/basics/arguments-and-literals",
                     "dev/api/command-api/basics/command-executors",
                     "dev/api/command-api/basics/command-registration",
                   ]
@@ -148,8 +149,13 @@ const paper: SidebarsConfig = {
                   label: "Arguments",
                   collapsed: true,
                   items: [
-                    "dev/api/command-api/arguments/arguments-and-literals",
-                    "dev/api/command-api/arguments/minecraft-arguments"
+                    "dev/api/command-api/arguments/minecraft-arguments",
+                    "dev/api/command-api/arguments/location-arguments",
+                    "dev/api/command-api/arguments/entity-player-arguments",                    
+                    "dev/api/command-api/arguments/registry-arguments",
+                    "dev/api/command-api/arguments/enum-value-arguments",                    
+                    "dev/api/command-api/arguments/predicate-arguments",
+                    "dev/api/command-api/arguments/adventure-arguments",
                   ]
                 },
                 {

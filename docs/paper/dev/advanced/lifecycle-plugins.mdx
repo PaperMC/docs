@@ -1,28 +1,25 @@
 ---
-slug: /dev/getting-started/paper-plugins
-description: A development guide for how to write Paper-specific plugins.
+slug: /dev/advanced/lifecycle-plugins
+description: A development guide for how to write lifecycle plugins.
 ---
 
-# Paper Plugins (Experimental)
+# Lifecycle Plugins
 
-Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to
-expand the field of what the Paper API is able to introduce.
-
-:::danger[Experimental]
-
-This is experimental and may be subject to change.
-
-:::
+## What is it used for?
+Lifecycle plugins, as the name suggests, allow developers to have more control over their plugins lifecycle.
+This is required to take advantage of some of the more modern concepts introduced by Mojang, such as datapacks.
+Lifecycle plugins allow us to do just that by defining a new way to load plugin resources before the server
+has started in form of [bootstrappers](#bootstrapper).
 
 - [Bootstrapper](#bootstrapper)
 - [Loader](#loaders)
 - [Differences](#differences)
 
 ## How do I use them?
-Similarly to Bukkit plugins, you have to introduce a `paper-plugin.yml` file into your JAR resources folder.
+Similarly to traditional paper plugins, you have to introduce a `paper-plugin.yml` file into your JAR resources folder.
 This will not act as a drop-in replacement for `plugin.yml`, as some things, as outlined in this guide, need to be declared differently.
 
-It should be noted that you still have the ability to include both `paper-plugin.yml` and `plugin.yml` in the same JAR.
+It should be noted that you still have the ability to include both `paper-plugin.yml` and `plugin.yml` in the same JAR, which can be useful for compatibility with older versions of Paper.
 
 Here is an example configuration:
 <VersionFormattedCode language={"yaml"}>
@@ -39,7 +36,7 @@ loader: io.papermc.testplugin.TestPluginLoader
 
 ### Dependency declaration
 
-Paper plugins change how to declare dependencies in your `paper-plugin.yml`:
+Lifecycle plugins change how to declare dependencies in your `paper-plugin.yml`:
 
 ```yml
 dependencies:
@@ -60,7 +57,7 @@ dependencies:
       join-classpath: false
 ```
 
-With Paper plugins, dependencies are split into two sections:
+With lifecycle plugins, dependencies are split into two sections:
 - `bootstrap` - These are dependencies that you will be using in the [bootstrap](#bootstrapper).
 - `server` - These are dependencies that are used for the core functionality of your plugin, whilst the server is running.
 
@@ -103,13 +100,8 @@ SuperDuperTacoParty:
   join-classpath: true
 ```
 
-## What is it used for?
-Paper plugins lay down the framework for some future API. Our goals are to open more modern API that better aligns
-with Vanilla. Paper plugins allow us to do just that by making a new way to load plugin resources before the server
-has started by using [bootstrappers](#bootstrapper).
-
 ## Bootstrapper
-Paper plugins are able to identify their own bootstrapper by implementing
+Lifecycle plugins are able to identify their own bootstrapper by implementing
 <Javadoc name={"io.papermc.paper.plugin.bootstrap.PluginBootstrap"}>`PluginBootstrap`</Javadoc>
 and adding the class of your implementation to the bootstrapper field in the `paper-plugin.yml`.
 ```java title="TestPluginBootstrap.java"
@@ -131,7 +123,7 @@ A bootstrapper also allows you to change the way your plugin is initialized, all
 Currently, bootstrappers do not offer much new API and are highly experimental. This may be subject to change once more API is introduced.
 
 ## Loaders
-Paper plugins are able to identify their own plugin loader by implementing
+Lifecycle plugins are able to identify their own plugin loader by implementing
 <Javadoc name={"io.papermc.paper.plugin.loader.PluginLoader"}>`PluginLoader`</Javadoc>
 and adding the class of your implementation to the loader field in the `paper-plugin.yml`.
 
@@ -159,40 +151,40 @@ Currently, you are able to add two different library types:
 ## Differences
 
 ### Bukkit serialization system
-Paper plugins still support the serialization system (`org.bukkit.configuration.serialization`) that Bukkit uses. However, custom classes will not be
+Lifecycle plugins still support the serialization system (`org.bukkit.configuration.serialization`) that Bukkit uses. However, custom classes will not be
 automatically registered for serialization. In order to use <Javadoc name={"org.bukkit.configuration.ConfigurationSection#getObject(java.lang.String,java.lang.Class)"}>`ConfigurationSection#getObject`</Javadoc>,
 you **must** call <Javadoc name={"org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class)"}>`ConfigurationSerialization#registerClass(Class)`</Javadoc>
 before you attempt to fetch objects from configurations.
 
 ### Classloading isolation
-Paper plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This
-helps prevent Paper plugins from accidentally accessing each other's dependencies, and in general helps ensure that
+Lifecycle plugins are not able to access each other unless given explicit access by depending on another plugin, etc. This
+helps prevent Lifecycle plugins from accidentally accessing each other's dependencies, and in general helps ensure that
 plugins are only able to access what they explicitly depend on.
 
-Paper plugins have the ability to bypass this, being able to access OTHER plugins' classloaders by adding a `join-classpath` option to their `paper-plugin.yml`.
+Lifecycle plugins have the ability to bypass this, being able to access OTHER plugins' classloaders by adding a `join-classpath` option to their `paper-plugin.yml`.
 
 ```yml
 Plugin:
   join-classpath: true # Means you have access to their classpath
 ```
 
-Note, other Paper plugins will still be unable to access your classloader.
+Note, other Lifecycle plugins will still be unable to access your classloader.
 
 ### Load order logic split
-In order to better take advantage of classloading isolation, Paper plugins do **not** use the `dependencies` field to determine load order.
+In order to better take advantage of classloading isolation, Lifecycle plugins do **not** use the `dependencies` field to determine load order.
 This was done for a variety of reasons, mostly to allow better control and allow plugins to properly share classloaders.
 
 See [declaring dependencies](#dependency-declaration) for more information on how to declare the load order of your plugin.
 
 ### Commands
-Paper plugins do not use the `commands` field to register commands. This means that you do not need to include all
+Lifecycle plugins do not use the `commands` field to register commands. This means that you do not need to include all
 of your commands in the `paper-plugin.yml` file. Instead, you can register commands using the
 [Brigadier Command API](../api/command-api/commands.mdx).
 
 ### Cyclic plugin loading
 
 Cyclic loading describes the phenomenon when a plugin loading causes a loop that eventually cycles back to the original plugin.
-Unlike Bukkit plugins, Paper plugins will not attempt to resolve cyclic loading issues.
+Unlike traditional paper plugins, lifecycle plugins will not attempt to resolve cyclic loading issues.
 
 ```mermaid
 graph LR;

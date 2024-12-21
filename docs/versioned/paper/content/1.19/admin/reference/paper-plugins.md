@@ -29,7 +29,7 @@ Paper plugins are added the same as Bukkit plugins, therefore, you can follow [t
 ### Cyclic Plugin Loading
 
 With the introduction of Paper plugins, Paper introduces a new plugin loader that fixes some odd issues.
-However, as a result, this now causes [cyclic loading](#cyclic-plugin-loading) between plugins to no longer be supported. 
+However, as a result, this now causes [cyclic loading](#cyclic-plugin-loading) between plugins to no longer be supported.
 
 ![Cyclic Loading](assets/cyclic-loading.png)
 
@@ -45,7 +45,7 @@ If you would like to still load these plugins, acknowledging that there may be u
 Failed to start the minecraft server
 ```
 
-It is up to plugin developers to resolve these circular loading issues, however, you are able to use the legacy plugin loader if you 
+It is up to plugin developers to resolve these circular loading issues, however, you are able to use the legacy plugin loader if you
 absolutely are unable to resolve this loading loop.
 
 

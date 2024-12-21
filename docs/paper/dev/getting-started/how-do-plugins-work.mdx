@@ -13,6 +13,11 @@ loaded from a `.jar` file.  Each plugin has a main class that is specified in th
 class must extend JavaPlugin, and is the entry point for the plugin and is where the plugin's lifecycle methods are
 defined.
 
+## Plugin lifecycle
+
+Plugins are loaded and unloaded at runtime. When a plugin is loaded, it is initialized and enabled. When a plugin is
+unloaded, it is disabled and finalized.
+
 :::warning
 
 We do not recommend writing code inside your main class's constructor as there are no guarantees about what
@@ -20,11 +25,6 @@ API is available at that point. Instead, you should use the `onLoad` method to i
 do not call your plugin's constructor directly. This will cause issues with your plugin.
 
 :::
-
-## Plugin lifecycle
-
-Plugins are loaded and unloaded at runtime. When a plugin is loaded, it is initialized and enabled. When a plugin is
-unloaded, it is disabled and finalized.
 
 ### Initialization
 

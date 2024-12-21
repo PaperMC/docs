@@ -4,7 +4,7 @@ slug: /adding-plugins
 description: Plugins are the most powerful way to extend the functionality of Paper beyond the configuration files.
 ---
 
-# Adding Plugins
+# Adding Plugins to your Paper Server
 
 Plugins are the most powerful way to extend the functionality of Paper beyond the configuration
 files. Functionality added by plugins can range from making milk restore hunger or dead bushes grow,
@@ -18,7 +18,7 @@ it is imperative that plugins only be installed from trusted sources. Be careful
 
 :::
 
-## Finding plugins
+## Finding Paper plugins for your server
 
 Before installing a plugin, you'll need to find what you want to install. The best place to find plugins is [Hangar](https://hangar.papermc.io), Paper's plugin repository, but you can also find many plugins
 on [SpigotMC](https://www.spigotmc.org/resources/),
@@ -35,7 +35,7 @@ mention Paper compatibility. It'll still work.
 
 :::
 
-## Installing plugins
+## Installing plugins on your Paper server
 
 1. Once you've found the plugin you'd like to install, download it. Ensure the file you have
    downloaded ends in `.jar`. Some plugins also distribute as `.zip` files, in which case you will

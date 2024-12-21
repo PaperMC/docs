@@ -4,7 +4,7 @@ slug: /dev/getting-started/paper-plugins
 
 # Paper Plugins
 
-Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to 
+Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to
 expand the field of what the Paper API is able to introduce.
 
 :::info[Experimental]
@@ -38,7 +38,7 @@ loader: io.papermc.testplugin.TestPluginLoader
 
 Dependency declaration is specified a bit differently than Bukkit plugins, as you are
 able to define if a dependency is required during bootstrapping. This means that any bootstrapping
-logic for your dependencies will be run before yours is run. 
+logic for your dependencies will be run before yours is run.
 ```yml
 dependencies:
   - name: DependencyName
@@ -47,14 +47,14 @@ dependencies:
 ```
 
 If a dependency is ``required`` it must be installed on the server or your plugin will fail to load. If marked otherwise, it will
-ignore if the dependency isn't found. 
+ignore if the dependency isn't found.
 Otherwise, your plugin will be loaded fine, in the same fashion as a plugin that is a ``soft-depend`` in a Bukkit plugin.yml
 
 If a dependency is marked as ``bootstrap``, this indicates that this dependency is required during bootstrapping, which currently does not serve a purpose.
 
 :::note[Plugin Loading Order]
 
-Note that [unlike Bukkit plugins](#load-order-logic-split), dependencies are independent of the plugin load order. 
+Note that [unlike Bukkit plugins](#load-order-logic-split), dependencies are independent of the plugin load order.
 This means that although declaring a dependency will give you access to its classes, if you require it to be initialised before your plugin is loaded, see how to [declare load order](#load-order-declaration).
 :::
 
@@ -68,17 +68,17 @@ you must set the ``bootstrap`` field to ``true``.
 :::note[Cyclic Loading]
 
 Note that in certain cases plugins may be able to introduce cyclic loading loops, which will prevent the server from starting.
-Please read the [cyclic loading guide](docs/paper/admin/reference/paper-plugins.md#cyclic-plugin-loading) for more information.
+Please read the [cyclic loading guide](docs/paper/admin/reference/lifecycle-plugins.md#cyclic-plugin-loading) for more information.
 :::
 
 #### load-before
-You are able to define a list of plugins that your plugin should load before. 
+You are able to define a list of plugins that your plugin should load before.
 ```yml
 load-before:
   - name: PluginName
     bootstrap: false
 ```
-This means that your plugin will load **before** ``PluginName`` is loaded. 
+This means that your plugin will load **before** ``PluginName`` is loaded.
 
 #### load-after
 You are then able to define a list of plugins that your plugin should load after.
@@ -104,14 +104,14 @@ public class TestPluginBootstrap implements PluginBootstrap {
 
     @Override
     public void bootstrap(@NotNull PluginProviderContext context) {
-        
+
     }
 
     @Override
     public @NotNull JavaPlugin createPlugin(@NotNull PluginProviderContext context) {
         return new TestPlugin("My custom parameter");
     }
-    
+
 }
 ```
 A Bootstrapper allows you to also override how your plugin is initiated, allowing you to pass values into your plugin constructor.
@@ -121,7 +121,7 @@ Currently, bootstrappers do not offer much new API, and are highly experimental.
 Paper plugins are able to identify their own plugin loader by implementing ``io.papermc.paper.plugin.loader.PluginLoader`` and adding
 the class of your implementation to the loader field in the ``paper-plugin.yml``.
 
-The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into. 
+The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into.
 This, as of right now, only applies to creating the expected classpath for the plugin, e.g. supplying external libraries to the plugin.
 ```java
 public class TestPluginLoader implements PluginLoader {
@@ -142,7 +142,7 @@ public class TestPluginLoader implements PluginLoader {
 Currently, you are able to add two different library types, ``JarLibrary``, and ``MavenLibraryResolver``.
 
 
-## Differences 
+## Differences
 
 ### Bukkit Serialization System
 Paper plugins do not support the serialization system (``org.bukkit.configuration.serialization``) that Bukkit uses. Your classes will not be able to be
@@ -153,7 +153,7 @@ Paper plugins have isolated classloaders, meaning that relocating dependencies w
 by depending on another plugin, etc. This prevents plugins from accidentally accessing your dependencies, and in general helps ensure that plugins are only able to access your plugin
 if they explicitly say that they're depending on it.
 
-Paper plugins have the ability to bypass this, being able to access OTHER plugins classloaders by adding 
+Paper plugins have the ability to bypass this, being able to access OTHER plugins classloaders by adding
 ```yml
 has-open-classloader: true
 ```

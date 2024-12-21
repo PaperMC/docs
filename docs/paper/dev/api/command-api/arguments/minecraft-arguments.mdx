@@ -1,46 +1,910 @@
 ---
 slug: /dev/command-api/arguments/minecraft-arguments
 description: Everything regarding the arguments retrievable from the ArgumentTypes class
-toc_min_heading_level: 4
-toc_max_heading_level: 4
+toc_min_heading_level: 2
+toc_max_heading_level: 2
 ---
 
-# Minecraft Arguments
+import BlockPositionMp4 from "./assets/vanilla-arguments/blockposition.mp4"
+import BlockStateMp4 from "./assets/vanilla-arguments/blockstate.mp4"
+import ComponentMp4 from "./assets/vanilla-arguments/component.mp4"
+import DoubleRangeMp4 from "./assets/vanilla-arguments/doublerange.mp4"
+import EntityOppedMp4 from "./assets/vanilla-arguments/entity-opped.mp4"
+import EntityUnoppedMp4 from "./assets/vanilla-arguments/entity-unopped.mp4"
+import EntitiesMp4 from "./assets/vanilla-arguments/entities.mp4"
+import EntityAnchorMp4 from "./assets/vanilla-arguments/entityanchor.mp4"
+import FinePositionMp4 from "./assets/vanilla-arguments/fineposition.mp4"
+import GameModeMp4 from "./assets/vanilla-arguments/gamemode.mp4"
+import HeightMapMp4 from "./assets/vanilla-arguments/heightmap.mp4"
+import IntegerRangeMp4 from "./assets/vanilla-arguments/integerrange.mp4"
+import ItemPredicateMp4 from "./assets/vanilla-arguments/itempredicate.mp4"
+import ItemStackMp4 from "./assets/vanilla-arguments/itemstack.mp4"
+import KeyMp4   from "./assets/vanilla-arguments/key.mp4"
+import NamedColorMp4 from "./assets/vanilla-arguments/namedcolor.mp4"
+import NamespacedKeyMp4 from "./assets/vanilla-arguments/namespacedkey.mp4"
+import ObjectiveCriteriaMp4 from "./assets/vanilla-arguments/objectivecriteria.mp4"
+import PlayerMp4 from "./assets/vanilla-arguments/player.mp4"
+import PlayersMp4 from "./assets/vanilla-arguments/players.mp4"
+import PlayerProfilesMp4 from "./assets/vanilla-arguments/playerprofiles.mp4"
+import StyleMp4 from "./assets/vanilla-arguments/style.mp4"
+import SignedMessageMp4 from "./assets/vanilla-arguments/signedmessage.mp4"
+import ScoreboardDisplaySlotMp4 from "./assets/vanilla-arguments/scoreboarddisplayslot.mp4"
+import TimeMp4 from "./assets/vanilla-arguments/time.mp4"
+import TemplateMirrorMp4 from "./assets/vanilla-arguments/templatemirror.mp4"
+import TemplateRotationMp4 from "./assets/vanilla-arguments/templaterotation.mp4"
+import UuidMp4 from "./assets/vanilla-arguments/uuid.mp4"
+import WorldMp4 from "./assets/vanilla-arguments/world.mp4"
+
+# Minecraft arguments
 The [Arguments and Literals](./arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
-in a static context using the `ArgumentTypes` class. We will go over all of those in this section.
+in a static context using the `ArgumentTypes` class. We will go over all of those here.
 
 ## Quick overview
-A quick overview of all possible arguments is defined here:
+You might as well use this a quick reference or a table of contents. The arguments are explained in more detail after this table:
 
-|               Method Name               |          Return Value          |                                       Quick Link                                       |
-|-----------------------------------------|--------------------------------|----------------------------------------------------------------------------------------|
-| `blockPosition()`                       | BlockPositionResolver          | [Block Position Argument](./location-arguments#block-position-argument)                |
-| `blockState()`                          | BlockState                     | [Block State Argument](./bukkit-arguments#block-state-argument)                        |
-| `component()`                           | Component (Kyori)              | [Adventure Component Argument](./adventure-arguments#adventure-component-argument)     |
-| `doubleRange()`                         | DoubleRangeProvider            | [Double Range argument](./predicate-arguments#double-range-argument)                   |
-| `entity()`                              | EntitySelectorArgumentResolver | [Entity Argument](./entity-player-arguments#entity-argument)                           |
-| `entities()`                            | EntitySelectorArgumentResolver | [Entities Argument](./entity-player-arguments#entities-argument)                       |
-| `entityAnchor()`                        | LookAnchor                     | [Entity Anchor Argument](./enum-arguments#entity-anchor-argument)                      |
-| `finePosition(boolean centerIntegers)`  | FinePositionResolver           | [Fine Position Argument](./location-arguments#fine-position-argument)                  |
-| `gameMode()`                            | GameMode                       | [GameMode Argument](./enum-arguments#gamemode-argument)                                |
-| `heightMap()`                           | HeightMap                      | [HeightMap Argument](./enum-arguments#heightmap-argument)                              |
-| `integerRange()`                        | IntegerRangeProvider           | [Integer Range Argument](./predicate-arguments#integer-range-argument)                 |
-| `itemPredicate()`                       | ItemStackPredicate             | [Item Predicate Argument](./predicate-arguments#item-predicate-argument)               |
-| `itemStack()`                           | ItemStack                      | [ItemStack Argument](./bukkit-arguments#itemstack-argument)                            |
-| `key()`                                 | Key (Kyori)                    | [Adventure Key Argument](./adventure-arguments#adventure-key-argument)                 |
-| `namedColor()`                          | NamedTextColor (Kyori)         | [Named Color Argument](./adventure-arguments#named-color-argument)                     |
-| `namespacedKey()`                       | NamespacedKey (Bukkit)         | [Bukkit NamespacedKey Argument](./bukkit-arguments#bukkit-namespacedkey-argument)      |
-| `objectiveCriteria()`                   | Criteria                       | [Objective Criteria Argument](./enum-arguments#objective-criteria-argument)            |
-| `player()`                              | PlayerSelectorArgumentResolver | [Player Argument](./entity-player-arguments#player-argument)                           |
-| `players()`                             | PlayerSelectorArgumentResolver | [Players Argument](./entity-player-arguments#players-argument)                         |
-| `playerProfiles()`                      | PlayerProfileListResolver      | [Player Profiles Argument](./entity-player-arguments#player-profiles-argument)         |
-| `resource(RegistryKey)`                 | (Depends on RegistryKey)       | [Resource Argument](./registry-arguments#resource-argument)                            |
-| `resourceKey(RegistryKey)`              | (Depends on RegistryKey)       | [Resource Key Argument](./registry-arguments#resource-key-argument)                    |
-| `style()`                               | Style (Kyori)                  | [Adventure Style Argument](./adventure-arguments#adventure-style-argument)             |
-| `signedMessage()`                       | SignedMessageResolver          | [Signed Message Argument](./adventure-arguments#signed-message-argument)               |
-| `scoreboardDisplaySlot()`               | DisplaySlot                    | [Scoreboard Display Slot Argument](./enum-arguments#scoreboard-display-slot-argument)  |
-| `time(float mintime)`                   | Integer                        | [Time Argument](./bukkit-arguments#time-argument)                                      |
-| `templateMirror()`                      | Mirror                         | [Template Mirror Argument](./enum-arguments#template-mirror-argument)                  |
-| `templateRotation()`                    | StructureRotation              | [Template Rotation Argument](./enum-arguments#template-rotation-argument)              |
-| `uuid()`                                | UUID                           | [UUID Argument](./bukkit-arguments#uuid-argument)                                      |
-| `world()`                               | World                          | [World Argument](./location-arguments#world-argument)                                  |
+|               Method Name               |          Return Value          |                               Quick Link                               |
+|-----------------------------------------|--------------------------------|------------------------------------------------------------------------|
+| `blockPosition()`                       | BlockPositionResolver          | [Block Position Argument](#block-position-argument)                    |
+| `blockState()`                          | BlockState                     | [Block State Argument](#block-state-argument)                          |
+| `component()`                           | Component (Kyori)              | [Adventure Component Argument](#adventure-component-argument)          |
+| `doubleRange()`                         | DoubleRangeProvider            | [Double Range argument](#double-range-argument)                        |
+| `entity()`                              | EntitySelectorArgumentResolver | [Entity Argument](#entity-argument)                                    |
+| `entities()`                            | EntitySelectorArgumentResolver | [Entities Argument](#entities-argument)                                |
+| `entityAnchor()`                        | LookAnchor                     | [Entity Anchor Argument](#entity-anchor-argument)                      |
+| `finePosition(boolean centerIntegers)`  | FinePositionResolver           | [Fine Position Argument](#fine-position-argument)                      |
+| `gameMode()`                            | GameMode                       | [GameMode Argument](#gamemode-argument)                                |
+| `heightMap()`                           | HeightMap                      | [HeightMap Argument](#heightmap-argument)                              |
+| `integerRange()`                        | IntegerRangeProvider           | [Integer Range Argument](#integer-range-argument)                      |
+| `itemPredicate()`                       | ItemStackPredicate             | [Item Predicate Argument](#item-predicate-argument)                    |
+| `itemStack()`                           | ItemStack                      | [ItemStack Argument](#itemstack-argument)                              |
+| `key()`                                 | Key (Kyori)                    | [Adventure Key Argument](#adventure-key-argument)                      |
+| `namedColor()`                          | NamedTextColor (Kyori)         | [Named Color Argument](#named-color-argument)                          |
+| `namespacedKey()`                       | NamespacedKey (Bukkit)         | [Bukkit NamespacedKey Argument](#bukkit-namespacedkey-argument)        |
+| `objectiveCriteria()`                   | Criteria                       | [Objective Criteria Argument](#objective-criteria-argument)            |
+| `player()`                              | PlayerSelectorArgumentResolver | [Player Argument](#player-argument)                                    |
+| `players()`                             | PlayerSelectorArgumentResolver | [Players Argument](#players-argument)                                  |
+| `playerProfiles()`                      | PlayerProfileListResolver      | [Player Profiles Argument](#player-profiles-argument)                  |
+| `resource(RegistryKey)`                 | (Depends on RegistryKey)       | [Resource Argument](#resource-argument)                                |
+| `resourceKey(RegistryKey)`              | (Depends on RegistryKey)       | [Resource Key Argument](#resource-key-argument)                        |
+| `style()`                               | Style (Kyori)                  | [Adventure Style Argument](#adventure-style-argument)                  |
+| `signedMessage()`                       | SignedMessageResolver          | [Signed Message Argument](#signed-message-argument)                    |
+| `scoreboardDisplaySlot()`               | DisplaySlot                    | [Scoreboard Display Slot Argument](#scoreboard-display-slot-argument)  |
+| `time()`                                | Integer                        | [Time Argument](#time-argument)                                        |
+| `templateMirror()`                      | Mirror                         | [Template Mirror Argument](#template-mirror-argument)                  |
+| `templateRotation()`                    | StructureRotation              | [Template Rotation Argument](#template-rotation-argument)              |
+| `uuid()`                                | UUID                           | [UUID Argument](#uuid-argument)                                        |
+| `world()`                               | World                          | [World Argument](#world-argument)                                      |
+
+
+## Block Position Argument
+The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` vanilla command.
+In order to retrieve the BlockPosition variable from the `BlockPositionResolver`, we have to resolve it using the command source.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
+    return Commands.literal("blockpositionargument")
+        .then(Commands.argument("arg", ArgumentTypes.blockPosition())
+            .executes(ctx -> {
+                final BlockPositionResolver blockPositionResolver = ctx.getArgument("arg", BlockPositionResolver.class);
+                final BlockPosition blockPosition = blockPositionResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendMessage("Put in " + blockPosition.x() + " " + blockPosition.y() + " " + blockPosition.z());
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={BlockPositionMp4}/>
+
+## Block State Argument
+The block state argument is a very useful argument for getting use input on an exact block type and its data. It is particularly useful for commands that modify blocks
+in some way, which requires precise input.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
+    return Commands.literal("blockstateargument")
+        .then(Commands.argument("arg", ArgumentTypes.blockState())
+            .executes(ctx -> {
+                final BlockState blockState = ctx.getArgument("arg", BlockState.class);
+                
+                ctx.getSource().getSender().sendMessage("You specified a " + blockState.getType() + "!");
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={BlockStateMp4}/>
+
+
+## Adventure Component Argument
+The component argument is a very complicated command for the user, which is why it should not be used for usual user input. It follows the same format as the `/tellraw <player> <msg>`
+command for its second argument. It accepts a text component as its json representation, returning it as an Adventure component to work with.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> componentArgument() {
+    return Commands.literal("componentargument")
+        .then(Commands.argument("arg", ArgumentTypes.component())
+            .executes(ctx -> {
+                final Component component = ctx.getArgument("arg", Component.class);
+
+                ctx.getSource().getSender().sendRichMessage(
+                    "Your message: <input>",
+                    Placeholder.component("input", component)
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ComponentMp4}/>
+
+
+## Double Range argument
+The double range argument is another very niche argument. With it you can define a double, or a range/amount of doubles, which can act as a predicate for numbers. This
+could be used for an argument which kill all enemies in a specific range or for clearing items in a range of slots. As this argument is also rather technical, it is
+not used very often.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> doubleRange() {
+    return Commands.literal("doublerange")
+        .then(Commands.argument("arg", ArgumentTypes.doubleRange())
+            .executes(ctx -> {
+                final DoubleRangeProvider doubleRangeProvider = ctx.getArgument("arg", DoubleRangeProvider.class);
+                final CommandSender sender = ctx.getSource().getSender();
+
+                for (int i = 0; i < 5; i++) {
+                    sender.sendRichMessage("Is <index> in bounds? <result>",
+                        Placeholder.unparsed("index", Integer.toString(i)),
+                        Placeholder.unparsed("result", Boolean.toString(doubleRangeProvider.range().test((double) i)))
+                    );
+                }
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={DoubleRangeMp4}/>
+
+
+## Entity Argument
+The entity argument has some strange behavior. If the executing sender is opped, they have access to not only players as valid arguments, but also entity selectors (like `@e` or `@r`).
+Though if the executing sender is not opped, they do not have access to entity selectors. Due to this mechanic, it is suggested to only use this argument if you are sure that
+the executing sender has operator permissions. This could be achieve with a `.requires(ctx -> ctx.getSender().isOp())` predicate on the command root.
+
+This argument, after resolving its `EntitySelectorArgumentResolver` returns a list of exactly one, no more and no less, Entities. It is safe to call `List#getFirst()` to retrieve that
+entity. 
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entity() {
+    return Commands.literal("entityarg")
+        .requires(ctx -> ctx.getSender().isOp())
+        .then(Commands.argument("arg", ArgumentTypes.entity())
+            .executes(ctx -> {
+                final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
+                final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Found a <entitytype>",
+                    Placeholder.unparsed("entitytype", entities.getFirst().getType().name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+If the executing player is not opped:
+<FullWidthVideo src={EntityUnoppedMp4}/>
+
+If the executing player is opped:
+<FullWidthVideo src={EntityOppedMp4}/>
+
+
+## Entities Argument
+Similar to the single entity argument, this argument also requires the executing sender to be opped in order to view useful suggestions.
+
+In contrast to the single entity argument, this multi entity argument accepts any amount of entities, with the minimum amount of entities being 1.
+They can, once again, be resolved using `EntitySelectorArgumentResolver#resolve(CommandSourceStack)`, which returns a `List<Entity>`.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entities() {
+    return Commands.literal("entitiesarg")
+        .requires(ctx -> ctx.getSender().isOp())
+        .then(Commands.argument("arg", ArgumentTypes.entities())
+            .executes(ctx -> {
+                final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
+                final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Found the following entities: <entitytypes>",
+                    Placeholder.unparsed("entitytypes", String.join(", ", entities.stream().map(Entity::getType).map(EntityType::name).toList()))
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={EntitiesMp4}/>
+
+
+## Entity Anchor Argument
+The entity anchor argument has two valid inputs: `feet` and `eyes`. The resulting `LookAnchor` is mainly used for methods like `Player#lookAt(Position, LookAnchor)` or 
+`Player#lookAt(Entity, LookAnchor, LookAnchor)`.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entityAnchorArgument() {
+    return Commands.literal("entityanchor")
+        .then(Commands.argument("arg", ArgumentTypes.entityAnchor())
+            .executes(ctx -> {
+                final LookAnchor lookAnchor = ctx.getArgument("arg", LookAnchor.class);
+
+                ctx.getSource().getSender().sendRichMessage("You chose <aqua><anchor></aqua>!",
+                    Placeholder.unparsed("anchor", lookAnchor.name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={EntityAnchorMp4}/>
+
+
+## Fine Position Argument
+The fine position argument works similarly to the block position argument, with the only difference being that it can accept decimal (precise) location input. The optional
+overload (`ArgumentTypes.finePosition(boolean centerIntegers)`), which defaults to false if not set, will center whole input, meaning 5 becomes 5.5, as that is the "middle"
+of a block. This only applies to X/Z. The y coordinate is untouched by this operation.
+
+This argument returns a `FinePositionResolver`. You can resolve that by running `FinePositionResolver#resolve(CommandSourceStack)` to get the resulting `FinePosition`.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> finePositionArgument() {
+    return Commands.literal("fineposition")
+        .then(Commands.argument("arg", ArgumentTypes.finePosition(true))
+            .executes(ctx -> {
+                final FinePositionResolver resolver = ctx.getArgument("arg", FinePositionResolver.class);
+                final FinePosition finePosition = resolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Position: <red><x></red> <green><y></green> <blue><z></blue>",
+                    Placeholder.unparsed("x", Double.toString(finePosition.x())),
+                    Placeholder.unparsed("y", Double.toString(finePosition.y())),
+                    Placeholder.unparsed("z", Double.toString(finePosition.z()))
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={FinePositionMp4}/>
+
+
+## GameMode Argument
+The game mode argument works the same way as the first argument of the vanilla `/gamemode <gamemode>` command. It accepts any of the 4 valid game modes, returning
+a `GameMode` enum to use in code.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> gameModeArgument() {
+    return Commands.literal("gamemodearg")
+        .then(Commands.argument("arg", ArgumentTypes.gameMode())
+            .executes(ctx -> {
+                final GameMode gamemode = ctx.getArgument("arg", GameMode.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.setGameMode(gamemode);
+                    player.sendRichMessage("Your gamemode has been set to <red><gamemode></red>!",
+                        Placeholder.component("gamemode", Component.translatable(gamemode.translationKey()))
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("This command requires a player!");
+                }
+                
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={GameModeMp4}/>
+
+
+## HeightMap Argument
+Despite its complicated sounding name, the height map argument is, similar to the game mode argument, just another enum argument, consisting of the following, valid inputs:
+`motion_blocking`, `motion_blocking_no_leaves`, `ocean_floor`, and `world_surface`. It returns a `HeightMap` enum value, which is often used for declaring relative positioning
+for data packs or the `/execute positioned over <height_map>` command. E.g. `world_surface` would mean that the surface of the world.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> heightMapArgument() {
+    return Commands.literal("heightmap")
+        .then(Commands.argument("arg", ArgumentTypes.heightMap())
+            .executes(ctx -> {
+                final HeightMap heightMap = ctx.getArgument("arg", HeightMap.class);
+
+                ctx.getSource().getSender().sendRichMessage("You selected <gold><selection></gold>",
+                    Placeholder.unparsed("selection", heightMap.name())
+                );
+                
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={HeightMapMp4}/>
+
+
+## Integer Range Argument
+This argument works very similarly to the double range argument, with the only difference being that this argument only accepts integers.
+
+### Example usage
+```java title="MinecraftArguments.java"
+public static LiteralCommandNode<CommandSourceStack> integerRangeArgument() {
+    return Commands.literal("integerrange")
+        .then(Commands.argument("range", ArgumentTypes.integerRange())
+            .then(Commands.argument("tested_integer", IntegerArgumentType.integer())
+                .executes(MinecraftArguments::runIntegerRangeCommand)))
+        .build();
+}
+
+private static int runIntegerRangeCommand(final CommandContext<CommandSourceStack> ctx) {
+    final IntegerRangeProvider integerRangeProvider = ctx.getArgument("range", IntegerRangeProvider.class);
+    final int integerToTest = ctx.getArgument("tested_integer", int.class);
+
+    if (integerRangeProvider.range().contains(integerToTest)) {
+        ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <green>is</green> inside the specified range!",
+            Placeholder.unparsed("input", Integer.toString(integerToTest))
+        );
+    }
+    else {
+        ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <red>is not</red> inside the specified range!",
+            Placeholder.unparsed("input", Integer.toString(integerToTest))
+        );
+    }
+
+    return Command.SINGLE_SUCCESS;
+}
+```
+
+### In-game preview
+<FullWidthVideo src={IntegerRangeMp4}/>
+
+
+## Item Predicate Argument
+This argument allows for checking whether an item fits some predicate. It is useful for filtering out certain items based on some criteria.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> itemPredicateArgument() {
+    return Commands.literal("itempredicate")
+        .then(Commands.argument("predicate", ArgumentTypes.itemPredicate())
+            .executes(ctx -> {
+                final ItemStackPredicate predicate = ctx.getArgument("predicate", ItemStackPredicate.class);
+                final ItemStack defaultWoodenSword = ItemType.WOODEN_SWORD.createItemStack();
+
+                ctx.getSource().getSender().sendRichMessage("Is default wooden sword? <result>.",
+                    Placeholder.parsed("result", predicate.test(defaultWoodenSword) ? "<green>true" : "<red>false")
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ItemPredicateMp4}/>
+
+
+## ItemStack Argument
+The item stack argument is a way to retrieve an `ItemStack` following the same argument format as the vanilla `/give <player> <item> [<amount>]` command as its second argument.
+
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
+    return Commands.literal("itemstack")
+        .then(Commands.argument("stack", ArgumentTypes.itemStack())
+            .executes(ctx -> {
+                final ItemStack itemStack = ctx.getArgument("stack", ItemStack.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.getInventory().addItem(itemStack);
+                    ctx.getSource().getSender().sendRichMessage("<green>Successfully gave <player> a <item>",
+                        Placeholder.component("player", player.name()),
+                        Placeholder.component("item", Component.translatable(itemStack.translationKey()))
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("<red>This argument requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ItemStackMp4}/>
+
+
+## Adventure Key Argument
+The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a `net.kyori.adventure.key.Key` from the adventure library, which
+can be used at various other places in the Bukkit/Paper API.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> keyArgument() {
+    return Commands.literal("key")
+        .then(Commands.argument("key_input", ArgumentTypes.key())
+            .executes(ctx -> {
+                final Key key = ctx.getArgument("key_input", Key.class);
+
+                ctx.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
+                    Placeholder.unparsed("key", key.asString())
+                );                    
+                
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={KeyMp4}/>
+
+
+## Named Color Argument
+This argument provides the user with the ability to select between the 16 build-in "named" text colors. This argument returns a `net.kyori.adventure.text.format.NamedtextColor` that
+you can use for styling components.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
+    return Commands.literal("namedcolor")
+        .then(Commands.argument("color", ArgumentTypes.namedColor())
+            .then(Commands.argument("message", StringArgumentType.greedyString())
+                .executes(ctx -> {
+                    final NamedTextColor color = ctx.getArgument("color", NamedTextColor.class);
+                    final String msg = ctx.getArgument("message", String.class);
+
+                    ctx.getSource().getSender().sendMessage(
+                        Component.text(msg).color(color)
+                    );
+                    return Command.SINGLE_SUCCESS;
+                })))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={NamedColorMp4}/>
+
+
+## Bukkit NamespacedKey Argument
+Similar to the **Key** argument, this argument allows the user to provide any artificial (namespaced) key. The difference is that the return value of this argument is instead
+`org.bukkit.NamespacedKey`, which makes it particularly useful when dealing with Bukkit API.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> namespacedKeyArgument() {
+    return Commands.literal("namespacedkey")
+        .then(Commands.argument("key", ArgumentTypes.namespacedKey())
+            .executes(ctx -> {
+                final NamespacedKey key = ctx.getArgument("key", NamespacedKey.class);
+
+                ctx.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
+                    Placeholder.unparsed("key", key.toString())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={NamespacedKeyMp4}/>
+
+
+## Objective Criteria Argument
+This argument has wide usage when dealing with scoreboard objectives and scores. You can retrieve the argument value as a `org.bukkit.scoreboard.Criteria` object,
+which can be used with Scoreboard objects.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> objectiveCriteriaArgument() {
+    return Commands.literal("objectivecriteria")
+        .then(Commands.argument("criteria", ArgumentTypes.objectiveCriteria())
+            .executes(ctx -> {
+                final Criteria criteria = ctx.getArgument("criteria", Criteria.class);
+
+                ctx.getSource().getSender().sendRichMessage("Default render type for <criteria>: <rendertype>",
+                    Placeholder.unparsed("criteria", criteria.getName()),
+                    Placeholder.unparsed("rendertype", criteria.getDefaultRenderType().name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ObjectiveCriteriaMp4}/>
+
+
+## Player Argument
+The player argument allows you to be given some player input. Similar as with the entity argument, this argument also only provides selectors if the executing player is opped.
+Running `ctx.getArgument` return a `PlayerSelectorArgumentResolver` for player arguments. For the "one player" argument (this one), you can safely get the target player by running
+`PlayerSelectorArgumentResolver.resolve(ctx.getSource()).getFirst()`, which returns a Bukkit `Player` object.
+
+### Example usage
+This command yeets the targeted player into the air!
+```java
+public static LiteralCommandNode<CommandSourceStack> playerArgument() {
+    return Commands.literal("player")
+        .then(Commands.argument("target", ArgumentTypes.player())
+            .executes(ctx -> {
+                final PlayerSelectorArgumentResolver targetResolver = ctx.getArgument("target", PlayerSelectorArgumentResolver.class);
+                final Player target = targetResolver.resolve(ctx.getSource()).getFirst();
+
+                target.setVelocity(new Vector(0, 100, 0));
+                target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+                ctx.getSource().getSender().sendRichMessage("Yeeted <target>!",
+                    Placeholder.component("target", target.name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={PlayerMp4}/>
+
+
+## Players Argument
+The "multiple players" argument works similarly to the Player argument, also returning a `PlayerSelectorArgumentResolver`. Instead of just resolving to exactly one `Player`, this
+one can resolve to more than just one player - which you should account for in case of using this argument. `PlayerSelectorArgumentResolver.resolve(ctx.getSource())` returns a
+`List<Player>`, which you can just iterate through.
+
+### Example usage
+Extending the "single player" yeet command to support multiple targets
+```java
+public static LiteralCommandNode<CommandSourceStack> playersArgument() {
+    return Commands.literal("players")
+        .then(Commands.argument("targets", ArgumentTypes.players())
+            .executes(ctx -> {
+                final PlayerSelectorArgumentResolver targetResolver = ctx.getArgument("targets", PlayerSelectorArgumentResolver.class);
+                final List<Player> targets = targetResolver.resolve(ctx.getSource());
+                final CommandSender sender = ctx.getSource().getSender();
+
+                for (final Player target : targets) {
+                    target.setVelocity(new Vector(0, 100, 0));
+                    target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+                    sender.sendRichMessage("Yeeted <target>!",
+                        Placeholder.component("target", target.name())
+                    );
+                }
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={PlayersMp4}/>
+
+
+## Player Profiles Argument
+The player profiles argument is a very powerful argument which can retrieve both offline and online players. It returns the result of the argument as a `PlayerProfileListResolver`,
+which resolves to a `Collection<PlayerProfile>`. This collection can be iterated to get the resulting profile(s). Usually, it only returns a single `PlayerProfile` if retrieving
+a player by name, but it can return multiple if using the entity selectors (like `@a` on online players). Thus it always makes sense to run whatever operation you want to run on
+all entries in the collection instead of just the first one.
+
+Sometimes, the API call to players, which are currently offline and have no yet logged onto the server, may fail. This is also visible in the in-game preview down below. This
+weird behavior also explains why the `/whitelist add` command fails, so now you know 🚀.
+
+### Example usage - Player lookup command
+```java
+public static LiteralCommandNode<CommandSourceStack> playerProfilesArgument() {
+    return Commands.literal("lookup")
+        .then(Commands.argument("profile", ArgumentTypes.playerProfiles())
+            .executes(ctx -> {
+                final PlayerProfileListResolver profilesResolver = ctx.getArgument("profile", PlayerProfileListResolver.class);
+                final Collection<PlayerProfile> foundProfiles = profilesResolver.resolve(ctx.getSource());
+
+                for (final PlayerProfile profile : foundProfiles) {
+                    ctx.getSource().getSender().sendMessage("Found " + profile.getName());
+                }
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={PlayerProfilesMp4}/>
+
+
+## Resource Argument
+This argument is explained in detail on its own page: **Registry Arguments** (WIP).
+
+
+## Resource Key Argument
+This argument is explained in detail on its own page: **Registry Arguments** (WIP).
+
+
+## Adventure Style Argument
+:::note
+
+Similar to the component argument, this argument is not really appropriate for general user input, as it also follows the json format for displaying components. Most users
+do not know how to use that format and thus its public usage is not advised.
+
+:::
+
+The style argument returns its value in form of an `net.kyori.adventure.text.format.Style` object. This can be applied to any component using `Component#style(Style)`.
+
+Whilst the json input allows for the `text` field, it does not actually do anything.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> styleArgument() {
+    return Commands.literal("style")
+        .then(Commands.argument("style", ArgumentTypes.style())
+            .then(Commands.argument("message", StringArgumentType.greedyString())
+                .executes(ctx -> {
+                    final Style style = ctx.getArgument("style", Style.class);
+                    final String message = ctx.getArgument("message", String.class);
+
+                    ctx.getSource().getSender().sendRichMessage("Your input: <input>",
+                        Placeholder.component("input", Component.text(message).style(style))
+                    );
+                    return Command.SINGLE_SUCCESS;
+                })))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={StyleMp4}/>
+
+
+## Signed Message Argument
+The signed message argument allows a player (not a console!!) to send an argument in form of a **signed message** to the server. This signed message is a special type - it
+allows the server to send that message, without the ability to directly modify it, to any player. The visible difference is that unsigned messages have a white bar at the left,
+whilst signed messages don't.
+
+A signed message argument returns a `SignedMessageResolver`. In order to call its `#resolve` method, you have to pass in two parameters:
+* The argument name
+* The `CommandContext<CommandSourceStack>` object
+
+You then get returned with a `CompletableFuture<SignedMessage>`. In order to work with the resulting `SignedMessage`, you can call `CompletableFuture<T>#thenAccept(Consumer<T>)`
+on that resulting completable future. Inside of that, you can send the signed message to players or work with it in other ways.
+
+:::warning
+
+The use of thread unsafe Bukkit API inside the `.thenAccept` method is not supported, as this is an asynchronous method, which does not run on the main thread.
+If you need to use Bukkit API, you can schedule a task to be run on the next available tick. You can read up on that [here](../scheduler.mdx).
+
+:::
+
+### Example usage
+```java title="MinecraftArguments.java"
+public static LiteralCommandNode<CommandSourceStack> signedMessageArgument() {
+    return Commands.literal("signedmessage")
+        .then(Commands.argument("target", ArgumentTypes.player())
+            .then(Commands.argument("message", ArgumentTypes.signedMessage())
+                .executes(MinecraftArguments::executeSignedMessageCommand)))
+        .build();
+}
+
+private static int executeSignedMessageCommand(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+    final Player target = ctx.getArgument("target", PlayerSelectorArgumentResolver.class).resolve(ctx.getSource()).getFirst();
+    final SignedMessageResolver messageResolver = ctx.getArgument("message", SignedMessageResolver.class);
+
+    messageResolver.resolveSignedMessage("message", ctx).thenAccept(msg -> {
+        target.sendMessage(msg, ChatType.CHAT.bind(ctx.getSource().getSender().name()));
+    });
+
+
+    return Command.SINGLE_SUCCESS;
+}
+```
+
+### In-game preview
+<FullWidthVideo src={SignedMessageMp4}/>
+
+
+## Scoreboard Display Slot Argument
+This argument allows you to retrieve a `DisplaySlot` enum value from the user.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> scoreboardDisplaySlotArgument() {
+    return Commands.literal("scoreboarddisplayslot")
+        .then(Commands.argument("slot", ArgumentTypes.scoreboardDisplaySlot())
+            .executes(ctx -> {
+                final DisplaySlot slot = ctx.getArgument("slot", DisplaySlot.class);
+                
+                ctx.getSource().getSender().sendMessage("You selected: " + slot.getId());
+                
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ScoreboardDisplaySlotMp4}/>
+
+## Time Argument
+The time argument allows the user to define a time frame, similar to the vanilla `/time <set|time> <time>` time argument. The user has 4 possible ways of inputting time:
+* Just as a number: This resolves to as usual ticks (`/timearg 1` --> 1 tick)
+* With a `t` suffix: This also resolves to ticks (`/timearg 1t` --> 1 tick)
+* With a `s` suffix: This resolves as irl seconds, meaning multiplying the first number by 20. (`/timearg 1s` --> 20 ticks)
+* With a `d` suffix. This resolves as in-game days, meaning multiplying the first number by 24000. (`/timearg 1d` --> 24000 ticks)
+
+If you choose to use this argument, it is advised to explain to the users what these suffixes mean, as here irl time (`s` suffix) is mixed with in-game time (`t` and `d` suffix).
+
+The `ArgumentType.time()` method has one additional overload: `ArgumentType.time(float mintime)`. This allows to set the minimum required amount of time. By default, this value
+is set to 0.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> timeArgument() {
+    return Commands.literal("timearg")
+        .then(Commands.argument("time", ArgumentTypes.time())
+            .executes(ctx -> {
+                final int timeInTicks = ctx.getArgument("time", int.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.getWorld().setFullTime(player.getWorld().getFullTime() + timeInTicks);
+                    player.sendRichMessage("Moved time forward by " + timeInTicks + " ticks!");
+                }
+                else {
+                    ctx.getSource().getSender().sendMessage("This argument requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={TimeMp4}/>
+
+
+## Template Mirror Argument
+This argument is a very simple enum argument. The user has 3 valid input possibilities: `front_back`, `left_right`, and `none`. You can retrieve the result of the argument as a
+`Mirror` enum value.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> templateMirrorArgument() {
+    return Commands.literal("templatemirror")
+        .then(Commands.argument("mirror", ArgumentTypes.templateMirror())
+            .executes(ctx -> {
+                final Mirror mirror = ctx.getArgument("mirror", Mirror.class);
+
+                ctx.getSource().getSender().sendMessage("You selected: " + mirror.name());
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={TemplateMirrorMp4}/>
+
+
+## Template Rotation Argument
+This argument is also a very simple enum argument. The user has 4 valid input possibilities: `180`, `clockwise_90`, `counterclockwise_90`, and `none`. You can retrieve the result 
+of the argument as a `StructureRotation` enum value.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> templateRotationArgument() {
+    return Commands.literal("templaterotation")
+        .then(Commands.argument("rotation", ArgumentTypes.templateRotation())
+            .executes(ctx -> {
+                final StructureRotation rotation = ctx.getArgument("rotation", StructureRotation.class);
+
+                ctx.getSource().getSender().sendMessage("You selected: " + rotation.name());
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={TemplateRotationMp4}/>
+
+
+## UUID Argument
+The uuid argument allows the user to input a valid uuid. You can retrieve that value as a `UUID` object, which is used in various places, like `Bukkit.getOfflinePlayer(UUID)`.
+This argument is also not very user-friendly, which is why it is suggested to only use this as a moderation or debug argument. For user input regarding offline player
+retrieval, the player profiles argument is preferred, as it allows by-name lookup.
+
+### Example usage - Lookup command
+```java
+public static LiteralCommandNode<CommandSourceStack> uuidArgument() {
+    return Commands.literal("uuid-lookup")
+        .then(Commands.argument("uuid", ArgumentTypes.uuid())
+            .executes(ctx -> {
+                final UUID uuid = ctx.getArgument("uuid", UUID.class);
+                final OfflinePlayer result = Bukkit.getOfflinePlayer(uuid);
+
+                ctx.getSource().getSender().sendRichMessage("Has <aqua><uuid></aqua> played before: <result>",
+                    Placeholder.unparsed("uuid", uuid.toString()),
+                    Placeholder.parsed("result", result.hasPlayedBefore() ? "<green>true</green>" : "<red>false</red>")
+                );
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={UuidMp4}/>
+
+## World Argument
+The world argument is the final argument of the predefined ones - it allows the user to select one of the currently loaded world. You can retrieve the result of that as a generic
+Bukkit `World` object.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> worldArgument() {
+    return Commands.literal("teleport-to-world")
+        .then(Commands.argument("world", ArgumentTypes.world())
+            .executes(ctx -> {
+                final World world = ctx.getArgument("world", World.class);
+                
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.teleport(world.getSpawnLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
+                    ctx.getSource().getSender().sendRichMessage("Successfully teleported <player> to <aqua><world></aqua>",
+                        Placeholder.component("player", player.name()),
+                        Placeholder.unparsed("world", world.getName())
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={WorldMp4}/>

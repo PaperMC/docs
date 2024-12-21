@@ -59,7 +59,7 @@ As you can see, you have to do a lot of manual checking in order to register a s
 the Brigadier api do it?
 
 ### The new Paper way
-First, we need to retrieve a `LiteralCommandNode<CommandSourceStack>`. That's a special Brigadier class that holds some sort of [command tree](./command-tree). 
+First, we need to retrieve a `LiteralCommandNode<CommandSourceStack>`. That's a special Brigadier class that holds some sort of [command tree](../basics/command-tree). 
 In our case, it is the root of our command. We can do that by running `Commands.literal(final String literal)`, which returns a 
 `LiteralArgumentBuilder<CommandSourceStack>`, where we can define some arguments and executors. Once we are done, we can call
 `LiteralArgumentBuilder#build()` to retrieve our build `LiteralCommandNode`, which we can then register. That sounds complicated at first,

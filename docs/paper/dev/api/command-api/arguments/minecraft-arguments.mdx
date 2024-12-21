@@ -6,7 +6,7 @@ toc_max_heading_level: 4
 ---
 
 # Minecraft Arguments
-The [Arguments and Literals](./arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
+The [Arguments and Literals](../basics/arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) defines a few more. These can be accessed
 in a static context using the `ArgumentTypes` class. We will go over all of those in this section.
 
 ## Quick overview
@@ -16,7 +16,7 @@ A quick overview of all possible arguments is defined here:
 |-----------------------------------------|--------------------------------|----------------------------------------------------------------------------------------|
 | `blockPosition()`                       | BlockPositionResolver          | [Block Position Argument](./location-arguments#block-position-argument)                |
 | `blockState()`                          | BlockState                     | [Block State Argument](./bukkit-arguments#block-state-argument)                        |
-| `component()`                           | Component (Kyori)              | [Adventure Component Argument](./adventure-arguments#adventure-component-argument)     |
+| `component()`                           | Component (Kyori)              | [Component Argument](./adventure-arguments#component-argument)                         |
 | `doubleRange()`                         | DoubleRangeProvider            | [Double Range argument](./predicate-arguments#double-range-argument)                   |
 | `entity()`                              | EntitySelectorArgumentResolver | [Entity Argument](./entity-player-arguments#entity-argument)                           |
 | `entities()`                            | EntitySelectorArgumentResolver | [Entities Argument](./entity-player-arguments#entities-argument)                       |
@@ -27,7 +27,7 @@ A quick overview of all possible arguments is defined here:
 | `integerRange()`                        | IntegerRangeProvider           | [Integer Range Argument](./predicate-arguments#integer-range-argument)                 |
 | `itemPredicate()`                       | ItemStackPredicate             | [Item Predicate Argument](./predicate-arguments#item-predicate-argument)               |
 | `itemStack()`                           | ItemStack                      | [ItemStack Argument](./bukkit-arguments#itemstack-argument)                            |
-| `key()`                                 | Key (Kyori)                    | [Adventure Key Argument](./adventure-arguments#adventure-key-argument)                 |
+| `key()`                                 | Key (Kyori)                    | [Key Argument](./adventure-arguments#key-argument)                                     |
 | `namedColor()`                          | NamedTextColor (Kyori)         | [Named Color Argument](./adventure-arguments#named-color-argument)                     |
 | `namespacedKey()`                       | NamespacedKey (Bukkit)         | [Bukkit NamespacedKey Argument](./bukkit-arguments#bukkit-namespacedkey-argument)      |
 | `objectiveCriteria()`                   | Criteria                       | [Objective Criteria Argument](./enum-arguments#objective-criteria-argument)            |
@@ -36,7 +36,7 @@ A quick overview of all possible arguments is defined here:
 | `playerProfiles()`                      | PlayerProfileListResolver      | [Player Profiles Argument](./entity-player-arguments#player-profiles-argument)         |
 | `resource(RegistryKey)`                 | (Depends on RegistryKey)       | [Resource Argument](./registry-arguments#resource-argument)                            |
 | `resourceKey(RegistryKey)`              | (Depends on RegistryKey)       | [Resource Key Argument](./registry-arguments#resource-key-argument)                    |
-| `style()`                               | Style (Kyori)                  | [Adventure Style Argument](./adventure-arguments#adventure-style-argument)             |
+| `style()`                               | Style (Kyori)                  | [Style Argument](./adventure-arguments#adventure-style-argument)                       |
 | `signedMessage()`                       | SignedMessageResolver          | [Signed Message Argument](./adventure-arguments#signed-message-argument)               |
 | `scoreboardDisplaySlot()`               | DisplaySlot                    | [Scoreboard Display Slot Argument](./enum-arguments#scoreboard-display-slot-argument)  |
 | `time(float mintime)`                   | Integer                        | [Time Argument](./bukkit-arguments#time-argument)                                      |

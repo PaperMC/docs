@@ -9,7 +9,7 @@ This documentation page serves to explain all the new semantics and possible con
 
 :::info
 
-Developers can get more information on Paper plugins [here](docs/paper/dev/getting-started/paper-plugins.mdx).
+Developers can get more information on Paper plugins [here](/paper/dev/advanced/lifecycle-plugins).
 
 :::
 
@@ -34,7 +34,7 @@ Paper plugins are added the same as Bukkit plugins, therefore, you can follow [t
 ### Cyclic plugin loading
 
 With the introduction of Paper plugins, Paper introduces a new plugin loader that fixes some odd issues.
-However, as a result, this now causes [cyclic loading](docs/paper/dev/getting-started/paper-plugins.mdx#cyclic-plugin-loading) between plugins to no longer be supported.
+However, as a result, this now causes [cyclic loading](/paper/dev/advanced/lifecycle-plugins#cyclic-plugin-loading) between plugins to no longer be supported.
 
 If Paper detects a loop, your server will be shut down with an error.
 

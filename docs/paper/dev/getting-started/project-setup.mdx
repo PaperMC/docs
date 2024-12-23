@@ -226,7 +226,7 @@ You will be asked to provide some information about your project.
 | **Main Class**        | The main class of your plugin. This should be the class that extends `JavaPlugin`.                                                                                                                                                                                   |
 | **Optional Settings** | Here you can define things like authors, website, description, etc. These are optional and not required for the plugin to work.                                                                                                                                      |
 | **Build System**      | The build system you want to use. Paper recommends using Gradle but you can use Maven if you prefer.                                                                                                                                                                 |
-| **Paper Manifest**    | Whether you want to use the new Paper plugins or not. For now this is not recommended as it is still in development.                                                                                                                                                 |
+| **Paper Manifest**    | Whether you want your plugin to be a lifecycle plugin. Learn more about lifecycle plugins [here](../advanced/lifecycle-plugins.mdx)                                                                                                                                                 |
 | **Group ID**          | The group ID of your project. This is used for Maven and Gradle. This is usually your domain name in reverse. If you don't know what you should put here, you can use something like `io.github.<yourname>` or if you don't have GitHub you can use `me.<yourname>`. |
 | **Artifact ID**       | The artifact ID of your project. This is used for Maven and Gradle. This is usually the name of your project. This is usually the same as the `Name` field.                                                                                                          |
 | **Version**           | The version of your project. This is used for Maven and Gradle. This is usually `1.0-SNAPSHOT` and does not really matter for now.                                                                                                                                   |
@@ -245,7 +245,7 @@ This means that the server will have to deobfuscate and remap the plugin JAR whe
 
 :::info
 
-`paperweight-userdev` already sets this attribute automatically. For more information see the [userdev](./userdev) documentation.
+`paperweight-userdev` already sets this attribute automatically. For more information see the [userdev](./advanced/userdev) documentation.
 
 :::
 

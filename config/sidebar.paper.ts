@@ -67,7 +67,7 @@ const paper: SidebarsConfig = {
               ],
             },
             "admin/reference/system-properties",
-            "admin/reference/paper-plugins",
+            "admin/reference/lifecycle-plugins",
             "admin/reference/vanilla-command-permissions",
           ],
         },
@@ -100,11 +100,9 @@ const paper: SidebarsConfig = {
             id: "dev/getting-started/README",
           },
           items: [
+            "dev/getting-started/how-do-plugins-work",
             "dev/getting-started/project-setup",
             "dev/getting-started/plugin-yml",
-            "dev/getting-started/how-do-plugins-work",
-            "dev/getting-started/paper-plugins",
-            "dev/getting-started/userdev",
           ],
         },
         {
@@ -175,6 +173,16 @@ const paper: SidebarsConfig = {
             "dev/misc/databases",
             "dev/misc/internal-code",
           ],
+        },
+        {
+          type: "category",
+          label: "Advanced",
+          collapsed: true,
+          link: {
+            type: "doc",
+            id: "dev/advanced/README",
+          },
+          items: ["dev/advanced/lifecycle-plugins", "dev/advanced/userdev"],
         },
       ],
     },

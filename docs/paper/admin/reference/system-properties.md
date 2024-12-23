@@ -198,7 +198,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.useLegacyPluginLoading
 
 - **default**: `false`
-- **description**: Allows cyclic plugin loading. See [here](paper-plugins.md#cyclic-plugin-loading) for more info.
+- **description**: Allows cyclic plugin loading. See [here](lifecycle-plugins.md#cyclic-plugin-loading) for more info.
 
 #### Paper.DisableCommandConverter
 
@@ -213,7 +213,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.disablePluginRemapping
 
 - **default**: `false`
-- **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](../../dev/getting-started/userdev.mdx#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
+- **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](../../dev/advanced/userdev.mdx#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
 
 #### paper.preferSparkPlugin
 

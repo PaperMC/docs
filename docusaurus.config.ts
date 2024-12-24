@@ -143,13 +143,6 @@ const config: Config = {
         path: "docs/paper",
         routeBasePath: "paper",
         sidebarPath: require.resolve("./config/sidebar.paper"),
-        lastVersion: "current",
-        versions: {
-          current: {
-            label: "1.21",
-            path: "",
-          },
-        },
       },
     ],
     [
@@ -160,13 +153,6 @@ const config: Config = {
         path: "docs/folia",
         routeBasePath: "folia",
         sidebarPath: require.resolve("./config/sidebar.folia"),
-        lastVersion: "current",
-        versions: {
-          current: {
-            label: "1.20",
-            path: "",
-          },
-        },
       },
     ],
     [

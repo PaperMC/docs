@@ -2,6 +2,7 @@
 toc_max_heading_level: 4
 slug: /adding-plugins
 description: Plugins are the most powerful way to extend the functionality of Paper beyond the configuration files.
+targetVersion: 1.21
 ---
 
 # Adding Plugins

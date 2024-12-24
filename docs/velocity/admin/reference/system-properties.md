@@ -1,6 +1,7 @@
 ---
 slug: /reference/system-properties
 description: Documentation for the system properties Velocity may check.
+targetVersion: 1.21
 ---
 
 # Velocity System Properties

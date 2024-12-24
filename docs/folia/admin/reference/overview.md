@@ -2,6 +2,7 @@
 slug: /reference/overview
 title: Overview
 description: An overview of how Folia works.
+targetVersion: 1.21
 ---
 
 # Project overview

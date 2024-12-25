@@ -3,30 +3,30 @@ slug: /dev/command-api/arguments/registry-arguments
 description: Documentation for arguments retrieving registry values
 ---
 
-import ResourceAttributes from "resource-attributes.mp4"
-import ResourceBannerPattern from "resource-banner-pattern.mp4"
-import ResourceBiome from "resource-biome.mp4"
-import ResourceBlock from "resource-block.mp4"
-import ResourceCatVariant from "resource-cat-variant.mp4"
-import ResourceDamageType from "resource-damage-type.mp4"
-import ResourceDataComponentType from "resource-data-component-type.mp4"
-import ResourceFluid from "resource-fluid.mp4"
-import ResourceFrogVariant from "resource-frog-variant.mp4"
-import ResourceGameEvent from "resource-game-event.mp4"
-import ResourceInstrument from "resource-instrument.mp4"
-import ResourceItem from "resource-item.mp4"
-import ResourceJukeboxSong from "resource-jukebox-song.mp4"
-import ResourceMapDecorationType from "resource-map-decoration-type.mp4"
-import ResourceMemoryModuleType from "resource-memory-module-type.mp4"
-import ResourceMenu from "resource-menu.mp4"
-import ResourceMobEffect from "resource-mob-effect.mp4"
-import ResourcePaintingVariant from "resource-painting-variant.mp4"
-import ResourceSoundEvent from "resource-sound-event.mp4"
-import ResourceVillagerProfession from "resource-villager-profession.mp4"
-import ResourceWolfVariant from "resource-wolf-variant.mp4"
+import ResourceAttributes from "./assets/registry-arguments/resource-attributes.mp4"
+import ResourceBannerPattern from "./assets/registry-arguments/resource-banner-pattern.mp4"
+import ResourceBiome from "./assets/registry-arguments/resource-biome.mp4"
+import ResourceBlock from "./assets/registry-arguments/resource-block.mp4"
+import ResourceCatVariant from "./assets/registry-arguments/resource-cat-variant.mp4"
+import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4"
+import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4"
+import ResourceFluid from "./assets/registry-arguments/resource-fluid.mp4"
+import ResourceFrogVariant from "./assets/registry-arguments/resource-frog-variant.mp4"
+import ResourceGameEvent from "./assets/registry-arguments/resource-game-event.mp4"
+import ResourceInstrument from "./assets/registry-arguments/resource-instrument.mp4"
+import ResourceItem from "./assets/registry-arguments/resource-item.mp4"
+import ResourceJukeboxSong from "./assets/registry-arguments/resource-jukebox-song.mp4"
+import ResourceMapDecorationType from "./assets/registry-arguments/resource-map-decoration-type.mp4"
+import ResourceMemoryModuleType from "./assets/registry-arguments/resource-memory-module-type.mp4"
+import ResourceMenu from "./assets/registry-arguments/resource-menu.mp4"
+import ResourceMobEffect from "./assets/registry-arguments/resource-mob-effect.mp4"
+import ResourcePaintingVariant from "./assets/registry-arguments/resource-painting-variant.mp4"
+import ResourceSoundEvent from "./assets/registry-arguments/resource-sound-event.mp4"
+import ResourceVillagerProfession from "./assets/registry-arguments/resource-villager-profession.mp4"
+import ResourceWolfVariant from "./assets/registry-arguments/resource-wolf-variant.mp4"
 
-import ResourceKeyItem from "resourcekey-item.mp4"
-import EnchantsRegistry from "enchants-registry.mp4"
+import ResourceKeyItem from "./assets/registry-arguments/resourcekey-item.mp4"
+import EnchantsRegistry from "./assets/registry-arguments/enchants-registry.mp4"
 
 # Registry Arguments
 Registries in Minecraft hold all sort of information - possible item materials, block materials, enchantments, potion effects, ... and more!
@@ -89,9 +89,10 @@ Finally, we enchant the item of the executing player's hand with whatever enchan
 Here is how it looks in-game:
 <FullWidthVideo src={EnchantsRegistry}/>
 
-:::warn
+<br/>
+:::warning
 
-There are certain edge-cases, where this argument will cause a **Network Protocol Error** on the client if used due to missing registries on the client.
+There are certain edge-cases, where this argument will cause a **Network Protocol Error** on the client, due to missing registries on the client.
 Basically, the only argument where this is the case right now is with the `STRUCTURE` registry key.
 
 ```java
@@ -105,7 +106,7 @@ Due to this fact, it is advised to only use the `STRUCTURE` registry key argumen
 [More information on resource key arguments can be found by clicking here.](#resource-key-argument).
 
 :::
-
+<br/>
 
 At the time of writing, the following RegistryKeys exist:
 

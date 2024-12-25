@@ -1,15 +1,210 @@
 ---
 slug: /dev/command-api/arguments/registry-arguments
-description: Documentation for arguments retrieving some sort of listed value
+description: Documentation for arguments retrieving registry values
 ---
+
+import ResourceAttributes from "resource-attributes.mp4"
+import ResourceBannerPattern from "resource-banner-pattern.mp4"
+import ResourceBiome from "resource-biome.mp4"
+import ResourceBlock from "resource-block.mp4"
+import ResourceCatVariant from "resource-cat-variant.mp4"
+import ResourceDamageType from "resource-damage-type.mp4"
+import ResourceDataComponentType from "resource-data-component-type.mp4"
+import ResourceFluid from "resource-fluid.mp4"
+import ResourceFrogVariant from "resource-frog-variant.mp4"
+import ResourceGameEvent from "resource-game-event.mp4"
+import ResourceInstrument from "resource-instrument.mp4"
+import ResourceItem from "resource-item.mp4"
+import ResourceJukeboxSong from "resource-jukebox-song.mp4"
+import ResourceMapDecorationType from "resource-map-decoration-type.mp4"
+import ResourceMemoryModuleType from "resource-memory-module-type.mp4"
+import ResourceMenu from "resource-menu.mp4"
+import ResourceMobEffect from "resource-mob-effect.mp4"
+import ResourcePaintingVariant from "resource-painting-variant.mp4"
+import ResourceSoundEvent from "resource-sound-event.mp4"
+import ResourceVillagerProfession from "resource-villager-profession.mp4"
+import ResourceWolfVariant from "resource-wolf-variant.mp4"
+
+import ResourceKeyItem from "resourcekey-item.mp4"
+import EnchantsRegistry from "enchants-registry.mp4"
 
 # Registry Arguments
 Registries in Minecraft hold all sort of information - possible item materials, block materials, enchantments, potion effects, ... and more!
 These arguments are particularly useful for retrieving type values.
 
+There are **two** types of registry arguments: `resource` and `resourceKey`. 
+The main difference between those arguments is the return value: The `resource` argument returns the parsed value, whilst the `resourceKey` only returns a `TypedKey`, which
+you can use to retrieve the value yourself.
+
+For more information on the `resourceKey` argument, check out [its dedicated segment](#resource-key-argument).
+
+
 ## Resource Argument
-This argument is explained in detail on its own page: **Registry Arguments** (WIP).
+Just like any other argument, you can get a `ArgumentType<T>` reference to it using `ArgumentTypes.resource(RegistryKey<T>)`. A selection of possible registry keys can be
+found below. They are accessed in a static context using the `ResourceKeys` interface.
+
+Each entry in the `ResourceKeys` returns a `RegistryKey<T>`. The `<T>` generic parameter here describes the return type. This means that if we were to retrieve
+`RegistryKeys.ITEM`, since it is defined as follows:
+
+```java title="RegistryKey.class"
+public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
+    // ...
+    RegistryKey<ItemType> ITEM = RegistryKeyImpl.create("item");
+    // ...
+}
+```
+
+The return type of the retrieved value using `ctx.getArgument(...)` would be an `ItemType`.
+
+And really, there isn't much more to it. For that exact reason, here is an example on the implementation of such an argument:
+```java
+public static LiteralCommandNode<CommandSourceStack> enchantmentRegistry() {
+    return Commands.literal("enchants-registry")
+        .then(Commands.argument("enchantment", ArgumentTypes.resource(RegistryKey.ENCHANTMENT))
+            .executes(ctx -> {
+                final Enchantment enchantment = ctx.getArgument("enchantment", Enchantment.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    final ItemStack stack = player.getInventory().getItemInMainHand();
+                    stack.addUnsafeEnchantment(enchantment, 10);
+                    ctx.getSource().getSender().sendRichMessage("Enchanted <player>'s <item> with <enchantment>!",
+                        Placeholder.component("player", player.name()),
+                        Placeholder.component("item", Component.translatable(stack.translationKey())),
+                        Placeholder.component("enchantment", enchantment.displayName(10))
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+We define an `enchantment` argument using a enchantment registry key resource and retrieve the value of that using `ctx.getArgument("enchantment", Enchantment.class)`.
+Finally, we enchant the item of the executing player's hand with whatever enchantment the sender chose at level 10 and send a success message.
+
+Here is how it looks in-game:
+<FullWidthVideo src={EnchantsRegistry}/>
+
+:::warn
+
+There are certain edge-cases, where this argument will cause a **Network Protocol Error** on the client if used due to missing registries on the client.
+Basically, the only argument where this is the case right now is with the `STRUCTURE` registry key.
+
+```java
+// Registering this command will cause client to not be able to connect to the server.
+final LiteralCommandNode<CommandSourceStack> invalidRegistryArgument = Commands.literal("registry-structure")
+    .then(Commands.argument("value", ArgumentTypes.resource(RegistryKey.STRUCTURE)))
+    .build();
+```
+
+Due to this fact, it is advised to only use the `STRUCTURE` registry key argument with a `resourceKey(...)` argument type and parse the values yourself.
+[More information on resource key arguments can be found by clicking here.](#resource-key-argument).
+
+:::
+
+
+At the time of writing, the following RegistryKeys exist:
+
+|   RegistryKeys Field   |      Return Value      |                              Quick Links                              |
+|------------------------|------------------------|-----------------------------------------------------------------------|
+| ATTRIBUTE              | Attribute              | [Attribute Registry Key](#attribute-registry-key)                     |
+| BANNER_PATTERN         | PatternType            | [Pattern Type Registry Key](#pattern-type-registry-key)               |
+| BIOME                  | Biome                  | [Biome Registry Key](#biome-registry-key)                             |
+| BLOCK                  | BlockType              | [Block Type Registry Key](#block-type-registry-key)                   |
+| CAT_VARIANT            | Cat.Type               | [Cat Type Registry Key](#cat-type-registry-key)                       |
+| DAMAGE_TYPE            | DamageType             | [Damage Type Registry Key](#damage-type-registry-key)                 |
+| DATA_COMPONENT_TYPE    | DataComponentType      | [Data Component Type Registry Key](#data-component-type-registry-key) |
+| FLUID                  | Fluid                  | [Fluid Registry Key](#fluid-registry-key)                             |
+| FROG_VARIANT           | Frog.Variant           | [Frog Variant Registry Key](#frog-variant-registry-key)               |
+| GAME_EVENT             | GameEvent              | [Game Event Registry Key](#game-event-registry-key)                   |
+| INSTRUMENT             | MusicInstrument        | [Music Instrument Registry Key](#music-instrument-registry-key)       |
+| ITEM                   | ItemType               | [Item Type Registry Key](#item-type-registry-key)                     |
+| JUKEBOX_SONG           | JukeboxSong            | [Jukebox Song Registry Key](#jukebox-song-registry-key)               |
+| MAP_DECORATION_TYPE    | MapCursor.Type         | [Map Cursor Type Registry Key](#map-cursor-type-registry-key)         |
+| MENU                   | MenuType               | [Menu Type Registry Key](#menu-type-registry-key)                     |
+| MOB_EFFECT             | PotionEffectType       | [Potion Effect Type Registry Key](#potion-effect-type-registry-key)   |
+| PAINTING_VARIANT       | Art                    | [Art Registry Key](#art-registry-key)                                 |
+| SOUND_EVENT            | Sound                  | [Sound Registry Key](#sound-registry-key)                             |
+| STRUCTURE              | Structure              | [Structure Registry Key](#structure-registry-key)                     |
+| STRUCTURE_TYPE         | StructureType          | [Structure Type Registry Key](#structure-type-registry-key)           |
+| VILLAGER_PROFESSION    | Villager.Profession    | [Villager Profession Registry Key](#villager-profession-registry-key) |
+| VILLAGER_TYPE          | Villager.Type          | [Villager Type Registry Key](#villager-type-registry-key)             |
+| WOLF_VARIANT           | Wolf.Variant           | [Wolf Variant Registry Key](#wolf-variant-registry-key)               |
+
+
+### Attribute Registry Key
+
+
+### Pattern Type Registry Key
+
+
+### Biome Registry Key
+
+
+### Block Type Registry Key
+
+
+### Cat Type Registry Key
+
+
+### Damage Type Registry Key
+
+
+### Data Component Type Registry Key
+
+
+### Fluid Registry Key
+
+
+### Frog Variant Registry Key
+
+
+### Game Event Registry Key
+
+
+### Music Instrument Registry Key
+
+
+### Item Type Registry Key
+
+
+### Jukebox Song Registry Key
+
+
+### Map Cursor Type Registry Key
+
+
+### Menu Type Registry Key
+
+
+### Potion Effect Type Registry Key
+
+
+### Art Registry Key
+
+
+### Sound Registry Key
+
+
+### Structure Registry Key
+
+
+### Structure Type Registry Key
+
+
+### Villager Profession Registry Key
+
+
+### Villager Type Registry Key
+
+
+### Wolf Variant Registry Key
+
+
 
 
 ## Resource Key Argument
-This argument is explained in detail on its own page: **Registry Arguments** (WIP).

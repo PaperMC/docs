@@ -37,20 +37,32 @@ See [here](#1205-and-beyond) for more details.
 
 ## Adding the plugin
 Add the plugin to your `build.gradle.kts` file.
-```kotlin
+
+<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
+```
 plugins {
-    id("io.papermc.paperweight.userdev") version "1.7.1" // Check for new versions at https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev
+    id("io.papermc.paperweight.userdev") version "%%_MAJ_MIN_PAT_USERDEV_%%"
 }
 ```
+</VersionFormattedCode>
 
 The latest version of `paperweight-userdev` supports dev bundles for Minecraft 1.17.1 and newer, so it's best practice to keep it up to date!
 Only the latest version of `paperweight-userdev` is officially supported, and we will ask you to update first if you are having problems with old versions.
 
+:::warning
+
+In order to use userdev for 1.21.4, you have to update your userdev to a beta version. At the time of writing, the latest version that works for
+1.21.4 is `2.0.0-beta.8`. You can find the latest version here: https://github.com/PaperMC/paperweight/releases.
+
+Furthermore, from version `2.0.0` onwards, userdev requires you to use at least **Gradle 8.11.2** (Gradle 8.11 or below will not work). For more information on upgrading, check
+out this site from the Gradle docs: https://docs.gradle.org/current/userguide/gradle_wrapper.html.
+
+:::
+
 :::info[Snapshots]
 
-**paperweight-userdev** releases are available through the [Gradle Plugin Portal](https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev), but if you
-want to use SNAPSHOT versions, you must add Paper's Maven repository to `settings.gradle.kts` with:
-```kotlin
+**paperweight-userdev** SNAPSHOT (pre-release) versions are only available through Paper's Maven repository.
+```kotlin title="settings.gradle.kts"
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -66,7 +78,7 @@ If you try to load your Gradle project now, you will receive an error saying you
 a dev bundle dependency. You can do that by adding to your `dependencies` block in your `build.gradle.kts`
 file.
 
-<VersionFormattedCode language={"kotlin"}>
+<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
 ```
 dependencies {
     // Other Dependencies
@@ -145,3 +157,9 @@ paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArt
 ```
 
 This is useful for plugins that have loaders for both Spigot and Paper and want to keep compatibility with both.
+
+:::note
+
+If you are using Gradle with the Groovy DSL, you should instead access the fields via static methods like `getMOJANG_PRODUCTION()`.
+
+:::

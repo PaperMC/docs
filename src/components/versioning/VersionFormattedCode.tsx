@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import CodeBlock from "@docusaurus/theme-classic/lib/theme/CodeBlock";
 import { getProjectVersion, VersionType } from "../../util/versionUtils";
-import { useDocsVersion } from "@docusaurus/theme-common/internal";
+import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
 
 export default function VersionFormattedCode({
   language = "",
@@ -45,6 +45,11 @@ export default function VersionFormattedCode({
       code = code.replace(
         /%%_MAJ_MIN_PAT_VEL_%%/g,
         await getProjectVersion("velocity", versionMeta)
+      );
+
+      code = code.replace(
+        /%%_MAJ_MIN_PAT_USERDEV_%%/g,
+        await getProjectVersion("userdev", versionMeta)
       );
 
       if (mounted.current) {

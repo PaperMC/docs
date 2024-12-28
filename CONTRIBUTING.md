@@ -106,49 +106,50 @@ of a few ways:
 
 1. `SoftwareVersion` component
 
-   This component is used to embed the current version of the software into the documentation. An example of this would be:
+    This component is used to embed the current version of the software into the documentation. An example of this would be:
 
-   ```jsx
-   <SoftwareVersion versionType={"maj-min-pat"}/> // e.g. 1.19.2
-   <SoftwareVersion versionType={"maj-min"}/> // e.g. 1.19
-   <SoftwareVersion versionType={"maj"}/> // e.g. 1
+    ```jsx
+    <SoftwareVersion versionType={"maj-min-pat"}/> // e.g. 1.19.2
+    <SoftwareVersion versionType={"maj-min"}/> // e.g. 1.19
+    <SoftwareVersion versionType={"maj"}/> // e.g. 1
 
-   // You can set the project name to be used for the versioning (defaults to paper):
-   <SoftwareVersion versionType={"maj-min-pat"} project={"velocity"}/> // e.g. 3.3.0-SNAPSHOT
-   ```
+    // You can set the project name to be used for the versioning (defaults to paper):
+    <SoftwareVersion versionType={"maj-min-pat"} project={"velocity"}/> // e.g. 3.3.0-SNAPSHOT
+    ```
 
 2. `Javadoc` component
 
-   This component is used to embed a link to the current version of the corresponding Javadoc. An example of this would be:
+    This component is used to embed a link to the current version of the corresponding Javadoc. An example of this would be:
 
-   ```jsx
-   <Javadoc name={"org.bukkit.event.Event"}>here</Javadoc>
-   // The project can also be set here, and defaults to Paper
-   ```
+    ```jsx
+    <Javadoc name={"org.bukkit.event.Event"}>here</Javadoc>
+    // The project can also be set here, and defaults to Paper
+    ```
 
 3. `VersionFormattedCode` component
 
-   This component is used to embed a code block with the current version of the software. An example of this would be:
+    This component is used to embed a code block with the current version of the software. An example of this would be:
 
-   ````jsx
-   <VersionFormattedCode language={"yaml"}>
-   ```⠀
-   name: Paper-Test-Plugin
-   version: '1.0'
-   main: io.papermc.testplugin.TestPlugin
-   description: Paper Test Plugin
-   api-version: '%%_MAJ_MIN_PAT_MC_%%'
-   bootstrapper: io.papermc.testplugin.TestPluginBootstrap
-   loader: io.papermc.testplugin.TestPluginLoader
-   ```⠀
-   </VersionFormattedCode>
+    ````jsx
+    <VersionFormattedCode language={"yaml"}>
+    ```⠀
+    name: Paper-Test-Plugin
+    version: '1.0'
+    main: io.papermc.testplugin.TestPlugin
+    description: Paper Test Plugin
+    api-version: '%%_MAJ_MIN_PAT_MC_%%'
+    bootstrapper: io.papermc.testplugin.TestPluginBootstrap
+    loader: io.papermc.testplugin.TestPluginLoader
+    ```⠀
+    </VersionFormattedCode>
 
-   // The possible placeholders are:
-   %%_MAJ_MIN_MC_%%  - Major-Minor Paper Version (E.g. 1.20)
-   %%_MAJ_MIN_PAT_MC_%% - Major-Minor-Patch Paper Version (E.g. 1.20.4)
-   %%_MAJ_MIN_VEL_%% - Major Velocity Version (E.g. 3.1.0)
-   %%_MAJ_MIN_PAT_VEL_%% - Major-Minor-Patch Velocity Version (E.g. 3.1.1-SNAPSHOT)
-   ````
+    // The possible placeholders are:
+    %%_MAJ_MIN_MC_%%  - Major-Minor Paper Version (E.g. 1.20)
+    %%_MAJ_MIN_PAT_MC_%% - Major-Minor-Patch Paper Version (E.g. 1.20.4)
+    %%_MAJ_MIN_VEL_%% - Major Velocity Version (E.g. 3.1.0)
+    %%_MAJ_MIN_PAT_VEL_%% - Major-Minor-Patch Velocity Version (E.g. 3.1.1-SNAPSHOT)
+    %%_MAJ_MIN_PAT_USERDEV_%% - Latest Paperweight-Userdev Version (E.g. 1.7.3)
+    ````
 
 When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
 for older versions. This is done by using Docusaurus's `version` command:

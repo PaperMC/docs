@@ -76,7 +76,7 @@ In the plugins block of your `build.gradle.kts` build script, add the publish pl
 
 ```kotlin
 plugins {
-    id("io.papermc.hangar-publish-plugin") version "0.1.0"
+    id("io.papermc.hangar-publish-plugin") version "0.1.2"
 }
 ```
 
@@ -221,6 +221,6 @@ jobs:
       - name: Publish
         env:
           # Make sure you have added a repository secret in the repository's settings
-          HANGAR_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+          HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
         run: ./gradlew build publishPluginPublicationToHangar --stacktrace
 ```

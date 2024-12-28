@@ -47,6 +47,4 @@ endorses some product or service. For instance, you may advertise a plugin as be
 compatible with Velocity, but you may not make the Velocity logo prominent in that
 advertising.
 
-Variants of the Velocity logomark may be found [here](https://github.com/VelocityPowered/Branding).
-
 ![Velocity logomark](velocity-logomark-512.png)

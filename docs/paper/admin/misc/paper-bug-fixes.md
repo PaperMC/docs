@@ -43,14 +43,6 @@ unsupported-settings:
   allow-unsafe-end-portal-teleportation: true
 ```
 
-Similarly, we also allow you to enable string-based duplication bugs with the following config option:
-```yaml title="config/paper-global.yml"
-unsupported-settings:
-  allow-tripwire-disarming-exploits: true
-```
-This is a [long term bug](https://bugs.mojang.com/browse/MC-129055) that has not yet been fixed by Mojang. We have
-fixed it in Paper, but we provide a config option to restore Vanilla behavior.
-
 ## Block breaking
 
 We also fix the ability to break Bedrock and End Portal frames. We do also provide a config option to restore this

@@ -108,7 +108,7 @@ that don't require a <Javadoc name={"org.bukkit.scheduler.BukkitTask"}>`BukkitTa
 
 You can either implement it in a separate class, e.g.:
 
-```java
+```java title="MyRunnableTask.java"
 public class MyRunnableTask implements Runnable {
 
     private final MyPlugin plugin;
@@ -144,7 +144,7 @@ e.g. when you want to cancel the task from inside it.
 
 You can either implement it in a separate class similarly to the `Runnable`, e.g.:
 
-```java
+```java title="MyConsumerTask.java"
 public class MyConsumerTask implements Consumer<BukkitTask> {
 
     private final UUID entityId;
@@ -191,7 +191,7 @@ scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
 and holds a `BukkitTask` instance. This means that you do not need to access the task from inside the `run()` method,
 you can simply use the <Javadoc name={"org.bukkit.scheduler.BukkitRunnable#cancel()"}>`this.cancel()`</Javadoc> method:
 
-```java
+```java title="CustomRunnable.java"
 public class CustomRunnable extends BukkitRunnable {
 
     private final UUID entityId;
@@ -209,7 +209,7 @@ public class CustomRunnable extends BukkitRunnable {
             return;
         }
 
-        task.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
+        this.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
     }
 }
 ```

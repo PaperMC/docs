@@ -126,6 +126,10 @@ settings:
       max:
         default: "2048.0"
         description: Overrides the maximum for the attackDamage attribute.
+    maxAbsorption:
+      max:
+        default: "2048.0"
+        description: Overrides the maximum for the maxAbsorption attribute.
     maxHealth:
       max:
         default: "2048.0"

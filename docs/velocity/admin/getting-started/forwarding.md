@@ -73,7 +73,7 @@ Velocity modern forwarding with a modded server using Fabric.
 ## Configuring modern forwarding for Forge
 
 A mod called [ProxyCompatibleForge](https://modrinth.com/mod/proxy-compatible-forge) allows you to use
-Velocity modern forwarding with a modded server using Forge 1.16.5 or higher.
+Velocity modern forwarding with a modded server using Forge 1.14 or higher.
 
 ## Configuring legacy BungeeCord-compatible forwarding
 
@@ -88,7 +88,7 @@ options to secure your server so that nothing aside from the proxy can connect t
 `legacy` forwarding is the player information forwarding protocol that is used by BungeeCord when
 enabling IP forwarding from BungeeCord. Due to this, it is ubiquitous and well-supported by most
 server implementations. It has excellent compatibility (supporting versions as old as 1.7.2,
-released in 2013) and will work with Forge if you also install SpongeForge on your modded server and
+released in 2013) and will work with Forge if you also install SpongeForge/BungeeForge on your modded server and
 configure it correctly. However, it is not secure.
 
 If you must use BungeeCord-compatible forwarding, simply set your `player-info-forwarding-mode` setting
@@ -108,8 +108,13 @@ To make Spigot or Paper understand the data forwarded from Velocity, set `settin
 ### Configuring legacy forwarding for Sponge
 
 To configure Sponge to understand the data forwarded from Velocity, you will need to stop the server
-first, set `modules.bungeecord` to `true` and `bungeecord.ip-forwarding` to true in your
+first, set `modules.bungeecord` to `true` and `bungeecord.ip-forwarding` to `true` in your
 `config/sponge/global.conf` file, and then restart your Sponge server.
+
+### Configuring legacy forwarding for Forge
+
+To configure Forge to understand the data forwarded from Velocity, you will need to stop the server
+first, download your correct [BungeeForge](https://github.com/caunt/BungeeForge/releases) version and place the mod into the mods folder, and then restart your Forge server.
 
 ### Configuring legacy forwarding for Fabric
 

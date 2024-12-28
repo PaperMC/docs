@@ -40,7 +40,7 @@ example-plugin
 When your plugin is initialized, you must save this resource into the plugin's data directory, so that a user can edit the values.
 Here is an example of how you would do this in your plugin's `onEnable`:
 
-```java
+```java title="TestPlugin.java"
 public class TestPlugin extends JavaPlugin {
 
     @Override
@@ -53,7 +53,6 @@ public class TestPlugin extends JavaPlugin {
 
         // getConfig()...
     }
-
 }
 ```
 
@@ -87,8 +86,9 @@ for the changes to be persisted to disk.
 
 :::
 
-```java
+```java title="TestPlugin.java"
 public class TestPlugin extends JavaPlugin {
+
     public void teleportPlayer(Player player) {
         Location to = getConfig().getLocation("target_location");
         player.teleport(to);
@@ -99,8 +99,9 @@ public class TestPlugin extends JavaPlugin {
 This is possible as they implement <Javadoc name={"org.bukkit.configuration.serialization.ConfigurationSerializable"}>`ConfigurationSerializable`</Javadoc>.
 You can use this yourself, by implementing and registering a custom class.
 
-```java
+```java title="TeleportOptions.java"
 public class TeleportOptions implements ConfigurationSerializable {
+
     private int chunkX;
     private int chunkZ;
     private String name;

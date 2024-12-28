@@ -24,7 +24,7 @@ to the `bungeecord:main` channel. This means that your plugins should continue t
 First, we're going to take a look at your Paper server. Your plugin will need to register that it
 will be sending on any given plugin channel. You should to do this alongside your other event listener registrations.
 
-```java
+```java title="PluginMessagingSample.java"
 public final class PluginMessagingSample extends JavaPlugin {
 
     @Override
@@ -42,7 +42,7 @@ Plugin messages are formatted as byte arrays and can be sent using the <Javadoc 
 method on a <Javadoc name={"org.bukkit.entity.Player"}>`Player`</Javadoc> object.
 Let's take a look at an example of sending a plugin message to the `BungeeCord` channel to send our player to another server.
 
-```java
+```java title="PluginMessagingSample.java"
 public final class PluginMessagingSample extends JavaPlugin implements Listener {
 
     @Override
@@ -67,7 +67,7 @@ public final class PluginMessagingSample extends JavaPlugin implements Listener 
 :::tip
 
 These channels rely on the Minecraft protocol, and are sent as a special type of packet called a
-[Plugin Message](https://wiki.vg/Plugin_channels#Plugin_Messages). They piggyback on player connections, so if there is no
+[Plugin Message](https://minecraft.wiki/w/Minecraft_Wiki:Projects/wiki.vg_merge/Plugin_channels). They piggyback on player connections, so if there is no
 player connected to the server, it will not be able to send or receive plugin messages.
 
 :::
@@ -109,7 +109,7 @@ These are the following:
 
 #### `PlayerCount`
 
-```java
+```java title="MyPlugin.java"
 public class MyPlugin extends JavaPlugin implements PluginMessageListener {
 
     @Override
@@ -143,7 +143,7 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
 
 #### `Forward`
 
-```java
+```java title="MyPlugin.java"
 public class MyPlugin extends JavaPlugin implements PluginMessageListener {
 
     @Override
@@ -205,7 +205,7 @@ The `MessageRaw` message type is used to send a raw chat component to a player. 
 by the second parameter - Player name or "ALL" for all players. This is also useful for sending messages to
 players who are on a different server within the proxied network.
 
-```java
+```java title="MyPlugin.java"
 public class MyPlugin extends JavaPlugin {
 
     @Override

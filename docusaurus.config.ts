@@ -50,14 +50,8 @@ const config: Config = {
     require.resolve("@fontsource/jetbrains-mono/index.css"),
   ],
 
-  webpack: {
-    jsLoader: (isServer) => ({
-      loader: require.resolve("esbuild-loader"),
-      options: {
-        loader: "tsx",
-        target: isServer ? "node12" : "es2017",
-      },
-    }),
+  future: {
+    experimental_faster: true,
   },
 
   headTags: [
@@ -79,6 +73,14 @@ const config: Config = {
           "query-input": "required name=search_term_string",
         },
       }),
+    },
+    {
+      tagName: "script",
+      attributes: {
+        defer: "true",
+        src: "https://trk.papermc.io/api/init",
+        "data-website-id": "f93a0860-1253-4868-b27a-08208a36cea7",
+      },
     },
   ],
 

@@ -31,9 +31,6 @@ entities:
     filtered-entity-tag-nbt-paths:
       default: "<expand>"
       description: "The default value is: []"
-fixes:
-  disable-unloaded-chunk-enderpearl-exploit:
-    default: "false"
 hopper:
   cooldown-when-full:
     default: "false"

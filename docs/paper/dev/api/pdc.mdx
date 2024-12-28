@@ -5,7 +5,7 @@ description: A guide to the PDC API for storing data.
 
 # Persistent Data Container (PDC)
 
-The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and blocks.
+The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and block entities.
 The full list of classes that support the PDC are:
 
 - [`Chunk`](#chunk)
@@ -120,34 +120,34 @@ The `PersistentDataType`'s job is to "deconstruct" a complex data type into some
 
 Here is an example of how to do that for a UUID:
 
-```java
+```java title="UUIDDataType.java"
 public class UUIDDataType implements PersistentDataType<byte[], UUID> {
-     @Override
-     public Class<byte[]> getPrimitiveType() {
-         return byte[].class;
-     }
+    @Override
+    public Class<byte[]> getPrimitiveType() {
+        return byte[].class;
+    }
 
-     @Override
-     public Class<UUID> getComplexType() {
-         return UUID.class;
-     }
+    @Override
+    public Class<UUID> getComplexType() {
+        return UUID.class;
+    }
 
-     @Override
-     public byte[] toPrimitive(UUID complex, PersistentDataAdapterContext context) {
-         ByteBuffer bb = ByteBuffer.wrap(new byte[16]);
-         bb.putLong(complex.getMostSignificantBits());
-         bb.putLong(complex.getLeastSignificantBits());
-         return bb.array();
-     }
+    @Override
+    public byte[] toPrimitive(UUID complex, PersistentDataAdapterContext context) {
+        ByteBuffer bb = ByteBuffer.wrap(new byte[Long.BYTES * 2]);
+        bb.putLong(complex.getMostSignificantBits());
+        bb.putLong(complex.getLeastSignificantBits());
+        return bb.array();
+    }
 
-     @Override
-     public UUID fromPrimitive(byte[] primitive, PersistentDataAdapterContext context) {
-         ByteBuffer bb = ByteBuffer.wrap(primitive);
-         long firstLong = bb.getLong();
-         long secondLong = bb.getLong();
-         return new UUID(firstLong, secondLong);
-     }
- }
+    @Override
+    public UUID fromPrimitive(byte[] primitive, PersistentDataAdapterContext context) {
+        ByteBuffer bb = ByteBuffer.wrap(primitive);
+        long firstLong = bb.getLong();
+        long secondLong = bb.getLong();
+        return new UUID(firstLong, secondLong);
+    }
+}
 ```
 
 :::note
@@ -164,6 +164,14 @@ container.set(key, new UUIDDataType(), uuid);
 
 ## Storing on different objects
 
+:::caution
+
+Data is **not** copied across holders for you, and needs to be **manually** copied if 'moving' between PersistentDataHolders.
+
+E.g. Placing an ItemStack as a Block (with a TileState) ***does not*** copy over PDC data.
+
+:::
+
 Objects that can have a PDC implement the <Javadoc name={"org.bukkit.persistence.PersistentDataHolder"}>`PersistentDataHolder`</Javadoc> interface
 and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.PersistentDataHolder#getPersistentDataContainer()"}>`PersistentDataHolder#getPersistentDataContainer()`</Javadoc>.
 
@@ -174,7 +182,7 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
 - ##### <Javadoc name={"org.bukkit.entity.Entity"}>`Entity`</Javadoc>
     - `Entity#getPersistentDataContainer()`
 - ##### <Javadoc name={"org.bukkit.block.TileState"}>`TileState`</Javadoc>
-    - This is slightly more complicated, as you need to cast the block to something that extends `TileState`.
+    - This is slightly more complicated, as you need to cast the block's state to something that extends `TileState`.
       This does not work for all blocks, only those that have a tile entity.
       ```java
         Block block = ...;
@@ -187,3 +195,7 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
     - `Structure#getPersistentDataContainer()`
 - ##### <Javadoc name={"org.bukkit.inventory.meta.ItemMeta"}>`ItemMeta`</Javadoc>
     - `ItemMeta#getPersistentDataContainer()`
+- ##### <Javadoc name={"org.bukkit.generator.structure.GeneratedStructure"}>`GeneratedStructure`</Javadoc>
+    - `GeneratedStructure#getPersistentDataContainer()`
+- ##### <Javadoc name={"org.bukkit.Raid"}>`Raid`</Javadoc>
+    - `Raid#getPersistentDataContainer()`

@@ -66,9 +66,9 @@
 
 /* Popup Window */
 .config-explorer-popup-window {
-  background-color: #1c1e21;
+  background-color: var(--config-node-popup-background-color);
   padding: 10px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   margin-right: 100px;
   width: fit-content;
@@ -78,6 +78,7 @@
 
 .config-explorer-popup-window-open-tag {
   z-index: 5;
+  margin-left: 3px;
 }
 
 .config-explorer-popup-window-open-tag:hover {
@@ -105,6 +106,11 @@
   flex-shrink: 0;
   white-space: nowrap;
   margin: 5px;
+}
+
+.config-explorer-node-content {
+  display: flex;
+  align-items: center;
 }
 
 /* Node without Flex */

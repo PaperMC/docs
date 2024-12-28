@@ -144,6 +144,11 @@ online-mode:
 op-permission-level:
   default: "4"
   description: "Sets the default permission level for ops when using /op. (Allowed values: 0, 1, 2, 3, 4)"
+pause-when-empty-seconds:
+  default: "-1"
+  description: >
+    How many seconds have to pass after no player has been online before the server is paused.
+    This is disabled by default because it is incompatible with what plugins expect and might do with no players online.
 player-idle-timeout:
   default: "0"
   description: >
@@ -208,15 +213,9 @@ simulation-distance:
     updated by the server, measured in chunks in each direction of the player (radius, not diameter).
     If entities are outside this radius, then they will not be ticked by the server nor will they be
     visible to players. Must be between 3 and 32 inclusive.
-spawn-animals:
-  default: "true"
-  description: "Determines if animals will be able to spawn."
 spawn-monsters:
   default: "true"
   description: "Determines if monsters will be spawned."
-spawn-npcs:
-  default: "true"
-  description: "Determines if villagers will be spawned."
 spawn-protection:
   default: "16"
   description: >

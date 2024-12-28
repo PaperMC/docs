@@ -65,11 +65,12 @@ chunk-system:
   worker-threads:
     default: "-1"
     description: >-
-      Sets the number of threads to be used for parallel chunk generation. If
-      any value below zero is set, the server will determine the best number
-      depending on the number of available CPU cores. This is capped at a
-      quarter of available processors and can be less for systems with very few
-      processors. _(Note: Hyper-Threaded threads **do not** count)_.
+      Sets the number of threads to be used for parallel chunk generation.
+      If a value below zero is set, the server will automatically determine the
+      optimal number of threads based on the available physical CPU cores
+      (**not logical cores**). For systems with 3 or fewer physical cores,
+      only 1 thread will be used. In all other cases, the number of threads
+      is capped at half of the physical cores.
 collisions:
   enable-player-collisions:
     default: "true"
@@ -141,7 +142,8 @@ item-validation:
       default: "2560"
       description: >-
         The max number of bytes a single page in a book can contribute to the
-        allowed byte total for a book
+        allowed byte total for a book, or "disabled" to disable non-vanilla restrictions on
+        the book size.
     total-multiplier:
       default: "0.98"
       description: >-
@@ -440,11 +442,6 @@ unsupported-settings:
       Allows the server to customize the format of saved region files. This
       supports ZLIB, GZIP and NONE, where None namely allows for compression to
       be disabled
-  allow-grindstone-overstacking:
-    default: "false"
-    description: >-
-      Whether the server should allow players to overstack items in the
-      grindstone
   allow-unsafe-end-portal-teleportation:
     default: "false"
     description: >-
@@ -452,11 +449,6 @@ unsupported-settings:
       possible, for example sand duplication. This
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
-  allow-tripwire-disarming-exploits:
-    default: "false"
-    description: >-
-      Whether the server should allow tripwire disarming exploits. This allows
-      the duplication of string.
 watchdog:
   early-warning-delay:
     default: "10000"

@@ -151,12 +151,14 @@ of a few ways:
     %%_MAJ_MIN_PAT_USERDEV_%% - Latest Paperweight-Userdev Version (E.g. 1.7.3)
     ````
 
-When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
-for older versions. This is done by using Docusaurus's `version` command:
+### Manual Version Tagging
 
-```bash
-pnpm docusaurus docs:version:paper "1.20"
-```
+All of our documentation which is potentially relevant to a specific version of the software should be tagged with the
+`targetVersion` frontmatter. This allows the user to see which version of the software the documentation was written for.
+
+It is important to keep this up to date, as it allows users to see if the documentation is still relevant to the version
+however it is not required for all documentation. For example, a page about the history of the project would not need a
+`targetVersion` tag.
 
 ## Magic Value Handling
 

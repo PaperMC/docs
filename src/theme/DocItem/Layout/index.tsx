@@ -40,7 +40,6 @@ function useDocTOC() {
 }
 
 function DocVersionLabel({ version }: { version: string }): JSX.Element {
-
   return (
     <div className={clsx(styles.docVersionContainer)}>
       <span>Written for version: {version}</span>

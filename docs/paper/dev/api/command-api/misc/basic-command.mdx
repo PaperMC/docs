@@ -9,12 +9,12 @@ import BroadcastSuggestionsUnfinished from  "./assets/broadcast-suggestions-unfi
 import BroadcastSuggestionsNone from        "./assets/broadcast-suggestions-none.png"
 
 # Basic Commands
-For very simple commands Paper has a way to declare Bukkit-style command by implementing the `BasicCommand` interface.
+For very simple commands Paper has a way to declare Bukkit-style commands by implementing the `BasicCommand` interface.
 
 This interface has one method you have to override:
 - `void execute(CommandSourceStack commandSourceStack, String[] args)`
 
-And three more, optional methods which you can override:
+And three more, optional methods which you can, but don't have to override:
 - `Collection<String> suggest(CommandSourceStack commandSourceStack, String[] args)`
 - `boolean canUse(CommandSender sender)`
 - `@Nullable String permission()`
@@ -48,9 +48,9 @@ You can freely choose whether to implement either of the at the top mentioned, o
 
 ### `suggest(CommandSourceStack, String[])`
 This method returns some sort of `Collection<String>` and takes in a `CommandSourceStack` and a `String[] args` as parameters. This is similar to the
-`onTabComplete(CommandSender, Command, String, String[])` method of the `TabCompleter` interface, which is commonly used for tab completion on Bukkit commands.
+`onTabComplete(CommandSender, Command, String, String[])` method of the `TabCompleter` interface, which is used for tab completion on Bukkit commands.
 
-Yeah entry in the collection that you return will be send to the client to be shown as suggestions, the same way as with Bukkit commands.
+Each entry in the collection that you return will be send to the client to be shown as suggestions the same way as with Bukkit commands.
 
 ### `canUse(CommandSender)`
 With this method, you can set up a basic `requires` structure from Brigadier commands. ([Read more on that here] WIP). This method returns a `boolean`, which is
@@ -99,8 +99,8 @@ else {
 
 This makes sure that we cover all cases and even allow the command to work correctly with `/execute as`.
 
-Next, we retrieve all arguments and join them to a String or telling the sender that at least one argument is required in order to send a broadcast
-(sending empty broadcasts make no sense, after all), if they defined no arguents (`args` has a length of 0):
+Next, we retrieve all arguments and join them to a String or tell the sender that at least one argument is required in order to send a broadcast
+if they defined no arguments (meaning that `args` has a length of 0):
 ```java
 if (args.length == 0) {
     commandSourceStack.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
@@ -110,7 +110,7 @@ if (args.length == 0) {
 final String message = String.join(" ", args);
 ```
 
-Finally, we can build our broadcast message and send if via `Bukkit.broadcast(Component)`:
+Finally, we can build our broadcast message and send it via `Bukkit.broadcast(Component)`:
 ```java
 final Component broadcastMessage = MiniMessage.miniMessage().deserialize(
     "<red><bold>BROADCAST</red> <name> <dark_gray>»</dark_gray> <message>",
@@ -196,7 +196,7 @@ This works great, but as you can see here, it will always suggest all players, r
 
 In order to fix this, we have to do some changes:
 
-First, we early return what we already have in case there is no arguments, as we can not filter by input then:
+First, we early return what we already have in case there is no arguments, as we cannot filter by input then:
 ```java
 if (args.length == 0) {
     return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();

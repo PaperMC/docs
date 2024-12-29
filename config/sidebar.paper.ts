@@ -162,7 +162,10 @@ const paper: SidebarsConfig = {
                   type: "category",
                   label: "Misc",
                   collapsed: true,
-                  items: ["dev/api/command-api/misc/comparison-bukkit-brigadier"],
+                  items: [
+                    "dev/api/command-api/misc/comparison-bukkit-brigadier",
+                    "dev/api/command-api/misc/basic-command",
+                  ],
                 },
               ],
             },

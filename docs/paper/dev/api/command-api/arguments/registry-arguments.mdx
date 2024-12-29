@@ -128,13 +128,13 @@ a value from a registry yourself.
 
 :::tip
 
-Unless you have a specific reason for using the `resourceKey` argument over the `resource` one, the `resource` argument is prefered due to the error checking
+Unless you have a specific reason for using the `resourceKey` argument over the `resource` one, the `resource` argument is preferred due to the error checking
 and simple usability.
 
 :::
 
 ### Direct code comparison
-Here is a simple code snipped on how one could use the `RegsitryKey.ITEM` registry with a `resource` argument type:
+Here is a simple code snipped on how one could use the `RegistryKey.ITEM` registry with a `resource` argument type:
 ```java title="Item Resource"
 Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
     .executes(ctx -> {

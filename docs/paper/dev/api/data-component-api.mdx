@@ -52,7 +52,7 @@ DataComponents allow the entire component to be modified in a fashion that bette
 
 #### Version-Specific
 The Data Component API is designed to adapt to version changes. The Data Component API may experience breaking changes on version updates as Minecraft makes changes to components.
-Backwards compatability is not promised.
+Backwards compatibility is not promised.
 
 Because ItemMeta is represented in a different format, breaking changes made to components by Mojang may not result in breaking changes to `ItemMeta`.
 
@@ -72,10 +72,10 @@ The DataComponent API integrates directly with `ItemStack`. Although conceptuall
 ### When should I use `DataComponents` or `ItemMeta`?
 #### `ItemMeta`
 - Simple changes to `ItemStacks`
-- Keep the most version compatability with your plugin
+- Keep the most version compatibility with your plugin
 #### `DataComponent`
 - More complicated `ItemStack` modifications
-- Do not care about cross-version compatability
+- Do not care about cross-version compatibility
 - Want to access default (prototype) values
 - Want to remove components from an ItemStack's prototype
 

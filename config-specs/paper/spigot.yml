@@ -174,7 +174,7 @@ settings:
   player-shuffle:
     default: "0"
     description: >-
-      How often to shuffle the list of player connections, in ticks, with -1 to
+      How often to shuffle the list of player connections, in ticks, 0 or less to
       disable. This prevents players from strategically re-logging to increase
       their position in the tick order. This can have a performance impact if
       enabled with low values.

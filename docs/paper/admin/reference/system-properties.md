@@ -1,6 +1,7 @@
 ---
 slug: /reference/system-properties
 description: Documentation for the system properties and environment variables Paper may check.
+targetVersion: 1.21
 ---
 
 # Paper System Properties

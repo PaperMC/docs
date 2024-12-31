@@ -2,6 +2,7 @@
 slug: /faq
 title: FAQ
 description: Questions frequently asked by our community, answered by us!
+targetVersion: 1.21
 ---
 
 # FAQ

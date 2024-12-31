@@ -1,6 +1,7 @@
 ---
 slug: /dev/handler-lists
 description: An explanation to what an event's HandlerList is.
+targetVersion: 1.21
 ---
 
 # Handler Lists
@@ -21,9 +22,9 @@ public class ExampleListener implements Listener {
         HandlerList handlerList = event.getHandlerList();
         // ...
     }
-    
+
     // Or:
-    
+
     public ExampleListener() {
         // Access the handler list through the static getter
         HandlerList handlerList = PlayerJoinEvent.getHandlerList();
@@ -45,9 +46,9 @@ public class ExampleListener implements Listener {
         handlerList.unregister(this);
         // ...
     }
-    
+
     // Or:
-    
+
     public ExampleListener() {
         // Access the handler list through the static getter
         HandlerList handlerList = PlayerJoinEvent.getHandlerList();

@@ -8,3 +8,5 @@
 /paper/configuration /paper/reference/configuration
 /paper/reference/vanilla-command-permissions /paper/reference/permissions
 /paper/dev/commands /paper/dev/command-api/commands
+/paper/:version/* /paper/*
+/paper/:version /paper

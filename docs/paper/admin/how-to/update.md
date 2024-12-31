@@ -1,6 +1,7 @@
 ---
 slug: /updating
 description: Paper has new features and fixes coming every day, this guide explains the updating process.
+targetVersion: 1.21
 ---
 
 # Updating Paper

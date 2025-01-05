@@ -142,6 +142,7 @@ const paper: SidebarsConfig = {
                     "dev/api/command-api/basics/arguments-and-literals",
                     "dev/api/command-api/basics/command-executors",
                     "dev/api/command-api/basics/command-registration",
+                    "dev/api/command-api/basics/command-requirements",
                   ],
                 },
                 {

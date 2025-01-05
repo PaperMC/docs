@@ -42,7 +42,6 @@ parameter `S` from our `CommandContext<S>`, which is also used in the `executes`
 With a `CommandSourceStack`, we can retrieve basic information about the sender of the command, the location the command was send from, and the executing entity.
 For more information, check out [basics/command-executors](../basics/command-executors.mdx).
 
-
 ## The optional methods
 You can freely choose whether to implement either of the at the top mentioned, optional methods. Here is a quick overview on what which one does:
 
@@ -53,11 +52,11 @@ This method returns some sort of `Collection<String>` and takes in a `CommandSou
 Each entry in the collection that you return will be send to the client to be shown as suggestions the same way as with Bukkit commands.
 
 ### `canUse(CommandSender)`
-With this method, you can set up a basic `requires` structure from Brigadier commands. ([Read more on that here] WIP). This method returns a `boolean`, which is
-required to return `true` in order for a command sender to execute that command.
+With this method, you can set up a basic `requires` structure from Brigadier commands. [You can read more on that here](../basics/command-requirements.mdx).
+This method returns a `boolean`, which is required to return `true` in order for a command sender to be able to execute that command.
 
 ### `permission()`
-With the permission method you can set the required permission required to be able to execute and view this command.
+With the permission method you can, similar to the `canUse` method, set the permission required to be able to execute and view this command.
 
 
 ## Example: Broadcast command

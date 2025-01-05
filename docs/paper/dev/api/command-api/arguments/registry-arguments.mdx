@@ -59,6 +59,7 @@ public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
 The return type of the retrieved value using `ctx.getArgument(...)` would be an `ItemType`.
 
 And really, there isn't much more to it. For that exact reason, here is an example on the implementation of such an argument:
+
 ```java
 public static LiteralCommandNode<CommandSourceStack> enchantmentRegistry() {
     return Commands.literal("enchants-registry")
@@ -91,10 +92,9 @@ Finally, we enchant the item of the executing player's hand with whatever enchan
 Here is how it looks in-game:
 <FullWidthVideo src={EnchantsRegistry}/>
 
-<br/>
 :::warning
 
-There are certain edge-cases, where this argument will cause a **Network Protocol Error** on the client, due to missing registries on the client.
+There are certain edge-cases, where this argument, due to missing registries on the client, will cause a **Network Protocol Error**.
 Basically, the only argument where this is the case right now is with the `STRUCTURE` registry key.
 
 ```java
@@ -108,19 +108,16 @@ Due to this fact, it is advised to only use the `STRUCTURE` registry key argumen
 [More information on resource key arguments can be found by clicking here.](#resource-key-argument).
 
 :::
-<br/>
 
 ## Resource Key Argument
 For the client, there is barely any difference between the using `ArgumentTypes.resource` or `ArgumentTypes.resourceKey`. The only difference is that
 using `ArgumentTypes.resourceKey` does not provide **error checking**. We can visualize this using `RegistryKey.ITEM`.
 
 Here is the tab completion for when using `ArgumentTypes.resource(RegistryKey.ITEM)`:
-<FullWidthVideo src={ResourceItem}/>
-<br/>
+<FullWidthVideo src={ResourceItem}/><br/>
 
 And here is the tab completion for when using `ArgumenTypes.resourceKey(RegistryKey.ITEM)`:
-<FullWidthVideo src={ResourceKeyItem}/>
-<br/>
+<FullWidthVideo src={ResourceKeyItem}/><br/>
 
 The resource argument provides a much cleaner user experience, whilst the resourceKey argument has one very important usecase: You get the raw
 `TypedKey<T>` returned as an argument result. This object is particularly useful, as it provides all information required to be able to retrieve
@@ -128,13 +125,14 @@ a value from a registry yourself.
 
 :::tip
 
-Unless you have a specific reason for using the `resourceKey` argument over the `resource` one, the `resource` argument is preferred due to the error checking
-and simple usability.
+Unless you have a specific reason for using the `resourceKey` argument over the `resource` one, the `resource` argument is preferred due to the client-side error
+checking and simple usability.
 
 :::
 
 ### Direct code comparison
 Here is a simple code snipped on how one could use the `RegistryKey.ITEM` registry with a `resource` argument type:
+
 ```java title="Item Resource"
 Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
     .executes(ctx -> {
@@ -149,6 +147,7 @@ Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
 ```
 
 Here is the same code, using a `resourceKey` argument type:
+
 ```java title="Item Resource"
 Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
     .executes(ctx -> {

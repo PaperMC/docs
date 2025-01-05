@@ -13,16 +13,19 @@ worry about handling various server reload events, like `/reload`. Instead, what
 But how does one get access to a `LifecycleEventManager` capable of registering commands? There are two "contexts" in which you can use a LifecycleEventManager. The first one,
 and preferred one, is in the `PluginBootstrap` class of our plugin. 
 
-### Using the PluginBootstrap
+### Registering inside a plugin bootstrapper
+
 :::note
 
-This requires you to use a `paper-plugin.yml` plugin. You can read more on that
-**here** (WIP). If you are not using `paper-plugin.yml`, you can instead register your commands inside your plugin's main class.
+This requires you to use a [`paper-plugin.yml` plugin](../../../getting-started/paper-plugins.mdx).
+
+If you are not using `paper-plugin.yml`, you can instead [register your commands inside your plugin's main class](#registering-inside-a-plugin-main-class).
 
 :::
 
 We can get access to a `LifecycleEventManager` capable of registering commands by running `context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {})`
 inside our bootstrap method, like this:
+
 ```java title="CustomPluginBootstrapper.java"
 public class CustomPluginBootstrap implements PluginBootstrap {
         
@@ -43,7 +46,6 @@ the lifecycle event type we want to register stuff for, the second parameter is 
 ```java
 @FunctionalInterface
 public interface LifecycleEventHandler<E extends LifecycleEvent> {
-
     void run(E event);
 }
 ```
@@ -55,7 +57,7 @@ The `ReloadableRegistrarEvent<Commands>` class has two methods: `ReloadableRegis
 the `registrar` one. With it we can register our commands.
 
 
-### Using the JavaPlugin
+### Registering inside a plugin main class
 Getting access to a `LifecycleEventManager` for commands inside our plugin's main class is very similar to how you access it inside the PluginBootstrap class, with the difference
 that instead of getting the `LifecycleEventManager` using the `BootstrapContext` provided to us in the bootstrap method of our PluginBootstrap class, we can just retrieve it using
 `JavaPlugin#getLifecycleManager`.
@@ -84,6 +86,7 @@ the `Commands#registerWithFlags()` method, which is also irrelevant for basic us
 ### Registering a LiteralCommandNode
 Most of the time, you will be using a `LiteralArgumentBuilder` to build up your command tree. In order to retrieve a `LiteralCommandNode` from that object, we need to call the
 `LiteralArgumentBuilder#build()` method on it:
+
 ```java
 LiteralArgumentBuilder<CommandSourceStack> command = Commands.literal("testcmd")
     .then(Commands.literal("argument_one"))
@@ -93,6 +96,7 @@ LiteralCommandNode<CommandSourceStack> buildCommand = command.build();
 ```
 
 Or in short:
+
 ```java
 LiteralCommandNode<CommandSourceStack> buildCommand = Commands.literal("testcmd")
     .then(Commands.literal("argument_one"))
@@ -104,6 +108,7 @@ Now that we have retrieved our `LiteralCommandNode`, we can register it. For tha
 Check out the **JavaDocs** for more information.
 
 Registering our "testcmd" might look like this:
+
 ```java
 this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
     commands.registrar().register(buildCommand);
@@ -115,6 +120,7 @@ A `BasicCommand` is a bukkit-like way of defining commands. Instead of building 
 This type of commands is particularly useful for very simple, text based commands, like a `/broadcast` command. You can read up on more details **here** (WIP).
 
 Assuming you already have your `BasicCommand` object, we can register it like this:
+
 ```java
 final BasicCommand basicCommand = ...;
 
@@ -125,6 +131,5 @@ this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, comman
 
 Similar to the `LiteralCommandNode`, we also have overloads for setting various additional information for our command. You can check out the **JavaDocs** for more information.
 
-## Further references
-* For a quick reference on the LifecycleEventManager, you can use **this site**.
-* If you want to read more about lifecycle events, you can check out the **dedicated docs entry** (WIP)
+## Further reference
+* For a quick reference on the LifecycleEventManager, click [here](../../lifecycle.mdx).

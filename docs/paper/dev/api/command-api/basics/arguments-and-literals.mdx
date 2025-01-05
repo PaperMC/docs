@@ -93,6 +93,7 @@ object? There are a few build-in, primitive argument types that you should defin
 ### Boolean argument type and argument parsing
 The BoolArgumentType can be used for enabling/disabling options. Like if we have a `/serverflight` command, which toggles every members ability to fly, we could add a boolean argument
 onto that, which would allow for `/serverflight true` and `/serverflight false`:
+
 ```java title="ServerFlightCommand.java"
 Commands.literal("serverflight")
     .then(Commands.argument("allow", BoolArgumentType.bool())
@@ -104,6 +105,7 @@ Commands.literal("serverflight")
         })
     );
 ```
+
 Here, you can see how one would access an argument in-code. The first parameter for the `Commands.argument(String, ArgumentType)` method takes in the node name. This is not required
 by literals, as their name is the same as their value. But here we need a way to access the argument. The parameter of the executes-lambda has a method called 
 `T getArgument(String, Class<T>)`. The first parameter is the name of the method we want to retrieve. The second parameter is the return value of the argument. As we are using
@@ -122,6 +124,7 @@ All of the number arguments (like `IntegerArgumentType.integer()`) have three ov
 This is particularly useful for filtering out too high or too low input. As an example, we can define a `/flyspeed` command. As the `Player#setFlySpeed(float value)` method only 
 accepts floats between -1 and 1, where -1 is an inverse direction, it would make sense to limit the values between 0 and 1 for allowed, non-negative speeds. That can be
 achieved with the following command tree:
+
 ```java title="FlightSpeedCommand.java"
 Commands.literal("flyspeed")
     .then(Commands.argument("speed", FloatArgumentType.floatArg(0, 1.0f))
@@ -180,12 +183,9 @@ Here you can see the arguments in action:
 </div>
 
 ## Further reference
-It is suggested that you visit our [Extensive Guide on Command Execution](./command-executors) in order to read more about the `.executes(...)` method. It contains a lot of useful information
-that is required for fully understanding Brigadier commands. 
-
 ### Minecraft arguments
 Apart from these build-in Brigadier arguments, countless custom arguments are defined by Paper as well. These can be accessed in a static context with the `ArgumentTypes` class. You
-can read more about these **here**. (WIP).
+can read more about these [here](../arguments/minecraft-arguments.mdx)
 
 ### Custom arguments
-Sometimes you want to define your own, custom arguments. For that you can implement the `CustomArgumentType<T, N>` interface. For more details, you should check out **this** site. (WIP).
+Sometimes you want to define your own, custom arguments. For that you can implement the `CustomArgumentType<T, N>` interface.

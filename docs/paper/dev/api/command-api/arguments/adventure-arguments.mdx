@@ -148,7 +148,7 @@ on that resulting completable future. Inside of that, you can send the signed me
 :::warning
 
 The use of thread unsafe Bukkit API inside the `.thenAccept` method is not supported, as this is an asynchronous method, which does not run on the main thread.
-If you need to use Bukkit API, you can schedule a task to be run on the next available tick. You can read up on that **here** (WIP).
+If you need to use Bukkit API, you can schedule a task to be run on the next available tick. You can read up on that [here](../../scheduler.mdx).
 
 :::
 

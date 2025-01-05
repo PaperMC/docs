@@ -47,7 +47,9 @@ public class BukkitPartyCommand extends BukkitCommand {
     }
 }
 ```
+
 After that, you can define your command like this:
+
 ```java title="PluginClass.java"
 this.getServer().getCommandMap().register(
     this.getName().toLowerCase(),
@@ -64,6 +66,7 @@ In our case, it is the root of our command. We can do that by running `Commands.
 `LiteralArgumentBuilder<CommandSourceStack>`, where we can define some arguments and executors. Once we are done, we can call
 `LiteralArgumentBuilder#build()` to retrieve our build `LiteralCommandNode`, which we can then register. That sounds complicated at first,
 but once you see it in action, it looks less terrifying:
+
 ```java title="PaperPartyCommand.java"
 public static LiteralCommandNode<CommandSourceStack> createCommand(final String commandName) {
     return Commands.literal(commandName)

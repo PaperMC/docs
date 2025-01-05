@@ -61,6 +61,7 @@ With the permission method you can, similar to the `canUse` method, set the perm
 
 ## Example: Broadcast command
 As an example, we can create a simple broadcast command. We start by declaring creating a class which implements BasicCommand and overrides `execute` and `permission`:
+
 ```java
 package your.package.name;
 
@@ -86,6 +87,7 @@ Our permission is set to `example.broadcast.use`. In order to give yourself that
 operator permissions. You can also set this permission to be `true` by default. For this, please check out the [plugin.yml documentation](../../../getting-started/plugin-yml.mdx).
 
 Now, in our `execute` method, we can retrieve the name of the executor of that command. If we do not find one, we can just get the name of the command sender, like this:
+
 ```java
 final Component name;
 if (commandSourceStack.getExecutor() != null) {
@@ -99,6 +101,7 @@ else {
 This makes sure that we cover all cases and even allow the command to work correctly with `/execute as`.
 
 Next, we retrieve all arguments and join them to a String or tell the sender that at least one argument is required in order to send a broadcast
+
 if they defined no arguments (meaning that `args` has a length of 0):
 ```java
 if (args.length == 0) {
@@ -110,6 +113,7 @@ final String message = String.join(" ", args);
 ```
 
 Finally, we can build our broadcast message and send it via `Bukkit.broadcast(Component)`:
+
 ```java
 final Component broadcastMessage = MiniMessage.miniMessage().deserialize(
     "<red><bold>BROADCAST</red> <name> <dark_gray>»</dark_gray> <message>",
@@ -121,6 +125,7 @@ Bukkit.broadcast(broadcastMessage);
 ```
 
 And we are done! As you can see, this is a very simple way to define commands. Here is the final result of our class:
+
 ```java title="BroadcastCommand.java"
 package your.package.name;
 
@@ -167,6 +172,7 @@ public class BroadcastCommand implements BasicCommand {
 ```
 
 Registering our command looks like this:
+
 ```java title="PluginMainClass.java"
 @Override
 public void onEnable() {
@@ -183,6 +189,7 @@ And this is how it looks like in-game:
 ## Example: Adding suggestions
 Our broadcast command works pretty well, but it is lacking on suggestions. A very common kind of suggestion for text based commands are player names.
 In order to suggest player names, we can just map all online players to their name, like this:
+
 ```java
 @Override
 public Collection<String> suggest(CommandSourceStack commandSourceStack, String[] args) {
@@ -196,6 +203,7 @@ This works great, but as you can see here, it will always suggest all players, r
 In order to fix this, we have to do some changes:
 
 First, we early return what we already have in case there is no arguments, as we cannot filter by input then:
+
 ```java
 if (args.length == 0) {
     return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
@@ -203,6 +211,7 @@ if (args.length == 0) {
 ```
 
 After this, we can add a `filter` clause to our stream, where we filter all names by whether they start with our current input, which is `args[args.length - 1]`:
+
 ```java
 return Bukkit.getOnlinePlayers().stream()
     .map(Player::getName)
@@ -218,6 +227,7 @@ But when there is no player who starts with an input, it just suggests nothing:
 
 ### Final code
 Here is the final code for our whole `BroadcastCommand` class, including the suggestions:
+
 ```java
 package your.package.name;
 

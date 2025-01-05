@@ -41,10 +41,7 @@ const createUserdevVersionsValue = (ttl: number = 5 * 60 * 1000): ExpiringValue<
       r.json()
     );
 
-    return json
-      .map((e) => e.name.substring(1))
-      .filter((e) => !e.includes("beta"))
-      .reverse();
+    return json.map((e) => e.name.substring(1)).reverse();
   });
 };
 

@@ -74,6 +74,14 @@ const config: Config = {
         },
       }),
     },
+    {
+      tagName: "script",
+      attributes: {
+        defer: "true",
+        src: "https://trk.papermc.io/api/init",
+        "data-website-id": "f93a0860-1253-4868-b27a-08208a36cea7",
+      },
+    },
   ],
 
   markdown: {

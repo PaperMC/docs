@@ -38,8 +38,9 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
 
 
 ## ItemStack Argument
-The item stack argument is a way to retrieve an `ItemStack` following the same argument format as the vanilla `/give <player> <item> [<amount>]` command as its second argument.
-The user may also define components to further customize the `ItemStack`. If you only require a material, you should instead check out the [registry arguments](./registry-arguments.mdx).
+The item stack argument is a way to retrieve an <JavaDocs name={org.bukkit.inventory.ItemStack}>`ItemStack`</JavaDocs> following the same argument format as the vanilla `/give <player> <item> [<amount>]`
+command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a <JavaDocs name={org.bukkit.Material}>`Material`</JavaDocs>, you should instead
+check out the [registry arguments](./registry-arguments.mdx).
 
 ### Example usage
 ```java
@@ -72,8 +73,8 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
 
 
 ## Bukkit NamespacedKey Argument
-Similar to the **Key** argument, this argument allows the user to provide any artificial (namespaced) key. The difference is that the return value of this argument is instead
-`org.bukkit.NamespacedKey`, which makes it particularly useful when dealing with Bukkit API.
+Similar to the **Key** argument, this argument allows the user to provide any artificial (namespaced) key. The difference is that the return value of this argument is instead a
+<JavaDocs name={org.bukkit.NamespacedKey}>`NamespacedKey`</JavaDocs>, which makes it particularly useful when dealing with Bukkit API.
 
 ### Example usage
 ```java

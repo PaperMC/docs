@@ -8,8 +8,6 @@ import FinePositionMp4 from "./assets/vanilla-arguments/fineposition.mp4"
 import WorldMp4 from "./assets/vanilla-arguments/world.mp4"
 
 # Location Arguments
-With the arguments described in this page, you can retrieve positional input from a user.
-
 
 ## Block Position Argument
 The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` vanilla command.
@@ -38,7 +36,7 @@ public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
 
 ## Fine Position Argument
 The fine position argument works similarly to the block position argument, with the only difference being that it can accept decimal (precise) location input. The optional
-overload (`ArgumentTypes.finePosition(boolean centerIntegers)`), which defaults to false if not set, will center whole input, meaning 5 becomes 5.5 (5.0 would stay as 5.5 though),
+overload (`ArgumentTypes.finePosition(boolean centerIntegers)`), which defaults to false if not set, will center whole input, meaning 5 becomes 5.5 (5.0 would stay as 5.0 though),
 as that is the "middle" of a block. This only applies to X/Z. The y coordinate is untouched by this operation.
 
 This argument returns a <Javadoc name='io.papermc.paper.command.brigadier.argument.resolvers.FinePositionResolver'>`FinePositionResolver`</Javadoc>. You can resolve that by running `FinePositionResolver#resolve(CommandSourceStack)` to get the resulting

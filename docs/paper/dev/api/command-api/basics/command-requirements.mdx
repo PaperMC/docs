@@ -7,7 +7,7 @@ import ClientServerMismatch from "./assets/client-server-mismatch.png"
 
 # Command Requirements
 Sometimes you want to limit a player's ability to use and/or view certain commands or subcommands. Exactly for this purpose,
-the `ArgumentBuilder<S>` class has a `#requires(Predicate<S>)` method to define a requirement in order to use that specific branch of a command tree.
+the `ArgumentBuilder<S>` class has a `requires(Predicate<S>)` method to define a requirement in order to use that specific branch of a command tree.
 As always, the generic parameter `S` is just a `CommandSourceStack`, providing us with the executing entity, the command sender, and the location of the command.
 
 ## Defining permissions
@@ -36,7 +36,7 @@ Commands.literal("testcmd")
 ```
 
 ## Defining more advanced predicates
-You don't have to limit yourself to checking just for permissions - any boolean can be returned, since it is a predicate. For example, you can check for whether
+You don't have to limit yourself to checking just for permissions - since it is a predicate, any boolean can be returned. For example, you can check for whether
 a player has a diamond sword in their inventory:
 
 ```java
@@ -57,7 +57,7 @@ the requirement was not met):
 
 <img src={ClientServerMismatch} style={{width: '100%', marginBottom: '1%'}}/>
 
-How can we solve this? The `Player` interface has a method called `#updateCommands()` just for this usecase. It resends the currently registered commands back to the
+How can we solve this? The `Player` interface has a method called <Javadoc name='org.bukkit.entity.Player#updateCommands()'>`#updateCommands()`</Javadoc> just for this usecase. It resends the currently registered commands back to the
 client in an attempt to reload commands. For now, we can create a new command with which the player can update its own commands in order to resync its command state:
 
 ```java

@@ -4,7 +4,7 @@ description: A guide to registering Brigadier commands
 ---
 
 # Command Registration
-In the previous chapters, we have taken an extensive look at how Brigadier works, but never actually specified on how to register commands. So we will be doing that right here!
+In the previous chapters, we have taken an extensive look at how Brigadier works, but never actually elaborated on how to register commands. So we will be doing that right here!
 
 ## The LifecycleEventManager
 In Paper, Brigadier commands are registered using the `LifecycleEventManager`. This is a special class which allows us to register commands in such a way that we never have to
@@ -26,7 +26,7 @@ If you are not using `paper-plugin.yml`, you can instead [register your commands
 We can get access to a `LifecycleEventManager` capable of registering commands by running `context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {})`
 inside our bootstrap method, like this:
 
-```java title="CustomPluginBootstrapper.java"
+```java title="CustomPluginBootstrap.java"
 public class CustomPluginBootstrap implements PluginBootstrap {
         
     @Override
@@ -76,12 +76,11 @@ public final class PluginMainClass extends JavaPlugin {
 
 This follows the same concept as the PluginBootstrap one, just that instead of being given a `LifecycleEventManager<BootstrapContext>`, we are instead given a 
 `LifecycleEventManager<Plugin>`. This doesn't really matter for our use cases, but you might as well be aware of that.
-The rest of the methods works the exact same way as with the `PluginBootstrap` inherited class.
+The rest of the methods works the exact same way as with the `PluginBootstrap` parameterized `LifecycleEventManager`.
 
 ## Registering Commands using the Commands class
 Now that we have access to the instance of a `Commands` class via `commands.registrar()` in our event handler, we have access to a few overloads of the `Commands#register`
-method. We also have access to the `CommandDispatcher<CommandSourceStack>` via `Commands#getDispatcher()`, which is a way more advanced access to registering commands, and
-the `Commands#registerWithFlags()` method, which is also irrelevant for basic usage. We will only be looking at the overloads of the `Commands#register` method for now.
+method.
 
 ### Registering a LiteralCommandNode
 Most of the time, you will be using a `LiteralArgumentBuilder` to build up your command tree. In order to retrieve a `LiteralCommandNode` from that object, we need to call the
@@ -105,8 +104,6 @@ LiteralCommandNode<CommandSourceStack> buildCommand = Commands.literal("testcmd"
 ```
 
 Now that we have retrieved our `LiteralCommandNode`, we can register it. For that we have multiple overloads, which optionally allow us to set aliases and/or the description.
-Check out the **JavaDocs** for more information.
-
 Registering our "testcmd" might look like this:
 
 ```java
@@ -116,7 +113,7 @@ this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, comman
 ```
 
 ### Registering a BasicCommand
-A `BasicCommand` is a bukkit-like way of defining commands. Instead of building up a command tree, we allow all user input and retrieve the arguments as a simple array of Strings.
+A <Javadoc name='io.papermc.paper.command.brigadier.BasicCommand'>`BasicCommand`</Javadoc> is a bukkit-like way of defining commands. Instead of building up a command tree, we allow all user input and retrieve the arguments as a simple array of Strings.
 This type of commands is particularly useful for very simple, text based commands, like a `/broadcast` command. You can read up on more details about basic commands 
 [here](../misc/basic-command.mdx).
 
@@ -127,10 +124,10 @@ final BasicCommand basicCommand = ...;
 
 this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
     commands.registrar().register("commandname", basicCommand);
-})
+});
 ```
 
-Similar to the `LiteralCommandNode`, we also have overloads for setting various additional information for our command. You can check out the **JavaDocs** for more information.
+Similar to the `LiteralCommandNode`, we also have overloads for setting various additional information for our command.
 
 ## Further reference
 * For a quick reference on the LifecycleEventManager, click [here](../../lifecycle.mdx).

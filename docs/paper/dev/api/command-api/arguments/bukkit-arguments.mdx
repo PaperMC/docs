@@ -15,8 +15,7 @@ The arguments described in this section return objects oftentime used in Bukkit 
 non-bukkit object described here is the [UUID Argument](#uuid-argument).
 
 ## Block State Argument
-The block state argument is a very useful argument for getting use input on an exact block type and its data. It is particularly used for commands that modify blocks
-in some way, which requires precise input.
+The block state argument can be used for getting a block type and explicit, assosiated data.
 
 ### Example usage
 ```java
@@ -37,9 +36,8 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
 <FullWidthVideo src={BlockStateMp4}/>
 
 
-
 ## ItemStack Argument
-The item stack argument is a way to retrieve an <Javadoc name={'org.bukkit.inventory.ItemStack'}>`ItemStack`</Javadoc> following the same argument format as the vanilla `/give <player> <item> [<amount>]`
+The item stack argument is the way to retrieve an <Javadoc name={'org.bukkit.inventory.ItemStack'}>`ItemStack`</Javadoc> following the same argument format as the vanilla `/give <player> <item> [<amount>]`
 command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a <Javadoc name={'org.bukkit.Material'}>`Material`</Javadoc>, you should instead
 check out the [registry arguments](./registry-arguments.mdx).
 
@@ -72,10 +70,9 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
 <FullWidthVideo src={ItemStackMp4}/>
 
 
-
 ## Bukkit NamespacedKey Argument
-Similar to the **Key** argument, this argument allows the user to provide any artificial (namespaced) key. The difference is that the return value of this argument is instead a
-<Javadoc name={'org.bukkit.NamespacedKey'}>`NamespacedKey`</Javadoc>, which makes it particularly useful when dealing with Bukkit API.
+This argument allows the user to provide any artificial (namespaced) key. The return value of this argument is a
+<Javadoc name={'org.bukkit.NamespacedKey'}>`NamespacedKey`</Javadoc>, which makes it useful when dealing with Bukkit API.
 
 ### Example usage
 ```java
@@ -96,7 +93,6 @@ public static LiteralCommandNode<CommandSourceStack> namespacedKeyArgument() {
 
 ### In-game preview
 <FullWidthVideo src={NamespacedKeyMp4}/>
-
 
 
 ## Time Argument
@@ -137,7 +133,6 @@ public static LiteralCommandNode<CommandSourceStack> timeArgument() {
 <FullWidthVideo src={TimeMp4}/>
 
 
-
 ## UUID Argument
 The uuid argument allows the user to input a valid uuid. You can retrieve that value as a `UUID` object, which is used in various places, like `Bukkit.getOfflinePlayer(UUID)`.
 This argument is not very user-friendly, which is why it is suggested to only use this as a moderation or debug argument. For user input regarding offline player
@@ -167,10 +162,8 @@ public static LiteralCommandNode<CommandSourceStack> uuidArgument() {
 <FullWidthVideo src={UuidMp4}/>
 
 
-
 ## Objective Criteria Argument
-This argument has wide usage when dealing with scoreboard objectives and scores. You can retrieve the argument value as a `Criteria` enum value, which can be
-used with Scoreboard objects.
+You can retrieve the argument value as a `Criteria` enum value, which can be used with Scoreboard objects.
 
 ### Example usage
 ```java

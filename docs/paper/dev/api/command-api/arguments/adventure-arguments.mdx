@@ -10,12 +10,18 @@ import StyleMp4 from "./assets/vanilla-arguments/style.mp4"
 import SignedMessageMp4 from "./assets/vanilla-arguments/signedmessage.mp4"
 
 # Adventure Library Arguments
-These arguments return a class from the `net.kyori` package. They are *technically* not native to Minecraft or Bukkit, but as Paper includes the Adventure library, they are
+These arguments return a class from the `net.kyori` package. They are technically not native to Minecraft or Bukkit, but as Paper includes the Adventure library, they are
 usually widely used in the Paper ecosystem.
 
 ## Component Argument
-The component argument is a very complicated command for the user, which is why it should not be used for usual user input. It follows the same format as the `/tellraw <player> <msg>`
-command for its second argument. It accepts a text component as its json representation, returning it as an Adventure component to work with.
+:::note
+
+This argument is very technical. Following the same format as the `/tellraw <player> <component>` command for its second argument, it expects the json
+representation of a text component, making it inappropriate for general user input.
+
+:::
+
+The result is returned as an Adventure component to work with.
 
 ### Example usage
 ```java
@@ -37,7 +43,6 @@ public static LiteralCommandNode<CommandSourceStack> componentArgument() {
 
 ### In-game preview
 <FullWidthVideo src={ComponentMp4}/>
-
 
 
 ## Key Argument
@@ -66,11 +71,9 @@ public static LiteralCommandNode<CommandSourceStack> keyArgument() {
 <FullWidthVideo src={KeyMp4}/>
 
 
-
 ## Named Color Argument
-This argument provides the user with the ability to select between the 16 build-in "named" text colors. This argument returns a `net.kyori.adventure.text.format.NamedTextColor` that
-
-you can use for styling components.
+This argument provides the user with the ability to select between the 16 build-in "named" text colors. This argument returns a
+`net.kyori.adventure.text.format.NamedTextColor` which you can use for styling components.
 
 ### Example usage
 ```java
@@ -95,18 +98,16 @@ public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
 <FullWidthVideo src={NamedColorMp4}/>
 
 
-
 ## Adventure Style Argument
 :::note
 
 Similar to the component argument, this argument is not really appropriate for general user input, as it also follows the json format for displaying components. Most users
-do not know how to use that format and thus its public usage is not advised.
+do not know how to use that format and thus its general usage is not advised.
 
 :::
 
 The style argument returns its value in form of an `net.kyori.adventure.text.format.Style` object. This can be applied to any component using `Component#style(Style)`.
-
-Whilst the json input allows for the `text` field, it does not actually do anything.
+Whilst the json input allows for the `text` field, its content is completely ignored.
 
 ### Example usage
 ```java
@@ -131,9 +132,8 @@ public static LiteralCommandNode<CommandSourceStack> styleArgument() {
 <FullWidthVideo src={StyleMp4}/>
 
 
-
 ## Signed Message Argument
-The signed message argument allows a player (not a console!!) to send an argument in form of a **signed message** to the server. This signed message is a special type - it
+The signed message argument allows a player to send an argument in form of a **signed message** to the server. This signed message is a special type - it
 allows the server to send that message, without the ability to directly modify it, to any player. The visible difference is that unsigned messages have a white bar at the left,
 whilst signed messages don't.
 

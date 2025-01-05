@@ -32,14 +32,10 @@ import EnchantsRegistry from "./assets/registry-arguments/enchants-registry.mp4"
 
 # Registry Arguments
 Registries in Minecraft hold all sort of information - possible item materials, block materials, enchantments, potion effects, ... and more!
-These arguments are particularly useful for retrieving type values.
 
-There are **two** types of registry arguments: `resource` and `resourceKey`. 
+There are two types of registry arguments: `resource` and `resourceKey`. 
 The main difference between those arguments is the return value: The `resource` argument returns the parsed value, whilst the `resourceKey` only returns a `TypedKey`, which
 you can use to retrieve the value yourself.
-
-For more information on the `resourceKey` argument, check out [its dedicated segment](#resource-key-argument).
-
 
 ## Resource Argument
 Just like any other argument, you can get a `ArgumentType<T>` reference to it using `ArgumentTypes.resource(RegistryKey<T>)`. A selection of possible registry keys can be
@@ -96,14 +92,13 @@ There are certain edge-cases, where this argument, due to missing registries on 
 Basically, the only argument where this is the case right now is with the `STRUCTURE` registry key.
 
 ```java
-// Registering this command will cause client to not be able to connect to the server.
+// Registering this command will cause clients to not be able to connect to the server.
 final LiteralCommandNode<CommandSourceStack> invalidRegistryArgument = Commands.literal("registry-structure")
     .then(Commands.argument("value", ArgumentTypes.resource(RegistryKey.STRUCTURE)))
     .build();
 ```
 
 Due to this fact, it is advised to only use the `STRUCTURE` registry key argument with a `resourceKey(...)` argument type and parse the values yourself.
-[More information on resource key arguments can be found by clicking here.](#resource-key-argument).
 
 :::
 

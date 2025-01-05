@@ -9,24 +9,23 @@ import FlySpeedProxied from "./assets/flyspeed-proxied.png"
 
 # Command Executors
 
-:::note
+:::tip
 
-This page requires knowledge about the **Structure of Brigadier Commands** and basic knowledge of **Arguments and Literals**. If you haven't read through those articles, it is
-highly recommend to check those out beforehand!
+This page requires knowledge about [Command Trees](./command-tree.mdx) and [Arguments and Literals](./arguments-and-literals.mdx). If you haven't read
+through those articles, it is highly recommend to check those out beforehand!
 
 :::
 
-This page is dedicated to the `.executes(...)` method from the `ArgumentBuilder` class.
+This page is dedicated to the `executes(...)` method from the `ArgumentBuilder` class.
 
 ## Examining the executes method
-The executes method is defined as follows:
+The `executes` method is defined as following:
 
 ```java title="ArgumentBuilder.class"
 public T executes(Command<S> command);
 ```
 
-The `Command<S>` interface is declared as a `FunctionalInterface`. That means that instead of putting in a class that implements it, we can just pass in a lambda statement. Since
-the interface is defined like this:
+The `Command<S>` interface is declared as a `FunctionalInterface`. That means that instead of putting in a class that implements it, we can just pass in a lambda statement.
 
 ```java title="Command.java"
 @FunctionalInterface

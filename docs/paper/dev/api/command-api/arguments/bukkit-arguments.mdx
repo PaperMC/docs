@@ -8,6 +8,7 @@ import ItemStackMp4 from "./assets/vanilla-arguments/itemstack.mp4"
 import NamespacedKeyMp4 from "./assets/vanilla-arguments/namespacedkey.mp4"
 import TimeMp4 from "./assets/vanilla-arguments/time.mp4"
 import UuidMp4 from "./assets/vanilla-arguments/uuid.mp4"
+import ObjectiveCriteriaMp4 from "./assets/vanilla-arguments/objectivecriteria.mp4"
 
 # Bukkit Arguments
 The arguments described in this section return objects oftentime used in Bukkit API. They don't explicitly require to be from the `org.bukkit` package. An example for a
@@ -38,8 +39,8 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
 
 
 ## ItemStack Argument
-The item stack argument is a way to retrieve an <JavaDocs name={org.bukkit.inventory.ItemStack}>`ItemStack`</JavaDocs> following the same argument format as the vanilla `/give <player> <item> [<amount>]`
-command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a <JavaDocs name={org.bukkit.Material}>`Material`</JavaDocs>, you should instead
+The item stack argument is a way to retrieve an <Javadoc name={'org.bukkit.inventory.ItemStack'}>`ItemStack`</Javadoc> following the same argument format as the vanilla `/give <player> <item> [<amount>]`
+command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a <Javadoc name={'org.bukkit.Material'}>`Material`</Javadoc>, you should instead
 check out the [registry arguments](./registry-arguments.mdx).
 
 ### Example usage
@@ -74,7 +75,7 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
 
 ## Bukkit NamespacedKey Argument
 Similar to the **Key** argument, this argument allows the user to provide any artificial (namespaced) key. The difference is that the return value of this argument is instead a
-<JavaDocs name={org.bukkit.NamespacedKey}>`NamespacedKey`</JavaDocs>, which makes it particularly useful when dealing with Bukkit API.
+<Javadoc name={'org.bukkit.NamespacedKey'}>`NamespacedKey`</Javadoc>, which makes it particularly useful when dealing with Bukkit API.
 
 ### Example usage
 ```java
@@ -164,3 +165,30 @@ public static LiteralCommandNode<CommandSourceStack> uuidArgument() {
 
 ### In-game preview
 <FullWidthVideo src={UuidMp4}/>
+
+
+
+## Objective Criteria Argument
+This argument has wide usage when dealing with scoreboard objectives and scores. You can retrieve the argument value as a `Criteria` enum value, which can be
+used with Scoreboard objects.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> objectiveCriteriaArgument() {
+    return Commands.literal("objectivecriteria")
+        .then(Commands.argument("criteria", ArgumentTypes.objectiveCriteria())
+            .executes(ctx -> {
+                final Criteria criteria = ctx.getArgument("criteria", Criteria.class);
+
+                ctx.getSource().getSender().sendRichMessage("Default render type for <criteria>: <rendertype>",
+                    Placeholder.unparsed("criteria", criteria.getName()),
+                    Placeholder.unparsed("rendertype", criteria.getDefaultRenderType().name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ObjectiveCriteriaMp4}/>

@@ -154,6 +154,7 @@ const paper: SidebarsConfig = {
                     "dev/api/command-api/arguments/location-arguments",
                     "dev/api/command-api/arguments/entity-player-arguments",
                     "dev/api/command-api/arguments/registry-arguments",
+                    "dev/api/command-api/arguments/bukkit-arguments",
                     "dev/api/command-api/arguments/enum-value-arguments",
                     "dev/api/command-api/arguments/predicate-arguments",
                     "dev/api/command-api/arguments/adventure-arguments",

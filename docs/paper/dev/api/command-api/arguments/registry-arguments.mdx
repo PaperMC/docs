@@ -43,10 +43,10 @@ For more information on the `resourceKey` argument, check out [its dedicated seg
 
 ## Resource Argument
 Just like any other argument, you can get a `ArgumentType<T>` reference to it using `ArgumentTypes.resource(RegistryKey<T>)`. A selection of possible registry keys can be
-found below. They are accessed in a static context using the `ResourceKeys` interface.
+found below. They are accessed in a static context using the <Javadoc name='io.papermc.paper.registry.RegistryKey'>`RegistryKey`</Javadoc> interface.
 
-Each entry in the `ResourceKeys` returns a `RegistryKey<T>`. The `<T>` generic parameter here describes the return type. This means that if we were to retrieve
-`RegistryKeys.ITEM`, since it is defined as follows:
+Each entry in `RegistryKey` returns a `RegistryKey<T>`. The `<T>` generic parameter here describes the return type. This means that if we were to retrieve
+<Javadoc name='io.papermc.paper.registry.RegistryKey#ITEM'>`RegistryKeys.ITEM`</Javadoc>, the return type would be an `ItemType`, since it is defined as follows:
 
 ```java title="RegistryKey.class"
 public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
@@ -55,8 +55,6 @@ public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
     // ...
 }
 ```
-
-The return type of the retrieved value using `ctx.getArgument(...)` would be an `ItemType`.
 
 And really, there isn't much more to it. For that exact reason, here is an example on the implementation of such an argument:
 

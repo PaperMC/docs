@@ -17,7 +17,7 @@ be able to be used. The specific arguments may allow or disallow certain selecto
 
 ## Entity Argument
 This argument, after resolving its returning `EntitySelectorArgumentResolver`, returns a list of exactly one, no more and no less, entity. It is safe
-to call `List#getFirst()` to retrieve that entity. 
+to call `List#getFirst()` to retrieve that entity. You can resolve it using <Javadoc name="io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)">`ArgumentResolver#resolve(CommandSourceStack)`</Javadoc>
 
 ### Example usage
 ```java
@@ -48,8 +48,9 @@ If the executing player is opped:
 
 
 ## Entities Argument
-In contrast to the single entity argument, this multi entity argument accepts any amount of entities, with the minimum amount of entities being 1.
-They can, once again, be resolved using `EntitySelectorArgumentResolver#resolve(CommandSourceStack)`, which returns a `List<Entity>`.
+In contrast to the single entity argument, this multi entity argument accepts any amount of entities, with the minimum amount of entities being 1. They can, once again, be resolved using
+<Javadoc name="io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)">`ArgumentResolver#resolve(CommandSourceStack)`</Javadoc>,
+which returns a `List<Entity>`.
 
 ### Example usage
 ```java
@@ -77,8 +78,8 @@ public static LiteralCommandNode<CommandSourceStack> entities() {
 
 ## Player Argument
 The player argument allows you to be given some player input. Running `ctx.getArgument` return a `PlayerSelectorArgumentResolver` for player arguments. 
-For the "one player" argument (this one), you can safely get the target player by running `PlayerSelectorArgumentResolver.resolve(ctx.getSource()).getFirst()`,
-which returns a Bukkit `Player` object.
+For this "single player" argument, you can safely get the target player by running `PlayerSelectorArgumentResolver.resolve(ctx.getSource()).getFirst()`,
+which returns a Bukkit <Javadoc name='org.bukkit.entity.Player'>`Player`</Javadoc> object.
 
 ### Example usage
 This command yeets the targeted player into the air!
@@ -149,7 +150,7 @@ a player by name, but it can return multiple if using the entity selectors (like
 all entries in the collection instead of just the first one.
 
 Sometimes, the API call to players, which are currently offline and have no yet logged onto the server, may fail. This is also visible in the in-game preview down below. This
-weird behavior also explains why the `/whitelist add` command fails, so now you know 🚀.
+weird behavior also explains why the `/whitelist add` command sometimes fails.
 
 ### Example usage - Player lookup command
 ```java

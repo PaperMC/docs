@@ -73,6 +73,6 @@ Commands.literal("reloadcommands")
 ```
 
 ## Automating command reloads
-Forcing a player to reload their own commands is not a viable option for user experience. For this reason, you can **automate** this behaviour. It is safe to call
+Forcing a player to reload their own commands is not a viable option for user experience. For this reason, you can **automate** this behavior. It is safe to call
 the update commands method as often as required, but it should generally be avoided as it can cost a great deal of bandwidth. If possible, you should instead place
 these in very specific spots. Furthermore, this method is completely thread safe, meaning you are free to call it from an asynchronous context.

@@ -172,12 +172,6 @@ const paper: SidebarsConfig = {
             },
             {
               type: "category",
-              label: "Old Brigadier Command API",
-              collapsed: true,
-              items: ["dev/api/command-api-old/commands", "dev/api/command-api-old/arguments"],
-            },
-            {
-              type: "category",
               label: "Entity API",
               collapsed: true,
               items: ["dev/api/entity-api/entity-teleport", "dev/api/entity-api/display-entities"],

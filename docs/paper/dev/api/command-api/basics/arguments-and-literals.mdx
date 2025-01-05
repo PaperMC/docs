@@ -79,16 +79,16 @@ That method returns a `RequiredArgumentBuilder`. The T type parameter declares t
 if you put in an `ArgumentType<Integer>`, you can retrieve the value of that argument as an integer, requiring no manual parsing! The only issue is, how do we create an `ArgumentType`
 object? There are a few build-in, primitive argument types that you should definitely be aware of:
 
-|               Name                | Return value  |  Possible Input   |                                    Description                                     |
-|-----------------------------------|---------------|-------------------|------------------------------------------------------------------------------------|
-| BoolArgumentType.bool()           | Boolean       | true/false        | Only allows a boolean value                                                        |
-| IntegerArgumentType.integer()     | Integer       | 253, -123, 0      | Any valid integer                                                                  |
-| LongArgumentType.longArg()        | Long          | 25418263123783    | Any valid long                                                                     |
-| FloatArgumentType.floatArg()      | Float         | 253.2, -25.0      | Any valid float                                                                    |
-| DoubleArgumentType.doubleArg()    | Double        | 4123.242, -1.1    | Any valid double                                                                   |
-| StringArgumentType.word()         | String        | no_spaces         | A single word. May only contain letters and underscores                            |
-| StringArgumentType.string()       | String        | "with spaces"     | A single word, or a valid string with spaces, if quoted                            |
-| StringArgumentType.greedyString() | String        | unquoted spaces   | The literal written input. May contain any characters. Has to be the last argument |
+|               Name                | Return value  |   Possible Input    |                                           Description                                            |
+|-----------------------------------|---------------|---------------------|--------------------------------------------------------------------------------------------------|
+| BoolArgumentType.bool()           | Boolean       | true/false          | Only allows a boolean value                                                                      |
+| IntegerArgumentType.integer()     | Integer       | 253, -123, 0        | Any valid integer                                                                                |
+| LongArgumentType.longArg()        | Long          | 25418263123783      | Any valid long                                                                                   |
+| FloatArgumentType.floatArg()      | Float         | 253.2, -25.0        | Any valid float                                                                                  |
+| DoubleArgumentType.doubleArg()    | Double        | 4123.242, -1.1      | Any valid double                                                                                 |
+| StringArgumentType.word()         | String        | letters-and+1234567 | A single word. May only contain letters and numbers and these characters: `+`, `-`, `_`, and `.` |
+| StringArgumentType.string()       | String        | "with spaces"       | A single word, or a valid string with spaces, if quoted                                          |
+| StringArgumentType.greedyString() | String        | unquoted spaces     | The literal written input. May contain any characters. Has to be the last argument               |
 
 ### Boolean argument type and argument parsing
 The BoolArgumentType can be used for enabling/disabling options. Like if we have a `/serverflight` command, which toggles every members ability to fly, we could add a boolean argument

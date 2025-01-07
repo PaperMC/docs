@@ -3,13 +3,13 @@ anticheat:
     items:
       all-models:
         also-obfuscate:
-          default: []
+          default: "[]"
           description: >-
             Controls whether certain data components should be hidden for all items from other players. It's
             generally not recommended you configure this unless you know what you are doing, as you may change
-            how items may look visually to other players.
+            how items look to other players.
         dont-obfuscate:
-          default: ['minecraft:lodestone_tracker']
+          default: "[minecraft:lodestone_tracker]"
           description: >-
             Controls which data components should not be hidden for all items from other players. This is because they may slightly change
             the item's appearance, so hiding it isn't warranted.
@@ -20,7 +20,7 @@ anticheat:
           description: >-
             Controls whether the item's count should be hidden from other players.
       enable-item-obfuscation:
-        default: false
+        default: "false"
         description: >-
           Controls whether unnecessary item information (such as enchantments, lore, etc.) that can give cheat clients an advantage should be sent to other
           players' clients. This may break resource packs that rely on information such as enchantments,
@@ -28,19 +28,19 @@ anticheat:
       model-overrides:
         minecraft:elytra:
           also-obfuscate:
-            default: [ ]
+            default: "[]"
             description: >-
               Controls the components that should also be obfuscated for items with the item model of `minecraft:elytra`.
-              This may be useful if you want to hide certain components not important to other items.
+              This may be useful if you want to hide certain components not important to other players.
           dont-obfuscate:
-            default: [ minecraft:damage ]
+            default: "[minecraft:damage]"
             description: >-
               Controls the components that should not be obfuscated for items with the item model of `minecraft:elytra`.
               This defaults to `minecraft:damage` as elytras with 1 durability have a special texture.
           sanitize-count:
             default: true
             description: >-
-              Controls whether the items with the item model of `minecraft:elytra` count should be hidden from other players.
+              Controls whether the item count of items with the model `minecraft:elytra` should be hidden from other players.
 block-updates:
   disable-noteblock-updates:
     default: "false"

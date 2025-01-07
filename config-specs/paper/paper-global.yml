@@ -16,7 +16,7 @@ anticheat:
             In this example, lodestone trackers may reveal critical locations, but hiding the location causes the
             compass to shake around for other players. It's up to your digression whether you think this tradeoff is important.
         sanitize-count:
-          default: 'true'
+          default: "true"
           description: >-
             Controls whether the item's count should be hidden from other players.
       enable-item-obfuscation:

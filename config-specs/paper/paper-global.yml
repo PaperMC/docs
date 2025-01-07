@@ -25,7 +25,7 @@ anticheat:
           Controls whether unnecessary item information (such as enchantments, lore, etc.) that can give cheat clients an advantage should be sent to other
           players' clients. This may break resource packs that rely on information such as enchantments,
           lore or item names when observing other players.
-          The hidden data components can be extended or reduced via the respective `also-obfuscate` and `dont-obfuscate` respectively.
+          The hidden data components can be extended or reduced via `also-obfuscate` and `dont-obfuscate` respectively.
       model-overrides:
         minecraft:elytra:
           also-obfuscate:

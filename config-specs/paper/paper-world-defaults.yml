@@ -76,30 +76,6 @@ anticheat:
         With engine-mode: 3, the behavior is the same as engine-mode: 2, but the
         replacement-blocks list is used to determine which blocks are used for
         each vertical chunk layer.
-  obfuscation:
-    items:
-      hide-durability:
-        default: "false"
-        description: >-
-          Controls whether durability information is sent to other players'
-          clients. This may break resource packs that rely on durability values
-          when observing other players
-      hide-itemmeta:
-        default: "false"
-        description: >-
-          Controls whether unnecessary item information (such as enchantments,
-          items in a shulker box/bundle, etc.) that can give cheat clients an
-          advantage should be sent to other players' clients. This may break
-          resource packs that rely on information such as enchantments, lore or
-          item names when observing other players
-      hide-itemmeta-with-visual-effects:
-        default: "false"
-        description: >-
-          Controls whether item information that affects how an item is
-          displayed (such as lodestone compass positions) should be sent to
-          other players' clients. This information could be used by cheat
-          clients to give another advantage to the cheating player. However,
-          this will affect how certain items look when held by another player
 chunks:
   auto-save-interval:
     default: default

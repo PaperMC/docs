@@ -142,8 +142,7 @@ A signed message argument returns a `SignedMessageResolver`. In order to call it
 * The argument name
 * The `CommandContext<CommandSourceStack>` object
 
-You then get returned with a `CompletableFuture<SignedMessage>`. In order to work with the resulting `SignedMessage`, you can call `CompletableFuture<T>#thenAccept(Consumer<T>)`
-on that resulting completable future. Inside of that, you can send the signed message to players or work with it in other ways.
+The resolved value is a `CompletableFuture<SignedMessage>`, whose `SignedMessage` value you can handle using a `thenAccept(Consumer<T>)`. Inside of the consumer, you can send the signed message to players or work with it in other ways.
 
 :::warning
 

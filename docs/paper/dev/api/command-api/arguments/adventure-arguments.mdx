@@ -153,9 +153,8 @@ If you need to use Bukkit API, you can schedule a task to be run on the next ava
 
 :::note
 
-A non-player sender is not capable of sending a signed message, which means that the method block inside the `#thenAccept` method of the `SignedMessageResolver#resolve` method
-will never be called. You should make sure to put a `.requires(ctx -> ctx.getSender() instanceof Player)` on your SignedArgument to only allow Players to run it. You may
-add a fallback greedy string argument for non-player senders if you want the argument to execute regardless of signing or not.
+A non-player sender is not capable of sending a signed message, which means that the resolved `CompletableFuture` will never be completed. You should make sure that only players can use your argument with `.requires(ctx -> ctx.getSender() instanceof Player)` on your `SignedArgument`. You may
+add a fallback greedy string argument for non-player senders if you want the argument to execute regardless of signing.
 
 :::
 

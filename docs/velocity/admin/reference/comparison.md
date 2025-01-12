@@ -1,6 +1,7 @@
 ---
 slug: /comparisons-to-other-proxies
 description: A comparison of Velocity to other proxies.
+targetVersion: 1.21
 ---
 
 # Comparing With Other Proxies
@@ -72,7 +73,7 @@ Meet [Hyrum's Law](https://www.hyrumslaw.com/):
 
 Here's Hyrum's law in comic format, in case that eases getting the point across:
 
-> [![xkcd #1172](https://imgs.xkcd.com/comics/workflow.png)](https://xkcd.com/1172/)  
+> [![xkcd #1172](https://imgs.xkcd.com/comics/workflow.png)](https://xkcd.com/1172/)
 > ["Workflow"](https://xkcd.com/1172/) from [xkcd](https://xkcd.com/) by Randal Munroe,
 > [licensed](https://xkcd.com/license.html) under
 > [CC BY-NC 2.5](https://creativecommons.org/licenses/by-nc/2.5/)

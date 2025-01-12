@@ -1,6 +1,7 @@
 ---
 slug: /credits
 description: The credits for all the different libraries used by Velocity.
+targetVersion: 1.21
 ---
 
 # Libraries Used

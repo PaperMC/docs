@@ -83,11 +83,6 @@ const navbar: Omit<Navbar, "style" | "hideOnScroll"> = {
       position: "left",
     },
     {
-      type: "docsVersionDropdown",
-      docsPluginId: "paper",
-      position: "right",
-    },
-    {
       to: "https://papermc.io/downloads",
       label: "Downloads",
       position: "right",

@@ -131,12 +131,6 @@ collisions:
       involved in collisions. Having this enabled will use more bandwidth;
       however, in the majority of cases, this is a worthy tradeoff
 commands:
-  fix-target-selector-tag-completion:
-    default: "true"
-    description: >-
-      Workaround for a client bug preventing entity type tag suggestions from
-      functioning in target selectors. Resolves
-      [MC-235045](https://bugs.mojang.com/browse/MC-235045)
   suggest-player-names-when-null-tab-completions:
     default: "true"
     description: >-

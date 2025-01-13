@@ -999,7 +999,11 @@ tick-rates:
           for the names. Might change between updates!
   container-update:
     default: "1"
-    description: "The rate, in ticks, at which the server updates containers and inventories"
+    description: >-
+      The rate, in ticks, at which the server updates containers and inventories.
+      Higher values than 1 can cause item desync/ghosting or make block breaking
+      progress appear to reset randomly. This can make the server appear laggy 
+      to clients, even at 20 TPS and low ping.
   grass-spread:
     default: "1"
     description: >-

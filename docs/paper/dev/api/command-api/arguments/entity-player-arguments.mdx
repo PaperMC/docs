@@ -15,7 +15,7 @@ The arguments described in this section relate to arguments which you can use to
 All of these have entity selectors (`@a`, `@e`, `@n`, etc.) as valid inputs, though they require the `minecraft.command.selector` permission in order to 
 be able to be used. The specific arguments may allow or disallow certain selectors.
 
-## Entity Argument
+## Entity argument
 This argument, after resolving its returning `EntitySelectorArgumentResolver`, returns a list of exactly one, no more and no less, entity. It is safe
 to call `List#getFirst()` to retrieve that entity. You can resolve it using <Javadoc name="io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)">`ArgumentResolver#resolve(CommandSourceStack)`</Javadoc>
 
@@ -46,7 +46,7 @@ If the executing player is opped:
 <FullWidthVideo src={EntityOppedMp4}/>
 
 
-## Entities Argument
+## Entities argument
 In contrast to the single entity argument, this multi entity argument accepts any amount of entities, with the minimum amount of entities being 1. They can, once again, be resolved using
 <Javadoc name="io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)">`ArgumentResolver#resolve(CommandSourceStack)`</Javadoc>,
 which returns a `List<Entity>`.
@@ -74,7 +74,7 @@ public static LiteralCommandNode<CommandSourceStack> entities() {
 <FullWidthVideo src={EntitiesMp4}/>
 
 
-## Player Argument
+## Player argument
 The player argument allows to retrieve a `PlayerSelectorArgumentResolver` for player arguments.
 For this "single player" argument, you can safely get the target player by running `PlayerSelectorArgumentResolver.resolve(ctx.getSource()).getFirst()`,
 which returns a <Javadoc name='org.bukkit.entity.Player'>Player</Javadoc> object.
@@ -106,7 +106,7 @@ public static LiteralCommandNode<CommandSourceStack> playerArgument() {
 <FullWidthVideo src={PlayerMp4}/>
 
 
-## Players Argument
+## Players argument
 The "multiple players" argument works similarly to the "single player" argument, also returning a `PlayerSelectorArgumentResolver`. Instead of just resolving to exactly one `Player`, this
 one can resolve to more than just one player - which you should account for in case of using this argument. `PlayerSelectorArgumentResolver.resolve#(ctx.getSource())` returns a
 `List<Player>`, which you can just iterate through.
@@ -141,7 +141,7 @@ public static LiteralCommandNode<CommandSourceStack> playersArgument() {
 <FullWidthVideo src={PlayersMp4}/>
 
 
-## Player Profiles Argument
+## Player profiles argument
 The player profiles argument is a very powerful argument which can retrieve both offline and online players. It returns the result of the argument as a `PlayerProfileListResolver`,
 which resolves to a `Collection<PlayerProfile>`. This collection can be iterated to get the resulting profile(s). Usually, it only returns a single `PlayerProfile` if retrieving
 a player by name, but it can return multiple if using the entity selectors (like `@a` on online players). Thus it always makes sense to run whatever operation you want to run on
@@ -152,7 +152,7 @@ taking a bit longer, it is suggested to resolve this argument in an asynchronous
 
 Sometimes, these API calls may fail. This is also visible in the in-game preview down below. This behavior is also the reason for `/whitelist add` sometimes.
 
-### Example usage - Player lookup command
+### Example usage - player lookup command
 ```java
 public static LiteralCommandNode<CommandSourceStack> playerProfilesArgument() {
     return Commands.literal("lookup")

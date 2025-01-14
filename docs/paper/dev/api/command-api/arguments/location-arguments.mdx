@@ -9,7 +9,7 @@ import WorldMp4 from "./assets/vanilla-arguments/world.mp4"
 
 # Location Arguments
 
-## Block Position Argument
+## Block position argument
 The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` vanilla command.
 In order to retrieve the BlockPosition variable from the
 <Javadoc name='io.papermc.paper.command.brigadier.argument.resolvers.BlockPositionResolver'>`BlockPositionResolver`</Javadoc>, we have to resolve it using the command source.
@@ -34,7 +34,7 @@ public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
 <FullWidthVideo src={BlockPositionMp4}/>
 
 
-## Fine Position Argument
+## Fine position argument
 The fine position argument works similarly to the block position argument, with the only difference being that it can accept decimal (precise) location input. The optional
 overload (`ArgumentTypes.finePosition(boolean centerIntegers)`), which defaults to false if not set, will center whole input, meaning 5 becomes 5.5 (5.0 would stay as 5.0 though),
 as that is the "middle" of a block. This only applies to X/Z. The y coordinate is untouched by this operation.
@@ -67,7 +67,7 @@ public static LiteralCommandNode<CommandSourceStack> finePositionArgument() {
 
 
 
-## World Argument
+## World argument
 This argument allows the user to select one of the currently loaded world. You can retrieve the result of that as a generic Bukkit 
 <Javadoc name='org.bukkit.World'>`World`</Javadoc> object.
 

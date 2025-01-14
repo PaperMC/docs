@@ -14,7 +14,7 @@ import ObjectiveCriteriaMp4 from "./assets/vanilla-arguments/objectivecriteria.m
 The arguments described in this section return objects oftentime used in Bukkit API. They don't explicitly require to be from the `org.bukkit` package. An example for a
 non-bukkit object described here is the [UUID Argument](#uuid-argument).
 
-## Block State Argument
+## Block state argument
 The block state argument can be used for getting a block type and explicit, associated data.
 
 ### Example usage
@@ -36,7 +36,7 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
 <FullWidthVideo src={BlockStateMp4}/>
 
 
-## ItemStack Argument
+## ItemStack argument
 The item stack argument is the way to retrieve an <Javadoc name={'org.bukkit.inventory.ItemStack'}>`ItemStack`</Javadoc> following the same argument format as the Vanilla `/give <player> <item> [<amount>]`
 command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a <Javadoc name={'org.bukkit.Material'}>`Material`</Javadoc>, you should instead
 check out the [registry arguments](./registry-arguments.mdx).
@@ -70,7 +70,7 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
 <FullWidthVideo src={ItemStackMp4}/>
 
 
-## Bukkit NamespacedKey Argument
+## NamespacedKey argument
 This argument allows the user to provide any artificial (namespaced) key. The return value of this argument is a
 <Javadoc name={'org.bukkit.NamespacedKey'}>`NamespacedKey`</Javadoc>, which makes it useful when dealing with Bukkit API.
 
@@ -95,7 +95,7 @@ public static LiteralCommandNode<CommandSourceStack> namespacedKeyArgument() {
 <FullWidthVideo src={NamespacedKeyMp4}/>
 
 
-## Time Argument
+## Time argument
 The time argument allows the user to define a time frame, similar to the Vanilla `/time <set|time> <time>` time argument. The user has 4 possible ways of inputting time:
 * Just as a number: This resolves to as usual ticks (`/timearg 1` --> 1 tick)
 * With a `t` suffix: This also resolves to ticks (`/timearg 1t` --> 1 tick)
@@ -133,7 +133,7 @@ public static LiteralCommandNode<CommandSourceStack> timeArgument() {
 <FullWidthVideo src={TimeMp4}/>
 
 
-## UUID Argument
+## UUID argument
 The UUID argument allows the user to input a valid UUID. You can retrieve that value as a `UUID` object, which is used in various places, like `Bukkit.getOfflinePlayer(UUID)`.
 This argument is not very user-friendly, which is why it is suggested to only use this as a moderation or debug argument. For user input regarding offline player
 retrieval, the [player profiles argument](./entity-player-arguments#player-profiles-argument) is preferred, as it allows by-name lookup.
@@ -162,7 +162,7 @@ public static LiteralCommandNode<CommandSourceStack> uuidArgument() {
 <FullWidthVideo src={UuidMp4}/>
 
 
-## Objective Criteria Argument
+## Objective criteria argument
 You can retrieve the argument value as a `Criteria` enum value, which can be used with `Scoreboard` objects.
 
 ### Example usage

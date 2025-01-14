@@ -13,7 +13,7 @@ import SignedMessageMp4 from "./assets/vanilla-arguments/signedmessage.mp4";
 These arguments return a class from the `net.kyori` package. They are technically not native to Minecraft or Bukkit, but as Paper includes the Adventure library, they are
 usually widely used in the Paper ecosystem.
 
-## Component Argument
+## Component argument
 :::note
 
 This argument is very technical. Following the same format as the `/tellraw <player> <component>` command for its second argument, it expects the JSON
@@ -45,7 +45,7 @@ public static LiteralCommandNode<CommandSourceStack> componentArgument() {
 <FullWidthVideo src={ComponentMp4}/>
 
 
-## Key Argument
+## Key argument
 The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a `net.kyori.adventure.key.Key` from the Adventure library, 
 which can be used at various other places in the Bukkit/Paper API.
 
@@ -71,7 +71,7 @@ public static LiteralCommandNode<CommandSourceStack> keyArgument() {
 <FullWidthVideo src={KeyMp4}/>
 
 
-## Named Color Argument
+## Named color argument
 This argument provides the user with the ability to select between the 16 built-in "named" text colors. This argument returns a
 `net.kyori.adventure.text.format.NamedTextColor` which you can use for styling components.
 
@@ -98,7 +98,7 @@ public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
 <FullWidthVideo src={NamedColorMp4}/>
 
 
-## Adventure Style Argument
+## Adventure style argument
 :::note
 
 Similar to the component argument, this argument is not really appropriate for general user input, as it also follows the JSON format for displaying components. Most users
@@ -133,7 +133,7 @@ public static LiteralCommandNode<CommandSourceStack> styleArgument() {
 <FullWidthVideo src={StyleMp4}/>
 
 
-## Signed Message Argument
+## Signed message argument
 The signed message argument allows a player to send an argument in the form of a **signed message** to the server. This signed message is a special type - it
 allows the server to send that message, without the ability to directly modify it, to any player. The visible difference is that unsigned messages have a white bar at the left,
 whilst signed messages don't.

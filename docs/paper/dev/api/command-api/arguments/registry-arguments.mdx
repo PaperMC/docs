@@ -37,7 +37,7 @@ There are two types of registry arguments: `resource` and `resourceKey`.
 The main difference between those arguments is the return value: The `resource` argument returns the parsed value, whilst the `resourceKey` only returns a `TypedKey`, which
 you can use to retrieve the value yourself.
 
-## Resource Argument
+## Resource argument
 Just like any other argument, you can get a `ArgumentType<T>` reference to it using `ArgumentTypes.resource(RegistryKey<T>)`. A selection of possible registry keys can be
 found below. They are accessed in a static context using the <Javadoc name='io.papermc.paper.registry.RegistryKey'>`RegistryKey`</Javadoc> interface.
 
@@ -102,7 +102,7 @@ Due to this fact, it is advised to only use the `STRUCTURE` registry key argumen
 
 :::
 
-## Resource Key Argument
+## Resource key argument
 For the client, there is barely any difference between the using `ArgumentTypes.resource` or `ArgumentTypes.resourceKey`. The only difference is that
 using `ArgumentTypes.resourceKey` does not provide **error checking**. We can visualize this using `RegistryKey.ITEM`.
 
@@ -170,7 +170,7 @@ from that resource key or null, if no value has been found.
 The main usecase for this argument type is the ability to store the key (the value returned to you by `TypedKey#key`). If you want to be able to store the exact user
 input and be able to retrieve the backed instance without much throuble, that is the way to do it.
 
-## Registry Key Previews
+## Registry key previews
 
 At the time of writing, the following RegistryKeys exist:
 
@@ -203,49 +203,49 @@ At the time of writing, the following RegistryKeys exist:
 ### Attribute
 <FullWidthVideo src={ResourceAttributes}/>
 
-### Pattern Type
+### Pattern type
 <FullWidthVideo src={ResourceBannerPattern}/>
 
 ### Biome
 <FullWidthVideo src={ResourceBiome}/>
 
-### Block Type
+### Block type
 <FullWidthVideo src={ResourceBlock}/>
 
-### Cat Type
+### Cat type
 <FullWidthVideo src={ResourceCatVariant}/>
 
-### Damage Type
+### Damage type
 <FullWidthVideo src={ResourceDamageType}/>
 
-### Data Component Type
+### Data component type
 <FullWidthVideo src={ResourceDataComponentType}/>
 
 ### Fluid
 <FullWidthVideo src={ResourceFluid}/>
 
-### Frog Variant
+### Frog variant
 <FullWidthVideo src={ResourceFrogVariant}/>
 
-### Game Event
+### Game event
 <FullWidthVideo src={ResourceGameEvent}/>
 
-### Music Instrument
+### Music instrument
 <FullWidthVideo src={ResourceInstrument}/>
 
-### Item Type
+### Item type
 <FullWidthVideo src={ResourceItem}/>
 
 ### Jukebox Song
 <FullWidthVideo src={ResourceJukeboxSong}/>
 
-### Map Cursor Type
+### Map cursor type
 <FullWidthVideo src={ResourceMapDecorationType}/>
 
-### Menu Type
+### Menu type
 <FullWidthVideo src={ResourceMenu}/>
 
-### Potion Effect Type
+### Potion effect type
 <FullWidthVideo src={ResourceMobEffect}/>
 
 ### Art
@@ -257,14 +257,14 @@ At the time of writing, the following RegistryKeys exist:
 ### Structure
 This argument kicks the client, so no preview for this one ¯\\\_(ツ)\_/¯
 
-### Structure Type
+### Structure type
 <FullWidthVideo src={ResourceStructureType}/>
 
-### Villager Profession
+### Villager profession
 <FullWidthVideo src={ResourceVillagerProfession}/>
 
-### Villager Type
+### Villager type
 <FullWidthVideo src={ResourceVillagerType}/>
 
-### Wolf Variant
+### Wolf variant
 <FullWidthVideo src={ResourceWolfVariant}/>

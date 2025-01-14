@@ -132,11 +132,11 @@ settings:
         description: Overrides the maximum for the maxAbsorption attribute.
     maxHealth:
       max:
-        default: "2048.0"
+        default: "1024.0"
         description: Overrides the maximum for the maxHealth attribute.
     movementSpeed:
       max:
-        default: "2048.0"
+        default: "1024.0"
         description: Overrides the maximum for the movementSpeed attribute.
   bungeecord:
     default: "false"

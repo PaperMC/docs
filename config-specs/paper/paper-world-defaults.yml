@@ -636,13 +636,6 @@ environment:
     description: >-
       Disables ice and snow formation. This also causes cauldrons to no longer
       be filled by rain or snow
-  disable-teleportation-suffocation-check:
-    default: "false"
-    description: >-
-      Disables the suffocation check the server performs before teleporting a
-      player. **Note**: While useful to keep your players out of walls, leaving
-      this feature on may allow players to teleport through solid materials by
-      logging out in specific locations
   disable-thunder:
     default: "false"
     description: Disables thunderstorms

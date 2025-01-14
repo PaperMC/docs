@@ -105,120 +105,152 @@ export const paperCommands: CommandData = {
 };
 
 export const vanillaPermissions: PermissionData = {
-  permissionPrefix: "minecraft",
-  permissions: [
+  sections: [
     {
-      permission: "",
-      description: "Gives the user the ability to use all vanilla utilities and commands.",
-      opLevel: 4,
-    },
-    {
-      permission: "admin.command_feedback",
-      description: "Receive command broadcasts when sendCommandFeedback is true.",
-      opLevel: 4,
-    },
-    {
-      permission: "nbt.place",
-      description: "Gives the user the ability to place restricted blocks with NBT in creative.",
-      opLevel: 4,
-    },
-    {
-      permission: "nbt.copy",
-      description: "Gives the user the ability to copy NBT in creative.",
-      opLevel: 0,
-    },
-    {
-      permission: "debugstick",
-      description: "Gives the user the ability to use the debug stick in creative.",
-      opLevel: 4,
-    },
-    {
-      permission: "debugstick.always",
-      description: "Gives the user the ability to use the debug stick in all game modes.",
-      requiresOp: false,
-    },
-    {
-      permission: "commandblock",
-      description: "Gives the user the ability to use command blocks.",
-      opLevel: 4,
+      permissionPrefix: "minecraft",
+      permissions: [
+        {
+          permission: "",
+          description: "Gives the user the ability to use all vanilla utilities and commands.",
+          opLevel: 4,
+        },
+        {
+          permission: "admin.command_feedback",
+          description: "Receive command broadcasts when sendCommandFeedback is true.",
+          opLevel: 4,
+        },
+        {
+          permission: "nbt.place",
+          description:
+            "Gives the user the ability to place restricted blocks with NBT in creative.",
+          opLevel: 4,
+        },
+        {
+          permission: "nbt.copy",
+          description: "Gives the user the ability to copy NBT in creative.",
+          opLevel: 0,
+        },
+        {
+          permission: "debugstick",
+          description: "Gives the user the ability to use the debug stick in creative.",
+          opLevel: 4,
+        },
+        {
+          permission: "debugstick.always",
+          description: "Gives the user the ability to use the debug stick in all game modes.",
+          requiresOp: false,
+        },
+        {
+          permission: "commandblock",
+          description: "Gives the user the ability to use command blocks.",
+          opLevel: 4,
+        },
+      ],
     },
   ],
 };
 
 export const bukkitPermissions: PermissionData = {
-  permissionPrefix: "bukkit",
-  permissions: [
+  sections: [
     {
-      permission: "broadcast",
-      description: "Allows the user to receive all broadcast messages",
-      opLevel: 4,
-    },
-    {
-      permission: "broadcast.admin",
-      description: "Allows the user to receive administrative broadcasts",
-      opLevel: 4,
-    },
-    {
-      permission: "broadcast.user",
-      description: "Allows the user to receive user broadcasts",
-      opLevel: 0,
+      permissionPrefix: "bukkit",
+      permissions: [
+        {
+          permission: "broadcast",
+          description: "Allows the user to receive all broadcast messages",
+          opLevel: 4,
+        },
+        {
+          permission: "broadcast.admin",
+          description: "Allows the user to receive administrative broadcasts",
+          opLevel: 4,
+        },
+        {
+          permission: "broadcast.user",
+          description: "Allows the user to receive user broadcasts",
+          opLevel: 0,
+        },
+      ],
     },
   ],
 };
 
 export const paperPermissions: PermissionData = {
-  permissionPrefix: "bukkit.command.paper",
-  permissions: [
-    { permission: "heap", description: "Allows the user to run the heap sub command", opLevel: 4 },
+  sections: [
     {
-      permission: "entity",
-      description: "Allows the user to run the entity sub command",
-      opLevel: 4,
+      permissionPrefix: "bukkit.command.paper",
+      permissions: [
+        {
+          permission: "heap",
+          description: "Allows the user to run the heap sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "entity",
+          description: "Allows the user to run the entity sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "reload",
+          description: "Allows the user to run the reload sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "version",
+          description: "Allows the user to run the version sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "dumpplugins",
+          description: "Allows the user to run the dumpplugins sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "syncloadinfo",
+          description: "Allows the user to run the syncloadinfo sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "dumpitem",
+          description: "Allows the user to run the dumpitem sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "mobcaps",
+          description: "Allows the user to run the mobcaps sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "dumplisteners",
+          description: "Allows the user to run the dumplisteners sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "fixlight",
+          description: "Allows the user to run the fixlight sub command",
+          opLevel: 4,
+        },
+        {
+          permission: "debug",
+          description: "Allows the user to run the debug sub command",
+          opLevel: 4,
+        },
+      ],
     },
     {
-      permission: "reload",
-      description: "Allows the user to run the reload sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "version",
-      description: "Allows the user to run the version sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "dumpplugins",
-      description: "Allows the user to run the dumpplugins sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "syncloadinfo",
-      description: "Allows the user to run the syncloadinfo sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "dumpitem",
-      description: "Allows the user to run the dumpitem sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "mobcaps",
-      description: "Allows the user to run the mobcaps sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "dumplisteners",
-      description: "Allows the user to run the dumplisteners sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "fixlight",
-      description: "Allows the user to run the fixlight sub command",
-      opLevel: 4,
-    },
-    {
-      permission: "debug",
-      description: "Allows the user to run the debug sub command",
-      opLevel: 4,
+      permissionPrefix: "paper",
+      permissions: [
+        {
+          permission: "antixray.bypass",
+          description: "Allows the user to bypass anti-xray if use-permission is enabled",
+          opLevel: 4,
+        },
+        {
+          permission: "bypass-visibility.tab-completion",
+          description: "Allows the user to see hidden players in command tab completions",
+          opLevel: 4,
+        },
+      ],
     },
   ],
 };

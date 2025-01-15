@@ -113,9 +113,9 @@ this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, comman
 ```
 
 ### Registering a BasicCommand
-A <Javadoc name='io.papermc.paper.command.brigadier.BasicCommand'>`BasicCommand`</Javadoc> is a bukkit-like way of defining commands. Instead of building up a command tree, we allow all user input and retrieve the arguments as a simple array of Strings.
-This type of commands is particularly useful for very simple, text based commands, like a `/broadcast` command. You can read up on more details about basic commands 
-[here](../misc/basic-command.mdx).
+A <Javadoc name='io.papermc.paper.command.brigadier.BasicCommand'>`BasicCommand`</Javadoc> is a Bukkit-like way of defining commands. Instead of building up a command tree,
+we allow all user input and retrieve the arguments as a simple array of strings. This type of commands is particularly useful for very simple, text based commands,
+like a `/broadcast` command. You can read up on more details about basic commands [here](../misc/basic-command.mdx).
 
 Assuming you already have your `BasicCommand` object, we can register it like this:
 

@@ -1,12 +1,12 @@
 ---
 slug: /dev/command-api/misc/basic-command
-description: Bukkit styled command declaration.
+description: An overview of a Bukkit-style command declaration using Brigadier.
 ---
 
-import BroadcastCommand from "./assets/broadcast-command.png"
-import BroadcastSuggestionsFinished from "./assets/broadcast-suggestions-finished.png"
-import BroadcastSuggestionsUnfinished from "./assets/broadcast-suggestions-unfinished.png"
-import BroadcastSuggestionsNone from "./assets/broadcast-suggestions-none.png"
+import BroadcastCommand from "./assets/broadcast-command.png";
+import BroadcastSuggestionsFinished from "./assets/broadcast-suggestions-finished.png";
+import BroadcastSuggestionsUnfinished from "./assets/broadcast-suggestions-unfinished.png";
+import BroadcastSuggestionsNone from "./assets/broadcast-suggestions-none.png";
 
 # Basic Commands
 For very simple commands Paper has a way to declare Bukkit-style commands by implementing the <Javadoc name='io.papermc.paper.command.brigadier.BasicCommand'>`BasicCommand`</Javadoc> interface.
@@ -60,7 +60,7 @@ With the permission method you can, similar to the `canUse` method, set the perm
 
 
 ## Example: Broadcast command
-As an example, we can create a simple broadcast command. We start by declaring creating a class which implements BasicCommand and overrides `execute` and `permission`:
+As an example, we can create a simple broadcast command. We start by declaring creating a class which implements `BasicCommand` and overrides `execute` and `permission`:
 
 ```java
 package your.package.name;
@@ -100,9 +100,8 @@ else {
 
 This makes sure that we cover all cases and even allow the command to work correctly with `/execute as`.
 
-Next, we retrieve all arguments and join them to a String or tell the sender that at least one argument is required in order to send a broadcast
-
-if they defined no arguments (meaning that `args` has a length of 0):
+Next, we retrieve all arguments and join them to a string or tell the sender that at least one argument is required in order to send a broadcast in case they defined no
+arguments (meaning that `args` has a length of 0):
 ```java
 if (args.length == 0) {
     commandSourceStack.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");

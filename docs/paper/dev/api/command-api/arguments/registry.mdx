@@ -3,32 +3,32 @@ slug: /dev/command-api/arguments/registry
 description: Documentation for arguments retrieving registry values.
 ---
 
-import ResourceAttributes from "./assets/registry-arguments/resource-attributes.mp4"
-import ResourceBannerPattern from "./assets/registry-arguments/resource-banner-pattern.mp4"
-import ResourceBiome from "./assets/registry-arguments/resource-biome.mp4"
-import ResourceBlock from "./assets/registry-arguments/resource-block.mp4"
-import ResourceCatVariant from "./assets/registry-arguments/resource-cat-variant.mp4"
-import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4"
-import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4"
-import ResourceFluid from "./assets/registry-arguments/resource-fluid.mp4"
-import ResourceFrogVariant from "./assets/registry-arguments/resource-frog-variant.mp4"
-import ResourceGameEvent from "./assets/registry-arguments/resource-game-event.mp4"
-import ResourceInstrument from "./assets/registry-arguments/resource-instrument.mp4"
-import ResourceItem from "./assets/registry-arguments/resource-item.mp4"
-import ResourceJukeboxSong from "./assets/registry-arguments/resource-jukebox-song.mp4"
-import ResourceMapDecorationType from "./assets/registry-arguments/resource-map-decoration-type.mp4"
-import ResourceMemoryModuleType from "./assets/registry-arguments/resource-memory-module-type.mp4"
-import ResourceMenu from "./assets/registry-arguments/resource-menu.mp4"
-import ResourceMobEffect from "./assets/registry-arguments/resource-mob-effect.mp4"
-import ResourcePaintingVariant from "./assets/registry-arguments/resource-painting-variant.mp4"
-import ResourceSoundEvent from "./assets/registry-arguments/resource-sound-event.mp4"
-import ResourceStructureType from "./assets/registry-arguments/resource-structure-type.mp4"
-import ResourceVillagerProfession from "./assets/registry-arguments/resource-villager-profession.mp4"
-import ResourceVillagerType from "./assets/registry-arguments/resource-villager-type.mp4"
-import ResourceWolfVariant from "./assets/registry-arguments/resource-wolf-variant.mp4"
+import ResourceAttributes from "./assets/registry-arguments/resource-attributes.mp4";
+import ResourceBannerPattern from "./assets/registry-arguments/resource-banner-pattern.mp4";
+import ResourceBiome from "./assets/registry-arguments/resource-biome.mp4";
+import ResourceBlock from "./assets/registry-arguments/resource-block.mp4";
+import ResourceCatVariant from "./assets/registry-arguments/resource-cat-variant.mp4";
+import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4";
+import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4";
+import ResourceFluid from "./assets/registry-arguments/resource-fluid.mp4";
+import ResourceFrogVariant from "./assets/registry-arguments/resource-frog-variant.mp4";
+import ResourceGameEvent from "./assets/registry-arguments/resource-game-event.mp4";
+import ResourceInstrument from "./assets/registry-arguments/resource-instrument.mp4";
+import ResourceItem from "./assets/registry-arguments/resource-item.mp4";
+import ResourceJukeboxSong from "./assets/registry-arguments/resource-jukebox-song.mp4";
+import ResourceMapDecorationType from "./assets/registry-arguments/resource-map-decoration-type.mp4";
+import ResourceMemoryModuleType from "./assets/registry-arguments/resource-memory-module-type.mp4";
+import ResourceMenu from "./assets/registry-arguments/resource-menu.mp4";
+import ResourceMobEffect from "./assets/registry-arguments/resource-mob-effect.mp4";
+import ResourcePaintingVariant from "./assets/registry-arguments/resource-painting-variant.mp4";
+import ResourceSoundEvent from "./assets/registry-arguments/resource-sound-event.mp4";
+import ResourceStructureType from "./assets/registry-arguments/resource-structure-type.mp4";
+import ResourceVillagerProfession from "./assets/registry-arguments/resource-villager-profession.mp4";
+import ResourceVillagerType from "./assets/registry-arguments/resource-villager-type.mp4";
+import ResourceWolfVariant from "./assets/registry-arguments/resource-wolf-variant.mp4";
 
-import ResourceKeyItem from "./assets/registry-arguments/resourcekey-item.mp4"
-import EnchantsRegistry from "./assets/registry-arguments/enchants-registry.mp4"
+import ResourceKeyItem from "./assets/registry-arguments/resourcekey-item.mp4";
+import EnchantsRegistry from "./assets/registry-arguments/enchants-registry.mp4";
 
 # Registry Arguments
 Registries in Minecraft hold all sort of information - possible item materials, block materials, enchantments, potion effects, ... and more!
@@ -42,7 +42,7 @@ Just like any other argument, you can get a `ArgumentType<T>` reference to it us
 found below. They are accessed in a static context using the <Javadoc name='io.papermc.paper.registry.RegistryKey'>`RegistryKey`</Javadoc> interface.
 
 Each entry in `RegistryKey` returns a `RegistryKey<T>`. The `<T>` generic parameter here describes the return type. This means that if we were to retrieve
-<Javadoc name='io.papermc.paper.registry.RegistryKey#ITEM'>`RegistryKeys.ITEM`</Javadoc>, the return type would be an `ItemType`, since it is defined as follows:
+<Javadoc name='io.papermc.paper.registry.RegistryKey#ITEM'>`RegistryKey.ITEM`</Javadoc>, the return type would be an `ItemType`, since it is defined as follows:
 
 ```java title="RegistryKey.class"
 public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
@@ -106,13 +106,13 @@ Due to this fact, it is advised to only use the `STRUCTURE` registry key argumen
 For the client, there is barely any difference between the using `ArgumentTypes.resource` or `ArgumentTypes.resourceKey`. The only difference is that
 using `ArgumentTypes.resourceKey` does not provide **error checking**. We can visualize this using `RegistryKey.ITEM`.
 
-Here is the tab completion for when using `ArgumentTypes.resource(RegistryKey.ITEM)`:
+Here is the tab completion when using `ArgumentTypes.resource(RegistryKey.ITEM)`:
 <FullWidthVideo src={ResourceItem}/><br/>
 
-And here is the tab completion for when using `ArgumenTypes.resourceKey(RegistryKey.ITEM)`:
+And here is the tab completion when using `ArgumentTypes.resourceKey(RegistryKey.ITEM)`:
 <FullWidthVideo src={ResourceKeyItem}/><br/>
 
-The resource argument provides a much cleaner user experience, whilst the resourceKey argument has one very important usecase: You get the raw
+The resource argument provides a much cleaner user experience, whilst the `resourceKey` argument has one very important usecase: You get the raw
 `TypedKey<T>` returned as an argument result. This object is particularly useful, as it provides all information required to be able to retrieve
 a value from a registry yourself.
 

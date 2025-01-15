@@ -3,12 +3,12 @@ slug: /dev/command-api/arguments/entity-player
 description: Player and Entity arguments documentation.
 ---
 
-import EntityOppedMp4 from "./assets/vanilla-arguments/entity-opped.mp4"
-import EntityUnoppedMp4 from "./assets/vanilla-arguments/entity-unopped.mp4"
-import EntitiesMp4 from "./assets/vanilla-arguments/entities.mp4"
-import PlayerMp4 from "./assets/vanilla-arguments/player.mp4"
-import PlayersMp4 from "./assets/vanilla-arguments/players.mp4"
-import PlayerProfilesMp4 from "./assets/vanilla-arguments/playerprofiles.mp4"
+import EntityOppedMp4 from "./assets/vanilla-arguments/entity-opped.mp4";
+import EntityUnoppedMp4 from "./assets/vanilla-arguments/entity-unopped.mp4";
+import EntitiesMp4 from "./assets/vanilla-arguments/entities.mp4";
+import PlayerMp4 from "./assets/vanilla-arguments/player.mp4";
+import PlayersMp4 from "./assets/vanilla-arguments/players.mp4";
+import PlayerProfilesMp4 from "./assets/vanilla-arguments/playerprofiles.mp4";
 
 # Entity and Player Arguments
 The arguments described in this section relate to arguments which you can use to retrieve entities. Their main usage is the selection of command targets.
@@ -108,7 +108,7 @@ public static LiteralCommandNode<CommandSourceStack> playerArgument() {
 
 ## Players argument
 The "multiple players" argument works similarly to the "single player" argument, also returning a `PlayerSelectorArgumentResolver`. Instead of just resolving to exactly one `Player`, this
-one can resolve to more than just one player - which you should account for in case of using this argument. `PlayerSelectorArgumentResolver.resolve#(ctx.getSource())` returns a
+one can resolve to more than just one player - which you should account for in case of using this argument. `PlayerSelectorArgumentResolver.resolve(ctx.getSource())` returns a
 `List<Player>`, which you can just iterate through.
 
 ### Example usage

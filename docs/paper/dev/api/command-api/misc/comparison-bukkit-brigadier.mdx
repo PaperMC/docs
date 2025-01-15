@@ -3,15 +3,15 @@ slug: /dev/command-api/misc/comparison-bukkit-brigadier
 description: A comparison between Brigadier and Bukkit commands.
 ---
 
-import BukkitPartyCommandImage from './assets/bukkitparty-command.png'
-import PaperPartyCommandImage from './assets/paperparty-command.png'
+import BukkitPartyCommandImage from "./assets/bukkitparty-command.png";
+import PaperPartyCommandImage from "./assets/paperparty-command.png";
 
 # Comparing Brigadier and Bukkit Commands
 
 ## Registering commands
 ### The old Bukkit way
 
-In order to register Bukkit commands, you would define a class that extends BukkitCommand, and implements the execute(...) and tabComplete(...)
+In order to register Bukkit commands, you would define a class that extends `BukkitCommand`, and implements the `execute(...)` and `tabComplete(...)`
 methods. This might look like this:
 ```java title="BukkitPartyCommand.java"
 public class BukkitPartyCommand extends BukkitCommand {
@@ -58,7 +58,7 @@ this.getServer().getCommandMap().register(
 ```
 
 As you can see, you have to do a lot of manual checking in order to register a single, very simple command. But how does
-the Brigadier api do it?
+the Brigadier API do it?
 
 ### The new Paper way
 First, we need to retrieve a `LiteralCommandNode<CommandSourceStack>`. That's a special Brigadier class that holds some sort of [command tree](../basics/command-tree). 
@@ -89,7 +89,7 @@ Each `.then(...)` defines a new branch in our tree, which can either be a litera
 (`Commands.argument(String, ArgumentType<T>)`). Each branch may or may not define an `.executes(Command)` executor. This is 
 where all the logic happens.
 
-We will take a closer look at that in different pages, but for now, how do we register it? Paper uses a LifecycleEventManager system.
+We will take a closer look at that in different pages, but for now, how do we register it? Paper uses a `LifecycleEventManager` system.
 In a nutshell, that is a way to register commands (or tags) that get loaded each time the server reloads its resources, like using /reload.
 Registering our command looks like this:
 ```java title="PluginClass.java"

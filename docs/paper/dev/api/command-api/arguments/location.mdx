@@ -1,17 +1,17 @@
 ---
 slug: /dev/command-api/arguments/location
-description: Block position, fine position, and world argument documentation.
+description: BlockPosition, FinePosition and World argument documentation.
 ---
 
-import BlockPositionMp4 from "./assets/vanilla-arguments/blockposition.mp4"
-import FinePositionMp4 from "./assets/vanilla-arguments/fineposition.mp4"
-import WorldMp4 from "./assets/vanilla-arguments/world.mp4"
+import BlockPositionMp4 from "./assets/vanilla-arguments/blockposition.mp4";
+import FinePositionMp4 from "./assets/vanilla-arguments/fineposition.mp4";
+import WorldMp4 from "./assets/vanilla-arguments/world.mp4";
 
 # Location Arguments
 
 ## Block position argument
-The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` vanilla command.
-In order to retrieve the BlockPosition variable from the
+The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` Vanilla command.
+In order to retrieve the `BlockPosition` variable from the
 <Javadoc name='io.papermc.paper.command.brigadier.argument.resolvers.BlockPositionResolver'>`BlockPositionResolver`</Javadoc>, we have to resolve it using the command source.
 
 ### Example usage

@@ -111,7 +111,7 @@ public static LiteralCommandNode<CommandSourceStack> timeArgument() {
     return Commands.literal("timearg")
         .then(Commands.argument("time", ArgumentTypes.time())
             .executes(ctx -> {
-                final int timeInTicks = ctx.getArgument("time", int.class);
+                final int timeInTicks = IntegerArgumentType.getInteger(ctx, "time");
 
                 if (ctx.getSource().getExecutor() instanceof Player player) {
                     player.getWorld().setFullTime(player.getWorld().getFullTime() + timeInTicks);

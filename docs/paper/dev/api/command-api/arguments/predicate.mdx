@@ -54,7 +54,7 @@ public static LiteralCommandNode<CommandSourceStack> integerRangeArgument() {
 
 private static int runIntegerRangeCommand(final CommandContext<CommandSourceStack> ctx) {
     final IntegerRangeProvider integerRangeProvider = ctx.getArgument("range", IntegerRangeProvider.class);
-    final int integerToTest = ctx.getArgument("tested_integer", int.class);
+    final int integerToTest = IntegerArgumentType.getInteger(ctx, "tested_integer");
 
     if (integerRangeProvider.range().contains(integerToTest)) {
         ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <green>is</green> inside the specified range!",

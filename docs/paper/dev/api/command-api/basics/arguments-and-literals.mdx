@@ -110,6 +110,28 @@ Commands.literal("flyspeed")
     );
 ```
 
+:::tip
+
+Some arguments can have special ways of being retrieved. Most notably, all of the Brigadier-provided arguments (the ones mentioned on this page)
+have a resolver to get their own argument value. For the float argument, this would look like this:
+
+```java
+float speed = FloatArgumentType.getFloat(ctx, "speed");
+```
+
+It generally does not matter whether you use `ctx.getArgument` or `FloatArgumentType.getFloat`, since it goes through the same logic, but in future documentation,
+primitive values might be retrieved using their own parsers.
+
+These parsers for Brigadier-native arguments exist. All of these take in `(CommandContext<?> context, String name)` as method parameters:
+- `BoolArgumentType.getBool`
+- `IntegerArgumentType.getInteger`
+- `LongArgumentType.getLong`
+- `FloatArgumentType.getFloat`
+- `DoubleArgumentType.getDouble`
+- `StringArgumentType.getString`
+
+:::
+
 Now, if we input a valid float between 0 and 1, the command would execute correctly:
 <div style={{display: 'inline-block', width: '100%'}}>
     <img src={ValidFloatInput} style={{float: 'left', width: '100%'}}/>

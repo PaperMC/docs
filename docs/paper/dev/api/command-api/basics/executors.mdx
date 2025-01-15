@@ -54,7 +54,7 @@ But that command does not actually set the flyspeed of the executing player. In 
 Commands.literal("flyspeed")
     .then(Commands.argument("speed", FloatArgumentType.floatArg(0, 1.0f))
         .executes(ctx -> {
-            float speed = ctx.getArgument("speed", float.class); // Retrieve the speed argument
+            float speed = FloatArgumentType.getFloat(ctx, "speed"); // Retrieve the speed argument
             // highlight-next-line
             CommandSender sender = ctx.getSource().getSender(); // Retrieve the command sender
             // highlight-next-line
@@ -88,8 +88,7 @@ Commands.literal("flyspeed")
 There is a lot to unpack, so let's break it down, top to bottom:
 
 The first lines define a `/flyspeed` command root, with a float argument named "speed", which only allows values between 0 and 1.
-We then add an executes clause to our argument branch and retrieves the speed argument. We put in `float.class` so that the return value (from the `V getArgument(String, Class<V>)` 
-method) is the correct type.
+We then add an executes clause to our argument branch and retrieves the speed argument by running `FloatArgumentType.getFloat`.
 
 Note the highlighted lines. We first retrieve the `CommandSourceStack` from our `CommandContext<CommandSourceStack>` and then finally retrieve its sender and executor.
 A `CommandSender` is an interface, which declares the `sendMessage(...)`, `getServer()`, and `getName()` methods. It is implemented by all entities, including players, 
@@ -134,7 +133,7 @@ public class FlightSpeedCommand {
     }
 
     private static int runFlySpeedLogic(CommandContext<CommandSourceStack> ctx) {
-        float speed = ctx.getArgument("speed", float.class); // Retrieve the speed argument
+        float speed = FloatArgumentType.getFloat(ctx, "speed"); // Retrieve the speed argument
         CommandSender sender = ctx.getSource().getSender(); // Retrieve the command sender
         Entity executor = ctx.getSource().getExecutor(); // Retrieve the command executor, which may or may not be the same as the sender
 

@@ -84,7 +84,7 @@ public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
             .then(Commands.argument("message", StringArgumentType.greedyString())
                 .executes(ctx -> {
                     final NamedTextColor color = ctx.getArgument("color", NamedTextColor.class);
-                    final String msg = ctx.getArgument("message", String.class);
+                    final String msg = StringArgumentType.getString(ctx, "message");
 
                     ctx.getSource().getSender().sendMessage(
                         Component.text(msg).color(color)
@@ -118,7 +118,7 @@ public static LiteralCommandNode<CommandSourceStack> styleArgument() {
             .then(Commands.argument("message", StringArgumentType.greedyString())
                 .executes(ctx -> {
                     final Style style = ctx.getArgument("style", Style.class);
-                    final String message = ctx.getArgument("message", String.class);
+                    final String msg = StringArgumentType.getString(ctx, "message");
 
                     ctx.getSource().getSender().sendRichMessage("Your input: <input>",
                         Placeholder.component("input", Component.text(message).style(style))

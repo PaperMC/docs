@@ -55,11 +55,10 @@ public static LiteralCommandNode<CommandSourceStack> gameModeArgument() {
                     player.sendRichMessage("Your gamemode has been set to <red><gamemode></red>!",
                         Placeholder.component("gamemode", Component.translatable(gamemode.translationKey()))
                     );
+                    return Command.SINGLE_SUCCESS;
                 }
-                else {
-                    ctx.getSource().getSender().sendPlainMessage("This command requires a player!");
-                }
-                
+
+                ctx.getSource().getSender().sendPlainMessage("This command requires a player!");
                 return Command.SINGLE_SUCCESS;
             }))
         .build();

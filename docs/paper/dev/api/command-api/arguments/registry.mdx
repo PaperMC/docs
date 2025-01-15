@@ -69,11 +69,10 @@ public static LiteralCommandNode<CommandSourceStack> enchantmentRegistry() {
                         Placeholder.component("item", Component.translatable(stack.translationKey())),
                         Placeholder.component("enchantment", enchantment.displayName(10))
                     );
-                }
-                else {
-                    ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
+                    return Command.SINGLE_SUCCESS;
                 }
 
+                ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
                 return Command.SINGLE_SUCCESS;
             }))
         .build();

@@ -60,12 +60,12 @@ private static int runIntegerRangeCommand(final CommandContext<CommandSourceStac
         ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <green>is</green> inside the specified range!",
             Placeholder.unparsed("input", Integer.toString(integerToTest))
         );
+        return Command.SINGLE_SUCCESS;
     }
-    else {
-        ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <red>is not</red> inside the specified range!",
-            Placeholder.unparsed("input", Integer.toString(integerToTest))
-        );
-    }
+
+    ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <red>is not</red> inside the specified range!",
+        Placeholder.unparsed("input", Integer.toString(integerToTest))
+    );
 
     return Command.SINGLE_SUCCESS;
 }

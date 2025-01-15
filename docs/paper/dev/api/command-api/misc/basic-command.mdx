@@ -93,13 +93,9 @@ operator permissions. You can also set this permission to be `true` by default. 
 Now, in our `execute` method, we can retrieve the name of the executor of that command. If we do not find one, we can just get the name of the command sender, like this:
 
 ```java
-final Component name;
-if (commandSourceStack.getExecutor() != null) {
-    name = commandSourceStack.getExecutor().name();
-}
-else {
-    name = commandSourceStack.getSender().name();
-}
+final Component name = commandSourceStack.getExecutor() != null
+    ? commandSourceStack.getExecutor().name()
+    : commandSourceStack.getSender().name();
 ```
 
 This makes sure that we cover all cases and even allow the command to work correctly with `/execute as`.
@@ -146,13 +142,9 @@ public class BroadcastCommand implements BasicCommand {
 
     @Override
     public void execute(CommandSourceStack commandSourceStack, String[] args) {
-        final Component name;
-        if (commandSourceStack.getExecutor() != null) {
-            name = commandSourceStack.getExecutor().name();
-        }
-        else {
-            name = commandSourceStack.getSender().name();
-        }
+        final Component name = commandSourceStack.getExecutor() != null
+            ? commandSourceStack.getExecutor().name()
+            : commandSourceStack.getSender().name();
 
         if (args.length == 0) {
             commandSourceStack.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
@@ -253,13 +245,9 @@ public class BroadcastCommand implements BasicCommand {
 
     @Override
     public void execute(CommandSourceStack commandSourceStack, String[] args) {
-        final Component name;
-        if (commandSourceStack.getExecutor() != null) {
-            name = commandSourceStack.getExecutor().name();
-        }
-        else {
-            name = commandSourceStack.getSender().name();
-        }
+        final Component name = commandSourceStack.getExecutor() != null
+            ? commandSourceStack.getExecutor().name()
+            : commandSourceStack.getSender().name();
 
         if (args.length == 0) {
             commandSourceStack.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");

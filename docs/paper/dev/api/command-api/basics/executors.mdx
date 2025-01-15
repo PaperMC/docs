@@ -73,13 +73,12 @@ Commands.literal("flyspeed")
             if (sender == executor) {
                 // If the player executed the command themselves
                 player.sendPlainMessage("Successfully set your flight speed to " + speed);
+                return Command.SINGLE_SUCCESS;
             }
-            else {
-                // If the speed was set by a different sender (Like using /execute)
-                sender.sendRichMessage("Successfully set <playername>'s flight speed to " + speed, Placeholder.component("playername", player.name()));
-                player.sendPlainMessage("Your flight speed has been set to " + speed);
-            }
-    
+
+            // If the speed was set by a different sender (Like using /execute)
+            sender.sendRichMessage("Successfully set <playername>'s flight speed to " + speed, Placeholder.component("playername", player.name()));
+            player.sendPlainMessage("Your flight speed has been set to " + speed);    
             return Command.SINGLE_SUCCESS;
         })
     );
@@ -152,13 +151,12 @@ public class FlightSpeedCommand {
         if (sender == executor) {
             // If the player executed the command themselves
             player.sendPlainMessage("Successfully set your flight speed to " + speed);
-        }
-        else {
-            // If the speed was set by a different sender (Like using /execute)
-            sender.sendRichMessage("Successfully set <playername>'s flight speed to " + speed, Placeholder.component("playername", player.name()));
-            player.sendPlainMessage("Your flight speed has been set to " + speed);
+            return Command.SINGLE_SUCCESS;
         }
 
+        // If the speed was set by a different sender (Like using /execute)
+        sender.sendRichMessage("Successfully set <playername>'s flight speed to " + speed, Placeholder.component("playername", player.name()));
+        player.sendPlainMessage("Your flight speed has been set to " + speed);
         return Command.SINGLE_SUCCESS;
     }
 }

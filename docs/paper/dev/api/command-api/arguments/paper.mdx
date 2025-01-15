@@ -54,11 +54,10 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
                         Placeholder.component("player", player.name()),
                         Placeholder.component("item", Component.translatable(itemStack.translationKey()))
                     );
-                }
-                else {
-                    ctx.getSource().getSender().sendRichMessage("<red>This argument requires a player!");
+                    return Command.SINGLE_SUCCESS;
                 }
 
+                ctx.getSource().getSender().sendRichMessage("<red>This argument requires a player!");
                 return Command.SINGLE_SUCCESS;
             }))
         .build();
@@ -117,11 +116,10 @@ public static LiteralCommandNode<CommandSourceStack> timeArgument() {
                 if (ctx.getSource().getExecutor() instanceof Player player) {
                     player.getWorld().setFullTime(player.getWorld().getFullTime() + timeInTicks);
                     player.sendRichMessage("Moved time forward by " + timeInTicks + " ticks!");
-                }
-                else {
-                    ctx.getSource().getSender().sendPlainMessage("This argument requires a player!");
+                    return Command.SINGLE_SUCCESS;
                 }
 
+                ctx.getSource().getSender().sendPlainMessage("This argument requires a player!");
                 return Command.SINGLE_SUCCESS;
             })
         ).build();

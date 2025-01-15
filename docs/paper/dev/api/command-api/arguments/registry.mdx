@@ -66,7 +66,7 @@ public static LiteralCommandNode<CommandSourceStack> enchantmentRegistry() {
                     stack.addUnsafeEnchantment(enchantment, 10);
                     ctx.getSource().getSender().sendRichMessage("Enchanted <player>'s <item> with <enchantment>!",
                         Placeholder.component("player", player.name()),
-                        Placeholder.component("item", Component.translatable(stack.translationKey())),
+                        Placeholder.component("item", Component.translatable(stack)),
                         Placeholder.component("enchantment", enchantment.displayName(10))
                     );
                     return Command.SINGLE_SUCCESS;

@@ -1002,7 +1002,7 @@ tick-rates:
     description: >-
       The rate, in ticks, at which the server updates containers and inventories.
       Higher values than 1 can cause item desync/ghosting or make block breaking
-      progress appear to reset randomly. It can also create visual artefacts mimicking
+      progress appear to reset randomly. It can also create visual artifacts mimicking
       server lag to clients, despite this not being the case.
   grass-spread:
     default: "1"

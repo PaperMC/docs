@@ -14,31 +14,42 @@ import PaperPartyCommandImage from "./assets/paperparty-command.png";
 In order to register Bukkit commands, you would define a class that extends `BukkitCommand`, and implements the `execute(...)` and `tabComplete(...)`
 methods. This might look like this:
 ```java title="BukkitPartyCommand.java"
+package your.package.name;
+
+import org.bukkit.Bukkit;
+import org.bukkit.command.CommandSender;
+import org.bukkit.command.defaults.BukkitCommand;
+import org.bukkit.entity.Player;
+import org.jspecify.annotations.NullMarked;
+
+import java.util.List;
+
+@NullMarked
 public class BukkitPartyCommand extends BukkitCommand {
-    public BukkitPartyCommand(@NotNull String name, @NotNull String description, @NotNull String usageMessage, @NotNull List<String> aliases) {
+    public BukkitPartyCommand(String name, String description, String usageMessage, List<String> aliases) {
         super(name, description, usageMessage, aliases);
     }
 
     @Override
-    public boolean execute(@NotNull CommandSender sender, @NotNull String commandLabel, @NotNull String[] args) {
+    public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         if (args.length == 0) {
-            sender.sendMessage("Please provide a player!");
+            sender.sendPlainMessage("Please provide a player!");
             return true;
         }
 
         final Player targetPlayer = Bukkit.getPlayer(args[0]);
         if (targetPlayer == null) {
-            sender.sendMessage("Please provide a valid player!");
+            sender.sendPlainMessage("Please provide a valid player!");
             return true;
         }
 
-        targetPlayer.sendMessage(sender.getName() + " started partying with you!");
-        sender.sendMessage("You are now partying with " + targetPlayer.getName() + "!");
+        targetPlayer.sendPlainMessage(sender.getName() + " started partying with you!");
+        sender.sendPlainMessage("You are now partying with " + targetPlayer.getName() + "!");
         return false;
     }
 
     @Override
-    public @NotNull List<String> tabComplete(@NotNull CommandSender sender, @NotNull String alias, @NotNull String[] args) throws IllegalArgumentException {
+    public List<String> tabComplete(CommandSender sender, String alias, String[] args) throws IllegalArgumentException {
         if (args.length == 1) {
             return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
         }
@@ -76,8 +87,8 @@ public static LiteralCommandNode<CommandSourceStack> createCommand(final String 
                 final Player targetPlayer = playerSelector.resolve(ctx.getSource()).getFirst();
                 final CommandSender sender = ctx.getSource().getSender();
 
-                targetPlayer.sendMessage(sender.getName() + " started partying with you!");
-                sender.sendMessage("You are now partying with " + targetPlayer.getName() + "!");
+                targetPlayer.sendPlainMessage(sender.getName() + " started partying with you!");
+                sender.sendPlainMessage("You are now partying with " + targetPlayer.getName() + "!");
 
                 return Command.SINGLE_SUCCESS;
             }))

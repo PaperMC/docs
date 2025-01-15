@@ -23,7 +23,7 @@ public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
                 final BlockPositionResolver blockPositionResolver = ctx.getArgument("arg", BlockPositionResolver.class);
                 final BlockPosition blockPosition = blockPositionResolver.resolve(ctx.getSource());
 
-                ctx.getSource().getSender().sendMessage("Put in " + blockPosition.x() + " " + blockPosition.y() + " " + blockPosition.z());
+                ctx.getSource().getSender().sendPlainMessage("Put in " + blockPosition.x() + " " + blockPosition.y() + " " + blockPosition.z());
                 return Command.SINGLE_SUCCESS;
             }))
         .build();

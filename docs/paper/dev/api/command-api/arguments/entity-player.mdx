@@ -162,7 +162,7 @@ public static LiteralCommandNode<CommandSourceStack> playerProfilesArgument() {
                 final Collection<PlayerProfile> foundProfiles = profilesResolver.resolve(ctx.getSource());
 
                 for (final PlayerProfile profile : foundProfiles) {
-                    ctx.getSource().getSender().sendMessage("Found " + profile.getName());
+                    ctx.getSource().getSender().sendPlainMessage("Found " + profile.getName());
                 }
 
                 return Command.SINGLE_SUCCESS;

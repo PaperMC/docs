@@ -10,7 +10,8 @@ import TimeMp4 from "./assets/vanilla-arguments/time.mp4";
 import UuidMp4 from "./assets/vanilla-arguments/uuid.mp4";
 import ObjectiveCriteriaMp4 from "./assets/vanilla-arguments/objectivecriteria.mp4";
 
-# Arguments for Types Frequently Used in Paper API
+# Paper Arguments
+The arguments in this section return objects frequently used in Paper API.
 
 ## Block state argument
 The block state argument can be used for getting a block type and explicit, associated data.
@@ -23,7 +24,7 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
             .executes(ctx -> {
                 final BlockState blockState = ctx.getArgument("arg", BlockState.class);
                 
-                ctx.getSource().getSender().sendMessage("You specified a " + blockState.getType() + "!");
+                ctx.getSource().getSender().sendPlainMessage("You specified a " + blockState.getType() + "!");
                 return Command.SINGLE_SUCCESS;
             }))
         .build();
@@ -118,7 +119,7 @@ public static LiteralCommandNode<CommandSourceStack> timeArgument() {
                     player.sendRichMessage("Moved time forward by " + timeInTicks + " ticks!");
                 }
                 else {
-                    ctx.getSource().getSender().sendMessage("This argument requires a player!");
+                    ctx.getSource().getSender().sendPlainMessage("This argument requires a player!");
                 }
 
                 return Command.SINGLE_SUCCESS;

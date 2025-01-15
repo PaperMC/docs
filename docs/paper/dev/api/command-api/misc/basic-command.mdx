@@ -26,7 +26,9 @@ package your.package.name;
 
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
+import org.jspecify.annotations.NullMarked;
 
+@NullMarked
 public class YourCommand implements BasicCommand {
 
     @Override
@@ -62,13 +64,15 @@ With the permission method you can, similar to the `canUse` method, set the perm
 ## Example: Broadcast command
 As an example, we can create a simple broadcast command. We start by declaring creating a class which implements `BasicCommand` and overrides `execute` and `permission`:
 
-```java
+```java title="BroadcastCommand.java"
 package your.package.name;
 
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
+@NullMarked
 public class BroadcastCommand implements BasicCommand {
 
     @Override
@@ -134,8 +138,10 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
+@NullMarked
 public class BroadcastCommand implements BasicCommand {
 
     @Override
@@ -237,10 +243,12 @@ import net.kyori.adventure.text.minimessage.MiniMessage;
 import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 
+@NullMarked
 public class BroadcastCommand implements BasicCommand {
 
     @Override

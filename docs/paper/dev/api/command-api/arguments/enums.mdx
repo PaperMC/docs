@@ -57,7 +57,7 @@ public static LiteralCommandNode<CommandSourceStack> gameModeArgument() {
                     );
                 }
                 else {
-                    ctx.getSource().getSender().sendRichMessage("This command requires a player!");
+                    ctx.getSource().getSender().sendPlainMessage("This command requires a player!");
                 }
                 
                 return Command.SINGLE_SUCCESS;
@@ -108,7 +108,7 @@ public static LiteralCommandNode<CommandSourceStack> scoreboardDisplaySlotArgume
             .executes(ctx -> {
                 final DisplaySlot slot = ctx.getArgument("slot", DisplaySlot.class);
                 
-                ctx.getSource().getSender().sendMessage("You selected: " + slot.getId());
+                ctx.getSource().getSender().sendPlainMessage("You selected: " + slot.getId());
                 
                 return Command.SINGLE_SUCCESS;
             })
@@ -132,7 +132,7 @@ public static LiteralCommandNode<CommandSourceStack> templateMirrorArgument() {
             .executes(ctx -> {
                 final Mirror mirror = ctx.getArgument("mirror", Mirror.class);
 
-                ctx.getSource().getSender().sendMessage("You selected: " + mirror.name());
+                ctx.getSource().getSender().sendPlainMessage("You selected: " + mirror.name());
 
                 return Command.SINGLE_SUCCESS;
             })
@@ -156,7 +156,7 @@ public static LiteralCommandNode<CommandSourceStack> templateRotationArgument() 
             .executes(ctx -> {
                 final StructureRotation rotation = ctx.getArgument("rotation", StructureRotation.class);
 
-                ctx.getSource().getSender().sendMessage("You selected: " + rotation.name());
+                ctx.getSource().getSender().sendPlainMessage("You selected: " + rotation.name());
 
                 return Command.SINGLE_SUCCESS;
             })

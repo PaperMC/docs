@@ -63,8 +63,8 @@ that we can use for arguments:
 | FloatArgumentType.floatArg()      | Float         | 253.2, -25.0        | Any valid float                                                                                  |
 | DoubleArgumentType.doubleArg()    | Double        | 4123.242, -1.1      | Any valid double                                                                                 |
 | StringArgumentType.word()         | String        | letters-and+1234567 | A single word. May only contain letters and numbers and these characters: `+`, `-`, `_`, and `.` |
-| StringArgumentType.string()       | String        | "with spaces"       | A single word, or a valid string with spaces, if quoted                                          |
-| StringArgumentType.greedyString() | String        | unquoted spaces     | The literal written input. May contain any characters. Has to be the last argument.              |
+| StringArgumentType.string()       | String        | "with spaces"       | A single word, or, if quoted, any valid string with spaces                                       |
+| StringArgumentType.greedyString() | String        | unquoted spaces     | The literal written input. May contain any characters. Has to be the last argument               |
 
 ### Boolean argument type and argument parsing
 A boolean argument is used for retrieving, well, a boolean. An example usage for that might be a `/serverflight` command which allows for enabling and disabling server flight
@@ -127,16 +127,16 @@ way better, as they can see invalid input without sending the command to the ser
 ### String arguments
 There is three string arguments: `word`, `string`, and `greedyString`.
 
-The `word` string argument is the simplest one of these. It only accepts a single word without any quotes or special characters. The only special character you can use is a underscore.
-* ✅ `this_is_valid_input`
+The `word` string argument is the simplest one of these. It only accepts a single word consisting of alphanumerical characters and these special characters: `+`, `-`, `_`, and `.`.
+* ✅ `.this_is_valid_input.`
 * ❌ `this is invalid input`
 * ❌ `"also_invalid"`
-* ✅ `10_numbers_are_valid`
+* ✅ `-10_numbers_are_valid`
 * ❌ `@_@`
 
-The `string` argument is slightly more complicated. If unquoted, it follows the same rules as the `word` argument. Only letters and underscores. But if you put your string into quotes,
-you can enter any combination of unicode characters you want to. Special characters, like quotes `"`, can be escaped using a backslash `\`.
-* ✅ `this_is_valid_input`
+The `string` argument is slightly more complicated. If unquoted, it follows the same rules as the `word` argument. Only alphanumerical characters and the mentioned special characters.
+But if you put your string into quotes, you can enter any combination of unicode characters you want to. Quotes `"` can be escaped using a backslash `\`.
+* ✅ `this_is-valid-input`
 * ✅ `"\"quotes\""`
 * ❌ `this is invalid input`
 * ✅ `"this is valid input again"`

@@ -1,0 +1,186 @@
+---
+slug: /dev/command-api/arguments/adventure
+description: Documentation for all arguments returning Adventure API objects.
+---
+
+import ComponentMp4 from "./assets/vanilla-arguments/component.mp4";
+import KeyMp4 from "./assets/vanilla-arguments/key.mp4";
+import NamedColorMp4 from "./assets/vanilla-arguments/namedcolor.mp4";
+import StyleMp4 from "./assets/vanilla-arguments/style.mp4";
+import SignedMessageMp4 from "./assets/vanilla-arguments/signedmessage.mp4";
+
+# Adventure Library Arguments
+These arguments return a class from the `net.kyori` package. They are technically not native to Minecraft or Bukkit, but as Paper includes the Adventure library, they are
+usually widely used in the Paper ecosystem.
+
+## Component argument
+:::note
+
+This argument is very technical. Following the same format as the `/tellraw <player> <component>` command for its second argument, it expects the JSON
+representation of a text component, making it inappropriate for general user input.
+
+:::
+
+The result is returned as an Adventure component to work with.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> componentArgument() {
+    return Commands.literal("componentargument")
+        .then(Commands.argument("arg", ArgumentTypes.component())
+            .executes(ctx -> {
+                final Component component = ctx.getArgument("arg", Component.class);
+
+                ctx.getSource().getSender().sendRichMessage(
+                    "Your message: <input>",
+                    Placeholder.component("input", component)
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={ComponentMp4}/>
+
+
+## Key argument
+The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a `net.kyori.adventure.key.Key` from the Adventure library, 
+which can be used at various other places in the Bukkit/Paper API.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> keyArgument() {
+    return Commands.literal("key")
+        .then(Commands.argument("key_input", ArgumentTypes.key())
+            .executes(ctx -> {
+                final Key key = ctx.getArgument("key_input", Key.class);
+
+                ctx.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
+                    Placeholder.unparsed("key", key.asString())
+                );                    
+                
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={KeyMp4}/>
+
+
+## Named color argument
+This argument provides the user with the ability to select between the 16 built-in "named" text colors. This argument returns a
+`net.kyori.adventure.text.format.NamedTextColor` which you can use for styling components.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
+    return Commands.literal("namedcolor")
+        .then(Commands.argument("color", ArgumentTypes.namedColor())
+            .then(Commands.argument("message", StringArgumentType.greedyString())
+                .executes(ctx -> {
+                    final NamedTextColor color = ctx.getArgument("color", NamedTextColor.class);
+                    final String msg = ctx.getArgument("message", String.class);
+
+                    ctx.getSource().getSender().sendMessage(
+                        Component.text(msg).color(color)
+                    );
+                    return Command.SINGLE_SUCCESS;
+                })))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={NamedColorMp4}/>
+
+
+## Adventure style argument
+:::note
+
+Similar to the component argument, this argument is not really appropriate for general user input, as it also follows the JSON format for displaying components. Most users
+
+do not know how to use that format and thus its general usage is not advised.
+
+:::
+
+The style argument returns its value in the form of an `net.kyori.adventure.text.format.Style` object. This can be applied to any component using `Component#style(Style)`.
+Whilst the JSON input allows for the `text` field, its content is completely ignored.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> styleArgument() {
+    return Commands.literal("style")
+        .then(Commands.argument("style", ArgumentTypes.style())
+            .then(Commands.argument("message", StringArgumentType.greedyString())
+                .executes(ctx -> {
+                    final Style style = ctx.getArgument("style", Style.class);
+                    final String message = ctx.getArgument("message", String.class);
+
+                    ctx.getSource().getSender().sendRichMessage("Your input: <input>",
+                        Placeholder.component("input", Component.text(message).style(style))
+                    );
+                    return Command.SINGLE_SUCCESS;
+                })))
+        .build();
+}
+```
+
+### In-game preview
+<FullWidthVideo src={StyleMp4}/>
+
+
+## Signed message argument
+The signed message argument allows a player to send an argument in the form of a **signed message** to the server. This signed message is a special type - it
+allows the server to send that message, without the ability to directly modify it, to any player. The visible difference is that unsigned messages have a white bar at the left,
+whilst signed messages don't.
+
+A signed message argument returns a `SignedMessageResolver`. In order to call its `#resolve` method, you have to pass in two parameters:
+* The argument name
+* The `CommandContext<CommandSourceStack>` object
+
+The resolved value is a `CompletableFuture<SignedMessage>`, whose `SignedMessage` value you can handle using a `thenAccept(Consumer<T>)`. Inside of the consumer, you can send the signed message to players or work with it in other ways.
+
+:::warning
+
+By default, the consumer passed into `thenAccept` is not executed on the main thread, making it unsafe to use most of Paper API within it.
+If you need to use the API, you can schedule a task to be run on the next available tick. For this you can use the <Javadoc name="org.bukkit.scheduler.BukkitScheduler#getMainThreadExecutor(org.bukkit.plugin.Plugin)">main thread executor</Javadoc>.
+You can read up on that [here](../../scheduler.mdx).
+
+:::
+
+:::note
+
+A non-player sender is not capable of sending a signed message, which means that the resolved `CompletableFuture` will never be completed. You should make sure that only players can use your argument with `.requires(ctx -> ctx.getSender() instanceof Player)` on your `SignedArgument`. You may
+add a fallback greedy string argument for non-player senders if you want the argument to execute regardless of signing.
+
+:::
+
+### Example usage
+```java title="MinecraftArguments.java"
+public static LiteralCommandNode<CommandSourceStack> signedMessageArgument() {
+    return Commands.literal("signedmessage")
+        .then(Commands.argument("target", ArgumentTypes.player())
+            .then(Commands.argument("message", ArgumentTypes.signedMessage())
+                .executes(MinecraftArguments::executeSignedMessageCommand)))
+        .build();
+}
+
+private static int executeSignedMessageCommand(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
+    final Player target = ctx.getArgument("target", PlayerSelectorArgumentResolver.class).resolve(ctx.getSource()).getFirst();
+    final SignedMessageResolver messageResolver = ctx.getArgument("message", SignedMessageResolver.class);
+
+    messageResolver.resolveSignedMessage("message", ctx).thenAccept(msg -> {
+        target.sendMessage(msg, ChatType.CHAT.bind(ctx.getSource().getSender().name()));
+    });
+
+
+    return Command.SINGLE_SUCCESS;
+}
+```
+
+### In-game preview
+<FullWidthVideo src={SignedMessageMp4}/>

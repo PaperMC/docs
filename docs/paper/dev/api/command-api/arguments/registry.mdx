@@ -1,0 +1,270 @@
+---
+slug: /dev/command-api/arguments/registry
+description: Documentation for arguments retrieving registry values.
+---
+
+import ResourceAttributes from "./assets/registry-arguments/resource-attributes.mp4"
+import ResourceBannerPattern from "./assets/registry-arguments/resource-banner-pattern.mp4"
+import ResourceBiome from "./assets/registry-arguments/resource-biome.mp4"
+import ResourceBlock from "./assets/registry-arguments/resource-block.mp4"
+import ResourceCatVariant from "./assets/registry-arguments/resource-cat-variant.mp4"
+import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4"
+import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4"
+import ResourceFluid from "./assets/registry-arguments/resource-fluid.mp4"
+import ResourceFrogVariant from "./assets/registry-arguments/resource-frog-variant.mp4"
+import ResourceGameEvent from "./assets/registry-arguments/resource-game-event.mp4"
+import ResourceInstrument from "./assets/registry-arguments/resource-instrument.mp4"
+import ResourceItem from "./assets/registry-arguments/resource-item.mp4"
+import ResourceJukeboxSong from "./assets/registry-arguments/resource-jukebox-song.mp4"
+import ResourceMapDecorationType from "./assets/registry-arguments/resource-map-decoration-type.mp4"
+import ResourceMemoryModuleType from "./assets/registry-arguments/resource-memory-module-type.mp4"
+import ResourceMenu from "./assets/registry-arguments/resource-menu.mp4"
+import ResourceMobEffect from "./assets/registry-arguments/resource-mob-effect.mp4"
+import ResourcePaintingVariant from "./assets/registry-arguments/resource-painting-variant.mp4"
+import ResourceSoundEvent from "./assets/registry-arguments/resource-sound-event.mp4"
+import ResourceStructureType from "./assets/registry-arguments/resource-structure-type.mp4"
+import ResourceVillagerProfession from "./assets/registry-arguments/resource-villager-profession.mp4"
+import ResourceVillagerType from "./assets/registry-arguments/resource-villager-type.mp4"
+import ResourceWolfVariant from "./assets/registry-arguments/resource-wolf-variant.mp4"
+
+import ResourceKeyItem from "./assets/registry-arguments/resourcekey-item.mp4"
+import EnchantsRegistry from "./assets/registry-arguments/enchants-registry.mp4"
+
+# Registry Arguments
+Registries in Minecraft hold all sort of information - possible item materials, block materials, enchantments, potion effects, ... and more!
+
+There are two types of registry arguments: `resource` and `resourceKey`. 
+The main difference between those arguments is the return value: The `resource` argument returns the parsed value, whilst the `resourceKey` only returns a `TypedKey`, which
+you can use to retrieve the value yourself.
+
+## Resource argument
+Just like any other argument, you can get a `ArgumentType<T>` reference to it using `ArgumentTypes.resource(RegistryKey<T>)`. A selection of possible registry keys can be
+found below. They are accessed in a static context using the <Javadoc name='io.papermc.paper.registry.RegistryKey'>`RegistryKey`</Javadoc> interface.
+
+Each entry in `RegistryKey` returns a `RegistryKey<T>`. The `<T>` generic parameter here describes the return type. This means that if we were to retrieve
+<Javadoc name='io.papermc.paper.registry.RegistryKey#ITEM'>`RegistryKeys.ITEM`</Javadoc>, the return type would be an `ItemType`, since it is defined as follows:
+
+```java title="RegistryKey.class"
+public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
+    // ...
+    RegistryKey<ItemType> ITEM = RegistryKeyImpl.create("item");
+    // ...
+}
+```
+
+And really, there isn't much more to it. For that exact reason, here is an example on the implementation of such an argument:
+
+```java
+public static LiteralCommandNode<CommandSourceStack> enchantmentRegistry() {
+    return Commands.literal("enchants-registry")
+        .then(Commands.argument("enchantment", ArgumentTypes.resource(RegistryKey.ENCHANTMENT))
+            .executes(ctx -> {
+                final Enchantment enchantment = ctx.getArgument("enchantment", Enchantment.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    final ItemStack stack = player.getInventory().getItemInMainHand();
+                    stack.addUnsafeEnchantment(enchantment, 10);
+                    ctx.getSource().getSender().sendRichMessage("Enchanted <player>'s <item> with <enchantment>!",
+                        Placeholder.component("player", player.name()),
+                        Placeholder.component("item", Component.translatable(stack.translationKey())),
+                        Placeholder.component("enchantment", enchantment.displayName(10))
+                    );
+                }
+                else {
+                    ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
+                }
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+We define an `enchantment` argument using a enchantment registry key resource and retrieve the value of that using `ctx.getArgument("enchantment", Enchantment.class)`.
+Finally, we enchant the item of the executing player's hand with whatever enchantment the sender chose at level 10 and send a success message.
+
+Here is how it looks in-game:
+<FullWidthVideo src={EnchantsRegistry}/>
+
+:::warning
+
+There are certain edge-cases, where this argument, due to missing registries on the client, will cause a **Network Protocol Error**.
+Basically, the only argument where this is the case right now is with the `STRUCTURE` registry key.
+
+```java
+// Registering this command will cause clients to not be able to connect to the server.
+final LiteralCommandNode<CommandSourceStack> invalidRegistryArgument = Commands.literal("registry-structure")
+    .then(Commands.argument("value", ArgumentTypes.resource(RegistryKey.STRUCTURE)))
+    .build();
+```
+
+Due to this fact, it is advised to only use the `STRUCTURE` registry key argument with a `resourceKey(...)` argument type and parse the values yourself.
+
+:::
+
+## Resource key argument
+For the client, there is barely any difference between the using `ArgumentTypes.resource` or `ArgumentTypes.resourceKey`. The only difference is that
+using `ArgumentTypes.resourceKey` does not provide **error checking**. We can visualize this using `RegistryKey.ITEM`.
+
+Here is the tab completion for when using `ArgumentTypes.resource(RegistryKey.ITEM)`:
+<FullWidthVideo src={ResourceItem}/><br/>
+
+And here is the tab completion for when using `ArgumenTypes.resourceKey(RegistryKey.ITEM)`:
+<FullWidthVideo src={ResourceKeyItem}/><br/>
+
+The resource argument provides a much cleaner user experience, whilst the resourceKey argument has one very important usecase: You get the raw
+`TypedKey<T>` returned as an argument result. This object is particularly useful, as it provides all information required to be able to retrieve
+a value from a registry yourself.
+
+:::tip
+
+Unless you have a specific reason for using the `resourceKey` argument over the `resource` one, the `resource` argument is preferred due to the client-side error
+checking and simple usability.
+
+:::
+
+### Direct code comparison
+Here is a simple code snipped on how one could use the `RegistryKey.ITEM` registry with a `resource` argument type:
+
+```java title="Item Resource"
+Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
+    .executes(ctx -> {
+        final ItemType item = ctx.getArgument("item", ItemType.class);
+
+        if (ctx.getSource().getExecutor() instanceof Player player) {
+            player.getInventory().addItem(item.createItemStack());
+        }
+
+        return Command.SINGLE_SUCCESS;
+    });
+```
+
+Here is the same code, using a `resourceKey` argument type:
+
+```java title="Item Resource"
+Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
+    .executes(ctx -> {
+        final TypedKey<ItemType> itemKey = ctx.getArgument("value", TypedKey.class);
+        ItemType item = RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key());
+        
+        if (item == null) {
+            ctx.getSource().getSender().sendRichMessage("<red>Please provide a valid item!");
+            return -1;
+        }
+
+        if (ctx.getSource().getExecutor() instanceof Player player) {
+            player.getInventory().addItem(item.createItemStack());
+        }
+
+        return Command.SINGLE_SUCCESS;
+    });
+```
+
+### Using a TypedKey
+First, in order to get the correct registry, you can run `RegistryAccess#getregistry(RegistryKey)`. In order to get a `RegistryAccess`, you can just use the static
+`RegistryAccess.registryAccess()` method. The `RegistryKey` is retrieved using `TypedKey#registryKey`.
+Now, in order to get the final value `T`, you can run `Registry#get(Key)`, where the key can be retrieved using `TypedKey#key`. This will return the backing instance
+from that resource key or null, if no value has been found.
+
+### Usecase over resource argument
+The main usecase for this argument type is the ability to store the key (the value returned to you by `TypedKey#key`). If you want to be able to store the exact user
+input and be able to retrieve the backed instance without much throuble, that is the way to do it.
+
+## Registry key previews
+
+At the time of writing, the following RegistryKeys exist:
+
+|   RegistryKeys Field   |      Return Value      |                Preview Video                |
+|------------------------|------------------------|---------------------------------------------|
+| ATTRIBUTE              | Attribute              | [Attribute](#attribute)                     |
+| BANNER_PATTERN         | PatternType            | [Pattern Type](#pattern-type)               |
+| BIOME                  | Biome                  | [Biome](#biome)                             |
+| BLOCK                  | BlockType              | [Block Type](#block-type)                   |
+| CAT_VARIANT            | Cat.Type               | [Cat Type](#cat-type)                       |
+| DAMAGE_TYPE            | DamageType             | [Damage Type](#damage-type)                 |
+| DATA_COMPONENT_TYPE    | DataComponentType      | [Data Component Type](#data-component-type) |
+| FLUID                  | Fluid                  | [Fluid](#fluid)                             |
+| FROG_VARIANT           | Frog.Variant           | [Frog Variant](#frog-variant)               |
+| GAME_EVENT             | GameEvent              | [Game Event](#game-event)                   |
+| INSTRUMENT             | MusicInstrument        | [Music Instrument](#music-instrument)       |
+| ITEM                   | ItemType               | [Item Type](#item-type)                     |
+| JUKEBOX_SONG           | JukeboxSong            | [Jukebox Song](#jukebox-song)               |
+| MAP_DECORATION_TYPE    | MapCursor.Type         | [Map Cursor Type](#map-cursor-type)         |
+| MENU                   | MenuType               | [Menu Type](#menu-type)                     |
+| MOB_EFFECT             | PotionEffectType       | [Potion Effect Type](#potion-effect-type)   |
+| PAINTING_VARIANT       | Art                    | [Art](#art)                                 |
+| SOUND_EVENT            | Sound                  | [Sound](#sound)                             |
+| STRUCTURE              | Structure              | [Structure](#structure)                     |
+| STRUCTURE_TYPE         | StructureType          | [Structure Type](#structure-type)           |
+| VILLAGER_PROFESSION    | Villager.Profession    | [Villager Profession](#villager-profession) |
+| VILLAGER_TYPE          | Villager.Type          | [Villager Type](#villager-type)             |
+| WOLF_VARIANT           | Wolf.Variant           | [Wolf Variant](#wolf-variant)               |
+
+### Attribute
+<FullWidthVideo src={ResourceAttributes}/>
+
+### Pattern type
+<FullWidthVideo src={ResourceBannerPattern}/>
+
+### Biome
+<FullWidthVideo src={ResourceBiome}/>
+
+### Block type
+<FullWidthVideo src={ResourceBlock}/>
+
+### Cat type
+<FullWidthVideo src={ResourceCatVariant}/>
+
+### Damage type
+<FullWidthVideo src={ResourceDamageType}/>
+
+### Data component type
+<FullWidthVideo src={ResourceDataComponentType}/>
+
+### Fluid
+<FullWidthVideo src={ResourceFluid}/>
+
+### Frog variant
+<FullWidthVideo src={ResourceFrogVariant}/>
+
+### Game event
+<FullWidthVideo src={ResourceGameEvent}/>
+
+### Music instrument
+<FullWidthVideo src={ResourceInstrument}/>
+
+### Item type
+<FullWidthVideo src={ResourceItem}/>
+
+### Jukebox Song
+<FullWidthVideo src={ResourceJukeboxSong}/>
+
+### Map cursor type
+<FullWidthVideo src={ResourceMapDecorationType}/>
+
+### Menu type
+<FullWidthVideo src={ResourceMenu}/>
+
+### Potion effect type
+<FullWidthVideo src={ResourceMobEffect}/>
+
+### Art
+<FullWidthVideo src={ResourcePaintingVariant}/>
+
+### Sound
+<FullWidthVideo src={ResourceSoundEvent}/>
+
+### Structure
+This argument kicks the client, so no preview for this one ¯\\\_(ツ)\_/¯
+
+### Structure type
+<FullWidthVideo src={ResourceStructureType}/>
+
+### Villager profession
+<FullWidthVideo src={ResourceVillagerProfession}/>
+
+### Villager type
+<FullWidthVideo src={ResourceVillagerType}/>
+
+### Wolf variant
+<FullWidthVideo src={ResourceWolfVariant}/>

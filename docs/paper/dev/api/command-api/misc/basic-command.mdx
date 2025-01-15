@@ -1,6 +1,6 @@
 ---
 slug: /dev/command-api/misc/basic-command
-description: Bukkit commands styled command declaration
+description: Bukkit styled command declaration.
 ---
 
 import BroadcastCommand from "./assets/broadcast-command.png"
@@ -40,7 +40,7 @@ If you have seen the `CommandContext<CommandSourceStack>` class before, you migh
 parameter `S` from our `CommandContext<S>`, which is also used in the `executes` method from the `ArgumentBuilder`. 
 
 With a `CommandSourceStack`, we can retrieve basic information about the sender of the command, the location the command was send from, and the executing entity.
-For more information, check out [basics/command-executors](../basics/command-executors.mdx).
+For more information, check out [basics/command-executors](../basics/executors).
 
 ## The optional methods
 You can freely choose whether to implement either of the at the top mentioned, optional methods. Here is a quick overview on what which one does:
@@ -52,7 +52,7 @@ This method returns some sort of `Collection<String>` and takes in a `CommandSou
 Each entry in the collection that you return will be send to the client to be shown as suggestions the same way as with Bukkit commands.
 
 ### `canUse(CommandSender)`
-With this method, you can set up a basic `requires` structure from Brigadier commands. [You can read more on that here](../basics/command-requirements.mdx).
+With this method, you can set up a basic `requires` structure from Brigadier commands. [You can read more on that here](../basics/requirements).
 This method returns a `boolean`, which is required to return `true` in order for a command sender to be able to execute that command.
 
 ### `permission()`

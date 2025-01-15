@@ -70,12 +70,12 @@ Commands.literal("flyspeed")
     
             if (sender == executor) {
                 // If the player executed the command themselves
-                player.sendMessage("Successfully set your flight speed to " + speed);
+                player.sendMessage(Component.text("Successfully set your flight speed to " + speed));
             }
             else {
                 // If the speed was set by a different sender (Like using /execute)
-                sender.sendMessage("Successfully set " + player.getName() + "'s flight speed to " + speed);
-                player.sendMessage("Your flight speed has been set to " + speed);
+                sender.sendRichMessage("Successfully set <playername>'s flight speed to " + speed, Placeholder.component("playername", player.name()));
+                player.sendMessage(Component.text("Your flight speed has been set to " + speed));
             }
     
             return Command.SINGLE_SUCCESS;

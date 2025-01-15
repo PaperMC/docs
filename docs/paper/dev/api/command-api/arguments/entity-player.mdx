@@ -15,23 +15,30 @@ The arguments described in this section relate to arguments which you can use to
 All of these have entity selectors (`@a`, `@e`, `@n`, etc.) as valid inputs, though they require the `minecraft.command.selector` permission in order to 
 be able to be used. The specific arguments may allow or disallow certain selectors.
 
+Due to the permission requirement for selectors it is adviced to add a `requires` statement to your command:
+```java
+.requires(ctx -> ctx.getSender().hasPermission("minecraft.command.selector"))
+```
+
+You can find more information about requirements [here](../basics/requirements.mdx).
+
 ## Entity argument
 This argument, after resolving its returning `EntitySelectorArgumentResolver`, returns a list of exactly one, no more and no less, entity. It is safe
 to call `List#getFirst()` to retrieve that entity. You can resolve it using <Javadoc name="io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)">`ArgumentResolver#resolve(CommandSourceStack)`</Javadoc>
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> entity() {
+public static LiteralCommandNode<CommandSourceStack> singleEntity() {
     return Commands.literal("entityarg")
-        .requires(ctx -> ctx.getSender().isOp())
         .then(Commands.argument("arg", ArgumentTypes.entity())
             .executes(ctx -> {
                 final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
                 final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
 
-                ctx.getSource().getSender().sendRichMessage("Found a <entitytype>",
-                    Placeholder.unparsed("entitytype", entities.getFirst().getType().name())
+                ctx.getSource().getSender().sendRichMessage("Found <green><entityname>",
+                    Placeholder.component("entityname", entities.getFirst().name())
                 );
+
                 return Command.SINGLE_SUCCESS;
             }))
         .build();
@@ -39,31 +46,33 @@ public static LiteralCommandNode<CommandSourceStack> entity() {
 ```
 
 ### In-game preview
-If the executing player is not opped:
+If the executing player doesn't have the `minecraft.command.selector` permission:
 <FullWidthVideo src={EntityUnoppedMp4}/>
 
-If the executing player is opped:
+If the executing player has the `minecraft.command.selector` permission:
 <FullWidthVideo src={EntityOppedMp4}/>
 
 
 ## Entities argument
-In contrast to the single entity argument, this multi entity argument accepts any amount of entities, with the minimum amount of entities being 1. They can, once again, be resolved using
+In contrast to the single entity argument, this multiple-entities argument accepts any amount of entities, with the minimum amount of entities being 1. They can, once again, be resolved using
 <Javadoc name="io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)">`ArgumentResolver#resolve(CommandSourceStack)`</Javadoc>,
 which returns a `List<Entity>`.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> entities() {
+public static LiteralCommandNode<CommandSourceStack> multipleEntities() {
     return Commands.literal("entitiesarg")
-        .requires(ctx -> ctx.getSender().isOp())
         .then(Commands.argument("arg", ArgumentTypes.entities())
             .executes(ctx -> {
                 final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
                 final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
 
-                ctx.getSource().getSender().sendRichMessage("Found the following entities: <entitytypes>",
-                    Placeholder.unparsed("entitytypes", String.join(", ", entities.stream().map(Entity::getType).map(EntityType::name).toList()))
+                final Component foundEntities = Component.join(JoinConfiguration.commas(true), entities.stream().map(Entity::name).toList());
+
+                ctx.getSource().getSender().sendRichMessage("Found <green><entitynames>",
+                    Placeholder.component("entitynames", foundEntities)
                 );
+
                 return Command.SINGLE_SUCCESS;
             }))
         .build();

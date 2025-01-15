@@ -34,18 +34,18 @@ public class BukkitPartyCommand extends BukkitCommand {
     public boolean execute(CommandSender sender, String commandLabel, String[] args) {
         if (args.length == 0) {
             sender.sendPlainMessage("Please provide a player!");
-            return true;
+            return false;
         }
 
         final Player targetPlayer = Bukkit.getPlayer(args[0]);
         if (targetPlayer == null) {
             sender.sendPlainMessage("Please provide a valid player!");
-            return true;
+            return false;
         }
 
         targetPlayer.sendPlainMessage(sender.getName() + " started partying with you!");
         sender.sendPlainMessage("You are now partying with " + targetPlayer.getName() + "!");
-        return false;
+        return true;
     }
 
     @Override

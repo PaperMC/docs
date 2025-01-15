@@ -52,7 +52,7 @@ const footer: Footer = {
       ],
     },
   ],
-  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.<div><a href="https://github.com/PaperMC/docs/">PaperMC/docs</a> @ <a href="https://github.com/PaperMC/docs/commit/${currentCommit}">${currentCommit}</a></div>`,
+  copyright: `Copyright © ${new Date().getFullYear()} PaperMC and Contributors. Built with Docusaurus.<div><a href="https://github.com/PaperMC/docs/">PaperMC/docs</a> @ <a href="https://github.com/PaperMC/docs/commit/${currentCommit}">${currentCommit}</a></div><div>This website is not an official Minecraft website and is not associated with Mojang Studios or Microsoft. All product and company names are trademarks or registered trademarks of their respective holders. Use of these names does not imply any affiliation or endorsement by them.</div>`,
 };
 
 export default footer;

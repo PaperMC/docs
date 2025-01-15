@@ -22,9 +22,6 @@ importers:
       '@docusaurus/faster':
         specifier: ^3.6.0
         version: 3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@docusaurus/plugin-client-redirects':
-        specifier: 3.6.0
-        version: 3.6.0(@docusaurus/faster@3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)))(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@mdx-js/react@3.0.1(@types/react@18.2.79)(react@18.2.0))(@rspack/core@1.0.14)(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5)
       '@docusaurus/plugin-content-docs':
         specifier: 3.6.0
         version: 3.6.0(patch_hash=r3vttmvpzacwm3dvl52nk773sy)(@docusaurus/faster@3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)))(@mdx-js/react@3.0.1(@types/react@18.2.79)(react@18.2.0))(@rspack/core@1.0.14)(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5)
@@ -932,13 +929,6 @@ packages:
     peerDependencies:
       react: '*'
       react-dom: '*'
-
-  '@docusaurus/plugin-client-redirects@3.6.0':
-    resolution: {integrity: sha512-LIqRT6dtgxdENQH8XYwOOyxfKuzFD1ayJmIDCp9Yi/rbdcPE4vvTcESLGXOKvcyWZSfyCu+JA8Tyk4qpp+2J0w==}
-    engines: {node: '>=18.0'}
-    peerDependencies:
-      react: ^18.0.0
-      react-dom: ^18.0.0
 
   '@docusaurus/plugin-content-blog@3.6.0':
     resolution: {integrity: sha512-o4aT1/E0Ldpzs/hQff5uyoSriAhS/yqBhqSn+fvSw465AaqRsva6O7CZSYleuBq6x2bewyE3QJq2PcTiHhAd8g==}
@@ -7297,41 +7287,6 @@ snapshots:
       - esbuild
       - supports-color
       - uglify-js
-      - webpack-cli
-
-  '@docusaurus/plugin-client-redirects@3.6.0(@docusaurus/faster@3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)))(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@mdx-js/react@3.0.1(@types/react@18.2.79)(react@18.2.0))(@rspack/core@1.0.14)(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5)':
-    dependencies:
-      '@docusaurus/core': 3.6.0(@docusaurus/faster@3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)))(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@mdx-js/react@3.0.1(@types/react@18.2.79)(react@18.2.0))(@rspack/core@1.0.14)(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5)
-      '@docusaurus/logger': 3.6.0
-      '@docusaurus/utils': 3.6.0(patch_hash=fj4flwdloktwsjj7beb2cdhvvm)(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@swc/core@1.8.0)(typescript@5.4.5)
-      '@docusaurus/utils-common': 3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))
-      '@docusaurus/utils-validation': 3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(@swc/core@1.8.0)(typescript@5.4.5)
-      eta: 2.2.0
-      fs-extra: 11.2.0
-      lodash: 4.17.21
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-      tslib: 2.8.1
-    transitivePeerDependencies:
-      - '@docusaurus/faster'
-      - '@docusaurus/types'
-      - '@mdx-js/react'
-      - '@parcel/css'
-      - '@rspack/core'
-      - '@swc/core'
-      - '@swc/css'
-      - acorn
-      - bufferutil
-      - csso
-      - debug
-      - esbuild
-      - eslint
-      - lightningcss
-      - supports-color
-      - typescript
-      - uglify-js
-      - utf-8-validate
-      - vue-template-compiler
       - webpack-cli
 
   '@docusaurus/plugin-content-blog@3.6.0(@docusaurus/faster@3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)))(@docusaurus/plugin-content-docs@3.6.0(patch_hash=r3vttmvpzacwm3dvl52nk773sy)(@docusaurus/faster@3.6.0(@docusaurus/types@3.6.0(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)))(@mdx-js/react@3.0.1(@types/react@18.2.79)(react@18.2.0))(@rspack/core@1.0.14)(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5))(@mdx-js/react@3.0.1(@types/react@18.2.79)(react@18.2.0))(@rspack/core@1.0.14)(@swc/core@1.8.0)(acorn@8.11.3)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.4.5)':

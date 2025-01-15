@@ -226,21 +226,6 @@ const config: Config = {
     ],
     "@docusaurus/plugin-debug",
     "docusaurus-plugin-sass",
-    [
-      "@docusaurus/plugin-client-redirects",
-      {
-        redirects: [
-          {
-            from: "/paper/dev/command-api/commands",
-            to: "/paper/dev/command-api/basics/introduction",
-          },
-          {
-            from: "/paper/dev/command-api/arguments",
-            to: "/paper/dev/command-api/basics/arguments-and-literals",
-          },
-        ],
-      },
-    ],
   ],
 
   themeConfig: {

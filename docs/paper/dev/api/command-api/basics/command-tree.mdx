@@ -257,15 +257,15 @@ LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat")
     .then(Commands.literal("ice-cream"))
     .then(Commands.literal("main-dish"));
 
-LiteralArgumentBuilder<CommandSourceStack> killall = Commands.literal("eat")
+LiteralArgumentBuilder<CommandSourceStack> killall = Commands.literal("killall")
     .then(Commands.literal("entities"))
     .then(Commands.literal("players"))
     .then(Commands.literal("zombies"));
 
 
 LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced");
-advancedCommandRoot.then(killall);
 advancedCommandRoot.then(eat);
+advancedCommandRoot.then(killall);
 ```
 
 Now then, you might have noticed that our root node also registers its branches using the `.then(...)` method, meaning we can also combine those:
@@ -276,7 +276,7 @@ LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.litera
         .then(Commands.literal("ice-cream"))
         .then(Commands.literal("main-dish"))
     )
-    .then(Commands.literal("eat")
+    .then(Commands.literal("killall")
         .then(Commands.literal("entities"))
         .then(Commands.literal("players"))
         .then(Commands.literal("zombies"))

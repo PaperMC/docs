@@ -121,7 +121,7 @@ We can even run it as another player, using `/execute as`:
 ### Logic separation
 Sometimes, if the command is too big or due to personal preference, you might not want to have your logic code in your executes method, as it might be unreadable
 due of the amount of indentations. In such an event we can, instead of defining our logic in the lambda statement, use a method reference instead. For that we
-define a method a pass a reference to that to the executes method. This might look like this:
+can just pass a method reference to the executes method. This might look like this:
 
 ```java title="FlightSpeedCommand.java"
 public class FlightSpeedCommand {

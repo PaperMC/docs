@@ -52,7 +52,7 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
                     player.getInventory().addItem(itemStack);
                     ctx.getSource().getSender().sendRichMessage("<green>Successfully gave <player> a <item>",
                         Placeholder.component("player", player.name()),
-                        Placeholder.component("item", Component.translatable(itemStack.translationKey()))
+                        Placeholder.component("item", Component.translatable(itemStack))
                     );
                     return Command.SINGLE_SUCCESS;
                 }

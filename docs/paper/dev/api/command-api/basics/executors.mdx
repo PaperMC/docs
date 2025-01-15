@@ -55,30 +55,29 @@ Commands.literal("flyspeed")
     .then(Commands.argument("speed", FloatArgumentType.floatArg(0, 1.0f))
         .executes(ctx -> {
             float speed = ctx.getArgument("speed", float.class); // Retrieve the speed argument
-            // highlight-next-line
             CommandSender sender = ctx.getSource().getSender(); // Retrieve the command sender
-            // highlight-next-line
             Entity executor = ctx.getSource().getExecutor(); // Retrieve the command executor, which may or may not be the same as the sender
-
+    
             // Check whether the executor is a player, as you can only set a player's flight speed
-            if (executor instanceof Player player) {
-                player.setFlySpeed(speed);
-                
-                if (sender == executor) {
-                    // If the player executed the command themselves
-                    player.sendMessage("Successfully set your flight speed to " + speed);
-                }
-                else {
-                    // If the speed was set by a different sender (Aka via /execute)
-                    sender.sendMessage("Successfully set " + player.getName() + "'s flight speed to " + speed);
-                    player.sendMessage("Your flight speed has been set to " + speed);
-                }
+            if (!(executor instanceof Player player)) {
+                // If a non-player tried to set their own flight speed
+                sender.sendMessage("Only players can fly!");
+                return Command.SINGLE_SUCCESS;
+            }
+    
+            // Set the player's speed
+            player.setFlySpeed(speed);
+    
+            if (sender == executor) {
+                // If the player executed the command themselves
+                player.sendMessage("Successfully set your flight speed to " + speed);
             }
             else {
-                // If a non-player tried to set their own flight speed
-                sender.sendMessage("Consoles can't fly!");
+                // If the speed was set by a different sender (Like using /execute)
+                sender.sendMessage("Successfully set " + player.getName() + "'s flight speed to " + speed);
+                player.sendMessage("Your flight speed has been set to " + speed);
             }
-
+    
             return Command.SINGLE_SUCCESS;
         })
     );

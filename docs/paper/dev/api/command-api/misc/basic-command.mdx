@@ -83,7 +83,7 @@ public class BroadcastCommand implements BasicCommand {
 }
 ```
 
-Our permission is set to `example.broadcast.use`. In order to give yourself that permission, it is suggested that you use a plugin like **LuckPerms** or just give yourself
+Our permission is set to `example.broadcast.use`. In order to give yourself that permission, it is suggested that you use a plugin like [LuckPerms](https://luckperms.net) or just give yourself
 operator permissions. You can also set this permission to be `true` by default. For this, please check out the [plugin.yml documentation](../../../getting-started/plugin-yml.mdx).
 
 Now, in our `execute` method, we can retrieve the name of the executor of that command. If we do not find one, we can just get the name of the command sender, like this:

@@ -11,7 +11,7 @@ import SignedMessageMp4 from "./assets/vanilla-arguments/signedmessage.mp4";
 
 # Adventure Library Arguments
 These arguments return a class from the `net.kyori` package. They are technically not native to Minecraft or Bukkit, but as Paper includes the Adventure library, they are
-usually widely used in the Paper ecosystem.
+widely used in the Paper ecosystem.
 
 ## Component argument
 :::note
@@ -46,8 +46,8 @@ public static LiteralCommandNode<CommandSourceStack> componentArgument() {
 
 
 ## Key argument
-The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a `net.kyori.adventure.key.Key` from the Adventure library, 
-which can be used at various other places in the Bukkit/Paper API.
+The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a [`Key`](https://jd.advntr.dev/key/latest/net/kyori/adventure/key/Key.html),
+which can be used at various other places in the Paper API.
 
 ### Example usage
 ```java
@@ -73,7 +73,8 @@ public static LiteralCommandNode<CommandSourceStack> keyArgument() {
 
 ## Named color argument
 This argument provides the user with the ability to select between the 16 built-in "named" text colors. This argument returns a
-`net.kyori.adventure.text.format.NamedTextColor` which you can use for styling components.
+[`NamedTextColor`](https://javadoc.io/doc/net.kyori/adventure-api/latest/net/kyori/adventure/text/format/NamedTextColor.html),
+which you can use for applying a color to components.
 
 ### Example usage
 ```java
@@ -102,13 +103,12 @@ public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
 :::note
 
 Similar to the component argument, this argument is not really appropriate for general user input, as it also follows the JSON format for displaying components. Most users
-
 do not know how to use that format and thus its general usage is not advised.
 
 :::
 
-The style argument returns its value in the form of an `net.kyori.adventure.text.format.Style` object. This can be applied to any component using `Component#style(Style)`.
-Whilst the JSON input allows for the `text` field, its content is completely ignored.
+The style argument returns its value in the form of a [`Style`](https://javadoc.io/doc/net.kyori/adventure-api/latest/net/kyori/adventure/text/format/Style.html) object.
+This can be applied to any component using `Component#style(Style)`. Whilst the JSON input allows for the `text` field, its content is completely ignored.
 
 ### Example usage
 ```java
@@ -142,19 +142,22 @@ A signed message argument returns a `SignedMessageResolver`. In order to call it
 * The argument name
 * The `CommandContext<CommandSourceStack>` object
 
-The resolved value is a `CompletableFuture<SignedMessage>`, whose `SignedMessage` value you can handle using a `thenAccept(Consumer<T>)`. Inside of the consumer, you can send the signed message to players or work with it in other ways.
+The resolved value is a `CompletableFuture<SignedMessage>`, whose [`SignedMessage`](https://javadoc.io/doc/net.kyori/adventure-api/latest/net/kyori/adventure/chat/SignedMessage.html)
+value you can handle using `thenAccept(Consumer<T>)`. Inside of the consumer, you can send the signed message to players or work with it in other ways.
 
 :::warning
 
 By default, the consumer passed into `thenAccept` is not executed on the main thread, making it unsafe to use most of Paper API within it.
-If you need to use the API, you can schedule a task to be run on the next available tick. For this you can use the <Javadoc name="org.bukkit.scheduler.BukkitScheduler#getMainThreadExecutor(org.bukkit.plugin.Plugin)">main thread executor</Javadoc>.
+If you need to use the API, you can schedule a task to be run on the next available tick. For this you can use the
+<Javadoc name="org.bukkit.scheduler.BukkitScheduler#getMainThreadExecutor(org.bukkit.plugin.Plugin)">main thread executor</Javadoc>.
 You can read up on that [here](../../scheduler.mdx).
 
 :::
 
 :::note
 
-A non-player sender is not capable of sending a signed message, which means that the resolved `CompletableFuture` will never be completed. You should make sure that only players can use your argument with `.requires(ctx -> ctx.getSender() instanceof Player)` on your `SignedArgument`. You may
+A non-player sender is not capable of sending a signed message, which means that the resolved `CompletableFuture` will never be completed.
+You should make sure that only players can use your argument with `.requires(ctx -> ctx.getSender() instanceof Player)` on your `SignedArgument`. You may
 add a fallback greedy string argument for non-player senders if you want the argument to execute regardless of signing.
 
 :::

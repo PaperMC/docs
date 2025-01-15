@@ -10,6 +10,8 @@ import ResourceBlock from "./assets/registry-arguments/resource-block.mp4";
 import ResourceCatVariant from "./assets/registry-arguments/resource-cat-variant.mp4";
 import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4";
 import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4";
+import ResourceEnchantment from "./assets/registry-arguments/resource-enchantment.mp4";
+import ResourceEntityType from "./assets/registry-arguments/resource-entity-type.mp4";
 import ResourceFluid from "./assets/registry-arguments/resource-fluid.mp4";
 import ResourceFrogVariant from "./assets/registry-arguments/resource-frog-variant.mp4";
 import ResourceGameEvent from "./assets/registry-arguments/resource-game-event.mp4";
@@ -21,8 +23,12 @@ import ResourceMemoryModuleType from "./assets/registry-arguments/resource-memor
 import ResourceMenu from "./assets/registry-arguments/resource-menu.mp4";
 import ResourceMobEffect from "./assets/registry-arguments/resource-mob-effect.mp4";
 import ResourcePaintingVariant from "./assets/registry-arguments/resource-painting-variant.mp4";
+import ResourceParticleType from "./assets/registry-arguments/resource-particle-type.mp4";
+import ResourcePotion from "./assets/registry-arguments/resource-potion.mp4";
 import ResourceSoundEvent from "./assets/registry-arguments/resource-sound-event.mp4";
 import ResourceStructureType from "./assets/registry-arguments/resource-structure-type.mp4";
+import ResourceTrimMaterial from "./assets/registry-arguments/resource-trim-material.mp4";
+import ResourceTrimPattern from "./assets/registry-arguments/resource-trim-pattern.mp4";
 import ResourceVillagerProfession from "./assets/registry-arguments/resource-villager-profession.mp4";
 import ResourceVillagerType from "./assets/registry-arguments/resource-villager-type.mp4";
 import ResourceWolfVariant from "./assets/registry-arguments/resource-wolf-variant.mp4";
@@ -138,14 +144,15 @@ Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
     });
 ```
 
-Here is the same code, using a `resourceKey` argument type:
+Here is the same code, using a `resourceKey` argument type. Instead of directly retrieving the argument using `ctx.getArgument("item", TypedKey.class)`, we instead use the
+<Javadoc name="io.papermc.paper.command.brigadier.argument.RegistryArgumentExtractor">`RegistryArgumentExtractor`</Javadoc> to retrieve our `TypedKey<ItemType>`.
 
 ```java title="Item Resource"
 Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
     .executes(ctx -> {
-        final TypedKey<ItemType> itemKey = ctx.getArgument("value", TypedKey.class);
+        final TypedKey<ItemType> itemKey = RegistryArgumentExtractor.getTypedKey(ctx, RegistryKey.ITEM, "item");
         ItemType item = RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key());
-        
+
         if (item == null) {
             ctx.getSource().getSender().sendRichMessage("<red>Please provide a valid item!");
             return -1;
@@ -156,7 +163,7 @@ Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
         }
 
         return Command.SINGLE_SUCCESS;
-    });
+    })
 ```
 
 ### Using a TypedKey
@@ -182,6 +189,8 @@ At the time of writing, the following RegistryKeys exist:
 | CAT_VARIANT            | Cat.Type               | [Cat Type](#cat-type)                       |
 | DAMAGE_TYPE            | DamageType             | [Damage Type](#damage-type)                 |
 | DATA_COMPONENT_TYPE    | DataComponentType      | [Data Component Type](#data-component-type) |
+| ENCHANTMENT            | Enchantment            | [Enchantment](#enchantment)                 |
+| ENTITY_TYPE            | EntityType             | [Entity Type](#entity-type)                 |
 | FLUID                  | Fluid                  | [Fluid](#fluid)                             |
 | FROG_VARIANT           | Frog.Variant           | [Frog Variant](#frog-variant)               |
 | GAME_EVENT             | GameEvent              | [Game Event](#game-event)                   |
@@ -189,15 +198,22 @@ At the time of writing, the following RegistryKeys exist:
 | ITEM                   | ItemType               | [Item Type](#item-type)                     |
 | JUKEBOX_SONG           | JukeboxSong            | [Jukebox Song](#jukebox-song)               |
 | MAP_DECORATION_TYPE    | MapCursor.Type         | [Map Cursor Type](#map-cursor-type)         |
+| MEMORY_MODULE_TYPE     | MemoryKey\<?>          | [Memory Module Type](#memory-module-type)   |
 | MENU                   | MenuType               | [Menu Type](#menu-type)                     |
 | MOB_EFFECT             | PotionEffectType       | [Potion Effect Type](#potion-effect-type)   |
 | PAINTING_VARIANT       | Art                    | [Art](#art)                                 |
+| PARTICLE_TYPE          | Particle               | [Particle](#particle)                       |
+| POTION                 | PotionType             | [Potion Type](#potion-type)                 |
 | SOUND_EVENT            | Sound                  | [Sound](#sound)                             |
 | STRUCTURE              | Structure              | [Structure](#structure)                     |
 | STRUCTURE_TYPE         | StructureType          | [Structure Type](#structure-type)           |
+| TRIM_MATERIAL          | TrimMaterial           | [Trim Material](#trim-material)             |
+| TRIM_PATTERN           | TrimPattern            | [Trim Pattern](#trim-pattern)               |
 | VILLAGER_PROFESSION    | Villager.Profession    | [Villager Profession](#villager-profession) |
 | VILLAGER_TYPE          | Villager.Type          | [Villager Type](#villager-type)             |
 | WOLF_VARIANT           | Wolf.Variant           | [Wolf Variant](#wolf-variant)               |
+
+Add: ENCHANTMENT, ENTITY_TYPE, MEMORY_MODULE_TYPE, PARTICLE_TYPE, POTION, TRIM_MATERIAL, TRIM_PATTERN
 
 ### Attribute
 <FullWidthVideo src={ResourceAttributes}/>
@@ -216,6 +232,12 @@ At the time of writing, the following RegistryKeys exist:
 
 ### Damage type
 <FullWidthVideo src={ResourceDamageType}/>
+
+### Enchantment
+<FullWidthVideo src={ResourceEnchantment}/>
+
+### Entity type
+<FullWidthVideo src={ResourceEntityType}/>
 
 ### Data component type
 <FullWidthVideo src={ResourceDataComponentType}/>
@@ -241,11 +263,23 @@ At the time of writing, the following RegistryKeys exist:
 ### Map cursor type
 <FullWidthVideo src={ResourceMapDecorationType}/>
 
+### Memory module type
+<FullWidthVideo src={ResourceMemoryModuleType}/>
+
 ### Menu type
 <FullWidthVideo src={ResourceMenu}/>
 
 ### Potion effect type
 <FullWidthVideo src={ResourceMobEffect}/>
+
+### Painting variant
+<FullWidthVideo src={ResourcePaintingVariant}/>
+
+### Particle type
+<FullWidthVideo src={ResourceParticleType}/>
+
+### Potion
+<FullWidthVideo src={ResourcePotion}/>
 
 ### Art
 <FullWidthVideo src={ResourcePaintingVariant}/>
@@ -258,6 +292,12 @@ This argument kicks the client, so no preview for this one ¯\\\_(ツ)\_/¯
 
 ### Structure type
 <FullWidthVideo src={ResourceStructureType}/>
+
+### Trim material
+<FullWidthVideo src={ResourceTrimMaterial}/>
+
+### Trim pattern
+<FullWidthVideo src={ResourceTrimPattern}/>
 
 ### Villager profession
 <FullWidthVideo src={ResourceVillagerProfession}/>

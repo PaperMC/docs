@@ -155,7 +155,7 @@ Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
 
         if (item == null) {
             ctx.getSource().getSender().sendRichMessage("<red>Please provide a valid item!");
-            return -1;
+            return Command.SINGLE_SUCCESS;
         }
 
         if (ctx.getSource().getExecutor() instanceof Player player) {

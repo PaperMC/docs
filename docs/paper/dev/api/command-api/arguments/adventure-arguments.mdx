@@ -146,8 +146,9 @@ The resolved value is a `CompletableFuture<SignedMessage>`, whose `SignedMessage
 
 :::warning
 
-The use of thread unsafe Bukkit API inside the `.thenAccept` method is not supported, as this is an asynchronous method, which does not run on the main thread.
-If you need to use Bukkit API, you can schedule a task to be run on the next available tick. You can read up on that [here](../../scheduler.mdx).
+By default, the consumer passed into `thenAccept` is not executed on the main thread, making it unsafe to use most of Paper API within it.
+If you need to use the API, you can schedule a task to be run on the next available tick. For this you can use the <Javadoc name="org.bukkit.scheduler.BukkitScheduler#getMainThreadExecutor(org.bukkit.plugin.Plugin)">main thread executor</Javadoc>.
+You can read up on that [here](../../scheduler.mdx).
 
 :::
 

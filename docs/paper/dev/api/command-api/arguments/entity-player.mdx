@@ -15,7 +15,7 @@ The arguments described in this section relate to arguments which you can use to
 All of these have entity selectors (`@a`, `@e`, `@n`, etc.) as valid inputs, though they require the `minecraft.command.selector` permission in order to 
 be able to be used. The specific arguments may allow or disallow certain selectors.
 
-Due to the permission requirement for selectors it is adviced to add a `requires` statement to your command:
+Due to the permission requirement for selectors it is advised to add a `requires` statement to your command:
 ```java
 .requires(ctx -> ctx.getSender().hasPermission("minecraft.command.selector"))
 ```

@@ -18,6 +18,7 @@
   "dependencies": {
     "@docusaurus/core": "3.6.0",
     "@docusaurus/faster": "^3.6.0",
+    "@docusaurus/plugin-client-redirects": "3.6.0",
     "@docusaurus/plugin-content-docs": "3.6.0",
     "@docusaurus/plugin-content-pages": "3.6.0",
     "@docusaurus/plugin-debug": "3.6.0",

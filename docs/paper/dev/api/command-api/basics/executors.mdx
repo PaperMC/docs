@@ -36,7 +36,7 @@ public interface Command<S> {
 }
 ```
 
-Our lambda has one parameter and returns an integer. That is essentially that `run` method defined in that Interface. The one parameter, `CommandContext<S>` is the one where
+Our lambda has one parameter and returns an integer. That is essentially that `run` method defined in that interface. The one parameter, `CommandContext<S>` is the one where
 we get all the information about the sender who executed that command and all the command arguments. It has quite a few methods, but the main ones of use for us are
 `S getSource()` and `V getArgument(String, Class<V>)`. We have taken a brief look at the `getArgument(...)` in the [Arguments and Literals](./arguments-and-literals) chapter, but
 in a nutshell, this is the method that we can retrieve arguments from. There will be more specific examples later on.

@@ -43,6 +43,11 @@ interface Permission {
 }
 
 export interface PermissionData {
+  /** Sections containing a prefix*/
+  sections: PermissionSection[];
+}
+
+export interface PermissionSection {
   /** The permission node prefix. */
   permissionPrefix: string;
   /** List of all permissions under the prefix*/
@@ -113,23 +118,25 @@ export function PermissionsTable({ data }: PermissionTableProps): JSX.Element {
         <th>Description</th>
         <th>Players Have Permission By Default?</th>
       </tr>
-      {data.permissions.map((permission) => (
-        <tr>
-          <td>{`${data.permissionPrefix}${permission.permission === "" ? "" : "." + permission.permission}`}</td>
-          <td>{permission.description}</td>
-          <td>
-            {permission.opLevel === undefined
-              ? permission.requiresOp === undefined
-                ? permission.defaultComment
-                : permission.requiresOp
+      {data.sections.map((section) =>
+        section.permissions.map((permission) => (
+          <tr>
+            <td>{`${section.permissionPrefix}${permission.permission === "" ? "" : "." + permission.permission}`}</td>
+            <td>{permission.description}</td>
+            <td>
+              {permission.opLevel === undefined
+                ? permission.requiresOp === undefined
+                  ? permission.defaultComment
+                  : permission.requiresOp
+                    ? "Yes"
+                    : "No"
+                : permission.opLevel == 0
                   ? "Yes"
-                  : "No"
-              : permission.opLevel == 0
-                ? "Yes"
-                : "No"}
-          </td>
-        </tr>
-      ))}
+                  : "No"}
+            </td>
+          </tr>
+        ))
+      )}
     </table>
   );
 }

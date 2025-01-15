@@ -61,7 +61,7 @@ const parseDefault = (
   const hash = createUrlHash(parentKey, name);
   useBrokenLinks().collectAnchor(hash);
 
-  if (value[0] === "[" && value[value.length - 1] === "]") {
+  if (value[0] === "[" && value[value.length - 1] === "]" && value !== "[]") {
     const items: (string | ReactNode)[] = value
       .replace("[", "")
       .replace("]", "")

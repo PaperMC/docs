@@ -1,3 +1,47 @@
+anticheat:
+  obfuscation:
+    items:
+      all-models:
+        also-obfuscate:
+          default: "[]"
+          description: >-
+            Controls additional data components which should be hidden for all items from other players. It's
+            generally not recommended to configure this unless you know what you are doing, as you may change
+            how items look to other players.
+        dont-obfuscate:
+          default: "[minecraft:lodestone_tracker]"
+          description: >-
+            Controls which data components should not be hidden for all items from other players. This is because they may slightly change
+            the item's appearance, so hiding it isn't warranted.
+            In this example, lodestone trackers may reveal critical locations, but hiding the location causes the
+            compass to shake around for other players. It's up to your digression whether you think this tradeoff is important.
+        sanitize-count:
+          default: "true"
+          description: >-
+            Controls whether the item's count should be hidden from other players.
+      enable-item-obfuscation:
+        default: "false"
+        description: >-
+          Controls whether unnecessary item information (such as enchantments, lore, etc.) that can give cheat clients an advantage should be sent to other
+          players' clients. This may break resource packs that rely on information such as enchantments,
+          lore or item names when observing other players.
+          The hidden data components can be extended or reduced via `also-obfuscate` and `dont-obfuscate` respectively.
+      model-overrides:
+        minecraft:elytra:
+          also-obfuscate:
+            default: "[]"
+            description: >-
+              Controls the components that should also be obfuscated for items with the item model of `minecraft:elytra`.
+              This may be useful if you want to hide certain components not important to other players.
+          dont-obfuscate:
+            default: "[minecraft:damage]"
+            description: >-
+              Controls the components that should not be obfuscated for items with the item model of `minecraft:elytra`.
+              This defaults to `minecraft:damage` as elytras with 1 durability have a special texture.
+          sanitize-count:
+            default: true
+            description: >-
+              Controls whether the item count of items with the model `minecraft:elytra` should be hidden from other players.
 block-updates:
   disable-noteblock-updates:
     default: "false"
@@ -87,12 +131,6 @@ collisions:
       involved in collisions. Having this enabled will use more bandwidth;
       however, in the majority of cases, this is a worthy tradeoff
 commands:
-  fix-target-selector-tag-completion:
-    default: "true"
-    description: >-
-      Workaround for a client bug preventing entity type tag suggestions from
-      functioning in target selectors. Resolves
-      [MC-235045](https://bugs.mojang.com/browse/MC-235045)
   suggest-player-names-when-null-tab-completions:
     default: "true"
     description: >-

@@ -1,11 +1,3 @@
-settings:
-  attribute:
-    maxHealth:
-      max:
-        default: "1024.0"
-    movementSpeed:
-      max:
-        default: "1024.0"
 world-settings:
   default:
     entity-activation-range:

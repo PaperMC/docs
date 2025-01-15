@@ -237,7 +237,7 @@ const config: Config = {
           {
             from: "/paper/dev/command-api/arguments",
             to: "/paper/dev/command-api/basics/arguments-and-literals",
-          }
+          },
         ],
       },
     ],

@@ -85,7 +85,7 @@ public static LiteralCommandNode<CommandSourceStack> heightMapArgument() {
                 ctx.getSource().getSender().sendRichMessage("You selected <gold><selection></gold>",
                     Placeholder.unparsed("selection", heightMap.name())
                 );
-                
+
                 return Command.SINGLE_SUCCESS;
             }))
         .build();
@@ -106,9 +106,9 @@ public static LiteralCommandNode<CommandSourceStack> scoreboardDisplaySlotArgume
         .then(Commands.argument("slot", ArgumentTypes.scoreboardDisplaySlot())
             .executes(ctx -> {
                 final DisplaySlot slot = ctx.getArgument("slot", DisplaySlot.class);
-                
+
                 ctx.getSource().getSender().sendPlainMessage("You selected: " + slot.getId());
-                
+
                 return Command.SINGLE_SUCCESS;
             })
         ).build();

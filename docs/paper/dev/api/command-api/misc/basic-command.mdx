@@ -39,7 +39,7 @@ public class YourCommand implements BasicCommand {
 ```
 
 If you have seen the `CommandContext<CommandSourceStack>` class before, you might recognize the first parameter of the execute method as the generic
-parameter `S` from our `CommandContext<S>`, which is also used in the `executes` method from the `ArgumentBuilder`. 
+parameter `S` from our `CommandContext<S>`, which is also used in the `executes` method from the `ArgumentBuilder`.
 
 With a `CommandSourceStack`, we can retrieve basic information about the sender of the command, the location the command was send from, and the executing entity.
 For more information, check out [basics/command-executors](../basics/executors).

@@ -59,17 +59,17 @@ Commands.literal("flyspeed")
             CommandSender sender = ctx.getSource().getSender(); // Retrieve the command sender
             // highlight-next-line
             Entity executor = ctx.getSource().getExecutor(); // Retrieve the command executor, which may or may not be the same as the sender
-    
+
             // Check whether the executor is a player, as you can only set a player's flight speed
             if (!(executor instanceof Player player)) {
                 // If a non-player tried to set their own flight speed
                 sender.sendPlainMessage("Only players can fly!");
                 return Command.SINGLE_SUCCESS;
             }
-    
+
             // Set the player's speed
             player.setFlySpeed(speed);
-    
+
             if (sender == executor) {
                 // If the player executed the command themselves
                 player.sendPlainMessage("Successfully set your flight speed to " + speed);
@@ -78,7 +78,7 @@ Commands.literal("flyspeed")
 
             // If the speed was set by a different sender (Like using /execute)
             sender.sendRichMessage("Successfully set <playername>'s flight speed to " + speed, Placeholder.component("playername", player.name()));
-            player.sendPlainMessage("Your flight speed has been set to " + speed);    
+            player.sendPlainMessage("Your flight speed has been set to " + speed);
             return Command.SINGLE_SUCCESS;
         })
     );

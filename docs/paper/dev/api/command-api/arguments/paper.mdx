@@ -23,7 +23,7 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
         .then(Commands.argument("arg", ArgumentTypes.blockState())
             .executes(ctx -> {
                 final BlockState blockState = ctx.getArgument("arg", BlockState.class);
-                
+
                 ctx.getSource().getSender().sendPlainMessage("You specified a " + blockState.getType() + "!");
                 return Command.SINGLE_SUCCESS;
             }))

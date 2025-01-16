@@ -59,8 +59,8 @@ public static LiteralCommandNode<CommandSourceStack> keyArgument() {
 
                 ctx.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
                     Placeholder.unparsed("key", key.asString())
-                );                    
-                
+                );
+
                 return Command.SINGLE_SUCCESS;
             }))
         .build();

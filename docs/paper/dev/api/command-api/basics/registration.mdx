@@ -11,7 +11,7 @@ In Paper, Brigadier commands are registered using the `LifecycleEventManager`. T
 worry about handling various server reload events, like `/reload`. Instead, whatever we register using the `LifecycleEventManager`, will be reregistered each time it is required.
 
 But how does one get access to a `LifecycleEventManager` capable of registering commands? There are two "contexts" in which you can use a LifecycleEventManager. The first one,
-and preferred one, is in the `PluginBootstrap` class of our plugin. 
+and preferred one, is in the `PluginBootstrap` class of our plugin.
 
 ### Registering inside a plugin bootstrapper
 
@@ -28,13 +28,13 @@ inside our bootstrap method, like this:
 
 ```java title="CustomPluginBootstrap.java"
 public class CustomPluginBootstrap implements PluginBootstrap {
-        
+
     @Override
     public void bootstrap(BootstrapContext context) {
         context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
             // register your commands here ...
         });
-    }    
+    }
 }
 ```
 

@@ -12,7 +12,7 @@ import StringArguments from "./assets/string-arguments.gif";
 
 :::note
 
-In the [command tree docs](./command-tree) we have looked at the structure of Brigadier commands and how to build up a command tree. 
+In the [command tree docs](./command-tree) we have looked at the structure of Brigadier commands and how to build up a command tree.
 If you haven't finished reading that yet, we strongly recommend doing that before reading about arguments and literals.
 
 :::
@@ -94,8 +94,8 @@ All of the number arguments (like `IntegerArgumentType.integer()`) have three ov
 | `IntegerArgumentType.integer(int min)`            | Any value between min and Integer.MAX_VALUE               |
 | `IntegerArgumentType.integer(int min, int max)`   | Any value between min and max                             |
 
-This is particularly useful for filtering out too high or too low input. As an example, we can define a `/flyspeed` command. As the 
-<Javadoc name='org.bukkit.entity.Player#setFlySpeed(float)'>`Player#setFlySpeed(float value)`</Javadoc> method only 
+This is particularly useful for filtering out too high or too low input. As an example, we can define a `/flyspeed` command. As the
+<Javadoc name='org.bukkit.entity.Player#setFlySpeed(float)'>`Player#setFlySpeed(float value)`</Javadoc> method only
 accepts floats between -1 and 1, where -1 is an inverse direction, it would make sense to limit the values between 0 and 1 for in-bounds, non-negative speed values.
 This can be achieved with the following command tree:
 

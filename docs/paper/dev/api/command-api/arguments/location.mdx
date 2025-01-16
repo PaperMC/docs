@@ -78,7 +78,7 @@ public static LiteralCommandNode<CommandSourceStack> worldArgument() {
         .then(Commands.argument("world", ArgumentTypes.world())
             .executes(ctx -> {
                 final World world = ctx.getArgument("world", World.class);
-                
+
                 if (ctx.getSource().getExecutor() instanceof Player player) {
                     player.teleport(world.getSpawnLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
                     ctx.getSource().getSender().sendRichMessage("Successfully teleported <player> to <aqua><world></aqua>",

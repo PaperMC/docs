@@ -96,8 +96,8 @@ public static LiteralCommandNode<CommandSourceStack> createCommand(final String 
 }
 ```
 
-Each `.then(...)` defines a new branch in our tree, which can either be a literal (`Commands.literal(String)`) or an argument 
-(`Commands.argument(String, ArgumentType<T>)`). Each branch may or may not define an `.executes(Command)` executor. This is 
+Each `.then(...)` defines a new branch in our tree, which can either be a literal (`Commands.literal(String)`) or an argument
+(`Commands.argument(String, ArgumentType<T>)`). Each branch may or may not define an `.executes(Command)` executor. This is
 where all the logic happens.
 
 We will take a closer look at that in different pages, but for now, how do we register it? Paper uses a `LifecycleEventManager` system.

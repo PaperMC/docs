@@ -117,7 +117,17 @@ Here is the tab completion when using `ArgumentTypes.resource(RegistryKey.ITEM)`
 And here is the tab completion when using `ArgumentTypes.resourceKey(RegistryKey.ITEM)`:
 <FullWidthVideo src={ResourceKeyItem}/><br/>
 
-The resource argument provides a much cleaner user experience, whilst the `resourceKey` argument has one very important usecase: You get the raw
+:::note
+
+In the example given above, due to an unhandled null pointer exception, the command does not successfully run. The code for that command is directly trying to use the value retrieved
+by the registry access by doing `ItemType item = RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key())`. If you try to do any
+operation with the result, it might be null and error.
+
+You should **always** check the result of a registry retrieval operation. An example for that is given below in the [direct code comparison](#direct-code-comparison).
+
+:::
+
+The resource argument provides a much cleaner user experience, whilst the `resourceKey` argument has one very important use case: You get the raw
 `TypedKey<T>` returned as an argument result. This object is particularly useful, as it provides all information required to be able to retrieve
 a value from a registry yourself.
 
@@ -167,14 +177,14 @@ Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
 ```
 
 ### Using a TypedKey
-First, in order to get the correct registry, you can run `RegistryAccess#getregistry(RegistryKey)`. In order to get a `RegistryAccess`, you can just use the static
-`RegistryAccess.registryAccess()` method. The `RegistryKey` is retrieved using `TypedKey#registryKey`.
-Now, in order to get the final value `T`, you can run `Registry#get(Key)`, where the key can be retrieved using `TypedKey#key`. This will return the backing instance
+First, in order to get the correct registry, you can run `RegistryAccess#getRegistry(RegistryKey)`. In order to get a `RegistryAccess`, you can just use the static
+`RegistryAccess.registryAccess()` method. The `RegistryKey` is retrieved using `TypedKey#registryKey()`.
+Now, in order to get the final value `T`, you can run `Registry#get(Key)`, where the key can be retrieved using `TypedKey#key()`. This will return the backing instance
 from that resource key or null, if no value has been found.
 
-### Usecase over resource argument
-The main usecase for this argument type is the ability to store the key (the value returned to you by `TypedKey#key`). If you want to be able to store the exact user
-input and be able to retrieve the backed instance without much throuble, that is the way to do it.
+### Use case over resource argument
+The main use case for this argument type is the ability to store the key (the value returned to you by `TypedKey#key`). If you want to be able to store the exact user
+input and be able to retrieve the backed instance without much trouble, that is the way to do it.
 
 ## Registry key previews
 
@@ -212,8 +222,6 @@ At the time of writing, the following RegistryKeys exist:
 | VILLAGER_PROFESSION    | Villager.Profession    | [Villager Profession](#villager-profession) |
 | VILLAGER_TYPE          | Villager.Type          | [Villager Type](#villager-type)             |
 | WOLF_VARIANT           | Wolf.Variant           | [Wolf Variant](#wolf-variant)               |
-
-Add: ENCHANTMENT, ENTITY_TYPE, MEMORY_MODULE_TYPE, PARTICLE_TYPE, POTION, TRIM_MATERIAL, TRIM_PATTERN
 
 ### Attribute
 <FullWidthVideo src={ResourceAttributes}/>

@@ -87,8 +87,8 @@ public static LiteralCommandNode<CommandSourceStack> itemPredicateArgument() {
                 final ItemStackPredicate predicate = ctx.getArgument("predicate", ItemStackPredicate.class);
                 final ItemStack defaultWoodenSword = ItemType.WOODEN_SWORD.createItemStack();
 
-                ctx.getSource().getSender().sendRichMessage("Is default wooden sword? <result>.",
-                    Placeholder.parsed("result", predicate.test(defaultWoodenSword) ? "<green>true" : "<red>false")
+                ctx.getSource().getSender().sendRichMessage("Does predicate include a default wooden sword? <result>",
+                    Placeholder.parsed("result", predicate.test(defaultWoodenSword) ? "<green>true</green>" : "<red>false</red>")
                 );
                 return Command.SINGLE_SUCCESS;
             }))

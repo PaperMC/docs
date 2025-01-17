@@ -16,7 +16,7 @@ This argument can be used as a predicate for numbers, which require precise inpu
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> doubleRange() {
+public static LiteralCommandNode<CommandSourceStack> doubleRangeArgument() {
     return Commands.literal("doublerange")
         .then(Commands.argument("arg", ArgumentTypes.doubleRange())
             .executes(ctx -> {

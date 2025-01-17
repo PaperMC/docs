@@ -50,7 +50,7 @@ found below. They are accessed in a static context using the <Javadoc name='io.p
 Each entry in `RegistryKey` returns a `RegistryKey<T>`. The `<T>` generic parameter here describes the return type. This means that if we were to retrieve
 <Javadoc name='io.papermc.paper.registry.RegistryKey#ITEM'>`RegistryKey.ITEM`</Javadoc>, the return type would be an `ItemType`, since it is defined as follows:
 
-```java title="RegistryKey.class"
+```java title="RegistryKey.java"
 public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
     // ...
     RegistryKey<ItemType> ITEM = RegistryKeyImpl.create("item");
@@ -141,7 +141,7 @@ checking and simple usability.
 ### Direct code comparison
 Here is a simple code snipped on how one could use the `RegistryKey.ITEM` registry with a `resource` argument type:
 
-```java title="Item Resource"
+```java
 Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
     .executes(ctx -> {
         final ItemType item = ctx.getArgument("item", ItemType.class);
@@ -157,7 +157,7 @@ Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
 Here is the same code, using a `resourceKey` argument type. Instead of directly retrieving the argument using `ctx.getArgument("item", TypedKey.class)`, we instead use the
 <Javadoc name="io.papermc.paper.command.brigadier.argument.RegistryArgumentExtractor">`RegistryArgumentExtractor`</Javadoc> to retrieve our `TypedKey<ItemType>`.
 
-```java title="Item Resource"
+```java
 Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
     .executes(ctx -> {
         final TypedKey<ItemType> itemKey = RegistryArgumentExtractor.getTypedKey(ctx, RegistryKey.ITEM, "item");

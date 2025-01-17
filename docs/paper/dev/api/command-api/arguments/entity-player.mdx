@@ -28,7 +28,7 @@ to call `List#getFirst()` to retrieve that entity. You can resolve it using <Jav
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> singleEntity() {
+public static LiteralCommandNode<CommandSourceStack> singleEntityArgument() {
     return Commands.literal("entityarg")
         .then(Commands.argument("arg", ArgumentTypes.entity())
             .executes(ctx -> {
@@ -60,7 +60,7 @@ which returns a `List<Entity>`.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> multipleEntities() {
+public static LiteralCommandNode<CommandSourceStack> multipleEntitiesArgument() {
     return Commands.literal("entitiesarg")
         .then(Commands.argument("arg", ArgumentTypes.entities())
             .executes(ctx -> {

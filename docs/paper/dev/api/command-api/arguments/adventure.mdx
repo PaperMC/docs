@@ -73,7 +73,7 @@ public static LiteralCommandNode<CommandSourceStack> keyArgument() {
 
 ## Named color argument
 This argument provides the user with the ability to select between the 16 built-in "named" text colors. This argument returns a
-[`NamedTextColor`](https://javadoc.io/doc/net.kyori/adventure-api/latest/net/kyori/adventure/text/format/NamedTextColor.html),
+[`NamedTextColor`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/format/NamedTextColor.html),
 which you can use for applying a color to components.
 
 ### Example usage
@@ -107,7 +107,7 @@ do not know how to use that format and thus its general usage is not advised.
 
 :::
 
-The style argument returns its value in the form of a [`Style`](https://javadoc.io/doc/net.kyori/adventure-api/latest/net/kyori/adventure/text/format/Style.html) object.
+The style argument returns its value in the form of a [`Style`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/format/Style.html) object.
 This can be applied to any component using `Component#style(Style)`. Whilst the JSON input allows for the `text` field, its content is completely ignored.
 
 ### Example usage
@@ -142,7 +142,7 @@ A signed message argument returns a `SignedMessageResolver`. In order to call it
 * The argument name
 * The `CommandContext<CommandSourceStack>` object
 
-The resolved value is a `CompletableFuture<SignedMessage>`, whose [`SignedMessage`](https://javadoc.io/doc/net.kyori/adventure-api/latest/net/kyori/adventure/chat/SignedMessage.html)
+The resolved value is a `CompletableFuture<SignedMessage>`, whose [`SignedMessage`](https://jd.advntr.dev/api/latest/net/kyori/adventure/chat/SignedMessage.html)
 value you can handle using `thenAccept(Consumer<T>)`. Inside of the consumer, you can send the signed message to players or work with it in other ways.
 
 :::warning

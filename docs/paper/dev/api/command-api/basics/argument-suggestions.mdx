@@ -44,12 +44,12 @@ The `SuggestionsBuilder` has a few methods we can use to construct our suggestio
 The first type of methods we will cover are the input retrieval methods: `getInput()`, `getStart()`, `getRemaining()`, and `getRemainingLowerCase()`.
 The following table displays what they return with the following input typed in the chat bar: `/customsuggestions Asumm13Text`.
 
-|           Method           |          Return Value          |                        Description                        |
-|----------------------------|--------------------------------|-----------------------------------------------------------|
-| getInput()                 | /customsuggestions Asumm13Text | The full chat input                                       |
-| getStart()                 | 19                             | The index of the forst character of the argument's input  |
-| getRemaining()             | Asumm13Text                    | The input for the current argument                        |
-| getRemainingLowerCase()    | asumm13text                    | The input for the current argument, lowercased            |
+|           Method           |          Return Value          |                          Description                          |
+|----------------------------|--------------------------------|---------------------------------------------------------------|
+| getInput()                 | /customsuggestions Asumm13Text | The full chat input                                           |
+| getStart()                 | 19                             | The index of the forfirstst character of the argument's input |
+| getRemaining()             | Asumm13Text                    | The input for the current argument                            |
+| getRemainingLowerCase()    | asumm13text                    | The input for the current argument, lowercased                |
 
 ### Suggestions
 The following overloads of the `SuggestionBuilder#suggest` method all add values that will be send to the client as suggestions, but accept

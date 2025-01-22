@@ -1,17 +1,17 @@
 ---
 slug: /dev/data-component-api
-description: A guide to the ItemStack DataComponent API.
+description: A guide to the ItemStack data component API.
 ---
 
 # Data Component API
 
 :::danger[Experimental]
 
-The DataComponent API is currently experimental, and is additionally subject to change across versions.
+The data component API is currently experimental, and is additionally subject to change across versions.
 
 :::
 
-The DataComponent API provides a version-specific interface for accessing and manipulating item data that is otherwise not representable by the `ItemMeta` API.
+The data component API provides a version-specific interface for accessing and manipulating item data that is otherwise not representable by the `ItemMeta` API.
 Through this API, you can read and modify properties of an item, so called data components, in a stable and object-oriented manner.
 
 
@@ -52,11 +52,11 @@ While `ItemMeta` is still very useful, it does not properly represent the protot
 ### Key differences
 
 #### Expanded data model
-The DataComponent API exposes a much broader and more detailed set of item properties than `ItemMeta`.
+The data component API exposes a much broader and more detailed set of item properties than `ItemMeta`.
 Data components allow the entire item to be modified in a fashion that better represents how Minecraft does item modifications.
 
 #### Version-specific
-The DataComponent API is designed to adapt to version changes. The DataComponent API may experience breaking changes on version updates as Minecraft makes changes to components.
+The data component API is designed to adapt to version changes. The data component API may experience breaking changes on version updates as Minecraft makes changes to components.
 Backwards compatibility is not promised.
 
 Because `ItemMeta` is represented in a different format, breaking changes made to components by Mojang may not result in breaking changes to `ItemMeta`.
@@ -72,7 +72,7 @@ durability or default attributes.
 Currently, `ItemMeta` represents a **snapshot** of an `ItemStack`'s patched map.
 This is expensive as it requires the entire patch to be read, even values that you may not be using.
 
-The DataComponent API integrates directly with `ItemStack`. Although conceptually similar, the DataComponent API focuses on explicit, strongly typed data retrieval and updates without this additional overhead.
+The data component API integrates directly with `ItemStack`. Although conceptually similar, the data component API focuses on explicit, strongly typed data retrieval and updates without this additional overhead.
 
 ### When should I use `DataComponents` or `ItemMeta`?
 
@@ -88,7 +88,7 @@ You would want to use data components if you:
 
 
 ## Basic usage
-The DataComponent API will fetch values according to the behavior seen in game. So, if the patch removes the `minecraft:tool` component,
+The data component API will fetch values according to the behavior seen in game. So, if the patch removes the `minecraft:tool` component,
 trying to get that component will return null.
 
 ### Retrieving a prototype value

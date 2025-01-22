@@ -6,6 +6,7 @@ import VersionFormattedCode from "@site/src/components/versioning/VersionFormatt
 import SoftwareVersion from "@site/src/components/versioning/SoftwareVersion";
 import Javadoc from "../components/versioning/Javadoc";
 import Property from "@site/src/components/Property";
+import FullWidthVideo from "@site/src/components/ui/FullWidthVideo";
 
 export default {
   // Re-use the default mapping
@@ -18,4 +19,5 @@ export default {
   Javadoc,
   Property,
   Icon: Icon,
+  FullWidthVideo,
 };

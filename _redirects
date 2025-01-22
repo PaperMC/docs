@@ -7,4 +7,6 @@
 /paper/per-world-configuration /paper/configuration
 /paper/configuration /paper/reference/configuration
 /paper/reference/vanilla-command-permissions /paper/reference/permissions
-/paper/dev/commands /paper/dev/command-api/commands
+/paper/dev/commands /paper/dev/command-api/basics/introduction
+/paper/dev/command-api/commands /paper/dev/command-api/basics/introduction
+/paper/dev/command-api/arguments /paper/dev/command-api/basics/arguments-and-literals

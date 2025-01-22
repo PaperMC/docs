@@ -5,6 +5,7 @@ description: Documentation about defining custom arguments suggestions.
 
 import SuggestionTooltip from "./assets/suggestion-tooltip.png";
 import GiveItemCommandMp4 from "./assets/give-item-command.mp4";
+import SelectNameCommandMp4 from "./assets/select-name-command.mp4";
 
 # Argument Suggestions
 Sometimes, you want to send your own suggestions to users. For this, the `RequiredArgumentBuilder#suggests(SuggestionProvider)` method exists.
@@ -158,3 +159,28 @@ public class SuggestionsTest {
 
 This is how the argument looks in-game:
 <FullWidthVideo src={GiveItemCommandMp4}/>
+
+## Example: Filtering by user input
+If you have multiple values, it is suggested that you filter your suggestions by what the user has already put in. For this, we can declare the following, simple command
+as a test:
+
+```java
+public static LiteralCommandNode<CommandSourceStack> constructStringSuggestionsCommand() {
+    final List<String> names = List.of("Alex", "Andreas", "Stephanie", "Sophie", "Emily");
+
+    return Commands.literal("selectname")
+        .then(Commands.argument("name", StringArgumentType.word())
+
+            .suggests((ctx, builder) -> {
+                names.stream()
+                    .filter(entry -> entry.toLowerCase().startsWith(builder.getRemainingLowerCase()))
+                    .forEach(builder::suggest);
+                return builder.buildFuture();
+            })
+
+        ).build();
+}
+```
+
+As you can see in the preview below, this simple setup filters suggestions by user input, providing a smooth user experience when using your command:
+<FullWidthVideo src={SelectNameCommandMp4}/>

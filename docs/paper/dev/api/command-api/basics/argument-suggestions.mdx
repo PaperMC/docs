@@ -20,14 +20,11 @@ public interface SuggestionProvider<S> {
 }
 ```
 
-Similar to the `Command<S>` interface, this is a functional interface, which means that instead of passing in a class which implements this interface,
-we can just pass a lambda statement or a method reference.
+Similar to other classes or interfaces with a `<S>` generic parameter, for Paper, this usually is a `CommandSourceStack`. Furthermore, similar to the `Command<S>` interface,
+this is a functional interface, which means that instead of passing in a class which implements this interface, we can just pass a lambda statement or a method reference.
 
-Our lambda/method requires two parameters: `CommandContext<S>` and `SuggestionsBuilder`. The lambda/method has to return a `CompletableFuture<Suggestions>`.
-In order to retrieve our return value, we can just run `SuggestionsBuilder#buildFuture()` (or `SuggestionsBuilder#build()`, if we already are inside a completeable
-future).
-
-Similar to other classes or interfaces with a `<S>` generic parameter, for Paper, this usually is a `CommandSourceStack`.
+Our lambda/method requires two parameters, `CommandContext<S>` and `SuggestionsBuilder`, returning a `CompletableFuture<Suggestions>`.
+In order to retrieve our return value, we can just run `SuggestionsBuilder#buildFuture()` (or `SuggestionsBuilder#build()`, if we already are inside a CompletableFuture).
 
 A very simple lambda for our `suggests` method might look like this:
 ```java
@@ -35,7 +32,7 @@ Commands.argument("name", StringArgumentType.word())
     .suggests((ctx, builder) -> builder.buildFuture())
 ```
 
-This suggests implementation obviously does not suggest anything, as we haven't added suggestions yet.
+This example obviously does not suggest anything, as we haven't added suggestions yet.
 
 ## A suggestion builder's methods
 The `SuggestionsBuilder` has a few methods we can use to construct our suggestions:
@@ -47,7 +44,7 @@ The following table displays what they return with the following input typed in 
 |           Method           |          Return Value          |                          Description                          |
 |----------------------------|--------------------------------|---------------------------------------------------------------|
 | getInput()                 | /customsuggestions Asumm13Text | The full chat input                                           |
-| getStart()                 | 19                             | The index of the forfirstst character of the argument's input |
+| getStart()                 | 19                             | The index of the first character of the argument's input      |
 | getRemaining()             | Asumm13Text                    | The input for the current argument                            |
 | getRemainingLowerCase()    | asumm13text                    | The input for the current argument, lowercased                |
 
@@ -83,7 +80,7 @@ lambda/method and only returning the final `Suggestions` object asynchronously.
 
 Here are the same suggestions declared in the two different ways mentioned above:
 ```java
-// This one allows the usage of all Paper API inside the suggests method
+// Here, you are safe to use all Paper API
 Commands.argument("name", StringArgumentType.word())
     .suggests((ctx, builder) -> {
         builder.suggest("first");
@@ -92,7 +89,7 @@ Commands.argument("name", StringArgumentType.word())
         return builder.buildFuture();
     });
 
-// This one does not allow the usage of most Paper API inside the suggests method
+// Here, most Paper API is not usable
 Commands.argument("name", StringArgumentType.word())
     .suggests((ctx, builder) -> CompletableFuture.supplyAsync(() -> {
         builder.suggest("first");
@@ -103,8 +100,8 @@ Commands.argument("name", StringArgumentType.word())
 ```
 
 ## Example: Suggesting amounts in a give command
-In commands where you give players certain items, you oftentimes include an amount argument. We could suggest `1`, `32`, and `64` as common amounts for
-items given. This could look like this:
+In commands where you give players certain items, you oftentimes include an amount argument. We could suggest `1`, `16`, `32`, and `64` as common amounts for
+items given. The command implementation could look like this:
 
 ```java
 @NullMarked
@@ -113,22 +110,29 @@ public class SuggestionsTest {
     public static LiteralCommandNode<CommandSourceStack> constructGiveItemCommand() {
         // Create new command: /giveitem
         return Commands.literal("giveitem")
-            // Requires a player executor
+
+            // Require a player to execute the command
             .requires(ctx -> ctx.getExecutor() instanceof Player)
+
             // Declare a new ItemStack argument
             .then(Commands.argument("item", ArgumentTypes.itemStack())
+
                 // Declare a new integer argument with the bounds of 1 to 99
                 .then(Commands.argument("stacksize", IntegerArgumentType.integer(1, 99))
+
+                    // Here, we use method references, since otherwise, our command definition would grow too big
                     .suggests(SuggestionsTest::getStackSizeSuggestions)
                     .executes(SuggestionsTest::executeCommandLogic)
+
                 )
             )
             .build();
     }
 
     private static CompletableFuture<Suggestions> getStackSizeSuggestions(final CommandContext<CommandSourceStack> ctx, final SuggestionsBuilder builder) {
-        // Suggest 1, 32, and 64 to the user when they reach the 'stacksize' argument
+        // Suggest 1, 16, 32, and 64 to the user when they reach the 'stacksize' argument
         builder.suggest(1);
+        builder.suggest(16);
         builder.suggest(32);
         builder.suggest(64);
         return builder.buildFuture();
@@ -140,17 +144,22 @@ public class SuggestionsTest {
             return Command.SINGLE_SUCCESS;
         }
 
+        // If the player has no empty slot, we tell the player that they have no free inventory space
+        if (player.getInventory().firstEmpty() == -1) {
+            player.sendRichMessage("<light_purple>You do not have enough space in your inventory!");
+            return Command.SINGLE_SUCCESS;
+        }
+
         // Retrieve our argument values
         final ItemStack item = ctx.getArgument("item", ItemStack.class);
         final int amount = IntegerArgumentType.getInteger(ctx, "stacksize");
 
-        // Set the item's max stack size to fit the stack size we defined, set the amount, and give it to the player
-        item.setData(DataComponentTypes.MAX_STACK_SIZE, amount);
+        // Set the item's amount and give it to the player
         item.setAmount(amount);
-        player.getInventory().addItem(item);
+        player.getInventory().setItem(player.getInventory().firstEmpty(), item);
 
         // Send a confirmation message
-        player.sendRichMessage("<gold>You have been given <white><amount>x</white> <aqua><item></aqua>",
+        player.sendRichMessage("<light_purple>You have been given <white><amount>x</white> <aqua><item></aqua>!",
             Placeholder.component("amount", Component.text(amount)),
             Placeholder.component("item", Component.translatable(item).hoverEvent(item))
         );
@@ -159,7 +168,7 @@ public class SuggestionsTest {
 }
 ```
 
-And here is how the argument looks in-game:
+And here is how the command looks in-game:
 <FullWidthVideo src={GiveItemCommandMp4}/>
 
 ## Example: Filtering by user input

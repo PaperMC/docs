@@ -59,12 +59,13 @@ difference parameters:
 | suggest(int)             | Adds an int to the suggestions                  |
 | suggest(int, Message)    | Adds a String with a tooltip to the suggestions |
 
-The `Message` interface has the following implementations: `LiteralMessage`, which can be used for basic, non-formatted text, and `AdventureComponent`, which can be
-constructed using an Adventure component by calling `new AdventureComponent(Component)`.
+There are two ways of retrieving a `Message` instance:
+- Using `LiteralMessage`, which can be used for basic, non-formatted text
+- Using the `MessageComponentSerializer`, with which you can serialize `Component`s into `Message`s.
 
 For example, if you add a suggestion like this:
 ```java
-builder.suggest("suggestion", new AdventureComponent(miniMessage().deserialize("<green>Suggestion tooltip")));
+builder.suggest("suggestion", MessageComponentSerializer.message().serialize(miniMessage().deserialize("<green>Suggestion tooltip")));
 ```
 
 It will look like this on the client:

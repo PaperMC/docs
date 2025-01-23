@@ -65,7 +65,9 @@ There are two ways of retrieving a `Message` instance:
 
 For example, if you add a suggestion like this:
 ```java
-builder.suggest("suggestion", MessageComponentSerializer.message().serialize(miniMessage().deserialize("<green>Suggestion tooltip")));
+builder.suggest("suggestion", MessageComponentSerializer.message().serialize(
+    miniMessage().deserialize("<green>Suggestion tooltip")
+));
 ```
 
 It will look like this on the client:

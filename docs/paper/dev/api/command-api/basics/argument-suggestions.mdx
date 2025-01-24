@@ -8,9 +8,10 @@ import GiveItemCommandMp4 from "./assets/give-item-command.mp4";
 import SelectNameCommandMp4 from "./assets/select-name-command.mp4";
 
 # Argument Suggestions
-Sometimes, you want to send your own suggestions to users. For this, you can use the `RequiredArgumentBuilder#suggests(SuggestionProvider)` method.
+Sometimes, you want to send your own suggestions to users. For this, you can use the `suggests(SuggestionProvider<CommandSourceStack>)` method when declaring
+arguments.
 
-## Examining the `SuggestionProvider<S>` method
+## Examining `SuggestionProvider<S>`
 The `SuggestionProvider<S>` interface is defined as follows:
 
 ```java title="SuggestionProvider.java"
@@ -20,26 +21,25 @@ public interface SuggestionProvider<S> {
 }
 ```
 
-Similar to other classes or interfaces with a `<S>` generic parameter, for Paper, this usually is a `CommandSourceStack`. Furthermore, similar to the `Command<S>` interface,
+Similar to other classes or interfaces with a `<S>` generic parameter, for Paper, this is usually a `CommandSourceStack`. Furthermore, similar to the `Command<S>` interface,
 this is a functional interface, which means that instead of passing in a class which implements this interface, we can just pass a lambda statement or a method reference.
 
-Our lambda/method requires two parameters, `CommandContext<S>` and `SuggestionsBuilder`, returning a `CompletableFuture<Suggestions>`.
-In order to retrieve our return value, we can just run `SuggestionsBuilder#buildFuture()` (or `SuggestionsBuilder#build()`, if we already are inside a CompletableFuture).
+Our lambda consists of two parameters, `CommandContext<S>` and `SuggestionsBuilder`, and expects to have a `CompletableFuture<Suggestions>` returned.
 
 A very simple lambda for our `suggests` method might look like this:
 ```java
 Commands.argument("name", StringArgumentType.word())
-    .suggests((ctx, builder) -> builder.buildFuture())
+    .suggests((ctx, builder) -> builder.buildFuture());
 ```
 
-This example obviously does not suggest anything, as we haven't added suggestions yet.
+This example obviously does not suggest anything, as we haven't added any suggestions yet.
 
-## A suggestion builder's methods
+## The `SuggestionBuilder`
 The `SuggestionsBuilder` has a few methods we can use to construct our suggestions:
 
 ### Input retrieval
 The first type of methods we will cover are the input retrieval methods: `getInput()`, `getStart()`, `getRemaining()`, and `getRemainingLowerCase()`.
-The following table displays what they return with the following input typed in the chat bar: `/customsuggestions Asumm13Text`.
+The following table displays what each returns with the following input typed in the chat bar: `/customsuggestions Asumm13Text`.
 
 |           Method           |          Return Value          |                          Description                          |
 |----------------------------|--------------------------------|---------------------------------------------------------------|
@@ -49,19 +49,18 @@ The following table displays what they return with the following input typed in 
 | getRemainingLowerCase()    | asumm13text                    | The input for the current argument, lowercased                |
 
 ### Suggestions
-The following overloads of the `SuggestionBuilder#suggest` method all add values that will be send to the client as suggestions, but accept
-difference parameters:
+The following overloads of the `SuggestionBuilder#suggest` method add values that will be send to the client as argument suggestions:
 
 |          Overload        |                   Description                   |
 |--------------------------|-------------------------------------------------|
 | suggest(String)          | Adds a String to the suggestions                |
 | suggest(String, Message) | Adds a String with a tooltip to the suggestions |
 | suggest(int)             | Adds an int to the suggestions                  |
-| suggest(int, Message)    | Adds a String with a tooltip to the suggestions |
+| suggest(int, Message)    | Adds an int with a tooltip to the suggestions   |
 
 There are two ways of retrieving a `Message` instance:
 - Using `LiteralMessage`, which can be used for basic, non-formatted text
-- Using the `MessageComponentSerializer`, with which you can serialize `Component` objects into `Message` objects.
+- Using the `MessageComponentSerializer`, which can be used to serialize `Component` objects into `Message` objects.
 
 For example, if you add a suggestion like this:
 ```java
@@ -74,12 +73,12 @@ It will look like this on the client:
 <img src={SuggestionTooltip} style={{width: "100%"}}/>
 
 ### Building
-There are two methods we can use to build our suggestions. The only difference between the both are that one directly returns the finished `Suggestions` object,
+There are two methods we can use to build our `Suggestions` object. The only difference between those is that one directly returns the finished `Suggestions` object,
 whilst the other one returns a `CompletableFuture<Suggestions>`.
 
-The reason for these two methods is that the `SuggestionProvider`'s method requires the return value to be a `CompletableFuture<Suggestions>`. This for once
-allows for constructing your suggestions asynchronously inside a `CompletableFuture.supplyAsync(Supplier<Suggestions>)` or synchronously directly inside our
-lambda/method and only returning the final `Suggestions` object asynchronously.
+The reason for these two methods is that `SuggestionProvider` expects the return value to be `CompletableFuture<Suggestions>`. This for once
+allows for constructing your suggestions asynchronously inside a `CompletableFuture.supplyAsync(Supplier<Suggestions>)` statement, or synchronously directly inside our
+lambda and returning the final `Suggestions` object asynchronously.
 
 Here are the same suggestions declared in the two different ways mentioned above:
 ```java
@@ -102,8 +101,8 @@ Commands.argument("name", StringArgumentType.word())
     }));
 ```
 
-## Example: Suggesting amounts in a give command
-In commands where you give players certain items, you oftentimes include an amount argument. We could suggest `1`, `16`, `32`, and `64` as common amounts for
+## Example: Suggesting amounts in a give item command
+In commands, where you give players items, you oftentimes include an amount argument. We could suggest `1`, `16`, `32`, and `64` as common amounts for
 items given. The command implementation could look like this:
 
 ```java
@@ -196,5 +195,5 @@ public static LiteralCommandNode<CommandSourceStack> constructStringSuggestionsC
 }
 ```
 
-And as you can see in the preview below, this simple setup filters suggestions by user input, providing a smooth user experience when using your command:
+This simple setup filters suggestions by user input, providing a smooth user experience when running the command:
 <FullWidthVideo src={SelectNameCommandMp4}/>

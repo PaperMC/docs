@@ -51,6 +51,11 @@ final Enchantment enchantment = enchantmentRegistry.getOrThrow(TypedKey.create(
     RegistryKey.ENCHANTMENT, Key.key("minecraft:sharpness"))
 );
 
+// Same as above, but using the instance's method
+final Enchantment enchantment = enchantmentRegistry.getOrThrow(
+    RegistryKey.ENCHANTMENT.typedKey(Key.key("minecraft:sharpness"))
+);
+
 // Same as above, but using generated create method
 // available for data-driven registries or "writable" ones
 // (those bound to a lifecycle event in RegistryEvents).

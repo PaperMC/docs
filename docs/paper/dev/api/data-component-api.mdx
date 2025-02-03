@@ -147,11 +147,11 @@ stack.resetData(DataComponentTypes.MAX_STACK_SIZE);
 Some components are only flags and don't carry any sort of value:
 
 ```java
-// Make the item unbreakable
-stack.setData(DataComponentTypes.UNBREAKABLE);
+// Make the item a glider to be used like elytra (combined with the equippable component)
+stack.setData(DataComponentTypes.GLIDER);
 
-// Remove the unbreakable flag
-stack.unsetData(DataComponentTypes.UNBREAKABLE);
+// Remove the glider flag
+stack.unsetData(DataComponentTypes.GLIDER);
 ```
 
 ## Advanced usage with builders
@@ -161,57 +161,57 @@ Many data components have complex structures that require builders.
 ### Modifying prototype component values
 
 ```java
-ItemStack itemStack = ItemStack.of(Material.DIAMOND_HELMET);
+ItemStack helmet = ItemStack.of(Material.DIAMOND_HELMET);
 // Get the equippable component for this item, and make it a builder.
 // Note: Not all types have .toBuilder() methods
 // This is the prototype value of the diamond helmet.
-Equippable.Builder builder = itemStack.getData(DataComponentTypes.EQUIPPABLE).toBuilder();
+Equippable.Builder builder = helmet.getData(DataComponentTypes.EQUIPPABLE).toBuilder();
 
 // Make the helmet look like netherite
 // We get the prototype equippable value from NETHERITE_HELMET
 builder.assetId(Material.NETHERITE_HELMET.getDefaultData(DataComponentTypes.EQUIPPABLE).assetId());
 // And give it a spooky sound when putting it on
-builder.equipSound(Registry.SOUNDS.getKeyOrThrow(Sound.ENTITY_GHAST_HURT));
+builder.equipSound(SoundEventKeys.ENTITY_GHAST_HURT);
 
 // Set our new item
-itemStack.setData(DataComponentTypes.EQUIPPABLE, builder);
+helmet.setData(DataComponentTypes.EQUIPPABLE, builder);
 ```
 This will create a diamond helmet that looks like a netherite helmet and plays a spooky ghast sound when equipped.
 
 ### Example: Written book
 
 ```java
-ItemStack writtenBook = ItemStack.of(Material.WRITTEN_BOOK);
-WrittenBookContent.Builder bookBuilder = WrittenBookContent.writtenBookContent("My Book", "AuthorName");
+ItemStack book = ItemStack.of(Material.WRITTEN_BOOK);
+WrittenBookContent.Builder builder = WrittenBookContent.writtenBookContent("My Book", "AuthorName");
 
 // Add a page
-bookBuilder.addPage(Component.text("This is a new page!"));
+builder.addPage(Component.text("This is a new page!"));
 
 // Add a page that shows differently for people who have swear filtering on
 // Players who have disabled filtering, will see "I hate Paper!", while those with filtering on will see the "I love Paper!".
-bookBuilder.addFilteredPage(
+builder.addFilteredPage(
     Filtered.of(Component.text("I hate Paper!"), Component.text("I love Paper!"))
 );
 
 // Change generation
-bookBuilder.generation(1);
+builder.generation(1);
 
 // Apply changes
-writtenBook.setData(DataComponentTypes.WRITTEN_BOOK_CONTENT, bookBuilder.build());
+book.setData(DataComponentTypes.WRITTEN_BOOK_CONTENT, builder.build());
 ```
 
 ### Example: Cool sword
 
 ```java
-ItemStack itemStack = ItemStack.of(Material.DIAMOND_SWORD);
-itemStack.setData(DataComponentTypes.LORE, ItemLore.lore().addLine(Component.text("Cool sword!")).build());
-itemStack.setData(DataComponentTypes.ENCHANTMENTS, ItemEnchantments.itemEnchantments().add(Enchantment.SHARPNESS, 10).build());
-itemStack.setData(DataComponentTypes.RARITY, ItemRarity.RARE);
+ItemStack sword = ItemStack.of(Material.DIAMOND_SWORD);
+sword.setData(DataComponentTypes.LORE, ItemLore.lore().addLine(Component.text("Cool sword!")).build());
+sword.setData(DataComponentTypes.ENCHANTMENTS, ItemEnchantments.itemEnchantments().add(Enchantment.SHARPNESS, 10).build());
+sword.setData(DataComponentTypes.RARITY, ItemRarity.RARE);
 
-itemStack.unsetData(DataComponentTypes.TOOL); // Remove the tool component
+sword.unsetData(DataComponentTypes.TOOL); // Remove the tool component
 
-itemStack.setData(DataComponentTypes.MAX_DAMAGE, 10);
-itemStack.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true); // Make it glow!
+sword.setData(DataComponentTypes.MAX_DAMAGE, 10);
+sword.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true); // Make it glow!
 ```
 
 ## Matching items without certain data components
@@ -223,10 +223,10 @@ method.
 For example, here we compare two diamond swords whilst ignoring their durability:
 
 ```java
-ItemStack originalSword = new ItemStack(Material.DIAMOND_SWORD);
-ItemStack damagedSword = new ItemStack(Material.DIAMOND_SWORD);
+ItemStack originalSword = ItemStack.of(Material.DIAMOND_SWORD);
+ItemStack damagedSword = ItemStack.of(Material.DIAMOND_SWORD);
 damagedSword.setData(DataComponentTypes.DAMAGE, 100);
 
 boolean match = damagedSword.matchesWithoutData(originalSword, Set.of(DataComponentTypes.DAMAGE), false);
-logger.info("Do the sword match? " + match); // true
+logger.info("Do the sword match? " + match); // -> true
 ```

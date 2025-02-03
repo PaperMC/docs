@@ -22,7 +22,7 @@ A data component represents a piece of data associated with an item. Vanilla ite
 
 ### Structure
 ![Component Structure](assets/data-component-api-tree.png)
-For implementation details, [click here](#example-cool-sword)
+For implementation details, [click here](#example-cool-sword).
 
 #### The prototype (default values)
 Items come with an initial set of components that we call the prototype.
@@ -106,7 +106,7 @@ boolean hasCustomName = stack.hasData(DataComponentTypes.CUSTOM_NAME);
 logger.info("Has custom name? " + hasCustomName);
 ```
 
-### reading a valued data component
+### Reading a valued data component
 
 ```java
 // The damage of an item can be null, so we require a null check
@@ -216,7 +216,7 @@ itemStack.setData(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true); // Make 
 
 ## Matching items without certain data components
 
-When comparing items, you sometimes want to ignore certain values. For this we can use the
+When comparing items, you sometimes want to ignore certain values. For this, we can use the
 <Javadoc name="org.bukkit.inventory.ItemStack#matchesWithoutData(org.bukkit.inventory.ItemStack,java.util.Set)">`ItemStack#matchesWithoutData`</Javadoc>
 method.
 

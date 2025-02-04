@@ -59,7 +59,7 @@ java -Xms1G -Xmx1G -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalV
 
 Once saved, open a terminal (or log into the machine) if you haven't already, navigate to the
 directory where you have placed the Velocity JAR file and the `start.sh` file. Then run
-`chmod +x start.sh` and then `./start.sh`. If it worked, you should now receive a console similar to
+`chmod u+x start.sh` and then `./start.sh`. If it worked, you should now receive a console similar to
 the output in the next section.
 
 ## After launch

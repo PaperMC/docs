@@ -478,7 +478,7 @@ unsupported-settings:
     default: ZLIB
     description: >-
       Allows the server to customize the format of saved region files. This
-      supports ZLIB, GZIP and NONE, where None namely allows for compression to
+      supports ZLIB, GZIP, LZ4 and NONE, where None namely allows for compression to
       be disabled
   allow-unsafe-end-portal-teleportation:
     default: "false"

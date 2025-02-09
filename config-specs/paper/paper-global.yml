@@ -487,6 +487,10 @@ unsupported-settings:
       possible, for example sand duplication. This
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
+  skip-tripwire-hook-placement-validation:
+    default: "false"
+    description: >-
+      This setting allows for exploits related to tripwire hook duping to be enabled.
 watchdog:
   early-warning-delay:
     default: "10000"

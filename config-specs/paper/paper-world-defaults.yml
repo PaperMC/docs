@@ -892,6 +892,10 @@ misc:
       Determines if the server will interrupt a sprinting player if they are
       attacked. When set to true, you may be subject to a Vanilla bug where
       sprinting is stopped and started when attacking players.
+  legacy-ender-pearl-behavior:
+    default: "false"
+    description: >-
+      Determines if ender pearls will not load chunks and will save to the world instead of the player.
   light-queue-size:
     default: "20"
     description: >-

@@ -896,8 +896,8 @@ misc:
     default: "false"
     description: >-
       Determines if the server uses legacy (pre-1.21.2) ender pearl behavior.
-      If enabled, ender pearls will no longer load chunks and save as entities
-      in the world instead of being saved with the launching player.
+      If enabled, ender pearls will no longer load chunks and will be saved with
+      the launching player instead of being saved as independent entities in the world.
   light-queue-size:
     default: "20"
     description: >-

@@ -1,12 +1,12 @@
 import type { SidebarsConfig } from "@docusaurus/plugin-content-docs";
 
 const paper: SidebarsConfig = {
-  primary: [
-    "README",
+  primary: ["README", "admin/README", "dev/README", "contributing/README"],
+  administration: [
     {
       type: "category",
       label: "Administration",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "admin/README",
@@ -82,10 +82,12 @@ const paper: SidebarsConfig = {
         },
       ],
     },
+  ],
+  development: [
     {
       type: "category",
       label: "Development",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "dev/README",
@@ -217,10 +219,12 @@ const paper: SidebarsConfig = {
         },
       ],
     },
+  ],
+  contributing: [
     {
       type: "category",
       label: "Contributing",
-      collapsed: true,
+      collapsible: false,
       link: {
         type: "doc",
         id: "contributing/README",

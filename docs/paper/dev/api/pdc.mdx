@@ -212,7 +212,7 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
       `ItemMeta`, which acts as a snapshot of the `ItemStack`'s data at the point of creation.
 
       To avoid this overhead, ItemStack exposes a read-only view of its persistent data container at
-      `ItemStack#getPersistentDataContainer`.
+      `ItemStack#getPersistentDataContainer()`.
       Edits to the persistent data container can be achieved via `ItemStack#editPersistentDataContainer(Consumer)`.
       The persistent data container available in the consumer is not valid outside the consumer.
       ```java

@@ -12,8 +12,10 @@ The full list of classes that support the PDC are:
 - [`World`](#world)
 - [`Entity`](#entity)
 - [`TileState`](#tilestate)
-- [`ItemMeta`](#itemmeta)
 - [`Structure`](#structure)
+- [`ItemMeta`](#itemmeta)
+- [`GeneratedStructure`](#generatedstructure)
+- [`Raid`](#raid)
 
 ## What is it used for?
 In the past, developers resorted to a variety of methods to store custom data on objects:
@@ -34,11 +36,11 @@ which is the object you want to store the data on. The third is the data itself.
 // Create a NamespacedKey
 NamespacedKey key = new NamespacedKey(pluginInstance, "example-key");
 
-ItemStack item = new ItemStack(Material.DIAMOND);
+ItemStack item = ItemStack.of(Material.DIAMOND);
 // ItemMeta implements PersistentDataHolder, so we can get the PDC from it
-ItemMeta meta = item.getItemMeta();
-meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
-item.setItemMeta(meta);
+item.editMeta(meta -> {
+    meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
+});
 ```
 
 :::info
@@ -92,9 +94,9 @@ The PDC supports a wide range of data types, such as:
   // Storing a list of strings in a container by verbosely creating
   // a list data type wrapping the string data type.
   container.set(
-    key,
-    PersistentDataType.LIST.listTypeFrom(PersistentDataType.STRING),
-    List.of("a", "list", "of", "strings")
+      key,
+      PersistentDataType.LIST.listTypeFrom(PersistentDataType.STRING),
+      List.of("a", "list", "of", "strings")
   );
 
   // Storing a list of strings in a container by using the api
@@ -134,7 +136,7 @@ public class UUIDDataType implements PersistentDataType<byte[], UUID> {
 
     @Override
     public byte[] toPrimitive(UUID complex, PersistentDataAdapterContext context) {
-        ByteBuffer bb = ByteBuffer.wrap(new byte[Long.BYTES * 2]);
+        ByteBuffer bb = ByteBuffer.allocate(Long.BYTES * 2);
         bb.putLong(complex.getMostSignificantBits());
         bb.putLong(complex.getLeastSignificantBits());
         return bb.array();
@@ -183,13 +185,13 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
     - `Entity#getPersistentDataContainer()`
 - ##### <Javadoc name={"org.bukkit.block.TileState"}>`TileState`</Javadoc>
     - This is slightly more complicated, as you need to cast the block's state to something that extends `TileState`.
-      This does not work for all blocks, only those that have a tile entity.
+      This does not work for all blocks, only those that have a block entity.
       ```java
-        Block block = ...;
-        if (block.getState() instanceof Chest chest) {
-            chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
-            chest.update();
-        }
+      Block block = ...;
+      if (block.getState() instanceof Chest chest) {
+          chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
+          chest.update();
+      }
       ```
 - ##### <Javadoc name={"org.bukkit.structure.Structure"}>`Structure`</Javadoc>
     - `Structure#getPersistentDataContainer()`

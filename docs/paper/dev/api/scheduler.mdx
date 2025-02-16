@@ -19,7 +19,7 @@ Every game runs something called a game loop ,which essentially executes all the
 A single execution of that loop in Minecraft is called a 'tick'.
 
 In Minecraft, there are 20 ticks per second or in other words, one tick every 50 milliseconds. This means that the game loop is executed
-20 times per second. A tick taking more than 50ms to execute is the moment when your server starts to fall behind on 
+20 times per second. A tick taking more than 50ms to execute is the moment when your server starts to fall behind on
 its work and lag.
 
 A task that should run after 100 ticks will run after 5 seconds (100 ticks / 20 ticks per second = 5 seconds). However,
@@ -30,14 +30,14 @@ seconds.
 
 Every method of the scheduler that takes a delay or period uses ticks as a unit of time.
 
-Converting from human units to ticks and back is as simple as:  
-- `ticks = seconds * 20`  
+Converting from human units to ticks and back is as simple as:
+- `ticks = seconds * 20`
 - `seconds = ticks / 20`
 
 You can make your code more readable by using the
 <Javadoc name={"java.util.concurrent.TimeUnit"} project={"java"}>`TimeUnit`</Javadoc>
-enum, e.g. to convert 5 minutes to ticks and back:  
-- `TimeUnit.MINUTES.toSeconds(5) * 20`  
+enum, e.g. to convert 5 minutes to ticks and back:
+- `TimeUnit.MINUTES.toSeconds(5) * 20`
 - `TimeUnit.SECONDS.toMinutes(ticks / 20)`
 
 You can also use the `Tick` class from Paper to convert between human units and ticks, e.g. to convert 5 minutes to ticks:
@@ -83,7 +83,7 @@ your server's performance.
 
 :::warning
 
-**Large portions of the Bukkit API are not safe to use from within asynchronous tasks**. If a method changes or 
+**Large portions of the Bukkit API are not safe to use from within asynchronous tasks**. If a method changes or
 accesses the world state, it is not safe to be used from an asynchronous task.
 
 :::
@@ -112,16 +112,15 @@ You can either implement it in a separate class, e.g.:
 public class MyRunnableTask implements Runnable {
 
     private final MyPlugin plugin;
-    
+
     public MyRunnableTask(MyPlugin plugin) {
         this.plugin = plugin;
     }
-    
+
     @Override
     public void run() {
         this.plugin.getServer().broadcast(Component.text("Hello, World!"));
     }
-
 }
 ```
 ```java
@@ -214,7 +213,7 @@ public class CustomRunnable extends BukkitRunnable {
 }
 ```
 
-This simply adds a potion effect until the entity dies. 
+This simply adds a potion effect until the entity dies.
 
 #### Using a delay of 0 ticks
 

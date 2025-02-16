@@ -53,7 +53,7 @@ its position in the corner of the block (this can be seen with the hitbox debug 
 ```java
 ItemDisplay display = world.spawn(location, ItemDisplay.class, entity -> {
     // customize the entity!
-    entity.setItemStack(new ItemStack(Material.SKELETON_SKULL));
+    entity.setItemStack(ItemStack.of(Material.SKELETON_SKULL));
 });
 ```
 
@@ -181,7 +181,7 @@ making the display spin indefinitely:
 
 ```java
 ItemDisplay display = location.getWorld().spawn(location, ItemDisplay.class, entity -> {
-    entity.setItemStack(new ItemStack(Material.GOLDEN_SWORD));
+    entity.setItemStack(ItemStack.of(Material.GOLDEN_SWORD));
 });
 
 int duration = 5 * 20; // duration of half a revolution (5 * 20 ticks = 5 seconds)

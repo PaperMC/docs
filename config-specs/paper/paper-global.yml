@@ -478,7 +478,7 @@ unsupported-settings:
     default: ZLIB
     description: >-
       Allows the server to customize the format of saved region files. This
-      supports ZLIB, GZIP and NONE, where None namely allows for compression to
+      supports ZLIB, GZIP, LZ4 and NONE, where None namely allows for compression to
       be disabled
   allow-unsafe-end-portal-teleportation:
     default: "false"
@@ -487,6 +487,10 @@ unsupported-settings:
       possible, for example sand duplication. This
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
+  skip-tripwire-hook-placement-validation:
+    default: "false"
+    description: >-
+      This setting allows for exploits related to tripwire hook duping to be enabled.
 watchdog:
   early-warning-delay:
     default: "10000"

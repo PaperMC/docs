@@ -20,7 +20,7 @@ public class TestPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         NamespacedKey key = new NamespacedKey(this, "WarriorSword");
-        ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack item = ItemStack.of(Material.DIAMOND_SWORD);
 
         ShapedRecipe recipe = new ShapedRecipe(key, item);
         recipe.shape(" A ", "AAA", " B ");
@@ -70,7 +70,7 @@ public class TestPlugin extends JavaPlugin {
     @Override
     public void onEnable() {
         NamespacedKey key = new NamespacedKey(this, "WarriorSword");
-        ItemStack item = new ItemStack(Material.DIAMOND_SWORD);
+        ItemStack item = ItemStack.of(Material.DIAMOND_SWORD);
 
         ShapelessRecipe recipe = new ShapelessRecipe(key, item);
         recipe.addIngredient(3, Material.DIAMOND);

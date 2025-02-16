@@ -53,3 +53,5 @@ unsupported-settings:
     default: "true"
   perform-username-validation:
     default: "false"
+  skip-tripwire-hook-placement-validation:
+    default: "true"

@@ -180,7 +180,7 @@ const paper: SidebarsConfig = {
             },
             {
               type: "category",
-              label: "Component API (Adventure)",
+              label: "Text Component API (Adventure)",
               collapsed: true,
               items: [
                 "dev/api/component-api/intro",
@@ -188,6 +188,7 @@ const paper: SidebarsConfig = {
                 "dev/api/component-api/audiences",
               ],
             },
+            "dev/api/data-component-api",
             "dev/api/pdc",
             "dev/api/custom-inventory-holder",
             "dev/api/scheduler",

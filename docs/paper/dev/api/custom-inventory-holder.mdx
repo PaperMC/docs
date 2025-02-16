@@ -104,7 +104,7 @@ public class MyInventory implements InventoryHolder {
         this.inventory = plugin.getServer().createInventory(this, 9);
 
         // Set the stone that we're going to be clicking.
-        this.inventory.setItem(0, new ItemStack(Material.STONE));
+        this.inventory.setItem(0, ItemStack.of(Material.STONE));
     }
 
     // A method we will call in the listener whenever the player clicks the stone.
@@ -115,7 +115,7 @@ public class MyInventory implements InventoryHolder {
 
     // A method that will update the counter item.
     private void updateCounter() {
-        this.inventory.setItem(8, new ItemStack(Material.BEDROCK, this.clicks));
+        this.inventory.setItem(8, ItemStack.of(Material.BEDROCK, this.clicks));
     }
 
     @Override

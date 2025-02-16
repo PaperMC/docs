@@ -16,6 +16,8 @@ The full list of classes that support the PDC are:
 - [`ItemMeta`](#itemmeta)
 - [`GeneratedStructure`](#generatedstructure)
 - [`Raid`](#raid)
+- [`OfflinePlayer`](#offlineplayer)
+- [`ItemStack`](#itemstack)
 
 ## What is it used for?
 In the past, developers resorted to a variety of methods to store custom data on objects:
@@ -201,3 +203,21 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
     - `GeneratedStructure#getPersistentDataContainer()`
 - ##### <Javadoc name={"org.bukkit.Raid"}>`Raid`</Javadoc>
     - `Raid#getPersistentDataContainer()`
+- ##### <Javadoc name={"org.bukkit.OfflinePlayer"}>`OfflinePlayer`</Javadoc>
+    - OfflinePlayer only exposes a read-only version of the persistent data container.
+      It can be accessed via `OfflinePlayer#getPersistentDataContainer()`.
+- ##### <Javadoc name={"org.bukkit.inventory.ItemStack"}>`ItemStack`</Javadoc>
+    - The persistent data container of an `ItemStack` has historically been accessed by
+      the `ItemStack`'s `ItemMeta`. This, however, includes the overhead of constructing the entire
+      `ItemMeta`, which acts as a snapshot of the `ItemStack`'s data at the point of creation.
+
+      To avoid this overhead, ItemStack exposes a read-only view of its persistent data container at
+      `ItemStack#getPersistentDataContainer()`.
+      Edits to the persistent data container can be achieved via `ItemStack#editPersistentDataContainer(Consumer)`.
+      The persistent data container available in the consumer is not valid outside the consumer.
+      ```java
+      ItemStack itemStack = ...;
+      itemStack.editPersistentDataContainer(pdc -> {
+          pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
+      });
+      ```

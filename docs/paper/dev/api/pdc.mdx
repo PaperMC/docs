@@ -217,7 +217,7 @@ and their PDC can be fetched with <Javadoc name={"org.bukkit.persistence.Persist
       The persistent data container available in the consumer is not valid outside the consumer.
       ```java
       ItemStack itemStack = ...;
-      itemStack.editPersistentDataContainer(p -> {
-        p.set(key, PersistentDataType.STRING, "I love Tacos!");
+      itemStack.editPersistentDataContainer(pdc -> {
+          pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
       });
       ```

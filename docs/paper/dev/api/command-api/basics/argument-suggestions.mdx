@@ -132,7 +132,7 @@ public class SuggestionsTest {
     }
 
     private static CompletableFuture<Suggestions> getStackSizeSuggestions(final CommandContext<CommandSourceStack> ctx, final SuggestionsBuilder builder) {
-        // Suggest 1, 16, 32, and 64 to the user when they reach the 'stacksize' argument
+        // Suggest 1, 16, 32, and 64 to the user when they reach the 'amount' argument
         builder.suggest(1);
         builder.suggest(16);
         builder.suggest(32);
@@ -154,7 +154,7 @@ public class SuggestionsTest {
 
         // Retrieve our argument values
         final ItemStack item = ctx.getArgument("item", ItemStack.class);
-        final int amount = IntegerArgumentType.getInteger(ctx, "stacksize");
+        final int amount = IntegerArgumentType.getInteger(ctx, "amount");
 
         // Set the item's amount and give it to the player
         item.setAmount(amount);

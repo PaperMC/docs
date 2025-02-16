@@ -59,13 +59,13 @@ The following overloads of the `SuggestionsBuilder#suggest` method add values th
 | suggest(int, Message)    | Adds an int with a tooltip to the suggestions   |
 
 There are two ways of retrieving a `Message` instance:
-- Using `LiteralMessage`, which can be used for basic, non-formatted text
+- Using `LiteralMessage`, which can be used for basic, non-formatted text.
 - Using the `MessageComponentSerializer`, which can be used to serialize `Component` objects into `Message` objects.
 
 For example, if you add a suggestion like this:
 ```java
 builder.suggest("suggestion", MessageComponentSerializer.message().serialize(
-    miniMessage().deserialize("<green>Suggestion tooltip")
+    MiniMessage.miniMessage().deserialize("<green>Suggestion tooltip")
 ));
 ```
 

@@ -120,10 +120,10 @@ public class SuggestionsTest {
             .then(Commands.argument("item", ArgumentTypes.itemStack())
 
                 // Declare a new integer argument with the bounds of 1 to 99
-                .then(Commands.argument("stacksize", IntegerArgumentType.integer(1, 99))
+                .then(Commands.argument("amount", IntegerArgumentType.integer(1, 99))
 
                     // Here, we use method references, since otherwise, our command definition would grow too big
-                    .suggests(SuggestionsTest::getStackSizeSuggestions)
+                    .suggests(SuggestionsTest::getAmountSuggestions)
                     .executes(SuggestionsTest::executeCommandLogic)
 
                 )
@@ -131,7 +131,7 @@ public class SuggestionsTest {
             .build();
     }
 
-    private static CompletableFuture<Suggestions> getStackSizeSuggestions(final CommandContext<CommandSourceStack> ctx, final SuggestionsBuilder builder) {
+    private static CompletableFuture<Suggestions> getAmountSuggestions(final CommandContext<CommandSourceStack> ctx, final SuggestionsBuilder builder) {
         // Suggest 1, 16, 32, and 64 to the user when they reach the 'amount' argument
         builder.suggest(1);
         builder.suggest(16);
@@ -147,7 +147,8 @@ public class SuggestionsTest {
         }
 
         // If the player has no empty slot, we tell the player that they have no free inventory space
-        if (player.getInventory().firstEmpty() == -1) {
+        final int firstEmptySlot = player.getInventory().firstEmpty();
+        if (firstEmptySlot == -1) {
             player.sendRichMessage("<light_purple>You do not have enough space in your inventory!");
             return Command.SINGLE_SUCCESS;
         }
@@ -158,7 +159,6 @@ public class SuggestionsTest {
 
         // Set the item's amount and give it to the player
         item.setAmount(amount);
-        final int firstEmptySlot = player.getInventory().firstEmpty();
         player.getInventory().setItem(firstEmptySlot, item);
 
         // Send a confirmation message

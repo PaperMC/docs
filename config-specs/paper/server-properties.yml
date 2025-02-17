@@ -145,6 +145,7 @@ op-permission-level:
   default: "4"
   description: "Sets the default permission level for ops when using /op. (Allowed values: 0, 1, 2, 3, 4)"
 pause-when-empty-seconds:
+  vanilla: "60"
   default: "-1"
   description: >
     How many seconds have to pass after no player has been online before the server is paused.

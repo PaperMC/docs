@@ -262,21 +262,26 @@ world-settings:
         to 0 for global (including cross-dimension).
     entity-activation-range:
       animals:
+        vanilla: "0"
         default: "32"
         description: The entity activation range for animals.
       flying-monsters:
+        vanilla: "0"
         default: "32"
         description: The entity activation range for flying monsters.
       ignore-spectators:
         default: "false"
         description: Whether spectators activate entities within range.
       misc:
+        vanilla: "0"
         default: "16"
         description: The entity activation range for misc entities.
       monsters:
+        vanilla: "0"
         default: "32"
         description: The entity activation range for monsters.
       raiders:
+        vanilla: "0"
         default: "64"
         description: The entity activation range for raiders.
       tick-inactive-villagers:
@@ -358,6 +363,7 @@ world-settings:
             A limit of how many inactive villagers can be woken up on the same
             tick.
       water:
+        vanilla: "0"
         default: "16"
         description: The entity activation range for water mobs.
     entity-tracking-range:
@@ -624,6 +630,7 @@ world-settings:
         default: "50"
         description: "This option does not operate, as it is disabled by a Paper patch."
     max-tnt-per-tick:
+      vanilla: "-1"
       default: "100"
       description: How many TNT to process per server tick. Set to 0 to disable.
     merge-radius:

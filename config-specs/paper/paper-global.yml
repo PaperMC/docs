@@ -132,11 +132,13 @@ collisions:
       however, in the majority of cases, this is a worthy tradeoff
 commands:
   suggest-player-names-when-null-tab-completions:
+    vanilla: "false"
     default: "true"
     description: >-
       Instructs the server to return a list of players when tab-completing when
       there are no other completions available
   time-command-affects-all-worlds:
+    vanilla: "true"
     default: "false"
     description: >-
       Whether the /time command should act on all worlds or just the sender's
@@ -155,9 +157,11 @@ console:
     description: Whether the console command sender has all permissions
 item-validation:
   display-name:
+    vanilla: "2147483647"
     default: "8192"
     description: The maximum length of an item's display name in characters
   lore-line:
+    vanilla: "2147483647"
     default: "8192"
     description: The maximum length of a lore line in characters
   resolve-selectors-in-books:
@@ -167,16 +171,20 @@ item-validation:
       creative mode will be able to crash the server in yet another way
   book:
     author:
+      vanilla: "2147483647"
       default: "8192"
       description: The maximum length of a book's author in characters
     page:
+      vanilla: "2147483647"
       default: "16384"
       description: The maximum length of a book's page in characters
     title:
+      vanilla: "2147483647"
       default: "8192"
       description: The maximum length of a book's title in characters
   book-size:
     page-max:
+      vanilla: disabled
       default: "2560"
       description: >-
         The max number of bytes a single page in a book can contribute to the
@@ -235,6 +243,7 @@ messages:
         Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
 misc:
   fix-entity-position-desync:
+    vanilla: "false"
     default: "true"
     description: >-
       Causes the server to lose the same precision that the client does for
@@ -246,6 +255,7 @@ misc:
       Loads bukkit's permission.yml file before plugins, allowing them to check
       information set there immediately on enable
   max-joins-per-tick:
+    vanilla: "2147483647"
     default: "5"
     description: >-
       Sets the maximum amount of players that may join the server in a single
@@ -303,9 +313,11 @@ packet-limiter:
         DROP which will ignore packets over the limit, and KICK which will kick
         players for exceeding the limit
     interval:
+      vanilla: "0.000001"
       default: "7.0"
-      description: "The interval, in seconds, for which max-packet-rate should apply"
+      description: The interval, in seconds, for which max-packet-rate should apply
     max-packet-rate:
+      vanilla: "999999.0"
       default: "500.0"
       description: The number of packets allowed per player within the interval
   kick-message:
@@ -376,6 +388,7 @@ scoreboards:
       will incur a performance degradation
 spam-limiter:
   incoming-packet-threshold:
+    vanilla: "2147483647"
     default: "300"
     description: >-
       Sets the threshold at which the server will consider incoming packets spam
@@ -447,16 +460,19 @@ unsupported-settings:
       The following settings are provided by Paper but are not officially
       supported. Use them at your own risk and they may be removed at any time.
   allow-headless-pistons:
+    vanilla: "true"
     default: "false"
     description: >-
       Whether the server should allow the creation of headless pistons. These
       are often used to break permanent blocks
   allow-permanent-block-break-exploits:
+    vanilla: "true"
     default: "false"
     description: >-
       Whether unbreakable blocks can be broken with Vanilla exploits. This
       includes bedrock, end portal frames, end portal blocks, and more
   allow-piston-duplication:
+    vanilla: "true"
     default: "false"
     description: >-
       Whether to allow duplication of TNT, carpets, and rails. This does not
@@ -469,6 +485,7 @@ unsupported-settings:
       standing bug in Paper. Enabling this option means that the damage tick will be
       skipped, which may result in rapid damage on shields due to the missing invulnerability.
   perform-username-validation:
+    vanilla: "false"
     default: "true"
     description: >-
       Whether the server should validate usernames. While this may allow users
@@ -481,6 +498,7 @@ unsupported-settings:
       supports ZLIB, GZIP, LZ4 and NONE, where None namely allows for compression to
       be disabled
   allow-unsafe-end-portal-teleportation:
+    vanilla: "true"
     default: "false"
     description: >-
       This setting allows for exploits related to end portal teleportation to be
@@ -488,6 +506,7 @@ unsupported-settings:
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
   skip-tripwire-hook-placement-validation:
+    vanilla: "true"
     default: "false"
     description: >-
       This setting allows for exploits related to tripwire hook duping to be enabled.

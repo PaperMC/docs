@@ -290,6 +290,7 @@ world-settings:
           Whether to keep ticking villagers that are outside of their activation
           range.
       villagers:
+        vanilla: "0"
         default: "32"
         description: The entity activation range for villagers.
       villagers-active-for-panic:
@@ -632,7 +633,7 @@ world-settings:
     max-tnt-per-tick:
       vanilla: "-1"
       default: "100"
-      description: How many TNT to process per server tick. Set to 0 to disable.
+      description: How many TNT to process per server tick. Set to 0 or less to disable.
     merge-radius:
       exp:
         default: "-1"

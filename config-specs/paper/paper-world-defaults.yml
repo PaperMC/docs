@@ -300,6 +300,10 @@ entities:
     phantoms-spawn-attempt-min-seconds:
       default: "60"
       description: Sets the minimum number of seconds between phantom spawn attempts
+    cooldown-failed-beehive-releases:
+      default: "true"
+      vanilla: "false"
+      description: Adds a cooldown to bees being released after a failed release, which can occur if the hive is blocked or it being night.
   entities-target-with-follow-range:
     default: "false"
     description: "Sets whether the server should use follow range when targeting entities "

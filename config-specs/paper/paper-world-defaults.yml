@@ -916,12 +916,6 @@ misc:
       Determines if the server uses legacy (pre-1.21.2) ender pearl behavior.
       If enabled, ender pearls will no longer load chunks and will be saved with
       the launching player instead of being saved as independent entities in the world.
-  light-queue-size:
-    default: "20"
-    description: >-
-      Sets how large the queue of light updates off the main thread for each
-      world should be. Vanilla uses 5, but this causes issues especially with
-      plugins such as WorldEdit
   max-leash-distance:
     default: default
     description: >-

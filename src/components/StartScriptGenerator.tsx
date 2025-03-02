@@ -32,7 +32,6 @@ const FLAGS: Option[] = [
       "-XX:G1MixedGCCountTarget=4",
       "-XX:G1MixedGCLiveThresholdPercent=90",
       "-XX:G1RSetUpdatingPauseTimePercent=5",
-      "-XX:InitiatingHeapOccupancyPercent=15",
       "-XX:MaxGCPauseMillis=200",
       "-XX:MaxTenuringThreshold=1",
       "-XX:SurvivorRatio=32",
@@ -44,13 +43,15 @@ const FLAGS: Option[] = [
         "-XX:G1NewSizePercent=30",
         "-XX:G1MaxNewSizePercent=40",
         "-XX:G1HeapRegionSize=8M",
-        "-XX:G1ReservePercent=20"
+        "-XX:G1ReservePercent=20",
+        "-XX:InitiatingHeapOccupancyPercent=15"
         ].join(" ")],
       [12, [
         "-XX:G1NewSizePercent=40",
         "-XX:G1MaxNewSizePercent=50",
         "-XX:G1HeapRegionSize=16M",
-        "-XX:G1ReservePercent=15"
+        "-XX:G1ReservePercent=15",
+        "-XX:InitiatingHeapOccupancyPercent=20"
         ].join(" ")]
       ]),
     description: "Optimized Minecraft flags by Aikar for better server performance.",

@@ -164,5 +164,6 @@ interface SelectProps {
 export interface Option {
   label: string;
   value: string;
+  alt_value?: Map<number, string>;
   description?: string;
 }

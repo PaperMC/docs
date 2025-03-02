@@ -28,14 +28,10 @@ const FLAGS: Option[] = [
       "-XX:+PerfDisableSharedMem",
       "-XX:+UnlockExperimentalVMOptions",
       "-XX:+UseG1GC",
-      "-XX:G1HeapRegionSize=8M",
       "-XX:G1HeapWastePercent=5",
-      "-XX:G1MaxNewSizePercent=40",
       "-XX:G1MixedGCCountTarget=4",
       "-XX:G1MixedGCLiveThresholdPercent=90",
-      "-XX:G1NewSizePercent=30",
       "-XX:G1RSetUpdatingPauseTimePercent=5",
-      "-XX:G1ReservePercent=20",
       "-XX:InitiatingHeapOccupancyPercent=15",
       "-XX:MaxGCPauseMillis=200",
       "-XX:MaxTenuringThreshold=1",
@@ -43,6 +39,20 @@ const FLAGS: Option[] = [
       "-Dusing.aikars.flags=https://mcflags.emc.gs",
       "-Daikars.new.flags=true",
     ].join(" "),
+    altValue: new Map<number, string>([ // Alternate values for different memory sizes. The outputted flags will match the closest lower bound.
+      [0, [                             // Example: If the memory is 12 or 13.5, the flags for 12 will be used, and if the memory is 4 or 11.5, the flags for 0 will be used.
+        "-XX:G1NewSizePercent=30",
+        "-XX:G1MaxNewSizePercent=40",
+        "-XX:G1HeapRegionSize=8M",
+        "-XX:G1ReservePercent=20"
+        ].join(" ")],
+      [12, [
+        "-XX:G1NewSizePercent=40",
+        "-XX:G1MaxNewSizePercent=50",
+        "-XX:G1HeapRegionSize=16M",
+        "-XX:G1ReservePercent=15"
+        ].join(" ")]
+      ]),
     description: "Optimized Minecraft flags by Aikar for better server performance.",
   },
   {
@@ -69,6 +79,22 @@ const VELOCITY = FLAGS[2];
 
 const isServerSide = typeof document === "undefined";
 
+
+// Works with the altValue property of the Option object defined in Select.tsx.
+// Returns the flags for the closest lower bound of memory. Necessary for Aikar's flags that change depending on memory size.
+// Takes in memory and selectedFlag as arguments. Returns a string of flags.
+// Returns "" if the selectedFlag does not have an altValue property.
+function getAltFlags(memory: number, selectedFlag: Option): string {
+  if (!selectedFlag.altValue) return "";
+  let closestKey = 0;
+  for (const currentKey of selectedFlag.altValue.keys()) {
+      if (memory >= currentKey && currentKey > closestKey) {
+          closestKey = currentKey;
+      }
+  }
+  return selectedFlag.altValue.get(closestKey);
+}
+
 const generateStartCommand = (
   memory: number,
   selectedFlag: Option,
@@ -79,7 +105,7 @@ const generateStartCommand = (
 ) => {
   setTimeout(resizeOutput, 0);
   let content = "";
-  const command = `java -Xms${memory * 1024}M -Xmx${memory * 1024}M ${selectedFlag.value}${selectedFlag === NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === VELOCITY ? "" : "nogui"}`;
+  const command = `java -Xms${memory * 1024}M -Xmx${memory * 1024}M ${selectedFlag.value}${getAltFlags(memory, selectedFlag)}${selectedFlag === NONE ? "" : " "}-jar ${filename === "" ? "server.jar" : filename} ${guiEnabled || selectedFlag === VELOCITY ? "" : "nogui"}`;
 
   if (autoRestartEnabled)
     content = (platform === WINDOWS ? WINDOWS_AUTO_RESTART : LINUX_AUTO_RESTART).replace(

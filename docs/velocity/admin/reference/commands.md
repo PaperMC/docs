@@ -19,10 +19,10 @@ The `/velocity` command contains a number of subcommands to manage the proxy.
 If the user has the `velocity.command.plugins` permission, they can view all the plugins currently
 active on the proxy using `/velocity plugins`, including the name, authors, and version.
 
-### `/velocity version`
+### `/velocity info`
 
-If the user has the `velocity.command.info` permission (by default, this is granted to all users),
-they can view the version of Velocity running on the proxy.
+If the user has the `velocity.command.info` permission, they can view a few inforamtions about the Velocity instance
+such as the version of Velocity running on the proxy.
 
 ### `/velocity reload`
 

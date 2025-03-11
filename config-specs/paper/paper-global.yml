@@ -511,6 +511,11 @@ unsupported-settings:
     default: "false"
     description: >-
       This setting allows for exploits related to tripwire hook duping to be enabled.
+  update-equipment-on-player-actions:
+    vanilla: "false"
+    default: "true"
+    description: >-
+      This setting controls if equipment should be updated when handling certain player actions.
 watchdog:
   early-warning-delay:
     default: "10000"

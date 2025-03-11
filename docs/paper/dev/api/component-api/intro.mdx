@@ -61,7 +61,7 @@ final Component component = Component.text("Hello")
    the same component. Also note that Adventure
    Components are designed for use with static method imports
    to make code less verbose */
-final Component component = text()
+final Component component = Component.text()
     .content("Hello").color(color(0x13f832))
     .append(text(" world!", GREEN))
     .build();

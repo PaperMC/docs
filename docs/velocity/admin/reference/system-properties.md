@@ -1,11 +1,11 @@
 ---
 slug: /reference/system-properties
-description: Documentation for the system properties Velocity may check.
+description: Documentation for the system properties and environment variables Velocity may check.
 ---
 
 # Velocity System Properties
 
-These system properties can be set when you start your server allowing for the configuration of various settings.
+These system properties and environment variables can be set when you start your server allowing for the configuration of various settings.
 
 :::danger[Danger Ahead]
 
@@ -90,3 +90,10 @@ The default value shown may not be set for the property but will only be used by
 
 - **default**: `true`
 - **description**: Whether the client should disconnect on packet errors. Temporarily added in MC 1.20.5 and removed in 1.21.2 to help modded servers transition to this change.
+
+## List of environment variables
+
+#### VELOCITY_FORWARDING_SECRET
+
+- **default**: `unset`
+- **description**: Overrides the forwarding secret inside the [`forwarding-secret-file`](./configuration.md#root-section).

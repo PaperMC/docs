@@ -143,6 +143,10 @@ commands:
     description: >-
       Whether the /time command should act on all worlds or just the sender's
       current world
+  rideCommandAllowPlayerAsVehicle:
+    default: "false"
+    description: >-
+      Allow mounting entities to a player in the vanilla '/ride' command.
 console:
   enable-brigadier-completions:
     default: "true"
@@ -515,8 +519,8 @@ unsupported-settings:
     vanilla: "false"
     default: "true"
     description: >-
-      This setting controls if equipment should be updated when handling certain player 
-      actions. If set to false this will allow players to exploit attributes by e.g. 
+      This setting controls if equipment should be updated when handling certain player
+      actions. If set to false this will allow players to exploit attributes by e.g.
       switching equipment before using it.
 watchdog:
   early-warning-delay:

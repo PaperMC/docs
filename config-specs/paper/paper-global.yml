@@ -143,7 +143,7 @@ commands:
     description: >-
       Whether the /time command should act on all worlds or just the sender's
       current world
-  rideCommandAllowPlayerAsVehicle:
+  ride-command-allow-player-as-vehicle:
     default: "false"
     description: >-
       Allow mounting entities to a player in the vanilla '/ride' command.

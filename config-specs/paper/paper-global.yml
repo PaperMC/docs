@@ -146,7 +146,7 @@ commands:
   ride-command-allow-player-as-vehicle:
     default: "false"
     description: >-
-      Allow mounting entities to a player in the vanilla '/ride' command.
+      Allow mounting entities to a player in the Vanilla `/ride` command.
 console:
   enable-brigadier-completions:
     default: "true"

@@ -197,6 +197,8 @@ const paper: SidebarsConfig = {
             "dev/api/lifecycle",
             "dev/api/registries",
             "dev/api/recipes",
+            "dev/api/mob-goals",
+            "dev/api/entity-pathfinder",
             "dev/api/folia-support",
             "dev/api/roadmap",
           ],

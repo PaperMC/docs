@@ -4,6 +4,7 @@ description: Guide on custom arguments.
 ---
 
 import IceCreamPng from "./assets/ice-cream.png";
+import IceCreamInvalidPng from "./assets/ice-cream-invalid.png";
 
 # Custom Arguments
 Custom arguments are nothing more than a wrapper around existing argument types, which allow a developer to provide an argument with suggestions and reusable parsing in order to
@@ -273,4 +274,14 @@ Commands.literal("icecream")
 
 <div style={{display: 'inline-block', width: '100%'}}>
     <img src={IceCreamPng} style={{float: 'left', width: '100%'}}/>
+</div>
+
+## Note: Error handling during suggestions phase
+In case you are looking for the ability to make the client show currently typed input as red to display invalid input, it should be noted that this is **not possible** with
+custom arguments. The client is only able to validate arguments it knows about and there is no way to throw a `CommandSyntaxException` during the suggestions phase. The only way to
+achieve that is by using **literals**, but those cannot be modified dynamically during server runtime.
+
+
+<div style={{display: 'inline-block', width: '100%'}}>
+    <img src={IceCreamInvalidPng} style={{float: 'left', width: '100%'}}/>
 </div>

@@ -144,6 +144,7 @@ const paper: SidebarsConfig = {
                     "dev/api/command-api/basics/registration",
                     "dev/api/command-api/basics/requirements",
                     "dev/api/command-api/basics/argument-suggestions",
+                    "dev/api/command-api/basics/custom-arguments",
                   ],
                 },
                 {
@@ -176,7 +177,10 @@ const paper: SidebarsConfig = {
               type: "category",
               label: "Entity API",
               collapsed: true,
-              items: ["dev/api/entity-api/entity-teleport", "dev/api/entity-api/display-entities"],
+              items: [
+                "dev/api/entity-api/entity-teleport",
+                "dev/api/entity-api/display-entities",
+              ],
             },
             {
               type: "category",

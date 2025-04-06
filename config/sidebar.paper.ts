@@ -144,6 +144,7 @@ const paper: SidebarsConfig = {
                     "dev/api/command-api/basics/registration",
                     "dev/api/command-api/basics/requirements",
                     "dev/api/command-api/basics/argument-suggestions",
+                    "dev/api/command-api/basics/custom-arguments",
                   ],
                 },
                 {

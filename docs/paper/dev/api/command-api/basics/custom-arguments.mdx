@@ -192,6 +192,15 @@ default <S> T convert(final N nativeType, final S source) throws CommandSyntaxEx
 These methods work similarly to the `parse` methods, but they instead provide you with the parsed, native type instead of a `StringReader`.
 This reduced the need to manually do string reader operations and instead directly uses the native type's parsing rules.
 
+## Error handling during the suggestions phase
+In case you are looking for the ability to make the client show currently typed input as red to display invalid input, it should be noted that this is **not possible** with
+custom arguments. The client is only able to validate arguments it knows about and there is no way to throw a `CommandSyntaxException` during the suggestions phase. The only way to
+achieve that is by using **literals**, but those cannot be modified dynamically during server runtime.
+
+<div style={{display: 'inline-block', width: '100%'}}>
+    <img src={IceCreamInvalidPng} style={{float: 'left', width: '100%'}}/>
+</div>
+
 ## Example: Ice-cream argument
 A practical example on how you can use a custom argument to your advantage could be a classical enum-type argument. In our case, we use this
 `IceCreamFlavor` enum:
@@ -274,14 +283,4 @@ Commands.literal("icecream")
 
 <div style={{display: 'inline-block', width: '100%'}}>
     <img src={IceCreamPng} style={{float: 'left', width: '100%'}}/>
-</div>
-
-## Note: Error handling during suggestions phase
-In case you are looking for the ability to make the client show currently typed input as red to display invalid input, it should be noted that this is **not possible** with
-custom arguments. The client is only able to validate arguments it knows about and there is no way to throw a `CommandSyntaxException` during the suggestions phase. The only way to
-achieve that is by using **literals**, but those cannot be modified dynamically during server runtime.
-
-
-<div style={{display: 'inline-block', width: '100%'}}>
-    <img src={IceCreamInvalidPng} style={{float: 'left', width: '100%'}}/>
 </div>

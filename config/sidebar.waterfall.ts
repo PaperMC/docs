@@ -16,4 +16,4 @@ const waterfall: SidebarsConfig = {
   ],
 };
 
-export = waterfall;
+export default waterfall;

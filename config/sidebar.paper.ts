@@ -231,4 +231,4 @@ const paper: SidebarsConfig = {
   ],
 };
 
-export = paper;
+export default paper;

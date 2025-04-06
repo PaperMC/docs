@@ -51,4 +51,4 @@ const folia: SidebarsConfig = {
   ],
 };
 
-export = folia;
+export default folia;

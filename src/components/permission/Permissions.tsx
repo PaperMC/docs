@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 
 interface Command {
   /** The primary name of the command as registered by Minecraft code. */

@@ -49,6 +49,9 @@ importers:
       '@docusaurus/theme-search-algolia':
         specifier: 3.7.0
         version: 3.7.0(@algolia/client-search@5.23.2)(@docusaurus/faster@3.7.0(@docusaurus/types@3.7.0(@swc/core@1.11.16)(acorn@8.14.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)))(@mdx-js/react@3.1.0(@types/react@19.1.0)(react@19.1.0))(@rspack/core@1.0.14)(@swc/core@1.11.16)(@types/react@19.1.0)(acorn@8.14.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)(search-insights@2.16.2)(typescript@5.8.3)
+      '@docusaurus/utils':
+        specifier: ^3.7.0
+        version: 3.7.0(patch_hash=f58c5f64bd5f38c27e8b1ee41a5350dba46284b6c4e4e346ed6bb39ee48c14ec)(@swc/core@1.11.16)(acorn@8.14.1)(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       '@floating-ui/react':
         specifier: ^0.27.6
         version: 0.27.6(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -98,6 +101,9 @@ importers:
       '@fec/remark-a11y-emoji':
         specifier: 4.0.2
         version: 4.0.2
+      '@octokit/types':
+        specifier: ^13.10.0
+        version: 13.10.0
       '@types/is-ci':
         specifier: 3.0.4
         version: 3.0.4
@@ -1346,6 +1352,12 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@octokit/openapi-types@24.2.0':
+    resolution: {integrity: sha512-9sIH3nSUttelJSXUrmGzl7QUBFul0/mB8HRYl3fOlgHbIWG+WnYDXU3v/2zMtAvuzZ/ed00Ei6on975FhBfzrg==}
+
+  '@octokit/types@13.10.0':
+    resolution: {integrity: sha512-ifLaO34EbbPj0Xgro4G5lP5asESjwHracYJvVaPIyXMuiuXLlhic3S47cBdTb+jfODkTE5YtGCLt3Ay3+J97sA==}
 
   '@pnpm/config.env-replace@1.1.0':
     resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
@@ -8355,6 +8367,12 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@octokit/openapi-types@24.2.0': {}
+
+  '@octokit/types@13.10.0':
+    dependencies:
+      '@octokit/openapi-types': 24.2.0
 
   '@pnpm/config.env-replace@1.1.0': {}
 

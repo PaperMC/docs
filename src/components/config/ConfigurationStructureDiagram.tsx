@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, type JSX } from "react";
 import "@site/src/css/configuration-explorer-layout.css";
 // @ts-ignore
 import { Icon } from "@iconify/react";

@@ -1,8 +1,6 @@
 {
   "extends": "@docusaurus/tsconfig",
   "compilerOptions": {
-    "baseUrl": ".",
-    "moduleResolution": "Node16",
-    "lib": ["DOM", "ES2021"]
+    "baseUrl": "."
   }
 }

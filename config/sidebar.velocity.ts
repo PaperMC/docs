@@ -116,4 +116,4 @@ const velocity: SidebarsConfig = {
   ],
 };
 
-export = velocity;
+export default velocity;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 import Translate from "@docusaurus/Translate";
 import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDateTimeFormat } from "@docusaurus/theme-common/internal";

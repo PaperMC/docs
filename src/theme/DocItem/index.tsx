@@ -1,4 +1,4 @@
-import React from "react";
+import React, { type JSX } from "react";
 import { HtmlClassNameProvider } from "@docusaurus/theme-common";
 import { DocProvider } from "@docusaurus/plugin-content-docs/client";
 import DocItemMetadata from "@theme/DocItem/Metadata";
@@ -23,8 +23,8 @@ function EOLMessage(message: string): JSX.Element {
 export default function DocItem(props: Props): JSX.Element {
   const docHtmlClassName = `docs-doc-id-${props.content.metadata.id}`;
   const MDXComponent = props.content;
-  const eolPage = props.content?.frontMatter?.eol === true;
-  const eolMessage = props.content?.frontMatter?.eol_message || "";
+  const eolPage = props.content?.frontMatter?.["eol"] === true;
+  const eolMessage = props.content?.frontMatter?.["eol_message"] || "";
 
   return (
     <DocProvider content={props.content}>

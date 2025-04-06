@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, ReactNode } from "react";
+import React, { useState, useEffect, useRef, ReactNode, type JSX } from "react";
 import ReactMarkdown from "react-markdown";
 import style from "@site/src/css/markdown-styles.module.css";
 import yaml from "js-yaml";
@@ -119,7 +119,7 @@ const parseItalics = (key: string) => {
 };
 
 const parseDescriptionForVersioning = (description: String) => {
-  return VersionFormattedCode({ children: description, plainText: true });
+  return VersionFormattedCode({ children: description, plainText: true }) as string;
 };
 
 const YamlNodeWithDescription = ({

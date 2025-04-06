@@ -1,0 +1,3 @@
+patchedDependencies:
+  '@docusaurus/utils@3.7.0': patches/@docusaurus__utils@3.7.0.patch
+  '@docusaurus/plugin-content-docs@3.7.0': patches/@docusaurus__plugin-content-docs@3.7.0.patch

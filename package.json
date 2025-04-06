@@ -16,17 +16,17 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
-    "@docusaurus/core": "3.6.0",
-    "@docusaurus/faster": "^3.6.0",
-    "@docusaurus/plugin-content-docs": "3.6.0",
-    "@docusaurus/plugin-content-pages": "3.6.0",
-    "@docusaurus/plugin-debug": "3.6.0",
-    "@docusaurus/plugin-pwa": "3.6.0",
-    "@docusaurus/plugin-sitemap": "3.6.0",
-    "@docusaurus/theme-classic": "3.6.0",
-    "@docusaurus/theme-common": "3.6.0",
-    "@docusaurus/theme-mermaid": "3.6.0",
-    "@docusaurus/theme-search-algolia": "3.6.0",
+    "@docusaurus/core": "3.7.0",
+    "@docusaurus/faster": "^3.7.0",
+    "@docusaurus/plugin-content-docs": "3.7.0",
+    "@docusaurus/plugin-content-pages": "3.7.0",
+    "@docusaurus/plugin-debug": "3.7.0",
+    "@docusaurus/plugin-pwa": "3.7.0",
+    "@docusaurus/plugin-sitemap": "3.7.0",
+    "@docusaurus/theme-classic": "3.7.0",
+    "@docusaurus/theme-common": "3.7.0",
+    "@docusaurus/theme-mermaid": "3.7.0",
+    "@docusaurus/theme-search-algolia": "3.7.0",
     "@floating-ui/react": "^0.26.16",
     "@fontsource/jetbrains-mono": "5.0.20",
     "@iconify/react": "5.0.1",
@@ -41,9 +41,9 @@
     "react-markdown": "8.0.7"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.6.0",
-    "@docusaurus/tsconfig": "3.6.0",
-    "@docusaurus/types": "3.6.0",
+    "@docusaurus/module-type-aliases": "3.7.0",
+    "@docusaurus/tsconfig": "3.7.0",
+    "@docusaurus/types": "3.7.0",
     "@fec/remark-a11y-emoji": "4.0.2",
     "@types/is-ci": "3.0.4",
     "@types/js-yaml": "^4.0.9",
@@ -67,11 +67,5 @@
       "last 1 safari version"
     ]
   },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee",
-  "pnpm": {
-    "patchedDependencies": {
-      "@docusaurus/plugin-content-docs@3.6.0": "patches/@docusaurus__plugin-content-docs@3.6.0.patch",
-      "@docusaurus/utils@3.6.0": "patches/@docusaurus__utils@3.6.0.patch"
-    }
-  }
+  "packageManager": "pnpm@10.7.1+sha512.2d92c86b7928dc8284f53494fb4201f983da65f0fb4f0d40baafa5cf628fa31dae3e5968f12466f17df7e97310e30f343a648baea1b9b350685dafafffdf5808"
 }

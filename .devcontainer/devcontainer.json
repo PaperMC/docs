@@ -19,7 +19,7 @@
   "waitFor": "postCreateCommand",
   "features": {
     "node": {
-      "version": "20"
+      "version": "22"
     }
   }
 }

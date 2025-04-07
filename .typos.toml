@@ -8,6 +8,7 @@ locale = "en-us"
 
 [default.extend-identifiers]
 Spectre = "Spectre" # ignore error, the vulnerability is named Spectre
+PrioritisedThreadedTaskQueue = "PrioritisedThreadedTaskQueue" # allow canadian spelling in code
 
 [default.extend-words]
 accessorise = "accessorize"

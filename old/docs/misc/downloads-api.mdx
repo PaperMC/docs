@@ -1,0 +1,87 @@
+---
+slug: /downloads-api
+description: Paper provides a downloads API that you can use to access builds.
+---
+
+# Downloads API
+
+PaperMC provides a downloads API to facilitate automated downloads access. Full documentation can be
+found on the [Downloads API Docs](https://api.papermc.io/docs).
+
+:::danger
+
+We emphatically **do not recommend** using unstable builds or auto-updaters within production environments.
+
+:::
+
+:::note
+
+We require `jq` to be installed for the examples below. You can install it with `sudo apt-get install jq` on Debian/Ubuntu.
+
+:::
+
+## Getting the latest version
+
+```shell
+#!/usr/bin/env sh
+
+PROJECT="paper"
+
+LATEST_VERSION=$(curl -s https://api.papermc.io/v2/projects/${PROJECT} | \
+    jq -r '.versions[-1]')
+
+echo "Latest version is $LATEST_VERSION"
+```
+
+This will get the latest available Minecraft version for the given project.
+
+## Getting the latest stable build number
+
+<VersionFormattedCode language={"shell"}>
+```
+#!/usr/bin/env sh
+
+PROJECT="paper"
+MINECRAFT_VERSION="%%_MAJ_MIN_PAT_MC_%%"
+
+LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
+    jq '.builds | map(select(.channel == "default") | .build) | .[-1]')
+
+if [ "$LATEST_BUILD" != "null" ]; then
+    echo "Latest stable build is $LATEST_BUILD"
+else
+    echo "No stable build for version $MINECRAFT_VERSION found :("
+fi
+```
+</VersionFormattedCode>
+
+This will get the latest stable build for the given project and Minecraft version, if it's available.
+
+## Downloading the latest stable build
+
+<VersionFormattedCode language={"shell"}>
+```
+#!/usr/bin/env sh
+
+PROJECT="paper"
+MINECRAFT_VERSION="%%_MAJ_MIN_PAT_MC_%%"
+
+LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
+    jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
+
+if [ "$LATEST_BUILD" != "null" ]; then
+    JAR_NAME=${PROJECT}-${MINECRAFT_VERSION}-${LATEST_BUILD}.jar
+    PAPERMC_URL="https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}"
+
+    # Download the latest Paper version
+    curl -o server.jar $PAPERMC_URL
+    echo "Download completed"
+else
+    echo "No stable build for version $MINECRAFT_VERSION found :("
+fi
+```
+</VersionFormattedCode>
+
+This is the most common use case for the API. It will download the latest stable build for the given project and
+Minecraft version. You should always serve & use the stable builds. Experimental builds are prone to error and
+do not receive support.

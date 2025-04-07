@@ -25,16 +25,13 @@ jobs:
       - name: "install dependencies"
         run: "pnpm install"
       - name: "build"
-        run: "pnpm run build"
-        env:
-          CI_ENV: preview
-          GITHUB_PR_HEAD_OWNER: ${{ github.event.pull_request.head.repo.owner.login }}
+        run: "pnpm build"
       - name: "copy cloudflare configuration files to build directory"
         run: |
-          cp _headers build/
-          cp _redirects build/
+          cp _headers dist/
+          cp _redirects dist/
       - name: "upload build artifact"
         uses: "actions/upload-artifact@v4"
         with:
           name: "preview-build"
-          path: "build"
+          path: "dist"

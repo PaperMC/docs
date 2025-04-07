@@ -1,0 +1,27 @@
+---
+title: Welcome
+description: Documentation for all projects under the PaperMC umbrella, including Paper, Velocity and Folia.
+template: splash
+editUrl: false
+hero:
+  title: PaperMC Docs
+  tagline: Documentation for all projects under the PaperMC umbrella, including Paper, Velocity and Folia.
+---
+
+import { CardGrid } from "@astrojs/starlight/components";
+import LinkCard from "../../components/LinkCard.astro";
+
+<CardGrid stagger>
+  <LinkCard title="Paper" href="/paper">
+    High performance Minecraft server that aims to fix gameplay and mechanics inconsistencies.
+  </LinkCard>
+  <LinkCard title="Velocity" href="/velocity">
+    The modern, next-generation Minecraft server proxy.
+  </LinkCard>
+  <LinkCard title="Folia" href="/folia">
+    A fork of Paper which adds regionized multithreading to the dedicated server.
+  </LinkCard>
+  <LinkCard title="Waterfall" href="/waterfall">
+    A discontinued BungeeCord proxy fork that aimed to improve performance and stability.
+  </LinkCard>
+</CardGrid>

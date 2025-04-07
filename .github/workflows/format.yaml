@@ -23,4 +23,4 @@ jobs:
       - name: Install dependencies
         run: pnpm install
       - name: Check format
-        run: pnpm run format:check
+        run: pnpm format:check

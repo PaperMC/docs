@@ -23,7 +23,7 @@ jobs:
         id: "preview-build-artifact"
         with:
           name: "preview-build"
-          path: "build"
+          path: "dist"
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
       - name: "Deploy to Cloudflare Pages"

@@ -1,10 +1,23 @@
-/.idea
-/node_modules
-/build
-/.vscode
-/.docusaurus
-.cache-loader
-.DS_Store
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
 npm-debug.log*
-.pnp.*
-/.meta
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
+.DS_Store
+
+.idea/

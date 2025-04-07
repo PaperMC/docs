@@ -1,0 +1,28 @@
+---
+slug: /configuration
+description: Configuration guide for Waterfall.
+eol: true
+eol_message: We recommend you transition to [Velocity](https://papermc.io/software/velocity). For more information, see the [announcement](https://forums.papermc.io/threads/1088/).
+---
+
+import React from 'react';
+import ConfigDocBlock from '@site/src/components/config/ConfigDocBlock';
+import WaterfallConfigSpec from '!!raw-loader!@site/config-specs/waterfall/waterfall-config.yml';
+
+# Configuration
+
+This page details the various configuration settings exposed by Waterfall. These settings can be
+found in waterfall.yml.
+
+If you want information on settings in BungeeCord's config.yml, you should see its respective
+documentation pages.
+
+:::note
+
+The below YAML shows you the structure and default values for the global configuration.
+
+Click on a leaf node to view the description for that setting.
+
+:::
+
+<ConfigDocBlock data={WaterfallConfigSpec} />

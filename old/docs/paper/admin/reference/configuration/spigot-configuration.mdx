@@ -1,0 +1,26 @@
+---
+slug: /reference/spigot-configuration
+description: An explanation of Spigot's configuration file.
+---
+
+# Spigot Configuration
+
+import React from 'react';
+import ConfigDocBlock from '@site/src/components/config/ConfigDocBlock';
+import SpigotConfigSpec from '!!raw-loader!@site/config-specs/paper/spigot.yml';
+
+:::note
+
+The below YAML shows you the structure and default values for `spigot.yml`
+
+Click on a leaf node to view the description for that setting.
+
+:::
+
+:::note
+
+To override a per-world option, create a new key under `world-settings` with the level-name (name of the folder).
+
+:::
+
+<ConfigDocBlock data={SpigotConfigSpec}/>

@@ -1,0 +1,40 @@
+---
+title: Vanilla-like experience
+description: This page lists all changes that result in a different experience than Vanilla.
+slug: paper/vanilla
+---
+
+Due to the way the Bukkit API is implemented in Paper, the gameplay experience between Vanilla and Paper can have inconsistencies.
+This can be furthered by efforts to fix bugs present in Vanilla Minecraft.
+Whilst many people may not notice the inconsistencies, there are situations where they become problematic.
+One example is that technical players may struggle getting their machines to work like they should.
+This page aims to provide a starting point for players who want to get as close to Vanilla as possible.
+
+:::note
+
+This page is inspired by [Earthcomputer's collection](https://gist.github.com/Earthcomputer/2296da33b8cc91dba81b48103c0e1fe3) of Vanilla breaking changes.
+
+:::
+
+:::caution
+
+This guide will only help you to get as close to Vanilla as possible.
+Unfortunately, it currently is not possible to get a 100% Vanilla experience in Paper.
+
+:::
+## server.properties
+{/* <ConfigDocBlock data={ServerProperties} showVanillaValues={true}/> */}
+
+## paper-world-defaults.yml
+{/* <ConfigDocBlock data={VanillaWorldDefaults} showVanillaValues={true}/> */}
+
+## paper-global.yml
+{/* <ConfigDocBlock data={VanillaGlobalDefaults} showVanillaValues={true}/> */}
+
+## spigot.yml
+{/* <ConfigDocBlock data={SpigotChanges} showVanillaValues={true}/> */}
+
+## Further considerations
+
+* `settings.timeout-time` in `spigot.yml` mirrors the watchdog setting in the `server.properties` file. Keep in mind that the `spigot.yml` setting is in seconds while the default setting is in milliseconds.
+* `watchdog` in `paper-global.yml` controls the watchdog early warning. While this is only a warning, you might want to disable it as it can get annoying.

@@ -1,0 +1,53 @@
+---
+import config from "virtual:starlight/user-config";
+
+const { entry, lang, siteTitle } = Astro.locals.starlightRoute;
+const { data } = entry;
+
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const canonicalImage = Astro.site
+  ? new URL("/assets/icons/icon-512x512.png", Astro.site)
+  : undefined;
+const description = data.description || config.description;
+
+const base = stripTrailingSlash(import.meta.env.BASE_URL);
+
+function stripTrailingSlash(href: string) {
+  if (href[href.length - 1] === "/") {
+    href = href.slice(0, -1);
+  }
+  return href;
+}
+function stripLeadingSlash(href: string) {
+  if (href[0] === "/") {
+    href = href.slice(1);
+  }
+  return href;
+}
+function fileWithBase(path: string) {
+  path = stripLeadingSlash(path);
+  return path ? base + "/" + path : base;
+}
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{data.title} {config.titleDelimiter} {siteTitle}</title>
+{canonical && <link rel="canonical" href={canonical.href} />}
+<meta property="generator" content={Astro.generator} />
+<link rel="shortcut icon" href={fileWithBase(config.favicon.href)} type={config.favicon.type} />
+<meta property="og:title" content={`${data.title} ${config.titleDelimiter} ${siteTitle}`} />
+<meta property="og:type" content="article" />
+{canonical && <meta property="og:url" content={canonical.href} />}
+<meta property="og:locale" content={lang} />
+<meta property="og:description" content={description} />
+<meta property="description" content={description} />
+<link rel="sitemap" href={fileWithBase("/sitemap-index.xml")} />
+{canonicalImage && <meta property="og:image" content={canonicalImage.href} />}
+{canonicalImage && <meta name="twitter:image" content={canonicalImage.href} />}
+<!-- TODO: re-enable tracking -->
+<!-- <script
+  defer
+  src="https://trk.papermc.io/api/init"
+  data-website-id="f93a0860-1253-4868-b27a-08208a36cea7"
+></script> -->

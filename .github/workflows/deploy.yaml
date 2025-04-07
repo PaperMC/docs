@@ -27,13 +27,11 @@ jobs:
       - name: "install dependencies"
         run: "pnpm install"
       - name: "build"
-        run: "pnpm run build"
-        env:
-          CI_ENV: production
+        run: "pnpm build"
       - name: "copy cloudflare configuration files to build directory"
         run: |
-          cp _headers build/
-          cp _redirects build/
+          cp _headers dist/
+          cp _redirects dist/
       - name: "publish (push)"
         id: "cloudflare-publish"
         uses: "AdrianGonz97/refined-cf-pages-action@v1"
@@ -42,5 +40,5 @@ jobs:
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: "papermc-docs"
           deploymentName: "Production"
-          directory: "build"
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          directory: "dist"
+          githubToken: ${{ secrets.GITHUB_TOKEN }}

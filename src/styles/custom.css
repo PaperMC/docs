@@ -1,0 +1,49 @@
+/* poppins-latin-500-normal - defined as 600, because actual 600 is too bold */
+@font-face {
+  font-family: "Poppins";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 600;
+  src:
+    url(@fontsource/poppins/files/poppins-latin-500-normal.woff2) format("woff2"),
+    url(@fontsource/poppins/files/poppins-latin-500-normal.woff) format("woff");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  --sl-font: Poppins;
+  --sl-font-mono: "JetBrains Mono";
+}
+
+/* Dark mode colors. */
+:root {
+  --sl-color-accent-low: #102a59;
+  --sl-color-accent: #3b82f6;
+  --sl-color-accent-high: #a5c4ff;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #d1d5db;
+  --sl-color-gray-2: #9ca3af;
+  --sl-color-gray-3: #6b7280;
+  --sl-color-gray-4: #3f4347;
+  --sl-color-gray-5: #2a2c2e;
+  --sl-color-gray-6: #181a1b;
+  --sl-color-black: #111111;
+}
+
+/* Light mode colors. */
+:root[data-theme="light"] {
+  --sl-color-accent-low: #dbeafe;
+  --sl-color-accent: #3b82f6;
+  --sl-color-accent-high: #1e40af;
+  --sl-color-white: #111111;
+  --sl-color-gray-1: #181a1b;
+  --sl-color-gray-2: #2a2c2e;
+  --sl-color-gray-3: #3f4347;
+  --sl-color-gray-4: #6b7280;
+  --sl-color-gray-5: #9ca3af;
+  --sl-color-gray-6: #d1d5db;
+  --sl-color-gray-7: #f3f4f6;
+  --sl-color-black: #ffffff;
+}

@@ -1,15 +1,16 @@
 ---
-slug: /getting-started
+title: Getting started
+slug: velocity/getting-started
+sidebar:
+  order: 1
 ---
-
-# Getting Started
 
 This page covers how to install and set up a minimal configuration of Velocity.
 
 ## Installing Java
 
 Velocity is written in Java, so if you do not already have Java installed, you will need to install
-it before you continue. Velocity requires Java <Property name="VELOCITY_JAVA_MIN" /> or newer. See our
+it before you continue. Velocity requires Java 17 or newer. See our
 [Java installation guide](/misc/java-install) for detailed instructions.
 
 ## Downloading Velocity
@@ -94,7 +95,7 @@ We now need to configure each server to accept connections from the proxy.
 
 Velocity is a highly configurable proxy. While most users will not need to change everything in the
 config, there are tons of options covered
-[on the configuration reference page](../reference/configuration.md) along with an explanation on
+[on the configuration reference page](/velocity/configuration) along with an explanation on
 how each option works. However, in this section we will do the bare minimum to get the proxy up and
 running.
 
@@ -139,5 +140,5 @@ your setup.
 Open the `server.properties` file for each of your servers and set the `online-mode` setting to
 `false`. This allows Velocity to connect to your server. Once you're done, restart your server.
 While Velocity is now ready for use, you will almost certainly want to
-[secure your servers](../how-to/security.md) and
-[configure player information forwarding](forwarding.md).
+[secure your servers](/velocity/security) and
+[configure player information forwarding](/velocity/player-information-forwarding).

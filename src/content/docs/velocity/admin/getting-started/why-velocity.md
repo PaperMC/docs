@@ -1,9 +1,8 @@
 ---
-slug: /why-velocity
+title: What does Velocity do for me?
 description: An explanation for why you should run Velocity.
+slug: velocity/why-velocity
 ---
-
-# What Does Velocity Do For Me?
 
 We believe that Velocity is one of the best proxies for _Minecraft_ around, and there's not much
 that can top it. However, we do diverge from more established, mainstream solutions in some

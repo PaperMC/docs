@@ -1,9 +1,8 @@
 ---
-slug: /security
+title: Securing your servers
 description: An explanation of how to secure your servers.
+slug: velocity/security
 ---
-
-# Securing Your Servers
 
 It is vital that you secure your backend servers. As part of setting up Velocity, you will put your
 server into offline mode, which means in theory, someone could impersonate any player on your

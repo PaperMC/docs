@@ -1,15 +1,14 @@
 ---
-slug: /reference/paper-plugins
+title: Paper plugins
 description: A guide to the ins and outs of Paper plugins.
+slug: paper/reference/paper-plugins
 ---
-
-# Paper Plugins
 
 This documentation page serves to explain all the new semantics and possible confusions that Paper plugins may introduce.
 
 :::note
 
-Developers can get more information on Paper plugins [here](docs/paper/dev/getting-started/paper-plugins.mdx).
+Developers can get more information on Paper plugins [here](/paper/dev/getting-started/paper-plugins).
 
 :::
 
@@ -18,7 +17,7 @@ Developers can get more information on Paper plugins [here](docs/paper/dev/getti
 Paper plugins are plugins which are loaded by Paper's new plugin loading framework. Paper plugins are used by developers to
 take advantage of modern systems Mojang provides, for example, datapacks.
 
-![Plugin List](assets/plugin-list.png)
+![Plugin List](./assets/plugin-list.png)
 
 ## What is the difference?
 
@@ -29,18 +28,18 @@ Paper plugins only support being loaded by Paper's Plugin Loader and may use new
 
 ### How do I add Paper plugins?
 
-Paper plugins are added the same as Bukkit plugins, therefore, you can follow [this guide](docs/paper/admin/getting-started/adding-plugins.md).
+Paper plugins are added the same as Bukkit plugins, therefore, you can follow [this guide](/paper/adding-plugins).
 
 ### Cyclic plugin loading
 
 With the introduction of Paper plugins, Paper introduces a new plugin loader that fixes some odd issues.
-However, as a result, this now causes [cyclic loading](docs/paper/dev/getting-started/paper-plugins.mdx#cyclic-plugin-loading) between plugins to no longer be supported.
+However, as a result, this now causes [cyclic loading](/paper/dev/getting-started/paper-plugins#cyclic-plugin-loading) between plugins to no longer be supported.
 
 If Paper detects a loop, your server will be shut down with an error.
 
 :::danger[Legacy]
 
-If your server **requires** this circular loading, you can enable this by adding the [`-Dpaper.useLegacyPluginLoading=true`](system-properties.md#paperuselegacypluginloading) startup flag.
+If your server **requires** this circular loading, you can enable this by adding the [`-Dpaper.useLegacyPluginLoading=true`](/paper/reference/system-properties#paperuselegacypluginloading) startup flag.
 Please note that this may not be supported in the future.
 
 :::

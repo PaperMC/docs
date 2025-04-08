@@ -20,6 +20,7 @@ export default defineConfig({
       social: [
         { icon: "github", label: "GitHub", href: "https://github.com/PaperMC" },
         { icon: "discord", label: "Discord", href: "https://discord.gg/PaperMC" },
+        { icon: "seti:java", label: "Javadoc", href: "https://jd.papermc.io" },
       ],
       lastUpdated: true,
       editLink: {
@@ -35,6 +36,7 @@ export default defineConfig({
       components: {
         Head: "./src/components/overrides/Head.astro",
         Sidebar: "./src/components/overrides/Sidebar.astro",
+        Footer: "./src/components/overrides/Footer.astro",
       },
       plugins: [
         // starlightLinksValidator(),
@@ -53,7 +55,29 @@ export default defineConfig({
                       autogenerate: { directory: "paper/admin/getting-started" },
                     },
                     { label: "How-to guides", autogenerate: { directory: "paper/admin/how-to" } },
+                    { label: "Reference", autogenerate: { directory: "paper/admin/reference" } },
                     { label: "Miscellaneous", autogenerate: { directory: "paper/admin/misc" } },
+                  ],
+                },
+              ],
+            },
+            {
+              id: "velocity",
+              label: "Velocity",
+              link: "/velocity/",
+              items: [
+                {
+                  label: "Administration",
+                  items: [
+                    {
+                      label: "Getting started",
+                      autogenerate: { directory: "velocity/admin/getting-started" },
+                    },
+                    {
+                      label: "How-to guides",
+                      autogenerate: { directory: "velocity/admin/how-to" },
+                    },
+                    { label: "Reference", autogenerate: { directory: "velocity/admin/reference" } },
                   ],
                 },
               ],
@@ -63,6 +87,7 @@ export default defineConfig({
             // pages excluded from sidebars
             topics: {
               paper: ["/paper/admin"],
+              velocity: ["/velocity/admin"],
             },
           }
         ),

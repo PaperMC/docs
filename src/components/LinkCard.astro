@@ -6,15 +6,17 @@ interface Props {
   icon?: ComponentProps<typeof Icon>["name"];
   title: string;
   href: string;
+  destructive?: boolean;
 }
 
-const { icon, title, href } = Astro.props;
+const { icon, title, href, destructive } = Astro.props;
 ---
 
-<article class="card sl-flex">
+<article class:list={["card", "sl-flex", destructive && "card-destructive"]}>
   <a {href} class="title sl-flex">
     {icon && <Icon name={icon} class="icon" size="1.333em" />}
     <span set:html={title} />
+    {destructive && <Icon name="warning" />}
   </a>
   <div class="body"><slot /></div>
 </article>
@@ -48,11 +50,13 @@ const { icon, title, href } = Astro.props;
   .title {
     font-weight: 600;
     font-size: var(--sl-text-h4);
-    color: var(--sl-color-white);
     line-height: var(--sl-line-height-headings);
     gap: 1rem;
     align-items: center;
     text-decoration: none;
+  }
+  .card-destructive .title {
+    color: var(--sl-color-red);
   }
   .card .icon {
     border: 1px solid var(--sl-card-border);

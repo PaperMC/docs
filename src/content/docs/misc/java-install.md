@@ -1,10 +1,10 @@
 ---
-title: Installing or Updating Java
+title: Installing or updating Java
 description: How to install or update to Java 21 on Linux (apt/rpm), Windows, or Mac.
-toc_max_heading_level: 5
+slug: misc/java-install
 ---
 
-Installing Java is a critical first step to using or developing plugins for Paper and Velocity. 
+Installing Java is a critical first step to using or developing plugins for Paper and Velocity.
 This guide will walk you through the recommended installation steps for most major
 platforms.
 
@@ -126,13 +126,13 @@ version. These instructions will not apply.
 If you have started a Paper server with an incorrect Java version, Pterodactyl will automatically
 prompt you to update like this:
 
-![Pterodactyl Automatic Prompt](pterodactyl-prompt.png)
+![Pterodactyl Automatic Prompt](./assets/pterodactyl-prompt.png)
 
 If this does not show up for you, the Java version can be manually changed. Navigate to the
 "Startup" tab of your server, select `Java 21` from the "Docker Image"
 dropdown as shown in the image below.
 
-![Pterodactyl Manual Java Version Change](pterodactyl-manual.png)
+![Pterodactyl Manual Java Version Change](./assets/pterodactyl-manual.png)
 
 :::note
 
@@ -142,7 +142,7 @@ If you don't see `Java 21` in the dropdown, an administrator account is required
 
 The Verifying Installation section does not apply for Pterodactyl.
 
-## Verifying Installation
+## Verifying installation
 
 Now that you have installed Java 21, run this command in your terminal to ensure the process was
 successful.

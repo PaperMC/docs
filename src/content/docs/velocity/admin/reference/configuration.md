@@ -1,9 +1,8 @@
 ---
-slug: /configuration
+title: Configuring Velocity
 description: Velocity is designed to be easy to configure and this guide will walk you through how to do so.
+slug: velocity/configuration
 ---
-
-# Configuring Velocity
 
 Velocity is designed to be easy to configure and set up. Every Velocity file is stored in
 `velocity.toml`, located in the directory where you started the proxy. Velocity uses the
@@ -40,7 +39,7 @@ These settings mostly cover the basic, most essential settings of the proxy.
 | `show-max-players`                 | Integer | This allows you to customize the number of "maximum" players in the player's server list. Note that Velocity doesn't have a maximum number of players it supports.                                                                                                 |
 | `online-mode`                      | Boolean | Should we authenticate players with Mojang? By default, this is on.                                                                                                                                                                                                |
 | `force-key-authentication`         | Boolean | Should the proxy enforce the new public key security standard? By default, this is on.                                                                                                                                                                             |
-| `player-info-forwarding-mode`      | Enum    | See [Configuring player information forwarding](../getting-started/forwarding.md) for more information.                                                                                                                                                            |
+| `player-info-forwarding-mode`      | Enum    | See [Configuring player information forwarding](/velocity/player-information-forwarding) for more information.                                                                                                                                                     |
 | `prevent-client-proxy-connections` | Boolean | If client's ISP/AS sent from this proxy is different from the one from Mojang's authentication server, the player is kicked. This disallows some VPN and proxy connections but is a weak form of protection.                                                       |
 | `forwarding-secret-file`           | String  | The name of the file in which the forwarding secret is stored. This secret is used to ensure that player info forwarded by Velocity comes from your proxy and not from someone pretending to run Velocity. See the "Player info forwarding" section for more info. |
 | `announce-forge`                   | Boolean | This setting determines whether Velocity should present itself as a Forge/FML-compatible server. By default, this is disabled.                                                                                                                                     |

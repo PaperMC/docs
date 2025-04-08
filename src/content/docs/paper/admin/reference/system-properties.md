@@ -1,9 +1,8 @@
 ---
-slug: /reference/system-properties
+title: System properties
 description: Documentation for the system properties and environment variables Paper may check.
+slug: paper/reference/system-properties
 ---
-
-# Paper System Properties
 
 These system properties and environment variables can be set when you start your server allowing for the configuration of various settings.
 
@@ -148,7 +147,7 @@ It also remaps plugin CB calls to remove the version information.
 #### Paper.WorkerThreadCount
 
 - **default**: half of available physical (**not logical**) cores or `1` if 3 or fewer cores are available
-- **description**: Sets the number of worker threads to use for chunk loading. See [here](./configuration/global-configuration.mdx#chunk_system_worker_threads) for more info.
+- **description**: Sets the number of worker threads to use for chunk loading. See [here](/paper/reference/global-configuration#chunk_system_worker_threads) for more info.
 
 #### Paper.excessiveTELimit
 
@@ -198,7 +197,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.useLegacyPluginLoading
 
 - **default**: `false`
-- **description**: Allows cyclic plugin loading. See [here](paper-plugins.md#cyclic-plugin-loading) for more info.
+- **description**: Allows cyclic plugin loading. See [here](/paper/reference/paper-plugins#cyclic-plugin-loading) for more info.
 
 #### Paper.DisableCommandConverter
 
@@ -213,7 +212,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.disablePluginRemapping
 
 - **default**: `false`
-- **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](../../dev/getting-started/userdev.mdx#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
+- **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](/paper/dev/getting-started/userdev#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
 
 #### paper.preferSparkPlugin
 
@@ -240,4 +239,4 @@ It also remaps plugin CB calls to remove the version information.
 #### PAPER_VELOCITY_SECRET
 
 - **default**: `unset`
-- **description**: Overrides the [`proxies.velocity.secret`](./configuration/global-configuration.mdx#proxies_velocity_secret) global configuration option.
+- **description**: Overrides the [`proxies.velocity.secret`](/paper/reference/global-configuration#proxies_velocity_secret) global configuration option.

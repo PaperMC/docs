@@ -1,11 +1,11 @@
 ---
-slug: /getting-started
+title: Getting started
 description: How to get started with running Waterfall.
-eol: true
-eol_message: We recommend you transition to [Velocity](https://papermc.io/software/velocity). For more information, see the [announcement](https://forums.papermc.io/threads/1088/).
+slug: waterfall/getting-started
+banner:
+  destructive: true
+  content: We recommend you transition to <a href="https://papermc.io/software/velocity">Velocity</a>. For more information, see the <a href="https://forums.papermc.io/threads/1088/">announcement</a>.
 ---
-
-# Getting Started
 
 ## What is Waterfall?
 
@@ -54,7 +54,7 @@ java -Xms512M -Xmx512M -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimen
 
 The amount of memory can be set by changing the numbers in the `-Xms` and `-Xmx` flags.
 
-To configure your proxy, see the [configuration](configuration.mdx) page.
+To configure your proxy, see the [configuration](/waterfall/configuration) page.
 
 ## Updating the proxy
 

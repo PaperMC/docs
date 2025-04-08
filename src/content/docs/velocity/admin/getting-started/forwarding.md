@@ -1,9 +1,8 @@
 ---
-slug: /player-information-forwarding
+title: Configuring player information forwarding
 description: How to configure information forwarding on Velocity.
+slug: velocity/player-information-forwarding
 ---
-
-# Configuring player information forwarding
 
 Velocity supports forwarding information about your players to your servers, such as IP addresses,
 UUIDs and skins. Velocity supports three forwarding formats:
@@ -80,7 +79,7 @@ Velocity modern forwarding with a modded server using Forge 1.14 or higher.
 :::danger
 
 Legacy forwarding is **fundamentally insecure**. If you must use it, you should understand
-[how to secure your server properly](../how-to/security.md). That page reviews all the possible
+[how to secure your server properly](/velocity/security). That page reviews all the possible
 options to secure your server so that nothing aside from the proxy can connect to your server.
 
 :::

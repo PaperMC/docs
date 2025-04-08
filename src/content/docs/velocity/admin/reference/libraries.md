@@ -1,9 +1,8 @@
 ---
-slug: /credits
+title: Libraries used
 description: The credits for all the different libraries used by Velocity.
+slug: velocity/credits
 ---
-
-# Libraries Used
 
 Velocity uses a number of open-source libraries:
 

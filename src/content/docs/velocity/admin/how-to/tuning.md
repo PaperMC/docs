@@ -1,9 +1,8 @@
 ---
-slug: /tuning
+title: Tuning Velocity
 description: How to tune Velocity to allow for even better performance.
+slug: velocity/tuning
 ---
-
-# Tuning Velocity
 
 Velocity comes with good performance out of the box. We go in deep, starting from smart algorithmic
 choices, making strategic usage of native libraries, all the way to the JVM level, optimizing the

@@ -1,9 +1,8 @@
 ---
-slug: /reference/system-properties
+title: System properties
 description: Documentation for the system properties and environment variables Velocity may check.
+slug: velocity/reference/system-properties
 ---
-
-# Velocity System Properties
 
 These system properties and environment variables can be set when you start your server allowing for the configuration of various settings.
 
@@ -101,4 +100,4 @@ The default value shown may not be set for the property but will only be used by
 #### VELOCITY_FORWARDING_SECRET
 
 - **default**: `unset`
-- **description**: Overrides the forwarding secret inside the [`forwarding-secret-file`](./configuration.md#root-section).
+- **description**: Overrides the forwarding secret inside the [`forwarding-secret-file`](/velocity/configuration#root-section).

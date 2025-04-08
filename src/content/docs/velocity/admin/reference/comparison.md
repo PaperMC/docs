@@ -1,9 +1,8 @@
 ---
-slug: /comparisons-to-other-proxies
+title: Comparing with other proxies
 description: A comparison of Velocity to other proxies.
+slug: velocity/comparisons-to-other-proxies
 ---
-
-# Comparing With Other Proxies
 
 Presumably, you have learned about what Velocity can do for you. But how does it stack up against
 other solutions out there? We're trying to convince you to use Velocity, after all, so this document
@@ -72,7 +71,7 @@ Meet [Hyrum's Law](https://www.hyrumslaw.com/):
 
 Here's Hyrum's law in comic format, in case that eases getting the point across:
 
-> [![xkcd #1172](https://imgs.xkcd.com/comics/workflow.png)](https://xkcd.com/1172/)  
+> [![xkcd #1172](https://imgs.xkcd.com/comics/workflow.png)](https://xkcd.com/1172/)
 > ["Workflow"](https://xkcd.com/1172/) from [xkcd](https://xkcd.com/) by Randal Munroe,
 > [licensed](https://xkcd.com/license.html) under
 > [CC BY-NC 2.5](https://creativecommons.org/licenses/by-nc/2.5/)

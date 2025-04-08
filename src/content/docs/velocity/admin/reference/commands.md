@@ -1,9 +1,8 @@
 ---
-slug: /built-in-commands
+title: Built-in commands
 description: A list of the built-in commands with explanations.
+slug: velocity/built-in-commands
 ---
-
-# Built-In Commands
 
 Velocity includes a few commands in the core of the proxy by default. These commands were chosen
 based on how generally useful they are to most users.

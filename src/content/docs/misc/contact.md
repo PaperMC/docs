@@ -1,9 +1,8 @@
 ---
-slug: /contact
+title: Contact us
 description: There are many ways to contact us, see here for more information.
+slug: misc/contact
 ---
-
-# Contact Us
 
 ## Discord
 

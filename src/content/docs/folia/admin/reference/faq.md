@@ -1,10 +1,8 @@
 ---
-slug: /faq
-title: FAQ
+title: Frequently asked questions
 description: Questions frequently asked by our community, answered by us!
+slug: folia/faq
 ---
-
-# FAQ
 
 ## What server types can benefit from Folia?
 Server types that naturally spread players out,

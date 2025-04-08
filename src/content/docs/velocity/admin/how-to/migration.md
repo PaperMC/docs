@@ -1,9 +1,8 @@
 ---
-slug: /migration
+title: Migration guide
 description: How to migrate your proxy between different Velocity versions.
+slug: velocity/migration
 ---
-
-# Migration Guide
 
 New to Velocity, or upgrading to a new version of Velocity? This page will briefly explore what you
 need to be aware of for a successful migration.

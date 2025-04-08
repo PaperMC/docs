@@ -3,13 +3,18 @@ title: Welcome
 description: Documentation for all projects under the PaperMC umbrella, including Paper, Velocity and Folia.
 template: splash
 editUrl: false
+lastUpdated: false
 hero:
   title: PaperMC Docs
   tagline: Documentation for all projects under the PaperMC umbrella, including Paper, Velocity and Folia.
+  image:
+    alt: PaperMC logo
+    file: /public/assets/icons/icon-512x512.png
 ---
 
 import { CardGrid } from "@astrojs/starlight/components";
-import LinkCard from "../../components/LinkCard.astro";
+import { ContributorList } from "starlight-contributor-list";
+import LinkCard from "/src/components/LinkCard.astro";
 
 <CardGrid stagger>
   <LinkCard title="Paper" href="/paper">
@@ -25,3 +30,13 @@ import LinkCard from "../../components/LinkCard.astro";
     A discontinued BungeeCord proxy fork that aimed to improve performance and stability.
   </LinkCard>
 </CardGrid>
+
+<br />
+
+## [Contribute](https://github.com/PaperMC/docs)
+
+We’d like to extend a warm thank you to all the contributors who have helped bring this documentation site to life.
+Whether you've written code, submitted feedback, fixed a typo, or shared your expertise - every contribution is deeply appreciated.
+This is very much a team effort, and we’re grateful to have you with us on the journey!
+
+<ContributorList githubRepo="PaperMC/docs" />

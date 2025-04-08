@@ -1,10 +1,8 @@
 ---
-slug: /reference/overview
 title: Overview
 description: An overview of how Folia works.
+slug: folia/reference/overview
 ---
-
-# Project overview
 
 Described in this document is the abstract overview
 of changes done by Folia. Folia splits the chunks within all loaded worlds

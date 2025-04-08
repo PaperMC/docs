@@ -84,6 +84,17 @@ export default defineConfig({
               ],
             },
             {
+              id: "folia",
+              label: "Folia",
+              link: "/folia/",
+              items: [
+                {
+                  label: "Administration",
+                  items: [{ label: "Reference", autogenerate: { directory: "folia/admin/reference" } }],
+                },
+              ],
+            },
+            {
               id: "waterfall",
               label: "Waterfall",
               link: "/waterfall/",
@@ -95,6 +106,7 @@ export default defineConfig({
             topics: {
               paper: ["/paper/admin"],
               velocity: ["/velocity/admin"],
+              folia: ["/folia/admin"],
               waterfall: ["/waterfall"],
             },
           }

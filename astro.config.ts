@@ -37,6 +37,7 @@ export default defineConfig({
         Head: "./src/components/overrides/Head.astro",
         Sidebar: "./src/components/overrides/Sidebar.astro",
         Footer: "./src/components/overrides/Footer.astro",
+        Banner: "./src/components/overrides/Banner.astro",
       },
       plugins: [
         // starlightLinksValidator(),
@@ -82,12 +83,19 @@ export default defineConfig({
                 },
               ],
             },
+            {
+              id: "waterfall",
+              label: "Waterfall",
+              link: "/waterfall/",
+              items: ["waterfall/getting-started", "waterfall/configuration"],
+            },
           ],
           {
             // pages excluded from sidebars
             topics: {
               paper: ["/paper/admin"],
               velocity: ["/velocity/admin"],
+              waterfall: ["/waterfall"],
             },
           }
         ),

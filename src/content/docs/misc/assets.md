@@ -1,9 +1,8 @@
 ---
-slug: /assets
+title: Art assets
 description: The official PaperMC and Velocity logomarks and the terms under which you may use them.
+slug: misc/assets
 ---
-
-# Art Assets
 
 This page provides the official PaperMC and Velocity logomarks and the terms under which you may use them.
 
@@ -35,7 +34,7 @@ You may not:
 - Sell the PaperMC logomark on its own or as part of other products without explicit permission.
 - Alter the transparency of any elements within the PaperMC logomark.
 
-![PaperMC logomark](papermc-logomark-512.png)
+![PaperMC logomark](./assets/papermc-logomark-512.png)
 
 ## Velocity
 
@@ -47,4 +46,4 @@ endorses some product or service. For instance, you may advertise a plugin as be
 compatible with Velocity, but you may not make the Velocity logo prominent in that
 advertising.
 
-![Velocity logomark](velocity-logomark-512.png)
+![Velocity logomark](./assets/velocity-logomark-512.png)

@@ -1,6 +1,7 @@
 ---
-title: Hangar Auto-Publishing
+title: Hangar auto-publishing
 description: How to automatically publish your plugin to Hangar on commits.
+slug: misc/hangar-publishing
 ---
 
 If you want to automatically publish your plugin to [Hangar](https://hangar.papermc.io/) on commits, you can use

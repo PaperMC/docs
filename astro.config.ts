@@ -100,6 +100,22 @@ export default defineConfig({
               link: "/waterfall/",
               items: ["waterfall/getting-started", "waterfall/configuration"],
             },
+            {
+              id: "misc",
+              label: "Miscellaneous",
+              link: "/misc/",
+              items: [
+                "misc/assets",
+                "misc/contact",
+                "misc/downloads-api",
+                "misc/hangar-publishing",
+                "misc/java-install",
+                {
+                  label: "Tools",
+                  items: ["misc/tools/minimessage-web-editor"],
+                },
+              ],
+            },
           ],
           {
             // pages excluded from sidebars
@@ -108,6 +124,7 @@ export default defineConfig({
               velocity: ["/velocity/admin"],
               folia: ["/folia/admin"],
               waterfall: ["/waterfall"],
+              misc: ["/misc", "/misc/tools"],
             },
           }
         ),

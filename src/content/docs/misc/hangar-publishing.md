@@ -34,7 +34,7 @@ are able to convert the example code.
 The builds script below will publish non-release builds under a `Snapshot` channel. You need to create this channel in
 your Hangar project's channel page first.
 
-![Create a Snapshot channel](https://i.imgur.com/p4UEIeJ.png)
+![Create a Snapshot channel](./assets/hangar-create-snapshot-channel.png)
 
 ### Adding the `HANGAR_API_TOKEN` repository secret
 
@@ -46,7 +46,7 @@ The GitHub Actions workflow provided uses a repository secret to store your Hang
 then click on "Actions" under the Security tab and click the "New repository secret" button. Name the
 secret `HANGAR_API_TOKEN` and paste the Hangar API token from the previous step into the Secret field.
 
-![Action secrets](https://i.imgur.com/l11Bnx5.png)
+![Action secrets](./assets/github-secrets-actions.png)
 
 ## Project files
 

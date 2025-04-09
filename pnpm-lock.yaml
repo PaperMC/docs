@@ -4,13 +4,18 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@astrojs/starlight@0.33.0':
+    hash: 0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef
+    path: patches/@astrojs__starlight@0.33.0.patch
+
 importers:
 
   .:
     dependencies:
       '@astrojs/starlight':
         specifier: ^0.33.0
-        version: 0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
+        version: 0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
       '@fontsource/jetbrains-mono':
         specifier: ^5.2.5
         version: 5.2.5
@@ -25,16 +30,16 @@ importers:
         version: 0.34.0
       starlight-contributor-list:
         specifier: ^0.3.0
-        version: 0.3.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
+        version: 0.3.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
       starlight-links-validator:
         specifier: ^0.15.0
-        version: 0.15.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
+        version: 0.15.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
       starlight-sidebar-topics:
         specifier: ^0.6.0
-        version: 0.6.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
+        version: 0.6.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
       starlight-sidebar-topics-dropdown:
         specifier: ^0.5.1
-        version: 0.5.1(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))(starlight-sidebar-topics@0.6.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))))
+        version: 0.5.1(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))(starlight-sidebar-topics@0.6.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))))
     devDependencies:
       '@types/node':
         specifier: ^22.14.0
@@ -2098,7 +2103,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.24.2
 
-  '@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))':
+  '@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))':
     dependencies:
       '@astrojs/mdx': 4.2.3(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
       '@astrojs/sitemap': 3.3.0
@@ -4266,17 +4271,17 @@ snapshots:
 
   space-separated-tokens@2.0.2: {}
 
-  starlight-contributor-list@0.3.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))):
+  starlight-contributor-list@0.3.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))):
     dependencies:
       '@11ty/eleventy-fetch': 4.0.1
-      '@astrojs/starlight': 0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
+      '@astrojs/starlight': 0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
     transitivePeerDependencies:
       - encoding
       - supports-color
 
-  starlight-links-validator@0.15.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))):
+  starlight-links-validator@0.15.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))):
     dependencies:
-      '@astrojs/starlight': 0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
+      '@astrojs/starlight': 0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
       '@types/picomatch': 3.0.2
       github-slugger: 2.0.0
       hast-util-from-html: 2.0.3
@@ -4290,14 +4295,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  starlight-sidebar-topics-dropdown@0.5.1(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))(starlight-sidebar-topics@0.6.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))):
+  starlight-sidebar-topics-dropdown@0.5.1(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))(starlight-sidebar-topics@0.6.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))):
     dependencies:
-      '@astrojs/starlight': 0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
-      starlight-sidebar-topics: 0.6.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
+      '@astrojs/starlight': 0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
+      starlight-sidebar-topics: 0.6.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3)))
 
-  starlight-sidebar-topics@0.6.0(@astrojs/starlight@0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))):
+  starlight-sidebar-topics@0.6.0(@astrojs/starlight@0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))):
     dependencies:
-      '@astrojs/starlight': 0.33.0(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
+      '@astrojs/starlight': 0.33.0(patch_hash=0f47c7ede119a7eb9b99cc460b190574fac83a62021681c34e4dac7e312b04ef)(astro@5.6.1(@types/node@22.14.0)(rollup@4.39.0)(typescript@5.8.3))
       picomatch: 4.0.2
 
   stream-replace-string@2.0.0: {}

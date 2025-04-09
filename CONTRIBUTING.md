@@ -17,8 +17,8 @@ The PaperMC Docs repository contains the documentation for the PaperMC project, 
 information, instructions, and guidelines to our users, developers, and contributors. Your contributions play a
 significant role in improving and maintaining the quality of our documentation.
 
-We use [Docusaurus](https://docusaurus.io/) to build and deploy the documentation website.
-Docusaurus has [extensive documentation](https://docusaurus.io/docs/category/guides) detailing what is possible with it.
+We use [Starlight](https://starlight.astro.build/) to build and deploy the documentation website.
+Docusaurus has [extensive documentation](https://starlight.astro.build/guides/authoring-content/) detailing what is possible with it.
 
 The bulk of Paper's documentation is written with Markdown, which is a simple markup language that is easy to learn.
 Take a look at some of the existing documentation to get a feel for how it is written.
@@ -26,23 +26,24 @@ Take a look at some of the existing documentation to get a feel for how it is wr
 ### Adding a page
 
 To add a new page to the documentation, create a new Markdown file in the appropriate folder. For example, if you want to add
-a new page to the Paper Admin docs, create a new Markdown file in the `docs/paper/admin/` folder. The file name should be in
+a new page to the Paper Admin docs, create a new Markdown file in the `src/content/docs/paper/admin/` folder. The file name should be in
 lowercase and use hyphens to separate words. For example, `my-new-page.md`.
 
 The page should start with a slug and title. For example:
 
 ```markdown
 ---
-slug: /reference/paper-plugins
+title: Paper Plugins
+slug: paper/reference/paper-plugins
 ---
-
-# Paper Plugins
 
 This documentation page serves to explain all the new semantics and possible confusions that Paper plugins may introduce.
 ```
 
 This will place the page at the `/paper/reference/paper-plugins` URL on the website. The slug should be unique and follow the
 folder structure of the documentation. The title is the name of the page that will be displayed on the website and in the sidebar.
+
+> TODO: rewrite
 
 You must also add the page to the sidebar. In this instance we will go to the `config/sidebar.paper.ts` file and
 add the file to the `items` tag for that section. You must use the file structure for that file. One example would be
@@ -79,12 +80,10 @@ To maintain consistency and readability across the documentation, please adhere 
 2. **Markdown Format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
 
 3. **Heading Structure**: Use `h1` (#) for the main title, `h2` (##) for section headings, and follow this pattern for subsequent subheadings.
-   Capitalize the first letter of each word in a h1, however, only capitalize the first letter of the first word in h2 and h3 unless~
-   it is a proper noun.
 
 4. **Code Blocks**: When including code snippets or terminal commands, use fenced code blocks with the appropriate syntax highlighting.
 
-5. **Admonitions**: Use admonitions to highlight important information. For example, use `:::note` for general notes, `:::tip`for tips,
+5. **Admonitions**: Use admonitions to highlight important information. For example, use `:::note` for general notes, `:::tip` for tips,
    `:::caution` for warnings, and `:::danger` for critical warnings.
 
 6. **Links and References**: When referencing external sources or linking to other pages, use descriptive anchor text and provide full URLs.
@@ -100,6 +99,8 @@ To maintain consistency and readability across the documentation, please adhere 
 11. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
 
 ## Automatic Doc Versioning
+
+> TODO: rewrite
 
 There are components and methods in order to embed the current Project Version into the documentation. This is done one
 of a few ways:

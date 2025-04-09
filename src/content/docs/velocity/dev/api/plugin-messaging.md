@@ -1,9 +1,8 @@
 ---
-slug: /dev/plugin-messaging
+title: Plugin messaging
 description: How to handle and send plugin messages on Velocity.
+slug: velocity/dev/plugin-messaging
 ---
-
-# Plugin Messaging
 
 First introduced in [2012](https://web.archive.org/web/20220711204310/https://dinnerbone.com/blog/2012/01/13/minecraft-plugin-channels-messaging/),
 plugin messaging is a way for Velocity plugins to communicate with clients and backend servers.
@@ -20,7 +19,7 @@ flowchart LR
 :::caution
 
 When listening to `PluginMessageEvent`, ensure the result is
-<Javadoc name={"com/velocitypowered/api/event/connection/PluginMessageEvent$ForwardResult#handled()"} project={"velocity"}>`ForwardResult.handled()`</Javadoc>
+[`ForwardResult.handled()`](jd:velocity:com.velocitypowered.api.event.connection.PluginMessageEvent$ForwardResult#handled())
 if you do not intend the client to participate.
 
 If the result is forwarded, players can impersonate the proxy to your backend servers.
@@ -146,7 +145,7 @@ public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdent
 ## Case 3: Receiving a plugin message from a backend server
 
 This is for when you need to receive plugin messages from your backend server.
-It will require registering with the <Javadoc name={"com.velocitypowered.api.proxy.messages.ChannelRegistrar"} project={"velocity"}>`ChannelRegistrar`</Javadoc>
+It will require registering with the [`ChannelRegistrar`](jd:velocity:com.velocitypowered.api.proxy.messages.ChannelRegistrar)
 for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.

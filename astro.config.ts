@@ -100,6 +100,10 @@ export default defineConfig({
                       label: "How-to guides",
                       autogenerate: { directory: "velocity/dev/how-to" },
                     },
+                    {
+                      label: "API",
+                      autogenerate: { directory: "velocity/dev/api" },
+                    },
                   ],
                 },
               ],

@@ -1,9 +1,8 @@
 ---
-slug: /dev/api-basics
+title: Velocity plugin basics
 description: How to get started with the Velocity API.
+slug: velocity/dev/api-basics
 ---
-
-# Velocity Plugin Basics
 
 Now we will lay the groundwork for your first plugin. We will cover how to create your very first
 Velocity plugin.
@@ -65,7 +64,7 @@ public VelocityTest(ProxyServer server, Logger logger) {
 This looks like magic! How is Velocity doing this? The answer lies in the
 [`@Inject`](https://javadoc.io/doc/com.google.inject/guice/latest/com/google/inject/Inject.html)
 which indicates that Velocity should inject a
-<Javadoc name={"com.velocitypowered.api.proxy.ProxyServer"} project={"velocity"}>`ProxyServer`</Javadoc>
+[`ProxyServer`](jd:velocity:com.velocitypowered.api.proxy.ProxyServer)
 and the [`Logger`](https://www.slf4j.org/api/org/slf4j/Logger.html) when constructing your plugin.
 These two interfaces will help you out as you begin working with Velocity. We won't talk too much about
 dependency injection: all you need to know is that Velocity will do this.
@@ -73,7 +72,7 @@ dependency injection: all you need to know is that Velocity will do this.
 All you need to do is build your plugin, put it in your `plugins/` directory, and try it! Isn't that
 nice? In the next section you'll learn more about how to use the API.
 
-## Choosing <Javadoc name={"com.velocitypowered.api.plugin.Plugin"} project={"velocity"}>`@Plugin`</Javadoc> information
+## Choosing [`@Plugin`](jd:velocity:com.velocitypowered.api.plugin.Plugin) information
 
 Choose your plugin's ID wisely. Other plugins will use this ID to depend on yours. If you change it,
 you could break compatibility.
@@ -89,7 +88,7 @@ when you fix a bug or make an otherwise unnoticeable change in the implementatio
 
 You can also describe your plugin's URL, authors, and description in your `@Plugin` annotation.
 Dependencies on other plugins are also to be specified there, but we'll get to that later on the
-[Dependency Management](../how-to/dependencies.mdx) page.
+[Dependency Management](/velocity/dev/dependency-management) page.
 
 ### A word of caution
 
@@ -103,7 +102,7 @@ have a valid plugin registration, but Velocity can't register the plugin until t
 constructed, causing a "chicken or the egg" problem.
 
 To break this vicious cycle, you should always wait for initialization, which is indicated when
-Velocity fires the <Javadoc name={"com.velocitypowered.api.event.proxy.ProxyInitializeEvent"} project={"velocity"}>`ProxyInitializeEvent`</Javadoc>.
+Velocity fires the [`ProxyInitializeEvent`](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent).
 We can do things on initialization by adding a listener for this event, as shown below.
 Note that Velocity automatically registers your plugin main class as a listener.
 
@@ -134,7 +133,7 @@ public VelocityTest(ProxyServer server, Logger logger, @DataDirectory Path dataD
 }
 ```
 
-This will get you a <Javadoc name={"java.nio.file.Path"} project={"java"}>`Path`</Javadoc> of your plugin directory.
-If you absolutely need a <Javadoc name={"java.io.File"} project={"java"}>`File`</Javadoc>,
-you may use <Javadoc name={"java.nio.file.Path#toFile()"} project={"java"}>`Path#toFile()`</Javadoc>.
+This will get you a [`Path`](jd:java:java.nio.file.Path) of your plugin directory.
+If you absolutely need a [`File`](jd:java:java.io.File),
+you may use [`Path#toFile()`](jd:java:java.nio.file.Path#toFile()).
 However, Velocity usually works with `Path`.

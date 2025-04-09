@@ -31,3 +31,7 @@ interface Project {
 const paperProject: Project = await fetch("https://api.papermc.io/v2/projects/paper").then((r) => r.json());
 
 export const LATEST_PAPER_RELEASE = paperProject.versions[paperProject.versions.length - 1];
+
+const velocityProject: Project = await fetch("https://api.papermc.io/v2/projects/velocity").then((r) => r.json());
+
+export const LATEST_VELOCITY_RELEASE = velocityProject.versions[velocityProject.versions.length - 1];

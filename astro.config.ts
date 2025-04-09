@@ -2,6 +2,8 @@ import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
 // import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
+import javadocPlugin from "./src/utils/remark/javadoc";
+import { LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "./src/utils/versions";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -136,4 +138,18 @@ export default defineConfig({
       ],
     }),
   ],
+  markdown: {
+    remarkPlugins: [
+      [
+        javadocPlugin,
+        {
+          targets: {
+            paper: `https://jd.papermc.io/paper/${LATEST_PAPER_RELEASE}`,
+            velocity: `https://jd.papermc.io/velocity/${LATEST_VELOCITY_RELEASE.substring(0, LATEST_VELOCITY_RELEASE.lastIndexOf("."))}.0`,
+            java: { url: "https://docs.oracle.com/en/java/javase/21/docs/api", module: "java.base" },
+          },
+        },
+      ],
+    ],
+  },
 });

@@ -47,6 +47,7 @@ export default defineConfig({
               id: "paper",
               label: "Paper",
               link: "/paper/",
+              icon: "paper",
               items: [
                 {
                   label: "Administration",
@@ -66,6 +67,7 @@ export default defineConfig({
               id: "velocity",
               label: "Velocity",
               link: "/velocity/",
+              icon: "velocity",
               items: [
                 {
                   label: "Administration",
@@ -87,6 +89,7 @@ export default defineConfig({
               id: "folia",
               label: "Folia",
               link: "/folia/",
+              icon: "folia",
               items: [
                 {
                   label: "Administration",
@@ -98,12 +101,14 @@ export default defineConfig({
               id: "waterfall",
               label: "Waterfall",
               link: "/waterfall/",
+              icon: "waterfall",
               items: ["waterfall/getting-started", "waterfall/configuration"],
             },
             {
               id: "misc",
               label: "Miscellaneous",
               link: "/misc/",
+              icon: "random",
               items: [
                 "misc/assets",
                 "misc/contact",

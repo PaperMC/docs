@@ -1,12 +1,11 @@
 ---
-slug: /dev/creating-your-first-plugin
+title: Creating your first plugin
 description: How to create your first plugin with the Velocity API.
+slug: velocity/dev/creating-your-first-plugin
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-# Creating Your First Plugin
+import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+import { LATEST_VELOCITY_RELEASE } from "/src/utils/versions";
 
 It is very simple to create a plugin for Velocity. This section will teach you how to set up your
 IDE, your plugin identifiers, and give you an introduction to the basics of the Velocity API.
@@ -26,7 +25,7 @@ IDEA is recommended.
 - Open your IDE
 - Click `Create New Project` or the equivalent
 - Select either `Gradle` or `Maven`
-- Make sure your **Project JDK** is Java <Property name="VELOCITY_JAVA_MIN" /> or later
+- Make sure your **Project JDK** is Java 17 or later
 - **Finish** the dialog and open the project.
 
 Now we have created our project, we need configure our build system.
@@ -41,13 +40,13 @@ Now we have created our project, we need configure our build system.
 
 ### Dependency
 
-| Group ID              | Artifact ID    | Version                                                              |
-|-----------------------|----------------|----------------------------------------------------------------------|
-| `com.velocitypowered` | `velocity-api` | <VersionFormattedCode>`%%_MAJ_MIN_PAT_VEL_%%`</VersionFormattedCode> |
+| Group ID              | Artifact ID    | Version                   |
+|-----------------------|----------------|---------------------------|
+| `com.velocitypowered` | `velocity-api` | {LATEST_VELOCITY_RELEASE} |
 
 ### Javadocs
 
-Javadocs are available at <Javadoc project={"velocity"}>jd.papermc.io</Javadoc>.
+Javadocs are available at [jd.papermc.io](jd:velocity).
 
 ## Set up your build system
 
@@ -60,69 +59,63 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
 
 ### Setting up the dependency
 
-<Tabs groupId="author-front-matter">
-  <TabItem value="maven" label="Maven POM">
+<Tabs>
+  <TabItem label="Gradle Kotlin DSL">
+    <Code
+      lang="kotlin"
+      meta={`title="build.gradle.kts"`}
+      code={`repositories {
+      maven {
+          name = "papermc"
+          url = uri("https://repo.papermc.io/repository/maven-public/")
+      }
+  }
 
-<VersionFormattedCode language={"xml"} title={"pom.xml"}>
-```
-<project>
-    <repositories>
-        <repository>
-            <id>papermc</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
-        </repository>
-    </repositories>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.velocitypowered</groupId>
-            <artifactId>velocity-api</artifactId>
-            <version>%%_MAJ_MIN_PAT_VEL_%%</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
-</project>
-```
-</VersionFormattedCode>
-
+  dependencies {
+      compileOnly("com.velocitypowered:velocity-api:${LATEST_VELOCITY_RELEASE}")
+      annotationProcessor("com.velocitypowered:velocity-api:${LATEST_VELOCITY_RELEASE}")
+  }`}
+    />
   </TabItem>
-  <TabItem value="gradle-kotlin" label="Gradle Kotlin DSL" default>
+  <TabItem label="Gradle Groovy DSL">
+    <Code
+      lang="groovy"
+      meta={`title="build.gradle"`}
+      code={`repositories {
+      maven {
+          name = 'papermc'
+          url = 'https://repo.papermc.io/repository/maven-public/'
+      }
+  }
 
-<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
-```
-repositories {
-    maven {
-        name = "papermc"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
-    }
-}
-
-dependencies {
-    compileOnly("com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%")
-    annotationProcessor("com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%")
-}
-```
-</VersionFormattedCode>
-
+  dependencies {
+      compileOnly 'com.velocitypowered:velocity-api:${LATEST_VELOCITY_RELEASE}'
+      annotationProcessor 'com.velocitypowered:velocity-api:${LATEST_VELOCITY_RELEASE}'
+  }`}
+    />
   </TabItem>
-  <TabItem value="gradle-groovy" label="Gradle Groovy DSL">
+  <TabItem label="Maven POM">
+    <Code
+      lang="xml"
+      meta={`title="pom.xml"`}
+      code={`<project>
+      <repositories>
+          <repository>
+              <id>papermc</id>
+              <url>https://repo.papermc.io/repository/maven-public/</url>
+          </repository>
+      </repositories>
 
-<VersionFormattedCode language={"groovy"} title={"build.gradle"}>
-```
-repositories {
-    maven {
-        name = 'papermc'
-        url = 'https://repo.papermc.io/repository/maven-public/'
-    }
-}
-
-dependencies {
-    compileOnly 'com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%'
-    annotationProcessor 'com.velocitypowered:velocity-api:%%_MAJ_MIN_PAT_VEL_%%'
-}
-```
-</VersionFormattedCode>
-
+      <dependencies>
+          <dependency>
+              <groupId>com.velocitypowered</groupId>
+              <artifactId>velocity-api</artifactId>
+              <version>${LATEST_VELOCITY_RELEASE}</version>
+              <scope>provided</scope>
+          </dependency>
+      </dependencies>
+  </project>`}
+    />
   </TabItem>
 </Tabs>
 
@@ -142,12 +135,12 @@ This tutorial only works with IntelliJ IDEA. If you are using another IDE, pleas
 The first thing you need to do is install the [Minecraft Development](https://plugins.jetbrains.com/plugin/8327-minecraft-development) plugin.
 You can do this by going to `File > Settings > Plugins` and searching for `Minecraft Development` under the `Marketplace` section.
 
-![](assets/installing-plugin.png)
+![](./assets/installing-plugin.png)
 
 Once you have installed the plugin, you will need to restart IntelliJ.
 To do that you can click the `Restart IDE` button that appears after installing the plugin.
 
-![](assets/restart-ide.png)
+![](./assets/restart-ide.png)
 
 ### Creating a new project
 
@@ -155,7 +148,7 @@ Now that you have installed the plugin, you can create a new project by going to
 
 ### Setting up a Velocity project
 
-![](assets/new-project-velocity.png)
+![](./assets/new-project-velocity.png)
 
 You will be asked to provide some information about your project.
 
@@ -174,12 +167,12 @@ You will be asked to provide some information about your project.
 | **Group ID**         | The group ID of your project. This is used for Maven and Gradle. This is usually your domain name in reverse. If you don't know what you should put here, you can use something like `io.github.<yourname>` or if you don't have GitHub you can just use `me.<yourname>`. |
 | **Artifact ID**      | The artifact ID of your project. This is used for Maven and Gradle. This is usually the name of your project. This is usually the same as the `Name` field.                                                                                                               |
 | **Version**          | The version of your project. This is used for Maven and Gradle. This is usually `1.0-SNAPSHOT` and does not really matter for now.                                                                                                                                        |
-| **JDK**              | The JDK you want to use. This can be anything from Java <Property name="VELOCITY_JAVA_MIN" /> and above.                                                                                                                                                                  |
+| **JDK**              | The JDK you want to use. This can be anything from Java 17 and above.                                                                                                                                                                                                     |
 
 Now you can click on the `Create` button and IntelliJ will create the project for you.
 If everything went well, you should see something like this:
 
-![](assets/velocity-plugin-overview.png)
+![](./assets/velocity-plugin-overview.png)
 
 ## Conclusion
 

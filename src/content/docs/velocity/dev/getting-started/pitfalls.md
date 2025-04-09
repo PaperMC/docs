@@ -1,9 +1,8 @@
 ---
-slug: /dev/pitfalls
+title: Common pitfalls
 description: How to avoid common pitfalls within Velocity.
+slug: velocity/dev/pitfalls
 ---
-
-# Common Pitfalls
 
 While we try to make the API a pleasure to use, there are the occasional rough edges, and you should
 be aware of them.
@@ -18,7 +17,7 @@ have a valid plugin registration, but Velocity can't register the plugin until t
 constructed.
 
 To break this cycle, you should always wait for initialization, which is indicated when Velocity
-fires the <Javadoc name={"com.velocitypowered.api.event.proxy.ProxyInitializeEvent"} project={"velocity"}>`ProxyInitializeEvent`</Javadoc>.
+fires the [`ProxyInitializeEvent`](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent).
 We can do things on initialization by adding a listener for this event, as shown below.
 Note that Velocity automatically registers your plugin main class as a listener.
 

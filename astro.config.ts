@@ -63,6 +63,10 @@ export default defineConfig({
                     { label: "Miscellaneous", autogenerate: { directory: "paper/admin/misc" } },
                   ],
                 },
+                {
+                  label: "Contributing",
+                  items: ["paper/contributing/events"],
+                },
               ],
             },
             {
@@ -83,6 +87,19 @@ export default defineConfig({
                       autogenerate: { directory: "velocity/admin/how-to" },
                     },
                     { label: "Reference", autogenerate: { directory: "velocity/admin/reference" } },
+                  ],
+                },
+                {
+                  label: "Development",
+                  items: [
+                    {
+                      label: "Getting started",
+                      autogenerate: { directory: "velocity/dev/getting-started" },
+                    },
+                    {
+                      label: "How-to guides",
+                      autogenerate: { directory: "velocity/dev/how-to" },
+                    },
                   ],
                 },
               ],
@@ -127,8 +144,8 @@ export default defineConfig({
           {
             // pages excluded from sidebars
             topics: {
-              paper: ["/paper/admin"],
-              velocity: ["/velocity/admin"],
+              paper: ["/paper/admin", "/paper/contributing"],
+              velocity: ["/velocity/admin", "/velocity/dev"],
               folia: ["/folia/admin"],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],

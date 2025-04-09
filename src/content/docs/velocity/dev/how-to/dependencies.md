@@ -1,9 +1,8 @@
 ---
-slug: /dev/dependency-management
+title: Dependency management
 description: How to handle dependencies within your Velocity plugin.
+slug: velocity/dev/dependency-management
 ---
-
-# Dependency Management
 
 Dependencies are common. You need to hook into another plugin. You don't want to write the same code
 someone else has already solved. Whatever you do, you need a way to manage your dependencies
@@ -12,7 +11,7 @@ effectively.
 ## Plugin dependencies
 
 Adding a dependency on another plugin is done with the
-<Javadoc name={"com.velocitypowered.api.plugin.Plugin"} project={"velocity"}>`@Plugin`</Javadoc>
+[`@Plugin`](jd:velocity:com.velocitypowered.api.plugin.Plugin)
 annotation in your main class. Let's revisit that briefly:
 
 ```java
@@ -83,7 +82,7 @@ Dependencies on other libraries aren't handled by Velocity. You will need to add
 build system.
 
 If your plugin does not shade its dependencies, but rather attaches them from a directory, you may
-use the <Javadoc name={"com.velocitypowered.api.plugin.PluginManager"} project={"velocity"}>`PluginManager`</Javadoc>'s
-<Javadoc name={"com.velocitypowered.api.plugin.PluginManager#addToClasspath(java.lang.Object,java.nio.file.Path)"} project={"velocity"}>`addToClasspath`</Javadoc>
+use the [`PluginManager`](jd:velocity:com.velocitypowered.api.plugin.PluginManager)'s
+[`addToClasspath`](jd:velocity:com.velocitypowered.api.plugin.PluginManager#addToClasspath(java.lang.Object,java.nio.file.Path))
 method instead of using reflection to access the
-<Javadoc name={"java.lang.ClassLoader"} project={"java"}>`ClassLoader`</Javadoc>.
+[`ClassLoader`](jd:java:java.lang.ClassLoader).

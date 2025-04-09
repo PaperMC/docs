@@ -2,7 +2,7 @@ import type { RemarkPlugin } from "@astrojs/markdown-remark";
 import { visit } from "unist-util-visit";
 
 // replaces special Markdown links with Javadoc URLs
-// link format: jd:<javadoc name>:<fully qualified class name; . as package separator, $ for inner>[:<module name>]
+// link format: jd:<javadoc name>[:<fully qualified class name; . as package separator, $ for inner>][:<module name>]
 
 interface Target {
   url: string;
@@ -21,7 +21,7 @@ const asUrl = (name: string): string => {
 };
 
 const parse = (url: string, { targets }: Options): string | null => {
-  const match = /^jd:(.+?):(.+?)(?::(.+?))?$/.exec(url);
+  const match = /^jd:(.+?)(?::(.+?))?(?::(.+?))?$/.exec(url);
   if (!match) {
     return null;
   }
@@ -31,10 +31,16 @@ const parse = (url: string, { targets }: Options): string | null => {
     return null;
   }
 
+  const targetUrl = typeof target !== "string" ? target.url : target;
+
   const name = match[2];
+  if (!name) {
+    return targetUrl;
+  }
+
   const module = match[3] ?? (typeof target !== "string" ? target.module : undefined);
 
-  return `${typeof target !== "string" ? target.url : target}/${module ? `${module}/` : ""}${asUrl(name)}`;
+  return `${targetUrl}/${module ? `${module}/` : ""}${asUrl(name)}`;
 };
 
 const plugin: RemarkPlugin = (options: Options) => {

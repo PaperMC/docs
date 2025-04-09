@@ -1,19 +1,18 @@
 ---
-slug: /dev/command-api
+title: The command API
 description: How to create commands within Velocity.
+slug: velocity/dev/command-api
 ---
-
-# The Command API
 
 The command API lets you create commands that can be executed by a player connected to the proxy or
 the console.
 
 ## Creating a command
 
-Each command class needs to implement a <Javadoc name={"com.velocitypowered.api.command.Command"} project={"velocity"}>`Command`</Javadoc> sub-interface.
+Each command class needs to implement a [`Command`](jd:velocity:com.velocitypowered.api.command.Command) sub-interface.
 The choice depends on the type of arguments and the granularity of suggestions provided to the client. These include:
 
-### <Javadoc name={"com.velocitypowered.api.command.BrigadierCommand"} project={"velocity"}>`BrigadierCommand`</Javadoc>
+### [`BrigadierCommand`](jd:velocity:com.velocitypowered.api.command.BrigadierCommand)
 
 Internally, Velocity uses the [Brigadier](https://github.com/Mojang/brigadier) library to register
 and dispatch command actions. You can register your own `CommandNode`s by wrapping them in a
@@ -110,13 +109,13 @@ Brigadier commands have full backward compatibility with 1.12.2 and lower versio
 Custom plugin command argument types are not supported in Velocity, as they would require the client
 to also support them. We recommend sticking to the predefined Brigadier types provided.
 
-### <Javadoc name={"com.velocitypowered.api.command.SimpleCommand"} project={"velocity"}>`SimpleCommand`</Javadoc>
+### [`SimpleCommand`](jd:velocity:com.velocitypowered.api.command.SimpleCommand)
 
 Modeled after the convention popularized by Bukkit and BungeeCord, a `SimpleCommand` has three
 methods: one for when the command is executed, one to provide suggestions for tab completion, and
-one to check a <Javadoc name={"com.velocitypowered.api.command.CommandSource"} project={"velocity"}>`CommandSource`</Javadoc>
+one to check a [`CommandSource`](jd:velocity:com.velocitypowered.api.command.CommandSource)
 has permission to use the command. All methods receive a
-<Javadoc name={"com.velocitypowered.api.command.SimpleCommand$Invocation"} project={"velocity"}>`SimpleCommand.Invocation`</Javadoc>
+[`SimpleCommand.Invocation`](jd:velocity:com.velocitypowered.api.command.SimpleCommand$Invocation)
 object, which contains the `CommandSource` that executed the command and the arguments as an array of strings.
 The previous example can also be implemented using this interface:
 
@@ -168,7 +167,7 @@ public final class TestCommand implements SimpleCommand {
 }
 ```
 
-It's important to note <Javadoc name={"com.velocitypowered.api.command.CommandInvocation#arguments()"} project={"velocity"}>`invocation.arguments()`</Javadoc>
+It's important to note [`invocation.arguments()`](jd:velocity:com.velocitypowered.api.command.CommandInvocation#arguments())
 doesn't include the command alias (e.g. `teleport` for `/teleport foo bar`). In the event that no arguments are specified, an empty array will be
 passed, rather than a null array.
 
@@ -176,7 +175,7 @@ If a player or the console executes the following command: `/stats Player2 kills
 argument will be `Player2`, which we can access using `invocation.arguments()[0]` and the second
 argument will be `kills`.
 
-### <Javadoc name={"com.velocitypowered.api.command.RawCommand"} project={"velocity"}>`RawCommand`</Javadoc>
+### [`RawCommand`](jd:velocity:com.velocitypowered.api.command.RawCommand)
 
 There's certain cases where you don't need to process the arguments. These may include:
 
@@ -209,16 +208,16 @@ public final class EchoCommand implements RawCommand {
 ## Registering a command
 
 Now that we have created a command, we need to register it in order for it to work. To register
-commands, you use the <Javadoc name={"com.velocitypowered.api.command.CommandManager"} project={"velocity"}>`CommandManager`</Javadoc>.
+commands, you use the [`CommandManager`](jd:velocity:com.velocitypowered.api.command.CommandManager).
 We get the command manager by executing
-<Javadoc name={"com.velocitypowered.api.proxy.ProxyServer#getCommandManager()"} project={"velocity"}>`proxyServer.getCommandManager()`</Javadoc>
+[`proxyServer.getCommandManager()`](jd:velocity:com.velocitypowered.api.proxy.ProxyServer#getCommandManager())
 with the proxy instance, or by injecting it using the [`@Inject`](https://javadoc.io/doc/com.google.inject/guice/latest/com/google/inject/Inject.html)
 annotation in the main class. The register method requires two parameters, the command metadata and the command object.
 
-The <Javadoc name={"com.velocitypowered.api.command.CommandMeta"} project={"velocity"}>`CommandMeta`</Javadoc>
+The [`CommandMeta`](jd:velocity:com.velocitypowered.api.command.CommandMeta)
 contains the case-insensitive aliases and more advanced features.
 `CommandManager` provides a meta builder via the
-<Javadoc name={"com.velocitypowered.api.command.CommandManager#metaBuilder(java.lang.String)"} project={"velocity"}>`#metaBuilder(String alias)`</Javadoc> method.
+[`#metaBuilder(String alias)`](jd:velocity:com.velocitypowered.api.command.CommandManager#metaBuilder(java.lang.String)) method.
 
 ```java
 package com.example.velocityplugin;
@@ -263,6 +262,6 @@ public final class HelloWorldPlugin {
 ```
 
 If you're registering a `BrigadierCommand`, you may prefer to use the
-<Javadoc name={"com.velocitypowered.api.command.CommandManager#register(com.velocitypowered.api.command.BrigadierCommand)"} project={"velocity"}>`#register(BrigadierCommand)`</Javadoc>
-method or <Javadoc name={"com.velocitypowered.api.command.CommandManager#metaBuilder(com.velocitypowered.api.command.BrigadierCommand)"} project={"velocity"}>`#metaBuilder(BrigadierCommand)`</Javadoc>
+[`#register(BrigadierCommand)`](jd:velocity:com.velocitypowered.api.command.CommandManager#register(com.velocitypowered.api.command.BrigadierCommand))
+method or [`#metaBuilder(BrigadierCommand)`](jd:velocity:com.velocitypowered.api.command.CommandManager#metaBuilder(com.velocitypowered.api.command.BrigadierCommand))
 to specify additional aliases.

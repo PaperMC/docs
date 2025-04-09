@@ -1,16 +1,15 @@
 ---
-slug: /dev/porting-plugins-from-velocity-1
+title: Porting your plugin from Velocity 1.x.x
 description: How to port your plugin from Velocity 1.x.x to modern API.
+slug: velocity/dev/porting-plugins-from-velocity-1
 ---
-
-# Porting Your Plugin from Velocity 1.x.x
 
 Velocity 3.0.0 includes important API changes from the Velocity 1.x.x series. **Please read this
 document very carefully**.
 
 ## Minimum supported Java version bump
 
-Velocity 3.3.x now requires Java <Property name="VELOCITY_JAVA_MIN" /> and above.
+Velocity 3.3.x now requires Java 17 and above.
 
 ## Removal of legacy dependencies
 
@@ -31,6 +30,6 @@ model.
 
 Existing event handlers will continue to work unmodified on Velocity 3.0.0, as all event handlers
 are assumed to be asynchronous blocking handlers by default. However, there are some new APIs
-introduced for handling continuations - see the [event API page](../api/event.mdx) for more
+introduced for handling continuations - see the [event API page](/velocity/dev/event-api) for more
 information. However, you are encouraged to migrate your event listeners to the new event API
 paradigms.

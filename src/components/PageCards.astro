@@ -1,0 +1,45 @@
+---
+import { CardGrid, LinkCard } from "@astrojs/starlight/components";
+import { getCollection } from "astro:content";
+
+interface Props {
+  path?: string;
+}
+
+const { path } = Astro.props;
+
+const realPath = path ?? Astro.locals.starlightRoute.entry.filePath;
+const parent = realPath.substring(0, realPath.lastIndexOf("/") + 1);
+
+interface Page {
+  title: string;
+  description?: string;
+  href: string;
+  group: boolean;
+}
+
+const pages: Page[] = (await getCollection(Astro.locals.starlightRoute.entry.collection))
+  .filter((p) => p.filePath!.startsWith(parent))
+  .filter((p) => p.filePath !== realPath)
+  .filter((p) => {
+    const rel = p.filePath!.substring(parent.length);
+
+    return !rel.includes("/") || rel.match(/^[A-z0-9-_]+\/index\.mdx?$/);
+  })
+  .map((p) => ({
+    title: p.data.title,
+    description: p.data.description,
+    href: `/${p.id}`,
+    group: p.filePath!.includes("index"),
+  }))
+  .sort((a, b) => a.title.localeCompare(b.title))
+  .sort((a, b) => (a.group === b.group ? 0 : a.group ? -1 : 1));
+---
+
+<CardGrid>
+  {
+    pages.map((p) => (
+      <LinkCard title={p.title} description={p.description ?? (p.group ? "(page group)" : undefined)} href={p.href} />
+    ))
+  }
+</CardGrid>

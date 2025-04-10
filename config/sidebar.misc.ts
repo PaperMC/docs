@@ -37,4 +37,4 @@ const misc: SidebarsConfig = {
   ],
 };
 
-export = misc;
+export default misc;

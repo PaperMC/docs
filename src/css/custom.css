@@ -10,8 +10,8 @@
 
   --ifm-code-font-size: 95%;
 
-  --ifm-font-family-monospace: "JetBrains Mono", "SFMono-Regular", "Menlo", "Consolas",
-    "Liberation Mono", monospace;
+  --ifm-font-family-monospace:
+    "JetBrains Mono", "SFMono-Regular", "Menlo", "Consolas", "Liberation Mono", monospace;
 
   /* Config Node */
   --default-config-node-text-color: rgb(148, 148, 148);

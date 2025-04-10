@@ -15,7 +15,7 @@ import {
 } from "./src/util/authorUtils";
 import { preview, deploymentID } from "./src/util/pagesUtils";
 
-cacheAuthorData(preview || env.NODE_ENV === "development");
+cacheAuthorData(preview || env.NODE_ENV === "development").then();
 
 const url =
   (preview && `https://${deploymentID}.papermc-docs.pages.dev`) || "https://docs.papermc.io";
@@ -282,4 +282,4 @@ const config: Config = {
   },
 };
 
-export = config;
+export default config;

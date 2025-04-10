@@ -1,4 +1,4 @@
-import React, { ComponentProps } from "react";
+import React, { ComponentProps, type JSX } from "react";
 import type DocVersionBadgeType from "@theme/DocVersionBadge";
 
 type Props = ComponentProps<typeof DocVersionBadgeType>;

@@ -1,6 +1,5 @@
-import React, { type ComponentType } from "react";
+import React, { type ComponentType, type JSX } from "react";
 import clsx from "clsx";
-import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Link from "@docusaurus/Link";
 import Translate from "@docusaurus/Translate";
 import {
@@ -8,8 +7,8 @@ import {
   useDocVersionSuggestions,
   type GlobalVersion,
 } from "@docusaurus/plugin-content-docs/client";
-import { ThemeClassNames, useDocsPreferredVersion } from "@docusaurus/theme-common";
-import { useDocsVersion } from "@docusaurus/plugin-content-docs/client";
+import { ThemeClassNames } from "@docusaurus/theme-common";
+import { useDocsVersion, useDocsPreferredVersion } from "@docusaurus/plugin-content-docs/client";
 
 import type { Props } from "@theme/DocVersionBanner";
 import type { VersionBanner, PropVersionMetadata } from "@docusaurus/plugin-content-docs";
@@ -104,9 +103,6 @@ function DocVersionBannerEnabled({
 }: Props & {
   versionMetadata: PropVersionMetadata;
 }): JSX.Element {
-  const {
-    siteConfig: { title: siteTitle },
-  } = useDocusaurusContext();
   const { pluginId } = useActivePlugin({ failfast: true })!;
 
   const getVersionMainDoc = (version: GlobalVersion) =>

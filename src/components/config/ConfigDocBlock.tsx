@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, ReactNode } from "react";
+import React, { useState, useEffect, useRef, ReactNode, type JSX } from "react";
 import ReactMarkdown from "react-markdown";
 import style from "@site/src/css/markdown-styles.module.css";
 import yaml from "js-yaml";
@@ -119,7 +119,7 @@ const parseItalics = (key: string) => {
 };
 
 const parseDescriptionForVersioning = (description: String) => {
-  return VersionFormattedCode({ children: description, plainText: true });
+  return VersionFormattedCode({ children: description, plainText: true }) as string;
 };
 
 const YamlNodeWithDescription = ({
@@ -200,9 +200,11 @@ const YamlNodeWithDescription = ({
         </button>
         <div className={clsx("indent-2 margin-bottom--sm", !showDescription && "display--none")}>
           <div className="outlined-box description-text color-offset-box">
-            <ReactMarkdown className={style.reactMarkDown}>
-              {parseDescriptionForVersioning(node.description.toString())}
-            </ReactMarkdown>
+            <div className={style.reactMarkDown}>
+              <ReactMarkdown>
+                {parseDescriptionForVersioning(node.description.toString())}
+              </ReactMarkdown>
+            </div>
           </div>
         </div>
       </div>

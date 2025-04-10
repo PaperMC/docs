@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import { existsSync } from "fs";
 import path from "path";
 import { Endpoints } from "@octokit/types";
 
@@ -7,7 +7,7 @@ import { Globby } from "@docusaurus/utils/src/globUtils";
 
 type endpoint = Endpoints["GET /repos/{owner}/{repo}/commits/{ref}"];
 
-const headers = {
+const headers: Record<string, string> = {
   Accept: "application/vnd.github.v3+json",
   "User-Agent": "PaperMC-Docs",
 };
@@ -38,7 +38,7 @@ async function cacheUsernameFromCommit(commit: string) {
       throw new Error(`Received error status code ${response.status} (${response.statusText})`);
     }
 
-    const body = (await response.json()) as endpoint["response"];
+    const body = (await response.json()) as endpoint["response"]["data"];
     const username = body.author.login;
 
     commitCache.set(commit, username);
@@ -67,7 +67,7 @@ export async function cacheAuthorData(isPreview: boolean) {
   }
   const docPath = path.resolve("docs/");
 
-  if (!(await fs.pathExists(docPath))) {
+  if (!existsSync(docPath)) {
     return null;
   }
 

@@ -1,9 +1,12 @@
 ---
-slug: /dev/getting-started/paper-plugins
+title: Paper plugins
 description: A development guide for how to write Paper-specific plugins.
+slug: paper/dev/getting-started/paper-plugins
+sidebar:
+  badge:
+    text: Experimental
+    variant: danger
 ---
-
-# Paper Plugins (Experimental)
 
 Paper plugins allow developers to take advantage of more modern concepts introduced by Mojang, such as datapacks, to
 expand the field of what the Paper API is able to introduce.
@@ -25,17 +28,15 @@ This will not act as a drop-in replacement for `plugin.yml`, as some things, as 
 It should be noted that you still have the ability to include both `paper-plugin.yml` and `plugin.yml` in the same JAR.
 
 Here is an example configuration:
-<VersionFormattedCode language={"yaml"}>
-```
+```yaml replace
 name: Paper-Test-Plugin
 version: '1.0'
 main: io.papermc.testplugin.TestPlugin
 description: Paper Test Plugin
-api-version: '%%_MAJ_MIN_PAT_MC_%%'
+api-version: '\{LATEST_PAPER_RELEASE}'
 bootstrapper: io.papermc.testplugin.TestPluginBootstrap
 loader: io.papermc.testplugin.TestPluginLoader
 ```
-</VersionFormattedCode>
 
 ### Dependency declaration
 
@@ -110,20 +111,20 @@ has started by using [bootstrappers](#bootstrapper).
 
 ## Bootstrapper
 Paper plugins are able to identify their own bootstrapper by implementing
-<Javadoc name={"io.papermc.paper.plugin.bootstrap.PluginBootstrap"}>`PluginBootstrap`</Javadoc>
+[`PluginBootstrap`](jd:paper:io.papermc.paper.plugin.bootstrap.PluginBootstrap)
 and adding the class of your implementation to the bootstrapper field in the `paper-plugin.yml`.
 ```java title="TestPluginBootstrap.java"
 public class TestPluginBootstrap implements PluginBootstrap {
 
-    @Override
-    public void bootstrap(BootstrapContext context) {
+  @Override
+  public void bootstrap(BootstrapContext context) {
 
-    }
+  }
 
-    @Override
-    public JavaPlugin createPlugin(PluginProviderContext context) {
-        return new TestPlugin("My custom parameter");
-    }
+  @Override
+  public JavaPlugin createPlugin(PluginProviderContext context) {
+    return new TestPlugin("My custom parameter");
+  }
 
 }
 ```
@@ -132,7 +133,7 @@ Currently, bootstrappers do not offer much new API and are highly experimental. 
 
 ## Loaders
 Paper plugins are able to identify their own plugin loader by implementing
-<Javadoc name={"io.papermc.paper.plugin.loader.PluginLoader"}>`PluginLoader`</Javadoc>
+[`PluginLoader`](jd:paper:io.papermc.paper.plugin.loader.PluginLoader)
 and adding the class of your implementation to the loader field in the `paper-plugin.yml`.
 
 The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into.
@@ -140,28 +141,28 @@ This, as of right now, only applies to creating the expected classpath for the p
 ```java title="TestPluginLoader.java"
 public class TestPluginLoader implements PluginLoader {
 
-    @Override
-    public void classloader(PluginClasspathBuilder classpathBuilder) {
-        classpathBuilder.addLibrary(new JarLibrary(Path.of("dependency.jar")));
+  @Override
+  public void classloader(PluginClasspathBuilder classpathBuilder) {
+    classpathBuilder.addLibrary(new JarLibrary(Path.of("dependency.jar")));
 
-        MavenLibraryResolver resolver = new MavenLibraryResolver();
-        resolver.addDependency(new Dependency(new DefaultArtifact("com.example:example:version"), null));
-        resolver.addRepository(new RemoteRepository.Builder("paper", "default", "https://repo.papermc.io/repository/maven-public/").build());
+    MavenLibraryResolver resolver = new MavenLibraryResolver();
+    resolver.addDependency(new Dependency(new DefaultArtifact("com.example:example:version"), null));
+    resolver.addRepository(new RemoteRepository.Builder("paper", "default", "https://repo.papermc.io/repository/maven-public/").build());
 
-        classpathBuilder.addLibrary(resolver);
-    }
+    classpathBuilder.addLibrary(resolver);
+  }
 }
 ```
 Currently, you are able to add two different library types:
-<Javadoc name={"io.papermc.paper.plugin.loader.library.impl.JarLibrary"}>`JarLibrary`</Javadoc> and
-<Javadoc name={"io.papermc.paper.plugin.loader.library.impl.MavenLibraryResolver"}>`MavenLibraryResolver`</Javadoc>.
+[`JarLibrary`](jd:paper:io.papermc.paper.plugin.loader.library.impl.JarLibrary) and
+[`MavenLibraryResolver`](jd:paper:io.papermc.paper.plugin.loader.library.impl.MavenLibraryResolver).
 
 ## Differences
 
 ### Bukkit serialization system
 Paper plugins still support the serialization system (`org.bukkit.configuration.serialization`) that Bukkit uses. However, custom classes will not be
-automatically registered for serialization. In order to use <Javadoc name={"org.bukkit.configuration.ConfigurationSection#getObject(java.lang.String,java.lang.Class)"}>`ConfigurationSection#getObject`</Javadoc>,
-you **must** call <Javadoc name={"org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class)"}>`ConfigurationSerialization#registerClass(Class)`</Javadoc>
+automatically registered for serialization. In order to use [`ConfigurationSection#getObject`](jd:paper:org.bukkit.configuration.ConfigurationSection#getObject(java.lang.String,java.lang.Class)),
+you **must** call [`ConfigurationSerialization#registerClass(Class)`](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class))
 before you attempt to fetch objects from configurations.
 
 ### Classloading isolation
@@ -187,7 +188,7 @@ See [declaring dependencies](#dependency-declaration) for more information on ho
 ### Commands
 Paper plugins do not use the `commands` field to register commands. This means that you do not need to include all
 of your commands in the `paper-plugin.yml` file. Instead, you can register commands using the
-[Brigadier Command API](../api/command-api/basics/introduction.mdx).
+[Brigadier Command API](/paper/dev/command-api/basics/introduction).
 
 ### Cyclic plugin loading
 

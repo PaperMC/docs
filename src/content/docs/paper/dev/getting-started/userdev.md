@@ -1,10 +1,8 @@
 ---
-slug: /dev/userdev
-sidebar_label: Paperweight Userdev
+title: paperweight-userdev
 description: A guide on how to use the paperweight-userdev Gradle plugin to access internal code.
+slug: paper/dev/userdev
 ---
-
-# paperweight-userdev
 
 **paperweight** is the name of Paper's custom build tooling. The **paperweight-userdev** Gradle plugin part of that
 provides access to internal code (also known as NMS) during development.
@@ -38,13 +36,11 @@ See [here](#1205-and-beyond) for more details.
 ## Adding the plugin
 Add the plugin to your `build.gradle.kts` file.
 
-<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
-```
+```kotlin title="build.gradle.kts"
 plugins {
-    id("io.papermc.paperweight.userdev") version "%%_MAJ_MIN_PAT_USERDEV_%%"
+  id("io.papermc.paperweight.userdev") version "<latest version here, check https://plugins.gradle.org/plugin/io.papermc.paperweight.userdev>"
 }
 ```
-</VersionFormattedCode>
 
 :::note[Gradle Version]
 
@@ -63,10 +59,10 @@ Furthermore, if you are having issues with `paperweight-userdev`, you should ask
 **paperweight-userdev** SNAPSHOT (pre-release) versions are only available through Paper's Maven repository.
 ```kotlin title="settings.gradle.kts"
 pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        maven("https://repo.papermc.io/repository/maven-public/")
-    }
+  repositories {
+    gradlePluginPortal()
+    maven("https://repo.papermc.io/repository/maven-public/")
+  }
 }
 ```
 
@@ -77,14 +73,12 @@ If you try to load your Gradle project now, you will receive an error saying you
 a dev bundle dependency. You can do that by adding to your `dependencies` block in your `build.gradle.kts`
 file.
 
-<VersionFormattedCode language={"kotlin"} title={"build.gradle.kts"}>
-```
+```kotlin title="build.gradle.kts" replace
 dependencies {
-    // Other Dependencies
-    paperweight.paperDevBundle("%%_MAJ_MIN_PAT_MC_%%-R0.1-SNAPSHOT")
+  // Other Dependencies
+  paperweight.paperDevBundle("\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT")
 }
 ```
-</VersionFormattedCode>
 
 :::tip
 
@@ -114,7 +108,7 @@ The `-dev-all.jar` file in `build/libs` is the shaded, but not re-obfuscated JAR
 You can make the `reobfJar` task run on the default `build` task with:
 ```kotlin
 tasks.assemble {
-    dependsOn(tasks.reobfJar)
+  dependsOn(tasks.reobfJar)
 }
 ```
 

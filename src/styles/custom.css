@@ -17,6 +17,13 @@
   --sl-font-mono: "JetBrains Mono";
 }
 
+/* fix too large TOC on large screens */
+@media (min-width: 96rem) {
+  :root {
+    --sl-content-width: 64rem;
+  }
+}
+
 /* Dark mode colors. */
 :root {
   --sl-color-accent-low: #1e40af;

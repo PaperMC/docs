@@ -45,7 +45,7 @@ some.translation.key=Translated Message: {0}
 ```
 
 ```java
-TranslationStore store = TranslationStore.messageFormat(Key.key("namespace:value"))
+TranslationStore store = TranslationStore.messageFormat(Key.key("namespace:value"));
 
 ResourceBundle bundle = ResourceBundle.getBundle("your.plugin.Bundle", Locale.US, UTF8ResourceBundleControl.get());
 store.registerAll(Locale.US, bundle, true);

@@ -1,13 +1,12 @@
 ---
-slug: /dev/debugging
+title: Debugging your plugin
 description: Debugging is common when writing code. This guide outlines the common ways to debug your plugin.
+slug: paper/dev/debugging
 ---
-
-# Debugging Your Plugin
 
 Debugging your plugin is vital to being able to fix bugs and issues in your plugin. This page will cover some of the most common debugging techniques.
 
-### Printing to the console
+## Printing to the console
 
 One of the most common debugging techniques is to print to the console. This is likely something you've done before, as it's very simple.
 This has a few downsides, though. It can be hard to find the print statements in the console, and it can be hard to remove them all when you're done debugging. Most notably, you have to recompile your plugin and restart the server to add or remove debugging.
@@ -26,12 +25,12 @@ This can be useful for finding your print statements in the console.
 
 :::
 
-### Using a remote debugger
+## Using a remote debugger
 
 A debugger is a tool that allows you to pause your code at a certain point and inspect the values of variables.
 This can be very useful for finding out why your code isn't working as expected and also for finding out where your code is going wrong.
 
-#### Setting up the debugger
+### Setting up the debugger
 
 To use a debugger, you need to set up your IDE to use it. This is different for each IDE, but for the sake of this guide, we will be using IntelliJ IDEA.
 
@@ -47,11 +46,9 @@ Then, click the `+` button in the top left and select `Remote JVM Debug`. You ca
 Finally, copy the command line arguments from the window, and paste these into your server's startup script.
 These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`. For example:
 
-<VersionFormattedCode language={"bash"}>
+```shell replace
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-\{LATEST_PAPER_RELEASE}.jar nogui
 ```
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-%%_MAJ_MIN_PAT_MC_%%.jar nogui
-```
-</VersionFormattedCode>
 
 Once your server is running, you can use the bug icon in the top right to connect your debugger to the server:
 
@@ -64,15 +61,15 @@ Let's say we have this code:
 ```java
 @EventHandler
 public void onPlayerMove(PlayerMoveEvent event) {
-    Player player = event.getPlayer();
-    Location location = player.getLocation();
+  Player player = event.getPlayer();
+  Location location = player.getLocation();
 
-    if (location.getWorld() == null)
-        return;
+  if (location.getWorld() == null)
+    return;
 
-    if (location.getWorld().getEnvironment() == World.Environment.NETHER) {
-        player.sendMessage("You are in the nether!");
-    }
+  if (location.getWorld().getEnvironment() == World.Environment.NETHER) {
+    player.sendMessage("You are in the nether!");
+  }
 }
 ```
 

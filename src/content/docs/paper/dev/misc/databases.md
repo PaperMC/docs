@@ -1,9 +1,8 @@
 ---
-slug: dev/using-databases
+title: Using databases
 description: Databases are the recommended way to store a large amount of data. This guide outlines a few key details.
+slug: paper/dev/using-databases
 ---
-
-# Using Databases
 
 When you are storing larger amounts of data inside a plugin, we recommend using a database. This guide will walk you through the startup process.
 
@@ -39,7 +38,7 @@ They can be created and handled from within your plugin code, but offer lesser p
 Some examples of file-based databases are `SQLite` and `H2`.
 
 <details>
-    <summary>Simple SQLite Setup</summary>
+  <summary>Simple SQLite Setup</summary>
 
 #### SQLite
 
@@ -53,21 +52,21 @@ The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it i
 
 ##### Usage
 
-You must invoke a <Javadoc name={"java.lang.Class#forName(java.lang.String)"} project={"java"}>`Class#forName(String)`</Javadoc>
+You must invoke a [`Class#forName(String)`](jd:java:java.lang.Class#forName(java.lang.String))
 on the driver to allow it to initialize and then create the connection to the database:
 
 ```java title="DatabaseManager.java"
 public class DatabaseManager {
 
-    public void connect() {
-        Class.forName("org.sqlite.JDBC");
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:plugins/TestPlugin/database.db");
-    }
+  public void connect() {
+    Class.forName("org.sqlite.JDBC");
+    Connection connection = DriverManager.getConnection("jdbc:sqlite:plugins/TestPlugin/database.db");
+  }
 }
 ```
 
-You then have access to a <Javadoc name={"java.sql.Connection"} module={"java.sql"} project={"java"}>`Connection`</Javadoc> object,
-which you can use to create a <Javadoc name={"java.sql.Statement"} module={"java.sql"} project={"java"}>`Statement`</Javadoc> and execute SQL queries.
+You then have access to a [`Connection`](jd:java:java.sql.Connection:java.sql) object,
+which you can use to create a [`Statement`](jd:java:java.sql.Statement:java.sql) and execute SQL queries.
 To learn more about the Java Database Connectivity API, see [here](https://www.baeldung.com/java-jdbc)
 
 </details>
@@ -86,7 +85,7 @@ and then return it back to the pool for future reuse. This significantly reduces
 down connections repeatedly, leading to improved application performance and better scalability.
 
 <details>
-    <summary>Simple MySQL Setup</summary>
+  <summary>Simple MySQL Setup</summary>
 
 #### MySQL
 
@@ -104,24 +103,24 @@ First, add the dependency to your project with the following dependency:
 ##### Maven
 ```xml
 <dependency>
-    <groupId>com.zaxxer</groupId>
-    <artifactId>HikariCP</artifactId>
-    <version>4.0.3</version>
-    <scope>compile</scope>
+  <groupId>com.zaxxer</groupId>
+  <artifactId>HikariCP</artifactId>
+  <version>4.0.3</version>
+  <scope>compile</scope>
 </dependency>
 ```
 
 ##### Gradle
 ```kotlin
 dependencies {
-    implementation("com.zaxxer:HikariCP:4.0.3")
+  implementation("com.zaxxer:HikariCP:4.0.3")
 }
 ```
 
 :::caution
 
 The Hikari library is not bundled with Paper, so you will need to shade/relocate it. In Gradle, you will need to use the [Shadow plugin](https://imperceptiblethoughts.com/shadow/).
-Alternatively, you can use the library loader with your Paper plugin to load the library at runtime. See [here](../getting-started/paper-plugins.mdx#loaders)
+Alternatively, you can use the library loader with your Paper plugin to load the library at runtime. See [here](/paper/dev/getting-started/paper-plugins#loaders)
 for more information on how to use this.
 
 :::
@@ -133,24 +132,24 @@ Once you have the dependency added, we can work with the connector in our code:
 ```java title="DatabaseManager.java"
 public class DatabaseManager {
 
-    public void connect() {
-        HikariConfig config = new HikariConfig();
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
-        config.setUsername("username"); // Username
-        config.setPassword("password"); // Password
-        config.setMaximumPoolSize(10); // Pool size defaults to 10
+  public void connect() {
+    HikariConfig config = new HikariConfig();
+    config.setJdbcUrl("jdbc:mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
+    config.setUsername("username"); // Username
+    config.setPassword("password"); // Password
+    config.setMaximumPoolSize(10); // Pool size defaults to 10
 
-        config.addDataSourceProperty("", ""); // MISC settings to add
-        HikariDataSource dataSource = new HikariDataSource(config);
+    config.addDataSourceProperty("", ""); // MISC settings to add
+    HikariDataSource dataSource = new HikariDataSource(config);
 
-        try (Connection connection = dataSource.getConnection()) {
-            // Use a try-with-resources here to autoclose the connection.
-            PreparedStatement sql = connection.prepareStatement("SQL");
-            // Execute statement
-        } catch (Exception e) {
-            // Handle any exceptions that arise from getting / handing the exception.
-        }
+    try (Connection connection = dataSource.getConnection()) {
+      // Use a try-with-resources here to autoclose the connection.
+      PreparedStatement sql = connection.prepareStatement("SQL");
+      // Execute statement
+    } catch (Exception e) {
+      // Handle any exceptions that arise from getting / handing the exception.
     }
+  }
 }
 ```
 
@@ -189,7 +188,7 @@ but it can be used to do much more malicious things, such as deleting the entire
 
 ### Prepared statements
 
-Using prepared statements in Java with <Javadoc name={"java.sql.PreparedStatement"} module={"java.sql"} project={"java"}>`PreparedStatement`</Javadoc>s
+Using prepared statements in Java with [`PreparedStatement`](jd:java:java.sql.PreparedStatement:java.sql)s
 helps prevent SQL injection. They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection
 [here](https://www.baeldung.com/sql-injection).

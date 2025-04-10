@@ -4,7 +4,7 @@ import { defineConfig } from "astro/config";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
-import { LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "./src/utils/versions";
+import { LATEST_MC_RELEASE, LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "./src/utils/versions";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -62,6 +62,30 @@ export default defineConfig({
                     { label: "How-to guides", autogenerate: { directory: "paper/admin/how-to" } },
                     { label: "Reference", autogenerate: { directory: "paper/admin/reference" } },
                     { label: "Miscellaneous", autogenerate: { directory: "paper/admin/misc" } },
+                  ],
+                },
+                {
+                  label: "Development",
+                  items: [
+                    {
+                      label: "Getting started",
+                      items: [
+                        "paper/dev/project-setup",
+                        "paper/dev/how-do-plugins-work",
+                        "paper/dev/getting-started/paper-plugins",
+                        "paper/dev/plugin-yml",
+                        "paper/dev/userdev",
+                      ],
+                    },
+                    {
+                      label: "Miscellaneous",
+                      items: [
+                        "paper/dev/using-databases",
+                        "paper/dev/debugging",
+                        "paper/dev/internals",
+                        "paper/dev/reading-stacktraces",
+                      ],
+                    },
                   ],
                 },
                 {
@@ -147,9 +171,15 @@ export default defineConfig({
             },
           ],
           {
-            // pages excluded from sidebars
+            // pages excluded from sidebars - index.md(x) pages
             topics: {
-              paper: ["/paper/admin", "/paper/contributing"],
+              paper: [
+                "/paper/admin",
+                "/paper/dev",
+                "/paper/dev/getting-started",
+                "/paper/dev/misc",
+                "/paper/contributing",
+              ],
               velocity: ["/velocity/admin", "/velocity/dev"],
               folia: ["/folia/admin"],
               waterfall: ["/waterfall"],
@@ -176,6 +206,7 @@ export default defineConfig({
         codeConstantsPlugin,
         {
           constants: {
+            LATEST_MC_RELEASE,
             LATEST_PAPER_RELEASE,
             LATEST_VELOCITY_RELEASE,
           },

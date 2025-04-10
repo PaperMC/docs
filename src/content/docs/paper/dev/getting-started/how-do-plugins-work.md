@@ -1,11 +1,8 @@
 ---
-slug: /dev/how-do-plugins-work
+title: How plugins work
 description: How plugins work in Paper.
+slug: paper/dev/how-do-plugins-work
 ---
-
-# How Plugins Work
-
-## Introduction
 
 Plugins are a way to extend the functionality of a Minecraft server. They are written in JVM-based languages such as
 Java, Kotlin, Groovy or Scala. Plugins are loaded from the `plugins` folder in the server directory. Plugins will be
@@ -51,12 +48,12 @@ be done before the plugin is unloaded. This may include saving data to disk or c
 ## Event listeners
 
 Events are a way for plugins to listen to things that happen in the server and run code when they are fired. For
-example, <Javadoc name={"org.bukkit.event.player.PlayerJoinEvent"}>`PlayerJoinEvent`</Javadoc> is fired when a player
+example, [`PlayerJoinEvent`](jd:paper:org.bukkit.event.player.PlayerJoinEvent) is fired when a player
 joins the server. This is a more performant way to run code when something happens, as opposed to constantly checking.
 See our [event listener page](/paper/dev/event-listeners) for more.
 
 Some events are cancellable. This means that when the event is fired, it can be cancelled which negates or stops the
-effect of the event. For example, <Javadoc name={"org.bukkit.event.player.PlayerMoveEvent"}>`PlayerMoveEvent`</Javadoc>
+effect of the event. For example, [`PlayerMoveEvent`](jd:paper:org.bukkit.event.player.PlayerMoveEvent)
 is cancellable. This means that when it is cancelled, the player will not move. This is useful for things like anti-cheat,
 where you want to cancel the event if the player is moving too fast.
 
@@ -112,7 +109,7 @@ to run after 100 ticks - one second is 20 ticks during normal operation. It is i
 delayed if the server is lagging. For example, if the server is only running at 10 ticks per second, a task that is
 scheduled to run after 100 ticks will take 10 seconds.
 
-In Java, typically you could use <Javadoc name={"java.lang.Thread#sleep(long)"} project={"java"}>`Thread#sleep()`</Javadoc> to delay
+In Java, typically you could use [`Thread#sleep()`](jd:java:java.lang.Thread#sleep(long)) to delay
 the execution of code. However, if the code is running on the main thread, this will cause the server to pause for the
 delay. Instead, you should use the `Scheduler` API to schedule tasks to run later.
 Learn more about the `Scheduler` API [here](/paper/dev/scheduler).

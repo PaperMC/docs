@@ -1,9 +1,8 @@
 ---
-slug: /dev/internals
+title: Minecraft internals
 description: A brief overview of how to use internals in your plugin.
+slug: paper/dev/internals
 ---
-
-# Minecraft Internals
 
 The code that runs Minecraft is not open source. Bukkit is an API that allows plugins to interact with the server. This
 is implemented by CraftBukkit and interacts with Minecraft's code. You will often hear the terms NMS and CraftBukkit
@@ -39,8 +38,8 @@ However, if you are unable to use `paperweight-userdev`, you can use reflection.
 Reflection is a way to access code at runtime. This allows you to access code that may not be available at compile time.
 Reflection is often used to access internal code across multiple versions. However, reflection does come
 with performance impacts if used improperly. For example, if you are accessing a method or field more than once,
-you should cache the <Javadoc name={"java.lang.reflect.Field"} project={"java"}>`Field`</Javadoc>/
-<Javadoc name={"java.lang.reflect.Method"} project={"java"}>`Method`</Javadoc> to prevent the performance
+you should cache the [`Field`](jd:java:java.lang.reflect.Field)/
+[`Method`](jd:java:java.lang.reflect.Method) to prevent the performance
 impact of looking up the field/method each time.
 
 The internal CraftBukkit code is relocated to `org.bukkit.craftbukkit.<version>` unless you run a Mojang-mapped version
@@ -59,7 +58,7 @@ CraftBukkit packages are now located in `org.bukkit.craftbukkit` and not in `org
 private static final String CRAFTBUKKIT_PACKAGE = Bukkit.getServer().getClass().getPackageName();
 
 public static String cbClass(String clazz) {
-    return CRAFTBUKKIT_PACKAGE + "." + clazz;
+  return CRAFTBUKKIT_PACKAGE + "." + clazz;
 }
 
 // You can then use this method to get the CraftBukkit class:
@@ -77,7 +76,7 @@ it makes the code easier to understand.
 :::note[Mojang-mapped runtime as of 1.20.5]
 
 As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
-For more information, see the [plugin remapping](./project-setup#plugin-remapping) section and [userdev](./userdev#1205-and-beyond) documentation covering these changes.
+For more information, see the [plugin remapping](/paper/dev/project-setup#plugin-remapping) section and [userdev](/paper/dev/userdev#1205-and-beyond) documentation covering these changes.
 
 :::
 
@@ -94,18 +93,16 @@ your plugin won't require internal remapping when we make the switch.
 You can get the current Minecraft version to allow you to use the correct code for a specific version. This can be done
 with one of the following methods:
 
-<VersionFormattedCode language={"java"}>
-```
-// Example value: %%_MAJ_MIN_PAT_MC_%%
+```java replace
+// Example value: \{LATEST_PAPER_RELEASE}
 String minecraftVersion = Bukkit.getServer().getMinecraftVersion();
 
-// Example value: %%_MAJ_MIN_PAT_MC_%%-R0.1-SNAPSHOT
+// Example value: \{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT
 String bukkitVersion = Bukkit.getServer().getBukkitVersion();
 
 // Example value for 1.20.1: 3465
 int dataVersion = Bukkit.getUnsafe().getDataVersion();
 ```
-</VersionFormattedCode>
 
 :::danger[Parsing the version]
 

@@ -19,7 +19,7 @@ Adventure's Javadocs for all-things translations can be found [here](https://jd.
 All translation is done through [`GlobalTranslator`](https://jd.advntr.dev/api/latest/net/kyori/adventure/translation/GlobalTranslator.html).
 You can render translations yourself and add new sources for translations.
 
-You can add sources to the `GlobalTranslator` by creating instances of [`TranslationRegistry`](https://jd.advntr.dev/api/latest/net/kyori/adventure/translation/TranslationRegistry.html)
+You can add sources to the `GlobalTranslator` by creating instances of [`TranslationStore`](https://jd.advntr.dev/api/latest/net/kyori/adventure/translation/TranslationStore.html)
 or implementing the [`Translator`](https://jd.advntr.dev/api/latest/net/kyori/adventure/translation/Translator.html) interface yourself.
 
 ## Where translations work
@@ -45,16 +45,16 @@ some.translation.key=Translated Message: {0}
 ```
 
 ```java
-TranslationRegistry registry = TranslationRegistry.create(Key.key("namespace:value"));
+TranslationStore store = TranslationStore.messageFormat(Key.key("namespace:value"))
 
 ResourceBundle bundle = ResourceBundle.getBundle("your.plugin.Bundle", Locale.US, UTF8ResourceBundleControl.get());
-registry.registerAll(Locale.US, bundle, true);
-GlobalTranslator.translator().addSource(registry);
+store.registerAll(Locale.US, bundle, true);
+GlobalTranslator.translator().addSource(store);
 ```
 
-This creates a new `TranslationRegistry` under a specified namespace. Then, a <Javadoc name={"java.util.ResourceBundle"} project={"java"}>`ResourceBundle`</Javadoc>
+This creates a new `TranslationStore` under a specified namespace. Then, a <Javadoc name={"java.util.ResourceBundle"} project={"java"}>`ResourceBundle`</Javadoc>
 is created from a bundle located on the classpath with the specified <Javadoc name={"java.util.Locale"} project={"java"}>`Locale`</Javadoc>.
-Finally, that `ResourceBundle` is added to the registry. That registry is then added as a source to the `GlobalTranslator`.
+Finally, that `ResourceBundle` is added to the store. That store is then added as a source to the `GlobalTranslator`.
 This makes all the translations available server-side.
 
 Now you can use translation keys in translatable components.

@@ -57,11 +57,31 @@ export default defineConfig({
                   items: [
                     {
                       label: "Getting started",
-                      autogenerate: { directory: "paper/admin/getting-started" },
+                      items: ["paper/getting-started", "paper/adding-plugins", "paper/migration", "paper/next-steps"],
                     },
-                    { label: "How-to guides", autogenerate: { directory: "paper/admin/how-to" } },
-                    { label: "Reference", autogenerate: { directory: "paper/admin/reference" } },
-                    { label: "Miscellaneous", autogenerate: { directory: "paper/admin/misc" } },
+                    {
+                      label: "How-to guides",
+                      items: [
+                        "paper/aikars-flags",
+                        "paper/anti-xray",
+                        "paper/basic-troubleshooting",
+                        "paper/profiling",
+                        "paper/updating",
+                        "paper/vanilla",
+                      ],
+                    },
+                    {
+                      label: "Reference",
+                      items: [
+                        "paper/reference/paper-plugins",
+                        "paper/reference/system-properties",
+                        "paper/reference/permissions",
+                      ],
+                    },
+                    {
+                      label: "Miscellaneous",
+                      items: ["paper/misc/paper-bug-fixes", "paper/faq"],
+                    },
                   ],
                 },
                 {
@@ -105,13 +125,28 @@ export default defineConfig({
                   items: [
                     {
                       label: "Getting started",
-                      autogenerate: { directory: "velocity/admin/getting-started" },
+                      items: [
+                        "velocity/getting-started",
+                        "velocity/why-velocity",
+                        "velocity/player-information-forwarding",
+                        "velocity/faq",
+                      ],
                     },
                     {
                       label: "How-to guides",
-                      autogenerate: { directory: "velocity/admin/how-to" },
+                      items: ["velocity/tuning", "velocity/security", "velocity/migration"],
                     },
-                    { label: "Reference", autogenerate: { directory: "velocity/admin/reference" } },
+                    {
+                      label: "Reference",
+                      items: [
+                        "velocity/configuration",
+                        "velocity/reference/system-properties",
+                        "velocity/built-in-commands",
+                        "velocity/server-compatibility",
+                        "velocity/comparisons-to-other-proxies",
+                        "velocity/credits",
+                      ],
+                    },
                   ],
                 },
                 {
@@ -119,15 +154,24 @@ export default defineConfig({
                   items: [
                     {
                       label: "Getting started",
-                      autogenerate: { directory: "velocity/dev/getting-started" },
+                      items: [
+                        "velocity/dev/creating-your-first-plugin",
+                        "velocity/dev/api-basics",
+                        "velocity/dev/pitfalls",
+                      ],
                     },
                     {
                       label: "How-to guides",
-                      autogenerate: { directory: "velocity/dev/how-to" },
+                      items: ["velocity/dev/dependency-management", "velocity/dev/porting-plugins-from-velocity-1"],
                     },
                     {
                       label: "API",
-                      autogenerate: { directory: "velocity/dev/api" },
+                      items: [
+                        "velocity/dev/event-api",
+                        "velocity/dev/scheduler-api",
+                        "velocity/dev/command-api",
+                        "velocity/dev/plugin-messaging",
+                      ],
                     },
                   ],
                 },
@@ -141,7 +185,12 @@ export default defineConfig({
               items: [
                 {
                   label: "Administration",
-                  items: [{ label: "Reference", autogenerate: { directory: "folia/admin/reference" } }],
+                  items: [
+                    {
+                      label: "Reference",
+                      items: ["folia/reference/overview", "folia/reference/region-logic", "folia/faq"],
+                    },
+                  ],
                 },
               ],
             },
@@ -175,13 +224,26 @@ export default defineConfig({
             topics: {
               paper: [
                 "/paper/admin",
+                "/paper/admin/getting-started",
+                "/paper/admin/how-to",
+                "/paper/admin/misc",
+                "/paper/admin/reference",
                 "/paper/dev",
                 "/paper/dev/getting-started",
                 "/paper/dev/misc",
                 "/paper/contributing",
               ],
-              velocity: ["/velocity/admin", "/velocity/dev"],
-              folia: ["/folia/admin"],
+              velocity: [
+                "/velocity/admin",
+                "/velocity/admin/getting-started",
+                "/velocity/admin/how-to",
+                "/velocity/admin/reference",
+                "/velocity/dev",
+                "/velocity/dev/getting-started",
+                "/velocity/dev/how-to",
+                "/velocity/dev/api",
+              ],
+              folia: ["/folia/admin", "/folia/admin/reference"],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],
             },

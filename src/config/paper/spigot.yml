@@ -65,8 +65,7 @@ messages:
       than the client version.
 
       The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines. Additionally, it replaces {0} with "%%_MAJ_MIN_PAT_MC_%%" (the current server
-      version)
+      newlines. Additionally, it replaces {0} with the current server version
   outdated-server:
     default: "Outdated server! I'm still on {0}"
     description: >-
@@ -74,8 +73,7 @@ messages:
       than the client version.
 
       The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines. Additionally, it replaces {0} with "%%_MAJ_MIN_PAT_MC_%%" (the current server
-      version)
+      newlines. Additionally, it replaces {0} with the current server version
   restart:
     default: Server is restarting
     description: >-

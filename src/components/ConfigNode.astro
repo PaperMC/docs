@@ -35,8 +35,8 @@ const formatDefault = (value?: string): Default => {
     return {
       value: value
         .substring(1, value.length - 1)
-        .split(", ")
-        .map((i) => ` - ${i}`)
+        .split(",")
+        .map((i) => ` - ${i.trim()}`)
         .join("\n"),
       inline: false,
     };

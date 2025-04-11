@@ -195,12 +195,13 @@ of your commands in the `paper-plugin.yml` file. Instead, you can register comma
 Cyclic loading describes the phenomenon when a plugin loading causes a loop that eventually cycles back to the original plugin.
 Unlike Bukkit plugins, Paper plugins will not attempt to resolve cyclic loading issues.
 
-```mermaid
-graph LR;
-    A-->B;
-    B-->C;
-    C-->D;
-    D-->A;
+```d2
+direction: right
+
+A -> B
+B -> C
+C -> D
+D -> A
 ```
 
 However, if Paper detects a loop that cannot be resolved, you will get an error that looks like this:

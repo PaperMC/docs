@@ -4,6 +4,7 @@ pnpm-workspace.yaml
 *.mdx
 !README.md
 !CONTRIBUTING.md
+public/d2
 
 # TODO: remove
 old

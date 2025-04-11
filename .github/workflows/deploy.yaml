@@ -24,6 +24,8 @@ jobs:
         with:
           cache: "pnpm"
           node-version: 20
+      - name: "setup d2"
+        run: "curl -fsSL https://d2lang.com/install.sh | sh -s --"
       - name: "install dependencies"
         run: "pnpm install"
       - name: "build"

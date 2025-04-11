@@ -10,10 +10,13 @@ plugin messaging is a way for Velocity plugins to communicate with clients and b
 Velocity manages connections in both directions, for both the client and backend server.
 This means Velocity plugins need to consider 4 main cases:
 
-```mermaid
-flowchart LR
-    player -->|"1 (Incoming)"| Velocity -->|"2 (Outgoing)"| backend
-    backend -->|"3 (Incoming)"| Velocity -->|"4 (Outgoing)"| player
+```d2
+direction: right
+
+player -> Velocity: "1 (Incoming)"
+Velocity -> backend: "2 (Outgoing)"
+backend -> Velocity: "3 (Incoming)"
+Velocity -> player: "4 (Outgoing)"
 ```
 
 :::caution
@@ -39,16 +42,20 @@ It will require registering with the ChannelRegistrar for the event to be fired.
 
 An example use case could be logging messages from a mod that reports the enabled features.
 
-```mermaid
-flowchart LR
-  subgraph handle from player
-    direction LR
-    a[player] --> b[Velocity] ~~~ c[backend]
-  end
-  subgraph forward from player
-    direction LR
-    d[player] --> e[Velocity] --> f[backend]
-  end
+```d2
+direction: right
+
+"Forward from player" {
+  player -> Velocity
+  Velocity -> backend
+}
+
+"Handle from player" {
+  player -> Velocity
+  Velocity -> backend {
+    style.stroke: transparent
+  }
+}
 ```
 
 
@@ -101,12 +108,15 @@ Otherwise, a player can pretend to be your proxy, and spoof them.
 
 :::
 
-```mermaid
-flowchart LR
-  subgraph Send to Backend
-  direction LR
-    player ~~~ Velocity --> backend
-  end
+```d2
+direction: right
+
+"Send to backend" {
+  player -> Velocity {
+    style.stroke: transparent
+  }
+  Velocity -> backend
+}
 ```
 
 
@@ -150,16 +160,20 @@ for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.
 
-```mermaid
-flowchart LR
-subgraph handle from backend
-    direction RL
-    a[backend] --> b[Velocity] ~~~ c[ player]
-end
-subgraph forward from backend
-    direction RL
-    d[backend] --> e[Velocity] --> f[player]
-end
+```d2
+direction: left
+
+"Forward from backend" {
+  backend -> Velocity
+  Velocity -> player
+}
+
+"Handle from backend" {
+  backend -> Velocity
+  Velocity -> player {
+    style.stroke: transparent
+  }
+}
 ```
 
 ```java
@@ -212,12 +226,15 @@ This is only really useful for when you are making client-side mods. Otherwise, 
 
 :::
 
-```mermaid
-flowchart RL
-    subgraph Send to Player
-    direction RL
-    backend ~~~ Velocity --> player
-    end
+```d2
+direction: left
+
+"Send to player" {
+  backend -> Velocity {
+    style.stroke: transparent
+  }
+  Velocity -> player
+}
 ```
 
 ```java

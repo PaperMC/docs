@@ -178,15 +178,16 @@ commands:
 If a plugin is specified as a dependency, it will be loaded before your plugin.
 Be careful as these can cause plugin load issues if cyclical dependencies appear. A cyclical dependency can be illustrated as follows:
 
-```mermaid
-graph LR;
-  PluginA-->PluginB;
-  PluginB-->PluginC;
-  PluginC-->PluginD;
-  PluginD-->PluginA;
+```d2
+direction: right
+
+"Plugin A" -> "Plugin B"
+"Plugin B" -> "Plugin C"
+"Plugin C" -> "Plugin D"
+"Plugin D" -> "Plugin A"
 ```
 
-Where `PluginA` and `PluginB` are plugins that depend on each other.
+Where `Plugin A` and `Plugin B` are plugins that depend on each other.
 
 :::
 

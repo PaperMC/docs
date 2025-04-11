@@ -17,9 +17,9 @@
     "@fontsource/jetbrains-mono": "^5.2.5",
     "@fontsource/poppins": "^5.2.5",
     "astro": "^5.6.1",
-    "sharp": "^0.34.0",
+    "sharp": "^0.34.1",
     "starlight-contributor-list": "^0.3.0",
-    "starlight-links-validator": "^0.15.0",
+    "starlight-links-validator": "^0.15.1",
     "starlight-sidebar-topics": "^0.6.0",
     "starlight-sidebar-topics-dropdown": "^0.5.1",
     "unist-util-visit": "^5.0.0"

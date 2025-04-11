@@ -3,13 +3,15 @@
 Thank you for considering contributing to the PaperMC Docs repository! We appreciate your help in making our documentation better.
 To ensure a smooth and collaborative contribution process, please follow the guidelines below.
 
-## Table of Contents
+## Table of contents
 
 1. [Introduction](#introduction)
 2. [How to add a page](#adding-a-page)
-3. [Submitting Contributions](#submitting-contributions)
-4. [Style Guidelines](#style-guidelines)
-5. [Code of Conduct](#code-of-conduct)
+3. [Submitting contributions](#submitting-contributions)
+4. [Style guidelines](#style-guidelines)
+5. [Automatic constant replacement](#automatic-constant-replacement)
+6. [Linking to Javadocs](#linking-to-javadocs)
+7. [Code of Conduct](#code-of-conduct)
 
 ## Introduction
 
@@ -43,14 +45,11 @@ This documentation page serves to explain all the new semantics and possible con
 This will place the page at the `/paper/reference/paper-plugins` URL on the website. The slug should be unique and follow the
 folder structure of the documentation. The title is the name of the page that will be displayed on the website and in the sidebar.
 
-> TODO: rewrite
+You must also add the page to the sidebar. In this instance we will go to the `astro.config.ts` file and
+add the file to the `items` tag for that section. You must use slug for that file, for example `paper/reference/paper-plugins`.
+Take a look at the existing sidebar elements to get a feel for how it is structured.
 
-You must also add the page to the sidebar. In this instance we will go to the `config/sidebar.paper.ts` file and
-add the file to the `items` tag for that section. You must use the file structure for that file. One example would be
-`admin/reference/paper-plugins` where you omit the file extension and use slashes to denote folders. Take a look at the
-existing sidebar elements to get a feel for how it is structured.
-
-## Submitting Contributions
+## Submitting contributions
 
 If you wish to contribute to the PaperMC Docs, please follow these steps:
 
@@ -69,7 +68,7 @@ If you wish to contribute to the PaperMC Docs, please follow these steps:
 
 7. Once your contribution meets the guidelines and requirements, it will be merged into the main repository.
 
-## Style Guidelines
+## Style guidelines
 
 To maintain consistency and readability across the documentation, please adhere to the following style guidelines:
 
@@ -98,82 +97,49 @@ To maintain consistency and readability across the documentation, please adhere 
 
 11. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
 
-## Automatic Doc Versioning
+## Automatic constant replacement
 
-> TODO: rewrite
+There are quite a few constants you may want to use in your pages, such as the latest Paper/Velocity/Minecraft version.
 
-There are components and methods in order to embed the current Project Version into the documentation. This is done one
-of a few ways:
+These constants can be imported and used in MDX, like so:
 
-1. `SoftwareVersion` component
+```mdxjs
+import { LATEST_MC_RELEASE, LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "/src/utils/versions";
 
-   This component is used to embed the current version of the software into the documentation. An example of this would be:
-
-   ```jsx
-   <SoftwareVersion versionType={"maj-min-pat"}/> // e.g. 1.19.2
-   <SoftwareVersion versionType={"maj-min"}/> // e.g. 1.19
-   <SoftwareVersion versionType={"maj"}/> // e.g. 1
-
-   // You can set the project name to be used for the versioning (defaults to paper):
-   <SoftwareVersion versionType={"maj-min-pat"} project={"velocity"}/> // e.g. 3.3.0-SNAPSHOT
-   ```
-
-2. `Javadoc` component
-
-   This component is used to embed a link to the current version of the corresponding Javadoc. An example of this would be:
-
-   ```jsx
-   <Javadoc name={"org.bukkit.event.Event"}>here</Javadoc>
-   // The project can also be set here, and defaults to Paper
-   ```
-
-3. `VersionFormattedCode` component
-
-   This component is used to embed a code block with the current version of the software. An example of this would be:
-
-   ````jsx
-   <VersionFormattedCode language={"yaml"}>
-   ```⠀
-   name: Paper-Test-Plugin
-   version: '1.0'
-   main: io.papermc.testplugin.TestPlugin
-   description: Paper Test Plugin
-   api-version: '%%_MAJ_MIN_PAT_MC_%%'
-   bootstrapper: io.papermc.testplugin.TestPluginBootstrap
-   loader: io.papermc.testplugin.TestPluginLoader
-   ```⠀
-   </VersionFormattedCode>
-
-   // The possible placeholders are:
-   %%_MAJ_MIN_MC_%%  - Major-Minor Paper Version (E.g. 1.20)
-   %%_MAJ_MIN_PAT_MC_%% - Major-Minor-Patch Paper Version (E.g. 1.20.4)
-   %%_MAJ_MIN_VEL_%% - Major Velocity Version (E.g. 3.1.0)
-   %%_MAJ_MIN_PAT_VEL_%% - Major-Minor-Patch Velocity Version (E.g. 3.1.1-SNAPSHOT)
-   %%_MAJ_MIN_PAT_USERDEV_%% - Latest Paperweight-Userdev Version (E.g. 1.7.3)
-   ````
-
-When the major version of the software changes, the docs will still need to have a "snapshot" created to keep documentation
-for older versions. This is done by using Docusaurus's `version` command:
-
-```bash
-pnpm docusaurus docs:version:paper "1.20"
+Latest Paper version is {LATEST_PAPER_RELEASE}.
+Latest Velocity version is {LATEST_VELOCITY_RELEASE}.
+Latest Minecraft version is {LATEST_MC_RELEASE}.
 ```
 
-## Magic Value Handling
+If you want to perform these replacements in code blocks, you need to use a special `replace` meta property.
+It works in plain .md files too, and you don't need to import anything:
 
-When writing documentation, it is important to avoid using "magic values" in the documentation. This may be slightly less
-obscure than in code, but it is still important to avoid using them. For example, these values may end up being used in
-multiple places, and if they change, it is important to change them in all places. This is why it is important to use
-our `Property` component to embed these values into the documentation. An example of this would be:
-
-```jsx
-<Property name="PAPER_JAVA_MIN" />
+````markdown
+```yaml replace
+name: Paper-Test-Plugin
+version: "1.0"
+main: io.papermc.testplugin.TestPlugin
+description: Paper Test Plugin
+api-version: '\{LATEST_PAPER_RELEASE}'
+bootstrapper: io.papermc.testplugin.TestPluginBootstrap
+loader: io.papermc.testplugin.TestPluginLoader
 ```
+````
 
-This will embed the value of the property into the documentation, and if it changes, it will be changed in all places.
+## Linking to Javadocs
 
-These values are stored in the `config-specs/properties.json` file. If you need to add a new property, you can
-add it to this file, and it will be available to use in the documentation.
+Many Javadoc sites support a `latest` tag, such as javadoc.io or similar, in which case, just use that in a plain Markdown link.
+However, you may also want to reference the Javadocs of the latest version of Paper, Velocity or a centrally defined version of Java, which do not support a `latest` tag.
+
+For that, you can use the `jd:project_name[:module_name][:class_or_member_reference]` Markdown link shortcut:
+
+```md
+[my `Event` link](jd:paper:org.bukkit.event.Event)
+[`ProxyInitializeEvent`](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent)
+[`repeat(long, TimeUnit)`](<jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder#repeat(long,java.util.concurrent.TimeUnit)>)
+[java.base's List](jd:java:java.util.List)
+[java.sql's Connection](jd:java:java.sql:java.sql.Connection)
+```
 
 ## Code of Conduct
 

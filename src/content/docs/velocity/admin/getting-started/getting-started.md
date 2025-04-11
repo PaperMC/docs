@@ -1,8 +1,6 @@
 ---
 title: Getting started
 slug: velocity/getting-started
-sidebar:
-  order: 1
 ---
 
 This page covers how to install and set up a minimal configuration of Velocity.

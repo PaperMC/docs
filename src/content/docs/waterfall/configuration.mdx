@@ -7,6 +7,10 @@ banner:
   content: We recommend you transition to <a href="https://papermc.io/software/velocity">Velocity</a>. For more information, see the <a href="https://forums.papermc.io/threads/1088/">announcement</a>.
 ---
 
+import ConfigNode from "/src/components/ConfigNode.astro";
+import WaterfallConfigYML from "/src/config/waterfall/waterfall-config.yml?raw";
+import { parse } from "yaml";
+
 This page details the various configuration settings exposed by Waterfall. These settings can be
 found in waterfall.yml.
 
@@ -21,4 +25,4 @@ Click on a leaf node to view the description for that setting.
 
 :::
 
-{/* <ConfigDocBlock data={WaterfallConfigSpec} /> */}
+<ConfigNode data={parse(WaterfallConfigYML)} />

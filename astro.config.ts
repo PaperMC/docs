@@ -74,6 +74,18 @@ export default defineConfig({
                     {
                       label: "Reference",
                       items: [
+                        {
+                          label: "Configuration",
+                          items: [
+                            "paper/reference/configuration",
+                            "paper/reference/global-configuration",
+                            "paper/reference/world-configuration",
+                            "paper/reference/bukkit-configuration",
+                            "paper/reference/spigot-configuration",
+                            "paper/reference/bukkit-commands-configuration",
+                            "paper/reference/server-properties",
+                          ],
+                        },
                         "paper/reference/paper-plugins",
                         "paper/reference/system-properties",
                         "paper/reference/permissions",

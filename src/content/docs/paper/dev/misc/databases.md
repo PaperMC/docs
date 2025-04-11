@@ -65,8 +65,8 @@ public class DatabaseManager {
 }
 ```
 
-You then have access to a [`Connection`](jd:java:java.sql.Connection:java.sql) object,
-which you can use to create a [`Statement`](jd:java:java.sql.Statement:java.sql) and execute SQL queries.
+You then have access to a [`Connection`](jd:java:java.sql:java.sql.Connection) object,
+which you can use to create a [`Statement`](jd:java:java.sql:java.sql.Statement) and execute SQL queries.
 To learn more about the Java Database Connectivity API, see [here](https://www.baeldung.com/java-jdbc)
 
 </details>
@@ -188,7 +188,7 @@ but it can be used to do much more malicious things, such as deleting the entire
 
 ### Prepared statements
 
-Using prepared statements in Java with [`PreparedStatement`](jd:java:java.sql.PreparedStatement:java.sql)s
+Using prepared statements in Java with [`PreparedStatement`](jd:java:java.sql:java.sql.PreparedStatement)s
 helps prevent SQL injection. They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection
 [here](https://www.baeldung.com/sql-injection).

@@ -6,5 +6,8 @@ pnpm-workspace.yaml
 !CONTRIBUTING.md
 public/d2
 
+# Prettier has issues with Astro
+src/components/ConfigNode.astro
+
 # TODO: remove
 old

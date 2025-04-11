@@ -1,14 +1,9 @@
 ---
-slug: /reference/configuration
+title: Configuration
+slug: paper/reference/configuration
 ---
 
-# Paper Configuration
-
-import ConfigurationStructureDiagram from "@site/src/components/config/ConfigurationStructureDiagram";
-
----
-
-## Paper configuration files
+import { FileTree } from "@astrojs/starlight/components";
 
 :::note
 
@@ -17,7 +12,33 @@ If this is not the case, they offer a brief explanation to what they are.
 
 :::
 
-<ConfigurationStructureDiagram/>
+<FileTree>
+  - logs all logs for the server
+    - latest.log the most recent log
+    - ... old logs are compressed into .gz files
+  - config
+    - [paper-global.yml](/paper/reference/global-configuration)
+    - [paper-world-defaults.yml](/paper/reference/world-configuration)
+  - plugins you can place your plugin JARs here
+    - .paper-remapped used to store remapped plugin JARs, learn more [here](https://forums.papermc.io/threads/important-dev-psa-future-removal-of-cb-package-relocation.1106/)
+      - ...
+    - spark used to store configuration for the bundled spark profiler, learn more [here](https://spark.lucko.me/docs/Configuration)
+      - ...
+  - &lt;world&gt;
+    - [paper-world.yml](#per-world-values) stores configuration values that apply only to this world
+  - banned-ips.json stores IP addresses banned from the server
+  - banned-players.json stores information about players banned from the server
+  - [bukkit.yml](/paper/reference/bukkit-configuration)
+  - [commands.yml](/paper/reference/bukkit-commands-configuration)
+  - eula.txt stores the EULA consent status
+  - help.yml stores configuration for the `/help` command
+  - ops.json stores information about players with operator status
+  - permissions.yml stores permission configuration
+  - [server.properties](/paper/reference/server-properties)
+  - [spigot.yml](/paper/reference/spigot-configuration)
+  - usercache.json caches players' Mojang API data, e.g. their head textures
+  - whitelist.json stores whitelist configuration
+</FileTree>
 
 ## Per-world configuration
 

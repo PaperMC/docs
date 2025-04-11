@@ -23,7 +23,8 @@
     "starlight-links-validator": "^0.15.1",
     "starlight-sidebar-topics": "^0.6.0",
     "starlight-sidebar-topics-dropdown": "^0.5.1",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "yaml": "^2.7.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

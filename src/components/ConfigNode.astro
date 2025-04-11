@@ -1,0 +1,150 @@
+---
+import { render } from "../utils/markdown";
+
+interface LeafData {
+  description: string;
+  default?: string;
+}
+
+interface MessageData {
+  message: string;
+  color?: string;
+}
+
+type Data = { [key: string]: Data } | LeafData | MessageData;
+
+interface Props {
+  data: Data;
+  separator?: string;
+
+  path?: string[];
+}
+
+let { data, separator, path } = Astro.props;
+path = path ?? [];
+
+const root = path.length === 0;
+
+interface Default {
+  value: string;
+  inline: boolean;
+}
+const formatDefault = (value?: string): Default => {
+  if (!value) value = "";
+  if (value.length > 2 && value.match(/^\[.+]$/)) {
+    return {
+      value: value
+        .substring(1, value.length - 1)
+        .split(", ")
+        .map((i) => ` - ${i}`)
+        .join("\n"),
+      inline: false,
+    };
+  }
+
+  return { value, inline: true };
+};
+---
+
+<div class:list={["not-content", "node", root && "node-root"]}>
+  {
+    Object.entries(data).map(([key, value]) => {
+      const displayKey = key.replace(/^_+/, ""); // remove leading underscores, used for duplicating keys
+      const childPath = [...path, key.replace(/-/g, "_")];
+
+      const def = formatDefault(value.default);
+      // this is ugly, but the spans don't play nice otherwise
+      const defValue = def.inline ? (<span class="value">{def.value}</span><a class="link" href={`#${childPath.join("_")}`}>#</a>) : (<a class="link" href={`#${childPath.join("_")}`}>#</a><p class="value">{def.value}</p>);
+      return (
+        <div>
+          {"message" in value ? (
+            <div
+              class="block message"
+              style={value.color ? `border-color: ${value.color}` : undefined}
+              set:html={render(value.message)}
+            />
+          ) : "description" in value ? (
+            <details id={childPath.join("_")}>
+              <summary class="line">
+                <span class="key">{displayKey}{separator ?? ": "}</span>{defValue}
+              </summary>
+              <div class="block" set:html={render(value.description)} />
+            </details>
+          ) : (
+            <span class="key">{displayKey}:</span>
+            <Astro.self data={value} path={childPath} {separator} />
+          )}
+        </div>
+      );
+    })
+  }
+</div>
+
+<style>
+  .node {
+    padding-left: 1.25rem;
+    font-size: 1rem;
+    font-family: var(--__sl-font-mono);
+  }
+
+  .node-root {
+    padding: 1rem;
+    background-color: var(--sl-color-gray-6);
+  }
+
+  .line {
+    cursor: pointer;
+    list-style: none;
+    overflow-wrap: anywhere;
+  }
+
+  .key {
+    white-space: pre;
+    color: var(--sl-color-text-accent);
+  }
+
+  .value {
+    white-space: pre-wrap;
+    color: var(--sl-color-text);
+    padding-right: 0.5rem;
+  }
+
+  .block {
+    margin-top: 0.5rem;
+    margin-bottom: 0.25rem;
+    margin-left: 1.25rem;
+    padding: 0.75rem;
+    line-height: 1.5;
+    color: var(--sl-color-white);
+    background-color: var(--sl-color-gray-5);
+    border-left: 5px solid var(--sl-color-bg-accent);
+  }
+
+  .message {
+    margin-left: 0;
+  }
+
+  .link {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .line:hover .link {
+    opacity: 1;
+  }
+</style>
+
+<script>
+  window.addEventListener("load", () => {
+    const hash = window.location.hash.slice(1);
+    if (!hash) {
+      return;
+    }
+
+    const el = document.getElementById(hash) as HTMLDetailsElement | null;
+    if (el?.tagName === "DETAILS") {
+      el.open = true;
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  });
+</script>

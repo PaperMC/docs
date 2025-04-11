@@ -1,0 +1,26 @@
+---
+title: commands.yml
+slug: paper/reference/bukkit-commands-configuration
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import CommandsYML from "/src/config/paper/commands.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+The below YAML shows you the structure and default values for the legacy `commands.yml`.
+
+Click on a leaf node to view the description for that setting.
+
+:::
+
+:::caution
+
+The aliases defined in this legacy file do not support modern features, such as:
+- Tab completion
+- Permissions
+
+:::
+
+<ConfigNode data={parse(CommandsYML)} />

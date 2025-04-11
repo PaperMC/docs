@@ -1,6 +1,10 @@
 pnpm-lock.yaml
-docs/versioned
+pnpm-workspace.yaml
 *.md
 *.mdx
 !README.md
 !CONTRIBUTING.md
+public/d2
+
+# TODO: remove
+old

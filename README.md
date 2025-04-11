@@ -9,8 +9,9 @@ How to get docs running on your local machine for development.
 
 ### Prerequisites
 
--   [node](https://nodejs.org)
--   [pnpm](https://pnpm.io/installation)
+- [node](https://nodejs.org)
+- [pnpm](https://pnpm.io/installation)
+- [d2](https://d2lang.com/) (optional for development - used for generating diagrams)
 
 ### Local Development
 
@@ -47,7 +48,7 @@ to be hosted on any static content server.
 
 ## License
 
-The PaperMC Documentation (e.g., `.md` files in the `/docs` folder) is
+The PaperMC Documentation (e.g., `.md` files in the `/src/content/docs` folder) is
 [CC-BY-SA-4.0](https://github.com/PaperMC/docs/blob/main/LICENSE-docs) licensed.
 
 The supporting code is

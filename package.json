@@ -1,77 +1,35 @@
 {
   "name": "docs",
-  "version": "1.0.0",
-  "license": "BSD-2-Clause",
-  "private": true,
+  "type": "module",
+  "version": "0.0.0",
   "scripts": {
-    "dev": "docusaurus start --no-open --no-minify",
-    "start": "pnpm run build && pnpm run serve",
-    "build": "docusaurus build",
-    "clear": "docusaurus clear",
-    "serve": "docusaurus serve --no-open",
-    "swizzle": "docusaurus swizzle --typescript",
-    "write-translations": "docusaurus write-translations",
-    "write-heading-ids": "docusaurus write-heading-ids",
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
   },
   "dependencies": {
-    "@docusaurus/core": "3.6.0",
-    "@docusaurus/faster": "^3.6.0",
-    "@docusaurus/plugin-content-docs": "3.6.0",
-    "@docusaurus/plugin-content-pages": "3.6.0",
-    "@docusaurus/plugin-debug": "3.6.0",
-    "@docusaurus/plugin-pwa": "3.6.0",
-    "@docusaurus/plugin-sitemap": "3.6.0",
-    "@docusaurus/theme-classic": "3.6.0",
-    "@docusaurus/theme-common": "3.6.0",
-    "@docusaurus/theme-mermaid": "3.6.0",
-    "@docusaurus/theme-search-algolia": "3.6.0",
-    "@floating-ui/react": "^0.26.16",
-    "@fontsource/jetbrains-mono": "5.0.20",
-    "@iconify/react": "5.0.1",
-    "@mdx-js/react": "3.0.1",
-    "clsx": "2.1.0",
-    "docusaurus-plugin-sass": "^0.2.5",
-    "js-yaml": "4.1.0",
-    "prism-react-renderer": "^2.3.1",
-    "raw-loader": "4.0.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-markdown": "8.0.7"
+    "@astrojs/markdown-remark": "^6.3.1",
+    "@astrojs/starlight": "^0.33.0",
+    "@fontsource/jetbrains-mono": "^5.2.5",
+    "@fontsource/poppins": "^5.2.5",
+    "astro": "^5.6.1",
+    "astro-d2": "^0.7.0",
+    "sharp": "^0.34.1",
+    "starlight-contributor-list": "^0.3.0",
+    "starlight-links-validator": "^0.15.1",
+    "starlight-sidebar-topics": "^0.6.0",
+    "starlight-sidebar-topics-dropdown": "^0.5.1",
+    "unist-util-visit": "^5.0.0"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.6.0",
-    "@docusaurus/tsconfig": "3.6.0",
-    "@docusaurus/types": "3.6.0",
-    "@fec/remark-a11y-emoji": "4.0.2",
-    "@types/is-ci": "3.0.4",
-    "@types/js-yaml": "^4.0.9",
-    "@types/node": "20.14.2",
-    "@types/react": "^18.2.79",
-    "is-ci": "3.0.1",
-    "prettier": "3.3.1",
-    "regenerator-runtime": "0.14.1",
-    "typescript": "5.4.5"
+    "@types/node": "^22.14.0",
+    "prettier": "3.5.3",
+    "prettier-plugin-astro": "0.14.1",
+    "prettier-plugin-organize-imports": "^4.1.0"
   },
-  "browserslist": {
-    "production": [
-      ">0.5%",
-      "not dead",
-      "not op_mini all",
-      "not ie <= 11"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "packageManager": "pnpm@9.12.3+sha512.cce0f9de9c5a7c95bef944169cc5dfe8741abfb145078c0d508b868056848a87c81e626246cb60967cbd7fd29a6c062ef73ff840d96b3c86c40ac92cf4a813ee",
-  "pnpm": {
-    "patchedDependencies": {
-      "@docusaurus/plugin-content-docs@3.6.0": "patches/@docusaurus__plugin-content-docs@3.6.0.patch",
-      "@docusaurus/utils@3.6.0": "patches/@docusaurus__utils@3.6.0.patch"
-    }
-  }
+  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
 }

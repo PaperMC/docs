@@ -1,6 +1,6 @@
 [files]
 extend-exclude = [
-    "docs/versioned" # old documentation shouldn't be checked
+  "public/d2" # D2 output shouldn't be checked
 ]
 
 [default]

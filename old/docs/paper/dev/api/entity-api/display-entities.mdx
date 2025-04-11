@@ -1,0 +1,242 @@
+---
+slug: /dev/display-entities
+description: The display entity API and how to use it.
+---
+
+# Display Entities
+
+Added in 1.19.4, [display entities](https://minecraft.wiki/w/Display) are a powerful way to display
+various things in the world, like blocks, items and text.
+
+By default, these entities have no hitbox, don't move, make sounds or take damage,
+making them the perfect for all kinds of applications, like holograms.
+
+## Types
+
+### Text
+
+Text can be displayed via a <Javadoc name={"org.bukkit.entity.TextDisplay"}>`TextDisplay`</Javadoc>
+entity.
+
+```java
+TextDisplay display = world.spawn(location, TextDisplay.class, entity -> {
+    // customize the entity!
+    entity.text(Component.text("Some awesome content", NamedTextColor.BLACK));
+    entity.setBillboard(Display.Billboard.VERTICAL); // pivot only around the vertical axis
+    entity.setBackgroundColor(Color.RED); // make the background red
+
+    // see the Display and TextDisplay Javadoc, there are many more options
+});
+```
+
+### Blocks
+
+Blocks can be displayed via a <Javadoc name={"org.bukkit.entity.BlockDisplay"}>`BlockDisplay`</Javadoc>
+entity.
+
+```java
+BlockDisplay display = world.spawn(location, BlockDisplay.class, entity -> {
+    // customize the entity!
+    entity.setBlock(Material.GRASS_BLOCK.createBlockData());
+});
+```
+
+### Items
+
+Items can be displayed via an <Javadoc name={"org.bukkit.entity.ItemDisplay"}>`ItemDisplay`</Javadoc>
+entity.
+
+Despite its name, an _item_ display can also display _blocks_, with the difference being the
+position in the model - an item display has its position in the center, whereas a block display has
+its position in the corner of the block (this can be seen with the hitbox debug mode - F3+B).
+
+```java
+ItemDisplay display = world.spawn(location, ItemDisplay.class, entity -> {
+    // customize the entity!
+    entity.setItemStack(ItemStack.of(Material.SKELETON_SKULL));
+});
+```
+
+## Transformation
+
+Displays can have an arbitrary affine transformation applied to them, allowing you to position and
+warp them as you choose in 3D space.
+
+Transformations are applied to the display in this order:
+
+```mermaid
+flowchart LR;
+    translation[Translation]-->left_rotation[Left rotation];
+    left_rotation-->scale[Scale];
+    scale-->right_rotation[Right rotation];
+```
+
+:::tip[Visualizing transformations]
+
+Use the [Transformation Visualizer](https://misode.github.io/transformation/) website to visualize
+a transformation for quick prototyping!
+
+:::
+
+### Scale
+
+The most basic transformation is scaling, let's take a grass block and scale it up:
+
+```java
+world.spawn(location, BlockDisplay.class, entity -> {
+    entity.setBlock(Material.GRASS_BLOCK.createBlockData());
+    entity.setTransformation(
+        new Transformation(
+                new Vector3f(), // no translation
+                new AxisAngle4f(), // no left rotation
+                new Vector3f(2, 2, 2), // scale up by a factor of 2 on all axes
+                new AxisAngle4f() // no right rotation
+        )
+    );
+    // or set a raw transformation matrix from JOML
+    // entity.setTransformationMatrix(
+    //         new Matrix4f()
+    //                 .scale(2) // scale up by a factor of 2 on all axes
+    // );
+});
+```
+
+![Scaling example](./assets/display-scale.png)
+
+### Rotation
+
+You can also rotate it, let's tip it on its corner:
+
+```java
+world.spawn(location, BlockDisplay.class, entity -> {
+    entity.setBlock(Material.GRASS_BLOCK.createBlockData());
+    entity.setTransformation(
+        new Transformation(
+                new Vector3f(), // no translation
+                // highlight-next-line
+                new AxisAngle4f((float) -Math.toRadians(45), 1, 0, 0), // rotate -45 degrees on the X axis
+                new Vector3f(2, 2, 2), // scale up by a factor of 2 on all axes
+                // highlight-next-line
+                new AxisAngle4f((float) Math.toRadians(45), 0, 0, 1) // rotate +45 degrees on the Z axis
+        )
+    );
+    // or set a raw transformation matrix from JOML
+    // entity.setTransformationMatrix(
+    //         new Matrix4f()
+    //                 .scale(2) // scale up by a factor of 2 on all axes
+                       // highlight-start
+    //                 .rotateXYZ(
+    //                         (float) Math.toRadians(360 - 45), // rotate -45 degrees on the X axis
+    //                         0,
+    //                         (float) Math.toRadians(45) // rotate +45 degrees on the Z axis
+    //                 )
+                       // highlight-end
+    // );
+});
+```
+
+![Rotation example](./assets/display-rotation.png)
+
+### Translation
+
+Finally, we can also apply a translation transformation (position offset) to the display, for example:
+
+```java
+world.spawn(location, BlockDisplay.class, entity -> {
+    entity.setBlock(Material.GRASS_BLOCK.createBlockData());
+    entity.setTransformation(
+        new Transformation(
+                // highlight-next-line
+                new Vector3f(0.5F, 0.5F, 0.5F), // offset by half a block on all axes
+                new AxisAngle4f((float) -Math.toRadians(45), 1, 0, 0), // rotate -45 degrees on the X axis
+                new Vector3f(2, 2, 2), // scale up by a factor of 2 on all axes
+                new AxisAngle4f((float) Math.toRadians(45), 0, 0, 1) // rotate +45 degrees on the Z axis
+        )
+    );
+    // or set a raw transformation matrix from JOML
+    // entity.setTransformationMatrix(
+    //         new Matrix4f()
+                       // highlight-next-line
+    //                 .translate(0.5F, 0.5F, 0.5F) // offset by half a block on all axes
+    //                 .scale(2) // scale up by a factor of 2 on all axes
+    //                 .rotateXYZ(
+    //                         (float) Math.toRadians(360 - 45), // rotate -45 degrees on the X axis
+    //                         0,
+    //                         (float) Math.toRadians(45) // rotate +45 degrees on the Z axis
+    //                 )
+    // );
+});
+```
+
+![Translation example](./assets/display-trans.png)
+
+## Interpolation
+
+A transformation can be linearly interpolated by the client to create a smooth animation,
+switching from one transformation to the next.
+
+An example of this would be smoothly rotating a block/item/text in-place. In conjunction with the
+[Scheduler API](../scheduler.mdx), the animation can be restarted after it's done,
+making the display spin indefinitely:
+
+```java
+ItemDisplay display = location.getWorld().spawn(location, ItemDisplay.class, entity -> {
+    entity.setItemStack(ItemStack.of(Material.GOLDEN_SWORD));
+});
+
+int duration = 5 * 20; // duration of half a revolution (5 * 20 ticks = 5 seconds)
+
+Matrix4f mat = new Matrix4f().scale(0.5F); // scale to 0.5x - smaller item
+Bukkit.getScheduler().runTaskTimer(plugin, task -> {
+    if (!display.isValid()) { // display was removed from the world, abort task
+        task.cancel();
+        return;
+    }
+
+    display.setTransformationMatrix(mat.rotateY(((float) Math.toRadians(180)) + 0.1F /* prevent the client from interpolating in reverse */));
+    display.setInterpolationDelay(0); // no delay to the interpolation
+    display.setInterpolationDuration(duration); // set the duration of the interpolated rotation
+}, 1 /* delay the initial transformation by one tick from display creation */, duration);
+```
+
+![Interpolation example](./assets/display-interp.gif)
+
+## Use cases
+
+Displays have many different use cases, ranging from stationary decoration to complex animation.
+
+A popular, simple use case is to make a decoration that's visible to only specific players,
+which can be achieved using standard entity API - <Javadoc name={"org.bukkit.entity.Entity#setVisibleByDefault(boolean)"}>`Entity#setVisibleByDefault()`</Javadoc>
+and <Javadoc name={"org.bukkit.entity.Player#showEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#showEntity()`</Javadoc>/
+<Javadoc name={"org.bukkit.entity.Player#hideEntity(org.bukkit.plugin.Plugin,org.bukkit.entity.Entity)"}>`Player#hideEntity()`</Javadoc>.
+
+:::caution
+
+If the display is only used temporarily, its persistence can be disabled with
+<Javadoc name={"org.bukkit.entity.Entity#setPersistent(boolean)"}>`Entity#setPersistent()`</Javadoc>,
+meaning it will disappear when the chunk unloads.
+
+_However, if the display is located in a chunk that never unloads, i.e. a spawn chunk, it will never
+be removed, creating a resource leak. Make sure to remove the display afterward with
+<Javadoc name={"org.bukkit.entity.Entity#remove()"}>`Entity#remove()`</Javadoc>._
+
+:::
+
+They can also be added as passengers to entities with the
+<Javadoc name={"org.bukkit.entity.Entity#addPassenger(org.bukkit.entity.Entity)"}>`Entity#addPassenger()`</Javadoc>/
+<Javadoc name={"org.bukkit.entity.Entity#removePassenger(org.bukkit.entity.Entity)"}>`Entity#removePassenger()`</Javadoc>
+methods, useful for making styled name tags!
+
+```java
+TextDisplay display = world.spawn(location, TextDisplay.class, entity -> {
+    // ...
+
+    entity.setVisibleByDefault(false); // hide it for everyone
+    entity.setPersistent(false); // don't save the display, it's temporary
+});
+
+entity.addPassenger(display); // mount it on top of an entity's head
+player.showEntity(plugin, display); // show it to a player
+// ...
+display.remove(); // done with the display
+```

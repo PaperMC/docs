@@ -1,8 +1,5 @@
 {
-  "extends": "@docusaurus/tsconfig",
-  "compilerOptions": {
-    "baseUrl": ".",
-    "moduleResolution": "Node16",
-    "lib": ["DOM", "ES2021"]
-  }
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"]
 }

@@ -54,10 +54,10 @@ parents -> "third child"
 "third child" -> "third grandchild"
 ```
 
-It is important to remember that this tree-like structure is not only important for Brigadier. It is a fairly often used concept. Paper's included [Adventure API](../../component-api/intro.mdx)
+It is important to remember that this tree-like structure is not only important for Brigadier. It is a fairly often used concept. Paper's included [Adventure API](/paper/dev/component-api/introduction)
 also operates using a tree. Why is this important for using Brigadier though? Well, it allows for explicit command declaration. Being at a node, you know exactly where you are. That means you do not have
 to, like in standard Bukkit way, first check whether the amount of arguments is 2 and the first argument is `tphere`. Because you are at that exact `tphere` node, you can just start writing
-your logic. If you want to learn more about the execute logic of Brigadier commands, it is suggested that you check out [command executors](./executors).
+your logic. If you want to learn more about the execute logic of Brigadier commands, it is suggested that you check out [command executors](/paper/dev/command-api/basics/executors).
 
 ## How can we visualize a tree in-code?
 We can define our root like this:

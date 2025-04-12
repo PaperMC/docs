@@ -212,7 +212,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.disablePluginRemapping
 
 - **default**: `false`
-- **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](/paper/dev/getting-started/userdev#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
+- **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](/paper/dev/userdev#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
 
 #### paper.preferSparkPlugin
 

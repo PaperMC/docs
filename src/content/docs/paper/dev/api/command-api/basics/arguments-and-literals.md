@@ -6,7 +6,7 @@ slug: paper/dev/command-api/basics/arguments-and-literals
 
 :::note
 
-In the [command tree docs](./command-tree) we have looked at the structure of Brigadier commands and how to build up a command tree.
+In the [command tree docs](/paper/dev/command-api/basics/command-tree) we have looked at the structure of Brigadier commands and how to build up a command tree.
 If you haven't finished reading that yet, we strongly recommend doing that before reading about arguments and literals.
 
 :::
@@ -39,7 +39,7 @@ Commands.literal("plant")
 :::tip
 
 You may notice the usage of the `executes` method. This method declares logic to our branches. If a branch has no `executes` method defined, it will not be executable.
-For more information about execution logic, [click here](./executors).
+For more information about execution logic, [click here](/paper/dev/command-api/basics/executors).
 
 :::
 
@@ -169,7 +169,7 @@ Here you can see the arguments in action:
 ## Further reference
 ### Minecraft arguments
 Apart from these built-in Brigadier arguments, countless custom arguments are defined by Paper as well. These can be accessed in a static context with the `ArgumentTypes` class. You
-can read more about these [here](../arguments/minecraft.mdx).
+can read more about these [here](/paper/dev/command-api/arguments/minecraft).
 
 ### Custom arguments
 Sometimes you want to define your own, custom arguments. For that you can implement the `CustomArgumentType<T, N>` interface.

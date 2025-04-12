@@ -100,7 +100,7 @@ Beyond plain reading access to registries, Paper also offers a way for plugins t
 
 :::caution
 Mutating registries needs to be done during the server's bootstrap phase.
-As such, this section is only applicable to [Paper plugins](../getting-started/paper-plugins.mdx).
+As such, this section is only applicable to [Paper plugins](/paper/dev/getting-started/paper-plugins).
 
 **Exceptions** thrown by plugins during this phase will cause the server to shutdown before loading,
 as missing values or modifications to the registries would otherwise cause data loss.
@@ -109,7 +109,7 @@ as missing values or modifications to the registries would otherwise cause data 
 :::note
 Mutating registries is done via the
 [LifecycleEventManager](jd:java:io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager).
-See the [Lifecycle Events](./lifecycle.mdx) page for more information.
+See the [Lifecycle Events](/paper/dev/lifecycle) page for more information.
 :::
 
 The general entrypoint for mutating registries is

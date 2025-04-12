@@ -6,7 +6,7 @@ slug: paper/dev/command-api/basics/executors
 
 :::tip
 
-This page requires knowledge about [Command Trees](./command-tree.mdx) and [Arguments and Literals](./arguments-and-literals.mdx). If you haven't read
+This page requires knowledge about [Command Trees](/paper/dev/command-api/basics/command-tree) and [Arguments and Literals](/paper/dev/command-api/basics/arguments-and-literals). If you haven't read
 through those articles, it is highly recommend to check those out beforehand!
 
 :::
@@ -33,7 +33,7 @@ public interface Command<S> {
 
 Our lambda has one parameter and returns an integer. That is essentially that `run` method defined in that interface. The one parameter, `CommandContext<S>` is the one where
 we get all the information about the sender who executed that command and all the command arguments. It has quite a few methods, but the main ones of use for us are
-`S getSource()` and `V getArgument(String, Class<V>)`. We have taken a brief look at the `getArgument(...)` in the [Arguments and Literals](./arguments-and-literals) chapter, but
+`S getSource()` and `V getArgument(String, Class<V>)`. We have taken a brief look at the `getArgument(...)` in the [Arguments and Literals](/paper/dev/command-api/basics/arguments-and-literals) chapter, but
 in a nutshell, this is the method that we can retrieve arguments from. There will be more specific examples later on.
 
 You should mainly notice the generic parameter S by the `getSource()` method. That is the type of the source of the command. For the executes method, this type is always a
@@ -42,7 +42,7 @@ The most used method from that is `getSender()`, as that is the command sender w
 which is relevant, if the command was ran via `/execute as <entity> run <our_command>`. It is not necessarily required, but is seen as good practice.
 
 ## Example: Flyspeed command
-In the [Arguments and Literals](./arguments-and-literals) chapter, we have briefly declared the structure for a `/flyspeed` command with the use of a ranged float argument.
+In the [Arguments and Literals](/paper/dev/command-api/basics/arguments-and-literals) chapter, we have briefly declared the structure for a `/flyspeed` command with the use of a ranged float argument.
 But that command does not actually set the flyspeed of the executing player. In order to do that, we'd have to append an executor onto it, like this:
 
 ```java title="FlightSpeedCommand.java"

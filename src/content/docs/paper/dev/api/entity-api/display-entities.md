@@ -175,7 +175,7 @@ A transformation can be linearly interpolated by the client to create a smooth a
 switching from one transformation to the next.
 
 An example of this would be smoothly rotating a block/item/text in-place. In conjunction with the
-[Scheduler API](../scheduler.mdx), the animation can be restarted after it's done,
+[Scheduler API](/paper/dev/scheduler), the animation can be restarted after it's done,
 making the display spin indefinitely:
 
 ```java

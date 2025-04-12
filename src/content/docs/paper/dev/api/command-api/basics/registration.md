@@ -17,7 +17,7 @@ and preferred one, is in the `PluginBootstrap` class of our plugin.
 
 :::note
 
-This requires you to use a [`paper-plugin.yml` plugin](../../../getting-started/paper-plugins.mdx).
+This requires you to use a [`paper-plugin.yml` plugin](/paper/dev/getting-started/paper-plugins).
 
 If you are not using `paper-plugin.yml`, you can instead [register your commands inside your plugin's main class](#registering-inside-a-plugin-main-class).
 
@@ -115,7 +115,7 @@ this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, comman
 ### Registering a BasicCommand
 A [`BasicCommand`](jd:paper:io.papermc.paper.command.brigadier.BasicCommand) is a Bukkit-like way of defining commands. Instead of building up a command tree,
 we allow all user input and retrieve the arguments as a simple array of strings. This type of commands is particularly useful for very simple, text based commands,
-like a `/broadcast` command. You can read up on more details about basic commands [here](../misc/basic-command.mdx).
+like a `/broadcast` command. You can read up on more details about basic commands [here](/paper/dev/command-api/misc/basic-command).
 
 Assuming you already have your `BasicCommand` object, we can register it like this:
 
@@ -130,4 +130,4 @@ this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, comman
 Similar to the `LiteralCommandNode`, we also have overloads for setting various additional information for our command.
 
 ## Further reference
-* For a quick reference on the LifecycleEventManager, click [here](../../lifecycle.mdx).
+* For a quick reference on the LifecycleEventManager, click [here](/paper/dev/lifecycle).

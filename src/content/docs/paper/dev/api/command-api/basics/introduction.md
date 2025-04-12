@@ -19,7 +19,7 @@ Paper's command system is still experimental and may change in the future.
 
 :::note
 
-To see a comparison between the new Brigadier system and the old Bukkit system, [click here](../misc/comparison-bukkit-brigadier).
+To see a comparison between the new Brigadier system and the old Bukkit system, [click here](/paper/dev/command-api/misc/comparison-bukkit-brigadier).
 
 :::
 

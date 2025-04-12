@@ -1,7 +1,7 @@
 import starlight from "@astrojs/starlight";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
-// import starlightLinksValidator from "starlight-links-validator";
+import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
@@ -44,7 +44,9 @@ export default defineConfig({
         Banner: "./src/components/overrides/Banner.astro",
       },
       plugins: [
-        // starlightLinksValidator(),
+        starlightLinksValidator({
+          errorOnInvalidHashes: false, // enable if you want to check hashes - it doesn't work with config diagrams
+        }),
         starlightSidebarTopics(
           [
             {
@@ -315,7 +317,11 @@ export default defineConfig({
                 "misc/java-install",
                 {
                   label: "Tools",
-                  items: ["misc/tools/minimessage-web-editor"],
+                  items: [
+                    "misc/tools/start-script-gen",
+                    "misc/tools/item-command-converter",
+                    "misc/tools/minimessage-web-editor",
+                  ],
                 },
               ],
             },

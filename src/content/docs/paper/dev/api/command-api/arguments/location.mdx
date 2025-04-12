@@ -1,0 +1,99 @@
+---
+title: Location
+description: BlockPosition, FinePosition and World argument documentation.
+slug: paper/dev/command-api/arguments/location
+---
+
+import BlockPositionMp4 from "./assets/vanilla-arguments/blockposition.mp4?url";
+import FinePositionMp4 from "./assets/vanilla-arguments/fineposition.mp4?url";
+import WorldMp4 from "./assets/vanilla-arguments/world.mp4?url";
+
+import Video from "/src/components/Video.astro";
+
+## Block position argument
+The block position argument is used for retrieving the position of a block. It works the same way as the first argument of the `/setblock <position> <block>` Vanilla command.
+In order to retrieve the `BlockPosition` variable from the
+[`BlockPositionResolver`](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.BlockPositionResolver), we have to resolve it using the command source.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> blockPositionArgument() {
+    return Commands.literal("blockpositionargument")
+        .then(Commands.argument("arg", ArgumentTypes.blockPosition())
+            .executes(ctx -> {
+                final BlockPositionResolver blockPositionResolver = ctx.getArgument("arg", BlockPositionResolver.class);
+                final BlockPosition blockPosition = blockPositionResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendPlainMessage("Put in " + blockPosition.x() + " " + blockPosition.y() + " " + blockPosition.z());
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={BlockPositionMp4} />
+
+
+## Fine position argument
+The fine position argument works similarly to the block position argument, with the only difference being that it can accept decimal (precise) location input. The optional
+overload (`ArgumentTypes.finePosition(boolean centerIntegers)`), which defaults to false if not set, will center whole input, meaning 5 becomes 5.5 (5.0 would stay as 5.0 though),
+as that is the "middle" of a block. This only applies to X/Z. The y coordinate is untouched by this operation.
+
+This argument returns a [`FinePositionResolver`](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.FinePositionResolver). You can resolve that by running `FinePositionResolver#resolve(CommandSourceStack)` to get the resulting
+[`FinePosition`](jd:paper:io.papermc.paper.math.FinePosition).
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> finePositionArgument() {
+    return Commands.literal("fineposition")
+        .then(Commands.argument("arg", ArgumentTypes.finePosition(true))
+            .executes(ctx -> {
+                final FinePositionResolver resolver = ctx.getArgument("arg", FinePositionResolver.class);
+                final FinePosition finePosition = resolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Position: <red><x></red> <green><y></green> <blue><z></blue>",
+                    Placeholder.unparsed("x", Double.toString(finePosition.x())),
+                    Placeholder.unparsed("y", Double.toString(finePosition.y())),
+                    Placeholder.unparsed("z", Double.toString(finePosition.z()))
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={FinePositionMp4} />
+
+
+## World argument
+This argument allows the user to select one of the currently loaded world. You can retrieve the result of that as a generic Bukkit
+[`World`](jd:paper:org.bukkit.World) object.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> worldArgument() {
+    return Commands.literal("teleport-to-world")
+        .then(Commands.argument("world", ArgumentTypes.world())
+            .executes(ctx -> {
+                final World world = ctx.getArgument("world", World.class);
+
+                if (ctx.getSource().getExecutor() instanceof Player player) {
+                    player.teleport(world.getSpawnLocation(), PlayerTeleportEvent.TeleportCause.COMMAND);
+                    ctx.getSource().getSender().sendRichMessage("Successfully teleported <player> to <aqua><world></aqua>",
+                        Placeholder.component("player", player.name()),
+                        Placeholder.unparsed("world", world.getName())
+                    );
+                    return Command.SINGLE_SUCCESS;
+                }
+
+                ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
+                return Command.SINGLE_SUCCESS;
+            })
+        ).build();
+}
+```
+
+### In-game preview
+<Video src={WorldMp4} />

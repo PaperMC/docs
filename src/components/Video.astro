@@ -1,0 +1,12 @@
+---
+interface Props {
+  src: string;
+}
+
+const { src } = Astro.props;
+---
+
+<video width="100%" muted loop controls data-pagefind-ignore>
+  <source {src} type="video/mp4" />
+  Your device does not support video playback.
+</video>

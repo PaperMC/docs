@@ -1,0 +1,102 @@
+---
+title: Predicates
+description: Documentation for arguments that allow value validation.
+slug: paper/dev/command-api/arguments/predicate
+---
+
+import DoubleRangeMp4 from "./assets/vanilla-arguments/doublerange.mp4";
+import IntegerRangeMp4 from "./assets/vanilla-arguments/integerrange.mp4";
+import ItemPredicateMp4 from "./assets/vanilla-arguments/itempredicate.mp4";
+
+import Video from "/src/components/Video.astro";
+
+A predicate allows for checking for valid values. These arguments are dedicated to checking whether some sort of value is valid according to user input.
+
+
+## Double range argument
+This argument can be used as a predicate for numbers, which require precise input.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> doubleRangeArgument() {
+    return Commands.literal("doublerange")
+        .then(Commands.argument("arg", ArgumentTypes.doubleRange())
+            .executes(ctx -> {
+                final DoubleRangeProvider doubleRangeProvider = ctx.getArgument("arg", DoubleRangeProvider.class);
+                final CommandSender sender = ctx.getSource().getSender();
+
+                for (int i = 0; i < 5; i++) {
+                    sender.sendRichMessage("Is <index> in bounds? <result>",
+                        Placeholder.unparsed("index", Integer.toString(i)),
+                        Placeholder.unparsed("result", Boolean.toString(doubleRangeProvider.range().test((double) i)))
+                    );
+                }
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={DoubleRangeMp4} />
+
+
+## Integer range argument
+This argument works very similarly to the double range argument, with the only difference being that this argument only accepts integers.
+
+### Example usage
+```java title="MinecraftArguments.java"
+public static LiteralCommandNode<CommandSourceStack> integerRangeArgument() {
+    return Commands.literal("integerrange")
+        .then(Commands.argument("range", ArgumentTypes.integerRange())
+            .then(Commands.argument("tested_integer", IntegerArgumentType.integer())
+                .executes(MinecraftArguments::runIntegerRangeCommand)))
+        .build();
+}
+
+private static int runIntegerRangeCommand(final CommandContext<CommandSourceStack> ctx) {
+    final IntegerRangeProvider integerRangeProvider = ctx.getArgument("range", IntegerRangeProvider.class);
+    final int integerToTest = IntegerArgumentType.getInteger(ctx, "tested_integer");
+
+    if (integerRangeProvider.range().contains(integerToTest)) {
+        ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <green>is</green> inside the specified range!",
+            Placeholder.unparsed("input", Integer.toString(integerToTest))
+        );
+        return Command.SINGLE_SUCCESS;
+    }
+
+    ctx.getSource().getSender().sendRichMessage("<aqua><input></aqua> <red>is not</red> inside the specified range!",
+        Placeholder.unparsed("input", Integer.toString(integerToTest))
+    );
+
+    return Command.SINGLE_SUCCESS;
+}
+```
+
+### In-game preview
+<Video src={IntegerRangeMp4} />
+
+
+## Item predicate argument
+This argument allows for checking whether an item fits some predicate. It is useful for filtering out certain items based on some criteria.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> itemPredicateArgument() {
+    return Commands.literal("itempredicate")
+        .then(Commands.argument("predicate", ArgumentTypes.itemPredicate())
+            .executes(ctx -> {
+                final ItemStackPredicate predicate = ctx.getArgument("predicate", ItemStackPredicate.class);
+                final ItemStack defaultWoodenSword = ItemType.WOODEN_SWORD.createItemStack();
+
+                ctx.getSource().getSender().sendRichMessage("Does predicate include a default wooden sword? <result>",
+                    Placeholder.parsed("result", predicate.test(defaultWoodenSword) ? "<green>true</green>" : "<red>false</red>")
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={ItemPredicateMp4} />

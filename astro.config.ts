@@ -111,6 +111,85 @@ export default defineConfig({
                       ],
                     },
                     {
+                      label: "API",
+                      items: [
+                        {
+                          label: "Command API",
+                          collapsed: true,
+                          items: [
+                            {
+                              label: "Basics",
+                              items: [
+                                "paper/dev/command-api/basics/introduction",
+                                "paper/dev/command-api/basics/command-tree",
+                                "paper/dev/command-api/basics/arguments-and-literals",
+                                "paper/dev/command-api/basics/executors",
+                                "paper/dev/command-api/basics/registration",
+                                "paper/dev/command-api/basics/requirements",
+                                "paper/dev/command-api/basics/argument-suggestions",
+                                "paper/dev/command-api/basics/custom-arguments",
+                              ],
+                            },
+                            {
+                              label: "Arguments",
+                              items: [
+                                "paper/dev/command-api/arguments/minecraft",
+                                "paper/dev/command-api/arguments/location",
+                                "paper/dev/command-api/arguments/entity-player",
+                                "paper/dev/command-api/arguments/registry",
+                                "paper/dev/command-api/arguments/paper",
+                                "paper/dev/command-api/arguments/enums",
+                                "paper/dev/command-api/arguments/predicate",
+                                "paper/dev/command-api/arguments/adventure",
+                              ],
+                            },
+                            {
+                              label: "Miscellaneous",
+                              items: [
+                                "paper/dev/command-api/misc/basic-command",
+                                "paper/dev/command-api/misc/comparison-bukkit-brigadier",
+                              ],
+                            },
+                          ],
+                        },
+                        {
+                          label: "Component API",
+                          collapsed: true,
+                          items: [
+                            "paper/dev/component-api/introduction",
+                            "paper/dev/component-api/i18n",
+                            "paper/dev/component-api/audiences",
+                          ],
+                        },
+                        {
+                          label: "Event API",
+                          collapsed: true,
+                          items: [
+                            "paper/dev/event-listeners",
+                            "paper/dev/custom-events",
+                            "paper/dev/handler-lists",
+                            "paper/dev/chat-events",
+                          ],
+                        },
+                        {
+                          label: "Entity API",
+                          collapsed: true,
+                          items: ["paper/dev/entity-teleport", "paper/dev/display-entities"],
+                        },
+                        "paper/dev/data-component-api",
+                        "paper/dev/pdc",
+                        "paper/dev/custom-inventory-holder",
+                        "paper/dev/scheduler",
+                        "paper/dev/plugin-messaging",
+                        "paper/dev/plugin-configurations",
+                        "paper/dev/lifecycle",
+                        "paper/dev/registries",
+                        "paper/dev/recipes",
+                        "paper/dev/folia-support",
+                        "paper/dev/roadmap",
+                      ],
+                    },
+                    {
                       label: "Miscellaneous",
                       items: [
                         "paper/dev/using-databases",
@@ -180,6 +259,15 @@ export default defineConfig({
                     {
                       label: "API",
                       items: [
+                        {
+                          label: "Component API",
+                          collapsed: true,
+                          items: [
+                            "paper/dev/component-api/introduction",
+                            "paper/dev/component-api/i18n",
+                            "paper/dev/component-api/audiences",
+                          ],
+                        },
                         "velocity/dev/event-api",
                         "velocity/dev/scheduler-api",
                         "velocity/dev/command-api",
@@ -243,6 +331,14 @@ export default defineConfig({
                 "/paper/admin/reference",
                 "/paper/dev",
                 "/paper/dev/getting-started",
+                "/paper/dev/api",
+                "/paper/dev/api/command-api",
+                "/paper/dev/api/command-api/arguments",
+                "/paper/dev/api/command-api/basics",
+                "/paper/dev/api/command-api/misc",
+                "/paper/dev/api/component-api",
+                "/paper/dev/api/entity-api",
+                "/paper/dev/api/event-api",
                 "/paper/dev/misc",
                 "/paper/contributing",
               ],

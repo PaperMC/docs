@@ -2,6 +2,9 @@
 /java-install-update /misc/java-install
 /papermc/* /misc/*
 /velocity/developers/* /velocity/dev/*
+/velocity/dev/component-api/introduction /paper/dev/component-api/introduction
+/velocity/dev/component-api/i18n /paper/dev/component-api/i18n
+/velocity/dev/component-api/audiences /paper/dev/component-api/audiences
 /paper/reference/paper-per-world-configuration /paper/reference/world-configuration
 /paper/reference/paper-global-configuration /paper/reference/global-configuration
 /paper/per-world-configuration /paper/configuration

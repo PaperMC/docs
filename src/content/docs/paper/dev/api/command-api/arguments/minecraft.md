@@ -1,0 +1,44 @@
+---
+title: Minecraft-specific
+description: Everything regarding the essential Brigadier arguments.
+slug: paper/dev/command-api/arguments/minecraft
+---
+
+The [Arguments and Literals](../basics/arguments-and-literals) page covers the most used, native Brigadier arguments. But Minecraft (and Paper) define a few more. These can be accessed
+in a static context using the [`ArgumentTypes`](jd:paper:io.papermc.paper.command.brigadier.argument.ArgumentTypes) class. We will go over all of those in this section.
+
+## Quick overview
+A quick overview of all possible arguments is defined here:
+
+| Method Name                            | Return Value                                                                                                                             | Quick Link                                                                   |
+|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| `blockPosition()`                      | [BlockPositionResolver](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.BlockPositionResolver)                            | [Block Position Argument](./location#block-position-argument)                |
+| `blockState()`                         | [BlockState](jd:paper:org.bukkit.block.BlockState)                                                                                       | [Block State Argument](./paper#block-state-argument)                         |
+| `component()`                          | [Component (Kyori)](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html)                                            | [Component Argument](./adventure#component-argument)                         |
+| `doubleRange()`                        | [DoubleRangeProvider](jd:paper:io.papermc.paper.command.brigadier.argument.range.DoubleRangeProvider)                                    | [Double Range argument](./predicate#double-range-argument)                   |
+| `entity()`                             | [EntitySelectorArgumentResolver](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.selector.EntitySelectorArgumentResolver) | [Entity Argument](./entity-player#entity-argument)                           |
+| `entities()`                           | [EntitySelectorArgumentResolver](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.selector.EntitySelectorArgumentResolver) | [Entities Argument](./entity-player#entities-argument)                       |
+| `entityAnchor()`                       | [LookAnchor](jd:paper:io.papermc.paper.entity.LookAnchor)                                                                                | [Entity Anchor Argument](./enums#entity-anchor-argument)                     |
+| `finePosition(boolean centerIntegers)` | [FinePositionResolver](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.FinePositionResolver)                              | [Fine Position Argument](./location#fine-position-argument)                  |
+| `gameMode()`                           | [GameMode](jd:paper:org.bukkit.GameMode)                                                                                                 | [GameMode Argument](./enums#gamemode-argument)                               |
+| `heightMap()`                          | [HeightMap](jd:paper:org.bukkit.HeightMap)                                                                                               | [HeightMap Argument](./enums#heightmap-argument)                             |
+| `integerRange()`                       | [IntegerRangeProvider](jd:paper:io.papermc.paper.command.brigadier.argument.range.IntegerRangeProvider)                                  | [Integer Range Argument](./predicate#integer-range-argument)                 |
+| `itemPredicate()`                      | [ItemStackPredicate](jd:paper:io.papermc.paper.command.brigadier.argument.predicate.ItemStackPredicate)                                  | [Item Predicate Argument](./predicate#item-predicate-argument)               |
+| `itemStack()`                          | [ItemStack](jd:paper:org.bukkit.inventory.ItemStack)                                                                                     | [ItemStack Argument](./paper#itemstack-argument)                             |
+| `key()`                                | [Key (Kyori)](https://jd.advntr.dev/key/latest/net/kyori/adventure/key/Key.html)                                                         | [Key Argument](./adventure#key-argument)                                     |
+| `namedColor()`                         | [NamedTextColor (Kyori)](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/format/NamedTextColor.html)                           | [Named Color Argument](./adventure#named-color-argument)                     |
+| `namespacedKey()`                      | [NamespacedKey](jd:paper:org.bukkit.NamespacedKey)                                                                                       | [Bukkit NamespacedKey Argument](./paper#namespacedkey-argument)              |
+| `objectiveCriteria()`                  | [Criteria](jd:paper:org.bukkit.scoreboard.Criteria)                                                                                      | [Objective Criteria Argument](./paper#objective-criteria-argument)           |
+| `player()`                             | [PlayerSelectorArgumentResolver](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver) | [Player Argument](./entity-player#player-argument)                           |
+| `players()`                            | [PlayerSelectorArgumentResolver](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.selector.PlayerSelectorArgumentResolver) | [Players Argument](./entity-player#players-argument)                         |
+| `playerProfiles()`                     | [PlayerProfileListResolver](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.PlayerProfileListResolver)                    | [Player Profiles Argument](./entity-player#player-profiles-argument)         |
+| `resource(RegistryKey)`                | (Depends on RegistryKey)                                                                                                                 | [Resource Argument](./registry#resource-argument)                            |
+| `resourceKey(RegistryKey)`             | (Depends on RegistryKey)                                                                                                                 | [Resource Key Argument](./registry#resource-key-argument)                    |
+| `style()`                              | [Style (Kyori)](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/format/Style.html)                                             | [Style Argument](./adventure#adventure-style-argument)                       |
+| `signedMessage()`                      | [SignedMessageResolver](jd:paper:io.papermc.paper.command.brigadier.argument.SignedMessageResolver)                                      | [Signed Message Argument](./adventure#signed-message-argument)               |
+| `scoreboardDisplaySlot()`              | [DisplaySlot](jd:paper:org.bukkit.scoreboard.DisplaySlot)                                                                                | [Scoreboard Display Slot Argument](./enums#scoreboard-display-slot-argument) |
+| `time(int mintime)`                    | Integer                                                                                                                                  | [Time Argument](./paper#time-argument)                                       |
+| `templateMirror()`                     | [Mirror](jd:paper:org.bukkit.block.structure.Mirror)                                                                                     | [Template Mirror Argument](./enums#template-mirror-argument)                 |
+| `templateRotation()`                   | [StructureRotation](jd:paper:org.bukkit.block.structure.StructureRotation)                                                               | [Template Rotation Argument](./enums#template-rotation-argument)             |
+| `uuid()`                               | UUID                                                                                                                                     | [UUID Argument](./paper#uuid-argument)                                       |
+| `world()`                              | [World](jd:paper:org.bukkit.World)                                                                                                       | [World Argument](./location#world-argument)                                  |

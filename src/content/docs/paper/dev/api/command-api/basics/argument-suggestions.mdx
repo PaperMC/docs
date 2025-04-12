@@ -1,0 +1,201 @@
+---
+title: Suggestions
+description: Documentation about defining custom argument suggestions.
+slug: paper/dev/command-api/basics/argument-suggestions
+---
+
+import GiveItemCommandMp4 from "./assets/give-item-command.mp4";
+import SelectNameCommandMp4 from "./assets/select-name-command.mp4";
+
+import Video from "/src/components/Video.astro";
+
+Sometimes, you want to send your own suggestions to users. For this, you can use the `suggests(SuggestionProvider<CommandSourceStack>)` method when declaring
+arguments.
+
+## Examining `SuggestionProvider<S>`
+The `SuggestionProvider<S>` interface is defined as follows:
+
+```java title="SuggestionProvider.java"
+@FunctionalInterface
+public interface SuggestionProvider<S> {
+    CompletableFuture<Suggestions> getSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) throws CommandSyntaxException;
+}
+```
+
+Similar to other classes or interfaces with a `<S>` generic parameter, for Paper, this is usually a `CommandSourceStack`. Furthermore, similar to the `Command<S>` interface,
+this is a functional interface, which means that instead of passing in a class which implements this interface, we can just pass a lambda statement or a method reference.
+
+Our lambda consists of two parameters, `CommandContext<S>` and `SuggestionsBuilder`, and expects to have a `CompletableFuture<Suggestions>` returned.
+
+A very simple lambda for our `suggests` method might look like this:
+```java
+Commands.argument("name", StringArgumentType.word())
+    .suggests((ctx, builder) -> builder.buildFuture());
+```
+
+This example obviously does not suggest anything, as we haven't added any suggestions yet.
+
+## The `SuggestionsBuilder`
+The `SuggestionsBuilder` has a few methods we can use to construct our suggestions:
+
+### Input retrieval
+The first type of methods we will cover are the input retrieval methods: `getInput()`, `getStart()`, `getRemaining()`, and `getRemainingLowerCase()`.
+The following table displays what each returns with the following input typed in the chat bar: `/customsuggestions Asumm13Text`.
+
+|           Method           |          Return Value          |                          Description                          |
+|----------------------------|--------------------------------|---------------------------------------------------------------|
+| getInput()                 | /customsuggestions Asumm13Text | The full chat input                                           |
+| getStart()                 | 19                             | The index of the first character of the argument's input      |
+| getRemaining()             | Asumm13Text                    | The input for the current argument                            |
+| getRemainingLowerCase()    | asumm13text                    | The input for the current argument, lowercased                |
+
+### Suggestions
+The following overloads of the `SuggestionsBuilder#suggest` method add values that will be send to the client as argument suggestions:
+
+|          Overload        |                   Description                   |
+|--------------------------|-------------------------------------------------|
+| suggest(String)          | Adds a String to the suggestions                |
+| suggest(String, Message) | Adds a String with a tooltip to the suggestions |
+| suggest(int)             | Adds an int to the suggestions                  |
+| suggest(int, Message)    | Adds an int with a tooltip to the suggestions   |
+
+There are two ways of retrieving a `Message` instance:
+- Using `LiteralMessage`, which can be used for basic, non-formatted text.
+- Using the `MessageComponentSerializer`, which can be used to serialize `Component` objects into `Message` objects.
+
+For example, if you add a suggestion like this:
+```java
+builder.suggest("suggestion", MessageComponentSerializer.message().serialize(
+    MiniMessage.miniMessage().deserialize("<green>Suggestion tooltip")
+));
+```
+
+It will look like this on the client:
+![](./assets/suggestion-tooltip.png)
+
+### Building
+There are two methods we can use to build our `Suggestions` object. The only difference between those is that one directly returns the finished `Suggestions` object,
+whilst the other one returns a `CompletableFuture<Suggestions>`.
+
+The reason for these two methods is that `SuggestionProvider` expects the return value to be `CompletableFuture<Suggestions>`. This for once
+allows for constructing your suggestions asynchronously inside a `CompletableFuture.supplyAsync(Supplier<Suggestions>)` statement, or synchronously directly inside our
+lambda and returning the final `Suggestions` object asynchronously.
+
+Here are the same suggestions declared in the two different ways mentioned above:
+```java
+// Here, you are safe to use all Paper API
+Commands.argument("name", StringArgumentType.word())
+    .suggests((ctx, builder) -> {
+        builder.suggest("first");
+        builder.suggest("second");
+
+        return builder.buildFuture();
+    });
+
+// Here, most Paper API is not usable
+Commands.argument("name", StringArgumentType.word())
+    .suggests((ctx, builder) -> CompletableFuture.supplyAsync(() -> {
+        builder.suggest("first");
+        builder.suggest("second");
+
+        return builder.build();
+    }));
+```
+
+## Example: Suggesting amounts in a give item command
+In commands, where you give players items, you oftentimes include an amount argument. We could suggest `1`, `16`, `32`, and `64` as common amounts for
+items given. The command implementation could look like this:
+
+```java
+@NullMarked
+public class SuggestionsTest {
+
+    public static LiteralCommandNode<CommandSourceStack> constructGiveItemCommand() {
+        // Create new command: /giveitem
+        return Commands.literal("giveitem")
+
+            // Require a player to execute the command
+            .requires(ctx -> ctx.getExecutor() instanceof Player)
+
+            // Declare a new ItemStack argument
+            .then(Commands.argument("item", ArgumentTypes.itemStack())
+
+                // Declare a new integer argument with the bounds of 1 to 99
+                .then(Commands.argument("amount", IntegerArgumentType.integer(1, 99))
+
+                    // Here, we use method references, since otherwise, our command definition would grow too big
+                    .suggests(SuggestionsTest::getAmountSuggestions)
+                    .executes(SuggestionsTest::executeCommandLogic)
+
+                )
+            )
+            .build();
+    }
+
+    private static CompletableFuture<Suggestions> getAmountSuggestions(final CommandContext<CommandSourceStack> ctx, final SuggestionsBuilder builder) {
+        // Suggest 1, 16, 32, and 64 to the user when they reach the 'amount' argument
+        builder.suggest(1);
+        builder.suggest(16);
+        builder.suggest(32);
+        builder.suggest(64);
+        return builder.buildFuture();
+    }
+
+    private static int executeCommandLogic(final CommandContext<CommandSourceStack> ctx) {
+        // We know that the executor will be a player, so we can just silently return
+        if (!(ctx.getSource().getExecutor() instanceof Player player)) {
+            return Command.SINGLE_SUCCESS;
+        }
+
+        // If the player has no empty slot, we tell the player that they have no free inventory space
+        final int firstEmptySlot = player.getInventory().firstEmpty();
+        if (firstEmptySlot == -1) {
+            player.sendRichMessage("<light_purple>You do not have enough space in your inventory!");
+            return Command.SINGLE_SUCCESS;
+        }
+
+        // Retrieve our argument values
+        final ItemStack item = ctx.getArgument("item", ItemStack.class);
+        final int amount = IntegerArgumentType.getInteger(ctx, "amount");
+
+        // Set the item's amount and give it to the player
+        item.setAmount(amount);
+        player.getInventory().setItem(firstEmptySlot, item);
+
+        // Send a confirmation message
+        player.sendRichMessage("<light_purple>You have been given <white><amount>x</white> <aqua><item></aqua>!",
+            Placeholder.component("amount", Component.text(amount)),
+            Placeholder.component("item", Component.translatable(item).hoverEvent(item))
+        );
+        return Command.SINGLE_SUCCESS;
+    }
+}
+```
+
+And here is how the command looks in-game:
+<Video src={GiveItemCommandMp4} />
+
+## Example: Filtering by user input
+If you have multiple values, it is suggested that you filter your suggestions by what the user has already put in. For this, we can declare the following, simple command
+as a test:
+
+```java
+public static LiteralCommandNode<CommandSourceStack> constructStringSuggestionsCommand() {
+    final List<String> names = List.of("Alex", "Andreas", "Stephanie", "Sophie", "Emily");
+
+    return Commands.literal("selectname")
+        .then(Commands.argument("name", StringArgumentType.word())
+
+            .suggests((ctx, builder) -> {
+                names.stream()
+                    .filter(entry -> entry.toLowerCase().startsWith(builder.getRemainingLowerCase()))
+                    .forEach(builder::suggest);
+                return builder.buildFuture();
+            })
+
+        ).build();
+}
+```
+
+This simple setup filters suggestions by user input, providing a smooth user experience when running the command:
+<Video src={SelectNameCommandMp4} />

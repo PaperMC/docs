@@ -43,9 +43,4 @@ function fileWithBase(path: string) {
 <link rel="sitemap" href={fileWithBase("/sitemap-index.xml")} />
 {canonicalImage && <meta property="og:image" content={canonicalImage.href} />}
 {canonicalImage && <meta name="twitter:image" content={canonicalImage.href} />}
-<!-- TODO: re-enable tracking -->
-<!-- <script
-  defer
-  src="https://trk.papermc.io/api/init"
-  data-website-id="f93a0860-1253-4868-b27a-08208a36cea7"
-></script> -->
+<script is:inline defer src="https://trk.papermc.io/api/init" data-website-id="f93a0860-1253-4868-b27a-08208a36cea7"></script>

@@ -1,17 +1,6 @@
 ---
 import { render } from "../utils/markdown";
-
-interface LeafData {
-  description: string;
-  default?: string;
-}
-
-interface MessageData {
-  message: string;
-  color?: string;
-}
-
-type Data = { [key: string]: Data } | LeafData | MessageData;
+import type { Data } from "../utils/config";
 
 interface Props {
   data: Data;
@@ -49,7 +38,7 @@ const formatDefault = (value?: string): Default => {
 <div class:list={["not-content", "node", root && "node-root"]}>
   {
     Object.entries(data).map(([key, value]) => {
-      const displayKey = key.replace(/^_+/, ""); // remove leading underscores, used for duplicating keys
+      const displayKey = key.replace(/_+$/, ""); // remove trailing underscores, used for duplicating keys
       const childPath = [...path, key.replace(/-/g, "_")];
 
       const def = formatDefault(value.default);

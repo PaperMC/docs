@@ -17,6 +17,11 @@
   --sl-font-mono: "JetBrains Mono";
 }
 
+/* make images full width in markup */
+.sl-markdown-content img {
+  width: 100%;
+}
+
 /* fix too large TOC on large screens */
 @media (min-width: 96rem) {
   :root {

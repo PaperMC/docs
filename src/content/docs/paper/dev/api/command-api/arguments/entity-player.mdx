@@ -1,0 +1,186 @@
+---
+title: Entities and players
+description: Player and Entity arguments documentation.
+slug: paper/dev/command-api/arguments/entity-player
+---
+
+import EntityOppedMp4 from "./assets/vanilla-arguments/entity-opped.mp4?url";
+import EntityUnoppedMp4 from "./assets/vanilla-arguments/entity-unopped.mp4?url";
+import EntitiesMp4 from "./assets/vanilla-arguments/entities.mp4?url";
+import PlayerMp4 from "./assets/vanilla-arguments/player.mp4?url";
+import PlayersMp4 from "./assets/vanilla-arguments/players.mp4?url";
+import PlayerProfilesMp4 from "./assets/vanilla-arguments/playerprofiles.mp4?url";
+
+import Video from "/src/components/Video.astro";
+
+The arguments described in this section relate to arguments which you can use to retrieve entities. Their main usage is the selection of command targets.
+All of these have entity selectors (`@a`, `@e`, `@n`, etc.) as valid inputs, though they require the `minecraft.command.selector` permission in order to
+be able to be used. The specific arguments may allow or disallow certain selectors.
+
+Due to the permission requirement for selectors it is advised to add a `requires` statement to your command:
+```java
+.requires(ctx -> ctx.getSender().hasPermission("minecraft.command.selector"))
+```
+
+You can find more information about requirements [here](../basics/requirements.mdx).
+
+## Entity argument
+This argument, after resolving its returning `EntitySelectorArgumentResolver`, returns a list of exactly one, no more and no less, entity. It is safe
+to call `List#getFirst()` to retrieve that entity. You can resolve it using [`ArgumentResolver#resolve(CommandSourceStack)`](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack))
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entityArgument() {
+    return Commands.literal("entityarg")
+        .then(Commands.argument("arg", ArgumentTypes.entity())
+            .executes(ctx -> {
+                final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
+                final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
+
+                ctx.getSource().getSender().sendRichMessage("Found <green><entityname>",
+                    Placeholder.component("entityname", entities.getFirst().name())
+                );
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+If the executing player doesn't have the `minecraft.command.selector` permission:
+<Video src={EntityUnoppedMp4} />
+
+If the executing player has the `minecraft.command.selector` permission:
+<Video src={EntityOppedMp4} />
+
+
+## Entities argument
+In contrast to the single entity argument, this multiple-entities argument accepts any amount of entities, with the minimum amount of entities being 1. They can, once again, be resolved using
+[`ArgumentResolver#resolve(CommandSourceStack)`](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)),
+which returns a `List<Entity>`.
+
+### Example usage
+```java
+public static LiteralCommandNode<CommandSourceStack> entitiesArgument() {
+    return Commands.literal("entitiesarg")
+        .then(Commands.argument("arg", ArgumentTypes.entities())
+            .executes(ctx -> {
+                final EntitySelectorArgumentResolver entitySelectorArgumentResolver = ctx.getArgument("arg", EntitySelectorArgumentResolver.class);
+                final List<Entity> entities = entitySelectorArgumentResolver.resolve(ctx.getSource());
+
+                final Component foundEntities = Component.join(JoinConfiguration.commas(true), entities.stream().map(Entity::name).toList());
+
+                ctx.getSource().getSender().sendRichMessage("Found <green><entitynames>",
+                    Placeholder.component("entitynames", foundEntities)
+                );
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={EntitiesMp4} />
+
+
+## Player argument
+The player argument allows to retrieve a `PlayerSelectorArgumentResolver` for player arguments.
+For this "single player" argument, you can safely get the target player by running `PlayerSelectorArgumentResolver.resolve(ctx.getSource()).getFirst()`,
+which returns a [Player](jd:paper:org.bukkit.entity.Player) object.
+
+### Example usage
+This command yeets the targeted player into the air!
+
+```java
+public static LiteralCommandNode<CommandSourceStack> playerArgument() {
+    return Commands.literal("player")
+        .then(Commands.argument("target", ArgumentTypes.player())
+            .executes(ctx -> {
+                final PlayerSelectorArgumentResolver targetResolver = ctx.getArgument("target", PlayerSelectorArgumentResolver.class);
+                final Player target = targetResolver.resolve(ctx.getSource()).getFirst();
+
+                target.setVelocity(new Vector(0, 100, 0));
+                target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+                ctx.getSource().getSender().sendRichMessage("Yeeted <target>!",
+                    Placeholder.component("target", target.name())
+                );
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={PlayerMp4} />
+
+
+## Players argument
+The "multiple players" argument works similarly to the "single player" argument, also returning a `PlayerSelectorArgumentResolver`. Instead of just resolving to exactly one `Player`, this
+one can resolve to more than just one player - which you should account for in case of using this argument. `PlayerSelectorArgumentResolver.resolve(ctx.getSource())` returns a
+`List<Player>`, which you can just iterate through.
+
+### Example usage
+Extending the "single player" yeet command to support multiple targets can look like this:
+
+```java
+public static LiteralCommandNode<CommandSourceStack> playersArgument() {
+    return Commands.literal("players")
+        .then(Commands.argument("targets", ArgumentTypes.players())
+            .executes(ctx -> {
+                final PlayerSelectorArgumentResolver targetResolver = ctx.getArgument("targets", PlayerSelectorArgumentResolver.class);
+                final List<Player> targets = targetResolver.resolve(ctx.getSource());
+                final CommandSender sender = ctx.getSource().getSender();
+
+                for (final Player target : targets) {
+                    target.setVelocity(new Vector(0, 100, 0));
+                    target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+                    sender.sendRichMessage("Yeeted <target>!",
+                        Placeholder.component("target", target.name())
+                    );
+                }
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={PlayersMp4} />
+
+
+## Player profiles argument
+The player profiles argument is a very powerful argument which can retrieve both offline and online players. It returns the result of the argument as a `PlayerProfileListResolver`,
+which resolves to a `Collection<PlayerProfile>`. This collection can be iterated to get the resulting profile(s). Usually, it only returns a single `PlayerProfile` if retrieving
+a player by name, but it can return multiple if using the entity selectors (like `@a` on online players). Thus it always makes sense to run whatever operation you want to run on
+all entries in the collection instead of just the first one.
+
+This argument will run API calls to Mojang servers in order to retrieve player information for players which have never joined the server before. Due to this operation sometimes
+taking a bit longer, it is suggested to resolve this argument in an asynchronous context in order to not cause any server lag.
+
+Sometimes, these API calls may fail. This is also visible in the in-game preview down below. This behavior is also the reason for `/whitelist add` sometimes.
+
+### Example usage - player lookup command
+```java
+public static LiteralCommandNode<CommandSourceStack> playerProfilesArgument() {
+    return Commands.literal("lookup")
+        .then(Commands.argument("profile", ArgumentTypes.playerProfiles())
+            .executes(ctx -> {
+                final PlayerProfileListResolver profilesResolver = ctx.getArgument("profile", PlayerProfileListResolver.class);
+                final Collection<PlayerProfile> foundProfiles = profilesResolver.resolve(ctx.getSource());
+
+                for (final PlayerProfile profile : foundProfiles) {
+                    ctx.getSource().getSender().sendPlainMessage("Found " + profile.getName());
+                }
+
+                return Command.SINGLE_SUCCESS;
+            }))
+        .build();
+}
+```
+
+### In-game preview
+<Video src={PlayerProfilesMp4} />

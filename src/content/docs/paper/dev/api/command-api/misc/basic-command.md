@@ -37,7 +37,7 @@ If you have seen the `CommandContext<CommandSourceStack>` class before, you migh
 parameter `S` from our `CommandContext<S>`, which is also used in the `executes` method from the `ArgumentBuilder`.
 
 With a `CommandSourceStack`, we can retrieve basic information about the sender of the command, the location the command was send from, and the executing entity.
-For more information, check out [basics/command-executors](../basics/executors).
+For more information, check out [basics/command-executors](/paper/dev/command-api/basics/executors).
 
 ## The optional methods
 You can freely choose whether to implement either of the at the top mentioned, optional methods. Here is a quick overview on what which one does:
@@ -49,7 +49,7 @@ This method returns some sort of `Collection<String>` and takes in a `CommandSou
 Each entry in the collection that you return will be send to the client to be shown as suggestions the same way as with Bukkit commands.
 
 ### `canUse(CommandSender)`
-With this method, you can set up a basic `requires` structure from Brigadier commands. [You can read more on that here](../basics/requirements).
+With this method, you can set up a basic `requires` structure from Brigadier commands. [You can read more on that here](/paper/dev/command-api/basics/requirements).
 This method returns a `boolean`, which is required to return `true` in order for a command sender to be able to execute that command.
 
 ### `permission()`
@@ -83,7 +83,7 @@ public class BroadcastCommand implements BasicCommand {
 ```
 
 Our permission is set to `example.broadcast.use`. In order to give yourself that permission, it is suggested that you use a plugin like [LuckPerms](https://luckperms.net) or just give yourself
-operator permissions. You can also set this permission to be `true` by default. For this, please check out the [plugin.yml documentation](../../../getting-started/plugin-yml.mdx).
+operator permissions. You can also set this permission to be `true` by default. For this, please check out the [plugin.yml documentation](/paper/dev/plugin-yml).
 
 Now, in our `execute` method, we can retrieve the name of the executor of that command. If we do not find one, we can just get the name of the command sender, like this:
 

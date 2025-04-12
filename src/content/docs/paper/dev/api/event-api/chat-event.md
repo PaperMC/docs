@@ -20,7 +20,7 @@ and [`ChatEvent`](jd:paper:io.papermc.paper.event.player.ChatEvent) is that
 This means that it does not block the main thread and sends the chat message when the listener has completed.
 Be aware that using the Bukkit API in an asynchronous context (i.e. the event handler) is unsafe and exceptions may be thrown.
 If you need to use the Bukkit API, you can use [`ChatEvent`](jd:paper:io.papermc.paper.event.player.ChatEvent).
-However, we recommend using [`BukkitScheduler`](../scheduler.mdx).
+However, we recommend using [`BukkitScheduler`](/paper/dev/scheduler).
 
 :::
 

@@ -40,7 +40,7 @@ public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
 ## ItemStack argument
 The item stack argument is the way to retrieve an [`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack) following the same argument format as the Vanilla `/give <player> <item> [<amount>]`
 command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a [`Material`](jd:paper:org.bukkit.Material), you should instead
-check out the [registry arguments](./registry.mdx).
+check out the [registry arguments](/paper/dev/command-api/arguments/registry).
 
 ### Example usage
 ```java
@@ -135,7 +135,7 @@ public static LiteralCommandNode<CommandSourceStack> timeArgument() {
 ## UUID argument
 The UUID argument allows the user to input a valid UUID. You can retrieve that value as a `UUID` object, which is used in various places, like `Bukkit.getOfflinePlayer(UUID)`.
 This argument is not very user-friendly, which is why it is suggested to only use this as a moderation or debug argument. For user input regarding offline player
-retrieval, the [player profiles argument](./entity-player#player-profiles-argument) is preferred, as it allows by-name lookup.
+retrieval, the [player profiles argument](/paper/dev/command-api/arguments/entity-player#player-profiles-argument) is preferred, as it allows by-name lookup.
 
 ### Example usage - Lookup command
 ```java

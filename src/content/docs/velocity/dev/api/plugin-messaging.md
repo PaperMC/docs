@@ -11,6 +11,7 @@ Velocity manages connections in both directions, for both the client and backend
 This means Velocity plugins need to consider 4 main cases:
 
 ```d2
+style.fill: transparent
 direction: right
 
 player -> Velocity: "1 (Incoming)"
@@ -43,6 +44,7 @@ It will require registering with the ChannelRegistrar for the event to be fired.
 An example use case could be logging messages from a mod that reports the enabled features.
 
 ```d2
+style.fill: transparent
 direction: right
 
 "Forward from player" {
@@ -109,6 +111,7 @@ Otherwise, a player can pretend to be your proxy, and spoof them.
 :::
 
 ```d2
+style.fill: transparent
 direction: right
 
 "Send to backend" {
@@ -161,6 +164,7 @@ for the event to be fired.
 An example use case could be handing a request to transfer the player to another server.
 
 ```d2
+style.fill: transparent
 direction: left
 
 "Forward from backend" {
@@ -227,6 +231,7 @@ This is only really useful for when you are making client-side mods. Otherwise, 
 :::
 
 ```d2
+style.fill: transparent
 direction: left
 
 "Send to player" {

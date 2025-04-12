@@ -196,6 +196,7 @@ Cyclic loading describes the phenomenon when a plugin loading causes a loop that
 Unlike Bukkit plugins, Paper plugins will not attempt to resolve cyclic loading issues.
 
 ```d2
+style.fill: transparent
 direction: right
 
 A -> B

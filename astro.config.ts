@@ -367,6 +367,7 @@ export default defineConfig({
       ],
     }),
     d2({
+      pad: 50,
       skipGeneration: !prod, // comment out if you have D2 locally and want to use it during dev
     }),
   ],

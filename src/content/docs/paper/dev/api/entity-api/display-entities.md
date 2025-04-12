@@ -63,11 +63,13 @@ warp them as you choose in 3D space.
 
 Transformations are applied to the display in this order:
 
-```mermaid
-flowchart LR;
-    translation[Translation]-->left_rotation[Left rotation];
-    left_rotation-->scale[Scale];
-    scale-->right_rotation[Right rotation];
+```d2
+style.fill: transparent
+direction: right
+
+Translation -> "Left rotation"
+"Left rotation" -> Scale
+Scale -> "Right rotation"
 ```
 
 :::tip[Visualizing transformations]

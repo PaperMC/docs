@@ -4,6 +4,10 @@ description: An extensive guide to building up a command tree.
 slug: paper/dev/command-api/basics/command-tree
 ---
 
+import { Image } from "astro:assets";
+import tree from "./assets/forest/tree.png";
+import treeDescriptions from "./assets/forest/tree-descriptions.png";
+
 What is a command tree and in what way does it have anything to do with Brigadier? If you are confused, this is the page for you! Here we will take an
 extensive look at everything you need to know to understands command tree!
 
@@ -17,7 +21,7 @@ It is suggested that you look in here if you are new to Brigadier programming.
 ## What is a tree?
 When talking about trees, the first that comes to mind is a tree in the wild. One that may look like this:
 
-![](./assets/forest/tree.png)
+<Image src={tree} alt="Command tree" style="width: 40%; margin: 1.5rem auto;" />
 
 So, what does this have to do with commands? Imagine a command that looks like this:
 
@@ -30,10 +34,11 @@ So, what does this have to do with commands? Imagine a command that looks like t
 For the sake of simplicity, we will refer to `/customplugin` (without any arguments) as our "command" or "tree" root. Each argument after our "root" is referred to as a "branch".
 You can visualize this on our generic tree like this:
 
-![](./assets/forest/tree-descriptions.png)
+<Image src={treeDescriptions} alt="Described command tree" style="width: 40%; margin: 1.5rem auto;" />
 
 Having to draw a tree each time like this is exhausting and usually does not get to the point though. We can visualize trees using a **tree diagram**. This would look like this:
 ```d2
+style.fill: transparent
 direction: down
 
 customplugin -> reload
@@ -44,6 +49,7 @@ customplugin -> killall
 It is way easier to understand the root/branch relationship of elements now. The root node is the node that is at the top of our hierarchy. In this case, that is the 'customplugin' node.
 The other elements have an arrow pointing **at** them, meaning they are a **branch** of our root node, also called a child. Family trees follow a similar structure, as you can see here:
 ```d2
+style.fill: transparent
 direction: down
 
 parents -> "first child"
@@ -105,6 +111,7 @@ Which allows for the following command executions in-game:
 As this is a fairly complicated command, we can visualize it as a tree graph first in order to we have a better understanding on what is going on:
 
 ```d2
+style.fill: transparent
 direction: down
 
 advanced -> killall
@@ -130,6 +137,8 @@ LiteralArgumentBuilder<CommandSourceStack> mainDish = Commands.literal("main-dis
 
 This grants us the deepest elements in our tree.
 ```d2
+style.fill: transparent
+
 entities
 players
 zombies
@@ -145,6 +154,8 @@ LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat");
 
 Visualized in our tree graph:
 ```d2
+style.fill: transparent
+
 killall
 eat
 ```
@@ -161,6 +172,7 @@ eat.then(mainDish);
 
 Which gives us this, somewhat tree-like structure:
 ```d2
+style.fill: transparent
 direction: down
 
 killall -> entities
@@ -179,18 +191,17 @@ advancedCommandRoot.then(eat);
 ```
 
 And this returns the final command tree:
-<p align="center">
-```mermaid
-stateDiagram-v2
-    killall --> entities
-    killall --> players
-    killall --> zombies
-    eat     --> ice#45;cream
-    eat     --> main#45;dish
-    advanced --> killall
-    advanced --> eat
+```d2
+style.fill: transparent
+
+killall -> entities
+killall -> players
+killall -> zombies
+eat -> "ice cream"
+eat -> "main dish"
+advanced -> killall
+advanced -> eat
 ```
-</p>
 
 And we are done!
 

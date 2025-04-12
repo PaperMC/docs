@@ -17,8 +17,11 @@
   --sl-font-mono: "JetBrains Mono";
 }
 
-/* make images full width in markup */
+/* make images in markup wide and centered */
 .sl-markdown-content img {
+  margin: 0 auto;
+}
+.sl-markdown-content img:not([alt="Diagram"]) {
   width: 100%;
 }
 

@@ -179,6 +179,7 @@ If a plugin is specified as a dependency, it will be loaded before your plugin.
 Be careful as these can cause plugin load issues if cyclical dependencies appear. A cyclical dependency can be illustrated as follows:
 
 ```d2
+style.fill: transparent
 direction: right
 
 "Plugin A" -> "Plugin B"

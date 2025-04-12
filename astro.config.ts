@@ -1,4 +1,5 @@
 import starlight from "@astrojs/starlight";
+import svelte from "@astrojs/svelte";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
@@ -366,6 +367,7 @@ export default defineConfig({
         ),
       ],
     }),
+    svelte(),
     d2({
       pad: 50,
       skipGeneration: !prod, // comment out if you have D2 locally and want to use it during dev

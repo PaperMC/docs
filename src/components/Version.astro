@@ -23,13 +23,12 @@ const { version, inline } = Astro.props;
   }
 
   .notice {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     gap: 1rem;
     align-items: center;
-    max-width: 14rem;
     font-size: var(--sl-text-xs);
-    padding: 1rem;
+    padding: 1rem 1.5rem;
     border-radius: 0.5rem;
     background-color: rgba(var(--sl-color-accent-raw), 0.125);
     margin: 1rem 0;
@@ -46,7 +45,7 @@ const { version, inline } = Astro.props;
   }
 
   .notice-inline {
-    max-width: 100%;
+    display: flex;
     margin: 0;
     border-radius: 0;
     font-size: var(--sl-text-sm);

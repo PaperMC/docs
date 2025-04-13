@@ -45,14 +45,12 @@ which is relevant, if the command was ran via `/execute as <entity> run <our_com
 In the [Arguments and Literals](/paper/dev/command-api/basics/arguments-and-literals) chapter, we have briefly declared the structure for a `/flyspeed` command with the use of a ranged float argument.
 But that command does not actually set the flyspeed of the executing player. In order to do that, we'd have to append an executor onto it, like this:
 
-```java title="FlightSpeedCommand.java"
+```java title="FlightSpeedCommand.java" {5-6}
 Commands.literal("flyspeed")
     .then(Commands.argument("speed", FloatArgumentType.floatArg(0, 1.0f))
         .executes(ctx -> {
             float speed = FloatArgumentType.getFloat(ctx, "speed"); // Retrieve the speed argument
-            // highlight-next-line
             CommandSender sender = ctx.getSource().getSender(); // Retrieve the command sender
-            // highlight-next-line
             Entity executor = ctx.getSource().getExecutor(); // Retrieve the command executor, which may or may not be the same as the sender
 
             // Check whether the executor is a player, as you can only set a player's flight speed

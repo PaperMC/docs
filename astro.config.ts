@@ -378,6 +378,9 @@ export default defineConfig({
       skipGeneration: !prod, // comment out if you have D2 locally and want to use it during dev
     }),
   ],
+  build: {
+    inlineStylesheets: "always",
+  },
   markdown: {
     remarkPlugins: [
       [

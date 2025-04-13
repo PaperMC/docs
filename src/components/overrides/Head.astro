@@ -39,7 +39,7 @@ function fileWithBase(path: string) {
 {canonical && <meta property="og:url" content={canonical.href} />}
 <meta property="og:locale" content={lang} />
 <meta property="og:description" content={description} />
-<meta property="description" content={description} />
+<meta name="description" content={description} />
 <link rel="sitemap" href={fileWithBase("/sitemap-index.xml")} />
 {canonicalImage && <meta property="og:image" content={canonicalImage.href} />}
 {canonicalImage && <meta name="twitter:image" content={canonicalImage.href} />}

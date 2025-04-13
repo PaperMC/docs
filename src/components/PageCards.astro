@@ -19,8 +19,7 @@ interface Page {
 }
 
 const pages: Page[] = (await getCollection(Astro.locals.starlightRoute.entry.collection))
-  .filter((p) => p.filePath!.startsWith(parent))
-  .filter((p) => p.filePath !== realPath)
+  .filter((p) => p.filePath!.startsWith(parent) && p.filePath !== realPath)
   .filter((p) => {
     const rel = p.filePath!.substring(parent.length);
 
@@ -39,7 +38,11 @@ const pages: Page[] = (await getCollection(Astro.locals.starlightRoute.entry.col
 <CardGrid>
   {
     pages.map((p) => (
-      <LinkCard title={p.title} description={p.description ?? (p.group ? "(page group)" : undefined)} href={p.href} />
+      <LinkCard
+        title={p.title}
+        description={p.description ?? (p.group ? "(documentation group)" : undefined)}
+        href={p.href}
+      />
     ))
   }
 </CardGrid>

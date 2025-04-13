@@ -1,6 +1,12 @@
 /intro /
 /java-install-update /misc/java-install
 /papermc/* /misc/*
+/paper/1.18 /paper
+/paper/1.18/* /paper/*
+/paper/1.19 /paper
+/paper/1.19/* /paper/*
+/paper/1.20 /paper
+/paper/1.20/* /paper/*
 /velocity/developers/* /velocity/dev/*
 /velocity/dev/component-api/introduction /paper/dev/component-api/introduction
 /velocity/dev/component-api/i18n /paper/dev/component-api/i18n

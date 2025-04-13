@@ -1,0 +1,66 @@
+---
+import { Icon } from "@astrojs/starlight/components";
+
+interface Props {
+  version: string;
+  inline?: boolean;
+}
+
+const { version, inline } = Astro.props;
+---
+
+<div class:list={["notice", inline && "notice-inline"]}>
+  <Icon name="information" class="icon" />
+  <div class="notice-inner">
+    Written for version:
+    <span>{version}</span>
+  </div>
+</div>
+
+<style>
+  .icon {
+    font-size: var(--sl-text-3xl);
+  }
+
+  .notice {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    max-width: 14rem;
+    font-size: var(--sl-text-xs);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgba(var(--sl-color-accent-raw), 0.125);
+    margin: 1rem 0;
+  }
+
+  .notice span {
+    font-weight: 600;
+    font-size: var(--sl-text-xl);
+  }
+
+  .notice .notice-inner {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .notice-inline {
+    max-width: 100%;
+    margin: 0;
+    border-radius: 0;
+    font-size: var(--sl-text-sm);
+  }
+
+  .notice-inline span {
+    font-size: var(--sl-text-sm);
+  }
+
+  .notice-inline .icon {
+    font-size: var(--sl-text-lg);
+  }
+
+  .notice-inline .notice-inner {
+    display: block;
+  }
+</style>

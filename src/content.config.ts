@@ -12,6 +12,7 @@ export const collections = {
             destructive: z.boolean().optional(),
           })
           .optional(),
+        version: z.string().optional(),
       }),
     }),
   }),

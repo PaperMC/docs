@@ -108,16 +108,14 @@ world.spawn(location, BlockDisplay.class, entity -> {
 
 You can also rotate it, let's tip it on its corner:
 
-```java
+```java {6, 8, 15-19}
 world.spawn(location, BlockDisplay.class, entity -> {
     entity.setBlock(Material.GRASS_BLOCK.createBlockData());
     entity.setTransformation(
         new Transformation(
                 new Vector3f(), // no translation
-                // highlight-next-line
                 new AxisAngle4f((float) -Math.toRadians(45), 1, 0, 0), // rotate -45 degrees on the X axis
                 new Vector3f(2, 2, 2), // scale up by a factor of 2 on all axes
-                // highlight-next-line
                 new AxisAngle4f((float) Math.toRadians(45), 0, 0, 1) // rotate +45 degrees on the Z axis
         )
     );
@@ -125,13 +123,11 @@ world.spawn(location, BlockDisplay.class, entity -> {
     // entity.setTransformationMatrix(
     //         new Matrix4f()
     //                 .scale(2) // scale up by a factor of 2 on all axes
-                       // highlight-start
     //                 .rotateXYZ(
     //                         (float) Math.toRadians(360 - 45), // rotate -45 degrees on the X axis
     //                         0,
     //                         (float) Math.toRadians(45) // rotate +45 degrees on the Z axis
     //                 )
-                       // highlight-end
     // );
 });
 ```
@@ -142,12 +138,11 @@ world.spawn(location, BlockDisplay.class, entity -> {
 
 Finally, we can also apply a translation transformation (position offset) to the display, for example:
 
-```java
+```java {5, 14}
 world.spawn(location, BlockDisplay.class, entity -> {
     entity.setBlock(Material.GRASS_BLOCK.createBlockData());
     entity.setTransformation(
         new Transformation(
-                // highlight-next-line
                 new Vector3f(0.5F, 0.5F, 0.5F), // offset by half a block on all axes
                 new AxisAngle4f((float) -Math.toRadians(45), 1, 0, 0), // rotate -45 degrees on the X axis
                 new Vector3f(2, 2, 2), // scale up by a factor of 2 on all axes
@@ -157,7 +152,6 @@ world.spawn(location, BlockDisplay.class, entity -> {
     // or set a raw transformation matrix from JOML
     // entity.setTransformationMatrix(
     //         new Matrix4f()
-                       // highlight-next-line
     //                 .translate(0.5F, 0.5F, 0.5F) // offset by half a block on all axes
     //                 .scale(2) // scale up by a factor of 2 on all axes
     //                 .rotateXYZ(

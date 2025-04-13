@@ -10,7 +10,7 @@
     { label: "Item Argument", value: "item-argument" },
     { label: "Component Argument", value: "component-argument" },
     { label: "Entity Argument", value: "entity-argument" },
-  ];
+  ].sort((e1, e2) => e1.label.localeCompare(e2.label));
 
   const ENTITY_TYPES: Option[] = [
     "item",
@@ -98,7 +98,7 @@
     "ender_crystal",
   ]
     .map((e) => ({ label: e, value: e }))
-    .sort((e1, e2) => e1.label.charCodeAt(0) - +e2.label.charCodeAt(0));
+    .sort((e1, e2) => e1.label.localeCompare(e2.label));
 </script>
 
 <script lang="ts">
@@ -107,6 +107,13 @@
   let copySuccess = $state(false);
   let input = $state("");
   let output = $state("");
+
+  let copied = $state(false);
+  $effect(() => {
+    if (copied) {
+      setTimeout(() => (copied = false), 1500);
+    }
+  });
 
   let mode = $state<Option>(MODES[0]);
 
@@ -122,32 +129,38 @@
     output = "";
     loading = true;
     try {
-      const query = mode === MODES[3] ? "?entityType=" + entityType?.value : "";
-      const response = await fetch(
-        "https://item-converter.papermc.io/convert-" + mode.value + query,
-        {
-          method: "POST",
-          body: input,
-        }
-      );
-      if (response.status === 200) {
-        output = await response.text();
-        toggleState(convertSuccess);
-      } else {
-        console.warn(
-          "Failed to convert command: " +
-            response.status +
-            ": " +
-            (await response.text())
-        );
-        toggleState(convertError);
-      }
+      // const query = mode === MODES[3] ? "?entityType=" + entityType?.value : "";
+      // const response = await fetch(
+      //   "https://item-converter.papermc.io/convert-" + mode.value + query,
+      //   {
+      //     method: "POST",
+      //     body: input,
+      //   }
+      // );
+      // if (response.status === 200) {
+      // output = await response.text();
+      output = input;
+      toggleState(convertSuccess);
+      // } else {
+      //   console.warn(
+      //     "Failed to convert command: " +
+      //       response.status +
+      //       ": " +
+      //       (await response.text())
+      //   );
+      //   toggleState(convertError);
+      // }
     } catch (error) {
       console.error("Failed to convert command: " + error);
       toggleState(convertError);
     }
 
     loading = false;
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(output);
+    copied = true;
   };
 </script>
 
@@ -162,7 +175,9 @@
   </p>
 
   <div class="convert-controls">
-    <button class="convert-content clickable" onclick={convert}>Convert</button>
+    <button class="convert-content clickable convert-button" onclick={convert}
+      >Convert</button
+    >
     {#if mode.value === "entity-argument"}
       <p class="convert-content entity-type">
         Entity Type:
@@ -192,14 +207,21 @@
       placeholder="Press 'Convert' to convert the command."
       class="textarea-panel"
       readonly
+      bind:value={output}
     ></textarea>
   </p>
 
-  <button class="clickable">Copy output!</button>
+  <button
+    class:copied
+    onclick={copyToClipboard}
+    class="clickable"
+    disabled={loading}>{copied ? "Copied!" : "Copy output!"}</button
+  >
 </div>
 
 <style>
   .item-command-converter {
+    margin-top: 1rem;
     padding: 1rem;
     border: 2px;
     border-style: solid;
@@ -256,5 +278,11 @@
     padding: 0.25rem;
     padding-left: 0.75rem;
     padding-right: 0.75rem;
+    transition: 0.15s;
+  }
+
+  .clickable:hover {
+    background-color: var(--sl-color-gray-5);
+    transition: 0.15s;
   }
 </style>

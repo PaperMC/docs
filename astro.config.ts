@@ -81,6 +81,7 @@ export default defineConfig({
                       items: [
                         {
                           label: "Configuration",
+                          collapsed: true,
                           items: [
                             "paper/reference/configuration",
                             "paper/reference/global-configuration",

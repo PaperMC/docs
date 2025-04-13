@@ -17,12 +17,27 @@
   --sl-font-mono: "JetBrains Mono";
 }
 
+/* make project dropdown sticky */
+.starlight-sidebar-topics-dropdown-dropdown {
+  position: sticky;
+  top: 1rem;
+  z-index: 20;
+  margin-top: 0;
+}
+
 /* make images in markup wide and centered */
 .sl-markdown-content img {
   margin: 0 auto;
 }
 .sl-markdown-content img:not([alt="Diagram"]) {
   width: 100%;
+}
+
+/* make index page hero smaller vertically */
+@media (min-width: 50rem) {
+  .hero {
+    padding-block: clamp(2.5rem, calc(1rem + 2.5vmin), 10rem);
+  }
 }
 
 /* fix too large TOC on large screens */

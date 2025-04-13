@@ -17,14 +17,6 @@
   --sl-font-mono: "JetBrains Mono";
 }
 
-/* make project dropdown sticky */
-.starlight-sidebar-topics-dropdown-dropdown {
-  position: sticky;
-  top: 1rem;
-  z-index: 20;
-  margin-top: 0;
-}
-
 /* make images in markup wide and centered */
 .sl-markdown-content img {
   margin: 0 auto;

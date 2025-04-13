@@ -371,6 +371,9 @@ export default defineConfig({
           }
         ),
       ],
+      expressiveCode: {
+        emitExternalStylesheet: false,
+      },
     }),
     svelte(),
     d2({

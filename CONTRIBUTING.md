@@ -157,7 +157,7 @@ For that, you can use the `jd:project_name[:module_name][:class_or_member_refere
 ```md
 [my `Event` link](jd:paper:org.bukkit.event.Event)
 [`ProxyInitializeEvent`](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent)
-[`repeat(long, TimeUnit)`](<jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder#repeat(long,java.util.concurrent.TimeUnit)>)
+[`repeat(long, TimeUnit)`](jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder#repeat(long,java.util.concurrent.TimeUnit))
 [java.base's List](jd:java:java.util.List)
 [java.sql's Connection](jd:java:java.sql:java.sql.Connection)
 ```

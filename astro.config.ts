@@ -322,6 +322,7 @@ export default defineConfig({
                     "misc/tools/start-script-gen",
                     "misc/tools/item-command-converter",
                     "misc/tools/minimessage-web-editor",
+                    "misc/tools/diff-viewer",
                   ],
                 },
               ],

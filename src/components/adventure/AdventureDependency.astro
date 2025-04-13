@@ -1,0 +1,62 @@
+---
+import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
+import { getVersion } from "./data/DependencyVersions.ts";
+
+interface Props {
+    artifact: string,
+    project: string,
+};
+
+const props: Props = Astro.props;
+
+const version = getVersion(props.project);
+const mavenCoordinatesString = `net.kyori:${props.artifact}:${version}`;
+
+const mavenDependency = `
+<dependency>
+   <groupId>net.kyori</groupId>
+   <artifactId>${props.artifact}</artifactId>
+   <version>${version}</version>
+</dependency>
+`;
+
+const gradleGroovyDependency = `
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "${mavenCoordinatesString}"
+}
+`
+
+const gradleKotlinDependency = `
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("${mavenCoordinatesString}")
+}
+`
+---
+
+<p>
+Declaring the dependency:
+</p>
+
+<Tabs syncKey="build-system">
+<TabItem label="Maven">
+  <Code lang="xml" code={mavenDependency} />
+</TabItem>
+<TabItem label="Gradle (Groovy)">
+  <Code lang="groovy" code={gradleGroovyDependency} />
+</TabItem>
+<TabItem label="Gradle (Kotlin)">
+  <Code lang="kotlin" code={gradleKotlinDependency} />
+</TabItem>
+</Tabs>
+
+<p>
+  Need development/snapshot builds? <a href="./snapshot-reference">Using Snapshot Builds</a>
+</p>

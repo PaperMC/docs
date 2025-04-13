@@ -310,7 +310,7 @@ export default defineConfig({
               id: "adventure",
               label: "Adventure",
               link: "/adventure/",
-              items: ["adventure/getting-started", "adventure/community-libraries"],
+              items: ["adventure/getting-started", "adventure/community-libraries", "adventure/faq"],
             },
             {
               id: "waterfall",

@@ -1,5 +1,5 @@
 ---
-title: The command API
+title: Command API
 description: How to create commands within Velocity.
 slug: velocity/dev/command-api
 ---

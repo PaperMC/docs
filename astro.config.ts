@@ -41,6 +41,7 @@ export default defineConfig({
       components: {
         Head: "./src/components/overrides/Head.astro",
         Sidebar: "./src/components/overrides/Sidebar.astro",
+        PageFrame: "./src/components/overrides/PageFrame.astro",
         Footer: "./src/components/overrides/Footer.astro",
         Banner: "./src/components/overrides/Banner.astro",
         TableOfContents: "./src/components/overrides/TableOfContents.astro",

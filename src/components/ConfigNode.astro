@@ -42,8 +42,6 @@ const formatDefault = (value?: string): Default => {
       const childPath = [...path, key.replace(/-/g, "_")];
 
       const def = formatDefault(value.default);
-      // this is ugly, but the spans don't play nice otherwise
-      const defValue = def.inline ? (<span class="value">{def.value}</span><a class="link" href={`#${childPath.join("_")}`}>#</a>) : (<a class="link" href={`#${childPath.join("_")}`}>#</a><p class="value">{def.value}</p>);
       return (
         <div>
           {"message" in value ? (
@@ -54,13 +52,17 @@ const formatDefault = (value?: string): Default => {
             />
           ) : "description" in value ? (
             <details id={childPath.join("_")}>
-              <summary class="line">
-                <span class="key">{displayKey}{separator ?? ": "}</span>{defValue}
+              <summary class="line notranslate" translate="no">
+                <span class="key">{displayKey}{separator ?? ": "}</span>{
+                  def.inline
+                    ? (<span class="value">{def.value}</span><a class="link" href={`#${childPath.join("_")}`}>#</a>)
+                    : (<a class="link" href={`#${childPath.join("_")}`}>#</a><p class="value">{def.value}</p>)
+                }
               </summary>
               <div class="block" set:html={render(value.description)} />
             </details>
           ) : (
-            <span class="key">{displayKey}:</span>
+            <span class="key notranslate" translate="no">{displayKey}:</span>
             <Astro.self data={value} path={childPath} {separator} />
           )}
         </div>

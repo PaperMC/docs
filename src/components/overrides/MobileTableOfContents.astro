@@ -1,0 +1,9 @@
+---
+import Default from "@astrojs/starlight/components/MobileTableOfContents.astro";
+import Version from "../Version.astro";
+
+const { version } = Astro.locals.starlightRoute.entry.data;
+---
+
+<Default><slot /></Default>
+{version && <Version {version} inline />}

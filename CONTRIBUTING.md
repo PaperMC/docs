@@ -9,9 +9,10 @@ To ensure a smooth and collaborative contribution process, please follow the gui
 2. [How to add a page](#adding-a-page)
 3. [Submitting contributions](#submitting-contributions)
 4. [Style guidelines](#style-guidelines)
-5. [Automatic constant replacement](#automatic-constant-replacement)
-6. [Linking to Javadocs](#linking-to-javadocs)
-7. [Code of Conduct](#code-of-conduct)
+5. [Version tags](#version-tags)
+6. [Automatic constant replacement](#automatic-constant-replacement)
+7. [Linking to Javadocs](#linking-to-javadocs)
+8. [Code of Conduct](#code-of-conduct)
 
 ## Introduction
 
@@ -20,7 +21,7 @@ information, instructions, and guidelines to our users, developers, and contribu
 significant role in improving and maintaining the quality of our documentation.
 
 We use [Starlight](https://starlight.astro.build/) to build and deploy the documentation website.
-Docusaurus has [extensive documentation](https://starlight.astro.build/guides/authoring-content/) detailing what is possible with it.
+Starlight has [extensive documentation](https://starlight.astro.build/guides/authoring-content/) detailing what is possible with it.
 
 The bulk of Paper's documentation is written with Markdown, which is a simple markup language that is easy to learn.
 Take a look at some of the existing documentation to get a feel for how it is written.
@@ -96,6 +97,26 @@ To maintain consistency and readability across the documentation, please adhere 
 10. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
 
 11. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
+
+## Version tags
+
+All of our documentation which is potentially relevant to a specific version of the software should be tagged with the
+`version` front matter value. This allows the user to see which version of the software the documentation was written for.
+
+It is important to keep this up to date, as it allows users to see if the documentation is still relevant to the version,
+however it is not required for all documentation. For example, a page about the history of the project would not need a
+`version` value.
+
+```markdown
+---
+title: My awesome page
+description: My awesome page about my awesome topic for 1.20.
+slug: paper/my-awesome-page
+version: "1.20"
+---
+
+.....
+```
 
 ## Automatic constant replacement
 

@@ -1,9 +1,8 @@
 ---
-slug: /tools/diff-viewer
+title: Diff viewer
 description: Multi-file rich diff viewer for GitHub and diff/patch files.
+slug: misc/tools/diff-viewer
 ---
-
-# Diff Viewer
 
 Multi-file rich diff viewer with support for GitHub commits, PRs, and comparisons, as well as
 diff and patch files.

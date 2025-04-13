@@ -2,6 +2,7 @@
 title: Display entities
 description: The display entity API and how to use it.
 slug: paper/dev/display-entities
+version: "1.20"
 ---
 
 Added in 1.19.4, [display entities](https://minecraft.wiki/w/Display) are a powerful way to display

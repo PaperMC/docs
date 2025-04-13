@@ -12,12 +12,12 @@ interface Props {
 const { icon, title, href, destructive } = Astro.props;
 ---
 
-<a href={href} class:list={["card", "sl-flex", destructive && "card-destructive"]}>
-  <article>
+<a href={href} class:list={["not-content", "card", destructive && "card-destructive"]}>
+  <article class="sl-flex">
     <div class="title sl-flex">
       {icon && <Icon name={icon} class="icon" size="1.333em" />}
       <span set:html={title} />
-      {destructive && <Icon name="warning" />}
+      {destructive && <Icon name="warning" class="warning-icon" />}
     </div>
     <div class="body"><slot /></div>
   </article>
@@ -31,14 +31,16 @@ const { icon, title, href, destructive } = Astro.props;
     border: 1px solid var(--sl-color-gray-5);
     background-color: var(--sl-color-black);
     padding: clamp(1rem, calc(0.125rem + 3vw), 2.5rem);
-    flex-direction: column;
-    gap: clamp(0.5rem, calc(0.125rem + 1vw), 1rem);
-    border-radius: 10px;
+    border-radius: 0.25rem;
     text-decoration: none;
     transition:
       border-color 0.3s ease,
       background-color 0.3s ease,
       box-shadow 0.3s ease;
+  }
+  .card article {
+    flex-direction: column;
+    gap: calc(clamp(0.5rem, calc(0.125rem + 1vw), 1rem) / 2);
   }
   .card:hover {
     border-color: var(--sl-card-border);
@@ -67,8 +69,9 @@ const { icon, title, href, destructive } = Astro.props;
     line-height: var(--sl-line-height-headings);
     gap: 1rem;
     align-items: center;
+    color: var(--sl-color-white);
   }
-  .card-destructive .title {
+  .card-destructive .warning-icon {
     color: var(--sl-color-red);
   }
   .card .icon {
@@ -80,6 +83,10 @@ const { icon, title, href, destructive } = Astro.props;
   .card .body {
     margin-top: 0.5rem;
     font-size: clamp(var(--sl-text-sm), calc(0.5rem + 1vw), var(--sl-text-body));
-    color: var(--astro-code-foreground);
+    color: var(--sl-color-gray-3);
+    transition: color 0.3s ease;
+  }
+  .card:hover .body {
+    color: var(--sl-color-gray-1);
   }
 </style>

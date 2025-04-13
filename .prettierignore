@@ -2,8 +2,6 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 *.md
 *.mdx
-!README.md
-!CONTRIBUTING.md
 public/d2
 
 # Prettier has issues with Astro

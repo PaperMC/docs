@@ -3,9 +3,9 @@ import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
 import { getVersion } from "./data/DependencyVersions.ts";
 
 interface Props {
-    artifact: string,
-    project: string,
-};
+  artifact: string;
+  project: string;
+}
 
 const props: Props = Astro.props;
 
@@ -28,7 +28,7 @@ repositories {
 dependencies {
     implementation "${mavenCoordinatesString}"
 }
-`
+`;
 
 const gradleKotlinDependency = `
 repositories {
@@ -38,23 +38,21 @@ repositories {
 dependencies {
     implementation("${mavenCoordinatesString}")
 }
-`
+`;
 ---
 
-<p>
-Declaring the dependency:
-</p>
+<p>Declaring the dependency:</p>
 
 <Tabs syncKey="build-system">
-<TabItem label="Maven">
-  <Code lang="xml" code={mavenDependency} />
-</TabItem>
-<TabItem label="Gradle (Groovy)">
-  <Code lang="groovy" code={gradleGroovyDependency} />
-</TabItem>
-<TabItem label="Gradle (Kotlin)">
-  <Code lang="kotlin" code={gradleKotlinDependency} />
-</TabItem>
+  <TabItem label="Maven">
+    <Code lang="xml" code={mavenDependency} />
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    <Code lang="groovy" code={gradleGroovyDependency} />
+  </TabItem>
+  <TabItem label="Gradle (Kotlin)">
+    <Code lang="kotlin" code={gradleKotlinDependency} />
+  </TabItem>
 </Tabs>
 
 <p>

@@ -6,11 +6,7 @@ import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
-import {
-  LATEST_MC_RELEASE,
-  LATEST_PAPER_RELEASE,
-  LATEST_VELOCITY_RELEASE,
-} from "./src/utils/versions";
+import { LATEST_MC_RELEASE, LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "./src/utils/versions";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -53,8 +49,7 @@ export default defineConfig({
         Footer: "./src/components/overrides/Footer.astro",
         Banner: "./src/components/overrides/Banner.astro",
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
-        MobileTableOfContents:
-          "./src/components/overrides/MobileTableOfContents.astro",
+        MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
       },
       plugins: [
         starlightLinksValidator({
@@ -73,12 +68,7 @@ export default defineConfig({
                   items: [
                     {
                       label: "Getting started",
-                      items: [
-                        "paper/getting-started",
-                        "paper/adding-plugins",
-                        "paper/migration",
-                        "paper/next-steps",
-                      ],
+                      items: ["paper/getting-started", "paper/adding-plugins", "paper/migration", "paper/next-steps"],
                     },
                     {
                       label: "How-to guides",
@@ -195,10 +185,7 @@ export default defineConfig({
                         {
                           label: "Entity API",
                           collapsed: true,
-                          items: [
-                            "paper/dev/entity-teleport",
-                            "paper/dev/display-entities",
-                          ],
+                          items: ["paper/dev/entity-teleport", "paper/dev/display-entities"],
                         },
                         "paper/dev/data-component-api",
                         "paper/dev/pdc",
@@ -250,11 +237,7 @@ export default defineConfig({
                     },
                     {
                       label: "How-to guides",
-                      items: [
-                        "velocity/tuning",
-                        "velocity/security",
-                        "velocity/migration",
-                      ],
+                      items: ["velocity/tuning", "velocity/security", "velocity/migration"],
                     },
                     {
                       label: "Reference",
@@ -282,10 +265,7 @@ export default defineConfig({
                     },
                     {
                       label: "How-to guides",
-                      items: [
-                        "velocity/dev/dependency-management",
-                        "velocity/dev/porting-plugins-from-velocity-1",
-                      ],
+                      items: ["velocity/dev/dependency-management", "velocity/dev/porting-plugins-from-velocity-1"],
                     },
                     {
                       label: "API",
@@ -320,11 +300,7 @@ export default defineConfig({
                   items: [
                     {
                       label: "Reference",
-                      items: [
-                        "folia/reference/overview",
-                        "folia/reference/region-logic",
-                        "folia/faq",
-                      ],
+                      items: ["folia/reference/overview", "folia/reference/region-logic", "folia/faq"],
                     },
                   ],
                 },

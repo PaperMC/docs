@@ -104,7 +104,6 @@
 <script lang="ts">
   let convertSuccess = $state(false);
   let convertError = $state(false);
-  let copySuccess = $state(false);
   let input = $state("");
   let output = $state("");
 
@@ -167,24 +166,15 @@
 <div class="item-command-converter">
   <p class="label">
     Input:
-    <textarea
-      placeholder="Enter your 1.20.4 command here..."
-      class="textarea-panel"
-      bind:value={input}
-    ></textarea>
+    <textarea placeholder="Enter your 1.20.4 command here..." class="textarea-panel" bind:value={input}></textarea>
   </p>
 
   <div class="convert-controls">
-    <button class="convert-content clickable convert-button" onclick={convert}
-      >Convert</button
-    >
+    <button class="convert-content clickable convert-button" onclick={convert}>Convert</button>
     {#if mode.value === "entity-argument"}
       <p class="convert-content entity-type">
         Entity Type:
-        <select
-          bind:value={entityType}
-          class="convert-content dropdown clickable"
-        >
+        <select bind:value={entityType} class="convert-content dropdown clickable">
           {#each ENTITY_TYPES as option (option.label)}
             <option value={option.value}>{option.label ?? option.value}</option>
           {/each}
@@ -203,19 +193,12 @@
 
   <p class="label">
     Output:
-    <textarea
-      placeholder="Press 'Convert' to convert the command."
-      class="textarea-panel"
-      readonly
-      bind:value={output}
+    <textarea placeholder="Press 'Convert' to convert the command." class="textarea-panel" readonly bind:value={output}
     ></textarea>
   </p>
 
-  <button
-    class:copied
-    onclick={copyToClipboard}
-    class="clickable"
-    disabled={loading}>{copied ? "Copied!" : "Copy output!"}</button
+  <button class:copied onclick={copyToClipboard} class="clickable" disabled={loading}
+    >{copied ? "Copied!" : "Copy output!"}</button
   >
 </div>
 

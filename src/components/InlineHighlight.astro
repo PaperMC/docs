@@ -1,0 +1,13 @@
+---
+import { highlight } from "../utils/shiki-utils"
+
+interface Props {
+  lang: string;
+  code: string;
+}
+
+const props: Props = Astro.props;
+const html = highlight(props.code, props.lang);
+---
+
+<a set:html={html} />

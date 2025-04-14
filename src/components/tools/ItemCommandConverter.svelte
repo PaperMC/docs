@@ -1,18 +1,14 @@
 <script lang="ts" module>
-  type Option = {
-    label: string;
-    value: string;
-    description?: string;
-  };
+  type Option = { label: string; value: string; description?: string };
 
-  const MODES: Option[] = [
+  const modes: Option[] = [
     { label: "Command", value: "command" },
-    { label: "Item Argument", value: "item-argument" },
-    { label: "Component Argument", value: "component-argument" },
-    { label: "Entity Argument", value: "entity-argument" },
-  ].sort((e1, e2) => e1.label.localeCompare(e2.label));
+    { label: "Item argument", value: "item-argument" },
+    { label: "Component argument", value: "component-argument" },
+    { label: "Entity argument", value: "entity-argument" },
+  ];
 
-  const ENTITY_TYPES: Option[] = [
+  const entityTypes: Option[] = [
     "item",
     "xp_orb",
     "area_effect_cloud",
@@ -99,11 +95,12 @@
   ]
     .map((e) => ({ label: e, value: e }))
     .sort((e1, e2) => e1.label.localeCompare(e2.label));
+
+  type State = "success" | "error" | "loading" | "idle";
 </script>
 
 <script lang="ts">
-  let convertSuccess = $state(false);
-  let convertError = $state(false);
+  let convState = $state<State>("idle");
   let input = $state("");
   let output = $state("");
 
@@ -114,47 +111,38 @@
     }
   });
 
-  let mode = $state<Option>(MODES[0]);
-
-  let entityType = $state<Option>();
-  let loading = $state(false);
-
-  const toggleState = (state: boolean) => {
-    state = true;
-    setTimeout(() => (state = false), 500);
-  };
+  let modeId = $state(modes[0]?.value);
+  let mode = $derived<Option>(modes.find((m) => m.value === modeId) ?? modes[0]);
+  let entityTypeId = $state(entityTypes[0]?.value);
+  let entityType = $derived<Option>(entityTypes.find((m) => m.value === entityTypeId) ?? entityTypes[0]);
 
   const convert = async () => {
-    output = "";
-    loading = true;
-    try {
-      // const query = mode === MODES[3] ? "?entityType=" + entityType?.value : "";
-      // const response = await fetch(
-      //   "https://item-converter.papermc.io/convert-" + mode.value + query,
-      //   {
-      //     method: "POST",
-      //     body: input,
-      //   }
-      // );
-      // if (response.status === 200) {
-      // output = await response.text();
-      output = input;
-      toggleState(convertSuccess);
-      // } else {
-      //   console.warn(
-      //     "Failed to convert command: " +
-      //       response.status +
-      //       ": " +
-      //       (await response.text())
-      //   );
-      //   toggleState(convertError);
-      // }
-    } catch (error) {
-      console.error("Failed to convert command: " + error);
-      toggleState(convertError);
+    if (convState === "loading") {
+      return;
     }
 
-    loading = false;
+    convState = "loading";
+    output = "Converting...";
+    try {
+      const query = mode.value === "entity-argument" ? `?entityType=${entityType!.value}` : "";
+      const response = await fetch(`https://item-converter.papermc.io/convert-${mode.value}${query}`, {
+        method: "POST",
+        body: input,
+      });
+
+      if (response.ok) {
+        output = await response.text();
+        convState = "success";
+      } else {
+        output = `Failed to convert command. (${await response.text()})`;
+        convState = "error";
+      }
+    } catch (e) {
+      output = "Failed to convert command, check the console.";
+      console.error(e);
+
+      convState = "error";
+    }
   };
 
   const copyToClipboard = () => {
@@ -163,60 +151,61 @@
   };
 </script>
 
-<div class="item-command-converter">
-  <p class="label">
-    Input:
-    <textarea placeholder="Enter your 1.20.4 command here..." class="textarea-panel" bind:value={input}></textarea>
-  </p>
+<div class="not-content generator">
+  <div class="area">
+    <p class="label">Input:</p>
+    <textarea placeholder="Enter your 1.20.4 command here..." bind:value={input}></textarea>
+  </div>
 
-  <div class="convert-controls">
-    <button class="convert-content clickable convert-button" onclick={convert}>Convert</button>
+  <div class="controls">
+    <button onclick={convert} disabled={convState === "loading"}>Convert</button>
     {#if mode.value === "entity-argument"}
-      <p class="convert-content entity-type">
-        Entity Type:
-        <select bind:value={entityType} class="convert-content dropdown clickable">
-          {#each ENTITY_TYPES as option (option.label)}
+      <div class="dropdown">
+        <div class="label">Entity type:</div>
+        <select bind:value={entityTypeId} class="dropdown-code">
+          {#each entityTypes as option (option.label)}
             <option value={option.value}>{option.label ?? option.value}</option>
           {/each}
         </select>
-      </p>
+      </div>
     {/if}
-    <p class="convert-content convert-mode">
-      Mode:
-      <select bind:value={mode} class="convert-content dropdown clickable">
-        {#each MODES as option (option)}
-          <option value={option}>{option.label ?? option.value}</option>
+    <div class="dropdown">
+      <div class="label">Mode:</div>
+      <select bind:value={modeId}>
+        {#each modes as option (option)}
+          <option value={option.value}>{option.label ?? option.value}</option>
         {/each}
       </select>
-    </p>
+    </div>
   </div>
 
-  <p class="label">
-    Output:
-    <textarea placeholder="Press 'Convert' to convert the command." class="textarea-panel" readonly bind:value={output}
-    ></textarea>
-  </p>
+  <div class="area">
+    <p class="label">Output:</p>
+    <textarea placeholder="Press 'Convert' to convert the command." readonly bind:value={output}></textarea>
+  </div>
 
-  <button class:copied onclick={copyToClipboard} class="clickable" disabled={loading}
-    >{copied ? "Copied!" : "Copy output!"}</button
-  >
+  <div class="controls">
+    <button class:copied onclick={copyToClipboard} disabled={convState !== "success"}>
+      {copied ? "Copied!" : "Copy"}
+    </button>
+  </div>
 </div>
 
 <style>
-  .item-command-converter {
-    margin-top: 1rem;
-    padding: 1rem;
-    border: 2px;
-    border-style: solid;
-    border-radius: 1rem;
-    border-color: var(--sl-color-gray-6);
+  .generator {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.5rem;
+    border: 1px solid var(--sl-color-gray-6);
+    border-radius: 0.25rem;
   }
 
   .label {
     font-weight: 600;
   }
 
-  .textarea-panel {
+  .area textarea {
     width: 100%;
     resize: none;
     border: none;
@@ -228,44 +217,88 @@
     word-break: break-all;
     background-color: var(--sl-color-gray-6);
     color: var(--sl-color-gray-1);
-    margin-top: 0.5rem;
-    border-radius: 0.5rem;
   }
 
-  .convert-controls {
+  .area .label {
+    margin-bottom: 0.25rem;
+  }
+
+  .controls {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  .convert-content {
-    margin-top: auto;
-    margin-bottom: auto;
-  }
-
-  .convert-mode {
-    float: right;
+    gap: 1rem;
   }
 
   .dropdown {
-    margin-left: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
   }
 
-  .clickable {
+  .dropdown .label {
+    flex-shrink: 0;
+  }
+
+  .dropdown select {
+    height: 3rem;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 0.25rem;
     background-color: var(--sl-color-gray-6);
-    color: var(--sl-color-gray-1);
-    border-style: solid;
-    border-radius: 0.5rem;
-    border-color: var(--sl-color-gray-5);
-    padding: 0.25rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-    transition: 0.15s;
   }
 
-  .clickable:hover {
+  .dropdown-code {
+    font-family: var(--__sl-font-mono);
+  }
+
+  .controls button {
+    height: 3rem;
+    width: 6rem;
+    padding: 0.5rem 1rem;
+    color: var(--sl-color-white);
+    background-color: var(--sl-color-gray-6);
+    border: none;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+
+  .controls button:hover {
     background-color: var(--sl-color-gray-5);
-    transition: 0.15s;
+  }
+
+  .controls button[disabled] {
+    cursor: not-allowed;
+    color: var(--sl-color-gray-1);
+    background-color: var(--sl-color-gray-5);
+  }
+
+  .copied {
+    color: var(--sl-color-black) !important;
+    background-color: var(--sl-color-green) !important;
+  }
+
+  @media (max-width: 640px) {
+    .controls {
+      flex-direction: column-reverse;
+      align-items: stretch;
+    }
+
+    .dropdown {
+      gap: 0.5rem;
+      flex-direction: column;
+      align-items: start;
+    }
+
+    .controls button {
+      width: inherit;
+    }
   }
 </style>

@@ -46,10 +46,13 @@ function plugin() {
         //   `Lang: ${lang}. Code: ${code}. (FullLang: ${fullLang}. FullCode: ${fullCode}) {${matchContent}}`
         // );
 
-        const output = highlighter.codeToHtml(code, {
-          lang: lang,
-          theme: "one-dark-pro",
-        }).replace("pre", "a").replace("</pre>", "</a>");
+        const output = highlighter
+          .codeToHtml(code, {
+            lang: lang,
+            theme: "one-dark-pro",
+          })
+          .replace("pre", "a")
+          .replace("</pre>", "</a>");
 
         console.log(`Output: ${output}`);
         content = content.replaceAll(match, output);

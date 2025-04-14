@@ -1,9 +1,9 @@
 import { createHighlighter } from "shiki";
 import MiniMessageLang from "../assets/mm.tmLanguage.json";
 
-// import NightOwlDark from "@astrojs/starlight/integrations/expressive-code/themes/night-owl-dark.jsonc";
-// import NightOwlLight from "@astrojs/starlight/integrations/expressive-code/themes/night-owl-light.jsonc";
 import starlightConfig from "virtual:starlight/user-config";
+import NightOwlDark from "../assets/themes/night-owl-dark.json";
+import NightOwlLight from "../assets/themes/night-owl-light.json";
 
 let themes: Array<any> | undefined = undefined;
 
@@ -11,8 +11,7 @@ if (typeof starlightConfig.expressiveCode === "object") {
   themes = starlightConfig.expressiveCode.themes;
 }
 
-// themes = themes ?? ["night-owl", "night-owl"];
-themes = ["night-owl", "one-light"]
+themes = themes ?? [NightOwlDark, NightOwlLight];
 
 let highlighter = await createHighlighter({
   langs: [MiniMessageLang, "java"],

@@ -310,7 +310,11 @@ export default defineConfig({
               id: "adventure",
               label: "Adventure",
               link: "/adventure/",
-              items: ["adventure/getting-started", "adventure/community-libraries", "adventure/faq"],
+              items: ["adventure/getting-started", "adventure/community-libraries", "adventure/faq", "adventure/audiences", "adventure/text",
+                {
+                  label: "Text Serializers",
+                  items: ["adventure/serializer/index", "adventure/serializer/json", "adventure/serializer/gson", "adventure/serializer/legacy", "adventure/serializer/plain", "adventure/serializer/ansi"]
+                }],
             },
             {
               id: "waterfall",

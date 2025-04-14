@@ -5,42 +5,57 @@ const { entry, lang, siteTitle } = Astro.locals.starlightRoute;
 const { data } = entry;
 
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site) : undefined;
-const canonicalImage = Astro.site ? new URL("/assets/icons/icon-512x512.png", Astro.site) : undefined;
 const description = data.description || config.description;
 
-const base = stripTrailingSlash(import.meta.env.BASE_URL);
-
-function stripTrailingSlash(href: string) {
+const stripTrailingSlash = (href: string) => {
   if (href[href.length - 1] === "/") {
     href = href.slice(0, -1);
   }
   return href;
-}
-function stripLeadingSlash(href: string) {
+};
+const stripLeadingSlash = (href: string) => {
   if (href[0] === "/") {
     href = href.slice(1);
   }
   return href;
-}
-function fileWithBase(path: string) {
+};
+const fileWithBase = (path: string) => {
   path = stripLeadingSlash(path);
   return path ? base + "/" + path : base;
-}
+};
+
+const base = stripTrailingSlash(import.meta.env.BASE_URL);
 ---
 
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>{data.title} {config.titleDelimiter} {siteTitle}</title>
+<meta name="description" content={description} />
 {canonical && <link rel="canonical" href={canonical.href} />}
 <meta property="generator" content={Astro.generator} />
-<link rel="shortcut icon" href={fileWithBase(config.favicon.href)} type={config.favicon.type} />
+<link rel="sitemap" href={fileWithBase("/sitemap-index.xml")} />
+
+<link rel="shortcut icon" type="image/svg+xml" href="https://assets.papermc.io/brand/papermc_logo.min.svg" />
+<link rel="shortcut icon" type="image/png" sizes="16x16" href="https://assets.papermc.io/web/favicon-16x16.png" />
+<link rel="shortcut icon" type="image/png" sizes="32x32" href="https://assets.papermc.io/web/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="https://assets.papermc.io/web/android-chrome-192x192.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="https://assets.papermc.io/web/android-chrome-512x512.png" />
+<link rel="apple-touch-icon" type="image/png" href="https://assets.papermc.io/web/apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="https://assets.papermc.io/web/apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="152x152" href="https://assets.papermc.io/web/apple-touch-icon-152x152.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="https://assets.papermc.io/web/apple-touch-icon-180x180.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="https://assets.papermc.io/web/apple-touch-icon-60x60.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="https://assets.papermc.io/web/apple-touch-icon-76x76.png" />
+
 <meta property="og:title" content={`${data.title} ${config.titleDelimiter} ${siteTitle}`} />
 <meta property="og:type" content="article" />
 {canonical && <meta property="og:url" content={canonical.href} />}
 <meta property="og:locale" content={lang} />
 <meta property="og:description" content={description} />
-<meta name="description" content={description} />
-<link rel="sitemap" href={fileWithBase("/sitemap-index.xml")} />
-{canonicalImage && <meta property="og:image" content={canonicalImage.href} />}
-{canonicalImage && <meta name="twitter:image" content={canonicalImage.href} />}
+<meta property="og:image" content="https://assets.papermc.io/brand/papermc_logo.512.png" />
+<meta name="twitter:image" content="https://assets.papermc.io/brand/papermc_logo.512.png" />
+
+<link rel="preload" as="image" type="image/svg+xml" href="https://assets.papermc.io/brand/papermc_combination_mark_light.min.svg" />
+<link rel="preload" as="image" type="image/svg+xml" href="https://assets.papermc.io/brand/papermc_combination_mark_dark.min.svg" />
+
 <script is:inline defer src="https://trk.papermc.io/api/init" data-website-id="f93a0860-1253-4868-b27a-08208a36cea7"></script>

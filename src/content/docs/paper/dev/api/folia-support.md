@@ -4,7 +4,7 @@ description: How to support both Folia and Paper within your plugin.
 slug: paper/dev/folia-support
 ---
 
-![](./assets/folia.png)
+![](https://assets.papermc.io/brand/folia.png)
 
 [Folia](https://github.com/PaperMC/Folia) is a fork of Paper, which is currently maintained by the PaperMC team.
 It adds the ability to split the world into regions as outlined [here](/folia/reference/overview) in more depth.

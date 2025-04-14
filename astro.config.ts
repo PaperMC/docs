@@ -16,12 +16,6 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "PaperMC Docs",
-      favicon: "favicon.ico",
-      logo: {
-        light: "./src/assets/logo-marker-light.svg",
-        dark: "./src/assets/logo-marker-dark.svg",
-        replacesTitle: true,
-      },
       social: [
         { icon: "github", label: "GitHub", href: "https://github.com/PaperMC" },
         { icon: "discord", label: "Discord", href: "https://discord.gg/PaperMC" },
@@ -40,6 +34,7 @@ export default defineConfig({
       ],
       components: {
         Head: "./src/components/overrides/Head.astro",
+        SiteTitle: "./src/components/overrides/SiteTitle.astro",
         Sidebar: "./src/components/overrides/Sidebar.astro",
         PageFrame: "./src/components/overrides/PageFrame.astro",
         Footer: "./src/components/overrides/Footer.astro",

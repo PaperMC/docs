@@ -370,6 +370,14 @@ export default defineConfig({
                   label: "Migrating to Adventure from other APIs",
                   items: ["adventure/migration/bungeecord-chat-api", "adventure/migration/text-3.x"],
                 },
+                {
+                  label: "Version History",
+                  items: [
+                    "adventure/version-history/adventure",
+                    "adventure/version-history/adventure-platform",
+                    "adventure/version-history/adventure-platform-fabric",
+                  ],
+                },
               ],
             },
             {
@@ -441,6 +449,7 @@ export default defineConfig({
                 "/adventure/platform",
                 "/adventure/migration",
                 "/adventure/contributing",
+                "/adventure/version-history",
               ],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],

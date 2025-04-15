@@ -56,7 +56,8 @@ This tag will be `<arg:index>` or `<argument:index>` where `index` is the zero i
 For example, this component `Component.translatable(key, Component.text("Kezz"))` with the MiniMessage string `Hello, <arg:0>!` will produce "Hello, Kezz!".
 
 You can also use the `Argument` class to create named tags for ease of use.
-For example, this component `Component.translatable(key, Argument.component("name", Component.text("Kezz"))` will produce the string "Hello, Kezz!" when used with either `Hello, <arg:0>!` or `Hello, <name>!`.
+For example, this component `Component.translatable(key, Argument.component("name", Component.text("Kezz"))` will produce the string "Hello, Kezz!"
+when used with either `Hello, <arg:0>!` or `Hello, <name>!`.
 
 Finally, you can also add entirely custom tags or tag resolvers to the deserialization by using the rest of the methods on `Argument`.
 For a full list, please see the Javadocs for the `Argument` class.

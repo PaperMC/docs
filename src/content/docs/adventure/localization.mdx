@@ -43,7 +43,8 @@ Please consult the documentation for your platform for any limitations.
 A `Translator` is a simple interface that provides two ways of translating content.
 
 The first `translate` method provides the translation key and locale as an argument and expects a nullable `MessageFormat` in return.
-This system is comparable to Minecraft's built-in localization system, using the standard Java [message format](https://docs.oracle.com/javase/8/docs/api/java/text/MessageFormat.html) for arguments.
+This system is comparable to Minecraft's built-in localization system, using the standard Java
+[message format](https://docs.oracle.com/javase/8/docs/api/java/text/MessageFormat.html) for arguments.
 
 If the first `translate` method returns `null`, the second method which provides the translatable component and locale as an argument can be used.
 This method allows for much richer customization of the translation process as you can return an entire component.
@@ -120,4 +121,4 @@ You may also want to use Adventure's `UTF8ResourceBundleControl` utility class t
 ### Using MiniMessage for translations
 
 Adventure also provides a translator that can use MiniMessage strings, with automatic support for placeholders and arguments.
-For more information, see [MiniMessage Translator](adventure/minimessage/translator).
+For more information, see [MiniMessage Translator](/adventure/minimessage/translator).

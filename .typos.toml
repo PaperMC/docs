@@ -1,6 +1,7 @@
 [files]
 extend-exclude = [
-  "public/d2" # D2 output shouldn't be checked
+  "public/d2", # D2 output shouldn't be checked
+  "src/content/docs/adventure/minimessage/format.mdx" # This file contains british spelling because of tag aliases
 ]
 
 [default]
@@ -79,10 +80,6 @@ regionise = "regionize"
 regioniser = "regionizer"
 regionising = "regionizing"
 regionised = "regionized"
-
-"`colour`" = "`colour`"
-"`grey`" = "`grey`"
-"`dark_grey`" = "`dark_grey`"
 
 # exceptions:
 

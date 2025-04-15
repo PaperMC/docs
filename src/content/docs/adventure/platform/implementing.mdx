@@ -43,7 +43,7 @@ callback command is requested. The platform is responsible for ensuring any exec
 `ComponentLogger`, as part of the `adventure-text-logger-slf4j` module, provides a logging interface that extends SLF4J and wraps any existing SLF4J logger (compatible with
 v1 and v2). Platforms are responsible for providing the adapter that looks up the appropriate logger by name and serializes components to text.
 
-This should involve performing any translations if necessary. The default behaviour of the logger is to serialize to plain text, but platforms may want to look at the
+This should involve performing any translations if necessary. The default behavior of the logger is to serialize to plain text, but platforms may want to look at the
 `/serializer/ansi` serializer instead for colored output.
 
 ### Boss Bars
@@ -53,7 +53,7 @@ In order to track viewers and link up to any internal state, the `BossBarImpleme
 
 ## Conventional behaviors
 
-Some behaviours are expected by platforms beyond what is explicitly required by implementing certain interfaces. These are:
+Some behaviors are expected by platforms beyond what is explicitly required by implementing certain interfaces. These are:
 
 * When implementing `Audience`, any unsupported operations should fail silently.
 * When sending components to a player, they should be passed through `GlobalTranslator` before sending to perform any translations (note: `GlobalTranslator` is only for

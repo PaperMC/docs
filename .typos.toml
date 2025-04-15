@@ -6,16 +6,10 @@ extend-exclude = [
 [default]
 locale = "en-us"
 
-# These are needed for the Adventure documentation
-extend-ignore-words-re = [
-  "`colour`",
-  "`grey`",
-  "`dark_grey`",
-  "JuliGames(Core)?"
-]
-
 [default.extend-identifiers]
 Spectre = "Spectre" # ignore error, the vulnerability is named Spectre
+JuliGamesCode = "JuliGamesCore" # Project organization utilizing the Adventure library
+JuliGames = "JuliGames" # Project name utilizing the Adventure library
 
 [default.extend-words]
 accessorise = "accessorize"
@@ -85,6 +79,9 @@ regionise = "regionize"
 regioniser = "regionizer"
 regionising = "regionizing"
 regionised = "regionized"
+color = "`colour`"
+gray = "`grey`"
+dark_gray = "`dark_grey`"
 
 # exceptions:
 

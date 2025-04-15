@@ -320,7 +320,6 @@ export default defineConfig({
                 {
                   label: "Text Serializers",
                   items: [
-                    "adventure/serializer/index",
                     "adventure/serializer/json",
                     "adventure/serializer/gson",
                     "adventure/serializer/legacy",
@@ -328,7 +327,6 @@ export default defineConfig({
                     {
                       label: "MiniMessage",
                       items: [
-                        "adventure/minimessage/index",
                         "adventure/minimessage/format",
                         "adventure/minimessage/api",
                         "adventure/minimessage/dynamic-replacements",
@@ -347,7 +345,6 @@ export default defineConfig({
                 {
                   label: "MiniMessage",
                   items: [
-                    "adventure/minimessage/index",
                     "adventure/minimessage/format",
                     "adventure/minimessage/api",
                     "adventure/minimessage/dynamic-replacements",
@@ -358,7 +355,6 @@ export default defineConfig({
                 {
                   label: "Platforms",
                   items: [
-                    "adventure/platform/index",
                     "adventure/platform/native",
                     "adventure/platform/bukkit",
                     "adventure/platform/bungeecord",
@@ -372,11 +368,7 @@ export default defineConfig({
                 },
                 {
                   label: "Migrating to Adventure from other APIs",
-                  items: [
-                    "adventure/migration/index",
-                    "adventure/migration/bungeecord-chat-api",
-                    "adventure/migration/text-3.x",
-                  ],
+                  items: ["adventure/migration/bungeecord-chat-api", "adventure/migration/text-3.x"],
                 },
               ],
             },
@@ -443,6 +435,13 @@ export default defineConfig({
                 "/velocity/dev/api",
               ],
               folia: ["/folia/admin", "/folia/admin/reference"],
+              adventure: [
+                "/adventure/serializer",
+                "/adventure/minimessage",
+                "/adventure/platform",
+                "/adventure/migration",
+                "/adventure/contributing",
+              ],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],
             },

@@ -8,7 +8,7 @@ Components represent Minecraft chat components
 ## Creating components
 
 ```java
-// Creates a line of text saying "You're a Bunny! Press <key> to jump!", with some colouring and styling.
+// Creates a line of text saying "You're a Bunny! Press <key> to jump!", with some coloring and styling.
 final TextComponent textComponent = Component.text("You're a ")
   .color(TextColor.color(0x443344))
   .append(Component.text("Bunny", NamedTextColor.LIGHT_PURPLE))
@@ -26,7 +26,7 @@ You can also use a builder, which is mutable, and creates one final
 component with the children.
 
 ```java
-// Creates a line of text saying "You're a Bunny! Press <key> to jump!", with some colouring and styling.
+// Creates a line of text saying "You're a Bunny! Press <key> to jump!", with some coloring and styling.
 final TextComponent textComponent2 = Component.text()
   .content("You're a ")
   .color(TextColor.color(0x443344))

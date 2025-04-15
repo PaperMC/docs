@@ -11,7 +11,7 @@ The JSON serializer works similar to all others, providing the basic serialize a
 
 ```java
 // Component to text
-final String jsonText = JSONComponentSerializer.json().serialize(Component.text("Hello world", NamedTextColour.LIGHT_PURPLE));
+final String jsonText = JSONComponentSerializer.json().serialize(Component.text("Hello world", NamedTextColor.LIGHT_PURPLE));
 
 // JSON string to component
 final Component comp = JSONComponentSerializer.json().deserialize(jsonText);

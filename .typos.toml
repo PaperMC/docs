@@ -6,6 +6,14 @@ extend-exclude = [
 [default]
 locale = "en-us"
 
+# These are needed for the Adventure documentation
+extend-ignore-words-re = [
+  "`colour`",
+  "`grey`",
+  "`dark_grey`",
+  "JuliGames(Core)?"
+]
+
 [default.extend-identifiers]
 Spectre = "Spectre" # ignore error, the vulnerability is named Spectre
 

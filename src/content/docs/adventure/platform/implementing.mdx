@@ -7,14 +7,14 @@ Most users will be here to look at information about existing platform implement
 
 While at its core Adventure 'just' provides data structures and serializers, as the game evolves and more functionality is added there are more tunable options and platform hooks
 necessary to produce the correct output for the applicable game version. This has led to the introduction of a variety of services that platforms can provide implementations of using
-Java's `ServiceLoader` mechanism. Some other behaviours are expected by convention. As there are not that many platforms that integrate with Adventure, this page is an attempt to
+Java's `ServiceLoader` mechanism. Some other behaviors are expected by convention. As there are not that many platforms that integrate with Adventure, this page is an attempt to
 cover the common points. Please don't be afraid to ask us questions, and together we can work on fleshing out this page.
 
 ## Services
 
 ### `ComponentSerializer` Services
 
-Most of the serializers (Gson, legacy, etc.) have `Provider` SPI's that allow customizing the default behaviours of serializers. These are most applicable for the Gson/other JSON
+Most of the serializers (Gson, legacy, etc.) have `Provider` SPI's that allow customizing the default behaviors of serializers. These are most applicable for the Gson/other JSON
 serializers where the data structures have changed over time, but the legacy serializer's options can be worth referencing too. See the Javadoc for each serializer for more information.
 
 For any `JSONComponentSerializer` subtype, we have tried to gather relevant tunable options within a single system, keyed by the game's active
@@ -44,14 +44,14 @@ callback command is requested. The platform is responsible for ensuring any exec
 v1 and v2). Platforms are responsible for providing the adapter that looks up the appropriate logger by name and serializes components to text.
 
 This should involve performing any translations if necessary. The default behaviour of the logger is to serialize to plain text, but platforms may want to look at the
-`/serializer/ansi` serializer instead for coloured output.
+`/serializer/ansi` serializer instead for colored output.
 
 ### Boss Bars
 
 Boss bars are logistically somewhat complicated. As one of the few holders of mutable state in the library, they have to re-sync any state changes to their viewers.
 In order to track viewers and link up to any internal state, the `BossBarImplementation.Provider` SPI allows platforms to provide their own implementation hooks per-bar.
 
-## Conventional Behaviours
+## Conventional behaviors
 
 Some behaviours are expected by platforms beyond what is explicitly required by implementing certain interfaces. These are:
 

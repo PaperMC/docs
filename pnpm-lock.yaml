@@ -77,9 +77,6 @@ importers:
       prettier-plugin-svelte:
         specifier: ^3.3.3
         version: 3.3.3(prettier@3.5.3)(svelte@5.26.1)
-      shiki:
-        specifier: ^3.2.2
-        version: 3.2.2
 
 packages:
 

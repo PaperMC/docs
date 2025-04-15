@@ -333,7 +333,6 @@ export default defineConfig({
                         "adventure/minimessage/api",
                         "adventure/minimessage/dynamic-replacements",
                         "adventure/minimessage/translator",
-                        "adventure/minimessage/ultra-small",
                       ],
                     },
                     "adventure/serializer/ansi",

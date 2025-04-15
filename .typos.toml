@@ -8,11 +8,8 @@ locale = "en-us"
 
 [default.extend-identifiers]
 Spectre = "Spectre" # ignore error, the vulnerability is named Spectre
-JuliGamesCode = "JuliGamesCore" # Project organization utilizing the Adventure library
+JuliGamesCore = "JuliGamesCore" # Project organization utilizing the Adventure library
 JuliGames = "JuliGames" # Project name utilizing the Adventure library
-"`colour`" = "`colour`"
-"`grey`" = "`grey`"
-"`dark_grey`" = "`dark_grey`"
 
 [default.extend-words]
 accessorise = "accessorize"
@@ -82,6 +79,10 @@ regionise = "regionize"
 regioniser = "regionizer"
 regionising = "regionizing"
 regionised = "regionized"
+
+"`colour`" = "`colour`"
+"`grey`" = "`grey`"
+"`dark_grey`" = "`dark_grey`"
 
 # exceptions:
 

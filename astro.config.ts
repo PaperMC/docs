@@ -306,6 +306,7 @@ export default defineConfig({
               id: "adventure",
               label: "Adventure",
               link: "/adventure/",
+              icon: "adventure",
               items: [
                 "adventure/getting-started",
                 "adventure/community-libraries",
@@ -381,12 +382,6 @@ export default defineConfig({
               link: "/waterfall/",
               icon: "waterfall",
               items: ["waterfall/getting-started", "waterfall/configuration"],
-            },
-            {
-              id: "adventure",
-              label: "Adventure",
-              link: "https://docs.advntr.dev/",
-              icon: "adventure",
             },
             {
               id: "misc",

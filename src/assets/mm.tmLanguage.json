@@ -4,7 +4,7 @@
   "patterns": [
     {
       "name": "meta.tag.mm",
-      "begin": "(<)(/?|!?)([a-zA-Z0-9_]+)",
+      "begin": "(<)(/?|!?)([a-zA-Z0-9_#]+)",
       "beginCaptures": {
         "1": { "name": "constant.language.tag.mm" },
         "2": { "name": "constant.language.tag.mm" },

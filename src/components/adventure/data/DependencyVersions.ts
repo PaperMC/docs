@@ -24,7 +24,7 @@ const versions: Map<string, string> = new Map(
     "text-serializer-bungeecord": "4.3.4",
     "adventure-platform-fabric": "6.3.0",
     facet: "4.3.4",
-    // "api": "4.3.4", -- Duplicate key?
+    platform: "4.3.4",
     bungeecord: "4.3.4",
     viaversion: "4.3.4",
     neoforge: "6.3.0",

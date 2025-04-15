@@ -305,6 +305,12 @@ export default defineConfig({
               items: ["waterfall/getting-started", "waterfall/configuration"],
             },
             {
+              id: "adventure",
+              label: "Adventure",
+              link: "https://docs.advntr.dev/",
+              icon: "adventure",
+            },
+            {
               id: "misc",
               label: "Miscellaneous",
               link: "/misc/",

@@ -7,6 +7,3 @@ public/d2
 # Prettier has issues with Astro
 src/components/overrides/Head.astro
 src/components/ConfigNode.astro
-
-# TODO: remove
-old

@@ -36,7 +36,7 @@ The page should start with a slug and title. For example:
 
 ```markdown
 ---
-title: Paper Plugins
+title: Paper plugins
 slug: paper/reference/paper-plugins
 ---
 
@@ -47,7 +47,7 @@ This will place the page at the `/paper/reference/paper-plugins` URL on the webs
 folder structure of the documentation. The title is the name of the page that will be displayed on the website and in the sidebar.
 
 You must also add the page to the sidebar. In this instance we will go to the `astro.config.ts` file and
-add the file to the `items` tag for that section. You must use slug for that file, for example `paper/reference/paper-plugins`.
+add the file to the `items` tag for that section. You must use the slug for that file, for example `paper/reference/paper-plugins`.
 Take a look at the existing sidebar elements to get a feel for how it is structured.
 
 ## Submitting contributions
@@ -77,26 +77,29 @@ To maintain consistency and readability across the documentation, please adhere 
    Take a look at [this guide](https://www.oxfordinternationalenglish.com/differences-in-british-and-american-spelling/) which outlines
    the differences between American and British English.
 
-2. **Markdown Format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
+2. **Embrace sentence case**: Use sentence case instead of Title Case, if it makes sense. Sentence case along with active voice creates a more natural, conversational tone.
 
-3. **Heading Structure**: Use `h1` (#) for the main title, `h2` (##) for section headings, and follow this pattern for subsequent subheadings.
+3. **Markdown format**: Documentation should be written in Markdown format (.md or .mdx) for easy rendering on the website.
+   If you don't use any MDX features, use a plain Markdown file (.md) instead to improve portability of your markup.
 
-4. **Code Blocks**: When including code snippets or terminal commands, use fenced code blocks with the appropriate syntax highlighting.
+4. **Heading structure**: Use the `title` front matter property for the main title, `h2` (##) for section headings, and follow this pattern for subsequent subheadings.
 
-5. **Admonitions**: Use admonitions to highlight important information. For example, use `:::note` for general notes, `:::tip` for tips,
+5. **Code blocks**: When including code snippets or terminal commands, use fenced code blocks with the appropriate syntax highlighting.
+
+6. **Admonitions**: Use admonitions to highlight important information. For example, use `:::note` for general notes, `:::tip` for tips,
    `:::caution` for warnings, and `:::danger` for critical warnings.
 
-6. **Links and References**: When referencing external sources or linking to other pages, use descriptive anchor text and provide full URLs.
+7. **Links and references**: When referencing external sources or linking to other pages, use descriptive anchor text and provide full URLs.
 
-7. **Images**: Include images if necessary to illustrate concepts. Ensure the images are clear and relevant to the content.
+8. **Images**: Include images if necessary to illustrate concepts, ensure the images are clear and relevant to the content, and store them in the repository rather than external CDNs (i.e. imgur).
 
-8. **Format Code**: After you've made changes, don't forget to run the formatting script with `pnpm run format`.
+9. **Format code**: After you've made changes, don't forget to run the formatting script with `pnpm run format`.
 
-9. **Keep It Concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
+10. **Keep it concise**: Write clear and concise sentences. Avoid unnecessary jargon and explanations.
 
-10. **Be Inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
+11. **Be inclusive**: Be mindful of all readers and contributors. Use language that is inclusive and welcoming to everyone.
 
-11. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
+12. **Capitalize Vanilla**: When referring to the base game, use "Vanilla" with a capital "V".
 
 ## Version tags
 

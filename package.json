@@ -13,11 +13,11 @@
   },
   "dependencies": {
     "@astrojs/markdown-remark": "^6.3.1",
-    "@astrojs/starlight": "^0.33.2",
+    "@astrojs/starlight": "^0.34.0",
     "@astrojs/svelte": "^7.0.10",
     "@fontsource/jetbrains-mono": "^5.2.5",
     "@fontsource/poppins": "^5.2.5",
-    "astro": "^5.6.2",
+    "astro": "^5.7.2",
     "astro-d2": "^0.7.0",
     "sharp": "^0.34.1",
     "starlight-contributor-list": "^0.3.0",

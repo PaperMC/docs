@@ -24,6 +24,13 @@
 .sl-markdown-content img:not([alt="Diagram"]) {
   width: 100%;
 }
+.sl-markdown-content .img-inline img {
+  margin: 0;
+  width: auto;
+}
+.sl-markdown-content .img-inline-center img {
+  width: auto;
+}
 
 /* Safari fixes for logo sizing */
 .hero-html > img {

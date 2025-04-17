@@ -25,6 +25,14 @@
   width: 100%;
 }
 
+/* Safari fixes for logo sizing */
+.hero-html > img {
+  object-fit: contain;
+  width: min(70%, 20rem);
+  height: auto;
+  margin-inline: auto;
+}
+
 /* make index page hero smaller vertically */
 @media (min-width: 50rem) {
   .hero {

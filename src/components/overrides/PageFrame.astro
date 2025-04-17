@@ -49,6 +49,8 @@ const { hasSidebar } = Astro.locals.starlightRoute;
   }
 
   .sidebar-pane {
+    display: flex;
+    flex-direction: column;
     visibility: var(--sl-sidebar-visibility, hidden);
     position: fixed;
     z-index: var(--sl-z-index-menu);
@@ -70,13 +72,13 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     z-index: 20;
     padding: 1rem var(--sl-sidebar-pad-x);
     background-color: var(--sl-color-black);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
 
   .sidebar-content {
     height: 100%;
     min-height: max-content;
-    padding: 0.5rem var(--sl-sidebar-pad-x) 0;
+    padding: 1rem var(--sl-sidebar-pad-x) 0;
     flex-direction: column;
     gap: 1rem;
   }

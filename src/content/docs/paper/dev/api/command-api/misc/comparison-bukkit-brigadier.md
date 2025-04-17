@@ -113,5 +113,4 @@ this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, comman
 
 And we are done! As you can see here, both commands do the same thing:
 
-![](./assets/bukkitparty-command.png)
-![](./assets/paperparty-command.png)
+<span style="display: flex;">![](./assets/bukkitparty-command.png) ![](./assets/paperparty-command.png)</span>

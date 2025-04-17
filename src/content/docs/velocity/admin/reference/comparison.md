@@ -71,7 +71,8 @@ Meet [Hyrum's Law](https://www.hyrumslaw.com/):
 
 Here's Hyrum's law in comic format, in case that eases getting the point across:
 
-> [![xkcd #1172](https://imgs.xkcd.com/comics/workflow.png)](https://xkcd.com/1172/)
+> <span class="img-inline">[![xkcd #1172](https://imgs.xkcd.com/comics/workflow.png)](https://xkcd.com/1172/)</span>
+>
 > ["Workflow"](https://xkcd.com/1172/) from [xkcd](https://xkcd.com/) by Randal Munroe,
 > [licensed](https://xkcd.com/license.html) under
 > [CC BY-NC 2.5](https://creativecommons.org/licenses/by-nc/2.5/)

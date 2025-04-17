@@ -195,7 +195,7 @@ Bukkit.getScheduler().runTaskTimer(plugin, task -> {
 }, 1 /* delay the initial transformation by one tick from display creation */, duration);
 ```
 
-![Interpolation example](./assets/display-interp.gif)
+<span class="img-inline-center">![Interpolation example](./assets/display-interp.gif)</span>
 
 ## Use cases
 

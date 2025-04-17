@@ -77,4 +77,7 @@
   --sl-color-gray-6: #e2e5e9;
   --sl-color-gray-7: #f3f4f6;
   --sl-color-black: #ffffff;
+
+  /* return to Starlight default */
+  --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);
 }

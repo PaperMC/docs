@@ -34,7 +34,7 @@ You may not:
 - Sell the PaperMC logomark on its own or as part of other products without explicit permission.
 - Alter the transparency of any elements within the PaperMC logomark.
 
-![PaperMC logomark](https://assets.papermc.io/brand/papermc_logo.min.svg)
+<span style="display: flex; width: min(100%, 24rem);">![PaperMC logomark](https://assets.papermc.io/brand/papermc_logo.min.svg)</span>
 
 ## Velocity
 
@@ -46,4 +46,4 @@ endorses some product or service. For instance, you may advertise a plugin as be
 compatible with Velocity, but you may not make the Velocity logo prominent in that
 advertising.
 
-![Velocity logomark](https://assets.papermc.io/brand/velocity_logo_blue.min.svg)
+<span style="display: flex; width: min(100%, 24rem);">![Velocity logomark](https://assets.papermc.io/brand/velocity_logo_blue.min.svg)</span>

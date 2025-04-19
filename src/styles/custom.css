@@ -32,6 +32,11 @@
   width: auto;
 }
 
+/* use custom font first instead of system */
+.sl-badge {
+  font-family: var(--__sl-font-mono);
+}
+
 /* Safari fixes for logo sizing */
 .hero-html > img {
   object-fit: contain;

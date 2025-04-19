@@ -1,5 +1,9 @@
 ---
 import config from "virtual:starlight/user-config";
+import poppins400Woff2 from "@fontsource/poppins/files/poppins-latin-400-normal.woff2?url";
+import poppins500Woff2 from "@fontsource/poppins/files/poppins-latin-500-normal.woff2?url";
+import jetbrainsMono400Woff2 from "@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2?url";
+import jetbrainsMono600Woff2 from "@fontsource/jetbrains-mono/files/jetbrains-mono-latin-600-normal.woff2?url";
 
 const { entry, lang, siteTitle } = Astro.locals.starlightRoute;
 const { data } = entry;
@@ -57,5 +61,9 @@ const base = stripTrailingSlash(import.meta.env.BASE_URL);
 
 <link rel="preload" as="image" type="image/svg+xml" href="https://assets.papermc.io/brand/papermc_combination_mark_light.min.svg" />
 <link rel="preload" as="image" type="image/svg+xml" href="https://assets.papermc.io/brand/papermc_combination_mark_dark.min.svg" />
+<link rel="preload" as="font" type="font/woff2" href={poppins400Woff2} />
+<link rel="preload" as="font" type="font/woff2" href={poppins500Woff2} />
+<link rel="preload" as="font" type="font/woff2" href={jetbrainsMono400Woff2} />
+<link rel="preload" as="font" type="font/woff2" href={jetbrainsMono600Woff2} />
 
 <script is:inline defer src="https://trk.papermc.io/api/init" data-website-id="f93a0860-1253-4868-b27a-08208a36cea7"></script>

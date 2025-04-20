@@ -17,7 +17,7 @@ import WhitelistYML from "/src/config/paper/whitelist-single.yml?raw";
 `eula.txt` is a simple config file that allows you to accept the [EULA](https://aka.ms/MinecraftEULA),
 which is required to run the Minecraft server.
 
-<ConfigNode data={parse(EulaYML)} separator="=" />
+<ConfigNode data={parse(EulaYML)} lang="properties" path={["eula"]} />
 
 ## `banned-ips.json`
 
@@ -33,7 +33,7 @@ Instead, use the `/ban-ip`, `/pardon-ip`, and `/banlist ips` commands to manage 
 
 :::
 
-<ConfigNode data={parse(BannedIpsYML)} />
+<ConfigNode data={parse(BannedIpsYML)} lang="json" path={["banned_ips"]} />
 
 
 ## `banned-players.json`
@@ -50,7 +50,7 @@ Instead, use the `/ban`, `/pardon`, and `/banlist players` commands to manage ba
 
 :::
 
-<ConfigNode data={parse(BannedPlayersYML)} />
+<ConfigNode data={parse(BannedPlayersYML)} lang="json" path={["banned_players"]} />
 
 ## `ops.json`
 
@@ -68,7 +68,7 @@ Instead, use the `/op`, `/deop` commands to manage ops.json.
 
 :::
 
-<ConfigNode data={parse(OpsYML)} />
+<ConfigNode data={parse(OpsYML)} lang="json" path={["ops"]} />
 
 ## `whitelist.json`
 
@@ -87,4 +87,4 @@ Instead, use the `/whitelist` command to manage whitelist.json.
 
 :::
 
-<ConfigNode data={parse(WhitelistYML)} />
+<ConfigNode data={parse(WhitelistYML)} lang="json" path={["whitelist"]} />

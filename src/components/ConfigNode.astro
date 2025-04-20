@@ -2,17 +2,21 @@
 import { render } from "../utils/markdown";
 import type { Data } from "../utils/config";
 
+type Language = "yaml" | "json" | "properties";
+
 interface Props {
   data: Data;
-  separator?: string;
+  lang?: Language; // defaults to "yaml"
 
+  child?: boolean;
   path?: string[];
 }
 
-let { data, separator, path } = Astro.props;
+let { data, lang, child, path } = Astro.props;
 path = path ?? [];
 
-const root = path.length === 0;
+const json = lang === "json";
+const separator = lang === "properties" ? "=" : ": ";
 
 interface Default {
   value: string;
@@ -20,7 +24,7 @@ interface Default {
 }
 const formatDefault = (value?: string): Default => {
   if (!value) value = "";
-  if (value.length > 2 && value.match(/^\[.+]$/)) {
+  if (!json && value.length > 2 && value.match(/^\[.+]$/)) {
     return {
       value: value
         .substring(1, value.length - 1)
@@ -35,40 +39,45 @@ const formatDefault = (value?: string): Default => {
 };
 ---
 
-<div class:list={["not-content", "node", root && "node-root"]}>
+<div class:list={["not-content", "node", json && "node-json", child || "node-root"]}>
+  {json && <p class="muted">{"{"}</p>}
   {
-    Object.entries(data).map(([key, value]) => {
-      const displayKey = key.replace(/_+$/, ""); // remove trailing underscores, used for duplicating keys
-      const childPath = [...path, key.replace(/-/g, "_")];
+    Object.entries(data).map(([key, rawValue], i, entries) => {
+      let displayKey = key.replace(/_+$/, ""); // remove trailing underscores, used for duplicating keys
+      if (json) displayKey = `"${displayKey}"`;
 
-      const def = formatDefault(value.default);
+      const childPath = [...path, key.replace(/-/g, "_")];
+      const hasComma = json && i !== (entries.length - 1);
+
+      const { value, inline } = formatDefault(rawValue.default);
       return (
         <div>
-          {"message" in value ? (
+          {"message" in rawValue ? (
             <div
-              class="block message"
-              style={value.color ? `border-color: ${value.color}` : undefined}
-              set:html={render(value.message)}
+              class:list={["block", "message", rawValue.inline && "message-inline"]}
+              style={rawValue.color ? `border-color: ${rawValue.color}` : undefined}
+              set:html={render(rawValue.message)}
             />
-          ) : "description" in value ? (
+          ) : "description" in rawValue ? (
             <details id={childPath.join("_")}>
               <summary class="line notranslate" translate="no">
-                <span class="key">{displayKey}{separator ?? ": "}</span>{
-                  def.inline
-                    ? (<span class="value">{def.value}</span><a class="link" href={`#${childPath.join("_")}`}>#</a>)
-                    : (<a class="link" href={`#${childPath.join("_")}`}>#</a><p class="value">{def.value}</p>)
+                <span class="key">{displayKey}{separator}</span>{
+                  inline
+                    ? (<span class="value">{value}</span><>{hasComma && <span class="muted">,</span>}</><a class="link" href={`#${childPath.join("_")}`}>#</a>)
+                    : (<a class="link" href={`#${childPath.join("_")}`}>#</a><p class="value">{value}</p><>{hasComma && <span class="muted">,</span>}</>)
                 }
               </summary>
-              <div class="block" set:html={render(value.description)} />
+              <div class="block" set:html={render(rawValue.description)} />
             </details>
           ) : (
-            <span class="key notranslate" translate="no">{displayKey}:</span>
-            <Astro.self data={value} path={childPath} {separator} />
+            <span class="key notranslate" translate="no">{displayKey}{separator}</span>
+            <Astro.self child data={rawValue} path={childPath} {lang} />
           )}
         </div>
       );
     })
   }
+  {json && <p class="muted">{"}"}</p>}
 </div>
 
 <style>
@@ -76,6 +85,14 @@ const formatDefault = (value?: string): Default => {
     padding-left: 1.25rem;
     font-size: var(--sl-text-xs);
     font-family: var(--__sl-font-mono);
+  }
+
+  .node-json {
+    padding-left: 0;
+  }
+
+  .node-json > div {
+    padding-left: 1.25rem;
   }
 
   .node-root {
@@ -90,14 +107,13 @@ const formatDefault = (value?: string): Default => {
   }
 
   .key {
-    white-space: pre;
+    white-space: pre-wrap;
     color: var(--sl-color-text-accent);
   }
 
   .value {
     white-space: pre-wrap;
     color: var(--sl-color-text);
-    padding-right: 0.5rem;
   }
 
   .block {
@@ -109,14 +125,28 @@ const formatDefault = (value?: string): Default => {
     color: var(--sl-color-white);
     background-color: var(--sl-color-gray-5);
     border-left: 5px solid var(--sl-color-bg-accent);
+    white-space: pre-wrap;
   }
 
   .message {
     margin-left: 0;
   }
 
+  .message-inline {
+    margin: 0;
+    padding: 0;
+    color: var(--sl-color-gray-3);
+    background-color: unset;
+    border-left: none;
+  }
+
+  .muted {
+    color: var(--sl-color-gray-3);
+  }
+
   .link {
     opacity: 0;
+    padding-left: 0.5rem;
     transition: opacity 0.2s ease;
   }
 

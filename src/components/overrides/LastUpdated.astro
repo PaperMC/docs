@@ -1,8 +1,8 @@
 ---
-import { type GitHubAccount, getGitHubAccountFromFile } from "/src/utils/git-utils.ts"
+import { type GitHubAccount, getGitHubAccountFromFile } from "/src/utils/git-utils.ts";
 
 const { lang, lastUpdated } = Astro.locals.starlightRoute;
-const filePath = Astro.locals.starlightRoute.entry.filePath
+const filePath = Astro.locals.starlightRoute.entry.filePath;
 
 const acc: GitHubAccount = await getGitHubAccountFromFile(filePath);
 ---

@@ -7,23 +7,35 @@ slug: paper/getting-started
 ## System Requirements
 
 :::tip[Important Note]
-Paper requires **Java 21** or higher for optimal performance and compatibility. You can [download and install Java](/misc/java-install) if you haven't already.
+Paper requires **Java 21** or higher for optimal performance and compatibility. You can [download and install Java](/misc/java-install) if you haven't already. Using the recommended Java version ensures you get the best performance and security updates.
 :::
 
 ### Java Version Compatibility Matrix
 
-| Paper Version  | Minimum Java Version | Recommended Java Version |
-|----------------|----------------------|--------------------------|
-| 1.8 to 1.11    | Java 8               | Java 8                   |
-| 1.12 to 1.16.4 | Java 11              | Java 11                  |
-| 1.16.5         | Java 16              | Java 16                  |
-| 1.17.1-1.18.1+ | Java 21              | Java 21                  |
+| Paper Version  | Minimum Java Version | Recommended Java Version | Notes |
+|----------------|----------------------|--------------------------|-------|
+| 1.8 to 1.11    | Java 8               | Java 8                   | Legacy support only |
+| 1.12 to 1.16.4 | Java 11              | Java 11                  | Limited support |
+| 1.16.5         | Java 16              | Java 16                  | Limited support |
+| 1.17.1-1.18.1+ | Java 21              | Java 21                  | Full support |
 
 :::note[System Requirements]
-- **RAM**: Minimum 2GB, Recommended 4GB+ for optimal performance
-- **Storage**: At least 10GB free space (more for larger worlds)
-- **CPU**: Modern multi-core processor recommended
-- **Network**: Stable internet connection for multiplayer
+- **RAM**: 
+  - Minimum: 2GB
+  - Recommended: 4GB+ for optimal performance
+  - Large servers: 8GB+ for 50+ players
+- **Storage**: 
+  - Minimum: 10GB free space
+  - Recommended: 20GB+ for larger worlds
+  - Consider SSD for better performance
+- **CPU**: 
+  - Minimum: 2 cores
+  - Recommended: 4+ cores for better performance
+  - Higher clock speed preferred over more cores
+- **Network**: 
+  - Minimum: 10Mbps upload
+  - Recommended: 100Mbps+ for larger servers
+  - Low latency connection preferred
 :::
 
 ## Downloading Paper
@@ -36,6 +48,7 @@ Paper requires **Java 21** or higher for optimal performance and compatibility. 
 :::tip[Version Selection]
 - Choose the latest stable build for your desired Minecraft version
 - Consider using the latest Paper version for best performance and security updates
+- Check the [PaperMC Discord](https://discord.gg/papermc) for version-specific announcements
 :::
 
 ## Server Setup and Configuration
@@ -49,18 +62,23 @@ Paper requires **Java 21** or higher for optimal performance and compatibility. 
 ### Running the Server
 
 #### Using the Startup Script Generator
-Visit our [Startup Script Generator](/misc/tools/start-script-gen) to create an optimized startup script for your system.
+Visit our [Startup Script Generator](/misc/tools/start-script-gen) to create an optimized startup script for your system. The generator takes into account:
+- Your system's available resources
+- Optimal JVM arguments for Paper
+- Memory allocation based on player count
+- Automatic restart capabilities
 
 #### Manual Command
 For a basic startup command:
 ```bash
-java -Xms4G -Xmx4G -jar paper.jar --nogui
+java -Xms4G -Xmx4G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -jar paper.jar --nogui
 ```
 
 :::note[Command Explanation]
 - `-Xms4G`: Initial RAM allocation (4GB)
 - `-Xmx4G`: Maximum RAM allocation (4GB)
 - `--nogui`: Disables the vanilla server GUI for better performance
+- JVM arguments are optimized for Paper's performance characteristics
 - Adjust RAM values based on your server's needs and available system resources
 :::
 
@@ -68,24 +86,46 @@ java -Xms4G -Xmx4G -jar paper.jar --nogui
 1. Run the server for the first time to generate necessary files
 2. Accept the EULA by editing `eula.txt` and setting `eula=true`
 3. Restart the server to complete initialization
+4. Review the generated configuration files
 
 ## Server Configuration
 
 After initial setup, you'll want to configure your server:
 
-1. Review and modify `server.properties` for basic server settings
-2. Configure Paper-specific settings in `paper.yml`
-3. Set up world-specific configurations in `bukkit.yml` and `spigot.yml`
+1. Review and modify `server.properties` for basic server settings:
+   - Server name and description
+   - Player limits
+   - View distance
+   - Difficulty settings
+   - Game mode
+   - PvP settings
+
+2. Configure Paper-specific settings in `paper.yml`:
+   - Performance optimizations
+   - Anti-cheat settings
+   - Chunk loading behavior
+   - Entity tracking ranges
+   - Redstone optimizations
+
+3. Set up world-specific configurations in `bukkit.yml` and `spigot.yml`:
+   - World generation settings
+   - Mob spawning rules
+   - Item despawn times
+   - Experience settings
+
 4. For detailed configuration guides, see:
    - [Global Configuration](/paper/reference/global-configuration)
    - [Per World Configuration](/paper/reference/world-configuration)
+   - [Performance Tuning Guide](/paper/admin/performance)
 
 ## Updating Your Server
 
 Paper makes updating simple and safe:
 1. Download the new version from the downloads page
-2. Replace the old JAR file with the new one
-3. Restart your server
+2. Create a backup of your server files
+3. Replace the old JAR file with the new one
+4. Restart your server
+5. Monitor the server logs for any issues
 
 For detailed update instructions, see our [Update Tutorial](/paper/updating).
 
@@ -96,12 +136,14 @@ Paper automatically handles the conversion of vanilla world saves, including:
 - Separation of dimensions (Overworld, Nether, End)
 - Conversion of world data to Paper's optimized format
 - Preservation of all existing world data
+- Automatic conversion of player data
 
 ### From CraftBukkit/Spigot
 Paper is a direct drop-in replacement:
 - No world conversion needed
 - All plugins and configurations remain compatible
 - Improved performance out of the box
+- Enhanced security features
 
 ## Next Steps
 
@@ -111,7 +153,12 @@ To optimize your server and unlock Paper's full potential:
 3. Set up essential plugins
 4. Implement proper backup solutions
 5. Configure security settings
+6. Set up monitoring and logging
+7. Configure automatic updates
+8. Implement proper player management
 
 :::tip[Pro Tip]
-Regularly check for Paper updates to ensure you have the latest performance improvements and security patches.
+- Regularly check for Paper updates to ensure you have the latest performance improvements and security patches
+- Join the [PaperMC Discord](https://discord.gg/papermc) for real-time support and announcements
+- Consider using a server management panel like [Pterodactyl](https://pterodactyl.io/) for easier administration
 :::

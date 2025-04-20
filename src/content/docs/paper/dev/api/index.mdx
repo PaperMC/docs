@@ -1,10 +1,118 @@
 ---
-title: API
+title: Paper API Documentation
+description: Comprehensive documentation for Paper's enhanced API, including new features, improvements, and best practices.
 ---
 
-import PageCards from "/src/components/PageCards.astro";
+import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
-Welcome to the Paper API guide!
-This guide includes information for developers about how to use specific parts of the Paper API.
+# Paper API Documentation
 
-<PageCards />
+Welcome to the Paper API documentation. This section provides detailed information about Paper's enhanced API features and improvements over the standard Bukkit/Spigot API.
+
+## Core API Features
+
+<CardGrid>
+  <LinkCard 
+    title="Event API" 
+    href="/paper/dev/api/event-api" 
+    description="Paper's enhanced event system with additional events and improved performance."
+  />
+  <LinkCard 
+    title="Entity API" 
+    href="/paper/dev/api/entity-api" 
+    description="Advanced entity management and customization features."
+  />
+  <LinkCard 
+    title="Command API" 
+    href="/paper/dev/api/command-api" 
+    description="Modern command system with improved registration and tab completion."
+  />
+  <LinkCard 
+    title="Component API" 
+    href="/paper/dev/api/component-api" 
+    description="Advanced text formatting and component system for rich chat messages."
+  />
+</CardGrid>
+
+## Data Management
+
+<CardGrid>
+  <LinkCard 
+    title="Persistent Data Container" 
+    href="/paper/dev/api/pdc" 
+    description="Store and retrieve persistent data for entities, blocks, and items."
+  />
+  <LinkCard 
+    title="Data Component API" 
+    href="/paper/dev/api/data-component-api" 
+    description="Modern system for handling item and entity data components."
+  />
+  <LinkCard 
+    title="Plugin Configurations" 
+    href="/paper/dev/api/plugin-configs" 
+    description="Advanced configuration system for plugins with type safety and validation."
+  />
+</CardGrid>
+
+## Advanced Features
+
+<CardGrid>
+  <LinkCard 
+    title="Scheduler" 
+    href="/paper/dev/api/scheduler" 
+    description="Enhanced task scheduling system with improved performance and reliability."
+  />
+  <LinkCard 
+    title="Plugin Messaging" 
+    href="/paper/dev/api/plugin-messaging" 
+    description="Advanced plugin communication system with improved reliability and features."
+  />
+  <LinkCard 
+    title="Custom Inventory" 
+    href="/paper/dev/api/custom-inventory-holder" 
+    description="Create and manage custom inventory interfaces with advanced features."
+  />
+  <LinkCard 
+    title="Registries" 
+    href="/paper/dev/api/registries" 
+    description="Access and modify game registries for blocks, items, and entities."
+  />
+</CardGrid>
+
+## Specialized Features
+
+<CardGrid>
+  <LinkCard 
+    title="Folia Support" 
+    href="/paper/dev/api/folia-support" 
+    description="Documentation for Paper's multi-threaded server implementation."
+  />
+  <LinkCard 
+    title="Recipes" 
+    href="/paper/dev/api/recipes" 
+    description="Create and manage custom crafting and smelting recipes."
+  />
+  <LinkCard 
+    title="Plugin Lifecycle" 
+    href="/paper/dev/api/lifecycle" 
+    description="Detailed documentation of plugin loading, enabling, and disabling processes."
+  />
+</CardGrid>
+
+## Getting Started
+
+If you're new to Paper plugin development:
+1. Review our [Getting Started Guide](/paper/dev/getting-started)
+2. Check out the [Example Plugins](/paper/dev/examples)
+3. Join the [PaperMC Discord](https://discord.gg/papermc) for developer support
+
+:::tip[Best Practices]
+- Always use Paper's enhanced APIs when available
+- Follow the plugin lifecycle guidelines
+- Implement proper error handling
+- Use the latest Paper API features for best performance
+:::
+
+:::note[Version Compatibility]
+Make sure to check the [Paper Roadmap](/paper/dev/api/roadmap) for upcoming API changes and version compatibility information.
+:::

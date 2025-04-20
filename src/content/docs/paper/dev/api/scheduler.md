@@ -1,220 +1,315 @@
 ﻿---
 title: Scheduling
-description: A guide on how to use BukkitScheduler to run code at specific times.
+description: A comprehensive guide on using BukkitScheduler to run code at specific times, including best practices and performance considerations.
 slug: paper/dev/scheduler
 ---
 
-The [`BukkitScheduler`](jd:paper:org.bukkit.scheduler.BukkitScheduler) can be used to schedule your code to be run later or repeatedly.
+The [`BukkitScheduler`](jd:paper:org.bukkit.scheduler.BukkitScheduler) is a powerful tool for scheduling tasks in your Paper server. It allows you to run code at specific times, either once or repeatedly, and supports both synchronous and asynchronous execution.
 
 :::note[Folia]
 
-This guide is designed for non-Folia Bukkit servers. If you are using Folia, you should use its respective schedulers.
+This guide is designed for non-Folia Bukkit servers. If you are using Folia, you should use its respective schedulers. See the [Folia Support](/paper/dev/api/folia-support) documentation for more information.
 
 :::
 
-## What is a tick?
+## Understanding Ticks
 
-Every game runs something called a game loop ,which essentially executes all the logic of the game over and over.
-A single execution of that loop in Minecraft is called a 'tick'.
+### What is a tick?
 
-In Minecraft, there are 20 ticks per second or in other words, one tick every 50 milliseconds. This means that the game loop is executed
-20 times per second. A tick taking more than 50ms to execute is the moment when your server starts to fall behind on
-its work and lag.
+Every game runs something called a game loop, which executes all the game logic repeatedly. In Minecraft, a single execution of this loop is called a 'tick'.
 
-A task that should run after 100 ticks will run after 5 seconds (100 ticks / 20 ticks per second = 5 seconds). However,
-if the server is only running at 10 ticks per second, a task that is scheduled to run after 100 ticks will take 10
-seconds.
+Key tick characteristics:
+- 20 ticks per second (TPS)
+- One tick = 50 milliseconds
+- Server lag occurs when ticks take longer than 50ms to execute
+- TPS can drop below 20 during high load or poor performance
 
 ### Converting between human units and Minecraft ticks
 
-Every method of the scheduler that takes a delay or period uses ticks as a unit of time.
+Every scheduler method that takes a delay or period uses ticks as the unit of time.
 
-Converting from human units to ticks and back is as simple as:
+Common conversions:
 - `ticks = seconds * 20`
 - `seconds = ticks / 20`
 
-You can make your code more readable by using the
-[`TimeUnit`](jd:java:java.util.concurrent.TimeUnit)
-enum, e.g. to convert 5 minutes to ticks and back:
-- `TimeUnit.MINUTES.toSeconds(5) * 20`
-- `TimeUnit.SECONDS.toMinutes(ticks / 20)`
+#### Using TimeUnit for readability
 
-You can also use the `Tick` class from Paper to convert between human units and ticks, e.g. to convert 5 minutes to ticks:
-`Tick.tick().fromDuration(Duration.ofMinutes(5))` will yield `6000` ticks.
-
-## Obtaining the scheduler
-
-To obtain a scheduler, you can use the [`getScheduler`](jd:paper:org.bukkit.Server#getScheduler()) method
-on the [`Server`](jd:paper:org.bukkit.Server) class, e.g. in your `onEnable` method:
+The [`TimeUnit`](jd:java:java.util.concurrent.TimeUnit) enum makes conversions more readable:
 
 ```java
+// Convert 5 minutes to ticks
+long ticks = TimeUnit.MINUTES.toSeconds(5) * 20;
+
+// Convert ticks back to minutes
+long minutes = TimeUnit.SECONDS.toMinutes(ticks / 20);
+```
+
+#### Using Paper's Tick class
+
+Paper provides a `Tick` class for more convenient conversions:
+
+```java
+// Convert 5 minutes to ticks
+long ticks = Tick.tick().fromDuration(Duration.ofMinutes(5)); // Returns 6000 ticks
+```
+
+## Obtaining the Scheduler
+
+You can obtain the scheduler in several ways:
+
+```java
+// Method 1: From your plugin instance
+BukkitScheduler scheduler = this.getServer().getScheduler();
+
+// Method 2: From Bukkit class
+BukkitScheduler scheduler = Bukkit.getScheduler();
+
+// Method 3: Store it as a field in your plugin
+private final BukkitScheduler scheduler;
+
 @Override
 public void onEnable() {
-    BukkitScheduler scheduler = this.getServer().getScheduler();
+    this.scheduler = this.getServer().getScheduler();
 }
 ```
 
-## Scheduling tasks
+## Task Types and Scheduling
 
-Scheduling a task requires you to pass:
+### Synchronous vs Asynchronous Tasks
 
-- Your plugin's instance
-- The code to run, either with a [`Runnable`](jd:java:java.lang.Runnable)
-or [`Consumer`](jd:java:java.util.function.Consumer)`<`[`BukkitTask`](jd:paper:org.bukkit.scheduler.BukkitTask)`>`
-- The delay in ticks before the task should run for the first time
-- The period in ticks between each execution of the task, if you're scheduling a repeating task
+#### Synchronous Tasks (Main Thread)
+- Executed on the main server thread
+- Can safely access and modify game state
+- Should be used for:
+  - World modifications
+  - Entity operations
+  - Player interactions
+  - Inventory management
+  - Scoreboard updates
 
-### Difference between synchronous and asynchronous tasks
+#### Asynchronous Tasks (Separate Thread)
+- Executed on separate threads
+- Cannot directly modify game state
+- Should be used for:
+  - File I/O operations
+  - Database queries
+  - Web requests
+  - Complex calculations
+  - Long-running operations
 
-#### Synchronous tasks (on the main thread)
+:::caution[Thread Safety]
 
-Synchronous tasks are tasks that are executed on the main server thread. This is the same
-thread that handles all game logic.
-
-All tasks scheduled on the main thread will affect the server's performance. If your task
-is making web requests, accessing files, databases or otherwise time-consuming operations, you should consider using
-an asynchronous task.
-
-#### Asynchronous tasks (off the main thread)
-
-Asynchronous tasks are tasks that are executed on separate threads, therefore will not directly affect
-your server's performance.
-
-:::caution
-
-**Large portions of the Bukkit API are not safe to use from within asynchronous tasks**. If a method changes or
-accesses the world state, it is not safe to be used from an asynchronous task.
-
-:::
-
-:::note
-
-While the tasks are executed on separate threads, they are still started from the main thread
-and will be affected if the server is lagging, an example would be 20 ticks not being exactly 1 second.
-
-If you need a scheduler that runs independently of the server, consider using your own
-[`ScheduledExecutorService`](jd:java:java.util.concurrent.ScheduledExecutorService).
-You can follow [this guide](https://www.baeldung.com/java-executor-service-tutorial#ScheduledExecutorService) to learn how to use it.
+**Most Bukkit API methods are not thread-safe**. Always use synchronous tasks for:
+- World modifications
+- Entity operations
+- Player data changes
+- Inventory management
+- Scoreboard updates
+- Any operation that affects game state
 
 :::
 
-### Different ways to schedule tasks
+### Scheduling Methods
 
-#### Using `Runnable`
+#### One-time Tasks
 
-The [`Runnable`](jd:java:java.lang.Runnable) interface is used for the simplest tasks
-that don't require a [`BukkitTask`](jd:paper:org.bukkit.scheduler.BukkitTask) instance.
+```java
+// Run after delay
+scheduler.runTaskLater(plugin, () -> {
+    // Task code
+}, 20); // 1 second delay
 
-You can either implement it in a separate class, e.g.:
+// Run asynchronously after delay
+scheduler.runTaskLaterAsynchronously(plugin, () -> {
+    // Async task code
+}, 20);
+```
 
-```java title="MyRunnableTask.java"
-public class MyRunnableTask implements Runnable {
+#### Repeating Tasks
 
+```java
+// Run every period ticks
+scheduler.runTaskTimer(plugin, task -> {
+    // Task code
+    if (shouldStop) {
+        task.cancel();
+    }
+}, 0, 20); // Start immediately, run every second
+
+// Run asynchronously every period ticks
+scheduler.runTaskTimerAsynchronously(plugin, task -> {
+    // Async task code
+    if (shouldStop) {
+        task.cancel();
+    }
+}, 0, 20);
+```
+
+#### Immediate Tasks
+
+```java
+// Run on next tick
+scheduler.runTask(plugin, () -> {
+    // Task code
+});
+
+// Run asynchronously immediately
+scheduler.runTaskAsynchronously(plugin, () -> {
+    // Async task code
+});
+```
+
+### Task Implementation Options
+
+#### Using Runnable
+
+```java
+// As a separate class
+public class MyTask implements Runnable {
     private final MyPlugin plugin;
-
-    public MyRunnableTask(MyPlugin plugin) {
+    
+    public MyTask(MyPlugin plugin) {
         this.plugin = plugin;
     }
-
+    
     @Override
     public void run() {
-        this.plugin.getServer().broadcast(Component.text("Hello, World!"));
+        // Task code
     }
 }
+
+// Using lambda (recommended for simple tasks)
+scheduler.runTask(plugin, () -> {
+    // Task code
+});
 ```
+
+#### Using Consumer<BukkitTask>
+
 ```java
-scheduler.runTaskLater(plugin, new MyRunnableTask(plugin), 20);
-```
-
-Or use a lambda expression, which is great for simple and short tasks:
-
-```java
-scheduler.runTaskLater(plugin, /* Lambda: */ () -> {
-    this.plugin.getServer().broadcast(Component.text("Hello, World!"));
-}, /* End of the lambda */ 20);
-```
-
-#### Using `Consumer<BukkitTask>`
-
-The [`Consumer`](jd:java:java.util.function.Consumer) interface is used for tasks
-that require a [`BukkitTask`](jd:paper:org.bukkit.scheduler.BukkitTask) instance (usually in repeated tasks),
-e.g. when you want to cancel the task from inside it.
-
-You can either implement it in a separate class similarly to the `Runnable`, e.g.:
-
-```java title="MyConsumerTask.java"
-public class MyConsumerTask implements Consumer<BukkitTask> {
-
-    private final UUID entityId;
-
-    public MyConsumerTask(UUID uuid) {
-        this.entityId = uuid;
+// For tasks that need to cancel themselves
+scheduler.runTaskTimer(plugin, task -> {
+    if (shouldStop) {
+        task.cancel();
     }
+    // Task code
+}, 0, 20);
+```
 
+#### Using BukkitRunnable
+
+```java
+public class MyRunnable extends BukkitRunnable {
     @Override
-    public void accept(BukkitTask task) {
-        Entity entity = Bukkit.getServer().getEntity(this.entityId);
-
-        if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
-            return;
+    public void run() {
+        // Task code
+        if (shouldStop) {
+            this.cancel();
         }
-
-        task.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
     }
 }
+
+// Usage
+new MyRunnable().runTaskTimer(plugin, 0, 20);
 ```
+
+## Best Practices
+
+### Performance Considerations
+
+1. **Minimize Task Frequency**
+   - Only schedule tasks as frequently as necessary
+   - Consider combining multiple tasks into one
+   - Use appropriate delays for non-critical tasks
+
+2. **Task Lifecycle Management**
+   - Always cancel tasks when they're no longer needed
+   - Cancel tasks in `onDisable()`
+   - Store task IDs for later cancellation
+
+3. **Resource Management**
+   - Use weak references for long-lived tasks
+   - Clean up resources in task cancellation
+   - Avoid memory leaks in repeating tasks
+
+### Common Patterns
+
+#### Task Cancellation
+
 ```java
-scheduler.runTaskTimer(plugin, new MyConsumerTask(someEntityId), 0, 20);
+private int taskId;
+
+@Override
+public void onEnable() {
+    this.taskId = scheduler.runTaskTimer(plugin, task -> {
+        // Task code
+    }, 0, 20).getTaskId();
+}
+
+@Override
+public void onDisable() {
+    scheduler.cancelTask(this.taskId);
+}
 ```
 
-Or use a lambda expression, which again is much cleaner for short and simple tasks:
+#### Conditional Task Execution
 
 ```java
-scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
-    Entity entity = Bukkit.getServer().getEntity(entityId);
-
-    if (entity instanceof LivingEntity livingEntity) {
-        livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+scheduler.runTaskTimer(plugin, task -> {
+    if (!condition) {
+        task.cancel();
         return;
     }
-
-    task.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
-} /* End of the lambda */, 0, 20);
+    // Task code
+}, 0, 20);
 ```
 
-##### Using `BukkitRunnable`
+#### Async to Sync Bridge
 
-[`BukkitRunnable`](jd:paper:org.bukkit.scheduler.BukkitRunnable) is a class that implements `Runnable`
-and holds a `BukkitTask` instance. This means that you do not need to access the task from inside the `run()` method,
-you can simply use the [`this.cancel()`](jd:paper:org.bukkit.scheduler.BukkitRunnable#cancel()) method:
-
-```java title="CustomRunnable.java"
-public class CustomRunnable extends BukkitRunnable {
-
-    private final UUID entityId;
-
-    public CustomRunnable(UUID uuid) {
-        this.entityId = uuid;
-    }
-
-    @Override
-    public void run() {
-        Entity entity = Bukkit.getServer().getEntity(this.entityId);
-
-        if (entity instanceof LivingEntity livingEntity) {
-            livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
-            return;
-        }
-
-        this.cancel(); // The entity is no longer valid, there's no point in continuing to run this task
-    }
-}
+```java
+scheduler.runTaskAsynchronously(plugin, () -> {
+    // Async work
+    final Result result = doAsyncWork();
+    
+    scheduler.runTask(plugin, () -> {
+        // Sync work with result
+        handleResult(result);
+    });
+});
 ```
 
-This simply adds a potion effect until the entity dies.
+## Common Pitfalls
 
-#### Using a delay of 0 ticks
+1. **Memory Leaks**
+   - Forgetting to cancel tasks
+   - Holding strong references to large objects
+   - Not cleaning up resources
 
-A delay of 0 ticks is treated as you wanting to run the task on the next tick. If you schedule a task with a delay of 0 ticks
-while the server is starting, or before it is enabled, it will be executed before the server is enabled.
+2. **Thread Safety Issues**
+   - Modifying game state from async tasks
+   - Not properly synchronizing shared data
+   - Race conditions in task execution
+
+3. **Performance Problems**
+   - Too many concurrent tasks
+   - Tasks running too frequently
+   - Heavy operations on main thread
+
+## Debugging Tips
+
+1. **Task Monitoring**
+   - Use `/timings` to monitor task performance
+   - Check server logs for task-related errors
+   - Monitor TPS for task impact
+
+2. **Common Issues**
+   - Tasks not running: Check if plugin is enabled
+   - Tasks running too slow: Check server TPS
+   - Memory issues: Check for task leaks
+
+:::tip[Pro Tips]
+- Use Paper's `Timings` system to monitor task performance
+- Consider using a task manager class for complex scheduling
+- Always test tasks under load conditions
+- Document task purposes and timing requirements
+:::

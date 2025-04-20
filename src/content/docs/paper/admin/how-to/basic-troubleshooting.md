@@ -31,7 +31,7 @@ Many lines beginning with `at` may appear beneath the exception message. These a
 
 Issues are often plugin-induced, and are the first possible thing you should check.
 
-# Common Issues
+# Common issues
 
 ## Plugin-induced issues
 If you find any plugin's name in a stack trace in your logs, head to [Check Plugin Updates](#check-plugin-updates) and read from there. In most cases, the plugin, whose name is found on the stack trace, is causing the problem.
@@ -80,7 +80,7 @@ Below, we list other issues that may happen when running a server.
 When this happens, always check your `latest.log` file in your `logs` folder, you may find your issue listed here. If logs are not generating, check your startup script, as described below:
 
 ### Checking your startup script
-The recommended way to start a server is via a startup script, that you can generate [here](https://docs.papermc.io/misc/tools/start-script-gen). Don't double click the .jar!
+The recommended way to start a server is via a startup script, that you can generate [here](/misc/tools/start-script-gen). Don't double click the .jar!
 If you're on Windows and your terminal disappears quickly after you run, make sure there's a line at the end of the file containing just `pause`.
 In case you get an error similar to `Error: Unable to access jarfile server.jar`, make sure that the .jar name in your startup script is the same as the file you downloaded. Note that Windows, by default, hides extensions, so you may need re-enable that in the Folder and Search Options in the file explorer to see the correct name of the file, extension included.
 
@@ -142,7 +142,7 @@ Exception in thread "ServerMain" java.lang.UnsupportedClassVersionError: org/buk
         at java.base/java.lang.Thread.run(Thread.java:842)
 ```
 
-Your version of Java is outdated, check [our guide on updating it](https://docs.papermc.io/misc/java-install). To avoid possibly having to do more tweaks, uninstall your current version of Java, if any.
+Your version of Java is outdated, check [our guide on updating it](/misc/java-install). To avoid possibly having to do more tweaks, uninstall your current version of Java, if any.
 If you do have the correct version installed, your operating system may be not picking it up. Make sure you've closed and opened your terminal after installing it, and that Java is present in your `PATH` environment variable.
 
 ## Server crashes or exits unexpectedly
@@ -190,17 +190,17 @@ A common cause (but not the only one), if it was killed due to OOM, is that your
 If you're using a hosting company that only provides you with a panel, you likely won't have the tools to get to the bottom of the problem. You should make a ticket with your host in this case.
 
 ## Performance and gameplay issues
-Unfortunately, Paper can't replicate Vanilla behavior 100%, but it is a goal (except when it comes to exploits). If you're still experiencing a bug that cannot be reproduced in vanilla **multiplayer**, please apply a [Vanilla-like configuration](https://docs.papermc.io/paper/vanilla) and check if there's already an open issue in our GitHub. If not, feel free to create one.
+Unfortunately, Paper can't replicate Vanilla behavior 100%, but it is a goal (except when it comes to exploits). If you're still experiencing a bug that cannot be reproduced in vanilla **multiplayer**, please apply a [Vanilla-like configuration](/paper/vanilla) and check if there's already an open issue in our GitHub. If not, feel free to create one.
 
 ### Strange entity/farm/redstone/spawning behavior
 If you copied values of a pre-made configuration or optimization guide, now is a good time to revert the changes. Keep a copy of your current configs if you prefer, and delete the originals so they can re-generate to default values.
 
-In case you're still experiencing such issues with default configurations, try our [Vanilla-like configurations](https://docs.papermc.io/paper/vanilla) but do note that this comes at a performance cost.
+In case you're still experiencing such issues with default configurations, try our [Vanilla-like configurations](/paper/vanilla) but do note that this comes at a performance cost.
 
 Also, keep in mind that singleplayer does not behave the same as multiplayer, both when it comes to spawning and certain entity behavior. For example, mobs despawn if they're over 128 blocks away from a player, and this becomes more apparent in multiplayer, especially if you're making farms where monsters go to another dimension via a nether portal. If there are players in the target dimension and they're all very far from the portal, the mob will instantly despawn -- this is intended Vanilla behavior.
 
 ### Dupes not working
-Paper has some [unsupported settings](https://docs.papermc.io/paper/reference/global-configuration#unsupported_settings) that allow certain dupes. However, a few of them cannot be re-introduced because that would break other aspects of the server. Paper also will not re-add dupes that no longer exist in the game.
+Paper has some [unsupported settings](/paper/reference/global-configuration#unsupported_settings) that allow certain dupes. However, a few of them cannot be re-introduced because that would break other aspects of the server. Paper also will not re-add dupes that no longer exist in the game.
 
 ## Performance issues
 ### Spark report

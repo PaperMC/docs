@@ -48,8 +48,6 @@ index-topics:
         A custom permission required to view this help entry.
 
         If this is empty/not set, the entry does not require a permission
-
-        This can be formatted with legacy "&" style formatting????? (but don't use it)
       default: '""'
     commands:
       description: |

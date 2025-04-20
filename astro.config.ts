@@ -38,6 +38,7 @@ export default defineConfig({
         Sidebar: "./src/components/overrides/Sidebar.astro",
         PageFrame: "./src/components/overrides/PageFrame.astro",
         Footer: "./src/components/overrides/Footer.astro",
+        LastUpdated: "./src/components/overrides/LastUpdated.astro",
         Banner: "./src/components/overrides/Banner.astro",
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
         MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",

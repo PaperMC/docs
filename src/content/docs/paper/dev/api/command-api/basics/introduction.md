@@ -48,4 +48,4 @@ The following pages will be added to the documentation in the future:
 :::
 
 ## Additional support
-For support regarding the command API, you can always ask in our [Discord Server](https://discord.gg/PaperMC) in the `#paper-dev` channel!
+For support regarding the command API, you can always ask in our Discord server under the [`#paper-dev`](https://discord.com/channels/289587909051416579/555462289851940864) channel!

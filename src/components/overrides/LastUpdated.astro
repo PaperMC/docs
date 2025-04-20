@@ -1,0 +1,24 @@
+---
+import { type GitHubAccount, getGitHubAccountFromFile } from "/src/utils/git-utils.ts"
+
+const { lang, lastUpdated } = Astro.locals.starlightRoute;
+const filePath = Astro.locals.starlightRoute.entry.filePath
+
+const acc: GitHubAccount = await getGitHubAccountFromFile(filePath);
+---
+
+{
+  lastUpdated && (
+    <p>
+      {"Last updated: "}
+      <time datetime={lastUpdated.toISOString()}>
+        {lastUpdated.toLocaleDateString(lang, {
+          dateStyle: "medium",
+          timeZone: "UTC",
+        })}
+      </time>
+      {" by "}
+      <a set:html={acc.displayName} href={acc.accountLink} />
+    </p>
+  )
+}

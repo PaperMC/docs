@@ -25,7 +25,7 @@ index-topics:
   <topic name>:
     header:
       message: |
-        An composite help topic index.
+        A composite help topic index.
 
         If the topic name is the special value "Default",
         it will override the automatically generated index used for /help with no arguments.

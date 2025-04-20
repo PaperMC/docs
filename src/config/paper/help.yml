@@ -106,5 +106,5 @@ command-topics-in-master-index:
     Whether to allow command topics (topics starting with a `/`) to be shown in the main index
 
     This is the index shown when the user types "`/help`" or "`/help <page>`"
-    Command Alias topics are always hidden.
+    Command alias topics are always hidden.
   default: "true"

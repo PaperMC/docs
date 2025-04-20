@@ -6,15 +6,25 @@ export interface GitHubAccount {
   accountLink?: string;
 }
 
-const headers = {
+const token: string | null = import.meta.env.GITHUB_TOKEN
+
+const headers: RequestInit = token != null ? {
   headers: {
     Accept: "application/vnd.github+json",
     "User-Agent": "papermc-docs/author",
+    "Authorization": `Bearer ${token}`
+  },
+}
+: {
+  headers: {
+    Accept: "application/vnd.github+json",
+    "User-Agent": "papermc-docs/author"
   },
 };
 
 const repo: string = "PaperMC/docs";
 const cache: Map<string, GitHubAccount> = new Map();
+
 
 // Git
 export async function getGitHubAccountFromFile(filePath: string): Promise<GitHubAccount | null> {
@@ -25,17 +35,6 @@ export async function getGitHubAccountFromFile(filePath: string): Promise<GitHub
   if (cached != null) {
     cached.displayName = displayName;
     return cached;
-  }
-
-  const accLink = await getGitHubAccountLinkByEmail(email);
-  if (accLink != null) {
-    const acc: GitHubAccount = {
-      displayName: displayName,
-      email: email,
-      accountLink: accLink,
-    };
-    cache.set(email, acc);
-    return acc;
   }
 
   // As the email seems to not be directly linked to an account, we instead use the GitHub API
@@ -54,18 +53,4 @@ export async function getGitHubAccountFromFile(filePath: string): Promise<GitHub
 
   cache.set(email, acc);
   return acc;
-}
-
-// E-Mail related
-
-export async function getGitHubAccountLinkByEmail(email: string): Promise<string | null> {
-  const url = new URL(`https://api.github.com/search/users?q=${email}`);
-  const result = await fetch(url, headers).then((response) => response.json());
-
-  if (result?.items == null || result.items.length < 1) {
-    return null;
-  }
-
-  const item = result.items[0];
-  return item.html_url;
 }

@@ -6,6 +6,7 @@ export interface LeafData {
 export interface MessageData {
   message: string;
   color?: string;
+  inline?: boolean;
 }
 
 export type Data = { [key: string]: Data } | LeafData | MessageData;

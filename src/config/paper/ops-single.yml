@@ -1,0 +1,18 @@
+header:
+  message: This is a single entry in the root array found in ops.json.
+uuid:
+  description: The UUID representing the operator.
+  default: the UUID of the operator
+name:
+  description: The name of the operator.
+  default: the name of the operator
+level:
+  description: |
+    The level of the operator permissions.
+
+    The expected format is an integer between 0 and 4.
+  default: "0"
+
+bypassesPlayerLimit:
+  description: Whether this operator bypasses the player limit.
+  default: "false"

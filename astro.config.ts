@@ -88,6 +88,7 @@ export default defineConfig({
                             "paper/reference/bukkit-permissions-configuration",
                             "paper/reference/bukkit-help-configuration",
                             "paper/reference/server-properties",
+                            "paper/reference/vanilla-data-files",
                           ],
                         },
                         "paper/reference/paper-plugins",

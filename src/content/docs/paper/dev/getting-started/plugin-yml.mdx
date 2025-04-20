@@ -139,17 +139,17 @@ permissions:
       permission.node.child: true
   another.permission.node:
     description: "This is another permission node"
-    default: not op
+    default: notop
 ```
 
 The description is the description of the permission node. This is what will be displayed in the permissions list.
-The default is the default value of the permission node. This can be `op`/`not op` or `true`/`false`.
+The default is the default value of the permission node. This can be `op`/`notop` or `true`/`false`.
 This defaults to the value of `default-permission` if not specified, which in turn defaults to `op`.
 Each permission node can have children. When set to `true`, it will inherit the parent permission.
 
 ### default-permission
 
-The default value that permissions that don't have a `default` specified will have. This can be `op`/`not op` or `true`/`false`.
+The default value that permissions that don't have a `default` specified will have. This can be `op`/`notop` or `true`/`false`.
 - `default-permission: true`
 
 ## Commands

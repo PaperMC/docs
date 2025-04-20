@@ -1,16 +1,16 @@
 ---
-title: Vanilla Data Files
-description: An explanation of Vanilla Minecraft's Extra data files.
+title: Vanilla data files
+description: An explanation of Minecraft's data files.
 slug: paper/reference/vanilla-data-files
 ---
 
 import ConfigNode from "/src/components/ConfigNode.astro";
 import { parse } from "yaml";
-import EulaYML from "/src/config/paper/vanilla-data-files/eula.yml?raw";
-import BannedIpsYML from "/src/config/paper/vanilla-data-files/banned-ips-single.yml?raw";
-import BannedPlayersYML from "/src/config/paper/vanilla-data-files/banned-players-single.yml?raw";
-import OpsYML from "/src/config/paper/vanilla-data-files/ops-single.yml?raw";
-import WhitelistYML from "/src/config/paper/vanilla-data-files/whitelist-single.yml?raw";
+import EulaYML from "/src/config/paper/eula.yml?raw";
+import BannedIpsYML from "/src/config/paper/banned-ips-single.yml?raw";
+import BannedPlayersYML from "/src/config/paper/banned-players-single.yml?raw";
+import OpsYML from "/src/config/paper/ops-single.yml?raw";
+import WhitelistYML from "/src/config/paper/whitelist-single.yml?raw";
 
 ## `eula.txt`
 
@@ -33,7 +33,7 @@ Instead, use the `/ban-ip`, `/pardon-ip`, and `/banlist ips` commands to manage 
 
 :::
 
-<ConfigNode data={parse(BannedIpsYML)} separator=": " />
+<ConfigNode data={parse(BannedIpsYML)} />
 
 
 ## `banned-players.json`
@@ -50,13 +50,13 @@ Instead, use the `/ban`, `/pardon`, and `/banlist players` commands to manage ba
 
 :::
 
-<ConfigNode data={parse(BannedPlayersYML)} separator=": " />
+<ConfigNode data={parse(BannedPlayersYML)} />
 
 ## `ops.json`
 
 `ops.json` is a JSON file that stores player's operator status information.
 
-In vanilla, this is used as a rudimentary permissions system, and to allow certain player to bypass the player limit.
+In Vanilla, this is used as a rudimentary permissions system, and to allow certain player to bypass the player limit.
 
 :::caution
 
@@ -68,7 +68,7 @@ Instead, use the `/op`, `/deop` commands to manage ops.json.
 
 :::
 
-<ConfigNode data={parse(OpsYML)} separator=": " />
+<ConfigNode data={parse(OpsYML)} />
 
 ## `whitelist.json`
 
@@ -87,4 +87,4 @@ Instead, use the `/whitelist` command to manage whitelist.json.
 
 :::
 
-<ConfigNode data={parse(WhitelistYML)} separator=": " />
+<ConfigNode data={parse(WhitelistYML)} />

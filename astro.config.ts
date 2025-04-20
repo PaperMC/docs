@@ -4,6 +4,7 @@ import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
+import miniMessageHighlight from "./src/assets/mm.tmLanguage.json";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
 import { LATEST_MC_RELEASE, LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "./src/utils/versions";
@@ -300,18 +301,87 @@ export default defineConfig({
                 },
               ],
             },
+
+            {
+              id: "adventure",
+              label: "Adventure",
+              link: "/adventure/",
+              icon: "adventure",
+              items: [
+                "adventure/getting-started",
+                "adventure/community-libraries",
+                "adventure/faq",
+                "adventure/audiences",
+                "adventure/text",
+                {
+                  label: "Text Serializers",
+                  items: [
+                    "adventure/serializer/json",
+                    "adventure/serializer/gson",
+                    "adventure/serializer/legacy",
+                    "adventure/serializer/plain",
+                    {
+                      label: "MiniMessage",
+                      items: [
+                        "adventure/minimessage/format",
+                        "adventure/minimessage/api",
+                        "adventure/minimessage/dynamic-replacements",
+                        "adventure/minimessage/translator",
+                      ],
+                    },
+                    "adventure/serializer/ansi",
+                  ],
+                },
+                "adventure/bossbar",
+                "adventure/sound",
+                "adventure/titles",
+                "adventure/book",
+                "adventure/tablist",
+                "adventure/resource-pack",
+                {
+                  label: "MiniMessage",
+                  items: [
+                    "adventure/minimessage/format",
+                    "adventure/minimessage/api",
+                    "adventure/minimessage/dynamic-replacements",
+                    "adventure/minimessage/translator",
+                  ],
+                },
+                "adventure/localization",
+                {
+                  label: "Platforms",
+                  items: [
+                    "adventure/platform/native",
+                    "adventure/platform/bukkit",
+                    "adventure/platform/bungeecord",
+                    "adventure/platform/spongeapi",
+                    "adventure/platform/modded",
+                    "adventure/platform/fabric",
+                    "adventure/platform/neoforge",
+                    "adventure/platform/viaversion",
+                    "adventure/platform/implementing",
+                  ],
+                },
+                {
+                  label: "Migrating to Adventure from other APIs",
+                  items: ["adventure/migration/bungeecord-chat-api", "adventure/migration/text-3.x"],
+                },
+                {
+                  label: "Version History",
+                  items: [
+                    "adventure/version-history/adventure",
+                    "adventure/version-history/adventure-platform",
+                    "adventure/version-history/adventure-platform-fabric",
+                  ],
+                },
+              ],
+            },
             {
               id: "waterfall",
               label: "Waterfall",
               link: "/waterfall/",
               icon: "waterfall",
               items: ["waterfall/getting-started", "waterfall/configuration"],
-            },
-            {
-              id: "adventure",
-              label: "Adventure",
-              link: "https://docs.advntr.dev/",
-              icon: "adventure",
             },
             {
               id: "misc",
@@ -369,6 +439,14 @@ export default defineConfig({
                 "/velocity/dev/api",
               ],
               folia: ["/folia/admin", "/folia/admin/reference"],
+              adventure: [
+                "/adventure/serializer",
+                "/adventure/minimessage",
+                "/adventure/platform",
+                "/adventure/migration",
+                "/adventure/contributing",
+                "/adventure/version-history",
+              ],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],
             },
@@ -377,6 +455,9 @@ export default defineConfig({
       ],
       expressiveCode: {
         emitExternalStylesheet: false,
+        shiki: {
+          langs: [miniMessageHighlight],
+        },
       },
     }),
     svelte(),

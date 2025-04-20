@@ -1,0 +1,32 @@
+---
+title: Plain
+description: Retrieving plain text content from components.
+---
+
+import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+
+The plain text serializer converts chat components to their plain-text representation
+and back. It is thus the simplest text serializer in Adventure. This serializer is
+useful for supporting legacy clients, logging, clearing formatting from a component that
+originates from external source, and provides a small, self-contained example of a
+text serializer.
+
+The plain text serializer, by its nature, does not support any advanced features, including
+color, hover and click events, URL linking, or insertions. If advanced features are desired,
+consider using `/minimessage/index`.
+
+<AdventureDependency artifact="adventure-text-serializer-plain" project="api" />
+
+## Usage
+
+The plain serializer is accessed using the `PlainTextComponentSerializer`.
+```java {/* This code block is REQUIRED because otherwise, the code blocks from the AdventureDependency component break */}
+PlainTextComponentSerializer.plainText();
+```
+
+This produces a default instance that silently ignores keybind and translatable components. You can also construct your own
+`PlainTextComponentSerializer` that maps the components to some plain-text representation.
+
+The deserialization of plain text is equivalent to `Component.text(string)`. No
+preprocessing is done on the input. The deserialization is implemented in order to provide
+API consistency.

@@ -1,114 +1,184 @@
 ---
-title: Migrating to or from Paper
-description: It's simple to migrate your server to or from Paper. This page will help you get started.
+title: Server Migration Guide
+description: Comprehensive guide for migrating your Minecraft server to or from Paper, including detailed steps and important considerations.
 slug: paper/migration
 ---
 
-It's simple to migrate your server to or from Paper. The steps below will help you get started.
+This guide provides detailed instructions for migrating your Minecraft server to or from Paper. Follow these steps carefully to ensure a smooth transition.
 
-:::caution[Backup your data before you start!]
+:::caution[Critical: Backup Your Data]
+Before beginning any migration process, create a complete backup of your server data:
+- World folders
+- Player data
+- Plugin configurations
+- Server configuration files
 
-Before you begin, please ensure you have a full backup of your server.
-
-See our [Backup Guide](/paper/updating#step-1-backup) for more information.
-
+See our [Backup Guide](/paper/updating#step-1-backup) for detailed instructions.
 :::
 
 ## Migrating to Paper
 
-### From CraftBukkit or Spigot
+### From CraftBukkit/Spigot
 
-It's easy to migrate from CraftBukkit or Spigot to Paper. Follow the steps below.
+Paper is designed as a drop-in replacement for CraftBukkit and Spigot, offering improved performance while maintaining full compatibility.
 
-1. Stop your server if it is running, and create a full backup.
-2. Download Paper from [our downloads page](https://papermc.io/downloads).
-3. Rename the downloaded file to match the name specified in the [start command](/paper/getting-started#running-the-server).
-4. Replace your existing JAR file with your freshly downloaded Paper JAR.
-5. Start your new server.
+#### Migration Steps
 
-Paper retains full compatibility with all Spigot plugins, allowing a seamless transition.
+1. **Preparation**
+   - Stop your current server
+   - Create a complete backup
+   - Note down any custom configurations
 
-:::note
+2. **Server Update**
+   - Download Paper from [our downloads page](https://papermc.io/downloads)
+   - Rename the downloaded file to match your startup script
+   - Replace the existing server JAR with Paper
 
-Your new Paper server will still use [`bukkit.yml`](/paper/reference/bukkit-configuration)
-and [`spigot.yml`](/paper/reference/spigot-configuration).
-New configuration options can be found in [`config/paper-global.yml`](/paper/reference/global-configuration)
-and [`config/paper-world-defaults.yml`](/paper/reference/world-configuration).
+3. **Configuration**
+   - Paper maintains compatibility with:
+     - `bukkit.yml`
+     - `spigot.yml`
+   - New configuration options available in:
+     - `config/paper-global.yml`
+     - `config/paper-world-defaults.yml`
 
+4. **Post-Migration**
+   - Start the server
+   - Verify plugin functionality
+   - Check world integrity
+   - Monitor server performance
+
+:::note[Compatibility]
+- All Spigot plugins remain compatible
+- No world conversion required
+- Improved performance out of the box
 :::
-
-If you have any issues migrating from CraftBukkit or Spigot, do not hesitate to reach out for
-support on [our Discord server](https://discord.gg/papermc) (`#paper-help` channel).
 
 ### From Vanilla
 
-When migrating to Paper from Vanilla, the way worlds are stored will automatically be changed.
-Should you ever want to go back to Vanilla, follow the [Vanilla Migration Guide](#to-vanilla)
-closely, as manual changes will be required.
+When migrating from Vanilla, Paper automatically handles world structure conversion.
 
-1. Stop your Vanilla server if it is running, and create a full backup.
-2. Download Paper from [our downloads page](https://papermc.io/downloads) and replace your Vanilla
-   server JAR with your freshly downloaded Paper JAR.
-3. Rename the downloaded file to match the name specified in the [start command](/paper/getting-started#running-the-server).
-4. Start your new Paper server.
+#### Migration Steps
 
-You have now successfully migrated to Paper. If you encounter any issues, do not hesitate to reach
-out for support on [our Discord server](https://discord.gg/papermc) (`#paper-help` channel).
+1. **Preparation**
+   - Stop the Vanilla server
+   - Create a complete backup
+   - Note current server settings
+
+2. **Server Update**
+   - Download Paper from [our downloads page](https://papermc.io/downloads)
+   - Replace the Vanilla server JAR
+   - Rename the JAR to match your startup script
+
+3. **World Conversion**
+   - Paper automatically converts world structure
+   - Dimensions are separated into individual folders
+   - All world data is preserved
+
+4. **Post-Migration**
+   - Start the server
+   - Verify world integrity
+   - Check player data
+   - Configure Paper-specific settings
 
 ### From Fabric/Forge
 
-Because both Fabric and Forge use the Vanilla world directory structure, the same steps as the
-[Vanilla Migration Guide](#from-vanilla) may be used, with one caveat. If your Fabric or Forge
-server used mods that added new blocks, items, or other data to the game, Paper will be unable to
-load these features.
+:::warning[Important Limitations]
+- Paper does not support Fabric or Forge mods
+- Custom blocks/items from mods will not be preserved
+- You'll need to find plugin replacements for mod functionality
+:::
 
-Additionally, note that Paper does not support Fabric or Forge mods. You will need to find plugin
-replacements. Any hybrids that attempt to support both mods and plugins are fundamentally flawed and
-not recommended for use.
+#### Migration Steps
+
+1. **Preparation**
+   - Stop the modded server
+   - Create a complete backup
+   - Document all mod features
+
+2. **Server Update**
+   - Follow the [Vanilla Migration Steps](#from-vanilla)
+   - Remove all mod files
+   - Find plugin replacements for mod features
+
+3. **Post-Migration**
+   - Start the server
+   - Verify world integrity
+   - Test plugin replacements
+   - Monitor server performance
 
 ## Migrating from Paper
 
 ### To Vanilla
 
-Because Paper stores worlds slightly differently than Vanilla, manual work is required to migrate.
-If these steps are not taken, your nether and end will look like they have been reset. Don't worry!
-Even if this has happened, you haven't lost any data. The Vanilla server just doesn't know where to
-find it.
+Paper uses a different world structure than Vanilla. Follow these steps carefully to ensure proper conversion.
 
-Here is a chart to show the difference between how Vanilla and Paper store worlds.
+#### World Structure Comparison
 
-| Server Software | Overworld | Nether                | End                   |
-| --------------- | --------- | --------------------- | --------------------- |
-| Vanilla         | `/world`  | `/world/DIM-1`        | `/world/DIM1`         |
-| Paper           | `/world`  | `/world_nether/DIM-1` | `/world_the_end/DIM1` |
+| Server Type | Overworld | Nether                | End                   |
+|-------------|-----------|-----------------------|-----------------------|
+| Vanilla     | `/world`  | `/world/DIM-1`        | `/world/DIM1`         |
+| Paper       | `/world`  | `/world_nether/DIM-1` | `/world_the_end/DIM1` |
 
-Follow these steps to migrate from Paper to Vanilla:
+#### Migration Steps
 
-:::note
+1. **Preparation**
+   - Stop the Paper server
+   - Create a complete backup
+   - Note current server settings
 
-These steps assume a `level-name` (as set in `server.properties`) of `world`. If this is not the
-case for you, replace `world` with your `level-name` for all steps below.
+2. **World Conversion**
+   - If Vanilla server was started, delete `DIM-1` and `DIM1` from `/world`
+   - Copy `/world_nether/DIM-1` to `/world`
+   - Copy `/world_the_end/DIM1` to `/world`
+   - Delete `/world_nether` and `/world_the_end` folders
 
+3. **Server Update**
+   - Replace Paper JAR with Vanilla server JAR
+   - Update server configuration
+   - Start the Vanilla server
+
+:::note[Custom Level Names]
+If your `level-name` in `server.properties` is not `world`, replace all instances of `world` in the paths above with your custom level name.
 :::
 
-1. Stop your Paper server, if it is running.
-2. If you have already started your server with Vanilla, enter the `world` folder and delete both
-   the `DIM-1` and `DIM1` folders. This step is only necessary should you have started your server
-   with Vanilla.
-3. Copy the `/world_nether/DIM-1` folder into the `/world` folder.
-4. Copy the `/world_the_end/DIM1` folder into the `/world` folder.
-5. Delete both the `/world_nether` and `/world_the_end` folders.
-6. Replace your Paper JAR with a Vanilla server JAR.
-7. Start your Vanilla server.
+### To CraftBukkit/Spigot
 
-### To CraftBukkit or Spigot
-
-Paper does **not** support migration to either CraftBukkit or Spigot! While you may find success
-(both CraftBukkit and Spigot use the same directory structure as Paper), **do not** reach out for
-support with issues you encounter and note that data loss is possible.
+:::danger[Not Recommended]
+Paper does not officially support migration to CraftBukkit or Spigot. While the directory structure is similar:
+- Data loss is possible
+- No support will be provided
+- Performance will be reduced
+:::
 
 ### To Fabric/Forge
 
-Because both Fabric and Forge use the same directory structure for world storage as Vanilla, follow
-the [Vanilla Migration Guide](#to-vanilla) for this process. Note that neither Fabric nor Forge will
-support Paper plugins! You will be required to find replacement mods.
+#### Migration Steps
+
+1. **Preparation**
+   - Follow the [Vanilla Migration Steps](#to-vanilla)
+   - Document all Paper plugins
+   - Find mod replacements for plugin features
+
+2. **Server Update**
+   - Install Fabric/Forge
+   - Add required mods
+   - Configure mod settings
+
+3. **Post-Migration**
+   - Start the server
+   - Verify world integrity
+   - Test mod functionality
+   - Monitor server performance
+
+## Troubleshooting
+
+If you encounter issues during migration:
+1. Check our [Troubleshooting Guide](/paper/basic-troubleshooting)
+2. Join our [Discord](https://discord.gg/papermc) (`#paper-help` channel)
+3. Review server logs for errors
+4. Verify backup integrity
+
+:::tip[Pro Tip]
+Always test migrations in a development environment first, especially when dealing with large or complex servers.
+:::

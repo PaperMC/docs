@@ -1,64 +1,176 @@
 ---
-title: Next steps
-description: How to proceed after starting your server.
+title: Next Steps After Server Setup
+description: A comprehensive guide to optimizing, securing, and maintaining your Paper server after initial setup.
 slug: paper/next-steps
 ---
 
-Now that you have your server up and running, there are a few things you should do to ensure that your server is running smoothly.
+Now that your Paper server is up and running, follow these steps to ensure optimal performance, security, and functionality.
 
-## Configuration
+## Server Configuration
 
-One of the first things you should do is ensure your server is configured to your specifications.
-Paper is highly configurable, and you can change many settings to suit your needs. We outline where
-you can find these settings in the [Configuration](/paper/reference/configuration) guide.
+### Essential Configuration Files
 
-## Plugins
+1. **Global Settings** (`server.properties`)
+   - Set server name, port, and basic gameplay settings
+   - Configure view distance and simulation distance
+   - Set player limits and game mode
 
-One of the main reasons to use Paper is to take advantage of the many plugins which make use of our
-expansive API. We have our own plugin repository, [Hangar](https://hangar.papermc.io/), where you can
-find many plugins to use on your server. We also have a guide on how to install plugins
-[here](/paper/adding-plugins).
+2. **Paper-Specific Settings** (`paper.yml`)
+   - Performance optimizations
+   - Anti-cheat configurations
+   - Entity and mob spawning controls
+   - Chunk loading optimizations
 
-![Hangar](./assets/hangar.png)
+3. **World Settings** (`bukkit.yml` and `spigot.yml`)
+   - World generation settings
+   - Entity tracking ranges
+   - Performance-related configurations
 
-## Security
+For detailed configuration options, see our [Configuration Guide](/paper/reference/configuration).
 
-### Whitelisting
+## Plugin Management
 
-If you want to restrict who can join your server, you can use the whitelist feature. This allows you to
-specify who can join your server, and stops anyone else from joining. You can use the whitelist from
-the server console, or by editing the `whitelist.json` file in your server directory.
+### Finding and Installing Plugins
 
-### Permissions
+1. **Official Plugin Repository**
+   - Visit [Hangar](https://hangar.papermc.io/) for official Paper plugins
+   - Browse by category or search for specific functionality
+   - Check plugin ratings and reviews
 
-Permissions are a way to control what players can and cannot do on your server. You can use permissions
-to restrict who can use certain commands, or who can access certain areas of your server. It is
-common for plugins to use permissions to control who can use their features. You can use permission
-plugins such as [LuckPerms](https://luckperms.net/) to manage the permissions which players will be granted.
+2. **Plugin Installation**
+   - Download plugins from trusted sources
+   - Place `.jar` files in the `plugins` directory
+   - Restart server or use `/reload confirm` (not recommended for production)
+   - See our [Plugin Installation Guide](/paper/adding-plugins) for detailed instructions
 
-## Backups
+:::tip[Plugin Best Practices]
+- Always backup before installing new plugins
+- Test plugins in a development environment first
+- Keep plugins updated to latest versions
+- Remove unused plugins to reduce server load
+:::
 
-It's important to keep backups of your server. If something goes wrong, you can restore your server to a
-previous state. We cover how to do this in the [Updating](/paper/updating) guide.
+## Security Implementation
 
-## Optimization
+### Access Control
 
-Out of the box, Paper is optimized for performance. However, there are many things you can do to further
-optimize your server. One of the most common things to do is to make sure that you are running the
-correct startup flags for your server. We have a tool that allows you to automatically generate a
-startup script with the correct flags for your server. You can find this tool
-[here](/misc/tools/start-script-gen). Beyond this, a guide such as [this one](https://paper-chan.moe/paper-optimization/)
-will help you to further optimize your server.
+1. **Whitelist Management**
+   - Enable whitelist: `/whitelist on`
+   - Add players: `/whitelist add <username>`
+   - Remove players: `/whitelist remove <username>`
+   - Configure in `whitelist.json` for bulk changes
 
-## Making your server public
+2. **Permission Systems**
+   - Install a permission plugin (recommended: [LuckPerms](https://luckperms.net/))
+   - Create role-based permission groups
+   - Assign permissions to groups and individual players
+   - Regular permission audits
 
-If you want to make your server public, you will need to port forward your server. This allows people
-from outside your network to connect to your server. There is a guide made by
-[NordVPN](https://nordvpn.com/blog/open-ports-on-router/) which explains what port forwarding is and how
-to do it for your Paper server.
+### Server Protection
+
+1. **Firewall Configuration**
+   - Configure server port (default: 25565)
+   - Set up proper firewall rules
+   - Consider using a proxy like [Waterfall](https://papermc.io/software/waterfall)
+
+2. **Anti-Exploit Measures**
+   - Enable Paper's built-in anti-cheat features
+   - Configure entity tracking ranges
+   - Set up proper logging
+
+## Backup Strategy
+
+### Automated Backups
+
+1. **Essential Files to Backup**
+   - World folders
+   - Plugin configurations
+   - Player data
+   - Server configuration files
+
+2. **Backup Solutions**
+   - Use automated backup plugins
+   - Set up regular backup schedules
+   - Store backups in multiple locations
+   - Test backup restoration regularly
+
+### Update Management
+
+1. **Regular Updates**
+   - Keep Paper updated to latest version
+   - Update plugins regularly
+   - Test updates in development environment
+   - Follow our [Update Guide](/paper/updating)
+
+## Performance Optimization
+
+### Server Optimization
+
+1. **Startup Parameters**
+   - Use our [Startup Script Generator](/misc/tools/start-script-gen)
+   - Optimize JVM arguments
+   - Configure proper RAM allocation
+   - Enable GC optimizations
+
+2. **World Optimization**
+   - Configure chunk loading settings
+   - Optimize entity spawning
+   - Set appropriate view distances
+   - Regular world maintenance
+
+### Monitoring and Maintenance
+
+1. **Performance Monitoring**
+   - Use monitoring plugins
+   - Track TPS and memory usage
+   - Monitor player counts
+   - Regular server restarts
+
+2. **Regular Maintenance**
+   - Clear unused chunks
+   - Remove inactive player data
+   - Optimize database if used
+   - Regular server cleanup
+
+## Making Your Server Public
+
+### Network Configuration
+
+1. **Port Forwarding**
+   - Configure router settings
+   - Set up proper firewall rules
+   - Consider using a proxy server
+   - Follow [Port Forwarding Guide](https://nordvpn.com/blog/open-ports-on-router/)
+
+2. **DNS Configuration**
+   - Set up domain name if desired
+   - Configure DNS records
+   - Consider using a dynamic DNS service
 
 ## Troubleshooting
 
-If you encounter any issues with your server, you can follow our [Troubleshooting](/paper/basic-troubleshooting)
-guide to help you diagnose and fix the issue. If you are unable to fix the issue, you can come and
-ask for help in our [Discord](https://discord.gg/papermc) server!
+### Common Issues
+
+1. **Performance Problems**
+   - Check TPS and memory usage
+   - Review plugin performance
+   - Optimize world settings
+   - Monitor entity counts
+
+2. **Connection Issues**
+   - Verify port forwarding
+   - Check firewall settings
+   - Test network connectivity
+   - Review server logs
+
+### Getting Help
+
+If you encounter issues:
+1. Check our [Troubleshooting Guide](/paper/basic-troubleshooting)
+2. Search existing solutions
+3. Join our [Discord](https://discord.gg/papermc) for support
+4. Review server logs for errors
+
+:::tip[Pro Tip]
+Regular maintenance and monitoring are key to a successful server. Set up automated tasks and keep detailed logs of any issues or changes.
+:::

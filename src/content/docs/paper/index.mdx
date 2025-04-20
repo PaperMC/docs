@@ -1,13 +1,59 @@
 ---
 title: Paper Documentation
+description: Comprehensive documentation for Paper, a high-performance Minecraft server implementation with advanced features and optimizations.
 ---
 
 import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
-Paper is a Minecraft game server based on Spigot, designed to greatly improve performance and offer more advanced features and API.
+Paper is a high-performance Minecraft server implementation based on Spigot, offering significant performance improvements, advanced features, and a powerful API. It's designed to handle large player counts while maintaining optimal performance and stability.
+
+## Key Features
+
+- **Performance Optimizations**: Advanced optimizations for better TPS and reduced lag
+  - Improved chunk loading and entity tracking
+  - Optimized redstone and hopper performance
+  - Enhanced mob spawning and AI
+- **Enhanced API**: Extended Bukkit/Spigot API with additional features
+  - Paper-specific API extensions
+  - Improved event system
+  - Additional utility methods
+- **Security Improvements**: Built-in anti-cheat and exploit prevention
+  - Anti-xray protection
+  - Packet validation
+  - Exploit patches
+- **Configuration Options**: Extensive customization through YAML files
+  - Global server settings
+  - Per-world configurations
+  - Fine-grained control over features
+- **Plugin Compatibility**: Full support for Bukkit and Spigot plugins
+  - Seamless migration from Spigot
+  - Enhanced plugin performance
+  - Additional plugin hooks
+
+## Documentation Sections
 
 <CardGrid>
-  <LinkCard title="Administration" href="/paper/admin" />
-  <LinkCard title="Development" href="/paper/dev" />
-  <LinkCard title="Contributing" href="/paper/contributing" />
+  <LinkCard 
+    title="Administration" 
+    href="/paper/admin" 
+    description="Server setup, configuration, and management guides for administrators. Includes performance tuning, security, and maintenance."
+  />
+  <LinkCard 
+    title="Development" 
+    href="/paper/dev" 
+    description="API documentation and guides for plugin developers. Learn about Paper's enhanced API and best practices."
+  />
+  <LinkCard 
+    title="Contributing" 
+    href="/paper/contributing" 
+    description="Guidelines for contributing to Paper's development. Includes code style, pull request process, and community guidelines."
+  />
 </CardGrid>
+
+:::tip[Getting Started]
+New to Paper? Start with our [Getting Started Guide](/paper/admin/getting-started) to set up your first server. For detailed technical information, see our [Reference Documentation](/paper/admin/reference).
+:::
+
+:::note[Version Compatibility]
+Paper requires Java 21 or higher. Check our [System Requirements](/paper/admin/getting-started#system-requirements) for detailed version compatibility information.
+:::

@@ -1,9 +1,59 @@
 ---
-title: Reference
+title: Paper Reference Documentation
+description: Comprehensive reference documentation for Paper's configuration options, system properties, and features.
 ---
 
 import PageCards from "/src/components/PageCards.astro";
 
-Reference of Paper's configuration options, system properties and other features.
+Welcome to the Paper reference documentation! This section provides detailed technical information about Paper's configuration options, system properties, and various features.
+
+## Configuration Reference
+
+### Core Configuration
+- [Global Configuration](/paper/admin/reference/configuration/global) - Server-wide settings and optimizations
+- [World Configuration](/paper/admin/reference/configuration/world) - Per-world settings and generation options
+- [System Properties](/paper/admin/reference/system-properties) - JVM and system-level configurations
+
+### Feature Documentation
+- [Command Permissions](/paper/admin/reference/vanilla-command-permissions) - Default command permissions and overrides
+- [Paper Plugins](/paper/admin/reference/paper-plugins) - Built-in Paper features and plugins
+- [API Documentation](/paper/dev/api) - Technical API reference and examples
+
+## Quick Reference
+
+### Common Tasks
+- [Performance Tuning](/paper/admin/how-to/optimization) - Optimizing server performance
+- [Security Configuration](/paper/admin/how-to/security) - Securing your server
+- [Plugin Management](/paper/admin/getting-started/adding-plugins) - Installing and updating plugins
+
+### Troubleshooting
+- [Common Issues](/paper/admin/how-to/troubleshooting) - Frequently encountered problems
+- [Performance Problems](/paper/admin/how-to/performance) - Performance optimization guides
+- [Error Messages](/paper/admin/how-to/errors) - Understanding error logs
+
+## Technical Details
+
+### Configuration Files
+- `paper-global.yml` - Global server settings
+- `paper-world-defaults.yml` - Default world settings
+- `bukkit.yml` - Bukkit compatibility settings
+- `spigot.yml` - Spigot compatibility settings
+
+### System Properties
+- `-Dpaper.disableChannelLimit` - Disable channel limit
+- `-Dpaper.disableFlushConsolidation` - Disable flush consolidation
+- `-Dpaper.disableTickThreads` - Disable tick threads
+
+:::tip[Configuration Tips]
+- Always backup configuration files before making changes
+- Test changes in a development environment first
+- Document any custom configurations
+- Keep configurations version-controlled
+- Use comments to explain non-obvious settings
+:::
+
+:::note[Performance Impact]
+Some configuration changes may significantly impact server performance. Always monitor TPS and memory usage after making changes.
+:::
 
 <PageCards />

@@ -1,71 +1,117 @@
 ---
-title: Getting started
-description: How to get started with downloading and setting up a Paper server.
+title: Getting Started with Paper
+description: A comprehensive guide to downloading, setting up, and running your first Paper Minecraft server.
 slug: paper/getting-started
 ---
 
-## Requirements
+## System Requirements
 
-:::tip
-
-Paper requires at least **Java 21** to run, which [is easy to download and install](/misc/java-install).
-
+:::tip[Important Note]
+Paper requires **Java 21** or higher for optimal performance and compatibility. You can [download and install Java](/misc/java-install) if you haven't already.
 :::
 
-| Paper Version  | Recommended Java Version |
-|----------------|--------------------------|
-| 1.8 to 1.11    | Java 8                   |
-| 1.12 to 1.16.4 | Java 11                  |
-| 1.16.5         | Java 16                  |
-| 1.17.1-1.18.1+ | Java 21                  |
+### Java Version Compatibility Matrix
+
+| Paper Version  | Minimum Java Version | Recommended Java Version |
+|----------------|----------------------|--------------------------|
+| 1.8 to 1.11    | Java 8               | Java 8                   |
+| 1.12 to 1.16.4 | Java 11              | Java 11                  |
+| 1.16.5         | Java 16              | Java 16                  |
+| 1.17.1-1.18.1+ | Java 21              | Java 21                  |
+
+:::note[System Requirements]
+- **RAM**: Minimum 2GB, Recommended 4GB+ for optimal performance
+- **Storage**: At least 10GB free space (more for larger worlds)
+- **CPU**: Modern multi-core processor recommended
+- **Network**: Stable internet connection for multiplayer
+:::
 
 ## Downloading Paper
 
-Paper provides runnable server JARs directly from our
-[website's downloads page](https://papermc.io/downloads).
+1. Visit the [Paper Downloads Page](https://papermc.io/downloads)
+2. Select your desired Minecraft version
+3. Click on the build number to download the server JAR file
+4. Save the file to your desired server directory
 
-Click on the build number to download a file.
+:::tip[Version Selection]
+- Choose the latest stable build for your desired Minecraft version
+- Consider using the latest Paper version for best performance and security updates
+:::
 
-## Running the server
+## Server Setup and Configuration
 
-To run the server you will need to either create a startup script
-or run a command in your terminal.
+### Initial Setup
 
-You can generate a startup script using our [Startup Script Generator](/misc/tools/start-script-gen).
-You can also obtain the optimized terminal command to run the server there.
+1. Create a dedicated directory for your server
+2. Place the downloaded Paper JAR file in this directory
+3. Create a startup script or use our [Startup Script Generator](/misc/tools/start-script-gen)
 
-If you're just looking for a short command:
+### Running the Server
+
+#### Using the Startup Script Generator
+Visit our [Startup Script Generator](/misc/tools/start-script-gen) to create an optimized startup script for your system.
+
+#### Manual Command
+For a basic startup command:
 ```bash
 java -Xms4G -Xmx4G -jar paper.jar --nogui
 ```
-Ensure you navigated your terminal to the directory of your server
-and that you have replaced `paper.jar` with the name of the JAR you have downloaded.
 
-The amount of RAM can be set by changing the numbers in the `Xmx` and `Xms` arguments.
-`--nogui` disables Vanilla's GUI, so you don't get double interfaces when using the command line.
+:::note[Command Explanation]
+- `-Xms4G`: Initial RAM allocation (4GB)
+- `-Xmx4G`: Maximum RAM allocation (4GB)
+- `--nogui`: Disables the vanilla server GUI for better performance
+- Adjust RAM values based on your server's needs and available system resources
+:::
 
-To configure your server, see the [Global Configuration](/paper/reference/global-configuration) and
-[Per World Configuration](/paper/reference/world-configuration) pages.
+### First-Time Setup
+1. Run the server for the first time to generate necessary files
+2. Accept the EULA by editing `eula.txt` and setting `eula=true`
+3. Restart the server to complete initialization
 
-## Updating the server
+## Server Configuration
 
-Updating Paper is simple! See our [Update Tutorial](/paper/updating) for more information.
+After initial setup, you'll want to configure your server:
 
-## Migrating to Paper
+1. Review and modify `server.properties` for basic server settings
+2. Configure Paper-specific settings in `paper.yml`
+3. Set up world-specific configurations in `bukkit.yml` and `spigot.yml`
+4. For detailed configuration guides, see:
+   - [Global Configuration](/paper/reference/global-configuration)
+   - [Per World Configuration](/paper/reference/world-configuration)
+
+## Updating Your Server
+
+Paper makes updating simple and safe:
+1. Download the new version from the downloads page
+2. Replace the old JAR file with the new one
+3. Restart your server
+
+For detailed update instructions, see our [Update Tutorial](/paper/updating).
+
+## Migration Guide
 
 ### From Vanilla
+Paper automatically handles the conversion of vanilla world saves, including:
+- Separation of dimensions (Overworld, Nether, End)
+- Conversion of world data to Paper's optimized format
+- Preservation of all existing world data
 
-Migrating from Vanilla is easy, but there are some differences, namely in world saves. Paper (and
-CraftBukkit and Spigot) separate out each dimension of a world (nether, the end, etc.) into separate
-world folders.
+### From CraftBukkit/Spigot
+Paper is a direct drop-in replacement:
+- No world conversion needed
+- All plugins and configurations remain compatible
+- Improved performance out of the box
 
-Paper will handle this conversion for you automatically. No additional consideration is required.
+## Next Steps
 
-### From CraftBukkit or Spigot
+To optimize your server and unlock Paper's full potential:
+1. Review our [Next Steps Guide](/paper/next-steps)
+2. Configure performance optimizations
+3. Set up essential plugins
+4. Implement proper backup solutions
+5. Configure security settings
 
-Paper is a drop in replacement for both CraftBukkit and Spigot, you don't need to make any changes.
-
-## Next steps
-
-Take a look at our [Next Steps](/paper/next-steps) guide to get your server up and running with the best performance and
-features.
+:::tip[Pro Tip]
+Regularly check for Paper updates to ensure you have the latest performance improvements and security patches.
+:::

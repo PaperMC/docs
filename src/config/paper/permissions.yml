@@ -1,19 +1,19 @@
 <permission>:
   default:
     description: |
-      Who this permission is granted to by default
+      Who this permission is granted to by default.
 
-      "true": all players
+      "true": all players.
 
-      "false": no players
+      "false": no players.
 
-      "op": only operators (also aliased as "isop", "operator", "isoperator", "admin", and "isadmin")
+      "op": only operators (also aliased as "isop", "operator", "isoperator", "admin", and "isadmin").
 
-      "!op": all players except operators (also aliased as "notop", "!operator", "notoperator", "!admin", "notadmin")
+      "!op": all players except operators (also aliased as "notop", "!operator", "notoperator", "!admin", "notadmin").
     default: "op"
   children:
     header:
-      message: A list (not shown) or a map (shown below) of child permissions
+      message: A list (not shown) or a map (shown below) of child permissions.
     <permission>:
       description: |
         A child permission of this permission.
@@ -25,6 +25,5 @@
         and any child permissions of the newly created permission are bubbled up to the top level.
       default: "true"
   description_:
-    description: |
-      The description of the permission.
+    description: The description of the permission.
     default: '""'

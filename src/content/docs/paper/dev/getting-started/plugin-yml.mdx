@@ -152,6 +152,29 @@ Each permission node can have children. When set to `true`, it will inherit the 
 The default value that permissions that don't have a `default` specified will have. This can be `op`/`notop` or `true`/`false`.
 - `default-permission: true`
 
+### paper-plugin-loader
+
+A fully qualified class name of a Paper plugin [loader](/paper/dev/getting-started/paper-plugins#loaders) class, if you want to use one.
+- `paper-plugin-loader: com.example.paperplugin.MyPluginLoader`
+
+:::danger[Experimental]
+
+[Paper plugins](/paper/dev/getting-started/paper-plugins) (and therefore plugin loaders) are experimental and may be subject to change.
+
+:::
+
+### paper-skip-libraries
+
+If `true`, Paper will skip resolution of libraries defined in the [`libraries` section](#libraries).
+This is useful for delegating library loading to a Paper plugin [loader](/paper/dev/getting-started/paper-plugins#loaders).
+- `paper-skip-libraries: false`
+
+:::danger[Experimental]
+
+[Paper plugins](/paper/dev/getting-started/paper-plugins) (and therefore plugin loaders) are experimental and may be subject to change.
+
+:::
+
 ## Commands
 
 This is a list of commands that your plugin uses. This is useful for plugins that use commands to provide features.

@@ -1,0 +1,27 @@
+header:
+  message: This is a single entry in the root array found in banned-players.json
+uuid:
+  description: |
+    The UUID representing the banned user
+  default: the UUID of the banned user
+name:
+  description: |
+    The name of the banned user
+  default: the name of the banned user
+
+created:
+  description: |
+    A timestamp of when the user was banned
+    The expected format is "yyyy-MM-dd HH:mm:ss Z"
+  default: the ban creation time.
+source:
+  description: A string representing the source of the ban. "(Unknown)" is used if not present
+  default: '"(Unknown)"'
+expires:
+  description: |
+    A timestamp of when the ban expires, or "forever" if it does not expire
+    The expected format is "yyyy-MM-dd HH:mm:ss Z"
+  default: '"forever"'
+reason:
+  description: The reason for the ban, "Banned by an operator." is used if not present
+  default: '"Banned by an operator."'

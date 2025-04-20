@@ -1,0 +1,28 @@
+header:
+  message: This is a single entry in the root array found in banned-ips.json
+ip:
+  description: |
+    The IP address representing the banned user
+
+    For IPv4 the expected format is "x.x.x.x"
+
+    For IPv6 the expected format follows [RFC5952 Section 4](https://datatracker.ietf.org/doc/html/rfc5952#section-4)
+
+    For anything else, "\<unknown>" may be present (but its use is discouraged)
+  default: "an IPv4 or IPv6 address"
+created:
+  description: |
+    A timestamp of when the user was banned
+    The expected format is "yyyy-MM-dd HH:mm:ss Z"
+  default: the ban creation time.
+source:
+  description: A string representing the source of the ban. "(Unknown)" is used if not present
+  default: '"(Unknown)"'
+expires:
+  description: |
+    A timestamp of when the ban expires, or "forever" if it does not expire
+    The expected format is "yyyy-MM-dd HH:mm:ss Z"
+  default: '"forever"'
+reason:
+  description: The reason for the ban, "Banned by an operator." is used if not present
+  default: '"Banned by an operator."'

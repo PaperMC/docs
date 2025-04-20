@@ -1,0 +1,9 @@
+header:
+  message: |
+    #By changing the setting below to TRUE you are indicating your agreement to our EULA (https://aka.ms/MinecraftEULA).
+    #\<date\>
+eula:
+  default: "false"
+  description: >-
+    Whether to accept the Minecraft EULA.
+    This must be set to "true" to run the server.

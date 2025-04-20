@@ -86,6 +86,7 @@ export default defineConfig({
                             "paper/reference/spigot-configuration",
                             "paper/reference/bukkit-commands-configuration",
                             "paper/reference/server-properties",
+                            "paper/reference/vanilla-data-files",
                           ],
                         },
                         "paper/reference/paper-plugins",

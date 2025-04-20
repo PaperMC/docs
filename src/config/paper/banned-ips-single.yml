@@ -8,7 +8,7 @@ ip:
 
     For IPv6 the expected format follows [RFC5952 Section 4](https://datatracker.ietf.org/doc/html/rfc5952#section-4),
 
-    For anything else, "\<unknown>" may be present (but it's use is discouraged).
+    For anything else, "\<unknown>" may be present (but its use is discouraged).
   default: "an IPv4 or IPv6 address"
 created:
   description: |

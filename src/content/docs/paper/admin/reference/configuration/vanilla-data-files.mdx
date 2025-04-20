@@ -1,0 +1,90 @@
+---
+title: Vanilla data files
+description: An explanation of Minecraft's data files.
+slug: paper/reference/vanilla-data-files
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import { parse } from "yaml";
+import EulaYML from "/src/config/paper/eula.yml?raw";
+import BannedIpsYML from "/src/config/paper/banned-ips-single.yml?raw";
+import BannedPlayersYML from "/src/config/paper/banned-players-single.yml?raw";
+import OpsYML from "/src/config/paper/ops-single.yml?raw";
+import WhitelistYML from "/src/config/paper/whitelist-single.yml?raw";
+
+## `eula.txt`
+
+`eula.txt` is a simple config file that allows you to accept the [EULA](https://aka.ms/MinecraftEULA),
+which is required to run the Minecraft server.
+
+<ConfigNode data={parse(EulaYML)} lang="properties" path={["eula"]} />
+
+## `banned-ips.json`
+
+`banned-ips.json` is a JSON file that stores IP addresses that are not allowed to connect to the server.
+
+:::caution
+
+This is a data file used by the server, not a configuration file.
+
+We do not recommend editing this file directly, and this is provided for reference only.
+
+Instead, use the `/ban-ip`, `/pardon-ip`, and `/banlist ips` commands to manage banned-ips.json.
+
+:::
+
+<ConfigNode data={parse(BannedIpsYML)} lang="json" path={["banned_ips"]} />
+
+
+## `banned-players.json`
+
+`banned-players.json` is a JSON file that stores players that are not allowed to connect to the server.
+
+:::caution
+
+This is a data file used by the server, not a configuration file.
+
+We do not recommend editing this file directly, and this is provided for reference only.
+
+Instead, use the `/ban`, `/pardon`, and `/banlist players` commands to manage banned-players.json.
+
+:::
+
+<ConfigNode data={parse(BannedPlayersYML)} lang="json" path={["banned_players"]} />
+
+## `ops.json`
+
+`ops.json` is a JSON file that stores player's operator status information.
+
+In Vanilla, this is used as a rudimentary permissions system, and to allow certain player to bypass the player limit.
+
+:::caution
+
+This is a data file used by the server, not a configuration file.
+
+We do not recommend editing this file directly, and this is provided for reference only.
+
+Instead, use the `/op`, `/deop` commands to manage ops.json.
+
+:::
+
+<ConfigNode data={parse(OpsYML)} lang="json" path={["ops"]} />
+
+## `whitelist.json`
+
+`whitelist.json` is a JSON file that stores players that are allowed to connect to the server.
+
+It is used in conjunction with the [`white-list`](/paper/reference/server-properties#white_list) option in `server.properties`.
+
+
+:::caution
+
+This is a data file used by the server, not a configuration file.
+
+We do not recommend editing this file directly, and this is provided for reference only.
+
+Instead, use the `/whitelist` command to manage whitelist.json.
+
+:::
+
+<ConfigNode data={parse(WhitelistYML)} lang="json" path={["whitelist"]} />

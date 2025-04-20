@@ -13,31 +13,32 @@ If this is not the case, they offer a brief explanation to what they are.
 :::
 
 <FileTree>
-  - logs all logs for the server
+  - logs/ all logs for the server
     - latest.log the most recent log
-    - ... old logs are compressed into .gz files
-  - config
+    - \<yyyy-MM-dd\>-\<run-id\>.log.gz old logs compressed with gzip
+  - config/
     - [paper-global.yml](/paper/reference/global-configuration)
     - [paper-world-defaults.yml](/paper/reference/world-configuration)
-  - plugins you can place your plugin JARs here
-    - .paper-remapped used to store remapped plugin JARs, learn more [here](https://forums.papermc.io/threads/important-dev-psa-future-removal-of-cb-package-relocation.1106/)
-      - ...
-    - spark used to store configuration for the bundled spark profiler, learn more [here](https://spark.lucko.me/docs/Configuration)
-      - ...
-  - &lt;world&gt;
-    - [paper-world.yml](#per-world-values) stores configuration values that apply only to this world
-  - banned-ips.json stores IP addresses banned from the server
-  - banned-players.json stores information about players banned from the server
+  - plugins/ you can place your plugin JARs here
+    - .paper-remapped/ used to store remapped plugin JARs, learn more [here](https://forums.papermc.io/threads/important-dev-psa-future-removal-of-cb-package-relocation.1106/)
+    - bStats/
+      - config.yml stores configuration for bStats plugin metrics
+    - spark/ plugin folder for the bundled spark profiler
+      - [config.json](https://spark.lucko.me/docs/Configuration) the main spark config file
+  - \<world\>/
+    - [paper-world.yml](#per-world-values) stores [configuration values](/paper/reference/world-configuration) that apply only to the world \<world\>
+  - [banned-ips.json](/paper/reference/vanilla-data-files#banned-ipsjson) stores IP addresses banned from the server
+  - [banned-players.json](/paper/reference/vanilla-data-files#banned-playersjson) stores players banned from the server
   - [bukkit.yml](/paper/reference/bukkit-configuration)
   - [commands.yml](/paper/reference/bukkit-commands-configuration)
-  - eula.txt stores the EULA consent status
+  - [eula.txt](/paper/reference/vanilla-data-files#eulatxt) stores the EULA consent status
   - help.yml stores configuration for the `/help` command
-  - ops.json stores information about players with operator status
+  - [ops.json](/paper/reference/vanilla-data-files#opsjson) stores information about players with operator status
   - permissions.yml stores permission configuration
   - [server.properties](/paper/reference/server-properties)
   - [spigot.yml](/paper/reference/spigot-configuration)
   - usercache.json caches players' Mojang API data, e.g. their head textures
-  - whitelist.json stores whitelist configuration
+  - [whitelist.json](/paper/reference/vanilla-data-files#whitelistjson) stores information about whitelisted players
 </FileTree>
 
 ## Per-world configuration

@@ -13,8 +13,7 @@
     default: "op"
   children:
     header:
-      message:
-        A list (not shown) or a map (shown below) of child permissions
+      message: A list (not shown) or a map (shown below) of child permissions
     <permission>:
       description: |
         A child permission of this permission.
@@ -28,4 +27,4 @@
   description_:
     description: |
       The description of the permission.
-    default: "\"\""
+    default: '""'

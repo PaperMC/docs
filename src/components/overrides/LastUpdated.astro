@@ -18,7 +18,7 @@ const acc: GitHubAccount = await getGitHubAccountFromFile(filePath);
         })}
       </time>
       {" by "}
-      <a set:html={acc.displayName} href={acc.accountLink} />
+      <a href={acc.accountLink}>{acc.displayName}</a>
     </p>
   )
 }

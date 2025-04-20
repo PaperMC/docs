@@ -1,0 +1,179 @@
+---
+title: Modded (Fabric and NeoForge shared API)
+description: Fabric and NeoForge shared Adventure implementation.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+Starting with *Minecraft: Java Edition* 1.21.2, Adventure is implemented using mostly shared code between NeoForge and Fabric.
+Each major version of Minecraft will usually require a new release of the platform.
+
+The platform supports all features, including localization and custom renderers.
+
+## Dependency
+
+When building multi-loader mods, we often want to move as much code as possible into a loader-agnostic part of our projects.
+
+Adventure facilities this through the `net.kyori:adventure-platform-mod-shared` artifact.
+
+A second variant, `net.kyori:adventure-platform-mod-shared-fabric-repack`, is also published. This variant should be used
+when your common code is managed by `fabric-loom`.
+
+If you are building a Fabric-only or NeoForge-only mod, or do not care to use the platform API in shared code,
+then you don't need to use this artifact explicitly. This is because both platforms depend on it transitively.
+
+As with the rest of the Adventure projects, releases are distributed on Maven Central, and snapshots on Sonatype OSS:
+
+// TODO: Make this a component + insert version placeholder
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Groovy)">
+  ```groovy
+  repositories {
+    // for development builds
+    maven {
+      name = "sonatype-oss-snapshots1"
+      url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+      mavenContent { snapshotsOnly() }
+    }
+    // for releases
+    mavenCentral()
+  }
+
+  dependencies {
+    // Loom project
+    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:|mod_version|") // for Minecraft 1.21.2-1.21.4
+
+    // NeoGradle/ModDevGradle/VanillaGradle project
+    compileOnly("net.kyori:adventure-platform-mod-shared:|mod_version|") // for Minecraft 1.21.2-1.21.4
+  }
+  ```
+  </TabItem>
+  <TabItem label="Gradle (Kotlin)">
+  ```kts
+  repositories {
+    // for development builds
+    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+      name = "sonatype-oss-snapshots1"
+      mavenContent { snapshotsOnly() }
+    }
+    // for releases
+    mavenCentral()
+  }
+
+  dependencies {
+    // Loom project
+    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:|mod_version|") // for Minecraft 1.21.2-1.21.4
+
+    // NeoGradle/ModDevGradle/VanillaGradle project
+    compileOnly("net.kyori:adventure-platform-mod-shared:|mod_version|") // for Minecraft 1.21.2-1.21.4
+  }
+  ```
+  </TabItem>
+</Tabs>
+
+
+:::danger[Attention]
+
+Each major Minecraft release will require different platform versions. For older Minecraft versions, consult the table below.
+
+<details>
+  <summary>Historic Versions</summary>
+
+  | Minecraft Version | Adventure version | `adventure-platform-(mod-shared/fabric/neoforge)` version |
+  |-------------------|-------------------|-----------------------------------------------------------|
+  | 1.21-1.21.1       | 4.17.0            | 6.0.0                                                     |
+
+</details>
+
+:::
+
+## Basic use
+
+The easiest way to get started with this platform is to work with the Minecraft game objects that directly implement Adventure interfaces.
+
+This covers almost all cases where the default renderer is used.
+
+On Fabric, interface injection is used so that you can directly call interface methods on Minecraft objects (with loom 0.11+).
+
+On NeoForge, you must manually cast or use the helpers provided in `MinecraftAudiences`.
+
+The following Adventure interfaces are directly implemented:
+
+`Audience`
+  - `net.minecraft.commands.CommandSourceStack`, `net.minecraft.server.MinecraftServer`, `net.minecraft.server.rcon.RconConsoleSource`,
+  - `net.minecraft.server.level.ServerPlayer`, `net.minecraft.client.player.LocalPlayer`
+
+`AdventureCommandSourceStack`
+  - `net.minecraft.commands.CommandSourceStack`
+
+`Sound.Emitter`
+  - `net.minecraft.world.entity.Entity`
+
+`Sound.Type`
+  - `net.minecraft.sounds.SoundEvent`
+
+`Identified`
+  - `net.minecraft.world.entity.player.Player`
+
+`ComponentLike`
+  - `net.minecraft.network.chat.Component`
+
+`Key`
+  - `net.minecraft.resources.ResourceLocation`
+
+`Keyed`
+  - `net.minecraft.resources.ResourceKey`
+
+`HoverEventSource`
+  - `net.minecraft.world.entity.Entity`,
+  - `net.minecraft.world.item.ItemStack`
+
+`SignedMessage.Signature`
+  - `net.minecraft.network.chat.MessageSignature`
+
+
+Using these injections, getting started is as simple as:
+
+```java
+void greet(final ServerPlayer player) {
+    Component message = Component.text()
+        .content("Hello ")
+        .append(player.get(Identity.DISPLAY_NAME)
+            .get()
+            .color(NamedTextColor.RED)
+        );
+    player.sendMessage(message);
+}
+```
+
+For more complex use cases, `MinecraftServerAudiences` or `MinecraftClientAudiences` provide additional API.
+
+### Commands
+
+The platform provides custom argument types to specify `Key` and `Component` parameters in Brigadier commands.
+
+:::caution
+
+See the platform-specific documentation for details on registration and syncing of these argument types.
+
+:::
+
+As an example, here's a simple command that will echo whatever is provided as input:
+
+```java
+// A potential method to be in the mod initializer class above
+private static final String ARG_MESSAGE = "message";
+
+void registerCommands(final CommandDispatcher dispatcher, final boolean isDedicated) {
+  dispatcher.register(literal("echo").then(argument(ARG_MESSAGE, component()).executes(ctx -> {
+      final Component message = component(ctx, ARG_MESSAGE);
+      ((Audience) ctx.getSource()).sendMessage(Component.text("You said: ").append(message));
+  }));
+}
+```
+
+## Working with native types
+
+Sadly, Adventure can't provide API for every place chat components are used in the game. However, for areas not covered by the API in `Audience`,
+it's possible to convert components between native and Adventure types. See certain native types which implement
+Adventure interfaces, and the methods on `MinecraftAudiences` for other available conversions.

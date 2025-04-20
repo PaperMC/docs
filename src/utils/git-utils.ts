@@ -6,25 +6,26 @@ export interface GitHubAccount {
   accountLink?: string;
 }
 
-const token: string | null = import.meta.env.GITHUB_TOKEN
+const token: string | null = import.meta.env.GITHUB_TOKEN;
 
-const headers: RequestInit = token != null ? {
-  headers: {
-    Accept: "application/vnd.github+json",
-    "User-Agent": "papermc-docs/author",
-    "Authorization": `Bearer ${token}`
-  },
-}
-: {
-  headers: {
-    Accept: "application/vnd.github+json",
-    "User-Agent": "papermc-docs/author"
-  },
-};
+const headers: RequestInit =
+  token != null
+    ? {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "papermc-docs/author",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    : {
+        headers: {
+          Accept: "application/vnd.github+json",
+          "User-Agent": "papermc-docs/author",
+        },
+      };
 
 const repo: string = "PaperMC/docs";
 const cache: Map<string, GitHubAccount> = new Map();
-
 
 // Git
 export async function getGitHubAccountFromFile(filePath: string): Promise<GitHubAccount | null> {

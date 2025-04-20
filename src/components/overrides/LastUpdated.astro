@@ -14,7 +14,7 @@ const acc: GitHubAccount = await getGitHubAccountFromFile(filePath);
       <time datetime={lastUpdated.toISOString()}>
         {lastUpdated.toLocaleDateString(lang, {
           dateStyle: "medium",
-          timeZone: "UTC",
+          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         })}
       </time>
       {" by "}

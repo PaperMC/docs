@@ -49,15 +49,15 @@ export async function getGitHubAccountFromFile(
   url.searchParams.set('path', filePath);
   url.searchParams.set('per_page', '1');
 
+  // It is **KNOWN** that if a commit is not pushed to GitHub, the link will be of the person who last edited the page remotely.
+  // This is only a bug in local dev or other branch environments, and not in production.
   const commit = (await fetch(url, headers).then(response => response.json()))[0]
-  const acc: GitHubAccount = {
+  let acc: GitHubAccount = {
     displayName: displayName,
     email: email,
     accountLink: commit?.author?.html_url
   }
 
-  console.log("Latest commit data is as follows:")
-  console.log(commit)
   cache.set(email, acc);
   return acc;
 }

@@ -1,10 +1,8 @@
 header:
-  message: This is a single entry in the root array found in whitelist.json
+  message: This is a single entry in the root array found in whitelist.json.
 uuid:
-  description: |
-    The UUID of the player on the whitelist
+  description: The UUID of the player on the whitelist.
   default: the UUID of the player on the whitelist
 name:
-  description: |
-    The name of the player on the whitelist
+  description: The name of the player on the whitelist.
   default: the name of the player on the whitelist

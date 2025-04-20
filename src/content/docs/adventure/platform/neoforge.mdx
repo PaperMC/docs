@@ -1,0 +1,135 @@
+---
+title: NeoForge
+description: The NeoForge Adventure implementation.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components"
+
+Adventure supports NeoForge on *Minecraft: Java Edition* 1.21 and up, for both server-side and client-side use. Each major version of Minecraft will usually require
+a new release of the platform.
+
+The platform supports all features, including localization and custom renderers.
+
+## Dependency
+
+The NeoForge platform is packaged as a mod, designed to be included in mods via jar-in-jar packaging. As with the rest of the Adventure projects,
+releases are distributed on Maven Central, and snapshots on Sonatype OSS:
+
+// TODO: Make this a component + insert version placeholder
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Groovy)">
+  ```groovy
+  repositories {
+    // for development builds
+    maven {
+        name = "sonatype-oss-snapshots1"
+        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+        mavenContent { snapshotsOnly() }
+    }
+    // for releases
+    mavenCentral()
+  }
+
+  dependencies {
+    implementation jarJar("net.kyori:adventure-platform-neoforge:|mod_version|") // for Minecraft 1.21.2-1.21.4
+  }
+  ```
+  </TabItem>
+  <TabItem label="Gradle (Kotlin)">
+  ```kts
+  repositories {
+    // for development builds
+    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+        name = "sonatype-oss-snapshots1"
+        mavenContent { snapshotsOnly() }
+    }
+    // for releases
+    mavenCentral()
+  }
+
+  dependencies {
+    implementation(jarJar("net.kyori:adventure-platform-neoforge:|mod_version|")!!) // for Minecraft 1.21.2-1.21.4
+  }
+  ```
+  </TabItem>
+</Tabs>
+
+:::danger[Attention]
+
+Each major Minecraft release will require different platform versions. For older Minecraft versions, consult the table
+at [Modded (Fabric and NeoForge shared API)](/adventure/platform/modded).
+
+:::
+
+## Basic Use
+
+See [Modded (Fabric and NeoForge shared API)](/adventure/platform/modded) for usage details common between NeoForge and Fabric.
+
+## Server
+
+The logical-server side of the modded platform can be accessed any time a server is available, through a `MinecraftServerAudiences`
+instance. By default, translatable components will be rendered with the global translator, but a custom renderer can be passed when initializing the platform.
+
+All `AudienceProvider` interface methods are supported.
+
+To get started with Adventure, set up an audience provider like this:
+
+```java
+@Mod("my_mod")
+public class MyMod {
+
+    private volatile MinecraftServerAudiences adventure;
+
+    public MinecraftServerAudiences adventure() {
+        if (this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure without a running server!");
+        }
+        return this.adventure;
+    }
+
+    public MyMod() {
+        // Register with the server lifecycle callbacks
+        // This will ensure any platform data is cleared between game instances
+        // This is important on the integrated server, where multiple server instances
+        // can exist for one mod initialization.
+        NeoForge.EVENT_BUS.addListener((ServerStartingEvent e) ->
+            this.adventure = MinecraftServerAudiences.of(e.getServer())
+        );
+        NeoForge.EVENT_BUS.addListener((ServerStoppedEvent e) ->
+            this.adventure = null
+        );
+    }
+}
+```
+
+From here, audiences can be acquired for players and any other `CommandSource`. Specialized serializer instances are also available, to allow using
+game information in component serialization.
+
+## Commands
+
+The NeoForge platform includes a method to register the `KeyArgumentType` and `ComponentArgumentType`:
+  - `AdventureArgumentTypes.register();`
+
+This should be called from the constructor of your `@Mod`-annotated class.
+Registering the argument types on the server will require all clients that join to have the argument types
+registered as well.
+
+## Client
+
+Special for the modded platform, purely client-side operations are supported. The setup is less involved than it is for the server, since the client is a singleton, and there
+is only one subject that can be acted on: the client's player.
+
+This means that for most users the `MinecraftClientAudiences` object can be treated as a singleton. The only exception is users using a custom renderer. This makes using Adventure
+audiences fairly simple, as this code example shows:
+
+```java
+void doThing() {
+  // Get the audience
+  final Audience client = MinecraftClientAudiences.of().audience();
+
+  // Do something. This will only work when the player is ingame.
+  client.sendMessage(Component.text("meow", NamedTextColor.DARK_PURPLE));
+}
+```
+
+The full functionality of the `Audience` interface is available, including localization!

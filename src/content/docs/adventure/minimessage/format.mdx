@@ -1,0 +1,525 @@
+---
+title: Format
+description: The MiniMessage format documentation.
+---
+
+import Shadow1 from "./assets/shadow_1.png";
+import Shadow2 from "./assets/shadow_2.png";
+import Shadow3 from "./assets/shadow_3.png";
+import Color1 from "./assets/color_1.png";
+import Color2 from "./assets/color_2.png";
+import ColorVerbose1 from "./assets/color_verbose_1.png";
+import ColorVerbose2 from "./assets/color_verbose_2.png";
+import Decoration1 from "./assets/decoration_1.png";
+import Reset1 from "./assets/reset_1.png";
+import Click1 from "./assets/click_1.png";
+import Hover1 from "./assets/hover_1.png";
+import Key1 from "./assets/key_1.png";
+import Translatable1 from "./assets/translatable_1.png";
+import Translatable2 from "./assets/translatable_2.png";
+import Insertion1 from "./assets/insertion_1.png";
+import Rainbow1 from "./assets/rainbow_1.png";
+import Gradient1 from "./assets/gradient_1.png";
+import Transition1 from "./assets/transition_1.png";
+import Font1 from "./assets/font_1.png";
+import Newline1 from "./assets/newline_1.png";
+import Selector1 from "./assets/selector_1.png";
+
+The MiniMessage language uses tags. Everything you do will be defined with tags. Tags have a start tag and an end tag (the `<reset>` tag is an exception here).
+Start tags are mandatory (obviously), but end tags aren't outside of `strict` mode. The following are all visually identical:
+```mm
+<yellow>Hello <blue>World<yellow>!
+<yellow>Hello <blue>World</blue>!
+<yellow>Hello </yellow><blue>World</blue><yellow>!</yellow>
+```
+
+For tags with no content, tags can be auto-closed by using the format `<tag/>`. With this format, even in strict mode no separate closing tag should be provided.
+
+All tag names are case-insensitive to reduce the possibility for conflict, but we recommend keeping all tag names lowercase (or at the very least, being consistent).
+
+Some tags have argument. Those look like this: `<tag:argument>stuff</tag>`.
+For example:
+```mm
+<hover:show_text:"<red>test:TEST">TEST
+<click:run_command:test>TEST
+```
+
+As you can see, those sometimes contain components, sometimes just numbers, strings, or other types. Refer to the detailed docs below.
+
+Single (`'`) and double (`"`) quotes can be used interchangeably. We recommend staying consistent, though in order to minimize escaping it might make more sense to switch quote types for some arguments.
+
+Any meaningful token can be escaped in the locations where they have influence. In plain text, tag open characters (`<`) can be escaped with a leading backslash (`\`). Within quoted strings,
+the opening quote character can be escaped (`'` or `"`). In either place, the escape character can be escaped in places where it would otherwise be relevant. Unquoted tag arguments cannot have escapes, for simplicity.
+In locations where escaping is not supported, the literal escape character will be passed through. In locations where escaping *is* supported but a literal escape character is desired, the escape character can itself be escaped to produce a `\`.
+
+The default tags try to represent components in a manner compatible with Vanilla, but simplifying some elements. It might be helpful to
+use [the minecraft wiki](https://minecraft.wiki/w/Raw_JSON_text_format) as a reference for the Vanilla component system, especially
+for things like the actions and values of click and hover events.
+
+The [MiniMessage Web Viewer](https://webui.advntr.dev) allows testing MiniMessage text locally, without having to spin up a Minecraft instance.
+It can be helpful to put examples from these docs into the viewer while learning.
+
+## Strict mode
+
+By default, MiniMessage is extremely lenient, and any invalid tags will just be ignored. Any tags left unclosed at the end of an input string will be automatically closed.
+
+Applications can optionally enable *strict mode*, which prohibits using `<reset>`, and requires all tags to be closed in reverse order of opening. Any application
+using MiniMessage should make it clear to end users which language variant is being used.
+
+## Standard tags
+
+These are the tags included and enabled by default in MiniMessage. Specific parses of MiniMessage may add custom tags to this list, or restrict the available tags to a subset of this list. Consult application documentation for details.
+
+### Color
+
+Color the next parts
+
+Tag
+  * `<_colorname_>`
+
+Arguments
+   * `_colorname_`, any minecraft color constant: `black`, `dark_blue`, `dark_green`, `dark_aqua`, `dark_red`, `dark_purple`, `gold`, `gray`, `dark_gray`, `blue`, `green`, `aqua`, `red`, `light_purple`, `yellow`, or `white`.
+
+
+     `dark_grey` can be used in place of `dark_gray`, and so can `grey` in place of `gray`.
+     Hex colors are supported as well, with the format `#RRGGBB`.
+
+Examples
+```mm
+<yellow>Hello <blue>World</blue>!
+<red>This is a <green>test!
+<#00ff00>R G B!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `<yellow>Hello <blue>World</blue>!`, shown in-game in the Minecraft client's chat window" src={Color1.src} />
+<img style="max-height: 10rem;" alt="The result of parsing `<red>This is a <green>test!`, shown in-game in the Minecraft client's chat window" src={Color2.src} />
+</div>
+
+### Color (verbose)
+
+A more verbose way of defining colors
+
+Tag
+  * `<color:_colorNameOrHex_>`
+
+Aliases
+  * `colour`, `c`
+
+Arguments
+  * `_colorNameOrHex_`, can be any of the values from above (so named colors or hex colors)
+
+Examples
+```mm
+<color:yellow>Hello <color:blue>World</color:blue>!
+<color:#FF5555>This is a <color:#55FF55>test!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `<color:yellow>Hello <color:blue>World</color:blue>!`, shown in-game in the Minecraft client's chat window" src={ColorVerbose1.src} />
+<img style="max-height: 10rem;" alt="The result of parsing `<color:#FF5555>This is a <color:#55FF55>test!`, shown in-game in the Minecraft client's chat window" src={ColorVerbose2.src} />
+</div>
+
+### Shadow Color
+
+Color the shadow of the next parts
+
+Tag
+   * `<shadow:_colorNameOrHex_:[alpha_as_float]>`
+   * `<!shadow>` as an alias to disable the shadow (equivalent to `<shadow:#00000000>`)
+
+Arguments
+   * `_colorNameOrHex_`, a named color or hex color string with the format `#RRGGBB` or `#RRGGBBAA`
+   * `[alpha_as_float]`, a float value between 0 and 1, representing the alpha value of the shadow. Optional, defaults to 0.25. Has no effect if an alpha value is already provided in the hex color string.
+
+Examples
+```mm
+<shadow:yellow>Hello <shadow:aqua:0.5>World</shadow>!
+<shadow:#FF5555>This is a <shadow:#55FF55>test!
+<shadow:#000000FF><b>Thicc
+```
+
+Preview
+<div style="display: flex;">
+  <img src={Shadow1.src} style="max-width: 50%; margin: auto;" alt="The result of parsing `<shadow:yellow>Hello <shadow:aqua:0.5>World</shadow>!` shown in-game in the Minecraft client's chat window"/>
+  <img src={Shadow2.src} style="max-width: 50%; margin: auto;" alt="The result of parsing `<shadow:#FF5555>This is a <shadow:#55FF55>test!` shown in-game in the Minecraft client's chat window"/>
+  <img src={Shadow3.src} style="max-width: 50%; margin: auto;" alt="The result of parsing `<shadow:#000000FF><b>Thicc` shown in-game in the Minecraft client's chat window"/>
+</div>
+
+### Decoration
+
+Decorate the next parts
+
+Tag
+  * `<_decorationname_[:false]>`, or `<!_decorationname_>` as an alias to invert the decoration.
+
+Arguments
+  * `_decorationname_`, Any decoration supported in Minecraft:
+
+| Decoration        | Aliases         |
+| ----------------- | --------------- |
+| `bold`            | `b`             |
+| `italic`          | `em` or `i`     |
+| `underlined`      | `u`             |
+| `strikethrough`   | `st`            |
+| `obfuscated`      | `obf`           |
+
+Examples
+```mm
+<underlined>This is <bold>important</bold>!
+```
+
+Preview
+<div style="display: inline-block;">
+  <img style="max-height: 10rem;" alt="The result of parsing `<underlined>This is <bold>important</bold>!`, shown in-game in the Minecraft client's chat window" src={Decoration1.src} />
+</div>
+
+### Reset
+
+Close all currently open tags, resetting color/decoration/etc. The reset tag cannot be closed.
+
+In strict mode, reset tags are forbidden.
+
+Tag
+  * `<reset>`
+
+Arguments
+  * none
+
+Examples
+```mm
+<yellow><bold>Hello <reset>world!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `<yellow><bold>Hello <reset>world!`, shown in-game in the Minecraft client's chat window" src={Reset1.src} />
+</div>
+
+### Click
+
+Allows doing multiple things when clicking on the component.
+
+Tag
+  * `<click:_action_:_value_>`
+
+Arguments
+  * `_action_`, the type of click event, one of [this list](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/event/ClickEvent.Action.html#enum.constant.summary)
+  * `_value_`, the argument for that particular event, refer to [the minecraft wiki](https://minecraft.wiki/w/Raw_JSON_text_format)
+
+Examples
+```mm
+<click:run_command:/seed>Click</click> to show the world seed!
+Click <click:copy_to_clipboard:Haha you suck> this </click>to copy your score!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `<click:run_command:/seed>Click</click> to show the world seed!`, shown in-game in the Minecraft client's chat window" src={Click1.src} />
+</div>
+
+:::caution
+
+Since the introduction of chat signatures in 1.19.1, the client no longer executes commands that require signed arguments
+like the `/say` or `/tell` command to prevent the server from sending signed messages on the client's behalf.
+
+:::
+
+### Hover
+
+Allows doing multiple things when hovering on the component.
+
+Tag
+  * `<hover:_action_:_value..._>`
+
+Arguments
+  * `_action_`, the type of hover event, one of this [list](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/event/HoverEvent.Action.html#field.summary)
+  * `_value..._`, arguments specific to each event action:
+
+| Action        | Value                                                                                                                     |
+|---------------|---------------------------------------------------------------------------------------------------------------------------|
+| `show_text`   | `_text_` (a MiniMessage string)                                                                                           |
+| `show_item`   | `_type_[:_count_[:tag]]` (a `Key` for the item's type, optionally followed by count (an integer) and tag (a SNBT string)) |
+| `show_entity` | `_type_:_uuid_[:_name_]` (a `Key` ID of the entity type, the entity's UUID, and an optional custom name)                  |
+
+Examples
+```mm
+<hover:show_text:'<red>test'>TEST
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `<hover:show_text:'<red>test'>TEST`, shown in-game in the Minecraft client's chat window" src={Hover1.src} />
+</div>
+
+### Keybind
+
+Allows displaying the configured key for actions
+
+Tag
+  * `<key:_key_>`
+
+Arguments
+  * `_key_`, the keybind identifier of the action
+
+Examples
+```mm
+Press <red><key:key.jump> to jump!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `Press <red><key:key.jump> to jump!`, shown in-game in the Minecraft client's chat window" src={Key1.src} />
+</div>
+
+### Translatable
+
+Allows displaying minecraft messages using the player locale
+
+Tag
+  * `<lang:_key_:_value1_:_value2_...>`
+
+Aliases
+  * `tr`, `translate`
+
+Arguments
+  * `_key_`, the translation key
+  * `_valueX_`, optional values that are used for placeholders in the key (they will end up in the `with` tag in the JSON)
+
+Examples
+```mm
+You should get a <lang:block.minecraft.diamond_block>!
+<lang:commands.drop.success.single:'<red>1':'<blue>Stone'>!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `You should get a <lang:block.minecraft.diamond_block>!`, shown in-game in the Minecraft client's chat window in English" src={Translatable1.src} />
+<img style="max-height: 10rem;" alt="The result of parsing `<lang:commands.drop.success.single:'<red>1':'<blue>Stone'>!`, shown in-game in the Minecraft client's chat window in English" src={Translatable2.src} />
+</div>
+
+### Insertion
+
+Allow insertion of text into chat via shift click
+
+Tag
+  * `<insertion:_text_>`
+
+Arguments
+  * `_text_`, the text to insert
+
+Examples
+```mm
+Shift-click <insert:test>this</insert> to insert!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `Shift-click <insert:test>this</insert> to insert!`, shown in-game in the Minecraft client's chat window" src={Insertion1.src} />
+</div>
+
+### Rainbow
+
+Rainbow-colored text?!
+
+Tag
+  * `<rainbow:[!][phase]>`
+
+Arguments
+  * phase, optional
+  * `!`, literal value which reverses the rainbow, optional
+
+Examples
+```mm
+<yellow>Woo: <rainbow>||||||||||||||||||||||||</rainbow>!
+<yellow>Woo: <rainbow:!>||||||||||||||||||||||||</rainbow>!
+<yellow>Woo: <rainbow:2>||||||||||||||||||||||||</rainbow>!
+<yellow>Woo: <rainbow:!2>||||||||||||||||||||||||</rainbow>!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing all four examples in series, shown in-game in the Minecraft client's chat window" src={Rainbow1.src} />
+</div>
+
+### Gradient
+
+Gradient colored text
+
+Tag
+  * `<gradient:[color1]:[color...]:[phase]>`
+
+Arguments
+  * a list of 1 to n colors, either hex or named colors and an optional phase parameter (range -1 to 1) allows you to shift the gradient around, creating animations.
+
+Examples
+```mm
+<yellow>Woo: <gradient>||||||||||||||||||||||||</gradient>!
+<yellow>Woo: <gradient:#5e4fa2:#f79459>||||||||||||||||||||||||</gradient>!
+<yellow>Woo: <gradient:#5e4fa2:#f79459:red>||||||||||||||||||||||||</gradient>!
+<yellow>Woo: <gradient:green:blue>||||||||||||||||||||||||</gradient>!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing the examples for the gradient tag, shown in-game in the Minecraft client's chat window" src={Gradient1.src} />
+</div>
+
+
+### Transition
+
+Transitions between colors.
+Similar to a gradient, but everything is the same color and the phase chooses that color
+
+Tag
+  * `<transition:[color1]:[color...]:[phase]>`
+Arguments
+  * a list of 1 to n colors, either hex or named colors and an optional phase parameter (range -1 to 1) allows you to shift the transition around, creating animations.
+Examples
+```mm
+<transition:#00ff00:#ff0000:0>|||||||||</transition>
+<transition:white:black:red:[phase]>Hello world [phase]</transition>
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `<transition:white:black:red:[phase]>Hello World [phase]</transition>`, shown in-game in the Minecraft client's chat window" src={Transition1.src} />
+</div>
+
+
+### Font
+
+Allows to change the font of the text
+
+Tag
+  * `<font:key>`
+
+Arguments
+  * the namespaced key of the font, defaulting to `minecraft`
+
+Examples
+```mm
+Nothing <font:uniform>Uniform <font:alt>Alt  </font> Uniform
+<font:myfont:custom_font>Uses a custom font from a resource pack</font>
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `Nothing <font:uniform>Uniform <font:alt>Alt  </font> Uniform`, shown in-game in the Minecraft client's chat window" src={Font1.src} />
+</div>
+
+### Newline
+
+Insert a newline character.
+
+Tag
+  * `<newline>`
+
+Aliases
+  * `br`
+
+Arguments
+  * none
+
+Examples
+```mm
+Let me insert a <newline>line break here.
+<hover:show_text:'<red>Hover with a<newline><green>line break'>Text with<newline>line break</hover>
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `<hover:show_text:'<red>Hover with a<newline><green>line break'>Text with<newline>line break</hover>`, shown in-game in the Minecraft client's chat window" src={Newline1.src} />
+</div>
+
+### Selector
+
+*(since v4.11.0)* Insert a selector component
+
+Tag
+  * `<selector:_sel_[:_separator_]>`
+
+Aliases
+  * `sel`
+
+Arguments
+  * `_sel_`, the selector pattern to insert
+  * `_separator_` (optional), the separator to insert between values the selector matches
+
+Examples
+```mm
+Hello <selector:@e[limit=5]>, I'm <selector:@s>!
+```
+
+Preview
+<div style="display: inline-block;">
+<img style="max-height: 10rem;" alt="The result of parsing `Hello <selector:@e[limit=5]>, I'm <selector:@s>!`, show in-game in the Minecraft client's chat window" src={Selector1.src} />
+</div>
+
+### Score
+
+*(since v4.13.0)* Insert a score component.
+
+:::note
+
+The score component requires *rendering* on the server to be seen by clients. This is a platform-specific operation.
+
+:::
+
+Tag
+  * `<score:_name_:_objective_>`
+
+Arguments:
+  * `_name_`, the name of the score holder on the server scoreboard, or a selector resolved with receiver context
+  * `_objective_`, the name of the objective to get `name`'s score in
+
+Examples
+```mm
+You have won <score:rymiel:gamesWon/> games!
+```
+
+### NBT
+
+*(since v4.13.0)* Insert a NBT component. The syntax of this tag is intended to be familiar to users of vanilla Minecraft's `/data` command.
+
+:::note
+
+The produced NBT component requires *rendering* on the server to be seen by clients. This is a platform-specific operation.
+
+:::
+
+Tag
+  * `<nbt:block|entity|storage:id:path[:_separator_][:interpret]>`
+
+Aliases
+  * `data`
+
+Arguments:
+  * `block|entity|storage` the type of data source to read from -- a `block` entity, an `entity` selector, or the persistent command `storage` container
+  * `_id_`, the position for a block NBT component, a selector for an entity NBT component, or a key (resource location) for a storage NBT component
+  * `_path_`, the NBT path to resolve from within the data source
+  * `_separator_`, the separator between multiple values, if (primarily for entity NBT) the data source returns more than one
+  * `interpret`, the literal text `interpret` if the result should be parsed as component JSON
+
+Examples
+```mm
+Your health is <nbt:entity:'@s':Health/>
+```
+
+### Pride
+
+*(since v4.18.0)* Colors the text inside the tags with a gradient corresponding to a pride flag.
+
+Tag
+  * `<pride[:flag]>`
+
+Arguments
+  * `flag` the flag to use, may be one of pride, progress, trans, bi, pan, nb, lesbian, ace, agender, demisexual, genderqueer, genderfluid, intersex, aro, baker, philly, queer, gay, bigender or demigender.
+
+Examples
+```mm
+Happy <pride>pride month</pride>!
+Kyori supports <pride:trans>trans rights</pride>!
+```

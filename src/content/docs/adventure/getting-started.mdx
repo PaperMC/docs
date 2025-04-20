@@ -1,0 +1,55 @@
+---
+title: Getting started
+description: A guide to getting started with Adventure.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+
+To use Adventure in your project, you will need to add the following dependency (and repository if using Gradle):
+
+<AdventureDependency artifact="adventure-api" project="api"/>
+
+Some platforms already use Adventure natively.
+In this case, you will not need to add Adventure as a dependency.
+To view the list of platforms that include Adventure, see [Native Support](/adventure/platform/native).
+
+To use Adventure with other platforms, you may wish to look at the platform-specific adapters.
+A list of platforms with supported adapters can be found at [Platforms](/adventure/platform).
+
+## Using snapshot builds
+
+To use snapshot builds, you will need to add the following repository:
+
+<Tabs syncKey="build-system">
+<TabItem label="Maven">
+  ```xml
+  <repositories>
+      <repository>
+        <id>sonatype-oss-snapshots1</id>
+        <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
+      </repository>
+  </repositories>
+  ```
+</TabItem>
+<TabItem label="Gradle (Groovy)">
+  ```groovy
+  repositories {
+    maven {
+        name = "sonatype-oss-snapshots1"
+        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+    }
+  }
+  ```
+</TabItem>
+<TabItem label="Gradle (Kotlin)">
+  ```kotlin
+  repositories {
+    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+        name = "sonatype-oss-snapshots"
+    }
+  }
+  ```
+</TabItem>
+</Tabs>

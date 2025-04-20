@@ -1,7 +1,8 @@
 [files]
 extend-exclude = [
-"public/d2", # D2 output shouldn't be checked
-"src/content/docs/adventure/minimessage/format.mdx" # This file contains british spelling because of tag aliases
+    "public/d2", # D2 output shouldn't be checked
+    "src/content/docs/adventure/minimessage/format.mdx", # This file contains british spelling because of tag aliases
+    "src/content/docs/adventure/community-libraries.mdx" # This file contains project names which might get flagged by typos
 ]
 
 [default]

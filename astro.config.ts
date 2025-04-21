@@ -383,6 +383,9 @@ export default defineConfig({
         ),
       ],
       expressiveCode: {
+        frames: {
+          extractFileNameFromCode: false,
+        },
         emitExternalStylesheet: false,
       },
     }),

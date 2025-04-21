@@ -4,6 +4,8 @@ description: How to create configuration files for your plugins to customize beh
 slug: paper/dev/plugin-configurations
 ---
 
+import { FileTree } from "@astrojs/starlight/components";
+
 Configuration files allow users to change certain behavior and functionality of plugins. This guide will outline how to use them.
 
 ## Format
@@ -26,15 +28,16 @@ When accessing indented values, you separate the levels with dots (`.`). For exa
 
 By placing a `config.yml` file inside your plugin, you can specify the default values for certain settings.
 This will be located in the `resources` directory:
-```
-example-plugin
-└── src
-    └── main
-        ├── java
-        └── resources
-            ├── config.yml
-            └── plugin.yml
-```
+
+<FileTree>
+  - example-plugin/
+    - src/
+      - main/
+        - java/
+        - resources/
+          - config.yml
+          - plugin.yml
+</FileTree>
 
 When your plugin is initialized, you must save this resource into the plugin's data directory, so that a user can edit the values.
 Here is an example of how you would do this in your plugin's `onEnable`:

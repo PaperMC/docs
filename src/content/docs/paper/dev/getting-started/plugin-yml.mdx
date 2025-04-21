@@ -4,6 +4,7 @@ description: "A guide to Bukkit's plugin.yml file."
 slug: paper/dev/plugin-yml
 ---
 
+import { FileTree } from "@astrojs/starlight/components";
 import { LATEST_PAPER_RELEASE } from "/src/utils/versions";
 
 The `plugin.yml` file is the main configuration file for your plugin.
@@ -11,16 +12,17 @@ It contains information about your plugin, such as its name, version, and descri
 It also contains information about the plugin's dependencies, permissions, and commands.
 
 The `plugin.yml` file is located in the `resources` directory of your project.
-```
-example-plugin
-├── build.gradle.kts
-├── settings.gradle.kts
-└── src
-    └── main
-        ├── java
-        └── resources
-            └── plugin.yml
-```
+
+<FileTree>
+  - example-plugin/
+    - build.gradle.kts
+    - settings.gradle.kts
+    - src/
+      - main/
+        - java/
+        - resources/
+          - plugin.yml
+</FileTree>
 
 ## Example
 

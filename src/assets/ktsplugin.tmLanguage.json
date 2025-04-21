@@ -1,0 +1,37 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "ktsplugin",
+  "scopeName": "source.kotlin.kts",
+  "patterns": [
+    {
+      "name": "meta.section.plugins.kotlin",
+      "begin": "\\b(plugins)\\s*\\{",
+      "beginCaptures": {
+        "1": {
+          "name": "constant.language.plugins.kotlin"
+        }
+      },
+      "end": "\\}",
+      "patterns": [
+        {
+          "name": "meta.kotlin.plugin.declaration",
+          "match": "\\b(id)\\s*\\(\\s*(\"[^\"]+\")\\s*\\)\\s*(version)\\s*(\"[^\"]+\")",
+          "captures": {
+            "1": {
+              "name": "constant.language.id.kotlin"
+            },
+            "2": {
+              "name": "string.quoted.double.kotlin"
+            },
+            "3": {
+              "name": "constant.language.version.kotlin"
+            },
+            "4": {
+              "name": "string.quoted.double.kotlin"
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

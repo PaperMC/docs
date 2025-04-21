@@ -4,9 +4,15 @@ import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
+import ktsPluginHighlight from "./src/assets/ktsplugin.tmLanguage.json";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
-import { LATEST_MC_RELEASE, LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "./src/utils/versions";
+import {
+  LATEST_MC_RELEASE,
+  LATEST_PAPER_RELEASE,
+  LATEST_USERDEV_RELEASE,
+  LATEST_VELOCITY_RELEASE,
+} from "./src/utils/versions";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -377,6 +383,9 @@ export default defineConfig({
       ],
       expressiveCode: {
         emitExternalStylesheet: false,
+        shiki: {
+          langs: [ktsPluginHighlight],
+        }
       },
     }),
     svelte(),
@@ -407,6 +416,7 @@ export default defineConfig({
             LATEST_MC_RELEASE,
             LATEST_PAPER_RELEASE,
             LATEST_VELOCITY_RELEASE,
+            LATEST_USERDEV_RELEASE
           },
         },
       ],

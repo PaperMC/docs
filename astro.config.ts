@@ -47,6 +47,7 @@ export default defineConfig({
         Banner: "./src/components/overrides/Banner.astro",
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
         MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
+        SocialIcons: "./src/components/overrides/SocialIcons.astro",
       },
       plugins: [
         starlightLinksValidator({

@@ -1,0 +1,52 @@
+---
+import config from "virtual:starlight/user-config";
+import { Icon } from "@astrojs/starlight/components";
+import { LATEST_RELEASES } from "../../utils/versions";
+
+const { isPageWithTopic, topics } = Astro.locals.starlightSidebarTopics;
+const currentTopic = isPageWithTopic ? topics.find((t) => t.isCurrent) : null;
+
+const links = (config.social || []).map((link) => {
+  const project = currentTopic?.label?.toLowerCase();
+  if (!project) {
+    return link;
+  }
+
+  const version = LATEST_RELEASES[project];
+  if (!version) {
+    return link;
+  }
+
+  switch (link.label) {
+    case "Javadoc":
+      return { ...link, href: `${link.href}/${project}/${version}` };
+    case "GitHub":
+      return { ...link, href: `${link.href}/${project}` };
+  }
+  return link;
+});
+---
+
+{
+  links.length > 0 && (
+    <>
+      {links.map(({ label, href, icon }) => (
+        <a {href} rel="me" class="sl-flex">
+          <span class="sr-only">{label}</span>
+          <Icon name={icon} />
+        </a>
+      ))}
+    </>
+  )
+}
+
+<style>
+  a {
+    color: var(--sl-color-text-accent);
+    padding: 0.5em;
+    margin: -0.5em;
+  }
+  a:hover {
+    opacity: 0.66;
+  }
+</style>

@@ -18,8 +18,7 @@ const info = await getCommitInfo(filePath);
             timeZone: "UTC",
           })}
         </time>
-      </span>
-      {" "}
+      </span>{" "}
       {info && (
         <span class="nowrap">
           by <a href={info.committer.href}>{info.committer.name}</a>

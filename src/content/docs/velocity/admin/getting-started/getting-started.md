@@ -1,5 +1,6 @@
 ---
 title: Getting started
+description: How to install and set up a minimal configuration of Velocity.
 slug: velocity/getting-started
 ---
 

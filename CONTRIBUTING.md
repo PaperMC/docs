@@ -128,13 +128,21 @@ There are quite a few constants you may want to use in your pages, such as the l
 These constants can be imported and used in MDX, like so:
 
 ```mdxjs
-import { LATEST_MC_RELEASE, LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE, LATEST_FOLIA_RELEASE, LATEST_WATERFALL_RELEASE } from "/src/utils/versions";
+import {
+  LATEST_MC_RELEASE,
+  LATEST_PAPER_RELEASE,
+  LATEST_VELOCITY_RELEASE,
+  LATEST_FOLIA_RELEASE,
+  LATEST_WATERFALL_RELEASE,
+  LATEST_USERDEV_RELEASE,
+} from "/src/utils/versions";
 
 Latest Paper version is {LATEST_PAPER_RELEASE}.
 Latest Velocity version is {LATEST_VELOCITY_RELEASE}.
 Latest Minecraft version is {LATEST_MC_RELEASE}.
 Latest Folia version is {LATEST_FOLIA_RELEASE}.
 Latest Waterfall version is {LATEST_WATERFALL_RELEASE}.
+Latest `paperweight-userdev` version is {LATEST_USERDEV_RELEASE}.
 ```
 
 If you want to perform these replacements in code blocks, you need to use a special `replace` meta property.

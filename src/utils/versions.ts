@@ -15,8 +15,25 @@ interface Manifest {
   versions: Version[];
 }
 
+const token = process.env.GITHUB_TOKEN;
+
+const options: RequestInit = token
+  ? {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  : {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+      },
+    };
+
 const fetchGitHubTags = async (repo: string) =>
-  await fetch(`https://api.github.com/repos/${repo}/tags`)
+  await fetch(`https://api.github.com/repos/${repo}/tags`, options)
     .then((r) => r.json())
     .then((json) => json.map((e) => e.name.substring(1)));
 

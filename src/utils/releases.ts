@@ -6,6 +6,23 @@ interface Release {
   tag: string;
 }
 
+const token = process.env.GITHUB_TOKEN;
+
+const options: RequestInit = token
+  ? {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  : {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+      },
+    };
+
 const cache: Map<string, Release[]> = new Map();
 
 export async function fetchRelease(repo: string): Promise<Release[]> {
@@ -14,7 +31,7 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
     return cached;
   }
 
-  const json = (await fetch(`https://api.github.com/repos/${repo}/releases`).then((response) =>
+  const json = (await fetch(`https://api.github.com/repos/${repo}/releases`, options).then((response) =>
     response.json()
   )) as any[];
 

@@ -9,34 +9,22 @@ const info = await getCommitInfo(filePath);
 
 {
   lastUpdated && (
-    <div class="last-updated">
-      <p>
-        Last updated:
-        <time datetime={lastUpdated.toISOString()}>
-          {lastUpdated.toLocaleDateString(lang, {
-            dateStyle: "medium",
-            timeZone: "UTC",
-          })}
-        </time>
-      </p>
+    <p>
+      Last updated:
+      <time datetime={lastUpdated.toISOString()}>
+        {lastUpdated.toLocaleDateString(lang, {
+          dateStyle: "medium",
+          timeZone: "UTC",
+        })}
+      </time>
       {info && (
-        <p class="commit">
-          by <a href={info.committer.href}>{info.committer.name}</a> in{" "}
+        <>
+          {" by "}
+          <a href={info.committer.href}>{info.committer.name}</a>
+          {" in "}
           <a href={`https://github.com/${REPO}/commit/${info.hash}`}>{info.hash.substring(0, 7)}</a>
-        </p>
+        </>
       )}
-    </div>
+    </p>
   )
 }
-
-<style>
-  .last-updated {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.5;
-  }
-
-  .commit {
-    font-size: var(--sl-text-2xs);
-  }
-</style>

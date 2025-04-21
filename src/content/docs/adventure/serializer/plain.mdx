@@ -19,10 +19,13 @@ consider using `/minimessage/index`.
 
 ## Usage
 
-The plain serializer is accessed using the `PlainTextComponentSerializer`. You can
-use `PlainTextComponentSerializer.plainText()` for a default instance that silently ignores
-keybind and translatable components, or construct your own `PlainTextComponentSerializer`
-that maps the components to some plain-text representation.
+The plain serializer is accessed using the `PlainTextComponentSerializer`.
+```java {/* This code block is REQUIRED because otherwise, the code blocks from the AdventureDependency component break */}
+PlainTextComponentSerializer.plainText();
+```
+
+This produces a default instance that silently ignores keybind and translatable components. You can also construct your own
+`PlainTextComponentSerializer` that maps the components to some plain-text representation.
 
 The deserialization of plain text is equivalent to `Component.text(string)`. No
 preprocessing is done on the input. The deserialization is implemented in order to provide

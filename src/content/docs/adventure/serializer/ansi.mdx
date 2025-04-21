@@ -18,6 +18,9 @@ deserialize text back into components.
 ## Usage
 
 The ANSI text serializer is accessed using the `ANSIComponentSerializer`.
+```java  {/* This code block is REQUIRED because otherwise, the code blocks from the AdventureDependency component break */}
+ANSIComponentSerializer.ansi();
+```
 
 Different kind of ANSI escape codes exist, allowing for different levels of color
 precision, however, not all terminals support newer kinds of ANSI escape sequences.

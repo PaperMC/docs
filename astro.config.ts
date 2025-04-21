@@ -385,7 +385,7 @@ export default defineConfig({
         emitExternalStylesheet: false,
         shiki: {
           langs: [ktsPluginHighlight],
-        }
+        },
       },
     }),
     svelte(),
@@ -416,7 +416,7 @@ export default defineConfig({
             LATEST_MC_RELEASE,
             LATEST_PAPER_RELEASE,
             LATEST_VELOCITY_RELEASE,
-            LATEST_USERDEV_RELEASE
+            LATEST_USERDEV_RELEASE,
           },
         },
       ],

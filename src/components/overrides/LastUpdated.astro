@@ -1,24 +1,42 @@
 ---
-import { type GitHubAccount, getGitHubAccountFromFile } from "/src/utils/git-utils.ts";
+import { REPO, getCommitInfo } from "../../utils/git";
 
 const { lang, lastUpdated } = Astro.locals.starlightRoute;
 const filePath = Astro.locals.starlightRoute.entry.filePath;
 
-const acc: GitHubAccount = await getGitHubAccountFromFile(filePath);
+const info = await getCommitInfo(filePath);
 ---
 
 {
   lastUpdated && (
-    <p>
-      {"Last updated: "}
-      <time datetime={lastUpdated.toISOString()}>
-        {lastUpdated.toLocaleDateString(lang, {
-          dateStyle: "medium",
-          timeZone: "UTC",
-        })}
-      </time>
-      {" by "}
-      <a href={acc.accountLink}>{acc.displayName}</a>
-    </p>
+    <div class="last-updated">
+      <p>
+        Last updated:
+        <time datetime={lastUpdated.toISOString()}>
+          {lastUpdated.toLocaleDateString(lang, {
+            dateStyle: "medium",
+            timeZone: "UTC",
+          })}
+        </time>
+      </p>
+      {info && (
+        <p class="commit">
+          by <a href={info.committer.href}>{info.committer.name}</a> in{" "}
+          <a href={`https://github.com/${REPO}/commit/${info.hash}`}>{info.hash.substring(0, 7)}</a>
+        </p>
+      )}
+    </div>
   )
 }
+
+<style>
+  .last-updated {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.5;
+  }
+
+  .commit {
+    font-size: var(--sl-text-2xs);
+  }
+</style>

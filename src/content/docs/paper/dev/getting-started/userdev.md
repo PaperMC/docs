@@ -36,7 +36,7 @@ See [here](#1205-and-beyond) for more details.
 ## Adding the plugin
 Add the plugin to your `build.gradle.kts` file.
 
-```ktsplugin title="build.gradle.kts" replace
+```kts title="build.gradle.kts" replace
 plugins {
   id("io.papermc.paperweight.userdev") version "\{LATEST_USERDEV_RELEASE}"
 }

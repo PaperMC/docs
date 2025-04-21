@@ -4,7 +4,6 @@ import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
-import ktsPluginHighlight from "./src/assets/ktsplugin.tmLanguage.json";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
 import {
@@ -383,9 +382,6 @@ export default defineConfig({
       ],
       expressiveCode: {
         emitExternalStylesheet: false,
-        shiki: {
-          langs: [ktsPluginHighlight],
-        },
       },
     }),
     svelte(),

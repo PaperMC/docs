@@ -34,6 +34,9 @@ importers:
       astro-d2:
         specifier: ^0.7.0
         version: 0.7.0(astro@5.7.2(@types/node@22.14.1)(rollup@4.40.0)(typescript@5.8.3)(yaml@2.7.1))
+      marked:
+        specifier: ^15.0.8
+        version: 15.0.8
       sharp:
         specifier: ^0.34.1
         version: 0.34.1
@@ -1350,6 +1353,11 @@ packages:
 
   markdown-table@3.0.4:
     resolution: {integrity: sha512-wiYz4+JrLyb/DqW2hkFJxP7Vd7JuTDm77fvbM8VfEQdmSMqcImWeeRbHwZjBjIFki/VaMK2BhFi7oUUZeM5bqw==}
+
+  marked@15.0.8:
+    resolution: {integrity: sha512-rli4l2LyZqpQuRve5C0rkn6pj3hT8EWPC+zkAxFTAJLxRbENfTAhEQq9itrmf1Y81QtAX5D/MYlGlIomNgj9lA==}
+    engines: {node: '>= 18'}
+    hasBin: true
 
   mdast-util-definitions@6.0.0:
     resolution: {integrity: sha512-scTllyX6pnYNZH/AIp/0ePz6s4cZtARxImwoPJ7kS42n+MnVsI4XbnG6d4ibehRIldYMWM2LD7ImQblVhUejVQ==}
@@ -3613,6 +3621,8 @@ snapshots:
   markdown-extensions@2.0.0: {}
 
   markdown-table@3.0.4: {}
+
+  marked@15.0.8: {}
 
   mdast-util-definitions@6.0.0:
     dependencies:

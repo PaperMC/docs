@@ -15,6 +15,28 @@ interface Manifest {
   versions: Version[];
 }
 
+const token = process.env.GITHUB_TOKEN;
+
+const options: RequestInit = token
+  ? {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  : {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+      },
+    };
+
+const fetchGitHubTags = async (repo: string) =>
+  await fetch(`https://api.github.com/repos/${repo}/tags`, options)
+    .then((r) => r.json())
+    .then((json) => json.map((e) => e.name.substring(1)));
+
 // prettier-ignore
 const manifest: Manifest = await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
   .then((r) => r.json());
@@ -36,8 +58,18 @@ const velocityProject: Project = await fetch("https://api.papermc.io/v2/projects
 
 export const LATEST_VELOCITY_RELEASE = velocityProject.versions[velocityProject.versions.length - 1];
 
-const userdevVersions: string[] = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags")
-  .then((r) => r.json())
-  .then((json) => json.map((e) => e.name.substring(1)));
+const userdevVersions: string[] = await fetchGitHubTags("PaperMC/paperweight");
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
+
+const adventureApiVersions: string[] = await fetchGitHubTags("KyoriPowered/adventure");
+
+export const LATEST_ADVENTURE_API_RELEASE = adventureApiVersions[0];
+
+const adventurePlatformVersions: string[] = await fetchGitHubTags("KyoriPowered/adventure-platform");
+
+export const LATEST_ADVENTURE_PLATFORM_RELEASE = adventurePlatformVersions[0];
+
+const adventureAnsiVersions: string[] = await fetchGitHubTags("KyoriPowered/ansi");
+
+export const LATEST_ADVENTURE_ANSI_RELEASE = adventureAnsiVersions[0];

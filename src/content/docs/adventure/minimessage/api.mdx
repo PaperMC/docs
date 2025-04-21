@@ -1,0 +1,196 @@
+---
+title: API
+description: A guide on using MiniMessage in your code.
+---
+
+import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+
+## Dependency
+
+<AdventureDependency artifact="adventure-text-minimessage" project="api" />
+
+:::node
+
+Some platforms already provide MiniMessage natively. In this case you will not need to add MiniMessage as a dependency.
+
+:::
+
+## Getting Started
+
+MiniMessage exposes a simple API via the `MiniMessage` class.
+
+A standard instance of the serializer is available through the `miniMessage()` method. This uses the default set of tags and is not in strict mode.
+
+Additional customization of MiniMessage is possible via the [Builder](#builder).
+
+MiniMessage allows you to both serialize components into MiniMessage strings and to parse/deserialize MiniMessage strings into components.
+
+Here's a short example to try things out:
+
+```java
+Audience player = ...;
+MiniMessage mm = MiniMessage.miniMessage();
+
+Component parsed = mm.deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
+
+player.sendMessage(parsed);
+```
+
+For more advanced uses, additional tag resolvers can be registered, which when given a tag name and arguments will produce a `Tag` instance. These are described in more detail below.
+
+### Builder
+
+To make customizing MiniMessage easier, we provide a Builder. The specific methods on the builder are explained in the javadoc.
+
+```java
+MiniMessage minimessage = MiniMessage.builder()
+    .tags(TagResolver.builder()
+      .resolver(StandardTags.color())
+      .resolver(StandardTags.decorations())
+      .resolver(this.someResolvers)
+      .build()
+    )
+    .build();
+```
+
+:::tip
+
+It's a good idea to initialize such a MiniMessage instance once, in a central location, and then use it for all your messages.
+Exception being if you want to customize MiniMessage based on permissions of a user (for example, admins should be allowed to use color and decoration in the message, normal users not)
+
+:::
+
+### Error handling
+
+By default, MiniMessage will never throw an exception caused by user input. Instead, it will treat any invalid tags as normal text. `MiniMessage.Builder#strict(true)` mode will enable strict mode,
+which throws exceptions on unclosed tags, but still will allow any improperly specified tags through.
+
+To capture information on why a parse may have failed, `MiniMessage.Builder#debug(Consumer<String>)` can be provided, which will accept debug logging for an input string.
+
+
+## Tag Resolvers
+
+All tag resolution goes through tag resolvers. There is one global tag resolver, which describes the tags available through a `MiniMessage` instance, plus parse-specific resolvers which can provide additional input-specific tags.
+
+Tag resolvers are the binding between a name and arguments, and the logic to produce a `Component` contained in a `Tag` instance. They are composable so a `TagResolver` can produce any number of actual `Tag` instances. The tag name passed to resolvers will always be lower-cased, to ensure case-insensitive searches.
+
+Tag names are only allowed to contain the characters a-z, 0-9, `_`, and `-`. They can also optionally start with any of the following characters: `!?#`.
+
+You can create your own `TagResolver` by using the static factory methods in `TagResolver`. To replace tags dynamically with text MiniMessage has built-in `Placeholder` and `Formatter`.
+Where possible, these built-in resolvers should be used, as MiniMessage can flatten combinations of these resolvers into a more efficient format.
+For built-in dynamic replacements take a look [here](/adventure/minimessage/dynamic-replacements).
+
+To combine multiple resolvers, take a look at the tag resolver builder, `TagResolver.builder()`.
+
+The builder for `MiniMessage` allows providing a custom tag resolver rather than the default (`StandardTags.all()`), allowing
+
+MiniMessage also provides convenience methods to do that:
+
+```java
+MiniMessage serializer = MiniMessage.builder()
+  .tags(TagResolver.builder()
+    .resolver(StandardTags.color())
+    .build()
+  )
+  .build();
+
+Component parsed = serializer.deserialize("<green><bold>Hai");
+
+// Assertion passes
+assertEquals(Component.text("<bold>Hai", NamedTextColor.GREEN), parsed);
+```
+
+Because the `<bold>` tag is not enabled on this builder, the bold tag is interpreted as literal text.
+
+### Handling Arguments
+
+Tag resolvers have an `ArgumentQueue` parameter, which provides any tag arguments that are present in the input. Helper methods on `Tag.Argument` can assist with conversions of the tag.
+
+Exceptions thrown by the `popOr()` methods will interrupt execution, but are not currently exposed to users outside of debug output. We plan to add an auto-completion function that can
+reveal some of this information to the user, so please do try to write useful error messages in custom tag resolvers.
+
+## Tags
+
+Once a tag resolver has handled arguments, it returns a `Tag` object. These objects implement the logic of producing or modifying a component tree. There are three main kinds of `Tag` -- all custom implementations must implement one of these interfaces.
+
+### Pre-process
+
+These tags implement the `PreProcess` interface, and have a value of a raw MiniMessage string that is replaced into the user input before parsing continues.
+
+Due to limitations in the current parser implementation, note that pre-process tags will adjust offsets in error messages, and may inhibit tab completion. However, they are currently the only way to integrate markup fragments into a message.
+
+### Inserting
+
+These tags are fairly straightforward: they represent a literal `Component`. The vast majority of Tag implementations will want
+to be `Inserting` tags. `Inserting` tags may also optionally be self-closing -- by default, this is only true for tags created by `Placeholder.unparsed(String)` and `Placeholder.component(Component)`,
+so that placeholders are self-contained.
+
+Most `standard tags <./format>` are `Inserting`. These tags will either directly insert a component, or use the helper `Tag.styling(StyleBuilderApplicable...)` to apply style to components.
+
+This helper can be used to efficiently apply a collection of styles with one tag. For example, to create a `<a:[href]>Title</a>` tag, that makes the `Title` text into a link that opens a URL with traditional link styling, this could be used:
+
+```java
+Component aTagExample() {
+  final String input = "Hello, <a:https://docs.advntr.dev>click me!</a> but not me!";
+  final MiniMessage extendedInstance = MiniMessage.builder()
+    .editTags(b -> b.tag("a", MiniMessageTest::createA))
+    .build();
+
+  return extendedInstance.deserialize(input);
+}
+
+static Tag createA(final ArgumentQueue args, final Context ctx) {
+  final String link = args.popOr("The <a> tag requires exactly one argument, the link to open").value();
+
+  return Tag.styling(
+    NamedTextColor.BLUE,
+    TextDecoration.UNDERLINED,
+    ClickEvent.openUrl(link),
+    HoverEvent.showText(Component.text("Open " + link))
+  );
+}
+```
+
+This allows producing rich styling relatively quickly.
+
+
+### Modifying
+
+Modifying tags are the most complex, and most specialized of the tag types available. These tags receive the node tree and have an opportunity to analyze it before
+components are constructed, and then receive every produced child component and can modify those children. This is used for the built-in `<rainbow>` and `<gradient>` tags,
+but can be applied for similar complex transformations.
+
+Modifying tags are first given an opportunity to visit every node of the tree in a depth-first traversal. If a `Modifying` instance stores any state during this traversal, its resolver should return a new instance every time to prevent state corruption.
+
+:::note
+
+The `Node` API in 4.10.0 is currently not very well developed -- most aspects are still internal. Additional information can be exposed as needed by tag developers.
+
+:::
+
+Once the whole parse tree has been visited, the `postVisit()` method is called. This method can optionally be overridden if any additional calculations must be performed.
+
+Next, the `Modifying` instance enters the application phase, where the component tree is presented to the tag for transformation. This allows the tag to *modify* the contents of these components, giving it its name.
+
+### Parser Directives
+
+Parser directives are a special kind of tag, as they are instructions for the parser, and therefore cannot be implemented by end users.
+
+There is currently only one, but more may be added at any time.
+
+| RESET | This indicates to the parser that this tag should close all currently open tags. |
+
+
+This can be used to provide the functionality of a `<reset>` tag under a different name. For example:
+
+```java
+final var clearTag = TagResolver.resolver("clear", ParserDirective.RESET);
+
+final var parser = MiniMessage.builder()
+  .editTags(t -> t.resolver(clearTag))
+  .build();
+
+final Component parsed = parser.deserialize("<red>hello <bold>world<clear>, how are you?");
+```
+
+This code would add a `<clear>` tag, behaving identically to the `<reset>` tag available by default — ", how are you?" would not be bold or colored red.

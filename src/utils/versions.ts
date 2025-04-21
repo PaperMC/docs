@@ -15,10 +15,10 @@ interface Manifest {
   versions: Version[];
 }
 
-const fetchGitHubTags = async (repo: string) =>
-  await fetch(`https://api.github.com/repos/${repo}/tags`)
-    .then((r) => r.json())
-    .then((json) => json.map((e) => e.name.substring(1)));
+const fetchGitHubTags = async (repo: string) => ["1.21.1"];
+await fetch(`https://api.github.com/repos/${repo}/tags`)
+  .then((r) => r.json())
+  .then((json) => json.map((e) => e.name.substring(1)));
 
 // prettier-ignore
 const manifest: Manifest = await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")

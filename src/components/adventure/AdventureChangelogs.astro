@@ -1,0 +1,44 @@
+---
+import { fetchRelease } from "../../utils/releases";
+import { marked } from "marked";
+
+interface Props {
+  repo: string;
+}
+
+const props: Props = Astro.props;
+const data = await fetchRelease(props.repo);
+---
+
+{
+  data.map((release) => (
+    <div>
+      <a class="title" href={`#release-${release.tag}`}>
+        <h2 id={`release-${release.tag}`}>{release.name}</h2>
+      </a>
+      <p class="released">
+        Released on{" "}
+        <time datetime={release.published}>
+          {new Date(release.published).toLocaleDateString("en", {
+            dateStyle: "medium",
+            timeZone: "UTC",
+          })}
+        </time>{" "}
+        - <a href={release.url}>GitHub</a>
+      </p>
+      <p set:html={marked.parse(release.body)} />
+      <br />
+    </div>
+  ))
+}
+
+<style>
+  .title {
+    color: var(--sl-color-white);
+    text-decoration: none;
+  }
+
+  .released {
+    font-style: italic;
+  }
+</style>

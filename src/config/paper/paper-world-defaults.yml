@@ -249,6 +249,11 @@ entities:
       vanilla: "false"
       default: "true"
       description: "Prevents phantoms from attacking players who have slept "
+    player-insomnia-start-ticks:
+      default: "72000"
+      description: |
+        Number of ticks a player must stay awake before phantoms can start spawning.
+        Default (72000) is 3 Minecraft days, -1 disables phantom spawning.
     piglins-guard-chests:
       default: "true"
       description: If piglins should attempt to guard chests when angered
@@ -357,6 +362,42 @@ entities:
       description: >-
         The rate, in ticks, at which arrows shot from players in creative mode
         are despawned
+    ticks-per-spawn:
+      ambient:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn ambient mobs (bats).
+          Default (-1) uses Vanilla spawn rate.
+      axolotls:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn axolotls.
+          Default (-1) uses Vanilla spawn rate.
+      creature:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn passive creatures (animals).
+          Default (-1) uses Vanilla spawn rate.
+      monster:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn hostile monsters.
+          Default (-1) uses Vanilla spawn rate.
+      underground_water_creature:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn underground water creatures (glow squid).
+          Default (-1) uses Vanilla spawn rate.
+      water_ambient:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn ambient water mobs (tropical fish).
+          Default (-1) uses Vanilla spawn rate.
+      water_creature:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn water creatures (squid, dolphins).
+          Default (-1) uses Vanilla spawn rate.
     despawn-range-shape:
       default: ELLIPSOID
       description: >-
@@ -1026,6 +1067,18 @@ tick-rates:
     description: >-
       How often mob spawners should tick to calculate available spawn areas and
       spawn new entities into the world. A value of -1 will disable all spawners
+  dry-farmland:
+    default: "1"
+    description: |
+      Controls how frequently dry farmland blocks are ticked.
+      Higher values slow down the rate at which farmland checks for moisture updates.
+      Default (1) uses Vanilla behavior, -1 disables dry farmland random ticks.
+  wet-farmland:
+    default: "1"
+    description: |
+      Controls how frequently wet farmland blocks are ticked.
+      Higher values slow down the rate at which farmland checks for moisture updates.
+      Default (1) uses Vanilla behavior, -1 disables wet farmland random ticks.
   sensor:
     villager:
       secondarypoisensor:

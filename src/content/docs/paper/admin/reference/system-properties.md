@@ -224,6 +224,11 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Disables the folder walk and symlink validation when loading a world. Significantly improves world loading speed on massive worlds (>1TB). This does not disable symlink verification of datapacks.
 
+#### paper.disableGameRuleLimits
+
+- **default**: `false`
+- **description**: Disables limits on certain game rule values, e.g. `minecartMaxSpeed` and `spawnChunkRadius`.
+
 #### minecraft.api.session.host
 
 - **default**: `https://sessionserver.mojang.com`
@@ -233,6 +238,11 @@ It also remaps plugin CB calls to remove the version information.
 
 - **default**: `https://api.minecraftservices.com`
 - **description**: Allows specifying of a custom services API URL e.g. for caching. [`minecraft.api.session.host`](#minecraftapisessionhost) needs to be set too for this to apply.
+
+#### com.mojang.eula.agree
+
+- **default**: `false`
+- **description**: Setting this to true indicates that you have agreed with [Mojang's EULA](https://aka.ms/MinecraftEULA), skipping `eula.txt` checks.
 
 ## List of environment variables
 

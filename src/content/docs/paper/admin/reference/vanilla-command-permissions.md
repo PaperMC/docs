@@ -113,21 +113,22 @@ The following is a list of permissions for Paper commands.
 
 ## Vanilla permissions
 
-The following is a list of all additional Vanilla Permissions.
+The following is a list of all additional Vanilla permissions.
 
-| Permission Node                   | Description                                                                 | Players Have Permission By Default? |
-|-----------------------------------|-----------------------------------------------------------------------------|-------------------------------------|
-| minecraft                         | Gives the user the ability to use all vanilla utilities and commands.       | No                                  |
-| minecraft.admin.command\_feedback | Receive command broadcasts when sendCommandFeedback is true.                | No                                  |
-| minecraft.nbt.place               | Gives the user the ability to place restricted blocks with NBT in creative. | No                                  |
-| minecraft.nbt.copy                | Gives the user the ability to copy NBT in creative.                         | Yes                                 |
-| minecraft.debugstick              | Gives the user the ability to use the debug stick in creative.              | No                                  |
-| minecraft.debugstick.always       | Gives the user the ability to use the debug stick in all game modes.        | No                                  |
-| minecraft.commandblock            | Gives the user the ability to use command blocks.                           | No                                  |
+| Permission Node                   | Description                                                                                                           | Players Have Permission By Default? |
+|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------|-------------------------------------|
+| minecraft                         | Gives the user the ability to use all vanilla utilities and commands.                                                 | No                                  |
+| minecraft.admin.command\_feedback | Receive command broadcasts when sendCommandFeedback is true.                                                          | No                                  |
+| minecraft.nbt.place               | Gives the user the ability to place restricted blocks with NBT in creative.                                           | No                                  |
+| minecraft.nbt.copy                | Gives the user the ability to copy NBT in creative.                                                                   | Yes                                 |
+| minecraft.debugstick              | Gives the user the ability to use the debug stick in creative.                                                        | No                                  |
+| minecraft.debugstick.always       | Gives the user the ability to use the debug stick in all game modes.                                                  | No                                  |
+| minecraft.commandblock            | Gives the user the ability to use command blocks.                                                                     | No                                  |
+| minecraft.command.selector        | Gives the user the ability to use [target selectors](https://minecraft.wiki/w/Target_selectors) in command arguments. | No                                  |
 
 ## Bukkit permissions
 
-The following is a list of all additional Bukkit Permissions.
+The following is a list of all additional Bukkit permissions.
 
 | Permission Node        | Description                                          | Players Have Permission By Default? |
 |------------------------|------------------------------------------------------|-------------------------------------|
@@ -137,7 +138,7 @@ The following is a list of all additional Bukkit Permissions.
 
 ## Paper permissions
 
-The following is a list of all additional Paper Permissions.
+The following is a list of all additional Paper permissions.
 
 | Permission Node                        | Description                                                      | Players Have Permission By Default? |
 |----------------------------------------|------------------------------------------------------------------|-------------------------------------|

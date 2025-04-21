@@ -13,13 +13,9 @@ is intended to document any future API changes that are planned or possible depr
 ### Interface `ItemStack`s
 
 When you create `ItemStack`s using the constructor, you create an API representation of an [`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack).
-However, there are also places where you can obtain an `ItemStack` that is backed by a NMS object instead.
-This can lead to inconsistencies and unnecessary upkeep, since we need to maintain our own `ItemStack` implementation and also
-support the NMS-backed object using ugly methods due to it not being a plain interface.
+This is an object that delegates to a NMS-backed object, you should instead use [`ItemStack#of`](jd:paper:org.bukkit.inventory.ItemStack#of(org.bukkit.Material)) to get the NMS-backed object directly.
 
-Currently, the API `ItemStack` always delegates to a NMS-backed `CraftItemStack`, however in the future,
-`ItemStack` will be converted to an interface that allows developers to use an underlying `ItemStack` directly,
-instead of going through the API implementation.
+In the future, `ItemStack` will be converted to an interface and the constructor will be removed.
 
 #### Precautions
 

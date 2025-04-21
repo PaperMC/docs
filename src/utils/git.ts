@@ -10,23 +10,22 @@ export interface CommitInfo {
   committer: CommitterInfo;
 }
 
-const token: string | null = import.meta.env.GITHUB_TOKEN;
+const token = process.env.GITHUB_TOKEN;
 
-const options: RequestInit =
-  token != null
-    ? {
-        headers: {
-          Accept: "application/vnd.github+json",
-          "User-Agent": "papermc-docs/author",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    : {
-        headers: {
-          Accept: "application/vnd.github+json",
-          "User-Agent": "papermc-docs/author",
-        },
-      };
+const options: RequestInit = token
+  ? {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  : {
+      headers: {
+        Accept: "application/vnd.github+json",
+        "User-Agent": "papermc-docs/author",
+      },
+    };
 
 export const REPO = "PaperMC/docs";
 const cache = new Map<string, CommitterInfo>();

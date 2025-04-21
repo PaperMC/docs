@@ -14,7 +14,7 @@ This guide is designed for non-Folia Bukkit servers. If you are using Folia, you
 
 ## What is a tick?
 
-Every game runs something called a game loop ,which essentially executes all the logic of the game over and over.
+Every game runs something called a game loop, which essentially executes all the logic of the game over and over.
 A single execution of that loop in Minecraft is called a 'tick'.
 
 In Minecraft, there are 20 ticks per second or in other words, one tick every 50 milliseconds. This means that the game loop is executed
@@ -60,7 +60,7 @@ Scheduling a task requires you to pass:
 
 - Your plugin's instance
 - The code to run, either with a [`Runnable`](jd:java:java.lang.Runnable)
-or [`Consumer`](jd:java:java.util.function.Consumer)`<`[`BukkitTask`](jd:paper:org.bukkit.scheduler.BukkitTask)`>`
+or <code>[Consumer](jd:java:java.util.function.Consumer)<[BukkitTask](jd:paper:org.bukkit.scheduler.BukkitTask)></code>
 - The delay in ticks before the task should run for the first time
 - The period in ticks between each execution of the task, if you're scheduling a repeating task
 

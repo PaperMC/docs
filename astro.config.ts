@@ -7,7 +7,12 @@ import starlightSidebarTopics from "starlight-sidebar-topics";
 import miniMessageHighlight from "./src/assets/mm.tmLanguage.json";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
-import { LATEST_MC_RELEASE, LATEST_PAPER_RELEASE, LATEST_VELOCITY_RELEASE } from "./src/utils/versions";
+import {
+  LATEST_MC_RELEASE,
+  LATEST_PAPER_RELEASE,
+  LATEST_USERDEV_RELEASE,
+  LATEST_VELOCITY_RELEASE,
+} from "./src/utils/versions";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -39,6 +44,7 @@ export default defineConfig({
         Sidebar: "./src/components/overrides/Sidebar.astro",
         PageFrame: "./src/components/overrides/PageFrame.astro",
         Footer: "./src/components/overrides/Footer.astro",
+        LastUpdated: "./src/components/overrides/LastUpdated.astro",
         Banner: "./src/components/overrides/Banner.astro",
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
         MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
@@ -488,6 +494,7 @@ export default defineConfig({
             LATEST_MC_RELEASE,
             LATEST_PAPER_RELEASE,
             LATEST_VELOCITY_RELEASE,
+            LATEST_USERDEV_RELEASE,
           },
         },
       ],

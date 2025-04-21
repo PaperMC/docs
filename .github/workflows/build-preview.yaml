@@ -28,6 +28,8 @@ jobs:
         run: "pnpm install"
       - name: "build"
         run: "pnpm build"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "copy cloudflare configuration files to build directory"
         run: |
           cp _headers dist/

@@ -38,11 +38,11 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
   const out: Release[] = json
     .map<Release>((obj) => {
       return {
-        name: obj.name,
-        body: obj.body,
-        published: obj.published_at,
-        url: obj.html_url,
-        tag: obj.tag_name.replaceAll(".", "-"),
+        name: obj.name ?? "<unknown-name>",
+        body: obj.body ?? "<unknown-body>",
+        published: obj.published_at ?? "2000-01-01",
+        url: obj.html_url ?? "about:blank",
+        tag: obj.tag_name?.replaceAll(".", "-") ?? "none",
       };
     })
     // Post-processing

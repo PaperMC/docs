@@ -38,7 +38,7 @@ as it **WILL** deadlock your server, if the chunk you're teleporting into is not
 
 ## Look at
 
-The [`lookAt`](jd:paper:org.bukkit.entity.Player#lookAt(io.papermc.paper.math.Position,io.papermc.paper.entity.LookAnchor))
+The [`lookAt`](jd:paper:org.bukkit.entity.Player#lookAt(org.bukkit.entity.Entity,io.papermc.paper.entity.LookAnchor,io.papermc.paper.entity.LookAnchor))
 API allows you to make a player look at a certain position or entity.
 
 ```java

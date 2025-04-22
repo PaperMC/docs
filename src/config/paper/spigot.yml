@@ -39,6 +39,9 @@ commands:
   silent-commandblock-console:
     default: "false"
     description: Whether to log Vanilla command feedback to the Console.
+  enable-spam-exclusions:
+    default: "false"
+    description: Whether to apply spam exclusions from [`commands.spam-exclusions`](#commands_spam_exclusions).
   spam-exclusions:
     default: "[/skill]"
     description: >-

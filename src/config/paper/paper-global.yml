@@ -57,6 +57,20 @@ block-updates:
       Disabling block updates leads to tripwires no longer updating their block
       state, allowing for technically invalid tripwires to remain in the world,
       which might be useful for mapmakers.
+  disable-chorus-plant-updates:
+    default: "false"
+    description: >-
+      Whether to disable any form of block updates for chorus plants on the
+      server. Disabling block updates leads to chorus plants no longer updating their block
+      state, allowing for technically invalid chorus plant configurations to remain in the world,
+      which might be useful for mapmakers.
+  disable-mushroom-block-updates:
+    default: "false"
+    description: >-
+      Whether to disable any form of block updates for mushroom blocks on the
+      server. Disabling block updates leads to mushroom blocks no longer updating their block
+      state, allowing for technically invalid mushroom block configurations to remain in the world,
+      which might be useful for mapmakers.
 chunk-loading-advanced:
   auto-config-send-distance:
     default: "true"
@@ -523,6 +537,9 @@ unsupported-settings:
       This setting controls if equipment should be updated when handling certain player
       actions. If set to false this will allow players to exploit attributes by e.g.
       switching equipment before using it.
+  simplify-remote-item-matching:
+    default: "false"
+    description: Only checks an item's amount and type instead of its full data during inventory desync checks.
 watchdog:
   early-warning-delay:
     default: "10000"

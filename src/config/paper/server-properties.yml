@@ -229,6 +229,11 @@ sync-chunk-writes:
 text-filtering-config:
   default: ""
   description: "The path to the text filtering configuration file. Leave blank to disable text filtering."
+text-filtering-version:
+  default: "0"
+  description: |
+    The version of the configuration format used for [`text-filtering-config`](#text_filtering_config).
+    Valid values are 0 and 1.
 use-native-transport:
   default: "true"
   description: "Provides a performance boost for Linux servers."

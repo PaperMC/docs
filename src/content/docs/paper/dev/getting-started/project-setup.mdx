@@ -4,7 +4,7 @@ description: Step-by-step instructions on how to set up a plugin development env
 slug: paper/dev/project-setup
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { FileTree, Tabs, TabItem } from "@astrojs/starlight/components";
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE.
 However, the steps below should apply to other IDEs as well, with some minor changes.
@@ -95,38 +95,34 @@ Inside of `main`, create two new directories called `java` and `resources`.
 
 It should look like this:
 
-```
-...
-example-plugin
-├── build.gradle.kts
-├── settings.gradle.kts
-└── src
-    └── main
-        ├── java
-        └── resources
-...
-```
+<FileTree>
+  - example-plugin/
+    - build.gradle.kts
+    - settings.gradle.kts
+    - src/
+      - main/
+        - java/
+        - resources/
+</FileTree>
 
 ### Setting up the `java` directory
 
 You will place your Java source files in the `java` directory. You first need to create some packages to organize your code.
 For this example, we will create three packages called `io.papermc.testplugin` and then create a class called `ExamplePlugin` inside of it.
 
-```
-...
-example-plugin
-├── build.gradle.kts
-├── settings.gradle.kts
-└── src
-    └── main
-        ├── java
-        │   └── io
-        │       └── papermc
-        │           └── testplugin
-        │               └── ExamplePlugin.java
-        └── resources
-...
-```
+<FileTree>
+  - example-plugin/
+    - build.gradle.kts
+    - settings.gradle.kts
+    - src/
+      - main/
+        - java/
+          - io/
+            - papermc/
+              - testplugin/
+                - ExamplePlugin.java
+        - resources/
+</FileTree>
 
 ### Packages
 

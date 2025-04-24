@@ -173,3 +173,4 @@ can read more about these [here](/paper/dev/command-api/arguments/minecraft).
 
 ### Custom arguments
 Sometimes you want to define your own, custom arguments. For that you can implement the `CustomArgumentType<T, N>` interface.
+You can read more about these [here](/paper/dev/command-api/basics/custom-arguments).

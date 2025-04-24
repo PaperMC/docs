@@ -25,7 +25,7 @@ Commands.argument("player", ArgumentTypes.player())
         final Player player = ctx.getArgument("player", PlayerSelectorArgumentResolver.class).resolve(ctx.getSource()).getFirst();
         if (!player.isOp()) {
             final Message message = MessageComponentSerializer.message().serialize(text(player.getName() + " is not a server operator!"));
-            throw new CommandSyntaxException(new SimpleCommandExceptionType(message), message);
+            throw new SimpleCommandExceptionType(message).create();
         }
 
         ctx.getSource().getSender().sendRichMessage("Player <player> is an operator!",
@@ -44,6 +44,14 @@ The solution to this problem are custom arguments. Before going into detail abou
 @NullMarked
 public final class OppedPlayerArgument implements CustomArgumentType<Player, PlayerSelectorArgumentResolver> {
 
+    private static final SimpleCommandExceptionType ERROR_BAD_SOURCE = new SimpleCommandExceptionType(
+        MessageComponentSerializer.message().serialize(Component.text("The source needs to be a CommandSourceStack!"))
+    );
+
+    private static final DynamicCommandExceptionType ERROR_NOT_OPERATOR = new DynamicCommandExceptionType(name -> {
+        return MessageComponentSerializer.message().serialize(Component.text(name + " is not a server operator!"));
+    });
+
     @Override
     public Player parse(StringReader reader) {
         throw new UnsupportedOperationException("This method will never be called.");
@@ -52,14 +60,12 @@ public final class OppedPlayerArgument implements CustomArgumentType<Player, Pla
     @Override
     public <S> Player parse(StringReader reader, S source) throws CommandSyntaxException {
         if (!(source instanceof CommandSourceStack stack)) {
-            final Message message = MessageComponentSerializer.message().serialize(Component.text("The source needs to be a CommandSourceStack!"));
-            throw new CommandSyntaxException(new SimpleCommandExceptionType(message), message);
+            throw ERROR_BAD_SOURCE.create();
         }
 
         final Player player = getNativeType().parse(reader).resolve(stack).getFirst();
         if (!player.isOp()) {
-            final Message message = MessageComponentSerializer.message().serialize(Component.text(player.getName() + " is not a server operator!"));
-            throw new CommandSyntaxException(new SimpleCommandExceptionType(message), message);
+            throw ERROR_NOT_OPERATOR.create(player.getName());
         }
 
         return player;
@@ -226,14 +232,16 @@ package io.papermc.commands.icecream;
 @NullMarked
 public class IceCreamArgument implements CustomArgumentType.Converted<IceCreamFlavor, String> {
 
+    private static final DynamicCommandExceptionType ERROR_INVALID_FLAVOR = new DynamicCommandExceptionType(flavor -> {
+        return MessageComponentSerializer.message().serialize(Component.text(flavor + " is not a valid flavor!"));
+    });
+
     @Override
     public IceCreamFlavor convert(String nativeType) throws CommandSyntaxException {
         try {
             return IceCreamFlavor.valueOf(nativeType.toUpperCase(Locale.ROOT));
-        }
-        catch (IllegalArgumentException e) {
-            final Message message = MessageComponentSerializer.message().serialize(Component.text(nativeType + " is not a valid flavor!"));
-            throw new CommandSyntaxException(new SimpleCommandExceptionType(message), message);
+        } catch (IllegalArgumentException ignored) {
+            throw ERROR_INVALID_FLAVOR.create(nativeType);
         }
     }
 

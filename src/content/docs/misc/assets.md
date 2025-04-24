@@ -15,6 +15,9 @@ slug: misc/assets
 
 This page provides the official PaperMC and Velocity logomarks and the terms under which you may use them.
 
+Images on this page are available through our CDN, and using the provided URLs is encouraged (but not necessary)
+when referencing these assets in your projects, as long as you adhere to the usage guidelines outlined below.
+
 :::caution
 
 The logomarks are subject to their own separate licensing terms and do not inherit any from the

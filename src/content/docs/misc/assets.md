@@ -4,7 +4,25 @@ description: The official PaperMC and Velocity logomarks and the terms under whi
 slug: misc/assets
 ---
 
+<style>
+  :root[data-theme="dark"] {
+    --image-backdrop-light: var(--sl-color-white);
+  }
+  :root[data-theme="light"] {
+    --image-backdrop-dark: var(--sl-color-white);
+  }
+  table td {
+    vertical-align: middle;
+  }
+  table img {
+    width: 12rem !important;
+  }
+</style>
+
 This page provides the official PaperMC and Velocity logomarks and the terms under which you may use them.
+
+Images on this page are available through our CDN, and using the provided URLs is encouraged (but not necessary)
+when referencing these assets in your projects, as long as you adhere to the usage guidelines outlined below.
 
 :::caution
 
@@ -34,7 +52,13 @@ You may not:
 - Sell the PaperMC logomark on its own or as part of other products without explicit permission.
 - Alter the transparency of any elements within the PaperMC logomark.
 
-<span style="display: flex; width: min(100%, 24rem);">![PaperMC logomark](https://assets.papermc.io/brand/papermc_logo.min.svg)</span>
+| Image                                                                                                                                        | URL                                                                      |
+|----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| <div style="background-color: var(--image-backdrop-light);">![](https://assets.papermc.io/brand/papermc_combination_mark_dark.min.svg)</div> | `https://assets.papermc.io/brand/papermc_combination_mark_dark.min.svg`  |
+| <div style="background-color: var(--image-backdrop-dark);">![](https://assets.papermc.io/brand/papermc_combination_mark_light.min.svg)</div> | `https://assets.papermc.io/brand/papermc_combination_mark_light.min.svg` |
+| ![](https://assets.papermc.io/brand/papermc_logo.min.svg)                                                                                    | `https://assets.papermc.io/brand/papermc_logo.min.svg`                   |
+| ![](https://assets.papermc.io/brand/papermc_logo.256.png)                                                                                    | `https://assets.papermc.io/brand/papermc_logo.256.png`                   |
+| ![](https://assets.papermc.io/brand/papermc_logo.512.png)                                                                                    | `https://assets.papermc.io/brand/papermc_logo.512.png`                   |
 
 ## Velocity
 
@@ -46,4 +70,9 @@ endorses some product or service. For instance, you may advertise a plugin as be
 compatible with Velocity, but you may not make the Velocity logo prominent in that
 advertising.
 
-<span style="display: flex; width: min(100%, 24rem);">![Velocity logomark](https://assets.papermc.io/brand/velocity_logo_blue.min.svg)</span>
+| Image                                                                                                                                         | URL                                                                       |
+|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
+| ![](https://assets.papermc.io/brand/velocity_combination_mark_blue.min.svg)                                                                   | `https://assets.papermc.io/brand/velocity_combination_mark_blue.min.svg`  |
+| <div style="background-color: var(--image-backdrop-dark);">![](https://assets.papermc.io/brand/velocity_combination_mark_white.min.svg)</div> | `https://assets.papermc.io/brand/velocity_combination_mark_white.min.svg` |
+| ![](https://assets.papermc.io/brand/velocity_logo_blue.min.svg)                                                                               | `https://assets.papermc.io/brand/velocity_logo_blue.min.svg`              |
+| <div style="background-color: var(--image-backdrop-dark);">![](https://assets.papermc.io/brand/velocity_logo_white.min.svg)</div>             | `https://assets.papermc.io/brand/velocity_logo_white.min.svg`             |

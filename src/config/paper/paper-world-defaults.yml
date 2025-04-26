@@ -1097,6 +1097,7 @@ unsupported-settings:
     message: >-
       **Unsupported settings**
 
+
       The following settings are provided by Paper but are not officially
       supported. Use them at your own risk and they may be removed at any time.
   disable-world-ticking-when-empty:

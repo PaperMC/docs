@@ -26,4 +26,3 @@
       default: "true"
   description_:
     description: The description of the permission.
-    default: '""'

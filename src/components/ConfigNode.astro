@@ -23,7 +23,9 @@ interface Default {
   inline: boolean;
 }
 const formatDefault = (value?: string): Default => {
-  if (!value) value = "";
+  if (!value) {
+    value = lang === "properties" ? "" : '""';
+  }
   if (!json && value.length > 2 && value.match(/^\[.+]$/)) {
     return {
       value: value
@@ -44,7 +46,9 @@ const formatDefault = (value?: string): Default => {
   {
     Object.entries(data).map(([key, rawValue], i, entries) => {
       let displayKey = key.replace(/_+$/, ""); // remove trailing underscores, used for duplicating keys
-      if (json) displayKey = `"${displayKey}"`;
+      if (json) {
+        displayKey = `"${displayKey}"`;
+      }
 
       const childPath = [...path, key.replace(/-/g, "_")];
       const hasComma = json && i !== (entries.length - 1);
@@ -61,16 +65,16 @@ const formatDefault = (value?: string): Default => {
           ) : "description" in rawValue ? (
             <details id={childPath.join("_")}>
               <summary class="line notranslate" translate="no">
-                <span class="key">{displayKey}{separator}</span>{
+                <span class="key key-leaf">{displayKey}</span><span class="muted">{separator}</span>{
                   inline
-                    ? (<span class="value">{value}</span><>{hasComma && <span class="muted">,</span>}</><a class="link" href={`#${childPath.join("_")}`}>#</a>)
+                    ? (<span class="value">{value}</span><>{hasComma && <span class="muted">,</span>}</><a class="link link-inline" href={`#${childPath.join("_")}`}>#</a>)
                     : (<a class="link" href={`#${childPath.join("_")}`}>#</a><p class="value">{value}</p><>{hasComma && <span class="muted">,</span>}</>)
                 }
               </summary>
               <div class="block" set:html={render(rawValue.description)} />
             </details>
           ) : (
-            <span class="key notranslate" translate="no">{displayKey}{separator}</span>
+            <span class="key notranslate" translate="no">{displayKey}</span><span class="muted">{separator}</span>
             <Astro.self child data={rawValue} path={childPath} {lang} />
           )}
         </div>
@@ -108,6 +112,10 @@ const formatDefault = (value?: string): Default => {
 
   .key {
     white-space: pre-wrap;
+    color: var(--sl-color-gray-3);
+  }
+
+  .key-leaf {
     color: var(--sl-color-text-accent);
   }
 
@@ -125,7 +133,6 @@ const formatDefault = (value?: string): Default => {
     color: var(--sl-color-white);
     background-color: var(--sl-color-gray-5);
     border-left: 5px solid var(--sl-color-bg-accent);
-    white-space: pre-wrap;
   }
 
   .message {
@@ -144,14 +151,24 @@ const formatDefault = (value?: string): Default => {
     color: var(--sl-color-gray-3);
   }
 
-  .link {
-    opacity: 0;
-    padding-left: 0.5rem;
+  .link,
+  .link:visited {
+    color: var(--sl-color-accent-high);
     transition: opacity 0.2s ease;
   }
 
-  .line:hover .link {
-    opacity: 1;
+  .link-inline {
+    padding-left: 0.5rem;
+  }
+
+  @media not (hover: none) {
+    .link {
+      opacity: 0;
+    }
+
+    .line:hover .link {
+      opacity: 1;
+    }
   }
 </style>
 

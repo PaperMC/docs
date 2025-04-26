@@ -7,19 +7,16 @@ general-topics:
         The first line of the help entry, used as a summary in index pages.
 
         This is formatted with legacy "&" style formatting.
-      default: '""'
     fullText:
       description: |
         The remaining lines of this help entry.
 
         This is formatted with legacy "&" style formatting.
-      default: '""'
     permission:
       description: |
         The permission required to view this help entry.
 
         If this is empty/not set, the entry does not require a permission.
-      default: '""'
 
 index-topics:
   <topic name>:
@@ -36,19 +33,16 @@ index-topics:
         This is not displayed when showing this topic itself.
 
         This is formatted with legacy "&" style formatting.
-      default: '""'
     preamble:
       description: |
         Information to show before the index.
 
         This is formatted with legacy "&" style formatting.
-      default: '""'
     permission:
       description: |
         A custom permission required to view this help entry.
 
         If this is empty/not set, the entry does not require a permission.
-      default: '""'
     commands:
       description: |
         What to show in the index.
@@ -72,7 +66,6 @@ amended-topics:
         If this contains the literal string `<text>`, it will be replaced with the original short text.
 
         This is formatted with legacy "&" style formatting.
-      default: '""'
     fullText:
       description: |
         A replacement for the full text of the topic.
@@ -82,13 +75,11 @@ amended-topics:
         If this contains the literal string `<text>`, it will be replaced with the original full text.
 
         This is formatted with legacy "&" style formatting.
-      default: '""'
     permission:
       description: |
         Overrides the permission required to view this help entry.
 
         If this is empty/not set, the original permission is NOT used, instead no permission is required.
-      default: '""'
 
 ignore-plugins:
   description: |

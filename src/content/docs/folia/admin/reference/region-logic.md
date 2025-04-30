@@ -224,8 +224,8 @@ created is added to the set x, as it is the section that is known
 to not be ticking - this is done to adhere to invariant third invariant.
 
 Every region y in the set X that is not x is merged into x if
-y is not in the ticking state, otherwise x runs the merge later
-logic into y.
+y is not in the ticking state, otherwise x runs the merge
+logic into y later.
 
 ### Merge later logic
 

@@ -221,7 +221,7 @@ Merge logic needs to occur when there are more than 1 region in the
 set X. From the set X, a region x is selected that is not ticking. If
 no such x exists, then a region x is created. Every region section
 created is added to the set x, as it is the section that is known
-to not be ticking - this is done to adhere to invariant third invariant.
+to not be ticking - this is done to adhere to the third invariant.
 
 Every region y in the set X that is not x is merged into x if
 y is not in the ticking state, otherwise x runs the merge later

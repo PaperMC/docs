@@ -160,6 +160,12 @@ loader: io.papermc.testplugin.TestPluginLoader
 ```
 ````
 
+For inline code blocks, i.e. `my code block` (`` `my code block` `` in Markdown), you do not need to use a property - replacements are done for all inline code blocks.
+
+```markdown
+- `api-version: '\{LATEST_PAPER_RELEASE}'`
+```
+
 ## Linking to Javadocs
 
 Many Javadoc sites support a `latest` tag, such as javadoc.io or similar, in which case, just use that in a plain Markdown link.

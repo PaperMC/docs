@@ -44,7 +44,7 @@ settings:
     default: none
     description: >
       Minimum plugin [api-version](/paper/dev/plugin-yml#api-version). A string
-      containing the server version, ignoring minor part, from 1.13 to 1.20. If
+      containing the server version, from `1.13` to `\{LATEST_PAPER_RELEASE}`. If
       below this, or not specified, the plugin is prevented from loading.
   use-map-color-cache:
     default: "true"

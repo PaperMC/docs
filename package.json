@@ -30,6 +30,7 @@
     "yaml": "^2.7.1"
   },
   "devDependencies": {
+    "@types/mdast": "^4.0.4",
     "@types/node": "^22.14.1",
     "prettier": "3.5.3",
     "prettier-plugin-astro": "0.14.1",

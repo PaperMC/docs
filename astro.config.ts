@@ -394,6 +394,15 @@ export default defineConfig({
       pad: 50,
       skipGeneration: !prod, // comment out if you have D2 locally and want to use it during dev
     }),
+    // save Markdown renderer configuration to globals for use by the on-demand renderer
+    {
+      name: "docs:config-md",
+      hooks: {
+        "astro:config:done": ({ config }) => {
+          globalThis.markdownConfig = config.markdown;
+        },
+      },
+    },
   ],
   build: {
     inlineStylesheets: "always",

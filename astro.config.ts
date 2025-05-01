@@ -19,6 +19,16 @@ const prod = process.env.NODE_ENV === "production";
 export default defineConfig({
   site: prod ? "https://docs.papermc.io" : undefined,
   integrations: [
+    // save Markdown renderer configuration to globals for use by the on-demand renderer
+    // order matters - we want this to use only our configuration
+    {
+      name: "docs:config-md",
+      hooks: {
+        "astro:config:setup": ({ config }) => {
+          globalThis.markdownConfig = { ...config.markdown };
+        },
+      },
+    },
     starlight({
       title: "PaperMC Docs",
       social: [
@@ -394,15 +404,6 @@ export default defineConfig({
       pad: 50,
       skipGeneration: !prod, // comment out if you have D2 locally and want to use it during dev
     }),
-    // save Markdown renderer configuration to globals for use by the on-demand renderer
-    {
-      name: "docs:config-md",
-      hooks: {
-        "astro:config:done": ({ config }) => {
-          globalThis.markdownConfig = config.markdown;
-        },
-      },
-    },
   ],
   build: {
     inlineStylesheets: "always",

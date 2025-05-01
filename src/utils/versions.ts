@@ -44,9 +44,13 @@ const waterfallProject: Project = await fetch("https://api.papermc.io/v2/project
 
 export const LATEST_WATERFALL_RELEASE = waterfallProject.versions[waterfallProject.versions.length - 1];
 
+interface Tag {
+  name: string;
+}
+
 const userdevVersions: string[] = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags")
-  .then((r) => r.json())
-  .then((json) => json.map((e) => e.name.substring(1)));
+  .then((r) => (r.ok ? r.json() : [{ name: "v0.0.0" }]))
+  .then((tags: Tag[]) => tags.map((t) => t.name.substring(1)));
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
 

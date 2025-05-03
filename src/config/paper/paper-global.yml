@@ -325,7 +325,10 @@ misc:
   xp-orb-groups-per-area:
     default: default
     description: >-
-      The amount of XP orb groups that can exist in a given area.
+      The amount of equal value experience orb groups that can exist in a given area.
+      By default, the server uses 40.
+      Experience orbs that do not share the same value will not be merged by vanilla's
+      merging algorithm.
 packet-limiter:
   all-packets:
     action:

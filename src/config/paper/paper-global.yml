@@ -322,6 +322,13 @@ misc:
       the default value of the defined compressor. Note that Paper is currently
       using the Velocity compressor, which uses a default compression level of 6
       as a middle ground between performance and data transmission.
+  xp-orb-groups-per-area:
+    default: default
+    description: >-
+      The amount of equal value experience orb groups that can exist in a given area.
+      By default, the server uses 40.
+      Experience orbs that do not share the same value will not be merged by Vanilla's
+      merging algorithm.
 packet-limiter:
   all-packets:
     action:

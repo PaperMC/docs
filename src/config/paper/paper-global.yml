@@ -322,11 +322,10 @@ misc:
       the default value of the defined compressor. Note that Paper is currently
       using the Velocity compressor, which uses a default compression level of 6
       as a middle ground between performance and data transmission.
-  xp-merge-percentage:
+  xp-orb-groups-per-area:
     default: default
     description: >-
-      The percentage of XP orbs that merge in the given radius. Default will
-      merge 2.5% of the orbs. Anything below 2.5% will be clamped to 2.5%.
+      The amount of XP orb groups that can exist in a given area.
 packet-limiter:
   all-packets:
     action:

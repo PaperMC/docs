@@ -32,16 +32,16 @@ Unfortunately, it currently is not possible to get a 100% Vanilla experience in 
 
 :::
 ## server.properties
-<ConfigNode data={filterVanilla(parse(ServerPropertiesYML))} lang="properties" />
+<ConfigNode data={filterVanilla(parse(ServerPropertiesYML))} lang="properties" path={["server_properties"]} />
 
 ## paper-world-defaults.yml
-<ConfigNode data={filterVanilla(parse(PaperWorldDefaultsYML))} />
+<ConfigNode data={filterVanilla(parse(PaperWorldDefaultsYML))} path={["paper_world_defaults"]} />
 
 ## paper-global.yml
-<ConfigNode data={filterVanilla(parse(PaperGlobalYML))} />
+<ConfigNode data={filterVanilla(parse(PaperGlobalYML))} path={["paper_global"]} />
 
 ## spigot.yml
-<ConfigNode data={filterVanilla(parse(SpigotYML))} />
+<ConfigNode data={filterVanilla(parse(SpigotYML))} path={["spigot"]} />
 
 ## Further considerations
 

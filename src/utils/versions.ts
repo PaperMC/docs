@@ -1,3 +1,5 @@
+import { GITHUB_OPTIONS } from "./git";
+
 // this is resolved on build-time, not by the client
 
 interface Latest {
@@ -48,7 +50,7 @@ interface Tag {
   name: string;
 }
 
-const userdevVersions: string[] = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags")
+const userdevVersions: string[] = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags", GITHUB_OPTIONS)
   .then((r) => (r.ok ? r.json() : [{ name: "v0.0.0" }]))
   .then((tags: Tag[]) => tags.map((t) => t.name.substring(1)));
 

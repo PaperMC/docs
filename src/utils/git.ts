@@ -10,20 +10,18 @@ export interface CommitInfo {
   committer: CommitterInfo;
 }
 
-const token = process.env.GITHUB_TOKEN;
-
-const options: RequestInit = token
+export const GITHUB_OPTIONS: RequestInit = process.env.GITHUB_TOKEN
   ? {
       headers: {
         Accept: "application/vnd.github+json",
-        "User-Agent": "papermc-docs/author",
-        Authorization: `Bearer ${token}`,
+        "User-Agent": "PaperMC/docs (https://docs.papermc.io)",
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
     }
   : {
       headers: {
         Accept: "application/vnd.github+json",
-        "User-Agent": "papermc-docs/author",
+        "User-Agent": "PaperMC/docs (https://docs.papermc.io)",
       },
     };
 
@@ -31,10 +29,9 @@ export const REPO = "PaperMC/docs";
 const cache = new Map<string, CommitterInfo>();
 
 export const getCommitInfo = async (filePath: string): Promise<CommitInfo | null> => {
-  let email: string, hash: string;
+  let hash: string, email: string, name: string;
   try {
-    email = execSync(`git log -1 --pretty="format:%ae" -- "${filePath}"`).toString();
-    hash = execSync(`git log -1 --pretty="format:%H" -- "${filePath}"`).toString();
+    [hash, email, name] = execSync(`git log -1 --format="%H,%ae,%an" -- "${filePath}"`).toString().trim().split(",", 3);
   } catch (e) {
     return null;
   }
@@ -44,16 +41,9 @@ export const getCommitInfo = async (filePath: string): Promise<CommitInfo | null
     return { hash, committer: cached };
   }
 
-  let name: string;
-  try {
-    name = execSync(`git log -1 --pretty="format:%an" -- "${filePath}"`).toString();
-  } catch (e) {
-    return null;
-  }
-
   const info: CommitterInfo = { name, href: `mailto:${email}` };
 
-  const res = await fetch(`https://api.github.com/repos/${REPO}/commits/${hash}`, options);
+  const res = await fetch(`https://api.github.com/repos/${REPO}/commits/${hash}`, GITHUB_OPTIONS);
   if (res.ok) {
     const commit = await res.json();
     info.href = commit.author.html_url;

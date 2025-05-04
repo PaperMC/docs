@@ -1,15 +1,16 @@
 ---
 import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 import { getCollection } from "astro:content";
+import { flattenEntries } from "../utils/sidebar";
 
 interface Props {
   path?: string;
 }
 
-const { path } = Astro.props;
+let { path } = Astro.props;
 
-const realPath = path ?? Astro.locals.starlightRoute.entry.filePath;
-const parent = realPath.substring(0, realPath.lastIndexOf("/") + 1);
+path = path ?? Astro.locals.starlightRoute.entry.filePath;
+const parent = path.substring(0, path.lastIndexOf("/") + 1);
 
 interface Page {
   title: string;
@@ -18,8 +19,9 @@ interface Page {
   group: boolean;
 }
 
+const entries = flattenEntries(Astro.locals.starlightRoute.sidebar);
 const pages: Page[] = (await getCollection(Astro.locals.starlightRoute.entry.collection))
-  .filter((p) => p.filePath!.startsWith(parent) && p.filePath !== realPath)
+  .filter((p) => p.filePath!.startsWith(parent) && p.filePath !== path)
   .filter((p) => {
     const rel = p.filePath!.substring(parent.length);
 
@@ -31,8 +33,7 @@ const pages: Page[] = (await getCollection(Astro.locals.starlightRoute.entry.col
     href: `/${p.id}`,
     group: p.filePath!.includes("index"),
   }))
-  .sort((a, b) => a.title.localeCompare(b.title))
-  .sort((a, b) => (a.group === b.group ? 0 : a.group ? -1 : 1));
+  .sort((a, b) => entries.findIndex((e) => e.label === a.title) - entries.findIndex((e) => e.label === b.title));
 ---
 
 <CardGrid>

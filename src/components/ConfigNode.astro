@@ -50,7 +50,7 @@ const formatDefault = (value?: string): Default => {
         displayKey = `"${displayKey}"`;
       }
 
-      const childPath = [...path, key.replace(/-/g, "_")];
+      const childPath = [...path, key.replace(/[-<> ]/g, "_")];
       const hasComma = json && i !== (entries.length - 1);
 
       const { value, inline } = formatDefault(rawValue.default);
@@ -101,6 +101,7 @@ const formatDefault = (value?: string): Default => {
 
   .node-root {
     padding: 1rem;
+    border: 1px solid var(--sl-color-gray-5);
     background-color: var(--sl-color-gray-6);
   }
 

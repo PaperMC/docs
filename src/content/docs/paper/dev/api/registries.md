@@ -2,6 +2,10 @@
 title: Registries
 description: A guide to registries and their modification on Paper.
 slug: paper/dev/registries
+sidebar:
+  badge:
+    text: Experimental
+    variant: danger
 ---
 
 :::danger[Experimental]

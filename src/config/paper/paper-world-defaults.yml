@@ -199,10 +199,16 @@ entities:
         Whether spiders should be able to climb on the world border, as if it
         were a regular wall.
     door-breaking-difficulty:
-      default: "[HARD, NORMAL, EASY, PEACEFUL]"
-      description: >-
-        Takes a list of difficulties at which each entity will attempt to break
-        doors
+      vindicator:
+        default: "[NORMAL, HARD]"
+        description: >-
+          A list of difficulties (PEACEFUL, EASY, NORMAL, HARD) at which vindicators will attempt to break doors.
+      <entity-type>:
+        default: "[HARD]"
+        description: >-
+          A list of difficulties (PEACEFUL, EASY, NORMAL, HARD) at which zombie-like entities
+          (husks, zombies, zombie villagers and zombified piglins) will attempt to break doors.
+          Defaults to *HARD*.
     ender-dragons-death-always-places-dragon-egg:
       default: "false"
       description: Controls whether ender dragons should always drop dragon eggs on death
@@ -797,6 +803,7 @@ feature-seeds:
       already set a seed to. Using this in a controlled environment is also a
       good way of receiving a full list of features you can set seeds for
   <feature-namespace>:
+    default: -1
     description: >-
       Sets the population seed for the specified feature. If set to -1, the
       Vanilla population seed stays unchanged and will not be overridden by the
@@ -1047,6 +1054,7 @@ tick-rates:
           entities
     <entity-type>:
       <behavior-name>:
+        default: -1
         description: >-
           Sets the behavior tick rate of an entity. -1 uses Vanilla. See timings
           for the names. Might change between updates!
@@ -1088,6 +1096,7 @@ tick-rates:
           entities
     <entity-type>:
       <sensor-name>:
+        default: -1
         description: >-
           Sets the sensor tick rate of an entity. -1 uses Vanilla. See timings
           for the names. Might change between updates!

@@ -138,6 +138,10 @@ export default defineConfig({
                         {
                           label: "Command API",
                           collapsed: true,
+                          badge: {
+                            text: "Exp.",
+                            variant: "danger",
+                          },
                           items: [
                             {
                               label: "Basics",

@@ -2,6 +2,10 @@
 title: Data components
 description: A guide to the ItemStack data component API.
 slug: paper/dev/data-component-api
+sidebar:
+  badge:
+    text: Exp.
+    variant: danger
 ---
 
 :::danger[Experimental]

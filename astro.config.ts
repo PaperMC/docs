@@ -139,7 +139,7 @@ export default defineConfig({
                           label: "Command API",
                           collapsed: true,
                           badge: {
-                            text: "Exp.",
+                            text: "Experimental",
                             variant: "danger",
                           },
                           items: [

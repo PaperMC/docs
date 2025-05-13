@@ -99,10 +99,21 @@ the best read timeout to use, use `-Dfml.readTimeout=120` and set `read-timeout 
 
 ### My forced hosts are not working!
 
-First, double-check that you properly set up DNS records pointing to your proxy for the forced hosts
-you have selected. Forced hosts are _not_ compatible with SRV records, so if you are relying on SRV
-records to direct the player to the proxy, you will need to find a way to get the proxy running on
-the default Minecraft port, 25565.
+If you are relying on SRV records to direct the player to the proxy, remember that Velocity matches `forced-hosts` using the **hostname the client sends**, which is resolved before the connection — not necessarily the address the player types.
+
+To make `forced-hosts` work with a proxy on a non-default port (e.g. `12345`), use this setup:
+
+Create DNS records:
+- **CNAME:** `forced1.example.com → actual.server.address.com`
+- **SRV:** `_minecraft._tcp.survival → forced1.example.com` (priority: 0, weight: 0, port: 12345)
+
+In velocity.toml:
+```
+[forced-hosts]
+"forced1.example.com" = ["survival"] # survival.example.com
+```
+
+Although the player connects via `survival.example.com`, the SRV record points to `forced1.example.com`, and that is what the client sends to Velocity — allowing it to match correctly in `forced-hosts`.
 
 ### Plugins unable to modify messages or commands
 

@@ -1,4 +1,5 @@
 import { resolve } from "node:path/posix";
+import { handlers } from "svelte/legacy";
 
 interface Release {
   name: string;
@@ -49,54 +50,18 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
     })
     // Post-processing
     .map((obj) => {
-      // Link contributors
-      {
-        const alreadyMatched: string[] = [];
-        obj.body
-          .matchAll(/\@(\w|\d|\-)+/g)
-          .map((match) => match[0])
-          .forEach((match) => {
-            if (alreadyMatched.find((e) => e == match) != null) {
-              return;
-            }
-
-            obj.body = obj.body.replaceAll(match, `[${match}](https://github.com/${match.substring(1)})`);
-            alreadyMatched.push(match);
-          });
-      }
-      {
-        const alreadyMatched: string[] = [];
-        obj.body
-          .matchAll(/https\:\/\/github\.com\/\w+\/\w+\/pull\/\d+/g)
-          .map((match) => match[0])
-          .forEach((match) => {
-            if (alreadyMatched.find((e) => e == match) != null) {
-              return;
-            }
-
-            const split: string[] = match.split("/");
-
-            obj.body = obj.body.replaceAll(match, `[#${split[split.length - 1]}](${match})`);
-            alreadyMatched.push(match);
-          });
-      }
-      {
-        const alreadyMatched: string[] = [];
-        obj.body
-          .matchAll(/https\:\/\/github\.com\/\w+\/\w+\/compare\/[v\.\d]+/g)
-          .map((match) => match[0])
-          .forEach((match) => {
-            if (alreadyMatched.find((e) => e == match) != null) {
-              return;
-            }
-
-            const split: string[] = match.split("/");
-
-            obj.body = obj.body.replaceAll(match, `[${split[split.length - 1]}](${match})`);
-            alreadyMatched.push(match);
-          });
-      }
-
+      handleRegex(obj, /\@(\w|\d|\-)+/g, (match) => `[${match}](https://github.com/${match.substring(1)})`);
+      handleRegex(obj, /https\:\/\/github\.com\/\w+\/\w+\/pull\/\d+/g, (match) => {
+        const split: string[] = match.split("/");
+        return `[#${split[split.length - 1]}](${match})`;
+      });
+      handleRegex(obj, /https\:\/\/github\.com\/\w+\/\w+\/compare\/[v\.\d]+/g, (match) => {
+        const split: string[] = match.split("/");
+        return `[${split[split.length - 1]}](${match})`;
+      });
+      return obj;
+    })
+    .map((obj) => {
       Object.entries({
         bug: "🐛",
         older_adult: "🧓",
@@ -113,4 +78,29 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
 
   cache.set(repo, out);
   return out;
+}
+
+function handleRegex(obj: Release, regex: RegExp, onMatch: (match: string) => string) {
+  if (obj.body == null || obj.body.matchAll == null) {
+    console.warn("obj.body is null. Not resolving any further.");
+    return;
+  }
+
+  const alreadyMatched: string[] = [];
+  let result = obj.body.matchAll(regex);
+  if (result == null || result.map == null) {
+    console.warn("Result of match was null.");
+    return;
+  }
+
+  result
+    .map((match) => match[0])
+    .forEach((match) => {
+      if (alreadyMatched.find((e) => e == match) != null) {
+        return;
+      }
+
+      obj.body = obj.body.replaceAll(match, onMatch(match));
+      alreadyMatched.push(match);
+    });
 }

@@ -1,4 +1,4 @@
-import {GITHUB_OPTIONS} from "./git";
+import { GITHUB_OPTIONS } from "./git";
 
 // this is resolved on build-time, not by the client
 
@@ -23,7 +23,7 @@ interface Tag {
 
 const fetchGitHubTags = async (repo: string) =>
   await fetch(`https://api.github.com/repos/${repo}/tags`, GITHUB_OPTIONS)
-    .then((r) => (r.ok ? r.json() : [{name: "v0.0.0"}]))
+    .then((r) => (r.ok ? r.json() : [{ name: "v0.0.0" }]))
     .then((tags: Tag[]) => tags.map((t) => t.name.substring(1)));
 
 // prettier-ignore
@@ -77,7 +77,7 @@ export const LATEST_RELEASES: Record<string, string> = {
   folia: LATEST_FOLIA_RELEASE,
   waterfall: LATEST_WATERFALL_RELEASE,
   userdev: LATEST_USERDEV_RELEASE,
-  'adventure-api': LATEST_ADVENTURE_API_RELEASE,
-  'adventure-platform': LATEST_ADVENTURE_PLATFORM_RELEASE,
-  'adventure-ansi': LATEST_ADVENTURE_ANSI_RELEASE,
+  "adventure-api": LATEST_ADVENTURE_API_RELEASE,
+  "adventure-platform": LATEST_ADVENTURE_PLATFORM_RELEASE,
+  "adventure-ansi": LATEST_ADVENTURE_ANSI_RELEASE,
 };

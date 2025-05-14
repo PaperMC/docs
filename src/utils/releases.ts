@@ -51,14 +51,8 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
     // Post-processing
     .map((obj) => {
       handleRegex(obj, /\@(\w|\d|\-)+/g, (match) => `[${match}](https://github.com/${match.substring(1)})`);
-      handleRegex(obj, /https\:\/\/github\.com\/\w+\/\w+\/pull\/\d+/g, (match) => {
-        const split: string[] = match.split("/");
-        return `[#${split[split.length - 1]}](${match})`;
-      });
-      handleRegex(obj, /https\:\/\/github\.com\/\w+\/\w+\/compare\/[v\.\d]+/g, (match) => {
-        const split: string[] = match.split("/");
-        return `[${split[split.length - 1]}](${match})`;
-      });
+      handleRegex(obj, /https\:\/\/github\.com\/\w+\/\w+\/pull\/\d+/g, shortCut);
+      handleRegex(obj, /https\:\/\/github\.com\/\w+\/\w+\/compare\/[v\.\d]+/g, shortCut);
       return obj;
     })
     .map((obj) => {
@@ -103,4 +97,9 @@ function handleRegex(obj: Release, regex: RegExp, onMatch: (match: string) => st
       obj.body = obj.body.replaceAll(match, onMatch(match));
       alreadyMatched.push(match);
     });
+}
+
+function shortCut(match: string): string {
+  const split: string[] = match.split("/");
+  return `[${split[split.length - 1]}](${match})`;
 }

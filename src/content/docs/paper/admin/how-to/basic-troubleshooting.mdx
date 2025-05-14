@@ -90,6 +90,7 @@ This may happen in two cases:
 2. `server-ip`, in `server.properties`, is configured incorrectly. Note that this option is not a placeholder for your external IP, it controls which network interfaces your server will bind to. Most of the time, it should be left empty.
 
 ### Attempted to load chunk saved with newer version
+{/* spellchecker:off */}
 ```
 java.lang.RuntimeException: Server attempted to load chunk saved with newer version of minecraft! 3955 > 3465
 [18:23:38 WARN]:        at net.minecraft.world.level.chunk.storage.ChunkRegionLoader.loadChunk(ChunkRegionLoader.java:149)
@@ -100,6 +101,7 @@ java.lang.RuntimeException: Server attempted to load chunk saved with newer vers
 [18:23:38 WARN]:        at ca.spottedleaf.concurrentutil.executor.standard.PrioritisedThreadPool$PrioritisedThread.pollTasks(PrioritisedThreadPool.java:274)
 [18:23:38 WARN]:        at ca.spottedleaf.concurrentutil.executor.standard.PrioritisedQueueExecutorThread.run(PrioritisedQueueExecutorThread.java:50)
 ```
+{/* spellchecker:on */}
 
 That error means that your world was created or opened in a server version that's newer than one you're currently running. Downgrading your world is not supported, so make sure to use the latest supported version of Paper. Even if you haven't joined the server, by loading your world in a newer version, it is upgraded automatically.
 

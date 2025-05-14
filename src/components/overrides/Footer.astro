@@ -6,7 +6,7 @@ import { Icon } from "@astrojs/starlight/components";
 <Default><slot /></Default>
 <div>
   <p class="footer-item">
-    Copyright © {new Date().getFullYear()} PaperMC and contributors. Built with <Icon name="starlight" />
+    Copyright © {new Date().getFullYear()} PaperMC and contributors. Built with <Icon name="starlight" class="icon" />
     <a href="https://starlight.astro.build/" target="_blank">Starlight</a>.
   </p>
   <p class="footer-item muted">
@@ -22,6 +22,14 @@ import { Icon } from "@astrojs/starlight/components";
     font-size: var(--sl-text-2xs);
     color: var(--sl-color-gray-2);
     margin-bottom: 0.25rem;
+  }
+
+  .footer-item a:not(:hover) {
+    text-decoration: none;
+  }
+
+  .icon {
+    color: var(--sl-color-orange);
   }
 
   .muted {

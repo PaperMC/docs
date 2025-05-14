@@ -50,7 +50,6 @@ export default defineConfig({
       components: {
         Head: "./src/components/overrides/Head.astro",
         SiteTitle: "./src/components/overrides/SiteTitle.astro",
-        Sidebar: "./src/components/overrides/Sidebar.astro",
         PageFrame: "./src/components/overrides/PageFrame.astro",
         Footer: "./src/components/overrides/Footer.astro",
         LastUpdated: "./src/components/overrides/LastUpdated.astro",
@@ -58,6 +57,9 @@ export default defineConfig({
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
         MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
         SocialIcons: "./src/components/overrides/SocialIcons.astro",
+        // stop starlight-sidebar-topics from having its component there
+        // we override the topics with our dropdown in PageFrame
+        Sidebar: "@astrojs/starlight/components/Sidebar.astro",
       },
       plugins: [
         starlightLinksValidator({

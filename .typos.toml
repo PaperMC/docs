@@ -5,8 +5,9 @@ extend-exclude = [
 
 [default]
 locale = "en-us"
-extend-ignore-identifiers-re = [
-    "Prioritised[A-Z][a-z]\\w+" # allow canadian spelling in code, e.g. PrioritisedTask, PrioritisedThreadedTaskQueue...
+extend-ignore-re = [
+  # {/* spellchecker:<on|off> */}
+  "(?s)\\{/\\*\\s*spellchecker:off\\s*\\*/\\}.*?\\n\\s*\\{/\\*\\s*spellchecker:on\\s*\\*/\\}"
 ]
 
 [default.extend-identifiers]

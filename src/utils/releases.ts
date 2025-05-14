@@ -1,3 +1,5 @@
+import { resolve } from "node:path/posix";
+
 interface Release {
   name: string;
   body: string;
@@ -31,8 +33,8 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
     return cached;
   }
 
-  const json = (await fetch(`https://api.github.com/repos/${repo}/releases`, options).then((response) =>
-    response.json()
+  const json = (await fetch(`https://api.github.com/repos/${repo}/releases`, options).then((r) =>
+    r.ok ? r.json() : [{}]
   )) as any[];
 
   const out: Release[] = json

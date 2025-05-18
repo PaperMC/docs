@@ -1,6 +1,3 @@
-import { resolve } from "node:path/posix";
-import { handlers } from "svelte/legacy";
-
 interface Release {
   name: string;
   body: string;
@@ -82,8 +79,14 @@ function handleRegex(obj: Release, regex: RegExp, onMatch: (match: string) => st
 
   const alreadyMatched: string[] = [];
   let result = obj.body.matchAll(regex);
-  if (result == null || result.map == null) {
+  if (result == null) {
     console.warn("Result of match was null.");
+    return;
+  }
+
+  console.info(result);
+  if (result.map == null) {
+    console.warn("Yeah it cannot find the map method")
     return;
   }
 

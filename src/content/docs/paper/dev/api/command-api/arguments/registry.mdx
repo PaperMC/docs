@@ -9,6 +9,8 @@ import ResourceBannerPattern from "./assets/registry-arguments/resource-banner-p
 import ResourceBiome from "./assets/registry-arguments/resource-biome.mp4";
 import ResourceBlock from "./assets/registry-arguments/resource-block.mp4";
 import ResourceCatVariant from "./assets/registry-arguments/resource-cat-variant.mp4";
+import ResourceChickenVariant from "./assets/registry-arguments/resource-chicken-variant.mp4";
+import ResourceCowVariant from "./assets/registry-arguments/resource-cow-variant.mp4";
 import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4";
 import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4";
 import ResourceEnchantment from "./assets/registry-arguments/resource-enchantment.mp4";
@@ -25,6 +27,7 @@ import ResourceMenu from "./assets/registry-arguments/resource-menu.mp4";
 import ResourceMobEffect from "./assets/registry-arguments/resource-mob-effect.mp4";
 import ResourcePaintingVariant from "./assets/registry-arguments/resource-painting-variant.mp4";
 import ResourceParticleType from "./assets/registry-arguments/resource-particle-type.mp4";
+import ResourcePigVariant from "./assets/registry-arguments/resource-pig-variant.mp4";
 import ResourcePotion from "./assets/registry-arguments/resource-potion.mp4";
 import ResourceSoundEvent from "./assets/registry-arguments/resource-sound-event.mp4";
 import ResourceStructureType from "./assets/registry-arguments/resource-structure-type.mp4";
@@ -32,6 +35,7 @@ import ResourceTrimMaterial from "./assets/registry-arguments/resource-trim-mate
 import ResourceTrimPattern from "./assets/registry-arguments/resource-trim-pattern.mp4";
 import ResourceVillagerProfession from "./assets/registry-arguments/resource-villager-profession.mp4";
 import ResourceVillagerType from "./assets/registry-arguments/resource-villager-type.mp4";
+import ResourceWolfSoundVariant from "./assets/registry-arguments/resource-wolf-sound-variant.mp4";
 import ResourceWolfVariant from "./assets/registry-arguments/resource-wolf-variant.mp4";
 
 import ResourceKeyItem from "./assets/registry-arguments/resourcekey-item.mp4";
@@ -190,7 +194,7 @@ input and be able to retrieve the backed instance without much trouble, that is 
 
 ## Registry key previews
 
-At the time of writing, the following RegistryKeys exist:
+In 1.21.5, the following `RegistryKeys` exist:
 
 |   RegistryKeys Field   |      Return Value      |                Preview Video                |
 |------------------------|------------------------|---------------------------------------------|
@@ -199,6 +203,8 @@ At the time of writing, the following RegistryKeys exist:
 | BIOME                  | Biome                  | [Biome](#biome)                             |
 | BLOCK                  | BlockType              | [Block](#block)                             |
 | CAT_VARIANT            | Cat.Type               | [Cat Variant](#cat-variant)                 |
+| CHICKEN_VARIANT        | Chicken.Variant        | [Chicken Variant](#chicken-variant)         |
+| COW_VARIANT            | Cow.Variant            | [Cow Variant](#cow-variant)                 |
 | DAMAGE_TYPE            | DamageType             | [Damage Type](#damage-type)                 |
 | DATA_COMPONENT_TYPE    | DataComponentType      | [Data Component Type](#data-component-type) |
 | ENCHANTMENT            | Enchantment            | [Enchantment](#enchantment)                 |
@@ -215,6 +221,7 @@ At the time of writing, the following RegistryKeys exist:
 | MOB_EFFECT             | PotionEffectType       | [Mob effect](#mob-effect)                   |
 | PAINTING_VARIANT       | Art                    | [Painting variant](#painting-variant)       |
 | PARTICLE_TYPE          | Particle               | [Particle](#particle)                       |
+| PIG_VARIANT            | Pig.Variant            | [Pig Variant](#pig-variant)                 |
 | POTION                 | PotionType             | [Potion](#potion)                           |
 | SOUND_EVENT            | Sound                  | [Sound](#sound)                             |
 | STRUCTURE              | Structure              | [Structure](#structure)                     |
@@ -223,12 +230,13 @@ At the time of writing, the following RegistryKeys exist:
 | TRIM_PATTERN           | TrimPattern            | [Trim Pattern](#trim-pattern)               |
 | VILLAGER_PROFESSION    | Villager.Profession    | [Villager Profession](#villager-profession) |
 | VILLAGER_TYPE          | Villager.Type          | [Villager Type](#villager-type)             |
+| WORLD_SOUND_VARIANT    | World.SoundVariant     | [Wolf Sound Variant](#wolf-sound-variant)   |
 | WOLF_VARIANT           | Wolf.Variant           | [Wolf Variant](#wolf-variant)               |
 
 ### Attribute
 <Video src={ResourceAttributes} />
 
-### Banner Pattern
+### Banner pattern
 <Video src={ResourceBannerPattern} />
 
 ### Biome
@@ -239,6 +247,12 @@ At the time of writing, the following RegistryKeys exist:
 
 ### Cat variant
 <Video src={ResourceCatVariant} />
+
+### Chicken variant
+<Video src={ResourceChickenVariant} />
+
+### Cow variant
+<Video src={ResourceCowVariant} />
 
 ### Damage type
 <Video src={ResourceDamageType} />
@@ -254,7 +268,7 @@ At the time of writing, the following RegistryKeys exist:
 
 ### Fluid
 <Video src={ResourceFluid} />
-
+7
 ### Frog variant
 <Video src={ResourceFrogVariant} />
 
@@ -288,6 +302,9 @@ At the time of writing, the following RegistryKeys exist:
 ### Particle
 <Video src={ResourceParticleType} />
 
+### Pig variant
+<Video src={ResourcePigVariant} />
+
 ### Potion
 <Video src={ResourcePotion} />
 
@@ -311,6 +328,9 @@ This argument kicks the client, so no preview for this one ¯\\\_(ツ)\_/¯
 
 ### Villager type
 <Video src={ResourceVillagerType} />
+
+### Wolf sound variant
+<Video src={ResourceWolfSoundVariant} />
 
 ### Wolf variant
 <Video src={ResourceWolfVariant} />

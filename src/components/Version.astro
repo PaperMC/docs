@@ -19,7 +19,7 @@ const { version, inline } = Astro.props;
 
 <style>
   .icon {
-    font-size: var(--sl-text-3xl);
+    font-size: var(--sl-text-4xl);
   }
 
   .notice {
@@ -28,10 +28,10 @@ const { version, inline } = Astro.props;
     gap: 1rem;
     align-items: center;
     font-size: var(--sl-text-xs);
-    padding: 1rem 1.5rem;
+    padding: 1rem 1.25rem;
     border-radius: 0.5rem;
     background-color: rgba(var(--sl-color-accent-raw), 0.125);
-    margin: 1rem 0;
+    margin-bottom: 1rem;
   }
 
   .notice span {
@@ -48,6 +48,7 @@ const { version, inline } = Astro.props;
     display: flex;
     margin: 0;
     border-radius: 0;
+    padding: 1rem var(--sl-content-pad-x);
     font-size: var(--sl-text-sm);
   }
 

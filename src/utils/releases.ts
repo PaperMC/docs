@@ -1,4 +1,4 @@
-interface Release {
+export interface Release {
   name: string;
   body: string;
   published: string;
@@ -44,7 +44,7 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
         published: obj.published_at ?? "2000-01-01",
         url: obj.html_url ?? "about:blank",
         tag: obj.tag_name?.replaceAll(".", "-") ?? "none",
-        tag_name: obj.tag_name ?? "v1.0.0"
+        tag_name: obj.tag_name ?? "v1.0.0",
       };
     })
     // Post-processing
@@ -80,7 +80,8 @@ function handleRegex(obj: Release, regex: RegExp, onMatch: (match: string) => st
   }
 
   const alreadyMatched: string[] = [];
-  obj.body.matchAll(regex)
+  obj.body
+    .matchAll(regex)
     .map((match) => match[0])
     .forEach((match) => {
       if (alreadyMatched.find((e) => e == match) != null) {

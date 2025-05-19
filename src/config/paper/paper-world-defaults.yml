@@ -373,37 +373,44 @@ entities:
         default: "-1"
         description: |
           Determines how many ticks there are between attempts to spawn ambient mobs (bats).
-          Default (-1) uses Vanilla spawn rate.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_ambient_spawns).
       axolotls:
         default: "-1"
         description: |
           Determines how many ticks there are between attempts to spawn axolotls.
-          Default (-1) uses Vanilla spawn rate.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_axolotl_spawns).
       creature:
         default: "-1"
         description: |
           Determines how many ticks there are between attempts to spawn passive creatures (animals).
-          Default (-1) uses Vanilla spawn rate.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_animal_spawns).
       monster:
         default: "-1"
         description: |
           Determines how many ticks there are between attempts to spawn hostile monsters.
-          Default (-1) uses Vanilla spawn rate.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_monster_spawns).
       underground_water_creature:
         default: "-1"
         description: |
           Determines how many ticks there are between attempts to spawn underground water creatures (glow squid).
-          Default (-1) uses Vanilla spawn rate.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_underground_creature_spawns).
       water_ambient:
         default: "-1"
         description: |
           Determines how many ticks there are between attempts to spawn ambient water mobs (tropical fish).
-          Default (-1) uses Vanilla spawn rate.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_ambient_spawns).
       water_creature:
         default: "-1"
         description: |
           Determines how many ticks there are between attempts to spawn water creatures (squid, dolphins).
-          Default (-1) uses Vanilla spawn rate.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_spawns).
     despawn-range-shape:
       default: ELLIPSOID
       description: >-

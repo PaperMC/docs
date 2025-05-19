@@ -304,6 +304,32 @@ Preview
 <img style="max-height: 10rem;" alt="The result of parsing `<lang:commands.drop.success.single:'<red>1':'<blue>Stone'>!`, shown in-game in the Minecraft client's chat window in English" src={Translatable2.src} />
 </div>
 
+### Fallback
+
+:::note
+
+The fallback option is only available since Minecraft 1.19.4.
+
+:::
+
+Allows displaying minecraft messages using the player locale, or a fallback if no text is available
+
+Tag
+  * `<lang_or:_key_:_fallback_:_value1_:_value2_...>`
+
+Aliases
+  * `tr_or`, `translate_or`
+
+Arguments
+  * `_key_`, the translation key
+  * `_fallback_`, the fallback text to display
+  * `_valueX_`, optional values that are used for placeholders in the key (they will end up in the `with` tag in the JSON)
+
+Examples
+```mm
+You should get a <lang_or:block.minecraft.diamond_block:'Dirt Block'>!
+```
+
 ### Insertion
 
 Allow insertion of text into chat via shift click

@@ -1,36 +1,52 @@
 ---
-import { fetchRelease } from "../../utils/releases";
+import { type Release, fetchRelease } from "../../utils/releases";
 import { render } from "../../utils/markdown";
 
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import type { MarkdownHeading } from "astro";
+
 interface Props {
+  title: string;
   repo: string;
 }
 
 const props: Props = Astro.props;
-const data = await fetchRelease(props.repo);
+const data: Release[] = await fetchRelease(props.repo);
+
+const headings: MarkdownHeading[] = data.map((e) => {
+  return {
+    depth: 2,
+    slug: `release-${e.tag}`,
+    text: `${e.tag_name} ${e.name}`,
+  };
+});
 ---
 
-{
-  data.map(async (release) => (
-    <div>
-      <a class="title" href={`#release-${release.tag}`}>
-        <h2 id={`release-${release.tag}`}>{release.name}</h2>
-      </a>
-      <p class="released">
-        Released on{" "}
-        <time datetime={release.published}>
-          {new Date(release.published).toLocaleDateString("en", {
-            dateStyle: "medium",
-            timeZone: "UTC",
-          })}
-        </time>{" "}
-        - <a href={release.url}>GitHub</a>
-      </p>
-      <p set:html={await render(release.body)} />
-      <br />
-    </div>
-  ))
-}
+<StarlightPage headings={headings} frontmatter={{ title: props.title }}>
+  {
+    data.map(async (release) => (
+      <div>
+        <a class="title" href={`#release-${release.tag}`}>
+          <h2 id={`release-${release.tag}`}>
+            {release.tag_name} {release.name}
+          </h2>
+        </a>
+        <p class="released">
+          Released on{" "}
+          <time datetime={release.published}>
+            {new Date(release.published).toLocaleDateString("en", {
+              dateStyle: "medium",
+              timeZone: "UTC",
+            })}
+          </time>{" "}
+          - <a href={release.url}>GitHub</a>
+        </p>
+        <p set:html={await render(release.body)} />
+        <br />
+      </div>
+    ))
+  }
+</StarlightPage>
 
 <style>
   .title {

@@ -431,9 +431,12 @@ export default defineConfig({
                 {
                   label: "Version History",
                   items: [
-                    "adventure/version-history/adventure",
-                    "adventure/version-history/adventure-platform",
-                    "adventure/version-history/adventure-platform-fabric",
+                    { label: "adventure", link: "/adventure/version-history/adventure" },
+                    { label: "adventure-platform", link: "/adventure/version-history/adventure-platform" },
+                    {
+                      label: "adventure-platform-fabric",
+                      link: "/adventure/version-history/adventure-platform-fabric",
+                    },
                   ],
                 },
               ],

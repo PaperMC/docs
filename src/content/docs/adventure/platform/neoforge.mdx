@@ -3,7 +3,7 @@ title: NeoForge
 description: The NeoForge Adventure implementation.
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components"
+import ModPlatformDependency from "/src/components/adventure/ModPlatformDependency.astro";
 
 Adventure supports NeoForge on *Minecraft: Java Edition* 1.21 and up, for both server-side and client-side use. Each major version of Minecraft will usually require
 a new release of the platform.
@@ -15,44 +15,7 @@ The platform supports all features, including localization and custom renderers.
 The NeoForge platform is packaged as a mod, designed to be included in mods via jar-in-jar packaging. As with the rest of the Adventure projects,
 releases are distributed on Maven Central, and snapshots on Sonatype OSS:
 
-// TODO: Make this a component + insert version placeholder
-<Tabs syncKey="build-system">
-  <TabItem label="Gradle (Groovy)">
-  ```groovy
-  repositories {
-    // for development builds
-    maven {
-        name = "sonatype-oss-snapshots1"
-        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-        mavenContent { snapshotsOnly() }
-    }
-    // for releases
-    mavenCentral()
-  }
-
-  dependencies {
-    implementation jarJar("net.kyori:adventure-platform-neoforge:|mod_version|") // for Minecraft 1.21.5
-  }
-  ```
-  </TabItem>
-  <TabItem label="Gradle (Kotlin)">
-  ```kts
-  repositories {
-    // for development builds
-    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-        name = "sonatype-oss-snapshots1"
-        mavenContent { snapshotsOnly() }
-    }
-    // for releases
-    mavenCentral()
-  }
-
-  dependencies {
-    implementation(jarJar("net.kyori:adventure-platform-neoforge:|mod_version|")!!) // for Minecraft 1.21.5
-  }
-  ```
-  </TabItem>
-</Tabs>
+<ModPlatformDependency platform="neoforge" />
 
 :::danger[Attention]
 

@@ -24,10 +24,9 @@ then you don't need to use this artifact explicitly. This is because both platfo
 
 As with the rest of the Adventure projects, releases are distributed on Maven Central, and snapshots on Sonatype OSS:
 
-// TODO: Make this a component + insert version placeholder
 <Tabs syncKey="build-system">
   <TabItem label="Gradle (Groovy)">
-  ```groovy
+  ```groovy replace
   repositories {
     // for development builds
     maven {
@@ -41,15 +40,15 @@ As with the rest of the Adventure projects, releases are distributed on Maven Ce
 
   dependencies {
     // Loom project
-    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:|mod_version|") // for Minecraft 1.21.5
+    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
 
     // NeoGradle/ModDevGradle/VanillaGradle project
-    compileOnly("net.kyori:adventure-platform-mod-shared:|mod_version|") // for Minecraft 1.21.5
+    compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
   }
   ```
   </TabItem>
   <TabItem label="Gradle (Kotlin)">
-  ```kts
+  ```kts replace
   repositories {
     // for development builds
     maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
@@ -62,10 +61,10 @@ As with the rest of the Adventure projects, releases are distributed on Maven Ce
 
   dependencies {
     // Loom project
-    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:|mod_version|") // for Minecraft 1.21.5
+    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
 
     // NeoGradle/ModDevGradle/VanillaGradle project
-    compileOnly("net.kyori:adventure-platform-mod-shared:|mod_version|") // for Minecraft 1.21.5
+    compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
   }
   ```
   </TabItem>

@@ -86,7 +86,7 @@ function handleRegex(obj: Release, regex: RegExp, onMatch: (match: string) => st
 
   console.info(result);
   if (result.map == null) {
-    console.warn("Yeah it cannot find the map method")
+    console.warn("Yeah it cannot find the map method");
     return;
   }
 

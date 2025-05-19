@@ -82,7 +82,8 @@ spawn-limits:
     default: "5"
     description: >-
       Set the spawn-limits for water underground creatures. This can be
-      overridden by the [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_underground_water_creature).
+      overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_spawn_limits_underground_water_creature).
   axolotls:
     default: "5"
     description: >-
@@ -103,38 +104,52 @@ ticks-per:
   animal-spawns:
     default: "400"
     description: >-
-      Number of ticks between each animal spawn attempt. Set to -1 to use
-      default.
+      Number of ticks between each passive creature (animal) spawn attempt.
+      Set to -1 to use [the Vanilla default](https://minecraft.wiki/w/Spawn_limit).
+      This can be overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_ticks_per_spawn_creature).
   monster-spawns:
     default: "1"
     description: >-
-      Number of ticks between each monster spawn attempt. Set to -1 to use
-      default.
+      Number of ticks between each hostile monster spawn attempt.
+      Set to -1 to use [the Vanilla default](https://minecraft.wiki/w/Spawn_limit).
+      This can be overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_ticks_per_spawn_monster).
   water-spawns:
     default: "1"
     description: >-
-      Number of ticks between each water-animal spawn attempt. Set to -1 to use
-      default.
+      Number of ticks between each water creature spawn attempt.
+      Set to -1 to use [the Vanilla default](https://minecraft.wiki/w/Spawn_limit).
+      This can be overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_ticks_per_spawn_water_creature).
   water-ambient-spawns:
     default: "1"
     description: >-
-      Number of ticks between each water-ambient mob spawn attempt. Set to -1 to
-      use default.
+      Number of ticks between each ambient water mob spawn attempt.
+      Set to -1 to use [the Vanilla default](https://minecraft.wiki/w/Spawn_limit).
+      This can be overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_ticks_per_spawn_water_ambient).
   water-underground-creature-spawns:
     default: "1"
     description: >-
-      Number of ticks between each water-underground-creature spawn attempt. Set
-      to -1 to use default.
+      Number of ticks between each underground water creatures spawn attempt.
+      Set to -1 to use [the Vanilla default](https://minecraft.wiki/w/Spawn_limit).
+      This can be overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_ticks_per_spawn_underground_water_creature).
   axolotl-spawns:
     default: "1"
     description: >-
-      Number of ticks between each axolotl spawn attempt. Set to -1 to use
-      default.
+      Number of ticks between each axolotl spawn attempt.
+      Set to -1 to use [the Vanilla default](https://minecraft.wiki/w/Spawn_limit).
+      This can be overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_ticks_per_spawn_axolotls).
   ambient-spawns:
     default: "1"
     description: >-
-      Number of ticks between each ambient mob spawn attempt. Set to -1 to use
-      default.
+      Number of ticks between each ambient mob spawn attempt.
+      Set to -1 to use [the Vanilla default](https://minecraft.wiki/w/Spawn_limit).
+      This can be overridden by the
+      [Paper world config](/paper/reference/world-configuration#entities_spawning_ticks_per_spawn_ambient).
   autosave:
     default: "6000"
     description: >-

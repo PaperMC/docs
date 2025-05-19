@@ -67,6 +67,10 @@ const adventurePlatformVersions: string[] = await fetchGitHubTags("KyoriPowered/
 
 export const LATEST_ADVENTURE_PLATFORM_RELEASE = adventurePlatformVersions[0];
 
+const adventurePlatformModVersions: string[] = await fetchGitHubTags("KyoriPowered/adventure-platform-mod");
+
+export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = adventurePlatformModVersions[0];
+
 const adventureAnsiVersions: string[] = await fetchGitHubTags("KyoriPowered/ansi");
 
 export const LATEST_ADVENTURE_ANSI_RELEASE = adventureAnsiVersions[0];
@@ -79,5 +83,6 @@ export const LATEST_RELEASES: Record<string, string> = {
   userdev: LATEST_USERDEV_RELEASE,
   "adventure-api": LATEST_ADVENTURE_API_RELEASE,
   "adventure-platform": LATEST_ADVENTURE_PLATFORM_RELEASE,
+  "adventure-platform-mod": LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
   "adventure-ansi": LATEST_ADVENTURE_ANSI_RELEASE,
 };

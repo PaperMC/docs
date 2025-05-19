@@ -4,6 +4,7 @@ interface Release {
   published: string;
   url: string;
   tag: string;
+  tag_name: string;
 }
 
 const token = process.env.GITHUB_TOKEN;
@@ -43,6 +44,7 @@ export async function fetchRelease(repo: string): Promise<Release[]> {
         published: obj.published_at ?? "2000-01-01",
         url: obj.html_url ?? "about:blank",
         tag: obj.tag_name?.replaceAll(".", "-") ?? "none",
+        tag_name: obj.tag_name ?? "v1.0.0"
       };
     })
     // Post-processing
@@ -78,19 +80,7 @@ function handleRegex(obj: Release, regex: RegExp, onMatch: (match: string) => st
   }
 
   const alreadyMatched: string[] = [];
-  let result = obj.body.matchAll(regex);
-  if (result == null) {
-    console.warn("Result of match was null.");
-    return;
-  }
-
-  console.info(result);
-  if (result.map == null) {
-    console.warn("Yeah it cannot find the map method");
-    return;
-  }
-
-  result
+  obj.body.matchAll(regex)
     .map((match) => match[0])
     .forEach((match) => {
       if (alreadyMatched.find((e) => e == match) != null) {

@@ -8,6 +8,7 @@ import type { MarkdownHeading } from "astro";
 interface Props {
   title: string;
   repo: string;
+  prepend_tag: boolean;
 }
 
 const props: Props = Astro.props;
@@ -17,7 +18,7 @@ const headings: MarkdownHeading[] = data.map((e) => {
   return {
     depth: 2,
     slug: `release-${e.tag}`,
-    text: `${e.tag_name} ${e.name}`,
+    text: (props.prepend_tag ?? false) ? `${e.tag_name}: ${e.name}` : e.name,
   };
 });
 ---
@@ -28,7 +29,7 @@ const headings: MarkdownHeading[] = data.map((e) => {
       <div>
         <a class="title" href={`#release-${release.tag}`}>
           <h2 id={`release-${release.tag}`}>
-            {release.tag_name} {release.name}
+            {(props.prepend_tag ?? false) ? `${release.tag_name}: ${release.name}` : release.name}
           </h2>
         </a>
         <p class="released">

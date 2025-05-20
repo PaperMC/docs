@@ -1,0 +1,38 @@
+---
+import AnchorHeading from "@astrojs/starlight/components/AnchorHeading.astro";
+import { render, type CollectionEntry, type CollectionKey } from "astro:content";
+
+interface Props {
+  id: string;
+  entry: CollectionEntry<CollectionKey & `${string}-releases`>;
+}
+
+const { id, entry } = Astro.props;
+const { Content } = await render(entry);
+---
+
+<article>
+  <AnchorHeading {id} level={2}>{entry.data.title}</AnchorHeading>
+  <p class="description">
+    Released on {(entry.data.pubdate ?? new Date(0)).toLocaleDateString("en", { dateStyle: "medium", timeZone: "UTC" })}
+    {
+      entry.data.link && (
+        <>
+          - <a href={entry.data.link}>GitHub</a>
+        </>
+      )
+    }
+  </p>
+  <Content />
+</article>
+
+<style>
+  article {
+    padding-bottom: 1.5rem;
+  }
+
+  .description {
+    font-style: italic;
+    color: var(--sl-color-gray-3);
+  }
+</style>

@@ -1,0 +1,27 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { getCollection, type CollectionKey } from "astro:content";
+import Release from "./Release.astro";
+
+interface Props {
+  title: string;
+  collection: CollectionKey & `${string}-releases`;
+}
+
+const { title, collection } = Astro.props;
+
+const entries = await getCollection(collection);
+const headings = entries.map((entry) => {
+  const id = entry.id.substring(entry.id.lastIndexOf("/") + 1);
+
+  return {
+    slug: id,
+    text: entry.data.title ?? id,
+    depth: 2,
+  };
+});
+---
+
+<StarlightPage frontmatter={{ title }} {headings}>
+  {entries.map((entry) => <Release id={entry.id.substring(entry.id.lastIndexOf("/") + 1)} {entry} />)}
+</StarlightPage>

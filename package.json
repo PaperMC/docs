@@ -20,6 +20,7 @@
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
     "astro": "^5.13.9",
+    "@ascorbic/feed-loader": "^1.0.4",
     "astro-d2": "^0.8.0",
     "sharp": "^0.34.4",
     "starlight-contributor-list": "^0.3.0",

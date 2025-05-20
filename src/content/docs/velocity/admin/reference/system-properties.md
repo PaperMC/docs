@@ -78,12 +78,12 @@ The default value shown may not be set for the property but will only be used by
 #### velocity.disable-native-transport
 
 - **default**: `false`
-- **description**: By default, Velocity will use Java's NIO transport. If set to true, Netty's native transport methods like the io_uring support and Epoll are used instead.
+- **description**: Whether to disable Netty's native transport methods like the io_uring support and Epoll. If set to true, Velocity will use Java's NIO transport instead.
 
 #### velocity.enable-iouring-transport
 
 - **default**: `false`
-- **description**: Whether to disable Netty's io_uring transport method. If set to true, Velocity will use Netty's Epoll transport instead. This setting is overridden if `velocity.disable-native-transport` is set to false.
+- **description**: By default, Velocity will use Netty's Epoll transport or Java's NIO if velocity.disable-native-transport` is set to true. If this property is set to true, Netty's io_uring support is used instead.
 
 #### velocity.natives-disabled
 

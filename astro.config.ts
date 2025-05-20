@@ -96,6 +96,9 @@ export default defineConfig({
       },
       plugins: [
         starlightLinksValidator({
+          exclude: [
+            "/adventure/version-history/*", // custom pages
+          ],
           errorOnInvalidHashes: false, // enable if you want to check hashes - it doesn't work with config diagrams
         }),
         starlightSidebarTopics(

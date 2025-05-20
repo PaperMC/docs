@@ -74,15 +74,3 @@ export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = adventurePlatformModVersion
 const adventureAnsiVersions: string[] = await fetchGitHubTags("KyoriPowered/ansi");
 
 export const LATEST_ADVENTURE_ANSI_RELEASE = adventureAnsiVersions[0];
-
-export const LATEST_RELEASES: Record<string, string> = {
-  paper: LATEST_PAPER_RELEASE,
-  velocity: LATEST_VELOCITY_RELEASE,
-  folia: LATEST_FOLIA_RELEASE,
-  waterfall: LATEST_WATERFALL_RELEASE,
-  userdev: LATEST_USERDEV_RELEASE,
-  "adventure-api": LATEST_ADVENTURE_API_RELEASE,
-  "adventure-platform": LATEST_ADVENTURE_PLATFORM_RELEASE,
-  "adventure-platform-mod": LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
-  "adventure-ansi": LATEST_ADVENTURE_ANSI_RELEASE,
-};

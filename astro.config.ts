@@ -328,7 +328,6 @@ export default defineConfig({
                 },
               ],
             },
-
             {
               id: "adventure",
               label: "Adventure",

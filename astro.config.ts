@@ -513,7 +513,6 @@ export default defineConfig({
                 "/adventure/minimessage",
                 "/adventure/platform",
                 "/adventure/migration",
-                "/adventure/contributing",
                 "/adventure/version-history",
               ],
               waterfall: ["/waterfall"],

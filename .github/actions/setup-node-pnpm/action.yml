@@ -8,5 +8,5 @@ runs:
     - name: "setup node"
       uses: "actions/setup-node@v4"
       with:
-      cache: "pnpm"
-      node-version: 22
+        cache: "pnpm"
+        node-version: 22

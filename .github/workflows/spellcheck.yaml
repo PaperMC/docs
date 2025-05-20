@@ -14,4 +14,4 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Spell check
-        uses: crate-ci/typos@v1.24.6
+        uses: crate-ci/typos@v1

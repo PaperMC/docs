@@ -83,7 +83,7 @@ The default value shown may not be set for the property but will only be used by
 #### velocity.enable-iouring-transport
 
 - **default**: `false`
-- **description**: By default, Velocity uses Netty's Epoll transport or fall back to Java's NIO if `velocity.disable-native-transport` is set to true, which will also override this property. If this property is set to true, Netty's io_uring support is used instead.
+- **description**: Enables Netty's io_uring transport when set to true. By default, Velocity only uses the Epoll (on Linux) and kqueue (on macOS) native transports. This property does not override the `velocity.disable-native-transport` property.
 
 #### velocity.natives-disabled
 

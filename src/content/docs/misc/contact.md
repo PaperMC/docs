@@ -14,12 +14,12 @@ Reach out for support, or contact us on our forums.
 
 - [Forums](https://forums.papermc.io)
 
-## Twitter
+## Twitter/X
 
 We often tweet out version release notes, update notices, and other information via our Twitter
 page.
 
-- [@PaperPowered](https://twitter.com/PaperPowered)
+- [@PaperPowered](https://x.com/PaperPowered)
 
 You should not DM or @ this account for support. It is not checked as regularly as the above
 locations.

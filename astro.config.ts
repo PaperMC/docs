@@ -12,6 +12,8 @@ import {
   LATEST_USERDEV_RELEASE,
   LATEST_VELOCITY_RELEASE,
 } from "./src/utils/versions";
+import remarkLintNoDeadUrls from "remark-lint-no-dead-urls";
+import remarkLint from "remark-lint";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -437,6 +439,22 @@ export default defineConfig({
           },
         },
       ],
+      [
+        remarkLint,
+        {
+
+        }
+      ],
+      [
+        remarkLintNoDeadUrls,
+        {
+          deadOrAliveOptions: {
+            checkAnchor: false,
+            findUrls: false,
+          }
+        },
+      ]
+      ,
     ],
   },
 });

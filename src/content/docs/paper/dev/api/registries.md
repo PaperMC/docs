@@ -112,7 +112,7 @@ as missing values or modifications to the registries would otherwise cause data 
 
 :::note
 Mutating registries is done via the
-[LifecycleEventManager](jd:java:io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager).
+[LifecycleEventManager](jd:paper:io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager).
 See the [Lifecycle Events](/paper/dev/lifecycle) page for more information.
 :::
 

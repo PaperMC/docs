@@ -1,0 +1,12 @@
+name: setup-node-pnpm
+description: Setup Node and PNPM
+runs:
+  using: "composite"
+  steps:
+    - name: "setup pnpm"
+      uses: "pnpm/action-setup@v4"
+    - name: "setup node"
+      uses: "actions/setup-node@v4"
+      with:
+        cache: "pnpm"
+        node-version: 22

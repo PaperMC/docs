@@ -2,6 +2,8 @@ import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
+import remarkLint from "remark-lint";
+import remarkLintNoDeadUrls from "remark-lint-no-dead-urls";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
@@ -12,8 +14,6 @@ import {
   LATEST_USERDEV_RELEASE,
   LATEST_VELOCITY_RELEASE,
 } from "./src/utils/versions";
-import remarkLintNoDeadUrls from "remark-lint-no-dead-urls";
-import remarkLint from "remark-lint";
 
 const prod = process.env.NODE_ENV === "production";
 
@@ -439,22 +439,16 @@ export default defineConfig({
           },
         },
       ],
-      [
-        remarkLint,
-        {
-
-        }
-      ],
+      [remarkLint, {}],
       [
         remarkLintNoDeadUrls,
         {
           deadOrAliveOptions: {
             checkAnchor: false,
             findUrls: false,
-          }
+          },
         },
-      ]
-      ,
+      ],
     ],
   },
 });

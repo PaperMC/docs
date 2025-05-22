@@ -43,9 +43,13 @@ const parse = async (url: string, { targets }: Options): Promise<string | null> 
 
   const parsed: string = `${targetUrl}/${module ? `${module}/` : ""}${asUrl(name)}`;
 
-  const result = await deadOrAlive(parsed);
+  const result = await deadOrAlive(parsed, {
+    findUrls: false,
+    followMetaHttpEquiv: false,
+    userAgent: "PaperMC/docs (https://docs.papermc.io)",
+  });
   if (result.status !== "alive") {
-    throw new Error(`javadoc markdown [${url}] for [${parsed}] is not valid`);
+    throw new Error(`Javadoc link "${url}" is not valid`);
   }
 
   return parsed;

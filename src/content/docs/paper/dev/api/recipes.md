@@ -7,7 +7,7 @@ slug: paper/dev/recipes
 Recipes are a way to define a way to craft a particular item. They are defined by a plugin or
 datapack, however we are only going to cover the plugin side of things here.
 
-## [`ShapedRecipe`](jd:paper:org.bukkit.inventory.ShapedRecipeBROKERN)
+## [`ShapedRecipe`](jd:paper:org.bukkit.inventory.ShapedRecipe)
 
 A shaped recipe is a recipe that requires a specific pattern of items in the crafting grid to craft an item.
 These are created using a pattern string and a map of characters to items. The pattern strings are 3,

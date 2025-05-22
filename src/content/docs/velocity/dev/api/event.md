@@ -219,7 +219,7 @@ You'll notice that your events don't need to extend or implement anything. They 
 
 To fire the event, you'll need to get the server's event manager and use the
 [`fire`](jd:velocity:com.velocitypowered.api.event.EventManager#fire(E))
-method. Note that this returns a [`CompletableFuture`](jd:velocity:java.util.concurrent.CompletableFuture),
+method. Note that this returns a [`CompletableFuture`](jd:java:java.util.concurrent.CompletableFuture),
 so if you want to continue logic after the event is handled by all listeners, use a callback:
 
 ```java

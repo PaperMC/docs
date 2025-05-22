@@ -156,9 +156,9 @@ public class UUIDDataType implements PersistentDataType<byte[], UUID> {
 :::note
 
 In order to use your own `PersistentDataType`, you must pass an instance of it to the
-[`get`](jd:paper:org.bukkit.persistence.PersistentDataContainer#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType))/
+[`get`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType))/
 [`set`](jd:paper:org.bukkit.persistence.PersistentDataContainer#set(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C))/
-[`has`](jd:paper:org.bukkit.persistence.PersistentDataContainer#has(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)) methods.
+[`has`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#has(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)) methods.
 ```java
 container.set(key, new UUIDDataType(), uuid);
 ```

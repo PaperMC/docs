@@ -119,7 +119,7 @@ dependencies {
 
 :::caution
 
-The Hikari library is not bundled with Paper, so you will need to shade/relocate it. In Gradle, you will need to use the [Shadow plugin](https://imperceptiblethoughts.com/shadow/).
+The Hikari library is not bundled with Paper, so you will need to shade/relocate it. In Gradle, you will need to use the [Shadow plugin](https://gradleup.com/shadow/).
 Alternatively, you can use the library loader with your Paper plugin to load the library at runtime. See [here](/paper/dev/getting-started/paper-plugins#loaders)
 for more information on how to use this.
 

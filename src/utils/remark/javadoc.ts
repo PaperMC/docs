@@ -1,4 +1,5 @@
 import type { RemarkPlugin } from "@astrojs/markdown-remark";
+import { deadOrAlive } from "dead-or-alive";
 import { visit } from "unist-util-visit";
 
 // replaces special Markdown links with Javadoc URLs
@@ -20,7 +21,7 @@ const asUrl = (name: string): string => {
   return `${name0}.html` + (hash ? `#${hash}` : "");
 };
 
-const parse = (url: string, { targets }: Options): string | null => {
+const parse = async (url: string, { targets }: Options): Promise<string | null> => {
   const match = /^jd:(.+?)(?::(.+?))?(?::(.+?))?$/.exec(url);
   if (!match) {
     return null;
@@ -40,14 +41,27 @@ const parse = (url: string, { targets }: Options): string | null => {
 
   const module = match[3] ? match[2] : typeof target !== "string" ? target.module : undefined;
 
-  return `${targetUrl}/${module ? `${module}/` : ""}${asUrl(name)}`;
+  const parsed: string = `${targetUrl}/${module ? `${module}/` : ""}${asUrl(name)}`;
+
+  const result = await deadOrAlive(parsed);
+  if (result.status !== "alive") {
+    throw new Error(`javadoc markdown [${url}] for [${parsed}] is not valid`);
+  }
+
+  return parsed;
 };
 
 const plugin: RemarkPlugin = (options: Options) => {
-  return (tree) => {
+  return async (tree) => {
+    const promises: Promise<void>[] = [];
     visit(tree, "link", (node) => {
-      node.url = parse(node.url, options) ?? node.url;
+      promises.push(
+        parse(node.url, options).then((url) => {
+          node.url = url ?? node.url;
+        })
+      );
     });
+    await Promise.all(promises);
   };
 };
 

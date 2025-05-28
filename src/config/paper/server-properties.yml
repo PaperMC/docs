@@ -225,7 +225,9 @@ spawn-protection:
     at least 1 operator to be enabled.
 sync-chunk-writes:
   default: "true"
-  description: "Enables synchronous writing of chunk data."
+  description: |
+    Enables synchronous writing of chunk data. Has no effect on Paper by default.
+    See [`system-properties`](/paper/reference/system-properties/#paperenable-sync-chunk-writes).
 text-filtering-config:
   default: ""
   description: "The path to the text filtering configuration file. Leave blank to disable text filtering."

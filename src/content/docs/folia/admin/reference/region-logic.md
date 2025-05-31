@@ -278,7 +278,7 @@ invariants #2 and #3 can be met.
 
 At the end of a tick, the region's new state is not immediately known.
 
-First, tt first must process its pending merges.
+First, the region must process its pending merges.
 
 After it processes its pending merges, it must then check if the
 region is now pending merge into any other region. If it is, then

@@ -12,7 +12,7 @@ Luckily, many of our community members have produced libraries that complement A
 
 This list of libraries is provided for reference only. The Kyori team does not endorse any specific ones, and cannot provide any information beyond the provided links.
 
-If you have a library that you'd like included, please open a pull request on the [papermc-docs](https://github.com/PaperMC/docs) repository.
+If you have a library that you'd like included, please open a pull request on the [PaperMC/docs](https://github.com/PaperMC/docs) repository.
 
 :::
 

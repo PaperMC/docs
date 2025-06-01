@@ -3,7 +3,8 @@ title: BungeeCord
 description: The BungeeCord Adventure implementation.
 ---
 
-import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_RELEASE } from "/src/utils/versions";
 
 Adventure targets the latest version of BungeeCord and BungeeCord-compatible
 forks, such as Waterfall.
@@ -15,7 +16,9 @@ Most developers will want to write plugins for [Velocity](/velocity), which nati
 
 :::
 
-<AdventureDependency artifact="adventure-platform-bungeecord" project="platform" />
+Declaring the dependency:
+
+<Dependency group="net.kyori" name="adventure-platform-bungeecord" version={LATEST_ADVENTURE_PLATFORM_RELEASE} />
 
 ## Usage
 

@@ -3,7 +3,8 @@ title: ANSI
 description: Serializing components to ANSI.
 ---
 
-import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ANSI_RELEASE, LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 The ANSI text serializer is an encoder that converts components to text containing
 [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code), which allows
@@ -13,14 +14,11 @@ logs containing components while preserving their color and style.
 Note that since it's an encoder, it can only serialize components, and can't
 deserialize text back into components.
 
-<AdventureDependency artifact="adventure-text-serializer-ansi" project="api" />
+Declaring the dependency:
+
+<Dependency group="net.kyori" name="adventure-text-serializer-ansi" version={LATEST_ADVENTURE_API_RELEASE} />
 
 ## Usage
-
-The ANSI text serializer is accessed using the `ANSIComponentSerializer`.
-```java  {/* This code block is REQUIRED because otherwise, the code blocks from the AdventureDependency component break */}
-ANSIComponentSerializer.ansi();
-```
 
 Different kind of ANSI escape codes exist, allowing for different levels of color
 precision, however, not all terminals support newer kinds of ANSI escape sequences.
@@ -56,7 +54,9 @@ The `AnsiComponentSerializer` is built upon a separate ANSI library, which deals
 the lower-level ANSI escape sequence logic, and also allows for creating an ANSI
 converter for any kind of component, not just those by Adventure.
 
-<AdventureDependency artifact="ansi" project="ansi" />
+Declaring the dependency:
+
+<Dependency group="net.kyori" name="ansi" version={LATEST_ANSI_RELEASE} />
 
 ### Implementation usage
 

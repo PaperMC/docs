@@ -3,7 +3,7 @@ title: Fabric
 description: The Fabric Adventure implementation.
 ---
 
-import ModPlatformDependency from "/src/components/adventure/ModPlatformDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
 
 Adventure supports Fabric on *Minecraft: Java Edition* 1.16 and up, for both server-side and client-side use. Each major version of Minecraft
 will usually require a new release of the platform.
@@ -25,7 +25,7 @@ Starting with Minecraft 1.21.2, both platforms have version 6.x published.
 The Fabric platform is packaged as a mod, designed to be included in mods via jar-in-jar packaging.
 As with the rest of the Adventure projects, releases are distributed on Maven Central, and snapshots on Sonatype OSS:
 
-<ModPlatformDependency platform="fabric" />
+<Dependency name="fabric" template="adventure-platform-mod" />
 
 The Fabric platform requires *fabric-api-base* in order to provide the locale change event, *fabric-command-api-v2* for the callback click event,
 and can optionally use [Colonel](https://gitlab.com/stellardrift/colonel) (or *fabric-networking-api-v1*) to allow the `Component` and `Key` argument

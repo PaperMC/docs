@@ -3,7 +3,8 @@ title: Legacy
 description: (Deprecated) Serializing components to legacy format.
 ---
 
-import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 The legacy text serializer converts text to and from the traditional chat format used
 in Minecraft prior to Minecraft 1.7, and continues to be used to this day for its
@@ -11,12 +12,14 @@ familiarity to server owners.
 
 The legacy text serializer does not support most advanced features, including hover
 and click events, components besides text components, and insertions. RGB colors
-are supported (see more in the `RGB support`_ section) and URLs can be transformed
+are supported (see more in the [RGB support](#rgb-support) section) and URLs can be transformed
 into clickable components if explicitly requested (note, however, that click events
 containing a URL will *not* be serialized). If advanced features are desired, consider
-using `/minimessage/index`.
+using [MiniMessage](/adventure/minimessage).
 
-<AdventureDependency artifact="adventure-text-serializer-legacy" project="api" />
+Declaring the dependency:
+
+<Dependency group="net.kyori" name="adventure-text-serializer-legacy" version={LATEST_ADVENTURE_API_RELEASE} />
 
 ## Usage
 
@@ -25,12 +28,6 @@ pre-provided serializers include one that uses the section symbol (§) (for disp
 old clients) and another that uses an ampersand (&) typically used in configuration and
 commands to specify color codes.
 
-```java {/* This code block is REQUIRED because otherwise, the code blocks from the AdventureDependency component break */}
-LegacyComponentSerializer.legacyAmpersand(); // For '&'
-LegacyComponentSerializer.legacySection(); // For '§'
-LegacyComponentSerializer.legacy(char legacyCharacter); // For any symbol
-```
-
 The default configuration for the legacy text serializer will deserialize all three of
 the RGB formats supported by Adventure but will only serialize legacy Mojang colors
 (downsampling to the nearest color as needed) and does not transform URLs in text to
@@ -38,8 +35,7 @@ links. You can configure an instance to automatically add click events to URLs i
 components and allow the serializer to serialize RGB colors in either the Adventure
 RGB format or the BungeeCord RGB format using the builder.
 
-RGB support
------------
+## RGB support
 
 The legacy serializer supports deserializing three different formats:
 

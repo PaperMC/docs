@@ -25,48 +25,48 @@ then you don't need to use this artifact explicitly. This is because both platfo
 As with the rest of the Adventure projects, releases are distributed on Maven Central, and snapshots on Sonatype OSS:
 
 <Tabs syncKey="build-system">
-  <TabItem label="Gradle (Groovy)">
-  ```groovy replace
-  repositories {
-    // for development builds
-    maven {
-      name = "sonatype-oss-snapshots1"
-      url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-      mavenContent { snapshotsOnly() }
-    }
-    // for releases
-    mavenCentral()
-  }
-
-  dependencies {
-    // Loom project
-    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
-
-    // NeoGradle/ModDevGradle/VanillaGradle project
-    compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
-  }
-  ```
-  </TabItem>
   <TabItem label="Gradle (Kotlin)">
-  ```kts replace
-  repositories {
-    // for development builds
-    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-      name = "sonatype-oss-snapshots1"
-      mavenContent { snapshotsOnly() }
+    ```kotlin title="build.gradle.kts" replace
+    repositories {
+      // for development builds
+      maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+        name = "sonatype-oss-snapshots1"
+        mavenContent { snapshotsOnly() }
+      }
+      // for releases
+      mavenCentral()
     }
-    // for releases
-    mavenCentral()
-  }
 
-  dependencies {
-    // Loom project
-    modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
+    dependencies {
+      // Loom project
+      modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
 
-    // NeoGradle/ModDevGradle/VanillaGradle project
-    compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
-  }
-  ```
+      // NeoGradle/ModDevGradle/VanillaGradle project
+      compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft 1.21.5
+    }
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy title="build.gradle" replace
+    repositories {
+      // for development builds
+      maven {
+        name = 'sonatype-oss-snapshots1'
+        url = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+        mavenContent { snapshotsOnly() }
+      }
+      // for releases
+      mavenCentral()
+    }
+
+    dependencies {
+      // Loom project
+      modCompileOnly('net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft 1.21.5
+
+      // NeoGradle/ModDevGradle/VanillaGradle project
+      compileOnly('net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft 1.21.5
+    }
+    ```
   </TabItem>
 </Tabs>
 

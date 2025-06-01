@@ -12,7 +12,8 @@ To ensure a smooth and collaborative contribution process, please follow the gui
 5. [Version tags](#version-tags)
 6. [Automatic constant replacement](#automatic-constant-replacement)
 7. [Linking to Javadocs](#linking-to-javadocs)
-8. [Code of Conduct](#code-of-conduct)
+8. [Referencing a build system dependency](#referencing-a-build-system-dependency)
+9. [Code of Conduct](#code-of-conduct)
 
 ## Introduction
 
@@ -179,6 +180,45 @@ For that, you can use the `jd:project_name[:module_name][:class_or_member_refere
 [`repeat(long, TimeUnit)`](jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder#repeat(long,java.util.concurrent.TimeUnit))
 [java.base's List](jd:java:java.util.List)
 [java.sql's Connection](jd:java:java.sql:java.sql.Connection)
+```
+
+## Referencing a build system dependency
+
+If you wish to reference a build system (i.e. Gradle or Maven) dependency, you can use the `Dependency` component.
+
+```mdxjs
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+
+{/* uses the "default" template */}
+<Dependency group="net.kyori" name="adventure-api" version={LATEST_ADVENTURE_API_RELEASE} />
+```
+
+The `default` template is fit for use with a simple `implementation`/`compile`-scope dependency from Maven Central,
+however you can also make your own template.
+
+If you need to declare the dependency in a unique way and/or need to add other configuration in the build script, simply use
+the `Tabs` component with the corresponding code blocks - **do not make a template unless you plan to use it more than once**.
+
+```mdxjs
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kotlin title="build.gradle.kts"
+    // my awesome build script in Kotlin
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy title="build.gradle"
+    // my awesome build script in Groovy
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml title="pom.xml"
+    <!-- my awesome build script in XML -->
+    ```
+  </TabItem>
+</Tabs>
 ```
 
 ## Code of Conduct

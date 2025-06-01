@@ -3,7 +3,8 @@ title: SpongeAPI
 description: The SpongeAPI Adventure implementation.
 ---
 
-import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_RELEASE } from "/src/utils/versions";
 
 Adventure provides a platform for SpongeAPI 7 for *Minecraft: Java Edition* 1.12.
 
@@ -14,7 +15,9 @@ Sponge's API interfaces directly extend Adventure's rather than needing a `Spong
 
 :::
 
-<AdventureDependency artifact="adventure-platform-spongeapi" project="platform" />
+Declaring the dependency:
+
+<Dependency group="net.kyori" name="adventure-platform-spongeapi" version={LATEST_ADVENTURE_PLATFORM_RELEASE} />
 
 ## Usage
 

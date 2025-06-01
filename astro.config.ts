@@ -6,15 +6,15 @@ import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
-import miniMessageHighlight from "./src/assets/mm.tmLanguage.json";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
+import miniMessageHighlight from "./src/utils/shiki/mm.tmLanguage.json";
 import {
-  LATEST_FOLIA_RELEASE,
-  LATEST_ADVENTURE_ANSI_RELEASE,
   LATEST_ADVENTURE_API_RELEASE,
   LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
   LATEST_ADVENTURE_PLATFORM_RELEASE,
+  LATEST_ANSI_RELEASE,
+  LATEST_FOLIA_RELEASE,
   LATEST_MC_RELEASE,
   LATEST_PAPER_RELEASE,
   LATEST_USERDEV_RELEASE,
@@ -577,7 +577,7 @@ export default defineConfig({
             LATEST_ADVENTURE_API_RELEASE,
             LATEST_ADVENTURE_PLATFORM_RELEASE,
             LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
-            LATEST_ADVENTURE_ANSI_RELEASE,
+            LATEST_ANSI_RELEASE,
           },
         },
       ],

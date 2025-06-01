@@ -208,7 +208,6 @@ entities:
         description: >-
           A list of difficulties (PEACEFUL, EASY, NORMAL, HARD) at which zombie-like entities
           (husks, zombies, zombie villagers and zombified piglins) will attempt to break doors.
-          Defaults to *HARD*.
     ender-dragons-death-always-places-dragon-egg:
       default: "false"
       description: Controls whether ender dragons should always drop dragon eggs on death
@@ -500,9 +499,9 @@ entities:
         server
     filtered-entity-tag-nbt-paths:
       vanilla: "[]"
-      default: "[Pos, Motion, SleepingX, SleepingY, SleepingZ]"
+      default: "[Pos, Motion, sleeping_pos]"
       description: >-
-        A list of NBT tags that will be removed from the EntityTag tag on items
+        A list of NBT tags that will be removed from the "entity_data" component on items
         which spawn entities. The format of these strings follows the same
         format used to select NBT tags in Vanilla commands. If the spawning was
         directly caused by a player and the player has the minecraft.nbt.place

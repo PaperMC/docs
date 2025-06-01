@@ -1,7 +1,9 @@
 ---
-title: Overview
+title: Platforms
 description: Documentation regarding various implementations of the Adventure API.
 tableOfContents: false
+sidebar:
+  label: Overview
 ---
 
 Adventure integrates with many of the Minecraft platforms out there. Some platforms support

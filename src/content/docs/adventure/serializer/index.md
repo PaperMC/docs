@@ -1,6 +1,8 @@
 ---
-title: Overview
+title: Text serializers
 description: Everything to know about text/component serializers.
+sidebar:
+  label: Overview
 ---
 
 The lowest-level way to convert between Adventure's data and other formats

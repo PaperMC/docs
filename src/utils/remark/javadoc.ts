@@ -49,7 +49,16 @@ const parse = async (url: string, { targets }: Options): Promise<string | null> 
     userAgent: "PaperMC/docs (https://docs.papermc.io)",
   });
   if (result.status !== "alive") {
-    throw new Error(`Javadoc link "${url}" is not valid`);
+    const error = new Error(`Javadoc link "${url}" is not valid`);
+    if (process.env.NODE_ENV === "production") {
+      console.error(error);
+
+      // throwing an error does not exit the build process, it silently fails
+      // we don't want missing pages, so exit the process instead
+      process.exit(1);
+    } else {
+      throw error;
+    }
   }
 
   return parsed;

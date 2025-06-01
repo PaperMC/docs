@@ -1,5 +1,5 @@
 ---
-title: Text Serializers
+title: Overview
 description: Everything to know about text/component serializers.
 ---
 
@@ -47,7 +47,7 @@ final Component component = LegacyComponentSerializer.legacyAmpersand().deserial
 final Component component = PlainTextComponentSerializer.plainText().deserialize("Hello world!");
 ```
 
-## Text Encoders
+## Text encoders
 
 Text encoders are similar to serializers, but they only provide one-way
 operations, allowing for serialization but not deserialization.

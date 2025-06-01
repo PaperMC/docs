@@ -3,7 +3,7 @@ title: Text (Chat Components)
 description: Everything you need to know about Components.
 ---
 
-Components represent Minecraft chat components
+Components represent Minecraft chat components.
 
 ## Creating components
 

@@ -1,5 +1,5 @@
 ---
-title: Dynamic Replacements
+title: Dynamic replacements
 description: A guide on tag resolvers.
 ---
 

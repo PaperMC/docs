@@ -368,8 +368,9 @@ export default defineConfig({
                 "adventure/audiences",
                 "adventure/text",
                 {
-                  label: "Text Serializers",
+                  label: "Text serializers",
                   items: [
+                    "adventure/serializer",
                     "adventure/serializer/json",
                     "adventure/serializer/gson",
                     "adventure/serializer/legacy",
@@ -377,6 +378,7 @@ export default defineConfig({
                     {
                       label: "MiniMessage",
                       items: [
+                        "adventure/minimessage",
                         "adventure/minimessage/format",
                         "adventure/minimessage/api",
                         "adventure/minimessage/dynamic-replacements",
@@ -395,6 +397,7 @@ export default defineConfig({
                 {
                   label: "MiniMessage",
                   items: [
+                    "adventure/minimessage",
                     "adventure/minimessage/format",
                     "adventure/minimessage/api",
                     "adventure/minimessage/dynamic-replacements",
@@ -405,6 +408,7 @@ export default defineConfig({
                 {
                   label: "Platforms",
                   items: [
+                    "adventure/platform",
                     "adventure/platform/native",
                     "adventure/platform/bukkit",
                     "adventure/platform/bungeecord",
@@ -418,10 +422,14 @@ export default defineConfig({
                 },
                 {
                   label: "Migrating to Adventure from other APIs",
-                  items: ["adventure/migration/bungeecord-chat-api", "adventure/migration/text-3.x"],
+                  items: [
+                    "adventure/migration",
+                    "adventure/migration/bungeecord-chat-api",
+                    "adventure/migration/text-3.x",
+                  ],
                 },
                 {
-                  label: "Version History",
+                  label: "Version history",
                   items: [
                     { label: "adventure", link: "/adventure/version-history/adventure" },
                     { label: "adventure-platform", link: "/adventure/version-history/adventure-platform" },
@@ -496,13 +504,6 @@ export default defineConfig({
                 "/velocity/dev/api",
               ],
               folia: ["/folia/admin", "/folia/admin/reference"],
-              adventure: [
-                "/adventure/serializer",
-                "/adventure/minimessage",
-                "/adventure/platform",
-                "/adventure/migration",
-                "/adventure/version-history",
-              ],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],
             },

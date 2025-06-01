@@ -519,6 +519,7 @@ export default defineConfig({
                 "/velocity/dev/api",
               ],
               folia: ["/folia/admin", "/folia/admin/reference"],
+              adventure: ["/adventure/version-history"],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],
             },

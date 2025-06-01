@@ -1,5 +1,5 @@
 ---
-title: MiniMessage Translator
+title: MiniMessage translator
 description: A guide on the MiniMessage translator.
 ---
 

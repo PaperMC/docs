@@ -1,6 +1,7 @@
 ---
-title: MiniMessage
-description: Documentation regarding MiniMessage
+title: Overview
+description: Documentation regarding MiniMessage.
+tableOfContents: false
 ---
 
 The MiniMessage format is a simple string representation of chat components, designed to be easy for end users to learn, and for developers to extend.
@@ -13,5 +14,5 @@ If you're looking to write messages with MiniMessage, take a look at the [MiniMe
 
 - [Format](/adventure/minimessage/format)
 - [API](/adventure/minimessage/api)
-- [Dynamic Replacements](/adventure/minimessage/dynamic-replacements)
-- [MiniMessage Translator](/adventure/minimessage/translator)
+- [Dynamic replacements](/adventure/minimessage/dynamic-replacements)
+- [MiniMessage translator](/adventure/minimessage/translator)

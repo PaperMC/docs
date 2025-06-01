@@ -18,7 +18,7 @@ Some platforms already provide MiniMessage natively. In this case you will not n
 
 :::
 
-## Getting Started
+## Getting started
 
 MiniMessage exposes a simple API via the `MiniMessage` class.
 
@@ -71,7 +71,7 @@ which throws exceptions on unclosed tags, but still will allow any improperly sp
 To capture information on why a parse may have failed, `MiniMessage.Builder#debug(Consumer<String>)` can be provided, which will accept debug logging for an input string.
 
 
-## Tag Resolvers
+## Tag resolvers
 
 All tag resolution goes through tag resolvers. There is one global tag resolver, which describes the tags available through a `MiniMessage` instance, plus parse-specific resolvers which can provide additional input-specific tags.
 
@@ -105,7 +105,7 @@ assertEquals(Component.text("<bold>Hai", NamedTextColor.GREEN), parsed);
 
 Because the `<bold>` tag is not enabled on this builder, the bold tag is interpreted as literal text.
 
-### Handling Arguments
+### Handling arguments
 
 Tag resolvers have an `ArgumentQueue` parameter, which provides any tag arguments that are present in the input. Helper methods on `Tag.Argument` can assist with conversions of the tag.
 
@@ -175,7 +175,7 @@ Once the whole parse tree has been visited, the `postVisit()` method is called. 
 
 Next, the `Modifying` instance enters the application phase, where the component tree is presented to the tag for transformation. This allows the tag to *modify* the contents of these components, giving it its name.
 
-### Parser Directives
+### Parser directives
 
 Parser directives are a special kind of tag, as they are instructions for the parser, and therefore cannot be implemented by end users.
 

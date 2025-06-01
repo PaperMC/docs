@@ -1,5 +1,5 @@
 ---
-title: Resource Packs
+title: Resource packs
 description: A guide to using resource packs with Adventure.
 ---
 
@@ -7,7 +7,7 @@ On top of the resource packs controlled by each player on their client, the game
 
 Initially this just allowed sending a single resource pack, but starting with *Minecraft 1.20.3* the server can send multiple resource packs to be stacked, and if needed removed individually.
 
-## Sending Resource Packs
+## Sending resource packs
 
 A resource pack is identified by:
   * its UUID
@@ -62,7 +62,7 @@ The callback function allows servers to respond to pack download feedback sent b
 
 The audience provided in the callback aims to be the exact same audience the resource pack was sent to in the case of wrapping audiences, re-wrapping any underlying returned value where necessary.
 
-## Removing Resource Packs
+## Removing resource packs
 
 Resource packs can be removed, either some quantity at a time with `Audience.removeResourcePacks()`, or all at once with `Audience.clearResourcePacks()`.
 

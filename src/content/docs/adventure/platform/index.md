@@ -1,6 +1,7 @@
 ---
-title: Platforms
+title: Overview
 description: Documentation regarding various implementations of the Adventure API.
+tableOfContents: false
 ---
 
 Adventure integrates with many of the Minecraft platforms out there. Some platforms support
@@ -8,7 +9,7 @@ Adventure natively, but other legacy platforms have their own types and need an 
 allow you to obtain `Audience` instances from native user types.
 
 Contents:
-* [Native Support](/adventure/platform/native)
+* [Native support](/adventure/platform/native)
 * [Bukkit](/adventure/platform/bukkit)
   * [Usage](/adventure/platform/bukkit#usage)
   * [Component serializers](/adventure/platform/bukkit#component-serializers)
@@ -34,9 +35,9 @@ Contents:
   * [Commands](/adventure/platform/neoforge#commands)
   * [Client](/adventure/platform/neoforge#dependency)
 * [ViaVersion](/adventure/platform/viaversion)
-* [Implementing Platforms](/adventure/platform/implementing)
+* [Implementing platforms](/adventure/platform/implementing)
   * [Services](/adventure/platform/implementing#services)
-  * [Conventional Behaviors](/adventure/platform/implementing#conventional-behaviors)
+  * [Conventional behaviors](/adventure/platform/implementing#conventional-behaviors)
 
 
 :::note

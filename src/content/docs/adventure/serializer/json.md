@@ -19,7 +19,7 @@ final Component comp = JSONComponentSerializer.json().deserialize(jsonText);
 
 Additionally, there is a `JSONComponentSerializer.builder()` available for advanced use that requires configuring legacy compatibility options.
 
-## Known Implementations
+## Known implementations
 
 | Name                                                         | Description                                             |
 | ------------------------------------------------------------ | ------------------------------------------------------- |

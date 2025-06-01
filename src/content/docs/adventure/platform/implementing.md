@@ -1,5 +1,5 @@
 ---
-title: Implementing Platforms
+title: Implementing platforms
 description: Implementing Adventure for your own platform.
 ---
 
@@ -12,7 +12,7 @@ cover the common points. Please don't be afraid to ask us questions, and togethe
 
 ## Services
 
-### `ComponentSerializer` Services
+### `ComponentSerializer` services
 
 Most of the serializers (Gson, legacy, etc.) have `Provider` SPI's that allow customizing the default behaviors of serializers. These are most applicable for the Gson/other JSON
 serializers where the data structures have changed over time, but the legacy serializer's options can be worth referencing too. See the Javadoc for each serializer for more information.
@@ -22,14 +22,14 @@ For any `JSONComponentSerializer` subtype, we have tried to gather relevant tuna
 interface. We offer an implementation that uses `adventure-nbt` as a separate submodule, but platforms may wish to use a native NBT library for this instead.
 Both of these options should be set on builders in the appropriate `Provider` implementation.
 
-### Data Component Values
+### Data component values
 
 To handle storing platform-specific data on `show_item` hover events, we expose opaque data objects in-API. Platforms should provide logic to convert between different
 implementations by providing an implementation of `DataComponentValueConverterRegistry.Provider`. For the most part this is just converting between platform-specific types
 and the generic `TagSerializable` and `Removed` types, but platforms should make sure to include converters to `GsonDataComponentValue` (from both platform types
 *and* the generic `TagSerializable` that requires parsing SNBT for a conversion to occur).
 
-### Click Callbacks
+### Click callbacks
 
 As callbacks are a commonly desired feature, Adventure provides a 'virtual' click event type for callback functions. This action is not persistent between runs, and needs
 platforms to register a command to trigger callbacks to execute. This is implemented via the `ClickCallback.Provider` SPI. This command should not be sent as part of the
@@ -38,7 +38,7 @@ command tree that clients receive to avoid spamming them.
 Platforms implementing the click callback provider must register a command at the appropriate time, and maintain a registry of active callbacks that is added to any time a
 callback command is requested. The platform is responsible for ensuring any execution conditions apply and implementing the effects of any `Option`s that may be set on the callback.
 
-### Component Logging
+### Component logging
 
 `ComponentLogger`, as part of the `adventure-text-logger-slf4j` module, provides a logging interface that extends SLF4J and wraps any existing SLF4J logger (compatible with
 v1 and v2). Platforms are responsible for providing the adapter that looks up the appropriate logger by name and serializes components to text.
@@ -46,7 +46,7 @@ v1 and v2). Platforms are responsible for providing the adapter that looks up th
 This should involve performing any translations if necessary. The default behavior of the logger is to serialize to plain text, but platforms may want to look at the
 `/serializer/ansi` serializer instead for colored output.
 
-### Boss Bars
+### Boss bars
 
 Boss bars are logistically somewhat complicated. As one of the few holders of mutable state in the library, they have to re-sync any state changes to their viewers.
 In order to track viewers and link up to any internal state, the `BossBarImplementation.Provider` SPI allows platforms to provide their own implementation hooks per-bar.

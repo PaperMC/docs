@@ -1,7 +1,9 @@
 ---
-title: Overview
+title: MiniMessage
 description: Documentation regarding MiniMessage.
 tableOfContents: false
+sidebar:
+  label: Overview
 ---
 
 The MiniMessage format is a simple string representation of chat components, designed to be easy for end users to learn, and for developers to extend.

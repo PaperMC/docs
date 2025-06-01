@@ -1,9 +1,9 @@
 ---
-title: Boss Bars
+title: Boss bars
 description: A guide to Adventure BossBars.
 ---
 
-## Constructing a Boss Bar
+## Constructing a BossBar
 
 Boss Bars are composed of:
   * A component used for the title of the boss bar
@@ -39,7 +39,7 @@ public void hideActiveBossBar(final @NonNull Audience target) {
 }
 ```
 
-## Changing an active Boss Bar
+## Changing an active BossBar
 
 Boss bars are mutable and listen for changes on their object,
 the in-game view will change automatically without having to manually refresh it!

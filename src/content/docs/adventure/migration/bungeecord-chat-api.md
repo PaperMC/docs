@@ -12,7 +12,7 @@ It is strongly recommended you read about [Audiences](/adventure/audiences) firs
 which limits functionality to specific user types, Adventure allows only the specific
 operations that apply to an audience to be taken.
 
-## Decoration and Styling
+## Decoration and styling
 
 The BungeeCord Chat API stores all decorations in the `BaseComponent`. Adventure separates
 out styles into their own `Style` class.
@@ -21,7 +21,7 @@ BungeeCord allows you to merge the styles from one component into another. Adven
 equivalent methods that merge styles together, or allows you to replace the styles on one
 component with another.
 
-## Chat Colors
+## Chat colors
 
 Adventure's chat color and styling hierarchy differs from that of BungeeCord's `ChatColor`
 API. This is probably where the most stark contrast between the Adventure API and BungeeCord/Bukkit

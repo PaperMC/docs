@@ -1,7 +1,9 @@
 ---
-title: Overview
+title: Migrating to Adventure from other APIs
 description: Moving from other chat APIs to Adventure.
 tableOfContents: false
+sidebar:
+  label: Overview
 ---
 
 Moving to Adventure from other APIs is fairly straightforward. These guides

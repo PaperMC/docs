@@ -44,7 +44,7 @@ A `Translator` is a simple interface that provides two ways of translating conte
 
 The first `translate` method provides the translation key and locale as an argument and expects a nullable `MessageFormat` in return.
 This system is comparable to Minecraft's built-in localization system, using the standard Java
-[message format](https://docs.oracle.com/javase/8/docs/api/java/text/MessageFormat.html) for arguments.
+[message format](jd:java:java.text.MessageFormat) for arguments.
 
 If the first `translate` method returns `null`, the second method which provides the translatable component and locale as an argument can be used.
 This method allows for much richer customization of the translation process as you can return an entire component.
@@ -115,7 +115,7 @@ myStore.register("mytranslation.key", Locale.US, new MessageFormat("Hello %s!", 
 GlobalTranslator.translator().addSource(myStore);
 ```
 
-There are additional methods on the message format translation store to bulk register from [resource bundles](https://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html).
+There are additional methods on the message format translation store to bulk register from [resource bundles](jd:java:java.util.ResourceBundle).
 You may also want to use Adventure's `UTF8ResourceBundleControl` utility class to create your bundle.
 
 ### Using MiniMessage for translations

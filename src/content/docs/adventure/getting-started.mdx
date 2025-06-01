@@ -5,11 +5,16 @@ description: A guide to getting started with Adventure.
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 To use Adventure in your project, you will need to add the following dependency (and repository if using Gradle):
 
-<AdventureDependency artifact="adventure-api" project="api"/>
+Declaring the dependency:
+
+<Dependency group="net.kyori" name="adventure-api" version={LATEST_ADVENTURE_API_RELEASE} />
+
+Need development/snapshot builds? [Using Snapshot Builds](#using-snapshot-builds)
 
 Some platforms already use Adventure natively.
 In this case, you will not need to add Adventure as a dependency.
@@ -23,33 +28,33 @@ A list of platforms with supported adapters can be found at [Platforms](/adventu
 To use snapshot builds, you will need to add the following repository:
 
 <Tabs syncKey="build-system">
-<TabItem label="Maven">
-  ```xml
-  <repositories>
+  <TabItem label="Gradle (Kotlin)">
+    ```kotlin title="build.gradle.kts"
+    repositories {
+      maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+        name = "sonatype-oss-snapshots"
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy title="build.gradle"
+    repositories {
+      maven {
+        name = 'sonatype-oss-snapshots1'
+        url = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml title="pom.xml"
+    <repositories>
       <repository>
         <id>sonatype-oss-snapshots1</id>
         <url>https://s01.oss.sonatype.org/content/repositories/snapshots/</url>
       </repository>
-  </repositories>
-  ```
-</TabItem>
-<TabItem label="Gradle (Groovy)">
-  ```groovy
-  repositories {
-    maven {
-        name = "sonatype-oss-snapshots1"
-        url = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-    }
-  }
-  ```
-</TabItem>
-<TabItem label="Gradle (Kotlin)">
-  ```kotlin
-  repositories {
-    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-        name = "sonatype-oss-snapshots"
-    }
-  }
-  ```
-</TabItem>
+    </repositories>
+    ```
+  </TabItem>
 </Tabs>

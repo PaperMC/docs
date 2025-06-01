@@ -71,6 +71,6 @@ const adventurePlatformModVersions: string[] = await fetchGitHubTags("KyoriPower
 
 export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = adventurePlatformModVersions[0];
 
-const adventureAnsiVersions: string[] = await fetchGitHubTags("KyoriPowered/ansi");
+const ansiVersions: string[] = await fetchGitHubTags("KyoriPowered/ansi");
 
-export const LATEST_ADVENTURE_ANSI_RELEASE = adventureAnsiVersions[0];
+export const LATEST_ANSI_RELEASE = ansiVersions[0];

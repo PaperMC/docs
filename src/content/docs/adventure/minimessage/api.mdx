@@ -3,13 +3,16 @@ title: API
 description: A guide on using MiniMessage in your code.
 ---
 
-import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 ## Dependency
 
-<AdventureDependency artifact="adventure-text-minimessage" project="api" />
+Declaring the dependency:
 
-:::node
+<Dependency group="net.kyori" name="adventure-text-minimessage" version={LATEST_ADVENTURE_API_RELEASE} />
+
+:::note
 
 Some platforms already provide MiniMessage natively. In this case you will not need to add MiniMessage as a dependency.
 

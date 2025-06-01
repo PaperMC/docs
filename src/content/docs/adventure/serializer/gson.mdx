@@ -3,9 +3,8 @@ title: Gson
 description: Serializing components to JSON with Gson.
 ---
 
-import { Tabs, TabItem, Code } from "@astrojs/starlight/components";
-
-import AdventureDependency from "/src/components/adventure/AdventureDependency.astro";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 The Gson text serializer converts chat components to their JSON representation
 and back using the Gson library. If you are interested in sending a chat component
@@ -16,14 +15,11 @@ An average user of this text serializer will typically want to only deserialize 
 component from an external source - serialization is done automatically by the
 [Platforms](/adventure/platform) when the component is sent to the user.
 
-<AdventureDependency artifact="adventure-text-serializer-gson" project="api" />
+Declaring the dependency:
+
+<Dependency group="net.kyori" name="adventure-text-serializer-gson" version={LATEST_ADVENTURE_API_RELEASE} />
 
 ## Usage
-
-The Gson serializer is accessed using the `GsonComponentSerializer`:
-```java {/* This code block is REQUIRED because otherwise, the code blocks from the AdventureDependency component break */}
-GsonComponentSerializer.gson();
-```
 
 In Minecraft 1.16, Mojang made several major changes to the JSON chat format, adding
 RGB chat colors and changing how hover events are serialized. Components generated for
@@ -47,7 +43,6 @@ provided platforms. If you can't use a platform, generally you should prefer the
 serializer for deserializing components (as it is backwards-compatible), and make a decision
 on whether to use the default or the color downsampling serializer based on the version the
 client is on.
-
 
 ### Advanced Usage
 

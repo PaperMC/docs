@@ -26,8 +26,8 @@ commands:
     default: "true"
     description: >-
       Whether to log commands executed by players, in chat or on signs. This
-      _currently_ logs in the format "<playername> issued server command:
-      <command>".
+      _currently_ logs in the format "\<playername> issued server command:
+      \<command>".
   replace-commands:
     default: "[setblock,summon,testforblock,tellraw]"
     description: List of Vanilla commands that should override any plugin commands.
@@ -724,7 +724,7 @@ world-settings:
       default: "100000"
       description: >-
         The chance of lightning occurring during a thunderstorm, as a
-        probability of 1/<thunder-chance> per chunk, every tick.
+        probability of 1/\<thunder-chance> per chunk, every tick.
     ticks-per:
       hopper-check:
         default: "1"

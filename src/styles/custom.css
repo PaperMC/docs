@@ -61,11 +61,8 @@
 
 /* Dark mode colors. */
 :root {
-  /* raw values for setting opacity */
-  --sl-color-accent-raw: 37, 99, 235;
-
   --sl-color-accent-low: #1e3a8a;
-  --sl-color-accent: rgb(var(--sl-color-accent-raw));
+  --sl-color-accent: #2563eb;
   --sl-color-accent-high: #60a5fa;
   --sl-color-white: #ffffff;
   --sl-color-gray-1: #e2e5e9;
@@ -82,11 +79,7 @@
 
 /* Light mode colors. */
 :root[data-theme="light"] {
-  /* raw values for setting opacity */
-  --sl-color-accent-raw: 37, 99, 235;
-
   --sl-color-accent-low: #60a5fa;
-  --sl-color-accent: rgb(var(--sl-color-accent-raw));
   --sl-color-accent-high: #1e3a8a;
   --sl-color-white: #111111;
   --sl-color-gray-1: #181a1b;

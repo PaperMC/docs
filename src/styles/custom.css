@@ -86,10 +86,15 @@
   --sl-color-gray-2: #2a2c2e;
   --sl-color-gray-3: #3f4347;
   --sl-color-gray-4: #9fa5af;
-  --sl-color-gray-5: #d1d5db;
-  --sl-color-gray-6: #e2e5e9;
-  --sl-color-gray-7: #f3f4f6;
+  --sl-color-gray-5: #e5e7eb;
+  --sl-color-gray-6: #f3f4f6;
+  --sl-color-gray-7: #f9fafb;
   --sl-color-black: #ffffff;
+
+  /* make separators easier to see */
+  --sl-color-hairline: var(--sl-color-gray-5);
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
 
   /* return to Starlight default */
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);

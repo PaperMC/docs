@@ -72,8 +72,6 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     inset-inline-start: 0;
     width: 100%;
     background-color: var(--sl-color-black);
-    overflow-y: auto;
-    scroll-padding-top: 5.5rem;
   }
 
   :global([aria-expanded="true"]) ~ .sidebar-pane {
@@ -81,12 +79,20 @@ const { hasSidebar } = Astro.locals.starlightRoute;
   }
 
   .dropdown-wrapper {
-    position: sticky;
-    top: 0;
-    z-index: 20;
-    padding: 1rem var(--sl-sidebar-pad-x);
+    --sl-color-gray-6: oklch(from var(--sl-color-gray-5) calc(l - 0.05) c h);
+
+    padding: var(--sl-sidebar-pad-x);
     background-color: var(--sl-color-black);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid var(--sl-color-hairline-light);
+  }
+
+  :root[data-theme="light"] .dropdown-wrapper {
+    --sl-color-gray-6: oklch(from var(--sl-color-gray-5) calc(l + 0.025) c h);
+  }
+
+  .dropdown-wrapper :global(.starlight-sidebar-topics-dropdown-dropdown) {
+    width: 100%;
+    margin: 0;
   }
 
   .sidebar-content {
@@ -95,6 +101,7 @@ const { hasSidebar } = Astro.locals.starlightRoute;
     padding: 1rem var(--sl-sidebar-pad-x) 0;
     flex-direction: column;
     gap: 1rem;
+    overflow-y: auto;
   }
 
   @media (min-width: 50rem) {

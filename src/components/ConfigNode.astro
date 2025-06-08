@@ -59,7 +59,7 @@ const formatDefault = (value?: string): Default => {
           {"message" in rawValue ? (
             <div
               class:list={["block", "message", rawValue.inline && "message-inline"]}
-              style={rawValue.color ? `border-color: ${rawValue.color}` : undefined}
+              style={rawValue.color ? `border-left-color: ${rawValue.color}` : undefined}
               set:html={render(rawValue.message)}
             />
           ) : "description" in rawValue ? (
@@ -86,17 +86,8 @@ const formatDefault = (value?: string): Default => {
 
 <style>
   details:target {
-    border-radius: 0.5rem;
-    padding-block: 0.3rem;
-    padding-inline: 0.5rem;
-  }
-
-  html[data-theme="dark"] details:target {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  html[data-theme="light"] details:target {
-    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.25rem 0;
+    border-image: conic-gradient(oklch(from var(--sl-color-accent) l c h / 0.1) 0, oklch(from var(--sl-color-accent) l c h / 0.1) 0) fill 0/0/0 100vw;
   }
 
   .node {
@@ -117,6 +108,7 @@ const formatDefault = (value?: string): Default => {
     padding: 1rem;
     border: 1px solid var(--sl-color-gray-5);
     background-color: var(--sl-color-gray-6);
+    contain: paint;
   }
 
   .line {
@@ -140,13 +132,12 @@ const formatDefault = (value?: string): Default => {
   }
 
   .block {
-    margin-top: 0.5rem;
-    margin-bottom: 0.25rem;
-    margin-left: 1.25rem;
+    margin: 0.5rem 0 0.5rem 1.25rem;
     padding: 0.75rem;
     line-height: 1.5;
     color: var(--sl-color-white);
     background-color: var(--sl-color-gray-5);
+    border: 1px solid var(--sl-color-gray-4);
     border-left: 5px solid var(--sl-color-bg-accent);
   }
 
@@ -159,7 +150,7 @@ const formatDefault = (value?: string): Default => {
     padding: 0;
     color: var(--sl-color-gray-3);
     background-color: unset;
-    border-left: none;
+    border: none;
   }
 
   .muted {

@@ -108,6 +108,9 @@ const { hasSidebar } = Astro.locals.starlightRoute;
   .sidebar-content :global(a:not([aria-current="page"]):hover) {
     color: var(--sl-color-accent-high);
   }
+  .main-frame :global(.right-sidebar a:hover) {
+    color: var(--sl-color-accent-high);
+  }
 
   @media (min-width: 50rem) {
     .sidebar-content::after {

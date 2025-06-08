@@ -81,7 +81,7 @@
 :root[data-theme="light"] {
   --sl-color-accent-low: #60a5fa;
   --sl-color-accent-high: #1e3a8a;
-  --sl-color-white: #111111;
+  --sl-color-white: #000000;
   --sl-color-gray-1: #181a1b;
   --sl-color-gray-2: #2a2c2e;
   --sl-color-gray-3: #3f4347;

@@ -55,6 +55,11 @@ The default value shown may not be set for the property but will only be used by
 - **default**: `64`
 - **description**: Limits known packs to the Vanilla default to prevent crashing Velocity.
 
+#### velocity.skip-uncompressed-packet-size-validation
+
+- **default**: `false`
+- **description**: Whether to accept uncompressed packets which should be compressed due to their size
+
 #### velocity.max-packets-per-flush
 
 - **default**: `8192`

@@ -70,6 +70,11 @@ The default value shown may not be set for the property but will only be used by
 - **default**: `false`
 - **description**: Whether packet decoding errors should be logged extensively.
 
+#### velocity.skip-uncompressed-packet-size-validation
+
+- **default**: `false`
+- **description**: Whether to skip the validation of uncompressed packet sizes, this is useful to allow modded setups to send uncompressed packets over the threshold.
+
 #### velocity.increased-compression-cap
 
 - **default**: `false`

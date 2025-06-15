@@ -96,6 +96,9 @@
   --sl-color-hairline-light: var(--sl-color-gray-5);
   --sl-color-hairline-shade: var(--sl-color-gray-5);
 
+  /* make sidebar badge background less pronounced */
+  --sl-badge-danger-bg: oklch(from var(--sl-color-red-high) calc(l + 0.1) c h);
+
   /* return to Starlight default */
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);
 }

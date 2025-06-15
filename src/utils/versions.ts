@@ -55,11 +55,3 @@ const userdevVersions: string[] = await fetch("https://api.github.com/repos/Pape
   .then((tags: Tag[]) => tags.map((t) => t.name.substring(1)));
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
-
-export const LATEST_RELEASES: Record<string, string> = {
-  paper: LATEST_PAPER_RELEASE,
-  velocity: LATEST_VELOCITY_RELEASE,
-  folia: LATEST_FOLIA_RELEASE,
-  waterfall: LATEST_WATERFALL_RELEASE,
-  userdev: LATEST_USERDEV_RELEASE,
-};

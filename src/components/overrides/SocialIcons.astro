@@ -1,30 +1,21 @@
 ---
 import config from "virtual:starlight/user-config";
 import { Icon } from "@astrojs/starlight/components";
-import { LATEST_RELEASES } from "../../utils/versions";
 
 const { isPageWithTopic, topics } = Astro.locals.starlightSidebarTopics;
 const currentTopic = isPageWithTopic ? topics.find((t) => t.isCurrent) : null;
 
-const links = (config.social || []).map((link) => {
-  const project = currentTopic?.label?.toLowerCase();
-  if (!project) {
-    return link;
-  }
+const project = currentTopic?.label?.toLowerCase();
 
-  const version = LATEST_RELEASES[project];
-  if (!version) {
-    return link;
-  }
-
-  switch (link.label) {
-    case "Javadoc":
-      return { ...link, href: `${link.href}/${project}/${version}` };
-    case "GitHub":
-      return { ...link, href: `${link.href}/${project}` };
-  }
-  return link;
-});
+const links = (config.social || [])
+  .filter((l) => !l.label.includes(":") || (project && l.label.startsWith(`${project}:`)))
+  .map((link) => {
+    // strip project IDs
+    const index = link.label.indexOf(":");
+    return index !== -1 ? { ...link, label: link.label.substring(index + 1) } : link;
+  })
+  // deduplicate links with the same label
+  .filter((l, pos, self) => self.findIndex((e) => e.label === l.label) === pos);
 ---
 
 {

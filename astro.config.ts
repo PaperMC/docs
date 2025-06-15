@@ -7,10 +7,12 @@ import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
 import {
+  LATEST_FOLIA_RELEASE,
   LATEST_MC_RELEASE,
   LATEST_PAPER_RELEASE,
   LATEST_USERDEV_RELEASE,
   LATEST_VELOCITY_RELEASE,
+  LATEST_WATERFALL_RELEASE,
 } from "./src/utils/versions";
 
 const prod = process.env.NODE_ENV === "production";
@@ -32,9 +34,29 @@ export default defineConfig({
     starlight({
       title: "PaperMC Docs",
       social: [
+        { icon: "github", label: "paper:GitHub", href: "https://github.com/PaperMC/Paper" },
+        { icon: "seti:java", label: "paper:Javadoc", href: `https://jd.papermc.io/paper/${LATEST_PAPER_RELEASE}` },
+
+        { icon: "github", label: "velocity:GitHub", href: "https://github.com/PaperMC/Velocity" },
+        {
+          icon: "seti:java",
+          label: "velocity:Javadoc",
+          href: `https://jd.papermc.io/velocity/${LATEST_VELOCITY_RELEASE.substring(0, LATEST_VELOCITY_RELEASE.lastIndexOf("."))}.0`,
+        },
+
+        { icon: "github", label: "folia:GitHub", href: "https://github.com/PaperMC/Folia" },
+        { icon: "seti:java", label: "folia:Javadoc", href: `https://jd.papermc.io/folia/${LATEST_FOLIA_RELEASE}` },
+
+        { icon: "github", label: "waterfall:GitHub", href: "https://github.com/PaperMC/Waterfall" },
+        {
+          icon: "seti:java",
+          label: "waterfall:Javadoc",
+          href: `https://jd.papermc.io/waterfall/${LATEST_WATERFALL_RELEASE}`,
+        },
+
         { icon: "github", label: "GitHub", href: "https://github.com/PaperMC" },
-        { icon: "discord", label: "Discord", href: "https://discord.gg/PaperMC" },
         { icon: "seti:java", label: "Javadoc", href: "https://jd.papermc.io" },
+        { icon: "discord", label: "Discord", href: "https://discord.gg/PaperMC" },
       ],
       lastUpdated: true,
       editLink: {
@@ -433,6 +455,8 @@ export default defineConfig({
             LATEST_MC_RELEASE,
             LATEST_PAPER_RELEASE,
             LATEST_VELOCITY_RELEASE,
+            LATEST_FOLIA_RELEASE,
+            LATEST_WATERFALL_RELEASE,
             LATEST_USERDEV_RELEASE,
           },
         },

@@ -61,11 +61,8 @@
 
 /* Dark mode colors. */
 :root {
-  /* raw values for setting opacity */
-  --sl-color-accent-raw: 37, 99, 235;
-
   --sl-color-accent-low: #1e3a8a;
-  --sl-color-accent: rgb(var(--sl-color-accent-raw));
+  --sl-color-accent: #2563eb;
   --sl-color-accent-high: #60a5fa;
   --sl-color-white: #ffffff;
   --sl-color-gray-1: #e2e5e9;
@@ -82,21 +79,25 @@
 
 /* Light mode colors. */
 :root[data-theme="light"] {
-  /* raw values for setting opacity */
-  --sl-color-accent-raw: 37, 99, 235;
-
   --sl-color-accent-low: #60a5fa;
-  --sl-color-accent: rgb(var(--sl-color-accent-raw));
   --sl-color-accent-high: #1e3a8a;
-  --sl-color-white: #111111;
-  --sl-color-gray-1: #181a1b;
-  --sl-color-gray-2: #2a2c2e;
-  --sl-color-gray-3: #3f4347;
+  --sl-color-white: #000000;
+  --sl-color-gray-1: #111111;
+  --sl-color-gray-2: #181a1b;
+  --sl-color-gray-3: #2a2c2e;
   --sl-color-gray-4: #9fa5af;
-  --sl-color-gray-5: #d1d5db;
-  --sl-color-gray-6: #e2e5e9;
-  --sl-color-gray-7: #f3f4f6;
+  --sl-color-gray-5: #e5e7eb;
+  --sl-color-gray-6: #f3f4f6;
+  --sl-color-gray-7: #f9fafb;
   --sl-color-black: #ffffff;
+
+  /* make separators easier to see */
+  --sl-color-hairline: var(--sl-color-gray-5);
+  --sl-color-hairline-light: var(--sl-color-gray-5);
+  --sl-color-hairline-shade: var(--sl-color-gray-5);
+
+  /* make sidebar badge background less pronounced */
+  --sl-badge-danger-bg: oklch(from var(--sl-color-red-high) calc(l + 0.1) c h);
 
   /* return to Starlight default */
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);

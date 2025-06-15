@@ -30,7 +30,7 @@ const { version, inline } = Astro.props;
     font-size: var(--sl-text-xs);
     padding: 1rem 1.25rem;
     border-radius: 0.5rem;
-    background-color: rgba(var(--sl-color-accent-raw), 0.125);
+    background-color: oklch(from var(--sl-color-accent) l c h / 0.125);
     margin-bottom: 1rem;
   }
 

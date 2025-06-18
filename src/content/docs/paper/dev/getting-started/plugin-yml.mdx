@@ -114,12 +114,6 @@ The prefix of the plugin. This is what will be displayed in the log instead of t
 
 ### libraries
 
-:::caution
-
-The use of this feature is *currently* against Maven Central's TOS. However, this feature is very likely to stay.
-
-:::
-
 This is a list of libraries that your plugin depends on. These libraries will be downloaded from the Maven Central repository and added to the classpath.
 This removes the need to shade and relocate the libraries.
 
@@ -128,6 +122,12 @@ libraries:
   - com.google.guava:guava:30.1.1-jre
   - com.google.code.gson:gson:2.8.6
 ```
+
+:::note
+
+The central repository is configurable using the [`PAPER_DEFAULT_CENTRAL_REPOSITORY`](/paper/reference/system-properties#paper_default_central_repository) environment variable and [`org.bukkit.plugin.java.LibraryLoader.centralURL`](/paper/reference/system-properties#orgbukkitpluginjavalibraryloadercentralurl) system property.
+
+:::
 
 ### permissions
 

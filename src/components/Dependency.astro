@@ -1,0 +1,124 @@
+---
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+import { LATEST_ADVENTURE_PLATFORM_MOD_RELEASE } from "../utils/versions";
+
+type TemplateKey = "default" | "adventure-platform-mod";
+
+interface Template {
+  label: string;
+  lang?: string;
+  title?: string;
+  code: string;
+}
+
+const templates: Record<TemplateKey, Template[]> = {
+  default: [
+    {
+      label: "Gradle (Kotlin)",
+      lang: "kotlin",
+      title: "build.gradle.kts",
+      code: `repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation("\{GROUP}:\{NAME}:\{VERSION}")
+}`,
+    },
+    {
+      label: "Gradle (Groovy)",
+      lang: "groovy",
+      title: "build.gradle",
+      code: `repositories {
+  mavenCentral()
+}
+
+dependencies {
+  implementation '\{GROUP}:\{NAME}:\{VERSION}'
+}`,
+    },
+    {
+      label: "Maven",
+      lang: "xml",
+      title: "pom.xml",
+      code: `<project>
+  <dependencies>
+    <dependency>
+      <groupId>\{GROUP}</groupId>
+      <artifactId>\{NAME}</artifactId>
+      <version>\{VERSION}</version>
+    </dependency>
+  </dependencies>
+</project>`,
+    },
+  ],
+  "adventure-platform-mod": [
+    {
+      label: "Gradle (Kotlin)",
+      lang: "kotlin",
+      title: "build.gradle.kts",
+      code: `repositories {
+  // for development builds
+  maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
+    name = "sonatype-oss-snapshots1"
+    mavenContent { snapshotsOnly() }
+  }
+  // for releases
+  mavenCentral()
+}
+
+dependencies {
+  modImplementation(include("net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}")!!) // for Minecraft 1.21.5
+}`,
+    },
+    {
+      label: "Gradle (Groovy)",
+      lang: "groovy",
+      title: "build.gradle",
+      code: `repositories {
+  // for development builds
+  maven {
+    name = 'sonatype-oss-snapshots1'
+    url = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+    mavenContent { snapshotsOnly() }
+  }
+  // for releases
+  mavenCentral()
+}
+
+dependencies {
+  modImplementation include('net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft 1.21.5
+}`,
+    },
+  ],
+};
+
+interface Props {
+  group?: string;
+  name?: string;
+  version?: string;
+  template?: TemplateKey;
+}
+
+let { group = "", name = "", version = "", template } = Astro.props;
+template = template ?? "default";
+
+const templateData = templates[template];
+if (!templateData) {
+  throw new Error(`Template '${template}' not found`);
+}
+
+const formatCode = (code: string): string => {
+  return code.replaceAll("\{GROUP}", group).replaceAll("\{NAME}", name).replaceAll("\{VERSION}", version);
+};
+---
+
+<Tabs syncKey="build-system">
+  {
+    templateData.map(({ label, lang, title, code }) => (
+      <TabItem {label}>
+        <Code {lang} {title} code={formatCode(code)} />
+      </TabItem>
+    ))
+  }
+</Tabs>

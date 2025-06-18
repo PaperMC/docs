@@ -12,6 +12,7 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
+    "@ascorbic/feed-loader": "^1.0.4",
     "@astrojs/markdown-remark": "^6.3.1",
     "@astrojs/starlight": "^0.34.3",
     "@astrojs/svelte": "^7.0.13",

@@ -244,9 +244,35 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Setting this to true indicates that you have agreed with [Mojang's EULA](https://aka.ms/MinecraftEULA), skipping `eula.txt` checks.
 
+#### org.bukkit.plugin.java.LibraryLoader.centralURL
+
+- **default**: `https://maven-central.storage-download.googleapis.com/maven2`
+- **description**: Sets the default central repository URL, from which plugins' dependencies declared using the [`libraries`](/paper/dev/plugin-yml#libraries) plugin.yml field are resolved. This is overridden by the [`PAPER_DEFAULT_CENTRAL_REPOSITORY`](#paper_default_central_repository) environment variable, if it is set.
+
+:::caution
+
+If you wish to configure this with Maven Central, use a mirror, as using Maven Central directly as a CDN is against the Maven Central Terms of Service, and you may hit rate limits.
+
+By default, this uses Google's NA mirror of Maven Central. You may also use region-specific mirrors listed [here](https://storage-download.googleapis.com/maven-central/index.html).
+
+:::
+
 ## List of environment variables
 
 #### PAPER_VELOCITY_SECRET
 
 - **default**: `unset`
 - **description**: Overrides the [`proxies.velocity.secret`](/paper/reference/global-configuration#proxies_velocity_secret) global configuration option.
+
+#### PAPER_DEFAULT_CENTRAL_REPOSITORY
+
+- **default**: `https://maven-central.storage-download.googleapis.com/maven2`
+- **description**: Sets the default central repository URL, from which plugins' dependencies declared using the [`libraries`](/paper/dev/plugin-yml#libraries) plugin.yml field are resolved. This overrides the [`org.bukkit.plugin.java.LibraryLoader.centralURL`](#orgbukkitpluginjavalibraryloadercentralurl) system property, if it is set.
+
+:::caution
+
+If you wish to configure this with Maven Central, use a mirror, as using Maven Central directly as a CDN is against the Maven Central Terms of Service, and you may hit rate limits.
+
+By default, this uses Google's NA mirror of Maven Central. You may also use region-specific mirrors listed [here](https://storage-download.googleapis.com/maven-central/index.html).
+
+:::

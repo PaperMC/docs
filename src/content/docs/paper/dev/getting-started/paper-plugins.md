@@ -157,6 +157,19 @@ Currently, you are able to add two different library types:
 [`JarLibrary`](jd:paper:io.papermc.paper.plugin.loader.library.impl.JarLibrary) and
 [`MavenLibraryResolver`](jd:paper:io.papermc.paper.plugin.loader.library.impl.MavenLibraryResolver).
 
+:::danger
+
+If you wish to resolve libraries from Maven Central, use a mirror, as using Maven Central directly as a CDN is against the Maven Central Terms of Service, and users of your plugin may hit rate limits.
+
+You should use Paper's default mirror, configured by the [`PAPER_DEFAULT_CENTRAL_REPOSITORY`](/paper/reference/system-properties#paper_default_central_repository) environment variable and [`org.bukkit.plugin.java.LibraryLoader.centralURL`](/paper/reference/system-properties#orgbukkitpluginjavalibraryloadercentralurl) system property:
+```java
+resolver.addRepository(new RemoteRepository.Builder("central", "default", MavenLibraryResolver.MAVEN_CENTRAL_DEFAULT_MIRROR).build());
+```
+
+Using the Maven Central repository (i.e. `*.maven.org` or `*.maven.apache.org`) will cause a warning to be shown in the console.
+
+:::
+
 ## Differences
 
 ### Bukkit serialization system

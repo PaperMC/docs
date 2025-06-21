@@ -2,6 +2,7 @@
 title: Requirements
 description: A guide to setting requirements for commands.
 slug: paper/dev/command-api/basics/requirements
+version: 1.21.6
 ---
 
 Sometimes you want to limit a player's ability to use and/or view certain commands or subcommands. Exactly for this purpose,
@@ -76,7 +77,7 @@ the update commands method as often as required, but it should generally be avoi
 these in very specific spots. Furthermore, this method is completely thread safe, meaning you are free to call it from an asynchronous context.
 
 ## Restricted commands
-Since 1.21.6, commands can be restricted. This feature is used by Vanilla in order to make a player confirm whether they
+From 1.21.6 onwards, commands can now be restricted. This feature is used by Vanilla in order to make a player confirm whether they
 really want to run a command from a run-command click event. That includes ones on text components or dialog buttons.
 All Vanilla commands, which require operator status by default, are restricted:
 

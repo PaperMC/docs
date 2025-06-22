@@ -55,6 +55,11 @@ The default value shown may not be set for the property but will only be used by
 - **default**: `64`
 - **description**: Limits known packs to the Vanilla default to prevent crashing Velocity.
 
+#### velocity.max-clientside-plugin-channels
+
+- **default**: `1024`
+- **description**: Limits the plugin messaging channels registered by the client, as both Velocity and the backend servers need to keep track of them.
+
 #### velocity.max-packets-per-flush
 
 - **default**: `8192`

@@ -197,7 +197,7 @@ It also remaps plugin CB calls to remove the version information.
 #### paper.disableStartupVersionCheck
 
 - **default**: `unset`
-- **description**: If set, bypasses the automatic update checking on startup.
+- **description**: If set, disables the automatic update checking on startup.
 
 #### paper.useLegacyPluginLoading
 

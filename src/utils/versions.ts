@@ -24,27 +24,33 @@ const manifest: Manifest = await fetch("https://piston-meta.mojang.com/mc/game/v
 export const LATEST_MC_RELEASE = manifest.latest.release;
 
 interface Project {
-  project_id: string;
-  project_name: string;
-  version_groups: string[];
-  versions: string[];
+  project: {
+    id: string;
+  };
+  versions: {
+    [key: string]: string[];
+  };
 }
 
-const paperProject: Project = await fetch("https://api.papermc.io/v2/projects/paper").then((r) => r.json());
+function flattenVersions(project: Project) {
+  return Object.entries(project.versions).flatMap(([_, versions]) => versions);
+}
 
-export const LATEST_PAPER_RELEASE = paperProject.versions[paperProject.versions.length - 1];
+const paperProject: Project = await fetch("https://fill.papermc.io/v3/projects/paper").then((r) => r.json());
 
-const velocityProject: Project = await fetch("https://api.papermc.io/v2/projects/velocity").then((r) => r.json());
+export const LATEST_PAPER_RELEASE = flattenVersions(paperProject)[0];
 
-export const LATEST_VELOCITY_RELEASE = velocityProject.versions[velocityProject.versions.length - 1];
+const velocityProject: Project = await fetch("https://fill.papermc.io/v3/projects/velocity").then((r) => r.json());
 
-const foliaProject: Project = await fetch("https://api.papermc.io/v2/projects/folia").then((r) => r.json());
+export const LATEST_VELOCITY_RELEASE = flattenVersions(velocityProject)[0];
 
-export const LATEST_FOLIA_RELEASE = foliaProject.versions[foliaProject.versions.length - 1];
+const foliaProject: Project = await fetch("https://fill.papermc.io/v3/projects/folia").then((r) => r.json());
 
-const waterfallProject: Project = await fetch("https://api.papermc.io/v2/projects/waterfall").then((r) => r.json());
+export const LATEST_FOLIA_RELEASE = flattenVersions(foliaProject)[0];
 
-export const LATEST_WATERFALL_RELEASE = waterfallProject.versions[waterfallProject.versions.length - 1];
+const waterfallProject: Project = await fetch("https://fill.papermc.io/v3/projects/waterfall").then((r) => r.json());
+
+export const LATEST_WATERFALL_RELEASE = flattenVersions(waterfallProject)[0];
 
 interface Tag {
   name: string;

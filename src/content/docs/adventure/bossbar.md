@@ -8,7 +8,7 @@ description: A guide to Adventure BossBars.
 Boss Bars are composed of:
   * A component used for the title of the boss bar
   * A number from 0 to 1 used to determine how full the boss bar should be
-  * A color, will be downsampled for clients &lt;1.9
+  * A color, will be downsampled for clients <1.9
   * An overlay that determines the amount of visual segments on the boss bar
 
 

@@ -78,9 +78,19 @@ PROJECT="paper"
 MINECRAFT_VERSION="\{LATEST_PAPER_RELEASE}"
 USER_AGENT="cool-project/1.0.0 (contact@me.com)"
 
+# First check if the version exists
+VERSION_CHECK=$(curl -s -H "User-Agent: $USER_AGENT" https://fill.papermc.io/v3/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds)
+
+# Check if the API returned an error
+if echo "$VERSION_CHECK" | jq -e '.ok == false' > /dev/null 2>&1; then
+  ERROR_MSG=$(echo "$VERSION_CHECK" | jq -r '.message // "Unknown error"')
+  echo "Error: $ERROR_MSG"
+  exit 1
+fi
+
 # Get the download URL directly, or null if no stable build exists
 PAPERMC_URL=$(curl -s -H "User-Agent: $USER_AGENT" https://fill.papermc.io/v3/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
-  jq -r 'map(select(.channel == "STABLE")) | if length > 0 then .[0] | .downloads | .["server:default"].url else "null" end')
+  jq -r 'first(.[] | select(.channel == "STABLE") | .downloads."server:default".url) // "null"')
 
 if [ "$PAPERMC_URL" != "null" ]; then
   # Download the latest Paper version
@@ -98,6 +108,7 @@ do not receive support.
 ---
 
 Fill also supports a GraphQL API, which can be accessed at `https://fill.papermc.io/graphql`.
+A built in GraphQL playground is available at https://fill.papermc.io/graphiql?path=/graphql
 Common API tools such as Postman will introspect the API and provide a UI for building queries.
 
 ## GraphQL API Examples

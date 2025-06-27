@@ -1,6 +1,6 @@
 ---
 import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
-import { LATEST_ADVENTURE_PLATFORM_MOD_RELEASE } from "../utils/versions";
+import { LATEST_ADVENTURE_SUPPORTED_MC_RANGE, LATEST_ADVENTURE_PLATFORM_MOD_RELEASE } from "../utils/versions";
 
 type TemplateKey = "default" | "adventure-platform-mod";
 
@@ -68,7 +68,7 @@ dependencies {
 }
 
 dependencies {
-  modImplementation(include("net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}")!!) // for Minecraft 1.21.5
+  modImplementation(include("net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}")!!) // for Minecraft ${LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
 }`,
     },
     {
@@ -87,7 +87,7 @@ dependencies {
 }
 
 dependencies {
-  modImplementation include('net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft 1.21.5
+  modImplementation include('net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft ${LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
 }`,
     },
   ],

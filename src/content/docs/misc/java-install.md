@@ -35,7 +35,7 @@ Installing Java 21 on Debian-based Linux distributions is very simple. First, en
 all required tools to successfully install Java.
 
 ```bash
-sudo apt-get update && sudo apt-get upgrade
+sudo apt-get update
 sudo apt-get install ca-certificates apt-transport-https gnupg wget
 ```
 

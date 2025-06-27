@@ -84,18 +84,7 @@ const userdevVersions: string[] = await fetchGitHubTags("PaperMC/paperweight");
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
 
-const adventureApiVersions: string[] = await fetchGitHubTags("KyoriPowered/adventure");
-
-export const LATEST_ADVENTURE_API_RELEASE = adventureApiVersions[0];
-
-const adventurePlatformVersions: string[] = await fetchGitHubTags("KyoriPowered/adventure-platform");
-
-export const LATEST_ADVENTURE_PLATFORM_RELEASE = adventurePlatformVersions[0];
-
-const adventurePlatformModVersions: string[] = await fetchGitHubTags("KyoriPowered/adventure-platform-mod");
-
-export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = adventurePlatformModVersions[0];
-
-const ansiVersions: string[] = await fetchGitHubTags("KyoriPowered/ansi");
-
-export const LATEST_ANSI_RELEASE = ansiVersions[0];
+export const LATEST_ADVENTURE_API_RELEASE = "4.22.0";
+export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.0";
+export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = "6.4.0";
+export const LATEST_ANSI_RELEASE = "1.1.1";

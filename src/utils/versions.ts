@@ -84,6 +84,8 @@ const userdevVersions: string[] = await fetchGitHubTags("PaperMC/paperweight");
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
 
+export const LATEST_ADVENTURE_SUPPORTED_MC = "1.21.5";
+export const LATEST_ADVENTURE_SUPPORTED_MC_RANGE = LATEST_ADVENTURE_SUPPORTED_MC;
 export const LATEST_ADVENTURE_API_RELEASE = "4.22.0";
 export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.0";
 export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = "6.4.0";

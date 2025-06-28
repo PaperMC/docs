@@ -125,7 +125,7 @@ Modification of a registry can take two different forms.
 
 Creating new entries is done via the [`compose` lifecycle event](jd:paper:io.papermc.paper.registry.event.RegistryEventProvider#compose())
 on the respective registries.
-The compose event is called after a registry's content has been loaded from "vanilla" sources, like the built in
+The compose event is called after a registry's content has been loaded from "vanilla" sources, like the built-in
 datapack or any detected, enabled, datapacks. Plugins can hence register their own entries at this point.
 The following example shows how to create a new enchantment:
 

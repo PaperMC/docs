@@ -123,10 +123,10 @@ Modification of a registry can take two different forms.
 
 ### Create new entries
 
-Creating new entries is done via the [`freeze` lifecycle event](jd:paper:io.papermc.paper.registry.event.RegistryEventProvider#freeze())
+Creating new entries is done via the [`compose` lifecycle event](jd:paper:io.papermc.paper.registry.event.RegistryEventProvider#compose())
 on the respective registries.
-The freeze event is called right before a registry's content is frozen in-place, meaning all Vanilla entries are registered.
-Plugins can hence register their own entries at this point.
+The compose event is called after a registry's content has been loaded from "vanilla" sources, like the built in
+datapack or any detected, enabled, datapacks. Plugins can hence register their own entries at this point.
 The following example shows how to create a new enchantment:
 
 ```java title="TestPluginBootstrap.java"
@@ -134,8 +134,8 @@ public class TestPluginBootstrap implements PluginBootstrap {
 
     @Override
     public void bootstrap(BootstrapContext context) {
-        // Register a new handler for the freeze lifecycle event on the enchantment registry
-        context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.freeze().newHandler(event -> {
+        // Register a new handler for the compose lifecycle event on the enchantment registry
+        context.getLifecycleManager().registerEventHandler(RegistryEvents.ENCHANTMENT.compose().newHandler(event -> {
             event.registry().register(
                 // The key of the registry
                 // Plugins should use their own namespace instead of minecraft or papermc

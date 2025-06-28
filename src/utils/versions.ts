@@ -24,33 +24,30 @@ const manifest: Manifest = await fetch("https://piston-meta.mojang.com/mc/game/v
 export const LATEST_MC_RELEASE = manifest.latest.release;
 
 interface Project {
-  project: {
-    id: string;
-  };
-  versions: {
-    [key: string]: string[];
-  };
+  versions: Record<string, string[]>;
 }
 
-function flattenVersions(project: Project) {
-  return Object.entries(project.versions).flatMap(([_, versions]) => versions);
-}
+const fetchFillVersions = async (id: string): Promise<string[]> => {
+  const project: Project = await fetch(`https://fill.papermc.io/v3/projects/${id}`).then((r) => r.json());
 
-const paperProject: Project = await fetch("https://fill.papermc.io/v3/projects/paper").then((r) => r.json());
+  return Object.values(project.versions).flat();
+};
 
-export const LATEST_PAPER_RELEASE = flattenVersions(paperProject)[0];
+const paperVersions = await fetchFillVersions("paper");
 
-const velocityProject: Project = await fetch("https://fill.papermc.io/v3/projects/velocity").then((r) => r.json());
+export const LATEST_PAPER_RELEASE = paperVersions[0];
 
-export const LATEST_VELOCITY_RELEASE = flattenVersions(velocityProject)[0];
+const velocityVersions = await fetchFillVersions("velocity");
 
-const foliaProject: Project = await fetch("https://fill.papermc.io/v3/projects/folia").then((r) => r.json());
+export const LATEST_VELOCITY_RELEASE = velocityVersions[0];
 
-export const LATEST_FOLIA_RELEASE = flattenVersions(foliaProject)[0];
+const foliaVersions = await fetchFillVersions("folia");
 
-const waterfallProject: Project = await fetch("https://fill.papermc.io/v3/projects/waterfall").then((r) => r.json());
+export const LATEST_FOLIA_RELEASE = foliaVersions[0];
 
-export const LATEST_WATERFALL_RELEASE = flattenVersions(waterfallProject)[0];
+const waterfallVersions = await fetchFillVersions("waterfall");
+
+export const LATEST_WATERFALL_RELEASE = waterfallVersions[0];
 
 interface Tag {
   name: string;

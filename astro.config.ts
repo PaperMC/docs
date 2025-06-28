@@ -45,7 +45,11 @@ export default defineConfig({
         },
 
         { icon: "github", label: "folia:GitHub", href: "https://github.com/PaperMC/Folia" },
-        { icon: "seti:java", label: "folia:Javadoc", href: `https://jd.papermc.io/folia/${LATEST_FOLIA_RELEASE}` },
+        {
+          icon: "seti:java",
+          label: "folia:Javadoc",
+          href: `https://jd.papermc.io/folia/${LATEST_FOLIA_RELEASE.split(".").slice(0, 2).join(".")}`,
+        },
 
         { icon: "github", label: "waterfall:GitHub", href: "https://github.com/PaperMC/Waterfall" },
         {

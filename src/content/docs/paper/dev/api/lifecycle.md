@@ -2,22 +2,12 @@
 title: Lifecycle API
 description: A guide to Paper's Lifecycle API.
 slug: paper/dev/lifecycle
-sidebar:
-  badge:
-    text: Experimental
-    variant: danger
 ---
 
 The lifecycle API can be used for lifecycle-related registration. It is currently used by the
 Brigadier command API. It is planned to be used for the Registry Modification API as well.
 Generally, systems that are initialized very early in the startup process can take advantage of this
 event system.
-
-:::danger[Experimental]
-
-The Lifecycle API and anything that uses it is currently experimental and may change in the future.
-
-:::
 
 ## LifecycleEventManager
 

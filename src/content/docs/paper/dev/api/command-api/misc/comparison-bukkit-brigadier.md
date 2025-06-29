@@ -4,12 +4,6 @@ description: A comparison between Brigadier and Bukkit commands.
 slug: paper/dev/command-api/misc/comparison-bukkit-brigadier
 ---
 
-:::danger[Experimental]
-
-Paper's command system is still experimental and may change in the future.
-
-:::
-
 ## Registering commands
 ### The old Bukkit way
 

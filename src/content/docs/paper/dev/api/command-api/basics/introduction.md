@@ -11,12 +11,6 @@ It offers many advantages above the previously widely used Bukkit command system
 - Integration with reload events, allowing the definition of commands usable in datapacks.
 - Easier creation of subcommands.
 
-:::danger[Experimental]
-
-Paper's command system is still experimental and may change in the future.
-
-:::
-
 :::note
 
 To see a comparison between the new Brigadier system and the old Bukkit system, [click here](/paper/dev/command-api/misc/comparison-bukkit-brigadier).

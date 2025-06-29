@@ -168,8 +168,10 @@ world.spawn(location, BlockDisplay.class, entity -> {
 
 ## Interpolation
 
-A transformation can be linearly interpolated by the client to create a smooth animation,
-switching from one transformation to the next.
+Transformations and teleports can be linearly interpolated by the client to create a smooth animation,
+switching from one transformation/location to the next.
+
+### Transformation
 
 An example of this would be smoothly rotating a block/item/text in-place. In conjunction with the
 [Scheduler API](/paper/dev/scheduler), the animation can be restarted after it's done,
@@ -196,6 +198,22 @@ Bukkit.getScheduler().runTaskTimer(plugin, task -> {
 ```
 
 <span class="img-inline-center">![Interpolation example](./assets/display-interp.gif)</span>
+
+### Teleportation
+
+Similarly to the transformation interpolation, you may also want to interpolate the movement
+of the entire display entity between two points.
+
+A similar effect may be achieved using an interpolated translation, however if you change
+other properties of the transformation, those too will be interpolated, which may or may not be what you want.
+
+```java
+// new position will be 10 blocks higher
+Location newLocation = display.getLocation().add(0, 10, 0);
+
+display.setTeleportDuration(20 * 10); // the movement will take 10 seconds (1 second = 20 ticks)
+display.teleport(newLocation); // perform the movement
+```
 
 ## Use cases
 

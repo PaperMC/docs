@@ -13,12 +13,6 @@ We emphatically **do not recommend** using unstable builds or auto-updaters with
 
 :::
 
-:::note
-
-We require `jq` to be installed for the examples below. You can install it with `sudo apt-get install jq` on Debian/Ubuntu.
-
-:::
-
 All requests must now include a valid User-Agent header that:
 - Clearly identifies your software or company
 - Is not generic (e.g. curl, wget, or similar defaults)
@@ -30,7 +24,13 @@ mc-image-helper/1.39.11 (https://github.com/itzg/docker-minecraft-server)
 nodecraft/packifier/1.0.0 (staff@nodecraft.com)
 ```
 
-## REST API Examples
+## REST API examples
+
+:::note
+
+We require `jq` to be installed for the examples below. You can install it with `sudo apt-get install jq` on Debian/Ubuntu.
+
+:::
 
 ### Getting the latest version
 
@@ -105,13 +105,12 @@ This is the most common use case for the API. It will download the latest stable
 Minecraft version. You should always serve & use the stable builds. Experimental builds are prone to error and
 do not receive support.
 
----
+## GraphQL API examples
 
 Fill also supports a GraphQL API, which can be accessed at `https://fill.papermc.io/graphql`.
+
 A built-in GraphQL playground is available at https://fill.papermc.io/graphiql?path=/graphql.
 Common API tools such as Postman will introspect the API and provide a UI for building queries.
-
-## GraphQL API Examples
 
 ### Getting the latest version
 ```graphql
@@ -125,7 +124,7 @@ query LatestVersion {
 ```
 
 <details>
-<summary>Return response</summary>
+<summary>Example response</summary>
 
 ```json
 {
@@ -157,7 +156,7 @@ query LatestStableBuild {
 ```
 
 <details>
-<summary>Return response</summary>
+<summary>Example response</summary>
 
 ```json
 {
@@ -195,7 +194,7 @@ query LatestStableBuildDownloadURL {
 ```
 
 <details>
-<summary>Return response</summary>
+<summary>Example response</summary>
 
 ```json
 {

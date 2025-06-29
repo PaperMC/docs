@@ -5,7 +5,7 @@ slug: misc/downloads-api
 ---
 
 PaperMC provides a downloads API to facilitate automated downloads access. Full documentation can be
-found on the [Downloads API Docs](https://api.papermc.io/docs).
+found on the [Downloads API Docs](https://fill.papermc.io/swagger-ui/index.html#/).
 
 :::danger
 
@@ -13,37 +13,52 @@ We emphatically **do not recommend** using unstable builds or auto-updaters with
 
 :::
 
+All requests must now include a valid User-Agent header that:
+- Clearly identifies your software or company
+- Is not generic (e.g. curl, wget, or similar defaults)
+- Includes a contact URL or email address (e.g. a homepage, bot info page, or support email)
+
+**Some examples:**
+```
+mc-image-helper/1.39.11 (https://github.com/itzg/docker-minecraft-server)
+nodecraft/packifier/1.0.0 (staff@nodecraft.com)
+```
+
+## REST API examples
+
 :::note
 
 We require `jq` to be installed for the examples below. You can install it with `sudo apt-get install jq` on Debian/Ubuntu.
 
 :::
 
-## Getting the latest version
+### Getting the latest version
 
 ```shell
 #!/usr/bin/env sh
 
 PROJECT="paper"
+USER_AGENT="cool-project/1.0.0 (contact@me.com)"
 
-LATEST_VERSION=$(curl -s https://api.papermc.io/v2/projects/${PROJECT} | \
-    jq -r '.versions[-1]')
+LATEST_VERSION=$(curl -s -H "User-Agent: $USER_AGENT" https://fill.papermc.io/v3/projects/${PROJECT} | \
+    jq -r '.versions | to_entries[0] | .value[0]')
 
 echo "Latest version is $LATEST_VERSION"
 ```
 
 This will get the latest available Minecraft version for the given project.
 
-## Getting the latest stable build number
+### Getting the latest stable build number
 
 ```shell replace
 #!/usr/bin/env sh
 
 PROJECT="paper"
 MINECRAFT_VERSION="\{LATEST_PAPER_RELEASE}"
+USER_AGENT="cool-project/1.0.0 (contact@me.com)"
 
-LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
-  jq '.builds | map(select(.channel == "default") | .build) | .[-1]')
+LATEST_BUILD=$(curl -s -H "User-Agent: $USER_AGENT" https://fill.papermc.io/v3/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
+  jq -r 'map(select(.channel == "STABLE")) | .[0] | .id')
 
 if [ "$LATEST_BUILD" != "null" ]; then
   echo "Latest stable build is $LATEST_BUILD"
@@ -54,21 +69,30 @@ fi
 
 This will get the latest stable build for the given project and Minecraft version, if it's available.
 
-## Downloading the latest stable build
+### Downloading the latest stable build
 
 ```shell replace
 #!/usr/bin/env sh
 
 PROJECT="paper"
 MINECRAFT_VERSION="\{LATEST_PAPER_RELEASE}"
+USER_AGENT="cool-project/1.0.0 (contact@me.com)"
 
-LATEST_BUILD=$(curl -s https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
-  jq -r '.builds | map(select(.channel == "default") | .build) | .[-1]')
+# First check if the version exists
+VERSION_CHECK=$(curl -s -H "User-Agent: $USER_AGENT" https://fill.papermc.io/v3/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds)
 
-if [ "$LATEST_BUILD" != "null" ]; then
-  JAR_NAME=${PROJECT}-${MINECRAFT_VERSION}-${LATEST_BUILD}.jar
-  PAPERMC_URL="https://api.papermc.io/v2/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds/${LATEST_BUILD}/downloads/${JAR_NAME}"
+# Check if the API returned an error
+if echo "$VERSION_CHECK" | jq -e '.ok == false' > /dev/null 2>&1; then
+  ERROR_MSG=$(echo "$VERSION_CHECK" | jq -r '.message // "Unknown error"')
+  echo "Error: $ERROR_MSG"
+  exit 1
+fi
 
+# Get the download URL directly, or null if no stable build exists
+PAPERMC_URL=$(curl -s -H "User-Agent: $USER_AGENT" https://fill.papermc.io/v3/projects/${PROJECT}/versions/${MINECRAFT_VERSION}/builds | \
+  jq -r 'first(.[] | select(.channel == "STABLE") | .downloads."server:default".url) // "null"')
+
+if [ "$PAPERMC_URL" != "null" ]; then
   # Download the latest Paper version
   curl -o server.jar $PAPERMC_URL
   echo "Download completed"
@@ -80,3 +104,116 @@ fi
 This is the most common use case for the API. It will download the latest stable build for the given project and
 Minecraft version. You should always serve & use the stable builds. Experimental builds are prone to error and
 do not receive support.
+
+## GraphQL API examples
+
+Fill also supports a GraphQL API, which can be accessed at `https://fill.papermc.io/graphql`.
+
+A built-in GraphQL playground is available at https://fill.papermc.io/graphiql?path=/graphql.
+Common API tools such as Postman will introspect the API and provide a UI for building queries.
+
+### Getting the latest version
+```graphql
+query LatestVersion {
+    project(id: "paper") {
+        versions(last: 1) {
+            id
+        }
+    }
+}
+```
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+    "data": {
+        "project": {
+            "versions": [
+                {
+                    "id": "1.21.6"
+                }
+            ]
+        }
+    }
+}
+```
+
+</details>
+
+### Getting the latest stable build number
+```graphql
+query LatestStableBuild {
+    project(id: "paper") {
+        versions(last: 1) {
+            builds(filterBy: { channel: STABLE }, last: 1) {
+                id
+            }
+        }
+    }
+}
+```
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+    "data": {
+        "project": {
+            "versions": [
+                {
+                    "builds": [
+                        {
+                            "id": 46
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+```
+
+</details>
+
+### Getting the latest stable build download URL
+```graphql
+query LatestStableBuildDownloadURL {
+    project(id: "paper") {
+        versions(last: 1) {
+            builds(filterBy: { channel: STABLE }, last: 1) {
+                download(name: "server:default") {
+                    url
+                }
+            }
+        }
+    }
+}
+```
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+    "data": {
+        "project": {
+            "versions": [
+                {
+                    "builds": [
+                        {
+                            "download": {
+                                "url": "https://fill-data.papermc.io/v1/objects/bfca155b4a6b45644bfc1766f4e02a83c736e45fcc060e8788c71d6e7b3d56f6/paper-1.21.6-46.jar"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
+```
+
+</details>

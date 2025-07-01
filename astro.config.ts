@@ -440,6 +440,10 @@ export default defineConfig({
   build: {
     inlineStylesheets: "always",
   },
+  image: {
+    responsiveStyles: true,
+    layout: "constrained",
+  },
   markdown: {
     remarkPlugins: [
       [

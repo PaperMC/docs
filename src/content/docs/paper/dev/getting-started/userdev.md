@@ -106,7 +106,7 @@ The `-dev-all.jar` file in `build/libs` is the shaded, but not re-obfuscated JAR
 :::
 
 You can make the `reobfJar` task run on the default `build` task with:
-```kotlin
+```kotlin title="build.gradle(.kts)"
 tasks.assemble {
   dependsOn(tasks.reobfJar)
 }

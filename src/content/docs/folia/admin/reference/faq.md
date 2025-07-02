@@ -57,14 +57,18 @@ Folia currently disables a handful of commands. These are them:
 - Item commands
 - Loot
 - Reload
+- Return
 - Ride
+- Rotate
 - Schedule
 - Scoreboard
+- Spectate
+- SpreadPlayers
 - Tag
 - Team
 - TeamMsg
+- Tick
 - Trigger
-- WorldBorder
 - Perf
 - SaveAll
 - Restart

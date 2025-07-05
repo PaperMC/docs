@@ -50,7 +50,7 @@ pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
 ```java
 NamespacedKey key = ...; // Retrieve the key from before
 
-// For 1.20.4 and below, use new ItemStack(Material.DIAMOND) instead
+// For 1.20.4 and below, use 'new ItemStack(Material.DIAMOND)' instead
 ItemStack item = ItemType.DIAMOND.createItemStack();
 // ItemStack provides a util method, so we can directly edit its PDC
 item.editPersistentDataContainer(pdc -> {

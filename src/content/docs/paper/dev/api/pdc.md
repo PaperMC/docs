@@ -2,6 +2,7 @@
 title: Persistent data container (PDC)
 description: A guide to the PDC API for storing data.
 slug: paper/dev/pdc
+version: "Up to 1.21.5"
 ---
 
 The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and block entities.
@@ -49,12 +50,15 @@ pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
 ```java
 NamespacedKey key = ...; // Retrieve the key from before
 
+// For 1.20.4 and below, use new ItemStack(Material.DIAMOND) instead
 ItemStack item = ItemType.DIAMOND.createItemStack();
 // ItemStack provides a util method, so we can directly edit its PDC
 item.editPersistentDataContainer(pdc -> {
     pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
 });
 ```
+Note: The [`ItemStack#editPersistentDataContainer()`](jd:org.bukkit.inventory.ItemStack#editPersistentDataContainer()) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the `ItemMeta` instead.
+For 1.16.5+, there's the [`ItemStack#editMeta()`](jd:org.bukkit.inventory.ItemStack#editMeta(Consumer)) method though.
 
 :::note
 
@@ -85,6 +89,7 @@ if (containerView.has(key, PersistentDataType.STRING)) {
     player.sendMessage(Component.text(value));
 }
 ```
+Note: The [`ItemStack#getPersistentDataContainer()`](jd:org.bukkit.inventory.ItemStack#getPersistentDataContainer()) method on `ItemStack` is only available in 1.21.1+. For older versions, you need to access and modify the `ItemMeta` instead.
 
 ## Data types
 
@@ -203,8 +208,8 @@ and their PDC can be fetched with [`PersistentDataHolder#getPersistentDataContai
     - The persistent data container of an `ItemStack` has historically been accessed by
       the `ItemStack`'s `ItemMeta`. This, however, includes the overhead of constructing the entire `ItemMeta`, which acts as a snapshot of the `ItemStack`'s data at the point of creation.
 
-      To avoid this overhead, ItemStack exposes a read-only view of its persistent data container at `ItemStack#getPersistentDataContainer()`.
-      Edits to the persistent data container can be achieved via `ItemStack#editPersistentDataContainer(Consumer)`.
+      To avoid this overhead in 1.21.1+, ItemStack exposes a read-only view of its persistent data container at `ItemStack#getPersistentDataContainer()`.
+      Edits to the persistent data container can also be simplified in 1.21.4+ using `ItemStack#editPersistentDataContainer(Consumer)`.
       The persistent data container available in the consumer is not valid outside the consumer.
       ```java
       ItemStack itemStack = ...;

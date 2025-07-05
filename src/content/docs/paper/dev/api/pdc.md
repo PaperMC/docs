@@ -61,9 +61,10 @@ item.editPersistentDataContainer(pdc -> {
 It is considered good practice to reuse `NamespacedKey` objects. They can be constructed with either:
 - A [`Plugin`](jd:paper:org.bukkit.plugin.Plugin) instance and a [`String`](jd:java:java.lang.String) identifier
 - A [`String`](jd:java:java.lang.String) namespace and a [`String`](jd:java:java.lang.String) identifier
-- Some classes such as ItemStack and OfflinePlayer provide a read-only container "view" and other than ItemStack, OfflinePlayer has no other method to add data.
+- Certain classes, like `ItemStack` or [`OfflinePlayer`](jd:paper:org.bukkit.OfflinePlayer), provide a read-only view of their PDC.
+In contrast to `ItemStack`, `OfflinePlayer` does __not__ provide any way to modify the underlying container.
 
-The first option is often preferred as it will automatically use the plugin's name as namespace; however, the second option can be used if you
+The first option is often preferred as it will automatically use the plugin's lowercased name as namespace; however, the second option can be used if you
 want to use a different namespace or access the data from another plugin.
 
 :::

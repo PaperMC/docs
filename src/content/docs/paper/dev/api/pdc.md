@@ -60,7 +60,7 @@ item.editPersistentDataContainer(pdc -> {
 
 :::note
 
-The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer()) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the `ItemMeta` instead.
+The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer(Consumer)) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the `ItemMeta` instead.
 For 1.16.5+, there's the [`ItemStack#editMeta()`](jd:paper:org.bukkit.inventory.ItemStack#editMeta(Consumer)) method though.
 
 :::

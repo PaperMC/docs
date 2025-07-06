@@ -60,8 +60,8 @@ item.editPersistentDataContainer(pdc -> {
 
 :::note
 
-The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer(Consumer)) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the `ItemMeta` instead.
-For 1.16.5+, there's the [`ItemStack#editMeta()`](jd:paper:org.bukkit.inventory.ItemStack#editMeta(Consumer)) method though.
+The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer(java.util.function.Consumer)) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the `ItemMeta` instead.
+For 1.16.5+, there's the [`ItemStack#editMeta()`](jd:paper:org.bukkit.inventory.ItemStack#editMeta(java.util.function.Consumer)) method though.
 
 :::
 
@@ -226,7 +226,7 @@ and their PDC can be fetched with [`PersistentDataHolder#getPersistentDataContai
       the `ItemStack`'s `ItemMeta`. This, however, includes the overhead of constructing the entire `ItemMeta`, which acts as a snapshot of the `ItemStack`'s data at the point of creation.
 
       To avoid this overhead in 1.21.1+, ItemStack exposes a read-only view of its persistent data container at `ItemStack#getPersistentDataContainer()`.
-      Edits to the persistent data container can also be simplified in 1.21.4+ using `ItemStack#editPersistentDataContainer(Consumer)`.
+      Edits to the persistent data container can also be simplified in 1.21.4+ using `ItemStack#editPersistentDataContainer(java.util.function.Consumer)`.
       The persistent data container available in the consumer is not valid outside the consumer.
       ```java
       ItemStack itemStack = ...;

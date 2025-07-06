@@ -203,8 +203,11 @@ container.set(key, UUIDDataType.INSTANCE, uuid);
 ## Read-only containers
 :::note
 
-Certain classes, like `ItemStack` or [`OfflinePlayer`](jd:paper:org.bukkit.OfflinePlayer), provide a read-only view of their PDC.
+- Certain classes, like `ItemStack` or [`OfflinePlayer`](jd:paper:org.bukkit.OfflinePlayer), provide a read-only view of their PDC.
 In contrast to `ItemStack`, `OfflinePlayer` does <u>not</u> provide any way to modify the underlying container.
+- This is because the `OfflinePlayer` is directly read from disk and would require a blocking file operation.
+Mutable objects, like the `PersistentDataHolder#getPersistentDataContainer()`, generally need to be re-saved even without modification or monitored.
+That's why it's better to use unmodifiable "views" for read-only operations.
 
 :::
 

@@ -57,6 +57,7 @@ item.editPersistentDataContainer(pdc -> {
     pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
 });
 ```
+
 :::note
 
 The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer()) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the `ItemMeta` instead.
@@ -91,7 +92,12 @@ if (containerView.has(key, PersistentDataType.STRING)) {
     player.sendMessage(Component.text(value));
 }
 ```
-Note: The [`ItemStack#getPersistentDataContainer()`](jd:org.bukkit.inventory.ItemStack#getPersistentDataContainer()) method on `ItemStack` is only available in 1.21.1+. For older versions, you need to access and modify the `ItemMeta` instead.
+
+:::note
+
+The [`ItemStack#getPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#getPersistentDataContainer()) method on `ItemStack` is only available in 1.21.1+. For older versions, you need to access and modify the `ItemMeta` instead.
+
+:::
 
 ## Data types
 

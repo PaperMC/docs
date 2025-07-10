@@ -14,6 +14,7 @@ import ResourceChickenVariant from "./assets/registry-arguments/resource-chicken
 import ResourceCowVariant from "./assets/registry-arguments/resource-cow-variant.mp4";
 import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4";
 import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4";
+import ResourceDialog from "./assets/registry-arguments/resource-dialog.mp4";
 import ResourceEnchantment from "./assets/registry-arguments/resource-enchantment.mp4";
 import ResourceEntityType from "./assets/registry-arguments/resource-entity-type.mp4";
 import ResourceFluid from "./assets/registry-arguments/resource-fluid.mp4";
@@ -197,42 +198,43 @@ input and be able to retrieve the backed instance without much trouble, that is 
 
 The following `RegistryKeys` exist:
 
-|   RegistryKeys Field   |      Return Value      |                Preview Video                |
-|------------------------|------------------------|---------------------------------------------|
-| ATTRIBUTE              | Attribute              | [Attribute](#attribute)                     |
-| BANNER_PATTERN         | PatternType            | [Banner Pattern](#banner-pattern)           |
-| BIOME                  | Biome                  | [Biome](#biome)                             |
-| BLOCK                  | BlockType              | [Block](#block)                             |
-| CAT_VARIANT            | Cat.Type               | [Cat Variant](#cat-variant)                 |
-| CHICKEN_VARIANT        | Chicken.Variant        | [Chicken Variant](#chicken-variant)         |
-| COW_VARIANT            | Cow.Variant            | [Cow Variant](#cow-variant)                 |
-| DAMAGE_TYPE            | DamageType             | [Damage Type](#damage-type)                 |
-| DATA_COMPONENT_TYPE    | DataComponentType      | [Data Component Type](#data-component-type) |
-| ENCHANTMENT            | Enchantment            | [Enchantment](#enchantment)                 |
-| ENTITY_TYPE            | EntityType             | [Entity Type](#entity-type)                 |
-| FLUID                  | Fluid                  | [Fluid](#fluid)                             |
-| FROG_VARIANT           | Frog.Variant           | [Frog Variant](#frog-variant)               |
-| GAME_EVENT             | GameEvent              | [Game Event](#game-event)                   |
-| INSTRUMENT             | MusicInstrument        | [Instrument](#instrument)                   |
-| ITEM                   | ItemType               | [Item](#item)                               |
-| JUKEBOX_SONG           | JukeboxSong            | [Jukebox Song](#jukebox-song)               |
-| MAP_DECORATION_TYPE    | MapCursor.Type         | [Map Decoration Type](#map-decoration-type) |
-| MEMORY_MODULE_TYPE     | MemoryKey\<?>          | [Memory Module Type](#memory-module-type)   |
-| MENU                   | MenuType               | [Menu](#menu)                               |
-| MOB_EFFECT             | PotionEffectType       | [Mob effect](#mob-effect)                   |
-| PAINTING_VARIANT       | Art                    | [Painting variant](#painting-variant)       |
-| PARTICLE_TYPE          | Particle               | [Particle](#particle)                       |
-| PIG_VARIANT            | Pig.Variant            | [Pig Variant](#pig-variant)                 |
-| POTION                 | PotionType             | [Potion](#potion)                           |
-| SOUND_EVENT            | Sound                  | [Sound](#sound)                             |
-| STRUCTURE              | Structure              | [Structure](#structure)                     |
-| STRUCTURE_TYPE         | StructureType          | [Structure Type](#structure-type)           |
-| TRIM_MATERIAL          | TrimMaterial           | [Trim Material](#trim-material)             |
-| TRIM_PATTERN           | TrimPattern            | [Trim Pattern](#trim-pattern)               |
-| VILLAGER_PROFESSION    | Villager.Profession    | [Villager Profession](#villager-profession) |
-| VILLAGER_TYPE          | Villager.Type          | [Villager Type](#villager-type)             |
-| WOLF_SOUND_VARIANT     | Wolf.SoundVariant      | [Wolf Sound Variant](#wolf-sound-variant)   |
-| WOLF_VARIANT           | Wolf.Variant           | [Wolf Variant](#wolf-variant)               |
+| RegistryKeys Field  | Return Value        | Preview Video                               |
+|---------------------|---------------------|---------------------------------------------|
+| ATTRIBUTE           | Attribute           | [Attribute](#attribute)                     |
+| BANNER_PATTERN      | PatternType         | [Banner Pattern](#banner-pattern)           |
+| BIOME               | Biome               | [Biome](#biome)                             |
+| BLOCK               | BlockType           | [Block](#block)                             |
+| CAT_VARIANT         | Cat.Type            | [Cat Variant](#cat-variant)                 |
+| CHICKEN_VARIANT     | Chicken.Variant     | [Chicken Variant](#chicken-variant)         |
+| COW_VARIANT         | Cow.Variant         | [Cow Variant](#cow-variant)                 |
+| DAMAGE_TYPE         | DamageType          | [Damage Type](#damage-type)                 |
+| DATA_COMPONENT_TYPE | DataComponentType   | [Data Component Type](#data-component-type) |
+| DIALOG              | Dialog              | [Dialog](#dialog)                           |
+| ENCHANTMENT         | Enchantment         | [Enchantment](#enchantment)                 |
+| ENTITY_TYPE         | EntityType          | [Entity Type](#entity-type)                 |
+| FLUID               | Fluid               | [Fluid](#fluid)                             |
+| FROG_VARIANT        | Frog.Variant        | [Frog Variant](#frog-variant)               |
+| GAME_EVENT          | GameEvent           | [Game Event](#game-event)                   |
+| INSTRUMENT          | MusicInstrument     | [Instrument](#instrument)                   |
+| ITEM                | ItemType            | [Item](#item)                               |
+| JUKEBOX_SONG        | JukeboxSong         | [Jukebox Song](#jukebox-song)               |
+| MAP_DECORATION_TYPE | MapCursor.Type      | [Map Decoration Type](#map-decoration-type) |
+| MEMORY_MODULE_TYPE  | MemoryKey\<?>       | [Memory Module Type](#memory-module-type)   |
+| MENU                | MenuType            | [Menu](#menu)                               |
+| MOB_EFFECT          | PotionEffectType    | [Mob effect](#mob-effect)                   |
+| PAINTING_VARIANT    | Art                 | [Painting variant](#painting-variant)       |
+| PARTICLE_TYPE       | Particle            | [Particle](#particle)                       |
+| PIG_VARIANT         | Pig.Variant         | [Pig Variant](#pig-variant)                 |
+| POTION              | PotionType          | [Potion](#potion)                           |
+| SOUND_EVENT         | Sound               | [Sound](#sound)                             |
+| STRUCTURE           | Structure           | [Structure](#structure)                     |
+| STRUCTURE_TYPE      | StructureType       | [Structure Type](#structure-type)           |
+| TRIM_MATERIAL       | TrimMaterial        | [Trim Material](#trim-material)             |
+| TRIM_PATTERN        | TrimPattern         | [Trim Pattern](#trim-pattern)               |
+| VILLAGER_PROFESSION | Villager.Profession | [Villager Profession](#villager-profession) |
+| VILLAGER_TYPE       | Villager.Type       | [Villager Type](#villager-type)             |
+| WOLF_SOUND_VARIANT  | Wolf.SoundVariant   | [Wolf Sound Variant](#wolf-sound-variant)   |
+| WOLF_VARIANT        | Wolf.Variant        | [Wolf Variant](#wolf-variant)               |
 
 ### Attribute
 <Video src={ResourceAttributes} />
@@ -258,14 +260,17 @@ The following `RegistryKeys` exist:
 ### Damage type
 <Video src={ResourceDamageType} />
 
+### Data component type
+<Video src={ResourceDataComponentType} />
+
+### Dialog
+<Video src={ResourceDialog} />
+
 ### Enchantment
 <Video src={ResourceEnchantment} />
 
 ### Entity type
 <Video src={ResourceEntityType} />
-
-### Data component type
-<Video src={ResourceDataComponentType} />
 
 ### Fluid
 <Video src={ResourceFluid} />

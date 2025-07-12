@@ -50,7 +50,20 @@ mention Paper compatibility. It'll still work.
    is not listed or is colored red, continue to [troubleshooting](#troubleshooting). A plugin listed
    in red means that it is not currently enabled. For a freshly installed plugin, this often means
    that the plugin failed to load.
+6. Common Ways to Change The Config of Your Installed Plugins:
+       - Go to Plugins/PluginName/Config.yml
+       Applying Changes:
+         - You can Use the Plugins Command Which Is Usually: /PluginName reload
+         - If Doesn't Work Restart The server
+         - Using /reload 
+:::danger[/reload is Not Recemmeded]
 
+
+Ensure You have a Backup For Doing This
+Because This Command Might Corrupt Your World/Server
+
+
+:::
 ## Troubleshooting
 
 ### Check your logs

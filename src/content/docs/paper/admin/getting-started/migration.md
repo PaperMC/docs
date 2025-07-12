@@ -25,6 +25,7 @@ It's easy to migrate from CraftBukkit or Spigot to Paper. Follow the steps below
 3. Rename the downloaded file to match the name specified in the [start command](/paper/getting-started#running-the-server).
 4. Replace your existing JAR file with your freshly downloaded Paper JAR.
 5. Start your new server.
+6. if your using other software you can go to advanced>replace server jar for mcss
 
 Paper retains full compatibility with all Spigot plugins, allowing a seamless transition.
 

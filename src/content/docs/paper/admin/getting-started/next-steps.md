@@ -36,6 +36,14 @@ to restrict who can use certain commands, or who can access certain areas of you
 common for plugins to use permissions to control who can use their features. You can use permission
 plugins such as [LuckPerms](https://luckperms.net/) to manage the permissions which players will be granted.
 
+### Offline Mode/InSecure Mode
+
+Its highly recemmeded to use online mode.piracy isn't a good thing but if you do activate Offline mode:
+   1. Hackers can change their usernames to match someone op and cheat
+   2. Hackers can fake their identity as someone else
+   3. The Clients will not be checked to verify its pirated or not!
+   
+
 ## Backups
 
 It's important to keep backups of your server. If something goes wrong, you can restore your server to a
@@ -56,6 +64,14 @@ If you want to make your server public, you will need to port forward your serve
 from outside your network to connect to your server. There is a guide made by
 [NordVPN](https://nordvpn.com/blog/open-ports-on-router/) which explains what port forwarding is and how
 to do it for your Paper server.
+:::tips[Tips To Follow For better security]
+You can use your ip on an domain using cloudflare so you don't have to endanger your ip to ddos or hacking
+
+For a Better tutorial and insight checkout:
+Cloudflare : [Cybrancee](https://cybrancee.com/learn/knowledge-base/how-to-connect-a-domain-cloudflare-to-a-minecraft-server/))
+Fleek dns panel: [Cybrancee](https://cybrancee.com/learn/knowledge-base/how-to-connect-a-domain-to-a-minecraft-server/)
+::
+  
 
 ## Troubleshooting
 

@@ -234,6 +234,7 @@ export default defineConfig({
                         "paper/dev/plugin-configurations",
                         "paper/dev/lifecycle",
                         "paper/dev/registries",
+                        "paper/dev/dialogs",
                         "paper/dev/recipes",
                         "paper/dev/folia-support",
                         "paper/dev/roadmap",

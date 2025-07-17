@@ -43,12 +43,12 @@ confirmation and one meant for refusal.
 ## Showing dialogs
 Dialogs can be shown in-game using the `/dialog show <players> <dialog>` command. Alternatively, you can show them
 using the API by using [Audience#showDialog(DialogLike)](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#showDialog(net.kyori.adventure.dialog.DialogLike)).
-You can get build-in dialogs statically from the [`Dialog`](jd:paper:io.papermc.paper.dialog.Dialog) interface.
+You can get built-in dialogs statically from the [`Dialog`](jd:paper:io.papermc.paper.dialog.Dialog) interface.
 New dialogs can be created dynamically using [`Dialog#create`](jd:paper:io.papermc.paper.dialog.Dialog#create(java.util.function.Consumer))
 or, if registered during the bootstrap phase, retrieved from the dialog registry with `RegistryAccess.registryAccess().getRegistry(RegistryKey.DIALOG).get(Key)`.
 
-## Build-in dialogs
-There are three build-in dialogs:
+## Built-in dialogs
+There are three built-in dialogs:
 - [Server Links](jd:paper:io.papermc.paper.registry.keys.DialogKeys#SERVER_LINKS)
 - [Quick Actions](jd:paper:io.papermc.paper.registry.keys.DialogKeys#QUICK_ACTIONS)
 - [Custom Options](jd:paper:io.papermc.paper.registry.keys.DialogKeys#CUSTOM_OPTIONS)

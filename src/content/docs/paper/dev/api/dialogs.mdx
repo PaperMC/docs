@@ -221,6 +221,9 @@ public class ServerJoinListener implements Listener {
         Dialog dialog = RegistryAccess.registryAccess().getRegistry(RegistryKey.DIALOG).get(Key.key("papermc:praise_paperchan"));
         if (dialog == null) {
             // The dialog failed to load :(
+            // This would happen if the dialog could not be found in the registry by the provided key.
+            // Usually that is an indicator that the used key is different from the one used to register your
+            // dialog, your bootstrapper might not be registered, or an exception ocurred in the bootstrap phase.
             return;
         }
 

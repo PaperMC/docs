@@ -21,7 +21,7 @@ Effective speed varies between particles.
 
 :::caution
 Leaving the `extra` parameter unset will default it to `1` (used as particle speed),
-likely resulting in unexpected behaviour.
+likely resulting in unexpected behavior.
 :::
 
 ### Random direction

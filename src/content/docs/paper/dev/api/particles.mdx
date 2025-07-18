@@ -102,6 +102,27 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 
 </details>
 
+## Note particle
+The note particle has two different behaviors based on the `count` argument.
+- If set to a positive number a random color
+(of the preset 24) will be chosen for each spawned particle.
+- If set to `0`, the `offsetX` argument will be used as an addition to a **HSB (hue, saturation, brightness)** color format's
+hue value, which has a starting point at a green color.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 0.4f, 0, 0);
+```
+
+:::tip[Vanilla note particle colors]
+To achieve the Vanilla note particle colors you must set the offsetX to a fraction of 24.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0f/24.0f, 0, 0);
+```
+:::
+
 ## Dust particles
 The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
 [Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.

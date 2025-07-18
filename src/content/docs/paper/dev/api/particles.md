@@ -2,6 +2,7 @@
 title: Particles
 description: A guide to particle spawning
 slug: paper/dev/particles
+version: "1.21.8"
 ---
 
 There are two methods to spawn particles:

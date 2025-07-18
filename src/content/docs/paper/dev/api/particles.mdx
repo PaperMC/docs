@@ -104,7 +104,7 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 
 ## Dust particles
 The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
-[Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions).
+[Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
 
 An example of creating a vertical line of green dust particles
 ```java
@@ -123,3 +123,18 @@ The size argument also controls the dust particle's lifetime:
 
 *According to the Minecraft wiki*
 :::
+
+## Dust transition particles
+Dust transition particles work similarly to [dust particles](#dust-particles), but they **transition** their color
+from one to another. This can be achieved by passing [Particle.DustTransition](jd:paper:org.bukkit.Particle$DustTransition)
+as `data`.
+
+An example where 3 dust transition particles spawn on the x axis within a 1 block length:
+```java
+someWorld.spawnParticle(
+  Particle.DUST_COLOR_TRANSITION,
+  someLocation,
+  3
+  0.5, 0, 0,
+  new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f));
+```

@@ -35,7 +35,7 @@ likely resulting in unexpected behavior.
 Setting the `count` parameter to anything positive will yield a random direction for the velocity. The offset arguments are used as random
 spawn offset from the location.
 
-An example of spawning 6 crit particles at a location without offset that will move in a random direction at a slow speed.
+An example of spawning 6 crit particles at a location without offset that will move in a random direction at a slow speed:
 ```java
 someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
 ```
@@ -43,7 +43,7 @@ someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
 ### Specified direction
 To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
 
-An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis).
+An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis):
 ```java
 Bukkit.getScheduler().runTaskTimer(plugin,
   () -> someWorld.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
@@ -103,4 +103,23 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 </details>
 
 ## Dust particles
+The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
+[Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions).
 
+An example of creating a vertical line of green dust particles
+```java
+for (double i = 0; i <= 1.0; i += 0.1) {
+  someWorld.spawnParticle(
+    Particle.DUST,
+    someLocation.clone().add(0, i, 0),
+    1,
+    new Particle.DustOptions(Color.GREEN, 1.0f));
+}
+```
+
+:::note
+The size argument also controls the dust particle's lifetime:
+> The particle's lifetime is a random integer from 8 to 40 game ticks, then multiplied by this scale value, with a minimum of 1.
+
+*According to the Minecraft wiki*
+:::

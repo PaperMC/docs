@@ -13,9 +13,27 @@ Most particles do not require the additional `extra` and `data` fields. This gui
 use these arguments, behave based on their value.
 
 ## Directional particles
-This type of particle has initial velocity when spawned.
+This type of particle has an initial velocity when spawned. The velocity can be determined in two different ways, however
+both take into account the `extra` argument as speed.
+:::note
+Effective speed varies between particles.
+:::
+
+:::caution
+Leaving the `extra` parameter unset will default it to `1` (used as particle speed),
+likely resulting in unexpected behaviour.
+:::
+
+### Random direction
+Setting the `count` parameter to anything positive will yield a random direction for the velocity. The offset arguments are used as random
+spawn offset from the location.
+
+### Specified direction
+To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
+
+### List of directional particles
 <details>
-<summary>List of directional particles</summary>
+<summary>Show list</summary>
 
 - BUBBLE,
 - BUBBLE_COLUMN_UP,
@@ -57,12 +75,6 @@ This type of particle has initial velocity when spawned.
 - WHITE_SMOKE.
 
 </details>
-
-
-:::caution
-If your particle count is not `0`, leaving the `extra` parameter unset will default it to `1` (used as particle speed),
-resulting in some particles to **shoot in a random direction**.
-:::
 
 ## Dust particles
 

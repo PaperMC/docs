@@ -6,8 +6,8 @@ version: "1.21.8"
 ---
 
 There are two methods to spawn particles:
-- `World.spawnParticle()` which spawns the particle for all players and
-- `Player.spawnParticle()` which spawns the particle only for the player.
+- [`World.spawnParticle()`](jd:paper:org.bukkit.World#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle for all players and
+- [`Player.spawnParticle()`](jd:paper:org.bukkit.entity.Player#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle only for the player.
 
 Most particles do not require the additional `extra` and `data` fields. This guide explains how the particles **that do**
 use these arguments behave based on their value.

@@ -9,15 +9,22 @@ There are two methods to spawn particles:
 - [`World.spawnParticle()`](jd:paper:org.bukkit.World#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle for all players and
 - [`Player.spawnParticle()`](jd:paper:org.bukkit.entity.Player#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle only for the player.
 
-Most particles do not require the additional `extra` and `data` fields. This guide explains how the particles **that do**
+Some particles do not require the additional `extra` and `data` fields. This guide explains how the particles **that do**
 use these arguments, behave based on their value.
 
 ## Directional particles
 This type of particle has an initial velocity when spawned. The velocity can be determined in two different ways, however
 both take into account the `extra` argument as speed.
+
 :::note
 Effective speed varies between particles.
 :::
+
+In the following example 8 flame particles are spawned in a 1x1x1 cube shape randomly, with `someLocation` serving as it's center.
+The last argument (extra) is set to 0, so the particles don't move.
+```java
+someWorld.spawnParticle(Particle.FLAME, someLocation, 8, 0.5, 0.5, 0.5, 0);
+```
 
 :::caution
 Leaving the `extra` parameter unset will default it to `1` (used as particle speed),
@@ -28,13 +35,31 @@ likely resulting in unexpected behavior.
 Setting the `count` parameter to anything positive will yield a random direction for the velocity. The offset arguments are used as random
 spawn offset from the location.
 
+An example of spawning 6 crit particles at a location without offset that will move in a random direction at a slow speed.
+```java
+someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
+```
+
 ### Specified direction
 To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
+
+An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis).
+```java
+Bukkit.getScheduler().runTaskTimer(plugin,
+  () -> someWorld.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
+  0, 4);
+```
+We could also make the smoke go down if we wanted to:
+```java
+Bukkit.getScheduler().runTaskTimer(plugin,
+  () -> someWorld.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, someLocation, 0, 0, -1, 0, 0.1),
+  0, 4);
+```
 
 ### List of directional particles
 <details>
 <summary>Show list</summary>
-
+  {/* spellchecker:off */}
 - BUBBLE,
 - BUBBLE_COLUMN_UP,
 - CAMPFIRE_COSY_SMOKE,
@@ -73,6 +98,7 @@ To specify the velocity's direction, set the `count` argument to `0` and use the
 - WAX_OFF,
 - WAX_ON,
 - WHITE_SMOKE.
+  {/* spellchecker:on */}
 
 </details>
 

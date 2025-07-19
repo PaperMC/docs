@@ -188,7 +188,7 @@ someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
 
 ## Material particles
 ### BlockData
-To spawn this type of particle, simply put `BlockData` as it's `data` argument.
+To spawn particles that require `BlockData`, simply put `BlockData` as it's `data` argument.
 
 Example:
 ```java
@@ -208,4 +208,18 @@ In this case **velocity matters** a lot. A higher velocity will ensure the same 
 result in a more random direction.
 
 To achieve this, the effective velocity vector's length should be high (around 10 is fine).
+:::
+
+### ItemStack
+To spawn particles that require an `ItemStack`, simply put an `ItemStack` as it's `data` argument.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.ITEM, someLocation, 4, ItemType.DIAMOND_PICKAXE.createItemStack());
+```
+
+:::note
+This guide uses [`ItemType.createItemStack()`](jd:paper:org.bukkit.inventory.ItemType#createItemStack()). While using
+[`new ItemStack(Material)`](jd:paper:org.bukkit.inventory.ItemStack) yields the same result,
+it is considered **legacy**.
 :::

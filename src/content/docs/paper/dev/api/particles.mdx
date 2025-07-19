@@ -253,3 +253,16 @@ Example where a shriek particle will spawn after one second:
 ```java
 someWorld.spawnParticle(Particle.SHRIEK, 1, Integer.valueOf(20));
 ```
+
+### Vibration
+Vibration particles are really simple to spawn. Pass a [`Vibration`](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
+location ([`Vibration.Destination.BlockDestination`](jd:paper:org.bukkit.Vibration\$Destination\$BlockDestination))
+or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bukkit.Vibration\$Destination\$EntityDestination)).
+
+```java
+someWorld.spawnParticle(
+  Particle.VIBRATION,
+  someLocation,
+  1,
+  new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10));
+```

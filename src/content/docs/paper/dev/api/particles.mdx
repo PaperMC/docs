@@ -42,6 +42,9 @@ someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
 
 ### Specified direction
 To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
+The `extra` argument will server as the vector's multiplier, scaling it.
+
+So for example if we set offsets to `2.5, 1.2, 0.4` and `extra` to `5`, the final velocity vector would be `(12.5, 6, 2)`.
 
 An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis):
 ```java
@@ -60,6 +63,7 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 <details>
 <summary>Show list</summary>
   {/* spellchecker:off */}
+- BLOCK,
 - BUBBLE,
 - BUBBLE_COLUMN_UP,
 - CAMPFIRE_COSY_SMOKE,
@@ -162,7 +166,7 @@ Example:
 someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 0.4f, 0, 0);
 ```
 
-:::tip[Vanilla note particle colors]
+:::tip
 To achieve the Vanilla note particle colors you must set the offsetX to a fraction of 24.
 
 Example:
@@ -182,3 +186,26 @@ An example where an enchantment particle will spawn at `someLocation.clone().add
 someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
 ```
 
+## Material particles
+### BlockData
+To spawn this type of particle, simply put `BlockData` as it's `data` argument.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.BLOCK_CRUMBLE, someLocation, 4, BlockType.GLOWSTONE.createBlockData());
+```
+
+:::note
+This guide uses [`BlockType.createBlockData()`](jd:paper:org.bukkit.block.BlockType#createBlockData()). While using
+[`Material.createBlockData()`](jd:paper:org.bukkit.Material#createBlockData()) or
+[`Bukkit.createBlockData(Material)`](jd:paper:org.bukkit.Bukkit#createBlockData(org.bukkit.Material)) yields the same result,
+they are considered **legacy**.
+:::
+
+:::tip
+The `BLOCK` particle is a **directional** particle. See the chapter on [Directional particles](#directional-particles).
+In this case **velocity matters** a lot. A higher velocity will ensure the same general direction of the particle, while a lower one will
+result in a more random direction.
+
+To achieve this, the effective velocity vector's length should be high (around 10 is fine).
+:::

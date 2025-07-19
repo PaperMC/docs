@@ -176,6 +176,15 @@ someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0f/24.0f, 0, 0);
 ```
 :::
 
+### Tinted leaves
+The `TINTED_LEAVES` particle is really simple to spawn, as it only requires a [`Color`](jd:paper:org.bukkit.Color) object
+to be passed as the `data` argument.
+
+Example of spawning 10 orange leaves in a 4x4 area:
+```java
+someWorld.spawnParticle(Particle.TINTED_LEAVES, someLocation, 10, 2, 0, 2, Color.fromRGB(191, 87, 0));
+```
+
 ## Enchantment particles
 The enchantment particles have two different behaviors based on the `count` argument:
 - If set to a positive number, offset arguments are used normally,
@@ -255,7 +264,7 @@ someWorld.spawnParticle(Particle.SHRIEK, 1, Integer.valueOf(20));
 ```
 
 ### Vibration
-Vibration particles are really simple to spawn. Pass a [`Vibration`](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
+Vibration particles require you to pass a [`Vibration`](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
 location ([`Vibration.Destination.BlockDestination`](jd:paper:org.bukkit.Vibration\$Destination\$BlockDestination))
 or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bukkit.Vibration\$Destination\$EntityDestination)).
 

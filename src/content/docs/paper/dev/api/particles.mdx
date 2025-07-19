@@ -170,3 +170,12 @@ An example where an enchantment particle will spawn at `someLocation.clone().add
 ```java
 someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
 ```
+
+## Effect & entity effect particles
+While having a similar name and sharing the texture, there is big difference between the two. `EFFECT` can **not**
+be colored, while `ENTITY_EFFECT` can be.
+
+An example of spawning a group of colored entity effect particles:
+```java
+someWorld.spawnParticle(Particle.ENTITY_EFFECT, 8, 1, 0.25, 1);
+```

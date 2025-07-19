@@ -120,7 +120,8 @@ for (double i = 0; i <= 1.0; i += 0.1) {
     Particle.DUST,
     someLocation.clone().add(0, i, 0),
     1,
-    new Particle.DustOptions(Color.GREEN, 1.0f));
+    new Particle.DustOptions(Color.GREEN, 1.0f)
+  );
 }
 ```
 
@@ -143,7 +144,8 @@ someWorld.spawnParticle(
   someLocation,
   3
   0.5, 0, 0,
-  new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f));
+  new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f)
+);
 ```
 
 ### Effect and entity effect particles
@@ -185,16 +187,26 @@ Example of spawning 10 orange leaves in a 4x4 area:
 someWorld.spawnParticle(Particle.TINTED_LEAVES, someLocation, 10, 2, 0, 2, Color.fromRGB(191, 87, 0));
 ```
 
-## Enchantment particles
-The enchantment particles have two different behaviors based on the `count` argument:
+## Converging particles
+As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.
+
+The particles have two different behaviors based on the `count` argument:
 - If set to a positive number, offset arguments are used normally,
-- If set to `0`, the offset arguments will be used for a fixed relative spawn location from the supplied location/coordinates.
+- If set to `0`, the offset arguments will be used for a relative spawn location from the supplied location/coordinates.
 The particle will then travel from this relative location to the supplied location in a curve.
 
 An example where an enchantment particle will spawn at `someLocation.clone().add(2,0,2)` and travel to `someLocation`:
 ```java
 someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
 ```
+
+### List of converging particles
+<details>
+<summary>Show list</summary>
+- ENCHANT,
+- NAUTILUS,
+- PORTAL.
+</details>
 
 ## Material particles
 ### BlockData
@@ -274,4 +286,19 @@ someWorld.spawnParticle(
   someLocation,
   1,
   new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10));
+```
+
+## Trail particles
+Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
+
+An example where 8 randomly offset trail particles move towards `someLocation`, which is in the center of the spawning
+bounding box in 10 ticks.
+```java
+someWorld.spawnParticle(
+  Particle.TRAIL,
+  someLocation,
+  8,
+  2, 2, 2,
+  new Particle.Trail(someLocation, Color.RED, 10)
+);
 ```

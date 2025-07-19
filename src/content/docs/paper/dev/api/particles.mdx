@@ -84,6 +84,7 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 - POOF,
 - REVERSE_PORTAL,
 - SCRAPE,
+- SCULK_CHARGE,
 - SCULK_CHARGE_POP,
 - SCULK_SOUL,
 - SHRIEK,
@@ -135,7 +136,7 @@ Dust transition particles work similarly to [dust particles](#dust-particles), b
 from one to another. This can be achieved by passing [Particle.DustTransition](jd:paper:org.bukkit.Particle$DustTransition)
 as `data`.
 
-An example where 3 dust transition particles spawn on the x axis within a 1 block length:
+An example where 3 dust transition particles spawn on the x-axis within a 1 block length:
 ```java
 someWorld.spawnParticle(
   Particle.DUST_COLOR_TRANSITION,
@@ -203,7 +204,8 @@ they are considered **legacy**.
 :::
 
 :::tip
-The `BLOCK` particle is a **directional** particle. See the chapter on [Directional particles](#directional-particles).
+The `BLOCK` particle is a [directional particle](#directional-particles).
+
 In this case **velocity matters** a lot. A higher velocity will ensure the same general direction of the particle, while a lower one will
 result in a more random direction.
 
@@ -223,3 +225,18 @@ This guide uses [`ItemType.createItemStack()`](jd:paper:org.bukkit.inventory.Ite
 [`new ItemStack(Material)`](jd:paper:org.bukkit.inventory.ItemStack) yields the same result,
 it is considered **legacy**.
 :::
+
+## Sculk particles
+### Sculk charge
+The `SCULK_CHARGE` particle takes a `Float` as it's `data`. This is used as the particle's "roll" or more formally,
+the angle the particle displays at in **radians**.
+
+Example of spawning a sculk charge particle at 45°.
+```java
+someWorld.spawnParticle(Particle.SCULK_CHARGE, 1, Float.valueOf(0.7853f));
+```
+
+:::tip
+The `SCULK_CHARGE` particle is a [directional particle](#directional-particles).
+:::
+

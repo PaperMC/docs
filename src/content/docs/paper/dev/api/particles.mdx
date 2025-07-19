@@ -102,8 +102,8 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 
 </details>
 
-## Note particle
-The note particle has two different behaviors based on the `count` argument.
+## Note particles
+The note particles have two different behaviors based on the `count` argument.
 - If set to a positive number a random color
 (of the preset 24) will be chosen for each spawned particle.
 - If set to `0`, the `offsetX` argument will be used as an addition to a **HSB (hue, saturation, brightness)** color format's
@@ -158,4 +158,15 @@ someWorld.spawnParticle(
   3
   0.5, 0, 0,
   new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f));
+```
+
+## Enchantment particles
+The enchantment particles have two different behaviors based on the `count` argument:
+- If set to a positive number, offset arguments are used normally,
+- If set to `0`, the offset arguments will be used for a fixed relative spawn location from the supplied location/coordinates.
+The particle will then travel from this relative location to the supplied location in a curve.
+
+An example where an enchantment particle will spawn at `someLocation.clone().add(2,0,2)` and travel to `someLocation`:
+```java
+someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
 ```

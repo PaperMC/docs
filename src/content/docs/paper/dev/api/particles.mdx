@@ -5,12 +5,27 @@ slug: paper/dev/particles
 version: "1.21.8"
 ---
 
+This guide explains how to spawn different types of particles.
+
 There are two methods to spawn particles:
 - [`World.spawnParticle()`](jd:paper:org.bukkit.World#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle for all players and
 - [`Player.spawnParticle()`](jd:paper:org.bukkit.entity.Player#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle only for the player.
 
-Some particles do not require the additional `extra` and `data` fields. This guide explains how the particles **that do**
-use these arguments, behave based on their value.
+:::note
+`offset` arguments are multiplied by a Gaussian (normal) distribution's random value (if offset arguments are used for offset).
+In simple terms this means an offset can be **added to** OR **subtracted from** the supplied location/coordinates.
+This also means that more particles will spawn closer to the supplied location.
+<details>
+  <summary>Example</summary>
+If we have a `location` and set offset arguments to `0.5, 0.5, 1.5`, particles will randomly spawn between coordinates
+`location.subtract(0.5, 0.5, 1.5)` and `location.add(0.5, 0.5, 1.5)`, or simply, inside a `1x1x3` box where `location` is
+the center.
+</details>
+:::
+
+:::note
+If the particle you're trying to spawn isn't mentioned in this guide, then it most likely has no special behavior.
+:::
 
 ## Directional particles
 This type of particle has an initial velocity when spawned. The velocity can be determined in two different ways, however

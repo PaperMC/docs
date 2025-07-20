@@ -64,17 +64,17 @@ So for example if we set offsets to `2.5, 1.2, 0.4` and `extra` to `5`, the fina
 An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis):
 ```java
 Bukkit.getScheduler().runTaskTimer(plugin,
-  () -> someWorld.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
+  () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
   0, 4);
 ```
 We could also make the smoke go down if we wanted to:
-{/* spellchecker:off */}
 ```java
 Bukkit.getScheduler().runTaskTimer(plugin,
-  () -> someWorld.spawnParticle(Particle.CAMPFIRE_COSY_SMOKE, someLocation, 0, 0, -1, 0, 0.1),
+  () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, -1, 0, 0.1),
   0, 4);
 ```
 
+{/* spellchecker:off */}
 ### List of directional particles
 <details>
 <summary>Show list</summary>

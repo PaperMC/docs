@@ -1,0 +1,319 @@
+---
+title: Particles
+description: A guide to particle spawning
+slug: paper/dev/particles
+version: "1.21.8"
+---
+
+This guide explains how to spawn different types of particles.
+
+There are two methods to spawn particles:
+- [`World.spawnParticle()`](jd:paper:org.bukkit.World#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle for all players and
+- [`Player.spawnParticle()`](jd:paper:org.bukkit.entity.Player#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle only for the player.
+
+:::note
+`offset` arguments are multiplied by a Gaussian (normal) distribution's random value (if offset arguments are used for offset).
+In simple terms this means an offset can be **added to** OR **subtracted from** the supplied location/coordinates.
+This also means that more particles will spawn closer to the supplied location.
+<details>
+  <summary>Example</summary>
+If we have a `location` and set offset arguments to `0.5, 0.5, 1.5`, particles will randomly spawn between coordinates
+`location.subtract(0.5, 0.5, 1.5)` and `location.add(0.5, 0.5, 1.5)`, or simply, inside a `1x1x3` box where `location` is
+the center.
+</details>
+:::
+
+:::note
+If the particle you're trying to spawn isn't mentioned in this guide, then it most likely has no special behavior.
+:::
+
+## Directional particles
+This type of particle has an initial velocity when spawned. The velocity can be determined in two different ways, however
+both take into account the `extra` argument as speed.
+
+:::note
+Effective speed varies between particles.
+:::
+
+In the following example 8 flame particles are spawned in a 1x1x1 cube shape randomly, with `someLocation` serving as it's center.
+The last argument (extra) is set to 0, so the particles don't move.
+```java
+someWorld.spawnParticle(Particle.FLAME, someLocation, 8, 0.5, 0.5, 0.5, 0);
+```
+
+:::caution
+Leaving the `extra` parameter unset will default it to `1` (used as particle speed),
+likely resulting in unexpected behavior.
+:::
+
+### Random direction
+Setting the `count` parameter to anything positive will yield a random direction for the velocity. The offset arguments are used as random
+spawn offset from the location.
+
+An example of spawning 6 crit particles at a location without offset that will move in a random direction at a slow speed:
+```java
+someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
+```
+
+### Specified direction
+To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
+The `extra` argument will server as the vector's multiplier, scaling it.
+
+So for example if we set offsets to `2.5, 1.2, 0.4` and `extra` to `5`, the final velocity vector would be `(12.5, 6, 2)`.
+
+An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis):
+```java
+Bukkit.getScheduler().runTaskTimer(plugin,
+  () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
+  0, 4);
+```
+We could also make the smoke go down if we wanted to:
+```java
+Bukkit.getScheduler().runTaskTimer(plugin,
+  () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, -1, 0, 0.1),
+  0, 4);
+```
+
+{/* spellchecker:off */}
+### List of directional particles
+<details>
+<summary>Show list</summary>
+- BLOCK,
+- BUBBLE,
+- BUBBLE_COLUMN_UP,
+- CAMPFIRE_COSY_SMOKE,
+- CAMPFIRE_SIGNAL_SMOKE,
+- CLOUD,
+- CRIT,
+- DAMAGE_INDICATOR,
+- DRAGON_BREATH,
+- DUST_PLUME,
+- ELECTRIC_SPARK,
+- ENCHANTED_HIT,
+- END_ROD,
+- FIREWORK,
+- FLAME,
+- FLASH,
+- GLOW_SQUID_INK,
+- LARGE_SMOKE,
+- POOF,
+- REVERSE_PORTAL,
+- SCRAPE,
+- SCULK_CHARGE,
+- SCULK_CHARGE_POP,
+- SCULK_SOUL,
+- SHRIEK,
+- SMALL_FLAME,
+- SMOKE,
+- SNEEZE,
+- SNOWFLAKE,
+- SOUL,
+- SOUL_FIRE_FLAME,
+- SPIT,
+- SPLASH,
+- SQUID_INK,
+- TOTEM_OF_UNDYING,
+- TRIAL_SPAWNER_DETECTION,
+- TRIAL_SPAWNER_DETECTION_OMINOUS,
+- WAX_OFF,
+- WAX_ON,
+- WHITE_SMOKE.
+
+</details>
+{/* spellchecker:on */}
+
+## Colored particles
+
+### Dust particles
+The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
+[Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
+
+An example of creating a vertical line of green dust particles
+```java
+for (double i = 0; i <= 1.0; i += 0.1) {
+  someWorld.spawnParticle(
+    Particle.DUST,
+    someLocation.clone().add(0, i, 0),
+    1,
+    new Particle.DustOptions(Color.GREEN, 1.0f)
+  );
+}
+```
+
+:::note
+The size argument also controls the dust particle's lifetime:
+> The particle's lifetime is a random integer from 8 to 40 game ticks, then multiplied by this scale value, with a minimum of 1.
+
+*According to the Minecraft wiki*
+:::
+
+### Dust transition particles
+Dust transition particles work similarly to [dust particles](#dust-particles), but they **transition** their color
+from one to another. This can be achieved by passing [Particle.DustTransition](jd:paper:org.bukkit.Particle$DustTransition)
+as `data`.
+
+An example where 3 dust transition particles spawn on the x-axis within a 1 block length:
+```java
+someWorld.spawnParticle(
+  Particle.DUST_COLOR_TRANSITION,
+  someLocation,
+  3
+  0.5, 0, 0,
+  new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f)
+);
+```
+
+### Effect and entity effect particles
+While having a similar name and sharing the texture, there is big difference between the two. `EFFECT` can **not**
+be colored, while `ENTITY_EFFECT` can be.
+
+An example of spawning a group of colored (gold) entity effect particles:
+```java
+someWorld.spawnParticle(Particle.ENTITY_EFFECT, 8, 1, 0.25, 1, Color.fromRGB(255, 215, 0));
+```
+
+### Note particles
+The note particles have two different behaviors based on the `count` argument.
+- If set to a positive number a random color
+(of the preset 24) will be chosen for each spawned particle.
+- If set to `0`, the `offsetX` argument will be used as an addition to a **HSB (hue, saturation, brightness)** color format's
+hue value, which has a starting point at a green color.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 0.4f, 0, 0);
+```
+
+:::tip
+To achieve the Vanilla note particle colors you must set the offsetX to a fraction of 24.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0f/24.0f, 0, 0);
+```
+:::
+
+### Tinted leaves
+The `TINTED_LEAVES` particle is really simple to spawn, as it only requires a [`Color`](jd:paper:org.bukkit.Color) object
+to be passed as the `data` argument.
+
+Example of spawning 10 orange leaves in a 4x4 area:
+```java
+someWorld.spawnParticle(Particle.TINTED_LEAVES, someLocation, 10, 2, 0, 2, Color.fromRGB(191, 87, 0));
+```
+
+## Converging particles
+As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.
+
+The particles have two different behaviors based on the `count` argument:
+- If set to a positive number, offset arguments are used normally,
+- If set to `0`, the offset arguments will be used for a relative spawn location from the supplied location/coordinates.
+The particle will then travel from this relative location to the supplied location in a curve.
+
+An example where an enchantment particle will spawn at `someLocation.clone().add(2,0,2)` and travel to `someLocation`:
+```java
+someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
+```
+
+### List of converging particles
+<details>
+<summary>Show list</summary>
+- ENCHANT,
+- NAUTILUS,
+- PORTAL.
+</details>
+
+## Material particles
+### BlockData
+To spawn particles that require `BlockData`, simply put `BlockData` as it's `data` argument.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.BLOCK_CRUMBLE, someLocation, 4, BlockType.GLOWSTONE.createBlockData());
+```
+
+:::note
+This guide uses [`BlockType.createBlockData()`](jd:paper:org.bukkit.block.BlockType#createBlockData()). While using
+[`Material.createBlockData()`](jd:paper:org.bukkit.Material#createBlockData()) or
+[`Bukkit.createBlockData(Material)`](jd:paper:org.bukkit.Bukkit#createBlockData(org.bukkit.Material)) yields the same result,
+they are considered **legacy**.
+:::
+
+:::tip
+The `BLOCK` particle is a [directional particle](#directional-particles).
+
+In this case **velocity matters** a lot. A higher velocity will ensure the same general direction of the particle, while a lower one will
+result in a more random direction.
+
+To achieve this, the effective velocity vector's length should be high (around 10 is fine).
+:::
+
+### ItemStack
+To spawn particles that require an `ItemStack`, simply put an `ItemStack` as it's `data` argument.
+
+Example:
+```java
+someWorld.spawnParticle(Particle.ITEM, someLocation, 4, ItemType.DIAMOND_PICKAXE.createItemStack());
+```
+
+:::note
+This guide uses [`ItemType.createItemStack()`](jd:paper:org.bukkit.inventory.ItemType#createItemStack()). While using
+[`new ItemStack(Material)`](jd:paper:org.bukkit.inventory.ItemStack) yields the same result,
+it is considered **legacy**.
+:::
+
+:::tip
+The `ITEM` particle is a [directional particle](#directional-particles).
+:::
+
+## Sculk particles
+### Sculk charge
+The `SCULK_CHARGE` particle takes a `Float` as it's `data`. This is used as the particle's "roll" or more formally,
+the angle the particle displays at in **radians**.
+
+Example of spawning a sculk charge particle at 45°.
+```java
+someWorld.spawnParticle(Particle.SCULK_CHARGE, 1, Float.valueOf(0.7853f));
+```
+
+:::tip
+The `SCULK_CHARGE` particle is a [directional particle](#directional-particles).
+:::
+
+### Shriek
+The `SHRIEK` particle takes an `Integer` as it's `data`. This is used to set the delay **in ticks** before the particle spawns.
+
+It is completely up to your implementation when choosing to use `data` or a scheduler.
+
+Example where a shriek particle will spawn after one second:
+```java
+someWorld.spawnParticle(Particle.SHRIEK, 1, Integer.valueOf(20));
+```
+
+### Vibration
+Vibration particles require you to pass a [`Vibration`](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
+location ([`Vibration.Destination.BlockDestination`](jd:paper:org.bukkit.Vibration\$Destination\$BlockDestination))
+or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bukkit.Vibration\$Destination\$EntityDestination)).
+
+```java
+someWorld.spawnParticle(
+  Particle.VIBRATION,
+  someLocation,
+  1,
+  new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10));
+```
+
+## Trail particles
+Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
+
+An example where 8 randomly offset trail particles move towards `someLocation`, which is in the center of the spawning
+bounding box in 10 ticks.
+```java
+someWorld.spawnParticle(
+  Particle.TRAIL,
+  someLocation,
+  8,
+  2, 2, 2,
+  new Particle.Trail(someLocation, Color.RED, 10)
+);
+```

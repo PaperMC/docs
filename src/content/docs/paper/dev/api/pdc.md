@@ -35,13 +35,10 @@ which is used to identify the data. The second is a [`PersistentDataContainer`](
 which is the object you want to store the data on. The third is the data itself.
 
 ```java
-// Create a NamespacedKey
-NamespacedKey key = new NamespacedKey(pluginInstance, "example-key");
-
+NamespacedKey key = new NamespacedKey(pluginInstance, "example-key"); // Create a NamespacedKey
 World world = Bukkit.getServer().getWorlds().getFirst();
 
 PersistentDataContainer pdc = world.getPersistentDataContainer();
-
 pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
 ```
 
@@ -51,7 +48,7 @@ pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
 NamespacedKey key = ...; // Retrieve the key from before
 
 // For 1.20.4 and below, use 'new ItemStack(Material.DIAMOND)' instead
-ItemStack item = ItemType.DIAMOND.createItemStack();
+ItemStack item = ItemStack.of(Material.DIAMOND);
 // ItemStack provides a util method, so we can directly edit its PDC
 item.editPersistentDataContainer(pdc -> {
     pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
@@ -80,8 +77,7 @@ want to use a different namespace or access the data from another plugin.
 To get data from the PDC, you need to know the `NamespacedKey` and the `PersistentDataType` of the data.
 
 ```java
-// Create a NamespacedKey
-NamespacedKey key = new NamespacedKey(pluginInstance, "example-key");
+NamespacedKey key = new NamespacedKey(pluginInstance, "example-key"); // Create a NamespacedKey
 
 ItemStack item = ...; // Retrieve the item from before
 // Get the data from the PDC. Do note that ItemStack provides a "view", which is read-only

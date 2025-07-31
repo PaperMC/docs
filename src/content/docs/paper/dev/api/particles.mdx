@@ -314,6 +314,7 @@ location ([`Vibration.Destination.BlockDestination`](jd:paper:org.bukkit.Vibrati
 or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bukkit.Vibration\$Destination\$EntityDestination)).
 The constructor's second argument is the travel time in **ticks**.
 
+An example where a vibration particle will spawn at `someLocation` and travel to `otherLocation` in 10 ticks:
 ```java
 someWorld.spawnParticle(
   Particle.VIBRATION,
@@ -326,7 +327,7 @@ someWorld.spawnParticle(
 Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
 
 An example where 8 randomly offset trail particles move towards `someLocation`, which is in the center of the spawning
-bounding box in 10 ticks.
+bounding box in 10 ticks:
 ```java
 someWorld.spawnParticle(
   Particle.TRAIL,

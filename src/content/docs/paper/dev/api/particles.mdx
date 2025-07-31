@@ -270,13 +270,14 @@ To spawn particles that require an `ItemStack`, simply put an `ItemStack` as it'
 
 Example:
 ```java
-someWorld.spawnParticle(Particle.ITEM, someLocation, 4, ItemType.DIAMOND_PICKAXE.createItemStack());
+someWorld.spawnParticle(Particle.ITEM, someLocation, 4, ItemStack.of(Material.DIAMOND_PICKAXE));
 ```
 
 :::note
-This guide uses [`ItemType.createItemStack()`](jd:paper:org.bukkit.inventory.ItemType#createItemStack()). While using
+This guide uses [`ItemStack.of(Material)`](jd:paper:org.bukkit.inventory.ItemStack#of(org.bukkit.Material)). While using
 [`new ItemStack(Material)`](jd:paper:org.bukkit.inventory.ItemStack) yields the same result,
-it is considered **legacy**.
+it is considered **legacy**. [`ItemType.createItemStack()`](jd:paper:org.bukkit.inventory.ItemType#createItemStack())
+also yields the same result, but is more likely to get removed in the future.
 :::
 
 :::tip

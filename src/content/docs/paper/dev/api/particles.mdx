@@ -230,7 +230,8 @@ Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly t
 
 :::note
 Colored particles support the alpha channel, which means you can make them translucent. The exceptions are [dust](#dust-particles),
-[dust transition](#dust-transition-particles) and [note](#note-particles) particles.
+[dust transition](#dust-transition-particles), [note](#note-particles) and [trail](#trail-particles) particles, which do
+not support the alpha channel.
 :::
 
 :::note
@@ -356,6 +357,37 @@ Example:
   </TabItem>
 </Tabs>
 :::
+
+### Trail particles
+Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
+
+An example where 8 randomly offset trail particles move towards `someLocation`, which is in the center of the spawning
+bounding box in 10 ticks:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    new ParticleBuilder(Particle.TRAIL)
+      .location(someLocation)
+      .offset(2, 2, 2)
+      .count(8)
+      .data(new Particle.Trail(someLocation, Color.RED, 10))
+      .receivers(48, true)
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(
+      Particle.TRAIL,
+      someLocation,
+      8,
+      2, 2, 2,
+      new Particle.Trail(someLocation, Color.RED, 10)
+    );
+    ```
+  </TabItem>
+</Tabs>
+
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.
@@ -541,36 +573,6 @@ An example where a vibration particle will spawn at `someLocation` and travel to
       someLocation,
       1,
       new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10)
-    );
-    ```
-  </TabItem>
-</Tabs>
-
-## Trail particles
-Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
-
-An example where 8 randomly offset trail particles move towards `someLocation`, which is in the center of the spawning
-bounding box in 10 ticks:
-<Tabs syncKey="spawn-type">
-  <TabItem label="ParticleBuilder">
-    ```java
-    new ParticleBuilder(Particle.TRAIL)
-      .location(someLocation)
-      .offset(2, 2, 2)
-      .count(8)
-      .data(new Particle.Trail(someLocation, Color.RED, 10))
-      .receivers(48, true)
-      .spawn();
-    ```
-  </TabItem>
-  <TabItem label="spawnParticle">
-    ```java
-    someWorld.spawnParticle(
-      Particle.TRAIL,
-      someLocation,
-      8,
-      2, 2, 2,
-      new Particle.Trail(someLocation, Color.RED, 10)
     );
     ```
   </TabItem>

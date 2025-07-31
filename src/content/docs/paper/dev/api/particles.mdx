@@ -312,6 +312,7 @@ someWorld.spawnParticle(Particle.SHRIEK, someLocation, 1, 20);
 Vibration particles require you to pass a [`Vibration`](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
 location ([`Vibration.Destination.BlockDestination`](jd:paper:org.bukkit.Vibration\$Destination\$BlockDestination))
 or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bukkit.Vibration\$Destination\$EntityDestination)).
+The constructor's second argument is the travel time in **ticks**.
 
 ```java
 someWorld.spawnParticle(

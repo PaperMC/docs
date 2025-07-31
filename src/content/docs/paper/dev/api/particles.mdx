@@ -111,7 +111,17 @@ So for example if we set offsets to `2.5, 1.2, 0.4` and `extra` to `5`, the fina
 An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis):
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = new ParticleBuilder(Particle.CAMPFIRE_SIGNAL_SMOKE)
+      .location(someLocation)
+      .offset(0, 1, 0)
+      .count(0)
+      .extra(0.1);
 
+    Bukkit.getScheduler().runTaskTimer(plugin,
+      () -> particleBuilder.allPlayers().spawn(),
+    0, 4);
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -124,7 +134,18 @@ An example of a repeating task spawning campfire smoke that slowly goes "up" (po
 We could also make the smoke go down if we wanted to:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = new ParticleBuilder(Particle.CAMPFIRE_SIGNAL_SMOKE)
+      .location(someLocation)
+      .offset(0, -1, 0)
+      .count(0)
+      .extra(0.1)
+      .allPlayers();
 
+    Bukkit.getScheduler().runTaskTimer(plugin,
+      () -> particleBuilder.allPlayers().spawn(),
+    0, 4);
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -190,7 +211,15 @@ These particles can be colored by passing a [`Color`](jd:paper:org.bukkit.Color)
 Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly translucent orange color:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.ENTITY_EFFECT)
+      .location(someLocation)
+      .offset(1, 1, 1)
+      .count(10)
+      .data(Color.fromARGB(200, 255, 128, 0))
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -215,7 +244,17 @@ The only Vanilla dust particle is the redstone particle. However, you can easily
 An example of creating a vertical line of green dust particles:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = new ParticleBuilder(Particle.DUST)
+      .count(1)
+      .color(Color.GREEN, 1.0f)
+      .allPlayers();
 
+    // We can reuse the builder
+    for (double i = 0; i <= 1.0; i += 0.1) {
+      particleBuilder.location(someLocation.clone().add(0, i, 0)).spawn();
+    }
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -246,7 +285,15 @@ as `data`.
 An example where 3 dust transition particles spawn on the x-axis within a 1 block length:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.DUST_COLOR_TRANSITION)
+      .location(someLocation)
+      .offset(1, 0, 0)
+      .count(3)
+      .colorTransition(Color.RED, Color.BLUE, 1.0f)
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -271,7 +318,14 @@ hue value, which has a starting point at a green color.
 Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.NOTE)
+      .location(someLocation)
+      .offset(0, 0.4f, 0)
+      .count(0)
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -286,7 +340,14 @@ To achieve the Vanilla note particle colors you must set the offsetX to a fracti
 Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.NOTE)
+      .location(someLocation)
+      .offset(2.0f/24.0f, 0, 0)
+      .count(0)
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -307,7 +368,14 @@ The particle will then travel from this relative location to the supplied locati
 An example where an enchantment particle will spawn at `someLocation.clone().add(2,0,2)` and travel to `someLocation`:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.ENCHANT)
+      .location(someLocation)
+      .offset(2, 0, 2)
+      .count(0)
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -331,7 +399,14 @@ To spawn particles that require `BlockData`, simply put `BlockData` as it's `dat
 Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.BLOCK_CRUMBLE)
+      .location(someLocation)
+      .count(4)
+      .data(BlockType.GLOWSTONE.createBlockData())
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -362,7 +437,14 @@ To spawn particles that require an `ItemStack`, simply put an `ItemStack` as it'
 Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.ITEM)
+      .location(someLocation)
+      .count(4)
+      .data(ItemStack.of(Material.DIAMOND_PICKAXE))
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -390,7 +472,14 @@ the angle the particle displays at in **radians**.
 Example of spawning a sculk charge particle at 45°:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.SCULK_CHARGE)
+      .location(someLocation)
+      .count(1)
+      .data(Math.toRadians(45))
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -411,7 +500,14 @@ It is completely up to your implementation when choosing to use `data` or a sche
 Example where a shriek particle will spawn after one second:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.SHRIEK)
+      .location(someLocation)
+      .count(1)
+      .data(20)
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -429,7 +525,14 @@ The constructor's second argument is the travel time in **ticks**.
 An example where a vibration particle will spawn at `someLocation` and travel to `otherLocation` in 10 ticks:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.VIBRATION)
+      .location(someLocation)
+      .count(1)
+      .data(new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10))
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
@@ -450,7 +553,15 @@ An example where 8 randomly offset trail particles move towards `someLocation`, 
 bounding box in 10 ticks:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
-
+    ```java
+    new ParticleBuilder(Particle.TRAIL)
+      .location(someLocation)
+      .offset(2, 2, 2)
+      .count(8)
+      .data(new Particle.Trail(someLocation, Color.RED, 10))
+      .allPlayers()
+      .spawn();
+    ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java

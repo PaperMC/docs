@@ -140,6 +140,21 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 {/* spellchecker:on */}
 
 ## Colored particles
+These particles can be colored by passing a [`Color`](jd:paper:org.bukkit.Color) object as the `data` argument.
+
+Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly translucent orange color:
+```java
+someWorld.spawnParticle(Particle.ENTITY_EFFECT, someLocation, 10, 1, 1, 1, Color.fromARGB(200, 255, 128, 0));
+```
+
+:::note
+Colored particles support the alpha channel, which means you can make them translucent. The exceptions are [dust](#dust-particles),
+[dust transition](#dust-transition-particles) and [note](#note-particles) particles.
+:::
+
+:::note
+The `EFFECT` particle can not be colored and will always be white, use `ENTITY_EFFECT` instead.
+:::
 
 ### Dust particles
 The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
@@ -180,15 +195,6 @@ someWorld.spawnParticle(
 );
 ```
 
-### Effect and entity effect particles
-While having a similar name and sharing the texture, there is big difference between the two. `EFFECT` can **not**
-be colored, while `ENTITY_EFFECT` can be.
-
-An example of spawning a group of colored (gold) entity effect particles:
-```java
-someWorld.spawnParticle(Particle.ENTITY_EFFECT, 8, 1, 0.25, 1, Color.fromRGB(255, 215, 0));
-```
-
 ### Note particles
 The note particles have two different behaviors based on the `count` argument.
 - If set to a positive number a random color
@@ -209,15 +215,6 @@ Example:
 someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0f/24.0f, 0, 0);
 ```
 :::
-
-### Tinted leaves
-The `TINTED_LEAVES` particle is really simple to spawn, as it only requires a [`Color`](jd:paper:org.bukkit.Color) object
-to be passed as the `data` argument.
-
-Example of spawning 10 orange leaves in a 4x4 area:
-```java
-someWorld.spawnParticle(Particle.TINTED_LEAVES, someLocation, 10, 2, 0, 2, Color.fromRGB(191, 87, 0));
-```
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.

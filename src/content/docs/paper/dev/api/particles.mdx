@@ -5,6 +5,8 @@ slug: paper/dev/particles
 version: "1.21.5"
 ---
 
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
 This guide explains how to spawn different types of particles.
 
 There are two ways to spawn particles.
@@ -53,9 +55,24 @@ Effective speed varies between particles.
 
 In the following example 8 flame particles are spawned in a 1x1x1 cube shape randomly, with `someLocation` serving as it's center.
 The last argument (extra) is set to 0, so the particles don't move.
-```java
-someWorld.spawnParticle(Particle.FLAME, someLocation, 8, 0.5, 0.5, 0.5, 0);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    new ParticleBuilder(Particle.FLAME)
+      .location(someLocation)
+      .offset(0.5, 0.5, 0.5)
+      .count(8)
+      .extra(0)
+      .allPlayers()
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.FLAME, someLocation, 8, 0.5, 0.5, 0.5, 0);
+    ```
+  </TabItem>
+</Tabs>
 
 :::caution
 Leaving the `extra` parameter unset will default it to `1` (used as particle speed),
@@ -67,9 +84,23 @@ Setting the `count` parameter to anything positive will yield a random direction
 spawn offset from the location.
 
 An example of spawning 6 crit particles at a location without offset that will move in a random direction at a slow speed:
-```java
-someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    new ParticleBuilder(Particle.CRIT)
+      .location(someLocation)
+      .count(6)
+      .extra(0.12)
+      .allPlayers()
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
+    ```
+  </TabItem>
+</Tabs>
 
 ### Specified direction
 To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
@@ -78,17 +109,31 @@ The `extra` argument will server as the vector's multiplier, scaling it.
 So for example if we set offsets to `2.5, 1.2, 0.4` and `extra` to `5`, the final velocity vector would be `(12.5, 6, 2)`.
 
 An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis):
-```java
-Bukkit.getScheduler().runTaskTimer(plugin,
-  () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
-  0, 4);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    Bukkit.getScheduler().runTaskTimer(plugin,
+      () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
+      0, 4);
+    ```
+  </TabItem>
+</Tabs>
 We could also make the smoke go down if we wanted to:
-```java
-Bukkit.getScheduler().runTaskTimer(plugin,
-  () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, -1, 0, 0.1),
-  0, 4);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    Bukkit.getScheduler().runTaskTimer(plugin,
+      () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, -1, 0, 0.1),
+      0, 4);
+    ```
+  </TabItem>
+</Tabs>
 
 {/* spellchecker:off */}
 ### List of directional particles
@@ -143,9 +188,16 @@ Bukkit.getScheduler().runTaskTimer(plugin,
 These particles can be colored by passing a [`Color`](jd:paper:org.bukkit.Color) object as the `data` argument.
 
 Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly translucent orange color:
-```java
-someWorld.spawnParticle(Particle.ENTITY_EFFECT, someLocation, 10, 1, 1, 1, Color.fromARGB(200, 255, 128, 0));
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.ENTITY_EFFECT, someLocation, 10, 1, 1, 1, Color.fromARGB(200, 255, 128, 0));
+    ```
+  </TabItem>
+</Tabs>
 
 :::note
 Colored particles support the alpha channel, which means you can make them translucent. The exceptions are [dust](#dust-particles),
@@ -160,17 +212,24 @@ The `EFFECT` particle can not be colored and will always be white, use `ENTITY_E
 The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
 [Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
 
-An example of creating a vertical line of green dust particles
-```java
-for (double i = 0; i <= 1.0; i += 0.1) {
-  someWorld.spawnParticle(
-    Particle.DUST,
-    someLocation.clone().add(0, i, 0),
-    1,
-    new Particle.DustOptions(Color.GREEN, 1.0f)
-  );
-}
-```
+An example of creating a vertical line of green dust particles:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    for (double i = 0; i <= 1.0; i += 0.1) {
+      someWorld.spawnParticle(
+        Particle.DUST,
+        someLocation.clone().add(0, i, 0),
+        1,
+        new Particle.DustOptions(Color.GREEN, 1.0f)
+      );
+    }
+    ```
+  </TabItem>
+</Tabs>
 
 :::note
 The size argument also controls the dust particle's lifetime:
@@ -185,15 +244,22 @@ from one to another. This can be achieved by passing [Particle.DustTransition](j
 as `data`.
 
 An example where 3 dust transition particles spawn on the x-axis within a 1 block length:
-```java
-someWorld.spawnParticle(
-  Particle.DUST_COLOR_TRANSITION,
-  someLocation,
-  3,
-  0.5, 0, 0,
-  new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f)
-);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(
+      Particle.DUST_COLOR_TRANSITION,
+      someLocation,
+      3,
+      0.5, 0, 0,
+      new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f)
+    );
+    ```
+  </TabItem>
+</Tabs>
 
 ### Note particles
 The note particles have two different behaviors based on the `count` argument.
@@ -203,17 +269,31 @@ The note particles have two different behaviors based on the `count` argument.
 hue value, which has a starting point at a green color.
 
 Example:
-```java
-someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 0.4f, 0, 0);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 0.4f, 0, 0);
+    ```
+  </TabItem>
+</Tabs>
 
 :::tip
 To achieve the Vanilla note particle colors you must set the offsetX to a fraction of 24.
 
 Example:
-```java
-someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0f/24.0f, 0, 0);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0f/24.0f, 0, 0);
+    ```
+  </TabItem>
+</Tabs>
 :::
 
 ## Converging particles
@@ -225,9 +305,16 @@ The particles have two different behaviors based on the `count` argument:
 The particle will then travel from this relative location to the supplied location in a curve.
 
 An example where an enchantment particle will spawn at `someLocation.clone().add(2,0,2)` and travel to `someLocation`:
-```java
-someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
+    ```
+  </TabItem>
+</Tabs>
 
 ### List of converging particles
 <details>
@@ -242,9 +329,16 @@ someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
 To spawn particles that require `BlockData`, simply put `BlockData` as it's `data` argument.
 
 Example:
-```java
-someWorld.spawnParticle(Particle.BLOCK_CRUMBLE, someLocation, 4, BlockType.GLOWSTONE.createBlockData());
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.BLOCK_CRUMBLE, someLocation, 4, BlockType.GLOWSTONE.createBlockData());
+    ```
+  </TabItem>
+</Tabs>
 
 :::note
 This guide uses [`BlockType.createBlockData()`](jd:paper:org.bukkit.block.BlockType#createBlockData()). While using
@@ -266,9 +360,16 @@ To achieve this, the effective velocity vector's length should be high (around 1
 To spawn particles that require an `ItemStack`, simply put an `ItemStack` as it's `data` argument.
 
 Example:
-```java
-someWorld.spawnParticle(Particle.ITEM, someLocation, 4, ItemStack.of(Material.DIAMOND_PICKAXE));
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.ITEM, someLocation, 4, ItemStack.of(Material.DIAMOND_PICKAXE));
+    ```
+  </TabItem>
+</Tabs>
 
 :::note
 This guide uses [`ItemStack.of(Material)`](jd:paper:org.bukkit.inventory.ItemStack#of(org.bukkit.Material)). While using
@@ -286,10 +387,17 @@ The `ITEM` particle is a [directional particle](#directional-particles).
 The `SCULK_CHARGE` particle takes a `Float` as it's `data`. This is used as the particle's "roll" or more formally,
 the angle the particle displays at in **radians**.
 
-Example of spawning a sculk charge particle at 45°.
-```java
-someWorld.spawnParticle(Particle.SCULK_CHARGE, someLocation, 1, Math.toRadians(45));
-```
+Example of spawning a sculk charge particle at 45°:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.SCULK_CHARGE, someLocation, 1, Math.toRadians(45));
+    ```
+  </TabItem>
+</Tabs>
 
 :::tip
 The `SCULK_CHARGE` particle is a [directional particle](#directional-particles).
@@ -301,9 +409,16 @@ The `SHRIEK` particle takes an `Integer` as its `data`. This is used to set the 
 It is completely up to your implementation when choosing to use `data` or a scheduler.
 
 Example where a shriek particle will spawn after one second:
-```java
-someWorld.spawnParticle(Particle.SHRIEK, someLocation, 1, 20);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.SHRIEK, someLocation, 1, 20);
+    ```
+  </TabItem>
+</Tabs>
 
 ### Vibration
 Vibration particles require you to pass a [`Vibration`](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
@@ -312,25 +427,40 @@ or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bu
 The constructor's second argument is the travel time in **ticks**.
 
 An example where a vibration particle will spawn at `someLocation` and travel to `otherLocation` in 10 ticks:
-```java
-someWorld.spawnParticle(
-  Particle.VIBRATION,
-  someLocation,
-  1,
-  new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10));
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(
+      Particle.VIBRATION,
+      someLocation,
+      1,
+      new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10)
+    );
+    ```
+  </TabItem>
+</Tabs>
 
 ## Trail particles
 Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
 
 An example where 8 randomly offset trail particles move towards `someLocation`, which is in the center of the spawning
 bounding box in 10 ticks:
-```java
-someWorld.spawnParticle(
-  Particle.TRAIL,
-  someLocation,
-  8,
-  2, 2, 2,
-  new Particle.Trail(someLocation, Color.RED, 10)
-);
-```
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(
+      Particle.TRAIL,
+      someLocation,
+      8,
+      2, 2, 2,
+      new Particle.Trail(someLocation, Color.RED, 10)
+    );
+    ```
+  </TabItem>
+</Tabs>

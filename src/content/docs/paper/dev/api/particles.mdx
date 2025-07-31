@@ -7,7 +7,23 @@ version: "1.21.5"
 
 This guide explains how to spawn different types of particles.
 
-There are two methods to spawn particles:
+There are two ways to spawn particles.
+The first option is using the [`ParticleBuilder`](jd:paper:com.destroystokyo.paper.ParticleBuilder) class, which is
+preferred over the `spawnParticle()` methods. It is reusable and offers improved readability and clarity. The builder also includes
+the method [`receivers()`](jd:paper:com.destroystokyo.paper.ParticleBuilder#receivers()), which provides you
+with greater control over receivers.
+
+An example of spawning 14 note particles in a 4x0.4x4 cuboid:
+```java
+new ParticleBuilder(Particle.NOTE)
+  .location(someLocation)
+  .offset(2, 0.2, 2)
+  .count(14)
+  .allPlayers()
+  .spawn();
+```
+
+The second way is using the `spawnParticle()` methods in `World` and `Player` classes:
 - [`World.spawnParticle()`](jd:paper:org.bukkit.World#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle for all players and
 - [`Player.spawnParticle()`](jd:paper:org.bukkit.entity.Player#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle only for the player.
 

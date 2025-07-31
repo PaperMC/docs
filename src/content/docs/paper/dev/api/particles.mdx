@@ -174,7 +174,7 @@ An example where 3 dust transition particles spawn on the x-axis within a 1 bloc
 someWorld.spawnParticle(
   Particle.DUST_COLOR_TRANSITION,
   someLocation,
-  3
+  3,
   0.5, 0, 0,
   new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f)
 );
@@ -291,7 +291,7 @@ the angle the particle displays at in **radians**.
 
 Example of spawning a sculk charge particle at 45°.
 ```java
-someWorld.spawnParticle(Particle.SCULK_CHARGE, 1, Float.valueOf(0.7853f));
+someWorld.spawnParticle(Particle.SCULK_CHARGE, someLocation, 1, Math.toRadians(45));
 ```
 
 :::tip
@@ -305,7 +305,7 @@ It is completely up to your implementation when choosing to use `data` or a sche
 
 Example where a shriek particle will spawn after one second:
 ```java
-someWorld.spawnParticle(Particle.SHRIEK, 1, Integer.valueOf(20));
+someWorld.spawnParticle(Particle.SHRIEK, someLocation, 1, 20);
 ```
 
 ### Vibration

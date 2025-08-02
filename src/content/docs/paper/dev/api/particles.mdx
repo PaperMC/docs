@@ -253,7 +253,6 @@ An example of creating a vertical line of green dust particles:
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = new ParticleBuilder(Particle.DUST)
-      .count(1)
       .color(Color.GREEN, 1.0f)
       .receivers(48, true);
 
@@ -525,7 +524,6 @@ Example of spawning a sculk charge particle at 45°:
     ```java
     new ParticleBuilder(Particle.SCULK_CHARGE)
       .location(someLocation)
-      .count(1)
       .data(Math.toRadians(45))
       .receivers(48, true)
       .spawn();
@@ -553,7 +551,6 @@ Example where a shriek particle will spawn after one second:
     ```java
     new ParticleBuilder(Particle.SHRIEK)
       .location(someLocation)
-      .count(1)
       .data(20)
       .receivers(48, true)
       .spawn();
@@ -578,7 +575,6 @@ An example where a vibration particle will spawn at `someLocation` and travel to
     ```java
     new ParticleBuilder(Particle.VIBRATION)
       .location(someLocation)
-      .count(1)
       .data(new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10))
       .receivers(48, true)
       .spawn();

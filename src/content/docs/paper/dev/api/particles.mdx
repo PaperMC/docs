@@ -167,6 +167,7 @@ We could also make the smoke go down if we wanted to:
 - BLOCK
 - BUBBLE
 - BUBBLE_COLUMN_UP
+- BUBBLE_POP
 - CAMPFIRE_COSY_SMOKE
 - CAMPFIRE_SIGNAL_SMOKE
 - CLOUD
@@ -198,7 +199,6 @@ We could also make the smoke go down if we wanted to:
 - SOUL
 - SOUL_FIRE_FLAME
 - SPIT
-- SPLASH
 - SQUID_INK
 - TOTEM_OF_UNDYING
 - TRIAL_SPAWNER_DETECTION
@@ -622,6 +622,25 @@ An example where a vibration particle will spawn at `someLocation` and travel to
     ```
   </TabItem>
 </Tabs>
+
+## Miscellaneous particle types
+This chapter covers particles that have some special behaviour, but don't fit into the previous categories.
+
+### Angry villager particles
+The `ANGRY_VILLAGER` particle always spawns `0.5` higher (y-axis) than the supplied location.
+
+### Cloud particles
+The `CLOUD` and `SNEEZE` particles move towards the player's y level, if they are withing 2 block distance from the player's
+location. When they reach the player's y level, they will stop moving vertically.
+
+If the player is moving vertically, the particles will attempt to match they player's vertical velocity.
+
+### Splash particles
+The `SPLASH` particle adds the `offsetX` and `offsetZ` values to the particle's velocity vector's x and y components, respectively,
+if `offsetY` is `0`.
+
+### Dust pillar particles
+The `DUST_PILLAR` particle uses `offsetY` for the y-axis velocity, while `offsetX` and `offsetZ` are ignored.
 
 ## `count` argument behavior <Badge variant="danger" text="Advanced" size="large" />
 When spawning particles, the Minecraft client behaves differently based on the count argument:

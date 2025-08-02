@@ -338,11 +338,10 @@ packet-limiter:
         DROP which will ignore packets over the limit, and KICK which will kick
         players for exceeding the limit
     interval:
-      vanilla: "0.000001"
+      vanilla: "-1"
       default: "7.0"
       description: The interval, in seconds, for which max-packet-rate should apply
     max-packet-rate:
-      vanilla: "999999.0"
       default: "500.0"
       description: The number of packets allowed per player within the interval
   kick-message:

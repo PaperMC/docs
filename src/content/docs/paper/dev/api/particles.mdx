@@ -244,6 +244,10 @@ The `EFFECT` particle can not be colored and will always be white, use `ENTITY_E
 The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
 [Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
 
+:::note
+The scale factor must be in the range of `0.01` to `4.0`. Values outside this range will be clamped to the nearest valid value.
+:::
+
 An example of creating a vertical line of green dust particles, that are 2 times the regular size:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
@@ -264,7 +268,7 @@ An example of creating a vertical line of green dust particles, that are 2 times
         Particle.DUST,
         someLocation.clone().add(0, i, 0),
         1,
-        new Particle.DustOptions(Color.GREEN, 1.0f)
+        new Particle.DustOptions(Color.GREEN, 2.0f)
       );
     }
     ```
@@ -272,10 +276,8 @@ An example of creating a vertical line of green dust particles, that are 2 times
 </Tabs>
 
 :::note
-The size argument also controls the dust particle's lifetime:
-> The particle's lifetime is a random integer from 8 to 40 game ticks, then multiplied by this scale value, with a minimum of 1.
-
-*According to the Minecraft wiki*
+Here, adding a size argument would control the dust particle's lifetime, in ticks. By default, the value is a random
+integer between 8 to 40, which is multiplied by the particle's scale, to get the final lifetime (with a minimum of 1).
 :::
 
 ### Dust transition particles

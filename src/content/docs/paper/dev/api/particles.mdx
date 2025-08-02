@@ -145,8 +145,7 @@ We could also make the smoke go down if we wanted to:
       .location(someLocation)
       .offset(0, -1, 0)
       .count(0)
-      .extra(0.1)
-      .receivers(48, true);
+      .extra(0.1);
 
     Bukkit.getScheduler().runTaskTimer(plugin,
       () -> particleBuilder.receivers(48, true).spawn(),

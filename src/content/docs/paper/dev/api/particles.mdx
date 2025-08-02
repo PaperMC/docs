@@ -315,8 +315,8 @@ An example where 3 dust transition particles spawn on the x-axis within a 1 bloc
 The note particles have two different behaviors based on the `count` argument.
 - If set to a positive number a random color
 (of the preset 24) will be chosen for each spawned particle.
-- If set to `0`, the `offsetX` argument will be used as a substitution to a **HSB (hue, saturation, brightness)** color format's
-hue value, which has a starting point at a green color.
+- If set to `0`, the `offsetX` argument will be used in a custom function to determine the color of the note particle,
+see [Note particle color picker](#note-particle-color-picker) for more details. `offsetY` and `offsetZ` are ignored in this case.
 
 Example:
 <Tabs syncKey="spawn-type">

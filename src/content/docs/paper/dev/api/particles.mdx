@@ -10,6 +10,8 @@ import { Badge } from '@astrojs/starlight/components';
 
 This guide explains how to spawn different types of particles.
 
+If the particle you're trying to spawn isn't mentioned in this guide, then it most likely has no special behavior.
+
 There are two ways to spawn particles.
 The first option is using the [`ParticleBuilder`](jd:paper:com.destroystokyo.paper.ParticleBuilder) class, which is
 preferred over the `spawnParticle()` methods. It is reusable and offers improved readability and clarity. The builder also includes
@@ -45,10 +47,6 @@ If we have a `location` and set offset arguments to `0.5, 0.5, 1.5`, particles w
 `location.subtract(0.5, 0.5, 1.5)` and `location.add(0.5, 0.5, 1.5)`, or simply, inside a `1x1x3` box where `location` is
 the center.
 </details>
-:::
-
-:::note
-If the particle you're trying to spawn isn't mentioned in this guide, then it most likely has no special behavior.
 :::
 
 ## Directional particles

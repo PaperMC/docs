@@ -21,7 +21,7 @@ with greater control over receivers.
 
 An example of spawning 14 note particles in a 4x0.4x4 cuboid:
 ```java
-new ParticleBuilder(Particle.NOTE)
+Particle.NOTE.builder()
   .location(someLocation)
   .offset(2, 0.2, 2)
   .count(14)
@@ -63,7 +63,7 @@ The last argument (extra) is set to 0, so the particles don't move.
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.FLAME)
+    Particle.FLAME.builder()
       .location(someLocation)
       .offset(0.5, 0.5, 0.5)
       .count(8)
@@ -92,7 +92,7 @@ An example of spawning 6 CRIT particles at a location, without offset, that will
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.CRIT)
+    Particle.CRIT.builder()
       .location(someLocation)
       .count(6)
       .extra(0.12)
@@ -117,7 +117,7 @@ An example of a repeating task spawning campfire smoke that slowly goes "up" (po
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder particleBuilder = new ParticleBuilder(Particle.CAMPFIRE_SIGNAL_SMOKE)
+    ParticleBuilder particleBuilder = Particle.CAMPFIRE_SIGNAL_SMOKE.builder()
       .location(someLocation)
       .offset(0, 1, 0)
       .count(0)
@@ -140,7 +140,7 @@ We could also make the smoke go down if we wanted to:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder particleBuilder = new ParticleBuilder(Particle.CAMPFIRE_SIGNAL_SMOKE)
+    ParticleBuilder particleBuilder = Particle.CAMPFIRE_SIGNAL_SMOKE.builder()
       .location(someLocation)
       .offset(0, -1, 0)
       .count(0)
@@ -216,7 +216,7 @@ Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly t
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.ENTITY_EFFECT)
+    Particle.ENTITY_EFFECT.builder()
       .location(someLocation)
       .offset(1, 1, 1)
       .count(10)
@@ -252,7 +252,7 @@ An example of creating a vertical line of green dust particles, that are 2 times
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder particleBuilder = new ParticleBuilder(Particle.DUST)
+    ParticleBuilder particleBuilder = Particle.DUST.builder()
       .color(Color.GREEN, 2.0f);
 
     // We can reuse the builder
@@ -289,7 +289,7 @@ An example where 3 dust transition particles spawn on the x-axis within a 1 bloc
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.DUST_COLOR_TRANSITION)
+    Particle.DUST_COLOR_TRANSITION.builder()
       .location(someLocation)
       .offset(0.5, 0, 0)
       .count(3)
@@ -322,7 +322,7 @@ Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.NOTE)
+    Particle.NOTE.builder()
       .location(someLocation)
       .offset(0.4f, 0, 0)
       .count(0)
@@ -349,7 +349,7 @@ Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.NOTE)
+    Particle.NOTE.builder()
       .location(someLocation)
       .offset(2.0f/24.0f, 0, 0)
       .count(0)
@@ -373,7 +373,7 @@ bounding box in 10 ticks:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.TRAIL)
+    Particle.TRAIL.builder()
       .location(someLocation)
       .offset(2, 2, 2)
       .count(8)
@@ -408,7 +408,7 @@ An example where an enchantment particle will spawn at `someLocation.clone().add
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.ENCHANT)
+    Particle.ENCHANT.builder()
       .location(someLocation)
       .offset(2, 0, 2)
       .count(0)
@@ -451,7 +451,7 @@ Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.BLOCK_CRUMBLE)
+    Particle.BLOCK_CRUMBLE.builder()
       .location(someLocation)
       .count(4)
       .data(BlockType.GLOWSTONE.createBlockData())
@@ -489,7 +489,7 @@ Example:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.ITEM)
+    Particle.ITEM.builder()
       .location(someLocation)
       .count(4)
       .data(ItemStack.of(Material.DIAMOND_PICKAXE))
@@ -552,7 +552,7 @@ Example of spawning a sculk charge particle at 45°:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.SCULK_CHARGE)
+    Particle.SCULK_CHARGE.builder()
       .location(someLocation)
       .data((float) Math.toRadians(45))
       .receivers(48, true)
@@ -579,7 +579,7 @@ Example where a shriek particle will spawn after one second:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.SHRIEK)
+    Particle.SHRIEK.builder()
       .location(someLocation)
       .data(20)
       .receivers(48, true)
@@ -603,7 +603,7 @@ An example where a vibration particle will spawn at `someLocation` and travel to
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    new ParticleBuilder(Particle.VIBRATION)
+    Particle.VIBRATION.builder()
       .location(someLocation)
       .data(new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10))
       .receivers(48, true)

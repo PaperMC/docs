@@ -396,7 +396,7 @@ bounding box in 10 ticks:
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.
 
 The particles have two different behaviors based on the `count` argument:
-- If set to a positive number, offset arguments are used normally and a random target location is picked as described
+- If set to a positive number, offset arguments are used normally and a random target location is picked.
 - If set to `0`, the offset arguments will be used for a relative spawn location from the supplied location/coordinates.
 The particle will then travel from this relative location to the supplied location in a curve.
 
@@ -509,6 +509,34 @@ also yields the same result, but is more likely to get removed in the future.
 
 :::tip
 The `ITEM` particle is a [directional particle](#directional-particles).
+:::
+
+## Sweep attack particles
+The `SWEEP_ATTACK` particle has two different behaviors based on the `count` argument:
+- If set to a positive number, offset arguments are used normally and a random target location.
+- If set to `0`, the `offsetX` argument controls the particle's scale, while `offsetY` and `offsetZ` are ignored.
+
+An example where a sweep attack particle will spawn at `someLocation` with a scale of `2.0`:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    Particle.SWEEP_ATTACK.builder()
+      .location(someLocation)
+      .offset(-2.0, 0, 0)
+      .count(0)
+      .receivers(48, true)
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2.0, 0, 0);
+    ```
+  </TabItem>
+</Tabs>
+
+:::note
+The scale is calculated as `1.0 - offsetX * 0.5`.
 :::
 
 ## Sculk particles

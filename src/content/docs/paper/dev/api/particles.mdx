@@ -247,12 +247,12 @@ The `EFFECT` particle can not be colored and will always be white, use `ENTITY_E
 The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
 [Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
 
-An example of creating a vertical line of green dust particles:
+An example of creating a vertical line of green dust particles, that are 2x the regular size:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = new ParticleBuilder(Particle.DUST)
-      .color(Color.GREEN, 1.0f);
+      .color(Color.GREEN, 2.0f);
 
     // We can reuse the builder
     for (double i = 0; i <= 1.0; i += 0.1) {

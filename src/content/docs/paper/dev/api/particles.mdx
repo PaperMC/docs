@@ -399,7 +399,7 @@ bounding box in 10 ticks:
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.
 
 The particles have two different behaviors based on the `count` argument:
-- If set to a positive number, offset arguments are used normally,
+- If set to a positive number, offset arguments are used normally and a random target location is picked as described
 - If set to `0`, the offset arguments will be used for a relative spawn location from the supplied location/coordinates.
 The particle will then travel from this relative location to the supplied location in a curve.
 
@@ -422,11 +422,22 @@ An example where an enchantment particle will spawn at `someLocation.clone().add
   </TabItem>
 </Tabs>
 
+:::note
+There are two types of converging particles:
+
+- **Curving**: Particles that follow a curved path to the specified location.
+- **Straight**: Particles that move in a straight line to the specified location.
+
+The `ENCHANT`, `NAUTILUS`, `PORTAL` and `VAULT_CONNECTION` particles use curved paths, while the `OMINOUS_SPAWNING` particle
+travels in a straight line.
+:::
+
 ### List of converging particles
 <details>
 <summary>Show list</summary>
 - ENCHANT,
 - NAUTILUS,
+- OMINOUS_SPAWNING,
 - PORTAL,
 - VAULT_CONNECTION.
 </details>

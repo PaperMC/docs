@@ -7,6 +7,7 @@ version: "1.21.5"
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Badge } from '@astrojs/starlight/components';
+import NoteParticleColorPicker from "/src/components/tools/NoteParticleColorPicker.svelte";
 
 This guide explains how to spawn different types of particles.
 
@@ -335,6 +336,8 @@ Example:
     ```
   </TabItem>
 </Tabs>
+
+<NoteParticleColorPicker client:load />
 
 :::tip
 To achieve the Vanilla note particle colors you must set the offsetX to a fraction of 24.

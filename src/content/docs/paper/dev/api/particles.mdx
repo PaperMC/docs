@@ -625,7 +625,7 @@ An example where a vibration particle will spawn at `someLocation` and travel to
 ## `count` argument behavior <Badge variant="danger" text="Advanced" size="large" />
 When spawning particles, the Minecraft client behaves differently based on the count argument:
 - If `count` is `0`, the client uses the provided location without modification. The offset values are multiplied by the
-`extra` argument (acting as a speed multiplier) and passed directly to the particle constructor. The way these values are
+`extra` argument and passed to the particle constructor. The way these values are
 used may vary between particle types.
 
 - If `count` is greater than `0`, the client spawns that number of particles. For each particle, it generates random offset

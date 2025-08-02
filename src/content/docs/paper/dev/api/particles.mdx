@@ -252,13 +252,11 @@ An example of creating a vertical line of green dust particles:
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = new ParticleBuilder(Particle.DUST)
-      .location(someLocation)
-      .color(Color.GREEN, 1.0f)
-      .receivers(48, true);
+      .color(Color.GREEN, 1.0f);
 
     // We can reuse the builder
     for (double i = 0; i <= 1.0; i += 0.1) {
-      particleBuilder.location(someLocation.clone().add(0, i, 0)).spawn();
+      particleBuilder.location(someLocation.clone().add(0, i, 0)).receivers(48, true).spawn();
     }
     ```
   </TabItem>

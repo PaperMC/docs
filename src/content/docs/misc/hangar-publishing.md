@@ -75,7 +75,7 @@ waterfallVersion=1.20
 
 In the plugins block of your `build.gradle.kts` build script, add the publish plugin:
 
-```kotlin
+```kotlin title="build.gradle.kts"
 plugins {
     id("io.papermc.hangar-publish-plugin") version "0.1.2"
 }

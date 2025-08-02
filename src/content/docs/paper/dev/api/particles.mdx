@@ -252,6 +252,7 @@ An example of creating a vertical line of green dust particles:
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = new ParticleBuilder(Particle.DUST)
+      .location(someLocation)
       .color(Color.GREEN, 1.0f)
       .receivers(48, true);
 

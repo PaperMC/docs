@@ -18,10 +18,33 @@
 
 </script>
 
-<div>
+<div class="picker">
 
-  <div style="width:100px; height:100px; background-color: {color};"></div>
-  <p><span>{offsetX}</span></p>
-  <input type="range" min={-1.0} max={1.0} step={0.01} bind:value={offsetX} />
+  <div class="colorBox" style="background-color: {color};"></div>
+  <p><span class="value">offsetX = {offsetX}</span></p>
+  <input class="offset-slider" type="range" min={-1.0} max={1.0} step={0.01} bind:value={offsetX} />
 
 </div>
+
+<style>
+  .picker {
+    width: 30rem;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .colorBox {
+    width: 100%;
+    height: 5rem;
+    border-radius: 1rem;
+  }
+
+  .value {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .offset-slider {
+    width: 100%;
+  }
+</style>

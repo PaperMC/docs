@@ -524,14 +524,14 @@ Example of spawning a sculk charge particle at 45°:
     ```java
     new ParticleBuilder(Particle.SCULK_CHARGE)
       .location(someLocation)
-      .data(Math.toRadians(45))
+      .data((float) Math.toRadians(45))
       .receivers(48, true)
       .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.SCULK_CHARGE, someLocation, 1, Math.toRadians(45));
+    someWorld.spawnParticle(Particle.SCULK_CHARGE, someLocation, 1, (float) Math.toRadians(45));
     ```
   </TabItem>
 </Tabs>

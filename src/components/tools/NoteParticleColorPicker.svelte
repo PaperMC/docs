@@ -21,7 +21,7 @@
 </script>
 
 <div class="picker">
-  <div class="colorBox" style="background-color: {color};"></div>
+  <div class="color-box" style="background-color: {color};"></div>
   <p><span class="value">offsetX = {offsetX}</span></p>
   <input class="offset-slider" type="range" min={-1.0} max={1.0} step={0.01} bind:value={offsetX} />
 </div>
@@ -33,7 +33,7 @@
     text-align: center;
   }
 
-  .colorBox {
+  .color-box {
     width: 100%;
     height: 5rem;
     border-radius: 1rem;

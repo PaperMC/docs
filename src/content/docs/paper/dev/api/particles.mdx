@@ -518,34 +518,6 @@ also yields the same result, but is more likely to get removed in the future.
 The `ITEM` particle is a [directional particle](#directional-particles).
 :::
 
-## Sweep attack particles
-The `SWEEP_ATTACK` particle has two different behaviors based on the `count` argument:
-- If set to a positive number, offset arguments are used normally and a random target location.
-- If set to `0`, the `offsetX` argument controls the particle's scale, while `offsetY` and `offsetZ` are ignored.
-
-An example where a sweep attack particle will spawn at `someLocation` with a scale of `2.0`:
-<Tabs syncKey="spawn-type">
-  <TabItem label="ParticleBuilder">
-    ```java
-    Particle.SWEEP_ATTACK.builder()
-      .location(someLocation)
-      .offset(-2.0, 0, 0)
-      .count(0)
-      .receivers(48, true)
-      .spawn();
-    ```
-  </TabItem>
-  <TabItem label="spawnParticle">
-    ```java
-    someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2.0, 0, 0);
-    ```
-  </TabItem>
-</Tabs>
-
-:::note
-The scale is calculated as `1.0 - offsetX * 0.5`.
-:::
-
 ## Sculk particles
 ### Sculk charge
 The `SCULK_CHARGE` particle takes a `float` as it's `data`. This is used as the particle's "roll". Or, more formally,
@@ -742,10 +714,6 @@ The `DUST_PILLAR` particle uses `offsetY` for the y-axis velocity, while `offset
 ### Dust plume particles
 The `DUST_PLUME` particle increases the provided `offsetY` by `0.15`. To make the velocity vector have zero,
 set `offsetY` to `-0.15`.
-
-### Explosion particles
-The `EXPLOSION` particle uses the `offsetX` argument as the explosion's size. It is calculated as `2.0 * (1.0 - offsetX * 0.5)`.
-Negative final values will result in the particle appearing mirrored.
 
 ### Firefly particles
 The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however there is 50% chance for the `offsetY`'s

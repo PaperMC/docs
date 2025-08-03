@@ -696,8 +696,9 @@ location. When they reach the player's y level, their vertical velocity will be 
 If the player is moving vertically, the particles will attempt to match they player's vertical velocity.
 
 ### Splash particles
-The `SPLASH` particle adds the `offsetX` and `offsetZ` values to the particle's velocity vector's x and y components, respectively,
-if `offsetY` is `0` and `offset` or `offsetZ` are not `0`.
+The `SPLASH` particle uses the `offsetX` and `offsetZ` arguments to determine the particle's velocity vector, if two conditions are met:
+1. `offsetY` is `0`
+2. Either `offsetX` or `offsetZ` are not `0`
 
 ### Damage indicator particles
 The `DAMAGE_INDICATOR` particle adds `1.0` to the provided `offsetY`.

@@ -30,9 +30,9 @@ Particle.NOTE.builder()
 ```
 
 :::note
-This guide uses [`ParticleBuilder.receivers(48, true)`](jd:paper:com.destroystokyo.paper.ParticleBuilder#receivers(int,boolean))
-which selects players that have a distance of up to 48 blocks (3 chunks) from the particle's location. Using `receivers(48, false)` or `receivers(48)`
-would select players that are within a 96x96x96 cuboid centered around the particle's location.
+The use of [`ParticleBuilder.receivers(48, true)`](jd:paper:com.destroystokyo.paper.ParticleBuilder#receivers(int,boolean))
+select all players in a distance of 48 blocks from the particle's location,
+resulting in a sphere shape. Setting the boolean parameter to `false` would select all players in a cube.
 :::
 
 The second way is using the `spawnParticle()` methods in `World` and `Player` classes:
@@ -57,8 +57,8 @@ both take into account the `extra` argument as speed.
 Effective speed varies between particles.
 :::
 
-In the following example 8 flame particles are spawned in a 1x1x1 cube shape randomly, with `someLocation` serving as it's center.
-The last argument (extra) is set to 0, so the particles don't move.
+In the following example 8 `FLAME` particles are spawned in a 1x1x1 cube shape randomly. `someLocation` servers as it's center.
+The `extra` argument is set to 0, so the particles don't move.
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
@@ -84,10 +84,10 @@ likely resulting in unexpected behavior.
 :::
 
 ### Random direction
-Setting the `count` parameter to anything positive will yield a random direction for the velocity. The offset arguments are used as a random
-spawn offset from the location.
+Setting the `count` parameter to anything positive will yield a random direction for the velocity as described in
+[`count` argument behavior](#count-argument-behavior).
 
-An example of spawning 6 CRIT particles at a location, without offset, that will move in a random direction at a slow speed:
+An example of spawning 6 `CRIT` particles at a location, without offset, that will move in a random direction at a slow speed:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
@@ -239,11 +239,12 @@ Only the `ENTITY_EFFECT` supports the alpha channel, which is used to create tra
 :::
 
 :::caution
-The `EFFECT` particle can not be colored and will always be white, use `ENTITY_EFFECT` instead.
+The `EFFECT` and `INSTANT_EFFECT` particles can not be colored with the API and will always be white. These particles
+can only be colored by thrown potions.
 :::
 
 ### Dust particles
-The only Vanilla dust particle is the redstone particle. However, you can easily create a custom colored one by passing
+Vanilla uses the dust particle for redstone particles. They can have a custom color by passing
 [Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
 
 :::note

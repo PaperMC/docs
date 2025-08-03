@@ -1,10 +1,30 @@
-<script lang="ts" module>
+<script lang="ts">
   let offsetX: number = $state(0.0);
   let color = $derived(
     `rgb(${noteColorRGB(offsetX)
       .map((c) => c * 100 + "%")
       .join(", ")})`
   );
+  let canvas: HTMLCanvasElement;
+  let noteImg: HTMLImageElement;
+
+  $effect(() => {
+    const context: CanvasRenderingContext2D | null = canvas.getContext("2d");
+    if (!context || !noteImg.complete) {
+      return;
+    }
+    context.globalCompositeOperation = "source-over";
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(noteImg, 0, 0, 8, 8);
+    context.imageSmoothingEnabled = false;
+    context.drawImage(canvas, 0, 0, 8, 8, 0, 0, canvas.width, canvas.height);
+    context.globalCompositeOperation = "multiply";
+    context.fillStyle = color;
+    context.fillRect(0, 0, canvas.width, canvas.height);
+    context.globalCompositeOperation = "destination-atop";
+    context.drawImage(noteImg, 0, 0, 8, 8);
+    context.drawImage(canvas, 0, 0, 8, 8, 0, 0, canvas.width, canvas.height);
+  });
 
   /**
    * Calculates RGB color based on the offsetX value, just like the Minecraft client.
@@ -21,22 +41,38 @@
 </script>
 
 <div class="picker">
-  <div class="color-box" style="background-color: {color};"></div>
+  <img
+    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAQAAABuBnYAAAAALElEQVR42mOAgc3/J/0H0UgCGahCm4GcQGQBiCzRAp//A41EFsj4H/gfZiAAXXUYtS3tm1IAAAAASUVORK5CYII="
+    alt="Note particle"
+    class="note-image"
+    bind:this={noteImg}
+  />
+  <canvas class="note-canvas" bind:this={canvas}></canvas>
   <p><span class="value">offsetX = {offsetX}</span></p>
   <input class="offset-slider" type="range" min={-1.0} max={1.0} step={0.01} bind:value={offsetX} />
 </div>
 
 <style>
   .picker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 30rem;
     padding: 1rem;
     text-align: center;
   }
 
-  .color-box {
-    width: 100%;
+  .note-image {
+    image-rendering: pixelated;
+    width: 1rem;
+    height: auto;
+    display: none;
+  }
+
+  .note-canvas {
     height: 5rem;
-    border-radius: 1rem;
+    width: 5rem;
   }
 
   .value {

@@ -59,6 +59,7 @@
     justify-content: center;
     align-items: center;
     width: 30rem;
+    max-width: 100%;
     padding: 1rem;
     text-align: center;
   }

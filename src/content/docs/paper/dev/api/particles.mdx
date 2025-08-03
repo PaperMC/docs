@@ -639,7 +639,7 @@ If the final calculated scale is negative, the particle will appear mirrored.
 :::
 
 ### Sweep attack particles
-`SWEEP_ATTACK` particle's scale is calculated as `1.0 - offsetX * 0.5`.
+The `SWEEP_ATTACK` particle's scale is calculated as `1.0 - offsetX * 0.5`.
 
 An example where a sweep attack particle will spawn at `someLocation` with a scale of `2.0`:
 <Tabs syncKey="spawn-type">
@@ -661,7 +661,7 @@ An example where a sweep attack particle will spawn at `someLocation` with a sca
 </Tabs>
 
 ### Explosion particles
-`EXPLOSION` and `SONIC_BOOM`'s scale is calculated as `2.0 * (1.0 - offsetX * 0.5)`.
+The `EXPLOSION` particle's scale is calculated as `2.0 * (1.0 - offsetX * 0.5)`.
 
 An example where an explosion particle will spawn at `someLocation` with a scale of `4.0`:
 <Tabs syncKey="spawn-type">

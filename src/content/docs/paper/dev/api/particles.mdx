@@ -690,7 +690,7 @@ The `ANGRY_VILLAGER` particle always spawns `0.5` higher (y-axis) than the suppl
 
 ### Cloud particles
 The `CLOUD` and `SNEEZE` particles move towards the player's y level, if they are within 2 block distance from the player's
-location. When they reach the player's y level, they will stop moving vertically.
+location. When they reach the player's y level, their vertical velocity will be greatly reduced.
 
 If the player is moving vertically, the particles will attempt to match they player's vertical velocity.
 
@@ -699,15 +699,13 @@ The `SPLASH` particle adds the `offsetX` and `offsetZ` values to the particle's 
 if `offsetY` is `0` and `offset` or `offsetZ` are not `0`.
 
 ### Damage indicator particles
-The `DAMAGE_INDICATOR` particle increases the provided `offsetY` by `1.0`. To make the velocity vector have zero,
-set `offsetY` to `-1.0`.
+The `DAMAGE_INDICATOR` particle adds `1.0` to the provided `offsetY`.
 
 ### Dust pillar particles
 The `DUST_PILLAR` particle uses `offsetY` for the y-axis velocity, while `offsetX` and `offsetZ` are ignored.
 
 ### Dust plume particles
-The `DUST_PLUME` particle increases the provided `offsetY` by `0.15`. To make the velocity vector have zero,
-set `offsetY` to `-0.15`.
+The `DUST_PLUME` particle adds `0.15` to the provided `offsetY`.
 
 ### Firefly particles
 The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however there is 50% chance for the `offsetY`'s

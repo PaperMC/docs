@@ -438,7 +438,7 @@ travels in a straight line.
 
 ## Material particles
 ### BlockData
-To spawn particles that require `BlockData`, simply put `BlockData` as it's `data` argument.
+To spawn particles that require `BlockData`, simply put `BlockData` as its `data` argument.
 
 Example:
 <Tabs syncKey="spawn-type">
@@ -476,7 +476,7 @@ To achieve this, the effective velocity vector's length should be high (around 1
 :::
 
 ### ItemStack
-To spawn particles that require an `ItemStack`, simply put an `ItemStack` as it's `data` argument.
+To spawn particles that require an `ItemStack`, simply put an `ItemStack` as its `data` argument.
 
 Example:
 <Tabs syncKey="spawn-type">
@@ -510,7 +510,7 @@ The `ITEM` particle is a [directional particle](#directional-particles).
 
 ## Sculk particles
 ### Sculk charge
-The `SCULK_CHARGE` particle takes a `float` as it's `data`. This is used as the particle's "roll". Or, more formally,
+The `SCULK_CHARGE` particle takes a `float` as its `data` argument. This is used as the particle's "roll". Or, more formally,
 the angle the particle displays at in **radians**.
 
 Example of spawning a sculk charge particle at 45°:
@@ -536,7 +536,7 @@ The `SCULK_CHARGE` particle is a [directional particle](#directional-particles).
 :::
 
 ### Shriek
-The `SHRIEK` particle takes an `integer` as its `data`. This is used to set the delay **in ticks** before the particle spawns.
+The `SHRIEK` particle takes an `integer` as its `data` argument. This is used to set the delay **in ticks** before the particle spawns.
 
 It is completely up to your implementation when choosing to use `data` or a scheduler.
 

@@ -38,17 +38,15 @@ The second way is using the `spawnParticle()` methods in `World` and `Player` cl
 - [`World.spawnParticle()`](jd:paper:org.bukkit.World#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle for all players and
 - [`Player.spawnParticle()`](jd:paper:org.bukkit.entity.Player#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle only for the player.
 
-:::note
-`offset` arguments are multiplied by a Gaussian (normal) distribution's random value (if offset arguments are used for offset).
-In simple terms this means an offset can be **added to** OR **subtracted from** the supplied location/coordinates.
-This also means that more particles will spawn closer to the supplied location.
-<details>
-  <summary>Example</summary>
-If we have a `location` and set offset arguments to `0.5, 0.5, 1.5`, particles will randomly spawn between coordinates
-`location.subtract(0.5, 0.5, 1.5)` and `location.add(0.5, 0.5, 1.5)`, or simply, inside a `1x1x3` box where `location` is
-the center.
-</details>
-:::
+## `count` argument behavior <Badge variant="danger" text="Important" size="large" />
+When spawning particles, the Minecraft client behaves differently based on the count argument:
+- If `count = 0`, the client uses the provided location without modification. The offset values are multiplied by the
+`extra` argument and passed to the particle constructor. The way these values are
+used may vary between particle types.
+
+- If `count > 0`, the client spawns that number of particles. For each particle, it generates random offset
+values using a Gaussian (normal) distribution, multiplies them by the extra argument, and passes
+them to the particle constructor.
 
 ## Directional particles
 This type of particle has an initial velocity when spawned. The velocity can be determined in two different ways, however
@@ -718,13 +716,3 @@ set `offsetY` to `-0.15`.
 ### Firefly particles
 The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however there is 50% chance for the `offsetY`'s
 sign to be inverted. This means that the particle will either move up or down, with equal probability.
-
-## `count` argument behavior <Badge variant="danger" text="Advanced" size="large" />
-When spawning particles, the Minecraft client behaves differently based on the count argument:
-- If `count` is `0`, the client uses the provided location without modification. The offset values are multiplied by the
-`extra` argument and passed to the particle constructor. The way these values are
-used may vary between particle types.
-
-- If `count` is greater than `0`, the client spawns that number of particles. For each particle, it generates random offset
-values using a Gaussian (normal) distribution, multiplies them by the extra argument (as a speed multiplier), and passes
-them to the particle constructor.

@@ -654,7 +654,7 @@ Example of spawning a `GLOW` particle that moves up:
 
 ### List of y-axis velocity particles
 <details>
-<summary>Show list</summary>
+  <summary>Show list</summary>
   - EFFECT
   - ENTITY_EFFECT
   - GLOW
@@ -663,6 +663,58 @@ Example of spawning a `GLOW` particle that moves up:
   - TRIAL_OMEN
   - WITCH
 </details>
+
+## Scalable particles
+These particles can be scaled with `offsetX`, while `offsetY` and `offsetZ` are ignored. This chapter does not include dust particles,
+those particles are covered in [Dust particles](#dust-particles) and [Dust transition particles](#dust-transition-particles) chapters.
+
+:::note
+If the final calculated scale is negative, the particle will appear mirrored.
+:::
+
+### Sweep attack particles
+`SWEEP_ATTACK` particle's scale is calculated as `1.0 - offsetX * 0.5`.
+
+An example where a sweep attack particle will spawn at `someLocation` with a scale of `2.0`:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    Particle.SWEEP_ATTACK.builder()
+    .location(someLocation)
+    .offset(-2.0, 0, 0)
+    .count(0)
+    .receivers(48, true)
+    .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2.0, 0, 0);
+    ```
+  </TabItem>
+</Tabs>
+
+### Explosion particles
+`EXPLOSION` and `SONIC_BOOM`'s scale is calculated as `2.0 * (1.0 - offsetX * 0.5)`.
+
+An example where an explosion particle will spawn at `someLocation` with a scale of `4.0`:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    Particle.EXPLOSION.builder()
+      .location(someLocation)
+      .offset(-2.0, 0, 0)
+      .count(0)
+      .receivers(48, true)
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, -2.0, 0, 0);
+    ```
+  </TabItem>
+</Tabs>
 
 ## Miscellaneous behaviors
 This chapter covers particles that have unique behaviors when spawning.

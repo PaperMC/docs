@@ -279,10 +279,10 @@ Here, adding a size argument would control the dust particle's lifetime, in tick
 integer between 8 to 40, which is multiplied by the particle's scale, to get the final lifetime (with a minimum of 1).
 :::
 
-### Dust transition particles
-Dust transition particles work similarly to [dust particles](#dust-particles), but they **transition** their color
-from one to another. A [Particle.DustTransition](jd:paper:org.bukkit.Particle$DustTransition) is used for specifying the
-transition.
+#### Dust transition particles
+Dust transition particles work exactly like [dust particles](#dust-particles), but instead of having a static color, they **transition**
+their color from one to another. A [Particle.DustTransition](jd:paper:org.bukkit.Particle$DustTransition) is used for
+specifying the transition.
 
 An example where 3 dust transition particles spawn on the x-axis within a 1 block length:
 <Tabs syncKey="spawn-type">

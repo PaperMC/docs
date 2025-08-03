@@ -174,6 +174,8 @@ We could also make the smoke go down if we wanted to:
 - CRIT
 - DAMAGE_INDICATOR
 - DRAGON_BREATH
+- DUST
+- DUST_COLOR_TRANSITION
 - DUST_PLUME
 - ELECTRIC_SPARK
 - ENCHANTED_HIT
@@ -623,8 +625,28 @@ An example where a vibration particle will spawn at `someLocation` and travel to
   </TabItem>
 </Tabs>
 
-## Miscellaneous particle types
-This chapter covers particles that have some special behaviour, but don't fit into the previous categories.
+## y-axis velocity particles
+These particles will use `offsetY` as the particle's y-axis velocity.
+
+If you set `offsetX` AND `offsetZ` to `0`, the particle will have almost no x or z-axis velocity, but will still have
+a y-axis velocity based on `offsetY`.
+
+In both cases, `offsetX` and `offsetZ` are not used in the velocity vector.
+
+### List of y-axis velocity particles
+<details>
+<summary>Show list</summary>
+  - EFFECT
+  - ENTITY_EFFECT
+  - GLOW
+  - INFESTED
+  - RAID_OMEN
+  - TRIAL_OMEN
+  - WITCH
+</details>
+
+## Miscellaneous behaviors
+This chapter covers particles that have unique behaviors when spawning.
 
 ### Angry villager particles
 The `ANGRY_VILLAGER` particle always spawns `0.5` higher (y-axis) than the supplied location.
@@ -639,8 +661,24 @@ If the player is moving vertically, the particles will attempt to match they pla
 The `SPLASH` particle adds the `offsetX` and `offsetZ` values to the particle's velocity vector's x and y components, respectively,
 if `offsetY` is `0`.
 
+### Damage indicator particles
+The `DAMAGE_INDICATOR` particle increases the provided `offsetY` by `1.0`. To make the velocity vector have zero,
+set `offsetY` to `-1.0`.
+
 ### Dust pillar particles
 The `DUST_PILLAR` particle uses `offsetY` for the y-axis velocity, while `offsetX` and `offsetZ` are ignored.
+
+### Dust plume particles
+The `DUST_PLUME` particle increases the provided `offsetY` by `0.15`. To make the velocity vector have zero,
+set `offsetY` to `-0.15`.
+
+### Explosion particles
+The `EXPLOSION` particle uses the `offsetX` argument as the explosion's size. It is calculated as `2.0 * (1.0 - offsetX * 0.5)`.
+Negative final values will result in the particle appearing mirrored.
+
+### Firefly particles
+The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however there is 50% chance for the `offsetY`'s
+sign to be inverted. This means that the particle will either move up or down, with equal probability.
 
 ## `count` argument behavior <Badge variant="danger" text="Advanced" size="large" />
 When spawning particles, the Minecraft client behaves differently based on the count argument:

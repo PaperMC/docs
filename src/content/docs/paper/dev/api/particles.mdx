@@ -40,18 +40,17 @@ The second way is using the `spawnParticle()` methods in `World` and `Player` cl
 - [`Player.spawnParticle()`](jd:paper:org.bukkit.entity.Player#spawnParticle(org.bukkit.Particle,double,double,double,int)) which spawns the particle only for the player.
 
 ## `count` argument behavior <Badge variant="danger" text="Important" size="large" />
-When spawning particles, the Minecraft client behaves differently based on the count argument:
+When spawning particles, the Minecraft client behaves differently based on the `count` argument:
 - If `count = 0`, a singular particle spawns and the client uses the provided location without modification.
 The offset values are multiplied by the `extra` argument and passed to the particle constructor. The way these values are
 used may vary between particle types.
 
-- If `count > 0`, the client spawns `count` number of particles. For each particle, it generates random offset
+- If `count > 0`, the client spawns `count` number of particles. For each particle, it generates new offset
 values using a Gaussian (normal) distribution, multiplies them by the `extra` argument, and passes
 them to the particle constructor.
 
 ## Directional particles
-This type of particle has an initial velocity when spawned. The velocity can be determined in two different ways, however
-both take into account the `extra` argument as speed.
+This type of particle has an initial velocity when spawned.
 
 :::note
 Effective speed varies between particles.
@@ -79,8 +78,7 @@ The `extra` argument is set to 0, so the particles don't move.
 </Tabs>
 
 :::caution
-Leaving the `extra` parameter unset will default it to `1` (used as particle speed),
-likely resulting in unexpected behavior.
+Leaving the `extra` parameter unset will default it to `1`, likely resulting in unexpected behavior.
 :::
 
 ### Random direction
@@ -108,9 +106,7 @@ An example of spawning 6 `CRIT` particles at a location, without offset, that wi
 
 ### Specified direction
 To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
-The `extra` argument will serve as the vector's multiplier, scaling it.
-
-So for example if we set offsets to `2.5, 1.2, 0.4` and `extra` to `5`, the final velocity vector would be `(12.5, 6, 2)`.
+See [`count` argument behavior](#count-argument-behavior) for more details.
 
 An example of a repeating task spawning campfire smoke that slowly goes "up" (positive Y axis):
 <Tabs syncKey="spawn-type">
@@ -315,10 +311,7 @@ An example where 3 dust transition particles spawn on the x-axis within a 1 bloc
 </Tabs>
 
 ### Note particles
-The note particles have two different behaviors based on the `count` argument.
-- If set to a positive number a random color
-(of the preset 24) will be chosen for each spawned particle.
-- If set to `0`, the `offsetX` argument will be used in a custom function to determine the color of the note particle,
+The note particles will use the `offsetX` argument in a custom function to determine the color,
 see [Note particle color picker](#note-particle-color-picker) for more details. `offsetY` and `offsetZ` are ignored in this case.
 
 Example:
@@ -371,8 +364,8 @@ Example:
 ### Trail particles
 Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
 
-An example where 8 randomly offset trail particles move towards `someLocation`, which is in the center of the spawning
-bounding box in 10 ticks:
+An example where 8 randomly offset trail particles travel towards a specified location
+(`someLocation.clone().add(12, 0, 0)`) with a red color and a travel time of 10 ticks:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
@@ -380,7 +373,7 @@ bounding box in 10 ticks:
       .location(someLocation)
       .offset(2, 2, 2)
       .count(8)
-      .data(new Particle.Trail(someLocation, Color.RED, 10))
+      .data(new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 10))
       .receivers(48, true)
       .spawn();
     ```
@@ -392,7 +385,7 @@ bounding box in 10 ticks:
       someLocation,
       8,
       2, 2, 2,
-      new Particle.Trail(someLocation, Color.RED, 10)
+      new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 10)
     );
     ```
   </TabItem>
@@ -401,11 +394,8 @@ bounding box in 10 ticks:
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.
-
-The particles have two different behaviors based on the `count` argument:
-- If set to a positive number, offset arguments are used normally and a random target location is picked.
-- If set to `0`, the offset arguments will be used for a relative spawn location from the supplied location/coordinates.
-The particle will then travel from this relative location to the supplied location in a curve.
+Offset arguments are used to determine the relative spawn location  of the particle.
+The particle will then travel from this relative location to the supplied location.
 
 An example where an enchantment particle will spawn at `someLocation.clone().add(2,0,2)` and travel to `someLocation`:
 <Tabs syncKey="spawn-type">
@@ -601,9 +591,7 @@ An example where a vibration particle will spawn at `someLocation` and travel to
 These particles will use `offsetY` as the particle's y-axis velocity.
 
 If you set `offsetX` AND `offsetZ` to `0`, the particle will have almost no x or z-axis velocity, but will still have
-a y-axis velocity based on `offsetY`.
-
-In both cases, `offsetX` and `offsetZ` are not used in the velocity vector.
+a y-axis velocity set by the `offsetY` argument. In both cases, `offsetX` and `offsetZ` are not used in the velocity vector.
 
 Example of spawning a `GLOW` particle that moves up:
 <Tabs syncKey="spawn-type">
@@ -623,6 +611,12 @@ Example of spawning a `GLOW` particle that moves up:
     ```
   </TabItem>
 </Tabs>
+
+:::note
+These particles have "reverse" gravity, meaning that the initial velocity will be used only briefly, and the particle will
+start to rise after a short time. Therefore, negative vertical velocity will only stop the particle from rising temporarily,
+while a positive vertical velocity will make the particle rise immediately.
+:::
 
 ### List of vertical velocity particles
 <details>

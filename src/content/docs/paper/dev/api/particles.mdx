@@ -31,7 +31,8 @@ Particle.NOTE.builder()
 
 :::note
 This guide uses [`ParticleBuilder.receivers(48, true)`](jd:paper:com.destroystokyo.paper.ParticleBuilder#receivers(int,boolean))
-which selects players that have a distance of up to 48 blocks (3 chunks) from the particle's location.
+which selects players that have a distance of up to 48 blocks (3 chunks) from the particle's location. Using `receivers(48, false)` or `receivers(48)`
+would select players that are within a 96x96x96 cuboid centered around the particle's location.
 :::
 
 The second way is using the `spawnParticle()` methods in `World` and `Player` classes:
@@ -40,12 +41,12 @@ The second way is using the `spawnParticle()` methods in `World` and `Player` cl
 
 ## `count` argument behavior <Badge variant="danger" text="Important" size="large" />
 When spawning particles, the Minecraft client behaves differently based on the count argument:
-- If `count = 0`, the client uses the provided location without modification. The offset values are multiplied by the
-`extra` argument and passed to the particle constructor. The way these values are
+- If `count = 0`, a singular particle spawns and the client uses the provided location without modification.
+The offset values are multiplied by the `extra` argument and passed to the particle constructor. The way these values are
 used may vary between particle types.
 
-- If `count > 0`, the client spawns that number of particles. For each particle, it generates random offset
-values using a Gaussian (normal) distribution, multiplies them by the extra argument, and passes
+- If `count > 0`, the client spawns `count` number of particles. For each particle, it generates random offset
+values using a Gaussian (normal) distribution, multiplies them by the `extra` argument, and passes
 them to the particle constructor.
 
 ## Directional particles
@@ -622,7 +623,7 @@ Example of spawning a `GLOW` particle that moves up:
   </TabItem>
 </Tabs>
 
-### List of y-axis velocity particles
+### List of vertical velocity particles
 <details>
   <summary>Show list</summary>
   - EFFECT

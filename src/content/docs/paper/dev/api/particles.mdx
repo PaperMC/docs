@@ -625,13 +625,32 @@ An example where a vibration particle will spawn at `someLocation` and travel to
   </TabItem>
 </Tabs>
 
-## y-axis velocity particles
+## Vertical velocity particles
 These particles will use `offsetY` as the particle's y-axis velocity.
 
 If you set `offsetX` AND `offsetZ` to `0`, the particle will have almost no x or z-axis velocity, but will still have
 a y-axis velocity based on `offsetY`.
 
 In both cases, `offsetX` and `offsetZ` are not used in the velocity vector.
+
+Example of spawning a `GLOW` particle that moves up:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    Particle.GLOW.builder()
+      .location(someLocation)
+      .count(0)
+      .offset(0, 2, 0)
+      .receivers(48, true)
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.GLOW, someLocation, 0, 0, 2, 0);
+    ```
+  </TabItem>
+</Tabs>
 
 ### List of y-axis velocity particles
 <details>
@@ -652,7 +671,7 @@ This chapter covers particles that have unique behaviors when spawning.
 The `ANGRY_VILLAGER` particle always spawns `0.5` higher (y-axis) than the supplied location.
 
 ### Cloud particles
-The `CLOUD` and `SNEEZE` particles move towards the player's y level, if they are withing 2 block distance from the player's
+The `CLOUD` and `SNEEZE` particles move towards the player's y level, if they are within 2 block distance from the player's
 location. When they reach the player's y level, they will stop moving vertically.
 
 If the player is moving vertically, the particles will attempt to match they player's vertical velocity.

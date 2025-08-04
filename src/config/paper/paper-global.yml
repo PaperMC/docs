@@ -351,11 +351,11 @@ packet-limiter:
       The message players are kicked with for sending too many packets.
       Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
   overrides:
+    header:
+      message: >-
+        Override the **action**, **interval**, and **max-packet-rate** configuration for any individual serverbound packet. You can
+        find the identifiers for packets on the [wiki](https://minecraft.wiki/w/Java_Edition_protocol/Packets).
     minecraft:place_recipe:
-      header:
-        message: >-
-          Override the **action**, **interval**, and **max-packet-rate** configuration for any individual serverbound packet. You can
-          find the identifiers for packets on the [wiki](https://minecraft.wiki/w/Java_Edition_protocol/Packets).
       action:
         default: KICK
         description: >-

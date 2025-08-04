@@ -210,7 +210,7 @@ player.sendPlainMessage(value);
 
 :::note
 
-PDC-view support for `ItemStack` was only introduced in 1.21.1. For older versions, you need to access and modify the `ItemMeta` instead.
+PDC-view support for `ItemStack` was only introduced in 1.21.1. For older versions, you need to use the `ItemMeta` instead.
 
 :::
 

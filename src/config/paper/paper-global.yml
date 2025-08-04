@@ -352,10 +352,23 @@ packet-limiter:
       Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
   overrides:
     minecraft:place_recipe:
-      <setting>:
+      action:
+        default: KICK
         description: >-
-          Override the **action**, **interval**, and **max-packet-rate** configuration for any individual serverbound packet. You can
-          find the identifiers for packets on the [wiki](https://minecraft.wiki/w/Java_Edition_protocol/Packets).
+          The action to take once the limit has been violated. Possible values are
+          DROP which will ignore packets over the limit, and KICK which will kick
+          players for exceeding the limit
+      interval:
+        vanilla: "0.000001"
+        default: "7.0"
+        description: The interval, in seconds, for which max-packet-rate should apply
+      max-packet-rate:
+        vanilla: "999999.0"
+        default: "500.0"
+        description: The number of packets allowed per player within the interval
+      description: >-
+        Override the **action**, **interval**, and **max-packet-rate** configuration for any individual serverbound packet. You can
+        find the identifiers for packets on the [wiki](https://minecraft.wiki/w/Java_Edition_protocol/Packets).
 player-auto-save:
   max-per-tick:
     default: "-1"

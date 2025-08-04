@@ -75,7 +75,7 @@ want to use a different namespace or access the data from another plugin.
 
 ## Getting data
 To get data from the PDC, you need to know the `NamespacedKey` and the `PersistentDataType` of the data.
-Some API parts, such as Adventure's `Component.text`, require non-null values. In such cases, use the [`getOrDefault`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#getOrDefault(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C)) on the pdc instead of [`get`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)), which is nullable.
+Some API parts, such as Adventure's [`Component.text(String)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html#text(java.lang.String)), require non-null values. In such cases, use the [`getOrDefault`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#getOrDefault(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C)) on the pdc instead of [`get`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)), which is nullable.
 
 ```java
 NamespacedKey key = ...; // Retrieve the key from before

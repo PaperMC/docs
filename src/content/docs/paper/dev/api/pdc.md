@@ -2,7 +2,7 @@
 title: Persistent data container (PDC)
 description: A guide to the PDC API for storing data.
 slug: paper/dev/pdc
-version: "1.21.4 and below"
+version: "1.21.8 and below"
 ---
 
 The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and block entities.

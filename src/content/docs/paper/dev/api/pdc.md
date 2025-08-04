@@ -83,11 +83,9 @@ World world = ...; // Retrieve the world from before
 
 PersistentDataContainer pdc = world.getPersistentDataContainer();
 // Utilize the data from the PDC
-if (pdc.has(key, PersistentDataType.STRING)) {
-    String value = pdc.getOrDefault(key, PersistentDataType.STRING, "<null>");
-    // Do something with the value
-    player.sendPlainMessage(value);
-}
+String value = pdc.getOrDefault(key, PersistentDataType.STRING, "<null>");
+// Do something with the value
+player.sendPlainMessage(value);
 ```
 
 ## Data types
@@ -205,11 +203,9 @@ ItemStack item = ...; // Retrieve the item from before
 
 PersistentDataContainerView pdcView = item.getPersistentDataContainer();
 // Utilize the data from the PDC "view"
-if (pdcView.has(key, PersistentDataType.STRING)) {
-    String value = pdcView.getOrDefault(key, PersistentDataType.STRING, "<null>");
-    // Do something with the value
-    player.sendPlainMessage(value);
-}
+String value = pdcView.getOrDefault(key, PersistentDataType.STRING, "<null>");
+// Do something with the value
+player.sendPlainMessage(value);
 ```
 
 :::note

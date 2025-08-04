@@ -228,6 +228,7 @@ export default defineConfig({
                         },
                         "paper/dev/data-component-api",
                         "paper/dev/pdc",
+                        "paper/dev/menu-type-api",
                         "paper/dev/custom-inventory-holder",
                         "paper/dev/scheduler",
                         "paper/dev/plugin-messaging",

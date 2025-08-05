@@ -1,6 +1,7 @@
 ---
 title: Menu Type API
 slug: paper/dev/menu-type-api
+description: A guide to the Menu Type API.
 version: 1.21.8
 ---
 

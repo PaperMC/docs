@@ -21,8 +21,8 @@ functional. Some of them can directly represent a block (a.e. a furnace) and the
 
 ## What are inventory views?
 An [`InventoryView`](jd:paper:org.bukkit.inventory.InventoryView) is a specific view created from a menu type.
-In the general sense, an inventory view link together **two separate inventories** and always has a player viewing them.
-The bottom linked inventory is here the player's inventory.
+In the general sense, an inventory view links together **two separate inventories** and always has a player viewing them.
+The bottom linked inventory is the player's inventory.
 
 There are specialized subinterfaces for getting specific inventory views (a.e. [`FurnaceView`](jd:paper:org.bukkit.inventory.view.FurnaceView)
 for furnace inventories). This makes it very convenient to check whether an inventory view is of a specific type.
@@ -56,20 +56,27 @@ MenuType.CRAFTING.builder()
     .open();
 ```
 
+:::tip[Reusing Builders]
+
+Builders can be reused in order to reduce code repetition.
+
+:::
+
 ## Opening blocks that have menus
 Almost all inventory views have a block attached to them. The only exception being the
 [`MenuType.MERCHANT`](jd:paper:org.bukkit.inventory.MenuType#MERCHANT), which
 instead has a [`Merchant`](jd:paper:org.bukkit.inventory.Merchant) attached to it.
 
-There are two types of blocks that have menus: Block entities and non block entities.
+There are two types of blocks that have menus: Block entity blocks and stateless blocks.
 
-Non block entities, as the name implies, do not have any state associated with them. Under
+Stateless blocks, as the name implies, do not have any state associated with them. Under
 those count the majority of "workbench" blocks, like crafting tables, grindstones, anvils, and more.
 
-Block entities have a state associated with them. Meaning when you open a specific location
-with the `#location` builder method, the state of that block can change (if it is the correct
-block to begin with), meaning all players can see the change live. An example of those blocks
-are the beacon, furnaces, chests, and similar.
+Block entity blocks (also referred to as tile entity blocks) have a state associated with them.
+Meaning when you open a specific location with the `#location` builder method, and the block matches
+the expected block from the menu type ([`MenuType.FURNACE`](jd:paper:org.bukkit.inventory.MenuType#FURNACE) expects a furnace)
+the state of that block can change, meaning all players can see the change live. An example of
+those blocks are the beacon, furnaces, chests, and similar.
 
 ## Persistent inventory views
 Inventory views can be reused! This is useful for persistent operations.
@@ -118,7 +125,6 @@ public class CommandPersistent implements Listener {
             // If there is no view currently stored, create it.
             if (view == null) {
                 view = MenuType.GENERIC_9X6.builder()
-                    .title(Component.text(player.getName() + "'s stash", NamedTextColor.DARK_RED))
                     .title(Component.text(player.getName() + "'s stash", NamedTextColor.DARK_RED))
                     .build(player);
 

@@ -16,6 +16,8 @@
     "@astrojs/starlight": "^0.35.2",
     "@astrojs/svelte": "^7.1.0",
     "@fontsource/jetbrains-mono": "^5.2.6",
+    "@expressive-code/plugin-collapsible-sections": "^0.41.3",
+    "@expressive-code/plugin-line-numbers": "^0.41.3",
     "@fontsource/poppins": "^5.2.6",
     "astro": "^5.12.8",
     "astro-d2": "^0.8.0",
@@ -41,5 +43,5 @@
   "engines": {
     "node": "22.x"
   },
-  "packageManager": "pnpm@10.8.0+sha512.0e82714d1b5b43c74610193cb20734897c1d00de89d0e18420aebc5977fa13d780a9cb05734624e81ebd81cc876cd464794850641c48b9544326b5622ca29971"
+  "packageManager": "pnpm@10.14.0+sha512.ad27a79641b49c3e481a16a805baa71817a04bbe06a38d17e60e2eaee83f6a146c6a688125f5792e48dd5ba30e7da52a5cda4c3992b9ccf333f9ce223af84748"
 }

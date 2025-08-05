@@ -77,7 +77,7 @@ Inventory views can be reused! This is useful for persistent operations.
 For example, we can write a `/persistent` command with opens a player's own, persistent, stash!
 
 ```java title="CommandPersistent.java" showLineNumbers collapse={1-18}
-package io.papermc.menutype;
+package io.papermc.docs.menutype;
 
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.tree.LiteralCommandNode;

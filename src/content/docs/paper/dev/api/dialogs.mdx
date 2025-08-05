@@ -384,12 +384,15 @@ DialogAction.customClick(
         int levels = view.getFloat("level").intValue();
         float exp = view.getFloat("experience").floatValue();
 
-        player.sendRichMessage("You selected <color:#ccfffd><level> levels</color> and <color:#ccfffd><exp>% exp</color> to the next level!",
-            Placeholder.component("level", Component.text(levels)),
-            Placeholder.component("exp", Component.text(exp))
-        );
-        player.setLevel(levels);
-        player.setExp(exp / 100);
+        if (audience instanceof Player player) {
+            player.sendRichMessage("You selected <color:#ccfffd><level> levels</color> and <color:#ccfffd><exp>% exp</color> to the next level!",
+                Placeholder.component("level", Component.text(levels)),
+                Placeholder.component("exp", Component.text(exp))
+            );
+
+            player.setLevel(levels);
+            player.setExp(exp / 100);
+        }
     },
     ClickCallback.Options.builder()
         .uses(1) // Set the number of uses for this callback. Defaults to 1

@@ -28,7 +28,7 @@ The dialog API is currently experimental and might change in the future.
 update. Paper released developer API for creating custom dialogs in 1.21.7. This section is meant
 as an introduction to this API and what you can and cannot do with dialogs.
 
-## What is a dialog
+## What is a dialog?
 Dialogs are a way for servers to send custom in-game menus to clients. They allow for displaying various information
 or provide an easy way to gather user input.
 
@@ -52,8 +52,6 @@ There are three built-in dialogs:
 - [Server Links](jd:paper:io.papermc.paper.registry.keys.DialogKeys#SERVER_LINKS)
 - [Quick Actions](jd:paper:io.papermc.paper.registry.keys.DialogKeys#QUICK_ACTIONS)
 - [Custom Options](jd:paper:io.papermc.paper.registry.keys.DialogKeys#CUSTOM_OPTIONS)
-
-Currently, only the server links can be modified from the API.
 
 ### Adding server links
 You can add server links by retrieving the [`ServerLinks`](jd:paper:org.bukkit.ServerLinks) instance from
@@ -129,7 +127,7 @@ There are four ways to gather input:
 
 
 ### Dialog type
-The [`DialogTypes`](jd:paper:io.papermc.paper.registry.data.dialog.type.DialogType) interface defines a few static
+The [`DialogType`](jd:paper:io.papermc.paper.registry.data.dialog.type.DialogType) interface defines a few static
 methods for the various dialog types. The following types exist:
 
 | Type             | Method                                                                                                                                                                                                                                              | Description                                |
@@ -143,11 +141,11 @@ methods for the various dialog types. The following types exist:
 The type primarily influences the bottom part of the dialog.
 
 ## Registering dialogs in the registry
-If you want dialogs to be registered in the dialogs registry, you have register them inside a registry modification lifecycle
+If you want dialogs to be registered in the dialogs registry, you must register them inside a registry modification lifecycle
 event in your plugin's bootstrapper. Some general information on that can be read [here](/paper/dev/registries).
 
 The general registration looks fairly similar to dynamically created dialogs:
-```java title="YourPluginBootstrapper.java"
+```java title="YourPluginBootstrapper.java" showLineNumbers
 @Override
 public void bootstrap(BootstrapContext context) {
     context.getLifecycleManager().registerEventHandler(RegistryEvents.DIALOG.compose()
@@ -167,14 +165,14 @@ the start.
 
 ### The dialog
 The dialog is a simple confirmation-type dialog with a single plain message body components. We will register it in
-the bootstrapper so that we can easily retrieve it from the `AsyncPlayerConfigureEvent`, where the dialog will
+the bootstrapper so that we can easily retrieve it from the `AsyncPlayerConnectionConfigureEvent`, where the dialog will
 be sent from.
 
-```java title="CustomPluginBootstrapper.java"
+```java title="CustomPluginBootstrapper.java" showLineNumbers
 ctx.getLifecycleManager().registerEventHandler(RegistryEvents.DIALOG.compose(),
-    e -> e.registry().registerWith(
+    e -> e.registry().register(
         DialogKeys.create(Key.key("papermc:praise_paperchan")),
-        builder -> builder.empty()
+        builder -> builder
             .base(DialogBase.builder(Component.text("Accept our rules!", NamedTextColor.LIGHT_PURPLE))
                 .canCloseWithEscape(false)
                 .body(List.of(
@@ -208,7 +206,7 @@ this by constructing a `CompletableFuture`, putting it into a map, and waiting u
 completed, will only happen as soon the player pressed one of the two confirmation buttons of the dialog.
 
 The code for that would look something like this:
-```java title="ServerJoinListener.java"
+```java title="ServerJoinListener.java" showLineNumbers
 @NullMarked
 public class ServerJoinListener implements Listener {
 
@@ -224,7 +222,7 @@ public class ServerJoinListener implements Listener {
             // The dialog failed to load :(
             // This would happen if the dialog could not be found in the registry by the provided key.
             // Usually that is an indicator that the used key is different from the one used to register your
-            // dialog, your bootstrapper might not be registered, or an exception ocurred in the bootstrap phase.
+            // dialog, your bootstrapper might not be registered, or an exception occurred in the bootstrap phase.
             return;
         }
 
@@ -284,11 +282,11 @@ be allowed to.
 </details>
 
 ## Example: Retrieving and parsing user input
-The dialog for this example will be fairly simple: It again confirmation-type dialog which contains two number range inputs.
+The dialog for this example will be fairly simple: We once again create a confirmation-type dialog which contains two number range inputs.
 The top input will be for setting the level, the bottom input for setting the experience percentage towards the next level.
 When the player clicks on the confirmation button, they should have their levels and exp set to the configured values.
 
-```java
+```java showLineNumbers
 Dialog.create(builder -> builder.empty()
     .base(DialogBase.builder(Component.text("Configure your new experience value"))
         .inputs(List.of(
@@ -324,7 +322,7 @@ Dialog.create(builder -> builder.empty()
 ```
 
 ### Reading the input
-To retrieve the values the user put into the dialog, we once again have to listen to a `PlayerCustomClickEvent`.
+To retrieve the values the user put into the dialog, we can once again listen to a `PlayerCustomClickEvent`.
 We first check the identifier of the action. After that, we can retrieve the input values from the
 [`DialogResponseView`](jd:paper:io.papermc.paper.dialog.DialogResponseView) retrievable from
 [`PlayerCustomClickEvent#getDialogResponseView()`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent#getDialogResponseView()).
@@ -362,6 +360,34 @@ void handleLevelsDialog(PlayerCustomClickEvent event) {
         player.setExp(exp / 100);
     }
 }
+```
+
+### Using callbacks
+
+Instead of registering another event handler, you can instead use the
+[`DialogAction.customClick(DialogActionCallback, ClickCallback.Options)`](jd:paper:io.papermc.paper.registry.data.dialog.action.DialogAction#customClick(io.papermc.paper.registry.data.dialog.action.DialogActionCallback,net.kyori.adventure.text.event.ClickCallback.Options))
+method to register a callback locally.
+
+The code for the dialog action would therefore look like this:
+
+```java showLineNumbers
+DialogAction.customClick(
+    (view, audience) -> {
+        int levels = view.getFloat("level").intValue();
+        float exp = view.getFloat("experience").floatValue();
+
+        player.sendRichMessage("You selected <color:#ccfffd><level> levels</color> and <color:#ccfffd><exp>% exp</color> to the next level!",
+            Placeholder.component("level", Component.text(levels)),
+            Placeholder.component("exp", Component.text(exp))
+        );
+        player.setLevel(levels);
+        player.setExp(exp / 100);
+    },
+    ClickCallback.Options.builder()
+        .uses(1) // Set the number of uses for this callback. Defaults to 1
+        .lifetime(ClickCallback.DEFAULT_LIFETIME) // Set the lifetime of the callback. Defaults to 12 hours
+        .build()
+)
 ```
 
 <details>

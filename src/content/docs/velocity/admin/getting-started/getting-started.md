@@ -57,10 +57,13 @@ host.
 java -Xms1G -Xmx1G -XX:+UseG1GC -XX:G1HeapRegionSize=4M -XX:+UnlockExperimentalVMOptions -XX:+ParallelRefProcEnabled -XX:+AlwaysPreTouch -XX:MaxInlineLevel=15 -jar velocity*.jar
 ```
 
-Once saved, open a terminal (or log into the machine) if you haven't already, navigate to the
-directory where you have placed the Velocity JAR file and the `start.sh` file. Then run
-`chmod +x start.sh` and then `./start.sh`. If it worked, you should now receive a console similar to
-the output in the next section.
+Once you've saved the files, open a terminal (or log into the machine) if you haven't already. Navigate to the directory
+where you have placed the Velocity JAR file and the `start.sh` file. Then, you will need to prepare the `start.sh`
+script for it to be executable and run it.
+
+1. Run `chmod u+x start.sh`. This command modifies the file's permissions, granting the file's owner (you) the ability to
+   execute (`x`) the script. Without this step, the system may not recognize the script as something that can be run.
+1. Now that the file is executable, run `./start.sh` to run the script.
 
 ## After launch
 

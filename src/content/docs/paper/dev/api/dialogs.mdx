@@ -149,12 +149,13 @@ event in your plugin's bootstrapper. Some general information on that can be rea
 The general registration looks fairly similar to dynamically created dialogs:
 ```java title="YourPluginBootstrapper.java"
 @Override
-public void bootstrap(BootstrapContext ctx) {
-    ctx.getLifecycleManager().registerEventHandler(RegistryEvents.DIALOG.compose()
-        .newHandler(event -> event.registry().registerWith(
-            TypedKey.create(RegistryKey.DIALOG, Key.key("papermc:custom_dialog")),
-            builder -> builder.empty()
-                       // ... build your dialog here
+public void bootstrap(BootstrapContext context) {
+    context.getLifecycleManager().registerEventHandler(RegistryEvents.DIALOG.compose()
+        .newHandler(event -> event.registry().register(
+            DialogKeys.create(Key.key("papermc:custom_dialog")),
+            builder -> {
+                // ... build your dialog here
+            }
         )));
 }
 ```

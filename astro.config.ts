@@ -238,7 +238,12 @@ export default defineConfig({
                         {
                           label: "Entity API",
                           collapsed: true,
-                          items: ["paper/dev/entity-teleport", "paper/dev/display-entities", "paper/dev/mob-goals", "paper/dev/entity-pathfinder"],
+                          items: [
+                            "paper/dev/entity-teleport",
+                            "paper/dev/display-entities",
+                            "paper/dev/mob-goals",
+                            "paper/dev/entity-pathfinder",
+                          ],
                         },
                         {
                           label: "Inventories",

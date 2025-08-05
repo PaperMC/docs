@@ -62,9 +62,8 @@ the `Server Links...` button. This button only appears if server links are prese
 ## Creating dialogs dynamically
 You can build a [`Dialog`](jd:paper:io.papermc.paper.dialog.Dialog) object using the [`Dialog#create`](jd:paper:io.papermc.paper.dialog.Dialog#create(java.util.function.Consumer))
 method. The consumer parameter allows you to build the dialog. **A dialog always requires a base and a type**, which
-can be declared in the builder. In order to create a new dialog, you first call `.empty()` on the consumer parameter.
-You can alternatively modify an existing [registry-registered](#registering-dialogs-in-the-registry) dialog instead
-of starting from scratch.
+can be declared in the builder. You can either create a new dialog or alternatively use an existing
+[registry-registered](#registering-dialogs-in-the-registry) dialog as a base instead.
 
 For reference, a very simple (notice-type) dialog can be constructed and shown to a player with the following code:
 ```java
@@ -144,6 +143,14 @@ The type primarily influences the bottom part of the dialog.
 If you want dialogs to be registered in the dialogs registry, you must register them inside a registry modification lifecycle
 event in your plugin's bootstrapper. Some general information on that can be read [here](/paper/dev/registries).
 
+:::tip
+
+The advantage of registering dialogs in the registry is that it allows you to use that same dialog
+elsewhere in your code without having to pass around the `Dialog` object. This also allows the dialog
+to be referenced in commands with a dialog parameter.
+
+:::
+
 The general registration looks fairly similar to dynamically created dialogs:
 ```java title="YourPluginBootstrapper.java" showLineNumbers
 @Override
@@ -151,9 +158,10 @@ public void bootstrap(BootstrapContext context) {
     context.getLifecycleManager().registerEventHandler(RegistryEvents.DIALOG.compose()
         .newHandler(event -> event.registry().register(
             DialogKeys.create(Key.key("papermc:custom_dialog")),
-            builder -> {
-                // ... build your dialog here
-            }
+            builder -> builder
+                // Build your dialog here ...
+                .base(DialogBase.builder(Component.text("Title")).build())
+                .type(DialogType.notice())
         )));
 }
 ```

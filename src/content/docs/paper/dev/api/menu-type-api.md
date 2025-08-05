@@ -147,7 +147,7 @@ public class CommandPersistent implements Listener {
         InventoryView view = VIEWS.remove(event.getPlayer());
         if (view != null) {
             Inventory topInventory = view.getTopInventory();
-            // Save the inventory.
+            // Save the contents of the inventory to a file or database.
         }
     }
 }

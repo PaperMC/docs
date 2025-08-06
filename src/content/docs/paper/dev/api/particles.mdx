@@ -104,6 +104,8 @@ An example of spawning 6 `CRIT` particles at a location, without offset, that wi
   </TabItem>
 </Tabs>
 
+![Crit particles going in random directions](./assets/particles/random-direction-crit.webp)
+
 ### Specified direction
 To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
 See [`count` argument behavior](#count-argument-behavior) for more details.
@@ -131,6 +133,9 @@ An example of a repeating task spawning campfire smoke that slowly goes "up" (po
     ```
   </TabItem>
 </Tabs>
+
+![Capmfire signal smoke going up](./assets/particles/smoke-going-up.webp)
+
 We could also make the smoke go down if we wanted to:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
@@ -154,6 +159,8 @@ We could also make the smoke go down if we wanted to:
     ```
   </TabItem>
 </Tabs>
+
+![Campfire signal smoke going down](./assets/particles/smoke-going-down.webp)
 
 {/* spellchecker:off */}
 ### List of directional particles
@@ -230,6 +237,8 @@ Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly t
   </TabItem>
 </Tabs>
 
+![Colored potion effect particles](./assets/particles/orange-spell-particles.webp)
+
 :::note
 Only the `ENTITY_EFFECT` supports the alpha channel, which is used to create translucent particles.
 :::
@@ -274,6 +283,8 @@ An example of creating a vertical line of green dust particles, that are 2 times
   </TabItem>
 </Tabs>
 
+![Blue dust particles in a vertical line](./assets/particles/blue-dust-particles-in-line.webp)
+
 :::note
 Here, adding a size argument would control the dust particle's lifetime, in ticks. By default, the value is a random
 integer between 8 to 40, which is multiplied by the particle's scale, to get the final lifetime (with a minimum of 1).
@@ -310,6 +321,8 @@ An example where 3 dust transition particles spawn on the x-axis within a 1 bloc
   </TabItem>
 </Tabs>
 
+![Dust transition particles in a line](./assets/particles/dust-transition-particles.webp)
+
 ### Note particles
 The note particles will use the `offsetX` argument in a custom function to determine the color,
 see [Note particle color picker](#note-particle-color-picker) for more details. `offsetY` and `offsetZ` are ignored in this case.
@@ -332,6 +345,8 @@ Example:
     ```
   </TabItem>
 </Tabs>
+
+![Note particle](./assets/particles/note-particle.webp)
 
 #### Note particle color picker
 This tool allows you to pick a color for the note particle by adjusting the `offsetX` value. It only allows you to
@@ -390,7 +405,6 @@ An example where 8 randomly offset trail particles travel towards a specified lo
     ```
   </TabItem>
 </Tabs>
-
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.

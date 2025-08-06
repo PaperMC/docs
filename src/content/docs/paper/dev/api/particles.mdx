@@ -380,15 +380,15 @@ Example:
 Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
 
 An example where 8 randomly offset trail particles travel towards a specified location
-(`someLocation.clone().add(12, 0, 0)`) with a red color and a travel time of 40 ticks:
+(`someLocation.clone().add(-4, 0, 4)`) with a yellow color and a travel time of 40 ticks:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
     Particle.TRAIL.builder()
       .location(someLocation)
-      .offset(2, 2, 2)
+      .offset(1, 1, 1)
       .count(8)
-      .data(new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 40))
+      .data(new Particle.Trail(someLocation.clone().add(-4, 0, 4), Color.YELLOW, 40))
       .receivers(32, true)
       .spawn();
     ```
@@ -399,12 +399,14 @@ An example where 8 randomly offset trail particles travel towards a specified lo
       Particle.TRAIL,
       someLocation,
       8,
-      2, 2, 2,
-      new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 40)
+      1, 1, 1,
+      new Particle.Trail(someLocation.clone().add(-4, 0, 4), Color.YELLOW, 40)
     );
     ```
   </TabItem>
 </Tabs>
+
+![Yellow trail particles floating towards the right side of the screen](./assets/particles/trail-particles.webp)
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.

@@ -3,7 +3,17 @@ title: Menu Type API
 slug: paper/dev/menu-type-api
 description: A guide to the Menu Type API.
 version: 1.21.8
+sidebar:
+  badge:
+    text: Experimental
+    variant: danger
 ---
+
+:::danger[Experimental]
+
+The Menu Type API and anything that uses it is currently experimental and may change in the future.
+
+:::
 
 Minecraft has a lot of types of menus. From chests, to crafting tables, to anvils, and even villager trade menus.
 With the old Bukkit inventory API, it was not possible to replicate most of these perfectly. Exactly for
@@ -15,17 +25,18 @@ Menus, also referred to as views, are user interfaces, which can be created and 
 The difference between menus and inventories is that inventories are containers and menus are
 their visual representations.
 
-Menus created using the menu type API **follow the same logic as Vanilla**, meaning they are fully
-functional. Some of them can directly represent a block (a.e. a furnace) and the
-[`MERCHANT`](jd:paper:org.bukkit.inventory.MenuType#MERCHANT) type can represent a merchant entity in the world.
+Menus created using this API **follow the same logic as Vanilla**, meaning they are fully
+functional. Some of them can directly represent a block, like a furnace. The [`MERCHANT`](jd:paper:org.bukkit.inventory.MenuType#MERCHANT)
+can represent a merchant entity in the world.
 
 ## What are inventory views?
 An [`InventoryView`](jd:paper:org.bukkit.inventory.InventoryView) is a specific view created from a menu type.
 In the general sense, an inventory view links together **two separate inventories** and always has a player viewing them.
 The bottom linked inventory is the player's inventory.
 
-There are specialized subinterfaces for getting specific inventory views (a.e. [`FurnaceView`](jd:paper:org.bukkit.inventory.view.FurnaceView)
-for furnace inventories). This makes it very convenient to check whether an inventory view is of a specific type.
+Some views have specialized subinterfaces for quickly checking their type, like [`FurnaceView`](jd:paper:org.bukkit.inventory.view.FurnaceView)
+for furnace inventories. For other views, which don't have their own sub type, you can instead use the
+[`InventoryView#getMenuType`](jd:paper.org.bukkit.inventory.InventoryView#getMenuType()) method.
 
 ## Building inventory views from menu types
 The most common way to create inventory views from menu types is by using their respective builders. **Every menu type
@@ -39,7 +50,7 @@ MenuType.CRAFTING.builder()
     // Set the title of the view, which will be displayed at the top.
     .title(Component.text("The inventory view's title"))
 
-    // Determines whether the server should check if the server can reach the location.
+    // Determines whether the server should check if the player can reach the location.
     .checkReachable(true)
 
     // Set the location. Because of checkReachable being set to `true`, this has to be a valid
@@ -74,9 +85,11 @@ those count the majority of "workbench" blocks, like crafting tables, grindstone
 
 Block entity blocks (also referred to as tile entity blocks) have a state associated with them.
 Meaning when you open a specific location with the `#location` builder method, and the block matches
-the expected block from the menu type ([`MenuType.FURNACE`](jd:paper:org.bukkit.inventory.MenuType#FURNACE) expects a furnace)
-the state of that block can change, meaning all players can see the change live. An example of
-those blocks are the beacon, furnaces, chests, and similar.
+the expected block from the menu type, the state of that block can change. This means that all players
+can see the change live.
+
+Under those blocks count the beacon, chests, furnaces, and similar. For example,
+[`MenuType.FURNACE`](jd:paper:org.bukkit.inventory.MenuType#FURNACE) would expect a furnace block.
 
 ## Persistent inventory views
 Inventory views can be reused! This is useful for persistent operations.
@@ -109,11 +122,11 @@ public class CommandPersistent implements Listener {
     // to use Player objects as keys or values, but in this case it is acceptable
     // because the inventory view is also bound to a player object, meaning we
     // couldn't reuse it after a player rejoins anyways.
-    private final Map<Player, InventoryView> VIEWS = new HashMap<>();
+    private static final Map<Player, InventoryView> VIEWS = new HashMap<>();
 
     // Create a command. Commands are explained in the Command API documentation
     // pages and therefore won't be covered here.
-    public LiteralCommandNode<CommandSourceStack> createCommand() {
+    public static LiteralCommandNode<CommandSourceStack> createCommand() {
         return Commands.literal("persistent").executes(ctx -> {
             if (!(ctx.getSource().getExecutor() instanceof Player player)) {
                 return 0;

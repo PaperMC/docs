@@ -99,7 +99,7 @@ An example of spawning 6 `CRIT` particles at a location, without offset, that wi
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.12);
+    someWorld.spawnParticle(Particle.CRIT, someLocation, 6, 0, 0, 0, 0.6);
     ```
   </TabItem>
 </Tabs>
@@ -252,22 +252,22 @@ An example of creating a vertical line of green dust particles, that are 2 times
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = Particle.DUST.builder()
-      .color(Color.GREEN, 2.0f);
+      .color(Color.BLUE, 2.0f);
 
     // We can reuse the builder
-    for (double i = 0; i <= 1.0; i += 0.1) {
+    for (double i = -1.0; i <= 1.0; i += 0.25) {
       particleBuilder.location(someLocation.clone().add(0, i, 0)).receivers(32, true).spawn();
     }
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    for (double i = 0; i <= 1.0; i += 0.1) {
+    for (double i = -1.0; i <= 1.0; i += 0.25) {
       someWorld.spawnParticle(
         Particle.DUST,
         someLocation.clone().add(0, i, 0),
         1,
-        new Particle.DustOptions(Color.GREEN, 2.0f)
+        new Particle.DustOptions(Color.BLUE, 2.0f)
       );
     }
     ```
@@ -373,7 +373,7 @@ An example where 8 randomly offset trail particles travel towards a specified lo
       .location(someLocation)
       .offset(2, 2, 2)
       .count(8)
-      .data(new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 10))
+      .data(new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 40))
       .receivers(32, true)
       .spawn();
     ```
@@ -385,7 +385,7 @@ An example where 8 randomly offset trail particles travel towards a specified lo
       someLocation,
       8,
       2, 2, 2,
-      new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 10)
+      new Particle.Trail(someLocation.clone().add(12, 0, 0), Color.RED, 40)
     );
     ```
   </TabItem>

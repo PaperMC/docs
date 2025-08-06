@@ -7,6 +7,7 @@ version: "1.21.5"
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Badge } from '@astrojs/starlight/components';
+import { Image } from "astro:assets";
 import NoteParticleColorPicker from "/src/components/tools/NoteParticleColorPicker.svelte";
 
 This guide explains how to spawn different types of particles.
@@ -406,7 +407,8 @@ An example where 8 randomly offset trail particles travel towards a specified lo
   </TabItem>
 </Tabs>
 
-![Yellow trail particles floating towards the right side of the screen](./assets/particles/trail-particles.webp)
+import trailParticles from "./assets/particles/trail-particles.webp";
+<Image src={trailParticles} alt="Yellow trail particles floating towards the right side of the screen" />
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.

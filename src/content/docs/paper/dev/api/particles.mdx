@@ -10,6 +10,8 @@ import { Badge } from '@astrojs/starlight/components';
 import { Image } from "astro:assets";
 import NoteParticleColorPicker from "/src/components/tools/NoteParticleColorPicker.svelte";
 
+import trailParticles from "./assets/particles/trail-particles.webp";
+
 This guide explains how to spawn different types of particles.
 
 If the particle you're trying to spawn isn't mentioned in this guide, then it most likely has no special behavior.
@@ -407,7 +409,6 @@ An example where 8 randomly offset trail particles travel towards a specified lo
   </TabItem>
 </Tabs>
 
-import trailParticles from "./assets/particles/trail-particles.webp";
 <Image src={trailParticles} alt="Yellow trail particles floating towards the right side of the screen" />
 
 ## Converging particles

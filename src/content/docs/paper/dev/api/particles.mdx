@@ -608,7 +608,7 @@ An example where a vibration particle will spawn at `someLocation` and travel to
 
 ![Vibration particle going to the left side of the screen](./assets/particles/vibration.webp)
 
-## Vertical velocity particles
+## Rising particles
 These particles will use `offsetY` as the particle's y-axis velocity.
 
 If you set `offsetX` AND `offsetZ` to `0`, the particle will have almost no x or z-axis velocity, but will still have
@@ -636,8 +636,8 @@ Example of spawning a `GLOW` particle that moves up:
 ![Glow particle going up](./assets/particles/rising-glow-particle.webp)
 
 :::note
-These particles have "reverse" gravity, meaning that the initial velocity will be used only briefly, and the particle will
-start to rise after a short time. Therefore, negative vertical velocity will only stop the particle from rising temporarily,
+These particles rise up, meaning that the initial velocity will be used only briefly, and the particle will
+start to travel up after a short time. Therefore, negative vertical velocity will only stop the particle from rising temporarily,
 while a positive vertical velocity will make the particle rise immediately.
 :::
 

@@ -655,21 +655,27 @@ If the final calculated scale is negative, the particle will appear mirrored.
 ### Sweep attack particles
 The `SWEEP_ATTACK` particle's scale is calculated as `1.0 - offsetX * 0.5`.
 
-An example where a sweep attack particle will spawn at `someLocation` with a scale of `2.0`:
+An example where two sweep attack particles will spawn at `someLocation`. First one with a scale of `1.0` and the second
+one with a scale of `2.0` right after:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    Particle.SWEEP_ATTACK.builder()
+    ParticleBuilder sweepAttackParticleBuilder = Particle.EXPLOSION.builder()
       .location(someLocation)
-      .offset(-2.0, 0, 0)
       .count(0)
       .receivers(32, true)
       .spawn();
+
+    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+      () -> sweepAttackParticleBuilder.offset(-2.0, 0, 0).spawn(), 10);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2.0, 0, 0);
+    someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0);
+
+    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+      () -> someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2.0, 0, 0), 10);
     ```
   </TabItem>
 </Tabs>
@@ -677,21 +683,28 @@ An example where a sweep attack particle will spawn at `someLocation` with a sca
 ### Explosion particles
 The `EXPLOSION` particle's scale is calculated as `2.0 * (1.0 - offsetX * 0.5)`.
 
-An example where an explosion particle will spawn at `someLocation` with a scale of `4.0`:
+An example where two sweep attack particles will spawn at `someLocation`. First one with a scale of `1.0` and the second
+one with a scale of `4.0` right after:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    Particle.EXPLOSION.builder()
+    ParticleBuilder explosionParticleBuilder = Particle.EXPLOSION.builder()
       .location(someLocation)
-      .offset(-2.0, 0, 0)
+      .offset(1, 0, 0)
       .count(0)
       .receivers(32, true)
       .spawn();
+
+    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+      () -> explosionParticleBuilder.offset(-2.0, 0, 0).spawn(), 10);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, -2.0, 0, 0);
+    someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, 1, 0, 0);
+
+    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+      () -> someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, -2.0, 0, 0), 10);
     ```
   </TabItem>
 </Tabs>

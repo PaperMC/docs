@@ -1,12 +1,16 @@
 ---
 interface Props {
   src: string;
+  "play-always": boolean;
 }
 
-const { src } = Astro.props;
+const props: Props = Astro.props;
+
+const src = props.src;
+const always = props["play-always"] ?? false;
 ---
 
-<video width="100%" muted loop controls data-pagefind-ignore>
+<video width="100%" muted loop controls={!always} data-pagefind-ignore autoplay={always}>
   <source {src} type="video/mp4" />
   Your device does not support video playback.
 </video>

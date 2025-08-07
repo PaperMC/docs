@@ -91,7 +91,7 @@ To maintain consistency and readability across the documentation, please adhere 
 
 7. **Links and references**: When referencing external sources or linking to other pages, use descriptive anchor text and provide full URLs.
 
-8. **Images**: Include images if necessary to illustrate concepts, ensure the images are clear and relevant to the content, and store them in the repository rather than external CDNs (i.e. imgur).
+8. **Images and videos**: Include images if necessary to illustrate concepts, ensure the images are clear and relevant to the content, and store them in the repository rather than external CDNs (i.e. imgur). Including a video is also possible; however, it should be short and adequately compressed. If the video does not need interaction, e.g. pausing, using an animated image (GIF, WebP, ...) is preferred, as it grabs attention better (auto-play) and can be further optimized by the build tooling.
 
 9. **Format code**: After you've made changes, don't forget to run the formatting script with `pnpm run format`.
 

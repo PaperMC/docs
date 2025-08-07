@@ -8,6 +8,15 @@
   let canvas: HTMLCanvasElement;
   let noteImg: HTMLImageElement;
 
+  // Run only once
+  $effect(() => {
+    const context: CanvasRenderingContext2D | null = canvas.getContext("2d");
+    if (!context) {
+      return;
+    }
+    context.imageSmoothingEnabled = false;
+  });
+
   $effect(() => {
     const context: CanvasRenderingContext2D | null = canvas.getContext("2d");
     if (!context || !noteImg.complete) {
@@ -15,15 +24,12 @@
     }
     context.globalCompositeOperation = "source-over";
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(noteImg, 0, 0, 8, 8);
-    context.imageSmoothingEnabled = false;
-    context.drawImage(canvas, 0, 0, 8, 8, 0, 0, canvas.width, canvas.height);
+    context.drawImage(noteImg, 0, 0, canvas.width, canvas.height);
     context.globalCompositeOperation = "multiply";
     context.fillStyle = color;
     context.fillRect(0, 0, canvas.width, canvas.height);
     context.globalCompositeOperation = "destination-atop";
-    context.drawImage(noteImg, 0, 0, 8, 8);
-    context.drawImage(canvas, 0, 0, 8, 8, 0, 0, canvas.width, canvas.height);
+    context.drawImage(noteImg, 0, 0, canvas.width, canvas.height);
   });
 
   /**

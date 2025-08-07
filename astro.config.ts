@@ -1,5 +1,7 @@
 import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
+import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
@@ -423,6 +425,11 @@ export default defineConfig({
         ),
       ],
       expressiveCode: {
+        plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
+        defaultProps: {
+          showLineNumbers: false,
+          collapseStyle: "collapsible-start",
+        },
         frames: {
           extractFileNameFromCode: false,
         },

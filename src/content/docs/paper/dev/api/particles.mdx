@@ -409,13 +409,13 @@ As the name implies, this type of particle converges to a single point (location
 Offset arguments are used to determine the relative spawn location  of the particle.
 The particle will then travel from this relative location to the supplied location.
 
-An example where an enchantment particle will spawn at `someLocation.clone().add(2,0,2)` and travel to `someLocation`:
+An example where an enchantment particle will spawn at `someLocation.clone().add(-2,0,2)` and travel to `someLocation`:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
     Particle.ENCHANT.builder()
       .location(someLocation)
-      .offset(2, 0, 2)
+      .offset(-2, 0, 2)
       .count(0)
       .receivers(32, true)
       .spawn();
@@ -423,7 +423,7 @@ An example where an enchantment particle will spawn at `someLocation.clone().add
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, 2, 0, 2);
+    someWorld.spawnParticle(Particle.ENCHANT, someLocation, 0, -2, 0, 2);
     ```
   </TabItem>
 </Tabs>
@@ -525,13 +525,14 @@ The `ITEM` particle is a [directional particle](#directional-particles).
 The `SCULK_CHARGE` particle takes a `float` as its `data` argument. This is used as the particle's "roll". Or, more formally,
 the angle the particle displays at in **radians**.
 
-Example of spawning a sculk charge particle at 45°:
+Example of spawning a sculk charge particle at 45° that doesn't move:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
     Particle.SCULK_CHARGE.builder()
       .location(someLocation)
       .data((float) Math.toRadians(45))
+      .extra(0)
       .receivers(32, true)
       .spawn();
     ```
@@ -576,13 +577,13 @@ location ([`Vibration.Destination.BlockDestination`](jd:paper:org.bukkit.Vibrati
 or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bukkit.Vibration\$Destination\$EntityDestination)).
 The constructor's second argument is the travel time in **ticks**.
 
-An example where a vibration particle will spawn at `someLocation` and travel to `otherLocation` in 10 ticks:
+An example where a vibration particle will spawn at `someLocation` and travel to `otherLocation` in 40 ticks:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
     Particle.VIBRATION.builder()
       .location(someLocation)
-      .data(new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10))
+      .data(new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 40))
       .receivers(32, true)
       .spawn();
     ```
@@ -593,7 +594,7 @@ An example where a vibration particle will spawn at `someLocation` and travel to
       Particle.VIBRATION,
       someLocation,
       1,
-      new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 10)
+      new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 40)
     );
     ```
   </TabItem>

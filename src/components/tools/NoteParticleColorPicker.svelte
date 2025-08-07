@@ -5,12 +5,13 @@
       .map((c) => c * 100 + "%")
       .join(", ")})`
   );
-  let canvas: HTMLCanvasElement;
+  let mainCanvas: HTMLCanvasElement;
+  let compositingCanvas: HTMLCanvasElement;
   let noteImg: HTMLImageElement;
 
   // Run only once
   $effect(() => {
-    const context: CanvasRenderingContext2D | null = canvas.getContext("2d");
+    const context: CanvasRenderingContext2D | null = mainCanvas.getContext("2d");
     if (!context) {
       return;
     }
@@ -18,18 +19,24 @@
   });
 
   $effect(() => {
-    const context: CanvasRenderingContext2D | null = canvas.getContext("2d");
-    if (!context || !noteImg.complete) {
+    const compositingContext: CanvasRenderingContext2D | null = compositingCanvas.getContext("2d");
+    if (!compositingContext || !noteImg.complete) {
       return;
     }
-    context.globalCompositeOperation = "source-over";
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.drawImage(noteImg, 0, 0, canvas.width, canvas.height);
-    context.globalCompositeOperation = "multiply";
-    context.fillStyle = color;
-    context.fillRect(0, 0, canvas.width, canvas.height);
-    context.globalCompositeOperation = "destination-atop";
-    context.drawImage(noteImg, 0, 0, canvas.width, canvas.height);
+    compositingContext.globalCompositeOperation = "source-over";
+    compositingContext.clearRect(0, 0, 8, 8);
+    compositingContext.drawImage(noteImg, 0, 0, 8, 8);
+    compositingContext.globalCompositeOperation = "multiply";
+    compositingContext.fillStyle = color;
+    compositingContext.fillRect(0, 0, 8, 8);
+    compositingContext.globalCompositeOperation = "destination-atop";
+    compositingContext.drawImage(noteImg, 0, 0, 8, 8);
+    // Draw on the main canvas
+    const mainContext: CanvasRenderingContext2D | null = mainCanvas.getContext("2d");
+    if (mainContext) {
+      mainContext.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+      mainContext.drawImage(compositingCanvas, 0, 0, 8,8, 0,0, mainCanvas.width, mainCanvas.height);
+    }
   });
 
   /**
@@ -53,7 +60,8 @@
     class="note-image"
     bind:this={noteImg}
   />
-  <canvas class="note-canvas" bind:this={canvas}></canvas>
+  <canvas class="compositing-canvas" bind:this={compositingCanvas}></canvas>
+  <canvas class="note-canvas" bind:this={mainCanvas}></canvas>
   <p><span class="value">offsetX = {offsetX}</span></p>
   <input class="offset-slider" type="range" min={-1.0} max={1.0} step={0.01} bind:value={offsetX} />
 </div>
@@ -80,6 +88,12 @@
   .note-canvas {
     height: 5rem;
     width: 5rem;
+  }
+
+  .compositing-canvas {
+    width: 8px;
+    height: 8px;
+    display: none;
   }
 
   .value {

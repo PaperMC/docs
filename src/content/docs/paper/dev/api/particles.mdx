@@ -5,12 +5,8 @@ slug: paper/dev/particles
 version: "1.21.5"
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components';
-import { Badge } from '@astrojs/starlight/components';
-import { Image } from "astro:assets";
+import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
 import NoteParticleColorPicker from "/src/components/tools/NoteParticleColorPicker.svelte";
-
-import trailParticles from "./assets/particles/trail-particles.webp";
 
 This guide explains how to spawn different types of particles.
 
@@ -137,7 +133,7 @@ An example of a repeating task spawning campfire smoke that slowly goes "up" (po
   </TabItem>
 </Tabs>
 
-![Capmfire signal smoke going up](./assets/particles/smoke-going-up.webp)
+![Campfire signal smoke going up](./assets/particles/smoke-going-up.webp)
 
 We could also make the smoke go down if we wanted to:
 <Tabs syncKey="spawn-type">
@@ -409,7 +405,7 @@ An example where 8 randomly offset trail particles travel towards a specified lo
   </TabItem>
 </Tabs>
 
-<Image src={trailParticles} alt="Yellow trail particles floating towards the right side of the screen" />
+![Yellow trail particles floating towards the right side of the screen](./assets/particles/trail-particles.webp)
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.

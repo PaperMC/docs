@@ -35,7 +35,7 @@
     const mainContext: CanvasRenderingContext2D | null = mainCanvas.getContext("2d");
     if (mainContext) {
       mainContext.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
-      mainContext.drawImage(compositingCanvas, 0, 0, 8,8, 0,0, mainCanvas.width, mainCanvas.height);
+      mainContext.drawImage(compositingCanvas, 0, 0, 8, 8, 0, 0, mainCanvas.width, mainCanvas.height);
     }
   });
 

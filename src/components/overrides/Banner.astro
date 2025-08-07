@@ -2,7 +2,15 @@
 const { banner } = Astro.locals.starlightRoute.entry.data;
 ---
 
-{banner && <div class:list={["sl-banner", banner.destructive && "sl-banner-destructive"]} set:html={banner.content} />}
+{
+  banner && (
+    <div
+      class:list={["sl-banner", banner.destructive && "sl-banner-destructive"]}
+      data-pagefind-ignore
+      set:html={banner.content}
+    />
+  )
+}
 
 <style>
   .sl-banner {

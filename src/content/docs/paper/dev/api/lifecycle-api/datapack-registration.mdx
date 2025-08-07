@@ -129,14 +129,14 @@ Build your plugin and verify that there is a `custom_datapack` folder in the roo
 ### Discovering the datapack
 In order to discover the datapack, you must call the [`DatapackRegistrar#discoverPack(URI uri, String id)`](jd:paper:io.papermc.paper.datapack.DatapackRegistrar#discoverPack(java.net.URI,java.lang.String))
 method. The uri should point to **your datapack's folder in your JAR**. This can be achieved simply by calling
-`getClass().getResource("/custom_datapack").toURI()`. **The trailing slash is very important**. The id can be set to
+`getClass().getResource("/custom_datapack").toURI()`. **The preceding slash is very important**. The id can be set to
 whatever you want to identify your datapack with. The final name of the loaded pack will be `<YourPluginName>/<id>`.
 
 Code example:
 
 ```java
 try {
-    // Retrieve the URI of the datapack folder
+    // Retrieve the URI of the datapack folder.
     URI uri = Objects.requireNonNull(getClass().getResource("/custom_datapack")).toURI();
     // Discover the pack. Here, the id is set to "provided", which indicates to a server owner
     // that your plugin includes this data pack (as the name is prefixes with the plugin name).

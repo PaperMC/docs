@@ -7,14 +7,9 @@ version: "1.21.5"
 
 import { Tabs, TabItem } from '@astrojs/starlight/components';
 import { Badge } from '@astrojs/starlight/components';
+import { Image } from "astro:assets";
 import NoteParticleColorPicker from "/src/components/tools/NoteParticleColorPicker.svelte";
 
-import critParticles from "./assets/particles/random-direction-crit.webp";
-import smokeGoingUp from "./assets/particles/smoke-going-up.webp";
-import coloredSpellParticles from "./assets/particles/orange-spell-particles.webp";
-import dustParticlesInLine from "./assets/particles/blue-dust-particles-in-line.webp";
-import dustTransitionParticles from "./assets/particles/dust-transition-particles.webp";
-import noteParticle from "./assets/particles/note-particle.webp";
 import trailParticles from "./assets/particles/trail-particles.webp";
 
 This guide explains how to spawn different types of particles.
@@ -111,8 +106,8 @@ An example of spawning 6 `CRIT` particles at a location, without offset, that wi
     ```
   </TabItem>
 </Tabs>
-<br />
-<img src={critParticles.src} width={critParticles.width} height={critParticles.height} alt="Randomly directed crit particles" />
+
+![Crit particles going in random directions](./assets/particles/random-direction-crit.webp)
 
 ### Specified direction
 To specify the velocity's direction, set the `count` argument to `0` and use the offset arguments as the direction vector.
@@ -141,8 +136,8 @@ An example of a repeating task spawning campfire smoke that slowly goes "up" (po
     ```
   </TabItem>
 </Tabs>
-<br />
-<img src={smokeGoingUp.src} width={smokeGoingUp.width} height={smokeGoingUp.height} alt="Campfire signal smoke going up" />
+
+![Capmfire signal smoke going up](./assets/particles/smoke-going-up.webp)
 
 We could also make the smoke go down if we wanted to:
 <Tabs syncKey="spawn-type">
@@ -167,6 +162,8 @@ We could also make the smoke go down if we wanted to:
     ```
   </TabItem>
 </Tabs>
+
+![Campfire signal smoke going down](./assets/particles/smoke-going-down.webp)
 
 {/* spellchecker:off */}
 ### List of directional particles
@@ -242,8 +239,8 @@ Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly t
     ```
   </TabItem>
 </Tabs>
-<br />
-<img src={coloredSpellParticles.src} width={coloredSpellParticles.width} height={coloredSpellParticles.height} alt="Colored potion effect particles" />
+
+![Colored potion effect particles](./assets/particles/orange-spell-particles.webp)
 
 :::note
 Only the `ENTITY_EFFECT` supports the alpha channel, which is used to create translucent particles.
@@ -288,8 +285,8 @@ An example of creating a vertical line of green dust particles, that are 2 times
     ```
   </TabItem>
 </Tabs>
-<br />
-<img src={dustParticlesInLine.src} width={dustParticlesInLine.width} height={dustParticlesInLine.height} alt="Blue dust particles in a vertical line" />
+
+![Blue dust particles in a vertical line](./assets/particles/blue-dust-particles-in-line.webp)
 
 :::note
 Here, adding a size argument would control the dust particle's lifetime, in ticks. By default, the value is a random
@@ -326,8 +323,8 @@ An example where 3 dust transition particles spawn on the x-axis within a 1 bloc
     ```
   </TabItem>
 </Tabs>
-<br />
-<img src={dustTransitionParticles.src} width={dustTransitionParticles.width} height={dustTransitionParticles.height} alt="Dust transition particles transitioning from red to blue" />
+
+![Dust transition particles in a line](./assets/particles/dust-transition-particles.webp)
 
 ### Note particles
 The note particles will use the `offsetX` argument in a custom function to determine the color,
@@ -351,8 +348,8 @@ Example:
     ```
   </TabItem>
 </Tabs>
-<br />
-<img src={noteParticle.src} width={noteParticle.width} height={noteParticle.height} alt="Note particle with a light blue color" />
+
+![Note particle](./assets/particles/note-particle.webp)
 
 #### Note particle color picker
 This tool allows you to pick a color for the note particle by adjusting the `offsetX` value. It only allows you to
@@ -411,8 +408,8 @@ An example where 8 randomly offset trail particles travel towards a specified lo
     ```
   </TabItem>
 </Tabs>
-<br />
-<img src={trailParticles.src} width={trailParticles.width} height={trailParticles.height} alt="Yellow trail particles floating towards the right side of the screen" />
+
+<Image src={trailParticles} alt="Yellow trail particles floating towards the right side of the screen" />
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.

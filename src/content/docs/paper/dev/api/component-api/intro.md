@@ -18,7 +18,7 @@ Paper and Velocity natively implements the Adventure API to add component suppor
 
 Previously, text was a linear structure with the only formatting options being
 confusing symbols like `§c` and `§k` to control basic colors and styles of text.
-Components are a tree-like structure which inherit style and colors from their parents.
+Components are a tree-like structure that inherits style and colors from their parents.
 
 Components have several types which do different things than just display raw text, like
 translating text to the client's language based on a key, or showing a client-specific keybind

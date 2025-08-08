@@ -50,6 +50,20 @@ Each entry in the collection that you return will be send to the client to be sh
 With this method, you can set up a basic `requires` structure from Brigadier commands. [You can read more on that here](/paper/dev/command-api/basics/requirements).
 This method returns a `boolean`, which is required to return `true` in order for a command sender to be able to execute that command.
 
+:::note
+
+If you override this method, overriding `permission()` does nothing. This is because the default implementation
+uses the return value of `permission()`, which wouldn't be used anymore if you were to override it.
+
+```java title="BasicCommand.java"
+default boolean canUse(final CommandSender sender) {
+    final String permission = this.permission();
+    return permission == null || sender.hasPermission(permission);
+}
+```
+
+:::
+
 ### `permission()`
 With the permission method you can, similar to the `canUse` method, set the permission required to be able to execute and view this command.
 

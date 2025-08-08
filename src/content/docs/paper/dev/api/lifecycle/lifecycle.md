@@ -1,7 +1,9 @@
 ---
 title: Lifecycle API
-description: A guide to Paper's Lifecycle API.
+description: An introduction to Paper's Lifecycle API.
 slug: paper/dev/lifecycle
+sidebar:
+  label: Introduction
 ---
 
 The lifecycle API can be used for lifecycle-related registration. It is currently used by the

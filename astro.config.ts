@@ -409,6 +409,7 @@ export default defineConfig({
                 "/paper/dev/api/command-api/misc",
                 "/paper/dev/api/component-api",
                 "/paper/dev/api/entity-api",
+                "/paper/dev/api/lifecycle",
                 "/paper/dev/api/event-api",
                 "/paper/dev/misc",
                 "/paper/contributing",

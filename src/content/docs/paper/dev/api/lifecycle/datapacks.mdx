@@ -46,7 +46,7 @@ public class CustomPluginBootstrap implements PluginBootstrap {
     public void bootstrap(BootstrapContext context) {
         context.getLifecycleManager().registerEventHandler(LifecycleEvents.DATAPACK_DISCOVERY.newHandler(
             event -> {
-                // All code is inside of here.
+                // All code is contained here.
             }
         ));
     }
@@ -56,8 +56,8 @@ public class CustomPluginBootstrap implements PluginBootstrap {
 :::
 
 ### Retrieving all currently discovered datapacks
-For sake of simplicity, let's start with the most basic operation: Retrieving discovered data packs.
-For this, we can use the following, simple code:
+For the sake of simplicity, let's start with the most basic operation: Retrieving discovered data packs.
+For this, we can use the following simple code:
 
 ```java showLineNumbers startLineNumber=8
 context.getLogger().info("The following datapacks were found: {}",
@@ -103,7 +103,7 @@ This would, as expected, remove the entries from being logged (and thus discover
 
 ## Registering custom datapacks
 The main use case of the datapack register lifecycle event is the adding of plugin included datapacks. And Paper makes this pretty simple:
-You just have to include your datapack in the plugin's JAR file, as already mentioned. This **does not** mean including the datapack zip.
+You have to include your datapack in the plugin's JAR file, as already mentioned. This **does not** mean including the datapack zip.
 This means including the **source files**, which makes it very convenient to work with in a dev environment.
 
 :::tip
@@ -171,7 +171,7 @@ public final class CustomJavaPlugin extends JavaPlugin {
 }
 ```
 
-If everything has gone correctly, the console should contain input similar to this:
+If everything has gone correctly, the console should contain output similar to this:
 ```
 [01:10:12 INFO]: [PaperDocsTestProject] Loading server plugin PaperDocsTestProject v1.0-DEV
 [01:10:12 INFO]: [PaperDocsTestProject] The datapack loaded successfully!

@@ -409,7 +409,7 @@ As the name implies, this type of particle converges to a single point (location
 Offset arguments are used to determine the relative spawn location of the particle.
 The particle will then travel from this relative location to the supplied location.
 
-An example where an enchantment particle will spawn at `someLocation.clone().add(-2,0,2)` and travel to `someLocation`:
+An example where an enchantment particle will spawn at `someLocation.clone().add(-2, 0, 2)` and travel to `someLocation`:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
@@ -541,7 +541,7 @@ Example of spawning a sculk charge particle at 45° that doesn't move:
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.SCULK_CHARGE, someLocation, 1, (float) Math.toRadians(45));
+    someWorld.spawnParticle(Particle.SCULK_CHARGE, someLocation, 1, 0, 0, 0, 0, (float) Math.toRadians(45));
     ```
   </TabItem>
 </Tabs>
@@ -670,13 +670,13 @@ one with a scale of `2.0` right after:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder sweepAttackParticleBuilder = Particle.EXPLOSION.builder()
+    ParticleBuilder sweepAttackParticleBuilder = Particle.SWEEP_ATTACK.builder()
       .location(someLocation)
       .count(0)
       .receivers(32, true)
       .spawn();
 
-    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+    Bukkit.getScheduler().runTaskLater(plugin,
       () -> sweepAttackParticleBuilder.offset(-2.0, 0, 0).spawn(), 10);
     ```
   </TabItem>
@@ -684,7 +684,7 @@ one with a scale of `2.0` right after:
     ```java
     someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0);
 
-    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+    Bukkit.getScheduler().runTaskLater(plugin,
       () -> someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2.0, 0, 0), 10);
     ```
   </TabItem>
@@ -695,7 +695,7 @@ one with a scale of `2.0` right after:
 ### Explosion particles
 The `EXPLOSION` particle's scale is calculated as `2.0 * (1.0 - offsetX * 0.5)`.
 
-An example where two sweep attack particles will spawn at `someLocation`. First one with a scale of `1.0` and the second
+An example where two explosion particles will spawn at `someLocation`. First one with a scale of `1.0` and the second
 one with a scale of `4.0` right after:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
@@ -707,7 +707,7 @@ one with a scale of `4.0` right after:
       .receivers(32, true)
       .spawn();
 
-    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+    Bukkit.getScheduler().runTaskLater(plugin,
       () -> explosionParticleBuilder.offset(-2.0, 0, 0).spawn(), 10);
     ```
   </TabItem>
@@ -715,7 +715,7 @@ one with a scale of `4.0` right after:
     ```java
     someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, 1, 0, 0);
 
-    Bukkit.getScheduler().runTaskLater(ParticlePlugin.getPlugin(ParticlePlugin.class),
+    Bukkit.getScheduler().runTaskLater(plugin,
       () -> someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, -2.0, 0, 0), 10);
     ```
   </TabItem>

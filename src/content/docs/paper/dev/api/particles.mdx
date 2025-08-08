@@ -1,8 +1,8 @@
 ---
 title: Particles
-description: Comprehensive guide to particle spawning
+description: A comprehensive guide to particle spawning.
 slug: paper/dev/particles
-version: "1.21.5"
+version: 1.21.5
 ---
 
 import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
@@ -240,8 +240,8 @@ Only the `ENTITY_EFFECT` supports the alpha channel, which is used to create tra
 :::
 
 :::caution
-The `EFFECT` and `INSTANT_EFFECT` particles can not be colored with the API and will always be white. These particles
-can only be colored by thrown potions.
+The `EFFECT` and `INSTANT_EFFECT` particles cannot be colored with the API and will always be white. Only thrown potions
+can color them.
 :::
 
 ### Dust particles
@@ -252,7 +252,7 @@ Vanilla uses the dust particle for redstone particles. They can have a custom co
 The scale factor must be in the range of `0.01` to `4.0`. Values outside this range will be clamped to the nearest valid value.
 :::
 
-An example of creating a vertical line of blue dust particles, that are 2 times the regular size:
+An example of creating a vertical line of blue dust particles, that are two times the regular size:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
@@ -283,7 +283,7 @@ An example of creating a vertical line of blue dust particles, that are 2 times 
 
 :::note
 Here, adding a size argument would control the dust particle's lifetime, in ticks. By default, the value is a random
-integer between 8 to 40, which is multiplied by the particle's scale, to get the final lifetime (with a minimum of 1).
+integer between 8 and 40, which is multiplied by the particle's scale, to get the final lifetime (with a minimum of 1).
 :::
 
 #### Dust transition particles
@@ -291,7 +291,7 @@ Dust transition particles work exactly like [dust particles](#dust-particles), b
 their color from one to another. A [Particle.DustTransition](jd:paper:org.bukkit.Particle$DustTransition) is used for
 specifying the transition.
 
-An example where 3 dust transition particles spawn on the x-axis within a 1 block length:
+An example where three dust transition particles spawn on the x-axis within a 1-block length:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
@@ -375,7 +375,7 @@ Example:
 ### Trail particles
 Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
 
-An example where 8 randomly offset trail particles travel towards a specified location
+An example where eight randomly offset trail particles travel towards a specified location
 (`someLocation.clone().add(-4, 0, 4)`) with a yellow color and a travel time of 40 ticks:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
@@ -406,7 +406,7 @@ An example where 8 randomly offset trail particles travel towards a specified lo
 
 ## Converging particles
 As the name implies, this type of particle converges to a single point (location), which in this case is the supplied location.
-Offset arguments are used to determine the relative spawn location  of the particle.
+Offset arguments are used to determine the relative spawn location of the particle.
 The particle will then travel from this relative location to the supplied location.
 
 An example where an enchantment particle will spawn at `someLocation.clone().add(-2,0,2)` and travel to `someLocation`:
@@ -483,7 +483,7 @@ they are considered **legacy**.
 :::tip
 The `BLOCK` particle is a [directional particle](#directional-particles).
 
-In this case **velocity matters** a lot. A higher velocity will ensure the same general direction of the particle, while a lower one will
+In this case, **velocity matters** a lot. A higher velocity will ensure the same general direction of the particle, while a lower one will
 result in a more random direction.
 
 To achieve this, the effective velocity vector's length should be high (around 10 is fine).
@@ -524,7 +524,7 @@ The `ITEM` particle is a [directional particle](#directional-particles).
 
 ## Sculk particles
 ### Sculk charge
-The `SCULK_CHARGE` particle takes a `float` as its `data` argument. This is used as the particle's "roll". Or, more formally,
+The `SCULK_CHARGE` particle takes a `float` as its `data` argument. This is used as the particle's "roll." Or, more formally,
 the angle the particle displays at in **radians**.
 
 Example of spawning a sculk charge particle at 45° that doesn't move:
@@ -730,10 +730,10 @@ This chapter covers particles that have unique behaviors when spawning.
 The `ANGRY_VILLAGER` particle always spawns `0.5` higher (y-axis) than the supplied location.
 
 ### Cloud particles
-The `CLOUD` and `SNEEZE` particles move towards the player's y level, if they are within 2 block distance from the player's
+The `CLOUD` and `SNEEZE` particles move towards the player's y level, if they are within two blocks distance from the player's
 location. When they reach the player's y level, their vertical velocity will be greatly reduced.
 
-If the player is moving vertically, the particles will attempt to match they player's vertical velocity.
+If the player is moving vertically, the particles will attempt to match the player's vertical velocity.
 
 ### Splash particles
 The `SPLASH` particle uses the `offsetX` and `offsetZ` arguments to determine the particle's velocity vector, if two conditions are met:
@@ -750,5 +750,5 @@ The `DUST_PILLAR` particle uses `offsetY` for the y-axis velocity, while `offset
 The `DUST_PLUME` particle adds `0.15` to the provided `offsetY`.
 
 ### Firefly particles
-The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however there is 50% chance for the `offsetY`'s
+The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however, there is 50% chance for the `offsetY`'s
 sign to be inverted. This means that the particle will either move up or down, with equal probability.

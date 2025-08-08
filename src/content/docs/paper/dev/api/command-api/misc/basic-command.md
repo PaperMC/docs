@@ -70,7 +70,7 @@ public class YourPlugin extends JavaPlugin {
 ```
 
 ### Basic commands are functional interfaces
-Because you only have to override one method, can directly pass in a lambda statement. This is not recommended for styling
+Because you only have to override one method, you can directly pass in a lambda statement. This is not recommended for styling
 reasons, as it makes the code harder to read, but it is very well possible.
 
 ```java

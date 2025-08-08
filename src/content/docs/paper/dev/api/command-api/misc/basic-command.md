@@ -34,8 +34,8 @@ public class YourCommand implements BasicCommand {
 }
 ```
 
-With a `CommandSourceStack`, we can retrieve basic information about the sender of the command, the location the command was send from, and the executing entity.
-For more information, check out [our page on command executors](/paper/dev/command-api/basics/executors).
+With a `CommandSourceStack` you can retrieve basic information about the sender of the command, the location the command was send from,
+and the entity for which the command was executed for. You can find more information on [our page on command executors](/paper/dev/command-api/basics/executors).
 
 ## The optional methods
 You can freely choose whether to implement either of the mentioned, optional methods. Here is a quick overview on what which one does:
@@ -68,7 +68,7 @@ default boolean canUse(final CommandSender sender) {
 With the permission method you can, similar to the `canUse` method, set the permission required to be able to execute and view this command.
 
 ## Registering basic commands
-Registering a `BasicCommand` is very simple: In your plugin's main class, you can just call one of the
+Registering a `BasicCommand` is very simple: In your plugin's main class, you can simply call one of the
 [`registerCommand(...)`](jd:paper:org.bukkit.plugin.java.JavaPlugin#registerCommand(java.lang.String,io.papermc.paper.command.brigadier.BasicCommand))
 methods inside the `onEnable` method.
 
@@ -85,7 +85,7 @@ public class YourPlugin extends JavaPlugin {
 
 ### Basic commands are functional interfaces
 Because you only have to override one method, you can directly pass in a lambda statement. This is not recommended for styling
-reasons, as it makes the code harder to read, but it is very well possible.
+reasons, as it makes the code harder to read.
 
 ```java
 @Override
@@ -204,7 +204,7 @@ public class BroadcastCommand implements BasicCommand {
 }
 ```
 
-Registering our command looks like this:
+Registering the command looks like this:
 
 ```java title="PluginMainClass.java"
 @Override

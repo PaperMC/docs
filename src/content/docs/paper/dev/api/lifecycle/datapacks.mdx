@@ -1,0 +1,178 @@
+---
+title: Datapack discovery
+description: A guide to including datapacks in your plugin and registering them with the lifecycle API.
+slug: paper/dev/lifecycle/datapacks
+version: 1.21.4+
+sidebar:
+  badge:
+    text: Experimental
+    variant: danger
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+
+:::danger[Experimental]
+
+The datapack discovery API is currently experimental and may change in the future.
+
+:::
+
+The lifecycle API grants developers much more direct access to modifying some of the core parts of the server.
+One such core aspect are **datapacks**. No more asking users to download your datapack alongside the plugin — you
+can now include the datapack in your plugin JAR and load it yourself!
+
+:::note
+
+This feature requires you to have a basic understanding of the [Lifecycle API](/paper/dev/lifecycle),
+the datapack format (which you can look up in the [Minecraft wiki](https://minecraft.wiki/w/Data_pack)), and
+requires you to use a [`paper-plugin.yml` plugin](/paper/dev/getting-started/paper-plugins).
+
+:::
+
+## The datapack discovery lifecycle event
+The [`LifecycleEvents.DATAPACK_DISCOVERY`](jd:paper:io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents#DATAPACK_DISCOVERY) lifecycle
+event allows developers to add, check for, and even remove datapacks which are about to be loaded by the server.
+
+:::tip
+
+The following code examples are assumed to be executed inside a `PluginBootstrap`'s `bootstrap(BootstrapContext context)` method.
+They are also assumed to already be inside an event handler, resulting in a structure like this:
+
+```java title="CustomPluginBootstrap.java" showLineNumbers
+@NullMarked
+public class CustomPluginBootstrap implements PluginBootstrap {
+
+    @Override
+    public void bootstrap(BootstrapContext context) {
+        context.getLifecycleManager().registerEventHandler(LifecycleEvents.DATAPACK_DISCOVERY.newHandler(
+            event -> {
+                // All code is contained here.
+            }
+        ));
+    }
+}
+```
+
+:::
+
+### Retrieving all currently discovered datapacks
+For the sake of simplicity, let's start with the most basic operation: Retrieving discovered data packs.
+For this, we can use the following simple code:
+
+```java showLineNumbers startLineNumber=8
+context.getLogger().info("The following datapacks were found: {}",
+    String.join(", ", event.registrar().getDiscoveredPacks().keySet())
+);
+```
+
+This might yield the following log output:
+
+```
+[00:26:12 INFO]: [PaperDocsTestProject] The following datapacks were found: file/bukkit, minecart_improvements, paper, redstone_experiments, trade_rebalance, vanilla
+```
+
+This resulted in a few more datapacks than one might expect. Primarily, at the time of writing, the experimental `minecart_improvements`, `redstone_experiments`,
+and `trade_rebalance` datapacks. The datapack discovery does not care about whether a datapack should be enabled or not. It simply **looks for** datapacks that
+the server *could* enable.
+
+### Removing discovered datapacks
+You can very easily prevent datapacks from being discovered by calling [`DatapackRegistrar#removeDiscoveredPack(String name)`](jd:paper:io.papermc.paper.datapack.DatapackRegistrar#removeDiscoveredPack(java.lang.String))
+on the datapack's name.
+
+To remove the above-mentioned, experimental datapacks, you could the following code:
+
+```java showLineNumbers startLineNumber=8
+// The names of the datapacks we want to remove.
+final Set<String> datapacksToRemove = Set.of("minecart_improvements", "redstone_experiments", "trade_rebalance");
+
+datapacksToRemove.forEach(
+    // Iterate through every datapack and remove it from the discovered packs.
+    datapack -> event.registrar().removeDiscoveredPack(datapack)
+);
+
+// The logging line from before.
+context.getLogger().info("The following datapacks were found: {}",
+    String.join(", ", event.registrar().getDiscoveredPacks().keySet())
+);
+```
+
+This would, as expected, remove the entries from being logged (and thus discovered):
+```
+[00:35:39 INFO]: [PaperDocsTestProject] The following datapacks were found: file/bukkit, paper, vanilla
+```
+
+## Registering custom datapacks
+The main use case of the datapack register lifecycle event is the adding of plugin included datapacks. And Paper makes this pretty simple:
+You have to include your datapack in the plugin's JAR file, as already mentioned. This **does not** mean including the datapack zip.
+This means including the **source files**, which makes it very convenient to work with in a dev environment.
+
+:::tip
+
+This section assumes that you already have a working datapack. If you do not have one, but still want to play around with datapack inclusion in your plugin,
+you can check out [Vanilla Tweaks](https://vanillatweaks.net) for their data packs.
+
+:::
+
+### Including the datapack in your plugin
+Before you can let the server know about your datapack, you must first include it. For this, you can just add it to your **plugins src/main/resources** folder.
+The datapack should have at least one extra folder (so don't dump all the contents into the `resources` root). For this example, it will be located under
+**resources/custom_datapack**, but you can rename this second folder to any name you want to. If you have done everything correctly, you should have a folder structure,
+which looks similar to this:
+
+<FileTree>
+  - src/main/resources
+        - custom_datapack
+          - pack.mcmeta
+          - data/
+</FileTree>
+
+Build your plugin and verify that there is a `custom_datapack` folder in the root of your plugin's JAR file.
+
+### Discovering the datapack
+To discover the datapack, you must call the [`DatapackRegistrar#discoverPack(URI uri, String id)`](jd:paper:io.papermc.paper.datapack.DatapackRegistrar#discoverPack(java.net.URI,java.lang.String))
+method. The uri should point to **your datapack's folder in your JAR**. This can be achieved simply by calling
+`getClass().getResource("/custom_datapack").toURI()`. **The preceding slash is very important**. The id can be set to
+whatever you want to identify your datapack with. The final name of the loaded pack will be `<YourPluginName>/<id>`.
+
+Code example:
+
+```java showLineNumbers startLineNumber=8
+try {
+    // Retrieve the URI of the datapack folder.
+    URI uri = Objects.requireNonNull(getClass().getResource("/custom_datapack")).toURI();
+    // Discover the pack. Here, the id is set to "provided", which indicates to a server owner
+    // that your plugin includes this data pack (as the name is prefixes with the plugin name).
+    event.registrar().discoverPack(uri, "provided");
+} catch (URISyntaxException | IOException e) {
+    throw new RuntimeException(e);
+}
+```
+
+### Verifying that the datapack loaded correctly
+You can verify that a datapack loaded simply by executing the command `/datapack list enabled`.
+
+Alternatively, you can check for the loaded status of your datapack during normal execution
+of your plugin. For example, a simple check inside your plugin's `onLoad` method might look like this:
+
+```java title="CustomJavaPlugin.java" showLineNumbers
+public final class CustomJavaPlugin extends JavaPlugin {
+
+    @Override
+    public void onLoad() {
+        Datapack pack = this.getServer().getDatapackManager().getPack(getPluginMeta().getName() + "/provided");
+        if (pack != null) {
+            if (pack.isEnabled()) {
+                this.getLogger().info("The datapack loaded successfully!");
+            } else {
+                this.getLogger().warn("The datapack failed to load.");
+            }
+        }
+    }
+}
+```
+
+If everything has gone correctly, the console should contain output similar to this:
+```
+[01:10:12 INFO]: [PaperDocsTestProject] Loading server plugin PaperDocsTestProject v1.0-DEV
+[01:10:12 INFO]: [PaperDocsTestProject] The datapack loaded successfully!
+```

@@ -167,7 +167,7 @@ public void bootstrap(BootstrapContext context) {
 Dialogs can be closed from the API. There are two ways to achieve that:
 
 - The intended way of using [`Adventure#closeDialog()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#closeDialog()).
-- The slightly hacky way of using [`Player#closeInventory()](jd:paper:org.bukkit.entity.HumanEntity#closeInventory()).
+- The slightly hacky way of using [`Player#closeInventory()`](jd:paper:org.bukkit.entity.HumanEntity#closeInventory()).
 
 Using `closeDialog()` will result in the dialog being closed and the player returning to the previous non-dialog or game menu screen they were on.
 This means any previously open inventories will be kept open.

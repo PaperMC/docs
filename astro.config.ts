@@ -450,12 +450,6 @@ export default defineConfig({
   image: {
     responsiveStyles: true,
     layout: "constrained",
-    service: {
-      entrypoint: "astro/assets/services/sharp",
-      config: {
-        limitInputPixels: false,
-      },
-    },
   },
   markdown: {
     remarkPlugins: [

@@ -11,10 +11,6 @@ sidebar:
 
 import Video from "/src/components/Video.astro";
 
-import InputBooleanMp4 from "./assets/dialogs/input-boolean.mp4?url";
-import InputMultiOptionMp4 from "./assets/dialogs/input-multi-options.mp4?url";
-import InputTextMp4 from "./assets/dialogs/input-text.mp4?url";
-import InputNumberRange from "./assets/dialogs/input-number-range.mp4?url";
 import DialogShowcaseMp4 from "./assets/dialogs/dialog-showcase.mp4?url";
 import InputDialogShowcaseMp4 from "./assets/dialogs/input-dialog-showcase.mp4?url";
 
@@ -66,6 +62,12 @@ can be declared in the builder. You can either create a new dialog or alternativ
 [registry-registered](#registering-dialogs-in-the-registry) dialog as a base instead.
 
 For reference, a very simple (notice-type) dialog can be constructed and shown to a player with the following code:
+
+<details>
+  <summary>In-game preview</summary>
+  ![A dialog with only a title and an ok button](./assets/dialogs/notice-dialog.png)
+</details>
+
 ```java
 Dialog dialog = Dialog.create(builder -> builder.empty()
     .base(DialogBase.builder(Component.text("Title")).build())
@@ -73,11 +75,6 @@ Dialog dialog = Dialog.create(builder -> builder.empty()
 );
 player.showDialog(dialog);
 ```
-
-<details>
-  <summary>In-game preview</summary>
-  ![A dialog with only a title and an ok button](./assets/dialogs/notice-dialog.png)
-</details>
 
 ### Dialog base
 You can create a dialog base using its [builder](jd:paper:io.papermc.paper.registry.data.dialog.DialogBase$Builder), which can be created
@@ -104,25 +101,25 @@ There are four ways to gather input:
 
    A simple tick box representing a true or false state
 
-   <Video src={InputBooleanMp4} />
+   ![](./assets/dialogs/input-boolean.gif)
 
 - [`DialogInput.singleOption`](jd:paper:io.papermc.paper.registry.data.dialog.input.DialogInput#singleOption(java.lang.String,net.kyori.adventure.text.Component,java.util.List))
 
    A multiple-choice button
 
-   <Video src={InputMultiOptionMp4} />
+   ![](./assets/dialogs/input-multi-options.gif)
 
 - [`DialogInput.text`](jd:paper:io.papermc.paper.registry.data.dialog.input.DialogInput#text(java.lang.String,net.kyori.adventure.text.Component))
 
    A simple string input field
 
-   <Video src={InputTextMp4} />
+   ![](./assets/dialogs/input-text.gif)
 
 - [`DialogInput.numberRange`](jd:paper:io.papermc.paper.registry.data.dialog.input.DialogInput#numberRange(java.lang.String,net.kyori.adventure.text.Component,float,float))
 
    A slider for number input
 
-   <Video src={InputNumberRange}/>
+   ![](./assets/dialogs/input-number-range.gif)
 
 
 ### Dialog type
@@ -165,6 +162,17 @@ public void bootstrap(BootstrapContext context) {
         )));
 }
 ```
+
+## Closing dialogs
+Dialogs can be closed from the API. There are two ways to achieve that:
+
+- The intended way of using [`Adventure#closeDialog()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#closeDialog()).
+- The slightly hacky way of using [`Player#closeInventory()](jd:paper:org.bukkit.entity.HumanEntity#closeInventory()).
+
+Using `closeDialog()` will result in the dialog being closed and the player returning to the previous non-dialog or game menu screen they were on.
+This means any previously open inventories will be kept open.
+
+In contrast, `closeInventory()` will close not only the currently open dialog, but also any other screens, like an open inventory.
 
 ## Example: A blocking confirmation dialog
 If you want your players to read some information, agree to something, or give general input before they join your server,
@@ -214,6 +222,12 @@ this by constructing a `CompletableFuture`, putting it into a map, and waiting u
 completed, will only happen as soon the player pressed one of the two confirmation buttons of the dialog.
 
 The code for that would look something like this:
+
+<details>
+  <summary>In-game preview</summary>
+  <Video src={DialogShowcaseMp4} />
+</details>
+
 ```java title="ServerJoinListener.java" showLineNumbers
 @NullMarked
 public class ServerJoinListener implements Listener {
@@ -284,11 +298,6 @@ public class ServerJoinListener implements Listener {
 And that's all there is to it. You can use this code to block players from joining your server before they should
 be allowed to.
 
-<details>
-  <summary>In-game preview</summary>
-  <Video src={DialogShowcaseMp4} />
-</details>
-
 ## Example: Retrieving and parsing user input
 The dialog for this example will be fairly simple: We once again create a confirmation-type dialog which contains two number range inputs.
 The top input will be for setting the level, the bottom input for setting the experience percentage towards the next level.
@@ -343,6 +352,12 @@ to cast the connection retrievable from [`PlayerCustomClickEvent#getCommonConnec
 to a [`PlayerGameConnection`](jd:paper:io.papermc.paper.connection.PlayerGameConnection), from which we can get the player.
 
 The full event handler code looks like this:
+
+<details>
+  <summary>In-game preview</summary>
+  <Video src={InputDialogShowcaseMp4} />
+</details>
+
 ```java
 @EventHandler
 void handleLevelsDialog(PlayerCustomClickEvent event) {
@@ -400,8 +415,3 @@ DialogAction.customClick(
         .build()
 )
 ```
-
-<details>
-  <summary>In-game preview</summary>
-  <Video src={InputDialogShowcaseMp4} />
-</details>

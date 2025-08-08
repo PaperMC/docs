@@ -36,7 +36,7 @@ The bottom linked inventory is the player's inventory.
 
 Some views have specialized subinterfaces for quickly checking their type, like [`FurnaceView`](jd:paper:org.bukkit.inventory.view.FurnaceView)
 for furnace inventories. For other views, which don't have their own sub type, you can instead use the
-[`InventoryView#getMenuType`](jd:paper.org.bukkit.inventory.InventoryView#getMenuType()) method.
+[`InventoryView#getMenuType`](jd:paper:org.bukkit.inventory.InventoryView#getMenuType()) method.
 
 ## Building inventory views from menu types
 The most common way to create inventory views from menu types is by using their respective builders. **Every menu type

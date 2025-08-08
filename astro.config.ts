@@ -211,6 +211,7 @@ export default defineConfig({
                             "paper/dev/component-api/introduction",
                             "paper/dev/component-api/i18n",
                             "paper/dev/component-api/audiences",
+                            "paper/dev/component-api/signed-messages",
                           ],
                         },
                         {

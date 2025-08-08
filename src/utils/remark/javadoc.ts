@@ -21,15 +21,31 @@ const asUrl = (name: string): string => {
   return `${name0}.html` + (hash ? `#${hash}` : "");
 };
 
+const error = (err: any): never => {
+  if (process.env.NODE_ENV === "production") {
+    console.error(err);
+
+    // throwing an error does not exit the build process, it silently fails
+    // we don't want missing pages, so exit the process instead
+    process.exit(1);
+  } else {
+    throw err;
+  }
+};
+
 const parse = async (url: string, { targets }: Options): Promise<string | null> => {
   const match = /^jd:(.+?)(?::(.+?))?(?::(.+?))?$/.exec(url);
   if (!match) {
-    return null;
+    if (url.startsWith("jd:")) {
+      error(new Error(`Failed to parse Javadoc link "${url}"`));
+    }
+
+    return null; // not a Javadoc link
   }
 
   const target = targets[match[1]];
   if (!target) {
-    return null;
+    error(new Error(`Unknown target for Javadoc link "${url}"`));
   }
 
   const targetUrl = typeof target !== "string" ? target.url : target;
@@ -40,8 +56,7 @@ const parse = async (url: string, { targets }: Options): Promise<string | null> 
   }
 
   const module = match[3] ? match[2] : typeof target !== "string" ? target.module : undefined;
-
-  const parsed: string = `${targetUrl}/${module ? `${module}/` : ""}${asUrl(name)}`;
+  const parsed = `${targetUrl}/${module ? `${module}/` : ""}${asUrl(name)}`;
 
   const result = await deadOrAlive(parsed, {
     findUrls: false,
@@ -49,16 +64,7 @@ const parse = async (url: string, { targets }: Options): Promise<string | null> 
     userAgent: "PaperMC/docs (https://docs.papermc.io)",
   });
   if (result.status !== "alive") {
-    const error = new Error(`Javadoc link "${url}" is not valid`);
-    if (process.env.NODE_ENV === "production") {
-      console.error(error);
-
-      // throwing an error does not exit the build process, it silently fails
-      // we don't want missing pages, so exit the process instead
-      process.exit(1);
-    } else {
-      throw error;
-    }
+    error(new Error(`Received dead status for Javadoc link "${url}"`));
   }
 
   return parsed;

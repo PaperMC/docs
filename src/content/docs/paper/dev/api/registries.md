@@ -68,8 +68,8 @@ final Enchantment enchantment = enchantmentRegistry.getOrThrow(EnchantmentKeys.S
 
 ### Referencing registry values
 
-Referencing entries in a registry is easier said then done.
-While for most cases a plain [Collection](jd:java:java.util.Collection) of the values might suffice, alternative approaches are
+Referencing entries in a registry is easier said than done.
+While in most cases, a plain [Collection](jd:java:java.util.Collection) of the values might suffice, alternative approaches are
 more often used by Minecraft and will hence be encountered.
 
 A [`RegistrySet`](jd:paper:io.papermc.paper.registry.set.RegistrySet) defines a

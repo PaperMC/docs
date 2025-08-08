@@ -195,7 +195,7 @@ For example, if a certain player is banned on one server, you can forward a mess
 
 :::caution[Example of banning a player on all servers]
 
-This is not a recommended way to ban players, due to the fact that there may not be anyone online on the target servers,
+This is not a recommended way to ban players, because there may not be anyone online on the target servers,
 but it is an example of how this can be used.
 
 :::

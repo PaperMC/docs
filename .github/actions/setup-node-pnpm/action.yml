@@ -12,6 +12,9 @@ runs:
           dist
           node_modules
         key: ${{ runner.os }}-output-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-output-${{ hashFiles('**/pnpm-lock.yaml') }}
+          ${{ runner.os }}-output-
     - name: "setup pnpm"
       uses: "pnpm/action-setup@v4"
     - name: "setup node"

@@ -18,6 +18,15 @@ To see a comparison between the new Brigadier system and the old Bukkit system, 
 :::
 
 ## Guide
+
+:::tip
+
+If the Brigadier API seems too complicated, you can start with
+[basic commands](/paper/dev/command-api/misc/basic-command). They
+provide a simple way of creating commands, with only a small learning curve.
+
+:::
+
 The following sites are worth-while to look through first when learning about Brigadier:
 - [The Command Tree](/paper/dev/command-api/basics/command-tree)
 - [Arguments and Literals](/paper/dev/command-api/basics/arguments-and-literals)

@@ -2,15 +2,16 @@
 title: Basic commands
 description: An overview of a Bukkit-style command declaration using Brigadier.
 slug: paper/dev/command-api/misc/basic-command
+version: 1.21.1
 ---
 
 For very simple commands Paper has a way to declare Bukkit-style commands by implementing the [`BasicCommand`](jd:paper:io.papermc.paper.command.brigadier.BasicCommand) interface.
 
 This interface has one method you have to override:
-- `void execute(CommandSourceStack commandSourceStack, String[] args)`
+- `void execute(CommandSourceStack source, String[] args)`
 
 And three more, optional methods which you can, but don't have to override:
-- `Collection<String> suggest(CommandSourceStack commandSourceStack, String[] args)`
+- `Collection<String> suggest(CommandSourceStack source, String[] args)`
 - `boolean canUse(CommandSender sender)`
 - `@Nullable String permission()`
 
@@ -27,20 +28,17 @@ import org.jspecify.annotations.NullMarked;
 public class YourCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack commandSourceStack, String[] args) {
+    public void execute(CommandSourceStack source, String[] args) {
 
     }
 }
 ```
 
-If you have seen the `CommandContext<CommandSourceStack>` class before, you might recognize the first parameter of the execute method as the generic
-parameter `S` from our `CommandContext<S>`, which is also used in the `executes` method from the `ArgumentBuilder`.
-
-With a `CommandSourceStack`, we can retrieve basic information about the sender of the command, the location the command was send from, and the executing entity.
-For more information, check out [basics/command-executors](/paper/dev/command-api/basics/executors).
+With a `CommandSourceStack` you can retrieve basic information about the sender of the command, the location the command was send from,
+and the entity for which the command was executed for. You can find more information on [our page on command executors](/paper/dev/command-api/basics/executors).
 
 ## The optional methods
-You can freely choose whether to implement either of the at the top mentioned, optional methods. Here is a quick overview on what which one does:
+You can freely choose whether to implement either of the mentioned, optional methods. Here is a quick overview on what which one does:
 
 ### `suggest(CommandSourceStack, String[])`
 This method returns some sort of `Collection<String>` and takes in a `CommandSourceStack` and a `String[] args` as parameters. This is similar to the
@@ -52,9 +50,52 @@ Each entry in the collection that you return will be send to the client to be sh
 With this method, you can set up a basic `requires` structure from Brigadier commands. [You can read more on that here](/paper/dev/command-api/basics/requirements).
 This method returns a `boolean`, which is required to return `true` in order for a command sender to be able to execute that command.
 
+:::note
+
+If you override this method, overriding `permission()` does nothing. This is because the default implementation
+uses the return value of `permission()`, which wouldn't be used anymore if you were to override it.
+
+```java title="BasicCommand.java"
+default boolean canUse(final CommandSender sender) {
+    final String permission = this.permission();
+    return permission == null || sender.hasPermission(permission);
+}
+```
+
+:::
+
 ### `permission()`
 With the permission method you can, similar to the `canUse` method, set the permission required to be able to execute and view this command.
 
+## Registering basic commands
+Registering a `BasicCommand` is very simple: In your plugin's main class, you can simply call one of the
+[`registerCommand(...)`](jd:paper:org.bukkit.plugin.java.JavaPlugin#registerCommand(java.lang.String,io.papermc.paper.command.brigadier.BasicCommand))
+methods inside the `onEnable` method.
+
+```java title="YourPlugin.java"
+public class YourPlugin extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        BasicCommand yourCommand = ...;
+        registerCommand("mycommand", yourCommand);
+    }
+}
+```
+
+### Basic commands are functional interfaces
+Because you only have to override one method, you can directly pass in a lambda statement. This is not recommended for styling
+reasons, as it makes the code harder to read.
+
+```java
+@Override
+public void onEnable() {
+    registerCommand(
+        "quickcmd",
+        (source, args) -> source.getSender().sendRichMessage("<yellow>Hello!")
+    );
+}
+```
 
 ## Example: Broadcast command
 As an example, we can create a simple broadcast command. We start by declaring creating a class which implements `BasicCommand` and overrides `execute` and `permission`:
@@ -71,7 +112,7 @@ import org.jspecify.annotations.Nullable;
 public class BroadcastCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack commandSourceStack, String[] args) {
+    public void execute(CommandSourceStack source, String[] args) {
 
     }
 
@@ -88,9 +129,9 @@ operator permissions. You can also set this permission to be `true` by default. 
 Now, in our `execute` method, we can retrieve the name of the executor of that command. If we do not find one, we can just get the name of the command sender, like this:
 
 ```java
-final Component name = commandSourceStack.getExecutor() != null
-    ? commandSourceStack.getExecutor().name()
-    : commandSourceStack.getSender().name();
+final Component name = source.getExecutor() != null
+    ? source.getExecutor().name()
+    : source.getSender().name();
 ```
 
 This makes sure that we cover all cases and even allow the command to work correctly with `/execute as`.
@@ -99,7 +140,7 @@ Next, we retrieve all arguments and join them to a string or tell the sender tha
 arguments (meaning that `args` has a length of 0):
 ```java
 if (args.length == 0) {
-    commandSourceStack.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
+    source.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
     return;
 }
 
@@ -136,13 +177,13 @@ import org.jspecify.annotations.Nullable;
 public class BroadcastCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack commandSourceStack, String[] args) {
-        final Component name = commandSourceStack.getExecutor() != null
-            ? commandSourceStack.getExecutor().name()
-            : commandSourceStack.getSender().name();
+    public void execute(CommandSourceStack source, String[] args) {
+        final Component name = source.getExecutor() != null
+            ? source.getExecutor().name()
+            : source.getSender().name();
 
         if (args.length == 0) {
-            commandSourceStack.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
+            source.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
             return;
         }
 
@@ -163,14 +204,12 @@ public class BroadcastCommand implements BasicCommand {
 }
 ```
 
-Registering our command looks like this:
+Registering the command looks like this:
 
 ```java title="PluginMainClass.java"
 @Override
 public void onEnable() {
-    this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS,
-        event -> event.registrar().register("broadcast", new BroadcastCommand())
-    );
+    registerCommand("broadcast", new BroadcastCommand());
 }
 ```
 
@@ -178,13 +217,13 @@ And this is how it looks like in-game:
 ![](./assets/broadcast-command.png)
 
 
-## Example: Adding suggestions
+### Adding suggestions
 Our broadcast command works pretty well, but it is lacking on suggestions. A very common kind of suggestion for text based commands are player names.
 In order to suggest player names, we can just map all online players to their name, like this:
 
 ```java
 @Override
-public Collection<String> suggest(CommandSourceStack commandSourceStack, String[] args) {
+public Collection<String> suggest(CommandSourceStack source, String[] args) {
     return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
 }
 ```
@@ -239,13 +278,13 @@ import java.util.Collection;
 public class BroadcastCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack commandSourceStack, String[] args) {
-        final Component name = commandSourceStack.getExecutor() != null
-            ? commandSourceStack.getExecutor().name()
-            : commandSourceStack.getSender().name();
+    public void execute(CommandSourceStack source, String[] args) {
+        final Component name = source.getExecutor() != null
+            ? source.getExecutor().name()
+            : source.getSender().name();
 
         if (args.length == 0) {
-            commandSourceStack.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
+            source.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
             return;
         }
 
@@ -265,7 +304,7 @@ public class BroadcastCommand implements BasicCommand {
     }
 
     @Override
-    public Collection<String> suggest(CommandSourceStack commandSourceStack, String[] args) {
+    public Collection<String> suggest(CommandSourceStack source, String[] args) {
         if (args.length == 0) {
             return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
         }

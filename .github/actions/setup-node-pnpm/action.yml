@@ -23,5 +23,4 @@ runs:
           node_modules
         key: ${{ runner.os }}-output-${{ hashFiles('**/pnpm-lock.yaml') }}
         restore-keys: |
-          ${{ runner.os }}-output-${{ hashFiles('**/pnpm-lock.yaml') }}
           ${{ runner.os }}-output-

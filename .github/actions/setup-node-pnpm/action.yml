@@ -13,14 +13,10 @@ runs:
         cache: pnpm
         node-version: 22
 
-    - name: cache output directories
+    - name: cache sharp output
       uses: actions/cache@v4
       with:
-        path: |
-          .astro
-          .cache
-          dist
-          node_modules
-        key: ${{ runner.os }}-output-${{ hashFiles('**/pnpm-lock.yaml') }}
+        path: node_modules/.astro/assets
+        key: sharp-${{ hashFiles('node_modules/.astro/assets') }}
         restore-keys: |
-          ${{ runner.os }}-output-
+          sharp-

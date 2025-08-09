@@ -17,6 +17,4 @@ runs:
       uses: actions/cache@v4
       with:
         path: node_modules/.astro/assets
-        key: sharp-${{ hashFiles('node_modules/.astro/assets') }}
-        restore-keys: |
-          sharp-
+        key: sharp

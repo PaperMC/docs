@@ -964,6 +964,13 @@ misc:
       Determines if the server will interrupt a sprinting player if they are
       attacked. When set to true, you may be subject to a Vanilla bug where
       sprinting is stopped and started when attacking players.
+  dragon-spawn-attempt-performance-improvements:
+    default: "true"
+    vanilla: "false"
+    description: >-
+      Optimizes dragon respawn attempt checks by first verifying whether a
+      placed end crystal in the end is actually located on the portal before
+      attempting to respawn the dragon.
   legacy-ender-pearl-behavior:
     default: "false"
     description: >-

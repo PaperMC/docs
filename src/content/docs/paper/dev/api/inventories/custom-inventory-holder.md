@@ -1,5 +1,5 @@
 ---
-title: Custom InventoryHolder
+title: Custom InventoryHolders
 description: How to use a custom InventoryHolder to identify custom inventories.
 slug: paper/dev/custom-inventory-holder
 ---

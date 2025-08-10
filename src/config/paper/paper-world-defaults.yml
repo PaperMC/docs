@@ -317,7 +317,7 @@ entities:
     stuck-entity-poi-retry-delay:
       default: "10"
       vanilla: "0"
-      description: Add a delay before retrying POI acquisition when entity navigation is stuck to reduce pathfinding performance impact. (in seconds)
+      description: The delay before retrying POI acquisition when entity navigation is stuck. This will reduce pathfinding performance impact. Measured in seconds.
   entities-target-with-follow-range:
     default: "false"
     description: "Sets whether the server should use follow range when targeting entities "

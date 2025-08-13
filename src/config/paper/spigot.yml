@@ -1,184 +1,20 @@
-advancements:
-  disable-saving:
-    default: "false"
-    description: Prevents saving of Advancements.
-  disabled:
-    default: "[minecraft:story/disabled]"
-    description: >-
-      A list of strings, each being:
-
-      - A namespace-including Advancement key, For example,
-      "minecraft:adventure/avoid_vibration" would disable the Sneak 100
-      advancement. [The Minecraft Wiki](https://minecraft.wiki/w/Advancement#List_of_advancements)
-      has a list of all the Vanilla advancements, which need the "minecraft:"
-      namespace prepended to them.
-
-      - The literal string "*", which disables *all* Advancements.
-
-      - An Advancement key's namespace, which disables all advancements inside
-      it. For example, "minecraft" would disable all Vanilla advancements.
-
-
-      if an advancement is disabled without all of it's children also being
-      disabled console errors occur on load.
-commands:
-  log:
-    default: "true"
-    description: >-
-      Whether to log commands executed by players, in chat or on signs. This
-      _currently_ logs in the format "\<playername> issued server command:
-      \<command>".
-  replace-commands:
-    default: "[setblock,summon,testforblock,tellraw]"
-    description: List of Vanilla commands that should override any plugin commands.
-  send-namespaced:
-    default: "true"
-    description: >-
-      Whether to send commands with a namespace (like minecraft:give) to the
-      client.
-  silent-commandblock-console:
-    default: "false"
-    description: Whether to log Vanilla command feedback to the Console.
-  enable-spam-exclusions:
-    default: "false"
-    description: Whether to apply spam exclusions from [`commands.spam-exclusions`](#commands_spam_exclusions).
-  spam-exclusions:
-    default: "[/skill]"
-    description: >-
-      Any chat message or command that prefix matches an entry in this list will
-      be excluded from the built-in spam filter.
-
-      Commands need a "/" to be counted as commands.
-  tab-complete:
-    default: "0"
-    description: >-
-      How many characters need to be typed before commands tab-complete.
-
-      - < 0: Tab-completion is disabled
-
-      - = 0: Always tab-complete all available commands
-
-      - \\> 0 only tab-complete commands after n characters are typed. This
-      behaves as 0 due to client changes.
-messages:
-  outdated-client:
-    default: "Outdated client! Please use {0}"
-    description: >-
-      The kick for a player when they can't join, as the server version is newer
-      than the client version.
-
-      The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines. Additionally, it replaces {0} with the current server version
-  outdated-server:
-    default: "Outdated server! I'm still on {0}"
-    description: >-
-      The kick for a player when they can't join, as the server version is older
-      than the client version.
-
-      The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines. Additionally, it replaces {0} with the current server version
-  restart:
-    default: Server is restarting
-    description: >-
-      The kick message for players on the server when it starts restarting, or
-      if a player tries to join while the server is still restarting.
-
-      The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines.
-  server-full:
-    default: The server is full!
-    description: >-
-      The kick message for a player when they can't join, as the server doesn't
-      have any open slots (current-players >= max players)
-
-      The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines.
-  unknown-command:
-    default: Unknown command. Type "/help" for help.
-    description: >-
-      The default message sent to a player, when a command they run is not found
-      by the server
-
-      The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines.
-  whitelist:
-    default: You are not whitelisted on this server!
-    description: >-
-      The kick message for a player when:
-
-      - The player is unable to join as the whitelist is active.
-
-      - The player was kicked after they are removed from the whitelist, with
-      enforce-whitelist enabled.
-
-      - The player was kicked after the whitelist enables, with
-      enforce-whitelist enabled
-
-
-      The message is formatted with legacy "&" style formatting, and "\\n" for
-      newlines.
-players:
-  disable-saving:
-    default: "false"
-    description: Prevents saving player data.
 settings:
-  attribute:
-    attackDamage:
-      max:
-        default: "2048.0"
-        description: Overrides the maximum for the attackDamage attribute.
-    maxAbsorption:
-      max:
-        default: "2048.0"
-        description: Overrides the maximum for the maxAbsorption attribute.
-    maxHealth:
-      max:
-        default: "1024.0"
-        description: Overrides the maximum for the maxHealth attribute.
-    movementSpeed:
-      max:
-        default: "1024.0"
-        description: Overrides the maximum for the movementSpeed attribute.
-  bungeecord:
-    default: "false"
-    description: |-
-      Whether to enable Bungeecord support, enabling:
-      - Receiving forwarded player-data and source ips.
-      - Support for binding to unix domain sockets.
   debug:
     default: "false"
     description: "Enables debug logging, by setting the log level to ALL."
-  log-named-deaths:
-    default: "true"
+  save-user-cache-on-stop-only:
+    default: "false"
+    description: "If false, the server saves the user-cache on every update."
+  sample-count:
+    default: "12"
     description: >-
-      Whether to log deaths of entities with custom names to console and
-      latest.log
-  log-villager-deaths:
-    default: "true"
+      How many players to display the names of in the player-count hover. The
+      selected players, and their positions in the list, are randomized.
+  timeout-time:
+    default: "60"
     description: >-
-      Whether to log villager deaths and witch transformations to console and
-      latest.log
-  moved-too-quickly-multiplier:
-    default: "10.0"
-    description: >-
-      Controls how fast a client can move in one packet. If triggered, the
-      server logs to console and prevents the move.
-  moved-wrongly-threshold:
-    default: "0.0625"
-    description: >-
-      Controls how far the client can move per move-packet, defined as the
-      distance in blocks squared. If triggered, the server logs to console and
-      prevents the move.
-  netty-threads:
-    default: "4"
-    description: Sets number of netty threads.
-  player-shuffle:
-    default: "0"
-    description: >-
-      How often to shuffle the list of player connections, in ticks, 0 or less to
-      disable. This prevents players from strategically re-logging to increase
-      their position in the tick order. This can have a performance impact if
-      enabled with low values.
+      Time in seconds since the last server-tick that the server is deemed
+      not-responding by the server, and is stopped/restarted by the watchdog.
   restart-on-crash:
     default: "true"
     description: >-
@@ -204,79 +40,314 @@ settings:
 
       For more information on Spigot's restart system, read
       [this](https://gist.github.com/Prof-Bloodstone/6367eb4016eaf9d1646a88772cdbbac5)
-  sample-count:
-    default: "12"
+  log-villager-deaths:
+    default: "true"
     description: >-
-      How many players to display the names of in the player-count hover. The
-      selected players, and their positions in the list, are randomized.
-  save-user-cache-on-stop-only:
+      Whether to log villager deaths and witch transformations to console and
+      latest.log
+  log-named-deaths:
+    default: "true"
+    description: >-
+      Whether to log deaths of entities with custom names to console and
+      latest.log
+  bungeecord:
     default: "false"
-    description: "If false, the server saves the user-cache on every update."
-  timeout-time:
-    default: "60"
+    description: |-
+      Whether to enable Bungeecord support, enabling:
+      - Receiving forwarded player-data and source ips.
+      - Support for binding to unix domain sockets.
+  attribute:
+    maxAbsorption:
+      max:
+        default: "2048.0"
+        description: Overrides the maximum for the maxAbsorption attribute.
+    maxHealth:
+      max:
+        default: "1024.0"
+        description: Overrides the maximum for the maxHealth attribute.
+    movementSpeed:
+      max:
+        default: "1024.0"
+        description: Overrides the maximum for the movementSpeed attribute.
+    attackDamage:
+      max:
+        default: "2048.0"
+        description: Overrides the maximum for the attackDamage attribute.
+  netty-threads:
+    default: "4"
+    description: Sets number of netty threads.
+  player-shuffle:
+    default: "0"
     description: >-
-      Time in seconds since the last server-tick that the server is deemed
-      not-responding by the server, and is stopped/restarted by the watchdog.
+      How often to shuffle the list of player connections, in ticks, 0 or less to
+      disable. This prevents players from strategically re-logging to increase
+      their position in the tick order. This can have a performance impact if
+      enabled with low values.
   user-cache-size:
     default: "1000"
     description: How many players to keep in the user cache.
-stats:
+  moved-too-quickly-multiplier:
+    default: "10.0"
+    description: >-
+      Controls how fast a client can move in one packet. If triggered, the
+      server logs to console and prevents the move.
+  moved-wrongly-threshold:
+    default: "0.0625"
+    description: >-
+      Controls how far the client can move per move-packet, defined as the
+      distance in blocks squared. If triggered, the server logs to console and
+      prevents the move.
+advancements:
   disable-saving:
     default: "false"
-    description: Whether to prevent saving stats.
-  forced-stats:
-    default: "{}"
+    description: Prevents saving of Advancements.
+  disabled:
+    default: "[minecraft:story/disabled]"
     description: >-
-      An Object, where:
+      A list of strings, each being:
 
-      - The Keys inside are any "Resource location" from [The Minecraft
-      Wiki](https://minecraft.wiki/w/Statistics#List_of_custom_statistic_names).
+      - A namespace-including Advancement key, For example,
+      "minecraft:adventure/avoid_vibration" would disable the Sneak 100
+      advancement. [The Minecraft Wiki](https://minecraft.wiki/w/Advancement#List_of_advancements)
+      has a list of all the Vanilla advancements, which need the "minecraft:"
+      namespace prepended to them.
 
-      - The Value for each key is an integer to force the related stat to.
+      - The literal string "*", which disables *all* Advancements.
+
+      - An Advancement key's namespace, which disables all advancements inside
+      it. For example, "minecraft" would disable all Vanilla advancements.
+
+
+      if an advancement is disabled without all of it's children also being
+      disabled console errors occur on load.
+messages:
+  whitelist:
+    default: You are not whitelisted on this server!
+    description: >-
+      The kick message for a player when:
+
+      - The player is unable to join as the whitelist is active.
+
+      - The player was kicked after they are removed from the whitelist, with
+      enforce-whitelist enabled.
+
+      - The player was kicked after the whitelist enables, with
+      enforce-whitelist enabled
+
+
+      The message is formatted with legacy "&" style formatting, and "\\n" for
+      newlines.
+  unknown-command:
+    default: Unknown command. Type "/help" for help.
+    description: >-
+      NOTE: This setting no longer has any effect. The functionality should instead
+      be replaced by a plugin.
+  server-full:
+    default: The server is full!
+    description: >-
+      The kick message for a player when they can't join, as the server doesn't
+      have any open slots (current-players >= max players)
+
+      The message is formatted with legacy "&" style formatting, and "\\n" for
+      newlines.
+  outdated-client:
+    default: "Outdated client! Please use {0}"
+    description: >-
+      The kick for a player when they can't join, as the server version is newer
+      than the client version.
+
+      The message is formatted with legacy "&" style formatting, and "\\n" for
+      newlines. Additionally, it replaces {0} with the current server version
+  outdated-server:
+    default: "Outdated server! I'm still on {0}"
+    description: >-
+      The kick for a player when they can't join, as the server version is older
+      than the client version.
+
+      The message is formatted with legacy "&" style formatting, and "\\n" for
+      newlines. Additionally, it replaces {0} with the current server version
+  restart:
+    default: Server is restarting
+    description: >-
+      The kick message for players on the server when it starts restarting, or
+      if a player tries to join while the server is still restarting.
+
+      The message is formatted with legacy "&" style formatting, and "\\n" for
+      newlines.
 world-settings:
   default:
-    unload-frozen-chunks:
-      default: "false"
-      description: Experimental option that controls whether chunks can unload whilst ticks are frozen via /tick freeze.
-    arrow-despawn-rate:
-      default: "1200"
-      description: The number of ticks before an arrow despawns.
     below-zero-generation-in-existing-chunks:
       default: "true"
       description: >-
         Whether to allow conversion of existing chunks to full (post 1.18)
         height.
-    dragon-death-sound-radius:
-      default: "0"
-      description: >-
-        The number of blocks that the dragon death sound is audible. Set to 0
-        for global (including cross-dimension).
+    merge-radius:
+      exp:
+        default: "-1"
+        description: >-
+          The range, in blocks, that exp orbs will combine at on initial spawn.
+          This behavior is not present in Vanilla and doesn't impact the usual
+          merge range once spawned. Set to 0 or less to disable.
+      item:
+        default: "0.5"
+        description: "The range, in blocks, that items will combine within."
+    ticks-per:
+      hopper-check:
+        default: "1"
+        description: The ticks between checks to pull items.
+      hopper-transfer:
+        default: "8"
+        description: The ticks between hopper item movements.
+    hopper-amount:
+      default: "1"
+      description: "How many items a hopper should move at a time, limited to stack size."
+    hopper-can-load-chunks:
+      default: "false"
+      description: Whether to prevent hoppers from loading chunks.
+    hunger:
+      combat-exhaustion:
+        default: "0.1"
+        description: How much exhaustion to give from attacking.
+      jump-sprint-exhaustion:
+        default: "0.2"
+        description: How much exhaustion to give from sprint jumping.
+      jump-walk-exhaustion:
+        default: "0.05"
+        description: How much exhaustion to give from jump walking.
+      other-multiplier:
+        default: "0.0"
+        description: The exhaustion multiplier for normal walking and crouching.
+      regen-exhaustion:
+        default: "6.0"
+        description: How much exhaustion to give from regenerating health.
+      sprint-multiplier:
+        default: "0.1"
+        description: The exhaustion multiplier for sprinting on the ground.
+      swim-multiplier:
+        default: "0.01"
+        description: >-
+          The exhaustion multiplier for when "swimming". This occurs when the
+          player is:
+
+          - actually swimming
+
+          - walking underwater (eyes below surface)
+
+          - walking on water (eyes above surface)
     enable-zombie-pigmen-portal-spawns:
       default: "true"
       description: >-
         Whether to allow zombified piglins to spawn inside nether portals. This
         setting does not affect portal travel for any mobs.
+    zombie-aggressive-towards-villager:
+      default: "true"
+      description: Whether zombies try to seek out and attack villagers.
+    dragon-death-sound-radius:
+      default: "0"
+      description: >-
+        The number of blocks that the dragon death sound is audible. Set to 0
+        for global (including cross-dimension).
     end-portal-sound-radius:
       default: "0"
       description: >-
         The number of blocks that the end portal opening sound is audible. Set
         to 0 for global (including cross-dimension).
+    hanging-tick-frequency:
+      default: "100"
+      description: "How often to tick hanging entities, in ticks."
+    wither-spawn-sound-radius:
+      default: "0"
+      description: >-
+        The number of blocks that the wither spawn sound is audible. Set to 0
+        for global (including cross-dimension).
+    item-despawn-rate:
+      default: "6000"
+      description: >-
+        The default time in ticks it takes an item to despawn. Per-item rates
+        are found in Paper's [per-world
+        config](/paper/reference/world-configuration#entities_spawning_alt_item_despawn_rate).
+    mob-spawn-range:
+      default: "8"
+      description: "The range, in chunks, from the player, that mobs can spawn."
+    arrow-despawn-rate:
+      default: "1200"
+      description: The number of ticks before an arrow despawns.
+    trident-despawn-rate:
+      default: "1200"
+      description: The number of ticks before a trident despawns.
+    seed-village:
+      default: "10387312"
+      description: The per-structure seed for villages.
+    seed-desert:
+      default: "14357617"
+      description: The per-structure seed for desert structures.
+    seed-igloo:
+      default: "14357618"
+      description: The per-structure seed for igloos.
+    seed-jungle:
+      default: "14357619"
+      description: The per-structure seed for jungle structures.
+    seed-swamp:
+      default: "14357620"
+      description: The per-structure seed for swamp structures.
+    seed-monument:
+      default: "10387313"
+      description: The per-structure seed for monuments.
+    seed-shipwreck:
+      default: "165745295"
+      description: The per-structure seed for shipwrecks.
+    seed-ocean:
+      default: "14357621"
+      description: The per-structure seed for the ocean structures.
+    seed-outpost:
+      default: "165745296"
+      description: The per-structure seed for outposts.
+    seed-endcity:
+      default: "10387313"
+      description: The per-structure seed for end cities.
+    seed-slime:
+      default: "987234911"
+      description: The per-structure seed for slime chunks.
+    seed-nether:
+      default: "30084232"
+      description: The per-structure seed for the nether structures.
+    seed-mansion:
+      default: "10387319"
+      description: The per-structure seed for mansions.
+    seed-fossil:
+      default: "14357921"
+      description: The per-structure seed for fossils.
+    seed-portal:
+      default: "34222645"
+      description: The per-structure seed for portals.
+    seed-ancientcity:
+      default: "20083232"
+      description: The per-structure seed for ancient cities.
+    seed-trailruins:
+      default: "83469867"
+      description: The per-structure seed for trail ruins.
+    seed-trialchambers:
+      default: "94251327"
+      description: The per-structure seed for trial chambers.
+    seed-buriedtreasure:
+      default: "10387320"
+      description: The per-structure seed for buried treasure.
+    seed-mineshaft:
+      default: default
+      description: The per-structure seed for mineshafts.
+    seed-stronghold:
+      default: default
+      description: The per-structure seed for strongholds.
+    thunder-chance:
+      default: "100000"
+      description: >-
+        The chance of lightning occurring during a thunderstorm, as a
+        probability of 1/\<thunder-chance> per chunk, every tick.
     entity-activation-range:
       animals:
         vanilla: "0"
         default: "32"
         description: The entity activation range for animals.
-      flying-monsters:
-        vanilla: "0"
-        default: "32"
-        description: The entity activation range for flying monsters.
-      ignore-spectators:
-        default: "false"
-        description: Whether spectators activate entities within range.
-      misc:
-        vanilla: "0"
-        default: "16"
-        description: The entity activation range for misc entities.
       monsters:
         vanilla: "0"
         default: "32"
@@ -285,28 +356,22 @@ world-settings:
         vanilla: "0"
         default: "64"
         description: The entity activation range for raiders.
-      tick-inactive-villagers:
-        default: "true"
-        description: >-
-          Whether to keep ticking villagers that are outside of their activation
-          range.
+      misc:
+        vanilla: "0"
+        default: "16"
+        description: The entity activation range for misc entities.
+      water:
+        vanilla: "0"
+        default: "16"
+        description: The entity activation range for water mobs.
       villagers:
         vanilla: "0"
         default: "32"
         description: The entity activation range for villagers.
-      villagers-active-for-panic:
-        default: "true"
-        description: Whether to activate villagers when they want to panic.
-      villagers-work-immunity-after:
-        default: "100"
-        description: >-
-          The time in ticks a villager has to be inactive and working to be
-          woken up.
-      villagers-work-immunity-for:
-        default: "20"
-        description: >-
-          How long a villager should be woken up for, in ticks, after
-          villagers-work-immunity-after.
+      flying-monsters:
+        vanilla: "0"
+        default: "32"
+        description: The entity activation range for flying monsters.
       wake-up-inactive:
         animals-every:
           default: "1200"
@@ -364,28 +429,45 @@ world-settings:
           description: >-
             A limit of how many inactive villagers can be woken up on the same
             tick.
-      water:
-        vanilla: "0"
-        default: "16"
-        description: The entity activation range for water mobs.
+      villagers-work-immunity-after:
+        default: "100"
+        description: >-
+          The time in ticks a villager has to be inactive and working to be
+          woken up.
+      villagers-work-immunity-for:
+        default: "20"
+        description: >-
+          How long a villager should be woken up for, in ticks, after
+          villagers-work-immunity-after.
+      villagers-active-for-panic:
+        default: "true"
+        description: Whether to activate villagers when they want to panic.
+      tick-inactive-villagers:
+        default: "true"
+        description: >-
+          Whether to keep ticking villagers that are outside of their activation
+          range.
+      ignore-spectators:
+        default: "false"
+        description: Whether spectators activate entities within range.
+    nerf-spawner-mobs:
+      default: "false"
+      description: Disable most AI for spawner spawned mobs.
+    unload-frozen-chunks:
+      default: "false"
+      description: Experimental option that controls whether chunks can unload whilst ticks are frozen via /tick freeze.
     entity-tracking-range:
+      players:
+        default: "128"
+        description: >-
+          Controls how far in blocks players are tracked (sent to) the player.
+          This is scaled by the
+          [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
       animals:
         default: "96"
         description: >-
           Controls how far in blocks animals are tracked (sent to) the player.
           This is scaled by the
-          [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
-      display:
-        default: "128"
-        description: >-
-          Controls how far in blocks display entities are tracked (sent to) the
-          player. This is scaled by the
-          [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
-      misc:
-        default: "96"
-        description: >-
-          Controls how far in blocks misc entities are tracked (sent to) the
-          player. This is scaled by the
           [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
       monsters:
         default: "96"
@@ -393,35 +475,25 @@ world-settings:
           Controls how far in blocks monsters are tracked (sent to) the player.
           This is scaled by the
           [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
+      misc:
+        default: "96"
+        description: >-
+          Controls how far in blocks misc entities are tracked (sent to) the
+          player. This is scaled by the
+          [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
+      display:
+        default: "128"
+        description: >-
+          Controls how far in blocks display entities are tracked (sent to) the
+          player. This is scaled by the
+          [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
       other:
         default: "64"
         description: >-
           Controls how far in blocks other entities are tracked (sent to) the
           player. This is scaled by the
           [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
-      players:
-        default: "128"
-        description: >-
-          Controls how far in blocks players are tracked (sent to) the player.
-          This is scaled by the
-          [entity-broadcast-range-percentage](/paper/reference/server-properties#entity_broadcast_range_percentage).
     growth:
-      bamboo-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for bamboo, where Vanilla speed is
-          100%. This option is unable to disable growth at 0%, instead
-          defaulting to 100%
-
-          The maximum effectiveness is 300%.
-      beetroot-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for beetroot, where Vanilla speed is
-          100%. This option is unable to disable growth at 0%, instead
-          defaulting to 100%
-
-          The maximum effectiveness is 5100%.
       cactus-modifier:
         default: "100"
         description: >-
@@ -438,45 +510,6 @@ world-settings:
           defaulting to 100%
 
           The maximum effectiveness is 1600%.
-      carrot-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for carrots, where Vanilla speed is
-          100%. This option is unable to disable growth, instead defaulting to
-          100%
-
-          The maximum effectiveness is 5100%.
-      cavevines-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for cave-vines, where Vanilla speed is
-          100%. This option is unable to disable growth, instead defaulting to
-          100%
-
-          The maximum effectiveness is 1000%
-      cocoa-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for cocoa beans, where Vanilla speed is
-          100%. This option is unable to disable growth, instead defaulting to
-          100%
-
-          The maximum effectiveness is 500%
-      glowberry-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for glow-berries, where Vanilla speed
-          is 100%. This option is unable to disable growth, instead defaulting
-          to 100%
-
-          The maximum effectiveness is roughly 910%
-      kelp-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for kelp, where Vanilla speed is 100%.
-          This option is unable to disable growth, instead defaulting to 100%
-
-          The maximum effectiveness is roughly 715%
       melon-modifier:
         default: "100"
         description: >-
@@ -493,30 +526,6 @@ world-settings:
           100%
 
           The maximum effectiveness is 2500%
-      netherwart-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for netherwart, where Vanilla speed is
-          100%. This option is unable to disable growth, instead defaulting to
-          100%
-
-          The maximum effectiveness is 1000%
-      pitcherplant-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for pitcherplants, where Vanilla speed
-          is 100%. This option is unable to disable growth, instead defaulting
-          to 100%
-
-          The maximum effectiveness is 5100%
-      potato-modifier:
-        default: "100"
-        description: >-
-          The growth modifier percentage for potatoes, where Vanilla speed is
-          100%. This option is unable to disable growth, instead defaulting to
-          100%
-
-          The maximum effectiveness is 5100%
       pumpkin-modifier:
         default: "100"
         description: >-
@@ -533,14 +542,30 @@ world-settings:
           100%
 
           The maximum effectiveness is 700%
-      sweetberry-modifier:
+      beetroot-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for sweet-berries, where Vanilla speed
-          is 100%. This option is unable to disable growth, instead defaulting
-          to 100%
+          The growth modifier percentage for beetroot, where Vanilla speed is
+          100%. This option is unable to disable growth at 0%, instead
+          defaulting to 100%
 
-          The maximum effectiveness is 500%
+          The maximum effectiveness is 5100%.
+      carrot-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for carrots, where Vanilla speed is
+          100%. This option is unable to disable growth, instead defaulting to
+          100%
+
+          The maximum effectiveness is 5100%.
+      potato-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for potatoes, where Vanilla speed is
+          100%. This option is unable to disable growth, instead defaulting to
+          100%
+
+          The maximum effectiveness is 5100%
       torchflower-modifier:
         default: "100"
         description: >-
@@ -549,12 +574,19 @@ world-settings:
           to 100%
 
           The maximum effectiveness is 5100%
-      twistingvines-modifier:
+      wheat-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for twisting-vines, where Vanilla speed
-          is 100%. This option is unable to disable growth, instead defaulting
-          to 100%
+          The growth modifier percentage for wheat, where Vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is 5100%
+      netherwart-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for netherwart, where Vanilla speed is
+          100%. This option is unable to disable growth, instead defaulting to
+          100%
 
           The maximum effectiveness is 1000%
       vine-modifier:
@@ -564,6 +596,45 @@ world-settings:
           This option is unable to disable growth, instead defaulting to 100%
 
           The maximum effectiveness is 400%
+      cocoa-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for cocoa beans, where Vanilla speed is
+          100%. This option is unable to disable growth, instead defaulting to
+          100%
+
+          The maximum effectiveness is 500%
+      bamboo-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for bamboo, where Vanilla speed is
+          100%. This option is unable to disable growth at 0%, instead
+          defaulting to 100%
+
+          The maximum effectiveness is 300%.
+      sweetberry-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for sweet-berries, where Vanilla speed
+          is 100%. This option is unable to disable growth, instead defaulting
+          to 100%
+
+          The maximum effectiveness is 500%
+      kelp-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for kelp, where Vanilla speed is 100%.
+          This option is unable to disable growth, instead defaulting to 100%
+
+          The maximum effectiveness is roughly 715%
+      twistingvines-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for twisting-vines, where Vanilla speed
+          is 100%. This option is unable to disable growth, instead defaulting
+          to 100%
+
+          The maximum effectiveness is 1000%
       weepingvines-modifier:
         default: "100"
         description: >-
@@ -572,187 +643,113 @@ world-settings:
           to 100%
 
           The maximum effectiveness is 1000%
-      wheat-modifier:
+      cavevines-modifier:
         default: "100"
         description: >-
-          The growth modifier percentage for wheat, where Vanilla speed is 100%.
-          This option is unable to disable growth, instead defaulting to 100%
+          The growth modifier percentage for cave-vines, where Vanilla speed is
+          100%. This option is unable to disable growth, instead defaulting to
+          100%
+
+          The maximum effectiveness is 1000%
+      glowberry-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for glow-berries, where Vanilla speed
+          is 100%. This option is unable to disable growth, instead defaulting
+          to 100%
+
+          The maximum effectiveness is roughly 910%
+      pitcherplant-modifier:
+        default: "100"
+        description: >-
+          The growth modifier percentage for pitcherplants, where Vanilla speed
+          is 100%. This option is unable to disable growth, instead defaulting
+          to 100%
 
           The maximum effectiveness is 5100%
-    hanging-tick-frequency:
-      default: "100"
-      description: "How often to tick hanging entities, in ticks."
-    hopper-amount:
-      default: "1"
-      description: "How many items a hopper should move at a time, limited to stack size."
-    hopper-can-load-chunks:
-      default: "false"
-      description: Whether to prevent hoppers from loading chunks.
-    hunger:
-      combat-exhaustion:
-        default: "0.1"
-        description: How much exhaustion to give from attacking.
-      jump-sprint-exhaustion:
-        default: "0.2"
-        description: How much exhaustion to give from sprint jumping.
-      jump-walk-exhaustion:
-        default: "0.05"
-        description: How much exhaustion to give from jump walking.
-      other-multiplier:
-        default: "0.0"
-        description: The exhaustion multiplier for normal walking and crouching.
-      regen-exhaustion:
-        default: "6.0"
-        description: How much exhaustion to give from regenerating health.
-      sprint-multiplier:
-        default: "0.1"
-        description: The exhaustion multiplier for sprinting on the ground.
-      swim-multiplier:
-        default: "0.01"
-        description: >-
-          The exhaustion multiplier for when "swimming". This occurs when the
-          player is:
-
-          - actually swimming
-
-          - walking underwater (eyes below surface)
-
-          - walking on water (eyes above surface)
-    item-despawn-rate:
-      default: "6000"
-      description: >-
-        The default time in ticks it takes an item to despawn. Per-item rates
-        are found in Paper's [per-world
-        config](/paper/reference/world-configuration#entities_spawning_alt_item_despawn_rate).
     max-tick-time:
-      entity:
-        default: "50"
-        description: "This option does not operate, and is non-functional upstream."
       tile:
         default: "50"
         description: "This option does not operate, as it is disabled by a Paper patch."
+      entity:
+        default: "50"
+        description: "This option does not operate, and is non-functional upstream."
     max-tnt-per-tick:
       vanilla: "-1"
       default: "100"
       description: How many TNT to process per server tick. Set to 0 or less to disable.
-    merge-radius:
-      exp:
-        default: "-1"
-        description: >-
-          The range, in blocks, that exp orbs will combine at on initial spawn.
-          This behavior is not present in Vanilla and doesn't impact the usual
-          merge range once spawned. Set to 0 or less to disable.
-      item:
-        default: "0.5"
-        description: "The range, in blocks, that items will combine within."
-    mob-spawn-range:
-      default: "8"
-      description: "The range, in chunks, from the player, that mobs can spawn."
-    nerf-spawner-mobs:
-      default: "false"
-      description: Disable most AI for spawner spawned mobs.
-    seed-ancientcity:
-      default: "20083232"
-      description: The per-structure seed for ancient cities.
-    seed-buriedtreasure:
-      default: "10387320"
-      description: The per-structure seed for buried treasure.
-    seed-desert:
-      default: "14357617"
-      description: The per-structure seed for desert structures.
-    seed-endcity:
-      default: "10387313"
-      description: The per-structure seed for end cities.
-    seed-fossil:
-      default: "14357921"
-      description: The per-structure seed for fossils.
-    seed-igloo:
-      default: "14357618"
-      description: The per-structure seed for igloos.
-    seed-jungle:
-      default: "14357619"
-      description: The per-structure seed for jungle structures.
-    seed-mansion:
-      default: "10387319"
-      description: The per-structure seed for mansions.
-    seed-mineshaft:
+    view-distance:
       default: default
-      description: The per-structure seed for mineshafts.
-    seed-monument:
-      default: "10387313"
-      description: The per-structure seed for monuments.
-    seed-nether:
-      default: "30084232"
-      description: The per-structure seed for the nether structures.
-    seed-ocean:
-      default: "14357621"
-      description: The per-structure seed for the ocean structures.
-    seed-outpost:
-      default: "165745296"
-      description: The per-structure seed for outposts.
-    seed-portal:
-      default: "34222645"
-      description: The per-structure seed for portals.
-    seed-shipwreck:
-      default: "165745295"
-      description: The per-structure seed for shipwrecks.
-    seed-slime:
-      default: "987234911"
-      description: The per-structure seed for slime chunks.
-    seed-stronghold:
-      default: default
-      description: The per-structure seed for strongholds.
-    seed-swamp:
-      default: "14357620"
-      description: The per-structure seed for swamp structures.
-    seed-trialchambers:
-      default: "94251327"
-      description: The per-structure seed for trial chambers.
-    seed-trailruins:
-      default: "83469867"
-      description: The per-structure seed for trail ruins.
-    seed-village:
-      default: "10387312"
-      description: The per-structure seed for villages.
+      description: >-
+        Overrides the view distance. Set to -1 or "default" to use the value in
+        [server.properties](/paper/reference/server-properties#view_distance)
     simulation-distance:
       default: default
       description: >-
         Overrides the simulation distance. Set to -1 or "default" to use the
         value in
         [server.properties](/paper/reference/server-properties#simulation_distance).
-    thunder-chance:
-      default: "100000"
-      description: >-
-        The chance of lightning occurring during a thunderstorm, as a
-        probability of 1/\<thunder-chance> per chunk, every tick.
-    ticks-per:
-      hopper-check:
-        default: "1"
-        description: The ticks between checks to pull items.
-      hopper-transfer:
-        default: "8"
-        description: The ticks between hopper item movements.
-    trident-despawn-rate:
-      default: "1200"
-      description: The number of ticks before a trident despawns.
     verbose:
       default: "false"
       description: >-
         Whether to log world settings when the configuration file is loaded.
         This normally occurs on startup, \`/spigot reload\`, and \`/reload\`.
-    view-distance:
-      default: default
-      description: >-
-        Overrides the view distance. Set to -1 or "default" to use the value in
-        [server.properties](/paper/reference/server-properties#view_distance)
-    wither-spawn-sound-radius:
-      default: "0"
-      description: >-
-        The number of blocks that the wither spawn sound is audible. Set to 0
-        for global (including cross-dimension).
-    zombie-aggressive-towards-villager:
-      default: "true"
-      description: Whether zombies try to seek out and attack villagers.
+players:
+  disable-saving:
+    default: "false"
+    description: Prevents saving player data.
 config-version:
   default: ""
   description: "Internal constant for upgrading configuration: **Do Not Touch**."
+stats:
+  disable-saving:
+    default: "false"
+    description: Whether to prevent saving stats.
+  forced-stats:
+    default: "{}"
+    description: >-
+      An Object, where:
+
+      - The Keys inside are any "Resource location" from [The Minecraft
+      Wiki](https://minecraft.wiki/w/Statistics#List_of_custom_statistic_names).
+
+      - The Value for each key is an integer to force the related stat to.
+commands:
+  tab-complete:
+    default: "0"
+    description: >-
+      How many characters need to be typed before commands tab-complete.
+
+      - < 0: Tab-completion is disabled
+
+      - = 0: Always tab-complete all available commands
+
+      - \\> 0 only tab-complete commands after n characters are typed. This
+      behaves as 0 due to client changes.
+  send-namespaced:
+    default: "true"
+    description: >-
+      Whether to send commands with a namespace (like minecraft:give) to the
+      client.
+  log:
+    default: "true"
+    description: >-
+      Whether to log commands executed by players, in chat or on signs. This
+      _currently_ logs in the format "\<playername> issued server command:
+      \<command>".
+  replace-commands:
+    default: "[setblock,summon,testforblock,tellraw]"
+    description: List of Vanilla commands that should override any plugin commands.
+  spam-exclusions:
+    default: "[/skill]"
+    description: >-
+      Any chat message or command that prefix matches an entry in this list will
+      be excluded from the built-in spam filter.
+
+      Commands need a "/" to be counted as commands.
+  silent-commandblock-console:
+    default: "false"
+    description: Whether to log Vanilla command feedback to the Console.
+  enable-spam-exclusions:
+    default: "false"
+    description: Whether to apply spam exclusions from [`commands.spam-exclusions`](#commands_spam_exclusions).

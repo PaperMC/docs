@@ -12,6 +12,10 @@ ignore-vanilla-permissions:
   default: "false"
   description: Whether to use Vanilla permission levels when executing commands.
 aliases:
+  icanhasbukkit:
+    default: "[version $1-]"
+    description: >-
+      A built-in alias. Set aliases to an empty list ([]) to persistently remove.
   <alias name>:
     default: "[<commands to run>]"
     description: >
@@ -30,8 +34,3 @@ aliases:
 
 
       Each alias registered cannot (easily) be overridden by a plugin.
-  icanhasbukkit:
-    default: "[version $1-]"
-    description: >-
-      A built-in alias. Set aliases to an empty list ([]) to persistently
-      remove.

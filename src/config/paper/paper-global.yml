@@ -43,6 +43,19 @@ anticheat:
             description: >-
               Controls whether the item count of items with the model `minecraft:elytra` should be hidden from other players.
 block-updates:
+  disable-chorus-plant-updates:
+    default: "false"
+    description: >-
+      Whether to disable any form of block updates for chorus plants on the
+      server. Disabling block updates leads to chorus plants no longer updating their block
+      state, allowing for technically invalid chorus plant configurations to remain in the world,
+  disable-mushroom-block-updates:
+    default: "false"
+    description: >-
+      Whether to disable any form of block updates for mushroom blocks on the
+      server. Disabling block updates leads to mushroom blocks no longer updating their block
+      state, allowing for technically invalid mushroom block configurations to remain in the world,
+      which might be useful for mapmakers.
   disable-noteblock-updates:
     default: "false"
     description: >-
@@ -50,26 +63,13 @@ block-updates:
       server. Disabling block updates leads to note blocks no longer updating
       their block state, allowing for technically invalid note blocks to remain
       in the world, which might be useful for mapmakers.
+      which might be useful for mapmakers.
   disable-tripwire-updates:
     default: "false"
     description: >-
       Whether to disable any form of block updates for tripwires on the server.
       Disabling block updates leads to tripwires no longer updating their block
       state, allowing for technically invalid tripwires to remain in the world,
-      which might be useful for mapmakers.
-  disable-chorus-plant-updates:
-    default: "false"
-    description: >-
-      Whether to disable any form of block updates for chorus plants on the
-      server. Disabling block updates leads to chorus plants no longer updating their block
-      state, allowing for technically invalid chorus plant configurations to remain in the world,
-      which might be useful for mapmakers.
-  disable-mushroom-block-updates:
-    default: "false"
-    description: >-
-      Whether to disable any form of block updates for mushroom blocks on the
-      server. Disabling block updates leads to mushroom blocks no longer updating their block
-      state, allowing for technically invalid mushroom block configurations to remain in the world,
       which might be useful for mapmakers.
 chunk-loading-advanced:
   auto-config-send-distance:
@@ -173,20 +173,6 @@ console:
     default: "false"
     description: Whether the console command sender has all permissions
 item-validation:
-  display-name:
-    vanilla: "2147483647"
-    default: "8192"
-    description: The maximum length of an item's display name in characters
-  lore-line:
-    vanilla: "2147483647"
-    default: "8192"
-    description: The maximum length of a lore line in characters
-  resolve-selectors-in-books:
-    vanilla: "true"
-    default: "false"
-    description: >-
-      Whether to resolve selectors in books. With this enabled, players given
-      creative mode will be able to crash the server in yet another way
   book:
     author:
       vanilla: "2147483647"
@@ -214,6 +200,20 @@ item-validation:
         Each page has this multiple of bytes from the last page as its
         contribution to the allowed byte total for a book (with the first page
         being having a multiplier of 1.0)
+  display-name:
+    vanilla: "2147483647"
+    default: "8192"
+    description: The maximum length of an item's display name in characters
+  lore-line:
+    vanilla: "2147483647"
+    default: "8192"
+    description: The maximum length of a lore line in characters
+  resolve-selectors-in-books:
+    vanilla: "true"
+    default: "false"
+    description: >-
+      Whether to resolve selectors in books. With this enabled, players given
+      creative mode will be able to crash the server in yet another way
 logging:
   deobfuscate-stacktraces:
     default: "true"
@@ -221,21 +221,6 @@ logging:
       Whether to remap Spigot mapped stacktraces to Mojang mappings in logging.
       Has no impact on Mojang mapped servers
 messages:
-  no-permission:
-    default: >-
-      <red>I'm sorry, but you do not have permission to perform this command.
-      Please contact the server administrators if you believe that this is in
-      error.
-    description: >-
-      Default message sent to players when they have insufficient permissions
-      for an action, formatted with
-      [MiniMessage](https://docs.advntr.dev/minimessage/). Plugins may override
-      this for their commands
-  use-display-name-in-quit-message:
-    default: "false"
-    description: >-
-      Whether the server should use the player's display name (set by plugins)
-      or actual name in quit messages
   kick:
     authentication-servers-down:
       default: "<lang:multiplayer.disconnect.authservers_down>"
@@ -259,47 +244,22 @@ messages:
       description: >-
         Message sent to players who are detected riding a flying vehicle.
         Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
+  no-permission:
+    default: >-
+      <red>I'm sorry, but you do not have permission to perform this command.
+      Please contact the server administrators if you believe that this is in
+      error.
+    description: >-
+      Default message sent to players when they have insufficient permissions
+      for an action, formatted with
+      [MiniMessage](https://docs.advntr.dev/minimessage/). Plugins may override
+      this for their commands
+  use-display-name-in-quit-message:
+    default: "false"
+    description: >-
+      Whether the server should use the player's display name (set by plugins)
+      or actual name in quit messages
 misc:
-  fix-entity-position-desync:
-    vanilla: "false"
-    default: "true"
-    description: >-
-      Causes the server to lose the same precision that the client does for
-      entities preventing desync. Fixes
-      [MC-4](https://bugs.mojang.com/browse/MC-4)
-  load-permissions-yml-before-plugins:
-    default: "true"
-    description: >-
-      Loads bukkit's permission.yml file before plugins, allowing them to check
-      information set there immediately on enable
-  max-joins-per-tick:
-    vanilla: "2147483647"
-    default: "5"
-    description: >-
-      Sets the maximum amount of players that may join the server in a single
-      tick. If more players join, they will be postponed until later ticks to
-      join but not kicked. This is not related to connection throttling found in
-      bukkit.yml
-  region-file-cache-size:
-    default: "256"
-    description: The maximum size of the region file cache
-  use-alternative-luck-formula:
-    default: "false"
-    description: >-
-      Use an [alternative luck formula](https://gist.github.com/aikar/40281f6c73ec9b6fef7588e6461e1ba9)
-      allowing luck to be applied to items that have no quality defined. Makes
-      major changes to fishing formulas
-  use-dimension-type-for-custom-spawners:
-    default: "false"
-    description: >-
-      Whether phantoms, wandering traders, etc. should be able to spawn in
-      custom overworlds. Defaults to false in order to match Vanilla behavior
-  strict-advancement-dimension-check:
-    default: "false"
-    description: >-
-      Disables the attempts to translate worlds that use the same generation as
-      the Overworld, The Nether, or The End to general dimensions rather than
-      the specific dimension key of the world.
   chat-threads:
     chat-executor-core-size:
       default: "-1"
@@ -322,6 +282,47 @@ misc:
       the default value of the defined compressor. Note that Paper is currently
       using the Velocity compressor, which uses a default compression level of 6
       as a middle ground between performance and data transmission.
+  load-permissions-yml-before-plugins:
+    default: "true"
+    description: >-
+      Loads bukkit's permission.yml file before plugins, allowing them to check
+      information set there immediately on enable
+  max-joins-per-tick:
+    vanilla: "2147483647"
+    default: "5"
+    description: >-
+      Sets the maximum amount of players that may join the server in a single
+      tick. If more players join, they will be postponed until later ticks to
+      join but not kicked. This is not related to connection throttling found in
+      bukkit.yml
+  prevent-negative-villager-demand:
+    default: "false"
+    description: >-
+      Fixes MC-163962. Prevents the villager demand from going
+      negative, but may introduce parity issues with Vanilla.
+  region-file-cache-size:
+    default: "256"
+    description: The maximum size of the region file cache
+  send-full-pos-for-item-entities:
+    default: "false"
+    description: Whether to send the full position for item entities
+  strict-advancement-dimension-check:
+    default: "false"
+    description: >-
+      Disables the attempts to translate worlds that use the same generation as
+      the Overworld, The Nether, or The End to general dimensions rather than
+      the specific dimension key of the world.
+  use-alternative-luck-formula:
+    default: "false"
+    description: >-
+      Use an [alternative luck formula](https://gist.github.com/aikar/40281f6c73ec9b6fef7588e6461e1ba9)
+      allowing luck to be applied to items that have no quality defined. Makes
+      major changes to fishing formulas
+  use-dimension-type-for-custom-spawners:
+    default: "false"
+    description: >-
+      Whether phantoms, wandering traders, etc. should be able to spawn in
+      custom overworlds. Defaults to false in order to match Vanilla behavior
   xp-orb-groups-per-area:
     default: default
     description: >-
@@ -382,18 +383,18 @@ player-auto-save:
       How often player data should be saved in ticks. A value of -1 will use
       ticks-per.autosave in bukkit.yml
 proxies:
-  proxy-protocol:
-    default: "false"
-    description: >-
-      Whether the server should process [PROXY Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)
-      messages. This is completely unrelated to Velocity or BungeeCord. Only
-      enable this if you are using HAProxy or similar
   bungee-cord:
     online-mode:
       default: "true"
       description: >-
         Instructs the server how to handle player UUIDs and data when behind
         BungeeCord. Always set to match your proxy's online-mode setting
+  proxy-protocol:
+    default: "false"
+    description: >-
+      Whether the server should process [PROXY Protocol](https://www.haproxy.org/download/1.8/doc/proxy-protocol.txt)
+      messages. This is completely unrelated to Velocity or BungeeCord. Only
+      enable this if you are using HAProxy or similar
   velocity:
     enabled:
       default: "false"
@@ -451,45 +452,14 @@ spam-limiter:
       The number that the internal tab spam counter can reach until the server
       kicks the player for spam
 spark:
-  enabled:
-    default: "true"
-    description: Whether the bundled spark profiler should be enabled.
   enable-immediately:
     default: "false"
     description: >-
       Whether the bundled spark profiler should be enabled as soon as possible. This can be useful for profiling the server during startup.
       By default, spark is enabled once the server has finished starting up (when the **Done (X.XXXs)! For help, type "help"** message is sent in the console).
-timings:
   enabled:
-    default: "false"
-    description: Controls the global enable state of Timings
-  hidden-config-entries:
-    default: "[database, proxies.velocity.secret]"
-    description: Configuration entries to hide in Timings reports
-  history-interval:
-    default: "300"
-    description: The interval in seconds between individual points in the Timings report
-  history-length:
-    default: "3600"
-    description: >-
-      The total amount of data to keep for a single report. This value is
-      validated server-side. Large reports will be rejected
-  server-name:
-    default: Unknown Server
-    description: Instructs Timings on what to put in for the server name
-  server-name-privacy:
-    default: "false"
-    description: Instructs Timings to hide server name information in reports
-  url:
-    default: "https://timings.aikar.co"
-    description: >-
-      Specifies the URL of the [Timings Viewer](https://github.com/aikar/timings)
-      server where Timings reports are sent
-  verbose:
     default: "true"
-    description: >-
-      Instructs Timings to provide more specific information in its reports. For
-      example, specific entity types causing lag rather than just "entities"
+    description: Whether the bundled spark profiler should be enabled.
 unsupported-settings:
   inline-docs-warning:
     color: red
@@ -517,26 +487,6 @@ unsupported-settings:
     description: >-
       Whether to allow duplication of TNT, carpets, and rails. This does not
       control sand duplication
-  skip-vanilla-damage-tick-when-shield-blocked:
-    default: "false"
-    description: >-
-      Whether the server should skip damage ticks when entities are blocking damage
-      via a shield. While Vanilla does process a damage tick, this behavior was a long
-      standing bug in Paper. Enabling this option means that the damage tick will be
-      skipped, which may result in rapid damage on shields due to the missing invulnerability.
-  perform-username-validation:
-    vanilla: "false"
-    default: "true"
-    description: >-
-      Whether the server should validate usernames. While this may allow users
-      with special characters in their name to join, it can also cause issues
-      with commands and plugins
-  compression-format:
-    default: ZLIB
-    description: >-
-      Allows the server to customize the format of saved region files. This
-      supports ZLIB, GZIP, LZ4 and NONE, where None namely allows for compression to
-      be disabled
   allow-unsafe-end-portal-teleportation:
     vanilla: "true"
     default: "false"
@@ -545,11 +495,31 @@ unsupported-settings:
       possible, for example sand duplication. This
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
+  compression-format:
+    default: ZLIB
+    description: >-
+      Allows the server to customize the format of saved region files. This
+      supports ZLIB, GZIP, LZ4 and NONE, where None namely allows for compression to
+      be disabled
+  perform-username-validation:
+    vanilla: "false"
+    default: "true"
+    description: >-
+      Whether the server should validate usernames. While this may allow users
+      with special characters in their name to join, it can also cause issues
+      with commands and plugins
   skip-tripwire-hook-placement-validation:
     vanilla: "true"
     default: "false"
     description: >-
       This setting allows for exploits related to tripwire hook duping to be enabled.
+  skip-vanilla-damage-tick-when-shield-blocked:
+    default: "false"
+    description: >-
+      Whether the server should skip damage ticks when entities are blocking damage
+      via a shield. While Vanilla does process a damage tick, this behavior was a long
+      standing bug in Paper. Enabling this option means that the damage tick will be
+      skipped, which may result in rapid damage on shields due to the missing invulnerability.
   update-equipment-on-player-actions:
     vanilla: "false"
     default: "true"

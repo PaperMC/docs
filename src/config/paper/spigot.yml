@@ -246,12 +246,14 @@ world-settings:
       default: "0"
       description: >-
         The number of blocks that the dragon death sound is audible. Set to 0
-        for global (including cross-dimension).
+        for global (including cross-dimension). Setting the gamerule globalSoundEvents
+        to true overrides this setting and forces global dragon death sounds.
     end-portal-sound-radius:
       default: "0"
       description: >-
         The number of blocks that the end portal opening sound is audible. Set
-        to 0 for global (including cross-dimension).
+        to 0 for global (including cross-dimension). Setting the gamerule globalSoundEvents
+        to true overrides this setting and forces global dragon death sounds.
     hanging-tick-frequency:
       default: "100"
       description: "How often to tick hanging entities, in ticks."
@@ -259,7 +261,8 @@ world-settings:
       default: "0"
       description: >-
         The number of blocks that the wither spawn sound is audible. Set to 0
-        for global (including cross-dimension).
+        for global (including cross-dimension). Setting the gamerule globalSoundEvents
+        to true overrides this setting and forces global dragon death sounds.
     item-despawn-rate:
       default: "6000"
       description: >-
@@ -718,13 +721,11 @@ commands:
   tab-complete:
     default: "0"
     description: >-
-      How many characters need to be typed before commands tab-complete.
+      How many characters need to be typed before commands tab-complete.<br>
 
-      - < 0: Tab-completion is disabled
-
-      - = 0: Always tab-complete all available commands
-
-      - \\> 0 only tab-complete commands after n characters are typed. This
+      < 0 — Tab-completion is disabled. <br>
+      = 0 — Always tab-complete all available commands. <br>
+      > 0 — Only tab-complete commands after n characters are typed. This
       behaves as 0 due to client changes.
   send-namespaced:
     default: "true"

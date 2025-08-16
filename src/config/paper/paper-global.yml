@@ -49,6 +49,7 @@ block-updates:
       Whether to disable any form of block updates for chorus plants on the
       server. Disabling block updates leads to chorus plants no longer updating their block
       state, allowing for technically invalid chorus plant configurations to remain in the world,
+      which might be useful for mapmakers.
   disable-mushroom-block-updates:
     default: "false"
     description: >-
@@ -63,7 +64,6 @@ block-updates:
       server. Disabling block updates leads to note blocks no longer updating
       their block state, allowing for technically invalid note blocks to remain
       in the world, which might be useful for mapmakers.
-      which might be useful for mapmakers.
   disable-tripwire-updates:
     default: "false"
     description: >-

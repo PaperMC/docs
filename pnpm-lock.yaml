@@ -15,7 +15,7 @@ importers:
     dependencies:
       '@ascorbic/feed-loader':
         specifier: ^1.0.4
-        version: 1.0.4(astro@5.7.11(@types/node@22.15.16)(rollup@4.40.2)(typescript@5.8.3)(yaml@2.7.1))
+        version: 1.0.4(astro@5.12.8(@types/node@24.2.0)(rollup@4.40.2)(typescript@5.9.2)(yaml@2.8.1))
       '@astrojs/markdown-remark':
         specifier: ^6.3.5
         version: 6.3.5
@@ -2340,15 +2340,15 @@ snapshots:
       '@jridgewell/gen-mapping': 0.3.8
       '@jridgewell/trace-mapping': 0.3.25
 
-  '@ascorbic/feed-loader@1.0.4(astro@5.7.11(@types/node@22.15.16)(rollup@4.40.2)(typescript@5.8.3)(yaml@2.7.1))':
+  '@ascorbic/feed-loader@1.0.4(astro@5.12.8(@types/node@24.2.0)(rollup@4.40.2)(typescript@5.9.2)(yaml@2.8.1))':
     dependencies:
-      '@ascorbic/loader-utils': 1.0.2(astro@5.7.11(@types/node@22.15.16)(rollup@4.40.2)(typescript@5.8.3)(yaml@2.7.1))
-      astro: 5.7.11(@types/node@22.15.16)(rollup@4.40.2)(typescript@5.8.3)(yaml@2.7.1)
+      '@ascorbic/loader-utils': 1.0.2(astro@5.12.8(@types/node@24.2.0)(rollup@4.40.2)(typescript@5.9.2)(yaml@2.8.1))
+      astro: 5.12.8(@types/node@24.2.0)(rollup@4.40.2)(typescript@5.9.2)(yaml@2.8.1)
       feedparser: 2.2.10
 
-  '@ascorbic/loader-utils@1.0.2(astro@5.7.11(@types/node@22.15.16)(rollup@4.40.2)(typescript@5.8.3)(yaml@2.7.1))':
+  '@ascorbic/loader-utils@1.0.2(astro@5.12.8(@types/node@24.2.0)(rollup@4.40.2)(typescript@5.9.2)(yaml@2.8.1))':
     dependencies:
-      astro: 5.7.11(@types/node@22.15.16)(rollup@4.40.2)(typescript@5.8.3)(yaml@2.7.1)
+      astro: 5.12.8(@types/node@24.2.0)(rollup@4.40.2)(typescript@5.9.2)(yaml@2.8.1)
 
   '@astrojs/compiler@2.12.0': {}
 

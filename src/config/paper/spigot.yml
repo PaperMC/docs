@@ -246,14 +246,14 @@ world-settings:
       default: "0"
       description: >-
         The number of blocks that the dragon death sound is audible. Set to 0
-        for global (including cross-dimension). Setting the gamerule globalSoundEvents
-        to true overrides this setting and forces global dragon death sounds.
+        for global (including cross-dimension). This setting has no effect if
+        the gamerule globalSoundEvents is set to true, which is the default.
     end-portal-sound-radius:
       default: "0"
       description: >-
         The number of blocks that the end portal opening sound is audible. Set
-        to 0 for global (including cross-dimension). Setting the gamerule globalSoundEvents
-        to true overrides this setting and forces global dragon death sounds.
+        to 0 for global (including cross-dimension). This setting has no effect if
+        the gamerule globalSoundEvents is set to true, which is the default.
     hanging-tick-frequency:
       default: "100"
       description: "How often to tick hanging entities, in ticks."
@@ -261,8 +261,8 @@ world-settings:
       default: "0"
       description: >-
         The number of blocks that the wither spawn sound is audible. Set to 0
-        for global (including cross-dimension). Setting the gamerule globalSoundEvents
-        to true overrides this setting and forces global dragon death sounds.
+        for global (including cross-dimension). This setting has no effect if
+        the gamerule globalSoundEvents is set to true, which is the default.
     item-despawn-rate:
       default: "6000"
       description: >-

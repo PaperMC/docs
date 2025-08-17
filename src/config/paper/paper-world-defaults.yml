@@ -948,6 +948,14 @@ max-growth-height:
     default: "3"
     description: Maximum height sugar cane/reeds blocks will naturally grow to
 misc:
+  allow-remote-ender-dragon-respawning:
+    default: "false"
+    vanilla: "true"
+    description: >-
+      Disables an optimization which verifies that end crystals placed in the end
+      are placed on the portal frame before any attempt is made at respawning
+      the ender dragon. Enabling this setting allows remote ender dragon
+      respawning to work again.
   disable-end-credits:
     default: "false"
     description: >-
@@ -964,16 +972,6 @@ misc:
       Determines if the server will interrupt a sprinting player if they are
       attacked. When set to true, you may be subject to a Vanilla bug where
       sprinting is stopped and started when attacking players.
-  allow-remote-ender-dragon-respawning:
-    default: "false"
-    vanilla: "true"
-    description: >-
-      The feature backed by this setting optimizes dragon respawn attempt checks by
-      first verifying whether a placed end crystal in the end is actually located on
-      the portal before attempting to respawn the dragon.
-
-      This only takes effect if this value is set to false. Setting it to true
-      disables this optimization.
   legacy-ender-pearl-behavior:
     default: "false"
     description: >-

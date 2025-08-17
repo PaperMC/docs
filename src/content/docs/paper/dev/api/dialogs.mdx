@@ -248,22 +248,22 @@ public class ServerJoinListener implements Listener {
             return;
         }
 
-        // Construct a new completable future without a task
+        // Construct a new completable future without a task.
         CompletableFuture<Boolean> response = new CompletableFuture<>();
 
-        // Put it into our map
+        // Put it into our map.
         awaitingResponse.put(event.getConnection(), response);
 
-        // Show the connecting player the dialog
+        // Show the connecting player the dialog.
         event.getConnection().getAudience().showDialog(dialog);
 
-        // Wait until the future is complete. This set is necessary to keep the player in the configuration phase
+        // Wait until the future is complete. This step is necessary in order to keep the player in the configuration phase.
         if (!response.join()) {
-            // If the response is false, they declined. Therefore, we kick them from the server
+            // If the response is false, they declined. Therefore, we kick them from the server.
             event.getConnection().disconnect(Component.text("You hate Paper-chan :(", NamedTextColor.RED));
         }
 
-        // We clean the map to avoid unnecessary entry buildup
+        // We clean the map to avoid unnecessary entry buildup.
         awaitingResponse.remove(event.getConnection());
     }
 
@@ -275,10 +275,10 @@ public class ServerJoinListener implements Listener {
         Key key = event.getIdentifier();
 
         if (key.equals(Key.key("papermc:paperchan/disagree"))) {
-            // If the identifier is the same as the disagree one, set the connection result to false
+            // If the identifier is the same as the disagree one, set the connection result to false.
             setConnectionJoinResult(event.getCommonConnection(), false);
         } else if (key.equals(Key.key("papermc:paperchan/agree"))) {
-            // If it is the same as the agree one, set the result to true
+            // If it is the same as the agree one, set the result to true.
             setConnectionJoinResult(event.getCommonConnection(), true);
         }
     }

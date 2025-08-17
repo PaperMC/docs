@@ -1,14 +1,11 @@
 import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
-import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
-import miniMessageHighlight from "./src/utils/shiki/mm.tmLanguage.json";
 import {
   LATEST_ADVENTURE_API_RELEASE,
   LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
@@ -528,20 +525,6 @@ export default defineConfig({
           }
         ),
       ],
-      expressiveCode: {
-        plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
-        defaultProps: {
-          showLineNumbers: false,
-          collapseStyle: "collapsible-start",
-        },
-        frames: {
-          extractFileNameFromCode: false,
-        },
-        emitExternalStylesheet: false,
-        shiki: {
-          langs: [miniMessageHighlight],
-        },
-      },
     }),
     svelte(),
     d2({

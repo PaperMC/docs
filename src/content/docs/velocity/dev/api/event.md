@@ -38,18 +38,13 @@ The higher the priority, the earlier the event handler will be called.
 State the desired order in the `@Subscribe` annotation:
 
 ```java
-@Subscribe(priority = 0, order = PostOrder.CUSTOM)
+@Subscribe(priority = 0)
 public void onPlayerChat(PlayerChatEvent event) {
 	// do stuff
 }
 ```
 
 `-32768` is the default value if you do not specify an order.
-:::note
-
-Due to compatibility constraints, you must specify [`PostOrder.CUSTOM`](jd:velocity:com.velocitypowered.api.event.PostOrder#CUSTOM) in order to use this field.
-
-:::
 
 ## Registering listeners
 
@@ -92,7 +87,7 @@ public class VelocityTest {
 
 public class MyListener {
 
-  @Subscribe(order = PostOrder.EARLY)
+  @Subscribe(priority = 0)
   public void onPlayerChat(PlayerChatEvent event) {
     // do something here
   }
@@ -124,12 +119,12 @@ return an [`EventTask`](jd:velocity:com.velocitypowered.api.event.EventTask)
 or add a second return an [`Continuation`](jd:velocity:com.velocitypowered.api.event.Continuation) parameter:
 
 ```java
-  @Subscribe(priority = 100, order = PostOrder.CUSTOM)
+  @Subscribe(priority = 100)
   public void onLogin(LoginEvent event, Continuation continuation) {
     doSomeAsyncProcessing().addListener(continuation::resume, continuation::resumeWithException);
   }
 
-  @Subscribe(priority = 100, order = PostOrder.CUSTOM)
+  @Subscribe(priority = 100)
   public EventTask onPlayerChat(PlayerChatEvent event) {
     if (mustFurtherProcess(event)) {
       return EventTask.async(() => ...);

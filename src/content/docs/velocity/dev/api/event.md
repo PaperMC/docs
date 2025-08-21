@@ -40,12 +40,12 @@ State the desired order in the `@Subscribe` annotation:
 ```java
 @Subscribe(priority = 10)
 public void onPlayerChatFirst(PlayerChatEvent event) {
-	// do first stuff
+    // this method fires first
 }
 
 @Subscribe(priority = 5)
 public void onPlayerChat(PlayerChatEvent event) {
-  // do other stuff with the change from the first listener
+    // this method fires after the one above
 }
 ```
 

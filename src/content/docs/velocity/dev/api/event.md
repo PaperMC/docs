@@ -38,13 +38,18 @@ The higher the priority, the earlier the event handler will be called.
 State the desired order in the `@Subscribe` annotation:
 
 ```java
-@Subscribe(priority = 0)
+@Subscribe(priority = 10)
 public void onPlayerChat(PlayerChatEvent event) {
-	// do stuff
+	// do first stuff
+}
+
+@Subscribe(priority = 5)
+public void onPlayerChat(PlayerChatEvent event) {
+  // do other stuff with the change from the first listener
 }
 ```
 
-`-32768` is the default value if you do not specify an order.
+`0` is the default value if you do not specify an order.
 
 ## Registering listeners
 
@@ -87,7 +92,7 @@ public class VelocityTest {
 
 public class MyListener {
 
-  @Subscribe(priority = 0)
+  @Subscribe
   public void onPlayerChat(PlayerChatEvent event) {
     // do something here
   }

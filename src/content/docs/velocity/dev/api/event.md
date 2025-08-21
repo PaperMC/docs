@@ -39,7 +39,7 @@ State the desired order in the `@Subscribe` annotation:
 
 ```java
 @Subscribe(priority = 10)
-public void onPlayerChat(PlayerChatEvent event) {
+public void onPlayerChatFirst(PlayerChatEvent event) {
 	// do first stuff
 }
 

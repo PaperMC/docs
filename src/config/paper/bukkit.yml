@@ -56,7 +56,6 @@ settings:
     description: >-
       Specifies the path to the folder where world files are saved. By default, this is the folder where the server JAR file is located.
       Note: Worlds must be manually moved to this folder for the server to recognize them.
-
 spawn-limits:
   monsters:
     default: "70"

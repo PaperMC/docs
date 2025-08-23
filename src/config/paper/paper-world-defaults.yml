@@ -315,9 +315,9 @@ entities:
       vanilla: "false"
       description: Adds a cooldown to bees being released after a failed release, which can occur if the hive is blocked or it being night.
     stuck-entity-poi-retry-delay:
-      default: "10"
+      default: "200"
       vanilla: "disabled"
-      description: The delay before retrying POI acquisition when entity navigation is stuck. This will reduce pathfinding performance impact. Measured in seconds.
+      description: The delay before retrying POI acquisition when entity navigation is stuck. This will reduce pathfinding performance impact. Measured in ticks.
   entities-target-with-follow-range:
     default: "false"
     description: "Sets whether the server should use follow range when targeting entities "

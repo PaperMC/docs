@@ -101,7 +101,7 @@ This will require a running MySQL database to connect to.
 First, add the dependency to your project with the following dependency:
 
 ##### Maven
-```xml
+```xml title="pom.xml"
 <dependency>
   <groupId>com.zaxxer</groupId>
   <artifactId>HikariCP</artifactId>
@@ -111,7 +111,7 @@ First, add the dependency to your project with the following dependency:
 ```
 
 ##### Gradle
-```kotlin
+```kotlin title="build.gradle(.kts)"
 dependencies {
   implementation("com.zaxxer:HikariCP:4.0.3")
 }

@@ -54,12 +54,12 @@ item.editPersistentDataContainer(pdc -> {
 });
 ```
 
-<details class="notice">
-  <summary>Version Notice</summary>
+:::note
 
-  The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer(java.util.function.Consumer)) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the [`ItemMeta`](jd:paper:org.bukkit.inventory.meta.ItemMeta) instead.
-  For 1.16.5+, there's the [`ItemStack#editMeta()`](jd:paper:org.bukkit.inventory.ItemStack#editMeta(java.util.function.Consumer)) method though.
-</details>
+The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer(java.util.function.Consumer)) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the [`ItemMeta`](jd:paper:org.bukkit.inventory.meta.ItemMeta) instead.
+For 1.16.5+, there's the [`ItemStack#editMeta()`](jd:paper:org.bukkit.inventory.ItemStack#editMeta(java.util.function.Consumer)) method though.
+
+:::
 
 :::note
 
@@ -207,11 +207,11 @@ String value = pdcView.getOrDefault(key, PersistentDataType.STRING, "<null>");
 player.sendPlainMessage(value);
 ```
 
-<details class="notice">
-  <summary>Version Notice</summary>
+:::note
 
-  PDC-view support for `ItemStack` was only introduced in 1.21.1. For older versions, you need to use the `ItemMeta` instead.
-</details>
+PDC-view support for `ItemStack` was only introduced in 1.21.1. For older versions, you need to use the `ItemMeta` instead.
+
+:::
 
 ## Storing on different objects
 

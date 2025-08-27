@@ -102,13 +102,3 @@
   /* return to Starlight default */
   --sl-color-orange-low: hsl(var(--sl-hue-orange), 90%, 88%);
 }
-
-.notice summary {
-  padding: 0.45rem 0.6rem;
-  border-radius: 6px;
-  border-left: 4px solid var(--color-accent-6, #2563eb);
-  background: var(--color-accent-2, #e8f4ff);
-}
-html[data-theme="dark"] details.notice summary {
-  background: var(--color-accent-2, #0f1724);
-}

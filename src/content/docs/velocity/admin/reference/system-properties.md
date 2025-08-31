@@ -45,6 +45,11 @@ The default value shown may not be set for the property but will only be used by
 - **default**: `true`
 - **description**: Overrides `force-key-authentication` from the config. If not set, it will be automatically set to the current config value.
 
+#### mojang.sessionserver
+
+- **default**: `https://sessionserver.mojang.com/session/minecraft/hasJoined`
+- **description**: Full URL of the `hasJoined` endpoint on the session server used for authentication.
+
 #### velocity.natives-tmpdir
 
 - **default**: `unset`

@@ -18,6 +18,7 @@
     "@fontsource/jetbrains-mono": "^5.2.6",
     "@expressive-code/plugin-collapsible-sections": "^0.41.3",
     "@expressive-code/plugin-line-numbers": "^0.41.3",
+    "@ascorbic/feed-loader": "^1.0.4",
     "@fontsource/poppins": "^5.2.6",
     "astro": "^5.12.8",
     "astro-d2": "^0.8.0",

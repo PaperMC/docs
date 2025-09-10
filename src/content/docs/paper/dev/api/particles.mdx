@@ -734,11 +734,6 @@ location. When they reach the player's y level, their vertical velocity will be 
 
 If the player is moving vertically, the particles will attempt to match the player's vertical velocity.
 
-### Splash particles
-The `SPLASH` particle uses the `offsetX` and `offsetZ` arguments to determine the particle's velocity vector, if two conditions are met:
-1. `offsetY` is `0`
-2. Either `offsetX` or `offsetZ` are not `0`
-
 ### Damage indicator particles
 The `DAMAGE_INDICATOR` particle adds `1.0` to the provided `offsetY`.
 
@@ -751,3 +746,19 @@ The `DUST_PLUME` particle adds `0.15` to the provided `offsetY`.
 ### Firefly particles
 The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however, there is 50% chance for the `offsetY`'s
 sign to be inverted. This means that the particle will either move up or down, with equal probability.
+
+### Powered particles
+The powered particles multiply the particle's velocity vector by the supplied argument.
+:::note
+The y component of the vector is calculated as `(verticalVelocity - 0.1) * power + 0.1`.
+:::
+
+#### List of powered particles
+- EFFECT
+- INSTANT_EFFECT
+- DRAGON_BREATH
+
+### Splash particles
+The `SPLASH` particle uses the `offsetX` and `offsetZ` arguments to determine the particle's velocity vector, if two conditions are met:
+1. `offsetY` is `0`
+2. Either `offsetX` or `offsetZ` are not `0`

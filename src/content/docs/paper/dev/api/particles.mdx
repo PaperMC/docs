@@ -236,12 +236,11 @@ Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly t
 ![Colored potion effect particles](./assets/particles/orange-spell-particles.webp)
 
 :::note
-Only the `ENTITY_EFFECT` supports the alpha channel, which is used to create translucent particles.
+Only the `ENTITY_EFFECT` particle supports the alpha channel, which is used to create translucent particles.
 :::
 
 :::caution
-The `EFFECT` and `INSTANT_EFFECT` particles cannot be colored with the API and will always be white. Only thrown potions
-can color them.
+While the `FLASH` particle supports the alpha channel, it is immediately overridden by the client.
 :::
 
 ### Dust particles

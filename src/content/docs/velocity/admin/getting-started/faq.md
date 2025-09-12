@@ -108,7 +108,7 @@ Create DNS records:
 - **SRV:** `_minecraft._tcp.survival → forced1.example.com` (priority: 0, weight: 0, port: 12345)
 
 In velocity.toml:
-```
+```toml
 [forced-hosts]
 "forced1.example.com" = ["survival"] # survival.example.com
 ```

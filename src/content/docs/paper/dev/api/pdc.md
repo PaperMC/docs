@@ -2,21 +2,22 @@
 title: Persistent data container (PDC)
 description: A guide to the PDC API for storing data.
 slug: paper/dev/pdc
+version: 1.21.8
 ---
 
 The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and block entities.
 The full list of classes that support the PDC are:
 
+- [`ItemStack`](#itemstack)
 - [`Chunk`](#chunk)
 - [`World`](#world)
 - [`Entity`](#entity)
 - [`TileState`](#tilestate)
 - [`Structure`](#structure)
-- [`ItemMeta`](#itemmeta)
 - [`GeneratedStructure`](#generatedstructure)
 - [`Raid`](#raid)
 - [`OfflinePlayer`](#offlineplayer)
-- [`ItemStack`](#itemstack)
+- [`ItemMeta`](#itemmeta)
 
 ## What is it used for?
 In the past, developers resorted to a variety of methods to store custom data on objects:
@@ -34,15 +35,31 @@ which is used to identify the data. The second is a [`PersistentDataContainer`](
 which is the object you want to store the data on. The third is the data itself.
 
 ```java
-// Create a NamespacedKey
-NamespacedKey key = new NamespacedKey(pluginInstance, "example-key");
+NamespacedKey key = new NamespacedKey(pluginInstance, "example-key"); // Create a NamespacedKey
+World world = Bukkit.getServer().getWorlds().getFirst();
 
+PersistentDataContainer pdc = world.getPersistentDataContainer();
+pdc.set(key, PersistentDataType.STRING, "I love tacos!");
+```
+
+[`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack) however doesn't have this method and instead requires you to use its builder-style consumer:
+
+```java
+NamespacedKey key = ...;
+
+// For 1.20.4 and below, use 'new ItemStack(Material.DIAMOND)' instead
 ItemStack item = ItemStack.of(Material.DIAMOND);
-// ItemMeta implements PersistentDataHolder, so we can get the PDC from it
-item.editMeta(meta -> {
-    meta.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
+item.editPersistentDataContainer(pdc -> {
+    pdc.set(key, PersistentDataType.STRING, "I love tacos!");
 });
 ```
+
+:::note
+
+The [`ItemStack#editPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#editPersistentDataContainer(java.util.function.Consumer)) method on `ItemStack` is only available in 1.21.4+. For older versions, you need to access and modify the [`ItemMeta`](jd:paper:org.bukkit.inventory.meta.ItemMeta) instead.
+For 1.16.5+, there's the [`ItemStack#editMeta()`](jd:paper:org.bukkit.inventory.ItemStack#editMeta(java.util.function.Consumer)) method though.
+
+:::
 
 :::note
 
@@ -50,26 +67,25 @@ It is considered good practice to reuse `NamespacedKey` objects. They can be con
 - A [`Plugin`](jd:paper:org.bukkit.plugin.Plugin) instance and a [`String`](jd:java:java.lang.String) identifier
 - A [`String`](jd:java:java.lang.String) namespace and a [`String`](jd:java:java.lang.String) identifier
 
-The first option is often preferred as it will automatically use the plugin's namespace; however, the second option can be used if you
-want to use a different namespace or access the data from another plugin.
+The first option is often preferred as it will automatically use the plugin's lowercased name as namespace; however, the second option can be used if you want to use a different namespace or access the data from another plugin.
 
 :::
 
 ## Getting data
-To get data from the PDC, you need to know the `NamespacedKey` and the `PersistentDataType` of the data.
+To get data from the PDC, you need to know the `NamespacedKey` and the [`PersistentDataType`](jd:paper:org.bukkit.persistence.PersistentDataType) of the data.
+Some API parts, such as Adventure's [`Component.text(String)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html#text(java.lang.String)), require non-null values. In such cases, use the [`getOrDefault`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#getOrDefault(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C)) on the pdc instead of [`get`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)), which is nullable.
 
 ```java
-// Create a NamespacedKey
-NamespacedKey key = new NamespacedKey(pluginInstance, "example-key");
+NamespacedKey key = ...; // Use the same key as the adding-data example
+World world = ...; // Use the same world as the adding-data example
 
-ItemStack item = ...; // Retrieve the item from before
-// Get the data from the PDC
-PersistentDataContainer container = item.getItemMeta().getPersistentDataContainer();
-if (container.has(key, PersistentDataType.STRING)) {
-    String value = container.get(key, PersistentDataType.STRING);
-    // Do something with the value
-    player.sendMessage(Component.text(value));
-}
+PersistentDataContainer pdc = world.getPersistentDataContainer();
+
+// Utilize the data from the PDC
+String value = pdc.getOrDefault(key, PersistentDataType.STRING, "<null>");
+
+// Do something with the value
+player.sendPlainMessage(value);
 ```
 
 ## Data types
@@ -85,7 +101,7 @@ The PDC supports a wide range of data types, such as:
 - `Boolean`
 - `Tag Containers` - a way to nest PDCs within each other. To create a new `PersistentDataContainer`, you can use:
   ```java
-  // Get the existing container
+  // Get an existing container
   PersistentDataContainer container = ...;
   // Create a new container
   PersistentDataContainer newContainer = container.getAdapterContext().newPersistentDataContainer();
@@ -100,7 +116,7 @@ The PDC supports a wide range of data types, such as:
       List.of("a", "list", "of", "strings")
   );
 
-  // Storing a list of strings in a container by using the api
+  // Storing a list of strings in a container by using the API
   // provided pre-definitions of commonly used list types.
   container.set(key, PersistentDataType.LIST.strings(), List.of("a", "list", "of", "strings"));
 
@@ -118,13 +134,20 @@ The [`Boolean`](jd:paper:org.bukkit.persistence.PersistentDataType#BOOLEAN) PDC 
 ### Custom data types
 
 You can store a wide range of data in the PDC with the native adapters; however, if you need a more complex data type, you can
-implement your own [`PersistentDataType`](jd:paper:org.bukkit.persistence.PersistentDataType) and use that instead.
+implement your own `PersistentDataType` and use that instead.
 The `PersistentDataType`'s job is to "deconstruct" a complex data type into something that is natively supported (see above) and then vice-versa.
 
 Here is an example of how to do that for a UUID:
 
 ```java title="UUIDDataType.java"
+@NullMarked
 public class UUIDDataType implements PersistentDataType<byte[], UUID> {
+
+    public static final UUIDDataType INSTANCE = new UUIDDataType();
+
+    // We just need a singleton, so there's no need to allow instantiation
+    private UUIDDataType() {}
+
     @Override
     public Class<byte[]> getPrimitiveType() {
         return byte[].class;
@@ -160,8 +183,36 @@ In order to use your own `PersistentDataType`, you must pass an instance of it t
 [`set`](jd:paper:org.bukkit.persistence.PersistentDataContainer#set(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C))/
 [`has`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#has(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)) methods.
 ```java
-container.set(key, new UUIDDataType(), uuid);
+container.set(key, UUIDDataType.INSTANCE, uuid);
 ```
+
+:::
+
+
+## Read-only containers
+
+Certain classes, like `ItemStack` or [`OfflinePlayer`](jd:paper:org.bukkit.OfflinePlayer), provide a read-only view of their PDC.
+In contrast to `ItemStack`, `OfflinePlayer` does <u>not</u> provide any way to modify the underlying container.
+This is because the `OfflinePlayer` is directly read from disk and would require a blocking file operation.
+Mutable objects, like the [`PersistentDataHolder#getPersistentDataContainer()`](jd:paper:org.bukkit.persistence.PersistentDataHolder#getPersistentDataContainer()), generally need to be re-saved even without modification or monitored.
+That's why it's better to use unmodifiable "views" for read-only operations.
+
+```java
+NamespacedKey key = ...;
+ItemStack item = ...;
+
+PersistentDataContainerView pdcView = item.getPersistentDataContainer();
+
+// Utilize the data from the PDC "view"
+String value = pdcView.getOrDefault(key, PersistentDataType.STRING, "<null>");
+
+// Do something with the value
+player.sendPlainMessage(value);
+```
+
+:::note
+
+PDC-view support for `ItemStack` was only introduced in 1.21.1. For older versions, you need to use the `ItemMeta` instead.
 
 :::
 
@@ -176,8 +227,21 @@ E.g. Placing an ItemStack as a Block (with a TileState) ***does not*** copy over
 :::
 
 Objects that can have a PDC implement the [`PersistentDataHolder`](jd:paper:org.bukkit.persistence.PersistentDataHolder) interface
-and their PDC can be fetched with [`PersistentDataHolder#getPersistentDataContainer()`](jd:paper:org.bukkit.persistence.PersistentDataHolder#getPersistentDataContainer()).
+and their PDC can be fetched with `PersistentDataHolder#getPersistentDataContainer()`.
 
+- ##### [`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack)
+    - The persistent data container of an `ItemStack` has historically been accessed by
+      the `ItemStack`'s `ItemMeta`. This, however, includes the overhead of constructing the entire `ItemMeta`, which acts as a snapshot of the `ItemStack`'s data at the point of creation.
+
+      To avoid this overhead in 1.21.1+, ItemStack exposes a read-only view of its persistent data container at [`ItemStack#getPersistentDataContainer()`](jd:paper:org.bukkit.inventory.ItemStack#getPersistentDataContainer()).
+      Edits to the persistent data container can also be simplified in 1.21.4+ using `ItemStack#editPersistentDataContainer(java.util.function.Consumer)`.
+      The persistent data container available in the consumer is not valid outside the consumer.
+      ```java
+      ItemStack itemStack = ...;
+      itemStack.editPersistentDataContainer(pdc -> {
+          pdc.set(key, PersistentDataType.STRING, "I love tacos!");
+      });
+      ```
 - ##### [`Chunk`](jd:paper:org.bukkit.Chunk)
     - `Chunk#getPersistentDataContainer()`
 - ##### [`World`](jd:paper:org.bukkit.World)
@@ -190,14 +254,12 @@ and their PDC can be fetched with [`PersistentDataHolder#getPersistentDataContai
       ```java
       Block block = ...;
       if (block.getState() instanceof Chest chest) {
-          chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
+          chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love tacos!");
           chest.update();
       }
       ```
 - ##### [`Structure`](jd:paper:org.bukkit.structure.Structure)
     - `Structure#getPersistentDataContainer()`
-- ##### [`ItemMeta`](jd:paper:org.bukkit.inventory.meta.ItemMeta)
-    - `ItemMeta#getPersistentDataContainer()`
 - ##### [`GeneratedStructure`](jd:paper:org.bukkit.generator.structure.GeneratedStructure)
     - `GeneratedStructure#getPersistentDataContainer()`
 - ##### [`Raid`](jd:paper:org.bukkit.Raid)
@@ -205,18 +267,5 @@ and their PDC can be fetched with [`PersistentDataHolder#getPersistentDataContai
 - ##### [`OfflinePlayer`](jd:paper:org.bukkit.OfflinePlayer)
     - OfflinePlayer only exposes a read-only version of the persistent data container.
       It can be accessed via `OfflinePlayer#getPersistentDataContainer()`.
-- ##### [`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack)
-    - The persistent data container of an `ItemStack` has historically been accessed by
-      the `ItemStack`'s `ItemMeta`. This, however, includes the overhead of constructing the entire
-      `ItemMeta`, which acts as a snapshot of the `ItemStack`'s data at the point of creation.
-
-      To avoid this overhead, ItemStack exposes a read-only view of its persistent data container at
-      `ItemStack#getPersistentDataContainer()`.
-      Edits to the persistent data container can be achieved via `ItemStack#editPersistentDataContainer(Consumer)`.
-      The persistent data container available in the consumer is not valid outside the consumer.
-      ```java
-      ItemStack itemStack = ...;
-      itemStack.editPersistentDataContainer(pdc -> {
-          pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
-      });
-      ```
+- ##### [`ItemMeta`](jd:paper:org.bukkit.inventory.meta.ItemMeta)
+    - `ItemMeta#getPersistentDataContainer()`

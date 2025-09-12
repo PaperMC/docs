@@ -2,7 +2,7 @@
 title: Persistent data container (PDC)
 description: A guide to the PDC API for storing data.
 slug: paper/dev/pdc
-version: "1.21.8"
+version: 1.21.8
 ---
 
 The Persistent Data Container (PDC) is a way to store custom data on a whole range of objects; such as items, entities, and block entities.
@@ -39,18 +39,18 @@ NamespacedKey key = new NamespacedKey(pluginInstance, "example-key"); // Create 
 World world = Bukkit.getServer().getWorlds().getFirst();
 
 PersistentDataContainer pdc = world.getPersistentDataContainer();
-pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
+pdc.set(key, PersistentDataType.STRING, "I love tacos!");
 ```
 
 [`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack) however doesn't have this method and instead requires you to use its builder-style consumer:
 
 ```java
-NamespacedKey key = ...; // Retrieve the key from before
+NamespacedKey key = ...;
 
 // For 1.20.4 and below, use 'new ItemStack(Material.DIAMOND)' instead
 ItemStack item = ItemStack.of(Material.DIAMOND);
 item.editPersistentDataContainer(pdc -> {
-    pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
+    pdc.set(key, PersistentDataType.STRING, "I love tacos!");
 });
 ```
 
@@ -76,13 +76,14 @@ To get data from the PDC, you need to know the `NamespacedKey` and the [`Persist
 Some API parts, such as Adventure's [`Component.text(String)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html#text(java.lang.String)), require non-null values. In such cases, use the [`getOrDefault`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#getOrDefault(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C)) on the pdc instead of [`get`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)), which is nullable.
 
 ```java
-NamespacedKey key = ...; // Retrieve the key from before
-World world = ...; // Retrieve the world from before
+NamespacedKey key = ...; // Use the same key as the adding-data example
+World world = ...; // Use the same world as the adding-data example
 
 PersistentDataContainer pdc = world.getPersistentDataContainer();
-// Utilize the data from the PDC
 
+// Utilize the data from the PDC
 String value = pdc.getOrDefault(key, PersistentDataType.STRING, "<null>");
+
 // Do something with the value
 player.sendPlainMessage(value);
 ```
@@ -100,7 +101,7 @@ The PDC supports a wide range of data types, such as:
 - `Boolean`
 - `Tag Containers` - a way to nest PDCs within each other. To create a new `PersistentDataContainer`, you can use:
   ```java
-  // Get the existing container
+  // Get an existing container
   PersistentDataContainer container = ...;
   // Create a new container
   PersistentDataContainer newContainer = container.getAdapterContext().newPersistentDataContainer();
@@ -115,7 +116,7 @@ The PDC supports a wide range of data types, such as:
       List.of("a", "list", "of", "strings")
   );
 
-  // Storing a list of strings in a container by using the api
+  // Storing a list of strings in a container by using the API
   // provided pre-definitions of commonly used list types.
   container.set(key, PersistentDataType.LIST.strings(), List.of("a", "list", "of", "strings"));
 
@@ -197,12 +198,14 @@ Mutable objects, like the [`PersistentDataHolder#getPersistentDataContainer()`](
 That's why it's better to use unmodifiable "views" for read-only operations.
 
 ```java
-NamespacedKey key = ...; // Retrieve the key from before
-ItemStack item = ...; // Retrieve the item from before
+NamespacedKey key = ...;
+ItemStack item = ...;
 
 PersistentDataContainerView pdcView = item.getPersistentDataContainer();
+
 // Utilize the data from the PDC "view"
 String value = pdcView.getOrDefault(key, PersistentDataType.STRING, "<null>");
+
 // Do something with the value
 player.sendPlainMessage(value);
 ```
@@ -236,7 +239,7 @@ and their PDC can be fetched with `PersistentDataHolder#getPersistentDataContain
       ```java
       ItemStack itemStack = ...;
       itemStack.editPersistentDataContainer(pdc -> {
-          pdc.set(key, PersistentDataType.STRING, "I love Tacos!");
+          pdc.set(key, PersistentDataType.STRING, "I love tacos!");
       });
       ```
 - ##### [`Chunk`](jd:paper:org.bukkit.Chunk)
@@ -251,7 +254,7 @@ and their PDC can be fetched with `PersistentDataHolder#getPersistentDataContain
       ```java
       Block block = ...;
       if (block.getState() instanceof Chest chest) {
-          chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love Tacos!");
+          chest.getPersistentDataContainer().set(key, PersistentDataType.STRING, "I love tacos!");
           chest.update();
       }
       ```

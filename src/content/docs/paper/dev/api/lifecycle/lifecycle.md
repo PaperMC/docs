@@ -35,7 +35,7 @@ public void bootstrap(BootstrapContext context) {
 
 ## LifecycleEvents
 
-After obtaining the correct `LifecycleEventManager`, create a event handler by selecting an
+After obtaining the correct `LifecycleEventManager`, create an event handler by selecting an
 event type from [LifecycleEvents](jd:paper:io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents):
 ```java title="TestPlugin.java"
 @Override

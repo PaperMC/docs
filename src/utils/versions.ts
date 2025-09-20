@@ -24,30 +24,52 @@ const manifest: Manifest = await fetch("https://piston-meta.mojang.com/mc/game/v
 export const LATEST_MC_RELEASE = manifest.latest.release;
 
 interface Project {
+  project: { id: string; name: string };
   versions: Record<string, string[]>;
 }
 
-const fetchFillVersions = async (id: string): Promise<string[]> => {
-  const project: Project = await fetch(`https://fill.papermc.io/v3/projects/${id}`).then((r) => r.json());
-
-  return Object.values(project.versions).flat();
+const fetchProject = async (id: string): Promise<Project> => {
+  return fetch(`https://fill.papermc.io/v3/projects/${id}`).then((r) => r.json());
 };
 
-const paperVersions = await fetchFillVersions("paper");
+interface Build {
+  id: number;
+  channel: "ALPHA" | "BETA" | "STABLE" | "RECOMMENDED";
+}
 
-export const LATEST_PAPER_RELEASE = paperVersions[0];
+const fetchBuilds = async ({ project }: Project, version: string): Promise<Build[]> => {
+  return fetch(`https://fill.papermc.io/v3/projects/${project.id}/versions/${version}/builds`).then((r) => r.json());
+};
 
-const velocityVersions = await fetchFillVersions("velocity");
+const findLatest = async (project: Project): Promise<string> => {
+  const versions = Object.values(project.versions).flat();
 
-export const LATEST_VELOCITY_RELEASE = velocityVersions[0];
+  // find the newest version with at least one stable build
+  for (const version of versions) {
+    const builds = await fetchBuilds(project, version);
+    if (builds.some((b) => b.channel === "STABLE")) {
+      return version;
+    }
+  }
 
-const foliaVersions = await fetchFillVersions("folia");
+  return versions[0];
+};
 
-export const LATEST_FOLIA_RELEASE = foliaVersions[0];
+const paperProject = await fetchProject("paper");
 
-const waterfallVersions = await fetchFillVersions("waterfall");
+export const LATEST_PAPER_RELEASE = await findLatest(paperProject);
 
-export const LATEST_WATERFALL_RELEASE = waterfallVersions[0];
+const velocityProject = await fetchProject("velocity");
+
+export const LATEST_VELOCITY_RELEASE = await findLatest(velocityProject);
+
+const foliaProject = await fetchProject("folia");
+
+export const LATEST_FOLIA_RELEASE = await findLatest(foliaProject);
+
+const waterfallProject = await fetchProject("waterfall");
+
+export const LATEST_WATERFALL_RELEASE = await findLatest(waterfallProject);
 
 interface Tag {
   name: string;

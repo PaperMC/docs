@@ -613,6 +613,12 @@ These particles will use `offsetY` as the particle's y-axis velocity.
 If you set `offsetX` AND `offsetZ` to `0`, the particle will have almost no x or z-axis velocity, but will still have
 a y-axis velocity set by the `offsetY` argument. In both cases, `offsetX` and `offsetZ` are not used in the velocity vector.
 
+:::caution
+`EFFECT` and `INSTANT_EFFECT` are [powered particles](#powered-particles) and use [`Particle.Spell`](jd:paper:org.bukkit.Particle$Spell)
+as their data. Due to the nature of rising particles' final calculated vertical velocity being very low (in range \[-0.056, 0.056\])
+and how powered particles calculate the vertical velocity the resulting vertical velocity will always be the opposite of power.
+:::
+
 Example of spawning a `GLOW` particle that moves up:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">

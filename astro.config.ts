@@ -139,6 +139,7 @@ export default defineConfig({
                           ],
                         },
                         "paper/reference/paper-plugins",
+                        "paper/reference/paper-command",
                         "paper/reference/system-properties",
                         "paper/reference/permissions",
                       ],

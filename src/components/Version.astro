@@ -30,8 +30,9 @@ const { version, inline } = Astro.props;
   {
     inline && (
       <span class="notice-fineprint">
-        This shows the earliest version for which this page is fully accurate. Features or APIs mentioned here may be
-        missing or incomplete in older versions.
+        This is the earliest version for which this page is fully accurate.
+        <br />
+        Features or APIs mentioned here may be missing or incomplete in older versions.
       </span>
     )
   }
@@ -77,6 +78,7 @@ const { version, inline } = Astro.props;
   }
 
   .notice-inline {
+    display: flex;
     margin: 0;
     border-radius: 0;
     padding: 1rem var(--sl-content-pad-x);

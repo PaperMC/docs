@@ -10,11 +10,31 @@ const { version, inline } = Astro.props;
 ---
 
 <div class:list={["notice", inline && "notice-inline"]}>
-  <Icon name="information" class="icon" />
-  <div class="notice-inner">
-    Written for version:
-    <span>{version}</span>
+  <div class="notice-block">
+    <Icon name="information" class="icon" />
+    <div class="notice-inner">
+      Written for version:
+      <span class="notice-version">{version}</span>
+      {
+        !inline && (
+          <span
+            class="notice-fineprint"
+            title="This shows the earliest version for which this page is fully accurate. Features or APIs mentioned here may be missing or incomplete in older versions."
+          >
+            What does this mean?
+          </span>
+        )
+      }
+    </div>
   </div>
+  {
+    inline && (
+      <span class="notice-fineprint">
+        This shows the earliest version for which this page is fully accurate. Features or APIs mentioned here may be
+        missing or incomplete in older versions.
+      </span>
+    )
+  }
 </div>
 
 <style>
@@ -24,9 +44,8 @@ const { version, inline } = Astro.props;
 
   .notice {
     display: inline-flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
     font-size: var(--sl-text-xs);
     padding: 1rem 1.25rem;
     border-radius: 0.5rem;
@@ -34,26 +53,47 @@ const { version, inline } = Astro.props;
     margin-bottom: 1rem;
   }
 
-  .notice span {
+  .notice-block {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  .notice-version {
     font-weight: 600;
     font-size: var(--sl-text-xl);
   }
 
-  .notice .notice-inner {
+  .notice-inner {
     display: flex;
     flex-direction: column;
   }
 
+  .notice-fineprint {
+    cursor: pointer;
+    font-size: var(--sl-text-2xs);
+    text-decoration: underline dashed oklch(from var(--sl-color-gray-2) l c h / 0.5);
+  }
+
   .notice-inline {
-    display: flex;
     margin: 0;
     border-radius: 0;
     padding: 1rem var(--sl-content-pad-x);
     font-size: var(--sl-text-sm);
   }
 
-  .notice-inline span {
+  .notice-inline .notice-block {
+    display: flex;
+  }
+
+  .notice-inline .notice-version {
     font-size: var(--sl-text-sm);
+  }
+
+  .notice-inline .notice-fineprint {
+    cursor: default;
+    text-decoration: none;
   }
 
   .notice-inline .icon {

@@ -273,6 +273,9 @@ public class ServerJoinListener implements Listener {
             // If the response is false, they declined. Therefore, we kick them from the server.
             connection.disconnect(Component.text("You hate Paper-chan :(", NamedTextColor.RED));
         }
+
+        // We clean the map to avoid unnecessary entry buildup.
+        awaitingResponse.remove(uniqueId);
     }
 
     /**
@@ -304,8 +307,7 @@ public class ServerJoinListener implements Listener {
      * Simple utility method for setting a connection's dialog response result.
      */
     private void setConnectionJoinResult(UUID uniqueId, boolean value) {
-        // We get the value and clean the map to avoid unnecessary entry buildup.
-        CompletableFuture<Boolean> future = awaitingResponse.remove(uniqueId);
+        CompletableFuture<Boolean> future = awaitingResponse.get(uniqueId);
         if (future != null) {
             future.complete(value);
         }

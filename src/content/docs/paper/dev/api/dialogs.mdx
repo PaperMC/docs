@@ -256,7 +256,7 @@ public class ServerJoinListener implements Listener {
 
         // Construct a new completable future without a task.
         CompletableFuture<Boolean> response = new CompletableFuture<>();
-        // Complete the future if nothing has been done after two minutes.
+        // Complete the future if nothing has been done after one minute.
         response.completeOnTimeout(false, 1, TimeUnit.MINUTES);
 
         // Put it into our map.

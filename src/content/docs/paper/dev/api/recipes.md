@@ -22,7 +22,7 @@ public class TestPlugin extends JavaPlugin {
         ItemStack item = ItemStack.of(Material.DIAMOND_SWORD);
 
         ShapedRecipe recipe = new ShapedRecipe(key, item);
-        recipe.shape(" A ", "AAA", " B ");
+        recipe.shape(" A ", " A ", " B ");
         recipe.setIngredient('A', Material.DIAMOND);
         recipe.setIngredient('B', Material.STICK);
 
@@ -31,13 +31,13 @@ public class TestPlugin extends JavaPlugin {
 }
 ```
 
-This recipe would require a diamond sword to be crafted with a diamond in the top row, another three diamonds in
+This recipe would require a diamond sword to be crafted with a diamond in the top row, another diamond in
 the middle row, and a stick in the bottom row. The diamond sword would be in the middle column of
 the bottom row. The result would look like this in the crafting grid:
 
 ```
  A
-AAA
+ A 
  B
 ```
 

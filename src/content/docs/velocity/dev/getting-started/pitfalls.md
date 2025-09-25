@@ -35,16 +35,16 @@ public void onProxyInitialization(ProxyInitializeEvent event) {
 Velocity currently does not support all Audience operations of the Adventure API, so these operations should be handled on the backend.
 Furthermore, playing sound was previously considered infeasible for versions below 1.19.3, a registry of hardcoded sound IDs is required.
 
-| Operation                  | Supported |
-| -------------------------- | ----------|
-| Chat messages              | Yes       |
-| Action bar messages        | Yes       |
-| Titles                     | Yes       |
-| Bossbars                   | Yes       |
-| Tablist header and footer  | Yes       |
-| Resource packs             | Yes       |
-| Sounds                     | Yes*      |
-| Books                      | No        |
-| Dialogs                    | No        |
+| Operation                  | Supported        |
+| -------------------------- | -----------------|
+| Chat messages              | Yes              |
+| Action bar messages        | Yes              |
+| Titles                     | Yes              |
+| Bossbars                   | Yes              |
+| Tablist header and footer  | Yes              |
+| Resource packs             | Yes              |
+| Sounds                     | Yes[^sounds-note]|
+| Books                      | No               |
+| Dialogs                    | No               |
 
-* Playing sounds only works on 1.19.3+ and requires an emitter ([`Sound.Emitter#self()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/sound/Sound.Emitter.html#self()) or another player from the same server). [`Player#playSound(Sound)`](jd:velocity:com.velocitypowered.api.proxy.Player#playSound(net.kyori.adventure.sound.Sound)) is not implemented, as Adventure's contract requires sounds to play at the player's current position.
+[^sounds-note]: Playing sounds only works on 1.19.3+ and requires an emitter ([`Sound.Emitter#self()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/sound/Sound.Emitter.html#self()) or another player from the same server). [`Player#playSound(Sound)`](jd:velocity:com.velocitypowered.api.proxy.Player#playSound(net.kyori.adventure.sound.Sound)) is not implemented, as Adventure's contract requires sounds to play at the player's current position.

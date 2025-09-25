@@ -31,8 +31,8 @@ public class TestPlugin extends JavaPlugin {
 }
 ```
 
-This recipe would require a diamond sword to be crafted with a diamond in the top row, a stick in
-the middle row, and a diamond in the bottom row. The diamond sword would be in the middle column of
+This recipe would require a diamond sword to be crafted with a diamond in the top row, another three diamonds in
+the middle row, and a stick in the bottom row. The diamond sword would be in the middle column of
 the bottom row. The result would look like this in the crafting grid:
 
 ```

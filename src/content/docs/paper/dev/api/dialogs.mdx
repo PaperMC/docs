@@ -304,6 +304,14 @@ public class ServerJoinListener implements Listener {
     }
 
     /**
+     * An event handler for cleanup the map to avoid unnecessary entry buildup.
+     */
+    @EventHandler
+    void onConnectionClose(PlayerConnectionCloseEvent event) {
+        awaitingResponse.remove(event.getPlayerUniqueId());
+    }
+
+    /**
      * Simple utility method for setting a connection's dialog response result.
      */
     private void setConnectionJoinResult(UUID uniqueId, boolean value) {

@@ -5,7 +5,7 @@ description: Move from the BungeeCord Chat API to the Adventure API.
 ---
 
 Adventure's text API and the BungeeCord Chat API are designed along very different
-lines. This page goes over some notable differences.
+methodologies. This page goes over some notable differences.
 
 ## Audiences
 

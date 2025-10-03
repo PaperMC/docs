@@ -1,5 +1,6 @@
 ---
 title: Player list/Tab list
+slug: adventure/tablist
 description: Setting the player list with Adventure.
 ---
 

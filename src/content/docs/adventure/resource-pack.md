@@ -1,5 +1,6 @@
 ---
 title: Resource packs
+slug: adventure/resource-pack
 description: A guide to using resource packs with Adventure.
 ---
 

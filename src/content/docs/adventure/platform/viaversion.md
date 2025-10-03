@@ -1,5 +1,6 @@
 ---
 title: ViaVersion
+slug: adventure/platform/viaversion
 description: Using Adventure with ViaVersion.
 ---
 

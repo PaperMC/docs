@@ -1,5 +1,6 @@
 ---
 title: MiniMessage
+slug: adventure/minimessage
 description: Documentation regarding MiniMessage.
 tableOfContents: false
 sidebar:

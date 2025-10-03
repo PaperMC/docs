@@ -1,5 +1,6 @@
 ---
 title: Text (Chat Components)
+slug: adventure/text
 description: Everything you need to know about Components.
 ---
 

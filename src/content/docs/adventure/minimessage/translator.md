@@ -1,5 +1,6 @@
 ---
 title: MiniMessage translator
+slug: adventure/minimessage/translator
 description: A guide on the MiniMessage translator.
 ---
 

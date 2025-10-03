@@ -1,5 +1,6 @@
 ---
 title: Titles
+slug: adventure/titles
 description: Displaying titles to players.
 ---
 

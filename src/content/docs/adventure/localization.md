@@ -1,5 +1,6 @@
 ---
 title: Localization
+slug: adventure/localization
 description: Utilizing localization in Adventure.
 ---
 

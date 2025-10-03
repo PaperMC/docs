@@ -1,5 +1,6 @@
 ---
 title: JSON
+slug: adventure/serializer/json
 description: Serializing components to their JSON representation.
 ---
 

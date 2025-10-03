@@ -1,5 +1,6 @@
 ---
 title: Implementing platforms
+slug: adventure/platform/implementing
 description: Implementing Adventure for your own platform.
 ---
 

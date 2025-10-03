@@ -1,5 +1,6 @@
 ---
 title: Books
+slug: adventure/book
 description: A guide to Adventure Books.
 ---
 

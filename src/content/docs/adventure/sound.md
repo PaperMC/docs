@@ -1,5 +1,6 @@
 ---
 title: Sound
+slug: adventure/sound
 description: A guide to playing sound with Adventure.
 ---
 

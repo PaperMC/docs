@@ -1,5 +1,6 @@
 ---
 title: Audiences
+slug: adventure/audiences
 description: A guide to Adventure Audiences.
 ---
 

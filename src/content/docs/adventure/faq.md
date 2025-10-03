@@ -1,5 +1,6 @@
 ---
 title: FAQ
+slug: adventure/faq
 description: Frequently asked questions.
 ---
 

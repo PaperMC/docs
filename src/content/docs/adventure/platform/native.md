@@ -1,5 +1,6 @@
 ---
 title: Native support
+slug: adventure/platform/native
 description: All native supported software.
 ---
 

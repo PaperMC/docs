@@ -1,5 +1,6 @@
 ---
 title: Text serializers
+slug: adventure/serializer
 description: Everything to know about text/component serializers.
 sidebar:
   label: Overview

@@ -1,5 +1,6 @@
 ---
 title: Boss bars
+slug: adventure/bossbar
 description: A guide to Adventure BossBars.
 ---
 

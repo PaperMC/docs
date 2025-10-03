@@ -1,5 +1,6 @@
 ---
 title: Migrating from the BungeeCord Chat API
+slug: adventure/migration/bungeecord-chat-api
 description: Move from the BungeeCord Chat API to the Adventure API.
 ---
 

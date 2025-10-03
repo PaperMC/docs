@@ -1,5 +1,6 @@
 ---
 title: Dynamic replacements
+slug: adventure/minimessage/dynamic-replacements
 description: A guide on tag resolvers.
 ---
 

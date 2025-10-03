@@ -1,5 +1,6 @@
 ---
 title: Migrating to Adventure from other APIs
+slug: adventure/migration
 description: Moving from other chat APIs to Adventure.
 tableOfContents: false
 sidebar:

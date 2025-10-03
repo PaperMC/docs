@@ -1,5 +1,6 @@
 ---
 title: Platforms
+slug: adventure/platform
 description: Documentation regarding various implementations of the Adventure API.
 tableOfContents: false
 sidebar:

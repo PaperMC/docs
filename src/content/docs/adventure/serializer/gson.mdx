@@ -3,8 +3,7 @@ title: Gson
 description: Serializing components to JSON with Gson.
 ---
 
-import Dependency from "/src/components/Dependency.astro";
-import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+import { TabItem, Tabs } from "@astrojs/starlight/components";
 
 The Gson text serializer converts chat components to their JSON representation
 and back using the Gson library. If you are interested in sending a chat component
@@ -17,7 +16,40 @@ component from an external source - serialization is done automatically by the
 
 Declaring the dependency:
 
-<Dependency group="net.kyori" name="adventure-text-serializer-gson" version={LATEST_ADVENTURE_API_RELEASE} />
+{/* TODO: Replace with Dependency component */}
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kts replace
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      implementation("net.kyori:adventure-text-serializer-gson:\{LATEST_ADVENTURE_API_RELEASE}")
+    }
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy replace
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      implementation 'net.kyori:adventure-text-serializer-gson:\{LATEST_ADVENTURE_API_RELEASE}'
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml replace
+    <dependency>
+      <groupId>net.kyori</groupId>
+      <artifactId>adventure-text-serializer-gson</artifactId>
+      <version>\{LATEST_ADVENTURE_API_RELEASE}</version>
+    </dependency>
+    ```
+  </TabItem>
+</Tabs>
 
 ## Usage
 

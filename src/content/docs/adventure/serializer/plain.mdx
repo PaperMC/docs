@@ -3,8 +3,7 @@ title: Plain
 description: Retrieving plain text content from components.
 ---
 
-import Dependency from "/src/components/Dependency.astro";
-import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+import { TabItem, Tabs } from "@astrojs/starlight/components";
 
 The plain text serializer converts chat components to their plain-text representation
 and back. It is thus the simplest text serializer in Adventure. This serializer is
@@ -18,7 +17,40 @@ consider using [MiniMessage](/adventure/minimessage).
 
 Declaring the dependency:
 
-<Dependency group="net.kyori" name="adventure-text-serializer-plain" version={LATEST_ADVENTURE_API_RELEASE} />
+{/* TODO: Replace with Dependency component */}
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kts replace
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      implementation("net.kyori:adventure-text-serializer-plain:\{LATEST_ADVENTURE_API_RELEASE}")
+    }
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy replace
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      implementation 'net.kyori:adventure-text-serializer-plain:\{LATEST_ADVENTURE_API_RELEASE}'
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml replace
+    <dependency>
+      <groupId>net.kyori</groupId>
+      <artifactId>adventure-text-serializer-plain</artifactId>
+      <version>\{LATEST_ADVENTURE_API_RELEASE}</version>
+    </dependency>
+    ```
+  </TabItem>
+</Tabs>
 
 ## Usage
 

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "mm",
+  "patterns": [
+    {
+      "name": "meta.tag.mm",
+      "begin": "(<)(/?|!?)([a-zA-Z0-9_#]+)",
+      "beginCaptures": {
+        "1": { "name": "constant.language.tag.mm" },
+        "2": { "name": "constant.language.tag.mm" },
+        "3": { "name": "constant.language.tag.mm" }
+      },
+      "end": "(>)",
+      "endCaptures": {
+        "1": { "name": "constant.language.tag.mm" }
+      },
+      "patterns": [
+        {
+          "name": "string.quoted.single.argument.mm",
+          "match": "(:)'([^']*)'",
+          "captures": {
+            "1": { "name": "constant.language.tag.mm" },
+            "2": { "name": "string.quoted.single.argument.mm" }
+          }
+        },
+        {
+          "name": "string.quoted.double.argument.mm",
+          "match": "(:)\"([^\"]*)\"",
+          "captures": {
+            "1": { "name": "constant.language.tag.mm" },
+            "2": { "name": "string.quoted.double.argument.mm" }
+          }
+        },
+        {
+          "name": "variable.language.argument.mm",
+          "match": "(:)([^:\\s\"'>]+(?:\\[[^\\]]*\\])?)",
+          "captures": {
+            "1": { "name": "constant.language.tag.mm" },
+            "2": { "name": "variable.language.argument.mm" }
+          }
+        }
+      ]
+    }
+  ],
+  "repository": {},
+  "scopeName": "text.mm"
+}

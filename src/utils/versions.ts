@@ -17,6 +17,15 @@ interface Manifest {
   versions: Version[];
 }
 
+interface Tag {
+  name: string;
+}
+
+const fetchGitHubTags = async (repo: string) =>
+  await fetch(`https://api.github.com/repos/${repo}/tags`, GITHUB_OPTIONS)
+    .then((r) => (r.ok ? r.json() : [{ name: "v0.0.0" }]))
+    .then((tags: Tag[]) => tags.map((t) => t.name.substring(1)));
+
 // prettier-ignore
 const manifest: Manifest = await fetch("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
   .then((r) => r.json());
@@ -71,12 +80,13 @@ const waterfallProject = await fetchProject("waterfall");
 
 export const LATEST_WATERFALL_RELEASE = await findLatest(waterfallProject);
 
-interface Tag {
-  name: string;
-}
-
-const userdevVersions: string[] = await fetch("https://api.github.com/repos/PaperMC/paperweight/tags", GITHUB_OPTIONS)
-  .then((r) => (r.ok ? r.json() : [{ name: "v0.0.0" }]))
-  .then((tags: Tag[]) => tags.map((t) => t.name.substring(1)));
+const userdevVersions: string[] = await fetchGitHubTags("PaperMC/paperweight");
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
+
+export const LATEST_ADVENTURE_SUPPORTED_MC = "1.21.9";
+export const LATEST_ADVENTURE_SUPPORTED_MC_RANGE = LATEST_ADVENTURE_SUPPORTED_MC;
+export const LATEST_ADVENTURE_API_RELEASE = "4.25.0";
+export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.1";
+export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = "6.5.1";
+export const LATEST_ANSI_RELEASE = "1.1.1";

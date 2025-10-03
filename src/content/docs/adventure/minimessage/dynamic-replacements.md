@@ -50,7 +50,7 @@ When you want to create your own styling tag you can use the styling placeholder
 ```java
 MiniMessage.miniMessage().deserialize("<my-style>Hello :)</my-style> How are you?",
     Placeholder.styling("my-style", ClickEvent.suggestCommand("/say hello"), NamedTextColor.RED, TextDecoration.BOLD));
-// will apply a click even, a red text color and bold decoration to the text
+// will apply a click event, a red text color and bold decoration to the text
 ```
 
 This will insert the style with a click event and a red text. Styling placeholders can be used for any style, e.g. colors, text decoration and events.

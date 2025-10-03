@@ -433,14 +433,6 @@ export default defineConfig({
                   ],
                 },
                 {
-                  label: "Migrating to Adventure from other APIs",
-                  items: [
-                    "adventure/migration",
-                    "adventure/migration/bungeecord-chat-api",
-                    "adventure/migration/text-3.x",
-                  ],
-                },
-                {
                   label: "Version history",
                   items: [
                     { label: "adventure", link: "/adventure/version-history/adventure" },
@@ -449,6 +441,14 @@ export default defineConfig({
                       label: "adventure-platform-mod",
                       link: "/adventure/version-history/adventure-platform-mod",
                     },
+                  ],
+                },
+                {
+                  label: "Migrating to Adventure from other APIs",
+                  items: [
+                    "adventure/migration",
+                    "adventure/migration/bungeecord-chat-api",
+                    "adventure/migration/text-3.x",
                   ],
                 },
               ],

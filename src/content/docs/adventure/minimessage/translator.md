@@ -6,7 +6,7 @@ description: A guide on the MiniMessage translator.
 
 :::note
 
-For more information about both Minecraft and Adventure's localization systems, see `localization`.
+For more information about both Minecraft and Adventure's localization systems, see [`localization`](/adventure/localization).
 
 :::
 

@@ -31,9 +31,9 @@ Sound myCustomSound = Sound.sound(Key.key("adventure", "rawr"), Sound.Source.AMB
 
 The client can play multiple sounds at once, but as of version 1.16 is limited to 8 sounds playing at once.
 
-In 1.15.2-1.16.5, due to `MC-138832`, the volume and pitch of sounds played with an emitter are ignored.
+In 1.15.2-1.16.5, due to [`MC-138832`](https://bugs.mojang.com/browse/MC-138832), the volume and pitch of sounds played with an emitter are ignored.
 
-As documented in `MC-146721`, any stereo sounds will not play at a specific position or following an entity, therefore, the location or emitter parameters will be ignored.
+As documented in [`MC-146721`](https://bugs.mojang.com/browse/MC-146721), any stereo sounds will not play at a specific position or following an entity, therefore, the location or emitter parameters will be ignored.
 
 :::
 

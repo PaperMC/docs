@@ -235,7 +235,7 @@ public class ServerJoinListener implements Listener {
     /**
      * A map for holding all currently connecting players.
      */
-    private final Map<PlayerCommonConnection, CompletableFuture<Boolean>> awaitingResponse = new HashMap<>();
+    private final Map<UUID, CompletableFuture<Boolean>> awaitingResponse = new ConcurrentHashMap<>();
 
     @EventHandler
     void onPlayerConfigure(AsyncPlayerConnectionConfigureEvent event) {
@@ -248,23 +248,34 @@ public class ServerJoinListener implements Listener {
             return;
         }
 
+        PlayerConfigurationConnection connection = event.getConnection();
+        UUID uniqueId = connection.getProfile().getId();
+        if (uniqueId == null) {
+            return;
+        }
+
         // Construct a new completable future without a task.
         CompletableFuture<Boolean> response = new CompletableFuture<>();
+        // Complete the future if nothing has been done after one minute.
+        response.completeOnTimeout(false, 1, TimeUnit.MINUTES);
 
         // Put it into our map.
-        awaitingResponse.put(event.getConnection(), response);
+        awaitingResponse.put(uniqueId, response);
 
+        Audience audience = connection.getAudience();
         // Show the connecting player the dialog.
-        event.getConnection().getAudience().showDialog(dialog);
+        audience.showDialog(dialog);
 
         // Wait until the future is complete. This step is necessary in order to keep the player in the configuration phase.
         if (!response.join()) {
+            // We close the dialog manually because the client might not do it on its own.
+            audience.closeDialog();
             // If the response is false, they declined. Therefore, we kick them from the server.
-            event.getConnection().disconnect(Component.text("You hate Paper-chan :(", NamedTextColor.RED));
+            connection.disconnect(Component.text("You hate Paper-chan :(", NamedTextColor.RED));
         }
 
         // We clean the map to avoid unnecessary entry buildup.
-        awaitingResponse.remove(event.getConnection());
+        awaitingResponse.remove(uniqueId);
     }
 
     /**
@@ -272,22 +283,39 @@ public class ServerJoinListener implements Listener {
      */
     @EventHandler
     void onHandleDialog(PlayerCustomClickEvent event) {
-        Key key = event.getIdentifier();
+        // Handle custom click only for configuration connection.
+        if (!(event.getCommonConnection() instanceof PlayerConfigurationConnection configurationConnection)) {
+            return;
+        }
 
+        UUID uniqueId = configurationConnection.getProfile().getId();
+        if (uniqueId == null) {
+            return;
+        }
+
+        Key key = event.getIdentifier();
         if (key.equals(Key.key("papermc:paperchan/disagree"))) {
             // If the identifier is the same as the disagree one, set the connection result to false.
-            setConnectionJoinResult(event.getCommonConnection(), false);
+            setConnectionJoinResult(uniqueId, false);
         } else if (key.equals(Key.key("papermc:paperchan/agree"))) {
             // If it is the same as the agree one, set the result to true.
-            setConnectionJoinResult(event.getCommonConnection(), true);
+            setConnectionJoinResult(uniqueId, true);
         }
+    }
+
+    /**
+     * An event handler for cleanup the map to avoid unnecessary entry buildup.
+     */
+    @EventHandler
+    void onConnectionClose(PlayerConnectionCloseEvent event) {
+        awaitingResponse.remove(event.getPlayerUniqueId());
     }
 
     /**
      * Simple utility method for setting a connection's dialog response result.
      */
-    private void setConnectionJoinResult(PlayerCommonConnection connection, boolean value) {
-        CompletableFuture<Boolean> future = awaitingResponse.get(connection);
+    private void setConnectionJoinResult(UUID uniqueId, boolean value) {
+        CompletableFuture<Boolean> future = awaitingResponse.get(uniqueId);
         if (future != null) {
             future.complete(value);
         }

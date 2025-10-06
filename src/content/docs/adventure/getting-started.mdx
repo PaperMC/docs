@@ -33,7 +33,7 @@ To use snapshot builds, you will need to add the following repository:
     ```kotlin title="build.gradle.kts"
     repositories {
       maven(url = "https://central.sonatype.com/repository/maven-snapshots/") {
-        name = "sonatype-oss-snapshots"
+        name = "central-snapshots"
       }
     }
     ```
@@ -42,7 +42,7 @@ To use snapshot builds, you will need to add the following repository:
     ```groovy title="build.gradle"
     repositories {
       maven {
-        name = 'sonatype-oss-snapshots1'
+        name = 'central-snapshots'
         url = 'https://central.sonatype.com/repository/maven-snapshots/'
       }
     }
@@ -52,7 +52,7 @@ To use snapshot builds, you will need to add the following repository:
     ```xml title="pom.xml"
     <repositories>
       <repository>
-        <id>sonatype-oss-snapshots1</id>
+        <id>central-snapshots</id>
         <url>https://central.sonatype.com/repository/maven-snapshots/</url>
       </repository>
     </repositories>

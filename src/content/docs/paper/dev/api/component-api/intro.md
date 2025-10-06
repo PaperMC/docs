@@ -145,7 +145,7 @@ of this format.
 
 :::note[In-Depth Documentation]
 
-The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.wiki/w/Raw_JSON_text_format).
+The JSON format is fully documented on the [Minecraft Wiki](https://minecraft.wiki/w/Text_component_format).
 
 :::
 

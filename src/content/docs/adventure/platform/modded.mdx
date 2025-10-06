@@ -30,8 +30,8 @@ As with the rest of the Adventure projects, releases are distributed on Maven Ce
     ```kotlin title="build.gradle.kts" replace
     repositories {
       // for development builds
-      maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-        name = "sonatype-oss-snapshots1"
+      maven(url = "https://central.sonatype.com/repository/maven-snapshots/") {
+        name = "central-snapshots"
         mavenContent { snapshotsOnly() }
       }
       // for releases
@@ -52,8 +52,8 @@ As with the rest of the Adventure projects, releases are distributed on Maven Ce
     repositories {
       // for development builds
       maven {
-        name = 'sonatype-oss-snapshots1'
-        url = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+        name = 'central-snapshots'
+        url = 'https://central.sonatype.com/repository/maven-snapshots/'
         mavenContent { snapshotsOnly() }
       }
       // for releases
@@ -81,6 +81,8 @@ Each major Minecraft release will require different platform versions. For older
 
   | Minecraft Version | Adventure version | `adventure-platform-(mod-shared/fabric/neoforge)` version |
   |-------------------|-------------------|-----------------------------------------------------------|
+  | 1.21.6-1.21.8     | 4.23.0            | 6.5.0                                                     |
+  | 1.21.5            | 4.21.0            | 6.4.0                                                     |
   | 1.21.2-1.21.4     | 4.20.0            | 6.3.0                                                     |
   | 1.21-1.21.1       | 4.17.0            | 6.0.0                                                     |
 

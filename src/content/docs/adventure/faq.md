@@ -16,7 +16,7 @@ In vanilla Minecraft, some places where components are rendered have parent styl
 
 - Test on a vanilla client, without any mods or resource packs. Modded clients (such as Badlion), client mods, and even resource packs can break many elements of the modern JSON chat format and mess with incoming chat packets in ways that cause a myriad of issues.
 - Try without other plugins/mods. If another plugin/mod is modifying outgoing packets or formatting chat messages, this could cause a loss of formatting in the messages you send. Try without any other plugins to see if any are causing issues.
-- For RGB colors, test on a client of at least version *1.16*. Mojang added RGB support in this version. The JSON message format has evolved over time and has had many new additions since its introduction many, many years ago. For a full version history, see [the Minecraft wiki](https://minecraft.wiki/w/Raw_JSON_text_format).
+- For RGB colors, test on a client of at least version *1.16*. Mojang added RGB support in this version. The JSON message format has evolved over time and has had many new additions since its introduction many, many years ago. For a full version history, see [the Minecraft wiki](https://minecraft.wiki/w/Text_component_format).
 
 ## How can I support both MiniMessage and legacy (§-code) formatting?
 

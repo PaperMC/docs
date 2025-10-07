@@ -76,7 +76,7 @@ these are valid update strategies.
 
 :::caution[Automatic Updates]
 
-While it may be convenient to install updates automatically (and Paper's [downloads API](/misc/downloads-api) allows you
+While it may be convenient to install updates automatically (and Paper's [downloads service](/misc/downloads-service) allows you
 to with ease), doing so is not recommended by Paper due to the possibility of plugin conflicts or
 other issues that you may not know about. Always be present during updates, and keep a careful watch
 on your server's log after the fact.

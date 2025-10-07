@@ -468,7 +468,7 @@ export default defineConfig({
               items: [
                 "misc/assets",
                 "misc/contact",
-                "misc/downloads-api",
+                "misc/downloads-service",
                 "misc/hangar-publishing",
                 "misc/java-install",
                 {

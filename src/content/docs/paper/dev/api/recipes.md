@@ -18,27 +18,28 @@ public class TestPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        NamespacedKey key = new NamespacedKey(this, "WarriorSword");
-        ItemStack item = ItemStack.of(Material.DIAMOND_SWORD);
+        NamespacedKey key = new NamespacedKey(this, "Television");
+
+        ItemStack item = ItemStack.of(Material.BLACK_WOOL);
+        item.editMeta(meta -> meta.itemName(Component.text("Television")));
 
         ShapedRecipe recipe = new ShapedRecipe(key, item);
-        recipe.shape(" A ", " A ", " B ");
-        recipe.setIngredient('A', Material.DIAMOND);
-        recipe.setIngredient('B', Material.STICK);
+        recipe.shape("AAA", "ABA", "AAA");
+        recipe.setIngredient('A', Material.WHITE_CONCRETE);
+        recipe.setIngredient('B', Material.BLACK_STAINED_GLASS_PANE);
 
         getServer().addRecipe(recipe);
     }
 }
 ```
 
-This recipe would require a diamond sword to be crafted with a diamond in the top row, another diamond in
-the middle row, and a stick in the bottom row. The diamond sword would be in the middle column of
-the bottom row. The result would look like this in the crafting grid:
+This recipe would require a television to be crafted with one black stained glass pane surrounded 
+by white concrete. The result would look like this in the crafting grid:
 
 ```
- A
- A 
- B
+AAA
+ABA 
+AAA
 ```
 
 :::note

@@ -18,7 +18,7 @@ public class TestPlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        NamespacedKey key = new NamespacedKey(this, "Television");
+        NamespacedKey key = new NamespacedKey(this, "television");
 
         ItemStack item = ItemStack.of(Material.BLACK_WOOL);
         item.editMeta(meta -> meta.itemName(Component.text("Television")));

@@ -21,7 +21,7 @@ public class TestPlugin extends JavaPlugin {
         NamespacedKey key = new NamespacedKey(this, "television");
 
         ItemStack item = ItemStack.of(Material.BLACK_WOOL);
-        item.editMeta(meta -> meta.itemName(Component.text("Television")));
+        item.setData(DataComponentTypes.ITEM_NAME, Component.text("Television"));
 
         ShapedRecipe recipe = new ShapedRecipe(key, item);
         recipe.shape("AAA", "ABA", "AAA");

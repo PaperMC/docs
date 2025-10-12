@@ -616,7 +616,8 @@ a y-axis velocity set by the `offsetY` argument. In both cases, `offsetX` and `o
 :::caution
 `EFFECT` and `INSTANT_EFFECT` are [powered particles](#powered-particles) and use [`Particle.Spell`](jd:paper:org.bukkit.Particle$Spell)
 as their data. Due to the nature of rising particles' final calculated vertical velocity being very low (in range \[-0.056, 0.056\])
-and how powered particles calculate the vertical velocity the resulting vertical velocity will always be the opposite of power.
+and how powered particles calculate the vertical velocity, the resulting vertical velocity will always be the opposite of
+`power` value's sign.
 :::
 
 Example of spawning a `GLOW` particle that moves up:

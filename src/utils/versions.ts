@@ -66,7 +66,8 @@ const findLatest = async (project: Project): Promise<string> => {
 
 const paperProject = await fetchProject("paper");
 
-export const LATEST_PAPER_RELEASE = await findLatest(paperProject);
+// export const LATEST_PAPER_RELEASE = await findLatest(paperProject);
+export const LATEST_PAPER_RELEASE = "1.21.10";
 
 const velocityProject = await fetchProject("velocity");
 

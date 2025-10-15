@@ -69,6 +69,8 @@ When a user clicks on the text component, a click event is fired which can perfo
 * Suggest a command
 * Change a book's page
 * Copy a string to clipboard
+* Open a dialog
+* Send a custom payload back to the server
 
 ## Serializing and deserializing components
 

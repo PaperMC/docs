@@ -18,7 +18,7 @@ There are a few "special" data types in the Velocity configuration.
 
 ### Chat
 
-Chat messages may be provided in [MiniMessage](https://docs.advntr.dev/minimessage/format.html) format.
+Chat messages may be provided in [MiniMessage](/adventure/minimessage/format/) format.
 
 RGB support is available for Minecraft 1.16 and later versions.
 
@@ -35,7 +35,7 @@ These settings mostly cover the basic, most essential settings of the proxy.
 |------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `config-version`                   | String  | This is the current config version used by Velocity. You should not alter this setting.                                                                                                                                                                            |
 | `bind`                             | Address | This tells the proxy to accept connections on a specific IP. By default, Velocity will listen for connections on all IP addresses on the computer on port 25565.                                                                                                   |
-| `motd`                             | Chat    | This allows you to change the message shown to players when they add your server to their server list. You can use [MiniMessage format](https://docs.advntr.dev/minimessage/format.html).                                                                          |
+| `motd`                             | Chat    | This allows you to change the message shown to players when they add your server to their server list. You can use [MiniMessage format](/adventure/minimessage/format/).                                                                                           |
 | `show-max-players`                 | Integer | This allows you to customize the number of "maximum" players in the player's server list. Note that Velocity doesn't have a maximum number of players it supports.                                                                                                 |
 | `online-mode`                      | Boolean | Should we authenticate players with Mojang? By default, this is on.                                                                                                                                                                                                |
 | `force-key-authentication`         | Boolean | Should the proxy enforce the new public key security standard? By default, this is on.                                                                                                                                                                             |

@@ -107,7 +107,7 @@ We recommend using this format for user-facing input such as commands or configu
 
 :::note[In-Depth Documentation]
 
-MiniMessage is a part of Adventure, and you can find its documentation on [Adventure's documentation](https://docs.advntr.dev/minimessage/index.html).
+MiniMessage is a part of Adventure, and you can find its documentation on [Adventure's documentation](/adventure/minimessage/).
 
 :::
 
@@ -172,7 +172,7 @@ This conversion is lossless and is the preferred form of serialization for compo
 Converts between `Component`
 and a MiniMessage-formatted string. This conversion is lossless and is the preferred form of
 serialization for components that have to be edited by users. There is also extensive customization you can add to the
-serializer, which is [documented here](https://docs.advntr.dev/minimessage/api.html#getting-started).
+serializer, which is [documented here](/adventure/minimessage/api/#getting-started).
 
 ### [`PlainTextComponentSerializer`](https://jd.advntr.dev/text-serializer-plain/latest)
 

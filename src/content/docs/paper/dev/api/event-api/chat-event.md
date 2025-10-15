@@ -140,4 +140,4 @@ Now you can see that the message is rendered as we wanted it to be.
 
 That is all you need to know about the new chat event and its renderer.
 Of course there are many more things you can do with components in general.
-If you want to learn more about components, you can read the [Component Documentation](https://docs.advntr.dev/text.html).
+If you want to learn more about components, you can read the [Component Documentation](/adventure/text/).

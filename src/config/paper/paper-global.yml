@@ -229,7 +229,7 @@ messages:
     description: >-
       Default message sent to players when they have insufficient permissions
       for an action, formatted with
-      [MiniMessage](https://docs.advntr.dev/minimessage/). Plugins may override
+      [MiniMessage](/adventure/minimessage/). Plugins may override
       this for their commands
   use-display-name-in-quit-message:
     default: "false"
@@ -242,23 +242,23 @@ messages:
       description: >-
         Message sent to players when Mojang's authentication servers are
         unreachable. Formatted using
-        [MiniMessage](https://docs.advntr.dev/minimessage/).
+        [MiniMessage](/adventure/minimessage/).
     connection-throttle:
       default: Connection throttled! Please wait before reconnecting.
       description: >-
         Message sent to players when they are throttled for connecting too
         frequently. Formatted using
-        [MiniMessage](https://docs.advntr.dev/minimessage/).
+        [MiniMessage](/adventure/minimessage/).
     flying-player:
       default: "<lang:multiplayer.disconnect.flying>"
       description: >-
         Message sent to players who are detected flying. Formatted using
-        [MiniMessage](https://docs.advntr.dev/minimessage/).
+        [MiniMessage](/adventure/minimessage/).
     flying-vehicle:
       default: "<lang:multiplayer.disconnect.flying>"
       description: >-
         Message sent to players who are detected riding a flying vehicle.
-        Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
+        Formatted using [MiniMessage](/adventure/minimessage/).
 misc:
   fix-entity-position-desync:
     vanilla: "false"
@@ -348,7 +348,7 @@ packet-limiter:
     default: "<red><lang:disconnect.exceeded_packet_rate>"
     description: >-
       The message players are kicked with for sending too many packets.
-      Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
+      Formatted using [MiniMessage](/adventure/minimessage/).
   overrides:
     header:
       message: >-

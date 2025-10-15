@@ -121,5 +121,5 @@ rich text. This means that plugins can send messages that contain things like co
 Colors were always possible, but only through the use of legacy color codes.
 
 Paper implements a library called `Adventure` that makes it easy to create and send messages to players. Learn more
-about the `Adventure` API [here](https://docs.advntr.dev/) from their docs or our docs
+about the `Adventure` API [here](/adventure/) from their docs or our docs
 [here](/paper/dev/component-api/introduction).

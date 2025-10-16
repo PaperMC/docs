@@ -12,6 +12,7 @@ This includes migrating from older versions of Adventure, as well as migrating f
 
 * [Migrating from Adventure 4.x to 5.x](/adventure/migration/adventure-4.x)
   * [A modern codebase](/adventure/migration/adventure-4.x#a-modern-codebase)
+  * [Updated dependencies](/adventure/migration/adventure-4.x#updated-dependencies)
   * [Breaking changes](/adventure/migration/adventure-4.x#breaking-changes)
   * [Removal of deprecated methods and classes](/adventure/migration/adventure-4.x#removal-of-deprecated-methods-and-classes)
 * [Migrating from the BungeeCord Chat API](/adventure/migration/bungeecord-chat-api)

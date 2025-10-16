@@ -17,9 +17,6 @@ This means that you can no longer extend these classes, although you shouldn't h
 One relatively common incorrect usage was to create custom `Component` implementations.
 This is now no longer possible, and you should instead be using the `VirtualComponent` API.
 
-Adventure has also migrated to using JSpecify for nullness annotations.
-These are applied at a module level, so unless otherwise specified, everything should be treated as non-null.
-
 Another side effect of wanting a modern codebase is that the `adventure-extra-kotlin` module has been removed.
 This module will be re-introduced in a separate repo under a new module in the future.
 This will allow for more flexibility working around the more frequent Kotlin updates.
@@ -27,10 +24,17 @@ This will allow for more flexibility working around the more frequent Kotlin upd
 The `adventure-text-serializer-gson-legacy-impl` module has also been removed.
 This module has been replaced with the implementation-agnostic `adventure-text-serializer-json-legacy-impl` module.
 
+Finally, Adventure now contains proper `module-info.java` files for those of you using the Java 9+ module system.
+
+## Updated dependencies
+
+Adventure has migrated to using JSpecify for nullness annotations.
+These are applied at a module level, so unless otherwise specified, everything should be treated as non-null.
+
 As most of the internal implementation of Adventure is now using records, we no longer have need to use the Examination library for `toString` generation.
 The Examination library has been entirely removed from Adventure and is no longer a transitive dependency.
 
-Finally, Adventure now contains proper `module-info.java` files for those of you using the Java 9+ module system.
+The `adventure-text-logger-slf4j` module has been updated to use SLF4J 2.0.
 
 ## Breaking changes
 
@@ -102,3 +106,6 @@ This section documents the removals that have been made and how you can migrate 
   This has been replaced with the equivalent `PlainTextComponentSerializer` class.
 * **`ClickEvent$Action#payloadType` has been removed.**\
   As click event actions are now typed, this field is no longer required.
+* **Typos have been removed.**\
+  Some incorrectly spelt/named methods, such as `Argument#numeric` and `ComponentSerializer#deseializeOrNull`, have been removed.
+  These methods have been deprecated, and correctly spelt/named methods have been available for a while.

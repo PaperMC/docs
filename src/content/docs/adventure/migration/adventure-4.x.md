@@ -12,7 +12,7 @@ One of the main goals for Adventure 5.0 was to migrate to a more modern codebase
 The minimum version of Java required to use Adventure is now Java 21.
 
 By updating to Java 21, Adventure has taken advantage of sealed classes and interfaces.
-Almost every interface/class that was annotated with `@ApiStatus.Internal` has now been made sealed.
+Almost every interface/class that was annotated with `@ApiStatus.NonExtendable` has now been made sealed.
 This means that you can no longer extend these classes, although you shouldn't have been doing that in the first place!
 One relatively common incorrect usage was to create custom `Component` implementations.
 This is now no longer possible, and you should instead be using the `VirtualComponent` API.
@@ -73,9 +73,9 @@ This section documents the removals that have been made and how you can migrate 
     All other messages are system messages.
   * **All `Audience#sendMessage` methods that accept an `Identity` or `Identified` have been removed.**\
     Prefer sending signed messages instead.
-* **Boss bar progress has been removed.**\
-  This includes the max/min progress constants and methods to change/get the progress.
-  You should instead be using the percent constants/methods.
+* **Boss bar percent has been removed.**\
+  This includes the max/min percent constants and methods to change/get the percent.
+  You should instead be using the progress constants/methods.
 * **`of` style static methods have been removed.**\
   These methods have been deprecated for some time, and each has named replacements.
 * **Custom click payload data has been removed.**\

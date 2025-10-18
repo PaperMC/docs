@@ -133,7 +133,7 @@ This will format your input based on the provided ChoiceFormat. In this case it 
 
 ## Complex placeholders
 
-You can simply create your own placeholders. Take a look at the Formatter and Placeholder class from MiniMessage for examples.
+You can simply create your own placeholders. Take a look at the [Formatter](https://github.com/PaperMC/adventure/blob/main/5/text-minimessage/src/main/java/net/kyori/adventure/text/minimessage/tag/resolver/Formatter.java) and [Placeholder](https://github.com/PaperMC/adventure/blob/main/5/text-minimessage/src/main/java/net/kyori/adventure/text/minimessage/tag/resolver/Placeholder.java) class from MiniMessage for examples.
 
 ### Examples
 

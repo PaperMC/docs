@@ -1026,11 +1026,6 @@ misc:
       on the Mojira bug tracker give an overview of the Eigencraft implementation.
 
       - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
-  shield-blocking-delay:
-    default: "5"
-    description: >-
-      The number of ticks between a player activating their shield and it
-      actually blocking damage
   show-sign-click-command-failure-msgs-to-player:
     default: "false"
     description: >-

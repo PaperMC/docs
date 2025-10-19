@@ -109,12 +109,6 @@ chunk-loading-basic:
       The maximum rate in chunks per second that the server will send to any
       individual player. Set to -1 to disable this limit.
 chunk-system:
-  gen-parallelism:
-    default: default
-    description: >-
-      Sets whether the server should use parallel chunk generation. The default
-      value will be used as true. Possible options are true, on and enable to
-      make the server use the system and false, off or disabled to disable.
   io-threads:
     default: "-1"
     description: >-
@@ -145,6 +139,9 @@ collisions:
       involved in collisions. Having this enabled will use more bandwidth;
       however, in the majority of cases, this is a worthy tradeoff
 commands:
+  ride-command-allow-player-as-vehicle:
+    default: "false"
+    description: Allow mounting entities to a player in the Vanilla `/ride` command.
   suggest-player-names-when-null-tab-completions:
     vanilla: "false"
     default: "true"
@@ -157,9 +154,6 @@ commands:
     description: >-
       Whether the /time command should act on all worlds or just the sender's
       current world
-  ride-command-allow-player-as-vehicle:
-    default: "false"
-    description: Allow mounting entities to a player in the Vanilla `/ride` command.
 console:
   enable-brigadier-completions:
     default: "true"
@@ -260,15 +254,30 @@ messages:
       Whether the server should use the player's display name (set by plugins)
       or actual name in quit messages
 misc:
-  fix-entity-position-desync:
-    vanilla: "false"
+  chat-threads:
+    chat-executor-core-size:
+      default: "-1"
+      description: >-
+        Sets the core number of threads in the chat thread pool.
+        Values smaller than 0 will have the same effect as 0.
+    chat-executor-max-size:
+      default: "-1"
+      description: >-
+        Limits the number of allowed threads in the chat thread pool. Values
+        Smaller or equal to 0 result in no limit.
+  client-interaction-leniency-distance:
+    default: "default"
+    description: >-
+      Defines the leniency distance added on the server to the interaction range of a player when validating interact packets.
+  compression-level:
+    default: "default"
+    description: >-
+      Sets the compression level. A value of "default" defaults to -1, resulting
+      in no compression.
+  enable-nether:
     default: "true"
     description: >-
-      A higher compression level means less data transmitted at the cost of more
-      CPU time. The default value is -1, which means that the server will use
-      the default value of the defined compressor. Note that Paper is currently
-      using the Velocity compressor, which uses a default compression level of 6
-      as a middle ground between performance and data transmission.
+      Whether the nether dimension is enabled and will be loaded.
   load-permissions-yml-before-plugins:
     default: "true"
     description: >-

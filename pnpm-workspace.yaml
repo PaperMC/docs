@@ -1,5 +1,5 @@
 patchedDependencies:
-  '@astrojs/starlight@0.35.2': patches/@astrojs__starlight@0.35.2.patch
+  '@astrojs/starlight@0.36.0': patches/@astrojs__starlight@0.36.0.patch
 
 onlyBuiltDependencies:
   - esbuild

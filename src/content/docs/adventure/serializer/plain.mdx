@@ -1,0 +1,63 @@
+---
+title: Plain
+slug: adventure/serializer/plain
+description: Retrieving plain text content from components.
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+
+The plain text serializer converts chat components to their plain-text representation
+and back. It is thus the simplest text serializer in Adventure. This serializer is
+useful for supporting legacy clients, logging, clearing formatting from a component that
+originates from external source, and provides a small, self-contained example of a
+text serializer.
+
+The plain text serializer, by its nature, does not support any advanced features, including
+color, hover and click events, URL linking, or insertions. If advanced features are desired,
+consider using [MiniMessage](/adventure/minimessage).
+
+Declaring the dependency:
+
+{/* TODO: Replace with Dependency component */}
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kts replace
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      implementation("net.kyori:adventure-text-serializer-plain:\{LATEST_ADVENTURE_API_RELEASE}")
+    }
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy replace
+    repositories {
+      mavenCentral()
+    }
+
+    dependencies {
+      implementation 'net.kyori:adventure-text-serializer-plain:\{LATEST_ADVENTURE_API_RELEASE}'
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml replace
+    <dependency>
+      <groupId>net.kyori</groupId>
+      <artifactId>adventure-text-serializer-plain</artifactId>
+      <version>\{LATEST_ADVENTURE_API_RELEASE}</version>
+    </dependency>
+    ```
+  </TabItem>
+</Tabs>
+
+## Usage
+
+This produces a default instance that silently ignores keybind and translatable components. You can also construct your own
+`PlainTextComponentSerializer` that maps the components to some plain-text representation.
+
+The deserialization of plain text is equivalent to `Component.text(string)`. No
+preprocessing is done on the input. The deserialization is implemented in order to provide
+API consistency.

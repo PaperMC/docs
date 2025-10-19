@@ -227,23 +227,23 @@ messages:
       description: >-
         Message sent to players when Mojang's authentication servers are
         unreachable. Formatted using
-        [MiniMessage](https://docs.advntr.dev/minimessage/).
+        [MiniMessage](/adventure/minimessage/).
     connection-throttle:
       default: Connection throttled! Please wait before reconnecting.
       description: >-
         Message sent to players when they are throttled for connecting too
         frequently. Formatted using
-        [MiniMessage](https://docs.advntr.dev/minimessage/).
+        [MiniMessage](/adventure/minimessage/).
     flying-player:
       default: "<lang:multiplayer.disconnect.flying>"
       description: >-
         Message sent to players who are detected flying. Formatted using
-        [MiniMessage](https://docs.advntr.dev/minimessage/).
+        [MiniMessage](/adventure/minimessage/).
     flying-vehicle:
       default: "<lang:multiplayer.disconnect.flying>"
       description: >-
         Message sent to players who are detected riding a flying vehicle.
-        Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
+        Formatted using [MiniMessage](/adventure/minimessage/).
   no-permission:
     default: >-
       <red>I'm sorry, but you do not have permission to perform this command.
@@ -252,7 +252,7 @@ messages:
     description: >-
       Default message sent to players when they have insufficient permissions
       for an action, formatted with
-      [MiniMessage](https://docs.advntr.dev/minimessage/). Plugins may override
+      [MiniMessage](/adventure/minimessage/). Plugins may override
       this for their commands
   use-display-name-in-quit-message:
     default: "false"
@@ -260,22 +260,9 @@ messages:
       Whether the server should use the player's display name (set by plugins)
       or actual name in quit messages
 misc:
-  chat-threads:
-    chat-executor-core-size:
-      default: "-1"
-      description: The minimum number of threads to keep in the chat thread pool
-    chat-executor-max-size:
-      default: "-1"
-      description: >-
-        The maximum number of threads to allow in the chat thread pool. The
-        default value is -1, which means no maximum
-  client-interaction-leniency-distance:
-    default: default
-    description: >-
-      Defines the leniency distance added on the server to the interaction range of a
-      player when validating interact packets.
-  compression-level:
-    default: default
+  fix-entity-position-desync:
+    vanilla: "false"
+    default: "true"
     description: >-
       A higher compression level means less data transmitted at the cost of more
       CPU time. The default value is -1, which means that the server will use
@@ -349,7 +336,7 @@ packet-limiter:
     default: "<red><lang:disconnect.exceeded_packet_rate>"
     description: >-
       The message players are kicked with for sending too many packets.
-      Formatted using [MiniMessage](https://docs.advntr.dev/minimessage/).
+      Formatted using [MiniMessage](/adventure/minimessage/).
   overrides:
     header:
       message: >-

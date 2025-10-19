@@ -1,7 +1,5 @@
 import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
-import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
 import starlightLinksValidator from "starlight-links-validator";
@@ -9,6 +7,12 @@ import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
 import {
+  LATEST_ADVENTURE_API_RELEASE,
+  LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
+  LATEST_ADVENTURE_PLATFORM_RELEASE,
+  LATEST_ADVENTURE_SUPPORTED_MC,
+  LATEST_ADVENTURE_SUPPORTED_MC_RANGE,
+  LATEST_ANSI_RELEASE,
   LATEST_FOLIA_RELEASE,
   LATEST_MC_RELEASE,
   LATEST_PAPER_RELEASE,
@@ -53,6 +57,9 @@ export default defineConfig({
           href: `https://jd.papermc.io/folia/${LATEST_FOLIA_RELEASE.split(".").slice(0, 2).join(".")}`,
         },
 
+        { icon: "github", label: "adventure:GitHub", href: "https://github.com/KyoriPowered/adventure" },
+        { icon: "seti:java", label: "adventure:Javadoc", href: "https://jd.advntr.dev" },
+
         { icon: "github", label: "waterfall:GitHub", href: "https://github.com/PaperMC/Waterfall" },
         {
           icon: "seti:java",
@@ -91,6 +98,9 @@ export default defineConfig({
       },
       plugins: [
         starlightLinksValidator({
+          exclude: [
+            "/adventure/version-history/*", // custom pages
+          ],
           errorOnInvalidHashes: false, // enable if you want to check hashes - it doesn't work with config diagrams
         }),
         starlightSidebarTopics(
@@ -359,17 +369,96 @@ export default defineConfig({
               ],
             },
             {
+              id: "adventure",
+              label: "Adventure",
+              link: "/adventure/",
+              icon: "adventure",
+              items: [
+                "adventure/getting-started",
+                "adventure/community-libraries",
+                "adventure/faq",
+                "adventure/audiences",
+                "adventure/text",
+                {
+                  label: "Text serializers",
+                  items: [
+                    "adventure/serializer",
+                    "adventure/serializer/json",
+                    "adventure/serializer/gson",
+                    "adventure/serializer/legacy",
+                    "adventure/serializer/plain",
+                    {
+                      label: "MiniMessage",
+                      items: [
+                        "adventure/minimessage",
+                        "adventure/minimessage/format",
+                        "adventure/minimessage/api",
+                        "adventure/minimessage/dynamic-replacements",
+                        "adventure/minimessage/translator",
+                      ],
+                    },
+                    "adventure/serializer/ansi",
+                  ],
+                },
+                "adventure/bossbar",
+                "adventure/sound",
+                "adventure/titles",
+                "adventure/book",
+                "adventure/tablist",
+                "adventure/resource-pack",
+                {
+                  label: "MiniMessage",
+                  items: [
+                    "adventure/minimessage",
+                    "adventure/minimessage/format",
+                    "adventure/minimessage/api",
+                    "adventure/minimessage/dynamic-replacements",
+                    "adventure/minimessage/translator",
+                  ],
+                },
+                "adventure/localization",
+                {
+                  label: "Platforms",
+                  items: [
+                    "adventure/platform",
+                    "adventure/platform/native",
+                    "adventure/platform/bukkit",
+                    "adventure/platform/bungeecord",
+                    "adventure/platform/spongeapi",
+                    "adventure/platform/modded",
+                    "adventure/platform/fabric",
+                    "adventure/platform/neoforge",
+                    "adventure/platform/viaversion",
+                    "adventure/platform/implementing",
+                  ],
+                },
+                {
+                  label: "Version history",
+                  items: [
+                    { label: "adventure", link: "/adventure/version-history/adventure" },
+                    { label: "adventure-platform", link: "/adventure/version-history/adventure-platform" },
+                    {
+                      label: "adventure-platform-mod",
+                      link: "/adventure/version-history/adventure-platform-mod",
+                    },
+                  ],
+                },
+                {
+                  label: "Migrating to Adventure from other APIs",
+                  items: [
+                    "adventure/migration",
+                    "adventure/migration/bungeecord-chat-api",
+                    "adventure/migration/text-3.x",
+                  ],
+                },
+              ],
+            },
+            {
               id: "waterfall",
               label: "Waterfall",
               link: "/waterfall/",
               icon: "waterfall",
               items: ["waterfall/getting-started", "waterfall/configuration"],
-            },
-            {
-              id: "adventure",
-              label: "Adventure",
-              link: "https://docs.advntr.dev/",
-              icon: "adventure",
             },
             {
               id: "misc",
@@ -379,7 +468,7 @@ export default defineConfig({
               items: [
                 "misc/assets",
                 "misc/contact",
-                "misc/downloads-api",
+                "misc/downloads-service",
                 "misc/hangar-publishing",
                 "misc/java-install",
                 {
@@ -429,23 +518,13 @@ export default defineConfig({
                 "/velocity/dev/api",
               ],
               folia: ["/folia/admin", "/folia/admin/reference"],
+              adventure: ["/adventure/version-history"],
               waterfall: ["/waterfall"],
               misc: ["/misc", "/misc/tools"],
             },
           }
         ),
       ],
-      expressiveCode: {
-        plugins: [pluginLineNumbers(), pluginCollapsibleSections()],
-        defaultProps: {
-          showLineNumbers: false,
-          collapseStyle: "collapsible-start",
-        },
-        frames: {
-          extractFileNameFromCode: false,
-        },
-        emitExternalStylesheet: false,
-      },
     }),
     svelte(),
     d2({
@@ -482,6 +561,12 @@ export default defineConfig({
             LATEST_FOLIA_RELEASE,
             LATEST_WATERFALL_RELEASE,
             LATEST_USERDEV_RELEASE,
+            LATEST_ADVENTURE_SUPPORTED_MC,
+            LATEST_ADVENTURE_SUPPORTED_MC_RANGE,
+            LATEST_ADVENTURE_API_RELEASE,
+            LATEST_ADVENTURE_PLATFORM_RELEASE,
+            LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
+            LATEST_ANSI_RELEASE,
           },
         },
       ],

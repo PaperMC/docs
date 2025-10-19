@@ -295,6 +295,10 @@ entities:
       description: >-
         Determines if spawner nerfed mobs should attempt to float (jump) in
         water
+    stuck-entity-poi-retry-delay:
+      default: "200"
+      vanilla: "disabled"
+      description: The delay before retrying POI acquisition when entity navigation is stuck. This will reduce pathfinding performance impact. Measured in ticks.
     zombie-villager-infection-chance:
       default: default
       description: >-
@@ -308,6 +312,9 @@ entities:
         Sets whether zombies and zombified piglins should target turtle eggs.
         Setting this to false may help with performance, as they won't search
         for nearby eggs
+  entities-target-with-follow-range:
+    default: "false"
+    description: "Sets whether the server should use follow range when targeting entities "
   markers:
     tick:
       default: "true"

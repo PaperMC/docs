@@ -26,8 +26,8 @@ You will land into the `build.gradle.kts` file where you can add your dependenci
 
 To add Paper as a dependency, you will need to add the Paper repository to your `build.gradle.kts` or `pom.xml` file as well as the dependency itself.
 
-<Tabs>
-  <TabItem label="Gradle Kotlin DSL">
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
     ```kotlin title="build.gradle.kts" replace
     repositories {
       maven {
@@ -45,7 +45,7 @@ To add Paper as a dependency, you will need to add the Paper repository to your 
     }
     ```
   </TabItem>
-  <TabItem label="Gradle Groovy DSL">
+  <TabItem label="Gradle (Groovy)">
     ```groovy title="build.gradle" replace
     repositories {
       maven {
@@ -59,7 +59,7 @@ To add Paper as a dependency, you will need to add the Paper repository to your 
     }
     ```
   </TabItem>
-  <TabItem label="Maven POM">
+  <TabItem label="Maven">
     ```xml title="pom.xml" replace
     <project>
       <repositories>
@@ -244,9 +244,9 @@ If you are using Paper plugins, this step is not needed as plugins will be assum
 
 :::
 
-<Tabs>
-  <TabItem label="Gradle Kotlin DSL">
-    ```kotlin
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kotlin title="build.gradle.kts"
     tasks.jar {
       manifest {
         attributes["paperweight-mappings-namespace"] = "mojang"
@@ -260,8 +260,27 @@ If you are using Paper plugins, this step is not needed as plugins will be assum
     }
     ```
   </TabItem>
-  <TabItem label="Maven POM">
-    ```xml
+  <TabItem label="Gradle (Groovy)">
+    ```groovy title="build.gradle"
+    jar {
+      manifest {
+        attributes(
+          'paperweight-mappings-namespace': 'mojang'
+        )
+      }
+    }
+    // if you have shadowJar configured
+    shadowJar {
+      manifest {
+        attributes(
+          'paperweight-mappings-namespace': 'mojang'
+        )
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml title="pom.xml"
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-jar-plugin</artifactId>
@@ -282,9 +301,9 @@ If you are using Paper plugins, this step is not needed as plugins will be assum
 
 If you explicitly want to tell the server that your plugin is Spigot-mapped, you need to add the following code to your build script:
 
-<Tabs>
-  <TabItem label="Gradle Kotlin DSL">
-    ```kotlin
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kotlin title="build.gradle.kts"
     tasks.jar {
       manifest {
         attributes["paperweight-mappings-namespace"] = "spigot"
@@ -298,8 +317,27 @@ If you explicitly want to tell the server that your plugin is Spigot-mapped, you
     }
     ```
   </TabItem>
-  <TabItem label="Maven POM">
-    ```xml
+  <TabItem label="Gradle (Groovy)">
+    ```groovy title="build.gradle"
+    jar {
+      manifest {
+        attributes(
+          'paperweight-mappings-namespace': 'spigot'
+        )
+      }
+    }
+    // if you have shadowJar configured
+    shadowJar {
+      manifest {
+        attributes(
+          'paperweight-mappings-namespace': 'spigot'
+        )
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml title="pom.xml"
     <plugin>
       <groupId>org.apache.maven.plugins</groupId>
       <artifactId>maven-jar-plugin</artifactId>

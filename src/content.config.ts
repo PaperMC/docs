@@ -19,17 +19,17 @@ export const collections = {
   }),
   "adventure-releases": defineCollection({
     loader: feedLoader({
-      url: "https://github.com/KyoriPowered/adventure/releases.atom",
+      url: "https://github.com/PaperMC/adventure/releases.atom",
     }),
   }),
   "adventure-platform-releases": defineCollection({
     loader: feedLoader({
-      url: "https://github.com/KyoriPowered/adventure-platform/releases.atom",
+      url: "https://github.com/PaperMC/adventure-platform/releases.atom",
     }),
   }),
   "adventure-platform-mod-releases": defineCollection({
     loader: feedLoader({
-      url: "https://github.com/KyoriPowered/adventure-platform-mod/releases.atom",
+      url: "https://github.com/PaperMC/adventure-platform-mod/releases.atom",
     }),
   }),
 };

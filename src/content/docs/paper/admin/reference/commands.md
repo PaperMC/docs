@@ -1,7 +1,7 @@
 ---
-title: Commands in Paper
+title: Commands
 slug: paper/reference/commands
-description: Documentation about the /paper command and its subcommands.
+description: Documentation about all commands added by Paper.
 version: 1.21.8
 ---
 
@@ -58,7 +58,7 @@ If you are looking to reload the Paper configs, you can use [/paper reload](#rel
 
 ## Performance profiling
 
-The `/mspt` and `/tps` commands, whilst working fine, are superseeded by the `/spark` command,
+The `/mspt` and `/tps` commands, whilst working fine, are superseded by the `/spark` command,
 and you should therefore switch to the `/spark` command instead.
 
 ### spark

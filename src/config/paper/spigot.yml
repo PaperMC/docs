@@ -246,13 +246,13 @@ world-settings:
       default: "0"
       description: >-
         The number of blocks that the dragon death sound is audible. Set to 0
-        for global (including cross-dimension). This setting has no effect if
+        to use the Vanilla default (64 blocks). This setting has no effect if
         the gamerule globalSoundEvents is set to true, which is the default.
     end-portal-sound-radius:
       default: "0"
       description: >-
         The number of blocks that the end portal opening sound is audible. Set
-        to 0 for global (including cross-dimension). This setting has no effect if
+        to 0 to use the Vanilla default (64 blocks). This setting has no effect if
         the gamerule globalSoundEvents is set to true, which is the default.
     hanging-tick-frequency:
       default: "100"

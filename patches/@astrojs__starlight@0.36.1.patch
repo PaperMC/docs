@@ -1,5 +1,5 @@
 diff --git a/components/Icons.ts b/components/Icons.ts
-index 41316b960537d689ae86ee7c056f363d6cc39214..c179bb0d181cf84d81ba333a29b39eeafd86db6f 100644
+index 413477d5343737363d99a68a3beb98f0991a469f..a171bd687cd85a1bf0644f328e887b044986764d 100644
 --- a/components/Icons.ts
 +++ b/components/Icons.ts
 @@ -193,6 +193,11 @@ export const BuiltInIcons = {

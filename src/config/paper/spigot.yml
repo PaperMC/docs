@@ -261,7 +261,7 @@ world-settings:
       default: "0"
       description: >-
         The number of blocks that the wither spawn sound is audible. Set to 0
-        for global (including cross-dimension). This setting has no effect if
+        to use the Vanilla default (64 blocks). This setting has no effect if
         the gamerule globalSoundEvents is set to true, which is the default.
     item-despawn-rate:
       default: "6000"

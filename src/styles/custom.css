@@ -18,10 +18,10 @@
 }
 
 /* make images in markup wide and centered */
-.sl-markdown-content img {
+.sl-markdown-content img:not(:where(.not-content *)) {
   margin: 0 auto;
 }
-.sl-markdown-content img:not([alt="Diagram"]) {
+.sl-markdown-content img:not(:where(.not-content *)):not([alt="Diagram"]) {
   width: 100%;
 }
 .sl-markdown-content .img-inline img {

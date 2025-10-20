@@ -12,35 +12,6 @@ anticheat:
         replace both hidden-blocks and replacement-blocks with randomly
         generated hidden-blocks. Similarly to engine mode 2, mode 3 will replace
         each chunk layer with a random block from the hidden-blocks list.
-    max-block-height:
-      default: "64"
-      description: >-
-        Sets the maximum height (y coordinate, starting from the bottom of the
-        world) to which anti-xray will operate. Only integer multiples of 16 are
-        accepted. All other values will be rounded down. The [Minecraft Wiki
-        page about Ore](https://minecraft.wiki/w/Ore) may be helpful in
-        determining the best value for you
-    update-radius:
-      default: "2"
-      description: >-
-        Radius for block updates which will be sent containing real block data
-        when the client interacts with a block. Only values 0, 1, and 2 are
-        accepted. Values smaller than 0 will be rounded up to 0, while values
-        larger than 2 will be rounded down to 2. 0 is only designed for testing
-        purposes. Do not use it in production
-    lava-obscures:
-      default: "false"
-      description: >-
-        Whether to obfuscate blocks touching lava. Does not work well with
-        non-stone-like ore textures. This is because lava, while being mostly
-        opaque, does not cover blocks fully at the surface
-    use-permission:
-      default: "false"
-      description: >-
-        Whether to allow players with the paper.antixray.bypass permission to
-        bypass anti-xray. Checking this permission is disabled by default as
-        legacy permission plugins may struggle with the number of checks made.
-        This should only be used with modern permission plugins
     hidden-blocks:
       default: >-
         [copper_ore, deepslate_copper_ore, raw_copper_block, gold_ore,
@@ -62,6 +33,20 @@ anticheat:
         engine-mode: 3 is very similar to 2, but these blocks will be randomly
         placed where each vertical chunk layer will take the same block from the
         list.
+    lava-obscures:
+      default: "false"
+      description: >-
+        Whether to obfuscate blocks touching lava. Does not work well with
+        non-stone-like ore textures. This is because lava, while being mostly
+        opaque, does not cover blocks fully at the surface
+    max-block-height:
+      default: "64"
+      description: >-
+        Sets the maximum height (y coordinate, starting from the bottom of the
+        world) to which anti-xray will operate. Only integer multiples of 16 are
+        accepted. All other values will be rounded down. The [Minecraft Wiki
+        page about Ore](https://minecraft.wiki/w/Ore) may be helpful in
+        determining the best value for you
     replacement-blocks:
       default: "[stone, oak_planks, deepslate]"
       description: >-
@@ -76,6 +61,21 @@ anticheat:
         With engine-mode: 3, the behavior is the same as engine-mode: 2, but the
         replacement-blocks list is used to determine which blocks are used for
         each vertical chunk layer.
+    update-radius:
+      default: "2"
+      description: >-
+        Radius for block updates which will be sent containing real block data
+        when the client interacts with a block. Only values 0, 1, and 2 are
+        accepted. Values smaller than 0 will be rounded up to 0, while values
+        larger than 2 will be rounded down to 2. 0 is only designed for testing
+        purposes. Do not use it in production
+    use-permission:
+      default: "false"
+      description: >-
+        Whether to allow players with the paper.antixray.bypass permission to
+        bypass anti-xray. Checking this permission is disabled by default as
+        legacy permission plugins may struggle with the number of checks made.
+        This should only be used with modern permission plugins
 chunks:
   auto-save-interval:
     default: default
@@ -108,6 +108,11 @@ chunks:
       this instance means static or unchanging. This is **not** fixing a bug.
       The timer is increased when chunks are kept loaded because of player
       activity
+  flush-regions-on-save:
+    default: "false"
+    description: >-
+      Sets whether the server will flush chunks to disk when they are saved.
+      This may have a performance impact
   max-auto-save-chunks-per-tick:
     vanilla: "200"
     default: "24"
@@ -119,11 +124,6 @@ chunks:
     description: >-
       Sets whether the server will prevent players from moving into unloaded
       chunks or not
-  flush-regions-on-save:
-    default: "false"
-    description: >-
-      Sets whether the server will flush chunks to disk when they are saved.
-      This may have a performance impact
 collisions:
   allow-player-cramming-damage:
     vanilla: "true"
@@ -153,13 +153,13 @@ collisions:
     default: "false"
     description: Only calculate collisions if a player is one of the two entities colliding
 command-blocks:
-  permissions-level:
-    default: "2"
-    description: "Default Vanilla permission level for command blocks."
   force-follow-perm-level:
     default: "true"
     description: "Require that command blocks meet both the Bukkit permission requirements
       and the Vanilla permission level. Otherwise, only 1 of those is required."
+  permissions-level:
+    default: "2"
+    description: "Default Vanilla permission level for command blocks."
 entities:
   armor-stands:
     do-collision-entity-lookups:
@@ -170,18 +170,21 @@ entities:
       description: >-
         Disable to prevent armor stands from ticking. Can improve performance
         with many armor stands
-  markers:
-    tick:
+  behavior:
+    allow-spider-world-border-climbing:
       default: "true"
       description: >-
-        Disable to prevent markers from ticking. This may affect how they behave
-        as passengers of other entities
-  behavior:
+        Whether spiders should be able to climb on the world border, as if it
+        were a regular wall.
     baby-zombie-movement-modifier:
       default: "0.5"
       description: >-
         Modifies the speed that baby zombies move at, where 0.5 is 50% faster
         than the mob base speed, and -0.4 would be 40% slower
+    cooldown-failed-beehive-releases:
+      default: "true"
+      vanilla: "false"
+      description: Adds a cooldown to bees being released after a failed release, which can occur if the hive is blocked or it being night.
     disable-chest-cat-detection:
       default: "false"
       description: Allows you to open chests even if they have a cat sitting on top of them
@@ -193,11 +196,6 @@ entities:
       description: >-
         Instructs the server to disable critical hits in PvP, treating them as
         normal hits instead
-    allow-spider-world-border-climbing:
-      default: "true"
-      description: >-
-        Whether spiders should be able to climb on the world border, as if it
-        were a regular wall.
     door-breaking-difficulty:
       vindicator:
         default: "[NORMAL, HARD]"
@@ -220,17 +218,17 @@ entities:
         into a single orb. This is especially noticeable when defeating boss
         monsters
     mobs-can-always-pick-up-loot:
-      zombies:
-        default: "false"
-        description: >-
-          Instructs the server to allow zombies to pick up loot. If set to
-          false, the probability that a zombie picks up items depends on the
-          world's difficulty (Vanilla behavior)
       skeletons:
         default: "false"
         description: >-
           Instructs the server to allow skeletons to pick up loot. If set to
           false, the probability that a skeleton picks up items depends on the
+          world's difficulty (Vanilla behavior)
+      zombies:
+        default: "false"
+        description: >-
+          Instructs the server to allow zombies to pick up loot. If set to
+          false, the probability that a zombie picks up items depends on the
           world's difficulty (Vanilla behavior)
     nerf-pigmen-from-nether-portals:
       default: "false"
@@ -254,11 +252,12 @@ entities:
       vanilla: "false"
       default: "true"
       description: "Prevents phantoms from attacking players who have slept "
-    player-insomnia-start-ticks:
-      default: "72000"
-      description: |
-        Number of ticks a player must stay awake before phantoms can start spawning.
-        Default (72000) is 3 Minecraft days, -1 disables phantom spawning.
+    phantoms-spawn-attempt-max-seconds:
+      default: "119"
+      description: Sets the maximum number of seconds between phantom spawn attempts
+    phantoms-spawn-attempt-min-seconds:
+      default: "60"
+      description: Sets the minimum number of seconds between phantom spawn attempts
     piglins-guard-chests:
       default: "true"
       description: If piglins should attempt to guard chests when angered
@@ -283,6 +282,11 @@ entities:
         per-player:
           default: "false"
           description: Sets the start to be independent for each player
+    player-insomnia-start-ticks:
+      default: "72000"
+      description: |
+        Number of ticks a player must stay awake before phantoms can start spawning.
+        Default (72000) is 3 Minecraft days, -1 disables phantom spawning.
     should-remove-dragon:
       default: "false"
       description: Sets whether to remove the dragon if it exists without a portal
@@ -291,6 +295,10 @@ entities:
       description: >-
         Determines if spawner nerfed mobs should attempt to float (jump) in
         water
+    stuck-entity-poi-retry-delay:
+      default: "200"
+      vanilla: "disabled"
+      description: The delay before retrying POI acquisition when entity navigation is stuck. This will reduce pathfinding performance impact. Measured in ticks.
     zombie-villager-infection-chance:
       default: default
       description: >-
@@ -304,23 +312,15 @@ entities:
         Sets whether zombies and zombified piglins should target turtle eggs.
         Setting this to false may help with performance, as they won't search
         for nearby eggs
-    phantoms-spawn-attempt-max-seconds:
-      default: "119"
-      description: Sets the maximum number of seconds between phantom spawn attempts
-    phantoms-spawn-attempt-min-seconds:
-      default: "60"
-      description: Sets the minimum number of seconds between phantom spawn attempts
-    cooldown-failed-beehive-releases:
-      default: "true"
-      vanilla: "false"
-      description: Adds a cooldown to bees being released after a failed release, which can occur if the hive is blocked or it being night.
-    stuck-entity-poi-retry-delay:
-      default: "200"
-      vanilla: "disabled"
-      description: The delay before retrying POI acquisition when entity navigation is stuck. This will reduce pathfinding performance impact. Measured in ticks.
   entities-target-with-follow-range:
     default: "false"
     description: "Sets whether the server should use follow range when targeting entities "
+  markers:
+    tick:
+      default: "true"
+      description: >-
+        Disable to prevent markers from ticking. This may affect how they behave
+        as passengers of other entities
   mob-effects:
     immune-to-wither-effect:
       default: "true"
@@ -371,49 +371,6 @@ entities:
       description: >-
         The rate, in ticks, at which arrows shot from players in creative mode
         are despawned
-    ticks-per-spawn:
-      ambient:
-        default: "-1"
-        description: |
-          Determines how many ticks there are between attempts to spawn ambient mobs (bats).
-          Default (-1) uses
-          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_ambient_spawns).
-      axolotls:
-        default: "-1"
-        description: |
-          Determines how many ticks there are between attempts to spawn axolotls.
-          Default (-1) uses
-          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_axolotl_spawns).
-      creature:
-        default: "-1"
-        description: |
-          Determines how many ticks there are between attempts to spawn passive creatures (animals).
-          Default (-1) uses
-          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_animal_spawns).
-      monster:
-        default: "-1"
-        description: |
-          Determines how many ticks there are between attempts to spawn hostile monsters.
-          Default (-1) uses
-          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_monster_spawns).
-      underground_water_creature:
-        default: "-1"
-        description: |
-          Determines how many ticks there are between attempts to spawn underground water creatures (glow squid).
-          Default (-1) uses
-          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_underground_creature_spawns).
-      water_ambient:
-        default: "-1"
-        description: |
-          Determines how many ticks there are between attempts to spawn ambient water mobs (tropical fish).
-          Default (-1) uses
-          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_ambient_spawns).
-      water_creature:
-        default: "-1"
-        description: |
-          Determines how many ticks there are between attempts to spawn water creatures (squid, dolphins).
-          Default (-1) uses
-          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_spawns).
     despawn-range-shape:
       default: ELLIPSOID
       description: >-
@@ -631,6 +588,49 @@ entities:
           except that it can be configured per world.
 
           A value of -1 will use the value in bukkit.yml
+    ticks-per-spawn:
+      ambient:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn ambient mobs (bats).
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_ambient_spawns).
+      axolotls:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn axolotls.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_axolotl_spawns).
+      creature:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn passive creatures (animals).
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_animal_spawns).
+      monster:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn hostile monsters.
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_monster_spawns).
+      underground_water_creature:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn underground water creatures (glow squid).
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_underground_creature_spawns).
+      water_ambient:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn ambient water mobs (tropical fish).
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_ambient_spawns).
+      water_creature:
+        default: "-1"
+        description: |
+          Determines how many ticks there are between attempts to spawn water creatures (squid, dolphins).
+          Default (-1) uses
+          [bukkit.yml spawn rate](/paper/reference/bukkit-configuration#ticks_per_water_spawns).
     wandering-trader:
       spawn-chance-failure-increment:
         default: "25"
@@ -663,11 +663,6 @@ entities:
           default value defers to Minecraft's default setting, which as of 1.12
           is the sea level of the world (usually Y: 64)
   tracking-range-y:
-    enabled:
-      default: "false"
-      description: >-
-        Enables separate ranges for tracking ranges in the vertical (Y)
-        direction.
     animal:
       default: default
       description: >-
@@ -678,26 +673,31 @@ entities:
       description: >-
         Controls how far vertically in blocks display entities are tracked (sent
         to) the player.
-    monster:
-      default: default
+    enabled:
+      default: "false"
       description: >-
-        Controls how far vertically in blocks monsters are tracked (sent to) the
-        player.
-    player:
-      default: default
-      description: >-
-        Controls how far vertically in blocks players are tracked (sent to) the
-        player.
+        Enables separate ranges for tracking ranges in the vertical (Y)
+        direction.
     misc:
       default: default
       description: >-
         Controls how far vertically in blocks miscellaneous are tracked (sent
         to) the player.
+    monster:
+      default: default
+      description: >-
+        Controls how far vertically in blocks monsters are tracked (sent to) the
+        player.
     other:
       default: default
       description: >-
         Controls how far vertically in blocks other entities are tracked (sent
         to) the player.
+    player:
+      default: default
+      description: >-
+        Controls how far vertically in blocks players are tracked (sent to) the
+        player.
 environment:
   disable-explosion-knockback:
     default: "false"
@@ -712,11 +712,9 @@ environment:
   disable-thunder:
     default: "false"
     description: Disables thunderstorms
-  locate-structures-outside-world-border:
-    default: "false"
-    description: >-
-      If the server should be able to locate structures in chunks that are outside
-      the world border.
+  fire-tick-delay:
+    default: "30"
+    description: Sets the minimum delay between fire ticks
   frosted-ice:
     delay:
       max:
@@ -731,6 +729,23 @@ environment:
   generate-flat-bedrock:
     default: "false"
     description: Instructs the server to generate bedrock as a single flat layer
+  locate-structures-outside-world-border:
+    default: "false"
+    description: >-
+      If the server should be able to locate structures in chunks that are outside
+      the world border.
+  max-block-ticks:
+    default: "65536"
+    description: >-
+      The maximum number of block ticks that can be processed in a single tick.
+      This is a safety measure to prevent the server from hanging when there is
+      a large amount of block updates.
+  max-fluid-ticks:
+    default: "65536"
+    description: >-
+      The maximum number of fluid ticks that can be processed in a single tick.
+      This is a safety measure to prevent the server from hanging when there is
+      a large number of fluid updates.
   nether-ceiling-void-damage-height:
     default: disabled
     description: >-
@@ -790,21 +805,6 @@ environment:
   water-over-lava-flow-speed:
     default: "5"
     description: Sets the speed at which water flows while over lava
-  fire-tick-delay:
-    default: "30"
-    description: Sets the minimum delay between fire ticks
-  max-fluid-ticks:
-    default: "65536"
-    description: >-
-      The maximum number of fluid ticks that can be processed in a single tick.
-      This is a safety measure to prevent the server from hanging when there is
-      a large number of fluid updates.
-  max-block-ticks:
-    default: "65536"
-    description: >-
-      The maximum number of block ticks that can be processed in a single tick.
-      This is a safety measure to prevent the server from hanging when there is
-      a large amount of block updates.
 feature-seeds:
   generate-random-seeds-for-all:
     default: "false"
@@ -960,6 +960,20 @@ misc:
       are placed on the portal frame before any attempt is made at respawning
       the ender dragon. Enabling this setting allows remote ender dragon
       respawning to work again.
+  alternate-current-update-order:
+    default: HORIZONTAL_FIRST_OUTWARD
+    description: >-
+      Controls the order in which Alternate Current updates wires and neighboring blocks.
+      Only has an effect when using the "ALTERNATE_CURRENT" redstone implementation.
+      This can be one of the following values:
+
+      - **HORIZONTAL_FIRST_OUTWARD**
+
+      - **HORIZONTAL_FIRST_INWARD**
+
+      - **VERTICAL_FIRST_OUTWARD**
+
+      - **VERTICAL_FIRST_INWARD**
   disable-end-credits:
     default: "false"
     description: >-
@@ -1012,25 +1026,6 @@ misc:
       on the Mojira bug tracker give an overview of the Eigencraft implementation.
 
       - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
-  alternate-current-update-order:
-    default: HORIZONTAL_FIRST_OUTWARD
-    description: >-
-      Controls the order in which Alternate Current updates wires and neighboring blocks.
-      Only has an effect when using the "ALTERNATE_CURRENT" redstone implementation.
-      This can be one of the following values:
-
-      - **HORIZONTAL_FIRST_OUTWARD**
-
-      - **HORIZONTAL_FIRST_INWARD**
-
-      - **VERTICAL_FIRST_OUTWARD**
-
-      - **VERTICAL_FIRST_INWARD**
-  shield-blocking-delay:
-    default: "5"
-    description: >-
-      The number of ticks between a player activating their shield and it
-      actually blocking damage
   show-sign-click-command-failure-msgs-to-player:
     default: "false"
     description: >-
@@ -1083,6 +1078,12 @@ tick-rates:
       Higher values than 1 can cause item desync/ghosting or make block breaking
       progress appear to reset randomly. It can also create visual artifacts mimicking
       server lag to clients, despite this not being the case.
+  dry-farmland:
+    default: "1"
+    description: |
+      Controls how frequently dry farmland blocks are ticked.
+      Higher values slow down the rate at which farmland checks for moisture updates.
+      Default (1) uses Vanilla behavior, -1 disables dry farmland random ticks.
   grass-spread:
     default: "1"
     description: >-
@@ -1093,18 +1094,6 @@ tick-rates:
     description: >-
       How often mob spawners should tick to calculate available spawn areas and
       spawn new entities into the world. A value of -1 will disable all spawners
-  dry-farmland:
-    default: "1"
-    description: |
-      Controls how frequently dry farmland blocks are ticked.
-      Higher values slow down the rate at which farmland checks for moisture updates.
-      Default (1) uses Vanilla behavior, -1 disables dry farmland random ticks.
-  wet-farmland:
-    default: "1"
-    description: |
-      Controls how frequently wet farmland blocks are ticked.
-      Higher values slow down the rate at which farmland checks for moisture updates.
-      Default (1) uses Vanilla behavior, -1 disables wet farmland random ticks.
   sensor:
     villager:
       secondarypoisensor:
@@ -1118,6 +1107,12 @@ tick-rates:
         description: >-
           Sets the sensor tick rate of an entity. -1 uses Vanilla. See timings
           for the names. Might change between updates!
+  wet-farmland:
+    default: "1"
+    description: |
+      Controls how frequently wet farmland blocks are ticked.
+      Higher values slow down the rate at which farmland checks for moisture updates.
+      Default (1) uses Vanilla behavior, -1 disables wet farmland random ticks.
 unsupported-settings:
   inline-docs-warning:
     color: red

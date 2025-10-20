@@ -6,9 +6,6 @@ allow-flight:
   description: >
     Means that users will not be kicked if they fly whilst in Survival mode. This is likely to occur through
     hacking however there can be false positives.
-allow-nether:
-  default: "true"
-  description: "Allows users to travel to the Nether."
 broadcast-console-to-ops:
   default: "true"
   description: "Send console command output to all online operators."
@@ -24,9 +21,14 @@ debug:
 difficulty:
   default: "easy"
   description: 'Defines the difficulty of the server. (Allowed values: "peaceful", "easy", "normal", "hard")'
-enable-command-block:
-  default: "true"
-  description: "Enables command blocks."
+enable-code-of-conduct:
+  default: "false"
+  description: >-
+    Whether the server will look for code of conduct files in the codeofconduct subfolder in the server folder.
+
+    Each file in the folder should have the form <language_code>.txt. The server will then show the code of conduct
+    matching the player’s language. If the language doesn’t exist, then en_us will be used. If neither exist, an
+    arbitrary available entry will be used instead.
 enable-jmx-monitoring:
   default: "false"
   description: >
@@ -109,6 +111,37 @@ log-ips:
   description: >-
     Whether player IP addresses should be logged by the server. This does not
     impact the ability of plugins to log the IP addresses of players
+management-server-enabled:
+  default: "false"
+  description: "Whether the [Minecraft Server Management Protocol](https://minecraft.wiki/w/Minecraft_Server_Management_Protocol) is enabled."
+management-server-host:
+  default: "localhost"
+  description: "Controls the host that the Minecraft Server Management Protocol is started."
+management-server-port:
+  default: "localhost"
+  description: "Controls the port that the Minecraft Server Management Protocol is started on."
+management-server-secret:
+  default: ""
+  description: >-
+    Allows for clients to supply an Authorization header with a server specific secret, which is forty alphanumeric characters long (A-Z, a-z, and 0-9).
+
+    The secret is automatically generated if the property is left empty.
+management-server-tls-enabled:
+  default: "true"
+  description: "Controls whether the Minecraft Server Management Protocol uses TLS (Transport Layer Security)."
+management-server-tls-keystore:
+  default: ""
+  description: >-
+    Controls the path to the keystore file used for TLS.
+
+    A server will not start is TLS is enabled and no keystore is provided.
+management-server-tls-keystore-password:
+  default: ""
+  description: >-
+    Controls the password to the keystore file used for TLS.
+
+    The password can be done through an environment variable (MINECRAFT_MANAGEMENT_TLS_KEYSTORE_PASSWORD), a
+    Java Virtual Machine argument (-Dmanagement.tls.keystore.password=), or through this server property.
 max-chained-neighbor-updates:
   default: "1000000"
   description: >
@@ -162,9 +195,6 @@ prevent-proxy-connections:
   description: >
     If the ISP/AS sent from the server is different from the one from Mojang Studios'' authentication
     server, the player not allowed to join the server.
-pvp:
-  default: "true"
-  description: "If set to false, players are not allowed to attack other players."
 query.port:
   default: "25565"
   description: "The port for the query server. This is used to get information about the server."
@@ -214,15 +244,17 @@ simulation-distance:
     updated by the server, measured in chunks in each direction of the player (radius, not diameter).
     If entities are outside this radius, then they will not be ticked by the server nor will they be
     visible to players. Must be between 3 and 32 inclusive.
-spawn-monsters:
-  default: "true"
-  description: "Determines if monsters will be spawned."
 spawn-protection:
   default: "16"
   description: >
     Used to determine the side length of the spawn protection. The formula of 2x+1 is used. A value of 1
     will result in a side length of 3 **blocks**. Setting this to 0 will disable spawn protection. There must be
     at least 1 operator to be enabled.
+status-heartbeat-interval:
+  default: "0"
+  description: >-
+    Controls the intervals in which the management server sends heartbeat notifications to connected clients.
+    It is disabled by default.
 sync-chunk-writes:
   default: "true"
   description: |

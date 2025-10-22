@@ -90,7 +90,7 @@ You should remove any dependency on the Paper API, as the dev bundle includes th
 
 A dev bundle might not support the JDK version Gradle is configured to use.
 If you are getting an error during the execution of `paperweightUserdevSetup`, you can try
-setting paperweight's java launcher property to a different Java version.
+setting paperweight's `javaLauncher` property to a different Java version.
 
 ```kts title="build.gradle.kts"
 paperweight {

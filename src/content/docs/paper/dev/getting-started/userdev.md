@@ -86,6 +86,23 @@ You should remove any dependency on the Paper API, as the dev bundle includes th
 
 :::
 
+:::note[Running userdev with a newer JDK]
+
+Sometimes, when using a new JDK, a dev bundle might not support that JDK. If you are
+getting an error during the execution of `paperweightUserdevSetup`, you can set
+paperweight's java launcher property for paperweight to use a lower Java version.
+
+You can do this by adding the following files to your `build.gradle.kts`:
+```kts
+paperweight {
+  javaLauncher = javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(21)
+  }
+}
+```
+
+:::
+
 ## Gradle tasks
 
 ### `reobfJar`

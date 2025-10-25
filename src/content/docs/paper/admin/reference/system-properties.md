@@ -257,6 +257,10 @@ By default, this uses Google's NA mirror of Maven Central. You may also use regi
 
 :::
 
+#### paper.debugEntitiesWithInvalidIds
+- **default**: `false`
+- **description**: Enables logging the full entity NBT when an entity with a missing or otherwise invalid entity id is attempted to be loaded. (Whenever 'Skipping Entity with id' is logged to the console.)
+
 ## List of environment variables
 
 #### PAPER_VELOCITY_SECRET

@@ -86,19 +86,27 @@ You should remove any dependency on the Paper API, as the dev bundle includes th
 
 :::
 
-:::note[Running userdev with a newer JDK]
+:::note[Configuring the Java toolchain for userdev setup]
 
-A dev bundle might not support the JDK version Gradle is configured to use.
-If you are getting an error during the execution of `paperweightUserdevSetup`, you can try
-setting paperweight's `javaLauncher` property to a different Java version.
+A given dev bundle may not always support the Java toolchain Gradle is configured to use
+(whether configured explicitly or inherited from the Gradle runtime).
+If you are getting an error during the execution of `paperweightUserdevSetup` (especially patch application failures),
+you can try setting paperweight's `javaLauncher` property to a different Java version.
 
+For example, with 1.17.1:
 ```kts title="build.gradle.kts"
 paperweight {
   javaLauncher = javaToolchains.launcherFor {
-    languageVersion = JavaLanguageVersion.of(21)
+    // Example scenario:
+    // Paper 1.17.1 was originally built with JDK 16 and the bundle
+    // has not been updated to work with 21+ (but we want to compile with a 25 toolchain)
+    languageVersion = JavaLanguageVersion.of(17)
   }
 }
 ```
+
+Among others, the [multi-project branch of the PaperMC/paperweight-test-plugin](https://github.com/PaperMC/paperweight-test-plugin/tree/multi-project)
+makes use of this feature.
 
 :::
 

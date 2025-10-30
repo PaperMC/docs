@@ -539,6 +539,7 @@ export default defineConfig({
   image: {
     responsiveStyles: true,
     layout: "constrained",
+    domains: ["assets.papermc.io"],
   },
   markdown: {
     remarkPlugins: [

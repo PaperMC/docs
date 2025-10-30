@@ -24,11 +24,15 @@
 .sl-markdown-content img:not(:where(.not-content *)):not([alt="Diagram"]) {
   width: 100%;
 }
-.sl-markdown-content .img-inline img {
+/* except when we want them inline */
+.sl-markdown-content :is(img.img-inline, .img-inline img) {
   margin: 0;
   width: auto;
 }
-.sl-markdown-content .img-inline-center img {
+.sl-markdown-content img.img-inline {
+  display: inline-block;
+}
+.sl-markdown-content :is(img.img-inline-center, .img-inline-center img) {
   width: auto;
 }
 
@@ -37,12 +41,8 @@
   font-family: var(--__sl-font-mono);
 }
 
-/* Safari fixes for logo sizing */
-.hero-html > img {
-  object-fit: contain;
+.hero > img {
   width: min(70%, 20rem);
-  height: auto;
-  margin-inline: auto;
 }
 
 /* make index page hero smaller vertically */
@@ -57,6 +57,11 @@
   :root {
     --sl-content-width: 64rem;
   }
+}
+
+/* magic */
+@view-transition {
+  navigation: auto;
 }
 
 /* Dark mode colors. */

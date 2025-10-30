@@ -41,6 +41,10 @@
   font-family: var(--__sl-font-mono);
 }
 
+.hero > img {
+  width: min(70%, 20rem);
+}
+
 /* make index page hero smaller vertically */
 @media (min-width: 50rem) {
   .hero {

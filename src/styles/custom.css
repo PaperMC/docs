@@ -55,6 +55,11 @@
   }
 }
 
+/* magic */
+@view-transition {
+  navigation: auto;
+}
+
 /* Dark mode colors. */
 :root {
   --sl-color-accent-low: #1e3a8a;

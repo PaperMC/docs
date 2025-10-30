@@ -4,6 +4,7 @@ slug: adventure/minimessage/format
 description: The MiniMessage format documentation.
 ---
 
+import { Image } from "astro:assets";
 import Shadow1 from "./assets/shadow_1.png";
 import Shadow2 from "./assets/shadow_2.png";
 import Shadow3 from "./assets/shadow_3.png";
@@ -96,8 +97,8 @@ Examples
 
 <br/>
 
-<img style="all: initial" alt="The result of parsing `<yellow>Hello <blue>World</blue>!`, shown in-game in the Minecraft client's chat window" src={Color1.src} />
-<img style="all: initial" alt="The result of parsing `<red>This is a <green>test!`, shown in-game in the Minecraft client's chat window" src={Color2.src} />
+<Image class="img-inline" alt="The result of parsing `<yellow>Hello <blue>World</blue>!`, shown in-game in the Minecraft client's chat window" src={Color1} />
+<Image class="img-inline" alt="The result of parsing `<red>This is a <green>test!`, shown in-game in the Minecraft client's chat window" src={Color2} />
 
 ### Color (verbose)
 
@@ -122,8 +123,8 @@ Examples
 
 <br/>
 
-<img style="all: initial" alt="The result of parsing `<color:yellow>Hello <color:blue>World</color:blue>!`, shown in-game in the Minecraft client's chat window" src={ColorVerbose1.src} />
-<img style="all: initial" alt="The result of parsing `<color:#FF5555>This is a <color:#55FF55>test!`, shown in-game in the Minecraft client's chat window" src={ColorVerbose2.src} />
+<Image class="img-inline" alt="The result of parsing `<color:yellow>Hello <color:blue>World</color:blue>!`, shown in-game in the Minecraft client's chat window" src={ColorVerbose1} />
+<Image class="img-inline" alt="The result of parsing `<color:#FF5555>This is a <color:#55FF55>test!`, shown in-game in the Minecraft client's chat window" src={ColorVerbose2} />
 
 ### Shadow Color
 
@@ -146,9 +147,9 @@ Examples
 
 <br/>
 
-<img src={Shadow1.src} style="all: initial" alt="The result of parsing `<shadow:yellow>Hello <shadow:aqua:0.5>World</shadow>!` shown in-game in the Minecraft client's chat window"/>
-<img src={Shadow2.src} style="all: initial" alt="The result of parsing `<shadow:#FF5555>This is a <shadow:#55FF55>test!` shown in-game in the Minecraft client's chat window"/>
-<img src={Shadow3.src} style="all: initial" alt="The result of parsing `<shadow:#000000FF><b>Thicc` shown in-game in the Minecraft client's chat window"/>
+<Image class="img-inline" src={Shadow1} alt="The result of parsing `<shadow:yellow>Hello <shadow:aqua:0.5>World</shadow>!` shown in-game in the Minecraft client's chat window"/>
+<Image class="img-inline" src={Shadow2} alt="The result of parsing `<shadow:#FF5555>This is a <shadow:#55FF55>test!` shown in-game in the Minecraft client's chat window"/>
+<Image class="img-inline" src={Shadow3} alt="The result of parsing `<shadow:#000000FF><b>Thicc` shown in-game in the Minecraft client's chat window"/>
 
 ### Decoration
 
@@ -174,7 +175,7 @@ Examples
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `<underlined>This is <bold>important</bold>!`, shown in-game in the Minecraft client's chat window" src={Decoration1.src} />
+<Image class="img-inline" alt="The result of parsing `<underlined>This is <bold>important</bold>!`, shown in-game in the Minecraft client's chat window" src={Decoration1} />
 
 ### Reset
 
@@ -194,7 +195,7 @@ Examples
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `<yellow><bold>Hello <reset>world!`, shown in-game in the Minecraft client's chat window" src={Reset1.src} />
+<Image class="img-inline" alt="The result of parsing `<yellow><bold>Hello <reset>world!`, shown in-game in the Minecraft client's chat window" src={Reset1} />
 
 ### Click
 
@@ -214,7 +215,7 @@ Click <click:copy_to_clipboard:Haha you suck> this </click>to copy your score!
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `<click:run_command:/seed>Click</click> to show the world seed!`, shown in-game in the Minecraft client's chat window" src={Click1.src} />
+<Image class="img-inline" alt="The result of parsing `<click:run_command:/seed>Click</click> to show the world seed!`, shown in-game in the Minecraft client's chat window" src={Click1} />
 
 :::caution
 
@@ -246,7 +247,7 @@ Examples
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `<hover:show_text:'<red>test'>TEST`, shown in-game in the Minecraft client's chat window" src={Hover1.src} />
+<Image class="img-inline" alt="The result of parsing `<hover:show_text:'<red>test'>TEST`, shown in-game in the Minecraft client's chat window" src={Hover1} />
 
 ### Keybind
 
@@ -264,7 +265,7 @@ Press <red><key:key.jump> to jump!
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `Press <red><key:key.jump> to jump!`, shown in-game in the Minecraft client's chat window" src={Key1.src} />
+<Image class="img-inline" alt="The result of parsing `Press <red><key:key.jump> to jump!`, shown in-game in the Minecraft client's chat window" src={Key1} />
 
 ### Translatable
 
@@ -287,8 +288,8 @@ You should get a <lang:block.minecraft.diamond_block>!
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `You should get a <lang:block.minecraft.diamond_block>!`, shown in-game in the Minecraft client's chat window in English" src={Translatable1.src} />
-<img style="all: initial" alt="The result of parsing `<lang:commands.drop.success.single:'<red>1':'<blue>Stone'>!`, shown in-game in the Minecraft client's chat window in English" src={Translatable2.src} />
+<Image class="img-inline" alt="The result of parsing `You should get a <lang:block.minecraft.diamond_block>!`, shown in-game in the Minecraft client's chat window in English" src={Translatable1} />
+<Image class="img-inline" alt="The result of parsing `<lang:commands.drop.success.single:'<red>1':'<blue>Stone'>!`, shown in-game in the Minecraft client's chat window in English" src={Translatable2} />
 
 ### Fallback
 
@@ -332,7 +333,7 @@ Shift-click <insert:test>this</insert> to insert!
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `Shift-click <insert:test>this</insert> to insert!`, shown in-game in the Minecraft client's chat window" src={Insertion1.src} />
+<Image class="img-inline" alt="The result of parsing `Shift-click <insert:test>this</insert> to insert!`, shown in-game in the Minecraft client's chat window" src={Insertion1} />
 
 ### Rainbow
 
@@ -354,7 +355,7 @@ Examples
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing all four examples in series, shown in-game in the Minecraft client's chat window" src={Rainbow1.src} />
+<Image class="img-inline" alt="The result of parsing all four examples in series, shown in-game in the Minecraft client's chat window" src={Rainbow1} />
 
 ### Gradient
 
@@ -375,7 +376,7 @@ Examples
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing the examples for the gradient tag, shown in-game in the Minecraft client's chat window" src={Gradient1.src} />
+<Image class="img-inline" alt="The result of parsing the examples for the gradient tag, shown in-game in the Minecraft client's chat window" src={Gradient1} />
 
 ### Transition
 
@@ -393,7 +394,7 @@ Examples
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `<transition:white:black:red:[phase]>Hello World [phase]</transition>`, shown in-game in the Minecraft client's chat window" src={Transition1.src} />
+<Image class="img-inline" alt="The result of parsing `<transition:white:black:red:[phase]>Hello World [phase]</transition>`, shown in-game in the Minecraft client's chat window" src={Transition1} />
 
 ### Font
 
@@ -412,7 +413,7 @@ Nothing <font:uniform>Uniform <font:alt>Alt  </font> Uniform
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `Nothing <font:uniform>Uniform <font:alt>Alt  </font> Uniform`, shown in-game in the Minecraft client's chat window" src={Font1.src} />
+<Image class="img-inline" alt="The result of parsing `Nothing <font:uniform>Uniform <font:alt>Alt  </font> Uniform`, shown in-game in the Minecraft client's chat window" src={Font1} />
 
 ### Newline
 
@@ -434,7 +435,7 @@ Let me insert a <newline>line break here.
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `<hover:show_text:'<red>Hover with a<newline><green>line break'>Text with<newline>line break</hover>`, shown in-game in the Minecraft client's chat window" src={Newline1.src} />
+<Image class="img-inline" alt="The result of parsing `<hover:show_text:'<red>Hover with a<newline><green>line break'>Text with<newline>line break</hover>`, shown in-game in the Minecraft client's chat window" src={Newline1} />
 
 ### Selector
 
@@ -456,7 +457,7 @@ Hello <selector:@e[limit=5]>, I'm <selector:@s>!
 ```
 
 <br/>
-<img style="all: initial" alt="The result of parsing `Hello <selector:@e[limit=5]>, I'm <selector:@s>!`, show in-game in the Minecraft client's chat window" src={Selector1.src} />
+<Image class="img-inline" alt="The result of parsing `Hello <selector:@e[limit=5]>, I'm <selector:@s>!`, show in-game in the Minecraft client's chat window" src={Selector1} />
 
 ### Score
 

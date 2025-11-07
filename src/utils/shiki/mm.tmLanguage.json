@@ -69,14 +69,14 @@
           "name": "variable.parameter.inverse-flag.mm",
           "match": "(\\s+)(![a-z_0-9-]+)",
           "captures": {
-            "2": { "name": "support.type.inverse-flag.mm" }
+            "2": { "name": "keyword.reserved.inverse-flag.mm" }
           }
         },
         {
           "name": "variable.parameter.flag.mm",
           "match": "(\\s+)([a-z_0-9-]+)",
           "captures": {
-            "2": { "name": "support.type.flag.mm" }
+            "2": { "name": "keyword.reserved.flag.mm" }
           }
         }
       ]

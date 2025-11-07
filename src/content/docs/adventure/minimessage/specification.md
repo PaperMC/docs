@@ -4,7 +4,7 @@ slug: adventure/minimessage/specification
 description: A developer-facing specification of the MiniMessage format.
 tableOfContents:
   minHeadingLevel: 2
-  maxHeadingLevel: 5
+  maxHeadingLevel: 4
 ---
 
 This document outlines the MiniMessage format in detail to aid developers who wish to implement their own MiniMessage
@@ -189,7 +189,7 @@ This section defines miscellaneous behavior of common parts.
 
 ### Identifiers
 
-All identifiers must be lowercased and contain only alphanumerical characters or `_`. All identifiers
+All identifiers must be lowercased and contain only alphanumerical characters, `_`, or '-'. All identifiers
 used as named argument names should be unique.
 
 ### Quoting
@@ -285,5 +285,5 @@ alphanumeric          → "a" | "b" | "c" | "d"
                         | "y" | "z" | "_" | "0"
                         | "1" | "2" | "3" | "4"
                         | "5" | "6" | "7" | "8"
-                        | "9"
+                        | "9" | "-"
 ```

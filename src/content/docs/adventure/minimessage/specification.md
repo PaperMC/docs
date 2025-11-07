@@ -8,7 +8,7 @@ tableOfContents:
 ---
 
 This document outlines the MiniMessage format in detail to aid developers who wish to implement their own MiniMessage
-parser from scratch or understand the internal processes happening during the parsing of MiniMesssage formatted strings.
+parser from scratch or understand the internal processes happening during the parsing of MiniMessage formatted strings.
 
 The keywords “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”,
 “MAY”, and “OPTIONAL” in this document are to be interpreted as described in
@@ -123,7 +123,7 @@ Here is an example for valid valued named arguments:
 And example for invalid valued named arguments:
 
 ```mm
-<birbtag vöglein=papagei Colour=red and blue>
+<birbtag vöglein=papagei Color=red and blue>
 ```
 
 :::note

@@ -2,6 +2,8 @@ import type { RemarkPlugin } from "@astrojs/markdown-remark";
 import { deadOrAlive } from "dead-or-alive";
 import { visit } from "unist-util-visit";
 
+const CI = Boolean(process.env.CI);
+
 // replaces special Markdown links with Javadoc URLs
 // link format: jd:<javadoc name>[:<module name>][:<fully qualified class name; . as package separator, $ for inner>]
 
@@ -58,13 +60,16 @@ const parse = async (url: string, { targets }: Options): Promise<string | null> 
   const module = match[3] ? match[2] : typeof target !== "string" ? target.module : undefined;
   const parsed = `${targetUrl}/${module ? `${module}/` : ""}${asUrl(name)}`;
 
-  const result = await deadOrAlive(parsed, {
-    findUrls: false,
-    followMetaHttpEquiv: false,
-    userAgent: "PaperMC/docs (https://docs.papermc.io)",
-  });
-  if (result.status !== "alive") {
-    error(new Error(`Received dead status for Javadoc link "${url}"`));
+  if (CI) {
+    // only check links in CI to avoid rate limiting during local development
+    const result = await deadOrAlive(parsed, {
+      findUrls: false,
+      followMetaHttpEquiv: false,
+      userAgent: "PaperMC/docs (https://docs.papermc.io)",
+    });
+    if (result.status !== "alive") {
+      error(new Error(`Received dead status for Javadoc link "${url}"`));
+    }
   }
 
   return parsed;

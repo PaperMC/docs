@@ -3,7 +3,7 @@ import { execSync } from "child_process";
 export interface CommitterInfo {
   name: string;
   href: string;
-  avatar: string;
+  avatar?: string;
 }
 
 export interface CommitInfo {
@@ -42,7 +42,7 @@ export const getCommitInfo = async (filePath: string): Promise<CommitInfo | null
     return { hash, committer: cached };
   }
 
-  const info: CommitterInfo = { name, href: `mailto:${email}`, avatar: "" };
+  const info: CommitterInfo = { name, href: `mailto:${email}` };
 
   const res = await fetch(`https://api.github.com/repos/${REPO}/commits/${hash}`, GITHUB_OPTIONS);
   if (res.ok) {

@@ -73,12 +73,3 @@ player.teleport(
     TeleportFlag.Relative.VELOCITY_Z
 );
 ```
-
-### Retaining passengers
-
-Teleport an entity with the [`RETAIN_PASSENGERS`](jd:paper:io.papermc.paper.entity.TeleportFlag$EntityState#RETAIN_PASSENGERS) flag,
-allowing its passengers to be transferred with the entity.
-
-```java
-entity.teleport(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
-```

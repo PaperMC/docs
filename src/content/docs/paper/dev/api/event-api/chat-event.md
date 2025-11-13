@@ -5,21 +5,21 @@ slug: paper/dev/chat-events
 ---
 
 The chat event has evolved a few times over the years.
-This guide will explain how to properly use the new [`AsyncChatEvent`](jd:paper:io.papermc.paper.event.player.AsyncChatEvent)
-and its [`ChatRenderer`](jd:paper:io.papermc.paper.chat.ChatRenderer).
-The [`AsyncChatEvent`](jd:paper:io.papermc.paper.event.player.AsyncChatEvent)
-is an improved version of the old [`AsyncPlayerChatEvent`](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent)
+This guide will explain how to properly use the new [](jd:paper:io.papermc.paper.event.player.AsyncChatEvent)
+and its [](jd:paper:io.papermc.paper.chat.ChatRenderer).
+The [](jd:paper:io.papermc.paper.event.player.AsyncChatEvent)
+is an improved version of the old [](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent)
 that allows you to render chat messages individually for each player.
 
 :::note[`AsyncChatEvent` vs `ChatEvent`]
 
-The key difference between [`AsyncChatEvent`](jd:paper:io.papermc.paper.event.player.AsyncChatEvent)
-and [`ChatEvent`](jd:paper:io.papermc.paper.event.player.ChatEvent) is that
-[`AsyncChatEvent`](jd:paper:io.papermc.paper.event.player.AsyncChatEvent) is fired asynchronously.
+The key difference between [](jd:paper:io.papermc.paper.event.player.AsyncChatEvent)
+and [](jd:paper:io.papermc.paper.event.player.ChatEvent) is that
+[](jd:paper:io.papermc.paper.event.player.AsyncChatEvent) is fired asynchronously.
 
 This means that it does not block the main thread and sends the chat message when the listener has completed.
 Be aware that using the Bukkit API in an asynchronous context (i.e. the event handler) is unsafe and exceptions may be thrown.
-If you need to use the Bukkit API, you can use [`ChatEvent`](jd:paper:io.papermc.paper.event.player.ChatEvent).
+If you need to use the Bukkit API, you can use [](jd:paper:io.papermc.paper.event.player.ChatEvent).
 However, we recommend using [`BukkitScheduler`](/paper/dev/scheduler).
 
 :::
@@ -28,10 +28,10 @@ However, we recommend using [`BukkitScheduler`](/paper/dev/scheduler).
 
 Before we can start using the new chat event, we need to understand how the new renderer works.
 The renderer is Paper's way of allowing plugins to modify the chat message before it is sent to the player.
-This is done by using the [`ChatRenderer`](jd:paper:io.papermc.paper.chat.ChatRenderer) interface with its
-[`render`](jd:paper:io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience))
-method. Previously, this was done by using the [`AsyncPlayerChatEvent`](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent)
-with its [`setFormat`](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent#setFormat(java.lang.String)) method.
+This is done by using the [](jd:paper:io.papermc.paper.chat.ChatRenderer) interface with its
+[](jd:paper:io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience))
+method. Previously, this was done by using the [](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent)
+with its [](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent#setFormat(java.lang.String)) method.
 
 ```java title="ChatRenderer#render"
 public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
@@ -39,7 +39,7 @@ public Component render(Player source, Component sourceDisplayName, Component me
 }
 ```
 
-- The [`render`](jd:paper:io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)) method is called when a chat message is sent to the player.
+- The [](jd:paper:io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)) method is called when a chat message is sent to the player.
 - The `source` parameter is the player that sent the message.
 - The `sourceDisplayName` parameter is the display name of the player that sent the message.
 - The `message` parameter is the message that was sent.
@@ -48,8 +48,8 @@ public Component render(Player source, Component sourceDisplayName, Component me
 :::tip[`ChatRenderer.ViewerUnaware`]
 
 If your renderer does not need to know about the viewer, you can use the
-[`ChatRenderer.ViewerUnaware`](jd:paper:io.papermc.paper.chat.ChatRenderer$ViewerUnaware)
-interface instead of the [`ChatRenderer`](jd:paper:io.papermc.paper.chat.ChatRenderer) interface.
+[](jd:paper:io.papermc.paper.chat.ChatRenderer$ViewerUnaware)
+interface instead of the [](jd:paper:io.papermc.paper.chat.ChatRenderer) interface.
 This will benefit performance as the message will only be rendered once instead of each individual player.
 
 :::
@@ -57,18 +57,18 @@ This will benefit performance as the message will only be rendered once instead 
 ## Using the renderer
 
 There are two ways to use the renderer.
-1. Implementing the [`ChatRenderer`](jd:paper:io.papermc.paper.chat.ChatRenderer) interface in a class.
+1. Implementing the [](jd:paper:io.papermc.paper.chat.ChatRenderer) interface in a class.
 2. Using a lambda expression.
 
 Depending on the complexity of your renderer, you may want to use one or the other.
 
 ### Implementing the `ChatRenderer` interface
 
-The first way of using the renderer is by implementing the [`ChatRenderer`](jd:paper:io.papermc.paper.chat.ChatRenderer)
+The first way of using the renderer is by implementing the [](jd:paper:io.papermc.paper.chat.ChatRenderer)
 interface in a class. In this example, we will be using our `ChatListener` class.
 
 Next, we need to tell the event to use the renderer by using the
-[`renderer`](jd:paper:io.papermc.paper.event.player.AbstractChatEvent#renderer()) method.
+[](jd:paper:io.papermc.paper.event.player.AbstractChatEvent#renderer()) method.
 
 ```java title="ChatListener.java"
 public class ChatListener implements Listener, ChatRenderer { // Implement the ChatRenderer and Listener interface

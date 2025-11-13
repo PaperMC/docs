@@ -23,6 +23,27 @@ const asUrl = (name: string): string => {
   return `${name0}.html` + (hash ? `#${hash}` : "");
 };
 
+const asRef = (name: string): string => {
+  let [name0, hash] = name.split("#", 2);
+  name0 = name0.replaceAll(".", "/");
+
+  const lastSlash = name0.lastIndexOf("/");
+  if (lastSlash !== -1) {
+    // remove package
+    name0 = name0.substring(lastSlash + 1);
+  }
+  name0 = name0.replaceAll("$", ".");
+
+  const parenIndex = hash?.indexOf("(");
+  if (hash && parenIndex !== -1) {
+    // method parameters
+    const params = hash.substring(parenIndex + 1, hash.length - 1).split(",");
+    hash = `${hash.substring(0, parenIndex)}(${params.map((p) => p.substring(p.lastIndexOf(".") + 1)).join(", ")})`;
+  }
+
+  return name0 + (hash ? `#${hash}` : "");
+};
+
 const error = (err: any): never => {
   if (process.env.NODE_ENV === "production") {
     console.error(err);
@@ -35,14 +56,19 @@ const error = (err: any): never => {
   }
 };
 
-const parse = async (url: string, { targets }: Options): Promise<string | null> => {
+interface ParseResult {
+  url?: string;
+  ref?: string;
+}
+
+const parse = async (url: string, { targets }: Options): Promise<ParseResult> => {
   const match = /^jd:(.+?)(?::(.+?))?(?::(.+?))?$/.exec(url);
   if (!match) {
     if (url.startsWith("jd:")) {
       error(new Error(`Failed to parse Javadoc link "${url}"`));
     }
 
-    return null; // not a Javadoc link
+    return {}; // not a Javadoc link
   }
 
   const target = targets[match[1]];
@@ -54,7 +80,7 @@ const parse = async (url: string, { targets }: Options): Promise<string | null> 
 
   const name = match[3] ?? match[2];
   if (!name) {
-    return targetUrl;
+    return { url: targetUrl };
   }
 
   const module = match[3] ? match[2] : typeof target !== "string" ? target.module : undefined;
@@ -72,7 +98,7 @@ const parse = async (url: string, { targets }: Options): Promise<string | null> 
     }
   }
 
-  return parsed;
+  return { url: parsed, ref: asRef(name) };
 };
 
 const plugin: RemarkPlugin = (options: Options) => {
@@ -80,8 +106,11 @@ const plugin: RemarkPlugin = (options: Options) => {
     const promises: Promise<void>[] = [];
     visit(tree, "link", (node) => {
       promises.push(
-        parse(node.url, options).then((url) => {
+        parse(node.url, options).then(({ url, ref }) => {
           node.url = url ?? node.url;
+          if (ref && node.children.length === 0) {
+            node.children.push({ type: "inlineCode", value: ref });
+          }
         })
       );
     });

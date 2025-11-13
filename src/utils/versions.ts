@@ -53,10 +53,10 @@ const fetchBuilds = async ({ project }: Project, version: string): Promise<Build
 const findLatest = async (project: Project): Promise<string> => {
   const versions = Object.values(project.versions).flat();
 
-  // find the newest version with at least one stable build
+  // find the newest version with at least one non-alpha build
   for (const version of versions) {
     const builds = await fetchBuilds(project, version);
-    if (builds.some((b) => b.channel === "STABLE")) {
+    if (builds.some((b) => b.channel !== "ALPHA")) {
       return version;
     }
   }

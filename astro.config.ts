@@ -41,20 +41,20 @@ export default defineConfig({
       title: "PaperMC Docs",
       social: [
         { icon: "github", label: "paper:GitHub", href: "https://github.com/PaperMC/Paper" },
-        { icon: "seti:java", label: "paper:Javadoc", href: `https://jd.papermc.io/paper/${LATEST_PAPER_RELEASE}` },
+        { icon: "seti:java", label: "paper:Javadoc", href: `https://jd.papermc.io/paper` },
 
         { icon: "github", label: "velocity:GitHub", href: "https://github.com/PaperMC/Velocity" },
         {
           icon: "seti:java",
           label: "velocity:Javadoc",
-          href: `https://jd.papermc.io/velocity/${LATEST_VELOCITY_RELEASE.substring(0, LATEST_VELOCITY_RELEASE.lastIndexOf("."))}.0`,
+          href: `https://jd.papermc.io/velocity`,
         },
 
         { icon: "github", label: "folia:GitHub", href: "https://github.com/PaperMC/Folia" },
         {
           icon: "seti:java",
           label: "folia:Javadoc",
-          href: `https://jd.papermc.io/folia/${LATEST_FOLIA_RELEASE.split(".").slice(0, 2).join(".")}`,
+          href: `https://jd.papermc.io/folia`,
         },
 
         { icon: "github", label: "adventure:GitHub", href: "https://github.com/PaperMC/adventure" },
@@ -64,7 +64,7 @@ export default defineConfig({
         {
           icon: "seti:java",
           label: "waterfall:Javadoc",
-          href: `https://jd.papermc.io/waterfall/${LATEST_WATERFALL_RELEASE}`,
+          href: `https://jd.papermc.io/waterfall`,
         },
 
         { icon: "github", label: "GitHub", href: "https://github.com/PaperMC" },
@@ -547,9 +547,9 @@ export default defineConfig({
         javadocPlugin,
         {
           targets: {
-            paper: `https://jd.papermc.io/paper/${LATEST_PAPER_RELEASE}`,
-            velocity: `https://jd.papermc.io/velocity/${LATEST_VELOCITY_RELEASE.substring(0, LATEST_VELOCITY_RELEASE.lastIndexOf("."))}.0`,
-            java: { url: "https://docs.oracle.com/en/java/javase/21/docs/api", module: "java.base" },
+            paper: "https://jd.papermc.io/paper",
+            velocity: "https://jd.papermc.io/velocity",
+            java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
           },
         },
       ],

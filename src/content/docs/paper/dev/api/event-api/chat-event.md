@@ -39,7 +39,7 @@ public Component render(Player source, Component sourceDisplayName, Component me
 }
 ```
 
-- The [](jd:paper:io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)) method is called when a chat message is sent to the player.
+- The [`render`](jd:paper:io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)) method is called when a chat message is sent to the player.
 - The `source` parameter is the player that sent the message.
 - The `sourceDisplayName` parameter is the display name of the player that sent the message.
 - The `message` parameter is the message that was sent.

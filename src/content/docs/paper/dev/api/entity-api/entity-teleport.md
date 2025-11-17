@@ -2,6 +2,7 @@
 title: Teleportation
 description: The entity teleportation API and how to use it.
 slug: paper/dev/entity-teleport
+version: 1.21.10
 ---
 
 Entities can be instantaneously teleported to specific positions, synchronously and asynchronously with the
@@ -72,4 +73,19 @@ player.teleport(
     TeleportFlag.Relative.VELOCITY_Y,
     TeleportFlag.Relative.VELOCITY_Z
 );
+```
+
+### Retaining passengers
+
+:::caution[Warning]
+
+Since 1.21.10 this flag is no longer supported. Because it's the current behavior for teleporting entities.
+
+:::
+
+Teleport an entity with the [`RETAIN_PASSENGERS`](jd:paper:io.papermc.paper.entity.TeleportFlag$EntityState#RETAIN_PASSENGERS) flag,
+allowing its passengers to be transferred with the entity.
+
+```java
+entity.teleport(location, TeleportFlag.EntityState.RETAIN_PASSENGERS);
 ```

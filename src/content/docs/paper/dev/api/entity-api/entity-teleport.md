@@ -79,7 +79,7 @@ player.teleport(
 
 :::caution[Warning]
 
-Since 1.21.10 this flag is no longer supported. Because it's the current behavior for teleporting entities.
+Since 1.21.10, this flag does not do anything, as it's been made the default behavior when teleporting entities.
 
 :::
 

@@ -211,7 +211,7 @@ other properties of the transformation, those too will be interpolated, which ma
 // new position will be 10 blocks higher
 Location newLocation = display.getLocation().add(0, 10, 0);
 
-display.setTeleportDuration(20 * 10); // the movement will take 10 seconds (1 second = 20 ticks)
+display.setTeleportDuration(20 * 5); // the movement will take 5 seconds (1 second = 20 ticks)
 display.teleport(newLocation); // perform the movement
 ```
 

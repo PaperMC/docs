@@ -196,12 +196,16 @@ helps prevent SQL injection. They separate SQL code from user input by using pla
 When using `PreparedStatement` the `login` method will become:
 
 ```java
-public void login(String username, String password) throws SQLException {
-    PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
-    statement.setString(1, username);
-    statement.setString(2, password);
-    ResultSet result = statement.executeQuery();
-    // Do work
+public void login(DataSource dataSource, String username, String password) {
+    try (Connection connection = dataSource.getConnection()) {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+        statement.setString(1, username);
+        statement.setString(2, password);
+        ResultSet result = statement.executeQuery();
+        // Do work
+    } catch (Exception e) {
+        // Handle any exceptions that arise from getting / handing the exception
+    }
 }
 ```
 
@@ -222,10 +226,10 @@ SELECT * FROM users WHERE username = '' AND password = '';
 Will become the following code in Java using JOOQ:
 
 ```java
-public void login(String username, String password) {
-    UsersRecord user = this.jooq.selectFrom(USERS)
-            .set(USERS.USERNAME, username)
-            .set(USERS.PASSWORD, password)
+public void login(DSLContext context, String username, String password) {
+    UsersRecord user = context.selectFrom(USERS)
+            .where(USERS.USERNAME.eq(username))
+            .and(USERS.PASSWORD.eq(password))
             .fetchOne();
     // Do work
 }

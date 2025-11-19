@@ -208,7 +208,7 @@ public void login(String username, String password) throws SQLException {
 ## Database tools
 
 A common approach to handle SQL security and other concerns like type-safety, is to use a library that can take care of the heavy lifting,
-leaving the developer with clen, secure and readable code.
+leaving the developer with clean, secure and readable code.
 
 Libraries can take multiple approaches to handle data, like SQL builders or [ORMs](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping). \
 Some of the most common libraries include [JDBI](https://jdbi.org/) and [JOOQ](https://www.jooq.org/doc/3.20/manual/).

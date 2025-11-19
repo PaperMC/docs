@@ -192,3 +192,40 @@ Using prepared statements in Java with [`PreparedStatement`](jd:java:java.sql:ja
 helps prevent SQL injection. They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection
 [here](https://www.baeldung.com/sql-injection).
+
+When using `PreparedStatement` the `login` method will become:
+
+```java
+public void login(String username, String password) throws SQLException {
+    PreparedStatement statement = this.connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+    statement.setString(1, username);
+    statement.setString(2, password);
+    ResultSet result = statement.executeQuery();
+    // Do work
+}
+```
+
+## Database Tools
+
+A common approach to handle type-safety and prevent SQL injections is to use a library that take care of the heavy lifting.
+
+Libraries can take multiple approaches to handle data, like SQL builders or [ORMs](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping). \
+Some of the most common libraries include [JDBI](https://jdbi.org/) and [JOOQ](https://www.jooq.org/doc/3.20/manual/).
+
+For example, the following SQL statement:
+
+```sql
+SELECT * FROM users WHERE username = '' AND password = '';
+```
+
+Will become the following code in Java using JOOQ:
+
+```java
+public void login(String username, String password) {
+    UsersRecord user = this.jooq.selectFrom(USERS)
+            .set(USERS.USERNAME, username)
+            .set(USERS.PASSWORD, password)
+            .fetchOne();
+    // Do work
+}
+```

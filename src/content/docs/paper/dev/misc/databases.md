@@ -205,7 +205,7 @@ public void login(String username, String password) throws SQLException {
 }
 ```
 
-## Database Tools
+## Database tools
 
 A common approach to handle SQL security and other concerns like type-safety, is to use a library that can take care of the heavy lifting,
 leaving the developer with clen, secure and readable code.

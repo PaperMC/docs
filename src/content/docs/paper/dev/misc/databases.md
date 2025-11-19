@@ -211,26 +211,9 @@ public void login(DataSource dataSource, String username, String password) {
 
 ## Database tools
 
-A common approach to handle SQL security and other concerns like type-safety, is to use a library that can take care of the heavy lifting,
-leaving the developer with clean, secure and readable code.
+Given the complexity of working with databases (managing connections, building and securing queries, or just parsing the data) several tools
+exist in the world of Java to leverage this work.
 
-Libraries can take multiple approaches to handle data, like SQL builders or [ORMs](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping). \
-Some of the most common libraries include [JDBI](https://jdbi.org/) and [JOOQ](https://www.jooq.org/doc/latest/manual/).
-
-For example, the following SQL statement:
-
-```sql
-SELECT * FROM users WHERE username = '' AND password = '';
-```
-
-Will become the following code in Java using JOOQ:
-
-```java
-public void login(DSLContext context, String username, String password) {
-    UsersRecord user = context.selectFrom(USERS)
-            .where(USERS.USERNAME.eq(username))
-            .and(USERS.PASSWORD.eq(password))
-            .fetchOne();
-    // Do work
-}
-```
+Some plugin developers use lightweight tools like [JDBI](https://jdbi.org/), [JOOQ](https://www.jooq.org/doc/latest/manual/)
+or [Exposed](https://www.jetbrains.com/help/exposed/get-started-with-exposed.html), which take care of all the heavy lifting,
+allowing the developers to focus on their plugins rather than the database.

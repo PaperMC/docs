@@ -26,6 +26,11 @@ addition, plugins that support BungeeCord but only require that they are install
 (nothing on the proxy) typically use the BungeeCord plugin messaging channel, which is supported
 natively by the latest versions of Velocity.
 
+If no Velocity port or alternative is available then the third-party project [Snap](https://hangar.papermc.io/Phoenix616/Snap)
+offers an experimental way to run BungeeCord/Waterfall plugins on Velocity, however not all plugins
+can be supported and there are some major drawbacks which need to be considered before use.
+Snap is not maintained by, or affiliated with, the Velocity project.
+
 ## Help, I can't connect to my server!
 
 There are a few common causes for why you can't connect to the server.

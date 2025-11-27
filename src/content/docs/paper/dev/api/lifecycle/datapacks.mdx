@@ -139,9 +139,9 @@ Code example:
 ```java showLineNumbers startLineNumber=8
 try {
     // Retrieve the URI of the datapack folder.
-    URI uri = Objects.requireNonNull(getClass().getResource("/custom_datapack")).toURI();
-    // Discover the pack. Here, the id is set to "provided", which indicates to a server owner
-    // that your plugin includes this data pack (as the name is prefixes with the plugin name).
+    URI uri = this.getClass().getResource("/custom_datapack").toURI();
+    // Discover the pack. The ID is set to "provided", which indicates to
+    // a server owner that your plugin includes this data pack.
     event.registrar().discoverPack(uri, "provided");
 } catch (URISyntaxException | IOException e) {
     throw new RuntimeException(e);

@@ -1,0 +1,82 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "bnf",
+  "scopeName": "source.bnf",
+  "patterns": [{ "include": "#comment" }, { "include": "#rule" }, { "include": "#meta" }, { "include": "#strings" }],
+  "repository": {
+    "comment": {
+      "name": "comment.line.semicolon.bnf",
+      "match": ";.*$"
+    },
+
+    "rule": {
+      "name": "meta.rule.bnf",
+      "begin": "^(\\s*)([A-Za-z0-9_-]+)(\\s*→)",
+      "beginCaptures": {
+        "2": { "name": "entity.name.function.nonterminal.bnf" },
+        "3": { "name": "keyword.reserved.arrow.bnf" }
+      },
+      "end": "(?=^\\s*[A-Za-z0-9_-]+\\s*→|\\Z)",
+      "patterns": [
+        { "include": "#tripleQuotedNonterminal" },
+        { "include": "#strings" },
+        { "include": "#meta" },
+        {
+          "match": "\\b[A-Za-z0-9_-]+\\b",
+          "name": "variable.language.nonterminal.bnf"
+        }
+      ]
+    },
+
+    "tripleQuotedNonterminal": {
+      "name": "meta.triplequoted.nonterminal.bnf",
+      "begin": "\"{3}",
+      "beginCaptures": {
+        "0": { "name": "string.quoted.double.bnf" }
+      },
+      "end": "\"{3}",
+      "endCaptures": {
+        "0": { "name": "string.quoted.double.bnf" }
+      },
+      "patterns": [
+        {
+          "match": "\\b[A-Za-z0-9_-]+\\b",
+          "name": "variable.language.nonterminal.bnf"
+        }
+      ]
+    },
+
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.bnf",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [{ "match": "\"\"", "name": "constant.character.escape.doublequote.bnf" }]
+        },
+        {
+          "name": "string.quoted.single.bnf",
+          "begin": "'",
+          "end": "'"
+        }
+      ]
+    },
+
+    "meta": {
+      "patterns": [
+        {
+          "match": "→",
+          "name": "keyword.reserved.arrow.bnf"
+        },
+        {
+          "match": "\\|",
+          "name": "keyword.reserved.choice.bnf"
+        },
+        {
+          "match": "[{}()]",
+          "name": "punctuation.section.group.bnf"
+        }
+      ]
+    }
+  }
+}

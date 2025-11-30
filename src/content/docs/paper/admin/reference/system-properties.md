@@ -261,6 +261,10 @@ By default, this uses Google's NA mirror of Maven Central. You may also use regi
 - **default**: `false`
 - **description**: Enables logging the full entity NBT when an entity with a missing or otherwise invalid entity id is attempted to be loaded. (Whenever 'Skipping Entity with id' is logged to the console.)
 
+#### paper.maxChatCommandInputSize
+- **default**: `256`
+- **description**: The maximum length that a chat command may have, a vanilla client can only send 256 characters in chat at a maximum.
+
 ## List of environment variables
 
 #### PAPER_VELOCITY_SECRET

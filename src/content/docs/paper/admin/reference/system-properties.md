@@ -263,7 +263,7 @@ By default, this uses Google's NA mirror of Maven Central. You may also use regi
 
 #### paper.maxChatCommandInputSize
 - **default**: `256`
-- **description**: The maximum length that a chat command may have, a vanilla client can only send 256 characters in chat at a maximum.
+- **description**: The maximum length a chat command may have. A Vanilla client cannot send more than 256 characters.
 
 ## List of environment variables
 

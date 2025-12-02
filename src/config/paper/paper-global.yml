@@ -279,6 +279,7 @@ misc:
     description: >-
       Whether the nether dimension is enabled and will be loaded.
   fix-far-end-terrain-generation:
+    vanilla: "false"
     default: "true"
     description: >-
       Whether to fix MC-159283 which causes unusual ring-shaped terrain patterns in the outer End islands at extremely far distances.

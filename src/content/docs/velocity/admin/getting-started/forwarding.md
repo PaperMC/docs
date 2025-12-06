@@ -54,7 +54,7 @@ You also need to disable BungeeCord forwarding if you had it enabled beforehand.
 
 In `config/paper-global.yml`, set `proxies.velocity.enabled` to true and
 `proxies.velocity.secret`, to match the secret in your `forwarding.secret` file. You must also set
-`proxies.velocity.online-mode` to the `online-mode` setting in your `velocity.toml`. Once
+`proxies.velocity.online-mode` to match the `online-mode` setting in your `velocity.toml`. Once
 you're done editing `paper-global.yml`, reboot your server.
 
 :::note

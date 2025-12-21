@@ -136,6 +136,7 @@ do not receive support.
 ## GraphQL API examples
 
 Fill also supports a GraphQL API, which can be accessed at `https://fill.papermc.io/graphql`.
+Fill's GraphQL API uses standard pagination, which you can learn more about [here](https://graphql.org/learn/pagination/).
 
 A built-in GraphQL playground is available at https://fill.papermc.io/graphiql?path=/graphql.
 Common API tools such as Postman will introspect the API and provide a UI for building queries.
@@ -143,9 +144,14 @@ Common API tools such as Postman will introspect the API and provide a UI for bu
 ### Getting the latest version
 ```graphql
 query LatestVersion {
-    project(id: "paper") {
-        versions(last: 1) {
-            id
+    project(key: "paper") {
+        key
+        versions(first: 1, orderBy: {direction: DESC}) {
+            edges {
+                node {
+                    key
+                }
+            }
         }
     }
 }
@@ -158,11 +164,16 @@ query LatestVersion {
 {
     "data": {
         "project": {
-            "versions": [
-                {
-                    "id": "1.21.6"
-                }
-            ]
+            "key": "paper",
+            "versions": {
+                "edges": [
+                    {
+                        "node": {
+                            "key": "1.21.11"
+                        }
+                    }
+                ]
+            }
         }
     }
 }
@@ -173,10 +184,20 @@ query LatestVersion {
 ### Getting the latest stable build number
 ```graphql
 query LatestStableBuild {
-    project(id: "paper") {
-        versions(last: 1) {
-            builds(filterBy: { channel: STABLE }, last: 1) {
-                id
+    project(key: "paper") {
+        key
+        versions(first: 1, orderBy: {direction: DESC}) {
+            edges {
+                node {
+                    key
+                    builds(filterBy: { channel: STABLE }, first: 1, orderBy: { direction: DESC }) {
+                        edges {
+                            node {
+                                number
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -190,15 +211,25 @@ query LatestStableBuild {
 {
     "data": {
         "project": {
-            "versions": [
-                {
-                    "builds": [
-                        {
-                            "id": 46
+            "key": "paper",
+            "versions": {
+                "edges": [
+                    {
+                        "node": {
+                            "key": "1.21.10",
+                            "builds": {
+                                "edges": [
+                                    {
+                                        "node": {
+                                            "number": 48
+                                        }
+                                    }
+                                ]
+                            }
                         }
-                    ]
-                }
-            ]
+                    }
+                ]
+            }
         }
     }
 }
@@ -209,11 +240,27 @@ query LatestStableBuild {
 ### Getting the latest stable build download URL
 ```graphql
 query LatestStableBuildDownloadURL {
-    project(id: "paper") {
-        versions(last: 1) {
-            builds(filterBy: { channel: STABLE }, last: 1) {
-                download(name: "server:default") {
-                    url
+    project(key: "paper") {
+        key
+        versions(first: 1, orderBy: {direction: DESC}) {
+            edges {
+                node {
+                    key
+                    builds(filterBy: { channel: STABLE }, first: 1, orderBy: { direction: DESC }) {
+                        edges {
+                            node {
+                                number
+                                download(key: "server:default") {
+                                    name
+                                    url
+                                    checksums {
+                                        sha256
+                                    }
+                                    size
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -228,17 +275,33 @@ query LatestStableBuildDownloadURL {
 {
     "data": {
         "project": {
-            "versions": [
-                {
-                    "builds": [
-                        {
-                            "download": {
-                                "url": "https://fill-data.papermc.io/v1/objects/bfca155b4a6b45644bfc1766f4e02a83c736e45fcc060e8788c71d6e7b3d56f6/paper-1.21.6-46.jar"
+            "key": "paper",
+            "versions": {
+                "edges": [
+                    {
+                        "node": {
+                            "key": "1.21.10",
+                            "builds": {
+                                "edges": [
+                                    {
+                                        "node": {
+                                            "number": 48,
+                                            "download": {
+                                                "name": "paper-1.21.10-48.jar",
+                                                "url": "https://fill-data.papermc.io/v1/objects/bfca155b4a6b45644bfc1766f4e02a83c736e45fcc060e8788c71d6e7b3d56f6/paper-1.21.10-48.jar",
+                                                "checksums": {
+                                                    "sha256": "bfca155b4a6b45644bfc1766f4e02a83c736e45fcc060e8788c71d6e7b3d56f6"
+                                                },
+                                                "size": 54185955
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
-                    ]
-                }
-            ]
+                    }
+                ]
+            }
         }
     }
 }

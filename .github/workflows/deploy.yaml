@@ -28,10 +28,6 @@ jobs:
         run: "pnpm build"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: "copy cloudflare configuration files to build directory"
-        run: |
-          cp _headers dist/
-          cp _redirects dist/
       - name: "publish (push)"
         id: "cloudflare-publish"
         uses: "AdrianGonz97/refined-cf-pages-action@v1"

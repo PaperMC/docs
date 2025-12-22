@@ -41,11 +41,15 @@ dependencies {
       label: "Maven",
       lang: "xml",
       title: "pom.xml",
-      code: `<dependency>
-  <groupId>\{GROUP}</groupId>
-  <artifactId>\{NAME}</artifactId>
-  <version>\{VERSION}</version>
-</dependency>`,
+      code: `<project>
+  <dependencies>
+    <dependency>
+      <groupId>\{GROUP}</groupId>
+      <artifactId>\{NAME}</artifactId>
+      <version>\{VERSION}</version>
+    </dependency>
+  </dependencies>
+</project>`,
     },
   ],
   "adventure-platform-mod": [

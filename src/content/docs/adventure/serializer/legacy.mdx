@@ -4,7 +4,8 @@ slug: adventure/serializer/legacy
 description: (Deprecated) Serializing components to legacy format.
 ---
 
-import { TabItem, Tabs } from "@astrojs/starlight/components";
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 The legacy text serializer converts text to and from the traditional chat format used
 in Minecraft prior to Minecraft 1.7, and continues to be used to this day for its
@@ -19,40 +20,7 @@ using [MiniMessage](/adventure/minimessage).
 
 Declaring the dependency:
 
-{/* TODO: Replace with Dependency component */}
-<Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
-    ```kts replace
-    repositories {
-      mavenCentral()
-    }
-
-    dependencies {
-      implementation("net.kyori:adventure-text-serializer-legacy:\{LATEST_ADVENTURE_API_RELEASE}")
-    }
-    ```
-  </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy replace
-    repositories {
-      mavenCentral()
-    }
-
-    dependencies {
-      implementation 'net.kyori:adventure-text-serializer-legacy:\{LATEST_ADVENTURE_API_RELEASE}'
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
-    ```xml replace
-    <dependency>
-      <groupId>net.kyori</groupId>
-      <artifactId>adventure-text-serializer-legacy</artifactId>
-      <version>\{LATEST_ADVENTURE_API_RELEASE}</version>
-    </dependency>
-    ```
-  </TabItem>
-</Tabs>
+<Dependency group="net.kyori" name="adventure-text-serializer-legacy" version={LATEST_ADVENTURE_API_RELEASE} />
 
 ## Usage
 

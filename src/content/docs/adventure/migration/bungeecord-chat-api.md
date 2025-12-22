@@ -134,7 +134,7 @@ being created that is a copy of the original component with the change you reque
 The BungeeCord Chat API includes three serializers. All three have equivalents in Adventure:
 
 * The `TextComponent.fromLegacyText()` deserialization method is equivalent to the
-  `deserialize` method of the [Legacy](/adventure/serializer/legacy] text serializer. Likewise, the
+  `deserialize` method of the [Legacy](/adventure/serializer/legacy) text serializer. Likewise, the
   `BaseComponent.toLegacyText()` serialization method is equivalent to the `serialize`
   method on the legacy text serializer.
 * The `TextComponent.toPlainText()` serialization method is equivalent to the

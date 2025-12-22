@@ -13,36 +13,36 @@
   },
   "dependencies": {
     "@ascorbic/feed-loader": "^2.0.1",
-    "@astrojs/markdown-remark": "^6.3.8",
-    "@astrojs/starlight": "^0.36.1",
-    "@astrojs/svelte": "^7.2.0",
-    "@expressive-code/plugin-collapsible-sections": "^0.41.3",
-    "@expressive-code/plugin-line-numbers": "^0.41.3",
+    "@astrojs/markdown-remark": "^6.3.10",
+    "@astrojs/starlight": "^0.37.1",
+    "@astrojs/svelte": "^7.2.4",
+    "@expressive-code/plugin-collapsible-sections": "^0.41.5",
+    "@expressive-code/plugin-line-numbers": "^0.41.5",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
-    "astro": "^5.14.7",
+    "astro": "^5.16.6",
     "astro-d2": "^0.8.1",
-    "sharp": "^0.34.4",
-    "starlight-contributor-list": "^0.3.0",
-    "starlight-links-validator": "^0.19.0",
+    "sharp": "^0.34.5",
+    "starlight-contributor-list": "^0.3.1",
+    "starlight-links-validator": "^0.19.2",
     "starlight-sidebar-topics": "^0.6.2",
-    "starlight-sidebar-topics-dropdown": "^0.5.1",
-    "svelte": "^5.41.1",
+    "starlight-sidebar-topics-dropdown": "^0.5.2",
+    "svelte": "^5.46.0",
     "typescript": "^5.9.3",
     "unist-util-visit": "^5.0.0",
-    "yaml": "^2.8.1"
+    "yaml": "^2.8.2"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",
-    "@types/node": "^24.9.0",
+    "@types/node": "^25.0.3",
     "dead-or-alive": "^1.0.4",
-    "prettier": "3.6.2",
+    "prettier": "3.7.4",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-organize-imports": "^4.3.0",
-    "prettier-plugin-svelte": "^3.4.0"
+    "prettier-plugin-svelte": "^3.4.1"
   },
   "engines": {
     "node": ">=22.x"
   },
-  "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d"
+  "packageManager": "pnpm@10.26.1+sha512.664074abc367d2c9324fdc18037097ce0a8f126034160f709928e9e9f95d98714347044e5c3164d65bd5da6c59c6be362b107546292a8eecb7999196e5ce58fa"
 }

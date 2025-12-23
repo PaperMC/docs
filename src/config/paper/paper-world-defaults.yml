@@ -365,7 +365,7 @@ entities:
       default: "200"
       description: >-
         Workaround for MC-125757, makes all arrows advance their despawn
-        timer as if they were stuck in the ground, after a delay.
+        timer as if they were stuck in the ground, after a delay (in ticks).
     count-all-mobs-for-spawning:
       vanilla: "true"
       default: "false"

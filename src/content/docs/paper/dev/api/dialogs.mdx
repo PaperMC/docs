@@ -163,6 +163,33 @@ public void bootstrap(BootstrapContext context) {
 }
 ```
 
+### Registering Pause Screen Additions and Quick Actions tags
+Dialog when registered in the registry can be tagged with these special tags:
+- [`DialogTagKeys.PAUSE_SCREEN_ADDITIONS`](jd:paper:io.papermc.paper.registry.keys.tags.DialogTagKeys#PAUSE_SCREEN_ADDITIONS)
+
+   Dialogs with this tag will be given a button in the game's pause screen.
+
+- [`DialogTagKeys.QUICK_ACTIONS`](jd:paper:io.papermc.paper.registry.keys.tags.DialogTagKeys#QUICK_ACTIONS)
+
+   Dialogs with this tag will be given a button in the quick actions menu (accessible via the `G` key by default).
+
+To add your custom dialog to these tags, you can use a post-flatten tag registrar event handler in your bootstrapper like so:
+
+```java title="YourPluginBootstrapper.java" showLineNumbers
+@Override
+public void bootstrap(BootstrapContext context) {
+    TypedKey<Dialog> customDialogKey = DialogKeys.create(Key.key("papermc:custom_dialog"));
+    context.getLifecycleManager().registerEventHandler(
+        LifecycleEvents.TAGS.postFlatten(RegistryKey.DIALOG)
+            .newHandler((ReloadableRegistrarEvent<PostFlattenTagRegistrar<Dialog>> event) -> {
+                PostFlattenTagRegistrar<Dialog> registrar = event.registrar();
+                registrar.addToTag(DialogTagKeys.PAUSE_SCREEN_ADDITIONS, List.of(customDialogKey));
+                registrar.addToTag(DialogTagKeys.QUICK_ACTIONS, List.of(customDialogKey));
+            })
+    );
+}
+```
+
 ## Closing dialogs
 Dialogs can be closed from the API. There are two ways to achieve that:
 
@@ -443,3 +470,71 @@ DialogAction.customClick(
         .build()
 )
 ```
+
+### Using NBT payloads
+
+Instead of using callbacks, you can use NBT payloads and event handlers.
+
+If we take a look at the dialog creation code again, the confirmation button is created like this:
+
+```java showLineNumbers
+    ActionButton.create(
+        Component.text("Confirm", TextColor.color(0xAEFFC1)),
+        Component.text("Click to confirm your input."),
+        100,
+        DialogAction.customClick(Key.key("papermc:user_input/confirm"), null)
+    ),
+```
+
+The last parameter, currently a `null`, is an optional `BinaryTagHolder` payload. If we wanted to, we could put custom NBT data in there.
+This NBT data will be sent to the client when the dialog is shown, and when the player clicks the button, a
+[`PlayerCustomClickEvent`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent) will be fired containing the same NBT data among other information.
+
+#### Creating payloads with `adventure-nbt`.
+
+The `BinaryTagHolder.binaryTagHolder` factory method requires an SNBT formatted string. We can either construct this string manually, or use
+the `adventure-nbt` library to create NBT data programmatically.
+
+:::tip
+The `adventure-nbt` library is not included by default in Paper, so make sure to add it as a dependency in your project.
+:::
+
+Using `TagStringIO` we can convert any NBT tag into an SNBT string like so:
+
+```java showLineNumbers
+BinaryTagHolder payload = BinaryTagHolder.binaryTagHolder(
+    TagStringIO.tagStringIO().asString(
+        CompoundBinaryTag.builder()
+            .putString("action", "confirm")
+            .putInt("some_value", 42)
+            .build()
+    )
+);
+```
+
+:::caution[Exceptions]
+The `asString` method can throw an `IOException`, so make sure to handle that appropriately.
+:::
+
+### Reading NBT payloads
+
+To read the NBT payload, we can use the [`PlayerCustomClickEvent#getTag()`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent#getTag()) method.
+
+#### Reading payloads with adventure-nbt.
+
+The `getTag()` method returns a `BinaryTagHolder`, which we can convert back into a `CompoundBinaryTag` using
+the `TagStringIO` class again:
+
+```java showLineNumbers
+BinaryTagHolder tagHolder = event.getTag();
+String snbt = tagHolder.string();
+CompoundBinaryTag tag = TagStringIO.tagStringIO().asCompound(snbt);
+
+String action = tag.getString("action");
+int someValue = tag.getInt("some_value");
+```
+
+:::caution[Exceptions]
+1. The `getTag()` method can return `null`, so make sure to check for that.
+2. The `asCompound()` method can throw an `IOException`, so make sure to handle that appropriately.
+:::

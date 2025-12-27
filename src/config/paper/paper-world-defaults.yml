@@ -360,7 +360,7 @@ entities:
             viewed by enabling advanced item tooltips in-game by pressing **F3 +
             H**; the item id will appear at the bottom of the tooltip that
             appears when you hover over an item
-    arrow-despawn-override-rate:
+    max-arrow-despawn-invulnerability:
       vanilla: "disabled"
       default: "200"
       description: >-

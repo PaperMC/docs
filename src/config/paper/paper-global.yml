@@ -502,6 +502,13 @@ unsupported-settings:
       Allows the server to customize the format of saved region files. This
       supports ZLIB, GZIP, LZ4 and NONE, where None namely allows for compression to
       be disabled
+  oversized-item-component-sanitizer:
+    dont-sanitize:
+      default: "[]"
+      description: >-
+        This setting define what item data components don't need to be sanitized in oversized item obfuscation.
+        Adding them re-enables exploits, but may be needed for certain resource packs.
+        (Expected: minecraft:container, minecraft:charged_projectiles and minecraft:bundle_contents)
   perform-username-validation:
     vanilla: "false"
     default: "true"

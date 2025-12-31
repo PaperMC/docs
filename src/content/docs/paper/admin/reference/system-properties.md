@@ -18,17 +18,17 @@ If you are unsure about what a flag does, it is recommended that you **do not us
 System properties are set when you start your server. For example, if you are using a `.bat` or a `.sh` file to start your server, you can add the system properties to the file. For example:
 
 ```bash
-java -Dpaper.log-level=FINE -jar paper.jar
+java -Dcom.mojang.eula.agree=true -jar paper.jar
 ```
 
 :::note
 
 Some of Paper's system properties contain a `.` character in their name. When using PowerShell, these will require wrapping in quotes.
-i.e. `"-Dpaper.log-level=FINE"`
+i.e. `"-Dcom.mojang.eula.agree=true"`
 
 :::
 
-Where a `-D` is used to set a system property, and the system property is `paper.log-level` with a value of `FINE`. Otherwise, just add them to the start command.
+Where a `-D` is used to set a system property, and the system property is `com.mojang.eula.agree` with a value of `true`. Otherwise, just add them to the start command.
 
 :::note
 

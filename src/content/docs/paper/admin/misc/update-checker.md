@@ -17,7 +17,7 @@ Additionally, you can manually check for updates at any time by running the `ver
 
 The update checker sends the following information to the PaperMC servers:
 - Current Paper version
-- Your IP
+- Your servers client IP (as for any http request)
 
 This information is not currently stored or analyzed by PaperMC, though requests pass through CloudFlare.
 

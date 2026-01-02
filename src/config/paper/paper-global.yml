@@ -503,6 +503,7 @@ unsupported-settings:
       be disabled
   oversized-item-component-sanitizer:
     dont-sanitize:
+      vanilla: "[minecraft:container, minecraft:charged_projectiles, minecraft:bundle_contents]"
       default: "[]"
       description: >-
         This setting defines which item data components shouldn't be sanitized in oversized item obfuscation.

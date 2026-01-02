@@ -106,6 +106,7 @@ The following is a list of permissions for Bukkit commands.
 | help    | /?           | bukkit.command.help    | Yes                                 |
 | plugins | /pl          | bukkit.command.plugins | Yes                                 |
 | reload  | /rl          | bukkit.command.reload  | No                                  |
+| restart |              | bukkit.command.restart | No                                  |
 | timings |              | bukkit.command.timings | No                                  |
 | version | /ver, /about | bukkit.command.version | Yes                                 |
 

@@ -156,7 +156,7 @@ export default defineConfig({
                     },
                     {
                       label: "Miscellaneous",
-                      items: ["paper/misc/paper-bug-fixes", "paper/faq"],
+                      items: ["paper/misc/update-checker", "paper/misc/paper-bug-fixes", "paper/faq"],
                     },
                   ],
                 },

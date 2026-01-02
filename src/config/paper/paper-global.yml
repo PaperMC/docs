@@ -527,6 +527,11 @@ unsupported-settings:
       This setting controls if equipment should be updated when handling certain player
       actions. If set to false this will allow players to exploit attributes by e.g.
       switching equipment before using it.
+update-checker:
+  enabled:
+    default: "true"
+    description: >-
+      Whether Paper should check for updates automatically on startup. See [here](/paper/misc/update-checker/) for more information.
 watchdog:
   early-warning-delay:
     default: "10000"

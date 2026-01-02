@@ -364,11 +364,10 @@ packet-limiter:
           DROP which will ignore packets over the limit, and KICK which will kick
           players for exceeding the limit
       interval:
-        vanilla: "0.000001"
+        vanilla: "-1"
         default: "7.0"
         description: The interval, in seconds, for which max-packet-rate should apply
       max-packet-rate:
-        vanilla: "999999.0"
         default: "500.0"
         description: The number of packets allowed per player within the interval
 player-auto-save:
@@ -427,7 +426,7 @@ scoreboards:
       will incur a performance degradation
 spam-limiter:
   incoming-packet-threshold:
-    vanilla: "2147483647"
+    vanilla: "disabled"
     default: "300"
     description: >-
       Sets the threshold at which the server will consider incoming packets spam
@@ -535,6 +534,11 @@ unsupported-settings:
       This setting controls if equipment should be updated when handling certain player
       actions. If set to false this will allow players to exploit attributes by e.g.
       switching equipment before using it.
+update-checker:
+  enabled:
+    default: "true"
+    description: >-
+      Whether Paper should check for updates automatically on startup. See [here](/paper/misc/update-checker/) for more information.
 watchdog:
   early-warning-delay:
     default: "10000"

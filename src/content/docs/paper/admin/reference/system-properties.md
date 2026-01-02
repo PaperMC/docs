@@ -194,6 +194,11 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Allows you to bypass the Java version check. See [here](/paper/faq#unsupported-java-detected-what-do-i-do) for more info.
 
+#### paper.disableStartupVersionCheck
+
+- **default**: `unset`
+- **description**: If set, disables the automatic update checking on startup. See [here](/paper/misc/update-checker) for more info.
+
 #### paper.useLegacyPluginLoading
 
 - **default**: `false`

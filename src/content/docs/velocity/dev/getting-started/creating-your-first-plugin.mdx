@@ -91,6 +91,13 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
     ```
   </TabItem>
   <TabItem label="Maven">
+    :::caution
+
+    If you're using JDK 23 or later, you must add the annotation processor manually to your `pom.xml`, as described in the example.
+    See the [Maven documentation](https://maven.apache.org/plugins/maven-compiler-plugin-4.x/examples/annotation-processor.html) for more information.
+
+    :::
+
     ```xml title="pom.xml" replace
     <project>
       <repositories>
@@ -107,8 +114,34 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
           <version>\{LATEST_VELOCITY_RELEASE}</version>
           <scope>provided</scope>
         </dependency>
+        <!-- add the annotation processor (Maven 4+) -->
+        <dependency>
+          <groupId>com.velocitypowered</groupId>
+          <artifactId>velocity-api</artifactId>
+          <version>\{LATEST_VELOCITY_RELEASE}</version>
+          <type>processor</type>
+        </dependency>
       </dependencies>
     </project>
+
+    <build>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <!-- add the annotation processor (Maven 3) -->
+            <annotationProcessorPaths>
+              <path>
+                <groupId>com.velocitypowered</groupId>
+                <artifactId>velocity-api</artifactId>
+                <version>\{LATEST_VELOCITY_RELEASE}</version>
+              </path>
+            </annotationProcessorPaths>
+          </configuration>
+        </plugin>
+      </plugins>
+    </build>
     ```
   </TabItem>
 </Tabs>

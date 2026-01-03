@@ -11,13 +11,13 @@ Since 1.21.11, Paper includes a built-in update checker that notifies server adm
 When the server starts, Paper will check its current version against the latest available version in the stable channel on the PaperMC servers.
 If a newer version is found, a notification message will be printed to the console and server logs.
 
-Additionally, you can manually check for updates at any time by running the `version` command in the server console (or in-game with appropriate `minecraft.command.version` permissions).
+Additionally, you can manually check for updates at any time by running the `version` command in the server console (or in-game with appropriate `bukkit.command.version` permission).
 
 ## What is sent
 
 The update checker sends the following information to the PaperMC servers:
 - Current Paper version
-- Your servers client IP (as for any http request)
+- Your server's client IP (as for any http request)
 
 This information is not currently stored or analyzed by PaperMC, though requests pass through CloudFlare.
 

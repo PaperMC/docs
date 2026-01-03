@@ -122,26 +122,26 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
           <type>processor</type>
         </dependency>
       </dependencies>
-    </project>
 
-    <build>
-      <plugins>
-        <plugin>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-compiler-plugin</artifactId>
-          <configuration>
-            <!-- add the annotation processor (Maven 3) -->
-            <annotationProcessorPaths>
-              <path>
-                <groupId>com.velocitypowered</groupId>
-                <artifactId>velocity-api</artifactId>
-                <version>\{LATEST_VELOCITY_RELEASE}</version>
-              </path>
-            </annotationProcessorPaths>
-          </configuration>
-        </plugin>
-      </plugins>
-    </build>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <!-- add the annotation processor (Maven 3) -->
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.velocitypowered</groupId>
+                  <artifactId>velocity-api</artifactId>
+                  <version>\{LATEST_VELOCITY_RELEASE}</version>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </project>
     ```
   </TabItem>
 </Tabs>

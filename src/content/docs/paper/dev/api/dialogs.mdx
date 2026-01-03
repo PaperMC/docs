@@ -486,7 +486,7 @@ ActionButton.create(
 ),
 ```
 
-The last parameter, currently a `null`, is an optional `BinaryTagHolder` payload. If we wanted to, we could put custom NBT data in there.
+The last parameter, currently `null`, is an optional `BinaryTagHolder` payload. If we wanted to, we could put custom NBT data in there.
 This NBT data will be sent to the client when the dialog is shown, and when the player clicks the button, a
 [`PlayerCustomClickEvent`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent) will be fired containing the same NBT data among other information.
 
@@ -495,7 +495,7 @@ This NBT data will be sent to the client when the dialog is shown, and when the 
 The `BinaryTagHolder.binaryTagHolder` factory method requires an SNBT-formatted string. We can either construct this string manually, or use
 the `adventure-nbt` library to create NBT data programmatically.
 
-:::tip
+:::caution
 The `adventure-nbt` library is not included by default in Paper, so make sure to add it as a dependency in your project.
 :::
 
@@ -511,10 +511,6 @@ BinaryTagHolder payload = BinaryTagHolder.binaryTagHolder(
     )
 );
 ```
-
-:::caution[Exceptions]
-The `asString` method can throw an `IOException`, so make sure to handle that appropriately.
-:::
 
 ### Reading NBT payloads
 
@@ -533,8 +529,3 @@ CompoundBinaryTag tag = TagStringIO.tagStringIO().asCompound(snbt);
 String action = tag.getString("action");
 int someValue = tag.getInt("some_value");
 ```
-
-:::caution[Exceptions]
-1. The `getTag()` method can return `null`, so make sure to check for that.
-2. The `asCompound()` method can throw an `IOException`, so make sure to handle that appropriately.
-:::

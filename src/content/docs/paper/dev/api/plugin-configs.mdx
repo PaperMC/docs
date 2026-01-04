@@ -157,7 +157,8 @@ YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 config.save(file);
 ```
 
-This example reads the `items.yml` file from your plugin's data directory. This file must exist, else an error will be thrown.
+This example reads the `items.yml` file from your plugin's data directory. If the file does not exist or an error occurs
+during reading, an empty configuration will be returned.
 
 :::danger[Blocking I/O]
 

@@ -445,10 +445,11 @@ export default defineConfig({
                   ],
                 },
                 {
-                  label: "Migrating to Adventure from other APIs",
+                  label: "Migration",
                   items: [
                     "adventure/migration",
                     "adventure/migration/bungeecord-chat-api",
+                    "adventure/migration/adventure-4.x",
                     "adventure/migration/text-3.x",
                   ],
                 },

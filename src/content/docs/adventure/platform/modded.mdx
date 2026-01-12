@@ -20,10 +20,16 @@ Adventure facilities this through the `net.kyori:adventure-platform-mod-shared` 
 A second variant, `net.kyori:adventure-platform-mod-shared-fabric-repack`, is also published. This variant should be used
 when your common code is managed by `fabric-loom`.
 
-If you are building a Fabric-only or NeoForge-only mod, or do not care to use the platform API in shared code,
-then you don't need to use this artifact explicitly. This is because both platforms depend on it transitively.
+:::caution[Note]
+  These artifacts are for the common module on multi-platform mods. For specific platforms, take a look at the
+  [Fabric](/adventure/platform/fabric) or [NeoForge](/adventure/platform/neoforge) pages. If you are building a
+  Fabric-only or NeoForge-only mod, or do not care to use the platform API in shared code, then you don't need to use
+  this artifact explicitly. This is because both platforms depend on it transitively.
+:::
 
 As with the rest of the Adventure projects, releases are distributed on Maven Central, and snapshots on Sonatype OSS:
+
+
 
 <Tabs syncKey="build-system">
   <TabItem label="Gradle (Kotlin)">
@@ -81,6 +87,7 @@ Each major Minecraft release will require different platform versions. For older
 
   | Minecraft Version | Adventure version | `adventure-platform-(mod-shared/fabric/neoforge)` version |
   |-------------------|-------------------|-----------------------------------------------------------|
+  | 1.21.9-1.21.10    | 4.25.0            | 6.7.0                                                     |
   | 1.21.6-1.21.8     | 4.24.0            | 6.6.0                                                     |
   | 1.21.5            | 4.21.0            | 6.4.0                                                     |
   | 1.21.2-1.21.4     | 4.20.0            | 6.3.0                                                     |

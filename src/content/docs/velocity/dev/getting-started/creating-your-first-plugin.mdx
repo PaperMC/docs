@@ -108,6 +108,25 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
           <scope>provided</scope>
         </dependency>
       </dependencies>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <release>21</release> <!-- The Java version that you want to compile for -->
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.velocitypowered</groupId>
+                  <artifactId>velocity-api</artifactId>
+                  <version>\{LATEST_VELOCITY_RELEASE}</version>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </project>
     ```
   </TabItem>

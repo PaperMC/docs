@@ -232,7 +232,7 @@ At one point you might want to completely automate the process of publishing to 
 
 There are two changes you need to make:
 
-First you want to get the content for updating the Resource Page. In most cases this would likely be the `README.md` of your project. (of course you can use every file in your project by simply replacing `README.md` in the following code snippet with a path relative to your prjects root)
+First you want to get the content for updating the Resource Page. In most cases this would likely be the `README.md` of your project. (of course you can use every file in your project by simply replacing `README.md` in the following code snippet with a path relative to your projects root)
 
 `val pageContent: String = project.file("README.md").readText(Charsets.UTF_8)`
 

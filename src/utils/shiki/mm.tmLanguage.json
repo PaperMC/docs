@@ -4,39 +4,79 @@
   "patterns": [
     {
       "name": "meta.tag.mm",
-      "begin": "(<)(/?|!?)([a-zA-Z0-9_#]+)",
+      "begin": "(</?)([a-z_0-9-]+)",
       "beginCaptures": {
-        "1": { "name": "constant.language.tag.mm" },
-        "2": { "name": "constant.language.tag.mm" },
-        "3": { "name": "constant.language.tag.mm" }
+        "1": { "name": "punctuation.definition.tag.mm" },
+        "2": { "name": "constant.language.identifier.identifier.mm" }
       },
-      "end": "(>)",
+      "end": "/?>",
       "endCaptures": {
-        "1": { "name": "constant.language.tag.mm" }
+        "1": { "name": "punctuation.definition.tag.mm" }
       },
       "patterns": [
         {
-          "name": "string.quoted.single.argument.mm",
-          "match": "(:)'([^']*)'",
+          "name": "variable.parameter.sequenced.quoted.mm",
+          "match": "(\\s*)(:)(\".*\")",
           "captures": {
-            "1": { "name": "constant.language.tag.mm" },
-            "2": { "name": "string.quoted.single.argument.mm" }
+            "2": { "name": "punctuation.definition.identifier.mm" },
+            "3": { "name": "string.quoted.double.mm" }
           }
         },
         {
-          "name": "string.quoted.double.argument.mm",
-          "match": "(:)\"([^\"]*)\"",
+          "name": "variable.parameter.sequenced.single-quoted.mm",
+          "match": "(\\s*)(:)('.*')",
           "captures": {
-            "1": { "name": "constant.language.tag.mm" },
-            "2": { "name": "string.quoted.double.argument.mm" }
+            "2": { "name": "punctuation.definition.identifier.mm" },
+            "3": { "name": "string.quoted.single.mm" }
           }
         },
         {
-          "name": "variable.language.argument.mm",
-          "match": "(:)([^:\\s\"'>]+(?:\\[[^\\]]*\\])?)",
+          "name": "variable.parameter.sequenced.unquoted.mm",
+          "match": "(\\s*)(:)(((\\\\>)|(\\\\:)|[^>:])*)",
           "captures": {
-            "1": { "name": "constant.language.tag.mm" },
-            "2": { "name": "variable.language.argument.mm" }
+            "2": { "name": "punctuation.definition.identifier.mm" },
+            "3": { "name": "string.unquoted.mm" }
+          }
+        },
+        {
+          "name": "variable.parameter.named-argument.quoted.mm",
+          "match": "(\\s+)([a-z_0-9-]+)(=)(\".*\")",
+          "captures": {
+            "2": { "name": "keyword.reserved.identifier.mm" },
+            "3": { "name": "punctuation.definition.identifier.mm" },
+            "4": { "name": "string.quoted.double.mm" }
+          }
+        },
+        {
+          "name": "variable.parameter.named-argument.single-quoted.mm",
+          "match": "(\\s+)([a-z_0-9-]+)(=)('.*')",
+          "captures": {
+            "2": { "name": "keyword.reserved.identifier.mm" },
+            "3": { "name": "punctuation.definition.identifier.mm" },
+            "4": { "name": "string.quoted.single.mm" }
+          }
+        },
+        {
+          "name": "variable.parameter.named-argument.unquoted.mm",
+          "match": "(\\s+)([a-z_0-9-]+)(=)([^ >:]*)",
+          "captures": {
+            "2": { "name": "keyword.reserved.identifier.mm" },
+            "3": { "name": "punctuation.definition.identifier.mm" },
+            "4": { "name": "string.unquoted.mm" }
+          }
+        },
+        {
+          "name": "variable.parameter.inverse-flag.mm",
+          "match": "(\\s+)(![a-z_0-9-]+)",
+          "captures": {
+            "2": { "name": "keyword.reserved.inverse-flag.mm" }
+          }
+        },
+        {
+          "name": "variable.parameter.flag.mm",
+          "match": "(\\s+)([a-z_0-9-]+)",
+          "captures": {
+            "2": { "name": "keyword.reserved.flag.mm" }
           }
         }
       ]

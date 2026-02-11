@@ -16,10 +16,20 @@ UUIDs and skins. Velocity supports three forwarding formats:
 
 :::note
 
-You may choose between only one of these forwarding formats. It is not currently possible to "mix
-and match" forwarding modes or use all the forwarding formats together. In general, if you are
-supporting clients using Minecraft 1.13 and newer only, use Velocity modern forwarding, else you
-must use BungeeCord forwarding.
+It is now possible to configure forwarding individually for each server.
+In general, if you are supporting clients using Minecraft 1.13 and newer only, use Velocity modern forwarding.
+For older versions, consider using BungeeGuard for added security; else you must use BungeeCord forwarding.
+
+Example:
+
+   ```toml
+   lobby = "127.0.0.1:30066"
+   ```
+   Becomes:
+
+   ```toml
+   lobby = { address = "127.0.0.1:30066", forwarding-mode = "MODERN" }
+   ```
 
 :::
 

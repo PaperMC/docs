@@ -58,7 +58,7 @@
     autoRestart: boolean,
     platform: Option
   ): string => {
-    const javaCmd = `java -Xms${memory * 1024}M -Xmx${memory * 1024}M ${flag.value}-jar ${filename || "server.jar"}${gui || flag.id === "velocity" ? "" : " nogui"}`;
+    const javaCmd = `java -Xms${memory * 1024}M -Xmx${memory * 1024}M ${flag.value}-jar ${filename || "server.jar"}${gui || flag.id === "velocity" ? "" : " --nogui"}`;
 
     let script = platform.id === "windows" ? `${javaCmd}\n\npause` : javaCmd;
     if (autoRestart) {

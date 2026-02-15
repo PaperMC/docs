@@ -2,7 +2,14 @@
   "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "bnf",
   "scopeName": "source.bnf",
-  "patterns": [{ "include": "#comment" }, { "include": "#rule" }, { "include": "#meta" }, { "include": "#strings" }],
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#rule" },
+    { "include": "#meta" },
+    { "include": "#strings" },
+    { "include": "#text" }
+  ],
+
   "repository": {
     "comment": {
       "name": "comment.line.semicolon.bnf",
@@ -11,37 +18,34 @@
 
     "rule": {
       "name": "meta.rule.bnf",
-      "begin": "^(\\s*)([A-Za-z0-9_-]+)(\\s*→)",
-      "beginCaptures": {
-        "2": { "name": "entity.name.function.nonterminal.bnf" },
-        "3": { "name": "keyword.reserved.arrow.bnf" }
-      },
-      "end": "(?=^\\s*[A-Za-z0-9_-]+\\s*→|\\Z)",
-      "patterns": [
-        { "include": "#tripleQuotedNonterminal" },
-        { "include": "#strings" },
-        { "include": "#meta" },
-        {
-          "match": "\\b[A-Za-z0-9_-]+\\b",
-          "name": "variable.language.nonterminal.bnf"
-        }
-      ]
+      "match": "([A-Za-z0-9_-]+)(\\s*→)",
+      "captures": {
+        "0": { "name": "entity.name.function.nonterminal.bnf" },
+        "1": { "name": "keyword.reserved.arrow.bnf" }
+      }
     },
 
-    "tripleQuotedNonterminal": {
-      "name": "meta.triplequoted.nonterminal.bnf",
-      "begin": "\"{3}",
-      "beginCaptures": {
-        "0": { "name": "string.quoted.double.bnf" }
-      },
-      "end": "\"{3}",
-      "endCaptures": {
-        "0": { "name": "string.quoted.double.bnf" }
-      },
+    "meta": {
       "patterns": [
         {
-          "match": "\\b[A-Za-z0-9_-]+\\b",
-          "name": "variable.language.nonterminal.bnf"
+          "match": "→",
+          "name": "keyword.reserved.arrow.bnf"
+        },
+        {
+          "match": "\\|",
+          "name": "keyword.reserved.choice.bnf"
+        },
+        {
+          "match": "[{}()]",
+          "name": "comment.punctuation.section.group.bnf"
+        },
+        {
+          "match": "\\+",
+          "name": "comment.punctuation.quantity.bnf"
+        },
+        {
+          "match": "\\*",
+          "name": "comment.punctuation.quantity.bnf"
         }
       ]
     },
@@ -62,19 +66,11 @@
       ]
     },
 
-    "meta": {
+    "text": {
       "patterns": [
         {
-          "match": "→",
-          "name": "keyword.reserved.arrow.bnf"
-        },
-        {
-          "match": "\\|",
-          "name": "keyword.reserved.choice.bnf"
-        },
-        {
-          "match": "[{}()]",
-          "name": "punctuation.section.group.bnf"
+          "name": "variable.language.bnf",
+          "match": "[a-z0-9-]+"
         }
       ]
     }

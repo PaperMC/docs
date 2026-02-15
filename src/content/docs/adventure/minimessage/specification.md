@@ -25,15 +25,27 @@ plain text part of a MiniMessage-formatted string:
 
 ```mm
 The MiniMessage format was made to be as simple as possible.
-Emojies are allowed 😅. So are japanese characters, like 紙.
+Emojis are allowed 😅. So are Japanese characters, like 紙.
 ```
 
-MiniMessage tags are primarily used for adding markup information to plain text parts. They can, however,
+MiniMessage tags are primarily used for adding markup information to plain text parts. However, they can
 also add entirely new content into the serialized component. The way how a tag is resolved makes no
-difference to the MiniMessage lexer. A tag has the following structure:
+difference to the MiniMessage lexer.
+
+There are two types of tags: sequential and named ones:
 
 ```mm
-<tagname flags named_argument=value :a sequenced argument:another one>
+; Note that these comments are not part of the MiniMessage specification
+; and are only here to explain something in-code.
+
+; An example of a tag with named arguments:
+<named="a sequenced argument":"another one" flags named_argument=value>
+
+; An example of a tag with sequential arguments:
+<sequential:the first value of the argument stack:the second one!>
+
+; A tag can also have no arguments at all:
+<empty_tag>
 ```
 
 A tag consists of the following parts:
@@ -83,7 +95,7 @@ This tag is auto-closed: <tagname/>
 Arguments are placed between the tag name and the closing more-than symbol.
 
 ```mm
-<tagname [arguments here]>
+<tagname[arguments here]>
 ```
 
 ### Named argument types
@@ -142,8 +154,17 @@ These two named types can be combined in any way.
 
 ### Sequential arguments
 
-Sequential arguments are declared at the end of the tag. Each sequential argument starts with a colon `:`.
-Unless named arguments are present, a whitespace before the first colon `:` is not necessary.
+Sequential arguments can be used either exclusively or inclusively. Exclusive/inclusive here refers to whether
+a tag with sequential arguments present may also contain named arguments.
+
+The formats are as following:
+
+- Exclusive: `<tag:arg 1:arg 2:...:arg n>`.
+- Inclusive: `<tag=arg 1:arg 2:...:'arg n' named_args>`
+
+Sequential arguments are separated using a colon `:`.
+In inclusive format, only the *last* sequential argument may need to be quoted to ensure
+extra whitespace is not treated as a separator between named arguments.
 
 Sequential arguments may contain any UTF-16 characters. Any instances of `<`, `>`, or `:` characters
 must either be escaped (see [misc/escaping](#escaping)) or the argument must be wrapped in quotes
@@ -152,14 +173,19 @@ must either be escaped (see [misc/escaping](#escaping)) or the argument must be 
 The following are valid MiniMessage tags with sequential arguments:
 
 ```mm
+; [hey there]
 <simpletag:hey there>
 
+; [first argument,second argument]
 <another:first argument:second argument>
 
+; [this is perfectly fine]
 <with_whitespace   :this is perfectly fine>
 
+; [<some_cool_tag and a : colon!]
 <nested_mm:\<some_cool_tag\> and a \: colon!>
 
+; [<some_cool_tag> and a : colon, but it's quoted!]
 <nested_mm:"<some_cool_tag> and a : colon, but it's quoted!">
 ```
 
@@ -168,19 +194,17 @@ The following are valid MiniMessage tags with sequential arguments:
 Named and sequential arguments can be used together. The general syntax looks as follows:
 
 ```mm
-<tagname[ named_arguments ][:sequenced:arguments]>
+<tagname[=sequenced:arguments][ named_arguments]>
 ```
-
-All named arguments must be located between the tag name and the first non-value colon.
 
 A few examples for valid tags making use of both named and sequenced arguments:
 
 ```mm
-<combined coolness=true flags :and sequenced args>
+<combined='and sequenced args' coolness=true flags>
 
-<combined flags !over more_flags and even !more flagss :I'd call this cool:Would you?:Yeah for sure>
+<combined=I'd call this cool:Would you?:'Yeah for sure' flags !over more_flags and even !more flagss>
 
-<combined tic=tac :time's up!>
+<combined="time's up!" tic=tac>
 ```
 
 ## Misc
@@ -190,10 +214,11 @@ This section defines miscellaneous behavior of common parts.
 ### Identifiers
 
 All identifiers must be lowercased and contain only alphanumerical characters, `_`, or '-'. All identifiers
-used as named argument names should be unique.
+used as named argument names should be unique. Identifiers may start with a single exclamation mark `!`.
 
 ### Quoting
-Argument values can be quoted. A value counts as quoted if the first character is a `'` or `"`. The quoted
+
+Argument values can be quoted. A value is treated as quoted if the first character is a `'` or `"`. The quoted
 value ends as soon as another unquoted quote of the same character as the starting quote is found at the
 end of an argument.
 
@@ -231,50 +256,50 @@ symbol. If a backlash character had no effect, it is included literally.
 This segment declares the formal grammar (in a flavor of the Backus-Naur form) which specifies the MiniMessage language.
 
 The specific flavor used here changes that non-terminal symbols are no longer enclosed in angle brackets `<>`
-and the `::=` meta symbol is replaced by `→`. Curly brackets `{}` declare optional parts. Lastly, a `+` suffix
-declares that a symbol should appear at least once, but may appear more often, whilst a `*` suffix declares that
-a symbol may appear once or more often.
+and the `::=` meta symbol is replaced by `→`. Curly brackets `{}` declare optional parts. `()` is used to
+group elements together. Lastly, a `+` suffix declares that a symbol must appear at least once, but may appear
+more often, whilst a `*` suffix declares that a symbol may appear zero or more times.
 
-```bnf
+```bnf title="Formal Grammar"
 ; Important notes regarding this specific grammar: due to the massive number of characters included
 ; in the UTF-16 characterset, some special non-terminal symbols have been added:
 ;
 ; utf-16-char                       → includes all UTF-16 characters.
 ;
-; utf-16-char-no-whitespace         → includes all UTF-16 characters except for spaces (\s), tabs (\t), newlines (\n)
-;                                     and carriage returns (\r).
+; utf-16-char-no-whitespace         → includes all UTF-16 characters except for spaces (\s), tabs (\t),
+;                                     newlines (\n) and carriage returns (\r).
 ;
 ; utf-16-char-no-angle-or-colon     → includes all UTF-16 characters except for the
 ;                                     angle-bracket characters (<>) and colon (:). However
 ;                                     those characters are valid if an uneven number of backslash
 ;                                     characters is located infront of them.
 
-minimessage           → string {tag string}
+minimessage           → {tag} {utf-16-char} {minimessage}
 
-string                → utf-16-char*
+; Note that the closing tag identifier should be the same as the opening one.
+tag                   → "<" identifier tag-arguments "/>"
+tag                   → "<" identifier tag-arguments ">" minimessage {"</" identifier ">"}
 
-tag                   → "<" tag-name tag-arguments "/>"
-tag                   → "<" tag-name tag-arguments ">" minimessage {"</" tag-name ">"}
+tag-arguments         → (":" sequential-value)+
+                        | {sequential-arguments} named-argument*
 
-tag-name              → identifier
+sequential-arguments  → "=" {sequential-value ":"}* sequential-quoted
 
-tag-arguments         → "" | named-argument " "+ sequential-argument | named-argument | " "* sequential-argument
-
-named-argument        → "" | " "+ {"!"} identifier {named-argument} | " "+ identifier "=" named-value {named-argument}
-
-named-value           → "" | quoted | no-whitespace-string
-
-no-whitespace-string  → utf-16-char-no-whitespace*
-
-sequential-argument   → ":" sequential-value {sequential-argument}
+sequential-quoted     → "" | quoted | no-whitespace-string
 
 sequential-value      → "" | quoted | sequential-string
 
-sequential-string     → utf-16-char-no-angle-or-colon*
+named-argument        → "" | " "+ identifier {"=" named-value} {named-argument}
 
-quoted                → "'" string "'" | """ string """
+named-value           → "" | quoted | no-whitespace-string
 
-identifier            → alphanumeric+
+sequential-string     → utf-16-char-no-angle-or-colon+
+
+no-whitespace-string  → utf-16-char-no-whitespace+
+
+quoted                → "'" utf-16-char* "'" | '"' utf-16-char* '"'
+
+identifier            → {"!"} alphanumeric+
 
 alphanumeric          → "a" | "b" | "c" | "d"
                         | "e" | "f" | "g" | "h"

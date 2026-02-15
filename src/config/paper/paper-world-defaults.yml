@@ -360,6 +360,12 @@ entities:
             viewed by enabling advanced item tooltips in-game by pressing **F3 +
             H**; the item id will appear at the bottom of the tooltip that
             appears when you hover over an item
+    max-arrow-despawn-invulnerability:
+      vanilla: "disabled"
+      default: "200"
+      description: >-
+        Workaround for MC-125757, makes all arrows advance their despawn
+        timer as if they were stuck in the ground, after a delay (in ticks).
     count-all-mobs-for-spawning:
       vanilla: "true"
       default: "false"

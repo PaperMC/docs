@@ -70,7 +70,7 @@ final Component component = text()
 :::note[In-Depth Documentation]
 
 For complete documentation on the Adventure Component API Paper and Velocity use, please look at the
-[Adventure documentation](https://docs.advntr.dev).
+[Adventure documentation](/adventure).
 
 :::
 

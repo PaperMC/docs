@@ -3,6 +3,7 @@ import { execSync } from "child_process";
 export interface CommitterInfo {
   name: string;
   href: string;
+  avatar?: string;
 }
 
 export interface CommitInfo {
@@ -47,6 +48,7 @@ export const getCommitInfo = async (filePath: string): Promise<CommitInfo | null
   if (res.ok) {
     const commit = await res.json();
     info.href = commit.author.html_url;
+    info.avatar = commit.author.avatar_url;
   }
 
   cache.set(email, info);

@@ -126,7 +126,17 @@ or add a second return an [`Continuation`](jd:velocity:com.velocitypowered.api.e
 ```java
   @Subscribe(priority = 100)
   public void onLogin(LoginEvent event, Continuation continuation) {
-    doSomeAsyncProcessing().addListener(continuation::resume, continuation::resumeWithException);
+    doSomeAsyncProcessing().whenComplete((_, throwable) -> {
+      if (throwable != null) {
+        continuation.resumeWithException(throwable);
+      } else {
+        continuation.resume();
+      }
+    });
+  }
+
+  private CompletableFuture<Void> doSomeAsyncProcessing() {
+    //...
   }
 
   @Subscribe(priority = 100)

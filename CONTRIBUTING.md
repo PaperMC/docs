@@ -180,6 +180,10 @@ For that, you can use the `jd:project_name[:module_name][:class_or_member_refere
 [`repeat(long, TimeUnit)`](jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder#repeat(long,java.util.concurrent.TimeUnit))
 [java.base's List](jd:java:java.util.List)
 [java.sql's Connection](jd:java:java.sql:java.sql.Connection)
+
+We don't even need to specify the link text, it can be generated automatically:
+[](jd:paper:org.bukkit.event.Event) looks like `Event`
+[](jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder#repeat(long,java.util.concurrent.TimeUnit)) looks like `Scheduler.TaskBuilder#repeat(long, TimeUnit)`
 ```
 
 ## Referencing a build system dependency

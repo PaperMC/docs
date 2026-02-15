@@ -25,7 +25,7 @@ IDEA is recommended.
 - Open your IDE
 - Click `Create New Project` or the equivalent
 - Select either `Gradle` or `Maven`
-- Make sure your **Project JDK** is Java 17 or later
+- Make sure your **Project JDK** is Java 21 or later
 - **Finish** the dialog and open the project.
 
 Now we have created our project, we need configure our build system.
@@ -90,7 +90,49 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
     }
     ```
   </TabItem>
-  <TabItem label="Maven">
+  <TabItem label="Maven 4+">
+    :::caution
+
+    If you're using JDK 23 or later, you must add the annotation processor manually to your `pom.xml`, as described in the example.
+    See the [Maven documentation](https://maven.apache.org/plugins/maven-compiler-plugin-4.x/examples/annotation-processor.html) for more information.
+
+    :::
+
+    ```xml title="pom.xml" replace
+    <project>
+      <repositories>
+        <repository>
+          <id>papermc</id>
+          <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+      </repositories>
+
+      <dependencies>
+        <dependency>
+          <groupId>com.velocitypowered</groupId>
+          <artifactId>velocity-api</artifactId>
+          <version>\{LATEST_VELOCITY_RELEASE}</version>
+          <scope>provided</scope>
+        </dependency>
+        <!-- add the annotation processor -->
+        <dependency>
+          <groupId>com.velocitypowered</groupId>
+          <artifactId>velocity-api</artifactId>
+          <version>\{LATEST_VELOCITY_RELEASE}</version>
+          <type>processor</type>
+        </dependency>
+      </dependencies>
+    </project>
+    ```
+  </TabItem>
+  <TabItem label="Maven 3">
+    :::caution
+
+    If you're using JDK 23 or later, you must add the annotation processor manually to your `pom.xml`, as described in the example.
+    See the [Maven documentation](https://maven.apache.org/plugins/maven-compiler-plugin-4.x/examples/annotation-processor.html) for more information.
+
+    :::
+
     ```xml title="pom.xml" replace
     <project>
       <repositories>
@@ -108,6 +150,25 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
           <scope>provided</scope>
         </dependency>
       </dependencies>
+
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <!-- add the annotation processor -->
+              <annotationProcessorPaths>
+                <path>
+                  <groupId>com.velocitypowered</groupId>
+                  <artifactId>velocity-api</artifactId>
+                  <version>\{LATEST_VELOCITY_RELEASE}</version>
+                </path>
+              </annotationProcessorPaths>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
     </project>
     ```
   </TabItem>
@@ -161,7 +222,7 @@ You will be asked to provide some information about your project.
 | **Group ID**         | The group ID of your project. This is used for Maven and Gradle. This is usually your domain name in reverse. If you don't know what you should put here, you can use something like `io.github.<yourname>` or if you don't have GitHub you can just use `me.<yourname>`. |
 | **Artifact ID**      | The artifact ID of your project. This is used for Maven and Gradle. This is usually the name of your project. This is usually the same as the `Name` field.                                                                                                               |
 | **Version**          | The version of your project. This is used for Maven and Gradle. This is usually `1.0-SNAPSHOT` and does not really matter for now.                                                                                                                                        |
-| **JDK**              | The JDK you want to use. This can be anything from Java 17 and above.                                                                                                                                                                                                     |
+| **JDK**              | The JDK you want to use. This can be anything from Java 21 and above.                                                                                                                                                                                                     |
 
 Now you can click on the `Create` button and IntelliJ will create the project for you.
 If everything went well, you should see something like this:

@@ -2,7 +2,7 @@
 title: Particles
 description: A comprehensive guide to particle spawning.
 slug: paper/dev/particles
-version: 1.21.5
+version: 1.21.9
 ---
 
 import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
@@ -236,12 +236,11 @@ Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly t
 ![Colored potion effect particles](./assets/particles/orange-spell-particles.webp)
 
 :::note
-Only the `ENTITY_EFFECT` supports the alpha channel, which is used to create translucent particles.
+Only the `ENTITY_EFFECT` particle supports the alpha channel, which is used to create translucent particles.
 :::
 
 :::caution
-The `EFFECT` and `INSTANT_EFFECT` particles cannot be colored with the API and will always be white. Only thrown potions
-can color them.
+While `FLASH` and `TINTED_LEAVES` particles take an ARGB color, the alpha channel is ignored.
 :::
 
 ### Dust particles
@@ -614,6 +613,13 @@ These particles will use `offsetY` as the particle's y-axis velocity.
 If you set `offsetX` AND `offsetZ` to `0`, the particle will have almost no x or z-axis velocity, but will still have
 a y-axis velocity set by the `offsetY` argument. In both cases, `offsetX` and `offsetZ` are not used in the velocity vector.
 
+:::caution
+`EFFECT` and `INSTANT_EFFECT` are [powered particles](#powered-particles) and use [`Particle.Spell`](jd:paper:org.bukkit.Particle$Spell)
+as their data. Due to the nature of rising particles' final calculated vertical velocity being very low (in range \[-0.056, 0.056\])
+and how powered particles calculate the vertical velocity, the resulting vertical velocity will always be the opposite of
+`power` value's sign.
+:::
+
 Example of spawning a `GLOW` particle that moves up:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
@@ -735,11 +741,6 @@ location. When they reach the player's y level, their vertical velocity will be 
 
 If the player is moving vertically, the particles will attempt to match the player's vertical velocity.
 
-### Splash particles
-The `SPLASH` particle uses the `offsetX` and `offsetZ` arguments to determine the particle's velocity vector, if two conditions are met:
-1. `offsetY` is `0`
-2. Either `offsetX` or `offsetZ` are not `0`
-
 ### Damage indicator particles
 The `DAMAGE_INDICATOR` particle adds `1.0` to the provided `offsetY`.
 
@@ -752,3 +753,19 @@ The `DUST_PLUME` particle adds `0.15` to the provided `offsetY`.
 ### Firefly particles
 The `FIREFLY` particle uses `offsetY` as the particle's initial y-axis velocity, however, there is 50% chance for the `offsetY`'s
 sign to be inverted. This means that the particle will either move up or down, with equal probability.
+
+### Powered particles
+The powered particles multiply the particle's velocity vector by the supplied argument.
+:::note
+The y component of the vector is calculated as `(verticalVelocity - 0.1) * power + 0.1`.
+:::
+
+#### List of powered particles
+- EFFECT
+- INSTANT_EFFECT
+- DRAGON_BREATH
+
+### Splash particles
+The `SPLASH` particle uses the `offsetX` and `offsetZ` arguments to determine the particle's velocity vector, if two conditions are met:
+1. `offsetY` is `0`
+2. Either `offsetX` or `offsetZ` are not `0`

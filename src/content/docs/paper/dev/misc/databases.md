@@ -192,3 +192,28 @@ Using prepared statements in Java with [`PreparedStatement`](jd:java:java.sql:ja
 helps prevent SQL injection. They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection
 [here](https://www.baeldung.com/sql-injection).
+
+When using `PreparedStatement` the `login` method will become:
+
+```java
+public void login(DataSource dataSource, String username, String password) {
+    try (Connection connection = dataSource.getConnection()) {
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+        statement.setString(1, username);
+        statement.setString(2, password);
+        ResultSet result = statement.executeQuery();
+        // Do work
+    } catch (Exception e) {
+        // Handle any exceptions that arise from getting / handing the exception
+    }
+}
+```
+
+## Database tools
+
+Given the complexity of working with databases (managing connections, building and securing queries, or just parsing the data) several tools
+exist in the world of Java to leverage this work.
+
+Some plugin developers use lightweight tools like [JDBI](https://jdbi.org/), [JOOQ](https://www.jooq.org/doc/latest/manual/)
+or [Exposed](https://www.jetbrains.com/help/exposed/get-started-with-exposed.html), which take care of all the heavy lifting,
+allowing the developers to focus on their plugins rather than the database.

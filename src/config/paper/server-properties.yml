@@ -118,7 +118,7 @@ management-server-host:
   default: "localhost"
   description: "Controls the host that the Minecraft Server Management Protocol is started."
 management-server-port:
-  default: "localhost"
+  default: "0"
   description: "Controls the port that the Minecraft Server Management Protocol is started on."
 management-server-secret:
   default: ""
@@ -134,7 +134,7 @@ management-server-tls-keystore:
   description: >-
     Controls the path to the keystore file used for TLS.
 
-    A server will not start is TLS is enabled and no keystore is provided.
+    A server will not start when TLS is enabled and no keystore is provided.
 management-server-tls-keystore-password:
   default: ""
   description: >-

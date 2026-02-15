@@ -4,7 +4,6 @@ slug: adventure/serializer/ansi
 description: Serializing components to ANSI.
 ---
 
-import { TabItem, Tabs } from "@astrojs/starlight/components";
 import Dependency from "/src/components/Dependency.astro";
 import { LATEST_ANSI_RELEASE, LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
@@ -58,40 +57,7 @@ converter for any kind of component, not just those by Adventure.
 
 Declaring the dependency:
 
-{/* TODO: Replace with Dependency component */}
-<Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
-    ```kts replace
-    repositories {
-      mavenCentral()
-    }
-
-    dependencies {
-      implementation("net.kyori:ansi:\{LATEST_ANSI_RELEASE}")
-    }
-    ```
-  </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy replace
-    repositories {
-      mavenCentral()
-    }
-
-    dependencies {
-      implementation 'net.kyori:ansi:\{LATEST_ANSI_RELEASE}'
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
-    ```xml replace
-    <dependency>
-      <groupId>net.kyori</groupId>
-      <artifactId>ansi/artifactId>
-      <version>\{LATEST_ANSI_RELEASE}</version>
-    </dependency>
-    ```
-  </TabItem>
-</Tabs>
+<Dependency group="net.kyori" name="ansi" version={LATEST_ANSI_RELEASE} />
 
 ### Implementation usage
 

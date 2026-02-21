@@ -50,6 +50,9 @@ The path towards the Minecraft server properties file. Defaults to `server.prope
 Whether to load the server in demo mode. This results in always the same world being generated and additional
 demo reminders and help messages being sent.
 
+##### `--bonusChest`
+Whether to create a bonus chest when a new world is created.
+
 ##### `--eraseCache`
 Whether to force cache erase during world upgrades. This removes data such as heightmap and light data,
 which may be useful if you want to force recalculate those.

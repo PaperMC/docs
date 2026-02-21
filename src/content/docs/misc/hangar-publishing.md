@@ -133,7 +133,7 @@ hangarPublish {
 }
 ```
 
-### GitHub Actions workflow
+## GitHub Actions workflow
 
 You don't necessarily need to publish via GitHub Actions, but it is an easy way to do so. If you want to use it, create
 a `publish.yml` file in the `.github/workflows` directory of your project root folder and make sure
@@ -171,11 +171,12 @@ jobs:
         run: ./gradlew build publishPluginPublicationToHangar --stacktrace
 ```
 
-### Optional: Handling multiple channels and an automatic changelog
+## Optional: Handling multiple channels and an automatic changelog
 
-With the following channels, any version that contains a hyphen (`-`) will be published under the `Snapshot` channel
-that you need to create on Hangar. By editing the `channel.set(...)` line, you can change this to any channel you would
-like. For example, you could further split builds depending on the branch you are currently on into `Alpha` builds.
+With the following code, any version that contains a hyphen (`-`) will be published under the `Snapshot` channel
+(that you need to create on Hangar) and the others on the `Release` channel.
+By editing the `channel.set(...)` line, you can change this to any channel you would like.
+For example, you could further split builds depending on the branch you are currently on into `Alpha` builds.
 
 :::caution
 
@@ -226,28 +227,29 @@ hangarPublish {
 }
 ```
 
-### Optional: Updating the Resource Page
+## Optional: Updating the resource page
 
-At one point you might want to completely automate the process of publishing to HangarMC. One major part in this would be to update the 'Resource Page' (eg. the plugins home page).
+A notable part of publishing a new version might be updating the resource page (e.g. the plugin's home page) with new content from your plugin's repository.
 
-There are two changes you need to make:
+In this example, we're using a README file, but you can use any text you want, as long as it is in Markdown format.
 
-First you want to get the content for updating the Resource Page. In most cases this would likely be the `README.md` of your project. (of course you can use every file in your project by simply replacing `README.md` in the following code snippet with a path relative to your projects root)
-
-`val pageContent: String = project.file("README.md").readText(Charsets.UTF_8)`
-
-Registering the content to your projects Resource Page as follows completes the gradle part.
 ```kotlin
+val pageContent = project.file("README.md").readText()
+
 hangarPublish {
     publications.register("plugin") {
+        // ... (see above)
         pages.resourcePage(pageContent)
     }
 }
 ```
-Next we need to add the `syncAllPagesToHangar` task to the `Publish` step in your workflow:
+
+You can invoke the `syncPluginPublicationMainResourcePagePageToHangar` task to update the resource page on Hangar.
+This will not publish a new version, but simply update the page content on Hangar.
+
+If you're using a GitHub Actions workflow, you should also add the task invocation to the `Publish` step in your workflow:
 ```yaml
 - name: Publish
-  env:
-    HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
-  run: ./gradlew build publishPluginPublicationToHangar syncAllPagesToHangar --stacktrace
+  # ...
+  run: ./gradlew build publishPluginPublicationToHangar syncPluginPublicationMainResourcePagePageToHangar --stacktrace
 ```

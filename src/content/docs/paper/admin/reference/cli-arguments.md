@@ -25,7 +25,7 @@ Prints a help message with all CLI arguments you may pass. Using this flag will 
 The path towards the command settings file. Defaults to `commands.yml`.
 
 ##### `-P, --plugins <plugin directory>`
-The directory to look in for plugin jars. Defaults to `plugins`.
+The directory to look in for plugin JARs. Defaults to `plugins`.
 
 ##### `-S, --spigot-settings <yml file>`
 The path towards the Spigot configuration file. Defaults to `spigot.yml`.
@@ -38,7 +38,7 @@ Additional directory to look for plugin files in. May be specified multiple time
 extra plugin directory.
 
 ##### `--add-extra-plugin-jar, --add-plugin <jar file>`
-Additional plugin jar file to load. May be specified multiple times for multiple plugin jars.
+Additional plugin JAR file to load. May be specified multiple times for multiple plugin JARs.
 
 ##### `-b, --bukkit-settings <yml file>`
 The path towards the Bukkit configuration file. Defaults to `bukkit.yml`.
@@ -75,7 +75,7 @@ Whether to only create setting files and then shut down the server before creati
 if you want to first set some configuration values, which may be relevant during world creation.
 
 ##### `--jfrProfile`
-Whether to enable jfr profiling.
+Whether to enable JFR (Java Flight Recorder) profiling.
 
 ##### `--log-append <true|false>`
 Whether to append to the log file. Defaults to `true`.
@@ -100,7 +100,7 @@ Disables the console.
 Disables the graphical interface.
 
 ##### `--nojline`
-Disables jline and emulates the Vanilla console.
+Disables JLine and emulates the Vanilla console.
 
 ##### `-o, --online-mode <true|false>`
 Whether to use online authentication.
@@ -115,7 +115,7 @@ The legacy Paper settings file path. Defaults to `paper.yml`.
 Path to the Paper settings directory. Defaults to `config`.
 
 ##### `--pidFile <path>`
-Path to the pid file.
+Path to the PID file.
 
 ##### `--recreateRegionFiles`
 Whether to recreate region files during world upgrades.
@@ -136,4 +136,4 @@ The server ID.
 Prints the CraftBukkit version. This option prevents the server from starting.
 
 ##### `-w, --level-name, --world <name>`
-Set the world name.
+Sets the world name.

@@ -71,6 +71,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
 
     dependencies {
       compileOnly("com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}")
+      // If you want your velocity-plugin.json file to be generated based on plugin annotations
       annotationProcessor("com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}")
     }
     ```
@@ -86,6 +87,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
 
     dependencies {
       compileOnly 'com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}'
+      // If you want your velocity-plugin.json file to be generated based on plugin annotations
       annotationProcessor 'com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}'
     }
     ```
@@ -114,7 +116,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
           <version>\{LATEST_VELOCITY_RELEASE}</version>
           <scope>provided</scope>
         </dependency>
-        <!-- add the annotation processor -->
+        <!-- add the annotation processor if you want your velocity-plugin.json file to be generated -->
         <dependency>
           <groupId>com.velocitypowered</groupId>
           <artifactId>velocity-api</artifactId>
@@ -157,7 +159,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <configuration>
-              <!-- add the annotation processor -->
+              <!-- add the annotation processor if you want your velocity-plugin.json file to be generated -->
               <annotationProcessorPaths>
                 <path>
                   <groupId>com.velocitypowered</groupId>

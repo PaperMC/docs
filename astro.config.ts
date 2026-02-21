@@ -323,6 +323,7 @@ export default defineConfig({
                       items: [
                         "velocity/dev/creating-your-first-plugin",
                         "velocity/dev/api-basics",
+                        "velocity/dev/velocity-plugin-json",
                         "velocity/dev/pitfalls",
                       ],
                     },

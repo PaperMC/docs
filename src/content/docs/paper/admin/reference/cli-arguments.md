@@ -46,9 +46,6 @@ The path towards the Bukkit configuration file. Defaults to `bukkit.yml`.
 ##### `-c, --config <properties file>`
 The path towards the Minecraft server properties file. Defaults to `server.properties`.
 
-##### `-d, --date-format <log date format>`
-Override for the date format displayed in log entries.
-
 ##### `--demo`
 Whether to load the server in demo mode. This results in always the same world being generated and additional
 demo reminders and help messages being sent.
@@ -76,22 +73,6 @@ if you want to first set some configuration values, which may be relevant during
 
 ##### `--jfrProfile`
 Whether to enable JFR (Java Flight Recorder) profiling.
-
-##### `--log-append <true|false>`
-Whether to append to the log file. Defaults to `true`.
-
-##### `--log-count <value>`
-The amount of log files to cycle through. Defaults to `1`.
-
-##### `--log-limit <value>`
-The maximum size of the log file. A value of `0` means it may grow in size indefinitely.
-Defaults to `0`.
-
-##### `--log-pattern <filename>`
-The log file name pattern. Defaults to `server.log`.
-
-##### `--log-strip-color`
-Strips color codes from the log file.
 
 ##### `--noconsole`
 Disables the console.
@@ -130,7 +111,7 @@ Loads worlds only with the Vanilla datapack enabled.
 The name of the server. Defaults to `Unknown Server`.
 
 ##### `--serverId <string>`
-The server ID.
+Sets the server identifier, which is used in crash files.
 
 ##### `-v, --version`
 Prints the CraftBukkit version. This option prevents the server from starting.

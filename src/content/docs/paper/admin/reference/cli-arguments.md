@@ -60,7 +60,7 @@ which may be useful if you want to force recalculate those.
 ##### `--forceUpgrade`
 Whether to force a full world upgrade on server start.
 
-:::warning
+:::danger[Warning]
 
 This setting should rarely ever be used. The upgrade system in Paper is fast enough to do
 upgrades gradually as you play.
@@ -117,7 +117,7 @@ Path to the Paper settings directory. Defaults to `config`.
 ##### `--pidFile <path>`
 Path to the pid file.
 
-##### `--recreateREgionFiles``
+##### `--recreateRegionFiles`
 Whether to recreate region files during world upgrades.
 
 ##### `-s, --max-players, --size <value>`

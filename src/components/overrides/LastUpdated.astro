@@ -1,5 +1,6 @@
 ---
 import { REPO, getCommitInfo } from "../../utils/git";
+import { Image } from "astro:assets";
 
 const { lang, lastUpdated } = Astro.locals.starlightRoute;
 const filePath = Astro.locals.starlightRoute.entry.filePath;
@@ -21,7 +22,20 @@ const info = await getCommitInfo(filePath);
       </span>{" "}
       {info && (
         <span class="nowrap">
-          by <a href={info.committer.href}>{info.committer.name}</a>
+          by{" "}
+          <a href={info.committer.href}>
+            {info.committer.avatar && (
+              <Image
+                src={info.committer.avatar}
+                alt={info.committer.name}
+                class="avatar"
+                width="18"
+                height="18"
+                loading="lazy"
+              />
+            )}
+            {info.committer.name}
+          </a>{" "}
           in <a href={`https://github.com/${REPO}/commit/${info.hash}`}>{info.hash.substring(0, 7)}</a>
         </span>
       )}
@@ -37,5 +51,12 @@ const info = await getCommitInfo(filePath);
 
   .nowrap {
     white-space: nowrap;
+  }
+
+  .avatar {
+    vertical-align: middle;
+    border-radius: 50%;
+    margin-left: 1px;
+    margin-right: 4px;
   }
 </style>

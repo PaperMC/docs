@@ -18,17 +18,17 @@ If you are unsure about what a flag does, it is recommended that you **do not us
 System properties are set when you start your server. For example, if you are using a `.bat` or a `.sh` file to start your server, you can add the system properties to the file. For example:
 
 ```bash
-java -Dpaper.log-level=FINE -jar paper.jar
+java -Dcom.mojang.eula.agree=true -jar paper.jar
 ```
 
 :::note
 
 Some of Paper's system properties contain a `.` character in their name. When using PowerShell, these will require wrapping in quotes.
-i.e. `"-Dpaper.log-level=FINE"`
+i.e. `"-Dcom.mojang.eula.agree=true"`
 
 :::
 
-Where a `-D` is used to set a system property, and the system property is `paper.log-level` with a value of `FINE`. Otherwise, just add them to the start command.
+Where a `-D` is used to set a system property, and the system property is `com.mojang.eula.agree` with a value of `true`. Otherwise, just add them to the start command.
 
 :::note
 
@@ -194,6 +194,11 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Allows you to bypass the Java version check. See [here](/paper/faq#unsupported-java-detected-what-do-i-do) for more info.
 
+#### paper.disableStartupVersionCheck
+
+- **default**: `unset`
+- **description**: If set, disables the automatic update checking on startup. See [here](/paper/misc/update-checker) for more info.
+
 #### paper.useLegacyPluginLoading
 
 - **default**: `false`
@@ -256,6 +261,14 @@ If you wish to configure this with Maven Central, use a mirror, as using Maven C
 By default, this uses Google's NA mirror of Maven Central. You may also use region-specific mirrors listed [here](https://storage-download.googleapis.com/maven-central/index.html).
 
 :::
+
+#### paper.debugEntitiesWithInvalidIds
+- **default**: `false`
+- **description**: Enables logging the full entity NBT when an entity with a missing or otherwise invalid entity id is attempted to be loaded. (Whenever 'Skipping Entity with id' is logged to the console.)
+
+#### paper.maxChatCommandInputSize
+- **default**: `256`
+- **description**: The maximum length a chat command may have. A Vanilla client cannot send more than 256 characters.
 
 ## List of environment variables
 

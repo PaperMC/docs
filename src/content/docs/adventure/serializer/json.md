@@ -4,7 +4,7 @@ slug: adventure/serializer/json
 description: Serializing components to their JSON representation.
 ---
 
-The JSON serializer provides a common interface for serializer implementations that translate between a Component and JSON strings. This allows a library to support any underlying JSON library than an application may want to use.
+The JSON serializer provides a common interface for serializer implementations that translate between a Component and JSON strings. This allows a library to support any underlying JSON library that an application may want to use.
 
 ## Use
 

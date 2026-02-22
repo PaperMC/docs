@@ -17,7 +17,8 @@ It also provides automatic support for argument placeholders, letting you use si
 
 To start, create an implementation of the `MiniMessageTranslator` and register it to the `GlobalTranslator`.
 This can be done using `GlobalTranslator.translator().addSource(myMiniMessageTranslator)`.
-For an example of how to create your own `MiniMessageTranslator`, see the below code block.
+For an example of how to create your own `MiniMessageTranslator`, see the code
+block below.
 
 ```java
 public class MyMiniMessageTranslator extends MiniMessageTranslator {

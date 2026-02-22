@@ -9,7 +9,7 @@ This page covers how to install and set up a minimal configuration of Velocity.
 ## Installing Java
 
 Velocity is written in Java, so if you do not already have Java installed, you will need to install
-it before you continue. Velocity requires at least Java 17, however it works best with 21 or above.
+it before you continue. Velocity requires at least Java 21.
 See our [Java installation guide](/misc/java-install) for detailed instructions.
 
 ## Downloading Velocity

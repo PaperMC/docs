@@ -135,7 +135,7 @@ This helper can be used to efficiently apply a collection of styles with one tag
 
 ```java
 Component aTagExample() {
-  final String input = "Hello, <a:https://docs.advntr.dev>click me!</a> but not me!";
+  final String input = "Hello, <a:https://docs.papermc.io>click me!</a> but not me!";
   final MiniMessage extendedInstance = MiniMessage.builder()
     .editTags(b -> b.tag("a", MiniMessageTest::createA))
     .build();

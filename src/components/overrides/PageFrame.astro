@@ -12,9 +12,11 @@ const { hasSidebar } = Astro.locals.starlightRoute;
       <nav class="sidebar print:hidden" aria-label={Astro.locals.t("sidebarNav.accessibleLabel")}>
         <MobileMenuToggle />
         <div id="starlight__sidebar" class="sidebar-pane">
-          <div class="dropdown-wrapper">
-            <TopicsDropdown />
-          </div>
+          {Astro.locals.starlightSidebarTopics.isPageWithTopic && (
+            <div class="dropdown-wrapper">
+              <TopicsDropdown />
+            </div>
+          )}
           <div class="sidebar-content sl-flex">
             <slot name="sidebar" />
           </div>

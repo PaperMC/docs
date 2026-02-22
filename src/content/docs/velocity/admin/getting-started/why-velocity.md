@@ -84,5 +84,5 @@ hostile to them), Velocity embraces the richness of the platform Minecraft provi
 example, we have a Fabric mod that
 [helps bridge the gap between Velocity itself and mods that extend the Minecraft protocol](https://www.curseforge.com/minecraft/mc-mods/crossstitch)
 and feature full Forge support for 1.7 through 1.12.2 and 1.20.2 or higher. Velocity also supports emerging
-standard libraries in the community such as Kyori's [Adventure](https://github.com/KyoriPowered/adventure) library.
+standard libraries in the community such as the [Adventure](https://github.com/PaperMC/adventure) library.
 We collaborate with the Minecraft modding community.

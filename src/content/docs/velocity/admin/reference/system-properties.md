@@ -105,6 +105,11 @@ The default value shown may not be set for the property but will only be used by
 - **default**: `false`
 - **description**: Whether native functionality for specific operating systems should be disabled.
 
+#### velocity.legacyChatMaxServerboundLength
+
+- **default**: `100`
+- **description**: Overrides the max chat input length for versions below 1.11. This is useful for mods that backport the modern chat limit of `256`.
+
 #### velocity.strictErrorHandling
 
 - **default**: `true`

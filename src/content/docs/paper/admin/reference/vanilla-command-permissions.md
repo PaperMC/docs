@@ -31,6 +31,7 @@ The following is a list of permissions for Vanilla commands.
 | [effect](https://minecraft.wiki/w/Commands/effect)                   |                                                       | minecraft.command.effect          | No                                                        |
 | [enchant](https://minecraft.wiki/w/Commands/enchant)                 |                                                       | minecraft.command.enchant         | No                                                        |
 | [execute](https://minecraft.wiki/w/Commands/execute)                 |                                                       | minecraft.command.execute         | No                                                        |
+| [fetchprofile](https://minecraft.wiki/w/Commands/fetchprofile)       |                                                       | minecraft.command.fetchprofile    | No                                                        |
 | [fill](https://minecraft.wiki/w/Commands/fill)                       |                                                       | minecraft.command.fill            | No                                                        |
 | [fillbiome](https://minecraft.wiki/w/Commands/fillbiome)             |                                                       | minecraft.command.fillbiome       | No                                                        |
 | [forceload](https://minecraft.wiki/w/Commands/forceload)             |                                                       | minecraft.command.forceload       | No                                                        |
@@ -105,6 +106,7 @@ The following is a list of permissions for Bukkit commands.
 | help    | /?           | bukkit.command.help    | Yes                                 |
 | plugins | /pl          | bukkit.command.plugins | Yes                                 |
 | reload  | /rl          | bukkit.command.reload  | No                                  |
+| restart |              | bukkit.command.restart | No                                  |
 | timings |              | bukkit.command.timings | No                                  |
 | version | /ver, /about | bukkit.command.version | Yes                                 |
 
@@ -147,16 +149,19 @@ The following is a list of all additional Paper permissions.
 
 | Permission Node                        | Description                                                      | Players Have Permission By Default? |
 |----------------------------------------|------------------------------------------------------------------|-------------------------------------|
-| bukkit.command.paper.heap              | Allows the user to run the heap sub command                      | No                                  |
-| bukkit.command.paper.entity            | Allows the user to run the entity sub command                    | No                                  |
-| bukkit.command.paper.reload            | Allows the user to run the reload sub command                    | No                                  |
-| bukkit.command.paper.version           | Allows the user to run the version sub command                   | No                                  |
-| bukkit.command.paper.dumpplugins       | Allows the user to run the dumpplugins sub command               | No                                  |
-| bukkit.command.paper.syncloadinfo      | Allows the user to run the syncloadinfo sub command              | No                                  |
-| bukkit.command.paper.dumpitem          | Allows the user to run the dumpitem sub command                  | No                                  |
-| bukkit.command.paper.mobcaps           | Allows the user to run the mobcaps sub command                   | No                                  |
-| bukkit.command.paper.dumplisteners     | Allows the user to run the dumplisteners sub command             | No                                  |
-| bukkit.command.paper.fixlight          | Allows the user to run the fixlight sub command                  | No                                  |
+| bukkit.command.paper.chunkinfo         | Allows the user to run the chunkinfo sub command                 | No                                  |
 | bukkit.command.paper.debug             | Allows the user to run the debug sub command                     | No                                  |
+| bukkit.command.paper.dumpitem          | Allows the user to run the dumpitem sub command                  | No                                  |
+| bukkit.command.paper.dumplisteners     | Allows the user to run the dumplisteners sub command             | No                                  |
+| bukkit.command.paper.dumpplugins       | Allows the user to run the dumpplugins sub command               | No                                  |
+| bukkit.command.paper.entity            | Allows the user to run the entity sub command                    | No                                  |
+| bukkit.command.paper.fixlight          | Allows the user to run the fixlight sub command                  | No                                  |
+| bukkit.command.paper.heap              | Allows the user to run the heap sub command                      | No                                  |
+| bukkit.command.paper.holderinfo        | Allows the user to run the holderinfo sub command                | No                                  |
+| bukkit.command.paper.mobcaps           | Allows the user to run the mobcaps sub command                   | No                                  |
+| bukkit.command.paper.playermobcaps     | Allows the user to run the playermobcaps sub command             | No                                  |
+| bukkit.command.paper.reload            | Allows the user to run the reload sub command                    | No                                  |
+| bukkit.command.paper.syncloadinfo      | Allows the user to run the syncloadinfo sub command              | No                                  |
+| bukkit.command.paper.version           | Allows the user to run the version sub command                   | No                                  |
 | paper.antixray.bypass                  | Allows the user to bypass anti-xray if use-permission is enabled | No                                  |
 | paper.bypass-visibility.tab-completion | Allows the user to see hidden players in command tab completions | No                                  |

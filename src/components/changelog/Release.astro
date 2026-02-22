@@ -14,11 +14,16 @@ const { Content } = await render(entry);
 <article>
   <AnchorHeading {id} level={2}>{entry.data.title}</AnchorHeading>
   <p class="description">
-    Released on {(entry.data.pubdate ?? new Date(0)).toLocaleDateString("en", { dateStyle: "medium", timeZone: "UTC" })}
+    Released on {
+      (entry.data.published ?? entry.data.updated)?.toLocaleDateString("en", {
+        dateStyle: "medium",
+        timeZone: "UTC",
+      }) ?? "-"
+    }
     {
-      entry.data.link && (
+      entry.data.url && (
         <>
-          - <a href={entry.data.link}>GitHub</a>
+          - <a href={entry.data.url}>GitHub</a>
         </>
       )
     }

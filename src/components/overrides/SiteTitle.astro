@@ -1,14 +1,20 @@
 ---
+import { Image } from "astro:assets";
+
 const { siteTitle, siteTitleHref } = Astro.locals.starlightRoute;
 ---
 
 <a href={siteTitleHref} class="site-title sl-flex">
-  <img
+  <Image
+    inferSize
+    priority
     class="light:sl-hidden print:hidden"
     alt="PaperMC Logo (Light)"
     src="https://assets.papermc.io/brand/papermc_combination_mark_light.min.svg"
   />
-  <img
+  <Image
+    inferSize
+    priority
     class="dark:sl-hidden print:block"
     alt="PaperMC Logo (Dark)"
     src="https://assets.papermc.io/brand/papermc_combination_mark_dark.min.svg"

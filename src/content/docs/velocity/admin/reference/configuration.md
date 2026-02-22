@@ -18,7 +18,7 @@ There are a few "special" data types in the Velocity configuration.
 
 ### Chat
 
-Chat messages may be provided in [MiniMessage](https://docs.advntr.dev/minimessage/format.html) format.
+Chat messages may be provided in [MiniMessage](/adventure/minimessage/format/) format.
 
 RGB support is available for Minecraft 1.16 and later versions.
 
@@ -35,7 +35,7 @@ These settings mostly cover the basic, most essential settings of the proxy.
 |------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `config-version`                   | String  | This is the current config version used by Velocity. You should not alter this setting.                                                                                                                                                                            |
 | `bind`                             | Address | This tells the proxy to accept connections on a specific IP. By default, Velocity will listen for connections on all IP addresses on the computer on port 25565.                                                                                                   |
-| `motd`                             | Chat    | This allows you to change the message shown to players when they add your server to their server list. You can use [MiniMessage format](https://docs.advntr.dev/minimessage/format.html).                                                                          |
+| `motd`                             | Chat    | This allows you to change the message shown to players when they add your server to their server list. You can use [MiniMessage format](/adventure/minimessage/format/).                                                                                           |
 | `show-max-players`                 | Integer | This allows you to customize the number of "maximum" players in the player's server list. Note that Velocity doesn't have a maximum number of players it supports.                                                                                                 |
 | `online-mode`                      | Boolean | Should we authenticate players with Mojang? By default, this is on.                                                                                                                                                                                                |
 | `force-key-authentication`         | Boolean | Should the proxy enforce the new public key security standard? By default, this is on.                                                                                                                                                                             |
@@ -78,6 +78,12 @@ These settings mostly cover the basic, most essential settings of the proxy.
 | `log-command-executions`                   | Boolean | Determines whether or not the proxy should log all commands run by the user.                                                                                                                            |
 | `log-player-connections`                   | Boolean | Enables logging of player connections when connecting to the proxy, switching servers and disconnecting from the proxy.                                                                                 |
 | `accepts-transfers`                        | Boolean | Determines whether or not the proxy accepts incoming transfers from other servers. If disabled, the proxy will disconnect transferred clients.                                                          |
+| `enable-reuse-port`                        | Boolean | Enables support for SO_REUSEPORT. This may help the proxy scale better on multicore systems with a lot of incoming connections, and provide better CPU utilization than the existing strategy of having a single thread accepting connections and distributing them to worker threads. Requires Linux or macOS. |
+| `command-rate-limit`                       | Integer | How fast (in milliseconds) are clients allowed to send commands after the last command. By default this is 50ms (20 commands per second) |
+| `forward-commands-if-rate-limited`         | Boolean | Should we forward commands to the backend upon being rate limited? This will forward the command to the server instead of processing it on the proxy. Since most server implementations have a rate limit, this will prevent the player from being able to send excessive commands to the server. |
+| `kick-after-rate-limited-commands`         | Integer | How many commands are allowed to be sent after the rate limit is hit before the player is kicked? Setting this to 0 or lower will disable this feature. |
+| `tab-complete-rate-limit`                  | Integer | How fast (in milliseconds) are clients allowed to send tab completions after the last tab completion |
+| `kick-after-rate-limited-tab-completes`    | Integer | How many tab completions are allowed to be sent after the rate limit is hit before the player is kicked? Setting this to 0 or lower will disable this feature. |
 
 ## `query` section
 

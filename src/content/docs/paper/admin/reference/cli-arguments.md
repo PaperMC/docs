@@ -113,7 +113,7 @@ Loads worlds only with the Vanilla datapack enabled.
 ##### `--server-name <name>`
 The name of the server. Defaults to `Unknown Server`.
 
-##### `--serverId <string>`
+##### `--serverId <id>`
 Sets the server identifier, which is used in crash files.
 
 ##### `-v, --version`

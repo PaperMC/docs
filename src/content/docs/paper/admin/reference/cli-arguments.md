@@ -51,7 +51,7 @@ Whether to load the server in demo mode. This results in always the same world b
 demo reminders and help messages being sent.
 
 ##### `--bonusChest`
-Whether to create a bonus chest when a new world is created.
+Whether to create a bonus chest on initial world creation.
 
 ##### `--eraseCache`
 Whether to force cache erase during world upgrades. This removes data such as heightmap and light data,
@@ -94,6 +94,13 @@ The port to listen on.
 
 ##### `--paper, --paper-settings <yml file>`
 The legacy Paper settings file path. Defaults to `paper.yml`.
+
+:::danger[Warning]
+
+This option is only used to migrate the legacy configuration file to the new format
+and should not be used for new servers.
+
+:::
 
 ##### `--paper-dir, --paper-settings-directory <config directory>`
 Path to the Paper settings directory. Defaults to `config`.

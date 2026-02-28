@@ -4,7 +4,7 @@ description: How to automatically publish your plugin to Hangar on commits.
 slug: misc/hangar-publishing
 ---
 
-If you want to automatically publish your plugin to [Hangar](https://hangar.papermc.io/) on commits, you can use
+If you want to automatically publish your plugin to [Hangar](https://hangar.papermc.io/) on pushes, you can use
 our [Gradle plugin](https://github.com/HangarMC/hangar-publish-plugin).
 
 After you have added the required `hangarPublish` configuration, you can manually publish it by
@@ -133,11 +133,50 @@ hangarPublish {
 }
 ```
 
-### Optional: Going deeper
+## GitHub Actions workflow
 
-With the following channels, any version that contains a hyphen (`-`) will be published under the `Snapshot` channel
-that you need to create on Hangar. By editing the `channel.set(...)` line, you can change this to any channel you would
-like. For example, you could further split builds depending on the branch you are currently on into `Alpha` builds.
+You don't necessarily need to publish via GitHub Actions, but it is an easy way to do so. If you want to use it, create
+a `publish.yml` file in the `.github/workflows` directory of your project root folder and make sure
+you [add the repository secret](#adding-the-hangar_api_token-repository-secret).
+
+You can add and remove branches to be published by editing the `branches` section.
+
+```yaml
+name: Publish to Hangar
+on:
+  push:
+    branches:
+      # Add any additional branches you want to automatically publish from
+      - main # Assuming your main branch is called 'main'
+
+jobs:
+  publish:
+    # TODO: Optional, make sure the task only runs on pushes to your repository and doesn't fail on forks. Uncomment the line below and put the repo owner into the quotes
+    # if: github.repository_owner == '<YOUR USER/ORG NAME>'
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+      - name: Validate Gradle Wrapper
+        uses: gradle/wrapper-validation-action@v1
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: 17
+      - name: Publish
+        env:
+          # Make sure you have added a repository secret in the repository's settings
+          HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
+        run: ./gradlew build publishPluginPublicationToHangar --stacktrace
+```
+
+## Optional: Handling multiple channels and an automatic changelog
+
+With the following code, any version that contains a hyphen (`-`) will be published under the `Snapshot` channel
+(that you need to create on Hangar) and the others on the `Release` channel.
+By editing the `channel.set(...)` line, you can change this to any channel you would like.
+For example, you could further split builds depending on the branch you are currently on into `Alpha` builds.
 
 :::caution
 
@@ -188,40 +227,29 @@ hangarPublish {
 }
 ```
 
-### GitHub Actions workflow
+## Optional: Updating the resource page
 
-You don't necessarily need to publish via GitHub Actions, but it is an easy way to do so. If you want to use it, create
-a `publish.yml` file in the `.github/workflows` directory of your project root folder and make sure
-you [add the repository secret](#adding-the-hangar_api_token-repository-secret).
+A notable part of publishing a new version might be updating the resource page (e.g. the plugin's home page) with new content from your plugin's repository.
 
-You can add and remove branches to be published by editing the `branches` section.
+In this example, we're using a README file, but you can use any text you want, as long as it is in Markdown format.
 
+```kotlin
+val pageContent = project.file("README.md").readText()
+
+hangarPublish {
+    publications.register("plugin") {
+        // ... (see above)
+        pages.resourcePage(pageContent)
+    }
+}
+```
+
+You can invoke the `syncPluginPublicationMainResourcePagePageToHangar` task to update the resource page on Hangar.
+This will not publish a new version, but simply update the page content on Hangar.
+
+If you're using a GitHub Actions workflow, you should also add the task invocation to the `Publish` step in your workflow:
 ```yaml
-name: Publish to Hangar
-on:
-  push:
-    branches:
-      # Add any additional branches you want to automatically publish from
-      - main # Assuming your main branch is called 'main'
-
-jobs:
-  publish:
-    # TODO: Optional, make sure the task only runs on pushes to your repository and doesn't fail on forks. Uncomment the line below and put the repo owner into the quotes
-    # if: github.repository_owner == '<YOUR USER/ORG NAME>'
-    runs-on: ubuntu-22.04
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'temurin'
-          java-version: 17
-      - name: Publish
-        env:
-          # Make sure you have added a repository secret in the repository's settings
-          HANGAR_API_TOKEN: ${{ secrets.HANGAR_API_TOKEN }}
-        run: ./gradlew build publishPluginPublicationToHangar --stacktrace
+- name: Publish
+  # ...
+  run: ./gradlew build publishPluginPublicationToHangar syncPluginPublicationMainResourcePagePageToHangar --stacktrace
 ```

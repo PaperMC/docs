@@ -50,6 +50,12 @@ In most cases, you will not need to use these, unless you are running Paper in a
 
 #### timings.bypassMax
 
+:::danger[Deprecation]
+
+Timings are deprecated. Due to that, this flag does not have any effect.
+
+:::
+
 - **default**: `unset`
 - **description**: Allows for bypassing the max amount of data to send to the Aikar's Timings API. Setting this will not permit bypassing the limit unless the API is configured to allow it.
 
@@ -113,25 +119,9 @@ In most cases, you will not need to use these, unless you are running Paper in a
 - **default**: `unset`
 - **description**: Bypasses the host pattern matching attempt for the client when connecting to the server.
 
-#### paper.ticklist-warn-on-excessive-delay
-
-- **default**: `unset`
-- **description**: Enables the warning when a tick list is scheduled with an excessive delay.
-
-#### debug.rewriteForIde
-
-- **default**: `unset`
-- **description**: Removes the NMS revision from the stack trace to allow for easier debugging in IDEs.
-It also remaps plugin CB calls to remove the version information.
-
-#### convertLegacySigns
-
-- **default**: `unset`
-- **description**: Converts legacy signs to the new format.
-
 #### paper.maxCustomChannelName
 
-- **default**: `64`
+- **default**: `32767`
 - **description**: Sets the largest size that a plugin channel name can take.
 
 #### Paper.maxSignLength
@@ -159,20 +149,10 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `unset`
 - **description**: Suppresses the nag message about using `System.out`/`System.err` in a plugin.
 
-#### paper.strict-thread-checks
-
-- **default**: `unset`
-- **description**: This sets the status of the AsyncCatcher so that it will always log an error if code is not run on the main thread.
-
 #### Paper.skipServerPropertiesComments
 
 - **default**: `unset`
 - **description**: Skips the comments in the `server.properties` file.
-
-#### Paper.debugInvalidSkullProfiles
-
-- **default**: `unset`
-- **description**: Enables debug logging for invalid skull profiles. This logs any invalid skulls in the world with the appropriate location information.
 
 #### paper.alwaysPrintWarningState
 
@@ -184,7 +164,7 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `true`
 - **description**: Sets whether to parse comments in YAML files by default.
 
-#### paperclip.patchonly:
+#### paperclip.patchonly
 
 - **default**: `false`
 - **description**: If the server is started via the Paperclip patch utility (the default distribution on the downloads page) then this sets whether it should only patch the Vanilla server and download libraries without starting the server.
@@ -204,20 +184,10 @@ It also remaps plugin CB calls to remove the version information.
 - **default**: `false`
 - **description**: Allows cyclic plugin loading. See [here](/paper/reference/paper-plugins#cyclic-plugin-loading) for more info.
 
-#### Paper.DisableCommandConverter
-
-- **default**: `false`
-- **description**: Disables Paper's automatic upgrading of commands, including items with custom data defined in command blocks and other places that may contain commands, to the new component format introduced in version 1.20.5.
-
 #### paper.disableOldApiSupport
 
 - **default**: `false`
 - **description**: Disables plugin compatibility measures that can otherwise result in a considerable delay of class loading (also known as "Commodore" plugin rewriting). This generally requires all of your plugins to be compiled against a recent API version.
-
-#### paper.disablePluginRemapping
-
-- **default**: `false`
-- **description**: Disables plugin remapping introduced in 1.20.5. For more information see the [userdev](/paper/dev/userdev#1205-and-beyond) documentation and the official [announcement](https://discord.com/channels/289587909051416579/976631292747735080/1232740079097876570).
 
 #### paper.preferSparkPlugin
 
@@ -230,6 +200,13 @@ It also remaps plugin CB calls to remove the version information.
 - **description**: Disables the folder walk and symlink validation when loading a world. Significantly improves world loading speed on massive worlds (>1TB). This does not disable symlink verification of datapacks.
 
 #### paper.disableGameRuleLimits
+
+:::note
+
+Whilst this system property exists, its associated code is not currently referenced anywhere,
+resulting in this property not having any effect.
+
+:::
 
 - **default**: `false`
 - **description**: Disables limits on certain game rule values, e.g. `minecartMaxSpeed` and `spawnChunkRadius`.

@@ -29,8 +29,8 @@ use non-obfuscated names in reflection if you want to support obfuscated servers
 :::note[Removal of obfuscations in 26.1]
 
 From Minecraft version **26.1** onwards, Paper no longer supports obfuscated plugins due to Mojang themselves
-removing obfuscation of their server jar. As Minecraft now ships unobfuscated, there are no 26.1 Spigot mappings
-to obfuscated to. For this reason, the obfuscation function no longer works for dev bundles for 26.1+.
+removing obfuscation of their server JAR. As Minecraft now ships unobfuscated, there are no 26.1 Spigot mappings
+to obfuscate to. For this reason, the reobfuscation function no longer works for dev bundles for 26.1+.
 
 :::
 

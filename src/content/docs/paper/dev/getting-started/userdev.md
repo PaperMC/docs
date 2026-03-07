@@ -26,10 +26,11 @@ fully deobfuscated types, names, and fields during development, and then remaps 
 server. However, this does not apply to reflection. Look at something like [this library](https://github.com/jpenilla/reflection-remapper) to be able to
 use non-obfuscated names in reflection if you want to support obfuscated servers.
 
-:::note[1.20.5 Mojang-mapped runtime]
+:::note[Removal of obfuscations in 26.1]
 
-As of Minecraft version 1.20.5, Paper ships with a Mojang-mapped runtime instead of re-obfuscating the server to Spigot mappings.
-See [here](#1205-and-beyond) for more details.
+From Minecraft version **26.1** onwards, Paper no longer supports obfuscated plugins due to Mojang themselves
+removing obfuscation of their server JAR. As Minecraft now ships unobfuscated, there are no 26.1 Spigot mappings
+to obfuscate to. For this reason, the reobfuscation function no longer works for dev bundles for 26.1+.
 
 :::
 
@@ -110,15 +111,21 @@ makes use of this feature.
 
 :::
 
-## Gradle tasks
+## Reobfuscation (up to 1.21.11)
 
-### `reobfJar`
+:::danger
 
-This task creates a plugin JAR that is re-obfuscated to Spigot's runtime mappings.
+Since Minecraft version **26.1**, Paper no longer supports remapping your plugin to Spigot
+runtime mappings. This section is kept as a reference for older versions, however
+reobfuscated plugins will not work from Paper 26.1 onwards!
+
+:::
+
+The `reobfJar` task creates a plugin JAR that is re-obfuscated to Spigot's runtime mappings.
 This means it will work on standard Paper servers.
 
 The output will be inside the `build/libs` folder. The JAR whose filename includes `-dev`
-is Mojang-mapped (not re-obfuscated) and will not work on most servers.
+is Mojang-mapped (not re-obfuscated) and will not work on non-Paper servers.
 
 :::note[Shadow]
 

@@ -11,7 +11,7 @@ It adds the ability to split the world into regions as outlined [here](/folia/re
 
 # Add Folia support
 
-Plugins can't run on Folia if you don't have this field in your paper-plugin.yml (or plugin.yml, respectively)
+Plugins can't run on Folia if you don't have this field in your paper-plugin.yml (or plugin.yml, respectively):
 ```yaml
 folia-supported: true
 ```

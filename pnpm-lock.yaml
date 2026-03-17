@@ -13,9 +13,6 @@ importers:
 
   .:
     dependencies:
-      '@ascorbic/feed-loader':
-        specifier: ^2.0.1
-        version: 2.0.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/markdown-remark':
         specifier: ^7.0.0
         version: 7.0.0
@@ -80,6 +77,9 @@ importers:
       dead-or-alive:
         specifier: ^1.0.4
         version: 1.0.4
+      feedsmith:
+        specifier: 3.0.0-next.6
+        version: 3.0.0-next.6
       prettier:
         specifier: 3.8.1
         version: 3.8.1
@@ -94,16 +94,6 @@ importers:
         version: 3.5.1(prettier@3.8.1)(svelte@5.53.13)
 
 packages:
-
-  '@ascorbic/feed-loader@2.0.1':
-    resolution: {integrity: sha512-nlP4WTp0Ea6J4q3vOleGK0d0l9s4bvKXTvAkttRgvobGb4AslsWm3LOciObWux9wKmzNjk0xSgJt9s00skXeFw==}
-    peerDependencies:
-      astro: ^4.14.0 || ^5.0.0
-
-  '@ascorbic/loader-utils@1.0.2':
-    resolution: {integrity: sha512-pg43g83gojVtEsAkXfjWuzJhuXneJp4wM/leBftGkCPV3yxKgB92EWA+nWu735BgbBMph3P7DrVqVc3ikt+dJA==}
-    peerDependencies:
-      astro: ^4.14.0 || ^5.0.0-beta.0
 
   '@astrojs/compiler@2.13.1':
     resolution: {integrity: sha512-f3FN83d2G/v32ipNClRKgYv30onQlMZX1vCeZMjPsMMPl1mDpmbl0+N5BYo4S/ofzqJyS5hvwacEo0CCVDn/Qg==}
@@ -720,10 +710,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@rowanmanning/feed-parser@2.1.2':
-    resolution: {integrity: sha512-zGF+QkFMtIHcCgVx0MLKWFRghJcuzTkvCtbxR3/SU9W3DzcqBxP4xvYeasjLkGP+Lslu3yvDYTCU0uSF16FhCA==}
-    engines: {node: 20.x || 22.x || 24.x}
-
   '@shikijs/core@3.23.0':
     resolution: {integrity: sha512-NSWQz0riNb67xthdm5br6lAkvpDJRTgB36fxlo37ZzM2yq0PQFFzbd8psqC2XMPgCzo1fW6cVi18+ArJ44wqgA==}
 
@@ -1084,6 +1070,10 @@ packages:
     resolution: {integrity: sha512-aN97NXWF6AWBTahfVOIrB/NShkzi5H7F9r1s9mD3cDj4Ko5f2qhhVoYMibXF7GlLveb/D2ioWay8lxI97Ven3g==}
     engines: {node: '>=0.12'}
 
+  entities@7.0.1:
+    resolution: {integrity: sha512-TWrgLOFUQTH994YUyl1yT4uyavY5nNB5muff+RtWaqNVCAK408b5ZnnbNAUEWLTCpum9w6arT70i1XdQ4UeOPA==}
+    engines: {node: '>=0.12'}
+
   environment@1.1.0:
     resolution: {integrity: sha512-xUtoPkMggbz0MPyPiIWr1Kp4aeWJjDZ6SMvURhimjdZgsRuDplF5/s9hcgGhyXMhs+6vpnuoiZ2kFiu3FMnS8Q==}
     engines: {node: '>=18'}
@@ -1163,6 +1153,9 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
+
+  feedsmith@3.0.0-next.6:
+    resolution: {integrity: sha512-EAwwD5Nv86FTalnXs/mBsIDQzBX1x5X+fIf/gmPVI0Bh8zv7O/TtSGvhweNtNYrb66tBEhOzAdzxe3O8OD/G8w==}
 
   flattie@1.1.1:
     resolution: {integrity: sha512-9UbaD6XdAL97+k/n+N7JwX46K/M6Zc6KcFYskrYL8wbBV/Uyk0CTAMY0VT+qiK5PM7AIc9aTWYtq65U7T+aCNQ==}
@@ -1255,9 +1248,6 @@ packages:
 
   hastscript@9.0.1:
     resolution: {integrity: sha512-g7df9rMFX/SPi34tyGCyUBREQoKkapwdY/T04Qn9TDWfHhAYt4/I0gMVirzK5wEzeUqIjEB+LXC/ypb7Aqno5w==}
-
-  html-entities@2.6.0:
-    resolution: {integrity: sha512-kig+rMn/QOVRvr7c86gQ8lWXq+Hkv6CbAH1hLu+RG338StTpE8Z0b44SDVaqVu7HGKf27frdmUYEs9hTUX/cLQ==}
 
   html-escaper@3.0.3:
     resolution: {integrity: sha512-RuMffC89BOWQoY0WKGpIhn5gX3iI54O6nRA0yC124NYVtzjmFWBIiFd8M0x+ZdX0P9R4lADg1mgP8C7PxGOWuQ==}
@@ -2123,16 +2113,6 @@ packages:
 
 snapshots:
 
-  '@ascorbic/feed-loader@2.0.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))':
-    dependencies:
-      '@ascorbic/loader-utils': 1.0.2(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
-      '@rowanmanning/feed-parser': 2.1.2
-      astro: 6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
-
-  '@ascorbic/loader-utils@1.0.2(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))':
-    dependencies:
-      astro: 6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
-
   '@astrojs/compiler@2.13.1': {}
 
   '@astrojs/compiler@3.0.1': {}
@@ -2662,11 +2642,6 @@ snapshots:
   '@rollup/rollup-win32-x64-msvc@4.59.0':
     optional: true
 
-  '@rowanmanning/feed-parser@2.1.2':
-    dependencies:
-      fast-xml-parser: 5.5.6
-      html-entities: 2.6.0
-
   '@shikijs/core@3.23.0':
     dependencies:
       '@shikijs/types': 3.23.0
@@ -3096,6 +3071,8 @@ snapshots:
 
   entities@6.0.1: {}
 
+  entities@7.0.1: {}
+
   environment@1.1.0: {}
 
   es-module-lexer@2.0.0: {}
@@ -3213,6 +3190,11 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.3):
     optionalDependencies:
       picomatch: 4.0.3
+
+  feedsmith@3.0.0-next.6:
+    dependencies:
+      entities: 7.0.1
+      fast-xml-parser: 5.5.6
 
   flattie@1.1.1: {}
 
@@ -3444,8 +3426,6 @@ snapshots:
       hast-util-parse-selector: 4.0.0
       property-information: 7.1.0
       space-separated-tokens: 2.0.2
-
-  html-entities@2.6.0: {}
 
   html-escaper@3.0.3: {}
 

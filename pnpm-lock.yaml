@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  '@astrojs/starlight':
+    hash: 838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191
+    path: patches/@astrojs__starlight.patch
+
 importers:
 
   .:
@@ -16,7 +21,7 @@ importers:
         version: 7.0.0
       '@astrojs/starlight':
         specifier: ^0.38.1
-        version: 0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
       '@astrojs/svelte':
         specifier: ^8.0.1
         version: 8.0.1(@types/node@25.5.0)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))(svelte@5.53.13)(typescript@5.9.3)(yaml@2.8.2)
@@ -46,13 +51,13 @@ importers:
         version: 0.34.5
       starlight-links-validator:
         specifier: ^0.20.1
-        version: 0.20.1(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
+        version: 0.20.1(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
       starlight-sidebar-topics:
         specifier: ^0.7.1
-        version: 0.7.1(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))
+        version: 0.7.1(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))
       starlight-sidebar-topics-dropdown:
         specifier: ^0.6.0
-        version: 0.6.0(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(starlight-sidebar-topics@0.7.1(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))))
+        version: 0.6.0(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(starlight-sidebar-topics@0.7.1(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))))
       svelte:
         specifier: ^5.53.13
         version: 5.53.13
@@ -2190,7 +2195,7 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 4.3.6
 
-  '@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))':
+  '@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))':
     dependencies:
       '@astrojs/markdown-remark': 7.0.0
       '@astrojs/mdx': 5.0.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
@@ -4393,9 +4398,9 @@ snapshots:
 
   space-separated-tokens@2.0.2: {}
 
-  starlight-links-validator@0.20.1(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)):
+  starlight-links-validator@0.20.1(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)):
     dependencies:
-      '@astrojs/starlight': 0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
+      '@astrojs/starlight': 0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
       '@types/picomatch': 4.0.2
       astro: 6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)
       github-slugger: 2.0.0
@@ -4411,14 +4416,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  starlight-sidebar-topics-dropdown@0.6.0(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(starlight-sidebar-topics@0.7.1(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))):
+  starlight-sidebar-topics-dropdown@0.6.0(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))(starlight-sidebar-topics@0.7.1(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))):
     dependencies:
-      '@astrojs/starlight': 0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
-      starlight-sidebar-topics: 0.7.1(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))
+      '@astrojs/starlight': 0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
+      starlight-sidebar-topics: 0.7.1(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2)))
 
-  starlight-sidebar-topics@0.7.1(@astrojs/starlight@0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))):
+  starlight-sidebar-topics@0.7.1(@astrojs/starlight@0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))):
     dependencies:
-      '@astrojs/starlight': 0.38.1(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
+      '@astrojs/starlight': 0.38.1(patch_hash=838fb41f94e67642f71733b1eaac1fea8d75e5bae93272e80410997803f12191)(astro@6.0.5(@types/node@25.5.0)(rollup@4.59.0)(typescript@5.9.3)(yaml@2.8.2))
       picomatch: 4.0.3
 
   stream-replace-string@2.0.0: {}

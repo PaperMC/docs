@@ -186,7 +186,9 @@ We could also make the smoke go down if we wanted to:
 - GLOW_SQUID_INK
 - ITEM
 - LARGE_SMOKE
+- PAUSE_MOB_GROWTH
 - POOF
+- RESET_MOB_GROWTH
 - REVERSE_PORTAL
 - SCRAPE
 - SCULK_CHARGE
@@ -764,6 +766,17 @@ The y component of the vector is calculated as `(verticalVelocity - 0.1) * power
 - EFFECT
 - INSTANT_EFFECT
 - DRAGON_BREATH
+
+### Simple vertical particles
+These particles apply a small, fixed change to vertical velocity (`±0.03`) based on a boolean flag:
+- If the flag is `true`, add `0.03` to the vertical velocity.
+- If the flag is `false`, subtract `0.03` from the vertical velocity.
+
+Only two particles use this behavior:
+
+- `PAUSE_MOB_GROWTH`: sets the flag to `false` (applies `-0.03`).
+- `RESET_MOB_GROWTH`: sets the flag to `true` (applies `+0.03`).
+
 
 ### Splash particles
 The `SPLASH` particle uses the `offsetX` and `offsetZ` arguments to determine the particle's velocity vector, if two conditions are met:

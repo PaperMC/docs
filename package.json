@@ -12,24 +12,24 @@
     "format:check": "prettier . --check"
   },
   "dependencies": {
-    "@astrojs/markdown-remark": "^7.0.0",
-    "@astrojs/starlight": "^0.38.1",
-    "@astrojs/svelte": "^8.0.1",
+    "@astrojs/markdown-remark": "^7.0.1",
+    "@astrojs/starlight": "^0.38.2",
+    "@astrojs/svelte": "^8.0.3",
     "@expressive-code/plugin-collapsible-sections": "^0.41.7",
     "@expressive-code/plugin-line-numbers": "^0.41.7",
     "@fontsource/jetbrains-mono": "^5.2.8",
     "@fontsource/poppins": "^5.2.7",
-    "astro": "^6.0.5",
+    "astro": "^6.0.8",
     "astro-contributors": "^0.8.0",
     "astro-d2": "^0.10.0",
     "sharp": "^0.34.5",
     "starlight-links-validator": "^0.20.1",
     "starlight-sidebar-topics": "^0.7.1",
     "starlight-sidebar-topics-dropdown": "^0.6.0",
-    "svelte": "^5.53.13",
+    "svelte": "^5.55.0",
     "typescript": "^5.9.3",
     "unist-util-visit": "^5.1.0",
-    "yaml": "^2.8.2"
+    "yaml": "^2.8.3"
   },
   "devDependencies": {
     "@types/mdast": "^4.0.4",

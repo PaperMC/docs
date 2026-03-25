@@ -1,0 +1,78 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "bnf",
+  "scopeName": "source.bnf",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#rule" },
+    { "include": "#meta" },
+    { "include": "#strings" },
+    { "include": "#text" }
+  ],
+
+  "repository": {
+    "comment": {
+      "name": "comment.line.semicolon.bnf",
+      "match": ";.*$"
+    },
+
+    "rule": {
+      "name": "meta.rule.bnf",
+      "match": "([A-Za-z0-9_-]+)(\\s*→)",
+      "captures": {
+        "0": { "name": "entity.name.function.nonterminal.bnf" },
+        "1": { "name": "keyword.reserved.arrow.bnf" }
+      }
+    },
+
+    "meta": {
+      "patterns": [
+        {
+          "match": "→",
+          "name": "keyword.reserved.arrow.bnf"
+        },
+        {
+          "match": "\\|",
+          "name": "keyword.reserved.choice.bnf"
+        },
+        {
+          "match": "[{}()]",
+          "name": "comment.punctuation.section.group.bnf"
+        },
+        {
+          "match": "\\+",
+          "name": "comment.punctuation.quantity.bnf"
+        },
+        {
+          "match": "\\*",
+          "name": "comment.punctuation.quantity.bnf"
+        }
+      ]
+    },
+
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.quoted.double.bnf",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [{ "match": "\"\"", "name": "constant.character.escape.doublequote.bnf" }]
+        },
+        {
+          "name": "string.quoted.single.bnf",
+          "begin": "'",
+          "end": "'"
+        }
+      ]
+    },
+
+    "text": {
+      "patterns": [
+        {
+          "name": "variable.language.bnf",
+          "match": "[a-z0-9-]+"
+        }
+      ]
+    }
+  }
+}

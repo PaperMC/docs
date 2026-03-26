@@ -42,6 +42,44 @@ player.sendMessage(parsed);
 
 For more advanced uses, additional tag resolvers can be registered, which when given a tag name and arguments will produce a `Tag` instance. These are described in more detail below.
 
+### Presets
+
+MiniMessage also provides a set of presets that can be used instead of the main MiniMessage instance.
+These presets are intended to easily allow developers to avoid accidentally allowing users to use abusable component features, such as the run command click event.
+
+Below is a list of available presets and their functionality:
+* **`DEFAULT`**\
+  The default preset, containing all MiniMessage features.
+  This is the same as `MiniMessage.miniMessage()`.
+* **`NON_INTERACTABLE`**\
+  A preset that disables all component features that allow for interaction.
+  This includes click events, hover events, and text insertion.
+  It also includes a custom post-processor that removes any interactable elements from the resulting component.
+  Therefore, this can also be used with custom tag resolvers that may produce interactable components.
+* **`FORMATTED_TEXT`**\
+  A preset that only allows text components and associated formatting.
+  This includes coloring, shadow, font, and text decoration (e.g., bold, italics).
+  It also includes a custom post-processor that removes any non-text components or interactable elements from the resulting component.
+  Therefore, this can also be used with custom tag resolvers.
+
+```java
+// You can get a pre-built MiniMessage instance based on any preset.
+final MiniMessage miniMessage = MiniMessage.miniMessage(MiniMessage.Preset.NON_INTERACTABLE);
+
+// Alternatively, you can get a pre-configured builder...
+final MiniMessage.Builder builder = MiniMessage.builder(MiniMessage.Preset.NON_INTERACTABLE);
+
+// ...then add your own tags or override other settings if needed...
+builder.editTags(tags -> {
+  tags
+    .resolver(new MyCustomTagResolver())
+    .resolver(fetchExternalTags());
+});
+
+// ...and finally, build your MiniMessage instance!
+final MiniMessage myCustomMiniMessageInstance = builder.build();
+```
+
 ### Builder
 
 To make customizing MiniMessage easier, we provide a Builder. The specific methods on the builder are explained in the javadoc.

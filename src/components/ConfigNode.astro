@@ -55,7 +55,7 @@ const formatDefault = (value?: string): Default => {
 
       const { value, inline } = formatDefault(rawValue.default);
       return (
-        <div>
+        <section id={childPath.join("_")}>
           {"message" in rawValue ? (
             <div
               class:list={["block", "message", rawValue.inline && "message-inline"]}
@@ -63,8 +63,8 @@ const formatDefault = (value?: string): Default => {
               set:html={render(rawValue.message)}
             />
           ) : "description" in rawValue ? (
-            <details id={childPath.join("_")}>
-              <summary class="line notranslate" translate="no">
+            <details>
+              <summary class="line line-leaf notranslate" translate="no">
                 <span class="key key-leaf">{displayKey}</span><span class="muted">{separator}</span>{
                   inline
                     ? (<span class="value">{value}</span><>{hasComma && <span class="muted">,</span>}</><a class="link link-inline" href={`#${childPath.join("_")}`}>#</a>)
@@ -74,10 +74,12 @@ const formatDefault = (value?: string): Default => {
               <div class="block" set:html={render(rawValue.description)} />
             </details>
           ) : (
-            <span class="key notranslate" translate="no">{displayKey}</span><span class="muted">{separator}</span>
+            <div class="line notranslate" translate="no">
+              <span class="key">{displayKey}</span><span class="muted">{separator}</span><a class="link" href={`#${childPath.join("_")}`}>#</a>
+            </div>
             <Astro.self child data={rawValue} path={childPath} {lang} />
           )}
-        </div>
+        </section>
       );
     })
   }
@@ -85,7 +87,7 @@ const formatDefault = (value?: string): Default => {
 </div>
 
 <style>
-  details:target {
+  section:target {
     padding: 0.25rem 0;
     border-image: conic-gradient(oklch(from var(--sl-color-accent) l c h / 0.1) 0, oklch(from var(--sl-color-accent) l c h / 0.1) 0) fill 0/0/0 100vw;
   }
@@ -100,7 +102,7 @@ const formatDefault = (value?: string): Default => {
     padding-left: 0;
   }
 
-  .node-json > div {
+  .node-json > section {
     padding-left: 1.25rem;
   }
 
@@ -112,9 +114,12 @@ const formatDefault = (value?: string): Default => {
   }
 
   .line {
+    word-break: break-all;
+  }
+
+  .line-leaf {
     cursor: pointer;
     list-style: none;
-    word-break: break-all;
   }
 
   .key {
@@ -185,10 +190,16 @@ const formatDefault = (value?: string): Default => {
       return;
     }
 
-    const el = document.getElementById(hash) as HTMLDetailsElement | null;
-    if (el?.tagName === "DETAILS") {
-      el.open = true;
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    const el = document.getElementById(hash);
+    if (!el) {
+      return;
     }
+
+    const details = el.querySelector(":scope > details") as HTMLDetailsElement | null;
+    if (details) {
+      details.open = true;
+    }
+
+    el.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 </script>

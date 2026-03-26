@@ -1,7 +1,20 @@
-import { feedLoader } from "@ascorbic/feed-loader";
 import { docsLoader } from "@astrojs/starlight/loaders";
 import { docsSchema } from "@astrojs/starlight/schema";
-import { defineCollection, z } from "astro:content";
+import { z } from "astro/zod";
+import { defineCollection } from "astro:content";
+import { parseAtomFeed, type Atom } from "feedsmith";
+
+const feedLoader = (url: string): (() => Promise<(Atom.Entry<string> & { id: string })[]>) => {
+  return async () => {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch feed from ${url}: ${response.statusText}`);
+    }
+
+    const feed = parseAtomFeed(await response.text());
+    return feed.entries!.map((e, i) => ({ ...e, id: e.id!, index: i }));
+  };
+};
 
 export const collections = {
   docs: defineCollection({
@@ -18,18 +31,12 @@ export const collections = {
     }),
   }),
   "adventure-releases": defineCollection({
-    loader: feedLoader({
-      url: "https://github.com/PaperMC/adventure/releases.atom",
-    }),
+    loader: feedLoader("https://github.com/PaperMC/adventure/releases.atom"),
   }),
   "adventure-platform-releases": defineCollection({
-    loader: feedLoader({
-      url: "https://github.com/PaperMC/adventure-platform/releases.atom",
-    }),
+    loader: feedLoader("https://github.com/PaperMC/adventure-platform/releases.atom"),
   }),
   "adventure-platform-mod-releases": defineCollection({
-    loader: feedLoader({
-      url: "https://github.com/PaperMC/adventure-platform-mod/releases.atom",
-    }),
+    loader: feedLoader("https://github.com/PaperMC/adventure-platform-mod/releases.atom"),
   }),
 };

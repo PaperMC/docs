@@ -10,13 +10,13 @@ interface Props {
 
 const { title, collection } = Astro.props;
 
-const entries = await getCollection(collection);
+const entries = (await getCollection(collection)).sort((a, b) => a.data.index - b.data.index);
 const headings = entries.map((entry) => {
   const id = entry.id.substring(entry.id.lastIndexOf("/") + 1);
 
   return {
     slug: id,
-    text: entry.data.title ?? id,
+    text: entry.data.title.value ?? id,
     depth: 2,
   };
 });

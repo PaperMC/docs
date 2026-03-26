@@ -8,27 +8,26 @@ interface Props {
 }
 
 const { id, entry } = Astro.props;
-const { Content } = await render(entry);
 ---
 
 <article>
-  <AnchorHeading {id} level={2}>{entry.data.title}</AnchorHeading>
+  <AnchorHeading {id} level={2}>{entry.data.title.value}</AnchorHeading>
   <p class="description">
     Released on {
-      (entry.data.published ?? entry.data.updated)?.toLocaleDateString("en", {
+      new Date(entry.data.published ?? entry.data.updated).toLocaleDateString("en", {
         dateStyle: "medium",
         timeZone: "UTC",
-      }) ?? "-"
+      })
     }
     {
-      entry.data.url && (
+      entry.data.links?.[0] && (
         <>
-          - <a href={entry.data.url}>GitHub</a>
+          - <a href={entry.data.links[0].href}>GitHub</a>
         </>
       )
     }
   </p>
-  <Content />
+  <Fragment set:html={entry.data.content.value} />
 </article>
 
 <style>

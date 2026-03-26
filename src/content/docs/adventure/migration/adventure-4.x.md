@@ -55,7 +55,7 @@ This does not change how you construct click events but does make serialization 
 This change also extends to `ClickEvent$Action`, which is now no longer an enum and instead is a typed interface.
 
 Additionally, the `nbt` field for custom click event payloads is now nullable.
-This is to allow for the possibility of custom click events without NBT and to be more in line with vanilla Minecraft behavior.
+This is to allow for the possibility of custom click events without NBT and to be more in line with Vanilla Minecraft behavior.
 
 ### Component renderer changes
 

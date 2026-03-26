@@ -8,6 +8,7 @@ With the release of Adventure 5.0, some breaking changes have been introduced fr
 This page documents the changes made and how you as a developer can migrate your code.
 
 ## A modern codebase
+
 One of the main goals for Adventure 5.0 was to migrate to a more modern codebase.
 The minimum version of Java required to use Adventure is now Java 21.
 
@@ -28,13 +29,20 @@ Finally, Adventure now contains proper `module-info.java` files for those of you
 
 ## Updated dependencies
 
-Adventure has migrated to using JSpecify for nullness annotations.
-These are applied at a module level, so unless otherwise specified, everything should be treated as non-null.
+Many non-breaking updates to dependencies have been made.
+There are a few notable breaking/major changes that are documented below.
 
-As most of the internal implementation of Adventure is now using records, we no longer have need to use the Examination library for `toString` generation.
+Adventure has migrated to using JSpecify for nullness annotations.
+These are applied at a package/class level, so unless otherwise specified, everything should be treated as non-null.
+
+As most of the internal implementation of Adventure is now using records, we no longer need to use the Examination library for `toString` generation.
 The Examination library has been entirely removed from Adventure and is no longer a transitive dependency.
 
 The `adventure-text-logger-slf4j` module has been updated to use SLF4J 2.0.
+
+The GSON library has been updated to 2.13.2.
+Although this version is higher than most Minecraft versions that are supported by Adventure, it is not our intention to drop support for these older versions.
+We will endeavor to not use newer GSON features that would break support for older versions of GSON used in legacy Minecraft versions.
 
 ## Breaking changes
 
@@ -46,19 +54,30 @@ This does not change how you construct click events but does make serialization 
 
 This change also extends to `ClickEvent$Action`, which is now no longer an enum and instead is a typed interface.
 
-### Component construction changes
+Additionally, the `nbt` field for custom click event payloads is now nullable.
+This is to allow for the possibility of custom click events without NBT and to be more in line with vanilla Minecraft behavior.
 
-All component construction methods now only accept `StyleBuilderApplicable` as additional parameters for styling.
-This allows for more flexibility in how you construct components and also reduces the number of methods used to create components.
-This change will only require a recompile, as all existing methods of constructing components will translate to the new methods seamlessly.
+### Component renderer changes
 
-Regarding forward-compatibility (e.g., running code compiled against Adventure 4.x on Adventure 5.x), the old methods will continue to work.
-During the 5.x series, we will maintain the old methods as invisible synthetic methods.
-This means that old code compiled against Adventure 4.x will work, but the methods will not be visible in your IDE.
+With the addition of the new object component, the `AbstractComponentRenderer` interface has been updated to include a new method to render object components.
+This is a breaking change, as implementations of this method will be required.
+Going forward, we will be adding new methods to this class whenever Mojang adds new component types.
+This breaking change is documented in the `AbstractComponentRenderer` javadocs.
 
-This period of migration will end in Adventure 6.0 with the removal of the invisible synthetic methods.
+### Sealing of `TextFormat` interface
+
+Although it was never recommended to extend `TextFormat`, it was possible to do so in the past.
+This ability has been removed from the API, and the interface is now sealed.
+If you were extending this interface, you should instead consider extending the `StyleBuilderApplicable` interface for a more powerful and widely-used alternative.
+
+### Chat type changes
+
+Due to changes in the chat system, specifically around the creation of dynamic chat types, it is possible for chat types to not be keyed.
+Due to this internal change, `ChatType#key` is now nullable.
+Additionally, the class no longer implemented `Keyed`.
 
 ## Removal of deprecated methods and classes
+
 A number of methods and classes have been deprecated in across the Adventure 4.x series.
 This section documents the removals that have been made and how you can migrate your code, if applicable.
 
@@ -106,6 +125,14 @@ This section documents the removals that have been made and how you can migrate 
   This has been replaced with the equivalent `PlainTextComponentSerializer` class.
 * **`ClickEvent$Action#payloadType` has been removed.**\
   As click event actions are now typed, this field is no longer required.
+* **`UTF8ResourceBundleControl` has been removed.**\
+  From Java 9 onwards, resource bundles are loaded using UTF-8 by default.
+  Therefore, this class is no longer required.
+  Instead of using this class, you can load properties files without any resource bundle control.
+* **Removal of methods from `GSONComponentSerializer`.**\
+  Since the addition of the options system to customize JSON serializers, the `downsampleColors` and `emitLegacyHoverEvent` options in the `GSONComponentSerializer` has been removed.
+  You should instead use `EMIT_RGB` and `EMIT_HOVER_EVENT_TYPE` fields in `JSONOptions` respectively.
+  Additionally, the `legacyHoverEventSerializer` that accepts a `LegacyHoverEventSerializer` from the GSON module has been removed in favor of the generic alternative in the JSON module.
 * **Typos have been removed.**\
   Some incorrectly spelt/named methods, such as `Argument#numeric` and `ComponentSerializer#deseializeOrNull`, have been removed.
   These methods have been deprecated, and correctly spelt/named methods have been available for a while.

@@ -20,8 +20,6 @@ jobs:
           fetch-depth: 0
       - name: "setup node and pnpm"
         uses: ./.github/actions/setup-node-pnpm
-      - name: "setup d2"
-        run: "curl -fsSL https://d2lang.com/install.sh | sh -s --"
       - name: "install dependencies"
         run: "pnpm install"
       - name: "build"

@@ -11,7 +11,6 @@ How to get docs running on your local machine for development.
 
 - [node 22](https://nodejs.org)
 - [pnpm](https://pnpm.io/installation)
-- [d2](https://d2lang.com/) (optional for development - used for generating diagrams)
 
 ### Local Development
 

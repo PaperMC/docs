@@ -25,7 +25,7 @@ competition. The recipe to the sauce is simple.
 
 When a Minecraft client connects to another Minecraft server, the server will send back an ID that
 uniquely identifies a specific player connection. This ID is used in packets that target the player
-that the server may send. But what happens when they're actually connecting a proxy that has the
+that the server may send. But what happens when they're actually connected to a proxy that has the
 ability to change what server the player is connected to?
 
 Other proxy solutions try to solve this problem by rewriting entity IDs that reference the current

@@ -198,7 +198,7 @@ argument defaults to the player, who ran the command, if one exists.
 ### reload
 The `/paper reload` command is an unsupported command which allows for runtime Paper-config reloading. If you get any issues
 after using this command, please make sure to reproduce this on a freshly-started server before asking for help or
-reporting it. Do not that this command **does not** reload non-Paper configs, like the `spigot.yml`.
+reporting it. Do note that this command **does not** reload non-Paper configs, like the `spigot.yml`.
 
 ### syncloadinfo
 The `/paper syncloadinfo [clear]` command requires the `-Dpaper.debug-sync-loads=true` JVM flag to be explicitly set

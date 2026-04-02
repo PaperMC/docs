@@ -26,7 +26,10 @@ It's easy to migrate from CraftBukkit or Spigot to Paper. Follow the steps below
 4. Replace your existing JAR file with your freshly downloaded Paper JAR.
 5. Start your new server.
 
-Paper retains full compatibility with all Spigot plugins, allowing a seamless transition.
+Up until 1.20.5, Paper retained full compatibility with all Spigot plugins. However, plugins using Spigot API
+added **after** 1.20.5 version will not work. Such plugins may often provide Paper-compatible builds. If they
+do not do that, you will need to look for alternatives. However, nowadays most plugins are built and tested
+against Paper, so you typically will not encounter incompatible plugins.
 
 :::note
 

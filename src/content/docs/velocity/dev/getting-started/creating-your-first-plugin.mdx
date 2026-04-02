@@ -57,6 +57,15 @@ How to set up a build system is outside the scope of this page, but you can look
 system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userguide.html) or
 [Maven](https://maven.apache.org/guides/getting-started/index.html)) for assistance.
 
+:::info[velocity-plugin.json]
+
+Before you set up your build system, you should think about whether you want your `velocity-plugin.json`
+to be generated automatically using a `@Plugin` annotation in your source code or if you want to write it
+manually. Depending on which you prefer, you may need to add additional lines to your build files. You can find
+more information on the [`velocity-plugin.json`] file [here](/velocity/dev/velocity-plugin-json).
+
+:::
+
 ### Setting up the dependency
 
 <Tabs syncKey="build-system">

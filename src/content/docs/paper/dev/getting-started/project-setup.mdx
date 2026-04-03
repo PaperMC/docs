@@ -24,7 +24,15 @@ You will land into the `build.gradle.kts` file where you can add your dependenci
 
 ### Adding Paper as a dependency
 
-To add Paper as a dependency, you will need to add the Paper repository to your `build.gradle.kts` or `pom.xml` file as well as the dependency itself.
+To add Paper as a dependency, you will need to add the Paper repository and dependency to your `build.gradle.kts` file.
+
+:::tip
+
+If you want to reference a specific build, you can do so by replacing the + with the build identifier
+(i.e. `{VERSION}.build.25-alpha` for the 25th alpha build of a version). Before `26.1` (`1.21.11` and below), the
+version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to reference a specific build.
+
+:::
 
 <Tabs syncKey="build-system">
   <TabItem label="Gradle (Kotlin)">
@@ -37,29 +45,18 @@ To add Paper as a dependency, you will need to add the Paper repository to your 
     }
 
     dependencies {
-      compileOnly("io.papermc.paper:paper-api:\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT")
+      compileOnly("io.papermc.paper:paper-api:\{LATEST_PAPER_RELEASE}.build.+")
     }
 
     java {
-      toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+      toolchain.languageVersion.set(JavaLanguageVersion.of(25))
     }
     ```
   </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy title="build.gradle" replace
-    repositories {
-      maven {
-        name = 'papermc'
-        url = 'https://repo.papermc.io/repository/maven-public/'
-      }
-    }
+  <TabItem label="Maven (Discouraged)">
+    Maven unfortunately does not support obtaining the latest version using version ranges the way Gradle
+    does. You will need to explicitly declare the build of a version you are targeting.
 
-    dependencies {
-      compileOnly 'io.papermc.paper:paper-api:\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT'
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
     ```xml title="pom.xml" replace
     <project>
       <repositories>
@@ -73,7 +70,7 @@ To add Paper as a dependency, you will need to add the Paper repository to your 
         <dependency>
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>
-          <version>\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT</version>
+          <version>\{LATEST_PAPER_BUILD_API_VERSION}</version>
           <scope>provided</scope>
         </dependency>
       </dependencies>
@@ -221,138 +218,6 @@ Now you can click on the `Create` button and IntelliJ will create the project fo
 If everything went well, you should see something like this:
 
 ![](./assets/paper-plugin-overview.png)
-
-## Plugin remapping
-
-As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
-If you are using Spigot/Bukkit plugins, your plugin will be assumed to be Spigot-mapped.
-This means that the server will have to deobfuscate and remap the plugin JAR when it's loaded for the first time.
-
-:::note
-
-`paperweight-userdev` already sets this attribute automatically. For more information see the [userdev](/paper/dev/userdev) documentation.
-
-:::
-
-### Mojang mappings
-
-To tell the server that your plugin is Mojang-mapped, you need to add the following code to your build script:
-
-:::note[Paper plugins]
-
-If you are using Paper plugins, this step is not needed as plugins will be assumed to be Mojang-mapped.
-
-:::
-
-<Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
-    ```kotlin title="build.gradle.kts"
-    tasks.jar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "mojang"
-      }
-    }
-    // if you have shadowJar configured
-    tasks.shadowJar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "mojang"
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy title="build.gradle"
-    jar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'mojang'
-        )
-      }
-    }
-    // if you have shadowJar configured
-    shadowJar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'mojang'
-        )
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
-    ```xml title="pom.xml"
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-jar-plugin</artifactId>
-      <version>3.4.1</version>
-      <configuration>
-        <archive>
-          <manifestEntries>
-            <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
-          </manifestEntries>
-        </archive>
-      </configuration>
-    </plugin>
-    ```
-  </TabItem>
-</Tabs>
-
-### Spigot mappings
-
-If you explicitly want to tell the server that your plugin is Spigot-mapped, you need to add the following code to your build script:
-
-<Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
-    ```kotlin title="build.gradle.kts"
-    tasks.jar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "spigot"
-      }
-    }
-    // if you have shadowJar configured
-    tasks.shadowJar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "spigot"
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy title="build.gradle"
-    jar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'spigot'
-        )
-      }
-    }
-    // if you have shadowJar configured
-    shadowJar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'spigot'
-        )
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
-    ```xml title="pom.xml"
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-jar-plugin</artifactId>
-      <version>3.4.1</version>
-      <configuration>
-        <archive>
-          <manifestEntries>
-            <paperweight-mappings-namespace>spigot</paperweight-mappings-namespace>
-          </manifestEntries>
-        </archive>
-      </configuration>
-    </plugin>
-    ```
-  </TabItem>
-</Tabs>
 
 ## Conclusion
 

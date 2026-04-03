@@ -56,7 +56,8 @@ const findLatest = async (project: Project): Promise<string> => {
   // find the newest version with at least one non-alpha build
   for (const version of versions) {
     const builds = await fetchBuilds(project, version);
-    if (builds.some((b) => true || b.channel !== "ALPHA")) { // TODO: Remove this, temporary change
+    if (builds.some((b) => true || b.channel !== "ALPHA")) {
+      // TODO: Remove this, temporary change
       return version;
     }
   }
@@ -70,7 +71,7 @@ export const LATEST_PAPER_RELEASE = await findLatest(paperProject);
 
 const paperBuild = (await fetchBuilds(paperProject, LATEST_PAPER_RELEASE)).at(0);
 
-export const LATEST_PAPER_BUILD_API_VERSION = `${LATEST_PAPER_RELEASE}.build.${paperBuild?.id}-${paperBuild?.channel.toLocaleLowerCase()}`
+export const LATEST_PAPER_BUILD_API_VERSION = `${LATEST_PAPER_RELEASE}.build.${paperBuild?.id}-${paperBuild?.channel.toLocaleLowerCase()}`;
 
 const velocityProject = await fetchProject("velocity");
 

@@ -45,7 +45,7 @@ not recommended for use.
 
 ### From Spigot/CraftBukkit
 
-Spigot and CraftBukkit modify the Vanilla world directory structure, making a direct migration
+Spigot and CraftBukkit modify the Vanilla world directory structure, making a direct migration as of `26.1`
 fundamentally impossible. If you wish to migrate from Spigot/CraftBukkit anyway, you will
 first need to **migrate from Spigot/CraftBukkit to Vanilla**, after which you can safely follow
 the [Vanilla Migration Guide](#from-vanilla). For instructions on how to do this, please
@@ -127,12 +127,8 @@ case for you, replace `world` with your `level-name` for all steps below.
 6. Replace your Paper JAR with a Vanilla server JAR.
 7. Start your Vanilla server.
 
-### To/From CraftBukkit or Spigot
+### To CraftBukkit or Spigot
 
-Paper does **not** support migration from or to either CraftBukkit or Spigot!
+Paper does **not** support migration to either CraftBukkit or Spigot!
 While you may find success, **do not** reach out for
 support with issues you encounter and note that data loss is possible.
-
-Historically, migrating from Spigot to Paper was possible due to a shared directory structure
-(`1.21.11` and older), however since `26.1`, Paper's world directory structure has been
-altered to more closely match Vanilla, which made migrating from or to Spigot/CraftBukkit no longer possible.

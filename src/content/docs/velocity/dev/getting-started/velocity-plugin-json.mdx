@@ -25,19 +25,21 @@ and used a `@Plugin` annotation somewhere in your code.
 ## Example
 This is an example `velocity-plugin.json` file:
 
-```json title=velocity-plugin.json
+```json title=velocity-plugin.json {"   Required values:":2-4} {"     The ID is required. Optional defaults to false:":11-15}
 {
-  "id": "example-plugin", // required
+
+  "id": "example-plugin",
+  "main": "com.example.testplugin.TestPluginMain",
   "name": "Velocity Example Plugin",
   "version": "1.0.0",
   "description": "An example plugin for showcasing the plugin json file.",
-  "main": "com.example.testplugin.TestPluginMain", // required
   "url": "https://github.com/PaperMC/docs",
   "authors": ["Strokkur24"],
   "dependencies": [
+
     {
-      "id": "luckperms", // required for dependencies
-      "optional": true // defaults to false
+      "id": "luckperms",
+      "optional": true
     }
   ]
 }

@@ -2,44 +2,10 @@
 title: Registry
 description: Documentation for arguments retrieving registry values.
 slug: paper/dev/command-api/arguments/registry
-version: 1.21.5
+version: 26.1.1
 ---
 
-import ResourceAttributes from "./assets/registry-arguments/resource-attributes.mp4";
-import ResourceBannerPattern from "./assets/registry-arguments/resource-banner-pattern.mp4";
-import ResourceBiome from "./assets/registry-arguments/resource-biome.mp4";
-import ResourceBlock from "./assets/registry-arguments/resource-block.mp4";
-import ResourceCatVariant from "./assets/registry-arguments/resource-cat-variant.mp4";
-import ResourceChickenVariant from "./assets/registry-arguments/resource-chicken-variant.mp4";
-import ResourceCowVariant from "./assets/registry-arguments/resource-cow-variant.mp4";
-import ResourceDamageType from "./assets/registry-arguments/resource-damage-type.mp4";
-import ResourceDataComponentType from "./assets/registry-arguments/resource-data-component-type.mp4";
-import ResourceDialog from "./assets/registry-arguments/resource-dialog.mp4";
-import ResourceEnchantment from "./assets/registry-arguments/resource-enchantment.mp4";
-import ResourceEntityType from "./assets/registry-arguments/resource-entity-type.mp4";
-import ResourceFluid from "./assets/registry-arguments/resource-fluid.mp4";
-import ResourceFrogVariant from "./assets/registry-arguments/resource-frog-variant.mp4";
-import ResourceGameEvent from "./assets/registry-arguments/resource-game-event.mp4";
-import ResourceInstrument from "./assets/registry-arguments/resource-instrument.mp4";
 import ResourceItem from "./assets/registry-arguments/resource-item.mp4";
-import ResourceJukeboxSong from "./assets/registry-arguments/resource-jukebox-song.mp4";
-import ResourceMapDecorationType from "./assets/registry-arguments/resource-map-decoration-type.mp4";
-import ResourceMemoryModuleType from "./assets/registry-arguments/resource-memory-module-type.mp4";
-import ResourceMenu from "./assets/registry-arguments/resource-menu.mp4";
-import ResourceMobEffect from "./assets/registry-arguments/resource-mob-effect.mp4";
-import ResourcePaintingVariant from "./assets/registry-arguments/resource-painting-variant.mp4";
-import ResourceParticleType from "./assets/registry-arguments/resource-particle-type.mp4";
-import ResourcePigVariant from "./assets/registry-arguments/resource-pig-variant.mp4";
-import ResourcePotion from "./assets/registry-arguments/resource-potion.mp4";
-import ResourceSoundEvent from "./assets/registry-arguments/resource-sound-event.mp4";
-import ResourceStructureType from "./assets/registry-arguments/resource-structure-type.mp4";
-import ResourceTrimMaterial from "./assets/registry-arguments/resource-trim-material.mp4";
-import ResourceTrimPattern from "./assets/registry-arguments/resource-trim-pattern.mp4";
-import ResourceVillagerProfession from "./assets/registry-arguments/resource-villager-profession.mp4";
-import ResourceVillagerType from "./assets/registry-arguments/resource-villager-type.mp4";
-import ResourceWolfSoundVariant from "./assets/registry-arguments/resource-wolf-sound-variant.mp4";
-import ResourceWolfVariant from "./assets/registry-arguments/resource-wolf-variant.mp4";
-
 import ResourceKeyItem from "./assets/registry-arguments/resourcekey-item.mp4";
 import EnchantsRegistry from "./assets/registry-arguments/enchants-registry.mp4";
 
@@ -101,8 +67,8 @@ Here is how it looks in-game:
 
 :::caution
 
-There are certain edge-cases, where this argument, due to missing registries on the client, will cause a **Network Protocol Error**.
-Basically, the only argument where this is the case right now is with the `STRUCTURE` registry key.
+There are certain edge-cases where this argument, due to missing registries on the client, will cause a **Network Protocol Error**.
+Currently, the only resource where this is the case, is with the `STRUCTURE` registry key.
 
 ```java
 // Registering this command will cause clients to not be able to connect to the server.
@@ -111,7 +77,7 @@ final LiteralCommandNode<CommandSourceStack> invalidRegistryArgument = Commands.
     .build();
 ```
 
-Due to this fact, it is advised to only use the `STRUCTURE` registry key argument with a `resourceKey(...)` argument type and parse the values yourself.
+Due to this fact, it is advised to only use the `STRUCTURE` registry key with a `resourceKey(...)` argument type and parse the values yourself.
 
 :::
 
@@ -120,10 +86,10 @@ For the client, there is barely any difference between the using `ArgumentTypes.
 using `ArgumentTypes.resourceKey` does not provide **error checking**. We can visualize this using `RegistryKey.ITEM`.
 
 Here is the tab completion when using `ArgumentTypes.resource(RegistryKey.ITEM)`:
-<Video src={ResourceItem} /><br/>
+<Video src={ResourceItem} /><br />
 
 And here is the tab completion when using `ArgumentTypes.resourceKey(RegistryKey.ITEM)`:
-<Video src={ResourceKeyItem} /><br/>
+<Video src={ResourceKeyItem} /><br />
 
 :::note
 
@@ -194,149 +160,7 @@ from that resource key or null, if no value has been found.
 The main use case for this argument type is the ability to store the key (the value returned to you by `TypedKey#key`). If you want to be able to store the exact user
 input and be able to retrieve the backed instance without much trouble, that is the way to do it.
 
-## Registry key previews
+## Registry key types
 
-The following `RegistryKeys` exist:
-
-| RegistryKeys Field  | Return Value        | Preview Video                               |
-|---------------------|---------------------|---------------------------------------------|
-| ATTRIBUTE           | Attribute           | [Attribute](#attribute)                     |
-| BANNER_PATTERN      | PatternType         | [Banner Pattern](#banner-pattern)           |
-| BIOME               | Biome               | [Biome](#biome)                             |
-| BLOCK               | BlockType           | [Block](#block)                             |
-| CAT_VARIANT         | Cat.Type            | [Cat Variant](#cat-variant)                 |
-| CHICKEN_VARIANT     | Chicken.Variant     | [Chicken Variant](#chicken-variant)         |
-| COW_VARIANT         | Cow.Variant         | [Cow Variant](#cow-variant)                 |
-| DAMAGE_TYPE         | DamageType          | [Damage Type](#damage-type)                 |
-| DATA_COMPONENT_TYPE | DataComponentType   | [Data Component Type](#data-component-type) |
-| DIALOG              | Dialog              | [Dialog](#dialog)                           |
-| ENCHANTMENT         | Enchantment         | [Enchantment](#enchantment)                 |
-| ENTITY_TYPE         | EntityType          | [Entity Type](#entity-type)                 |
-| FLUID               | Fluid               | [Fluid](#fluid)                             |
-| FROG_VARIANT        | Frog.Variant        | [Frog Variant](#frog-variant)               |
-| GAME_EVENT          | GameEvent           | [Game Event](#game-event)                   |
-| INSTRUMENT          | MusicInstrument     | [Instrument](#instrument)                   |
-| ITEM                | ItemType            | [Item](#item)                               |
-| JUKEBOX_SONG        | JukeboxSong         | [Jukebox Song](#jukebox-song)               |
-| MAP_DECORATION_TYPE | MapCursor.Type      | [Map Decoration Type](#map-decoration-type) |
-| MEMORY_MODULE_TYPE  | MemoryKey\<?>       | [Memory Module Type](#memory-module-type)   |
-| MENU                | MenuType            | [Menu](#menu)                               |
-| MOB_EFFECT          | PotionEffectType    | [Mob effect](#mob-effect)                   |
-| PAINTING_VARIANT    | Art                 | [Painting variant](#painting-variant)       |
-| PARTICLE_TYPE       | Particle            | [Particle](#particle)                       |
-| PIG_VARIANT         | Pig.Variant         | [Pig Variant](#pig-variant)                 |
-| POTION              | PotionType          | [Potion](#potion)                           |
-| SOUND_EVENT         | Sound               | [Sound](#sound)                             |
-| STRUCTURE           | Structure           | [Structure](#structure)                     |
-| STRUCTURE_TYPE      | StructureType       | [Structure Type](#structure-type)           |
-| TRIM_MATERIAL       | TrimMaterial        | [Trim Material](#trim-material)             |
-| TRIM_PATTERN        | TrimPattern         | [Trim Pattern](#trim-pattern)               |
-| VILLAGER_PROFESSION | Villager.Profession | [Villager Profession](#villager-profession) |
-| VILLAGER_TYPE       | Villager.Type       | [Villager Type](#villager-type)             |
-| WOLF_SOUND_VARIANT  | Wolf.SoundVariant   | [Wolf Sound Variant](#wolf-sound-variant)   |
-| WOLF_VARIANT        | Wolf.Variant        | [Wolf Variant](#wolf-variant)               |
-
-### Attribute
-<Video src={ResourceAttributes} />
-
-### Banner pattern
-<Video src={ResourceBannerPattern} />
-
-### Biome
-<Video src={ResourceBiome} />
-
-### Block
-<Video src={ResourceBlock} />
-
-### Cat variant
-<Video src={ResourceCatVariant} />
-
-### Chicken variant
-<Video src={ResourceChickenVariant} />
-
-### Cow variant
-<Video src={ResourceCowVariant} />
-
-### Damage type
-<Video src={ResourceDamageType} />
-
-### Data component type
-<Video src={ResourceDataComponentType} />
-
-### Dialog
-<Video src={ResourceDialog} />
-
-### Enchantment
-<Video src={ResourceEnchantment} />
-
-### Entity type
-<Video src={ResourceEntityType} />
-
-### Fluid
-<Video src={ResourceFluid} />
-
-### Frog variant
-<Video src={ResourceFrogVariant} />
-
-### Game event
-<Video src={ResourceGameEvent} />
-
-### Instrument
-<Video src={ResourceInstrument} />
-
-### Item
-<Video src={ResourceItem} />
-
-### Jukebox Song
-<Video src={ResourceJukeboxSong} />
-
-### Map decoration type
-<Video src={ResourceMapDecorationType} />
-
-### Memory module type
-<Video src={ResourceMemoryModuleType} />
-
-### Menu
-<Video src={ResourceMenu} />
-
-### Mob effect
-<Video src={ResourceMobEffect} />
-
-### Painting variant
-<Video src={ResourcePaintingVariant} />
-
-### Particle
-<Video src={ResourceParticleType} />
-
-### Pig variant
-<Video src={ResourcePigVariant} />
-
-### Potion
-<Video src={ResourcePotion} />
-
-### Sound
-<Video src={ResourceSoundEvent} />
-
-### Structure
-This argument kicks the client, so no preview for this one ¯\\\_(ツ)\_/¯
-
-### Structure type
-<Video src={ResourceStructureType} />
-
-### Trim material
-<Video src={ResourceTrimMaterial} />
-
-### Trim pattern
-<Video src={ResourceTrimPattern} />
-
-### Villager profession
-<Video src={ResourceVillagerProfession} />
-
-### Villager type
-<Video src={ResourceVillagerType} />
-
-### Wolf sound variant
-<Video src={ResourceWolfSoundVariant} />
-
-### Wolf variant
-<Video src={ResourceWolfVariant} />
+You can get a list of all registry key types and their return values on the
+[`RegistryKey` Javadocs](jd:paper:io.papermc.paper.registry.RegistryKey).

@@ -77,7 +77,7 @@ file.
 ```kotlin title="build.gradle.kts" replace
 dependencies {
   // Other Dependencies
-  paperweight.paperDevBundle("\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT")
+  paperweight.paperDevBundle("\{LATEST_PAPER_RELEASE}.build.+")
 }
 ```
 

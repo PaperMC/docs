@@ -5,6 +5,7 @@ slug: paper/dev/project-setup
 ---
 
 import { FileTree, Tabs, TabItem } from "@astrojs/starlight/components";
+import { LATEST_PAPER_RELEASE, LATEST_PAPER_BUILD_API_VERSION} from "/src/utils/versions";
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE.
 However, the steps below should apply to other IDEs as well, with some minor changes.
@@ -54,8 +55,9 @@ version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to referen
     ```
   </TabItem>
   <TabItem label="Maven (Discouraged)">
-    Maven unfortunately does not support obtaining the latest version using version ranges the way Gradle
-    does. You will need to explicitly declare the build of a version you are targeting.
+    If you want dynamic latest build version resolution with Maven, you will need to define your
+    version as a range: `[\{LATEST_PAPER_RELEASE},)`. For a specific build, you can
+    use the standard variant: `\{LATEST_PAPER_BUILD_API_VERSION}`.
 
     ```xml title="pom.xml" replace
     <project>
@@ -70,7 +72,7 @@ version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to referen
         <dependency>
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>
-          <version>\{LATEST_PAPER_BUILD_API_VERSION}</version>
+          <version>[\{LATEST_PAPER_RELEASE},)</version>
           <scope>provided</scope>
         </dependency>
       </dependencies>

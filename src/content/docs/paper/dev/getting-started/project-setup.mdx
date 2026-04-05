@@ -56,7 +56,7 @@ version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to referen
   </TabItem>
   <TabItem label="Maven (Discouraged)">
     If you want dynamic latest build version resolution with Maven, you will need to define your
-    version as a range: `[\{LATEST_PAPER_RELEASE},)`. For a specific build, you can
+    version as a range: `[\{LATEST_PAPER_RELEASE}.build,)`. For a specific build, you can
     use the standard variant: `\{LATEST_PAPER_BUILD_API_VERSION}`.
 
     ```xml title="pom.xml" replace
@@ -72,7 +72,7 @@ version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to referen
         <dependency>
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>
-          <version>[\{LATEST_PAPER_RELEASE},)</version>
+          <version>[\{LATEST_PAPER_RELEASE}.build,)</version>
           <scope>provided</scope>
         </dependency>
       </dependencies>

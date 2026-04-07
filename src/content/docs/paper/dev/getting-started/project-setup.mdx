@@ -11,7 +11,8 @@ As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/
 However, the steps below should apply to other IDEs as well, with some minor changes.
 
 The Paper team uses [Gradle](https://gradle.org/) as its build system, and its tools are implemented for Gradle.
-Most of the code below can be altered to work with other build systems, such as Maven, but this guide will only cover Gradle.
+Most of the code below can be altered to work with other build systems, such as Maven, but this guide will only cover Gradle
+using the **Kotlin DSL**.
 
 Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from_maven.html) to learn how to migrate from Maven to Gradle.
 
@@ -36,7 +37,7 @@ version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to referen
 :::
 
 <Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
+  <TabItem label="Gradle">
     ```kotlin title="build.gradle.kts" replace
     repositories {
       maven {

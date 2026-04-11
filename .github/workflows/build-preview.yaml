@@ -10,7 +10,7 @@ jobs:
     name: "Build Preview Site and Upload Build Artifact"
     steps:
       - name: "checkout"
-        uses: "actions/checkout@v4"
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
@@ -24,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "upload build artifact"
-        uses: "actions/upload-artifact@v4"
+        uses: actions/upload-artifact@v7
         with:
           name: "preview-build"
           path: "dist"

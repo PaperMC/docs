@@ -15,7 +15,7 @@ jobs:
       pull-requests: write
     steps:
       - name: "checkout"
-        uses: "actions/checkout@v4"
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: "setup node and pnpm"
@@ -28,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "publish (push)"
         id: "cloudflare-publish"
-        uses: "AdrianGonz97/refined-cf-pages-action@v1"
+        uses: AdrianGonz97/refined-cf-pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

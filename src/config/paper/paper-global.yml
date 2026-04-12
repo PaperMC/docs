@@ -208,12 +208,6 @@ item-validation:
     description: >-
       Whether to resolve selectors in books. With this enabled, players given
       creative mode will be able to crash the server in yet another way
-logging:
-  deobfuscate-stacktraces:
-    default: "true"
-    description: >-
-      Whether to remap Spigot mapped stacktraces to Mojang mappings in logging.
-      Has no impact on Mojang mapped servers
 messages:
   kick:
     authentication-servers-down:

@@ -251,18 +251,6 @@ and know what you are doing.
 - **default**: `unset`
 - **description**: Disables the 30-second delay before starting a world migration.
 
-#### paper.disableGameRuleLimits
-
-:::note
-
-Whilst this system property exists, its associated code is not currently referenced anywhere,
-resulting in this property not having any effect.
-
-:::
-
-- **default**: `false`
-- **description**: Disables limits on certain game rule values, e.g. `minecartMaxSpeed` and `spawnChunkRadius`.
-
 #### minecraft.api.session.host
 
 - **default**: `https://sessionserver.mojang.com`

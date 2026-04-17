@@ -16,6 +16,7 @@ import Decoration1 from "./assets/decoration_1.png";
 import Reset1 from "./assets/reset_1.png";
 import Click1 from "./assets/click_1.png";
 import Hover1 from "./assets/hover_1.png";
+import Hover2 from "./assets/hover_2.png";
 import Key1 from "./assets/key_1.png";
 import Translatable1 from "./assets/translatable_1.png";
 import Translatable2 from "./assets/translatable_2.png";
@@ -245,9 +246,14 @@ Examples
 ```mm
 <hover:show_text:'<red>test'>TEST
 ```
-
 <br/>
 <Image class="img-inline" alt="The result of parsing `<hover:show_text:'<red>test'>TEST`, shown in-game in the Minecraft client's chat window" src={Hover1} />
+
+```mm
+<hover:show_item:diamond_sword:1:enchantments:'{sharpness:3,knockback:2}'>Very sharp sword!</hover>
+```
+<br/>
+<Image class="img-inline" alt="<hover:show_item:diamond_sword:1:enchantments:'{sharpness:3,knockback:2}'>Very sharp sword!</hover>" src={Hover2} />
 
 ### Keybind
 

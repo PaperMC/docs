@@ -230,17 +230,41 @@ like the `/say` or `/tell` command to prevent the server from sending signed mes
 Allows doing multiple things when hovering on the component.
 
 Tag
-  * `<hover:_action_:_value..._>`
+  * `<hover:_action_:_value_>`
 
 Arguments
   * `_action_`, the type of hover event, one of this [list](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/event/HoverEvent.Action.html#field.summary)
-  * `_value..._`, arguments specific to each event action:
+  * `_value_`, argument(s) specific to each event action:
 
-| Action        | Value                                                                                                                     |
-|---------------|---------------------------------------------------------------------------------------------------------------------------|
-| `show_text`   | `_text_` (a MiniMessage string)                                                                                           |
-| `show_item`   | `_type_[:_count_[:tag]]` (a `Key` for the item's type, optionally followed by count (an integer) and tag (a SNBT string)) |
-| `show_entity` | `_type_:_uuid_[:_name_]` (a `Key` ID of the entity type, the entity's UUID, and an optional custom name)                  |
+[//]: # (Starlight's padding doesn't apply for a spanned cell, so a manual padding is added)
+<table>
+  <tbody>
+    <tr>
+      <th>Action</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>`show_text`</td>
+      <td><code>\_text_</code></td>
+      <td>a MiniMessage string</td>
+    </tr>
+    <tr>
+      <td rowSpan={2}>`show_item`</td>
+      <td><code>\_type_[:\_count_[(:\_componentKey_:\_componentValue_)...]]</code></td>
+      <td>a `Key` for the item's type, optionally followed by count (an integer) and a list of <a href="https://minecraft.wiki/w/Data_component_format" target="_blank">data component</a> key value pairs</td>
+    </tr>
+    <tr>
+      <td style={{ paddingLeft: "1rem" }}><code>\_type_[:\_count_[:tag]]</code></td>
+      <td>a `Key` for the item's type, optionally followed by count (an integer) and tag (a <a href="https://minecraft.wiki/w/NBT_format#SNBT_format" target="_blank">SNBT</a> string)</td>
+    </tr>
+    <tr>
+      <td>`show_entity`</td>
+      <td><code>\_type_:\_uuid_[:\_name_]</code></td>
+      <td>a `Key` ID of the entity type, the entity's UUID, and an optional custom name</td>
+    </tr>
+  </tbody>
+</table>
 
 Examples
 ```mm

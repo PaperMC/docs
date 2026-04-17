@@ -47,4 +47,4 @@ Furthermore, playing sound was previously considered infeasible for versions bel
 | Books                      | No               |
 | Dialogs                    | No               |
 
-[^sounds-note]: Playing sounds only works on 1.19.3+ and requires an emitter ([`Sound.Emitter#self()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/sound/Sound.Emitter.html#self()) or another player from the same server). [`Player#playSound(Sound)`](jd:velocity:com.velocitypowered.api.proxy.Player#playSound(net.kyori.adventure.sound.Sound)) is not implemented, as Adventure's contract requires sounds to play at the player's current position.
+[^sounds-note]: Playing sounds only works on 1.19.3+ and requires an emitter ([](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.sound.Sound$Emitter.html#self()) or another player from the same server). [`Player#playSound(Sound)`](jd:velocity:com.velocitypowered.api.proxy.Player#playSound(net.kyori.adventure.sound.Sound)) is not implemented, as Adventure's contract requires sounds to play at the player's current position.

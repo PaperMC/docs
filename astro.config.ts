@@ -59,7 +59,7 @@ export default defineConfig({
         },
 
         { icon: "github", label: "adventure:GitHub", href: "https://github.com/PaperMC/adventure" },
-        { icon: "seti:java", label: "adventure:Javadoc", href: "https://jd.advntr.dev" },
+        { icon: "seti:java", label: "adventure:Javadoc", href: "https://jd.papermc.io" },
 
         { icon: "github", label: "waterfall:GitHub", href: "https://github.com/PaperMC/Waterfall" },
         {
@@ -555,6 +555,7 @@ export default defineConfig({
             paper: "https://jd.papermc.io/paper",
             velocity: "https://jd.papermc.io/velocity",
             java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
+            adventure: "https://jd.papermc.io/adventure",
           },
         },
       ],

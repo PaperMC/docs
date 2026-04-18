@@ -38,7 +38,7 @@ confirmation and one meant for refusal.
 
 ## Showing dialogs
 Dialogs can be shown in-game using the `/dialog show <players> <dialog>` command. Alternatively, you can show them
-using the API by using [Audience#showDialog(DialogLike)](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#showDialog(net.kyori.adventure.dialog.DialogLike)).
+using the API by using [Audience#showDialog(DialogLike)](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#showDialog(net.kyori.adventure.dialog.DialogLike)).
 You can get built-in dialogs statically from the [`Dialog`](jd:paper:io.papermc.paper.dialog.Dialog) interface.
 New dialogs can be created dynamically using [`Dialog#create`](jd:paper:io.papermc.paper.dialog.Dialog#create(java.util.function.Consumer))
 or, if registered during the bootstrap phase, retrieved from the dialog registry with `RegistryAccess.registryAccess().getRegistry(RegistryKey.DIALOG).get(Key)`.
@@ -166,7 +166,7 @@ public void bootstrap(BootstrapContext context) {
 ## Closing dialogs
 Dialogs can be closed from the API. There are two ways to achieve that:
 
-- The intended way of using [`Adventure#closeDialog()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#closeDialog()).
+- The intended way of using [`Adventure#closeDialog()`](https://jd.papermc.io/adventure/net.kyori.adventure.api/net/kyori/adventure/audience/ForwardingAudience.html#closeDialog()).
 - The slightly hacky way of using [`Player#closeInventory()`](jd:paper:org.bukkit.entity.HumanEntity#closeInventory()).
 
 Using `closeDialog()` will result in the dialog being closed and the player returning to the previous non-dialog or game menu screen they were on.

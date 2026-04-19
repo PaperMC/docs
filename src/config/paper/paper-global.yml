@@ -489,12 +489,6 @@ unsupported-settings:
       possible, for example sand duplication. This
       setting is not recommended to be enabled, but is provided for those who
       wish to use it.
-  compression-format:
-    default: ZLIB
-    description: >-
-      Allows the server to customize the format of saved region files. This
-      supports ZLIB, GZIP, LZ4 and NONE, where None namely allows for compression to
-      be disabled
   oversized-item-component-sanitizer:
     dont-sanitize:
       vanilla: "[minecraft:container, minecraft:charged_projectiles, minecraft:bundle_contents]"

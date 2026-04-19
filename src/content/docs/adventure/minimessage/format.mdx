@@ -5,6 +5,7 @@ description: The MiniMessage format documentation.
 ---
 
 import { Image } from "astro:assets";
+import { Badge, Icon } from "@astrojs/starlight/components";
 import Shadow1 from "./assets/shadow_1.png";
 import Shadow2 from "./assets/shadow_2.png";
 import Shadow3 from "./assets/shadow_3.png";
@@ -255,7 +256,7 @@ Arguments
       <td>a `Key` for the item's type, optionally followed by count (an integer) and a list of <a href="https://minecraft.wiki/w/Data_component_format" target="_blank">data component</a> key value pairs</td>
     </tr>
     <tr>
-      <td style={{ paddingLeft: "1rem" }}><code>\_type_[:\_count_[:tag]]</code></td>
+      <td style={{ paddingLeft: "1rem" }}><Badge variant="caution" text="Legacy" /> <code>\_type_[:\_count_[:tag]]</code></td>
       <td>a `Key` for the item's type, optionally followed by count (an integer) and tag (a <a href="https://minecraft.wiki/w/NBT_format#SNBT_format" target="_blank">SNBT</a> string)</td>
     </tr>
     <tr>
@@ -265,6 +266,11 @@ Arguments
     </tr>
   </tbody>
 </table>
+
+:::caution
+`_type_[:\_count_[:tag]]` value format for `show_item` action is considered legacy and support for it may eventually be removed.
+The recommended format is `_type_[:\_count_[(:\_componentKey_:\_componentValue_)...]]`.
+:::
 
 Examples
 ```mm

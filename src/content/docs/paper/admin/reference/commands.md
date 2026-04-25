@@ -102,8 +102,8 @@ For help setting up the restart script, see
 This section is dedicated to the subcommands of the in-game `/paper` command.
 
 ### chunkinfo
-The `/paper chunkinfo [<worldname>]` command is used for displaying information about loaded chunks in a world.
-You can specify the world to get info about with the `[<worldname>]` argument. If you set it to `*` or leave it
+The `/paper chunkinfo [<world>]` command is used for displaying information about loaded chunks in a world.
+You can specify the world to get info about with the `[<world>]` argument. If you set it to `*` or leave it
 out, it will list information for all worlds.
 
 The output differentiates between multiple types of loaded chunks. Here is a quick rundown of each type.

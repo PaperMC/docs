@@ -212,7 +212,7 @@ rcon.port:
 region-file-compression:
   default: "deflate"
   description: >
-    Specifies the compression type used to compress region files. Possible values are: "deflate", "lz4" and "none".
+    Specifies the compression type used to compress region files. Possible values are: "deflate", "lz4", "none" and "gzip" (only available on Paper).
     If set to "none", region files will take up significantly more disk space, but it might make sense together with filesystem-level compression.
 require-resource-pack:
   default: "false"

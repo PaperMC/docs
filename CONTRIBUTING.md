@@ -132,6 +132,7 @@ These constants can be imported and used in MDX, like so:
 import {
   LATEST_MC_RELEASE,
   LATEST_PAPER_RELEASE,
+  LATEST_PAPER_BUILD_API_VERSION,
   LATEST_VELOCITY_RELEASE,
   LATEST_FOLIA_RELEASE,
   LATEST_WATERFALL_RELEASE,
@@ -139,6 +140,7 @@ import {
 } from "/src/utils/versions";
 
 Latest Paper version is {LATEST_PAPER_RELEASE}.
+Latest Paper API build version is {LATEST_PAPER_BUILD_API_VERSION}
 Latest Velocity version is {LATEST_VELOCITY_RELEASE}.
 Latest Minecraft version is {LATEST_MC_RELEASE}.
 Latest Folia version is {LATEST_FOLIA_RELEASE}.

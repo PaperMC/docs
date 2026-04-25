@@ -56,7 +56,8 @@ const findLatest = async (project: Project): Promise<string> => {
   // find the newest version with at least one non-alpha build
   for (const version of versions) {
     const builds = await fetchBuilds(project, version);
-    if (builds.some((b) => b.channel !== "ALPHA")) {
+    if (builds.some((b) => true || b.channel !== "ALPHA")) {
+      // TODO: Remove this, temporary change
       return version;
     }
   }
@@ -67,6 +68,10 @@ const findLatest = async (project: Project): Promise<string> => {
 const paperProject = await fetchProject("paper");
 
 export const LATEST_PAPER_RELEASE = await findLatest(paperProject);
+
+const paperBuild = (await fetchBuilds(paperProject, LATEST_PAPER_RELEASE)).at(0);
+
+export const LATEST_PAPER_BUILD_API_VERSION = `${LATEST_PAPER_RELEASE}.build.${paperBuild?.id}-${paperBuild?.channel.toLocaleLowerCase()}`;
 
 const velocityProject = await fetchProject("velocity");
 
@@ -86,7 +91,7 @@ export const LATEST_USERDEV_RELEASE = userdevVersions[0];
 
 export const LATEST_ADVENTURE_SUPPORTED_MC = "1.21.11";
 export const LATEST_ADVENTURE_SUPPORTED_MC_RANGE = LATEST_ADVENTURE_SUPPORTED_MC;
-export const LATEST_ADVENTURE_API_RELEASE = "4.26.1";
+export const LATEST_ADVENTURE_API_RELEASE = "5.0.0";
 export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.1";
 export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = "6.8.0";
 export const LATEST_ANSI_RELEASE = "1.1.1";

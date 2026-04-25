@@ -5,12 +5,14 @@ slug: paper/dev/project-setup
 ---
 
 import { FileTree, Tabs, TabItem } from "@astrojs/starlight/components";
+import { LATEST_PAPER_RELEASE, LATEST_PAPER_BUILD_API_VERSION} from "/src/utils/versions";
 
 As the Paper team primarily uses [IntelliJ IDEA](https://www.jetbrains.com/idea/), this guide will be focused on that IDE.
 However, the steps below should apply to other IDEs as well, with some minor changes.
 
 The Paper team uses [Gradle](https://gradle.org/) as its build system, and its tools are implemented for Gradle.
-Most of the code below can be altered to work with other build systems, such as Maven, but this guide will only cover Gradle.
+Most of the code below can be altered to work with other build systems, such as Maven, but this guide will only cover Gradle
+using the **Kotlin DSL**.
 
 Follow the guide [here](https://docs.gradle.org/current/userguide/migrating_from_maven.html) to learn how to migrate from Maven to Gradle.
 
@@ -24,10 +26,18 @@ You will land into the `build.gradle.kts` file where you can add your dependenci
 
 ### Adding Paper as a dependency
 
-To add Paper as a dependency, you will need to add the Paper repository to your `build.gradle.kts` or `pom.xml` file as well as the dependency itself.
+To add Paper as a dependency, you will need to add the Paper repository and dependency to your `build.gradle.kts` file.
+
+:::tip
+
+If you want to reference a specific build, you can do so by replacing the + with the build identifier
+(i.e. `{VERSION}.build.25-alpha` for the 25th alpha build of a version). Before `26.1` (`1.21.11` and below), the
+version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to reference a specific build.
+
+:::
 
 <Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
+  <TabItem label="Gradle">
     ```kotlin title="build.gradle.kts" replace
     repositories {
       maven {
@@ -37,29 +47,19 @@ To add Paper as a dependency, you will need to add the Paper repository to your 
     }
 
     dependencies {
-      compileOnly("io.papermc.paper:paper-api:\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT")
+      compileOnly("io.papermc.paper:paper-api:\{LATEST_PAPER_RELEASE}.build.+")
     }
 
     java {
-      toolchain.languageVersion.set(JavaLanguageVersion.of(21))
+      toolchain.languageVersion.set(JavaLanguageVersion.of(25))
     }
     ```
   </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy title="build.gradle" replace
-    repositories {
-      maven {
-        name = 'papermc'
-        url = 'https://repo.papermc.io/repository/maven-public/'
-      }
-    }
+  <TabItem label="Maven (Discouraged)">
+    If you want dynamic latest build version resolution with Maven, you will need to define your
+    version as a range: `[\{LATEST_PAPER_RELEASE}.build,)`. For a specific build, you can
+    use the standard variant: `\{LATEST_PAPER_BUILD_API_VERSION}`.
 
-    dependencies {
-      compileOnly 'io.papermc.paper:paper-api:\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT'
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
     ```xml title="pom.xml" replace
     <project>
       <repositories>
@@ -73,7 +73,7 @@ To add Paper as a dependency, you will need to add the Paper repository to your 
         <dependency>
           <groupId>io.papermc.paper</groupId>
           <artifactId>paper-api</artifactId>
-          <version>\{LATEST_PAPER_RELEASE}-R0.1-SNAPSHOT</version>
+          <version>[\{LATEST_PAPER_RELEASE}.build,)</version>
           <scope>provided</scope>
         </dependency>
       </dependencies>
@@ -141,8 +141,10 @@ This allows for a unique package name for every plugin.
 ### The _main_ class
 
 The main class is the entry point to your plugin and will be the only class that extends
-[`JavaPlugin`](jd:paper:org.bukkit.plugin.java.JavaPlugin) in your plugin.
-This is an example of what your `ExamplePlugin` class could look like:
+[`JavaPlugin`](jd:paper:org.bukkit.plugin.java.JavaPlugin) in your plugin. It is considered
+good practice to **not** name this class `Main`. Instead, choose a more descriptive name,
+like your plugin's name. If your plugin is called `Example`, your main class could be called
+`ExamplePlugin`. An example implementation of this class might look like this:
 
 ```java title="ExamplePlugin.java"
 package io.papermc.testplugin;
@@ -215,144 +217,12 @@ You will be asked to provide some information about your project.
 | **Group ID**          | The group ID of your project. This is used for Maven and Gradle. This is usually your domain name in reverse. If you don't know what you should put here, you can use something like `io.github.<yourname>` or if you don't have GitHub you can use `me.<yourname>`. |
 | **Artifact ID**       | The artifact ID of your project. This is used for Maven and Gradle. This is usually the name of your project. This is usually the same as the `Name` field.                                                                                                          |
 | **Version**           | The version of your project. This is used for Maven and Gradle. This is usually `1.0-SNAPSHOT` and does not really matter for now.                                                                                                                                   |
-| **JDK**               | The JDK you want to use. This can be anything from Java 21 and above.                                                                                                                                                                                                |
+| **JDK**               | The JDK you want to use. This can be anything from Java 25 and above.                                                                                                                                                                                                |
 
 Now you can click on the `Create` button and IntelliJ will create the project for you.
 If everything went well, you should see something like this:
 
 ![](./assets/paper-plugin-overview.png)
-
-## Plugin remapping
-
-As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of reobfuscating the server to Spigot mappings.
-If you are using Spigot/Bukkit plugins, your plugin will be assumed to be Spigot-mapped.
-This means that the server will have to deobfuscate and remap the plugin JAR when it's loaded for the first time.
-
-:::note
-
-`paperweight-userdev` already sets this attribute automatically. For more information see the [userdev](/paper/dev/userdev) documentation.
-
-:::
-
-### Mojang mappings
-
-To tell the server that your plugin is Mojang-mapped, you need to add the following code to your build script:
-
-:::note[Paper plugins]
-
-If you are using Paper plugins, this step is not needed as plugins will be assumed to be Mojang-mapped.
-
-:::
-
-<Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
-    ```kotlin title="build.gradle.kts"
-    tasks.jar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "mojang"
-      }
-    }
-    // if you have shadowJar configured
-    tasks.shadowJar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "mojang"
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy title="build.gradle"
-    jar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'mojang'
-        )
-      }
-    }
-    // if you have shadowJar configured
-    shadowJar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'mojang'
-        )
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
-    ```xml title="pom.xml"
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-jar-plugin</artifactId>
-      <version>3.4.1</version>
-      <configuration>
-        <archive>
-          <manifestEntries>
-            <paperweight-mappings-namespace>mojang</paperweight-mappings-namespace>
-          </manifestEntries>
-        </archive>
-      </configuration>
-    </plugin>
-    ```
-  </TabItem>
-</Tabs>
-
-### Spigot mappings
-
-If you explicitly want to tell the server that your plugin is Spigot-mapped, you need to add the following code to your build script:
-
-<Tabs syncKey="build-system">
-  <TabItem label="Gradle (Kotlin)">
-    ```kotlin title="build.gradle.kts"
-    tasks.jar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "spigot"
-      }
-    }
-    // if you have shadowJar configured
-    tasks.shadowJar {
-      manifest {
-        attributes["paperweight-mappings-namespace"] = "spigot"
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Gradle (Groovy)">
-    ```groovy title="build.gradle"
-    jar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'spigot'
-        )
-      }
-    }
-    // if you have shadowJar configured
-    shadowJar {
-      manifest {
-        attributes(
-          'paperweight-mappings-namespace': 'spigot'
-        )
-      }
-    }
-    ```
-  </TabItem>
-  <TabItem label="Maven">
-    ```xml title="pom.xml"
-    <plugin>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-jar-plugin</artifactId>
-      <version>3.4.1</version>
-      <configuration>
-        <archive>
-          <manifestEntries>
-            <paperweight-mappings-namespace>spigot</paperweight-mappings-namespace>
-          </manifestEntries>
-        </archive>
-      </configuration>
-    </plugin>
-    ```
-  </TabItem>
-</Tabs>
 
 ## Conclusion
 

@@ -1,6 +1,6 @@
 ---
 title: Installing or updating Java
-description: How to install or update to Java 21 on Linux (apt/rpm), Windows, or Mac.
+description: How to install or update to Java 25 on Linux (apt/rpm), Windows, or Mac.
 slug: misc/java-install
 ---
 
@@ -31,7 +31,7 @@ previous hostile licensing.
 
 ### Ubuntu/Debian
 
-Installing Java 21 on Debian-based Linux distributions is very simple. First, ensure your system has
+Installing Java 25 on Debian-based Linux distributions is very simple. First, ensure your system has
 all required tools to successfully install Java.
 
 ```bash
@@ -46,18 +46,18 @@ wget -O - https://apt.corretto.aws/corretto.key | sudo gpg --dearmor -o /usr/sha
 echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | sudo tee /etc/apt/sources.list.d/corretto.list
 ```
 
-Then, install Java 21 and other dependencies using the following command:
+Then, install Java 25 and other dependencies using the following command:
 
 ```bash
 sudo apt-get update
-sudo apt-get install -y java-21-amazon-corretto-jdk libxi6 libxtst6 libxrender1
+sudo apt-get install -y java-25-amazon-corretto-jdk libxi6 libxtst6 libxrender1
 ```
 
 Proceed to [verify your installation](#verifying-installation).
 
 ### RPM-based
 
-To install Java 21 on CentOS, RHEL, Fedora, openSUSE, SLES, or any other RPM-based Linux
+To install Java 25 on CentOS, RHEL, Fedora, openSUSE, SLES, or any other RPM-based Linux
 distribution, execute the following commands depending on your package manager. Once you have
 finished, precede to [verify your installation](#verifying-installation).
 
@@ -68,7 +68,7 @@ DNF is used on Fedora, CentOS/RHEL 7+, and related distributions.
 ```bash
 sudo rpm --import https://yum.corretto.aws/corretto.key
 sudo curl -Lo /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
-sudo dnf -y install java-21-amazon-corretto-devel
+sudo dnf -y install java-25-amazon-corretto-devel
 ```
 
 #### Zypper
@@ -78,7 +78,7 @@ Zypper is used on openSUSE, SLES, and related distributions.
 ```bash
 sudo zypper addrepo https://yum.corretto.aws/corretto.repo
 sudo zypper refresh
-sudo zypper install java-21-amazon-corretto-devel
+sudo zypper install java-25-amazon-corretto-devel
 ```
 
 #### YUM
@@ -88,14 +88,14 @@ YUM is used on older releases of CentOS/RHEL, and excessively old releases of Fe
 ```bash
 sudo rpm --import https://yum.corretto.aws/corretto.key
 sudo curl -Lo /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
-sudo yum -y install java-21-amazon-corretto-devel
+sudo yum -y install java-25-amazon-corretto-devel
 ```
 
 ## Windows 10 & 11
 
 If you're on Windows 10 or 11, installing Java is just like installing any other program. Download
 the Amazon Corretto installer from
-[their website](https://corretto.aws/downloads/latest/amazon-corretto-21-x64-windows-jdk.msi).
+[their website](https://corretto.aws/downloads/latest/amazon-corretto-25-x64-windows-jdk.msi).
 
 Once you have run the installer, it is safe to click "next" through the whole process. No additional
 bloatware or toolbars will be installed, and all the required features are enabled out of the box.
@@ -109,7 +109,7 @@ If you're on macOS, the best way to manage Java installations is with a tool cal
 terminal run the following command:
 
 ```bash
-brew install openjdk@21
+brew install openjdk@25
 ```
 
 Once this command has completed, continue to [verify your installation](#verifying-installation).
@@ -129,14 +129,14 @@ prompt you to update like this:
 ![Pterodactyl Automatic Prompt](./assets/pterodactyl-prompt.png)
 
 If this does not show up for you, the Java version can be manually changed. Navigate to the
-"Startup" tab of your server, select `Java 21` from the "Docker Image"
+"Startup" tab of your server, select `Java 25` from the "Docker Image"
 dropdown as shown in the image below.
 
 ![Pterodactyl Manual Java Version Change](./assets/pterodactyl-manual.png)
 
 :::note
 
-If you don't see `Java 21` in the dropdown, an administrator account is required to update the Paper egg.
+If you don't see `Java 25` in the dropdown, an administrator account is required to update the Paper egg.
 
 :::
 
@@ -144,7 +144,7 @@ The Verifying Installation section does not apply for Pterodactyl.
 
 ## Verifying installation
 
-Now that you have installed Java 21, run this command in your terminal to ensure the process was
+Now that you have installed Java 25, run this command in your terminal to ensure the process was
 successful.
 
 ```bash
@@ -152,13 +152,13 @@ java -version
 ```
 
 The output should be similar to this. The important parts to look out for is that it starts with
-`openjdk 21` and contains `64-Bit` in the last line. If the output you get is similar to
+`openjdk 25` and contains `64-Bit` in the last line. If the output you get is similar to
 `java: command not found`, try creating a new terminal session.
 
 ```
-openjdk version "21" 2023-09-19 LTS
-OpenJDK Runtime Environment Corretto-21.0.0.35.1 (build 21+35-LTS)
-OpenJDK 64-Bit Server VM Corretto-21.0.0.35.1 (build 21+35-LTS, mixed mode, sharing)
+openjdk version "25" 2025-09-16
+OpenJDK Runtime Environment (build 25+36-3489)
+OpenJDK 64-Bit Server VM (build 25+36-3489, mixed mode, sharing)
 ```
 
 If your installation has failed, do not hesitate to reach out in the `#paper-help` channel of our

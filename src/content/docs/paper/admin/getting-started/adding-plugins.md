@@ -18,20 +18,12 @@ it is imperative that plugins only be installed from trusted sources. Be careful
 
 ## Finding plugins
 
-Before installing a plugin, you'll need to find what you want to install. The best place to find plugins is [Hangar](https://hangar.papermc.io), Paper's plugin repository, but you can also find many plugins
-on [SpigotMC](https://www.spigotmc.org/resources/),
-[BukkitDev](https://dev.bukkit.org/bukkit-plugins), or the
-[PaperMC Forums](https://forums.papermc.io/forums/paper-plugin-releases/), while other plugins may
-release on [GitHub](https://github.com). One of the best ways to find plugins isn't to browse any of
-these sites directly but to search for plugins using a search engine. Searching for the function you
-desire followed by `Minecraft plugin` will often yield good results.
-
-:::tip[Spigot and Bukkit Plugins]
-
-Paper is compatible with both Spigot and Bukkit plugins. It's okay if a plugin does not explicitly
-mention Paper compatibility. It'll still work.
-
-:::
+Before installing a plugin, you'll need to find what you want to install. The best place to find
+plugins is [Hangar](https://hangar.papermc.io), Paper's plugin repository, but you can also find
+plugins on [Modrinth](https://modrinth.com/discover/plugins?g=categories:paper) or
+[BukkitDev](https://dev.bukkit.org/bukkit-plugins). Many plugins may release on [GitHub](https://github.com).
+Instead of checking each site directly, you can also use a search engine. Searching for the function you
+desire, followed by `Paper plugin` will often yield good results.
 
 ## Installing plugins
 

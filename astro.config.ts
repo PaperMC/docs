@@ -15,6 +15,7 @@ import {
   LATEST_ANSI_RELEASE,
   LATEST_FOLIA_RELEASE,
   LATEST_MC_RELEASE,
+  LATEST_PAPER_BUILD_API_VERSION,
   LATEST_PAPER_RELEASE,
   LATEST_USERDEV_RELEASE,
   LATEST_VELOCITY_RELEASE,
@@ -451,10 +452,11 @@ export default defineConfig({
                   ],
                 },
                 {
-                  label: "Migrating to Adventure from other APIs",
+                  label: "Migration",
                   items: [
                     "adventure/migration",
                     "adventure/migration/bungeecord-chat-api",
+                    "adventure/migration/adventure-4.x",
                     "adventure/migration/text-3.x",
                   ],
                 },
@@ -567,6 +569,7 @@ export default defineConfig({
           constants: {
             LATEST_MC_RELEASE,
             LATEST_PAPER_RELEASE,
+            LATEST_PAPER_BUILD_API_VERSION,
             LATEST_VELOCITY_RELEASE,
             LATEST_FOLIA_RELEASE,
             LATEST_WATERFALL_RELEASE,

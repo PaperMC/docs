@@ -4,7 +4,7 @@ slug: paper/dev/mob-goals
 description: A guide to the Mob Goal API.
 ---
 
-The Mob Goal API is a way of controlling the behavior of mobs in Minecraft. It allows you to set a goal for a mob to perform, such as
+The Mob Goal API allows controlling the behavior of mobs in Minecraft. With it, you can set a goal for a mob to perform, such as
 attacking a player, or moving to a location. It also allows you to create your own custom goals.
 
 ## Adding a goal to an entity
@@ -52,7 +52,7 @@ The [`getTypes()`](jd:paper:com.destroystokyo.paper.entity.ai.Goal#getTypes()) m
 
 Here is an example of a goal that makes a camel follow a player. This is essentially the same as the
 [`FOLLOW_MOB`](jd:paper:com.destroystokyo.paper.entity.ai.VanillaGoal#FOLLOW_MOB) Vanilla goal,
-but it is a good example of how to create a goal.
+but it is a good example on how to create a goal.
 
 ```java
 @NullMarked
@@ -120,7 +120,7 @@ public class CamelFollowPlayerGoal implements Goal<Camel> {
 
 ## Removing a goal
 
-To remove a goal, you call one of the [`removeGoal`](jd:paper:com.destroystokyo.paper.entity.ai.MobGoals#removeAllGoals(T)) method:
+To remove a goal, you can call one of the [`removeGoal`](jd:paper:com.destroystokyo.paper.entity.ai.MobGoals#removeAllGoals(T)) methods:
 
 ```java
 Cow cow = ...;

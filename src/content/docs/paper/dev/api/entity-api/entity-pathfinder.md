@@ -4,12 +4,12 @@ slug: paper/dev/entity-pathfinder
 description: A guide to the Entity Pathfinder API.
 ---
 
-The Entity Pathfinder API is a way of controlling the movement of entities in Minecraft. It allows you to set a path
-for an entity to follow, such as moving to a location, or following a player.
+The Entity Pathfinder API can be used to control the movement of entities in Minecraft. It allows you to set a path
+for an entity to follow, such as moving to a location or following a player.
 
 ## Accessing the pathfinder
 
-To access the pathfinder for a Mob, you need to call [`getPathfinder()`](jd:paper:org.bukkit.entity.Mob#getPathfinder()) on the Mob.
+To access the pathfinder for a mob, you need to call [`getPathfinder()`](jd:paper:org.bukkit.entity.Mob#getPathfinder()) on the mob.
 This will return an instance of [`Pathfinder`](jd:paper:com.destroystokyo.paper.entity.Pathfinder).
 
 :::note
@@ -18,8 +18,8 @@ The pathfinder is only available for entities that implement [`Mob`](jd:paper:or
 
 :::
 
-Let's say that we have a [`Cow`](jd:paper:org.bukkit.entity.Cow) and we want it to move to a specific [`Player`](jd:paper:org.bukkit.entity.Player)'s
-location. We can do this by getting the pathfinder for the cow and then setting the path to the player's location:
+Let's say that you have a [`Cow`](jd:paper:org.bukkit.entity.Cow) and want to move it to a player.
+You can do this by getting the pathfinder for the cow and then setting the path to the player's location:
 
 ```java
 Cow cow = ...;
@@ -30,7 +30,7 @@ Pathfinder pathfinder = cow.getPathfinder();
 boolean success = pathfinder.moveTo(player.getLocation());
 ```
 
-If we want to access the current path for the cow, we can call [`getPathfinder()`](jd:paper:org.bukkit.entity.Mob#getPathfinder())
+If you want to access the current path for the cow, you can call [`getPathfinder()`](jd:paper:org.bukkit.entity.Mob#getPathfinder())
 on the pathfinder:
 
 ```java
@@ -47,18 +47,20 @@ Location destination = path.getFinalPoint();
 
 ## Pathfinding rules
 
-Much of the way that the Pathfinder works is dictated by the limitations of the actual entity pathfinding in Minecraft.
-For example, a Polar Bear cannot fly. This means that if you set a path for a Polar Bear to a location that is in the air,
+The pathfinder is limited by Minecraft's own pathfinding logic.
+For example, a polar bear cannot fly. This means that if you set a path for a polar bear to a location that is in the air,
 it will not be able to reach it.
 
 Some attributes can be set on the pathfinder to change the way that the pathfinder works. These are:
-- [`setCanOpenDoors(boolean)`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#setCanOpenDoors(boolean)): Whether the entity can open doors. This is relevant for Zombies breaking down doors, and
-Villagers opening doors.
+- [`setCanOpenDoors(boolean)`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#setCanOpenDoors(boolean)): Whether the entity can open doors.
+  This is relevant for zombies breaking down doors and villagers opening doors.
 - [`setCanPassDoors(boolean)`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#setCanPassDoors(boolean)): Whether the entity can pass through open doors.
 - [`setCanFloat(boolean)`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#setCanFloat(boolean)): Whether the entity can float in water.
-These all have respective getters as well.
 
-## Stopping the pathfinder
+These methods have respective getters as well.
 
-You can call [`stopPathfinding()`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#stopPathfinding()) on the pathfinder to stop the pathfinder. This will stop the pathfinder and clear the
-current path. You can use [`hasPath()`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#hasPath()) to check if the pathfinder is running.
+## Stopping the pathfinding
+
+You can call [`stopPathfinding()`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#stopPathfinding()) on the pathfinder to cancel the entity
+from pathfinding. This will also clear the current path. You can use
+[`hasPath()`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#hasPath()) to check if the pathfinder is currently running.

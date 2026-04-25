@@ -148,12 +148,6 @@ commands:
     description: >-
       Instructs the server to return a list of players when tab-completing when
       there are no other completions available
-  time-command-affects-all-worlds:
-    vanilla: "true"
-    default: "false"
-    description: >-
-      Whether the /time command should act on all worlds or just the sender's
-      current world
 console:
   enable-brigadier-completions:
     default: "true"
@@ -454,6 +448,12 @@ spark:
   enabled:
     default: "true"
     description: Whether the bundled spark profiler should be enabled.
+time:
+  affects-all-worlds:
+    default: "false"
+    description: >-
+      Whether the worlds share a clock by dimension type or each runs independently. This for example affects the time command
+      where should act on all worlds or just the sender's current world.
 unsupported-settings:
   inline-docs-warning:
     color: red

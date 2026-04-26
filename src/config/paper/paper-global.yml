@@ -456,6 +456,7 @@ spark:
     description: Whether the bundled spark profiler should be enabled.
 time:
   affects-all-worlds:
+    vanilla: "true"
     default: "false"
     description: >-
       Whether the worlds share a clock by dimension type or each runs independently. This for example affects the time command

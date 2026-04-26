@@ -1140,3 +1140,12 @@ unsupported-settings:
     description: >-
       If set to false, the creation of invulnerable end crystals will be
       allowed. Fixes [MC-108513](https://bugs.mojang.com/browse/MC-108513)
+  ticking:
+    chunks:
+      default: "true"
+      description: >-
+        Controls whether the server ticks chunks.
+    block-entities:
+      default: "true"
+      description: >-
+        Controls whether the server ticks block entities.

@@ -57,6 +57,15 @@ How to set up a build system is outside the scope of this page, but you can look
 system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userguide.html) or
 [Maven](https://maven.apache.org/guides/getting-started/index.html)) for assistance.
 
+:::note[velocity-plugin.json]
+
+Before you set up your build system, you should think about whether you want your `velocity-plugin.json`
+to be generated automatically using a `@Plugin` annotation in your source code or if you want to write it
+manually. Depending on which you prefer, you may need to add additional lines to your build files. You can find
+more information on the `velocity-plugin.json` file [here](/velocity/dev/velocity-plugin-json).
+
+:::
+
 ### Setting up the dependency
 
 <Tabs syncKey="build-system">
@@ -71,6 +80,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
 
     dependencies {
       compileOnly("com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}")
+      // If you want your velocity-plugin.json file to be generated based on plugin annotations
       annotationProcessor("com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}")
     }
     ```
@@ -86,6 +96,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
 
     dependencies {
       compileOnly 'com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}'
+      // If you want your velocity-plugin.json file to be generated based on plugin annotations
       annotationProcessor 'com.velocitypowered:velocity-api:\{LATEST_VELOCITY_RELEASE}'
     }
     ```
@@ -114,7 +125,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
           <version>\{LATEST_VELOCITY_RELEASE}</version>
           <scope>provided</scope>
         </dependency>
-        <!-- add the annotation processor -->
+        <!-- add the annotation processor if you want your velocity-plugin.json file to be generated -->
         <dependency>
           <groupId>com.velocitypowered</groupId>
           <artifactId>velocity-api</artifactId>
@@ -157,7 +168,7 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
             <configuration>
-              <!-- add the annotation processor -->
+              <!-- add the annotation processor if you want your velocity-plugin.json file to be generated -->
               <annotationProcessorPaths>
                 <path>
                   <groupId>com.velocitypowered</groupId>

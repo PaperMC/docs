@@ -13,15 +13,15 @@ All `CommandSender`s are single audiences. This includes players, the console, a
 `World` are all forwarding audiences. This means that they are made up of multiple audiences. For example, the server is
 made up of all online players and the console.
 
-This means that all the [`Audience`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html)
+This means that all the [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience)
 methods are available on [`CommandSender`](jd:paper:org.bukkit.command.CommandSender),
 [`Server`](jd:paper:org.bukkit.Server), [`Team`](jd:paper:org.bukkit.scoreboard.Team)
 and [`World`](jd:paper:org.bukkit.World).
 
 ## `ForwardingAudience`
 
-The [`ForwardingAudience`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/ForwardingAudience.html)
-wraps a collection of [`Audience`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html)
+The [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.ForwardingAudience)
+wraps a collection of [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience)
 instances and forwards messages to all of them. This is useful for sending messages to multiple audiences (players) at once.
 
 ```java
@@ -37,8 +37,8 @@ Audience audience = Audience.audience(Audience...);
 ## What do `Audience`s do?
 
 Audiences are used for interacting with players. They can be used to send messages, play sounds, show bossbars, and more.
-They are mostly used for sending other parts of the API to players. For example, you can send a [`Component`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html)
-to a player using [`Audience#sendMessage(Component)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#sendMessage(net.kyori.adventure.text.Component)).
+They are mostly used for sending other parts of the API to players. For example, you can send a [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.text.Component)
+to a player using [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#sendMessage(net.kyori.adventure.text.Component)).
 
 ## Pointers
 

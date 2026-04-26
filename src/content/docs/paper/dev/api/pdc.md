@@ -73,7 +73,7 @@ The first option is often preferred as it will automatically use the plugin's lo
 
 ## Getting data
 To get data from the PDC, you need to know the `NamespacedKey` and the [`PersistentDataType`](jd:paper:org.bukkit.persistence.PersistentDataType) of the data.
-Some API parts, such as Adventure's [`Component.text(String)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html#text(java.lang.String)), require non-null values. In such cases, use the [`getOrDefault`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#getOrDefault(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C)) on the pdc instead of [`get`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)), which is nullable.
+Some API parts, such as Adventure's [`Component.text(String)`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.text.Component#text(java.lang.String)), require non-null values. In such cases, use the [`getOrDefault`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#getOrDefault(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType,C)) on the pdc instead of [`get`](jd:paper:io.papermc.paper.persistence.PersistentDataContainerView#get(org.bukkit.NamespacedKey,org.bukkit.persistence.PersistentDataType)), which is nullable.
 
 ```java
 NamespacedKey key = ...; // Use the same key as the adding-data example

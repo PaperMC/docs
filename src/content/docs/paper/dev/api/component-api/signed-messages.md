@@ -17,15 +17,15 @@ For a full overview, you can refer [to this linked gist](https://gist.github.com
 :::
 
 ## How are signed messages represented in code?
-Paper uses Adventure's [`SignedMessage`](https://jd.advntr.dev/api/latest/net/kyori/adventure/chat/SignedMessage.html)
+Paper uses Adventure's [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.SignedMessage)
 object to represent a signed message. We differentiate two kinds of signed messages: system messages and non-system messages.
-System messages (checked with [`SignedMessage#isSystem()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/chat/SignedMessage.html#isSystem()))
+System messages (checked with [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.SignedMessage#isSystem()))
 are messages send by the server, whilst non-system messages are not.
 
 You can also differentiate the **signed plain text** `String` content of the message
-([`SignedMessage#message()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/chat/SignedMessage.html#message()))
-from the unsigned, nullable [`Component`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html)
-content ([`SignedMessage#unsignedContent()`](https://jd.advntr.dev/api/latest/net/kyori/adventure/chat/SignedMessage.html#unsignedContent())).
+([](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.SignedMessage#message()))
+from the unsigned, nullable [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.text.Component)
+content ([](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.SignedMessage#unsignedContent())).
 
 ## Obtaining a signed message
 Signed messages can be obtained in two ways.
@@ -37,13 +37,13 @@ Signed messages can be obtained in two ways.
    Brigadier argument type.
 
 ## Using signed messages
-You can send signed message objects to an [`Audience`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html)
-using the [`Audience#sendMessage(SignedMessage, ChatType.Bound)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#sendMessage(net.kyori.adventure.chat.SignedMessage,net.kyori.adventure.chat.ChatType.Bound))
-method. You can obtain a [`ChatType.Bound`](https://jd.advntr.dev/api/latest/net/kyori/adventure/chat/ChatType.Bound.html) object
-from the [`ChatType`](https://jd.advntr.dev/api/latest/net/kyori/adventure/chat/ChatType.html) interface.
+You can send signed message objects to an [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience)
+using the [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#sendMessage(net.kyori.adventure.chat.SignedMessage,net.kyori.adventure.chat.ChatType.Bound))
+method. You can obtain a [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.ChatType$Bound) object
+from the [`ChatType`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.ChatType) interface.
 
-Deleting messages is much simpler. Adventure provides the [`Audience#deleteMessage(SignedMessage)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#deleteMessage(net.kyori.adventure.chat.SignedMessage))
-or [`Audience#deleteMessage(SignedMessage.Signature)`](https://jd.advntr.dev/api/latest/net/kyori/adventure/audience/Audience.html#deleteMessage(net.kyori.adventure.chat.SignedMessage.Signature))
+Deleting messages is much simpler. Adventure provides the [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#deleteMessage(net.kyori.adventure.chat.SignedMessage))
+or [](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#deleteMessage(net.kyori.adventure.chat.SignedMessage.Signature))
 methods for that.
 
 ## Example: Making user sent messages deletable

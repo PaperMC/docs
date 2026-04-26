@@ -94,7 +94,7 @@ const parse = async (url: string, { targets }: Options): Promise<ParseResult> =>
       userAgent: "PaperMC/docs (https://docs.papermc.io)",
     });
     if (result.status !== "alive") {
-      error(new Error(`Received dead status for Javadoc link "${url}"`));
+      error(new Error(`Received dead status for Javadoc link "${url} at ${parsed}"`));
     }
   }
 

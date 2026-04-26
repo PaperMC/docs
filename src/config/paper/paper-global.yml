@@ -284,6 +284,12 @@ misc:
       tick. If more players join, they will be postponed until later ticks to
       join but not kicked. This is not related to connection throttling found in
       bukkit.yml
+  max-tracking-combat-entries:
+    vanilla: "disabled"
+    default: "10240"
+    description: >-
+      The maximum number of combat entries that the server will track. Older
+      entries will be discarded.
   prevent-negative-villager-demand:
     default: "false"
     description: >-

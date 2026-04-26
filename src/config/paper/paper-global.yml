@@ -453,7 +453,7 @@ time:
     default: "false"
     description: >-
       Whether the worlds share a clock by dimension type or each runs independently. This for example affects the time command
-      where should act on all worlds or just the sender's current world.
+      where it should act on all worlds or just the sender's current world. This also affects World time API.
 unsupported-settings:
   inline-docs-warning:
     color: red

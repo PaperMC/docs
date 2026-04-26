@@ -1144,7 +1144,8 @@ unsupported-settings:
     chunks:
       default: "true"
       description: >-
-        Controls whether the server ticks chunks.
+        Controls whether the server ticks chunks. This includes mob spawning,
+        random block ticking, thunder, and ice and snow creation.
     block-entities:
       default: "true"
       description: >-

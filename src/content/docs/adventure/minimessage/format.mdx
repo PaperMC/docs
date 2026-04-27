@@ -5,6 +5,7 @@ description: The MiniMessage format documentation.
 ---
 
 import { Image } from "astro:assets";
+import { Badge } from "@astrojs/starlight/components";
 import Shadow1 from "./assets/shadow_1.png";
 import Shadow2 from "./assets/shadow_2.png";
 import Shadow3 from "./assets/shadow_3.png";
@@ -16,6 +17,7 @@ import Decoration1 from "./assets/decoration_1.png";
 import Reset1 from "./assets/reset_1.png";
 import Click1 from "./assets/click_1.png";
 import Hover1 from "./assets/hover_1.png";
+import Hover2 from "./assets/hover_2.png";
 import Key1 from "./assets/key_1.png";
 import Translatable1 from "./assets/translatable_1.png";
 import Translatable2 from "./assets/translatable_2.png";
@@ -229,25 +231,59 @@ like the `/say` or `/tell` command to prevent the server from sending signed mes
 Allows doing multiple things when hovering on the component.
 
 Tag
-  * `<hover:_action_:_value..._>`
+  * `<hover:_action_:_value_>`
 
 Arguments
   * `_action_`, the type of hover event, one of this [list](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/event/HoverEvent.Action.html#field.summary)
-  * `_value..._`, arguments specific to each event action:
+  * `_value_`, argument(s) specific to each event action:
 
-| Action        | Value                                                                                                                     |
-|---------------|---------------------------------------------------------------------------------------------------------------------------|
-| `show_text`   | `_text_` (a MiniMessage string)                                                                                           |
-| `show_item`   | `_type_[:_count_[:tag]]` (a `Key` for the item's type, optionally followed by count (an integer) and tag (a SNBT string)) |
-| `show_entity` | `_type_:_uuid_[:_name_]` (a `Key` ID of the entity type, the entity's UUID, and an optional custom name)                  |
+[//]: # (Starlight's padding doesn't apply for a spanned cell, so a manual padding is added)
+<table>
+  <tbody>
+    <tr>
+      <th>Action</th>
+      <th>Value</th>
+      <th>Description</th>
+    </tr>
+    <tr>
+      <td>`show_text`</td>
+      <td>`_text_`</td>
+      <td>a MiniMessage string</td>
+    </tr>
+    <tr>
+      <td rowSpan={2}>`show_item`</td>
+      <td>`_type_[:_count_[(:_componentKey_:_componentValue_)...]]`</td>
+      <td>a `Key` for the item's type, optionally followed by count (an integer) and a list of <a href="https://minecraft.wiki/w/Data_component_format" target="_blank">data component</a> key value pairs</td>
+    </tr>
+    <tr>
+      <td style={{ paddingLeft: "1rem" }}><Badge variant="caution" text="Legacy" /> `_type_[:_count_[:tag]]`</td>
+      <td>a `Key` for the item's type, optionally followed by count (an integer) and tag (a <a href="https://minecraft.wiki/w/NBT_format#SNBT_format" target="_blank">SNBT</a> string)</td>
+    </tr>
+    <tr>
+      <td>`show_entity`</td>
+      <td>`_type_:_uuid_[:_name_]`</td>
+      <td>a `Key` ID of the entity type, the entity's UUID, and an optional custom name</td>
+    </tr>
+  </tbody>
+</table>
+
+:::caution
+`_type_[:_count_[:tag]]` value format for `show_item` action is considered legacy and support for it may eventually be removed.
+The recommended format is `_type_[:_count_[(:_componentKey_:_componentValue_)...]]`.
+:::
 
 Examples
 ```mm
 <hover:show_text:'<red>test'>TEST
 ```
-
 <br/>
 <Image class="img-inline" alt="The result of parsing `<hover:show_text:'<red>test'>TEST`, shown in-game in the Minecraft client's chat window" src={Hover1} />
+
+```mm
+<hover:show_item:diamond_sword:1:enchantments:'{sharpness:3,knockback:2}'>Very sharp sword!</hover>
+```
+<br/>
+<Image class="img-inline" alt="<hover:show_item:diamond_sword:1:enchantments:'{sharpness:3,knockback:2}'>Very sharp sword!</hover>" src={Hover2} />
 
 ### Keybind
 

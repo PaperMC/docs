@@ -760,10 +760,20 @@ Starting values of `xd` and `zd` are in the range [-0.1, 0.1], while `yd` is in 
 :::
 
 ### Plume
+The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
+coordinates are altered by a random value in the range `[-0.1, 0.1]`, while the y coordinate is altered by a random
+value in the range `[-0.5, 0.5]`.
+
+While technically a [directional particle](#directional-particles), the vertical velocity of this particle is set to `0`
+and the horizontal velocity is applied only on the first tick.
+
+The height of the plume is calculated as `5 * waterBlocks`.
 
 ### Emitter
-The `GEYSER` particle is an emitter particle, which means that it spawns other particles. In this case, it spawns all the
-above-mentioned geyser particles. The `offsetX` and `offsetZ` arguments are ignored, while `offsetY` is used to determine the vertical velocity of the spawned particles.
+The `GEYSER` particle is an emitter particle, meaning it spawns other particles. In this case, it spawns all the previously
+mentioned geyser particles. The provided velocity vector is passed to the spawned particles and used as described above.
+The geyser base particle's burst impulse base is set to `1.5`, while the poof particle's burst impulse base is set to `2.0`.
+The plume particle therefore does not use the burst impulse parameter.
 
 ## Miscellaneous behaviors
 This chapter covers particles that have unique behaviors when spawning.

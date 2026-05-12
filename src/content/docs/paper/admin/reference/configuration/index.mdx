@@ -98,14 +98,14 @@ entities:
       water_creature: 20
 ```
 
-```yaml title="world_nether/paper-world.yml"
+```yaml title="world/dimensions/minecraft/the_nether/paper-world.yml"
 entities:
   spawning:
     spawn-limits:
       monster: 90
 ```
 
-```yaml title="resource_world/paper-world.yml"
+```yaml title="world/dimensions/custom/resource/paper-world.yml"
 lootables:
   auto-replenish: false
 entities:
@@ -116,21 +116,21 @@ entities:
       monster: 2
 ```
 
-This example demonstrates the concept of inheritance. For each world, this is the effective
+This example demonstrates the concept of inheritance. For each world in `/world/dimensions/`, this is the effective
 configuration which will be applied:
 
-| Configuration Key                                           | world  | world_nether | world_the_end | resource_world |
-|-------------------------------------------------------------|--------|--------------|---------------|----------------|
-| `lootables.auto-replenish`                                  | `true` | `true`       | `true`        | `false`        |
-| `entities.spawning.spawn-limits.ambient`                    | `15`   | `15`         | `15`          | `15`           |
-| `entities.spawning.spawn-limits.axolotls`                   | `5`    | `5`          | `5`           | `8`            |
-| `entities.spawning.spawn-limits.creature`                   | `10`   | `10`         | `10`          | `15`           |
-| `entities.spawning.spawn-limits.monster`                    | `70`   | `90`         | `70`          | `2`            |
-| `entities.spawning.spawn-limits.underground_water_creature` | `5`    | `5`          | `5`           | `5`            |
-| `entities.spawning.spawn-limits.water_ambient`              | `20`   | `20`         | `20`          | `20`           |
-| `entities.spawning.spawn-limits.water_creature`             | `5`    | `5`          | `5`           | `5`            |
+| Configuration Key                                           | minecraft/overworld | minecraft/the_nether | minecraft/the_end | custom/resource |
+|-------------------------------------------------------------|---------------------|----------------------|-------------------|-----------------|
+| `lootables.auto-replenish`                                  | `true`              | `true`               | `true`            | `false`         |
+| `entities.spawning.spawn-limits.ambient`                    | `15`                | `15`                 | `15`              | `15`            |
+| `entities.spawning.spawn-limits.axolotls`                   | `5`                 | `5`                  | `5`               | `8`             |
+| `entities.spawning.spawn-limits.creature`                   | `10`                | `10`                 | `10`              | `15`            |
+| `entities.spawning.spawn-limits.monster`                    | `70`                | `90`                 | `70`              | `2`             |
+| `entities.spawning.spawn-limits.underground_water_creature` | `5`                 | `5`                  | `5`               | `5`             |
+| `entities.spawning.spawn-limits.water_ambient`              | `20`                | `20`                 | `20`              | `20`            |
+| `entities.spawning.spawn-limits.water_creature`             | `5`                 | `5`                  | `5`               | `5`             |
 
-Notice that `world_the_end/paper-world.yml` was never modified. Because of this, it inherits all the
+Notice that `world/dimensions/minecraft/the_end/paper-world.yml` was never modified. Because of this, it inherits all the
 configuration options from `config/paper-world-defaults.yml`. Additionally, `auto-replenish` was
-only disabled in `resource_world/paper-world.yml` because in `config/paper-world-defaults.yml`,
+only disabled in `world/dimensions/custom/resource/paper-world.yml` because in `config/paper-world-defaults.yml`,
 `auto-replenish` is set to `true`.

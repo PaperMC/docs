@@ -237,38 +237,16 @@ Arguments
   * `_action_`, the type of hover event, one of this [list](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/event/HoverEvent.Action.html#field.summary)
   * `_value_`, argument(s) specific to each event action:
 
-[//]: # (Starlight's padding doesn't apply for a spanned cell, so a manual padding is added)
-<table>
-  <tbody>
-    <tr>
-      <th>Action</th>
-      <th>Value</th>
-      <th>Description</th>
-    </tr>
-    <tr>
-      <td>`show_text`</td>
-      <td>`_text_`</td>
-      <td>a MiniMessage string</td>
-    </tr>
-    <tr>
-      <td rowSpan={2}>`show_item`</td>
-      <td>`_type_[:_count_[(:_componentKey_:_componentValue_)...]]`</td>
-      <td>a `Key` for the item's type, optionally followed by count (an integer) and a list of <a href="https://minecraft.wiki/w/Data_component_format" target="_blank">data component</a> key value pairs</td>
-    </tr>
-    <tr>
-      <td style={{ paddingLeft: "1rem" }}><Badge variant="caution" text="Legacy" /> `_type_[:_count_[:tag]]`</td>
-      <td>a `Key` for the item's type, optionally followed by count (an integer) and tag (a <a href="https://minecraft.wiki/w/NBT_format#SNBT_format" target="_blank">SNBT</a> string)</td>
-    </tr>
-    <tr>
-      <td>`show_entity`</td>
-      <td>`_type_:_uuid_[:_name_]`</td>
-      <td>a `Key` ID of the entity type, the entity's UUID, and an optional custom name</td>
-    </tr>
-  </tbody>
-</table>
+[//]: # (FIXME: Starlight's padding doesn't apply for a spanned cell, so a manual padding is added)
+| Action        | Value                                                                                                      | Description                                                                                                                                                           |
+|---------------|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_text`   | `_text_`                                                                                                   | a MiniMessage string                                                                                                                                                  |
+| `show_item`   | `_type_[:_count_[(:_componentKey_:_componentValue_)...]]`                                                  | a `Key` for the item's type, optionally followed by count (an integer) and a list of [data component](https://minecraft.wiki/w/Data_component_format) key value pairs |
+| ^             | <span style="padding-left: 1rem"><Badge variant="caution" text="Legacy" /> `_type_[:_count_[:tag]]`</span> | a `Key` for the item's type, optionally followed by count (an integer) and tag (a [SNBT](https://minecraft.wiki/w/NBT_format#SNBT_format) string)                     |
+| `show_entity` | `_type_:_uuid_[:_name_]`                                                                                   | a `Key` ID of the entity type, the entity's UUID, and an optional custom name                                                                                         |
 
 :::caution
-`_type_[:_count_[:tag]]` value format for `show_item` action is considered legacy and support for it may eventually be removed.
+The `_type_[:_count_[:tag]]` value format for the `show_item` action is considered legacy and support for it may eventually be removed.
 The recommended format is `_type_[:_count_[(:_componentKey_:_componentValue_)...]]`.
 :::
 

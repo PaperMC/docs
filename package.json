@@ -22,6 +22,7 @@
     "astro": "^6.1.3",
     "astro-contributors": "^0.8.0",
     "astro-d2": "^0.10.0",
+    "remark-extended-table": "^2.0.3",
     "sharp": "^0.34.5",
     "starlight-links-validator": "^0.20.1",
     "starlight-sidebar-topics": "^0.7.1",

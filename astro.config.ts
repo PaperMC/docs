@@ -2,6 +2,7 @@ import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
+import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
@@ -552,7 +553,13 @@ export default defineConfig({
     domains: ["assets.papermc.io"],
   },
   markdown: {
+    remarkRehype: {
+      handlers: {
+        ...extendedTableHandlers,
+      },
+    },
     remarkPlugins: [
+      remarkExtendedTable,
       [
         javadocPlugin,
         {

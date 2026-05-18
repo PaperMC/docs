@@ -26,8 +26,8 @@ If this is not the case, they offer a brief explanation to what they are.
       - config.yml stores configuration for bStats plugin metrics
     - spark/ plugin folder for the bundled spark profiler
       - [config.json](https://spark.lucko.me/docs/Configuration) the main spark config file
-  - \<world\>/
-    - [paper-world.yml](#per-world-values) stores [configuration values](/paper/reference/world-configuration) that apply only to the world \<world\>
+  - world/dimensions/\<namespace\>/\<key\>/
+    - [paper-world.yml](#per-world-values) stores [configuration values](/paper/reference/world-configuration) that apply only to the world with the key `namespace:key`
   - [banned-ips.json](/paper/reference/vanilla-data-files#banned-ipsjson) stores IP addresses banned from the server
   - [banned-players.json](/paper/reference/vanilla-data-files#banned-playersjson) stores players banned from the server
   - [bukkit.yml](/paper/reference/bukkit-configuration)
@@ -58,10 +58,10 @@ you have not manually overridden it.
 ### Per-world values
 
 To set a value for a specific world, edit `paper-world.yml` within the world folder. For example, if
-you wanted to enable `lootables.auto-replenish` for a world named `resource`, you would edit
-`paper-world.yml` within the `resource` folder like so:
+you wanted to enable `lootables.auto-replenish` for a world with the key `custom:resource`, you would edit
+`paper-world.yml` within the `world/dimensions/custom/resource` folder like so:
 
-```yaml title=resource/paper-world.yml {3-4}
+```yaml title=world/dimensions/custom/resource/paper-world.yml {3-4}
 _version: 28
 
 lootables:
@@ -116,7 +116,7 @@ entities:
       monster: 2
 ```
 
-This example demonstrates the concept of inheritance. For each world in `/world/dimensions/`, this is the effective
+This example demonstrates the concept of inheritance. For each world in `world/dimensions`, this is the effective
 configuration which will be applied:
 
 | Configuration Key                                           | minecraft/overworld | minecraft/the_nether | minecraft/the_end | custom/resource |

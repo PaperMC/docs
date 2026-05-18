@@ -56,8 +56,7 @@ const findLatest = async (project: Project): Promise<string> => {
   // find the newest version with at least one non-alpha build
   for (const version of versions) {
     const builds = await fetchBuilds(project, version);
-    if (builds.some((b) => true || b.channel !== "ALPHA")) {
-      // TODO: Remove this, temporary change
+    if (builds.some((b) => b.channel !== "ALPHA")) {
       return version;
     }
   }

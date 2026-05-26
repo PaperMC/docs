@@ -29,14 +29,6 @@ If you still cannot figure out the issue by yourself, you can always ask in the
 
 ### Content:
 * [Native support](/adventure/platform/native)
-* [Bukkit](/adventure/platform/bukkit)
-  * [Usage](/adventure/platform/bukkit#usage)
-  * [Component serializers](/adventure/platform/bukkit#component-serializers)
-* [BungeeCord](/adventure/platform/bungeecord)
-  * [Usage](/adventure/platform/bungeecord#usage)
-  * [Component serializers](/adventure/platform/bungeecord#component-serializers)
-* [SpongeAPI](/adventure/platform/spongeapi)
-  * [Usage](/adventure/platform/spongeapi#usage)
 * [Modded (Fabric and NeoForge shared API)](/adventure/platform/modded)
   * [Dependency](/adventure/platform/modded#dependency)
   * [Basic use](/adventure/platform/modded#basic-use)
@@ -53,7 +45,28 @@ If you still cannot figure out the issue by yourself, you can always ask in the
   * [Server](/adventure/platform/neoforge#server)
   * [Commands](/adventure/platform/neoforge#commands)
   * [Client](/adventure/platform/neoforge#dependency)
-* [ViaVersion](/adventure/platform/viaversion)
 * [Implementing platforms](/adventure/platform/implementing)
   * [Services](/adventure/platform/implementing#services)
   * [Conventional behaviors](/adventure/platform/implementing#conventional-behaviors)
+
+### Legacy platforms
+
+:::danger
+
+Adventure platform implementations for Bungeecord, Bukkit/Spigot, and Sponge API 7, as well as associated serializers, are no longer maintained.
+The Adventure team no longer provides support for using these libraries.
+
+We recommend that users of these libraries update to modern platforms that [natively support Adventure](/adventure/platform/native) (e.g., Velocity, Paper, Sponge API 8+).
+For users who develop for modded platforms, we recommend that you use [adventure-platform-mod](/adventure/platform/modded) for near-native support for Fabric and NeoForge.
+
+:::
+
+* [Bukkit](/adventure/platform/bukkit)
+  * [Usage](/adventure/platform/bukkit#usage)
+  * [Component serializers](/adventure/platform/bukkit#component-serializers)
+* [BungeeCord](/adventure/platform/bungeecord)
+  * [Usage](/adventure/platform/bungeecord#usage)
+  * [Component serializers](/adventure/platform/bungeecord#component-serializers)
+* [SpongeAPI](/adventure/platform/spongeapi)
+  * [Usage](/adventure/platform/spongeapi#usage)
+* [ViaVersion](/adventure/platform/viaversion)

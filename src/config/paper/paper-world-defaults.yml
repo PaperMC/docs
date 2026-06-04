@@ -119,6 +119,23 @@ chunks:
     description: >-
       The maximum number of chunks the auto-save system will save in a single
       tick
+  min-chunk-unload-count:
+    vanilla: "2147483647"
+    default: "50"
+    description: >-
+      The minimum number of eligible chunks to unload each tick.
+      The chunks will unload from world chunk map, and save to disk asynchronously.
+
+      See min-chunk-unload-fraction for more.
+      Increasing these takes more tick time on chunk unloading, but may help with
+      memory usage in specific scenarios.
+  min-chunk-unload-fraction:
+    default: "0.05"
+    description: >-
+      The minimum fraction of chunks to unload each tick.
+
+      The final number of chunks unloads per tick is the maximum of
+      min-chunk-unload-count and eligible-chunks * min-chunk-unload-fraction.
   prevent-moving-into-unloaded-chunks:
     default: "false"
     description: >-

@@ -132,9 +132,9 @@ chunks:
   min-chunk-unload-fraction:
     default: "0.05"
     description: >-
-      The minimum fraction of chunks to unload each tick.
+      The minimum fraction of eligible chunks to unload each tick.
 
-      The final number of chunks unloads per tick is the maximum of
+      The final number of chunk unloads per tick is the maximum of
       min-chunk-unload-count and eligible-chunks * min-chunk-unload-fraction.
   prevent-moving-into-unloaded-chunks:
     default: "false"

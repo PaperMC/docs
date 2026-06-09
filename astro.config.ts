@@ -1,3 +1,4 @@
+import { unified } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
 import d2 from "astro-d2";
@@ -553,43 +554,45 @@ export default defineConfig({
     domains: ["assets.papermc.io"],
   },
   markdown: {
-    remarkRehype: {
-      handlers: {
-        ...extendedTableHandlers,
+    processor: unified({
+      remarkRehype: {
+        handlers: {
+          ...extendedTableHandlers,
+        },
       },
-    },
-    remarkPlugins: [
-      remarkExtendedTable,
-      [
-        javadocPlugin,
-        {
-          targets: {
-            paper: "https://jd.papermc.io/paper",
-            velocity: "https://jd.papermc.io/velocity",
-            java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
+      remarkPlugins: [
+        remarkExtendedTable,
+        [
+          javadocPlugin,
+          {
+            targets: {
+              paper: "https://jd.papermc.io/paper",
+              velocity: "https://jd.papermc.io/velocity",
+              java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
+            },
           },
-        },
-      ],
-      [
-        codeConstantsPlugin,
-        {
-          constants: {
-            LATEST_MC_RELEASE,
-            LATEST_PAPER_RELEASE,
-            LATEST_PAPER_BUILD_API_VERSION,
-            LATEST_VELOCITY_RELEASE,
-            LATEST_FOLIA_RELEASE,
-            LATEST_WATERFALL_RELEASE,
-            LATEST_USERDEV_RELEASE,
-            LATEST_ADVENTURE_SUPPORTED_MC,
-            LATEST_ADVENTURE_SUPPORTED_MC_RANGE,
-            LATEST_ADVENTURE_API_RELEASE,
-            LATEST_ADVENTURE_PLATFORM_RELEASE,
-            LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
-            LATEST_ANSI_RELEASE,
+        ],
+        [
+          codeConstantsPlugin,
+          {
+            constants: {
+              LATEST_MC_RELEASE,
+              LATEST_PAPER_RELEASE,
+              LATEST_PAPER_BUILD_API_VERSION,
+              LATEST_VELOCITY_RELEASE,
+              LATEST_FOLIA_RELEASE,
+              LATEST_WATERFALL_RELEASE,
+              LATEST_USERDEV_RELEASE,
+              LATEST_ADVENTURE_SUPPORTED_MC,
+              LATEST_ADVENTURE_SUPPORTED_MC_RANGE,
+              LATEST_ADVENTURE_API_RELEASE,
+              LATEST_ADVENTURE_PLATFORM_RELEASE,
+              LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
+              LATEST_ANSI_RELEASE,
+            },
           },
-        },
+        ],
       ],
-    ],
+    }),
   },
 });

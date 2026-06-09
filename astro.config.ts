@@ -5,6 +5,7 @@ import { defineConfig } from "astro/config";
 import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
+import { agentDocs } from "./src/plugins/agent-docs";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
 import {
@@ -99,6 +100,7 @@ export default defineConfig({
         Sidebar: "@astrojs/starlight/components/Sidebar.astro",
       },
       plugins: [
+        agentDocs(),
         starlightLinksValidator({
           exclude: [
             "/adventure/version-history/*", // custom pages

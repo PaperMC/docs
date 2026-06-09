@@ -1,0 +1,57 @@
+---
+import Default from "@astrojs/starlight/components/PageTitle.astro";
+
+const markdownUrl = new URL(`${Astro.url.pathname.replace(/\/$/, "")}/index.md`, Astro.site ?? Astro.url);
+---
+
+<div class="sl-copy-markdown-title">
+  <Default />
+
+  <button type="button" class="sl-copy-markdown-button" data-markdown-url={markdownUrl.pathname}>
+    Copy Markdown
+  </button>
+</div>
+
+<script>
+  document.querySelectorAll(".sl-copy-markdown-button").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const url = button.getAttribute("data-markdown-url");
+      if (!url) return;
+
+      const response = await fetch(url);
+      const markdown = await response.text();
+
+      await navigator.clipboard.writeText(markdown);
+
+      const original = button.textContent;
+      button.textContent = "Copied";
+      setTimeout(() => {
+        button.textContent = original;
+      }, 1400);
+    });
+  });
+</script>
+
+<style>
+  .sl-copy-markdown-title {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .sl-copy-markdown-button {
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.5rem;
+    padding: 0.35rem 0.65rem;
+    color: var(--sl-color-gray-2);
+    background: var(--sl-color-bg);
+    font-size: var(--sl-text-sm);
+    cursor: pointer;
+  }
+
+  .sl-copy-markdown-button:hover {
+    border-color: var(--sl-color-accent);
+    color: var(--sl-color-white);
+  }
+</style>

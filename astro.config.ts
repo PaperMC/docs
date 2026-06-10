@@ -95,6 +95,7 @@ export default defineConfig({
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
         MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
         SocialIcons: "./src/components/overrides/SocialIcons.astro",
+        PageTitle: "./src/components/overrides/PageTitle.astro",
         // stop starlight-sidebar-topics from having its component there
         // we override the topics with our dropdown in PageFrame
         Sidebar: "@astrojs/starlight/components/Sidebar.astro",

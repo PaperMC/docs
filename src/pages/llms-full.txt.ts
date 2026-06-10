@@ -1,9 +1,7 @@
-import { getDocsPages } from "../lib/docs";
-import { pageToMarkdown } from "../lib/markdown";
+import type { APIRoute } from "astro";
+import { getDocsPages, pageToMarkdown } from "../utils/llms";
 
-export const prerender = true;
-
-export async function GET() {
+export const GET: APIRoute = async () => {
   const pages = await getDocsPages();
 
   const body = pages.map((page) => pageToMarkdown(page)).join("\n\n---\n\n");
@@ -13,4 +11,4 @@ export async function GET() {
       "Content-Type": "text/markdown; charset=utf-8",
     },
   });
-}
+};

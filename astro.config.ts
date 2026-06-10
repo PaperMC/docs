@@ -5,7 +5,6 @@ import { defineConfig } from "astro/config";
 import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
-import { agentDocs } from "./src/plugins/agent-docs";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
 import javadocPlugin from "./src/utils/remark/javadoc";
 import {
@@ -95,12 +94,12 @@ export default defineConfig({
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
         MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
         SocialIcons: "./src/components/overrides/SocialIcons.astro",
+        PageTitle: "./src/components/overrides/PageTitle.astro",
         // stop starlight-sidebar-topics from having its component there
         // we override the topics with our dropdown in PageFrame
         Sidebar: "@astrojs/starlight/components/Sidebar.astro",
       },
       plugins: [
-        agentDocs(),
         starlightLinksValidator({
           exclude: [
             "/adventure/version-history/*", // custom pages

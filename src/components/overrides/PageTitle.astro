@@ -7,51 +7,81 @@ const markdownUrl = new URL(`${Astro.url.pathname.replace(/\/$/, "")}/index.md`,
 <div class="sl-copy-markdown-title">
   <Default />
 
-  <button type="button" class="sl-copy-markdown-button" data-markdown-url={markdownUrl.pathname}>
-    Copy Markdown
+  <button
+    type="button"
+    class="sl-copy-markdown-button"
+    data-markdown-url={markdownUrl.pathname}
+    title="Copy page content as Markdown"
+  >
+    <!-- copy icon -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+      <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+    </svg>
   </button>
 </div>
 
 <script>
-  document.querySelectorAll(".sl-copy-markdown-button").forEach((button) => {
+  const button = document.querySelector(".sl-copy-markdown-button") as HTMLButtonElement | null;
+  if (button) {
+    let wait = false; // block extra clicks while fetching
     button.addEventListener("click", async () => {
       const url = button.getAttribute("data-markdown-url");
-      if (!url) return;
+      if (!url || wait) return;
 
+      wait = true;
       const response = await fetch(url);
       const markdown = await response.text();
 
       await navigator.clipboard.writeText(markdown);
 
-      const original = button.textContent;
-      button.textContent = "Copied";
+      const original = button.innerHTML;
+      // green checkmark icon
+      button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--sl-color-green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>`;
       setTimeout(() => {
-        button.textContent = original;
+        button.innerHTML = original;
+        wait = false;
       }, 1400);
     });
-  });
+  }
 </script>
 
 <style>
   .sl-copy-markdown-title {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 1rem;
   }
 
   .sl-copy-markdown-button {
-    border: 1px solid var(--sl-color-gray-5);
-    border-radius: 0.5rem;
-    padding: 0.35rem 0.65rem;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 0.4rem;
+    padding: 0.5rem;
     color: var(--sl-color-gray-2);
-    background: var(--sl-color-bg);
-    font-size: var(--sl-text-sm);
+    background-color: var(--sl-color-gray-6);
     cursor: pointer;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
   }
 
   .sl-copy-markdown-button:hover {
-    border-color: var(--sl-color-accent);
     color: var(--sl-color-white);
+    background-color: var(--sl-color-gray-5);
   }
 </style>

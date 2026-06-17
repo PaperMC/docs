@@ -735,8 +735,10 @@ one with a scale of `4.0` right after:
 There are four geyser particles: `GEYSER_BASE`, `GEYSER_POOF`, `GEYSER_PLUME` and `GEYSER`.
 
 ### Base and poof
-`GEYSER_BASE` and `GEYSER_POOF` particles function identically, with the only difference being their appearance. They use
+`GEYSER_BASE` and `GEYSER_POOF` particles function identically, differing only in appearance.They use
 [`Particle.GeyserBase`](jd:paper:org.bukkit.Particle$GeyserBase) as their data.
+
+The particle size is calculated as `3.0F + 0.125F * waterBlocks`.
 
 The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
 coordinates are altered by a random value in the range `[-0.25, 0.25]`, while the y coordinate is altered by a random

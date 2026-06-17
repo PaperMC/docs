@@ -735,7 +735,8 @@ one with a scale of `4.0` right after:
 There are four geyser particles: `GEYSER_BASE`, `GEYSER_POOF`, `GEYSER_PLUME` and `GEYSER`.
 
 ### Base and poof
-`GEYSER_BASE` and `GEYSER_POOF` particles function identically, with the only difference being their appearance.
+`GEYSER_BASE` and `GEYSER_POOF` particles function identically, with the only difference being their appearance. They use
+[`Particle.GeyserBase`](jd:paper:org.bukkit.Particle$GeyserBase) as their data.
 
 The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
 coordinates are altered by a random value in the range `[-0.25, 0.25]`, while the y coordinate is altered by a random
@@ -760,6 +761,8 @@ Starting values of `xd` and `zd` are in the range [-0.1, 0.1], while `yd` is in 
 :::
 
 ### Plume
+The `GEYSER_PLUME` particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
+
 The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
 coordinates are altered by a random value in the range `[-0.1, 0.1]`, while the y coordinate is altered by a random
 value in the range `[-0.5, 0.5]`.
@@ -772,7 +775,9 @@ The height of the plume is calculated as `5 * waterBlocks`.
 ### Emitter
 The `GEYSER` particle is an emitter particle, meaning it spawns other particles. In this case, it spawns all the previously
 mentioned geyser particles. The provided velocity vector is passed to the spawned particles and used as described above.
-The geyser base particle's burst impulse base is set to `1.5`, while the poof particle's burst impulse base is set to `2.0`.
+
+While this particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data,
+the geyser base particle's burst impulse base is set to `1.5` and the poof particle's burst impulse base is set to `2.0`.
 The plume particle therefore does not use the burst impulse parameter.
 
 ## Miscellaneous behaviors

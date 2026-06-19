@@ -117,7 +117,6 @@ GlobalTranslator.translator().addSource(myStore);
 ```
 
 There are additional methods on the message format translation store to bulk register from [resource bundles](jd:java:java.util.ResourceBundle).
-You may also want to use Adventure's `UTF8ResourceBundleControl` utility class to create your bundle.
 
 ### Using MiniMessage for translations
 

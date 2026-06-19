@@ -362,7 +362,13 @@ world-settings:
       misc:
         vanilla: "0"
         default: "16"
-        description: The entity activation range for misc entities.
+        description: >-
+          The distance in blocks from a player at which miscellaneous entities,
+          including dropped items, tick normally. Outside this range, entities tick
+          less frequently, which can cause dropped items moving through water streams
+          to appear to lag, rubber-band, or move backward. Set to 0 or less to disable
+          activation-range throttling for miscellaneous entities, causing loaded
+          entities in this category to tick normally regardless of player distance.
       water:
         vanilla: "0"
         default: "16"

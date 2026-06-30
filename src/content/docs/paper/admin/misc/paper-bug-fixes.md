@@ -48,6 +48,12 @@ unsupported-settings:
   skip-tripwire-hook-placement-validation: true
 ```
 
+Enabling this option does not guarantee that every tripwire hook duplicator design will work.
+Designs that rely on a same-tick door update may still fail because of Paper's block physics handling. See
+[the maintainer explanation](https://github.com/PaperMC/Paper/issues/12114#issuecomment-2660579220)
+for more context. The [original implementation](https://github.com/PaperMC/Paper/pull/12091)
+was tested using [this duplicator design](https://www.youtube.com/watch?v=sRYuZn4r9RY).
+
 ## Block breaking
 
 We also fix the ability to break Bedrock and End Portal frames. We do also provide a config option to restore this

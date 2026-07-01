@@ -826,6 +826,28 @@ While this particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser
 the geyser base particle's burst impulse base is set to `1.5` and the poof particle's burst impulse base is set to `2.0`.
 The plume particle therefore does not use the burst impulse parameter.
 
+An example of spawning a geyser particle at `someLocation` with 1 water block:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = Particle.GEYSER.builder()
+      .location(someLocation)
+      .offset(0, 0, 0)
+      .count(0)
+      .receivers(32, true)
+      .data(new Particle.Geyser(1))
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.GEYSER, someLocation, 0, 0, 0, 0, new Particle.Geyser(1));
+    ```
+  </TabItem>
+</Tabs>
+
+![Geyser particle example](./assets/particles/geyser.webp)
+
 ## Miscellaneous behaviors
 This chapter covers particles that have unique behaviors when spawning.
 

@@ -1,7 +1,9 @@
+import { unified } from "@astrojs/markdown-remark";
 import starlight from "@astrojs/starlight";
 import svelte from "@astrojs/svelte";
 import d2 from "astro-d2";
 import { defineConfig } from "astro/config";
+import { extendedTableHandlers, remarkExtendedTable } from "remark-extended-table";
 import starlightLinksValidator from "starlight-links-validator";
 import starlightSidebarTopics from "starlight-sidebar-topics";
 import codeConstantsPlugin from "./src/utils/remark/code_const";
@@ -93,6 +95,7 @@ export default defineConfig({
         TableOfContents: "./src/components/overrides/TableOfContents.astro",
         MobileTableOfContents: "./src/components/overrides/MobileTableOfContents.astro",
         SocialIcons: "./src/components/overrides/SocialIcons.astro",
+        PageTitle: "./src/components/overrides/PageTitle.astro",
         // stop starlight-sidebar-topics from having its component there
         // we override the topics with our dropdown in PageFrame
         Sidebar: "@astrojs/starlight/components/Sidebar.astro",
@@ -552,37 +555,45 @@ export default defineConfig({
     domains: ["assets.papermc.io"],
   },
   markdown: {
-    remarkPlugins: [
-      [
-        javadocPlugin,
-        {
-          targets: {
-            paper: "https://jd.papermc.io/paper",
-            velocity: "https://jd.papermc.io/velocity",
-            java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
-          },
+    processor: unified({
+      remarkRehype: {
+        handlers: {
+          ...extendedTableHandlers,
         },
-      ],
-      [
-        codeConstantsPlugin,
-        {
-          constants: {
-            LATEST_MC_RELEASE,
-            LATEST_PAPER_RELEASE,
-            LATEST_PAPER_BUILD_API_VERSION,
-            LATEST_VELOCITY_RELEASE,
-            LATEST_FOLIA_RELEASE,
-            LATEST_WATERFALL_RELEASE,
-            LATEST_USERDEV_RELEASE,
-            LATEST_ADVENTURE_SUPPORTED_MC,
-            LATEST_ADVENTURE_SUPPORTED_MC_RANGE,
-            LATEST_ADVENTURE_API_RELEASE,
-            LATEST_ADVENTURE_PLATFORM_RELEASE,
-            LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
-            LATEST_ANSI_RELEASE,
+      },
+      remarkPlugins: [
+        remarkExtendedTable,
+        [
+          javadocPlugin,
+          {
+            targets: {
+              paper: "https://jd.papermc.io/paper",
+              velocity: "https://jd.papermc.io/velocity",
+              java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
+            },
           },
-        },
+        ],
+        [
+          codeConstantsPlugin,
+          {
+            constants: {
+              LATEST_MC_RELEASE,
+              LATEST_PAPER_RELEASE,
+              LATEST_PAPER_BUILD_API_VERSION,
+              LATEST_VELOCITY_RELEASE,
+              LATEST_FOLIA_RELEASE,
+              LATEST_WATERFALL_RELEASE,
+              LATEST_USERDEV_RELEASE,
+              LATEST_ADVENTURE_SUPPORTED_MC,
+              LATEST_ADVENTURE_SUPPORTED_MC_RANGE,
+              LATEST_ADVENTURE_API_RELEASE,
+              LATEST_ADVENTURE_PLATFORM_RELEASE,
+              LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
+              LATEST_ANSI_RELEASE,
+            },
+          },
+        ],
       ],
-    ],
+    }),
   },
 });

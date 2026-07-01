@@ -42,6 +42,12 @@ unsupported-settings:
   allow-unsafe-end-portal-teleportation: true
 ```
 
+If you wish to re-enable tripwire hook duping exploits, you may do so by enabling the following config option:
+```yaml title="config/paper-global.yml"
+unsupported-settings:
+  skip-tripwire-hook-placement-validation: true
+```
+
 ## Block breaking
 
 We also fix the ability to break Bedrock and End Portal frames. We do also provide a config option to restore this

@@ -56,8 +56,7 @@ const findLatest = async (project: Project): Promise<string> => {
   // find the newest version with at least one non-alpha build
   for (const version of versions) {
     const builds = await fetchBuilds(project, version);
-    if (builds.some((b) => true || b.channel !== "ALPHA")) {
-      // TODO: Remove this, temporary change
+    if (builds.some((b) => b.channel !== "ALPHA")) {
       return version;
     }
   }
@@ -91,7 +90,9 @@ export const LATEST_USERDEV_RELEASE = userdevVersions[0];
 
 export const LATEST_ADVENTURE_SUPPORTED_MC = "1.21.11";
 export const LATEST_ADVENTURE_SUPPORTED_MC_RANGE = LATEST_ADVENTURE_SUPPORTED_MC;
-export const LATEST_ADVENTURE_API_RELEASE = "5.0.0";
-export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.1";
+export const LATEST_ADVENTURE_API_RELEASE = "5.2.0";
 export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = "6.8.0";
 export const LATEST_ANSI_RELEASE = "1.1.1";
+
+// legacy
+export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.1";

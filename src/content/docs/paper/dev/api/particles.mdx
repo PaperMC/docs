@@ -2,7 +2,7 @@
 title: Particles
 description: A comprehensive guide to particle spawning.
 slug: paper/dev/particles
-version: 26.1.1
+version: "26.2"
 ---
 
 import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
@@ -730,6 +730,123 @@ one with a scale of `4.0` right after:
 </Tabs>
 
 ![Explosion particle scale comparison](./assets/particles/explosion.webp)
+
+## Geyser particles
+There are four geyser particles: `GEYSER_BASE`, `GEYSER_POOF`, `GEYSER_PLUME` and `GEYSER`.
+
+### Base and poof
+`GEYSER_BASE` and `GEYSER_POOF` particles function identically, differing only in appearance.They use
+[`Particle.GeyserBase`](jd:paper:org.bukkit.Particle$GeyserBase) as their data.
+
+The particle size is calculated as `3.0F + 0.125F * waterBlocks`.
+
+The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
+coordinates are altered by a random value in the range `[-0.25, 0.25]`, while the y coordinate is altered by a random
+value in the range `[-0.05, 0.45]`.
+
+They are [directional particles](#directional-particles), but are also affected by the water blocks and burst impulse
+parameters. The initial velocity is calculated as follows:
+```java
+float burstImpulse = burstImpulseBase + 0.25F * waterBlocks;
+
+// xd, yd and zd are the particle velocity's x, y and z components respectively
+// xAux, yAux and zAux are the provided velocity vector's x, y and z components respectively
+this.xd = this.xd * burstImpulse + xAux;
+this.yd = this.yd * burstImpulse + yAux;
+this.zd = this.zd * burstImpulse + zAux;
+
+this.yd = Math.abs(this.yd);
+```
+
+:::note
+Starting values of `xd` and `zd` are in the range [-0.1, 0.1], while `yd` is in the range [0.0, 0.2].
+:::
+
+An example of spawning a geyser base particle at `someLocation` with a burst impulse of `1` and 1 water block:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = Particle.GEYSER_BASE.builder()
+      .location(someLocation)
+      .offset(0, 0, 0)
+      .count(0)
+      .receivers(32, true)
+      .data(new Particle.GeyserBase(1, 1))
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.GEYSER_BASE, someLocation, 0, 0, 0, 0, new Particle.GeyserBase(1, 1));
+    ```
+  </TabItem>
+</Tabs>
+
+![Geyser base particle example](./assets/particles/geyser-base.webp)
+
+### Plume
+The `GEYSER_PLUME` particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
+
+The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
+coordinates are altered by a random value in the range `[-0.1, 0.1]`, while the y coordinate is altered by a random
+value in the range `[-0.5, 0.5]`.
+
+While technically a [directional particle](#directional-particles), the vertical velocity of this particle is set to `0`
+and the horizontal velocity is applied only on the first tick.
+
+The height of the plume is calculated as `5 * waterBlocks`.
+
+An example of spawning a geyser plume particle at `someLocation` with 1 water block:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = Particle.GEYSER_PLUME.builder()
+      .location(someLocation)
+      .offset(0, 0, 0)
+      .count(0)
+      .receivers(32, true)
+      .data(new Particle.Geyser(1))
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.GEYSER_PLUME, someLocation, 0, 0, 0, 0, new Particle.Geyser(1));
+    ```
+  </TabItem>
+</Tabs>
+
+![Geyser plume particle example](./assets/particles/geyser-plume.webp)
+
+### Emitter
+The `GEYSER` particle is an emitter particle, meaning it spawns other particles. In this case, it spawns all the previously
+mentioned geyser particles. The provided velocity vector is passed to the spawned particles and used as described above.
+
+This particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
+
+The geyser base particle's burst impulse base is set to `1.5` and the poof particle's burst impulse base is set to `2.0`.
+
+An example of spawning a geyser particle at `someLocation` with 1 water block:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = Particle.GEYSER.builder()
+      .location(someLocation)
+      .offset(0, 0, 0)
+      .count(0)
+      .receivers(32, true)
+      .data(new Particle.Geyser(1))
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.GEYSER, someLocation, 0, 0, 0, 0, new Particle.Geyser(1));
+    ```
+  </TabItem>
+</Tabs>
+
+![Geyser particle example](./assets/particles/geyser.webp)
 
 ## Miscellaneous behaviors
 This chapter covers particles that have unique behaviors when spawning.

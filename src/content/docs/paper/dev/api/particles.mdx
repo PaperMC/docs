@@ -762,6 +762,28 @@ this.yd = Math.abs(this.yd);
 Starting values of `xd` and `zd` are in the range [-0.1, 0.1], while `yd` is in the range [0.0, 0.2].
 :::
 
+An example of spawning a geyser base particle at `someLocation` with a burst impulse of `1` and 1 water block:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = Particle.GEYSER_BASE.builder()
+      .location(someLocation)
+      .offset(0, 0, 0)
+      .count(0)
+      .receivers(32, true)
+      .data(new Particle.GeyserBase(1, 1))
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.GEYSER_BASE, someLocation, 0, 0, 0, 0, new Particle.GeyserBase(1, 1));
+    ```
+  </TabItem>
+</Tabs>
+
+![Geyser base particle example](./assets/particles/geyser-base.webp)
+
 ### Plume
 The `GEYSER_PLUME` particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
 
@@ -773,6 +795,28 @@ While technically a [directional particle](#directional-particles), the vertical
 and the horizontal velocity is applied only on the first tick.
 
 The height of the plume is calculated as `5 * waterBlocks`.
+
+An example of spawning a geyser plume particle at `someLocation` with 1 water block:
+<Tabs syncKey="spawn-type">
+  <TabItem label="ParticleBuilder">
+    ```java
+    ParticleBuilder particleBuilder = Particle.GEYSER_PLUME.builder()
+      .location(someLocation)
+      .offset(0, 0, 0)
+      .count(0)
+      .receivers(32, true)
+      .data(new Particle.Geyser(1))
+      .spawn();
+    ```
+  </TabItem>
+  <TabItem label="spawnParticle">
+    ```java
+    someWorld.spawnParticle(Particle.GEYSER_PLUME, someLocation, 0, 0, 0, 0, new Particle.Geyser(1));
+    ```
+  </TabItem>
+</Tabs>
+
+![Geyser plume particle example](./assets/particles/geyser-plume.webp)
 
 ### Emitter
 The `GEYSER` particle is an emitter particle, meaning it spawns other particles. In this case, it spawns all the previously

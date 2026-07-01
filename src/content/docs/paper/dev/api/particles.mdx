@@ -822,9 +822,9 @@ An example of spawning a geyser plume particle at `someLocation` with 1 water bl
 The `GEYSER` particle is an emitter particle, meaning it spawns other particles. In this case, it spawns all the previously
 mentioned geyser particles. The provided velocity vector is passed to the spawned particles and used as described above.
 
-While this particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data,
-the geyser base particle's burst impulse base is set to `1.5` and the poof particle's burst impulse base is set to `2.0`.
-The plume particle therefore does not use the burst impulse parameter.
+This particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
+
+The geyser base particle's burst impulse base is set to `1.5` and the poof particle's burst impulse base is set to `2.0`.
 
 An example of spawning a geyser particle at `someLocation` with 1 water block:
 <Tabs syncKey="spawn-type">

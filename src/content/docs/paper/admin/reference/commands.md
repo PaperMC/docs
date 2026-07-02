@@ -126,8 +126,8 @@ commands which expect an item argument. `/paper dumpitem all` yields the **full 
 including default data components you do not have to explicitly declare.
 
 ### dumplisteners
-The `/paper dumplisteners toFile|<className>` command is primarily intended for developers trying to figure out why
-their event handlers might not be working as expected. Using `/paper dumplisteners toFile` will write all
+The `/paper dumplisteners tofile|<className>` command is primarily intended for developers trying to figure out why
+their event handlers might not be working as expected. Using `/paper dumplisteners tofile` will write all
 currently registered event handlers to a file, whilst `/paper dumplisteners <className>` will print the registered
 event handlers only for the specific event.
 

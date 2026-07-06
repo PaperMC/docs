@@ -15,6 +15,12 @@ broadcast-rcon-to-ops:
 bug-report-link:
   default: ""
   description: "A URL value used for the Report Server Bugs button in the Server Links client menu."
+chat-spam-threshold-seconds:
+  default: "10"
+  description: "Defines how many messages per second a player must send to be kicked for spamming. To disable this, set to 0."
+command-spam-threshold-seconds:
+  default: "10"
+  description: "Defines how many commands per second a player must send to be kicked for spamming. To disable this, set to 0."
 debug:
   default: "false"
   description: "Enables the server's debug mode."

@@ -347,6 +347,11 @@ world-settings:
         The chance of lightning occurring during a thunderstorm, as a
         probability of 1/\<thunder-chance> per chunk, every tick.
     entity-activation-range:
+      description: >-
+        The distance in blocks from a player at which entities tick normally.
+        Outside this range, entities tick less frequently. Set to 0 or less to
+        disable activation-range throttling for loaded entities in that category,
+        causing them to tick normally regardless of player distance.
       animals:
         vanilla: "0"
         default: "32"
@@ -363,12 +368,10 @@ world-settings:
         vanilla: "0"
         default: "16"
         description: >-
-          The distance in blocks from a player at which miscellaneous entities,
-          including dropped items, tick normally. Outside this range, entities tick
-          less frequently, which can cause dropped items moving through water streams
-          to appear to lag, rubber-band, or move backward. Set to 0 or less to disable
-          activation-range throttling for miscellaneous entities, causing loaded
-          entities in this category to tick normally regardless of player distance.
+          The entity activation range for miscellaneous entities, including
+          dropped items. Dropped items outside this range may tick less frequently,
+          which can cause items moving through water streams to appear to lag,
+          rubber-band, or move backward.
       water:
         vanilla: "0"
         default: "16"

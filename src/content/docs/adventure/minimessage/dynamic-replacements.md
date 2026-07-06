@@ -142,9 +142,9 @@ Create a custom tag which makes its contents clickable:
 ```java
 TagResolver.resolver("click-by-version", (args, context) -> {
   final String version = args.popOr("version expected").value();
-  return Tag.styling(ClickEvent.openUrl("https://jd.advntr.dev/api/ " + version + "/"));
+  return Tag.styling(ClickEvent.openUrl("https://jd.papermc.io/adventure/ " + version + "/"));
 });
-// creates a tag to get javadocs of adventure by the version: <click-by-version:'4.14.0'>
+// creates a tag to get javadocs of adventure by the version: <click-by-version:'5.2.0'>
 ```
 
 You can create your own complex placeholders with multiple arguments and their own logic.

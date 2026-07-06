@@ -118,7 +118,7 @@ Let's say we want to render our chat to look like this:
 
 ![](./assets/plain-message-rendering.png)
 
-To do this, we need to return a new [`Component`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.text.Component) that contains the message we want to send.
+To do this, we need to return a new [`Component`](jd:adventure:net.kyori.adventure.text.Component) that contains the message we want to send.
 
 ```java title="ChatListener.java"
 public class ChatListener implements Listener, ChatRenderer {

@@ -569,7 +569,7 @@ export default defineConfig({
             targets: {
               paper: "https://jd.papermc.io/paper",
               velocity: "https://jd.papermc.io/velocity",
-              adventure: "https://jd.papermc.io/adventure",
+              adventure: { url: "https://jd.papermc.io/adventure", module: "net.kyori.adventure.api" },
               java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
             },
           },

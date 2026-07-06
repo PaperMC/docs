@@ -38,8 +38,8 @@ Signed messages can be obtained in two ways.
 
 ## Using signed messages
 You can send signed message objects to an [`Audience`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience)
-using the [`Audience#sendMessage(SignedMessage, ChatType.Bound)`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#sendMessage(net.kyori.adventure.chat.SignedMessage,net.kyori.adventure.chat.ChatType.Bound))
-method. You can obtain a [`ChatType.Bound`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.ChatType.Bound) object
+using the [`Audience#sendMessage(SignedMessage, ChatType.Bound)`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#sendMessage(net.kyori.adventure.chat.SignedMessage,net.kyori.adventure.chat.ChatType$Bound))
+method. You can obtain a [`ChatType.Bound`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.ChatType$Bound) object
 from the [`ChatType`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.chat.ChatType) interface.
 
 Deleting messages is much simpler. Adventure provides the [`Audience#deleteMessage(SignedMessage)`](jd:adventure:net.kyori.adventure.api:net.kyori.adventure.audience.Audience#deleteMessage(net.kyori.adventure.chat.SignedMessage))

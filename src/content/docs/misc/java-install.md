@@ -140,7 +140,23 @@ If you don't see `Java 25` in the dropdown, an administrator account is required
 
 :::
 
-The Verifying Installation section does not apply for Pterodactyl.
+## Pufferpanel (Docker)
+
+:::note
+
+You will need Admin permissions for said server to change your Java version.
+
+:::
+
+Go to your server which you want to update then the "Admin" tab, and open "Edit Server Definition". In the environment tab, the Docker Image should look like this:
+![Pufferpanel Enviroment Tab](./assets/pufferpanel-enviroment.png)
+Then you will change the version (The number after the ":"), with 25.
+
+:::
+
+The Verifying Installation section does not apply for Pterodactyl and Pufferpanel.
+
+:::
 
 ## Verifying installation
 

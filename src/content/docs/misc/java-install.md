@@ -152,7 +152,8 @@ Go to your server which you want to update then the "Admin" tab, and open "Edit 
 ![Pufferpanel Environment Tab](./assets/pufferpanel-environment.png)
 Then you will change the version (The number after the ":"), with 25.
 
-:::
+
+:::note
 
 The Verifying Installation section does not apply for Pterodactyl and Pufferpanel.
 

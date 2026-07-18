@@ -740,16 +740,13 @@ There are four geyser particles: `GEYSER_BASE`, `GEYSER_POOF`, `GEYSER_PLUME` an
 
 The particle size is calculated as `3.0F + 0.125F * waterBlocks`.
 
-The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
-coordinates are altered by a random value in the range `[-0.25, 0.25]`, while the y coordinate is altered by a random
-value in the range `[-0.05, 0.45]`.
-
 They are [directional particles](#directional-particles), but are also affected by the water blocks and burst impulse
 parameters. The initial velocity is calculated as follows:
 ```java
 float burstImpulse = burstImpulseBase + 0.25F * waterBlocks;
 
 // xd, yd and zd are the particle velocity's x, y and z components respectively
+// In this case they can have a non zero starting value
 // xAux, yAux and zAux are the provided velocity vector's x, y and z components respectively
 this.xd = this.xd * burstImpulse + xAux;
 this.yd = this.yd * burstImpulse + yAux;
@@ -760,6 +757,12 @@ this.yd = Math.abs(this.yd);
 
 :::note
 Starting values of `xd` and `zd` are in the range `[-0.1, 0.1]`, while `yd` is in the range `[0.0, 0.2]`.
+:::
+
+:::note
+The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
+coordinates are altered by a random value in the range `[-0.25, 0.25]`, while the y coordinate is altered by a random
+value in the range `[-0.05, 0.45]`.
 :::
 
 An example of spawning a geyser base particle at `someLocation` with a burst impulse of `1` and 1 water block:
@@ -787,14 +790,16 @@ An example of spawning a geyser base particle at `someLocation` with a burst imp
 ### Plume
 The `GEYSER_PLUME` particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
 
-The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
-coordinates are altered by a random value in the range `[-0.1, 0.1]`, while the y coordinate is altered by a random
-value in the range `[0, 1]`.
-
 While technically a [directional particle](#directional-particles), the vertical velocity of this particle is set to `0`
 and the horizontal velocity is applied only on the first tick.
 
 The height of the plume is calculated as `5 * waterBlocks`.
+
+:::note
+The spawn position of these particles is slightly altered by adding a random offset to each coordinate. The x and z
+coordinates are altered by a random value in the range `[-0.1, 0.1]`, while the y coordinate is altered by a random
+value in the range `[0, 1]`.
+:::
 
 An example of spawning a geyser plume particle at `someLocation` with 1 water block:
 <Tabs syncKey="spawn-type">

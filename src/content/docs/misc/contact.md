@@ -8,12 +8,6 @@ slug: misc/contact
 
 The PaperMC project handles most communication via Discord. Use the following invite: https://discord.gg/papermc
 
-## Forums
-
-Reach out for support, or contact us on our forums.
-
-- [Forums](https://forums.papermc.io)
-
 ## Twitter/X
 
 We often tweet out version release notes, update notices, and other information via our Twitter

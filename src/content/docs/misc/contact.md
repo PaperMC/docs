@@ -13,7 +13,6 @@ The PaperMC project handles most communication via Discord. Use the following in
 :::caution
 After careful consideration and due to limited usage, we’ve made the decision to discontinue the PaperMC forums. Moving forward, we recommend using Hangar for plugin uploads, and for all other community discussions and support, please join us on Discord.
 :::
-Reach out for support, or contact us on our forums.
 
 - [Forums](https://forums.papermc.io)
 

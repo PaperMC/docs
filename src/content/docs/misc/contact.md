@@ -20,7 +20,6 @@ Reach out for support, or contact us on our forums.
 
 - [Forums](https://forums.papermc.io)
 
-
 ## Twitter/X
 
 We often tweet out version release notes, update notices, and other information via our Twitter

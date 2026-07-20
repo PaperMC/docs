@@ -153,17 +153,17 @@ jobs:
   publish:
     # TODO: Optional, make sure the task only runs on pushes to your repository and doesn't fail on forks. Uncomment the line below and put the repo owner into the quotes
     # if: github.repository_owner == '<YOUR USER/ORG NAME>'
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
-      - name: Validate Gradle Wrapper
-        uses: gradle/wrapper-validation-action@v1
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/checkout@v7
+      - name: Set up JDK 25
+        uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
-          java-version: 17
+          java-version: 25
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
       - name: Publish
         env:
           # Make sure you have added a repository secret in the repository's settings

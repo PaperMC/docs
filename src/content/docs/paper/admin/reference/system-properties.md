@@ -255,13 +255,23 @@ and know what you are doing.
 
 - **default**: `https://sessionserver.mojang.com`
 - **description**: Allows specifying of a custom session server URL e.g. for caching. [
-  `minecraft.api.services.host`](#minecraftapiserviceshost) needs to be set too for this to apply.
+  `minecraft.api.services.host`](#minecraftapiserviceshost) and [
+  `minecraft.api.profiles.host`](#minecraftapiprofileshost) needs to be set too for this to apply.
 
 #### minecraft.api.services.host
 
 - **default**: `https://api.minecraftservices.com`
 - **description**: Allows specifying of a custom services API URL e.g. for caching. [
-  `minecraft.api.session.host`](#minecraftapisessionhost) needs to be set too for this to apply.
+  `minecraft.api.session.host`](#minecraftapisessionhost) and [
+  `minecraft.api.profiles.host`](#minecraftapiprofileshost) needs to be set too for this to apply.
+
+#### minecraft.api.profiles.host
+
+- **default**: `https://api.mojang.com`
+- **description**: Allows specifying of a custom profile API URL e.g. for caching. [
+  `minecraft.api.session.host`](#minecraftapisessionhost) and [
+  `minecraft.api.services.host`](#minecraftapiserviceshost) needs to be set too for this to apply.
+
 
 #### com.mojang.eula.agree
 

@@ -18,6 +18,7 @@ import PlayerListPreview43 from "./assets/scoreboards/player-list-preview-hp-43.
 import PlayerListPreview100 from "./assets/scoreboards/player-list-preview-hp-100.png";
 import Score from "./assets/scoreboards/score.png";
 import SidebarPreview from "./assets/scoreboards/sidebar-preview.png";
+import SidebarPreviewTutorial from "./assets/scoreboards/sidebar-preview-tutorial.png";
 
 ## Introduction
 
@@ -205,3 +206,154 @@ score.numberFormat(NumberFormat.fixed(Component.text("25", TextColor.color(0x24F
 ```
 
 <Image class="img-30-left img-inline" alt="A preview of the score example above" src={Score} />
+
+## Tutorial: Sidebars done correctly
+
+Sidebar scoreboards are very popular for displaying data. However, one must interface with sidebars in a very specific way
+to avoid flickering and other oddities.
+
+To do this, you need to keep track of **two** objectives, where you edit the one not shown, and only when ready, switch
+the visible one. If you want to do this in your own plugin, it is advised to write a small wrapper to do this. An example is
+given below:
+
+```java title="BufferedScoreboard.java" showlinenumbers
+@NullMarked
+public class BufferedScoreboard {
+    // Create a new Bukkit scoreboard.
+    public final Scoreboard board = Bukkit.getScoreboardManager().getNewScoreboard();
+
+    // We keep track of two objectives, and the currently shown one via the buffer variable.
+    private int buffer = 0;
+    private final Objective first = board.registerNewObjective("first", Criteria.DUMMY, (Component) null);
+    private final Objective second = board.registerNewObjective("second", Criteria.DUMMY, (Component) null);
+
+    /// Sets the title of this scoreboard. This is done one both objectives.
+    public void setTitle(Component title) {
+        first.displayName(title);
+        second.displayName(title);
+    }
+
+    /// Directly updates both objectives.
+    public void updateObjectives(Consumer<Objective> update) {
+        update.accept(first);
+        update.accept(second);
+    }
+
+    /// Updates a score for a specific line.
+    public void updateLine(int line, Consumer<Score> update) {
+        Objective next = buffer == 0 ? second : first;
+
+        // The score name is the line value.
+        Score score = next.getScore(Integer.toString(line));
+        // We subtract the line value so that line 0 is at the top, and line 15 at the bottom.
+        // Minecraft sorts the score lines in a descending order.
+        score.setScore(15 - line);
+        // Update the next score before it is shown.
+        update.accept(score);
+        // Set the next objective's display slot, which makes it be shown
+        // on the client. The previous objective is automatically hidden.
+        next.setDisplaySlot(DisplaySlot.SIDEBAR);
+
+        Objective curr = buffer == 0 ? first : second;
+        Score currScore = curr.getScore(Integer.toString(line));
+        currScore.setScore(15 - line);
+        // Repeat the update on the now hidden score to keep both objectives synced.
+        update.accept(currScore);
+
+        buffer = buffer == 0 ? 1 : 0;
+    }
+}
+```
+
+When writing your actual scoreboard, it is strongly advised to do per-line updates instead of re-drawing the entire scoreboard from scratch. A scoreboard
+typically consists of some parts, that never change, and lines that hold data, which may change frequently. A good convention is to hide the scoreboard updates
+behind methods, which each simply take in input for the lines that need changing, and doing very selected updates.
+
+For some example for tthe shown image here, see the preview below.
+
+<Image class="img-40-left img-inline" alt="A preview of the sidebar display slot" src={SidebarPreviewTutorial} />
+
+<details>
+  <summary>Click to show the code.</summary>
+
+  ```java title="ScoreboardManager.java" showlinenumbers
+  @NullMarked
+  public final class ScoreboardManager implements Listener {
+    private static final TextColor SECTION_COLOR = TextColor.color(0xE57CFF);
+    private static final TextColor KEY_COLOR = TextColor.color(0xCE69DB);
+    private static final TextColor VALUE_COLOR = TextColor.color(0xEFAFFF);
+
+    private static final java.text.NumberFormat FORMAT = DecimalFormat.getIntegerInstance(Locale.US);
+
+    /// A map holding the BufferedScoreboard objects for every player. We can use the Player object
+    /// as a key here, as the entry is removed when the player quits. If you want to keep references
+    /// across player joins, use an UUID key instead.
+    private final Map<Player, BufferedScoreboard> scoreboards = new HashMap<>();
+
+    /// Util method to get an existing scoreboard, or to create a new one for a player.
+    private BufferedScoreboard getScoreboard(Player player) {
+        return scoreboards.computeIfAbsent(player, _ -> {
+            BufferedScoreboard scoreboard = new BufferedScoreboard();
+            // Set the title of the scoreboard.
+            scoreboard.setTitle(MiniMessage.miniMessage().deserialize("<gradient:dark_purple:light_purple:dark_purple><bold><player>",
+                Placeholder.component("player", player.displayName())
+            ));
+            // show the scoreboard to the player.
+            player.setScoreboard(scoreboard.board);
+            return scoreboard;
+        });
+    }
+
+    /// Initialises the scoreboard. This sets initial values for all lines. You might want to fetch
+    /// some player data before this, if you display player data.
+    public void initScoreboard(Player player) {
+        final BufferedScoreboard scoreboard = getScoreboard(player);
+        // Set the default number format to blank, so it doesn't show the red numbers.
+        scoreboard.updateObjectives(obj -> obj.numberFormat(NumberFormat.blank()));
+        scoreboard.updateLine(0, score -> score.customName(Component.empty()));
+        scoreboard.updateLine(1, score -> score.customName(Component.text("DATA", SECTION_COLOR, TextDecoration.BOLD)));
+        updatePurse(scoreboard, 0);
+        updateBank(scoreboard, 0);
+        scoreboard.updateLine(4, score -> score.customName(Component.empty()));
+        scoreboard.updateLine(5, score -> score.customName(Component.text("docs.papermc.io", NamedTextColor.DARK_GRAY)));
+    }
+
+    /// Public method to update the purse value.
+    public void updatePurse(Player player, int value) {
+        updatePurse(getScoreboard(player), value);
+    }
+
+    /// Public method to update the bank value.
+    public void updateBank(Player player, int value) {
+        updateBank(getScoreboard(player), value);
+    }
+
+    private void updatePurse(BufferedScoreboard scoreboard, int value) {
+        scoreboard.updateLine(2, score -> {
+            score.customName(Component.text("├ Purse", KEY_COLOR));
+            score.numberFormat(NumberFormat.fixed(Component.text("$" + FORMAT.format(value), VALUE_COLOR)));
+        });
+    }
+
+    private void updateBank(BufferedScoreboard scoreboard, int value) {
+        scoreboard.updateLine(3, score -> {
+            score.customName(Component.text("└ Bank", KEY_COLOR));
+            score.numberFormat(NumberFormat.fixed(Component.text("$" + FORMAT.format(value), VALUE_COLOR)));
+        });
+    }
+
+    /// Initialises the scoreboard when a player joins.
+    @EventHandler
+    void onPlayerJoin(PlayerJoinEvent event) {
+        initScoreboard(event.getPlayer());
+    }
+
+    /// Removes the scoreboard data when a player quits.
+    @EventHandler
+    void onPlayerQuit(PlayerQuitEvent event) {
+        scoreboards.remove(event.getPlayer());
+    }
+}
+  ```
+
+</details>

@@ -10,7 +10,7 @@ Velocity is designed to be easy to configure and set up. Every Velocity file is 
 pitfalls of YAML and other configuration formats common in the community.
 
 An up-to-date version of the default configuration can be found on
-[GitHub](https://github.com/PaperMC/Velocity/blob/dev/3.0.0/proxy/src/main/resources/default-velocity.toml).
+[GitHub](https://github.com/PaperMC/Velocity/blob/dev/4.0.0/proxy/src/main/resources/default-velocity.toml).
 
 ## Data types
 

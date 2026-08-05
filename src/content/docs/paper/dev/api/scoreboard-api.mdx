@@ -1,0 +1,207 @@
+---
+title: Scoreboard API
+description: A full guide to using Paper's scoreboard API.
+slug: paper/dev/scoreboard-api
+tableOfContents:
+  minHeadingLevel: 2
+  maxHeadingLevel: 4
+---
+
+import { Image } from "astro:assets";
+import BelowNamePreview from "./assets/scoreboards/below-name-preview.png";
+import BelowNamePreviewNoScore from "./assets/scoreboards/below-name-preview-no-score.png";
+import PlayerListPreview from "./assets/scoreboards/player-list-preview.png";
+import PlayerListPreview0 from "./assets/scoreboards/player-list-preview-hp-0.png";
+import PlayerListPreview5 from "./assets/scoreboards/player-list-preview-hp-5.png";
+import PlayerListPreview20 from "./assets/scoreboards/player-list-preview-hp-20.png";
+import PlayerListPreview43 from "./assets/scoreboards/player-list-preview-hp-43.png";
+import PlayerListPreview100 from "./assets/scoreboards/player-list-preview-hp-100.png";
+import Score from "./assets/scoreboards/score.png";
+import SidebarPreview from "./assets/scoreboards/sidebar-preview.png";
+
+## Introduction
+
+Scoreboards are a great way to display information to the client. Each player can view exactly one scoreboard, and one
+scoreboard can be viewed by multiple players.
+
+[](jd:paper:org.bukkit.scoreboard.Scoreboard) objects can be retrieved in two ways:
+
+1. Via the [](jd:paper:org.bukkit.scoreboard.ScoreboardManager) (which can be retrieved from either the [](jd:paper:org.bukkit.Bukkit)
+or [](jd:paper:org.bukkit.Server) interfaces using [`getScoreboardManager()`](jd:paper:org.bukkit.Server#getScoreboardManager())
+respectively).
+2. A player's currently shown scoreboard with the [`Player#getScoreboard()`](jd:paper:org.bukkit.entity.Player#getScoreboard())
+method.
+
+Scoreboards can be categorized in two ways:
+
+1. The main scoreboard (retrieved with [`ScoreboardManager#getMainScoreboard()`](jd:paper:org.bukkit.scoreboard.ScoreboardManager#getMainScoreboard())),
+which is saved across restarts and is the default scoreboard shown to players.
+2. New scoreboards (created with [`ScoreboardManager#getNewScoreboard()`](jd:paper:org.bukkit.scoreboard.ScoreboardManager#getNewScoreboard())),
+which are not saved and only exist for the duration of you either keeping a reference to the object or a player viewing the scoreboard.
+
+## Objectives
+
+To display information, a scoreboard must register an **objective**. This can be done by using
+[`Scoreboard#registerNewObjective`](jd:paper:org.bukkit.scoreboard.Scoreboard#registerNewObjective(java.lang.String,org.bukkit.scoreboard.Criteria,net.kyori.adventure.text.Component)).
+
+This method has the following parameters:
+
+- The name of the objective, which is used for identifying it. You can use the same name in [`Scoreboard#getObjective`](jd:paper:org.bukkit.scoreboard.Scoreboard#getObjective(java.lang.String))
+to retrieve the same objective.
+- The criteria. Traditional "Vanilla-style" scoreboards use this to automatically set the score of a scoreboard entry
+to match the criteria. When designing a custom scoreboard, you probably want to set this to [](jd:paper:org.bukkit.scoreboard.Criteria#DUMMY),
+which has no built-in handling.
+- The display name of the scoreboard. Can be set to `null`, which defaults the display name to the of the objective.
+This is used when displaying the objective anywhere, like a command response or the sidebar.
+- OPTIONALLY: The render type, which is either [](jd:paper:org.bukkit.scoreboard.RenderType#INTEGER) or [](jd:paper:org.bukkit.scoreboard.RenderType#HEARTS).
+Used for when the objective is displayed in the player list or below a player's name. Defaults to `INTEGER`.
+  :::note
+  The HEARTS render type has no effect unless a [player list display slot](#player-list-display-slot) is used.
+  :::
+
+### Display slots
+
+A scoreboard can have multiple objectives, however, only one objective can be set to a particular display slot at a
+time. When you try to set the display slot of an objective to one which is already occupied, it will simply
+override that display slot.
+
+To set the display slot, you can call [`setDisplaySlot(DisplaySlot)`](jd:paper:org.bukkit.scoreboard.Objective#setDisplaySlot(org.bukkit.scoreboard.DisplaySlot))
+on the [](jd:paper:org.bukkit.scoreboard.Objective) object.
+
+There are three different display slots.
+
+#### Sidebar display slot
+
+The probably most well-known display slot of an objective is the sidebar. That is also what most players generally
+understand as the "scoreboard". It shows up on the right-side of a player's client and consists of a title and
+up to 15 lines of scores. The display information is the same for all players viewing the same scoreboard instance.
+
+<Image class="img-20-left img-inline" alt="A preview of the sidebar display slot" src={SidebarPreview} />
+
+#### Player list display slot
+
+Objectives with this display slot show up in the player list (sometimes called TAB list) next to the name of the player.
+In order for a score to be visible, the score name needs to be the same as the player's name. The score value is
+what gets displayed. All players have an implicit score value of 0.
+
+<Image class="img-40-left img-inline" alt="A preview of the player list display slot" src={PlayerListPreview} />
+
+<details>
+  <summary>Source code</summary>
+
+  ```java
+  Scoreboard board = ...;
+  Objective obj = board.registerNewObjective(
+      "playerlist",
+      Criteria.DUMMY,
+      (Component) null,
+      RenderType.HEARTS
+  );
+  obj.setDisplaySlot(DisplaySlot.PLAYER_LIST);
+
+  Score score = obj.getScore(player);
+  score.setScore(125);
+  score.numberFormat(NumberFormat.styled(style -> style
+      .color(TestPlugin.C_PRIMARY)
+      .shadowColor(ShadowColor.shadowColor(0xAA8F618E))
+      .decorate(TextDecoration.ITALIC)
+  ));
+  ```
+
+</details>
+
+If you set the `RenderType` of the objective to `HEARTS`, it will instead display the provided score as a health bar.
+This health bar score behaves differently depending on the score value:
+
+**Values 0 and below**: The score is hidden; instead, only a big space is visible.
+<Image class="img-40-left img-inline" alt="A preview of the player list display slot with 0 score" src={PlayerListPreview0} />
+
+**Values 1-20**: A regular full health bar is visible.
+<Image class="img-40-left img-inline" alt="A preview of the player list display slot with 5 score" src={PlayerListPreview5} />
+<Image class="img-40-left img-inline" alt="A preview of the player list display slot with 20 score" src={PlayerListPreview20} />
+
+**Values 21-43**: The regular hearts get appended with "absorption" hearts.
+<Image class="img-40-left img-inline" alt="A preview of the player list display slot with 43 score" src={PlayerListPreview43} />
+
+**Value 44+**: Instead of a health bar, text displaying the health points is visible.
+<Image class="img-40-left img-inline" alt="A preview of the player list display slot with 100 score" src={PlayerListPreview100} />
+
+:::caution
+
+When using [](jd:paper:org.bukkit.scoreboard.RenderType#HEARTS), the number format provided on a score is completely
+ignored.
+
+:::
+
+#### Below name display slot
+
+[](jd:paper:org.bukkit.scoreboard.DisplaySlot#BELOW_NAME) makes the score of a player render below the player's
+own display name.
+
+<Image class="img-20-left img-inline" alt="A preview of the below name display slot" src={BelowNamePreview} />
+
+Similar to the [player list display slot](#player-list-display-slot), all players implicitly have a score of 0,
+if not set. Therefore, if you wish to have custom number formatting applied, you will have to manually set it
+for every single online player for every single scoreboard you have.
+
+<Image class="img-40-left img-inline" alt="A preview of the below name display slot if a player has no score" src={BelowNamePreviewNoScore} />
+
+<details>
+  <summary>Source code</summary>
+
+  ```java
+  Player player = ...;
+  Scoreboard board = ...;
+
+  Objective obj = board.registerNewObjective(
+      "below-name",
+      Criteria.DUMMY,
+      (Component) null
+  );
+  obj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+
+  Score score = obj.getScore(player);
+  score.setScore(0);
+  score.numberFormat(NumberFormat.fixed(plugin.mm("Kills: <red>0")));
+  ```
+
+</details>
+
+### Number format
+
+You can define a default number format for an objective. All scores under that objective will inherit the default number format set,
+however a score's own number format will override the objective one.
+
+For example, to default to a blank number format, you can do this:
+```java
+Objective objective = ...;
+objective.numberFormat(NumberFormat.blank());
+```
+
+## Scores
+
+You can retrieve a score from an `Objective` instance using the `getScore` methods.
+Scores are saved using a `String` identifier. For players, their name is used. For entities,
+their UUID is used instead. A `Score` instance consits of four parts: the score name, displayname,
+the score value as an integer, and the optional number format.
+
+**For example:**
+
+```java
+Objective obj = ...;
+
+// The name of the score can be whatever. For sidebars with custom
+// lines, you usually call the score the same as the line number.
+Score score = obj.getScore("2");
+
+// Set the score value. A higher value makes it appear higher on the sidebar.
+score.setScore(2);
+
+// The custom name is what actually gets displayed in the sidebar.
+score.customName(Component.text("Custom Value", TextColor.color(0xAABB24)));
+
+// Set the number format of this score.
+score.numberFormat(NumberFormat.fixed(Component.text("25", TextColor.color(0x24FFAA))));
+```
+
+<Image class="img-30-left img-inline" alt="A preview of the score example above" src={Score} />

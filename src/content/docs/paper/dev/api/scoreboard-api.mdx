@@ -269,7 +269,7 @@ When writing your actual scoreboard, it is strongly advised to do per-line updat
 typically consists of some parts, that never change, and lines that hold data, which may change frequently. A good convention is to hide the scoreboard updates
 behind methods, which each simply take in input for the lines that need changing, and doing very selected updates.
 
-For some example for tthe shown image here, see the preview below.
+For some example for the shown image here, see the preview below.
 
 <Image class="img-40-left img-inline" alt="A preview of the sidebar display slot" src={SidebarPreviewTutorial} />
 
@@ -304,7 +304,7 @@ For some example for tthe shown image here, see the preview below.
         });
     }
 
-    /// Initialises the scoreboard. This sets initial values for all lines. You might want to fetch
+    /// Initializes the scoreboard. This sets initial values for all lines. You might want to fetch
     /// some player data before this, if you display player data.
     public void initScoreboard(Player player) {
         final BufferedScoreboard scoreboard = getScoreboard(player);
@@ -342,7 +342,7 @@ For some example for tthe shown image here, see the preview below.
         });
     }
 
-    /// Initialises the scoreboard when a player joins.
+    /// Initializes the scoreboard when a player joins.
     @EventHandler
     void onPlayerJoin(PlayerJoinEvent event) {
         initScoreboard(event.getPlayer());

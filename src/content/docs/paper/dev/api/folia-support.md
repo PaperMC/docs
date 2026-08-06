@@ -30,12 +30,7 @@ use this utility method to check if the current server is running Folia:
 
 ```java
 private static boolean isFolia() {
-    try {
-        Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
-        return true;
-    } catch (ClassNotFoundException e) {
-        return false;
-    }
+    return ServerBuildInfo.buildInfo().isBrandCompatible(Key.key("papermc", "folia"));
 }
 ```
 

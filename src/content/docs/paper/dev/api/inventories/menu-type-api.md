@@ -3,17 +3,7 @@ title: Menu Type API
 slug: paper/dev/menu-type-api
 description: A guide to the Menu Type API.
 version: 1.21.8
-sidebar:
-  badge:
-    text: Experimental
-    variant: danger
 ---
-
-:::danger[Experimental]
-
-The Menu Type API and anything that uses it is currently experimental and may change in the future.
-
-:::
 
 Minecraft has a lot of types of menus. From chests, to crafting tables, to anvils, and even villager trade menus.
 With the old Bukkit inventory API, it was not possible to replicate most of these perfectly. Exactly for

@@ -32,10 +32,10 @@ MiniMessage allows you to both serialize components into MiniMessage strings and
 Here's a short example to try things out:
 
 ```java
-Audience player = ...;
-MiniMessage mm = MiniMessage.miniMessage();
+final Audience player = ...;
+final MiniMessage mm = MiniMessage.miniMessage();
 
-Component parsed = mm.deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
+final Component parsed = mm.deserialize("Hello <rainbow>world</rainbow>, isn't <underlined>MiniMessage</underlined> fun?");
 
 player.sendMessage(parsed);
 ```
@@ -85,7 +85,7 @@ final MiniMessage myCustomMiniMessageInstance = builder.build();
 To make customizing MiniMessage easier, we provide a Builder. The specific methods on the builder are explained in the javadoc.
 
 ```java
-MiniMessage minimessage = MiniMessage.builder()
+final MiniMessage mm = MiniMessage.builder()
     .tags(TagResolver.builder()
       .resolver(StandardTags.color())
       .resolver(StandardTags.decorations())
@@ -129,7 +129,7 @@ The builder for `MiniMessage` allows providing a custom tag resolver rather than
 MiniMessage also provides convenience methods to do that:
 
 ```java
-MiniMessage serializer = MiniMessage.builder()
+final MiniMessage serializer = MiniMessage.builder()
   .tags(TagResolver.builder()
     .resolver(StandardTags.color())
     .build()

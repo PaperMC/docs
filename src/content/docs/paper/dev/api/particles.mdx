@@ -681,14 +681,14 @@ one with a scale of `2.0` right after:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder sweepAttackParticleBuilder = Particle.SWEEP_ATTACK.builder()
+    ParticleBuilder particleBuilder = Particle.SWEEP_ATTACK.builder()
       .location(someLocation)
       .count(0)
       .receivers(32, true)
       .spawn();
 
     Bukkit.getScheduler().runTaskLater(plugin,
-      () -> sweepAttackParticleBuilder.offset(-2.0, 0, 0).spawn(), 10);
+      () -> particleBuilder.offset(-2.0, 0, 0).spawn(), 10);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -711,7 +711,7 @@ one with a scale of `4.0` right after:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder explosionParticleBuilder = Particle.EXPLOSION.builder()
+    ParticleBuilder particleBuilder = Particle.EXPLOSION.builder()
       .location(someLocation)
       .offset(1, 0, 0)
       .count(0)
@@ -719,7 +719,7 @@ one with a scale of `4.0` right after:
       .spawn();
 
     Bukkit.getScheduler().runTaskLater(plugin,
-      () -> explosionParticleBuilder.offset(-2.0, 0, 0).spawn(), 10);
+      () -> particleBuilder.offset(-2.0, 0, 0).spawn(), 10);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -772,9 +772,8 @@ An example of spawning a geyser base particle at `someLocation` with a burst imp
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder particleBuilder = Particle.GEYSER_BASE.builder()
+    Particle.GEYSER_BASE.builder()
       .location(someLocation)
-      .offset(0, 0, 0)
       .count(0)
       .receivers(32, true)
       .data(new Particle.GeyserBase(1, 1))
@@ -808,9 +807,8 @@ An example of spawning a geyser plume particle at `someLocation` with 1 water bl
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder particleBuilder = Particle.GEYSER_PLUME.builder()
+    Particle.GEYSER_PLUME.builder()
       .location(someLocation)
-      .offset(0, 0, 0)
       .count(0)
       .receivers(32, true)
       .data(new Particle.Geyser(1))
@@ -838,9 +836,8 @@ An example of spawning a geyser particle at `someLocation` with 1 water block:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
-    ParticleBuilder particleBuilder = Particle.GEYSER.builder()
+    Particle.GEYSER.builder()
       .location(someLocation)
-      .offset(0, 0, 0)
       .count(0)
       .receivers(32, true)
       .data(new Particle.Geyser(1))

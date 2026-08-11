@@ -34,7 +34,7 @@ private static final ResourcePackInfo PACK_INFO = ResourcePackInfo.resourcePackI
   .hash("2849ace6aa689a8c610907a41c03537310949294")
   .build();
 
-public void sendResourcePack(final @NonNull Audience target) {
+public void sendResourcePack(final Audience target) {
   final ResourcePackRequest request = ResourcePackRequest.resourcePackRequest()
     .packs(PACK_INFO)
     .prompt(Component.text("Please download the resource pack!"))
@@ -45,7 +45,7 @@ public void sendResourcePack(final @NonNull Audience target) {
   target.sendResourcePacks(request);
 }
 
-public void sendOptionalResourcePack(final @NonNull Audience target) {
+public void sendOptionalResourcePack(final Audience target) {
   final ResourcePackRequest request = ResourcePackRequest.resourcePackRequest()
     .packs(PACK_INFO)
     .prompt(Component.text("Please download the resource pack!"))

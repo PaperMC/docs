@@ -30,12 +30,18 @@ public class MyMiniMessageTranslator extends MiniMessageTranslator {
   }
 
   @Override
-  public @Nullable String getMiniMessageString(final @NotNull String key, final @NotNull Locale locale) {
+  public Key name() {
+    // Every translator has a name which is used to identify this specific translator instance.
+    return Key.key("mynamespace:mykey");
+  }
+
+  @Override
+  public @Nullable String getMiniMessageString(final String key, final Locale locale) {
     // Creating a custom MiniMessage translator is as simple as overriding this one method.
     // All you need to do is return a MiniMessage string for the provided key and locale.
     // In this example we will hardcode this, but you could pull it from a resource bundle, a properties file, a config file or something else entirely.
     if (key.equals("mykey") && locale == Locale.US) {
-      return "<red>Hello, <name>! Today is <day_of_week>."
+      return "<red>Hello, <name>! Today is <day_of_week>.";
     } else {
       // Returning null "ignores" this translation.
       return null;

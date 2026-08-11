@@ -15,7 +15,7 @@ Titles are composed of:
 **Examples:**
 
 ```java
-public void showMyTitle(final @NonNull Audience target) {
+public void showMyTitle(final Audience target) {
   final Component mainTitle = Component.text("This is the main title", NamedTextColor.WHITE);
   final Component subtitle = Component.text("This is the subtitle", NamedTextColor.GRAY);
 
@@ -26,7 +26,7 @@ public void showMyTitle(final @NonNull Audience target) {
   target.showTitle(title);
 }
 
-public void showMyTitleWithDurations(final @NonNull Audience target) {
+public void showMyTitleWithDurations(final Audience target) {
   final Title.Times times = Title.Times.times(Duration.ofMillis(500), Duration.ofMillis(3000), Duration.ofMillis(1000));
   // Using the times object this title will use 500ms to fade in, stay on screen for 3000ms and then fade out for 1000ms
   final Title title = Title.title(Component.text("Hello!"), Component.empty(), times);

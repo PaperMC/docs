@@ -18,7 +18,7 @@ Boss Bars are composed of:
 ```java
 private @Nullable BossBar activeBar;
 
-public void showMyBossBar(final @NonNull Audience target) {
+public void showMyBossBar(final Audience target) {
   final Component name = Component.text("Awesome BossBar");
   // Creates a red boss bar which has no progress and no notches
   final BossBar emptyBar = BossBar.bossBar(name, 0, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
@@ -34,7 +34,7 @@ public void showMyBossBar(final @NonNull Audience target) {
   this.activeBar = fullBar;
 }
 
-public void hideActiveBossBar(final @NonNull Audience target) {
+public void hideActiveBossBar(final Audience target) {
   target.hideBossBar(this.activeBar);
   this.activeBar = null;
 }

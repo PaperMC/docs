@@ -98,7 +98,7 @@ becomes this Adventure equivalent:
 
 ```java
 Component.text()
-  .append(Component.text("hello", NamedTextColor.GOLD)
+  .append(Component.text("hello", NamedTextColor.GOLD))
   .append(Component.text(" world"))
   .build()
 ```
@@ -118,7 +118,7 @@ becomes
 ```java
 Style style = Style.style(NamedTextColor.GOLD, TextDecoration.BOLD);
 Component.text()
-  .append(Component.text("hello", style)
+  .append(Component.text("hello", style))
   .append(Component.text(" world", style))
   .build()
 ```

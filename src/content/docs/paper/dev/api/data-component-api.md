@@ -95,31 +95,31 @@ int defaultDurability = Material.DIAMOND_SWORD.getDefaultData(DataComponentTypes
 
 ```java
 // Check if this item has a custom name data component
-boolean hasCustomName = stack.hasData(DataComponentTypes.CUSTOM_NAME);
-logger.info("Has custom name? " + hasCustomName);
+boolean hasCustomName = item.hasData(DataComponentTypes.CUSTOM_NAME);
+logger.info("Has custom name? {}", hasCustomName);
 ```
 
 ### Reading a valued data component
 
 ```java
 // The damage of an item can be null, so we require a null check
-Integer damageValue = stack.getData(DataComponentTypes.DAMAGE);
+Integer damageValue = item.getData(DataComponentTypes.DAMAGE);
 if (damageValue != null) {
-    logger.info("Current damage: " + damageValue);
+    logger.info("Current damage: {}", damageValue);
 } else {
     logger.info("This item doesn't have a damage component set.");
 }
 
 // Certain components, like the max stack size, will always be present on an item
-Integer maxStackSize = stack.getData(DataComponentTypes.MAX_STACK_SIZE);
+Integer maxStackSize = item.getData(DataComponentTypes.MAX_STACK_SIZE);
 ```
 
 ### Setting a valued data component
 
 ```java
 // Set a custom model data value on this item
-stack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData()
-    .addFloat(0.5f)
+item.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelData()
+    .addFloat(0.5F)
     .addFlag(true)
     .build()
 );
@@ -129,10 +129,10 @@ stack.setData(DataComponentTypes.CUSTOM_MODEL_DATA, CustomModelData.customModelD
 
 ```java
 // Remove an existing component (e.g. tool)
-stack.unsetData(DataComponentTypes.TOOL);
+item.unsetData(DataComponentTypes.TOOL);
 
 // Reset a component to the default (prototype) value for its item type (e.g. max stack size)
-stack.resetData(DataComponentTypes.MAX_STACK_SIZE);
+item.resetData(DataComponentTypes.MAX_STACK_SIZE);
 ```
 
 ### Non-valued data components
@@ -141,10 +141,10 @@ Some components are only flags and don't carry any sort of value:
 
 ```java
 // Make the item a glider to be used like elytra (combined with the equippable component)
-stack.setData(DataComponentTypes.GLIDER);
+item.setData(DataComponentTypes.GLIDER);
 
 // Remove the glider flag
-stack.unsetData(DataComponentTypes.GLIDER);
+item.unsetData(DataComponentTypes.GLIDER);
 ```
 
 ## Advanced usage with builders
@@ -164,7 +164,7 @@ Equippable.Builder builder = helmet.getData(DataComponentTypes.EQUIPPABLE).toBui
 // We get the prototype equippable value from NETHERITE_HELMET
 builder.assetId(Material.NETHERITE_HELMET.getDefaultData(DataComponentTypes.EQUIPPABLE).assetId());
 // And give it a spooky sound when putting it on
-builder.equipSound(SoundEventKeys.ENTITY_GHAST_HURT);
+builder.equipSound(SoundEventKeys.ENTITY_GHAST_HURT.key());
 
 // Set our new item
 helmet.setData(DataComponentTypes.EQUIPPABLE, builder);
@@ -197,8 +197,8 @@ book.setData(DataComponentTypes.WRITTEN_BOOK_CONTENT, builder.build());
 
 ```java
 ItemStack sword = ItemStack.of(Material.DIAMOND_SWORD);
-sword.setData(DataComponentTypes.LORE, ItemLore.lore().addLine(Component.text("Cool sword!")).build());
-sword.setData(DataComponentTypes.ENCHANTMENTS, ItemEnchantments.itemEnchantments().add(Enchantment.SHARPNESS, 10).build());
+sword.setData(DataComponentTypes.LORE, ItemLore.lore().addLine(Component.text("Cool sword!")));
+sword.setData(DataComponentTypes.ENCHANTMENTS, ItemEnchantments.itemEnchantments().add(Enchantment.SHARPNESS, 10));
 sword.setData(DataComponentTypes.RARITY, ItemRarity.RARE);
 
 sword.unsetData(DataComponentTypes.TOOL); // Remove the tool component
@@ -221,5 +221,5 @@ ItemStack damagedSword = ItemStack.of(Material.DIAMOND_SWORD);
 damagedSword.setData(DataComponentTypes.DAMAGE, 100);
 
 boolean match = damagedSword.matchesWithoutData(originalSword, Set.of(DataComponentTypes.DAMAGE), false);
-logger.info("Do the sword match? " + match); // -> true
+logger.info("Do the sword match? {}", match); // -> true
 ```

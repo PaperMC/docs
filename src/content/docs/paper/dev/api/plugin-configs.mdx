@@ -10,7 +10,7 @@ Configuration files allow users to change certain behavior and functionality of 
 
 ## Format
 
-By default, plugins use a YAML configuration format (`.yml` file). Other formats, such as JSON or TOML, can be used;
+By default, plugins use a [YAML](https://yaml.org) configuration format (`.yaml`/`.yml` file). Other formats, such as JSON or TOML, can be used;
 however, these are not natively supported by Paper, so they will not be covered in this guide.
 
 YAML works by having a tree-like `key: value` pair structure, as you would have seen in your [`plugin.yml`](/paper/dev/plugin-yml).
@@ -39,21 +39,21 @@ This will be located in the `resources` directory:
           - plugin.yml
 </FileTree>
 
-When your plugin is initialized, you must save this resource into the plugin's data directory, so that a user can edit the values.
+When your plugin is initialized, you must copy this file into the plugin's data directory, so that a user can edit the values.
 Here is an example of how you would do this in your plugin's `onEnable`:
 
-```java title="TestPlugin.java"
-public class TestPlugin extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveResource("config.yml", /* replace */ false);
+        this.saveResource("config.yml", /* replace */ false);
 
-        // You can also use this for configuration files:
-        saveDefaultConfig();
-        // Where the default config.yml will be saved if it does not already exist
+        // You can also use this shorthand for the default configuration file (config.yml):
+        // this.saveDefaultConfig();
+        // the file will be saved if it does not already exist
 
-        // getConfig()...
+        // this.getConfig()...
     }
 }
 ```
@@ -65,81 +65,82 @@ If set to true, the configuration will be overwritten on every call.
 
 :::
 
-## Getting and setting data
+## Fetching and writing data
 
-The [`FileConfiguration`](jd:paper:org.bukkit.configuration.file.FileConfiguration) of the plugin can be fetched with
-[`JavaPlugin#getConfig()`](jd:paper:org.bukkit.plugin.java.JavaPlugin#getConfig()) once it has been saved.
-This will allow data to be fetched and set with the respective `#get...(key)` and
-[`#set(key, value)`](jd:paper:org.bukkit.configuration.ConfigurationSection#set(java.lang.String,java.lang.Object)).
+The [](jd:paper:org.bukkit.configuration.file.FileConfiguration) of the plugin can be fetched with
+[](jd:paper:org.bukkit.plugin.Plugin#getConfig()) once it has been saved.
+This will allow data to be fetched and set with the respective `get...(key)` and
+[`set(key, value)`](jd:paper:org.bukkit.configuration.ConfigurationSection#set(java.lang.String,java.lang.Object)).
 By default, most basic data types are supported by YAML. These can be fetched simply with
-[`#getString(key)`](jd:paper:org.bukkit.configuration.ConfigurationSection#getString(java.lang.String)) or
-[`#getBoolean(key)`](jd:paper:org.bukkit.configuration.ConfigurationSection#getBoolean(java.lang.String)).
+[`getString(key)`](jd:paper:org.bukkit.configuration.ConfigurationSection#getString(java.lang.String)) or
+[`getBoolean(key)`](jd:paper:org.bukkit.configuration.ConfigurationSection#getBoolean(java.lang.String)).
 
-However, some more complex Bukkit data types are also supported. A few of these include
-[`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack),
-[`Location`](jd:paper:org.bukkit.Location) and [`Vector`](jd:paper:org.bukkit.util.Vector)s.
+However, some more complex Bukkit data types are also supported. A few of these include:
+[](jd:paper:org.bukkit.inventory.ItemStack),
+[](jd:paper:org.bukkit.Location) and [](jd:paper:org.bukkit.util.Vector).
 Here is an example of loading a value from the config for teleporting a player:
 
 :::note[Saving Configs]
 
 Whenever setting data in configurations, you must call
-[`FileConfiguration#save(File/String)`](jd:paper:org.bukkit.configuration.file.FileConfiguration#save(java.io.File))
+[](jd:paper:org.bukkit.configuration.file.FileConfiguration#save(java.io.File))
 for the changes to be persisted to disk.
 
 :::
 
-```java title="TestPlugin.java"
-public class TestPlugin extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     public void teleportPlayer(Player player) {
-        Location to = getConfig().getLocation("target_location");
+        Location to = this.getConfig().getLocation("target-location");
         player.teleport(to);
     }
 }
 ```
 
-This is possible as they implement [`ConfigurationSerializable`](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerializable).
+This is possible as they implement [](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerializable).
 You can use this yourself, by implementing and registering a custom class.
 
 ```java title="TeleportOptions.java"
 public class TeleportOptions implements ConfigurationSerializable {
 
-    private int chunkX;
-    private int chunkZ;
-    private String name;
+    private final String name;
+    private final int chunkX;
+    private final int chunkZ;
 
-    public TeleportOptions(int chunkX, int chunkZ, String name) {
-        // Set the values
+    public TeleportOptions(String name, int chunkX, int chunkZ) {
+        this.name = name;
+        // ...
     }
 
     public Map<String, Object> serialize() {
-        Map<String, Object> data = new HashMap<>();
+        Map<String, Object> data = new HashMap<>(3);
 
+        data.put("name", this.name);
         data.put("chunk-x", this.chunkX);
         data.put("chunk-z", this.chunkZ);
-        data.put("name", this.name);
 
         return data;
     }
 
     public static TeleportOptions deserialize(Map<String, Object> args) {
         return new TeleportOptions(
+                (String) args.get("name"),
                 (int) args.get("chunk-x"),
-                (int) args.get("chunk-z"),
-                (String) args.get("name")
+                (int) args.get("chunk-z")
         );
     }
 }
 ```
 
 Here we can see that we have an instance-based `serialize` method, which returns a map, and then a static `deserialize`
-method that takes a [`Map`](jd:java:java.util.Map) as a parameter and returns an instance
+method that takes a Map as a parameter and returns an instance
 of the `TeleportOptions` class. Finally, for this to work, we must call:
-`ConfigurationSerialization.registerClass(TeleportOptions.class)`
+`ConfigurationSerialization.registerClass(TeleportOptions.class);`
 
 :::caution
 
-If you do not call [`ConfigurationSerialization#registerClass(Class)`](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class))
+If you do not call [](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class))
 with Paper plugins, you will not be able to load nor save your custom classes.
 
 :::
@@ -151,18 +152,18 @@ across multiple different files, you can still use the Bukkit `FileConfiguration
 It is as simple as:
 
 ```java
-File file = new File(plugin.getDataFolder(), "items.yml");
+File file = new File(plugin.getDataFolder(), "items.yaml");
 YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
 // Work with config here
 config.save(file);
 ```
 
-This example reads the `items.yml` file from your plugin's data directory. If the file does not exist or an error occurs
+This example reads the `items.yaml` file from your plugin's data directory. If the file does not exist or an error occurs
 during reading, an empty configuration will be returned.
 
 :::danger[Blocking I/O]
 
-Loading and saving files on the main thread will slow your server. `load` and `save` operations should be executed asynchronously.
+Loading and saving files on the main thread will slow down your server. `load` and `save` operations should be executed asynchronously.
 
 :::
 

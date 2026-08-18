@@ -21,7 +21,7 @@ server.getMobGoals().addGoal(cow, 0, goal);
 
 :::tip
 
-You can access Vanilla goals from the [`VanillaGoal`](jd:paper:com.destroystokyo.paper.entity.ai.VanillaGoal) class.
+You can access Vanilla goals from the [](jd:paper:com.destroystokyo.paper.entity.ai.VanillaGoal) class.
 They may be specific to a mob type. For example, you can't use
 [`VanillaGoal.BEE_ATTACK`](jd:paper:com.destroystokyo.paper.entity.ai.VanillaGoal#BEE_ATTACK) on a zombie.
 
@@ -29,7 +29,7 @@ They may be specific to a mob type. For example, you can't use
 
 ## Creating a custom goal
 
-To create a custom goal, you need to create a class that implements the [`Goal`](jd:paper:com.destroystokyo.paper.entity.ai.Goal) interface.
+To create a custom goal, you need to create a class that implements the [](jd:paper:com.destroystokyo.paper.entity.ai.Goal) interface.
 This interface has several methods:
 - [`void start()`](jd:paper:com.destroystokyo.paper.entity.ai.Goal#start()): Called when the goal is started.
 - [`void tick()`](jd:paper:com.destroystokyo.paper.entity.ai.Goal#tick()): Called every tick while the goal is running.
@@ -54,8 +54,7 @@ Here is an example of a goal that makes a camel follow a player. This is essenti
 [`FOLLOW_MOB`](jd:paper:com.destroystokyo.paper.entity.ai.VanillaGoal#FOLLOW_MOB) Vanilla goal,
 but it is a good example on how to create a goal.
 
-```java
-@NullMarked
+```java title="CamelFollowPlayerGoal.java"
 public class CamelFollowPlayerGoal implements Goal<Camel> {
 
     // This is the key for the goal. It is used to identify the goal and is
@@ -64,7 +63,7 @@ public class CamelFollowPlayerGoal implements Goal<Camel> {
         // The entity class this goal is targeting.
         Camel.class,
         // The key used for identification. Should use your plugin's namespace.
-        new NamespacedKey("testplugin", "camel_follow_player")
+        new NamespacedKey("example_plugin", "camel_follow_player")
     );
 
     private final Player player; // The player to follow.
@@ -86,7 +85,7 @@ public class CamelFollowPlayerGoal implements Goal<Camel> {
     @Override
     public void start() {
         // Called when the goal starts.
-        player.sendMessage(text("I am following you!"));
+        player.sendPlainMessage("I am following you!");
     }
 
     @Override
@@ -100,7 +99,7 @@ public class CamelFollowPlayerGoal implements Goal<Camel> {
     @Override
     public void stop() {
         // Called when the goal stops.
-        player.sendMessage(text("I stopped following you!"));
+        player.sendPlainMessage("I stopped following you!");
     }
 
     @Override
@@ -125,7 +124,7 @@ To remove a goal, you can call one of the [`removeGoal`](jd:paper:com.destroysto
 ```java
 Cow cow = ...;
 
-// This works because our example has a public static field.
+// This works because our example has declared this constant.
 server.getMobGoals().removeGoal(cow, CamelFollowPlayerGoal.KEY);
 
 // You can also remove Vanilla goals.

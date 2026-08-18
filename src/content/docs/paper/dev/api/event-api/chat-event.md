@@ -33,10 +33,8 @@ This is done by using the [](jd:paper:io.papermc.paper.chat.ChatRenderer) interf
 method. Previously, this was done by using the [](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent)
 with its [](jd:paper:org.bukkit.event.player.AsyncPlayerChatEvent#setFormat(java.lang.String)) method.
 
-```java title="ChatRenderer#render"
-public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
-    // ...
-}
+```java title="ChatRenderer.java"
+Component render(Player source, Component sourceDisplayName, Component message, Audience viewer);
 ```
 
 - The [`render`](jd:paper:io.papermc.paper.chat.ChatRenderer#render(org.bukkit.entity.Player,net.kyori.adventure.text.Component,net.kyori.adventure.text.Component,net.kyori.adventure.audience.Audience)) method is called when a chat message is sent to the player.
@@ -71,15 +69,13 @@ Next, we need to tell the event to use the renderer by using the
 [](jd:paper:io.papermc.paper.event.player.AbstractChatEvent#renderer()) method.
 
 ```java title="ChatListener.java"
-public class ChatListener implements Listener, ChatRenderer { // Implement the ChatRenderer and Listener interface
+public class ChatListener implements Listener, ChatRenderer {
 
-    // Listen for the AsyncChatEvent
     @EventHandler
     public void onChat(AsyncChatEvent event) {
         event.renderer(this); // Tell the event to use our renderer
     }
 
-    // Override the render method
     @Override
     public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {
         // ...
@@ -118,12 +114,12 @@ Let's say we want to render our chat to look like this:
 
 ![](./assets/plain-message-rendering.png)
 
-To do this, we need to return a new [`Component`](jd:adventure:net.kyori.adventure.text.Component) that contains the message we want to send.
+To do this, we need to return a new [](jd:adventure:net.kyori.adventure.text.Component) that contains the message we want to send.
 
 ```java title="ChatListener.java"
 public class ChatListener implements Listener, ChatRenderer {
 
-    // Listener logic
+    // Event logic...
 
     @Override
     public Component render(Player source, Component sourceDisplayName, Component message, Audience viewer) {

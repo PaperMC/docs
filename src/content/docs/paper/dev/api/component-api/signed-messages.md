@@ -17,42 +17,42 @@ For a full overview, you can refer [to this linked gist](https://gist.github.com
 :::
 
 ## How are signed messages represented in code?
-Paper uses Adventure's [`SignedMessage`](jd:adventure:net.kyori.adventure.chat.SignedMessage)
+Paper uses Adventure's [](jd:adventure:net.kyori.adventure.chat.SignedMessage)
 object to represent a signed message. We differentiate two kinds of signed messages: system messages and non-system messages.
-System messages (checked with [`SignedMessage#isSystem()`](jd:adventure:net.kyori.adventure.chat.SignedMessage#isSystem()))
+System messages (checked with [](jd:adventure:net.kyori.adventure.chat.SignedMessage#isSystem()))
 are messages send by the server, whilst non-system messages are not.
 
 You can also differentiate the **signed plain text** `String` content of the message
-([`SignedMessage#message()`](jd:adventure:net.kyori.adventure.chat.SignedMessage#message()))
-from the unsigned, nullable [`Component`](jd:adventure:net.kyori.adventure.text.Component)
-content ([`SignedMessage#unsignedContent()`](jd:adventure:net.kyori.adventure.chat.SignedMessage#unsignedContent())).
+([](jd:adventure:net.kyori.adventure.chat.SignedMessage#message()))
+from the unsigned, nullable [](jd:adventure:net.kyori.adventure.text.Component)
+content ([](jd:adventure:net.kyori.adventure.chat.SignedMessage#unsignedContent())).
 
 ## Obtaining a signed message
 Signed messages can be obtained in two ways.
 
-1. From an [`AsyncChatEvent`](jd:paper:io.papermc.paper.event.player.AsyncChatEvent) using
-   [`AbstractChatEvent#signedMessage()`](jd:paper:io.papermc.paper.event.player.AbstractChatEvent#signedMessage()).
+1. From an [](jd:paper:io.papermc.paper.event.player.AsyncChatEvent) using
+   [](jd:paper:io.papermc.paper.event.player.AbstractChatEvent#signedMessage()).
 
-2. From an [`ArgumentTypes.signedMessage()`](jd:paper:io.papermc.paper.command.brigadier.argument.ArgumentTypes#signedMessage())
+2. From an [](jd:paper:io.papermc.paper.command.brigadier.argument.ArgumentTypes#signedMessage())
    Brigadier argument type.
 
 ## Using signed messages
-You can send signed message objects to an [`Audience`](jd:adventure:net.kyori.adventure.audience.Audience)
-using the [`Audience#sendMessage(SignedMessage, ChatType.Bound)`](jd:adventure:net.kyori.adventure.audience.Audience#sendMessage(net.kyori.adventure.chat.SignedMessage,net.kyori.adventure.chat.ChatType$Bound))
-method. You can obtain a [`ChatType.Bound`](jd:adventure:net.kyori.adventure.chat.ChatType$Bound) object
-from the [`ChatType`](jd:adventure:net.kyori.adventure.chat.ChatType) interface.
+You can send signed message objects to an [](jd:adventure:net.kyori.adventure.audience.Audience)
+using the [](jd:adventure:net.kyori.adventure.audience.Audience#sendMessage(net.kyori.adventure.chat.SignedMessage,net.kyori.adventure.chat.ChatType$Bound))
+method. You can obtain a [](jd:adventure:net.kyori.adventure.chat.ChatType$Bound) object
+from the [](jd:adventure:net.kyori.adventure.chat.ChatType) interface.
 
-Deleting messages is much simpler. Adventure provides the [`Audience#deleteMessage(SignedMessage)`](jd:adventure:net.kyori.adventure.audience.Audience#deleteMessage(net.kyori.adventure.chat.SignedMessage))
-or [`Audience#deleteMessage(SignedMessage.Signature)`](jd:adventure:net.kyori.adventure.audience.Audience#deleteMessage(net.kyori.adventure.chat.SignedMessage.Signature))
+Deleting messages is much simpler. Adventure provides the [](jd:adventure:net.kyori.adventure.audience.Audience#deleteMessage(net.kyori.adventure.chat.SignedMessage))
+or [](jd:adventure:net.kyori.adventure.audience.Audience#deleteMessage(net.kyori.adventure.chat.SignedMessage$Signature))
 methods for that.
 
 ## Example: Making user sent messages deletable
 For our example, we will create a chat format plugin which allows a user to delete
-their own messages in case they made a mistake. For this we will use the [`AsyncChatEvent`](jd:paper:io.papermc.paper.event.player.AsyncChatEvent).
+their own messages in case they made a mistake. For this we will use the [](jd:paper:io.papermc.paper.event.player.AsyncChatEvent).
 
 :::tip[AsyncChatEvent]
 
-The [`AsyncChatEvent`](jd:paper:io.papermc.paper.event.player.AsyncChatEvent) is covered in the [chat events](/paper/dev/chat-events)
+The [](jd:paper:io.papermc.paper.event.player.AsyncChatEvent) is covered in the [chat events](/paper/dev/chat-events)
 documentation page. If you want to read up on more detail on the chat renderer, you can do so there.
 
 :::
@@ -61,25 +61,14 @@ documentation page. If you want to read up on more detail on the chat renderer, 
 ![](./assets/signed-messages-deletion.gif)
 
 ### Code
-```java title="SignedChatListener.java" collapse={1-10} showLineNumbers
-package io.papermc.docs.signedmessages;
-
-import io.papermc.paper.event.player.AsyncChatEvent;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.event.ClickEvent;
-import net.kyori.adventure.text.format.NamedTextColor;
-import net.kyori.adventure.text.format.TextDecoration;
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-
+```java title="SignedChatListener.java" showLineNumbers
 public class SignedChatListener implements Listener {
 
     @EventHandler
     void onPlayerChat(AsyncChatEvent event) {
         // We modify the chat format, so we use a chat renderer.
         event.renderer((player, playerName, message, viewer) -> {
-            // This is the base format of our message. It will format chat as "<player> » <message>".
+            // This is the base format of our message. It will format chat as "<player_name> » <message>".
             final Component base = Component.textOfChildren(
                 playerName.colorIfAbsent(NamedTextColor.GOLD),
                 Component.text(" » ", NamedTextColor.DARK_GRAY),
@@ -93,18 +82,18 @@ public class SignedChatListener implements Listener {
 
             // Create a base delete suffix. The creation is separated into two
             // parts purely for readability reasons.
-            final Component deleteCrossBase = Component.textOfChildren(
+            final Component deleteCrossIcon = Component.textOfChildren(
                 Component.text("[", NamedTextColor.DARK_GRAY),
                 Component.text("X", NamedTextColor.DARK_RED, TextDecoration.BOLD),
                 Component.text("]", NamedTextColor.DARK_GRAY)
             );
 
             // Add a hover and click event to the delete suffix.
-            final Component deleteCross = deleteCrossBase
+            final Component deleteCross = deleteCrossIcon
                 .hoverEvent(Component.text("Click to delete your message!", NamedTextColor.RED))
                 // We retrieve the signed message with event.signedMessage() and request a server-wide deletion if the
                 // deletion cross were to be clicked.
-                .clickEvent(ClickEvent.callback(audience -> Bukkit.getServer().deleteMessage(event.signedMessage())));
+                .clickEvent(ClickEvent.callback(_ -> Bukkit.getServer().deleteMessage(event.signedMessage())));
 
             // Send the base format but with the delete suffix.
             return base.appendSpace().append(deleteCross);

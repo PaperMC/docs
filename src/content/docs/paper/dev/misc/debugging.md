@@ -15,12 +15,12 @@ When debugging, you can use `System.out.println("");` to print to the console. I
 as it will be easier to know which plugin the log has come from. This can be done simply with:
 
 ```java
-plugin.getComponentLogger().debug(Component.text("SuperDuperBad Thing has happened"));
+plugin.getSLF4JLogger().debug("SuperDuperBad Thing has happened");
 ```
 
 :::note[Logger Levels]
 
-In some consoles, using the `warning` level will print the message in different colors.
+In some consoles, using the `warn` or `error` level will print the message in different colors.
 This can be useful for finding your print statements in the console.
 
 :::
@@ -47,7 +47,7 @@ Finally, copy the command line arguments from the window, and paste these into y
 These will go after the `java` command and before `-jar`. Once you have done this, you can click `OK`. For example:
 
 ```shell replace
-java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-\{LATEST_PAPER_RELEASE}.jar nogui
+java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-\{LATEST_PAPER_RELEASE}.jar --nogui
 ```
 
 Once your server is running, you can use the bug icon in the top right to connect your debugger to the server:
@@ -61,15 +61,15 @@ Let's say we have this code:
 ```java
 @EventHandler
 public void onPlayerMove(PlayerMoveEvent event) {
-  Player player = event.getPlayer();
-  Location location = player.getLocation();
+    Player player = event.getPlayer();
+    Location location = player.getLocation();
 
-  if (location.getWorld() == null)
-    return;
+    if (location.getWorld() == null)
+        return;
 
-  if (location.getWorld().getEnvironment() == World.Environment.NETHER) {
-    player.sendMessage("You are in the nether!");
-  }
+    if (location.getWorld().getEnvironment() == World.Environment.NETHER) {
+        player.sendPlainMessage("You are in the nether!");
+    }
 }
 ```
 

@@ -27,45 +27,36 @@ The result is returned as an Adventure component to work with.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> componentArgument() {
-    return Commands.literal("componentargument")
-        .then(Commands.argument("arg", ArgumentTypes.component())
-            .executes(ctx -> {
-                final Component component = ctx.getArgument("arg", Component.class);
+Commands.argument("input", ArgumentTypes.component())
+  .executes(context -> {
+      final Component input = context.getArgument("input", Component.class);
 
-                ctx.getSource().getSender().sendRichMessage(
-                    "Your message: <input>",
-                    Placeholder.component("input", component)
-                );
-                return Command.SINGLE_SUCCESS;
-            }))
-        .build();
-}
+      context.getSource().getSender().sendRichMessage("Your message: <input>",
+          Placeholder.component("input", input)
+      );
+      return Command.SINGLE_SUCCESS;
+  })
 ```
 
 ### In-game preview
 <Video src={ComponentMp4} />
 
 ## Key argument
-The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a [`Key`](jd:adventure:net.kyori.adventure.key:net.kyori.adventure.key.Key),
+The key argument allows a user to put in any artificial (namespaced) key, ensuring its validity. This returns a [](jd:adventure:net.kyori.adventure.key:net.kyori.adventure.key.Key),
 which can be used at various other places in the Paper API.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> keyArgument() {
-    return Commands.literal("key")
-        .then(Commands.argument("key_input", ArgumentTypes.key())
-            .executes(ctx -> {
-                final Key key = ctx.getArgument("key_input", Key.class);
+Commands.argument("key", ArgumentTypes.key())
+    .executes(context -> {
+        final Key key = context.getArgument("key", Key.class);
 
-                ctx.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
-                    Placeholder.unparsed("key", key.asString())
-                );
+        context.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
+            Placeholder.unparsed("key", key.asString())
+        );
 
-                return Command.SINGLE_SUCCESS;
-            }))
-        .build();
-}
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ### In-game preview
@@ -74,26 +65,23 @@ public static LiteralCommandNode<CommandSourceStack> keyArgument() {
 
 ## Named color argument
 This argument provides the user with the ability to select between the 16 built-in "named" text colors. This argument returns a
-[`NamedTextColor`](jd:adventure:net.kyori.adventure.text.format.NamedTextColor),
+[](jd:adventure:net.kyori.adventure.text.format.NamedTextColor),
 which you can use for applying a color to components.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> namedColorArgument() {
-    return Commands.literal("namedcolor")
-        .then(Commands.argument("color", ArgumentTypes.namedColor())
-            .then(Commands.argument("message", StringArgumentType.greedyString())
-                .executes(ctx -> {
-                    final NamedTextColor color = ctx.getArgument("color", NamedTextColor.class);
-                    final String msg = StringArgumentType.getString(ctx, "message");
+Commands.argument("color", ArgumentTypes.namedColor())
+    .then(Commands.argument("message", StringArgumentType.greedyString())
+        .executes(context -> {
+            final NamedTextColor color = context.getArgument("color", NamedTextColor.class);
+            final String msg = StringArgumentType.getString(context, "message");
 
-                    ctx.getSource().getSender().sendMessage(
-                        Component.text(msg).color(color)
-                    );
-                    return Command.SINGLE_SUCCESS;
-                })))
-        .build();
-}
+            context.getSource().getSender().sendMessage(
+                Component.text(msg).color(color)
+            );
+            return Command.SINGLE_SUCCESS;
+        })
+    )
 ```
 
 ### In-game preview
@@ -108,26 +96,23 @@ do not know how to use that format and thus its general usage is not advised.
 
 :::
 
-The style argument returns its value in the form of a [`Style`](jd:adventure:net.kyori.adventure.text.format.Style) object.
+The style argument returns its value in the form of a [](jd:adventure:net.kyori.adventure.text.format.Style) object.
 This can be applied to any component using `Component#style(Style)`. Whilst the JSON input allows for the `text` field, its content is completely ignored.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> styleArgument() {
-    return Commands.literal("style")
-        .then(Commands.argument("style", ArgumentTypes.style())
-            .then(Commands.argument("message", StringArgumentType.greedyString())
-                .executes(ctx -> {
-                    final Style style = ctx.getArgument("style", Style.class);
-                    final String msg = StringArgumentType.getString(ctx, "message");
+Commands.argument("style", ArgumentTypes.style())
+    .then(Commands.argument("message", StringArgumentType.greedyString())
+        .executes(context -> {
+            final Style style = context.getArgument("style", Style.class);
+            final String msg = StringArgumentType.getString(context, "message");
 
-                    ctx.getSource().getSender().sendRichMessage("Your input: <input>",
-                        Placeholder.component("input", Component.text(message).style(style))
-                    );
-                    return Command.SINGLE_SUCCESS;
-                })))
-        .build();
-}
+            context.getSource().getSender().sendRichMessage("Your input: <input>",
+                Placeholder.component("input", Component.text(msg).style(style))
+            );
+            return Command.SINGLE_SUCCESS;
+        })
+    )
 ```
 
 ### In-game preview
@@ -143,7 +128,7 @@ A signed message argument returns a `SignedMessageResolver`. In order to call it
 * The argument name
 * The `CommandContext<CommandSourceStack>` object
 
-The resolved value is a `CompletableFuture<SignedMessage>`, whose [`SignedMessage`](jd:adventure:net.kyori.adventure.chat.SignedMessage)
+The resolved value is a `CompletableFuture<SignedMessage>`, whose [](jd:adventure:net.kyori.adventure.chat.SignedMessage)
 value you can handle using `thenAccept(Consumer<T>)`. Inside of the consumer, you can send the signed message to players or work with it in other ways.
 
 :::caution
@@ -158,32 +143,26 @@ You can read up on that [here](/paper/dev/scheduler).
 :::note
 
 A non-player sender is not capable of sending a signed message, which means that the resolved `CompletableFuture` will never be completed.
-You should make sure that only players can use your argument with `.requires(ctx -> ctx.getSender() instanceof Player)` on your `SignedArgument`. You may
+You should make sure that only players can use your argument with `.requires(source -> source.getSender() instanceof Player)`. You may
 add a fallback greedy string argument for non-player senders if you want the argument to execute regardless of signing.
 
 :::
 
 ### Example usage
-```java title="MinecraftArguments.java"
-public static LiteralCommandNode<CommandSourceStack> signedMessageArgument() {
-    return Commands.literal("signedmessage")
-        .then(Commands.argument("target", ArgumentTypes.player())
-            .then(Commands.argument("message", ArgumentTypes.signedMessage())
-                .executes(MinecraftArguments::executeSignedMessageCommand)))
-        .build();
-}
+```java
+Commands.argument("target", ArgumentTypes.player())
+    .then(Commands.argument("message", ArgumentTypes.signedMessage())
+        .executes(context -> {
+            final Player target = context.getArgument("target", PlayerSelectorArgumentResolver.class).resolve(context.getSource()).getFirst();
+            final SignedMessageResolver resolver = context.getArgument("message", SignedMessageResolver.class);
 
-private static int executeSignedMessageCommand(final CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
-    final Player target = ctx.getArgument("target", PlayerSelectorArgumentResolver.class).resolve(ctx.getSource()).getFirst();
-    final SignedMessageResolver messageResolver = ctx.getArgument("message", SignedMessageResolver.class);
+            resolver.resolveSignedMessage("message", context).thenAccept(msg -> {
+                target.sendMessage(msg, ChatType.CHAT.bind(context.getSource().getSender().name()));
+            });
 
-    messageResolver.resolveSignedMessage("message", ctx).thenAccept(msg -> {
-        target.sendMessage(msg, ChatType.CHAT.bind(ctx.getSource().getSender().name()));
-    });
-
-
-    return Command.SINGLE_SUCCESS;
-}
+            return Command.SINGLE_SUCCESS;
+        })
+    )
 ```
 
 ### In-game preview

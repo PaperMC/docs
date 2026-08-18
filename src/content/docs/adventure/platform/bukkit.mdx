@@ -31,7 +31,7 @@ and can be reused from different threads if needed. From here, Bukkit `CommandSe
 
 The audiences object should also be closed when a plugin is disabled in order to clean up resources and increase the likelihood of a successful `/reload`.
 
-```java
+```java title="MyPlugin.java"
 public class MyPlugin extends JavaPlugin {
 
     private BukkitAudiences adventure;

@@ -27,7 +27,7 @@ higher. Generally, LTS versions of Java are targeted, though you may have luck o
 
 ## Migrating from BungeeCord
 
-Waterfall is a drop in replacements for BungeeCord, you don't need to make any changes to your
+Waterfall is a drop-in replacement for BungeeCord, you don't need to make any changes to your
 configuration.
 
 ## Getting a proxy JAR

@@ -2,6 +2,7 @@
 title: Paper-specific
 description: Documentation for arguments handling miscellaneous Paper API values.
 slug: paper/dev/command-api/arguments/paper
+version: "26.2"
 ---
 
 import BlockStateMp4 from "./assets/vanilla-arguments/blockstate.mp4?url";
@@ -20,50 +21,41 @@ The block state argument can be used for getting a block type and explicit, asso
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> blockStateArgument() {
-    return Commands.literal("blockstateargument")
-        .then(Commands.argument("arg", ArgumentTypes.blockState())
-            .executes(ctx -> {
-                final BlockState blockState = ctx.getArgument("arg", BlockState.class);
+Commands.argument("state", ArgumentTypes.blockState())
+    .executes(context -> {
+        final BlockState state = context.getArgument("state", BlockState.class);
+        // will be an unplaced snapshot which needs to be copied in order to be used later
 
-                ctx.getSource().getSender().sendPlainMessage("You specified a " + blockState.getType() + "!");
-                return Command.SINGLE_SUCCESS;
-            }))
-        .build();
-}
+        context.getSource().getSender().sendRichMessage("You specified a <block>!",
+            Placeholder.component("block", Component.translatable(state.getType()))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ### In-game preview
 <Video src={BlockStateMp4} />
 
 
-## ItemStack argument
-The item stack argument is the way to retrieve an [`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack) following the same argument format as the Vanilla `/give <player> <item> [<amount>]`
-command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a [`Material`](jd:paper:org.bukkit.Material), you should instead
+## Item argument
+The item stack argument is the way to retrieve an [item](jd:paper:org.bukkit.inventory.ItemStack) following the same argument format as the Vanilla `/give <player> <item> [<amount>]`
+command as its second argument. The user may also define components to further customize the `ItemStack`. If you only require a [](jd:paper:org.bukkit.Material), you should instead
 check out the [registry arguments](/paper/dev/command-api/arguments/registry).
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
-    return Commands.literal("itemstack")
-        .then(Commands.argument("stack", ArgumentTypes.itemStack())
-            .executes(ctx -> {
-                final ItemStack itemStack = ctx.getArgument("stack", ItemStack.class);
+Commands.argument("item", ArgumentTypes.itemStack())
+    .executes(context -> {
+        final ItemStack item = context.getArgument("item", ItemStack.class);
+        final Player player = context.getSource().getPlayerOrThrow();
 
-                if (ctx.getSource().getExecutor() instanceof Player player) {
-                    player.getInventory().addItem(itemStack);
-                    ctx.getSource().getSender().sendRichMessage("<green>Successfully gave <player> a <item>",
-                        Placeholder.component("player", player.name()),
-                        Placeholder.component("item", Component.translatable(itemStack))
-                    );
-                    return Command.SINGLE_SUCCESS;
-                }
-
-                ctx.getSource().getSender().sendRichMessage("<red>This argument requires a player!");
-                return Command.SINGLE_SUCCESS;
-            }))
-        .build();
-}
+        player.getInventory().addItem(item);
+        context.getSource().getSender().sendRichMessage("<green>Successfully gave <player> a <item>",
+            Placeholder.component("player", player.displayName()),
+            Placeholder.component("item", Component.translatable(item).hoverEvent(item))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ### In-game preview
@@ -72,23 +64,19 @@ public static LiteralCommandNode<CommandSourceStack> itemStackArgument() {
 
 ## NamespacedKey argument
 This argument allows the user to provide any artificial (namespaced) key. The return value of this argument is a
-[`NamespacedKey`](jd:paper:org.bukkit.NamespacedKey), which makes it useful when dealing with Bukkit API.
+[](jd:paper:org.bukkit.NamespacedKey), which makes it useful when dealing with Bukkit API.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> namespacedKeyArgument() {
-    return Commands.literal("namespacedkey")
-        .then(Commands.argument("key", ArgumentTypes.namespacedKey())
-            .executes(ctx -> {
-                final NamespacedKey key = ctx.getArgument("key", NamespacedKey.class);
+Commands.argument("key", ArgumentTypes.namespacedKey())
+    .executes(context -> {
+        final NamespacedKey key = context.getArgument("key", NamespacedKey.class);
 
-                ctx.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
-                    Placeholder.unparsed("key", key.toString())
-                );
-                return Command.SINGLE_SUCCESS;
-            }))
-        .build();
-}
+        context.getSource().getSender().sendRichMessage("You put in <aqua><key></aqua>!",
+            Placeholder.unparsed("key", key.toString())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ### In-game preview
@@ -96,7 +84,7 @@ public static LiteralCommandNode<CommandSourceStack> namespacedKeyArgument() {
 
 
 ## Time argument
-The time argument allows the user to define a time frame, similar to the Vanilla `/time <set|time> <time>` time argument. The user has 4 possible ways of inputting time:
+The time argument allows the user to define a time frame, similar to the Vanilla `/time set <time>` time argument. The user has 4 possible ways of inputting time:
 * Just as a number: This resolves to as usual ticks (`/timearg 1` --> 1 tick)
 * With a `t` suffix: This also resolves to ticks (`/timearg 1t` --> 1 tick)
 * With a `s` suffix: This resolves to seconds, meaning multiplying the first number by 20. (`/timearg 1s` --> 20 ticks)
@@ -104,28 +92,20 @@ The time argument allows the user to define a time frame, similar to the Vanilla
 
 If you choose to use this argument, it is advised to explain to the users what these suffixes mean, as real time (`s` suffix) is mixed with in-game time (`t` and `d` suffix).
 
-The `ArgumentTypes.time()` method has one additional overload: `ArgumentTypes.time(int mintime)`. This allows to set the minimum required amount of ticks this argument has to resolve to.
+The `ArgumentTypes.time()` method has one additional overload: `ArgumentTypes.time(int minTime)`. This allows to set the minimum required amount of ticks this argument has to resolve to.
 By default this value is set to 0.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> timeArgument() {
-    return Commands.literal("timearg")
-        .then(Commands.argument("time", ArgumentTypes.time())
-            .executes(ctx -> {
-                final int timeInTicks = IntegerArgumentType.getInteger(ctx, "time");
+Commands.argument("time", ArgumentTypes.time())
+    .executes(context -> {
+        final int timeInTicks = IntegerArgumentType.getInteger(context, "time");
+        final Player player = context.getSource().getPlayerOrThrow();
 
-                if (ctx.getSource().getExecutor() instanceof Player player) {
-                    player.getWorld().setFullTime(player.getWorld().getFullTime() + timeInTicks);
-                    player.sendRichMessage("Moved time forward by " + timeInTicks + " ticks!");
-                    return Command.SINGLE_SUCCESS;
-                }
-
-                ctx.getSource().getSender().sendPlainMessage("This argument requires a player!");
-                return Command.SINGLE_SUCCESS;
-            })
-        ).build();
-}
+        player.getWorld().setFullTime(player.getWorld().getFullTime() + timeInTicks);
+        player.sendPlainMessage("Moved time forward by " + timeInTicks + " ticks!");
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ### In-game preview
@@ -134,27 +114,23 @@ public static LiteralCommandNode<CommandSourceStack> timeArgument() {
 
 ## UUID argument
 The UUID argument allows the user to input a valid UUID. You can retrieve that value as a `UUID` object, which is used in various places, like `Bukkit.getOfflinePlayer(UUID)`.
-This argument is not very user-friendly, which is why it is suggested to only use this as a moderation or debug argument. For user input regarding offline player
+This argument is not very user-friendly, which is why it is suggested to only use this as a moderation or debug argument (and at least providing suggestions completion). For user input regarding offline player
 retrieval, the [player profiles argument](/paper/dev/command-api/arguments/entity-player#player-profiles-argument) is preferred, as it allows by-name lookup.
 
 ### Example usage - Lookup command
 ```java
-public static LiteralCommandNode<CommandSourceStack> uuidArgument() {
-    return Commands.literal("uuid-lookup")
-        .then(Commands.argument("uuid", ArgumentTypes.uuid())
-            .executes(ctx -> {
-                final UUID uuid = ctx.getArgument("uuid", UUID.class);
-                final OfflinePlayer result = Bukkit.getOfflinePlayer(uuid);
+Commands.argument("uuid", ArgumentTypes.uuid())
+    .executes(context -> {
+        final UUID uuid = context.getArgument("uuid", UUID.class);
+        final OfflinePlayer result = Bukkit.getOfflinePlayer(uuid);
 
-                ctx.getSource().getSender().sendRichMessage("Has <aqua><uuid></aqua> played before: <result>",
-                    Placeholder.unparsed("uuid", uuid.toString()),
-                    Placeholder.parsed("result", result.hasPlayedBefore() ? "<green>true</green>" : "<red>false</red>")
-                );
+        context.getSource().getSender().sendRichMessage("Has <aqua><uuid></aqua> played before: <result:'<green>true</green>':'<red>false</red>'>",
+            Placeholder.unparsed("uuid", uuid.toString()),
+            Formatter.booleanChoice("result", result.hasPlayedBefore())
+        );
 
-                return Command.SINGLE_SUCCESS;
-            })
-        ).build();
-}
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ### In-game preview
@@ -162,24 +138,20 @@ public static LiteralCommandNode<CommandSourceStack> uuidArgument() {
 
 
 ## Objective criteria argument
-You can retrieve the argument value as a `Criteria` enum value, which can be used with `Scoreboard` objects.
+You can retrieve the argument value as a `Criteria`, which can be used with `Scoreboard` objects.
 
 ### Example usage
 ```java
-public static LiteralCommandNode<CommandSourceStack> objectiveCriteriaArgument() {
-    return Commands.literal("objectivecriteria")
-        .then(Commands.argument("criteria", ArgumentTypes.objectiveCriteria())
-            .executes(ctx -> {
-                final Criteria criteria = ctx.getArgument("criteria", Criteria.class);
+Commands.argument("criteria", ArgumentTypes.objectiveCriteria())
+    .executes(context -> {
+        final Criteria criteria = context.getArgument("criteria", Criteria.class);
 
-                ctx.getSource().getSender().sendRichMessage("Default render type for <criteria>: <rendertype>",
-                    Placeholder.unparsed("criteria", criteria.getName()),
-                    Placeholder.unparsed("rendertype", criteria.getDefaultRenderType().name())
-                );
-                return Command.SINGLE_SUCCESS;
-            }))
-        .build();
-}
+        context.getSource().getSender().sendRichMessage("Default render type for <criteria>: <render_type>",
+            Placeholder.unparsed("criteria", criteria.getName()),
+            Placeholder.unparsed("render_type", criteria.getDefaultRenderType().name())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ### In-game preview

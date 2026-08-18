@@ -38,8 +38,8 @@ However, if you are unable to use `paperweight-userdev`, you can use reflection.
 Reflection is a way to access code at runtime. This allows you to access code that may not be available at compile time.
 Reflection is often used to access internal code across multiple versions. However, reflection does come
 with performance impacts if used improperly. For example, if you are accessing a method or field more than once,
-you should cache the [`Field`](jd:java:java.lang.reflect.Field)/
-[`Method`](jd:java:java.lang.reflect.Method) to prevent the performance
+you should cache the [](jd:java:java.lang.reflect.Field)/
+[](jd:java:java.lang.reflect.Method) to prevent the performance
 impact of looking up the field/method each time.
 
 :::caution[1.20.4 and older]
@@ -52,8 +52,8 @@ for the CraftServer class in version 1.20.2. You could access these classes easi
 ```java
 private static final String CRAFTBUKKIT_PACKAGE = Bukkit.getServer().getClass().getPackageName();
 
-public static String cbClass(String clazz) {
-  return CRAFTBUKKIT_PACKAGE + "." + clazz;
+public static String cbClass(String className) {
+    return CRAFTBUKKIT_PACKAGE + "." + className;
 }
 
 // You can then use this method to get the CraftBukkit class:

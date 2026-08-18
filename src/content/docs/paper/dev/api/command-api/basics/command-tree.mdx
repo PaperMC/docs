@@ -108,7 +108,7 @@ Which allows for the following command executions in-game:
 /advanced eat main-dish
 ```
 
-As this is a fairly complicated command, we can visualize it as a tree graph first in order to we have a better understanding on what is going on:
+As this is a fairly complicated command, we can visualize it as a tree graph first in order to have a better understanding on what is going on:
 
 ```d2
 style.fill: transparent
@@ -123,7 +123,7 @@ eat -> "ice cream"
 eat -> "main dish"
 ```
 
-Having defined our target command, how can we go about this now? There is a few possible ways, but the simplest one is defining **furthest from root** first. That means we are first
+Having defined our target command, how can we go about this now? There are a few possible ways, but the simplest one is defining **furthest from root** first. That means we are first
 defining the last branches of our entire tree. So those, which have no subcommands:
 
 ```java

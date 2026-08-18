@@ -48,8 +48,8 @@ This will insert and parse the text.
 When you want to create your own styling tag you can use the styling placeholder.
 
 ```java
-MiniMessage.miniMessage().deserialize("<my-style>Hello :)</my-style> How are you?",
-    Placeholder.styling("my-style", ClickEvent.suggestCommand("/say hello"), NamedTextColor.RED, TextDecoration.BOLD));
+MiniMessage.miniMessage().deserialize("<my_style>Hello :)</my_style> How are you?",
+    Placeholder.styling("my_style", ClickEvent.suggestCommand("/say hello"), NamedTextColor.RED, TextDecoration.BOLD));
 // will apply a click event, a red text color and bold decoration to the text
 ```
 
@@ -59,8 +59,8 @@ Create your own styling tags:
 
 ```java
 Placeholder.styling("fancy", TextColor.color(150, 200, 150)); // will replace the color between "<fancy>" and "</fancy>"
-Placeholder.styling("myhover", HoverEvent.showText(Component.text("test"))); // will display your custom text as hover
-Placeholder.styling("mycmd", ClickEvent.runCommand("/mycmd is cool")); // will create a clickable text which will run your specified command.
+Placeholder.styling("my_hover", HoverEvent.showText(Component.text("test"))); // will display your custom text as hover
+Placeholder.styling("my_cmd", ClickEvent.runCommand("/mycmd is cool")); // will create a clickable text which will run your specified command.
 ```
 
 :::tip
@@ -83,10 +83,10 @@ To specify the locale and format of the number the formatter accepts optionally 
 You can specify the locale and the number format. It's possible to pass both as arguments to the tag but you have provide the locale first.
 
 ```java
-MiniMessage.miniMessage().deserialize("<gray>Hello my number <no>!", Formatter.number("no", 250.25d));
-MiniMessage.miniMessage().deserialize("<gray>Hello my number <no:'#.00'>!", Formatter.number("no", 250.25d));
-MiniMessage.miniMessage().deserialize("<gray>Hello my number <no:'de-DE':'#.00'>!", Formatter.number("no", 250.25d));
-MiniMessage.miniMessage().deserialize("<gray>Hello my number <no:'de-DE'>!", Formatter.number("no", 250.25d));
+MiniMessage.miniMessage().deserialize("<gray>Hello my number <no>!", Formatter.number("no", 250.25));
+MiniMessage.miniMessage().deserialize("<gray>Hello my number <no:'#.00'>!", Formatter.number("no", 250.25));
+MiniMessage.miniMessage().deserialize("<gray>Hello my number <no:'de-DE':'#.00'>!", Formatter.number("no", 250.25));
+MiniMessage.miniMessage().deserialize("<gray>Hello my number <no:'de-DE'>!", Formatter.number("no", 250.25));
 ```
 
 All those examples are valid and will insert the number as the tag.
@@ -98,7 +98,7 @@ Refer to Locale and DecimalFormat for valid locale tags and usable patterns.
 You can change the style such as the color by a more complex pattern:
 
 ```java
-MiniMessage.miniMessage().deserialize("<gray>Your current balance is <no:'en-EN':'<green>#.00;<red>-#.00'>.", Formatter.number("no", 250.25d));
+MiniMessage.miniMessage().deserialize("<gray>Your current balance is <no:'en-EN':'<green>#.00;<red>-#.00'>.", Formatter.number("no", 250.25));
 ```
 
 This will display the balance in red for negative numbers, otherwise the number will be green.
@@ -139,12 +139,12 @@ You can simply create your own placeholders. Take a look at the [Formatter](http
 
 Create a custom tag which makes its contents clickable:
 
-```java
-TagResolver.resolver("click-by-version", (args, context) -> {
+```java replace
+TagResolver.resolver("click_by_version", (args, context) -> {
   final String version = args.popOr("version expected").value();
-  return Tag.styling(ClickEvent.openUrl("https://jd.papermc.io/adventure/ " + version + "/"));
+  return Tag.styling(ClickEvent.openUrl("https://jd.papermc.io/adventure/" + version + "/"));
 });
-// creates a tag to get javadocs of adventure by the version: <click-by-version:'5.2.0'>
+// creates a tag to get javadocs of adventure by the version: <click_by_version:'\{LATEST_ADVENTURE_API_RELEASE}'>
 ```
 
 You can create your own complex placeholders with multiple arguments and their own logic.

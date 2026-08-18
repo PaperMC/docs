@@ -11,7 +11,7 @@ thus run asynchronously.
 ## Running a delayed task
 
 All scheduling works by using a [`TaskBuilder`](jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder)
-returned from the [`Scheduler`](jd:velocity:com.velocitypowered.api.scheduler.Scheduler).
+returned from the [](jd:velocity:com.velocitypowered.api.scheduler.Scheduler).
 This fluent builder may be chained to configure the details of the scheduling.
 
 ```java
@@ -27,11 +27,11 @@ Here, we are scheduling a task to run 2 seconds later. Velocity requires the ins
 plugin, `plugin` above. If you are scheduling a task from your main plugin class you may simply use
 `this`.
 
-Time arguments are specified as a `long` with a [`TimeUnit`](jd:java:java.util.concurrent.TimeUnit).
+Time arguments are specified as a `long` with a [](jd:java:java.util.concurrent.TimeUnit).
 Using time units makes scheduling delayed tasks more readable and allows for greater precision.
 `2L, TimeUnit.SECONDS` is far easier to understand than the ambiguous `2000L`.
 
-You can also use a [`Duration`](jd:java:java.time.Duration) to specify the time arguments,
+You can also use a [](jd:java:java.time.Duration) to specify the time arguments,
 e.g.: `Duration.ofSeconds(5L)`.
 
 ## Running a repeating task
@@ -58,7 +58,7 @@ and _repeat_ methods of the `TaskBuilder`.
 ## Cancellation
 
 The [`schedule()`](jd:velocity:com.velocitypowered.api.scheduler.Scheduler$TaskBuilder#schedule())
-method returns a [`ScheduledTask`](jd:velocity:com.velocitypowered.api.scheduler.ScheduledTask),
+method returns a [](jd:velocity:com.velocitypowered.api.scheduler.ScheduledTask),
 which may then be used to cancel the task involved via the
 [`cancel()`](jd:velocity:com.velocitypowered.api.scheduler.ScheduledTask#cancel()) method.
 Tasks cannot be uncancelled.

@@ -364,7 +364,7 @@ entities:
       vanilla: "disabled"
       default: "200"
       description: >-
-        Workaround for MC-125757, makes all arrows advance their despawn
+        Workaround for [MC-125757](https://mojira.dev/MC-125757), makes all arrows advance their despawn
         timer as if they were stuck in the ground, after a delay (in ticks).
     count-all-mobs-for-spawning:
       vanilla: "true"

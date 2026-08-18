@@ -13,25 +13,25 @@ worry about handling various server reload events, like `/reload`. Instead, what
 But how does one get access to a `LifecycleEventManager` capable of registering commands? There are two "contexts" in which you can use a LifecycleEventManager. The first one,
 and preferred one, is in the `PluginBootstrap` class of our plugin.
 
-### Registering inside a plugin bootstrapper
+### Registering inside the plugin bootstrapper
 
 :::note
 
-This requires you to use a [`paper-plugin.yml` plugin](/paper/dev/getting-started/paper-plugins).
+This requires you to use a [Paper plugin](/paper/dev/getting-started/paper-plugins) (with a `paper-plugin.yml`).
 
-If you are not using `paper-plugin.yml`, you can instead [register your commands inside your plugin's main class](#registering-inside-a-plugin-main-class).
+If you are not using `paper-plugin.yml`, you can instead [register your commands inside your plugin's main class](#registering-inside-the-plugins-main-class).
 
 :::
 
-We can get access to a `LifecycleEventManager` capable of registering commands by running `context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {})`
+We can get access to a `LifecycleEventManager` capable of registering commands by running `context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {})`
 inside our bootstrap method, like this:
 
-```java title="CustomPluginBootstrap.java"
-public class CustomPluginBootstrap implements PluginBootstrap {
+```java title="ExamplePluginBootstrap.java"
+public final class ExamplePluginBootstrap implements PluginBootstrap {
 
     @Override
-    public void bootstrap(BootstrapContext context) {
-        context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
+    public void bootstrap(final BootstrapContext context) {
+        context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             // register your commands here ...
         });
     }
@@ -40,8 +40,7 @@ public class CustomPluginBootstrap implements PluginBootstrap {
 
 A quick recap on what all of this means:
 By running `context.getLifecycleManager()`, we get a `LifecycleEventManager<BootstrapContext>` object. We can call
-`LifecycleEventManager#registerEventHandler(LifecycleEventType, LifecycleEventHandler)` on that to get our correct lifecycle event. The first parameter declares
-the lifecycle event type we want to register stuff for, the second parameter is an interface that looks like this:
+`LifecycleEventManager#registerEventHandler(LifecycleEventType, LifecycleEventHandler)` on that to register our lifecycle event. The first parameter declares the lifecycle event type we want to register the handler for, the second parameter is an interface that looks like this:
 
 ```java
 @FunctionalInterface
@@ -56,18 +55,23 @@ Due to it being a functional interface, we can, instead of implementing it, just
 The `ReloadableRegistrarEvent<Commands>` class has two methods: `ReloadableRegistrarEvent.Cause cause()` and `Commands registrar()`. The more relevant method for us is
 the `registrar` one. With it we can register our commands.
 
+:::tip
 
-### Registering inside a plugin main class
+Registering commands in the plugin bootstrapper allow for your commands to be used by datapack function earlier in the server startup process.
+
+:::
+
+### Registering inside the plugin's main class
 Getting access to a `LifecycleEventManager` for commands inside our plugin's main class is very similar to how you access it inside the PluginBootstrap class, with the difference
 that instead of getting the `LifecycleEventManager` using the `BootstrapContext` provided to us in the bootstrap method of our PluginBootstrap class, we can just retrieve it using
-`JavaPlugin#getLifecycleManager`.
+`Plugin#getLifecycleManager`.
 
-```java title="PluginMainClass.java"
-public final class PluginMainClass extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
+        this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
             // register your commands here ...
         });
     }
@@ -79,7 +83,7 @@ This follows the same concept as the PluginBootstrap one, just that instead of b
 The rest of the methods works the exact same way as with the `PluginBootstrap` parameterized `LifecycleEventManager`.
 
 ## Registering commands using the Commands class
-Now that we have access to the instance of a `Commands` class via `commands.registrar()` in our event handler, we have access to a few overloads of the `Commands#register`
+Now that we have access to the instance of a `Commands` class via `event.registrar()` in our event handler, we have access to a few overloads of the `Commands#register`
 method.
 
 ### Registering a LiteralCommandNode
@@ -107,13 +111,13 @@ Now that we have retrieved our `LiteralCommandNode`, we can register it. For tha
 Registering our "testcmd" might look like this:
 
 ```java
-this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-    commands.registrar().register(buildCommand);
+context.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+    event.registrar().register(buildCommand);
 });
 ```
 
 ### Registering a BasicCommand
-A [`BasicCommand`](jd:paper:io.papermc.paper.command.brigadier.BasicCommand) is a Bukkit-like way of defining commands. Instead of building up a command tree,
+A [](jd:paper:io.papermc.paper.command.brigadier.BasicCommand) is a Bukkit-like way of defining commands. Instead of building up a command tree,
 we allow all user input and retrieve the arguments as a simple array of strings. This type of commands is particularly useful for very simple, text based commands,
 like a `/broadcast` command. You can read up on more details about basic commands [here](/paper/dev/command-api/misc/basic-command).
 
@@ -122,8 +126,8 @@ Assuming you already have your `BasicCommand` object, we can register it like th
 ```java
 final BasicCommand basicCommand = ...;
 
-this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, commands -> {
-    commands.registrar().register("commandname", basicCommand);
+this.getLifecycleManager().registerEventHandler(LifecycleEvents.COMMANDS, event -> {
+    event.registrar().register("commandname", basicCommand);
 });
 ```
 

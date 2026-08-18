@@ -4,7 +4,7 @@ description: A guide on how to use BukkitScheduler to run code at specific times
 slug: paper/dev/scheduler
 ---
 
-The [`BukkitScheduler`](jd:paper:org.bukkit.scheduler.BukkitScheduler) can be used to schedule your code to be run later or repeatedly.
+The [](jd:paper:org.bukkit.scheduler.BukkitScheduler) can be used to schedule your code to be run later or repeatedly.
 
 :::note[Folia]
 
@@ -34,7 +34,7 @@ Converting from human units to ticks and back is as simple as:
 - `seconds = ticks / 20`
 
 You can make your code more readable by using the
-[`TimeUnit`](jd:java:java.util.concurrent.TimeUnit)
+[](jd:java:java.util.concurrent.TimeUnit)
 enum, e.g. to convert 5 minutes to ticks and back:
 - `TimeUnit.MINUTES.toSeconds(5) * 20`
 - `TimeUnit.SECONDS.toMinutes(ticks / 20)`
@@ -45,7 +45,7 @@ You can also use the `Tick` class from Paper to convert between human units and 
 ## Obtaining the scheduler
 
 To obtain a scheduler, you can use the [`getScheduler`](jd:paper:org.bukkit.Server#getScheduler()) method
-on the [`Server`](jd:paper:org.bukkit.Server) class, e.g. in your `onEnable` method:
+on the [](jd:paper:org.bukkit.Server) class, e.g. in your `onEnable` method:
 
 ```java
 @Override
@@ -59,7 +59,7 @@ public void onEnable() {
 Scheduling a task requires you to pass:
 
 - Your plugin's instance
-- The code to run, either with a [`Runnable`](jd:java:java.lang.Runnable)
+- The code to run, either with a [](jd:java:java.lang.Runnable)
 or <code>[Consumer](jd:java:java.util.function.Consumer)<[BukkitTask](jd:paper:org.bukkit.scheduler.BukkitTask)></code>
 - The delay in ticks before the task should run for the first time
 - The period in ticks between each execution of the task, if you're scheduling a repeating task
@@ -93,7 +93,7 @@ While the tasks are executed on separate threads, they are still started from th
 and will be affected if the server is lagging, an example would be 20 ticks not being exactly 1 second.
 
 If you need a scheduler that runs independently of the server, consider using your own
-[`ScheduledExecutorService`](jd:java:java.util.concurrent.ScheduledExecutorService).
+[](jd:java:java.util.concurrent.ScheduledExecutorService).
 You can follow [this guide](https://www.baeldung.com/java-executor-service-tutorial#ScheduledExecutorService) to learn how to use it.
 
 :::
@@ -102,8 +102,8 @@ You can follow [this guide](https://www.baeldung.com/java-executor-service-tutor
 
 #### Using `Runnable`
 
-The [`Runnable`](jd:java:java.lang.Runnable) interface is used for the simplest tasks
-that don't require a [`BukkitTask`](jd:paper:org.bukkit.scheduler.BukkitTask) instance.
+The [](jd:java:java.lang.Runnable) interface is used for the simplest tasks
+that don't require a [](jd:paper:org.bukkit.scheduler.BukkitTask) instance.
 
 You can either implement it in a separate class, e.g.:
 
@@ -130,14 +130,14 @@ Or use a lambda expression, which is great for simple and short tasks:
 
 ```java
 scheduler.runTaskLater(plugin, /* Lambda: */ () -> {
-    this.plugin.getServer().broadcast(Component.text("Hello, World!"));
+    plugin.getServer().broadcast(Component.text("Hello, World!"));
 }, /* End of the lambda */ 20);
 ```
 
 #### Using `Consumer<BukkitTask>`
 
-The [`Consumer`](jd:java:java.util.function.Consumer) interface is used for tasks
-that require a [`BukkitTask`](jd:paper:org.bukkit.scheduler.BukkitTask) instance (usually in repeated tasks),
+The [](jd:java:java.util.function.Consumer) interface is used for tasks
+that require a [](jd:paper:org.bukkit.scheduler.BukkitTask) instance (usually in repeated tasks),
 e.g. when you want to cancel the task from inside it.
 
 You can either implement it in a separate class similarly to the `Runnable`, e.g.:
@@ -147,8 +147,8 @@ public class MyConsumerTask implements Consumer<BukkitTask> {
 
     private final UUID entityId;
 
-    public MyConsumerTask(UUID uuid) {
-        this.entityId = uuid;
+    public MyConsumerTask(UUID entityId) {
+        this.entityId = entityId;
     }
 
     @Override
@@ -185,7 +185,7 @@ scheduler.runTaskTimer(plugin, /* Lambda: */ task -> {
 
 ##### Using `BukkitRunnable`
 
-[`BukkitRunnable`](jd:paper:org.bukkit.scheduler.BukkitRunnable) is a class that implements `Runnable`
+[](jd:paper:org.bukkit.scheduler.BukkitRunnable) is a class that implements `Runnable`
 and holds a `BukkitTask` instance. This means that you do not need to access the task from inside the `run()` method,
 you can simply use the [`this.cancel()`](jd:paper:org.bukkit.scheduler.BukkitRunnable#cancel()) method:
 
@@ -194,8 +194,8 @@ public class CustomRunnable extends BukkitRunnable {
 
     private final UUID entityId;
 
-    public CustomRunnable(UUID uuid) {
-        this.entityId = uuid;
+    public CustomRunnable(UUID entityId) {
+        this.entityId = entityId;
     }
 
     @Override

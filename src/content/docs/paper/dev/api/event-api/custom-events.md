@@ -9,10 +9,10 @@ This will allow other plugins to listen to your custom events and add functional
 
 ## Creating a custom event
 
-To create a custom event, you need to create a class that extends [`Event`](jd:paper:org.bukkit.event.Event).
-Each event requires a [`HandlerList`](jd:paper:org.bukkit.event.HandlerList) that will contain all the listeners that are listening to that event.
+To create a custom event, you need to create a class that extends [](jd:paper:org.bukkit.event.Event).
+Each event requires a [](jd:paper:org.bukkit.event.HandlerList) that will contain all the listeners that are listening to that event.
 The only exception to this requirement is when you have an event class that cannot be fired, but serves as a parent for other events instead.
-An example of this is [`BlockPistonEvent`](jd:paper:org.bukkit.event.block.BlockPistonEvent), which cannot be listened to directly.
+An example of this is [](jd:paper:org.bukkit.event.block.BlockPistonEvent), which cannot be listened to directly.
 
 This list is used to call the listeners when the event is called.
 
@@ -76,7 +76,7 @@ public class PaperIsCoolEvent extends Event {
 Now that we have created our event, we can call it.
 
 ```java title="ExamplePlugin.java"
-public class ExamplePlugin extends JavaPlugin {
+public final class ExamplePlugin extends JavaPlugin {
 
     // ...
 
@@ -110,8 +110,8 @@ public class PaperIsCoolEvent extends Event implements Cancellable {
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
-        this.cancelled = cancelled;
+    public void setCancelled(boolean cancel) {
+        this.cancelled = cancel;
     }
 }
 ```
@@ -119,7 +119,7 @@ public class PaperIsCoolEvent extends Event implements Cancellable {
 Now, when the event is called, you can check if it is cancelled and act accordingly.
 
 ```java title="ExamplePlugin.java"
-public class ExamplePlugin extends JavaPlugin {
+public final class ExamplePlugin extends JavaPlugin {
 
     // ...
 
@@ -133,12 +133,12 @@ public class ExamplePlugin extends JavaPlugin {
 }
 ```
 
-When an event is cancellable, [`Event#callEvent()`](jd:paper:org.bukkit.event.Event#callEvent())
+When an event is cancellable, [](jd:paper:org.bukkit.event.Event#callEvent())
 will return false if the event was cancelled. This allows you to directly use `callEvent` in your `if` statement,
-instead of having to check [`Cancellable#isCancelled()`](jd:paper:org.bukkit.event.Cancellable#isCancelled()) manually.
+instead of having to check [](jd:paper:org.bukkit.event.Cancellable#isCancelled()) manually.
 
 ```java title="ExamplePlugin.java"
-public class ExamplePlugin extends JavaPlugin {
+public final class ExamplePlugin extends JavaPlugin {
 
     // ...
 

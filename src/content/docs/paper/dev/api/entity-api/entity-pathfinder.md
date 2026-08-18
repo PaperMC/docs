@@ -10,15 +10,15 @@ for an entity to follow, such as moving to a location or following a player.
 ## Accessing the pathfinder
 
 To access the pathfinder for a mob, you need to call [`getPathfinder()`](jd:paper:org.bukkit.entity.Mob#getPathfinder()) on the mob.
-This will return an instance of [`Pathfinder`](jd:paper:com.destroystokyo.paper.entity.Pathfinder).
+This will return an instance of [](jd:paper:com.destroystokyo.paper.entity.Pathfinder).
 
 :::note
 
-The pathfinder is only available for entities that implement [`Mob`](jd:paper:org.bukkit.entity.Mob).
+The pathfinder is only available for entities that implement [](jd:paper:org.bukkit.entity.Mob).
 
 :::
 
-Let's say that you have a [`Cow`](jd:paper:org.bukkit.entity.Cow) and want to move it to a player.
+Let's say that you have a [](jd:paper:org.bukkit.entity.Cow) and want to move it to a player.
 You can do this by getting the pathfinder for the cow and then setting the path to the player's location:
 
 ```java

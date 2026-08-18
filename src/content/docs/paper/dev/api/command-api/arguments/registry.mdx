@@ -2,7 +2,7 @@
 title: Registry
 description: Documentation for arguments retrieving registry values.
 slug: paper/dev/command-api/arguments/registry
-version: 26.1.1
+version: "26.2"
 ---
 
 import ResourceItem from "./assets/registry-arguments/resource-item.mp4";
@@ -18,8 +18,8 @@ The main difference between those arguments is the return value: The `resource` 
 you can use to retrieve the value yourself.
 
 ## Resource argument
-Just like any other argument, you can get a `ArgumentType<T>` reference to it using `ArgumentTypes.resource(RegistryKey<T>)`. A selection of possible registry keys can be
-found below. They are accessed in a static context using the [`RegistryKey`](jd:paper:io.papermc.paper.registry.RegistryKey) interface.
+Just like any other argument, you can get an `ArgumentType<T>` reference to it using `ArgumentTypes.resource(RegistryKey<T>)`.
+They are accessed in a static context using the [](jd:paper:io.papermc.paper.registry.RegistryKey) interface.
 
 Each entry in `RegistryKey` returns a `RegistryKey<T>`. The `<T>` generic parameter here describes the return type. This means that if we were to retrieve
 [`RegistryKey.ITEM`](jd:paper:io.papermc.paper.registry.RegistryKey#ITEM), the return type would be an `ItemType`, since it is defined as follows:
@@ -35,31 +35,29 @@ public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
 And really, there isn't much more to it. For that exact reason, here is an example on the implementation of such an argument:
 
 ```java
-public static LiteralCommandNode<CommandSourceStack> enchantmentRegistry() {
-    return Commands.literal("enchants-registry")
-        .then(Commands.argument("enchantment", ArgumentTypes.resource(RegistryKey.ENCHANTMENT))
-            .executes(ctx -> {
-                final Enchantment enchantment = ctx.getArgument("enchantment", Enchantment.class);
+Commands.argument("enchantment", ArgumentTypes.resource(RegistryKey.ENCHANTMENT))
+    .executes(context -> {
+        final Player player = context.getSource().getPlayerOrThrow();
+        final ItemStack item = player.getInventory().getItemInMainHand();
+        if (item.isEmpty()) {
+            context.getSource().getSender().sendRichMessage("<red><player> is not holding any item",
+                Placeholder.component("player", player.displayName())
+            );
+            return Command.SINGLE_SUCCESS;
+        }
 
-                if (ctx.getSource().getExecutor() instanceof Player player) {
-                    final ItemStack stack = player.getInventory().getItemInMainHand();
-                    stack.addUnsafeEnchantment(enchantment, 10);
-                    ctx.getSource().getSender().sendRichMessage("Enchanted <player>'s <item> with <enchantment>!",
-                        Placeholder.component("player", player.name()),
-                        Placeholder.component("item", Component.translatable(stack)),
-                        Placeholder.component("enchantment", enchantment.displayName(10))
-                    );
-                    return Command.SINGLE_SUCCESS;
-                }
-
-                ctx.getSource().getSender().sendRichMessage("<red>This command requires a player!");
-                return Command.SINGLE_SUCCESS;
-            }))
-        .build();
-}
+        final Enchantment enchantment = context.getArgument("enchantment", Enchantment.class);
+        item.addUnsafeEnchantment(enchantment, 10);
+        context.getSource().getSender().sendRichMessage("Enchanted <player>'s <item> with <enchantment>!",
+            Placeholder.component("player", player.displayName()),
+            Placeholder.component("item", Component.translatable(item).hoverEvent(item)),
+            Placeholder.component("enchantment", enchantment.displayName(10))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
-We define an `enchantment` argument using a enchantment registry key resource and retrieve the value of that using `ctx.getArgument("enchantment", Enchantment.class)`.
+We define an `enchantment` argument using the registry key of the enchantment registry and retrieve the value of that using `context.getArgument("enchantment", Enchantment.class)`.
 Finally, we enchant the item of the executing player's hand with whatever enchantment the sender chose at level 10 and send a success message.
 
 Here is how it looks in-game:
@@ -82,7 +80,7 @@ Due to this fact, it is advised to only use the `STRUCTURE` registry key with a 
 :::
 
 ## Resource key argument
-For the client, there is barely any difference between the using `ArgumentTypes.resource` or `ArgumentTypes.resourceKey`. The only difference is that
+For the client, there is barely any difference between using `ArgumentTypes.resource` or `ArgumentTypes.resourceKey`. The only difference is that
 using `ArgumentTypes.resourceKey` does not provide **error checking**. We can visualize this using `RegistryKey.ITEM`.
 
 Here is the tab completion when using `ArgumentTypes.resource(RegistryKey.ITEM)`:
@@ -93,11 +91,11 @@ And here is the tab completion when using `ArgumentTypes.resourceKey(RegistryKey
 
 :::note
 
-In the example given above, due to an unhandled null pointer exception, the command does not successfully run. The code for that command is directly trying to use the value retrieved
-by the registry access by doing `ItemType item = RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key())`. If you try to do any
+In the example given above, due to an unhandled `NullPointerException`, the command does not successfully run. The code for that command is directly trying to use the value retrieved
+by the registry access by doing `RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key())`. If you try to do any
 operation with the result, it might be null and error.
 
-You should **always** check the result of a registry retrieval operation. An example for that is given below in the [direct code comparison](#direct-code-comparison).
+You should **always** check the result of a registry retrieval operation when it's not already enforced by the argument type. An example for that is given below in the [direct code comparison](#direct-code-comparison).
 
 :::
 
@@ -113,39 +111,35 @@ checking and simple usability.
 :::
 
 ### Direct code comparison
-Here is a simple code snipped on how one could use the `RegistryKey.ITEM` registry with a `resource` argument type:
+Here is a simple code snippet on how one could use the `RegistryKey.ITEM` registry with a `resource` argument type:
 
 ```java
 Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
-    .executes(ctx -> {
-        final ItemType item = ctx.getArgument("item", ItemType.class);
+    .executes(context -> {
+        final ItemType item = context.getArgument("item", ItemType.class);
+        final Player player = context.getSource().getPlayerOrThrow();
 
-        if (ctx.getSource().getExecutor() instanceof Player player) {
-            player.getInventory().addItem(item.createItemStack());
-        }
+        player.getInventory().addItem(item.createItemStack());
 
         return Command.SINGLE_SUCCESS;
-    });
+    })
 ```
 
-Here is the same code, using a `resourceKey` argument type. Instead of directly retrieving the argument using `ctx.getArgument("item", TypedKey.class)`, we instead use the
-[`RegistryArgumentExtractor`](jd:paper:io.papermc.paper.command.brigadier.argument.RegistryArgumentExtractor) to retrieve our `TypedKey<ItemType>`.
+Here is the same code, using a `resourceKey` argument type. Instead of directly retrieving the argument using `context.getArgument("item", TypedKey.class)`, we instead use the
+[](jd:paper:io.papermc.paper.command.brigadier.argument.RegistryArgumentExtractor) to retrieve our `TypedKey<ItemType>`.
 
 ```java
 Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
-    .executes(ctx -> {
-        final TypedKey<ItemType> itemKey = RegistryArgumentExtractor.getTypedKey(ctx, RegistryKey.ITEM, "item");
-        ItemType item = RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key());
+    .executes(context -> {
+        final TypedKey<ItemType> itemKey = RegistryArgumentExtractor.getTypedKey(context, RegistryKey.ITEM, "item");
+        final ItemType item = RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key());
 
         if (item == null) {
-            ctx.getSource().getSender().sendRichMessage("<red>Please provide a valid item!");
+            context.getSource().getSender().sendRichMessage("<red>Please provide a valid item!");
             return Command.SINGLE_SUCCESS;
         }
 
-        if (ctx.getSource().getExecutor() instanceof Player player) {
-            player.getInventory().addItem(item.createItemStack());
-        }
-
+        context.getSource().getPlayerOrThrow().getInventory().addItem(item.createItemStack());
         return Command.SINGLE_SUCCESS;
     })
 ```

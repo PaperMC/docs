@@ -16,7 +16,7 @@ Ideally, at least 16 _cores_ (not threads).
 First, it is recommended that the world is pre-generated so that the number
 of chunk system worker threads required is reduced greatly.
 
-The following is a _very rough_ estimation based off of the testing
+The following is a _very rough_ estimation based on the testing
 done before Folia was released on the test server we ran that
 had ~330 players peak. So, it is not exact and will require further tuning -
 just take it as a starting point.

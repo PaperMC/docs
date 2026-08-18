@@ -13,7 +13,7 @@ This guide explains how to spawn different types of particles.
 If the particle you're trying to spawn isn't mentioned in this guide, then it most likely has no special behavior.
 
 There are two ways to spawn particles.
-The first option is using the [`ParticleBuilder`](jd:paper:com.destroystokyo.paper.ParticleBuilder) class, which is
+The first option is using the [](jd:paper:com.destroystokyo.paper.ParticleBuilder) class, which is
 preferred over the `spawnParticle()` methods. It is reusable and offers improved readability and clarity. The builder also includes
 the method [`receivers()`](jd:paper:com.destroystokyo.paper.ParticleBuilder#receivers()), which provides you
 with greater control over receivers.
@@ -21,11 +21,11 @@ with greater control over receivers.
 An example of spawning 14 note particles in a 4x0.4x4 cuboid:
 ```java
 Particle.NOTE.builder()
-  .location(someLocation)
-  .offset(2, 0.2, 2)
-  .count(14)
-  .receivers(32, true)
-  .spawn();
+    .location(someLocation)
+    .offset(2, 0.2, 2)
+    .count(14)
+    .receivers(32, true)
+    .spawn();
 ```
 
 :::note
@@ -61,12 +61,12 @@ The `extra` argument is set to 0, so the particles don't move.
   <TabItem label="ParticleBuilder">
     ```java
     Particle.FLAME.builder()
-      .location(someLocation)
-      .offset(0.5, 0.5, 0.5)
-      .count(8)
-      .extra(0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(0.5, 0.5, 0.5)
+        .count(8)
+        .extra(0)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -89,11 +89,11 @@ An example of spawning 6 `CRIT` particles at a location, without offset, that wi
   <TabItem label="ParticleBuilder">
     ```java
     Particle.CRIT.builder()
-      .location(someLocation)
-      .count(6)
-      .extra(0.6)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .count(6)
+        .extra(0.6)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -114,21 +114,21 @@ An example of a repeating task spawning campfire smoke that slowly goes "up" (po
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = Particle.CAMPFIRE_SIGNAL_SMOKE.builder()
-      .location(someLocation)
-      .offset(0, 1, 0)
-      .count(0)
-      .extra(0.1);
+        .location(someLocation)
+        .offset(0, 1, 0)
+        .count(0)
+        .extra(0.1);
 
-    Bukkit.getScheduler().runTaskTimer(plugin,
-      () -> particleBuilder.receivers(32, true).spawn(),
-    0, 4);
+    Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+        particleBuilder.receivers(32, true).spawn();
+    }, 0, 4);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    Bukkit.getScheduler().runTaskTimer(plugin,
-      () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, 1, 0, 0.1),
-      0, 4);
+    Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+        someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, 1, 0, 0.1);
+    }, 0, 4);
     ```
   </TabItem>
 </Tabs>
@@ -140,95 +140,94 @@ We could also make the smoke go down if we wanted to:
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = Particle.CAMPFIRE_SIGNAL_SMOKE.builder()
-      .location(someLocation)
-      .offset(0, -1, 0)
-      .count(0)
-      .extra(0.1);
+        .location(someLocation)
+        .offset(0, -1, 0)
+        .count(0)
+        .extra(0.1);
 
-    Bukkit.getScheduler().runTaskTimer(plugin,
-      () -> particleBuilder.receivers(32, true).spawn(),
-    0, 4);
+    Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+        particleBuilder.receivers(32, true).spawn();
+    }, 0, 4);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    Bukkit.getScheduler().runTaskTimer(plugin,
-      () -> someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, -1, 0, 0.1),
-      0, 4);
+    Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+        someWorld.spawnParticle(Particle.CAMPFIRE_SIGNAL_SMOKE, someLocation, 0, 0, -1, 0, 0.1);
+    }, 0, 4);
     ```
   </TabItem>
 </Tabs>
 
-{/* spellchecker:off */}
 ### List of directional particles
+{/* spellchecker:off */}
 <details>
-<summary>Show list</summary>
-- BLOCK
-- BUBBLE
-- BUBBLE_COLUMN_UP
-- BUBBLE_POP
-- CAMPFIRE_COSY_SMOKE
-- CAMPFIRE_SIGNAL_SMOKE
-- CLOUD
-- CRIT
-- DAMAGE_INDICATOR
-- DRAGON_BREATH
-- DUST
-- DUST_COLOR_TRANSITION
-- DUST_PLUME
-- ELECTRIC_SPARK
-- ENCHANTED_HIT
-- END_ROD
-- FIREWORK
-- FISHING
-- FLAME
-- FLASH
-- GEYSER_BASE
-- GEYSER_POOF
-- GEYSER_PLUME
-- GLOW_SQUID_INK
-- ITEM
-- LARGE_SMOKE
-- PAUSE_MOB_GROWTH
-- POOF
-- RESET_MOB_GROWTH
-- REVERSE_PORTAL
-- SCRAPE
-- SCULK_CHARGE
-- SCULK_CHARGE_POP
-- SCULK_SOUL
-- SMALL_FLAME
-- SMOKE
-- SNEEZE
-- SNOWFLAKE
-- SOUL
-- SOUL_FIRE_FLAME
-- SPIT
-- SQUID_INK
-- TOTEM_OF_UNDYING
-- TRIAL_SPAWNER_DETECTION
-- TRIAL_SPAWNER_DETECTION_OMINOUS
-- WAX_OFF
-- WAX_ON
-- WHITE_SMOKE
-
+  <summary>Show list</summary>
+  - BLOCK
+  - BUBBLE
+  - BUBBLE_COLUMN_UP
+  - BUBBLE_POP
+  - CAMPFIRE_COSY_SMOKE
+  - CAMPFIRE_SIGNAL_SMOKE
+  - CLOUD
+  - CRIT
+  - DAMAGE_INDICATOR
+  - DRAGON_BREATH
+  - DUST
+  - DUST_COLOR_TRANSITION
+  - DUST_PLUME
+  - ELECTRIC_SPARK
+  - ENCHANTED_HIT
+  - END_ROD
+  - FIREWORK
+  - FISHING
+  - FLAME
+  - FLASH
+  - GEYSER_BASE
+  - GEYSER_POOF
+  - GEYSER_PLUME
+  - GLOW_SQUID_INK
+  - ITEM
+  - LARGE_SMOKE
+  - PAUSE_MOB_GROWTH
+  - POOF
+  - RESET_MOB_GROWTH
+  - REVERSE_PORTAL
+  - SCRAPE
+  - SCULK_CHARGE
+  - SCULK_CHARGE_POP
+  - SCULK_SOUL
+  - SMALL_FLAME
+  - SMOKE
+  - SNEEZE
+  - SNOWFLAKE
+  - SOUL
+  - SOUL_FIRE_FLAME
+  - SPIT
+  - SQUID_INK
+  - TOTEM_OF_UNDYING
+  - TRIAL_SPAWNER_DETECTION
+  - TRIAL_SPAWNER_DETECTION_OMINOUS
+  - WAX_OFF
+  - WAX_ON
+  - WHITE_SMOKE
 </details>
 {/* spellchecker:on */}
 
 ## Colored particles
-These particles can be colored by passing a [`Color`](jd:paper:org.bukkit.Color) object as the `data` argument.
+These particles can be colored by passing a [](jd:paper:org.bukkit.Color) object as the `data` argument.
 
 Example of spawning 10 potion effect particles in a 2x2x2 area with a slightly translucent orange color:
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
     Particle.ENTITY_EFFECT.builder()
-      .location(someLocation)
-      .offset(1, 1, 1)
-      .count(10)
-      .data(Color.fromARGB(200, 255, 128, 0))
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(1, 1, 1)
+        .count(10)
+        .data(Color.fromARGB(200, 255, 128, 0))
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -250,7 +249,7 @@ While `FLASH` and `TINTED_LEAVES` particles take an ARGB color, the alpha channe
 
 ### Dust particles
 Vanilla uses the dust particle for redstone particles. They can have a custom color by passing
-[Particle.DustOptions](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
+[](jd:paper:org.bukkit.Particle$DustOptions) as `data`.
 
 :::note
 The scale factor must be in the range of `0.01` to `4.0`. Values outside this range will be clamped to the nearest valid value.
@@ -261,23 +260,23 @@ An example of creating a vertical line of blue dust particles, that are two time
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = Particle.DUST.builder()
-      .color(Color.BLUE, 2.0f);
+        .color(Color.BLUE, 2.0F);
 
     // We can reuse the builder
     for (double i = -1.0; i <= 1.0; i += 0.25) {
-      particleBuilder.location(someLocation.clone().add(0, i, 0)).receivers(32, true).spawn();
+        particleBuilder.location(someLocation.clone().add(0, i, 0)).receivers(32, true).spawn();
     }
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
     for (double i = -1.0; i <= 1.0; i += 0.25) {
-      someWorld.spawnParticle(
-        Particle.DUST,
-        someLocation.clone().add(0, i, 0),
-        1,
-        new Particle.DustOptions(Color.BLUE, 2.0f)
-      );
+        someWorld.spawnParticle(
+            Particle.DUST,
+            someLocation.clone().add(0, i, 0),
+            1,
+            new Particle.DustOptions(Color.BLUE, 2.0F)
+        );
     }
     ```
   </TabItem>
@@ -292,7 +291,7 @@ integer between 8 and 40, which is multiplied by the particle's scale, to get th
 
 #### Dust transition particles
 Dust transition particles work exactly like [dust particles](#dust-particles), but instead of having a static color, they **transition**
-their color from one to another. A [Particle.DustTransition](jd:paper:org.bukkit.Particle$DustTransition) is used for
+their color from one to another. A [](jd:paper:org.bukkit.Particle$DustTransition) is used for
 specifying the transition.
 
 An example where three dust transition particles spawn on the x-axis within a 1-block length:
@@ -300,22 +299,22 @@ An example where three dust transition particles spawn on the x-axis within a 1-
   <TabItem label="ParticleBuilder">
     ```java
     Particle.DUST_COLOR_TRANSITION.builder()
-      .location(someLocation)
-      .offset(0.5, 0, 0)
-      .count(3)
-      .colorTransition(Color.RED, Color.BLUE)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(0.5, 0, 0)
+        .count(3)
+        .colorTransition(Color.RED, Color.BLUE)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
     someWorld.spawnParticle(
-      Particle.DUST_COLOR_TRANSITION,
-      someLocation,
-      3,
-      0.5, 0, 0,
-      new Particle.DustTransition(Color.RED, Color.BLUE, 1.0f)
+        Particle.DUST_COLOR_TRANSITION,
+        someLocation,
+        3,
+        0.5, 0, 0,
+        new Particle.DustTransition(Color.RED, Color.BLUE, 1.0F)
     );
     ```
   </TabItem>
@@ -332,16 +331,16 @@ Example:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.NOTE.builder()
-      .location(someLocation)
-      .offset(0.4f, 0, 0)
-      .count(0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(0.4F, 0, 0)
+        .count(0)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 0.4f, 0, 0);
+    someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 0.4F, 0, 0);
     ```
   </TabItem>
 </Tabs>
@@ -361,23 +360,23 @@ Example:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.NOTE.builder()
-      .location(someLocation)
-      .offset(2.0f/24.0f, 0, 0)
-      .count(0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(2.0F / 24.0F, 0, 0)
+        .count(0)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
-    someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0f/24.0f, 0, 0);
+    someWorld.spawnParticle(Particle.NOTE, someLocation, 0, 2.0F / 24.0F, 0, 0);
     ```
   </TabItem>
 </Tabs>
 :::
 
 ### Trail particles
-Trail particles require you to pass a [`Particle.Trail`](jd:paper:org.bukkit.Particle$Trail) object as `data`.
+Trail particles require you to pass a [](jd:paper:org.bukkit.Particle$Trail) object as `data`.
 
 An example where eight randomly offset trail particles travel towards a specified location
 (`someLocation.clone().add(-4, 0, 4)`) with a yellow color and a travel time of 40 ticks:
@@ -385,22 +384,22 @@ An example where eight randomly offset trail particles travel towards a specifie
   <TabItem label="ParticleBuilder">
     ```java
     Particle.TRAIL.builder()
-      .location(someLocation)
-      .offset(1, 1, 1)
-      .count(8)
-      .data(new Particle.Trail(someLocation.clone().add(-4, 0, 4), Color.YELLOW, 40))
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(1, 1, 1)
+        .count(8)
+        .data(new Particle.Trail(someLocation.clone().add(-4, 0, 4), Color.YELLOW, 40))
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
     someWorld.spawnParticle(
-      Particle.TRAIL,
-      someLocation,
-      8,
-      1, 1, 1,
-      new Particle.Trail(someLocation.clone().add(-4, 0, 4), Color.YELLOW, 40)
+        Particle.TRAIL,
+        someLocation,
+        8,
+        1, 1, 1,
+        new Particle.Trail(someLocation.clone().add(-4, 0, 4), Color.YELLOW, 40)
     );
     ```
   </TabItem>
@@ -418,11 +417,11 @@ An example where an enchantment particle will spawn at `someLocation.clone().add
   <TabItem label="ParticleBuilder">
     ```java
     Particle.ENCHANT.builder()
-      .location(someLocation)
-      .offset(-2, 0, 2)
-      .count(0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(-2, 0, 2)
+        .count(0)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -446,12 +445,12 @@ travels in a straight line.
 
 ### List of converging particles
 <details>
-<summary>Show list</summary>
-- ENCHANT
-- NAUTILUS
-- OMINOUS_SPAWNING
-- PORTAL
-- VAULT_CONNECTION
+  <summary>Show list</summary>
+  - ENCHANT
+  - NAUTILUS
+  - OMINOUS_SPAWNING
+  - PORTAL
+  - VAULT_CONNECTION
 </details>
 
 ## Material particles
@@ -463,11 +462,11 @@ Example:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.BLOCK_CRUMBLE.builder()
-      .location(someLocation)
-      .count(4)
-      .data(BlockType.GLOWSTONE.createBlockData())
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .count(4)
+        .data(BlockType.GLOWSTONE.createBlockData())
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -478,9 +477,9 @@ Example:
 </Tabs>
 
 :::note
-This guide uses [`BlockType.createBlockData()`](jd:paper:org.bukkit.block.BlockType#createBlockData()). While using
-[`Material.createBlockData()`](jd:paper:org.bukkit.Material#createBlockData()) or
-[`Bukkit.createBlockData(Material)`](jd:paper:org.bukkit.Bukkit#createBlockData(org.bukkit.Material)) yields the same result,
+This guide uses [](jd:paper:org.bukkit.block.BlockType#createBlockData()). While using
+[](jd:paper:org.bukkit.Material#createBlockData()) or
+[](jd:paper:org.bukkit.Bukkit#createBlockData(org.bukkit.Material)) yields the same result,
 they are considered **legacy**.
 :::
 
@@ -501,11 +500,11 @@ Example:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.ITEM.builder()
-      .location(someLocation)
-      .count(4)
-      .data(ItemStack.of(Material.DIAMOND_PICKAXE))
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .count(4)
+        .data(ItemStack.of(Material.DIAMOND_PICKAXE))
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -516,9 +515,9 @@ Example:
 </Tabs>
 
 :::note
-This guide uses [`ItemStack.of(Material)`](jd:paper:org.bukkit.inventory.ItemStack#of(org.bukkit.Material)). While using
+This guide uses [](jd:paper:org.bukkit.inventory.ItemStack#of(org.bukkit.Material)). While using
 [`new ItemStack(Material)`](jd:paper:org.bukkit.inventory.ItemStack) yields the same result,
-it is considered **legacy**. [`ItemType.createItemStack()`](jd:paper:org.bukkit.inventory.ItemType#createItemStack())
+it is considered **legacy**. [](jd:paper:org.bukkit.inventory.ItemType#createItemStack())
 also yields the same result, but is more likely to get removed in the future.
 :::
 
@@ -536,11 +535,11 @@ Example of spawning a sculk charge particle at 45° that doesn't move:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.SCULK_CHARGE.builder()
-      .location(someLocation)
-      .data((float) Math.toRadians(45))
-      .extra(0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .data((float) Math.toRadians(45))
+        .extra(0)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -566,10 +565,10 @@ Example where a shriek particle will spawn after one second:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.SHRIEK.builder()
-      .location(someLocation)
-      .data(20)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .data(20)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -582,9 +581,9 @@ Example where a shriek particle will spawn after one second:
 ![Shriek particle](./assets/particles/shriek.webp)
 
 ### Vibration
-Vibration particles require you to pass a [`Vibration`](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
-location ([`Vibration.Destination.BlockDestination`](jd:paper:org.bukkit.Vibration\$Destination\$BlockDestination))
-or an entity target ([`Vibration.Destination.EntityDestination`](jd:paper:org.bukkit.Vibration\$Destination\$EntityDestination)).
+Vibration particles require you to pass a [](jd:paper:org.bukkit.Vibration) object as `data`, where you can choose between a
+location ([](jd:paper:org.bukkit.Vibration$Destination$BlockDestination))
+or an entity target ([](jd:paper:org.bukkit.Vibration$Destination$EntityDestination)).
 The constructor's second argument is the travel time in **ticks**.
 
 An example where a vibration particle will spawn at `someLocation` and travel to `otherLocation` in 40 ticks:
@@ -592,19 +591,19 @@ An example where a vibration particle will spawn at `someLocation` and travel to
   <TabItem label="ParticleBuilder">
     ```java
     Particle.VIBRATION.builder()
-      .location(someLocation)
-      .data(new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 40))
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .data(new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 40))
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
     someWorld.spawnParticle(
-      Particle.VIBRATION,
-      someLocation,
-      1,
-      new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 40)
+        Particle.VIBRATION,
+        someLocation,
+        1,
+        new Vibration(new Vibration.Destination.BlockDestination(otherLocation), 40)
     );
     ```
   </TabItem>
@@ -619,7 +618,7 @@ If you set `offsetX` AND `offsetZ` to `0`, the particle will have almost no x or
 a y-axis velocity set by the `offsetY` argument. In both cases, `offsetX` and `offsetZ` are not used in the velocity vector.
 
 :::caution
-`EFFECT` and `INSTANT_EFFECT` are [powered particles](#powered-particles) and use [`Particle.Spell`](jd:paper:org.bukkit.Particle$Spell)
+`EFFECT` and `INSTANT_EFFECT` are [powered particles](#powered-particles) and use [](jd:paper:org.bukkit.Particle$Spell)
 as their data. Due to the nature of rising particles' final calculated vertical velocity being very low (in range \[-0.056, 0.056\])
 and how powered particles calculate the vertical velocity, the resulting vertical velocity will always be the opposite of
 `power` value's sign.
@@ -630,11 +629,11 @@ Example of spawning a `GLOW` particle that moves up:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.GLOW.builder()
-      .location(someLocation)
-      .count(0)
-      .offset(0, 2, 0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .count(0)
+        .offset(0, 2, 0)
+        .receivers(32, true)
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -682,21 +681,23 @@ one with a scale of `2.0` right after:
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = Particle.SWEEP_ATTACK.builder()
-      .location(someLocation)
-      .count(0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .count(0)
+        .receivers(32, true)
+        .spawn();
 
-    Bukkit.getScheduler().runTaskLater(plugin,
-      () -> particleBuilder.offset(-2.0, 0, 0).spawn(), 10);
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        particleBuilder.offset(-2, 0, 0).spawn();
+    }, 10);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
     someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0);
 
-    Bukkit.getScheduler().runTaskLater(plugin,
-      () -> someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2.0, 0, 0), 10);
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        someWorld.spawnParticle(Particle.SWEEP_ATTACK, someLocation, 0, -2, 0, 0);
+    }, 10);
     ```
   </TabItem>
 </Tabs>
@@ -712,22 +713,24 @@ one with a scale of `4.0` right after:
   <TabItem label="ParticleBuilder">
     ```java
     ParticleBuilder particleBuilder = Particle.EXPLOSION.builder()
-      .location(someLocation)
-      .offset(1, 0, 0)
-      .count(0)
-      .receivers(32, true)
-      .spawn();
+        .location(someLocation)
+        .offset(1, 0, 0)
+        .count(0)
+        .receivers(32, true)
+        .spawn();
 
-    Bukkit.getScheduler().runTaskLater(plugin,
-      () -> particleBuilder.offset(-2.0, 0, 0).spawn(), 10);
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        particleBuilder.offset(-2, 0, 0).spawn();
+    }, 10);
     ```
   </TabItem>
   <TabItem label="spawnParticle">
     ```java
     someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, 1, 0, 0);
 
-    Bukkit.getScheduler().runTaskLater(plugin,
-      () -> someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, -2.0, 0, 0), 10);
+    Bukkit.getScheduler().runTaskLater(plugin, () -> {
+        someWorld.spawnParticle(Particle.EXPLOSION, someLocation, 0, -2, 0, 0);
+    }, 10);
     ```
   </TabItem>
 </Tabs>
@@ -739,23 +742,23 @@ There are four geyser particles: `GEYSER_BASE`, `GEYSER_POOF`, `GEYSER_PLUME` an
 
 ### Base and poof
 `GEYSER_BASE` and `GEYSER_POOF` particles function identically, differing only in appearance. They use
-[`Particle.GeyserBase`](jd:paper:org.bukkit.Particle$GeyserBase) as their data.
+[](jd:paper:org.bukkit.Particle$GeyserBase) as their data.
 
-The particle size is calculated as `3.0F + 0.125F * waterBlocks`.
+The particle size is calculated as `3.0 + 0.125 * waterBlocks`.
 
 They are [directional particles](#directional-particles), but are also affected by the water blocks and burst impulse
 parameters. The initial velocity is calculated as follows:
-```java
-float burstImpulse = burstImpulseBase + 0.25F * waterBlocks;
+```
+burstImpulse = burstImpulseBase + 0.25 * waterBlocks;
 
 // xd, yd and zd are the particle velocity's x, y and z components respectively
 // In this case they can have a non zero starting value
 // xAux, yAux and zAux are the provided velocity vector's x, y and z components respectively
-this.xd = this.xd * burstImpulse + xAux;
-this.yd = this.yd * burstImpulse + yAux;
-this.zd = this.zd * burstImpulse + zAux;
+xd = xd * burstImpulse + xAux;
+yd = yd * burstImpulse + yAux;
+zd = zd * burstImpulse + zAux;
 
-this.yd = Math.abs(this.yd);
+yd = abs(yd);
 ```
 
 :::note
@@ -773,11 +776,11 @@ An example of spawning a geyser base particle at `someLocation` with a burst imp
   <TabItem label="ParticleBuilder">
     ```java
     Particle.GEYSER_BASE.builder()
-      .location(someLocation)
-      .count(0)
-      .receivers(32, true)
-      .data(new Particle.GeyserBase(1, 1))
-      .spawn();
+        .location(someLocation)
+        .count(0)
+        .receivers(32, true)
+        .data(new Particle.GeyserBase(1, 1))
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -790,7 +793,7 @@ An example of spawning a geyser base particle at `someLocation` with a burst imp
 ![Geyser base particle example](./assets/particles/geyser-base.webp)
 
 ### Plume
-The `GEYSER_PLUME` particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
+The `GEYSER_PLUME` particle uses [](jd:paper:org.bukkit.Particle$Geyser) as its data.
 
 While technically a [directional particle](#directional-particles), the vertical velocity of this particle is set to `0`
 and the horizontal velocity is applied only on the first tick.
@@ -808,11 +811,11 @@ An example of spawning a geyser plume particle at `someLocation` with 1 water bl
   <TabItem label="ParticleBuilder">
     ```java
     Particle.GEYSER_PLUME.builder()
-      .location(someLocation)
-      .count(0)
-      .receivers(32, true)
-      .data(new Particle.Geyser(1))
-      .spawn();
+        .location(someLocation)
+        .count(0)
+        .receivers(32, true)
+        .data(new Particle.Geyser(1))
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">
@@ -828,7 +831,7 @@ An example of spawning a geyser plume particle at `someLocation` with 1 water bl
 The `GEYSER` particle is an emitter particle, meaning it spawns other particles. In this case, it spawns all the previously
 mentioned geyser particles. The provided velocity vector is passed to the spawned particles and used as described above.
 
-This particle uses [`Particle.Geyser`](jd:paper:org.bukkit.Particle$Geyser) as its data.
+This particle uses [](jd:paper:org.bukkit.Particle$Geyser) as its data.
 
 The geyser base particle's burst impulse base is set to `1.5` and the poof particle's burst impulse base is set to `2.0`.
 
@@ -837,11 +840,11 @@ An example of spawning a geyser particle at `someLocation` with 1 water block:
   <TabItem label="ParticleBuilder">
     ```java
     Particle.GEYSER.builder()
-      .location(someLocation)
-      .count(0)
-      .receivers(32, true)
-      .data(new Particle.Geyser(1))
-      .spawn();
+        .location(someLocation)
+        .count(0)
+        .receivers(32, true)
+        .data(new Particle.Geyser(1))
+        .spawn();
     ```
   </TabItem>
   <TabItem label="spawnParticle">

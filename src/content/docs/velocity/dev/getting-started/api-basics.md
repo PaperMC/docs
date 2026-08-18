@@ -11,7 +11,7 @@ Velocity plugin.
 
 Create a new class (let's say `com.example.velocityplugin.VelocityTest`) and paste this in:
 
-```java
+```java title="VelocityTest.java" collapse={1-6} showLineNumbers
 package com.example.velocityplugin;
 
 import com.google.inject.Inject;
@@ -23,16 +23,16 @@ import org.slf4j.Logger;
         url = "https://example.org", description = "I did it!", authors = {"Me"})
 public class VelocityTest {
 
-    private final ProxyServer server;
-    private final Logger logger;
+  private final ProxyServer server;
+  private final Logger logger;
 
-    @Inject
-    public VelocityTest(ProxyServer server, Logger logger) {
-        this.server = server;
-        this.logger = logger;
+  @Inject
+  public VelocityTest(ProxyServer server, Logger logger) {
+    this.server = server;
+    this.logger = logger;
 
-        logger.info("Hello there! I made my first plugin with Velocity.");
-    }
+    logger.info("Hello there! I made my first plugin with Velocity.");
+  }
 }
 ```
 
@@ -54,17 +54,17 @@ Moving on, what's this?
 ```java
 @Inject
 public VelocityTest(ProxyServer server, Logger logger) {
-    this.server = server;
-    this.logger = logger;
+  this.server = server;
+  this.logger = logger;
 
-    logger.info("Hello there, it's a test plugin I made!");
+  logger.info("Hello there, it's a test plugin I made!");
 }
 ```
 
 This looks like magic! How is Velocity doing this? The answer lies in the
 [`@Inject`](https://javadoc.io/doc/com.google.inject/guice/latest/com/google/inject/Inject.html)
 which indicates that Velocity should inject a
-[`ProxyServer`](jd:velocity:com.velocitypowered.api.proxy.ProxyServer)
+[](jd:velocity:com.velocitypowered.api.proxy.ProxyServer)
 and the [`Logger`](https://www.slf4j.org/api/org/slf4j/Logger.html) when constructing your plugin.
 These two interfaces will help you out as you begin working with Velocity. We won't talk too much about
 dependency injection: all you need to know is that Velocity will do this.
@@ -102,16 +102,16 @@ have a valid plugin registration, but Velocity can't register the plugin until t
 constructed, causing a "chicken or the egg" problem.
 
 To break this vicious cycle, you should always wait for initialization, which is indicated when
-Velocity fires the [`ProxyInitializeEvent`](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent).
+Velocity fires the [](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent).
 We can do things on initialization by adding a listener for this event, as shown below.
 Note that Velocity automatically registers your plugin main class as a listener.
 
 ```java
 @Subscribe
 public void onProxyInitialization(ProxyInitializeEvent event) {
-    // Do some operation demanding access to the Velocity API here.
-    // For instance, we could register an event:
-    server.getEventManager().register(this, new PluginListener());
+  // Do some operation demanding access to the Velocity API here.
+  // For instance, we could register an event:
+  server.getEventManager().register(this, new PluginListener());
 }
 ```
 
@@ -127,13 +127,13 @@ private final Path dataDirectory;
 
 @Inject
 public VelocityTest(ProxyServer server, Logger logger, @DataDirectory Path dataDirectory) {
-    this.server = server;
-    this.logger = logger;
-    this.dataDirectory = dataDirectory;
+  this.server = server;
+  this.logger = logger;
+  this.dataDirectory = dataDirectory;
 }
 ```
 
-This will get you a [`Path`](jd:java:java.nio.file.Path) of your plugin directory.
-If you absolutely need a [`File`](jd:java:java.io.File),
-you may use [`Path#toFile()`](jd:java:java.nio.file.Path#toFile()).
+This will get you a [](jd:java:java.nio.file.Path) of your plugin directory.
+If you absolutely need a [](jd:java:java.io.File),
+you may use [](jd:java:java.nio.file.Path#toFile()).
 However, Velocity usually works with `Path`.

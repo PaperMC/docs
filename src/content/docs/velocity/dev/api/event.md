@@ -6,7 +6,7 @@ slug: velocity/dev/event-api
 
 Listening to events with Velocity's `@Subscribe`
 annotation is straightforward. You've already seen one such listener, using
-[`ProxyInitializeEvent`](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent)
+[](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent)
 in your main class. Additional events can be found on the [Javadoc](jd:velocity).
 
 ## Creating a listener method
@@ -18,7 +18,7 @@ it's the equivalent of Bukkit's/Bungee's `@EventHandler` and Sponge's `@Listener
 ```java
 @Subscribe
 public void onPlayerChat(PlayerChatEvent event) {
-	// do stuff
+  // do stuff here
 }
 ```
 
@@ -40,12 +40,12 @@ State the desired order in the `@Subscribe` annotation:
 ```java
 @Subscribe(priority = 10)
 public void onPlayerChatFirst(PlayerChatEvent event) {
-    // this method fires first
+  // this method fires first
 }
 
 @Subscribe(priority = 5)
 public void onPlayerChat(PlayerChatEvent event) {
-    // this method fires after the one above
+  // this method fires after the one above
 }
 ```
 
@@ -56,7 +56,7 @@ public void onPlayerChat(PlayerChatEvent event) {
 Velocity automatically registers your main plugin class as an event listener. This is handy for
 initialization and for simple plugins, but for more complex plugins, you will want to separate your
 event handlers from the main plugin class. To do so, you will need to register with the
-[`EventManager`](jd:velocity:com.velocitypowered.api.event.EventManager)
+[](jd:velocity:com.velocitypowered.api.event.EventManager)
 any other listeners you have:
 
 The event system supports registering an object as a listener (allowing you to use `@Subscribe` to
@@ -68,7 +68,7 @@ mark event handlers) or registering functional listeners.
 server.getEventManager().register(plugin, listener);
 ```
 
-Both parameters are [`Object`](jd:java:java.lang.Object).
+Both parameters are [](jd:java:java.lang.Object).
 The first argument is your plugin's object, and the second argument should be the listener to register. For example:
 
 ```java
@@ -106,9 +106,9 @@ As an alternative to `@Subscribe`, you can also use the functional `EventHandler
 [`register(Object plugin, Class<E> eventClass, EventHandler<E> handler)`](jd:velocity:com.velocitypowered.api.event.EventManager#register(java.lang.Object,java.lang.Class,com.velocitypowered.api.event.EventHandler)):
 
 ```java
-  server.getEventManager().register(this, PlayerChatEvent.class, event -> {
-      // do something here
-  });
+server.getEventManager().register(this, PlayerChatEvent.class, event -> {
+  // do something here
+});
 ```
 
 ## Handling events asynchronously
@@ -120,51 +120,51 @@ asynchronously, however only some will explicitly wait for events to finish bein
 continuing.
 
 For an annotation-based listener, all that is needed to process an event asynchronously is to either
-return an [`EventTask`](jd:velocity:com.velocitypowered.api.event.EventTask)
-or add a second return an [`Continuation`](jd:velocity:com.velocitypowered.api.event.Continuation) parameter:
+return an [](jd:velocity:com.velocitypowered.api.event.EventTask)
+or add a second return an [](jd:velocity:com.velocitypowered.api.event.Continuation) parameter:
 
 ```java
-  @Subscribe(priority = 100)
-  public void onLogin(LoginEvent event, Continuation continuation) {
-    doSomeAsyncProcessing().whenComplete((_, throwable) -> {
-      if (throwable != null) {
-        continuation.resumeWithException(throwable);
-      } else {
-        continuation.resume();
-      }
-    });
-  }
-
-  private CompletableFuture<Void> doSomeAsyncProcessing() {
-    //...
-  }
-
-  @Subscribe(priority = 100)
-  public EventTask onPlayerChat(PlayerChatEvent event) {
-    if (mustFurtherProcess(event)) {
-      return EventTask.async(() => ...);
+@Subscribe(priority = 100)
+public void onLogin(LoginEvent event, Continuation continuation) {
+  doSomeAsyncProcessing().whenComplete((_, throwable) -> {
+    if (throwable != null) {
+      continuation.resumeWithException(throwable);
+    } else {
+      continuation.resume();
     }
-    return null;
+  });
+}
+
+private CompletableFuture<Void> doSomeAsyncProcessing() {
+  //...
+}
+
+@Subscribe(priority = 100)
+public EventTask onPlayerChat(PlayerChatEvent event) {
+  if (mustFurtherProcess(event)) {
+    return EventTask.async(() => ...);
   }
+  return null;
+}
 ```
 
 A functional listener simply needs to implement
-[`AwaitingEventExecutor`](jd:velocity:com.velocitypowered.api.event.AwaitingEventExecutor)
-and return an [`EventTask`](jd:velocity:com.velocitypowered.api.event.EventTask):
+[](jd:velocity:com.velocitypowered.api.event.AwaitingEventExecutor)
+and return an [](jd:velocity:com.velocitypowered.api.event.EventTask):
 
 ```java
-  server.getEventManager().register(this, PlayerChatEvent.class, (AwaitingEventExecutor) event -> {
-    if (mustFurtherProcess(event)) {
-      return EventTask.async(() => ...);
-    }
-    return null;
-  });
+server.getEventManager().register(this, PlayerChatEvent.class, (AwaitingEventExecutor) event -> {
+  if (mustFurtherProcess(event)) {
+    return EventTask.async(() => ...);
+  }
+  return null;
+});
 ```
 
 There are two types of event tasks:
 
 - **Async tasks** simply run a unit of execution asynchronously. To get a basic event task, use
-  [`EventTask.async(Runnable)`](jd:velocity:com.velocitypowered.api.event.EventTask#async(java.lang.Runnable)).
+  [](jd:velocity:com.velocitypowered.api.event.EventTask#async(java.lang.Runnable)).
   Basic event tasks are the closest equivalent for Velocity 1.x.x event listeners and asynchronous
   events in the Bukkit API.
 - **Continuation tasks** provide the listener with a callback (known as a `Continuation`) to resume
@@ -193,7 +193,7 @@ similar for the most part.
 First we need to create a class for our event. In this tutorial we'll assume you're making a private
 messaging plugin, and thus use a `PrivateMessageEvent`. Most of this part is boilerplate.
 
-```java
+```java title="PrivateMessageEvent.java"
 public class PrivateMessageEvent {
 
   private final Player sender;
@@ -229,7 +229,7 @@ You'll notice that your events don't need to extend or implement anything. They 
 
 To fire the event, you'll need to get the server's event manager and use the
 [`fire`](jd:velocity:com.velocitypowered.api.event.EventManager#fire(E))
-method. Note that this returns a [`CompletableFuture`](jd:java:java.util.concurrent.CompletableFuture),
+method. Note that this returns a [](jd:java:java.util.concurrent.CompletableFuture),
 so if you want to continue logic after the event is handled by all listeners, use a callback:
 
 ```java
@@ -241,7 +241,7 @@ server.getEventManager().fire(new PrivateMessageEvent(sender, recipient, message
 
 ### Using `ResultedEvent`
 
-Velocity uses the generalized [`ResultedEvent`](jd:velocity:com.velocitypowered.api.event.ResultedEvent)
+Velocity uses the generalized [](jd:velocity:com.velocitypowered.api.event.ResultedEvent)
 for events which have some sort of 'result'. The result type of the event is defined by its generic type; for example
 `PrivateMessageEvent implements ResultedEvent<ResultType>`.
 
@@ -254,7 +254,7 @@ used to on other platforms, whose meaning is vague and limited to a simple boole
 we'll use `GenericResult`, so listeners will be able to mark our `PrivateMessageEvent` as either
 allowed or denied.
 
-```java
+```java title="PrivateMessageEvent.java"
 public class PrivateMessageEvent implements ResultedEvent<GenericResult> {
 
   private final Player sender;
@@ -295,7 +295,7 @@ public class PrivateMessageEvent implements ResultedEvent<GenericResult> {
 ```
 
 Per convention, the result of a `ResultedEvent` should never be null. Here, we assure that using
-[`Objects#requireNonNull(Object)`](jd:java:java.util.Objects#requireNonNull(T)).
+[](jd:java:java.util.Objects#requireNonNull(T)).
 
 Listeners may 'deny' the event by using `event.setResult(GenericResult.denied())`, and you may check
 the result with `event.getResult()`.

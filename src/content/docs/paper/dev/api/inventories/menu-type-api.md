@@ -11,7 +11,7 @@ this reason, the menu type API was introduced.
 
 ## What is a menu?
 Menus, also referred to as views, are user interfaces, which can be created and viewed by players. The
-[`MenuType`](jd:paper:org.bukkit.inventory.MenuType) interface declares all possible menu types a menu can have.
+[](jd:paper:org.bukkit.inventory.MenuType) interface declares all possible menu types a menu can have.
 The difference between menus and inventories is that inventories are containers and menus are
 their visual representations.
 
@@ -20,13 +20,13 @@ functional. Some of them can directly represent a block, like a furnace. The [`M
 can represent a merchant entity in the world.
 
 ## What are inventory views?
-An [`InventoryView`](jd:paper:org.bukkit.inventory.InventoryView) is a specific view created from a menu type.
+An [](jd:paper:org.bukkit.inventory.InventoryView) is a specific view created from a menu type.
 In the general sense, an inventory view links together **two separate inventories** and always has a player viewing them.
 The bottom linked inventory is the player's inventory.
 
-Some views have specialized subinterfaces for quickly checking their type, like [`FurnaceView`](jd:paper:org.bukkit.inventory.view.FurnaceView)
+Some views have specialized subinterfaces for quickly checking their type, like [](jd:paper:org.bukkit.inventory.view.FurnaceView)
 for furnace inventories. For other views, which don't have their own sub type, you can instead use the
-[`InventoryView#getMenuType`](jd:paper:org.bukkit.inventory.InventoryView#getMenuType()) method.
+[](jd:paper:org.bukkit.inventory.InventoryView#getMenuType()) method.
 
 ## Building inventory views from menu types
 The most common way to create inventory views from menu types is by using their respective builders. **Every menu type
@@ -57,16 +57,16 @@ MenuType.CRAFTING.builder()
     .open();
 ```
 
-:::tip[Reusing Builders]
+:::tip
 
-Builders can be reused in order to reduce code repetition.
+Builders can be reused in order to reduce code repetition. They can also be [cloned](jd:paper:org.bukkit.inventory.view.builder.InventoryViewBuilder#copy()) as well for more complex operations.
 
 :::
 
 ## Opening blocks that have menus
 Almost all inventory views have a block attached to them. The only exception being the
 [`MenuType.MERCHANT`](jd:paper:org.bukkit.inventory.MenuType#MERCHANT), which
-instead has a [`Merchant`](jd:paper:org.bukkit.inventory.Merchant) attached to it.
+instead has a [](jd:paper:org.bukkit.inventory.Merchant) attached to it.
 
 There are two types of blocks that have menus: Block entity blocks and stateless blocks.
 
@@ -84,28 +84,9 @@ Under those blocks count the beacon, chests, furnaces, and similar. For example,
 ## Persistent inventory views
 Inventory views can be reused! This is useful for persistent operations.
 
-For example, we can write a `/persistent` command with opens a player's own, persistent, stash!
+For example, we can write a `/persistent` command which opens a player's own, persistent, stash!
 
-```java title="CommandPersistent.java" showLineNumbers collapse={1-18}
-package io.papermc.docs.menutype;
-
-import com.mojang.brigadier.Command;
-import com.mojang.brigadier.tree.LiteralCommandNode;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
-import io.papermc.paper.command.brigadier.Commands;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.format.NamedTextColor;
-import org.bukkit.entity.Player;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryView;
-import org.bukkit.inventory.MenuType;
-
-import java.util.HashMap;
-import java.util.Map;
-
+```java title="CommandPersistent.java" showLineNumbers
 public class CommandPersistent implements Listener {
 
     // A map to store all inventory views in. Generally it is not recommended
@@ -117,23 +98,16 @@ public class CommandPersistent implements Listener {
     // Create a command. Commands are explained in the Command API documentation
     // pages and therefore won't be covered here.
     public static LiteralCommandNode<CommandSourceStack> createCommand() {
-        return Commands.literal("persistent").executes(ctx -> {
-            if (!(ctx.getSource().getExecutor() instanceof Player player)) {
-                return 0;
-            }
+        return Commands.literal("persistent").executes(context -> {
+            Player player = context.getSource().getPlayerOrThrow();
 
             // First, attempt to get a stored view.
-            InventoryView view = VIEWS.get(player);
-
-            // If there is no view currently stored, create it.
-            if (view == null) {
-                view = MenuType.GENERIC_9X6.builder()
-                    .title(Component.text(player.getName() + "'s stash", NamedTextColor.DARK_RED))
-                    .build(player);
-
-                // And finally store it in the map.
-                VIEWS.put(player, view);
-            }
+            InventoryView view = VIEWS.computeIfAbsent(player, p -> {
+                // If there is no view currently stored, create it.
+                return MenuType.GENERIC_9X6.builder()
+                    .title(Component.text(p.getName() + "'s stash", NamedTextColor.DARK_RED))
+                    .build(p);
+            });
 
             // As the inventory view is directly bound to the player, we do not have
             // to reassign the player and can just open it.
@@ -149,7 +123,7 @@ public class CommandPersistent implements Listener {
     void onPlayerQuit(PlayerQuitEvent event) {
         InventoryView view = VIEWS.remove(event.getPlayer());
         if (view != null) {
-            Inventory topInventory = view.getTopInventory();
+            Inventory inventory = view.getTopInventory();
             // Save the contents of the inventory to a file or database.
         }
     }

@@ -13,7 +13,7 @@ As example, if you want to have an argument for a player, which is currently onl
 
 ```java
 Commands.argument("player", ArgumentTypes.player())
-    .suggests((ctx, builder) -> {
+    .suggests((context, builder) -> {
         Bukkit.getOnlinePlayers().stream()
             .filter(ServerOperator::isOp)
             .map(Player::getName)
@@ -21,15 +21,14 @@ Commands.argument("player", ArgumentTypes.player())
             .forEach(builder::suggest);
         return builder.buildFuture();
     })
-    .executes(ctx -> {
-        final Player player = ctx.getArgument("player", PlayerSelectorArgumentResolver.class).resolve(ctx.getSource()).getFirst();
+    .executes(context -> {
+        final Player player = context.getArgument("player", PlayerSelectorArgumentResolver.class).resolve(context.getSource()).getFirst();
         if (!player.isOp()) {
-            final Message message = MessageComponentSerializer.message().serialize(text(player.getName() + " is not a server operator!"));
-            throw new SimpleCommandExceptionType(message).create();
+            throw new SimpleCommandExceptionType(new LiteralMessage(player.getName() + " is not a server operator!")).create();
         }
 
-        ctx.getSource().getSender().sendRichMessage("Player <player> is an operator!",
-            Placeholder.component("player", player.displayName())
+        context.getSource().getSender().sendRichMessage("Player <player_name> is a server operator!",
+            Placeholder.component("player_name", player.displayName())
         );
         return Command.SINGLE_SUCCESS;
     })
@@ -41,29 +40,28 @@ copy-paste a lot of code. It goes without saying that this would be incredibly t
 The solution to this problem are custom arguments. Before going into detail about them, this is how the argument would look when implemented as a custom argument:
 
 ```java title="OppedPlayerArgument.java"
-@NullMarked
 public final class OppedPlayerArgument implements CustomArgumentType<Player, PlayerSelectorArgumentResolver> {
 
     private static final SimpleCommandExceptionType ERROR_BAD_SOURCE = new SimpleCommandExceptionType(
-        MessageComponentSerializer.message().serialize(Component.text("The source needs to be a CommandSourceStack!"))
+        new LiteralMessage("The source needs to be a valid CommandSourceStack!")
     );
 
     private static final DynamicCommandExceptionType ERROR_NOT_OPERATOR = new DynamicCommandExceptionType(name -> {
-        return MessageComponentSerializer.message().serialize(Component.text(name + " is not a server operator!"));
+        return new LiteralMessage(name + " is not a server operator!");
     });
 
     @Override
-    public Player parse(StringReader reader) {
+    public Player parse(final StringReader reader) {
         throw new UnsupportedOperationException("This method will never be called.");
     }
 
     @Override
-    public <S> Player parse(StringReader reader, S source) throws CommandSyntaxException {
+    public <S> Player parse(final StringReader reader, final S source) throws CommandSyntaxException {
         if (!(source instanceof CommandSourceStack stack)) {
             throw ERROR_BAD_SOURCE.create();
         }
 
-        final Player player = getNativeType().parse(reader).resolve(stack).getFirst();
+        final Player player = this.getNativeType().parse(reader).resolve(stack).getFirst();
         if (!player.isOp()) {
             throw ERROR_NOT_OPERATOR.create(player.getName());
         }
@@ -77,7 +75,7 @@ public final class OppedPlayerArgument implements CustomArgumentType<Player, Pla
     }
 
     @Override
-    public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> ctx, SuggestionsBuilder builder) {
+    public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
         Bukkit.getOnlinePlayers().stream()
             .filter(ServerOperator::isOp)
             .map(Player::getName)
@@ -93,11 +91,11 @@ The answer becomes apparent rather quickly when we look at how the argument is n
 
 ```java
 Commands.argument("player", new OppedPlayerArgument())
-    .executes(ctx -> {
-        final Player player = ctx.getArgument("player", Player.class);
+    .executes(context -> {
+        final Player player = context.getArgument("player", Player.class);
 
-        ctx.getSource().getSender().sendRichMessage("Player <player> is an operator!",
-            Placeholder.component("player", player.displayName())
+        context.getSource().getSender().sendRichMessage("Player <player_name> is a server operator!",
+            Placeholder.component("player_name", player.displayName())
         );
         return Command.SINGLE_SUCCESS;
     })
@@ -109,13 +107,10 @@ This is way more readable and easy to understand when using a custom argument. A
 The interface is declared as follows:
 
 ```java title="CustomArgumentType.java"
-package io.papermc.paper.command.brigadier.argument;
-
-@NullMarked
 public interface CustomArgumentType<T, N> extends ArgumentType<T> {
 
     @Override
-    T parse(final StringReader reader) throws CommandSyntaxException;
+    T parse(StringReader reader) throws CommandSyntaxException;
 
     @Override
     default <S> T parse(final StringReader reader, final S source) throws CommandSyntaxException {
@@ -139,34 +134,25 @@ public interface CustomArgumentType<T, N> extends ArgumentType<T> {
 
 ### Generic types
 There are three generic types present in the interface:
-- `T`: This is the type of the class that is returned when `CommandContext#getArgument` is called on this argument.
-- `N`: The native type of the class which this custom argument extends. Used as the "underlying" argument.
+- `T`: This is the type of the argument type that is returned when `CommandContext#getArgument` is called.
+- `N`: The native type of the argument type which this custom argument extends. Used as the "underlying" argument.
 - `S`: A generic type for the command source. Will usually be a `CommandSourceStack`.
 
 ### Methods
-| Method declaration                                                                                                              | Description                                                                                                                                                                   |
-|---------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `ArgumentType<N> getNativeType()`                                                                                               | Here, you declare the underlying argument type, which is used as a base for client-side argument validation.                                                                  |
-| `T parse(final StringReader reader) throws CommandSyntaxException`                                                              | This method is used if `T parse(StringReader, S)` is not overridden. In here, you can run conversion and validation logic.                                                    |
-| `default <S> T parse(final StringReader reader, final S source)`                                                                | If overridden, this method will be preferred to `T parse(StringReader)`. It serves the same purpose, but allows including the source in the parsing logic.                    |
-| `default Collection<String> getExamples()`                                                                                      | This method should **not** be overridden. It is used internally to differentiate certain argument types while parsing.                                                        |
-| `default <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder)` | This method is the equivalent of `RequiredArgumentBuilder#suggests(SuggestionProvider<S>)`. You can override this method in order to send your own suggestions to the client. |
+| Method declaration                                                                                          | Description                                                                                                                                                                   |
+|-------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `ArgumentType<N> getNativeType()`                                                                           | Here, you declare the underlying argument type, which is used as a base for client-side argument validation.                                                                  |
+| `T parse(StringReader reader) throws CommandSyntaxException`                                                | This method is used if `T parse(StringReader, S)` is not overridden. In here, you can run conversion and validation logic.                                                    |
+| `<S> T parse(StringReader reader, S source)`                                                                | If overridden, this method will be preferred to `T parse(StringReader)`. It serves the same purpose, but allows including the source in the parsing logic.                    |
+| `Collection<String> getExamples()`                                                                          | This method should **not** be overridden. It is used internally to differentiate certain argument types while parsing.                                                        |
+| `<S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder)` | This method is the equivalent of `RequiredArgumentBuilder#suggests(SuggestionProvider<S>)`. You can override this method in order to send your own suggestions to the client. |
 
 ### A very basic implementation
-```java
-package io.papermc.commands;
-
-import com.mojang.brigadier.StringReader;
-import com.mojang.brigadier.arguments.ArgumentType;
-import com.mojang.brigadier.arguments.StringArgumentType;
-import io.papermc.paper.command.brigadier.argument.CustomArgumentType;
-import org.jspecify.annotations.NullMarked;
-
-@NullMarked
+```java title="BasicImplementation.java"
 public class BasicImplementation implements CustomArgumentType<String, String> {
 
     @Override
-    public String parse(StringReader reader) {
+    public String parse(final StringReader reader) {
         return reader.readUnquotedString();
     }
 
@@ -207,11 +193,6 @@ A practical example on how you can use a custom argument to your advantage could
 `IceCreamFlavor` enum:
 
 ```java title="IceCreamFlavor.java"
-package io.papermc.commands.icecream;
-
-import org.jspecify.annotations.NullMarked;
-
-@NullMarked
 public enum IceCreamFlavor {
     VANILLA,
     CHOCOLATE,
@@ -219,7 +200,7 @@ public enum IceCreamFlavor {
 
     @Override
     public String toString() {
-        return name().toLowerCase();
+        return this.name().toLowerCase();
     }
 }
 ```
@@ -227,32 +208,29 @@ public enum IceCreamFlavor {
 We then can use a converted custom argument type in order to convert between a word string argument and our enum type, like this:
 
 ```java title="IceCreamArgument.java"
-package io.papermc.commands.icecream;
-
-@NullMarked
 public class IceCreamArgument implements CustomArgumentType.Converted<IceCreamFlavor, String> {
 
     private static final DynamicCommandExceptionType ERROR_INVALID_FLAVOR = new DynamicCommandExceptionType(flavor -> {
-        return MessageComponentSerializer.message().serialize(Component.text(flavor + " is not a valid flavor!"));
+        return new LiteralMessage(flavor + " is not a valid flavor!");
     });
 
     @Override
-    public IceCreamFlavor convert(String nativeType) throws CommandSyntaxException {
+    public IceCreamFlavor convert(final String nativeType) throws CommandSyntaxException {
         try {
             return IceCreamFlavor.valueOf(nativeType.toUpperCase(Locale.ROOT));
-        } catch (IllegalArgumentException ignored) {
+        } catch (IllegalArgumentException _) {
             throw ERROR_INVALID_FLAVOR.create(nativeType);
         }
     }
 
     @Override
-    public <S> CompletableFuture<Suggestions> listSuggestions(CommandContext<S> context, SuggestionsBuilder builder) {
-        for (IceCreamFlavor flavor : IceCreamFlavor.values()) {
-            String name = flavor.toString();
+    public <S> CompletableFuture<Suggestions> listSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) {
+        for (final IceCreamFlavor flavor : IceCreamFlavor.values()) {
+            final String name = flavor.toString();
 
             // Only suggest if the flavor name matches the user input
             if (name.startsWith(builder.getRemainingLowerCase())) {
-                builder.suggest(flavor.toString());
+                builder.suggest(name);
             }
         }
 
@@ -270,18 +248,15 @@ Finally, we can just declare our command like this, and we are done! And again, 
 type without any additional parsing in the `executes(...)` method, which makes custom argument types very powerful.
 
 ```java
-Commands.literal("icecream")
-    .then(Commands.argument("flavor", new IceCreamArgument())
-        .executes(ctx -> {
-            final IceCreamFlavor flavor = ctx.getArgument("flavor", IceCreamFlavor.class);
+Commands.argument("flavor", new IceCreamArgument())
+    .executes(context -> {
+        final IceCreamFlavor flavor = context.getArgument("flavor", IceCreamFlavor.class);
 
-            ctx.getSource().getSender().sendRichMessage("<b><red>Y<green>U<aqua>M<light_purple>!</b> You just had a scoop of <flavor>!",
-                Placeholder.unparsed("flavor", flavor.toString())
-            );
-            return Command.SINGLE_SUCCESS;
-        })
-    )
-    .build();
+        context.getSource().getSender().sendRichMessage("<b><red>Y<green>U<aqua>M<light_purple>!</b> You just had a scoop of <flavor>!",
+            Placeholder.unparsed("flavor", flavor.toString())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
 ```
 
 ![](./assets/ice-cream.png)

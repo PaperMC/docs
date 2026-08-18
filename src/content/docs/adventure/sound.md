@@ -19,10 +19,10 @@ Sounds are composed of:
 
 ```java
 // Create a built-in sound using standard volume and pitch
-Sound musicDisc = Sound.sound(Key.key("music_disc.13"), Sound.Source.MUSIC, 1f, 1f);
+Sound musicDisc = Sound.sound(Key.key("music_disc.13"), Sound.Source.MUSIC, 1F, 1F);
 
 // Create a sound from our resource pack with a higher pitch
-Sound myCustomSound = Sound.sound(Key.key("adventure", "rawr"), Sound.Source.AMBIENT, 1f, 1.1f);
+Sound myCustomSound = Sound.sound(Key.key("adventure", "rawr"), Sound.Source.AMBIENT, 1F, 1.1F);
 ```
 
 ## Playing a Sound

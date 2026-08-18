@@ -4,8 +4,8 @@ description: An explanation to what an event's HandlerList is.
 slug: paper/dev/handler-lists
 ---
 
-Every [`Event`](jd:paper:org.bukkit.event.Event) that can be listened to has a
-[`HandlerList`](jd:paper:org.bukkit.event.HandlerList) containing all the listeners that are listening to that event.
+Every [](jd:paper:org.bukkit.event.Event) that can be listened to has a
+[](jd:paper:org.bukkit.event.HandlerList) containing all the listeners that are listening to that event.
 This list is used to call the listeners when the event is called.
 
 ## Getting the handler list for an event
@@ -56,7 +56,7 @@ public class ExampleListener implements Listener {
 }
 ```
 
-You can unregister based on [`Listener`](jd:paper:org.bukkit.event.Listener)
-or [`Plugin`](jd:paper:org.bukkit.plugin.Plugin) for more convenience.
+You can unregister based on [](jd:paper:org.bukkit.event.Listener)
+or [](jd:paper:org.bukkit.plugin.Plugin) for more convenience.
 Likewise, you can also unregister all listeners for a specific event by calling
 [`unregisterAll()`](jd:paper:org.bukkit.event.HandlerList#unregisterAll()) on the `HandlerList`.

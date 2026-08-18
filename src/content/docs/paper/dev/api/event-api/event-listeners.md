@@ -10,7 +10,7 @@ Plugins are able to call custom events, such as a player completing a quest, for
 
 ## Your listener class
 
-To listen for events, you need to create a class that implements [`Listener`](jd:paper:org.bukkit.event.Listener).
+To listen for events, you need to create a class that implements [](jd:paper:org.bukkit.event.Listener).
 This class can be called anything you want, but it is recommended to name it something related to the events you are listening for.
 
 ```java title="ExampleListener.java"
@@ -58,11 +58,11 @@ This will register your listener class and allow it to listen for events.
 This is commonly done in the `onEnable()` method of your plugin so that it is registered when the server starts ticking.
 
 ```java title="ExamplePlugin.java"
-public class ExamplePlugin extends JavaPlugin {
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(new ExampleListener(), this);
+        this.getServer().getPluginManager().registerEvents(new ExampleListener(), this);
     }
 }
 ```
@@ -102,7 +102,7 @@ This means you can get the result of any plugin interaction such as cancellation
 ## Event cancellation
 
 Some events can be cancelled, preventing the given action from being completed.
-These events implement [`Cancellable`](jd:paper:org.bukkit.event.Cancellable).
+These events implement [](jd:paper:org.bukkit.event.Cancellable).
 
 ```java title="ExampleListener.java"
 public class ExampleListener implements Listener {

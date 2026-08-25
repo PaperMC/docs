@@ -30,7 +30,7 @@ Pathfinder pathfinder = cow.getPathfinder();
 boolean success = pathfinder.moveTo(player.getLocation());
 ```
 
-If you want to access the current path for the cow, you can call [`getPathfinder()`](jd:paper:org.bukkit.entity.Mob#getPathfinder())
+If you want to access the current path for the cow, you can call [`getCurrentPath()`](jd:paper:com.destroystokyo.paper.entity.Pathfinder#getCurrentPath())
 on the pathfinder:
 
 ```java

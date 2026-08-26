@@ -1,0 +1,117 @@
+---
+title: The Velocity plugin file
+description: A full reference of the velocity-plugin.json file.
+slug: velocity/dev/velocity-plugin-json
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+
+The `velocity-plugin.json` file is the configuration file for your plugin. It contains information
+about your plugin's name, description, version, main class path, and other. It is located in the `resources`
+directory of your plugin and may be generated automatically, if you configured the Velocity annotation processor
+and used a `@Plugin` annotation somewhere in your code.
+
+<FileTree>
+  - velocity-plugin/
+    - src/
+      - main/
+        - java/
+        - resources/
+          - **velocity-plugin.json**
+    - build.gradle.kts
+    - settings.gradle.kts
+</FileTree>
+
+## Example
+This is an example `velocity-plugin.json` file:
+
+```json title=velocity-plugin.json {"   Required values:":2-4} {"     The ID is required. Optional defaults to false:":11-15}
+{
+
+  "id": "example-plugin",
+  "main": "com.example.testplugin.TestPluginMain",
+  "name": "Velocity Example Plugin",
+  "version": "1.0.0",
+  "description": "An example plugin for showcasing the plugin json file.",
+  "url": "https://github.com/PaperMC/docs",
+  "authors": ["Strokkur24"],
+  "dependencies": [
+
+    {
+      "id": "luckperms",
+      "optional": true
+    }
+  ]
+}
+```
+
+## Fields
+The only required fields are `id` and `main`. Any other fields are optional.
+
+- **`id`**\
+  The ID of the plugin. This ID needs to be unique for each plugin. It is used for identifying your
+  plugin internally and also used as the name for your plugin's logger.
+
+  Plugin IDs must start with a lowercase letter and may contain lowercase letters,
+  digits, hyphens, and underscores. The total length must not exceed 64 characters.
+
+  ```json
+  {"id": "a_cool_plugin"}
+  ```
+
+- **`main`**\
+  The path towards your main plugin class.
+
+  ```json
+  {"main": "com.example.yourplugin.PluginMain"}
+  ```
+
+- **`name`**\
+  A user-friendly variant of your plugin's name. This is used for any user-facing display of your plugin, such
+  as the `/velocity plugins` command.
+
+  ```json
+  {"name": "A cool plugin"}
+  ```
+
+- **`version`**\
+  The version of your plugin.
+  ```json
+  {"version": "0.0.1-beta.7"}
+  ```
+
+- **`description`**\
+  The description of your plugin.
+  ```json
+  {"description": "Some interesting plugin description."}
+  ```
+
+- **`url`**\
+  The URL of your plugin's website.
+  ```json
+  {"url": "https://github.com/PaperMC/Velocity"}
+  ```
+
+- **`authors`**\
+  A list of your plugin's authors.
+  ```json
+  {"authors": ["Strokkur24", "electronicboy"]}
+  ```
+
+- **`dependencies`**\
+  Your plugin's dependencies. The value of this field is an array of dependency objects.
+
+  The dependency object itself has two fields:
+  - `id` the plugin ID of the plugin you depend upon
+  - `optional` whether the dependency is optional. This field is not required and defaults to `false`.
+
+  ```json
+  {
+    "dependencies": [
+      {
+        "id": "luckperms",
+        "optional": true
+      }
+    ]
+  }
+  ```

@@ -9,7 +9,7 @@ document very carefully**.
 
 ## Minimum supported Java version bump
 
-Velocity 3.5.x and above now requires Java 21 and above.
+Velocity 4.0.x and above now requires Java 25 and above.
 
 ## Removal of legacy dependencies
 

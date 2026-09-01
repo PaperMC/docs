@@ -64,17 +64,17 @@ Below is an example of how one might implement a custom `Translator`.
 public class MyTranslator implements Translator {
 
   @Override
-  public @NotNull Key name() {
+  public Key name() {
     // Every translator has a name which is used to identify this specific translator instance.
     return Key.key("mynamespace:mykey");
   }
 
   @Override
-  public @Nullable MessageFormat translate(final @NotNull String key, final @NotNull Locale locale) {
+  public @Nullable MessageFormat translate(final String key, final Locale locale) {
     // You could retrieve a string from a properties file, a config file, or some other system.
-    // An an example, we will hard-code a check for a specific key here.
+    // As an example, we will hard-code a check for a specific key here.
     if (key.equals("mytranslation.key") && locale == Locale.US) {
-      return new MessageFormat("Hello %s!", locale);
+      return new MessageFormat("Hello {0}!", locale);
     } else {
       // If you only want to use component translation, you can override this method and always return `null`.
       return null;
@@ -82,12 +82,13 @@ public class MyTranslator implements Translator {
   }
 
   @Override
-  public @Nullable Component translate(@NotNull TranslatableComponent component, @NotNull Locale locale) {
+  public @Nullable Component translate(final TranslatableComponent component, final Locale locale) {
     // As above, we will hardcode a check here, but you should be reading this from elsewhere.
-    if (key.equals("mytranslation.colorful") && locale == Locale.US) {
+    if (component.key().equals("mytranslation.colorful") && locale == Locale.US) {
       return Component.text("Hello, ", NamedTextColor.GREEN)
-        .append(component.arguments().get(0).color(NamedTextColor.RED))
-        .append(component.children()); // Always make sure to copy the children over!
+        .append(component.arguments().stream().map(it -> it.asComponent().color(NamedTextColor.RED)).toList())
+        .append(component.children()) // Always make sure to copy the children over!
+        .applyFallbackStyle(component.style());
     } else {
       return null;
     }
@@ -107,10 +108,10 @@ An example of how to use a translation store is below.
 ```java
 // As above, every translator needs an identifying name!
 // Could also use TranslationStore#component(Key) to work with components instead.
-final TranslationStore myStore = TranslationStore.messageFormat(Key.key("mynamespace:mykey"));
+final TranslationStore.StringBased<MessageFormat> myStore = TranslationStore.messageFormat(Key.key("mynamespace:mykey"));
 
 // You can add translations one-by-one, or in bulk. Consult the Javadocs for a full list of methods.
-myStore.register("mytranslation.key", Locale.US, new MessageFormat("Hello %s!", Locale.US));
+myStore.register("mytranslation.key", Locale.US, new MessageFormat("Hello {0}!", Locale.US));
 
 // You can then register this to the global translator so the translations are available there!
 GlobalTranslator.translator().addSource(myStore);

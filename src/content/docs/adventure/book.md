@@ -15,13 +15,13 @@ Books are composed of:
 
 ```java
 // Create and open a book about cats for the target audience
-public void openMyBook(final @NonNull Audience target) {
-    Component bookTitle = Component.text("Encyclopedia of cats");
-    Component bookAuthor = Component.text("kashike");
-    Collection<Component> bookPages = Cats.getCatKnowledge();
+public void openMyBook(final Audience target) {
+  final Component bookTitle = Component.text("Encyclopedia of cats");
+  final Component bookAuthor = Component.text("kashike");
+  final Collection<Component> bookPages = Cats.getCatKnowledge();
 
-    Book myBook = Book.book(bookTitle, bookAuthor, bookPages);
-    target.openBook(myBook);
+  final Book myBook = Book.book(bookTitle, bookAuthor, bookPages);
+  target.openBook(myBook);
 }
 ```
 

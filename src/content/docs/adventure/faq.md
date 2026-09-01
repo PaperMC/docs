@@ -43,7 +43,7 @@ PlaceholderAPI placeholders are not supported in MiniMessage. However, you can e
   * @param player the player
   * @return the tag resolver
   */
-  public @NotNull TagResolver papiTag(final @NotNull Player player) {
+  public TagResolver papiTag(final Player player) {
       return TagResolver.resolver("papi", (argumentQueue, context) -> {
           // Get the string placeholder that they want to use.
           final String papiPlaceholder = argumentQueue.popOr("papi tag requires an argument").value();

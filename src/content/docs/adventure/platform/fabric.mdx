@@ -103,7 +103,7 @@ Using these injections, getting started is as simple as:
 
 ```java
 void greet(final ServerPlayer player) {
-    Component message = Component.text()
+    final Component message = Component.text()
         .content("Hello ")
         .append(player.get(Identity.DISPLAY_NAME)
             .get()
@@ -177,7 +177,7 @@ void registerCommands(final CommandDispatcher dispatcher, final boolean isDedica
     dispatcher.register(literal("echo").then(argument(ARG_MESSAGE, component()).executes(ctx -> {
         final Component message = component(ctx, ARG_MESSAGE);
         ctx.getSource().sendMessage(Component.text("You said: ").append(message));
-    }));
+    })));
 }
 ```
 

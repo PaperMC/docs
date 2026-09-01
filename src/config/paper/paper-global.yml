@@ -242,6 +242,11 @@ messages:
       Whether the server should use the player's display name (set by plugins)
       or actual name in quit messages
 misc:
+  catchup-ticks:
+    default: "default"
+    description: >-
+      Sets the maximum number of ticks the server can speedup after a lag spike. A value of
+      "default" defaults to 5. Set to 0 to disable the catchup.
   chat-threads:
     chat-executor-core-size:
       default: "-1"

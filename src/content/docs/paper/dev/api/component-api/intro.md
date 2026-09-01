@@ -33,7 +33,7 @@ representations in the legacy string format.
 Representing text as components is now the supported way of representing text for Paper and Velocity. They are used
 for almost all aspects of text being displayed to clients. Text like item names, lore, bossbars, team prefixes and
 suffixes, custom names, and much more all support components in respective APIs.
-[Mojang has stated](https://mojira.dev/MC-190605#comment-993040)
+[Mojang has stated](https://mojira.dev/MC-190605#comment-id-606141)
 that client support for the legacy format with `§` will be removed in the future.
 
 

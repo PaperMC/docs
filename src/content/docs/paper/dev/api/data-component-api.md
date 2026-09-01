@@ -2,17 +2,7 @@
 title: Data components
 description: A guide to the ItemStack data component API.
 slug: paper/dev/data-component-api
-sidebar:
-  badge:
-    text: Experimental
-    variant: danger
 ---
-
-:::danger[Experimental]
-
-The data component API is currently experimental, and is additionally subject to change across versions.
-
-:::
 
 The data component API provides a version-specific interface for accessing and manipulating item data that is otherwise not representable by the `ItemMeta` API.
 Through this API, you can read and modify properties of an item, so called data components, in a stable and object-oriented manner.

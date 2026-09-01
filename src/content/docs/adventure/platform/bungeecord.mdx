@@ -38,7 +38,6 @@ public class MyPlugin extends Plugin {
 
     private BungeeAudiences adventure;
 
-    @NonNull
     public BungeeAudiences adventure() {
         if (this.adventure == null) {
             throw new IllegalStateException("Cannot retrieve audience provider while plugin is not enabled");

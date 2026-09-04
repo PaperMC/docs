@@ -549,7 +549,7 @@ Tag
 
 Arguments
   * `atlas` the atlas to use, e.g. `minecraft:blocks`.
-  * `sprite` the sprite to use, e.g. `item/emerald`. Textures added to the atlas from separate namespaces (i.e. textures from `assets/<namespace>/textures/items/`) need to be prefixed with the namespace.
+  * `sprite` the sprite to use, e.g. `item/emerald`. Name is based on the atlas used, may or may not have a prefix (e.g. `item/` for items atlas) and may require a namespace, if the texture is not stored in the `minecraft` namespace (e.g. texture paths from `assets/example/textures/item/` require `example:` as namespace).
 
 Examples
 ```mm

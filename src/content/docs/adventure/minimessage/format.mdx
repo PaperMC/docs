@@ -549,12 +549,13 @@ Tag
 
 Arguments
   * `atlas` the atlas to use, e.g. `minecraft:blocks`.
-  * `sprite` the sprite to use, e.g. `item/emerald`.
+  * `sprite` the sprite to use, e.g. `item/emerald`. Textures added to the atlas from separate namespaces (i.e. textures from `assets/<namespace>/textures/items/`) need to be prefixed with the namespace.
 
 Examples
 ```mm
 Look at my <sprite:blocks:block/stone>!
 This item costs 10 x <sprite:"minecraft:items":item/porkchop>.
+This is a custom texture from a namespace: <sprite:items:"example:item/example">
 ```
 
 ### Head

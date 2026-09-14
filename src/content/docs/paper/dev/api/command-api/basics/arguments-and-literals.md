@@ -137,7 +137,7 @@ This is the main advantage of native arguments: The client itself performs simpl
 way better, as they can see invalid input without sending the command to the server.
 
 ### String arguments
-There is three string arguments: `word`, `string`, and `greedyString`.
+There are three string arguments: `word`, `string`, and `greedyString`.
 
 The `word` string argument is the simplest one of these. It only accepts a single word consisting of alphanumerical characters and these special characters: `+`, `-`, `_`, and `.`.
 * ✅ `.this_is_valid_input.`

@@ -303,9 +303,6 @@ misc:
   region-file-cache-size:
     default: "256"
     description: The maximum size of the region file cache
-  send-full-pos-for-item-entities:
-    default: "false"
-    description: Whether to send the full position for item entities
   strict-advancement-dimension-check:
     default: "false"
     description: >-

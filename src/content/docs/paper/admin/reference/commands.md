@@ -107,7 +107,7 @@ You can specify the world to get info about with the `[<world>]` argument. If yo
 out, it will list information for all worlds.
 
 The output differentiates between multiple types of loaded chunks. Here is a quick rundown of each type.
-A more complete documentation may be found in the [Minecraft wiki](https://minecraft.wiki/w/Chunk).
+A more complete documentation may be found in the [Minecraft Wiki](https://minecraft.wiki/w/Chunk).
 
 - `Total` As the name suggests, this number describes **all chunks** currently loaded.
 - `Inactive` More commonly referred to as "inaccessible", are chunks which are not ticked, but where chunk generation occurs.

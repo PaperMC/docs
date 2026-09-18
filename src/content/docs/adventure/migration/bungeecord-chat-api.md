@@ -116,7 +116,7 @@ new ComponentBuilder("hello")
 becomes
 
 ```java
-Style style = Style.style(NamedTextColor.GOLD, TextDecoration.BOLD);
+final Style style = Style.style(NamedTextColor.GOLD, TextDecoration.BOLD);
 Component.text()
   .append(Component.text("hello", style))
   .append(Component.text(" world", style))

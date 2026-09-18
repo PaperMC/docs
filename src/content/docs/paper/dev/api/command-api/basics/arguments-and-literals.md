@@ -26,14 +26,15 @@ In code, literals generally cannot be accessed. Yet, due to the nature of our co
 ```java
 Commands.literal("plant")
     .then(Commands.literal("tree")
-        .executes(ctx -> {
-            /* Here we are on /plant tree */
+        .executes(context -> {
+            // Here we are on /plant tree
         })
     )
     .then(Commands.literal("grass")
-        .executes(ctx -> {
-             /* Here we are on /plant grass */
-        }));
+        .executes(context -> {
+            // Here we are on /plant grass
+        })
+    )
 ```
 
 :::tip
@@ -45,11 +46,11 @@ For more information about execution logic, [click here](/paper/dev/command-api/
 
 ## Arguments
 Arguments are slightly more complex. They also define a new branch in a tree, but they are not directly predictable. Each argument is created using `Commands.argument(String, ArgumentType<T>)`.
-That method returns a `RequiredArgumentBuilder`. The T type parameter declares the return type of the argument, which you can then use inside your `executes` method. That means that
+That method returns a `RequiredArgumentBuilder`. The `T` type parameter declares the return type of the argument, which you can then use inside your `executes` method. That means that
 if you put in an `ArgumentType<Integer>`, you can retrieve the value of that argument as an integer, requiring no manual parsing! There are a few build-in, primitive argument types
 that we can use for arguments:
 
-|               Name                | Return value  |   Possible Input    |                                           Description                                            |
+| Argument Type                     | Resolved Type | Possible Input      | Description                                                                                      |
 |-----------------------------------|---------------|---------------------|--------------------------------------------------------------------------------------------------|
 | BoolArgumentType.bool()           | Boolean       | true/false          | Only allows a boolean value                                                                      |
 | IntegerArgumentType.integer()     | Integer       | 253, -123, 0        | Any valid integer                                                                                |
@@ -61,47 +62,47 @@ that we can use for arguments:
 | StringArgumentType.greedyString() | String        | unquoted spaces     | The literal written input. May contain any characters. Has to be the last argument               |
 
 ### Boolean argument type and argument parsing
-A boolean argument is used for retrieving, well, a boolean. An example usage for that might be a `/serverflight` command which allows for enabling and disabling server flight
+A boolean argument type is used for retrieving, well, a boolean. An example usage for that might be a `/serverflight` command which allows for enabling and disabling server flight
 with `/serverflight true` and `/serverflight false`:
 
-```java title="ServerFlightCommand.java"
+```java
 Commands.literal("serverflight")
     .then(Commands.argument("allow", BoolArgumentType.bool())
-        .executes(ctx -> {
-            boolean allowed = ctx.getArgument("allow", boolean.class);
-            /* Toggle server flying */
+        .executes(context -> {
+            boolean allow = context.getArgument("allow", boolean.class);
+            // Toggle server flying
         })
-    );
+    )
 ```
 
-Here, you can see how one would access an argument in-code. The first parameter for the `Commands.argument(String, ArgumentType)` method takes in the node name. This is not required
+Here, you can see how one would access an argument in-code. The first parameter for the `Commands.argument(String, ArgumentType<T>)` method takes in the node name. This is not required
 by literals, as their name is the same as their value. But here we need a way to access the argument. The parameter of the executes-lambda has a method called
-`T getArgument(String, Class<T>)`. The first parameter is the name of the method we want to retrieve. The second parameter is the return value of the argument. As we are using
+`V getArgument(String, Class<V>)`. The first parameter is the name of the argument we want to retrieve. The second parameter is the return value of the argument. As we are using
 a boolean argument, we put in `boolean.class` and retrieve the argument value as such.
 
 ### Number arguments
 All of the number arguments (like `IntegerArgumentType.integer()`) have three overloads:
 
-|                     Overload                      |                        Description                        |
-|---------------------------------------------------|-----------------------------------------------------------|
-| `IntegerArgumentType.integer()`                   | Any value between Integer.MIN_VALUE and Integer.MAX_VALUE |
-| `IntegerArgumentType.integer(int min)`            | Any value between min and Integer.MAX_VALUE               |
-| `IntegerArgumentType.integer(int min, int max)`   | Any value between min and max                             |
+| Overload                                        | Description                                               |
+|-------------------------------------------------|-----------------------------------------------------------|
+| `IntegerArgumentType.integer()`                 | Any value between Integer.MIN_VALUE and Integer.MAX_VALUE |
+| `IntegerArgumentType.integer(int min)`          | Any value between min and Integer.MAX_VALUE               |
+| `IntegerArgumentType.integer(int min, int max)` | Any value between min and max                             |
 
 This is particularly useful for filtering out too high or too low input. As an example, we can define a `/flyspeed` command. As the
-[`Player#setFlySpeed(float value)`](jd:paper:org.bukkit.entity.Player#setFlySpeed(float)) method only
+[](jd:paper:org.bukkit.entity.Player#setFlySpeed(float)) method only
 accepts floats between -1 and 1, where -1 is an inverse direction, it would make sense to limit the values between 0 and 1 for in-bounds, non-negative speed values.
 This can be achieved with the following command tree:
 
-```java title="FlightSpeedCommand.java"
+```java
 Commands.literal("flyspeed")
-    .then(Commands.argument("speed", FloatArgumentType.floatArg(0, 1.0f))
-        .executes(ctx -> {
-            float speed = ctx.getArgument("speed", float.class);
-            /* Set player's flight speed */
+    .then(Commands.argument("speed", FloatArgumentType.floatArg(0, 1.0F))
+        .executes(context -> {
+            float speed = context.getArgument("speed", float.class);
+            // Set player's flight speed
             return Command.SINGLE_SUCCESS;
         })
-    );
+    )
 ```
 
 :::tip
@@ -110,10 +111,10 @@ Some arguments can have special ways of being retrieved. Most notably, all of th
 have a resolver to get their own argument value. For the float argument, this would look like this:
 
 ```java
-float speed = FloatArgumentType.getFloat(ctx, "speed");
+float speed = FloatArgumentType.getFloat(context, "speed");
 ```
 
-It generally does not matter whether you use `ctx.getArgument` or `FloatArgumentType.getFloat`, since it goes through the same logic, but in future documentation,
+It generally does not matter whether you use `context.getArgument` or `FloatArgumentType.getFloat`, since it goes through the same logic, but in future documentation,
 primitive values might be retrieved using their own parsers.
 
 These parsers for Brigadier-native arguments exist. All of these take in `(CommandContext<?> context, String name)` as method parameters:

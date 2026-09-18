@@ -6,18 +6,17 @@ sidebar:
   label: Introduction
 ---
 
-The lifecycle API can be used for lifecycle-related registration. It is currently used by the
-Brigadier command API. It is planned to be used for the Registry Modification API as well.
+The lifecycle API can be used for lifecycle-related registration. It is currently used when registering [Brigadier commands](/paper/dev/command-api/basics/introduction) and modifying [registries](/paper/dev/registries/#create-new-entries) or [datapacks](/paper/dev/lifecycle/datapacks/).
 Generally, systems that are initialized very early in the startup process can take advantage of this
 event system.
 
 ## LifecycleEventManager
 
-The [LifecycleEventManager](jd:paper:io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager) is tied
-to either a [Plugin](jd:paper:org.bukkit.plugin.Plugin) instance or a
-[BootstrapContext](jd:paper:io.papermc.paper.plugin.bootstrap.BootstrapContext) depending on where you access it from. For example in your plugin's main class:
+The [](jd:paper:io.papermc.paper.plugin.lifecycle.event.LifecycleEventManager) is tied
+to either a [](jd:paper:org.bukkit.plugin.Plugin) instance or a
+[](jd:paper:io.papermc.paper.plugin.bootstrap.BootstrapContext) depending on where you access it from. For example in your plugin's main class:
 
-```java title="TestPlugin.java"
+```java title="ExamplePlugin.java"
 @Override
 public void onEnable() {
     final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
@@ -26,9 +25,9 @@ public void onEnable() {
 
 Or, with a bootstrapper:
 
-```java title="TestPluginBootstrap.java"
+```java title="ExamplePluginBootstrap.java"
 @Override
-public void bootstrap(BootstrapContext context) {
+public void bootstrap(final BootstrapContext context) {
     final LifecycleEventManager<BootstrapContext> lifecycleManager = context.getLifecycleManager();
 }
 ```
@@ -36,12 +35,12 @@ public void bootstrap(BootstrapContext context) {
 ## LifecycleEvents
 
 After obtaining the correct `LifecycleEventManager`, create an event handler by selecting an
-event type from [LifecycleEvents](jd:paper:io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents):
-```java title="TestPlugin.java"
+event type from [](jd:paper:io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents):
+```java title="ExamplePlugin.java"
 @Override
 public void onEnable() {
     final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-    PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+    final PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler(event -> {
         // Handler for the event
     });
 }
@@ -66,11 +65,11 @@ the handler.
 
 The priority and monitor state are exclusive options, setting one will reset the other.
 
-```java title="TestPlugin.java"
+```java title="ExamplePlugin.java"
 @Override
 public void onEnable() {
     final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-    PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+    final PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler(event -> {
         // Handler for the event
     });
     config.priority(10); // sets a priority of 10
@@ -83,11 +82,11 @@ public void onEnable() {
 
 Once the handler has been configured, it can be registered with the lifecycle manager:
 
-```java title="TestPlugin.java"
+```java title="ExamplePlugin.java"
 @Override
 public void onEnable() {
     final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-    PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler((event) -> {
+    final PrioritizedLifecycleEventHandlerConfiguration<LifecycleEventOwner> config = LifecycleEvents.SOME_EVENT.newHandler(event -> {
         // Handler for the event
     }).priority(10);
     lifecycleManager.registerEventHandler(config);
@@ -95,11 +94,11 @@ public void onEnable() {
 ```
 There is also a shorthand way to register just the handler without doing any configuration:
 
-```java title="TestPlugin.java"
+```java title="ExamplePlugin.java"
 @Override
 public void onEnable() {
     final LifecycleEventManager<Plugin> lifecycleManager = this.getLifecycleManager();
-    lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS, (event) -> {
+    lifecycleManager.registerEventHandler(LifecycleEvents.COMMANDS, event -> {
         // Handler for the event
     });
 }
@@ -131,8 +130,8 @@ system to support this new need for events:
 
 - You cannot have generics on Bukkit events because there is 0 compile time checking since they are
   registered reflectively. This is a problem because the events are mostly going to follow a very
-  similar pattern, specifically the registry modification events. If we can’t use generics, there’s
-  going to be many useless classes.
+  similar pattern, specifically the registry events. If we can’t use generics, there’s going to be
+  many useless classes.
 
 - Another reason is that the existing system has priorities, but always has them. With the lifecycle
   events, there may be some events for which we do not want to support priorities (it would
@@ -149,6 +148,6 @@ system to support this new need for events:
 
 - A new system lets us enforce, at compile time, which events you can register where based on the
   context of the registration. So you can’t even register a handler for an event in the wrong spot,
-  that will be a compiler error thanks to our implementation using Generics.
+  that will be a compiler error thanks to our implementation using generics.
 
 :::

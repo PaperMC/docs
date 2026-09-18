@@ -17,16 +17,16 @@ have a valid plugin registration, but Velocity can't register the plugin until t
 constructed.
 
 To break this cycle, you should always wait for initialization, which is indicated when Velocity
-fires the [`ProxyInitializeEvent`](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent).
+fires the [](jd:velocity:com.velocitypowered.api.event.proxy.ProxyInitializeEvent).
 We can do things on initialization by adding a listener for this event, as shown below.
 Note that Velocity automatically registers your plugin main class as a listener.
 
 ```java
 @Subscribe
 public void onProxyInitialization(ProxyInitializeEvent event) {
-    // Do some operation demanding access to the Velocity API here.
-    // For instance, we could register an event:
-    server.getEventManager().register(this, new PluginListener());
+  // Do some operation demanding access to the Velocity API here.
+  // For instance, we could register an event:
+  server.getEventManager().register(this, new PluginListener());
 }
 ```
 
@@ -47,4 +47,4 @@ Furthermore, playing sound was previously considered infeasible for versions bel
 | Books                      | No               |
 | Dialogs                    | No               |
 
-[^sounds-note]: Playing sounds only works on 1.19.3+ and requires an emitter ([`Sound.Emitter#self()`](jd:adventure:net.kyori.adventure.sound.Sound$Emitter#self()) or another player from the same server). [`Player#playSound(Sound)`](jd:velocity:com.velocitypowered.api.proxy.Player#playSound(net.kyori.adventure.sound.Sound)) is not implemented, as Adventure's contract requires sounds to play at the player's current position.
+[^sounds-note]: Playing sounds only works on 1.19.3+ and requires an emitter ([](jd:adventure:net.kyori.adventure.sound.Sound$Emitter#self()) or another player from the same server). [](jd:velocity:com.velocitypowered.api.proxy.Player#playSound(net.kyori.adventure.sound.Sound)) is not implemented, as Adventure's contract requires sounds to play at the player's current position.

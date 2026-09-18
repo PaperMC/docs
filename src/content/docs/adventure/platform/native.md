@@ -17,3 +17,4 @@ The following software provide native support for Adventure.
 | Paper     | 1.16.5 build 473                     |                                                                                                                  |
 | Minestom  | Build 7494725                        | For more information, see the [Minestom Wiki](https://minestom.net/docs/feature/adventure)                       |
 | Fabric    | `adventure-platform-fabric` 5.3.0    | This is not strictly native, but injected interfaces provide a near-native experience                            |
+| Fidorial  | 0.1.0                                |                                                                                                                  |

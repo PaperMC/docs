@@ -284,5 +284,5 @@ view-distance:
     of the player (radius, not diameter). It determines the server-side viewing distance (Default: 10, Min: 3,
     Max: 32).
 white-list:
-  default: "true"
+  default: "false"
   description: "Enables a whitelist on the server. If enabled, the server will only allow selected users to connect."

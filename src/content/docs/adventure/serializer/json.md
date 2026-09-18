@@ -12,10 +12,10 @@ The JSON serializer works similar to all others, providing the basic serialize a
 
 ```java
 // Component to text
-final String jsonText = JSONComponentSerializer.json().serialize(Component.text("Hello world", NamedTextColor.LIGHT_PURPLE));
+final String json = JSONComponentSerializer.json().serialize(Component.text("Hello world", NamedTextColor.LIGHT_PURPLE));
 
 // JSON string to component
-final Component comp = JSONComponentSerializer.json().deserialize(jsonText);
+final Component component = JSONComponentSerializer.json().deserialize(json);
 ```
 
 Additionally, there is a `JSONComponentSerializer.builder()` available for advanced use that requires configuring legacy compatibility options.

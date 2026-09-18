@@ -63,9 +63,8 @@ system's documentation ([Gradle](https://docs.gradle.org/current/userguide/userg
   <TabItem label="Gradle (Kotlin)">
     ```kotlin title="build.gradle.kts" replace
     repositories {
-      maven {
+      maven(url = "https://repo.papermc.io/repository/maven-public/") {
         name = "papermc"
-        url = uri("https://repo.papermc.io/repository/maven-public/")
       }
     }
 

@@ -20,7 +20,7 @@ This can be done using `GlobalTranslator.translator().addSource(myMiniMessageTra
 For an example of how to create your own `MiniMessageTranslator`, see the code
 block below.
 
-```java
+```java title="MyMiniMessageTranslator.java"
 public class MyMiniMessageTranslator extends MiniMessageTranslator {
 
   public MyMiniMessageTranslator() {
@@ -39,7 +39,7 @@ public class MyMiniMessageTranslator extends MiniMessageTranslator {
   public @Nullable String getMiniMessageString(final String key, final Locale locale) {
     // Creating a custom MiniMessage translator is as simple as overriding this one method.
     // All you need to do is return a MiniMessage string for the provided key and locale.
-    // In this example we will hardcode this, but you could pull it from a resource bundle, a properties file, a config file or something else entirely.
+    // In this example we will hard-code this, but you could pull it from a resource bundle, a properties file, a config file or something else entirely.
     if (key.equals("mykey") && locale == Locale.US) {
       return "<red>Hello, <name>! Today is <day_of_week>.";
     } else {

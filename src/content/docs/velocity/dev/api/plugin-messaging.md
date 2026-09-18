@@ -66,33 +66,33 @@ public static final MinecraftChannelIdentifier IDENTIFIER = MinecraftChannelIden
 
 @Subscribe
 public void onProxyInitialization(ProxyInitializeEvent event) {
-    proxyServer.getChannelRegistrar().register(IDENTIFIER);
+  proxyServer.getChannelRegistrar().register(IDENTIFIER);
 }
 
 @Subscribe
 public void onPluginMessageFromPlayer(PluginMessageEvent event) {
-    // Check if the identifier matches first, no matter the source.
-    if (!IDENTIFIER.equals(event.getIdentifier())) {
-        return;
-    }
+  // Check if the identifier matches first, no matter the source.
+  if (!IDENTIFIER.equals(event.getIdentifier())) {
+    return;
+  }
 
-    // mark PluginMessage as handled, indicating that the contents
-    // should not be forwarding to their original destination.
-    event.setResult(PluginMessageEvent.ForwardResult.handled());
+  // mark PluginMessage as handled, indicating that the contents
+  // should not be forwarding to their original destination.
+  event.setResult(PluginMessageEvent.ForwardResult.handled());
 
-    // Alternatively:
+  // Alternatively:
 
-    // mark PluginMessage as forwarded, indicating that the contents
-    // should be passed through, as if Velocity is not present.
-    //event.setResult(PluginMessageEvent.ForwardResult.forward());
+  // mark PluginMessage as forwarded, indicating that the contents
+  // should be passed through, as if Velocity is not present.
+  //event.setResult(PluginMessageEvent.ForwardResult.forward());
 
-    // only attempt parsing the data if the source is a player
-    if (!(event.getSource() instanceof Player player)) {
-        return;
-    }
+  // only attempt parsing the data if the source is a player
+  if (!(event.getSource() instanceof Player player)) {
+    return;
+  }
 
-    ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
-    // handle packet data
+  ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
+  // handle packet data
 }
 ```
 
@@ -132,8 +132,8 @@ An example use case could be telling the server to shut down.
 
 ```java
 public boolean sendPluginMessageToBackend(RegisteredServer server, ChannelIdentifier identifier, byte[] data) {
-    // On success, returns true
-    return server.sendPluginMessage(identifier, data);
+  // On success, returns true
+  return server.sendPluginMessage(identifier, data);
 }
 ```
 
@@ -146,19 +146,19 @@ An example use case could be telling the backend server to give the player a spe
 
 ```java
 public boolean sendPluginMessageToBackendUsingPlayer(Player player, ChannelIdentifier identifier, byte[] data) {
-    Optional<ServerConnection> connection = player.getCurrentServer();
-    if (connection.isPresent()) {
-        // On success, returns true
-        return connection.get().sendPluginMessage(identifier, data);
-    }
-    return false;
+  Optional<ServerConnection> connection = player.getCurrentServer();
+  if (connection.isPresent()) {
+    // On success, returns true
+    return connection.get().sendPluginMessage(identifier, data);
+  }
+  return false;
 }
 ```
 
 ## Case 3: Receiving a plugin message from a backend server
 
 This is for when you need to receive plugin messages from your backend server.
-It will require registering with the [`ChannelRegistrar`](jd:velocity:com.velocitypowered.api.proxy.messages.ChannelRegistrar)
+It will require registering with the [](jd:velocity:com.velocitypowered.api.proxy.messages.ChannelRegistrar)
 for the event to be fired.
 
 An example use case could be handing a request to transfer the player to another server.
@@ -185,38 +185,38 @@ public static final MinecraftChannelIdentifier IDENTIFIER = MinecraftChannelIden
 
 @Subscribe
 public void onProxyInitialization(ProxyInitializeEvent event) {
-    proxyServer.getChannelRegistrar().register(IDENTIFIER);
+  proxyServer.getChannelRegistrar().register(IDENTIFIER);
 }
 
 @Subscribe
 public void onPluginMessageFromBackend(PluginMessageEvent event) {
-    // Check if the identifier matches first, no matter the source.
-    // this allows setting all messages to IDENTIFIER as handled,
-    // preventing any client-originating messages from being forwarded.
-    if (!IDENTIFIER.equals(event.getIdentifier())) {
-        return;
-    }
+  // Check if the identifier matches first, no matter the source.
+  // this allows setting all messages to IDENTIFIER as handled,
+  // preventing any client-originating messages from being forwarded.
+  if (!IDENTIFIER.equals(event.getIdentifier())) {
+    return;
+  }
 
-    // mark PluginMessage as handled, indicating that the contents
-    // should not be forwarding to their original destination.
-    event.setResult(PluginMessageEvent.ForwardResult.handled());
+  // mark PluginMessage as handled, indicating that the contents
+  // should not be forwarding to their original destination.
+  event.setResult(PluginMessageEvent.ForwardResult.handled());
 
-    // Alternatively:
+  // Alternatively:
 
-    // mark PluginMessage as forwarded, indicating that the contents
-    // should be passed through, as if Velocity is not present.
-    //
-    // this should be used with extreme caution,
-    // as any client can freely send whatever it wants, pretending to be the proxy
-    //event.setResult(PluginMessageEvent.ForwardResult.forward());
+  // mark PluginMessage as forwarded, indicating that the contents
+  // should be passed through, as if Velocity is not present.
+  //
+  // this should be used with extreme caution,
+  // as any client can freely send whatever it wants, pretending to be the proxy
+  //event.setResult(PluginMessageEvent.ForwardResult.forward());
 
-    // only attempt parsing the data if the source is a backend server
-    if (!(event.getSource() instanceof ServerConnection backend)) {
-        return;
-    }
+  // only attempt parsing the data if the source is a backend server
+  if (!(event.getSource() instanceof ServerConnection backend)) {
+    return;
+  }
 
-    ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
-    // handle packet data
+  ByteArrayDataInput in = ByteStreams.newDataInput(event.getData());
+  // handle packet data
 }
 ```
 
@@ -244,8 +244,8 @@ direction: left
 
 ```java
 public boolean sendPluginMessageToPlayer(Player player, ChannelIdentifier identifier, byte[] data) {
-    // On success, returns true
-    return player.sendPluginMessage(identifier, data);
+  // On success, returns true
+  return player.sendPluginMessage(identifier, data);
 }
 ```
 

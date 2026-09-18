@@ -2,7 +2,7 @@
 title: Requirements
 description: A guide to setting requirements for commands.
 slug: paper/dev/command-api/basics/requirements
-version: 1.21.6
+version: "26.2"
 ---
 
 Sometimes you want to limit a player's ability to use and/or view certain commands or subcommands. Exactly for this purpose,
@@ -10,16 +10,16 @@ the `ArgumentBuilder<S>` class has a `requires(Predicate<S>)` method to define a
 As always, the generic parameter `S` is just a `CommandSourceStack`, providing us with the executing entity, the command sender, and the location of the command.
 
 ## Defining permissions
-One of the most common usecases for requirements are permissions. Usually, these are checked on the **command sender**, as that is the actual entity/console/object
+One of the most common use cases for requirements are permissions. Usually, these are checked on the **command sender**, as that is the actual entity/console/object
 which ran the command, even if it is run as someone else (the executor). A simple command with a permission might look like this:
 
 ```java
 Commands.literal("testcmd")
-    .requires(sender -> sender.getSender().hasPermission("permission.test"))
-    .executes(ctx -> {
-        ctx.getSource().getSender().sendRichMessage("<gold>You have permission to run this command!");
+    .requires(source -> source.getSender().hasPermission("permission.test"))
+    .executes(context -> {
+        context.getSource().getSender().sendRichMessage("<gold>You have permission to run this command!");
         return Command.SINGLE_SUCCESS;
-    });
+    })
 ```
 
 This command requires the `permission.test` permission to be had by a sender.
@@ -27,11 +27,11 @@ But you cannot only define permissions, you can also require a sender to be a se
 
 ```java
 Commands.literal("testcmd")
-    .requires(sender -> sender.getSender().isOp())
-    .executes(ctx -> {
-        ctx.getSource().getSender().sendRichMessage("<gold>You are a server operator!");
+    .requires(source -> source.getSender().isOp())
+    .executes(context -> {
+        context.getSource().getSender().sendRichMessage("<gold>You are a server operator!");
         return Command.SINGLE_SUCCESS;
-    });
+    })
 ```
 
 ## Defining more advanced predicates
@@ -40,14 +40,11 @@ a player has a diamond sword in their inventory:
 
 ```java
 Commands.literal("givesword")
-    .requires(sender -> sender.getExecutor() instanceof Player player && !player.getInventory().contains(Material.DIAMOND_SWORD))
-    .executes(ctx -> {
-        if (ctx.getSource().getExecutor() instanceof Player player) {
-            player.getInventory().addItem(ItemType.DIAMOND_SWORD.createItemStack());
-        }
-
+    .requires(source -> source.getExecutor() instanceof Player player && !player.getInventory().contains(Material.DIAMOND_SWORD))
+    .executes(context -> {
+        context.getSource().getPlayerOrThrow().getInventory().addItem(ItemStack.of(Material.DIAMOND_SWORD));
         return Command.SINGLE_SUCCESS;
-    });
+    })
 ```
 
 At first glance, this works just fine. But it does have a very big flaw - since the player's client is not aware of the requirement, it still shows the command
@@ -56,19 +53,18 @@ the requirement was not met):
 
 ![](./assets/client-server-mismatch.png)
 
-How can we solve this? The `Player` interface has a method called [`#updateCommands()`](jd:paper:org.bukkit.entity.Player#updateCommands()) just for this usecase. It resends the currently registered commands back to the
+How can we solve this? The `Player` interface has a method called [`updateCommands()`](jd:paper:org.bukkit.entity.Player#updateCommands()) just for this usecase. It resends the currently registered commands back to the
 client in an attempt to reload commands. For now, we can create a new command with which the player can update its own commands in order to resync its command state:
 
 ```java
 Commands.literal("reloadcommands")
-    .executes(ctx -> {
-        if (ctx.getSource().getExecutor() instanceof Player player) {
-            player.updateCommands();
-            player.sendRichMessage("<gold>Successfully updated your commands!");
-        }
+    .executes(context -> {
+        final Player player = context.getSource().getPlayerOrThrow();
+        player.updateCommands();
+        player.sendRichMessage("<gold>Successfully updated your commands!");
 
         return Command.SINGLE_SUCCESS;
-    });
+    })
 ```
 
 ### Automating command reloads
@@ -90,10 +86,10 @@ A simple implementation might look like this:
 ```java
 Commands.literal("test-req")
     .requires(Commands.restricted(source -> true))
-    .executes(ctx -> {
-        ctx.getSource().getSender().sendRichMessage("You passed!");
+    .executes(context -> {
+        context.getSource().getSender().sendPlainMessage("You passed!");
         return Command.SINGLE_SUCCESS;
-    });
+    })
 ```
 
 ![](./assets/custom-restriction.png)
@@ -108,7 +104,7 @@ Commands.literal("mycommand")
     .requires(Commands.restricted(source -> source.getSender().hasPermission("my.custom.permission")
                                             && source.getExecutor() instanceof Player player
                                             && player.getGameMode() == GameMode.ADVENTURE))
-    .executes(ctx -> {
+    .executes(context -> {
         // Command logic
-    });
+    })
 ```

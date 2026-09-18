@@ -7,41 +7,46 @@ slug: paper/dev/recipes
 Recipes are a way to define a way to craft a particular item. They are defined by a plugin or
 datapack, however we are only going to cover the plugin side of things here.
 
-## [`ShapedRecipe`](jd:paper:org.bukkit.inventory.ShapedRecipe)
+## [](jd:paper:org.bukkit.inventory.ShapedRecipe)
 
 A shaped recipe is a recipe that requires a specific pattern of items in the crafting grid to craft an item.
 These are created using a pattern string and a map of characters to items. The pattern strings are 3,
 3-character strings that represent the rows of the crafting grid. They can be created as follows:
 
-```java title="TestPlugin.java"
-public class TestPlugin extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
         NamespacedKey key = new NamespacedKey(this, "television");
 
-        ItemStack item = ItemStack.of(Material.BLACK_WOOL);
-        item.setData(DataComponentTypes.ITEM_NAME, Component.text("Television"));
+        ItemStack result = ItemStack.of(Material.BLACK_WOOL);
+        result.setData(DataComponentTypes.ITEM_NAME, Component.text("Television"));
 
-        ShapedRecipe recipe = new ShapedRecipe(key, item);
-        recipe.shape("AAA", "ABA", "AAA");
+        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        recipe.shape(
+            "AAA",
+            "ABA",
+            "AAA"
+        );
         recipe.setIngredient('A', Material.WHITE_CONCRETE);
         recipe.setIngredient('B', Material.BLACK_STAINED_GLASS_PANE);
 
-        getServer().addRecipe(recipe);
+        this.getServer().addRecipe(recipe);
     }
 }
 ```
 
-This recipe would require a television to be crafted with one black stained glass pane surrounded 
-by white concrete. The result would look like this in the crafting grid:
+This recipe would require a television to be crafted with one black stained glass pane surrounded
+by white concrete. The recipe would look like this in the crafting grid:
 
 ```
 AAA
-ABA 
+ABA
 AAA
 ```
 
+<!-- TODO: this note is outdated for recent version, see the TODO in Server#addRecipe which now always resend recipes must wait once this one is resolved -->
 :::note
 
 You do not need to register the recipe within your plugin's `onEnable` method, You can register it
@@ -54,29 +59,29 @@ method to update all players with the new recipe.
 
 :::caution
 
-You cannot use Air as a material in a shaped recipe, this will cause an error.
+You cannot use `minecraft:air` as an ingredient in a shaped recipe, this will cause an error instead just leave a space in the shape pattern.
 
 :::
 
 
-## [`ShapelessRecipe`](jd:paper:org.bukkit.inventory.ShapelessRecipe)
+## [](jd:paper:org.bukkit.inventory.ShapelessRecipe)
 
 A shapeless recipe is a recipe that requires a specific number of items in the crafting grid to craft an item.
 These are created using a list of items. They can be created as follows:
 
-```java title="TestPlugin.java"
-public class TestPlugin extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        NamespacedKey key = new NamespacedKey(this, "WarriorSword");
-        ItemStack item = ItemStack.of(Material.DIAMOND_SWORD);
+        NamespacedKey key = new NamespacedKey(this, "warrior_sword");
+        ItemStack result = ItemStack.of(Material.DIAMOND_SWORD);
 
-        ShapelessRecipe recipe = new ShapelessRecipe(key, item);
+        ShapelessRecipe recipe = new ShapelessRecipe(key, result);
         recipe.addIngredient(3, Material.DIAMOND);
         recipe.addIngredient(2, Material.STICK);
 
-        getServer().addRecipe(recipe);
+        this.getServer().addRecipe(recipe);
     }
 }
 ```

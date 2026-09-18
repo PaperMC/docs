@@ -17,13 +17,13 @@ Custom `InventoryHolder`s have no such downsides and by using them you're guaran
 
 ## Creating a custom holder
 
-The first step is to implement the [`InventoryHolder`](jd:paper:org.bukkit.inventory.InventoryHolder) interface.
-We can do this the following way: create a new class that will create our [`Inventory`](jd:paper:org.bukkit.inventory.Inventory) in the constructor.
+The first step is to implement the [](jd:paper:org.bukkit.inventory.InventoryHolder) interface.
+We can do this the following way: create a new class that will create our [](jd:paper:org.bukkit.inventory.Inventory) in the constructor.
 
 :::note
 
 The constructor takes your main plugin class as an argument in order to create the `Inventory`.
-If you wish, you can use the static method [`Bukkit#createInventory(InventoryHolder, int)`](jd:paper:org.bukkit.Bukkit#createInventory(org.bukkit.inventory.InventoryHolder,int)) instead and remove the argument.
+If you wish, you can use the static method [](jd:paper:org.bukkit.Bukkit#createInventory(org.bukkit.inventory.InventoryHolder,int)) instead and remove the argument.
 
 :::
 
@@ -58,8 +58,7 @@ argument you don't have to pass it here.
 :::
 
 ```java
-Player player; // Assume we have a Player instance.
-               // This can be a command, another event or anywhere else you have a Player.
+Player player = ...;
 
 MyInventory myInventory = new MyInventory(myPlugin);
 player.openInventory(myInventory.getInventory());
@@ -68,7 +67,7 @@ player.openInventory(myInventory.getInventory());
 ## Listening to an event
 
 Once we have the inventory open, we can listen to any inventory events we like and check if
-[`Inventory#getHolder()`](jd:paper:org.bukkit.inventory.Inventory#getHolder()) returns an instance of our `MyInventory`.
+[](jd:paper:org.bukkit.inventory.Inventory#getHolder()) returns an instance of our `MyInventory`.
 
 ```java
 @EventHandler
@@ -96,7 +95,6 @@ First, let's modify our `MyInventory` class a little:
 public class MyInventory implements InventoryHolder {
 
     private final Inventory inventory;
-
     private int clicks = 0; // Store the amount of clicks.
 
     public MyInventory(MyPlugin plugin) {
@@ -106,13 +104,13 @@ public class MyInventory implements InventoryHolder {
         this.inventory.setItem(0, ItemStack.of(Material.STONE));
     }
 
-    // A method we will call in the listener whenever the player clicks the stone.
+    /// Called from the event whenever the player clicks the stone.
     public void addClick() {
         this.clicks++;
         this.updateCounter();
     }
 
-    // A method that will update the counter item.
+    /// Update the counter item once the stone is clicked.
     private void updateCounter() {
         this.inventory.setItem(8, ItemStack.of(Material.BEDROCK, this.clicks));
     }

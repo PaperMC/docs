@@ -67,7 +67,7 @@ scheduler.execute(plugin, locationToChange, () -> {
 });
 ```
 
-We pass the location as a parameter to the [`RegionScheduler`](jd:paper:io.papermc.paper.threadedregions.scheduler.RegionScheduler)
+We pass the location as a parameter to the [](jd:paper:io.papermc.paper.threadedregions.scheduler.RegionScheduler)
 as it needs to work out which region to execute on.
 
 ### Async scheduler

@@ -62,7 +62,7 @@ These settings mostly cover the basic, most essential settings of the proxy.
 
 ## `advanced` section
 
-| Setting name                               | Type    | Description                                                                                                                                                                                             |
+| Setting Name                               | Type    | Description                                                                                                                                                                                             |
 |--------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `compression-threshold`                    | Integer | This is the minimum size (in bytes) that a packet must be before the proxy compresses it. Minecraft uses 256 bytes by default.                                                                          |
 | `compression-level`                        | Integer | This setting indicates what `zlib` compression level the proxy should use to compress packets. The default value uses the default zlib level.                                                           |
@@ -87,7 +87,7 @@ These settings mostly cover the basic, most essential settings of the proxy.
 
 ## `query` section
 
-| Setting name   | Type    | Description                                                                                                  |
+| Setting Name   | Type    | Description                                                                                                  |
 |----------------|---------|--------------------------------------------------------------------------------------------------------------|
 | `enabled`      | Boolean | Whether or not Velocity should reply to Minecraft query protocol requests. You can usually leave this false. |
 | `port`         | Number  | Specifies which port that Velocity should listen on for GameSpy 4 (Minecraft query protocol) requests.       |

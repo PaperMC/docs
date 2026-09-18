@@ -41,7 +41,7 @@ For tags with no content, tags can be auto-closed by using the format `<tag/>`. 
 
 All tag names are case-insensitive to reduce the possibility for conflict, but we recommend keeping all tag names lowercase (or at the very least, being consistent).
 
-Some tags have argument. Those look like this: `<tag:argument>stuff</tag>`.
+Some tags have argument. Those look like this: `<tag:argument>content</tag>`.
 For example:
 ```mm
 <hover:show_text:"<red>test:TEST">TEST
@@ -57,7 +57,7 @@ the opening quote character can be escaped (`'` or `"`). In either place, the es
 In locations where escaping is not supported, the literal escape character will be passed through. In locations where escaping *is* supported but a literal escape character is desired, the escape character can itself be escaped to produce a `\`.
 
 The default tags try to represent components in a manner compatible with Vanilla, but simplifying some elements. It might be helpful to
-use [the Minecraft wiki](https://minecraft.wiki/w/Text_component_format) as a reference for the Vanilla component system, especially
+use [the Minecraft Wiki](https://minecraft.wiki/w/Text_component_format) as a reference for the Vanilla component system, especially
 for things like the actions and values of click and hover events.
 
 The [MiniMessage Web Viewer](https://webui.advntr.dev) allows testing MiniMessage text locally, without having to spin up a Minecraft instance.
@@ -83,7 +83,7 @@ Tag
   * `<_colorname_>`
 
 Arguments
-   * `_colorname_`, any minecraft color constant: `black`, `dark_blue`, `dark_green`, `dark_aqua`, `dark_red`, `dark_purple`, `gold`, `gray`, `dark_gray`, `blue`, `green`, `aqua`, `red`, `light_purple`, `yellow`, or `white`.
+  * `_colorname_`, any minecraft color constant: `black`, `dark_blue`, `dark_green`, `dark_aqua`, `dark_red`, `dark_purple`, `gold`, `gray`, `dark_gray`, `blue`, `green`, `aqua`, `red`, `light_purple`, `yellow`, or `white`.
 
 
      `dark_grey` can be used in place of `dark_gray`, and so can `grey` in place of `gray`.
@@ -133,12 +133,12 @@ Examples
 Color the shadow of the next parts
 
 Tag
-   * `<shadow:_colorNameOrHex_:[alpha_as_float]>`
-   * `<!shadow>` as an alias to disable the shadow (equivalent to `<shadow:#00000000>`)
+  * `<shadow:_colorNameOrHex_:[alpha_as_float]>`
+  * `<!shadow>` as an alias to disable the shadow (equivalent to `<shadow:#00000000>`)
 
 Arguments
-   * `_colorNameOrHex_`, a named color or hex color string with the format `#RRGGBB` or `#RRGGBBAA`
-   * `[alpha_as_float]`, a float value between 0 and 1, representing the alpha value of the shadow. Optional, defaults to 0.25. Has no effect if an alpha value is already provided in the hex color string.
+  * `_colorNameOrHex_`, a named color or hex color string with the format `#RRGGBB` or `#RRGGBBAA`
+  * `[alpha_as_float]`, a float value between 0 and 1, representing the alpha value of the shadow. Optional, defaults to 0.25. Has no effect if an alpha value is already provided in the hex color string.
 
 Examples
 ```mm
@@ -208,7 +208,7 @@ Tag
 
 Arguments
   * `_action_`, the type of click event, one of [this list](jd:adventure:net.kyori.adventure.text.event.ClickEvent$Action#field-summary)
-  * `_value_`, the argument for that particular event, refer to [the minecraft wiki](https://minecraft.wiki/w/Text_component_format)
+  * `_value_`, the argument for that particular event, refer to [the Minecraft Wiki](https://minecraft.wiki/w/Text_component_format#Click_events)
 
 Examples
 ```mm

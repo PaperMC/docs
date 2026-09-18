@@ -1,7 +1,7 @@
 use_netty_dns_resolver:
   default: "true"
   description: >-
-    Sets whether Netty''s async DNS resolver is used for account authentication.
+    Sets whether Netty's async DNS resolver is used for account authentication.
 disable_modern_tab_limiter:
   default: "true"
   description: >-

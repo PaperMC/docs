@@ -275,7 +275,7 @@ misc:
     vanilla: "false"
     default: "true"
     description: >-
-      Whether to fix MC-159283 which causes unusual ring-shaped terrain patterns in the outer End islands at extremely far distances.
+      Whether to fix [MC-159283](https://mojira.dev/MC-159283) which causes unusual ring-shaped terrain patterns in the outer End islands at extremely far distances.
   load-permissions-yml-before-plugins:
     default: "true"
     description: >-
@@ -298,7 +298,7 @@ misc:
   prevent-negative-villager-demand:
     default: "false"
     description: >-
-      Fixes MC-163962. Prevents the villager demand from going
+      Fixes [MC-163962](https://mojira.dev/MC-163962). Prevents the villager demand from going
       negative, but may introduce parity issues with Vanilla.
   region-file-cache-size:
     default: "256"

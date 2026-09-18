@@ -83,7 +83,7 @@ public class MyTranslator implements Translator {
 
   @Override
   public @Nullable Component translate(final TranslatableComponent component, final Locale locale) {
-    // As above, we will hardcode a check here, but you should be reading this from elsewhere.
+    // As above, we will hard-code a check here, but you should be reading this from elsewhere.
     if (component.key().equals("mytranslation.colorful") && locale == Locale.US) {
       return Component.text("Hello, ", NamedTextColor.GREEN)
         .append(component.arguments().stream().map(it -> it.asComponent().color(NamedTextColor.RED)).toList())

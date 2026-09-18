@@ -23,12 +23,12 @@ to the `bungeecord:main` channel. This means that your plugins should continue t
 First, we're going to take a look at your Paper server. Your plugin will need to register that it
 will be sending on any given plugin channel. You should to do this alongside your other event listener registrations.
 
-```java title="PluginMessagingSample.java"
-public final class PluginMessagingSample extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         // Blah blah blah...
     }
 
@@ -38,16 +38,16 @@ public final class PluginMessagingSample extends JavaPlugin {
 Now that we're registered, we can send messages on the `BungeeCord` channel.
 
 Plugin messages are formatted as byte arrays and can be sent using the [`sendPluginMessage`](jd:paper:org.bukkit.plugin.messaging.PluginMessageRecipient#sendPluginMessage(org.bukkit.plugin.Plugin,java.lang.String,byte[]))
-method on a [`Player`](jd:paper:org.bukkit.entity.Player) object.
+method on a [](jd:paper:org.bukkit.entity.Player) object.
 Let's take a look at an example of sending a plugin message to the `BungeeCord` channel to send our player to another server.
 
-```java title="PluginMessagingSample.java"
-public final class PluginMessagingSample extends JavaPlugin implements Listener {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
-        getServer().getPluginManager().registerEvents(this, this);
-        getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
+        this.getServer().getPluginManager().registerEvents(this, this);
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
     }
 
     @EventHandler
@@ -75,7 +75,7 @@ player connected to the server, it will not be able to send or receive plugin me
 
 We sent a plugin message on the `BungeeCord` channel! The message we sent was a byte array that contained two strings converted to bytes: `Connect` and `hub2`.
 
-Our proxy server received the message through the player who triggered the [`PlayerJumpEvent`](jd:paper:com.destroystokyo.paper.event.player.PlayerJumpEvent) on our Java server.
+Our proxy server received the message through the player who triggered the [](jd:paper:com.destroystokyo.paper.event.player.PlayerJumpEvent) on our Java server.
 Then, it recognized the channel as its own and, in alignment with BungeeCord's protocol, sent our player to the `hub2` server.
 
 For BungeeCord, we can think of this message as a case-sensitive command with arguments.
@@ -110,8 +110,8 @@ These are the following:
 
 #### `PlayerCount`
 
-```java title="MyPlugin.java"
-public class MyPlugin extends JavaPlugin implements PluginMessageListener {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin implements PluginMessageListener {
 
     @Override
     public void onEnable() {
@@ -144,8 +144,8 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
 
 #### `Forward`
 
-```java title="MyPlugin.java"
-public class MyPlugin extends JavaPlugin implements PluginMessageListener {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin implements PluginMessageListener {
 
     @Override
     public void onEnable() {
@@ -158,13 +158,13 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
         out.writeUTF("ALL"); // This is the target server. "ALL" will message all servers apart from the one sending the message
         out.writeUTF("SecretInternalChannel"); // This is the channel.
 
-        ByteArrayOutputStream msgbytes = new ByteArrayOutputStream();
-        DataOutputStream msgout = new DataOutputStream(msgbytes);
+        ByteArrayOutputStream msgBytes = new ByteArrayOutputStream();
+        DataOutputStream msgout = new DataOutputStream(msgBytes);
         msgout.writeUTF("Paper is the meaning of life"); // You can do anything you want with msgout
         msgout.writeShort(42); // Writing a random short
 
-        out.writeShort(msgbytes.toByteArray().length); // This is the length.
-        out.write(msgbytes.toByteArray()); // This is the message.
+        out.writeShort(msgBytes.toByteArray().length); // This is the length.
+        out.write(msgBytes.toByteArray()); // This is the message.
 
         player.sendPluginMessage(this, "BungeeCord", out.toByteArray());
         // The response will be handled in onPluginMessageReceived
@@ -179,12 +179,12 @@ public class MyPlugin extends JavaPlugin implements PluginMessageListener {
         String subchannel = in.readUTF();
         if (subchannel.equals("SecretInternalChannel")) {
             short len = in.readShort();
-            byte[] msgbytes = new byte[len];
-            in.readFully(msgbytes);
+            byte[] msgBytes = new byte[len];
+            in.readFully(msgBytes);
 
-            DataInputStream msgIn = new DataInputStream(new ByteArrayInputStream(msgbytes));
+            DataInputStream msgIn = new DataInputStream(new ByteArrayInputStream(msgBytes));
             String secretMessage = msgIn.readUTF(); // Read the data in the same way you wrote it
-            short meaningofLife = msgIn.readShort();
+            short meaningOfLife = msgIn.readShort();
         }
     }
 }
@@ -206,8 +206,8 @@ The `MessageRaw` message type is used to send a raw chat component to a player. 
 by the second parameter - Player name or "ALL" for all players. This is also useful for sending messages to
 players who are on a different server within the proxied network.
 
-```java title="MyPlugin.java"
-public class MyPlugin extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {

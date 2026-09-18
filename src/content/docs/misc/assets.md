@@ -35,7 +35,7 @@ projects they represent.
 
 You may:
 
-- Use the PaperMC logomark to represent the project in blogposts and other places in order to bring
+- Use the PaperMC logomark to represent the project in blog posts and other places in order to bring
   attention to the project.
 - Use the PaperMC logomark to represent Paper-Server in downloads, server selectors, and similar
   places.

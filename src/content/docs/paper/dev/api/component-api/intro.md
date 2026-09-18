@@ -98,7 +98,7 @@ public final class Components {
 
 // ...
 
-import static io.papermc.docs.util.Components.mm; // replace with your own package
+import static com.example.paperplugin.util.Components.mm; // replace with your own package
 
 final Component component = mm("<blue>Hello <red>World!");
 ```
@@ -158,7 +158,7 @@ There are online tools to make generating this format much easier like [JSON Tex
 ## Serializers
 
 Paper and Velocity come bundled with different serializers for converting between
-[`Component`](jd:adventure:net.kyori.adventure.text.Component)s and other forms of serialized text.
+[](jd:adventure:net.kyori.adventure.text.Component)s and other forms of serialized text.
 
 ### [`GsonComponentSerializer`](jd:adventure:net.kyori.adventure.text.serializer.gson:module-summary)
 
@@ -178,7 +178,7 @@ serializer, which is [documented here](/adventure/minimessage/api/#getting-start
 
 Serializes a `Component` into a plain text string. This is very lossy as all style information as well as most other
 types of components will lose information. There may be special handling for
-[`TranslatableComponent`](jd:adventure:net.kyori.adventure.text.TranslatableComponent)s to be serialized
+[](jd:adventure:net.kyori.adventure.text.TranslatableComponent)s to be serialized
 into a default language, but generally this shouldn't be used except in certain circumstances, like logging to a text file.
 
 ### [`LegacyComponentSerializer`](jd:adventure:net.kyori.adventure.text.serializer.legacy:module-summary)
@@ -206,7 +206,7 @@ final String miniMessageString = MiniMessage.miniMessage().serialize(
 
 There are 2 built-in legacy serializers, one dealing with `§` symbols and the other for
 `&` symbols. They have their own instances available through
-[`LegacyComponentSerializer#legacySection()`](jd:adventure:net.kyori.adventure.text.serializer.legacy:net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer#legacySection())
-and [`LegacyComponentSerializer#legacyAmpersand()`](jd:adventure:net.kyori.adventure.text.serializer.legacy:net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer#legacyAmpersand()).
+[](jd:adventure:net.kyori.adventure.text.serializer.legacy:net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer#legacySection())
+and [](jd:adventure:net.kyori.adventure.text.serializer.legacy:net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer#legacyAmpersand()).
 
 :::

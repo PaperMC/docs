@@ -80,10 +80,6 @@ const foliaProject = await fetchProject("folia");
 
 export const LATEST_FOLIA_RELEASE = await findLatest(foliaProject);
 
-const waterfallProject = await fetchProject("waterfall");
-
-export const LATEST_WATERFALL_RELEASE = await findLatest(waterfallProject);
-
 const userdevVersions: string[] = await fetchGitHubTags("PaperMC/paperweight");
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
@@ -96,3 +92,7 @@ export const LATEST_ANSI_RELEASE = "1.1.1";
 
 // legacy
 export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.1";
+
+const waterfallProject = await fetchProject("waterfall");
+
+export const LATEST_WATERFALL_RELEASE = await findLatest(waterfallProject);

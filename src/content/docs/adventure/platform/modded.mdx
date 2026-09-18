@@ -30,7 +30,6 @@ when your common code is managed by `fabric-loom`.
 As with the rest of the Adventure projects, releases are distributed on Maven Central, and snapshots on Sonatype OSS:
 
 
-
 <Tabs syncKey="build-system">
   <TabItem label="Gradle (Kotlin)">
     ```kotlin title="build.gradle.kts" replace
@@ -85,7 +84,7 @@ Each major Minecraft release will require different platform versions. For older
 <details>
   <summary>Historic Versions</summary>
 
-  | Minecraft Version | Adventure version | `adventure-platform-(mod-shared/fabric/neoforge)` version |
+  | Minecraft Version | Adventure Version | `adventure-platform-(mod-shared/fabric/neoforge)` Version |
   |-------------------|-------------------|-----------------------------------------------------------|
   | 1.21.9-1.21.10    | 4.25.0            | 6.7.0                                                     |
   | 1.21.6-1.21.8     | 4.24.0            | 6.6.0                                                     |
@@ -175,10 +174,10 @@ As an example, here's a simple command that will echo whatever is provided as in
 private static final String ARG_MESSAGE = "message";
 
 void registerCommands(final CommandDispatcher dispatcher, final boolean isDedicated) {
-  dispatcher.register(literal("echo").then(argument(ARG_MESSAGE, component()).executes(ctx -> {
-      final Component message = component(ctx, ARG_MESSAGE);
-      ((Audience) ctx.getSource()).sendMessage(Component.text("You said: ").append(message));
-  }));
+  dispatcher.register(literal("echo").then(argument(ARG_MESSAGE, component()).executes(context -> {
+      final Component message = component(context, ARG_MESSAGE);
+      ((Audience) context.getSource()).sendMessage(Component.text("You said: ").append(message));
+  })));
 }
 ```
 

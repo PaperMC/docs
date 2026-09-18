@@ -19,6 +19,9 @@ interface Options {
 const asUrl = (name: string): string => {
   let [name0, hash] = name.split("#", 2);
   name0 = name0.replaceAll(".", "/").replaceAll("$", ".");
+  if (hash) {
+    hash = hash.replaceAll("$", ".");
+  }
 
   return `${name0}.html` + (hash ? `#${hash}` : "");
 };
@@ -39,6 +42,7 @@ const asRef = (name: string): string => {
     // method parameters
     const params = hash.substring(parenIndex + 1, hash.length - 1).split(",");
     hash = `${hash.substring(0, parenIndex)}(${params.map((p) => p.substring(p.lastIndexOf(".") + 1)).join(", ")})`;
+    hash = hash.replaceAll("$", ".");
   }
 
   return name0 + (hash ? `#${hash}` : "");

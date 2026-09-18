@@ -23,7 +23,7 @@ public void showMyBossBar(final Audience target) {
   // Creates a red boss bar which has no progress and no notches
   final BossBar emptyBar = BossBar.bossBar(name, 0, BossBar.Color.RED, BossBar.Overlay.PROGRESS);
   // Creates a green boss bar which has 50% progress and 10 notches
-  final BossBar halfBar = BossBar.bossBar(name, 0.5f, BossBar.Color.GREEN, BossBar.Overlay.NOTCHED_10);
+  final BossBar halfBar = BossBar.bossBar(name, 0.5F, BossBar.Color.GREEN, BossBar.Overlay.NOTCHED_10);
   // etc..
   final BossBar fullBar = BossBar.bossBar(name, 1, BossBar.Color.BLUE, BossBar.Overlay.NOTCHED_20);
 

@@ -6,11 +6,11 @@ on:
 
 jobs:
   build-preview:
-    runs-on: "ubuntu-latest"
+    runs-on: namespace-profile-linux-default
     name: "Build Preview Site and Upload Build Artifact"
     steps:
       - name: "checkout"
-        uses: actions/checkout@v6
+        uses: namespacelabs/nscloud-checkout-action@v9
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}

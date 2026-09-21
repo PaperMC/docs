@@ -9,10 +9,10 @@ jobs:
     # run on all push events or on PR syncs not from the same repo
     if: github.event_name != 'pull_request' || github.repository != github.event.pull_request.head.repo.full_name
 
-    runs-on: ubuntu-latest
+    runs-on: namespace-profile-linux-default
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: namespacelabs/nscloud-checkout-action@v9
       - name: "setup node and pnpm"
         uses: ./.github/actions/setup-node-pnpm
         with:

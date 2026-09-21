@@ -16,11 +16,16 @@ runs:
     - name: setup node
       uses: actions/setup-node@v6
       with:
-        cache: pnpm
+        package-manager-cache: false
         node-version: 22
 
+    - name: Set up pnpm cache
+      uses: namespacelabs/nscloud-cache-action@v1
+      with:
+        cache: pnpm
+
     - name: cache sharp output
-      uses: actions/cache@v5
+      uses: namespacelabs/nscloud-cache-action@v1
       if: ${{ inputs.build-cache == 'true' }}
       with:
         path: node_modules/.astro/assets

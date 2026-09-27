@@ -548,14 +548,14 @@ Tag
   * `<sprite[:atlas]:sprite>`
 
 Arguments
-  * `atlas` the atlas to use, e.g. `minecraft:blocks`.
-  * `sprite` the sprite to use, e.g. `item/emerald`. Name is based on the atlas used, may or may not have a prefix (e.g. `item/` for items atlas) and may require a namespace, if the texture is not stored in the `minecraft` namespace (e.g. texture paths from `assets/example/textures/item/` require `example:` as namespace).
+  * `atlas` the atlas to use, e.g. `minecraft:blocks` or `items`.
+  * `sprite` the sprite to use, e.g. `item/emerald` or `custom:item/ruby`.
 
 Examples
 ```mm
 Look at my <sprite:blocks:block/stone>!
 This item costs 10 x <sprite:"minecraft:items":item/porkchop>.
-This is a custom texture from a namespace: <sprite:items:"example:item/example">
+This is a custom texture from a namespace: <sprite:items:"custom:item/ruby">
 ```
 
 ### Head

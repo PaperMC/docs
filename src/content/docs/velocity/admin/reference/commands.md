@@ -88,4 +88,4 @@ players on the proxy) to another server.
 
 ## `/velocity:callback`
 
-This command is used internally to execute ClickEvent callbacks.
+Velocity uses this command internally for plugins to run click callbacks when a user clicks on text.

@@ -272,7 +272,6 @@ and know what you are doing.
   `minecraft.api.session.host`](#minecraftapisessionhost) and [
   `minecraft.api.services.host`](#minecraftapiserviceshost) needs to be set too for this to apply.
 
-
 #### com.mojang.eula.agree
 
 - **default**: `false`

@@ -143,7 +143,7 @@ tasks.assemble {
 }
 ```
 
-### 1.20.5 and beyond
+### 1.20.5 to 1.21.11
 
 As of 1.20.5, Paper ships with a Mojang-mapped runtime instead of re-obfuscating the server to Spigot mappings.
 Additionally, CraftBukkit classes will no longer be relocated into a versioned package.
@@ -152,6 +152,7 @@ This requires plugins to be deobfuscated before loading when necessary.
 Most of this process is done automatically by paperweight, but there are some important things to know when using server internals (or "NMS") from now on.
 
 #### Default mappings assumption
+
 * By default, all Spigot/Bukkit plugins will be assumed to be Spigot-mapped if they do not specify their mappings namespace in the manifest.
   The other way around, all Paper plugins will be assumed to be Mojang-mapped if they do not specify their mappings namespace in the manifest.
 * Spigot-mapped plugins will need to be deobfuscated on first load, Mojang-mapped plugins will not.

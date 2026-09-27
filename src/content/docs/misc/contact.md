@@ -11,7 +11,9 @@ The PaperMC project handles most communication via Discord. Use the following in
 ## Forums
 
 :::caution
-After careful consideration and due to limited usage, we’ve made the decision to discontinue the PaperMC forums. Moving forward, we recommend using Hangar for plugin uploads, and for all other community discussions and support, please join us on Discord.
+After careful consideration and due to limited usage, we’ve made the decision to discontinue the PaperMC forums.
+Moving forward, we recommend using Hangar for plugin uploads. For all other community discussions and support,
+please join us on Discord.
 :::
 
 - [Forums](https://forums.papermc.io)

@@ -9,7 +9,9 @@ sidebar:
     variant: danger
 ---
 
+import Dependency from "/src/components/Dependency.astro";
 import Video from "/src/components/Video.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 import DialogShowcaseMp4 from "./assets/dialogs/dialog-showcase.mp4?url";
 import InputDialogShowcaseMp4 from "./assets/dialogs/input-dialog-showcase.mp4?url";
@@ -163,6 +165,7 @@ public void bootstrap(BootstrapContext context) {
 }
 ```
 
+{/* Commented out, until tag lifecycle stuff gets proper documentation
 ### Pause Screen Additions and Quick Actions
 Dialogs can be tagged with these special tags when registered:
 - [`DialogTagKeys.PAUSE_SCREEN_ADDITIONS`](jd:paper:io.papermc.paper.registry.keys.tags.DialogTagKeys#PAUSE_SCREEN_ADDITIONS)
@@ -189,6 +192,7 @@ public void bootstrap(BootstrapContext context) {
     );
 }
 ```
+*/}
 
 ## Closing dialogs
 Dialogs can be closed from the API. There are two ways to achieve that:
@@ -486,17 +490,23 @@ ActionButton.create(
 ),
 ```
 
-The last parameter, currently `null`, is an optional `BinaryTagHolder` payload. If we wanted to, we could put custom NBT data in there.
-This NBT data will be sent to the client when the dialog is shown, and when the player clicks the button, a
-[`PlayerCustomClickEvent`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent) will be fired containing the same NBT data among other information.
+The DialogAction's last parameter, currently `null`, is an optional `BinaryTagHolder` payload. If we wanted to, we could
+put custom NBT data in there. This NBT data will be sent to the client when the dialog is shown. When the player
+clicks the button, a [`PlayerCustomClickEvent`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent) will be
+fired containing the same NBT data among other information.
 
 #### Creating payloads with `adventure-nbt`
 
-The `BinaryTagHolder.binaryTagHolder` factory method requires an SNBT-formatted string. We can either construct this string manually, or use
-the `adventure-nbt` library to create NBT data programmatically.
+The `BinaryTagHolder.binaryTagHolder` factory method requires a SNBT-formatted string. We can either construct this
+string manually, or use the `adventure-nbt` library to create NBT data programmatically.
 
 :::caution
-The `adventure-nbt` library is not included by default in Paper, so make sure to add it as a dependency in your project.
+The `adventure-nbt` library is not included by default in Paper, you will have to include it manually.
+
+<details>
+  <summary>Adding the <code>adventure-nbt</code> dependency.</summary>
+  <Dependency group="net.kyori" name="adventure-nbt" version={LATEST_ADVENTURE_API_RELEASE}  />
+</details>
 :::
 
 Using `TagStringIO` we can convert any NBT tag into an SNBT string like so:

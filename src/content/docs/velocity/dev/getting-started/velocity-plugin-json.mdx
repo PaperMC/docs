@@ -41,7 +41,8 @@ This is an example `velocity-plugin.json` file:
       "id": "luckperms",
       "optional": true
     }
-  ]
+  ],
+  "provides": ["other-plugin"]
 }
 ```
 
@@ -115,3 +116,7 @@ The only required fields are `id` and `main`. Any other fields are optional.
     ]
   }
   ```
+
+- **`provides`**\
+  A list of plugin IDs that this plugin provides for. This is used for dependency resolution,
+  marking that plugins depending on these IDs should be satisfied by this plugin as well.

@@ -22,6 +22,8 @@
     "astro": "^6.4.5",
     "astro-contributors": "^0.8.0",
     "astro-d2": "^0.11.0",
+    "node-addon-api": "^8.9.2",
+    "node-gyp": "^13.0.2",
     "remark-extended-table": "^2.0.3",
     "sharp": "^0.34.5",
     "starlight-links-validator": "^0.24.0",

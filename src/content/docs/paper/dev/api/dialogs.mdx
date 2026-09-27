@@ -5,7 +5,9 @@ slug: paper/dev/dialogs
 version: 1.21.8
 ---
 
+import Dependency from "/src/components/Dependency.astro";
 import Video from "/src/components/Video.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
 
 import DialogShowcaseMp4 from "./assets/dialogs/dialog-showcase.mp4?url";
 import InputDialogShowcaseMp4 from "./assets/dialogs/input-dialog-showcase.mp4?url";
@@ -154,6 +156,35 @@ public void bootstrap(final BootstrapContext context) {
     );
 }
 ```
+
+{/* Commented out, until tag lifecycle stuff gets proper documentation
+### Pause Screen Additions and Quick Actions
+Dialogs can be tagged with these special tags when registered:
+- [`DialogTagKeys.PAUSE_SCREEN_ADDITIONS`](jd:paper:io.papermc.paper.registry.keys.tags.DialogTagKeys#PAUSE_SCREEN_ADDITIONS)
+
+   Dialogs with this tag will be given a button in the game's pause screen.
+
+- [`DialogTagKeys.QUICK_ACTIONS`](jd:paper:io.papermc.paper.registry.keys.tags.DialogTagKeys#QUICK_ACTIONS)
+
+   Dialogs with this tag will be given a button in the quick actions menu (accessible via the `G` key by default).
+
+To add your custom dialog to these tags, you can use a post-flatten tag registrar event handler in your bootstrapper like so:
+
+```java title="YourPluginBootstrapper.java" showLineNumbers
+@Override
+public void bootstrap(BootstrapContext context) {
+    TypedKey<Dialog> customDialogKey = DialogKeys.create(Key.key("papermc:custom_dialog"));
+    context.getLifecycleManager().registerEventHandler(
+        LifecycleEvents.TAGS.postFlatten(RegistryKey.DIALOG)
+            .newHandler((ReloadableRegistrarEvent<PostFlattenTagRegistrar<Dialog>> event) -> {
+                PostFlattenTagRegistrar<Dialog> registrar = event.registrar();
+                registrar.addToTag(DialogTagKeys.PAUSE_SCREEN_ADDITIONS, List.of(customDialogKey));
+                registrar.addToTag(DialogTagKeys.QUICK_ACTIONS, List.of(customDialogKey));
+            })
+    );
+}
+```
+*/}
 
 ## Closing dialogs
 Dialogs can be closed from the API. There are two ways to achieve that:
@@ -428,4 +459,69 @@ DialogAction.customClick(
         .lifetime(ClickCallback.DEFAULT_LIFETIME) // Set the lifetime of the callback. Defaults to 12 hours
         .build()
 )
+```
+
+### Using NBT payloads
+
+Instead of using callbacks, you can use NBT payloads and event handlers.
+
+If we take a look at the dialog creation code again, the confirmation button is created like this:
+
+```java showLineNumbers
+ActionButton.create(
+    Component.text("Confirm", TextColor.color(0xAEFFC1)),
+    Component.text("Click to confirm your input."),
+    100,
+    DialogAction.customClick(Key.key("papermc:user_input/confirm"), null)
+),
+```
+
+The DialogAction's last parameter, currently `null`, is an optional `BinaryTagHolder` payload. If we wanted to, we could
+put custom NBT data in there. This NBT data will be sent to the client when the dialog is shown. When the player
+clicks the button, a [`PlayerCustomClickEvent`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent) will be
+fired containing the same NBT data among other information.
+
+#### Creating payloads with `adventure-nbt`
+
+The `BinaryTagHolder.binaryTagHolder` factory method requires a SNBT-formatted string. We can either construct this
+string manually, or use the `adventure-nbt` library to create NBT data programmatically.
+
+:::caution
+The `adventure-nbt` library is not included by default in Paper, you will have to include it manually.
+
+<details>
+  <summary>Adding the <code>adventure-nbt</code> dependency.</summary>
+  <Dependency group="net.kyori" name="adventure-nbt" version={LATEST_ADVENTURE_API_RELEASE}  />
+</details>
+:::
+
+Using `TagStringIO` we can convert any NBT tag into an SNBT string like so:
+
+```java showLineNumbers
+BinaryTagHolder payload = BinaryTagHolder.binaryTagHolder(
+    TagStringIO.tagStringIO().asString(
+        CompoundBinaryTag.builder()
+            .putString("action", "confirm")
+            .putInt("some_value", 42)
+            .build()
+    )
+);
+```
+
+### Reading NBT payloads
+
+To read the NBT payload, we can use the [`PlayerCustomClickEvent#getTag()`](jd:paper:io.papermc.paper.event.player.PlayerCustomClickEvent#getTag()) method.
+
+#### Reading payloads with `adventure-nbt`
+
+The `getTag()` method returns a `BinaryTagHolder`, which we can convert back into a `CompoundBinaryTag` using
+the `TagStringIO` class again:
+
+```java showLineNumbers
+BinaryTagHolder tagHolder = event.getTag();
+String snbt = tagHolder.string();
+CompoundBinaryTag tag = TagStringIO.tagStringIO().asCompound(snbt);
+
+String action = tag.getString("action");
+int someValue = tag.getInt("some_value");
 ```

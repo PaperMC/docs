@@ -85,3 +85,7 @@ players can use this command to view the number of players currently on the prox
 
 If the user has the `velocity.command.send` permission, they can send other players (or all
 players on the proxy) to another server.
+
+## `/velocity:callback`
+
+Velocity uses this command internally for plugins to run click callbacks when a user clicks on text.

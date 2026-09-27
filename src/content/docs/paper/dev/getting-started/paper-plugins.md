@@ -29,13 +29,13 @@ It should be noted that you still have the ability to include both `paper-plugin
 
 Here is an example configuration:
 ```yaml replace
-name: Paper-Test-Plugin
+name: Example-Plugin
 version: '1.0'
-main: io.papermc.testplugin.TestPlugin
-description: Paper Test Plugin
+main: com.example.paperplugin.ExamplePlugin
+description: A Paper plugin showcase
 api-version: '\{LATEST_PAPER_RELEASE}'
-bootstrapper: io.papermc.testplugin.TestPluginBootstrap
-loader: io.papermc.testplugin.TestPluginLoader
+bootstrapper: com.example.paperplugin.ExamplePluginBootstrap
+loader: com.example.paperplugin.ExamplePluginLoader
 ```
 
 ### Dependency declaration
@@ -111,20 +111,20 @@ has started by using [bootstrappers](#bootstrapper).
 
 ## Bootstrapper
 Paper plugins are able to identify their own bootstrapper by implementing
-[`PluginBootstrap`](jd:paper:io.papermc.paper.plugin.bootstrap.PluginBootstrap)
+[](jd:paper:io.papermc.paper.plugin.bootstrap.PluginBootstrap)
 and adding the class of your implementation to the bootstrapper field in the `paper-plugin.yml`.
-```java title="TestPluginBootstrap.java"
-public class TestPluginBootstrap implements PluginBootstrap {
+```java title="ExamplePluginBootstrap.java"
+public final class ExamplePluginBootstrap implements PluginBootstrap {
 
-  @Override
-  public void bootstrap(BootstrapContext context) {
+    @Override
+    public void bootstrap(final BootstrapContext context) {
 
-  }
+    }
 
-  @Override
-  public JavaPlugin createPlugin(PluginProviderContext context) {
-    return new TestPlugin("My custom parameter");
-  }
+    @Override
+    public JavaPlugin createPlugin(final PluginProviderContext context) {
+        return new ExamplePlugin("My custom parameter");
+    }
 
 }
 ```
@@ -133,29 +133,29 @@ Currently, bootstrappers do not offer much new API and are highly experimental. 
 
 ## Loaders
 Paper plugins are able to identify their own plugin loader by implementing
-[`PluginLoader`](jd:paper:io.papermc.paper.plugin.loader.PluginLoader)
+[](jd:paper:io.papermc.paper.plugin.loader.PluginLoader)
 and adding the class of your implementation to the loader field in the `paper-plugin.yml`.
 
 The goal of the plugin loader is the creation of an expected/dynamic environment for the plugin to load into.
 This, as of right now, only applies to creating the expected classpath for the plugin, e.g. supplying external libraries to the plugin.
-```java title="TestPluginLoader.java"
-public class TestPluginLoader implements PluginLoader {
+```java title="ExamplePluginLoader.java"
+public final class ExamplePluginLoader implements PluginLoader {
 
-  @Override
-  public void classloader(PluginClasspathBuilder classpathBuilder) {
-    classpathBuilder.addLibrary(new JarLibrary(Path.of("dependency.jar")));
+    @Override
+    public void classloader(final PluginClasspathBuilder classpathBuilder) {
+        classpathBuilder.addLibrary(new JarLibrary(Path.of("dependency.jar")));
 
-    MavenLibraryResolver resolver = new MavenLibraryResolver();
-    resolver.addDependency(new Dependency(new DefaultArtifact("com.example:example:version"), null));
-    resolver.addRepository(new RemoteRepository.Builder("paper", "default", "https://repo.papermc.io/repository/maven-public/").build());
+        final MavenLibraryResolver resolver = new MavenLibraryResolver();
+        resolver.addDependency(new Dependency(new DefaultArtifact("com.example:example:version"), null));
+        resolver.addRepository(new RemoteRepository.Builder("paper", "default", "https://repo.papermc.io/repository/maven-public/").build());
 
-    classpathBuilder.addLibrary(resolver);
-  }
+        classpathBuilder.addLibrary(resolver);
+    }
 }
 ```
 Currently, you are able to add two different library types:
-[`JarLibrary`](jd:paper:io.papermc.paper.plugin.loader.library.impl.JarLibrary) and
-[`MavenLibraryResolver`](jd:paper:io.papermc.paper.plugin.loader.library.impl.MavenLibraryResolver).
+[](jd:paper:io.papermc.paper.plugin.loader.library.impl.JarLibrary) and
+[](jd:paper:io.papermc.paper.plugin.loader.library.impl.MavenLibraryResolver).
 
 :::danger
 
@@ -174,8 +174,8 @@ Using the Maven Central repository (i.e. `*.maven.org` or `*.maven.apache.org`) 
 
 ### Bukkit serialization system
 Paper plugins still support the serialization system (`org.bukkit.configuration.serialization`) that Bukkit uses. However, custom classes will not be
-automatically registered for serialization. In order to use [`ConfigurationSection#getObject`](jd:paper:org.bukkit.configuration.ConfigurationSection#getObject(java.lang.String,java.lang.Class)),
-you **must** call [`ConfigurationSerialization#registerClass(Class)`](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class))
+automatically registered for serialization. In order to use [](jd:paper:org.bukkit.configuration.ConfigurationSection#getObject(java.lang.String,java.lang.Class)),
+you **must** call [](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class))
 before you attempt to fetch objects from configurations.
 
 ### Classloading isolation
@@ -212,19 +212,19 @@ Unlike Bukkit plugins, Paper plugins will not attempt to resolve cyclic loading 
 style.fill: transparent
 direction: right
 
-A -> B
-B -> C
-C -> D
-D -> A
+Plugin A -> Plugin B
+Plugin B -> Plugin C
+Plugin C -> Plugin D
+Plugin D -> Plugin A
 ```
 
 However, if Paper detects a loop that cannot be resolved, you will get an error that looks like this:
 ```
 [ERROR]: [LoadOrderTree] =================================
 [ERROR]: [LoadOrderTree] Circular plugin loading detected:
-[ERROR]: [LoadOrderTree] 1) Paper-Test-Plugin1 -> Paper-Test-Plugin -> Paper-Test-Plugin1
-[ERROR]: [LoadOrderTree]    Paper-Test-Plugin1 loadbefore: [Paper-Test-Plugin]
-[ERROR]: [LoadOrderTree]    Paper-Test-Plugin loadbefore: [Paper-Test-Plugin1]
+[ERROR]: [LoadOrderTree] 1) PluginA -> PluginB -> PluginA
+[ERROR]: [LoadOrderTree]    PluginA loadbefore: [PluginB]
+[ERROR]: [LoadOrderTree]    PluginB loadbefore: [PluginA]
 [ERROR]: [LoadOrderTree] Please report this to the plugin authors of the first plugin of each loop or join the PaperMC Discord server for further help.
 [ERROR]: [LoadOrderTree] =================================
 ```

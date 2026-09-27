@@ -132,16 +132,26 @@ These constants can be imported and used in MDX, like so:
 import {
   LATEST_MC_RELEASE,
   LATEST_PAPER_RELEASE,
+  LATEST_PAPER_BUILD_API_VERSION,
   LATEST_VELOCITY_RELEASE,
   LATEST_FOLIA_RELEASE,
+  LATEST_ADVENTURE_API_RELEASE,
+  LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
+  LATEST_ADVENTURE_PLATFORM_RELEASE,
+  LATEST_ANSI_RELEASE,
   LATEST_WATERFALL_RELEASE,
   LATEST_USERDEV_RELEASE,
 } from "/src/utils/versions";
 
 Latest Paper version is {LATEST_PAPER_RELEASE}.
+Latest Paper API build version is {LATEST_PAPER_BUILD_API_VERSION}
 Latest Velocity version is {LATEST_VELOCITY_RELEASE}.
 Latest Minecraft version is {LATEST_MC_RELEASE}.
 Latest Folia version is {LATEST_FOLIA_RELEASE}.
+Latest Adventure API version is {LATEST_ADVENTURE_API_RELEASE}.
+Latest Adventure platform mod version is {LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}.
+Latest Adventure platform version is {LATEST_ADVENTURE_PLATFORM_RELEASE}.
+Latest `ansi` version is {LATEST_ANSI_RELEASE}.
 Latest Waterfall version is {LATEST_WATERFALL_RELEASE}.
 Latest `paperweight-userdev` version is {LATEST_USERDEV_RELEASE}.
 ```

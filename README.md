@@ -11,7 +11,6 @@ How to get docs running on your local machine for development.
 
 - [node 22](https://nodejs.org)
 - [pnpm](https://pnpm.io/installation)
-- [d2](https://d2lang.com/) (optional for development - used for generating diagrams)
 
 ### Local Development
 
@@ -56,3 +55,5 @@ The supporting code is
 
 The PaperMC logomark is subject to its [own terms](https://docs.papermc.io/misc/assets) and does not
 inherit a license from any of the projects it represents.
+
+[![CI powered by namespace badge](https://papermc.io/assets/misc/namespace-oss-badge.svg?project=velocity)](https://namespace.so/github-actions/?utm_source=oss&utm_campaign=papermc)

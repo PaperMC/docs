@@ -10,10 +10,12 @@ import { LATEST_ADVENTURE_PLATFORM_RELEASE } from "/src/utils/versions";
 Adventure targets the latest version of BungeeCord and BungeeCord-compatible
 forks, such as Waterfall.
 
-:::caution
+:::danger
 
-The BungeeCord platform is intended for legacy environments only.
-Most developers will want to write plugins for [Velocity](/velocity), which natively implements the Adventure API. No adapters required!
+Adventure platform implementation for Bungeecord and the Bungeecord component serializer is no longer maintained.
+The Adventure team no longer provides support for using these libraries.
+
+We recommend that users of these libraries update to modern software that [natively supports Adventure](/adventure/platform/native) (e.g., [Velocity](/velocity)).
 
 :::
 
@@ -31,12 +33,11 @@ and tab list header and footer are supported, but all other requests will fail s
 
 A simple example of how to appropriately initialize this platform follows:
 
-```java
+```java title="MyPlugin.java"
 public class MyPlugin extends Plugin {
 
     private BungeeAudiences adventure;
 
-    @NonNull
     public BungeeAudiences adventure() {
         if (this.adventure == null) {
             throw new IllegalStateException("Cannot retrieve audience provider while plugin is not enabled");

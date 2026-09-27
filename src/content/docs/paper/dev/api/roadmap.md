@@ -12,7 +12,7 @@ is intended to document any future API changes that are planned or possible depr
 
 ### Interface `ItemStack`s
 
-When you create `ItemStack`s using the constructor, you create an API representation of an [`ItemStack`](jd:paper:org.bukkit.inventory.ItemStack).
+When you create `ItemStack`s using the constructor, you create an API representation of an [](jd:paper:org.bukkit.inventory.ItemStack).
 This is an object that delegates to a NMS-backed object, you should instead use [`ItemStack#of`](jd:paper:org.bukkit.inventory.ItemStack#of(org.bukkit.Material)) to get the NMS-backed object directly.
 
 In the future, `ItemStack` will be converted to an interface and the constructor will be removed.

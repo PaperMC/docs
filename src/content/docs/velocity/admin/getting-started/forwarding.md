@@ -67,7 +67,7 @@ If you are using Paper 1.18.2 or lower, you will find these options as `settings
 ## Configuring modern forwarding for Fabric
 
 A mod called [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite) allows you to use
-Velocity modern forwarding with a modded server using Fabric.
+Velocity modern forwarding with a modded server using Fabric. For additional compatibility, you may use the [CrossStitch](https://modrinth.com/mod/crossstitch) mod.
 
 ## Configuring modern forwarding for Forge
 

@@ -33,7 +33,7 @@ representations in the legacy string format.
 Representing text as components is now the supported way of representing text for Paper and Velocity. They are used
 for almost all aspects of text being displayed to clients. Text like item names, lore, bossbars, team prefixes and
 suffixes, custom names, and much more all support components in respective APIs.
-[Mojang has stated](https://bugs-legacy.mojang.com/browse/MC-190605?focusedId=993040&page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel#comment-993040)
+[Mojang has stated](https://mojira.dev/MC-190605#comment-id-606141)
 that client support for the legacy format with `§` will be removed in the future.
 
 
@@ -70,7 +70,7 @@ final Component component = text()
 :::note[In-Depth Documentation]
 
 For complete documentation on the Adventure Component API Paper and Velocity use, please look at the
-[Adventure documentation](https://docs.advntr.dev).
+[Adventure documentation](/adventure).
 
 :::
 
@@ -98,7 +98,7 @@ public final class Components {
 
 // ...
 
-import static io.papermc.docs.util.Components.mm; // replace with your own package
+import static com.example.paperplugin.util.Components.mm; // replace with your own package
 
 final Component component = mm("<blue>Hello <red>World!");
 ```
@@ -158,30 +158,30 @@ There are online tools to make generating this format much easier like [JSON Tex
 ## Serializers
 
 Paper and Velocity come bundled with different serializers for converting between
-[`Component`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/Component.html)s and other forms of serialized text.
+[](jd:adventure:net.kyori.adventure.text.Component)s and other forms of serialized text.
 
-### [`GsonComponentSerializer`](https://jd.advntr.dev/text-serializer-gson/latest)
+### [`GsonComponentSerializer`](jd:adventure:net.kyori.adventure.text.serializer.gson:module-summary)
 
 Converts between `Component`
 and JSON-formatted strings with convenience methods to directly deal with Gson's
 [`JsonElement`](https://javadoc.io/doc/com.google.code.gson/gson/latest/com.google.gson/com/google/gson/JsonElement.html).
 This conversion is lossless and is the preferred form of serialization for components that do not have to be edited by users regularly.
 
-### [`MiniMessage`](https://jd.advntr.dev/text-minimessage/latest)
+### [`MiniMessage`](jd:adventure:net.kyori.adventure.text.minimessage:module-summary)
 
 Converts between `Component`
 and a MiniMessage-formatted string. This conversion is lossless and is the preferred form of
 serialization for components that have to be edited by users. There is also extensive customization you can add to the
 serializer, which is [documented here](/adventure/minimessage/api/#getting-started).
 
-### [`PlainTextComponentSerializer`](https://jd.advntr.dev/text-serializer-plain/latest)
+### [`PlainTextComponentSerializer`](jd:adventure:net.kyori.adventure.text.serializer.plain:module-summary)
 
 Serializes a `Component` into a plain text string. This is very lossy as all style information as well as most other
 types of components will lose information. There may be special handling for
-[`TranslatableComponent`](https://jd.advntr.dev/api/latest/net/kyori/adventure/text/TranslatableComponent.html)s to be serialized
+[](jd:adventure:net.kyori.adventure.text.TranslatableComponent)s to be serialized
 into a default language, but generally this shouldn't be used except in certain circumstances, like logging to a text file.
 
-### [`LegacyComponentSerializer`](https://jd.advntr.dev/text-serializer-legacy/latest)
+### [`LegacyComponentSerializer`](jd:adventure:net.kyori.adventure.text.serializer.legacy:module-summary)
 
 :::caution
 
@@ -206,7 +206,7 @@ final String miniMessageString = MiniMessage.miniMessage().serialize(
 
 There are 2 built-in legacy serializers, one dealing with `§` symbols and the other for
 `&` symbols. They have their own instances available through
-[`LegacyComponentSerializer#legacySection()`](https://jd.advntr.dev/text-serializer-legacy/latest/net/kyori/adventure/text/serializer/legacy/LegacyComponentSerializer.html#legacySection())
-and [`LegacyComponentSerializer#legacyAmpersand()`](https://jd.advntr.dev/text-serializer-legacy/latest/net/kyori/adventure/text/serializer/legacy/LegacyComponentSerializer.html#legacyAmpersand()).
+[](jd:adventure:net.kyori.adventure.text.serializer.legacy:net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer#legacySection())
+and [](jd:adventure:net.kyori.adventure.text.serializer.legacy:net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer#legacyAmpersand()).
 
 :::

@@ -102,12 +102,12 @@ For help setting up the restart script, see
 This section is dedicated to the subcommands of the in-game `/paper` command.
 
 ### chunkinfo
-The `/paper chunkinfo [<worldname>]` command is used for displaying information about loaded chunks in a world.
-You can specify the world to get info about with the `[<worldname>]` argument. If you set it to `*` or leave it
+The `/paper chunkinfo [<world>]` command is used for displaying information about loaded chunks in a world.
+You can specify the world to get info about with the `[<world>]` argument. If you set it to `*` or leave it
 out, it will list information for all worlds.
 
 The output differentiates between multiple types of loaded chunks. Here is a quick rundown of each type.
-A more complete documentation may be found in the [Minecraft wiki](https://minecraft.wiki/w/Chunk).
+A more complete documentation may be found in the [Minecraft Wiki](https://minecraft.wiki/w/Chunk).
 
 - `Total` As the name suggests, this number describes **all chunks** currently loaded.
 - `Inactive` More commonly referred to as "inaccessible", are chunks which are not ticked, but where chunk generation occurs.
@@ -126,8 +126,8 @@ commands which expect an item argument. `/paper dumpitem all` yields the **full 
 including default data components you do not have to explicitly declare.
 
 ### dumplisteners
-The `/paper dumplisteners toFile|<className>` command is primarily intended for developers trying to figure out why
-their event handlers might not be working as expected. Using `/paper dumplisteners toFile` will write all
+The `/paper dumplisteners tofile|<className>` command is primarily intended for developers trying to figure out why
+their event handlers might not be working as expected. Using `/paper dumplisteners tofile` will write all
 currently registered event handlers to a file, whilst `/paper dumplisteners <className>` will print the registered
 event handlers only for the specific event.
 
@@ -198,7 +198,7 @@ argument defaults to the player, who ran the command, if one exists.
 ### reload
 The `/paper reload` command is an unsupported command which allows for runtime Paper-config reloading. If you get any issues
 after using this command, please make sure to reproduce this on a freshly-started server before asking for help or
-reporting it. Do not that this command **does not** reload non-Paper configs, like the `spigot.yml`.
+reporting it. Do note that this command **does not** reload non-Paper configs, like the `spigot.yml`.
 
 ### syncloadinfo
 The `/paper syncloadinfo [clear]` command requires the `-Dpaper.debug-sync-loads=true` JVM flag to be explicitly set

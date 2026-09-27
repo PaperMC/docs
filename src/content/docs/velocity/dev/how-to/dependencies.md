@@ -82,7 +82,7 @@ Dependencies on other libraries aren't handled by Velocity. You will need to add
 build system.
 
 If your plugin does not shade its dependencies, but rather attaches them from a directory, you may
-use the [`PluginManager`](jd:velocity:com.velocitypowered.api.plugin.PluginManager)'s
+use the [](jd:velocity:com.velocitypowered.api.plugin.PluginManager)'s
 [`addToClasspath`](jd:velocity:com.velocitypowered.api.plugin.PluginManager#addToClasspath(java.lang.Object,java.nio.file.Path))
 method instead of using reflection to access the
-[`ClassLoader`](jd:java:java.lang.ClassLoader).
+[](jd:java:java.lang.ClassLoader).

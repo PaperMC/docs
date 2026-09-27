@@ -22,3 +22,4 @@ pnpm-debug.log*
 .DS_Store
 
 .idea/
+public/d2

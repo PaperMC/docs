@@ -21,9 +21,9 @@ more likely to only let you send everything at once.
 
 ```java
 public void onPlayerJoin(final Audience player) {
-    final Component header = Component.text("My Cool Server", NamedTextColor.BLUE);
-    final Component footer = Component.text("It is: today!");
-    player.sendPlayerListHeaderAndFooter(header, footer);
+  final Component header = Component.text("My Cool Server", NamedTextColor.BLUE);
+  final Component footer = Component.text("It is: today!");
+  player.sendPlayerListHeaderAndFooter(header, footer);
 }
 ```
 
@@ -31,7 +31,7 @@ Depending on your platform this next example might display an existing header as
 
 ```java
 public void onDayChange(final Audience server) {
-    final Component footer = Component.text("It is: tomorrow!");
-    server.sendPlayerListFooter(footer);
+  final Component footer = Component.text("It is: tomorrow!");
+  server.sendPlayerListFooter(footer);
 }
 ```

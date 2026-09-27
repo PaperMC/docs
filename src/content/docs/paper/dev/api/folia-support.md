@@ -9,6 +9,20 @@ slug: paper/dev/folia-support
 [Folia](https://github.com/PaperMC/Folia) is a fork of Paper, which is currently maintained by the PaperMC team.
 It adds the ability to split the world into regions as outlined [here](/folia/reference/overview) in more depth.
 
+# Mark plugin as supported on Folia
+
+Plugins can't run on Folia if you don't have this field in your paper-plugin.yml (or plugin.yml, respectively):
+```yaml
+folia-supported: true
+```
+
+:::danger
+
+Marking a plugin as supported on Folia is *not nearly enough* to support Folia.
+You must specially develop your plugin with the intent of supporting Folia, keeping things mentioned on this page in mind.
+
+:::
+
 # Checking for Folia
 
 Depending on what platform your plugin is running on, you may need to implement features differently. For this, you can
@@ -16,12 +30,7 @@ use this utility method to check if the current server is running Folia:
 
 ```java
 private static boolean isFolia() {
-    try {
-        Class.forName("io.papermc.paper.threadedregions.RegionizedServer");
-        return true;
-    } catch (ClassNotFoundException e) {
-        return false;
-    }
+    return ServerBuildInfo.buildInfo().isBrandCompatible(Key.key("papermc", "folia"));
 }
 ```
 
@@ -58,7 +67,7 @@ scheduler.execute(plugin, locationToChange, () -> {
 });
 ```
 
-We pass the location as a parameter to the [`RegionScheduler`](jd:paper:io.papermc.paper.threadedregions.scheduler.RegionScheduler)
+We pass the location as a parameter to the [](jd:paper:io.papermc.paper.threadedregions.scheduler.RegionScheduler)
 as it needs to work out which region to execute on.
 
 ### Async scheduler

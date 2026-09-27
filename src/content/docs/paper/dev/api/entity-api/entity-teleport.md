@@ -18,7 +18,7 @@ hurting overall performance.
 :::
 
 ```java
-entity.teleport(location); // loads chunks synchronously and teleports the entity
+boolean success = entity.teleport(location); // loads chunks synchronously and teleports the entity
 
 entity.teleportAsync(location).thenAccept(success -> { // loads chunks asynchronously and teleports the entity
     // this code is ran when the teleport completes
@@ -60,7 +60,7 @@ player.lookAt(
 Teleport flags offer a way to teleport entities whilst being able to customize behavior.
 This allows you to do things like teleport players using relative flags and being able to retain passengers.
 
-All available teleport flags can be found in the [`TeleportFlag`](jd:paper:io.papermc.paper.entity.TeleportFlag) class.
+All available teleport flags can be found in the [](jd:paper:io.papermc.paper.entity.TeleportFlag) class.
 
 ### Relative teleportation
 

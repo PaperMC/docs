@@ -5,7 +5,7 @@ slug: paper/dev/command-api/misc/basic-command
 version: 1.21.1
 ---
 
-For very simple commands Paper has a way to declare Bukkit-style commands by implementing the [`BasicCommand`](jd:paper:io.papermc.paper.command.brigadier.BasicCommand) interface.
+For very simple commands Paper has a way to declare Bukkit-style commands by implementing the [](jd:paper:io.papermc.paper.command.brigadier.BasicCommand) interface.
 
 This interface has one method you have to override:
 - `void execute(CommandSourceStack source, String[] args)`
@@ -18,17 +18,10 @@ And three more, optional methods which you can, but don't have to override:
 ## Simple usage
 Implementing the execute method, your class might look like this:
 ```java title="YourCommand.java"
-package your.package.name;
-
-import io.papermc.paper.command.brigadier.BasicCommand;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
-import org.jspecify.annotations.NullMarked;
-
-@NullMarked
 public class YourCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack source, String[] args) {
+    public void execute(final CommandSourceStack source, final String[] args) {
 
     }
 }
@@ -72,25 +65,25 @@ Registering a `BasicCommand` is very simple: In your plugin's main class, you ca
 [`registerCommand(...)`](jd:paper:org.bukkit.plugin.java.JavaPlugin#registerCommand(java.lang.String,io.papermc.paper.command.brigadier.BasicCommand))
 methods inside the `onEnable` method.
 
-```java title="YourPlugin.java"
-public class YourPlugin extends JavaPlugin {
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
 
     @Override
     public void onEnable() {
         BasicCommand yourCommand = ...;
-        registerCommand("mycommand", yourCommand);
+        this.registerCommand("mycommand", yourCommand);
     }
 }
 ```
 
 ### Basic commands are functional interfaces
-Because you only have to override one method, you can directly pass in a lambda statement. This is not recommended for styling
+Because you only have to override one method, you can directly pass in a lambda expression. This is not recommended for styling
 reasons, as it makes the code harder to read.
 
 ```java
 @Override
 public void onEnable() {
-    registerCommand(
+    this.registerCommand(
         "quickcmd",
         (source, args) -> source.getSender().sendRichMessage("<yellow>Hello!")
     );
@@ -101,23 +94,15 @@ public void onEnable() {
 As an example, we can create a simple broadcast command. We start by declaring creating a class which implements `BasicCommand` and overrides `execute` and `permission`:
 
 ```java title="BroadcastCommand.java"
-package your.package.name;
-
-import io.papermc.paper.command.brigadier.BasicCommand;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
-import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
-
-@NullMarked
 public class BroadcastCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack source, String[] args) {
+    public void execute(final CommandSourceStack source, final String[] args) {
 
     }
 
     @Override
-    public @Nullable String permission() {
+    public String permission() {
         return "example.broadcast.use";
     }
 }
@@ -126,30 +111,28 @@ public class BroadcastCommand implements BasicCommand {
 Our permission is set to `example.broadcast.use`. In order to give yourself that permission, it is suggested that you use a plugin like [LuckPerms](https://luckperms.net) or just give yourself
 operator permissions. You can also set this permission to be `true` by default. For this, please check out the [plugin.yml documentation](/paper/dev/plugin-yml).
 
-Now, in our `execute` method, we can retrieve the name of the executor of that command. If we do not find one, we can just get the name of the command sender, like this:
-
-```java
-final Component name = source.getExecutor() != null
-    ? source.getExecutor().name()
-    : source.getSender().name();
-```
-
-This makes sure that we cover all cases and even allow the command to work correctly with `/execute as`.
-
-Next, we retrieve all arguments and join them to a string or tell the sender that at least one argument is required in order to send a broadcast in case they defined no
+Now, in our `execute` method, we tell the sender that at least one argument is required in order to send a broadcast in case they defined no
 arguments (meaning that `args` has a length of 0):
+
 ```java
 if (args.length == 0) {
     source.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
     return;
 }
-
-final String message = String.join(" ", args);
 ```
 
-Finally, we can build our broadcast message and send it via `Bukkit.broadcast(Component)`:
+Next, we can retrieve the name of the executor of that command. If we do not find one, we can just get the name of the command sender, like this:
 
 ```java
+final Component name = Objects.requireNonNullElseGet(source.getExecutor(), source::getSender).name();
+```
+
+This makes sure that we cover all cases and even allow the command to work correctly with `/execute as`.
+
+Finally, we can build our broadcast message by joining the arguments to a string and send it via `Bukkit.broadcast(Component)`:
+
+```java
+final String message = String.join(" ", args);
 final Component broadcastMessage = MiniMessage.miniMessage().deserialize(
     "<red><bold>BROADCAST</red> <name> <dark_gray>»</dark_gray> <message>",
     Placeholder.component("name", name),
@@ -162,30 +145,16 @@ Bukkit.broadcast(broadcastMessage);
 And we are done! As you can see, this is a very simple way to define commands. Here is the final result of our class:
 
 ```java title="BroadcastCommand.java"
-package your.package.name;
-
-import io.papermc.paper.command.brigadier.BasicCommand;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.bukkit.Bukkit;
-import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
-
-@NullMarked
 public class BroadcastCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack source, String[] args) {
-        final Component name = source.getExecutor() != null
-            ? source.getExecutor().name()
-            : source.getSender().name();
-
+    public void execute(final CommandSourceStack source, final String[] args) {
         if (args.length == 0) {
             source.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
             return;
         }
+
+        final Component name = Objects.requireNonNullElseGet(source.getExecutor(), source::getSender).name();
 
         final String message = String.join(" ", args);
         final Component broadcastMessage = MiniMessage.miniMessage().deserialize(
@@ -194,11 +163,11 @@ public class BroadcastCommand implements BasicCommand {
             Placeholder.unparsed("message", message)
         );
 
-        Bukkit.broadcast(broadcastMessage);
+        Bukkit.getServer().broadcast(broadcastMessage);
     }
 
     @Override
-    public @Nullable String permission() {
+    public String permission() {
         return "example.broadcast.use";
     }
 }
@@ -206,10 +175,10 @@ public class BroadcastCommand implements BasicCommand {
 
 Registering the command looks like this:
 
-```java title="PluginMainClass.java"
+```java
 @Override
 public void onEnable() {
-    registerCommand("broadcast", new BroadcastCommand());
+    this.registerCommand("broadcast", new BroadcastCommand());
 }
 ```
 
@@ -223,7 +192,7 @@ In order to suggest player names, we can just map all online players to their na
 
 ```java
 @Override
-public Collection<String> suggest(CommandSourceStack source, String[] args) {
+public Collection<String> suggest(final CommandSourceStack source, final String[] args) {
     return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
 }
 ```
@@ -241,7 +210,7 @@ if (args.length == 0) {
 }
 ```
 
-After this, we can add a `filter` clause to our stream, where we filter all names by whether they start with our current input, which is `args[args.length - 1]`:
+After this, we can add a `filter` step to our stream, where we filter all names by whether they start with our current input, which is `args[args.length - 1]`:
 
 ```java
 return Bukkit.getOnlinePlayers().stream()
@@ -259,34 +228,17 @@ But when there is no player who starts with an input, it just suggests nothing:
 ### Final code
 Here is the final code for our whole `BroadcastCommand` class, including the suggestions:
 
-```java
-package your.package.name;
-
-import io.papermc.paper.command.brigadier.BasicCommand;
-import io.papermc.paper.command.brigadier.CommandSourceStack;
-import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.minimessage.MiniMessage;
-import net.kyori.adventure.text.minimessage.tag.resolver.Placeholder;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
-import org.jspecify.annotations.NullMarked;
-import org.jspecify.annotations.Nullable;
-
-import java.util.Collection;
-
-@NullMarked
+```java title="BroadcastCommand.java"
 public class BroadcastCommand implements BasicCommand {
 
     @Override
-    public void execute(CommandSourceStack source, String[] args) {
-        final Component name = source.getExecutor() != null
-            ? source.getExecutor().name()
-            : source.getSender().name();
-
+    public void execute(final CommandSourceStack source, final String[] args) {
         if (args.length == 0) {
             source.getSender().sendRichMessage("<red>You cannot send an empty broadcast!");
             return;
         }
+
+        final Component name = Objects.requireNonNullElseGet(source.getExecutor(), source::getSender).name();
 
         final String message = String.join(" ", args);
         final Component broadcastMessage = MiniMessage.miniMessage().deserialize(
@@ -295,16 +247,16 @@ public class BroadcastCommand implements BasicCommand {
             Placeholder.unparsed("message", message)
         );
 
-        Bukkit.broadcast(broadcastMessage);
+        Bukkit.getServer().broadcast(broadcastMessage);
     }
 
     @Override
-    public @Nullable String permission() {
+    public String permission() {
         return "example.broadcast.use";
     }
 
     @Override
-    public Collection<String> suggest(CommandSourceStack source, String[] args) {
+    public Collection<String> suggest(final CommandSourceStack source, final String[] args) {
         if (args.length == 0) {
             return Bukkit.getOnlinePlayers().stream().map(Player::getName).toList();
         }

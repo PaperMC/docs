@@ -6,19 +6,17 @@ on:
 
 jobs:
   build-preview:
-    runs-on: "ubuntu-latest"
+    runs-on: namespace-profile-linux-default
     name: "Build Preview Site and Upload Build Artifact"
     steps:
       - name: "checkout"
-        uses: "actions/checkout@v4"
+        uses: namespacelabs/nscloud-checkout-action@v9
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
       - name: "setup node and pnpm"
         uses: ./.github/actions/setup-node-pnpm
-      - name: "setup d2"
-        run: "curl -fsSL https://d2lang.com/install.sh | sh -s --"
       - name: "install dependencies"
         run: "pnpm install"
       - name: "build"
@@ -26,7 +24,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "upload build artifact"
-        uses: "actions/upload-artifact@v4"
+        uses: actions/upload-artifact@v7
         with:
           name: "preview-build"
           path: "dist"

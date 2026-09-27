@@ -15,6 +15,12 @@ broadcast-rcon-to-ops:
 bug-report-link:
   default: ""
   description: "A URL value used for the Report Server Bugs button in the Server Links client menu."
+chat-spam-threshold-seconds:
+  default: "10"
+  description: "Defines how many messages per second a player must send to be kicked for spamming. To disable this, set to 0."
+command-spam-threshold-seconds:
+  default: "10"
+  description: "Defines how many commands per second a player must send to be kicked for spamming. To disable this, set to 0."
 debug:
   default: "false"
   description: "Enables the server's debug mode."
@@ -212,7 +218,7 @@ rcon.port:
 region-file-compression:
   default: "deflate"
   description: >
-    Specifies the compression type used to compress region files. Possible values are: "deflate", "lz4" and "none".
+    Specifies the compression type used to compress region files. Possible values are: "deflate", "lz4", "none" and "gzip" (only available on Paper).
     If set to "none", region files will take up significantly more disk space, but it might make sense together with filesystem-level compression.
 require-resource-pack:
   default: "false"

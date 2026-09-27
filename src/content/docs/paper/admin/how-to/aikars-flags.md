@@ -169,7 +169,7 @@ up much space (5MB)
 
 ### Transparent huge pages
 
-Controversial feature but may be usable if you can not configure your host for real HugeTLBFS. Try
+Controversial feature but may be usable if you cannot configure your host for real HugeTLBFS. Try
 adding `-XX:+UseTransparentHugePages` but it's extremely important you also have `AlwaysPreTouch` set.
 Otherwise, THP will likely hurt you. We have not measured how THP works for Minecraft or its impact with
 `AlwaysPreTouch`, so this section is for the advanced users who want to experiment.

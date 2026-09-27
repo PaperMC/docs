@@ -8,20 +8,18 @@ on:
 
 jobs:
   deploy:
-    runs-on: "ubuntu-latest"
+    runs-on: namespace-profile-linux-default
     permissions:
       contents: read
       deployments: write
       pull-requests: write
     steps:
       - name: "checkout"
-        uses: "actions/checkout@v4"
+        uses: namespacelabs/nscloud-checkout-action@v9
         with:
           fetch-depth: 0
       - name: "setup node and pnpm"
         uses: ./.github/actions/setup-node-pnpm
-      - name: "setup d2"
-        run: "curl -fsSL https://d2lang.com/install.sh | sh -s --"
       - name: "install dependencies"
         run: "pnpm install"
       - name: "build"
@@ -30,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: "publish (push)"
         id: "cloudflare-publish"
-        uses: "AdrianGonz97/refined-cf-pages-action@v1"
+        uses: AdrianGonz97/refined-cf-pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}

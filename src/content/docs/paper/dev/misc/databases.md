@@ -52,21 +52,21 @@ The JDBC Driver is bundled with Paper, so you do not need to shade/relocate it i
 
 ##### Usage
 
-You must invoke a [`Class#forName(String)`](jd:java:java.lang.Class#forName(java.lang.String))
+You must invoke a [](jd:java:java.lang.Class#forName(java.lang.String))
 on the driver to allow it to initialize and then create the connection to the database:
 
 ```java title="DatabaseManager.java"
 public class DatabaseManager {
 
-  public void connect() {
-    Class.forName("org.sqlite.JDBC");
-    Connection connection = DriverManager.getConnection("jdbc:sqlite:plugins/TestPlugin/database.db");
-  }
+    public void connect() {
+        Class.forName("org.sqlite.JDBC");
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:plugins/ExamplePlugin/database.db");
+    }
 }
 ```
 
-You then have access to a [`Connection`](jd:java:java.sql:java.sql.Connection) object,
-which you can use to create a [`Statement`](jd:java:java.sql:java.sql.Statement) and execute SQL queries.
+You then have access to a [](jd:java:java.sql:java.sql.Connection) object,
+which you can use to create a [](jd:java:java.sql:java.sql.Statement) and execute SQL queries.
 To learn more about the Java Database Connectivity API, see [here](https://www.baeldung.com/java-jdbc)
 
 </details>
@@ -132,24 +132,24 @@ Once you have the dependency added, we can work with the connector in our code:
 ```java title="DatabaseManager.java"
 public class DatabaseManager {
 
-  public void connect() {
-    HikariConfig config = new HikariConfig();
-    config.setJdbcUrl("jdbc:mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
-    config.setUsername("username"); // Username
-    config.setPassword("password"); // Password
-    config.setMaximumPoolSize(10); // Pool size defaults to 10
+    public void connect() {
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/mydatabase"); // Address of your running MySQL database
+        config.setUsername("username"); // Username
+        config.setPassword("password"); // Password
+        config.setMaximumPoolSize(10); // Pool size defaults to 10
 
-    config.addDataSourceProperty("", ""); // MISC settings to add
-    HikariDataSource dataSource = new HikariDataSource(config);
+        config.addDataSourceProperty("", ""); // MISC settings to add
+        HikariDataSource dataSource = new HikariDataSource(config);
 
-    try (Connection connection = dataSource.getConnection()) {
-      // Use a try-with-resources here to autoclose the connection.
-      PreparedStatement sql = connection.prepareStatement("SQL");
-      // Execute statement
-    } catch (Exception e) {
-      // Handle any exceptions that arise from getting / handing the exception.
+        try (Connection connection = dataSource.getConnection()) {
+            // Use a try-with-resources here to autoclose the connection.
+            PreparedStatement sql = connection.prepareStatement("SQL");
+            // Execute statement
+        } catch (Exception e) {
+            // Handle any exceptions that arise from getting / handing the exception.
+        }
     }
-  }
 }
 ```
 
@@ -188,7 +188,7 @@ but it can be used to do much more malicious things, such as deleting the entire
 
 ### Prepared statements
 
-Using prepared statements in Java with [`PreparedStatement`](jd:java:java.sql:java.sql.PreparedStatement)s
+Using prepared statements in Java with [](jd:java:java.sql:java.sql.PreparedStatement)s
 helps prevent SQL injection. They separate SQL code from user input by using placeholders, reducing the risk of executing unintended SQL commands.
 **Always** use prepared statements to ensure the security and integrity of your data. Read more about SQL injection
 [here](https://www.baeldung.com/sql-injection).

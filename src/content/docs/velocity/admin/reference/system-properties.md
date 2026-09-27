@@ -105,10 +105,24 @@ The default value shown may not be set for the property but will only be used by
 - **default**: `false`
 - **description**: Whether native functionality for specific operating systems should be disabled.
 
+#### velocity.legacyChatMaxServerboundLength
+
+- **default**: `100`
+- **description**: Overrides the max chat input length for versions below 1.11. This is useful for mods that backport the modern chat limit of `256`.
+
 #### velocity.strictErrorHandling
 
 - **default**: `true`
 - **description**: Whether the client should disconnect on packet errors. Temporarily added in MC 1.20.5 and removed in 1.21.2 to help modded servers transition to this change.
+
+#### velocity.maximum-play-queue-size
+
+- **default**: `134217728` (128 MiB)
+- **description**: The maximum size of the queue (in bytes) that holds pending PLAY state packets sent to the client while it is in the CONFIG state.
+
+#### velocity.max-plugin-message-payload-size
+- **default**: `32767`
+- **description**: The maximum allowed size of plugin message packets in bytes.
 
 ## List of environment variables
 

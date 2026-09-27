@@ -29,9 +29,9 @@ The `plugin.yml` file is located in the `resources` directory of your project.
 Here is an example of a `plugin.yml` file:
 
 ```yaml replace
-name: ExamplePlugin
+name: Example-Plugin
 version: 1.0.0
-main: io.papermc.testplugin.ExamplePlugin
+main: com.example.paperplugin.ExamplePlugin
 description: An example plugin
 author: PaperMC
 website: https://papermc.io
@@ -51,7 +51,7 @@ If they have an asterisk (\*) next to them, that means they are required.
 
 The name of your plugin. This is what will be displayed in the plugin list and log messages.
 This will be overridden in the logs if the prefix is set.
-- `name: ExamplePlugin`
+- `name: Example-Plugin`
 
 ### version*
 
@@ -61,7 +61,7 @@ The current version of the plugin. This is shown in plugin info messages and ser
 ### main*
 
 The main class of your plugin. This is the class that extends `JavaPlugin` and is the entry point to your plugin.
-- `main: io.papermc.testplugin.ExamplePlugin`
+- `main: com.example.paperplugin.ExamplePlugin`
 
 This is the package path and class name of your main class.
 
@@ -74,13 +74,13 @@ A short description of your plugin and what it does. This will be shown in the p
 
 The author(s) of the plugin. This can be a single author or a list of authors.
 - `author: PaperMC`
-- `authors: [PaperMC, SpigotMC, Bukkit]`
+- `authors: [PaperMC, Bukkit]`
 These will be shown in the plugin info commands.
 
 ### contributors
 
 The contributors to the plugin that aren't the managing author(s).
-- `contributors: [PaperMC, SpigotMC, Bukkit]`
+- `contributors: [PaperMC, Bukkit]`
 These will be shown in the plugin info commands.
 
 ### website
@@ -157,7 +157,7 @@ The default value that permissions that don't have a `default` specified will ha
 ### paper-plugin-loader
 
 A fully qualified class name of a Paper plugin [loader](/paper/dev/getting-started/paper-plugins#loaders) class, if you want to use one.
-- `paper-plugin-loader: com.example.paperplugin.MyPluginLoader`
+- `paper-plugin-loader: com.example.paperplugin.ExamplePluginLoader`
 
 :::danger[Experimental]
 
@@ -246,5 +246,5 @@ This is useful if you want to load your plugin before another plugin for the oth
 
 This can be used to tell the server that this plugin will provide the functionality of some library or other plugin (like an alias system).
 Plugins that (soft)depend on the other plugin will treat your plugin as if the other plugin exists when resolving dependencies or using
-[`PluginManager#getPlugin(String)`](jd:paper:org.bukkit.plugin.PluginManager#getPlugin(java.lang.String)).
+[](jd:paper:org.bukkit.plugin.PluginManager#getPlugin(java.lang.String)).
 - `provides: [SomeOtherPlugin]`

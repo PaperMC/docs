@@ -18,19 +18,19 @@ The `SuggestionProvider<S>` interface is defined as follows:
 ```java title="SuggestionProvider.java"
 @FunctionalInterface
 public interface SuggestionProvider<S> {
-    CompletableFuture<Suggestions> getSuggestions(final CommandContext<S> context, final SuggestionsBuilder builder) throws CommandSyntaxException;
+    CompletableFuture<Suggestions> getSuggestions(CommandContext<S> context, SuggestionsBuilder builder) throws CommandSyntaxException;
 }
 ```
 
 Similar to other classes or interfaces with a `<S>` generic parameter, for Paper, this is usually a `CommandSourceStack`. Furthermore, similar to the `Command<S>` interface,
-this is a functional interface, which means that instead of passing in a class which implements this interface, we can just pass a lambda statement or a method reference.
+this is a functional interface, which means that instead of passing in a class which implements this interface, we can just pass a lambda expression or a method reference.
 
 Our lambda consists of two parameters, `CommandContext<S>` and `SuggestionsBuilder`, and expects to have a `CompletableFuture<Suggestions>` returned.
 
 A very simple lambda for our `suggests` method might look like this:
 ```java
 Commands.argument("name", StringArgumentType.word())
-    .suggests((ctx, builder) -> builder.buildFuture());
+    .suggests((context, builder) -> builder.buildFuture())
 ```
 
 This example obviously does not suggest anything, as we haven't added any suggestions yet.
@@ -42,17 +42,17 @@ The `SuggestionsBuilder` has a few methods we can use to construct our suggestio
 The first type of methods we will cover are the input retrieval methods: `getInput()`, `getStart()`, `getRemaining()`, and `getRemainingLowerCase()`.
 The following table displays what each returns with the following input typed in the chat bar: `/customsuggestions Asumm13Text`.
 
-|           Method           |          Return Value          |                          Description                          |
-|----------------------------|--------------------------------|---------------------------------------------------------------|
-| getInput()                 | /customsuggestions Asumm13Text | The full chat input                                           |
-| getStart()                 | 19                             | The index of the first character of the argument's input      |
-| getRemaining()             | Asumm13Text                    | The input for the current argument                            |
-| getRemainingLowerCase()    | asumm13text                    | The input for the current argument, lowercased                |
+| Method                  | Return Value                   | Description                                              |
+|-------------------------|--------------------------------|----------------------------------------------------------|
+| getInput()              | /customsuggestions Asumm13Text | The full chat input                                      |
+| getStart()              | 19                             | The index of the first character of the argument's input |
+| getRemaining()          | Asumm13Text                    | The input for the current argument                       |
+| getRemainingLowerCase() | asumm13text                    | The input for the current argument, lowercased           |
 
 ### Suggestions
 The following overloads of the `SuggestionsBuilder#suggest` method add values that will be send to the client as argument suggestions:
 
-|          Overload        |                   Description                   |
+| Overload                 | Description                                     |
 |--------------------------|-------------------------------------------------|
 | suggest(String)          | Adds a String to the suggestions                |
 | suggest(String, Message) | Adds a String with a tooltip to the suggestions |
@@ -60,13 +60,13 @@ The following overloads of the `SuggestionsBuilder#suggest` method add values th
 | suggest(int, Message)    | Adds an int with a tooltip to the suggestions   |
 
 There are two ways of retrieving a `Message` instance:
-- Using `LiteralMessage`, which can be used for basic, non-formatted text.
-- Using the `MessageComponentSerializer`, which can be used to serialize `Component` objects into `Message` objects.
+- `LiteralMessage`, which can be used for basic, non-formatted text.
+- `MessageComponentSerializer`, which can be used to serialize `Component` objects into `Message` objects.
 
 For example, if you add a suggestion like this:
 ```java
 builder.suggest("suggestion", MessageComponentSerializer.message().serialize(
-    MiniMessage.miniMessage().deserialize("<green>Suggestion tooltip")
+    Component.text("Suggestion tooltip", NamedTextColor.GREEN)
 ));
 ```
 
@@ -85,54 +85,61 @@ Here are the same suggestions declared in the two different ways mentioned above
 ```java
 // Here, you are safe to use all Paper API
 Commands.argument("name", StringArgumentType.word())
-    .suggests((ctx, builder) -> {
+    .suggests((context, builder) -> {
         builder.suggest("first");
         builder.suggest("second");
 
         return builder.buildFuture();
-    });
+    })
 
 // Here, most Paper API is not usable
 Commands.argument("name", StringArgumentType.word())
-    .suggests((ctx, builder) -> CompletableFuture.supplyAsync(() -> {
+    .suggests((context, builder) -> CompletableFuture.supplyAsync(() -> {
         builder.suggest("first");
         builder.suggest("second");
 
         return builder.build();
-    }));
+    }))
 ```
 
 ## Example: Suggesting amounts in a give item command
 In commands, where you give players items, you oftentimes include an amount argument. We could suggest `1`, `16`, `32`, and `64` as common amounts for
 items given. The command implementation could look like this:
 
-```java
-@NullMarked
-public class SuggestionsTest {
+```java title="GiveItemCommand.java"
+public class GiveItemCommand {
 
-    public static LiteralCommandNode<CommandSourceStack> constructGiveItemCommand() {
+    public static LiteralCommandNode<CommandSourceStack> createCommand() {
         // Create new command: /giveitem
         return Commands.literal("giveitem")
 
-            // Require a player to execute the command
-            .requires(ctx -> ctx.getExecutor() instanceof Player)
+          // Declare a new ItemStack argument
+          .then(Commands.argument("item", ArgumentTypes.itemStack())
 
-            // Declare a new ItemStack argument
-            .then(Commands.argument("item", ArgumentTypes.itemStack())
+              // Declare a new integer argument with the bounds of 1 to 99
+              .then(Commands.argument("amount", IntegerArgumentType.integer(1, 99))
 
-                // Declare a new integer argument with the bounds of 1 to 99
-                .then(Commands.argument("amount", IntegerArgumentType.integer(1, 99))
+                  // Here, we defer to separate methods, since otherwise, our command definition would grow too big
+                  // It also allows building optional arguments as shown below.
+                  .suggests(GiveItemCommand::amountSuggestions)
+                  .executes(context -> giveItem(
+                      context,
+                      context.getArgument("item", ItemStack.class),
+                      IntegerArgumentType.getInteger(context, "amount")
+                  ))
+              )
 
-                    // Here, we use method references, since otherwise, our command definition would grow too big
-                    .suggests(SuggestionsTest::getAmountSuggestions)
-                    .executes(SuggestionsTest::executeCommandLogic)
-
-                )
-            )
-            .build();
+              // Add a fallback path in case the amount is not specified which gives 64 items
+              .executes(context -> giveItem(
+                  context,
+                  context.getArgument("item", ItemStack.class),
+                  64
+              ))
+          )
+          .build();
     }
 
-    private static CompletableFuture<Suggestions> getAmountSuggestions(final CommandContext<CommandSourceStack> ctx, final SuggestionsBuilder builder) {
+    private static CompletableFuture<Suggestions> amountSuggestions(final CommandContext<CommandSourceStack> context, final SuggestionsBuilder builder) {
         // Suggest 1, 16, 32, and 64 to the user when they reach the 'amount' argument
         builder.suggest(1);
         builder.suggest(16);
@@ -141,9 +148,13 @@ public class SuggestionsTest {
         return builder.buildFuture();
     }
 
-    private static int executeCommandLogic(final CommandContext<CommandSourceStack> ctx) {
-        // We know that the executor will be a player, so we can just silently return
-        if (!(ctx.getSource().getExecutor() instanceof Player player)) {
+    private static int giveItem(
+        final CommandContext<CommandSourceStack> context, final ItemStack item, final int amount
+    ) {
+        // We know that the executor will be a player, so we can just silently return.
+        // Alternatively we could use CommandSourceStack#getPlayerOrThrow which will be used
+        // in later chapters to simplify examples.
+        if (!(context.getSource().getExecutor() instanceof Player player)) {
             return Command.SINGLE_SUCCESS;
         }
 
@@ -153,10 +164,6 @@ public class SuggestionsTest {
             player.sendRichMessage("<light_purple>You do not have enough space in your inventory!");
             return Command.SINGLE_SUCCESS;
         }
-
-        // Retrieve our argument values
-        final ItemStack item = ctx.getArgument("item", ItemStack.class);
-        final int amount = IntegerArgumentType.getInteger(ctx, "amount");
 
         // Set the item's amount and give it to the player
         item.setAmount(amount);
@@ -180,20 +187,19 @@ If you have multiple values, it is suggested that you filter your suggestions by
 as a test:
 
 ```java
-public static LiteralCommandNode<CommandSourceStack> constructStringSuggestionsCommand() {
+public static LiteralCommandNode<CommandSourceStack> suggestNamesCommand() {
     final List<String> names = List.of("Alex", "Andreas", "Stephanie", "Sophie", "Emily");
 
     return Commands.literal("selectname")
         .then(Commands.argument("name", StringArgumentType.word())
-
-            .suggests((ctx, builder) -> {
+            .suggests((context, builder) -> {
                 names.stream()
-                    .filter(entry -> entry.toLowerCase().startsWith(builder.getRemainingLowerCase()))
+                    .filter(entry -> entry.toLowerCase(Locale.ROOT).startsWith(builder.getRemainingLowerCase()))
                     .forEach(builder::suggest);
                 return builder.buildFuture();
             })
-
-        ).build();
+        )
+        .build();
 }
 ```
 

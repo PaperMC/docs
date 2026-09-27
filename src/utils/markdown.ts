@@ -1,6 +1,4 @@
-import { createMarkdownProcessor } from "@astrojs/markdown-remark";
-
-const renderer = await createMarkdownProcessor(globalThis.markdownConfig);
+const renderer = await globalThis.markdownConfig!.processor!.createRenderer({});
 
 export const render = async (content: string): Promise<string> => {
   const code = (await renderer.render(content)).code;

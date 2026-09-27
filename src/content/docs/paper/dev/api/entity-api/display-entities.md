@@ -9,13 +9,13 @@ Added in 1.19.4, [display entities](https://minecraft.wiki/w/Display) are a powe
 various things in the world, like blocks, items and text.
 
 By default, these entities have no hitbox, don't move, make sounds or take damage,
-making them the perfect for all kinds of applications, like holograms.
+making them perfect for all kinds of applications, like holograms.
 
 ## Types
 
 ### Text
 
-Text can be displayed via a [`TextDisplay`](jd:paper:org.bukkit.entity.TextDisplay)
+Text can be displayed via a [](jd:paper:org.bukkit.entity.TextDisplay)
 entity.
 
 ```java
@@ -31,7 +31,7 @@ TextDisplay display = world.spawn(location, TextDisplay.class, entity -> {
 
 ### Blocks
 
-Blocks can be displayed via a [`BlockDisplay`](jd:paper:org.bukkit.entity.BlockDisplay)
+Blocks can be displayed via a [](jd:paper:org.bukkit.entity.BlockDisplay)
 entity.
 
 ```java
@@ -43,7 +43,7 @@ BlockDisplay display = world.spawn(location, BlockDisplay.class, entity -> {
 
 ### Items
 
-Items can be displayed via an [`ItemDisplay`](jd:paper:org.bukkit.entity.ItemDisplay)
+Items can be displayed via an [](jd:paper:org.bukkit.entity.ItemDisplay)
 entity.
 
 Despite its name, an _item_ display can also display _blocks_, with the difference being the
@@ -232,7 +232,7 @@ meaning it will disappear when the chunk unloads.
 
 _However, if the display is located in a chunk that never unloads, i.e. a spawn chunk, it will never
 be removed, creating a resource leak. Make sure to remove the display afterward with
-[`Entity#remove()`](jd:paper:org.bukkit.entity.Entity#remove())._
+[](jd:paper:org.bukkit.entity.Entity#remove())._
 
 :::
 

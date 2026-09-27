@@ -360,6 +360,12 @@ entities:
             viewed by enabling advanced item tooltips in-game by pressing **F3 +
             H**; the item id will appear at the bottom of the tooltip that
             appears when you hover over an item
+    max-arrow-despawn-invulnerability:
+      vanilla: "disabled"
+      default: "200"
+      description: >-
+        Workaround for [MC-125757](https://mojira.dev/MC-125757), makes all arrows advance their despawn
+        timer as if they were stuck in the ground, after a delay (in ticks).
     count-all-mobs-for-spawning:
       vanilla: "true"
       default: "false"
@@ -1022,7 +1028,7 @@ misc:
       in each implementation's respective documentation:
 
       - Eigencraft: No official documentation available. However,
-      [theosib's comments](https://bugs.mojang.com/browse/MC-81098?focusedCommentId=420777#comment-420777)
+      [theosib's comments](https://mojira.dev/MC-81098#comment-id-71035)
       on the Mojira bug tracker give an overview of the Eigencraft implementation.
 
       - [Alternate Current](https://github.com/SpaceWalkerRS/alternate-current/blob/main/README.md)
@@ -1133,4 +1139,14 @@ unsupported-settings:
     default: "true"
     description: >-
       If set to false, the creation of invulnerable end crystals will be
-      allowed. Fixes [MC-108513](https://bugs.mojang.com/browse/MC-108513)
+      allowed. Fixes [MC-108513](https://mojira.dev/MC-108513)
+  ticking:
+    chunks:
+      default: "true"
+      description: >-
+        Controls whether the server ticks chunks. This includes mob spawning,
+        random block ticking, thunder, and ice and snow creation.
+    block-entities:
+      default: "true"
+      description: >-
+        Controls whether the server ticks block entities.

@@ -278,6 +278,7 @@ export default defineConfig({
                       items: [
                         "paper/dev/using-databases",
                         "paper/dev/debugging",
+                        "paper/dev/logging",
                         "paper/dev/internals",
                         "paper/dev/reading-stacktraces",
                       ],
@@ -572,6 +573,7 @@ export default defineConfig({
               velocity: "https://jd.papermc.io/velocity",
               adventure: { url: "https://jd.papermc.io/adventure", module: "net.kyori.adventure.api" },
               java: { url: "https://docs.oracle.com/en/java/javase/25/docs/api", module: "java.base" },
+              slf4j: "https://www.slf4j.org/apidocs",
             },
           },
         ],

@@ -1,6 +1,9 @@
 ---
 import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
-import { LATEST_ADVENTURE_SUPPORTED_MC_RANGE, LATEST_ADVENTURE_PLATFORM_MOD_RELEASE } from "../utils/versions";
+import {
+  LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE,
+  LATEST_ADVENTURE_PLATFORM_MOD_RELEASE,
+} from "../utils/versions";
 
 type TemplateKey = "default" | "adventure-platform-mod";
 
@@ -10,6 +13,16 @@ interface Template {
   title?: string;
   code: string;
 }
+
+interface Props {
+  group?: string;
+  name?: string;
+  version?: string;
+  template?: TemplateKey;
+}
+
+const { group = "", name = "", version = "", template = "default" } = Astro.props;
+const modPackaging = name === "neoforge" ? "jarJar" : "include";
 
 const templates: Record<TemplateKey, Template[]> = {
   default: [
@@ -55,8 +68,8 @@ dependencies {
       title: "build.gradle.kts",
       code: `repositories {
   // for development builds
-  maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/") {
-    name = "sonatype-oss-snapshots1"
+  maven(url = "https://central.sonatype.com/repository/maven-snapshots/") {
+    name = "central-snapshots"
     mavenContent { snapshotsOnly() }
   }
   // for releases
@@ -64,7 +77,7 @@ dependencies {
 }
 
 dependencies {
-  modImplementation(include("net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}")!!) // for Minecraft ${LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
+  ${modPackaging}(implementation("net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}")!!) // for Minecraft ${LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}
 }`,
     },
     {
@@ -74,8 +87,8 @@ dependencies {
       code: `repositories {
   // for development builds
   maven {
-    name = 'sonatype-oss-snapshots1'
-    url = 'https://s01.oss.sonatype.org/content/repositories/snapshots/'
+    name = 'central-snapshots'
+    url = 'https://central.sonatype.com/repository/maven-snapshots/'
     mavenContent { snapshotsOnly() }
   }
   // for releases
@@ -83,21 +96,11 @@ dependencies {
 }
 
 dependencies {
-  modImplementation include('net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft ${LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
+  ${modPackaging}(implementation('net.kyori:adventure-platform-\{NAME}:${LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}')) // for Minecraft ${LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}
 }`,
     },
   ],
 };
-
-interface Props {
-  group?: string;
-  name?: string;
-  version?: string;
-  template?: TemplateKey;
-}
-
-let { group = "", name = "", version = "", template } = Astro.props;
-template = template ?? "default";
 
 const templateData = templates[template];
 if (!templateData) {

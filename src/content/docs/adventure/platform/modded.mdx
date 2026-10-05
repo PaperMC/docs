@@ -15,10 +15,13 @@ The platform supports all features, including localization and custom renderers.
 
 When building multi-loader mods, we often want to move as much code as possible into a loader-agnostic part of our projects.
 
-Adventure facilities this through the `net.kyori:adventure-platform-mod-shared` artifact.
+Adventure facilitates this through the `net.kyori:adventure-platform-mod-shared` artifact.
 
-A second variant, `net.kyori:adventure-platform-mod-shared-fabric-repack`, is also published. This variant should be used
-when your common code is managed by `fabric-loom`.
+For Minecraft 26.1 and newer, use this artifact with both Loom and ModDevGradle. Loom projects should use the
+non-remapping `net.fabricmc.fabric-loom` plugin and the standard `compileOnly` configuration.
+
+For Minecraft 1.21.11 and older, common modules managed by remapping Loom (`net.fabricmc.fabric-loom-remap` or the
+legacy `fabric-loom` plugin) must instead use `net.kyori:adventure-platform-mod-shared-fabric-repack` with `modCompileOnly`.
 
 :::caution[Note]
   These artifacts are for the common module on multi-platform mods. For specific platforms, take a look at the
@@ -44,11 +47,8 @@ As with the rest of the Adventure projects, releases are distributed on Maven Ce
     }
 
     dependencies {
-      // Loom project
-      modCompileOnly("net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft \{LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
-
-      // NeoGradle/ModDevGradle/VanillaGradle project
-      compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft \{LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
+      // Common module (Loom or ModDevGradle)
+      compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // for Minecraft \{LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}
     }
     ```
   </TabItem>
@@ -66,11 +66,8 @@ As with the rest of the Adventure projects, releases are distributed on Maven Ce
     }
 
     dependencies {
-      // Loom project
-      modCompileOnly('net.kyori:adventure-platform-mod-shared-fabric-repack:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft \{LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
-
-      // NeoGradle/ModDevGradle/VanillaGradle project
-      compileOnly('net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft \{LATEST_ADVENTURE_SUPPORTED_MC_RANGE}
+      // Common module (Loom or ModDevGradle)
+      compileOnly('net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // for Minecraft \{LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}
     }
     ```
   </TabItem>
@@ -86,6 +83,9 @@ Each major Minecraft release will require different platform versions. For older
 
   | Minecraft Version | Adventure Version | `adventure-platform-(mod-shared/fabric/neoforge)` Version |
   |-------------------|-------------------|-----------------------------------------------------------|
+  | 26.2              | 5.2.0             | 7.1.1                                                     |
+  | 26.1-26.1.2       | 4.26.1            | 6.9.0                                                     |
+  | 1.21.11           | 4.25.0            | 6.8.0                                                     |
   | 1.21.9-1.21.10    | 4.25.0            | 6.7.0                                                     |
   | 1.21.6-1.21.8     | 4.24.0            | 6.6.0                                                     |
   | 1.21.5            | 4.21.0            | 6.4.0                                                     |
@@ -102,7 +102,7 @@ The easiest way to get started with this platform is to work with the Minecraft 
 
 This covers almost all cases where the default renderer is used.
 
-On Fabric, interface injection is used so that you can directly call interface methods on Minecraft objects (with loom 0.11+).
+On Fabric, Loom applies interface injection so that you can directly call interface methods on Minecraft objects.
 
 On NeoForge, you must manually cast or use the helpers provided in `MinecraftAudiences`.
 
@@ -128,17 +128,17 @@ The following Adventure interfaces are directly implemented:
   - `net.minecraft.network.chat.Component`
 
 `Key`
-  - `net.minecraft.resources.ResourceLocation`
+  - `net.minecraft.resources.Identifier`
 
 `Keyed`
   - `net.minecraft.resources.ResourceKey`
 
 `HoverEventSource`
   - `net.minecraft.world.entity.Entity`,
-  - `net.minecraft.world.item.ItemStack`
+  - `net.minecraft.world.item.ItemStack`, `net.minecraft.world.item.ItemStackTemplate`
 
-`SignedMessage.Signature`
-  - `net.minecraft.network.chat.MessageSignature`
+`SignedMessage`
+  - `net.minecraft.network.chat.PlayerChatMessage`
 
 
 Using these injections, getting started is as simple as:
@@ -150,7 +150,8 @@ void greet(final ServerPlayer player) {
         .append(player.get(Identity.DISPLAY_NAME)
             .get()
             .color(NamedTextColor.RED)
-        );
+        )
+        .build();
     player.sendMessage(message);
 }
 ```

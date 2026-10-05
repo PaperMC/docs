@@ -84,13 +84,14 @@ const userdevVersions: string[] = await fetchGitHubTags("PaperMC/paperweight");
 
 export const LATEST_USERDEV_RELEASE = userdevVersions[0];
 
-export const LATEST_ADVENTURE_SUPPORTED_MC = "1.21.11";
-export const LATEST_ADVENTURE_SUPPORTED_MC_RANGE = LATEST_ADVENTURE_SUPPORTED_MC;
+export const LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC = "26.3";
+export const LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE = LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC;
 export const LATEST_ADVENTURE_API_RELEASE = "5.2.0";
-export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = "6.8.0";
+export const LATEST_ADVENTURE_PLATFORM_MOD_RELEASE = "7.2.0";
 export const LATEST_ANSI_RELEASE = "1.1.1";
 
 // legacy
+export const LATEST_ADVENTURE_PLATFORM_BUKKIT_SUPPORTED_MC = "1.21.11";
 export const LATEST_ADVENTURE_PLATFORM_RELEASE = "4.4.1";
 
 const waterfallProject = await fetchProject("waterfall");

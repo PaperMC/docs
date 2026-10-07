@@ -218,3 +218,64 @@ This simply adds a potion effect until the entity dies.
 
 A delay of 0 ticks is treated as you wanting to run the task on the next tick. If you schedule a task with a delay of 0 ticks
 while the server is starting, or before it is enabled, it will be executed before the server is enabled.
+
+## Using `ScheduledTask`
+
+Paper also includes the global region, region, async and entity schedulers, which are required on Folia and work on Paper as well.
+See [Supporting Paper and Folia](/paper/dev/folia-support) to learn when to use each of them.
+
+Instead of a `BukkitTask`, these schedulers use a [](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask).
+It is returned by methods such as `run`, `runDelayed` and `runAtFixedRate`, and it is
+passed to the <code>[Consumer](jd:java:java.util.function.Consumer)<[ScheduledTask](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask)></code> that you give to them.
+
+### Cancelling a task from inside itself
+
+Just like with `Consumer<BukkitTask>`, you can cancel a repeating task from inside it, e.g. a countdown that stops once it reaches zero:
+
+```java
+AtomicInteger secondsLeft = new AtomicInteger(10);
+
+server.getGlobalRegionScheduler().runAtFixedRate(plugin, task -> {
+    int seconds = secondsLeft.getAndDecrement();
+
+    if (seconds > 0) {
+        server.broadcast(Component.text(seconds + "..."));
+        return;
+    }
+
+    server.broadcast(Component.text("Go!"));
+    task.cancel(); // The countdown is over, there's no point in continuing to run this task
+}, 1, 20);
+```
+
+:::caution
+
+Unlike the `BukkitScheduler`, the global region scheduler requires the delay and period to be at least 1 tick.
+Passing 0 throws an `IllegalArgumentException`.
+
+:::
+
+### Checking the state of a task
+
+[`cancel()`](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask#cancel()) does not interrupt a task
+that is currently running; it only prevents it from running again. It returns a
+[](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask$CancelledState) describing what happened:
+
+- `CANCELLED_BY_CALLER`: The task was cancelled by this call and will not run.
+- `CANCELLED_ALREADY`: The task was already cancelled before this call.
+- `RUNNING`: The task is not repeating and could not be cancelled, because it is currently running.
+- `ALREADY_EXECUTED`: The task is not repeating and could not be cancelled, because it has already finished.
+- `NEXT_RUNS_CANCELLED`: The repeating task is currently running, but this call stopped its future runs.
+- `NEXT_RUNS_CANCELLED_ALREADY`: The repeating task is currently running, and its future runs were already cancelled.
+
+You can also check a task at any time with these methods:
+
+- [`getExecutionState()`](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask#getExecutionState())
+  returns a [](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask$ExecutionState):
+  `IDLE`, `RUNNING`, `FINISHED`, `CANCELLED` or `CANCELLED_RUNNING` (cancelled, but still running).
+- [`isCancelled()`](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask#isCancelled())
+  returns `true` if the state is `CANCELLED` or `CANCELLED_RUNNING`.
+- [`isRepeatingTask()`](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask#isRepeatingTask())
+  returns `true` if the task was scheduled to run repeatedly.
+- [`getOwningPlugin()`](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask#getOwningPlugin())
+  returns the plugin that scheduled the task.

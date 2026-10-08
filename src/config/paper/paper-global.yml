@@ -246,7 +246,8 @@ misc:
     default: "default"
     description: >-
       Sets the maximum number of ticks the server can speedup after a lag spike. A value of
-      "default" defaults to 5. Set to 0 to disable the catchup.
+      "default" defaults to 5. Set to 0 to disable the catchup. A value of 1 has the same effect
+      as 0, so the lowest value that enables the catchup is 2.
   chat-threads:
     chat-executor-core-size:
       default: "-1"

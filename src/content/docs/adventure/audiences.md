@@ -28,6 +28,87 @@ for you.
 Most users using will primarily use this API to show content created by other parts
 of the API.
 
+## Forwarding audiences
+
+A [](jd:adventure:net.kyori.adventure.audience.ForwardingAudience) passes every
+action it receives on to other audiences. Its only abstract method is `audiences()`,
+so implementing it is enough to turn one of your own types into an audience:
+
+```java
+public class GameTeam implements ForwardingAudience {
+  private final List<GamePlayer> players = new ArrayList<>();
+
+  // ...
+
+  @Override
+  public Iterable<? extends Audience> audiences() {
+    return this.players;
+  }
+}
+```
+
+Everything that can be sent to an audience can now be sent to the whole team:
+
+```java
+team.sendMessage(Component.text("The game starts in 10 seconds!"));
+team.playSound(Sound.sound(Key.key("block.note_block.pling"), Sound.Source.MASTER, 1F, 1F));
+```
+
+`audiences()` is called every time an action is forwarded, so members added to
+or removed from the backing collection are taken into account automatically.
+
+If you do not need a type of your own, `Audience.audience(Iterable)` and the
+`Audience.toAudience()` collector create a `ForwardingAudience` for you.
+
+### Wrapping a single audience
+
+A forwarding audience made up of several members has no pointers of its own, so
+`get(Identity.UUID)` on the `GameTeam` above returns an empty `Optional`.
+To wrap exactly one audience, implement [](jd:adventure:net.kyori.adventure.audience.ForwardingAudience$Single)
+instead. It forwards pointers as well as actions:
+
+```java
+public class GamePlayer implements ForwardingAudience.Single {
+  private final Audience audience;
+  private int score;
+
+  public GamePlayer(final Audience audience) {
+    this.audience = audience;
+  }
+
+  @Override
+  public Audience audience() {
+    return this.audience;
+  }
+}
+```
+
+This is especially useful in plugins that support more than one platform. The shared
+code only works with `GamePlayer`, and each platform module passes in the audience for
+its own player type. See [Platforms](/adventure/platform) for how to get one.
+
+### Changing what is forwarded
+
+Many `Audience` methods are convenience overloads that end up calling a smaller set
+of methods. `sendMessage(ComponentLike)` calls `sendMessage(Component)`, and
+`showTitle(Title)` calls `sendTitlePart` once for each part of the title.
+`ForwardingAudience` only overrides that smaller set, so that is also all you need
+to override to change what your audience does:
+
+```java
+public class GameTeam implements ForwardingAudience {
+  private static final Component PREFIX = Component.text("[Team] ");
+
+  // ...
+
+  @Override
+  public void sendMessage(final Component message) {
+    // Also applies to sendMessage(ComponentLike)
+    ForwardingAudience.super.sendMessage(PREFIX.append(message));
+  }
+}
+```
+
 ## Pointers
 
 Audiences can also provide arbitrary information, such as display name or UUID.

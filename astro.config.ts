@@ -264,6 +264,7 @@ export default defineConfig({
                         "paper/dev/data-component-api",
                         "paper/dev/pdc",
                         "paper/dev/scheduler",
+                        "paper/dev/scoreboard-api",
                         "paper/dev/plugin-messaging",
                         "paper/dev/plugin-configurations",
                         "paper/dev/registries",

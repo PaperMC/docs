@@ -90,3 +90,40 @@ If needed, you can also use the text box at the top to evaluate expressions for 
 Direct debugging will allow you to run the server directly from your IDE, and will allow you to use breakpoints and step through your code.
 We can achieve this by using [JPenilla's Gradle plugin](https://github.com/jpenilla/run-task) to run the server directly from the IDE.
 See [here](https://github.com/jpenilla/run-task#basic-usage) for instructions on how to set up the plugin.
+
+### Preventing timeouts while paused
+
+While the server is paused at a breakpoint, it doesn't tick. If you stay paused for a while, two timeouts can interrupt your debugging session.
+
+#### The watchdog
+
+The watchdog can't tell a paused server apart from a frozen one. With the default configuration, it starts printing thread dumps
+after 10 seconds without a tick and stops the server after 60 seconds.
+
+To prevent this, start your server with the [`disable.watchdog`](/paper/reference/system-properties#disablewatchdog) system property:
+
+```shell replace
+java -Ddisable.watchdog=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005 -jar paper-\{LATEST_PAPER_RELEASE}.jar --nogui
+```
+
+If you run the server with the Gradle plugin, add the flag to the `runServer` task instead:
+
+```kotlin title="build.gradle.kts"
+tasks {
+    runServer {
+        jvmArgs("-Ddisable.watchdog=true")
+    }
+}
+```
+
+:::caution
+
+Only disable the watchdog on a development server. On a production server, it is what detects and reports a real freeze.
+
+:::
+
+#### Client timeouts
+
+The Vanilla client disconnects after 30 seconds without receiving anything from the server, so you get kicked while the server is paused.
+This timeout is part of the client and can't be changed from the server. If you need to stay connected,
+install a client mod that raises it, such as [untimeout](https://modrinth.com/mod/untimeout).

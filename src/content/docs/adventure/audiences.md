@@ -34,7 +34,7 @@ A [](jd:adventure:net.kyori.adventure.audience.ForwardingAudience) passes every
 action it receives on to other audiences. Its only abstract method is `audiences()`,
 so implementing it is enough to turn one of your own types into an audience:
 
-```java
+```java title=GameTeam.java
 public class GameTeam implements ForwardingAudience {
   private final List<GamePlayer> players = new ArrayList<>();
 
@@ -50,6 +50,7 @@ public class GameTeam implements ForwardingAudience {
 Everything that can be sent to an audience can now be sent to the whole team:
 
 ```java
+final GameTeam team = /* ... */;
 team.sendMessage(Component.text("The game starts in 10 seconds!"));
 team.playSound(Sound.sound(Key.key("block.note_block.pling"), Sound.Source.MASTER, 1F, 1F));
 ```
@@ -57,17 +58,21 @@ team.playSound(Sound.sound(Key.key("block.note_block.pling"), Sound.Source.MASTE
 `audiences()` is called every time an action is forwarded, so members added to
 or removed from the backing collection are taken into account automatically.
 
-If you do not need a type of your own, `Audience.audience(Iterable)` and the
-`Audience.toAudience()` collector create a `ForwardingAudience` for you.
+If you do not need a type of your own,
+[`Audience.audience(Iterable<? extends Audience>)`](jd:adventure:net.kyori.adventure.audience.Audience#audience(java.lang.Iterable)),
+[`Audience.audience(Audience...)`](jd:adventure:net.kyori.adventure.audience.Audience#audience(net.kyori.adventure.audience.Audience...)),
+and the [`Audience.toAudience()`](jd:adventure:net.kyori.adventure.audience.Audience#toAudience())
+collector can create a `ForwardingAudience` for you.
+
+A forwarding audience made up of several members has no pointers of its own, so
+`get(Identity.UUID)` on the `GameTeam` above would return an empty `Optional`.
 
 ### Wrapping a single audience
 
-A forwarding audience made up of several members has no pointers of its own, so
-`get(Identity.UUID)` on the `GameTeam` above returns an empty `Optional`.
 To wrap exactly one audience, implement [](jd:adventure:net.kyori.adventure.audience.ForwardingAudience$Single)
 instead. It forwards pointers as well as actions:
 
-```java
+```java title=GamePlayer.java
 public class GamePlayer implements ForwardingAudience.Single {
   private final Audience audience;
   private int score;
@@ -90,12 +95,12 @@ its own player type. See [Platforms](/adventure/platform) for how to get one.
 ### Changing what is forwarded
 
 Many `Audience` methods are convenience overloads that end up calling a smaller set
-of methods. `sendMessage(ComponentLike)` calls `sendMessage(Component)`, and
+of methods. `sendMessage(ComponentLike)` calls `sendMessage(Component)` and
 `showTitle(Title)` calls `sendTitlePart` once for each part of the title.
 `ForwardingAudience` only overrides that smaller set, so that is also all you need
 to override to change what your audience does:
 
-```java
+```java title=GameTeam.java
 public class GameTeam implements ForwardingAudience {
   private static final Component PREFIX = Component.text("[Team] ");
 

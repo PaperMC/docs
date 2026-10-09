@@ -88,9 +88,9 @@ public class GamePlayer implements ForwardingAudience.Single {
 }
 ```
 
-This is especially useful in plugins that support more than one platform. The shared
-code only works with `GamePlayer`, and each platform module passes in the audience for
-its own player type. See [Platforms](/adventure/platform) for how to get one.
+This is especially useful in projects that support more than one platform. If common
+code only works with `GamePlayer`, each platform module can pass in the audience for
+its own player type. See [Platforms](/adventure/platform) for more information.
 
 ### Changing what is forwarded
 

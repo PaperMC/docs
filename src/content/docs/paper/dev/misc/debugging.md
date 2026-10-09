@@ -126,4 +126,4 @@ Only disable the watchdog on a development server. On a production server, it is
 
 The Vanilla client disconnects after 30 seconds without receiving anything from the server, so you get kicked while the server is paused.
 This timeout is part of the client and can't be changed from the server. If you need to stay connected,
-install a client mod that raises it, such as [TimeOutOut](https://modrinth.com/mod/timeoutout).
+install a client mod that raises it, such as [untimeout](https://modrinth.com/mod/untimeout).

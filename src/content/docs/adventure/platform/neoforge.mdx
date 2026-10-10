@@ -5,6 +5,7 @@ description: The NeoForge Adventure implementation.
 ---
 
 import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_MOD_RELEASE, LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE } from "/src/utils/versions";
 
 Adventure supports NeoForge on *Minecraft: Java Edition* 1.21 and up, for both server-side and client-side use. Each major version of Minecraft will usually require
 a new release of the platform.
@@ -16,7 +17,12 @@ The platform supports all features, including localization and custom renderers.
 The NeoForge platform is packaged as a mod, designed to be included in mods via jar-in-jar packaging. As with the rest of the Adventure projects,
 releases are distributed on Maven Central, and snapshots on Sonatype OSS:
 
+The following example uses ModDevGradle (`net.neoforged.moddev`). Use `implementation` for the development dependency
+and `jarJar` to bundle the platform in your mod:
+
 <Dependency name="neoforge" template="adventure-platform-mod" />
+
+The current platform release, {LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}, targets Minecraft {LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}.
 
 :::danger[Attention]
 

@@ -5,6 +5,7 @@ description: The Fabric Adventure implementation.
 ---
 
 import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_MOD_RELEASE, LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE } from "/src/utils/versions";
 
 Adventure supports Fabric on *Minecraft: Java Edition* 1.16 and up, for both server-side and client-side use. Each major version of Minecraft
 will usually require a new release of the platform.
@@ -26,7 +27,14 @@ Starting with Minecraft 1.21.2, both platforms have version 6.x published.
 The Fabric platform is packaged as a mod, designed to be included in mods via jar-in-jar packaging.
 As with the rest of the Adventure projects, releases are distributed on Maven Central, and snapshots on Sonatype OSS:
 
+The following example uses the non-remapping `net.fabricmc.fabric-loom` plugin for Minecraft 26.1 and newer.
+Use `implementation` for the development dependency and `include` to bundle the platform in your mod:
+
 <Dependency name="fabric" template="adventure-platform-mod" />
+
+The current platform release, {LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}, targets Minecraft {LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}.
+For Minecraft 1.21.11 and older, use a compatible platform version with remapping Loom
+(`net.fabricmc.fabric-loom-remap` or the legacy `fabric-loom` plugin) and `modImplementation` instead of `implementation`.
 
 The Fabric platform requires *fabric-api-base* in order to provide the locale change event, *fabric-command-api-v2* for the callback click event,
 and can optionally use [Colonel](https://gitlab.com/stellardrift/colonel) (or *fabric-networking-api-v1*) to allow the `Component` and `Key` argument
@@ -35,6 +43,7 @@ types to be used on clients without the mod installed. There are no other depend
 :::danger[Attention]
 
 Each major Minecraft release will require different platform versions. For older Minecraft versions, consult the table below.
+For Minecraft 1.21.2 and newer, see the table at [Modded (Fabric and NeoForge shared API)](/adventure/platform/modded).
 
 <details>
   <summary>Historic Versions</summary>
@@ -59,7 +68,7 @@ Each major Minecraft release will require different platform versions. For older
 
 ## Basic use
 
-The easiest way to get started with this platform is to work with the Minecraft game objects that directly implement Adventure interfaces (requires Loom 0.11 or newer).
+The easiest way to get started with this platform is to work with the Minecraft game objects that directly implement Adventure interfaces through Loom's interface injection.
 
 This covers almost all cases where the default renderer is used.
 
@@ -68,6 +77,9 @@ The following Adventure interfaces are directly implemented:
 `Audience`
   - `net.minecraft.commands.CommandSourceStack`, `net.minecraft.server.MinecraftServer`, `net.minecraft.server.rcon.RconConsoleSource`,
   - `net.minecraft.server.level.ServerPlayer`, `net.minecraft.client.player.LocalPlayer`
+
+`AdventureCommandSourceStack`
+  - `net.minecraft.commands.CommandSourceStack`
 
 `Sound.Emitter`
   - `net.minecraft.world.entity.Entity`
@@ -82,22 +94,19 @@ The following Adventure interfaces are directly implemented:
   - `net.minecraft.network.chat.Component`
 
 `Key`
-  - `net.minecraft.resources.ResourceLocation`
+  - `net.minecraft.resources.Identifier`
 
 `Keyed`
   - `net.minecraft.resources.ResourceKey`
 
 `HoverEventSource`
   - `net.minecraft.world.entity.Entity`,
-  - `net.minecraft.world.item.ItemStack`
+  - `net.minecraft.world.item.ItemStack`, `net.minecraft.world.item.ItemStackTemplate`
 
 `SignedMessage`
   - `net.minecraft.network.chat.PlayerChatMessage`
 
-`SignedMessage.Signature`
-  - `net.minecraft.network.chat.MessageSignature`
-
-Additionally, all `Key`s created will be `ResourceLocation` instances (on Loader 0.14.0+)
+Additionally, all `Key`s created will be `Identifier` instances.
 
 Using these injections, getting started is as simple as:
 
@@ -108,18 +117,19 @@ void greet(final ServerPlayer player) {
         .append(player.get(Identity.DISPLAY_NAME)
             .get()
             .color(NamedTextColor.RED)
-        );
+        )
+        .build();
     player.sendMessage(message);
 }
 ```
 
-For more complex use cases, `FabricServerAudiences` or `FabricClientAudiences` provide additional API.
+For more complex use cases, `MinecraftServerAudiences` or `MinecraftClientAudiences` provide additional API.
 
 ## Server
 
 The logical-server side of the Fabric platform can be accessed any time a server is available, through a `MinecraftServerAudiences` instance. By default, translatable components will be rendered with the global translator, but a custom renderer can be passed when initializing the platform.
 
-All `AudienceProvider` interface methods are supported, except for the `permission` method. This will become supported as soon as Fabric gets a suitable permissions API.
+All `AudienceProvider` interface methods are supported. The `permission` method requires *fabric-permissions-api* to filter players by permission.
 
 To get started with Adventure, set up an audience provider like this:
 
@@ -158,7 +168,7 @@ updated language from their client, and allows accessing the current locale for 
 ### Commands
 
 The Fabric platform provides custom argument types to specify `Key` and `Component` parameters in Brigadier commands, and has helpers to easily get an
-`Audience` from a `CommandSourceStack` (yarn: `ServerCommandSource`) instance.
+`Audience` from a `CommandSourceStack` instance.
 
 :::caution
 
@@ -205,4 +215,4 @@ The full functionality of the `Audience` interface is available, including local
 
 Sadly, Adventure can't provide API for every place chat components are used in the game. However, for areas not covered by the API in `Audience`,
 it's possible to convert components between native and Adventure types. See certain native types which implement
-Adventure interfaces, and the methods on `FabricAudiences` for other available conversions.
+Adventure interfaces, and the methods on `MinecraftAudiences` for other available conversions.

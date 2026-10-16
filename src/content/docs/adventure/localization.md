@@ -73,7 +73,7 @@ public class MyTranslator implements Translator {
   public @Nullable MessageFormat translate(final String key, final Locale locale) {
     // You could retrieve a string from a properties file, a config file, or some other system.
     // As an example, we will hard-code a check for a specific key here.
-    if (key.equals("mytranslation.key") && locale == Locale.US) {
+    if (key.equals("mytranslation.key") && Locale.US.equals(locale)) {
       return new MessageFormat("Hello {0}!", locale);
     } else {
       // If you only want to use component translation, you can override this method and always return `null`.
@@ -84,7 +84,7 @@ public class MyTranslator implements Translator {
   @Override
   public @Nullable Component translate(final TranslatableComponent component, final Locale locale) {
     // As above, we will hard-code a check here, but you should be reading this from elsewhere.
-    if (component.key().equals("mytranslation.colorful") && locale == Locale.US) {
+    if (component.key().equals("mytranslation.colorful") && Locale.US.equals(locale)) {
       return Component.text("Hello, ", NamedTextColor.GREEN)
         .append(component.arguments().stream().map(it -> it.asComponent().color(NamedTextColor.RED)).toList())
         .append(component.children()) // Always make sure to copy the children over!

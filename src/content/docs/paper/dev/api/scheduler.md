@@ -218,3 +218,35 @@ This simply adds a potion effect until the entity dies.
 
 A delay of 0 ticks is treated as you wanting to run the task on the next tick. If you schedule a task with a delay of 0 ticks
 while the server is starting, or before it is enabled, it will be executed before the server is enabled.
+
+## Using the entity scheduler
+
+Every entity has its own [](jd:paper:io.papermc.paper.threadedregions.scheduler.EntityScheduler), which you can get with
+[`Entity#getScheduler()`](jd:paper:org.bukkit.entity.Entity#getScheduler()). A task scheduled on it only runs while
+the entity is in a world, and it is dropped once the entity is removed. This means that you do not need to look the entity up
+and check that it is still valid yourself.
+
+The example from above, which adds a potion effect to an entity, can be written like this:
+
+```java
+livingEntity.getScheduler().runAtFixedRate(plugin, task -> {
+    livingEntity.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 1));
+}, /* Retired callback: */ null, 1, 20);
+```
+
+The task is a [](jd:paper:io.papermc.paper.threadedregions.scheduler.ScheduledTask) instead of a `BukkitTask`,
+and you can cancel it in the same way with `task.cancel()`.
+
+The retired callback is run instead of the task if the entity is removed before the task could be run. It may be `null`
+if you do not need it. If the entity has already been removed when you schedule the task, nothing is scheduled
+and `null` is returned.
+
+:::caution
+
+Unlike the `BukkitScheduler`, the entity scheduler requires the delay and period to be at least 1 tick.
+Passing 0 to `runDelayed` or `runAtFixedRate` throws an `IllegalArgumentException`.
+
+:::
+
+The entity scheduler is one of the schedulers that are required on Folia.
+See [Supporting Paper and Folia](/paper/dev/folia-support) for more details.

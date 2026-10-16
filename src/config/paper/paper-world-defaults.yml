@@ -329,6 +329,11 @@ entities:
         Sets whether zombies and zombified piglins should target turtle eggs.
         Setting this to false may help with performance, as they won't search
         for nearby eggs
+    inactive-mob-goal-selector-throttle-rate:
+      default: "disabled"
+      description: >-
+        If specified, this setting controls how often to tick inactive mobs' goal selectors.
+        Higher values reduce the performance impact of ticking mobs that are far away. Measured in ticks.
   entities-target-with-follow-range:
     default: "false"
     description: "Sets whether the server should use follow range when targeting entities "

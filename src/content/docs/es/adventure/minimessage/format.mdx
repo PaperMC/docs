@@ -1,0 +1,578 @@
+---
+title: Formato
+slug: es/adventure/minimessage/format
+description: Documentación sobre el formato MiniMessage.
+---
+
+import { Image } from "astro:assets";
+import { Badge } from "@astrojs/starlight/components";
+import Shadow1 from "../../../adventure/minimessage/assets/shadow_1.png";
+import Shadow2 from "../../../adventure/minimessage/assets/shadow_2.png";
+import Shadow3 from "../../../adventure/minimessage/assets/shadow_3.png";
+import Color1 from "../../../adventure/minimessage/assets/color_1.png";
+import Color2 from "../../../adventure/minimessage/assets/color_2.png";
+import ColorVerbose1 from "../../../adventure/minimessage/assets/color_verbose_1.png";
+import ColorVerbose2 from "../../../adventure/minimessage/assets/color_verbose_2.png";
+import Decoration1 from "../../../adventure/minimessage/assets/decoration_1.png";
+import Reset1 from "../../../adventure/minimessage/assets/reset_1.png";
+import Click1 from "../../../adventure/minimessage/assets/click_1.png";
+import Hover1 from "../../../adventure/minimessage/assets/hover_1.png";
+import Hover2 from "../../../adventure/minimessage/assets/hover_2.png";
+import Key1 from "../../../adventure/minimessage/assets/key_1.png";
+import Translatable1 from "../../../adventure/minimessage/assets/translatable_1.png";
+import Translatable2 from "../../../adventure/minimessage/assets/translatable_2.png";
+import Insertion1 from "../../../adventure/minimessage/assets/insertion_1.png";
+import Rainbow1 from "../../../adventure/minimessage/assets/rainbow_1.png";
+import Gradient1 from "../../../adventure/minimessage/assets/gradient_1.png";
+import Transition1 from "../../../adventure/minimessage/assets/transition_1.png";
+import Font1 from "../../../adventure/minimessage/assets/font_1.png";
+import Newline1 from "../../../adventure/minimessage/assets/newline_1.png";
+import Selector1 from "../../../adventure/minimessage/assets/selector_1.png";
+
+El lenguaje MiniMessage usa etiquetas. Todo lo que hagas se define mediante etiquetas. Las etiquetas tienen una etiqueta de apertura y otra de cierre (la etiqueta `<reset>` es una excepción).
+Las etiquetas de apertura son obligatorias, pero las de cierre solo lo son en el modo `strict`. Los siguientes ejemplos se ven exactamente iguales:
+```mm
+<yellow>Hola <blue>mundo<yellow>.
+<yellow>Hola <blue>mundo</blue>.
+<yellow>Hola </yellow><blue>mundo</blue><yellow>.
+```
+
+Las etiquetas sin contenido se pueden cerrar automáticamente con el formato `<tag/>`. Con este formato, ni siquiera en el modo estricto hay que proporcionar una etiqueta de cierre independiente.
+
+Los nombres de etiquetas no distinguen entre mayúsculas y minúsculas, para reducir la posibilidad de conflictos, pero recomendamos escribirlos siempre en minúsculas (o, como mínimo, ser coherentes).
+
+Algunas etiquetas tienen argumentos. Su formato es el siguiente: `<tag:argument>content</tag>`.
+Por ejemplo:
+```mm
+<hover:show_text:"<red>prueba:PRUEBA">PRUEBA
+<click:run_command:test>PRUEBA
+```
+
+Como puedes ver, a veces contienen componentes y otras veces solo números, cadenas u otros tipos. Consulta la documentación detallada a continuación.
+
+Se pueden intercambiar las comillas simples (`'`) y dobles (`"`). Recomendamos mantener la coherencia, aunque para reducir los escapes puede resultar conveniente cambiar el tipo de comillas en algunos argumentos.
+
+Se puede escapar cualquier token significativo en los lugares donde tenga efecto. En texto sin formato, los caracteres de apertura de etiqueta (`<`) se pueden escapar anteponiendo una barra invertida (`\`). Dentro de cadenas entre comillas,
+se puede escapar el carácter de comillas de apertura (`'` o `"`). En ambos casos, se puede escapar el carácter de escape cuando tenga efecto. Por simplicidad, los argumentos de etiqueta sin comillas no admiten escapes.
+En los lugares donde no se admiten escapes, el carácter de escape literal se conserva. En los lugares donde sí se admiten escapes, pero se quiere incluir un carácter de escape literal, se puede escapar ese carácter para producir una `\`.
+
+Las etiquetas predeterminadas intentan representar componentes de forma compatible con Vanilla, aunque simplifican algunos elementos. Puede resultar útil
+consultar [Minecraft Wiki](https://minecraft.wiki/w/Text_component_format) como referencia del sistema de componentes de Vanilla, sobre todo
+para elementos como las acciones y los valores de los eventos de clic y de desplazamiento.
+
+El [visor web de MiniMessage](https://webui.advntr.dev) permite probar texto MiniMessage localmente, sin tener que iniciar una instancia de Minecraft.
+Mientras aprendes, puede ser útil copiar en el visor los ejemplos de esta documentación.
+
+## Modo estricto
+
+De forma predeterminada, MiniMessage es muy permisivo e ignora las etiquetas no válidas. Las etiquetas que queden abiertas al final de una cadena de entrada se cerrarán automáticamente.
+
+Las aplicaciones pueden habilitar el *modo estricto*, que prohíbe el uso de `<reset>` y exige que todas las etiquetas se cierren en el orden inverso al de apertura. Toda aplicación
+que use MiniMessage debe indicar claramente a los usuarios finales qué variante del lenguaje se está usando.
+
+## Etiquetas estándar
+
+Estas son las etiquetas que MiniMessage incluye y habilita de forma predeterminada. Algunos analizadores de MiniMessage pueden añadir etiquetas personalizadas a esta lista o limitar las disponibles a un subconjunto. Consulta la documentación de la aplicación para obtener más detalles.
+
+### Color
+
+{/* spellchecker:off */}
+Colorea las siguientes partes.
+
+Etiqueta
+  * `<_colorname_>`
+
+Argumentos
+  * `_colorname_`, cualquier constante de color de Minecraft: `black`, `dark_blue`, `dark_green`, `dark_aqua`, `dark_red`, `dark_purple`, `gold`, `gray`, `dark_gray`, `blue`, `green`, `aqua`, `red`, `light_purple`, `yellow` o `white`.
+
+
+     Se puede usar `dark_grey` en lugar de `dark_gray`, y también `grey` en lugar de `gray`.
+     También se admiten colores hexadecimales con el formato `#RRGGBB`.
+{/* spellchecker:on */}
+
+Ejemplos
+```mm
+<yellow>Hola <blue>mundo</blue>!
+<red>Esto es una <green>prueba.
+<#00ff00>R G B!
+```
+
+<br/>
+
+<Image class="img-inline" alt="Resultado del análisis de `<yellow>Hola <blue>mundo</blue>!`, mostrado en la ventana de chat del cliente de Minecraft" src={Color1} />
+<Image class="img-inline" alt="Resultado del análisis de `<red>Esto es una <green>prueba.`, mostrado en la ventana de chat del cliente de Minecraft" src={Color2} />
+
+### Color (forma detallada)
+
+Una forma más detallada de definir colores.
+
+Etiqueta
+  * `<color:_colorNameOrHex_>`
+
+{/* spellchecker:off */}
+Alias
+  * `colour`, `c`
+{/* spellchecker:on */}
+
+Argumentos
+  * `_colorNameOrHex_`, puede ser cualquiera de los valores anteriores (colores con nombre o colores hexadecimales)
+
+Ejemplos
+```mm
+<color:yellow>Hola <color:blue>mundo</color:blue>!
+<color:#FF5555>Esto es una <color:#55FF55>prueba.
+```
+
+<br/>
+
+<Image class="img-inline" alt="Resultado del análisis de `<color:yellow>Hola <color:blue>mundo</color:blue>!`, mostrado en la ventana de chat del cliente de Minecraft" src={ColorVerbose1} />
+<Image class="img-inline" alt="Resultado del análisis de `<color:#FF5555>Esto es una <color:#55FF55>prueba.`, mostrado en la ventana de chat del cliente de Minecraft" src={ColorVerbose2} />
+
+### Color de sombra
+
+Colorea la sombra de las siguientes partes.
+
+Etiqueta
+  * `<shadow:_colorNameOrHex_:[alpha_as_float]>`
+  * `<!shadow>` como alias para desactivar la sombra (equivalente a `<shadow:#00000000>`)
+
+Argumentos
+  * `_colorNameOrHex_`, un color con nombre o una cadena de color hexadecimal con el formato `#RRGGBB` o `#RRGGBBAA`
+  * `[alpha_as_float]`, un valor de punto flotante entre 0 y 1 que representa el valor alfa de la sombra. Es opcional y su valor predeterminado es 0.25. No tiene efecto si la cadena de color hexadecimal ya incluye un valor alfa.
+
+Ejemplos
+```mm
+<shadow:yellow>Hola <shadow:aqua:0.5>mundo</shadow>!
+<shadow:#FF5555>Esto es una <shadow:#55FF55>prueba.
+<shadow:#000000FF><b>Grueso
+```
+
+<br/>
+
+<Image class="img-inline" src={Shadow1} alt="Resultado del análisis de `<shadow:yellow>Hola <shadow:aqua:0.5>mundo</shadow>!`, mostrado en la ventana de chat del cliente de Minecraft"/>
+<Image class="img-inline" src={Shadow2} alt="Resultado del análisis de `<shadow:#FF5555>Esto es una <shadow:#55FF55>prueba.`, mostrado en la ventana de chat del cliente de Minecraft"/>
+<Image class="img-inline" src={Shadow3} alt="Resultado del análisis de `<shadow:#000000FF><b>Grueso`, mostrado en la ventana de chat del cliente de Minecraft"/>
+
+### Decoración
+
+Decora las siguientes partes.
+
+Etiqueta
+  * `<_decorationname_[:false]>` o `<!_decorationname_>` como alias para invertir la decoración.
+
+Argumentos
+  * `_decorationname_`, cualquier decoración compatible con Minecraft:
+
+| Decoración        | Alias           |
+| ----------------- | --------------- |
+| `bold`            | `b`             |
+| `italic`          | `em` o `i`      |
+| `underlined`      | `u`             |
+| `strikethrough`   | `st`            |
+| `obfuscated`      | `obf`           |
+
+Ejemplos
+```mm
+<underlined>Esto es <bold>importante</bold>.
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `<underlined>Esto es <bold>importante</bold>.`, mostrado en la ventana de chat del cliente de Minecraft" src={Decoration1} />
+
+### Reinicio
+
+Cierra todas las etiquetas abiertas y restablece el color, la decoración, etc. La etiqueta de reinicio no se puede cerrar.
+
+En el modo estricto, las etiquetas de reinicio están prohibidas.
+
+Etiqueta
+  * `<reset>`
+
+Argumentos
+  * ninguno
+
+Ejemplos
+```mm
+<yellow><bold>Hola <reset>mundo.
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `<yellow><bold>Hola <reset>mundo.`, mostrado en la ventana de chat del cliente de Minecraft" src={Reset1} />
+
+### Clic
+
+Permite realizar varias acciones al hacer clic en el componente.
+
+Etiqueta
+  * `<click:_action_:_value_>`
+
+Argumentos
+  * `_action_`, el tipo de evento de clic; debe ser uno de los elementos de [esta lista](jd:adventure:net.kyori.adventure.text.event.ClickEvent$Action#field-summary)
+  * `_value_`, el argumento de ese evento; consulta [Minecraft Wiki](https://minecraft.wiki/w/Text_component_format#Click_events)
+
+Ejemplos
+```mm
+<click:run_command:/seed>Haz clic</click> para ver la semilla del mundo.
+Haz clic <click:copy_to_clipboard:Jaja, eres un desastre> aquí </click>para copiar tu puntuación.
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `<click:run_command:/seed>Haz clic</click> para ver la semilla del mundo.`, mostrado en la ventana de chat del cliente de Minecraft" src={Click1} />
+
+:::caution
+
+Desde que se introdujeron las firmas de chat en 1.19.1, el cliente ya no ejecuta comandos que requieren argumentos firmados,
+como `/say` o `/tell`, para impedir que el servidor envíe mensajes firmados en nombre del cliente.
+
+:::
+
+### Desplazamiento
+
+Permite realizar varias acciones al pasar el cursor sobre el componente.
+
+Etiqueta
+  * `<hover:_action_:_value_>`
+
+Argumentos
+  * `_action_`, el tipo de evento de desplazamiento; debe ser uno de los elementos de [esta lista](jd:adventure:net.kyori.adventure.text.event.HoverEvent$Action#field-summary)
+  * `_value_`, los argumentos específicos de cada acción del evento:
+
+[//]: # (FIXME: El relleno de Starlight no se aplica a las celdas combinadas, así que se añade manualmente)
+| Acción        | Valor                                                                                                      | Descripción                                                                                                                                                           |
+|---------------|------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `show_text`   | `_text_`                                                                                                   | una cadena MiniMessage                                                                                                                                               |
+| `show_item`   | `_type_[:_count_[(:_componentKey_:_componentValue_)...]]`                                                  | una `Key` del tipo de objeto, seguida opcionalmente de la cantidad (un entero) y una lista de pares clave-valor de [componentes de datos](https://minecraft.wiki/w/Data_component_format) |
+| ^             | <span style="padding-left: 1rem"><Badge variant="caution" text="Antiguo" /> `_type_[:_count_[:tag]]`</span> | una `Key` del tipo de objeto, seguida opcionalmente de la cantidad (un entero) y una etiqueta (una cadena [SNBT](https://minecraft.wiki/w/NBT_format#SNBT_format)) |
+| `show_entity` | `_type_:_uuid_[:_name_]`                                                                                   | una `Key` con el ID del tipo de entidad, el UUID de la entidad y un nombre personalizado opcional                                                                    |
+
+:::caution
+El formato de valor `_type_[:_count_[:tag]]` de la acción `show_item` se considera antiguo y es posible que se deje de admitir.
+El formato recomendado es `_type_[:_count_[(:_componentKey_:_componentValue_)...]]`.
+:::
+
+Ejemplos
+```mm
+<hover:show_text:'<red>prueba'>PRUEBA
+```
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `<hover:show_text:'<red>prueba'>PRUEBA`, mostrado en la ventana de chat del cliente de Minecraft" src={Hover1} />
+
+```mm
+<hover:show_item:diamond_sword:1:enchantments:'{sharpness:3,knockback:2}'>¡Espada muy afilada!</hover>
+```
+<br/>
+<Image class="img-inline" alt="Resultado de `<hover:show_item:diamond_sword:1:enchantments:'{sharpness:3,knockback:2}'>¡Espada muy afilada!</hover>" src={Hover2} />
+
+### Asignación de teclas
+
+Permite mostrar la tecla configurada para las acciones.
+
+Etiqueta
+  * `<key:_key_>`
+
+Argumentos
+  * `_key_`, el identificador de asignación de teclas de la acción
+
+Ejemplos
+```mm
+Pulsa <red><key:key.jump> para saltar.
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `Pulsa <red><key:key.jump> para saltar.`, mostrado en la ventana de chat del cliente de Minecraft" src={Key1} />
+
+### Traducible
+
+Permite mostrar mensajes de Minecraft usando la configuración regional del jugador.
+
+Etiqueta
+  * `<lang:_key_:_value1_:_value2_...>`
+
+Alias
+  * `tr`, `translate`
+
+Argumentos
+  * `_key_`, la clave de traducción
+  * `_valueX_`, valores opcionales que se usan como marcadores de posición en la clave (se incluirán en la etiqueta `with` del JSON)
+
+Ejemplos
+```mm
+Deberías conseguir un <lang:block.minecraft.diamond_block>.
+<lang:commands.drop.success.single:'<red>1':'<blue>Piedra'>.
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de una etiqueta de traducción de Minecraft, con el resultado en inglés en la ventana de chat del cliente" src={Translatable1} />
+<Image class="img-inline" alt="Resultado del análisis de una etiqueta de traducción de Minecraft con argumentos, en la ventana de chat del cliente" src={Translatable2} />
+
+### Alternativa
+
+:::note
+
+La opción de alternativa solo está disponible desde Minecraft 1.19.4.
+
+:::
+
+Permite mostrar mensajes de Minecraft usando la configuración regional del jugador o un texto alternativo si no hay una traducción disponible.
+
+Etiqueta
+  * `<lang_or:_key_:_fallback_:_value1_:_value2_...>`
+
+Alias
+  * `tr_or`, `translate_or`
+
+Argumentos
+  * `_key_`, la clave de traducción
+  * `_fallback_`, el texto alternativo que se mostrará
+  * `_valueX_`, valores opcionales que se usan como marcadores de posición en la clave (se incluirán en la etiqueta `with` del JSON)
+
+Ejemplos
+```mm
+Deberías conseguir un <lang_or:block.minecraft.diamond_block:'Bloque de tierra'>.
+```
+
+### Inserción
+
+Permite insertar texto en el chat mediante Mayús + clic.
+
+Etiqueta
+  * `<insert:_text_>`
+
+Argumentos
+  * `_text_`, el texto que se insertará
+
+Ejemplos
+```mm
+Pulsa Mayús y haz clic en <insert:prueba>este texto</insert> para insertarlo.
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `Pulsa Mayús y haz clic en <insert:prueba>este texto</insert> para insertarlo.`, mostrado en la ventana de chat del cliente de Minecraft" src={Insertion1} />
+
+### Arcoíris
+
+¿Texto con los colores del arcoíris?
+
+Etiqueta
+  * `<rainbow:[!][phase]>`
+
+Argumentos
+  * phase, opcional
+  * `!`, valor literal opcional que invierte el arcoíris
+
+Ejemplos
+```mm
+<yellow>Woo: <rainbow>||||||||||||||||||||||||</rainbow>!
+<yellow>Woo: <rainbow:!>||||||||||||||||||||||||</rainbow>!
+<yellow>Woo: <rainbow:2>||||||||||||||||||||||||</rainbow>!
+<yellow>Woo: <rainbow:!2>||||||||||||||||||||||||</rainbow>!
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de los cuatro ejemplos en serie, mostrado en la ventana de chat del cliente de Minecraft" src={Rainbow1} />
+
+### Degradado
+
+Texto con colores en degradado.
+
+Etiqueta
+  * `<gradient:[color1]:[color...]:[phase]>`
+
+Argumentos
+  * Una lista de 1 a n colores, que pueden ser hexadecimales o con nombre, y un parámetro de fase opcional (rango de -1 a 1) que permite desplazar el degradado para crear animaciones.
+
+Ejemplos
+```mm
+<yellow>Woo: <gradient>||||||||||||||||||||||||</gradient>!
+<yellow>Woo: <gradient:#5e4fa2:#f79459>||||||||||||||||||||||||</gradient>!
+<yellow>Woo: <gradient:#5e4fa2:#f79459:red>||||||||||||||||||||||||</gradient>!
+<yellow>Woo: <gradient:green:blue>||||||||||||||||||||||||</gradient>!
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de los ejemplos de la etiqueta de degradado, mostrado en la ventana de chat del cliente de Minecraft" src={Gradient1} />
+
+### Transición
+
+Transición entre colores.
+Es similar a un degradado, pero todo el texto tiene el mismo color y la fase determina cuál.
+
+Etiqueta
+  * `<transition:[color1]:[color...]:[phase]>`
+Argumentos
+  * Una lista de 1 a n colores, que pueden ser hexadecimales o con nombre, y un parámetro de fase opcional (rango de -1 a 1) que permite desplazar la transición para crear animaciones.
+Ejemplos
+```mm
+<transition:#00ff00:#ff0000:0>|||||||||</transition>
+<transition:white:black:red:[phase]>Hola mundo [phase]</transition>
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `<transition:white:black:red:[phase]>Hola mundo [phase]</transition>`, mostrado en la ventana de chat del cliente de Minecraft" src={Transition1} />
+
+### Fuente
+
+Permite cambiar la fuente del texto.
+
+Etiqueta
+  * `<font:key>`
+
+Argumentos
+  * La clave con espacio de nombres de la fuente; el valor predeterminado es `minecraft`
+
+Ejemplos
+```mm
+Nada <font:uniform>Uniforme <font:alt>Alternativa  </font> Uniforme
+<font:myfont:custom_font>Usa una fuente personalizada de un paquete de recursos</font>
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `Nada <font:uniform>Uniforme <font:alt>Alternativa  </font> Uniforme`, mostrado en la ventana de chat del cliente de Minecraft" src={Font1} />
+
+### Salto de línea
+
+Inserta un carácter de salto de línea.
+
+Etiqueta
+  * `<newline>`
+
+Alias
+  * `br`
+
+Argumentos
+  * ninguno
+
+Ejemplos
+```mm
+Inserta aquí un<newline>salto de línea.
+<hover:show_text:'<red>Texto emergente con un<newline><green>salto de línea'>Texto con<newline>salto de línea</hover>
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `<hover:show_text:'<red>Texto emergente con un<newline><green>salto de línea'>Texto con<newline>salto de línea</hover>`, mostrado en la ventana de chat del cliente de Minecraft" src={Newline1} />
+
+### Selector
+
+*(desde v4.11.0)* Inserta un componente selector.
+
+Etiqueta
+  * `<selector:_sel_[:_separator_]>`
+
+Alias
+  * `sel`
+
+Argumentos
+  * `_sel_`, el patrón del selector que se insertará
+  * `_separator_` (opcional), el separador que se insertará entre los valores que coincidan con el selector
+
+Ejemplos
+```mm
+Hola <selector:@e[limit=5]>, soy <selector:@s>.
+```
+
+<br/>
+<Image class="img-inline" alt="Resultado del análisis de `Hola <selector:@e[limit=5]>, soy <selector:@s>.`, mostrado en la ventana de chat del cliente de Minecraft" src={Selector1} />
+
+### Puntuación
+
+*(desde v4.13.0)* Inserta un componente de puntuación.
+
+:::note
+
+El componente de puntuación requiere *renderizado* en el servidor para que los clientes puedan verlo. Esta operación depende de la plataforma.
+
+:::
+
+Etiqueta
+  * `<score:_name_:_objective_>`
+
+Argumentos:
+  * `_name_`, el nombre del titular de la puntuación en el marcador del servidor, o un selector que se resuelve en el contexto del destinatario
+  * `_objective_`, el nombre del objetivo cuyo valor de puntuación se obtendrá para `name`
+
+Ejemplos
+```mm
+Has ganado <score:rymiel:gamesWon/> partidas.
+```
+
+### NBT
+
+*(desde v4.13.0)* Inserta un componente NBT. La sintaxis de esta etiqueta está pensada para resultar familiar a quienes usan el comando `/data` de Minecraft vanilla.
+
+:::note
+
+El componente NBT generado requiere *renderizado* en el servidor para que los clientes puedan verlo. Esta operación depende de la plataforma.
+
+:::
+
+Etiqueta
+  * `<nbt:block|entity|storage:id:path[:_separator_][:interpret]>`
+
+Alias
+  * `data`
+
+Argumentos:
+  * `block|entity|storage`, el tipo de origen de datos del que se leerá: una entidad `block`, un selector `entity` o el contenedor persistente de comandos `storage`
+  * `_id_`, la posición para un componente NBT de bloque, un selector para uno de entidad o una clave (ubicación de recurso) para uno de almacenamiento
+  * `_path_`, la ruta NBT que se resolverá dentro del origen de datos
+  * `_separator_`, el separador entre varios valores, si el origen devuelve más de uno (principalmente para NBT de entidades)
+  * `interpret`, el texto literal `interpret` si el resultado debe analizarse como JSON de componentes
+
+Ejemplos
+```mm
+Tu salud es <nbt:entity:'@s':Health/>
+```
+
+### Orgullo
+
+*(desde v4.18.0)* Colorea el texto entre las etiquetas con un degradado correspondiente a una bandera del orgullo.
+
+Etiqueta
+  * `<pride[:flag|phase]>`
+
+Argumentos
+  * `flag`, la bandera que se usará: pride, progress, trans, bi, pan, nb, lesbian, ace, agender, demisexual, genderqueer, genderfluid, intersex, aro, baker, philly, queer, gay, bigender, demigender, femboy o intersex inclusive.
+  * `phase`, fase opcional, un número entre -1 y 1
+
+Ejemplos
+```mm
+¡Feliz <pride>mes del orgullo</pride>!
+Kyori apoya los <pride:trans>derechos trans</pride>.
+```
+
+### Sprite
+
+*(desde v4.25.0)* Inserta un sprite.
+
+Etiqueta
+  * `<sprite[:atlas]:sprite>`
+
+Argumentos
+  * `atlas`, el atlas que se usará, por ejemplo, `minecraft:blocks` o `items`.
+  * `sprite`, el sprite que se usará, por ejemplo, `item/emerald` o `custom:item/ruby`.
+
+Ejemplos
+```mm
+Mira mi <sprite:blocks:block/stone>.
+Este objeto cuesta 10 × <sprite:"minecraft:items":item/porkchop>.
+Esta es una textura personalizada de un espacio de nombres: <sprite:items:"custom:item/ruby">
+```
+
+### Cabeza
+
+*(desde v4.25.0)* Inserta una cabeza de jugador.
+
+Etiqueta
+  * `<head:name|uuid|texture[:outer_layer]>`
+
+Argumentos
+  * `name|uuid|texture`, el nombre, UUID o ruta a la textura de la skin que se usará para dibujar la cabeza.
+  * `outer_layer`, `true` o `false`; determina si se dibuja la capa exterior (o capa del «sombrero»).
+  El valor predeterminado es `true`.
+
+Ejemplos
+```mm
+Mi desarrollador favorito es <head:1f085b2d-9548-4159-a8c7-f3ccdf0c2054>.
+¿Prefieres a <head:entity/player/wide/steve> Steve o a <head:entity/player/slim/alex> Alex?
+¡Gracias <head:Strokkur24:false> por la documentación!
+```

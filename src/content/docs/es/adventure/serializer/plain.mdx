@@ -1,0 +1,29 @@
+---
+title: Texto sin formato
+slug: es/adventure/serializer/plain
+description: Obtener el contenido de texto sin formato de los componentes.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+
+El serializador de texto sin formato convierte los componentes del chat a su representación de texto sin formato
+y viceversa. Por ello, es el serializador de texto más sencillo de Adventure. Resulta
+útil para admitir clientes antiguos, generar registros, eliminar el formato de un componente
+de origen externo y ofrecer un ejemplo pequeño e independiente de un serializador de texto.
+
+Por su naturaleza, el serializador de texto sin formato no admite funciones avanzadas como
+colores, eventos de desplazamiento o clic, enlaces URL o inserciones. Si necesitas funciones avanzadas,
+considera usar [MiniMessage](/es/adventure/minimessage).
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-text-serializer-plain" version={LATEST_ADVENTURE_API_RELEASE} />
+
+## Uso
+
+Esto crea una instancia predeterminada que ignora silenciosamente los componentes de asignación de teclas y los traducibles. También puedes crear tu propio
+`PlainTextComponentSerializer` para asignar los componentes a alguna representación de texto sin formato.
+
+La deserialización de texto sin formato equivale a `Component.text(string)`. No se
+preprocesa la entrada. La deserialización se implementa para mantener la coherencia de la API.

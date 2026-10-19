@@ -43,6 +43,11 @@ export default defineConfig({
     },
     starlight({
       title: "PaperMC Docs",
+      defaultLocale: "root",
+      locales: {
+        root: { label: "English", lang: "en" },
+        es: { label: "Español", lang: "es" },
+      },
       social: [
         { icon: "github", label: "paper:GitHub", href: "https://github.com/PaperMC/Paper" },
         { icon: "seti:java", label: "paper:Javadoc", href: `https://jd.papermc.io/paper` },
@@ -105,6 +110,7 @@ export default defineConfig({
         starlightLinksValidator({
           exclude: [
             "/adventure/version-history/*", // custom pages
+            "/es/adventure/version-history/*", // custom pages
           ],
           errorOnInvalidHashes: false, // enable if you want to check hashes - it doesn't work with config diagrams
         }),
@@ -112,19 +118,22 @@ export default defineConfig({
           [
             {
               id: "paper",
-              label: "Paper",
+              label: { en: "Paper", es: "Paper" },
               link: "/paper/",
               icon: "paper",
               items: [
                 {
                   label: "Administration",
+                  translations: { es: "Administración" },
                   items: [
                     {
                       label: "Getting started",
+                      translations: { es: "Primeros pasos" },
                       items: ["paper/getting-started", "paper/adding-plugins", "paper/migration", "paper/next-steps"],
                     },
                     {
                       label: "How-to guides",
+                      translations: { es: "Guías prácticas" },
                       items: [
                         "paper/aikars-flags",
                         "paper/anti-xray",
@@ -136,9 +145,11 @@ export default defineConfig({
                     },
                     {
                       label: "Reference",
+                      translations: { es: "Referencia" },
                       items: [
                         {
                           label: "Configuration",
+                          translations: { es: "Configuración" },
                           collapsed: true,
                           items: [
                             "paper/reference/configuration",
@@ -162,15 +173,18 @@ export default defineConfig({
                     },
                     {
                       label: "Miscellaneous",
+                      translations: { es: "Varios" },
                       items: ["paper/misc/update-checker", "paper/misc/paper-bug-fixes", "paper/faq"],
                     },
                   ],
                 },
                 {
                   label: "Development",
+                  translations: { es: "Desarrollo" },
                   items: [
                     {
                       label: "Getting started",
+                      translations: { es: "Primeros pasos" },
                       items: [
                         "paper/dev/project-setup",
                         "paper/dev/how-do-plugins-work",
@@ -181,13 +195,16 @@ export default defineConfig({
                     },
                     {
                       label: "API",
+                      translations: { es: "API" },
                       items: [
                         {
                           label: "Command API",
+                          translations: { es: "API de comandos" },
                           collapsed: true,
                           items: [
                             {
                               label: "Basics",
+                              translations: { es: "Fundamentos" },
                               items: [
                                 "paper/dev/command-api/basics/introduction",
                                 "paper/dev/command-api/basics/command-tree",
@@ -201,6 +218,7 @@ export default defineConfig({
                             },
                             {
                               label: "Arguments",
+                              translations: { es: "Argumentos" },
                               items: [
                                 "paper/dev/command-api/arguments/minecraft",
                                 "paper/dev/command-api/arguments/location",
@@ -214,6 +232,7 @@ export default defineConfig({
                             },
                             {
                               label: "Miscellaneous",
+                              translations: { es: "Varios" },
                               items: [
                                 "paper/dev/command-api/misc/basic-command",
                                 "paper/dev/command-api/misc/comparison-bukkit-brigadier",
@@ -223,6 +242,7 @@ export default defineConfig({
                         },
                         {
                           label: "Component API",
+                          translations: { es: "API de componentes" },
                           collapsed: true,
                           items: [
                             "paper/dev/component-api/introduction",
@@ -233,6 +253,7 @@ export default defineConfig({
                         },
                         {
                           label: "Event API",
+                          translations: { es: "API de eventos" },
                           collapsed: true,
                           items: [
                             "paper/dev/event-listeners",
@@ -243,6 +264,7 @@ export default defineConfig({
                         },
                         {
                           label: "Entity API",
+                          translations: { es: "API de entidades" },
                           collapsed: true,
                           items: [
                             "paper/dev/entity-teleport",
@@ -253,11 +275,13 @@ export default defineConfig({
                         },
                         {
                           label: "Inventories",
+                          translations: { es: "Inventarios" },
                           collapsed: true,
                           items: ["paper/dev/menu-type-api", "paper/dev/custom-inventory-holder"],
                         },
                         {
                           label: "Lifecycle API",
+                          translations: { es: "API de ciclo de vida" },
                           collapsed: true,
                           items: ["paper/dev/lifecycle", "paper/dev/lifecycle/datapacks"],
                         },
@@ -276,6 +300,7 @@ export default defineConfig({
                     },
                     {
                       label: "Miscellaneous",
+                      translations: { es: "Varios" },
                       items: [
                         "paper/dev/using-databases",
                         "paper/dev/debugging",
@@ -287,21 +312,24 @@ export default defineConfig({
                 },
                 {
                   label: "Contributing",
+                  translations: { es: "Colaboración" },
                   items: ["paper/contributing/events"],
                 },
               ],
             },
             {
               id: "velocity",
-              label: "Velocity",
+              label: { en: "Velocity", es: "Velocity" },
               link: "/velocity/",
               icon: "velocity",
               items: [
                 {
                   label: "Administration",
+                  translations: { es: "Administración" },
                   items: [
                     {
                       label: "Getting started",
+                      translations: { es: "Primeros pasos" },
                       items: [
                         "velocity/getting-started",
                         "velocity/why-velocity",
@@ -311,10 +339,12 @@ export default defineConfig({
                     },
                     {
                       label: "How-to guides",
+                      translations: { es: "Guías prácticas" },
                       items: ["velocity/tuning", "velocity/security", "velocity/migration"],
                     },
                     {
                       label: "Reference",
+                      translations: { es: "Referencia" },
                       items: [
                         "velocity/configuration",
                         "velocity/reference/system-properties",
@@ -328,9 +358,11 @@ export default defineConfig({
                 },
                 {
                   label: "Development",
+                  translations: { es: "Desarrollo" },
                   items: [
                     {
                       label: "Getting started",
+                      translations: { es: "Primeros pasos" },
                       items: [
                         "velocity/dev/creating-your-first-plugin",
                         "velocity/dev/velocity-plugin-json",
@@ -340,13 +372,16 @@ export default defineConfig({
                     },
                     {
                       label: "How-to guides",
+                      translations: { es: "Guías prácticas" },
                       items: ["velocity/dev/dependency-management", "velocity/dev/porting-plugins-from-velocity-1"],
                     },
                     {
                       label: "API",
+                      translations: { es: "API" },
                       items: [
                         {
                           label: "Component API",
+                          translations: { es: "API de componentes" },
                           collapsed: true,
                           items: [
                             "paper/dev/component-api/introduction",
@@ -366,15 +401,17 @@ export default defineConfig({
             },
             {
               id: "folia",
-              label: "Folia",
+              label: { en: "Folia", es: "Folia" },
               link: "/folia/",
               icon: "folia",
               items: [
                 {
                   label: "Administration",
+                  translations: { es: "Administración" },
                   items: [
                     {
                       label: "Reference",
+                      translations: { es: "Referencia" },
                       items: ["folia/reference/overview", "folia/reference/region-logic", "folia/faq"],
                     },
                   ],
@@ -383,7 +420,7 @@ export default defineConfig({
             },
             {
               id: "adventure",
-              label: "Adventure",
+              label: { en: "Adventure", es: "Adventure" },
               link: "/adventure/",
               icon: "adventure",
               items: [
@@ -394,6 +431,7 @@ export default defineConfig({
                 "adventure/text",
                 {
                   label: "Text serializers",
+                  translations: { es: "Serializadores de texto" },
                   items: [
                     "adventure/serializer",
                     "adventure/serializer/json",
@@ -402,6 +440,7 @@ export default defineConfig({
                     "adventure/serializer/plain",
                     {
                       label: "MiniMessage",
+                      translations: { es: "MiniMessage" },
                       items: [
                         "adventure/minimessage",
                         "adventure/minimessage/format",
@@ -419,19 +458,10 @@ export default defineConfig({
                 "adventure/book",
                 "adventure/tablist",
                 "adventure/resource-pack",
-                {
-                  label: "MiniMessage",
-                  items: [
-                    "adventure/minimessage",
-                    "adventure/minimessage/format",
-                    "adventure/minimessage/api",
-                    "adventure/minimessage/dynamic-replacements",
-                    "adventure/minimessage/translator",
-                  ],
-                },
                 "adventure/localization",
                 {
                   label: "Platforms",
+                  translations: { es: "Plataformas" },
                   items: [
                     "adventure/platform",
                     "adventure/platform/native",
@@ -447,6 +477,7 @@ export default defineConfig({
                 },
                 {
                   label: "Version history",
+                  translations: { es: "Historial de versiones" },
                   items: [
                     { label: "adventure", link: "/adventure/version-history/adventure" },
                     { label: "adventure-platform", link: "/adventure/version-history/adventure-platform" },
@@ -458,6 +489,7 @@ export default defineConfig({
                 },
                 {
                   label: "Migration",
+                  translations: { es: "Migración" },
                   items: [
                     "adventure/migration",
                     "adventure/migration/bungeecord-chat-api",
@@ -469,14 +501,14 @@ export default defineConfig({
             },
             {
               id: "waterfall",
-              label: "Waterfall",
+              label: { en: "Waterfall", es: "Waterfall" },
               link: "/waterfall/",
               icon: "waterfall",
               items: ["waterfall/getting-started", "waterfall/configuration"],
             },
             {
               id: "misc",
-              label: "Miscellaneous",
+              label: { en: "Miscellaneous", es: "Misceláneos" },
               link: "/misc/",
               icon: "random",
               items: [
@@ -487,6 +519,7 @@ export default defineConfig({
                 "misc/java-install",
                 {
                   label: "Tools",
+                  translations: { es: "Herramientas" },
                   items: [
                     "misc/tools/start-script-gen",
                     "misc/tools/item-command-converter",
@@ -520,6 +553,25 @@ export default defineConfig({
                 "/paper/dev/api/event-api",
                 "/paper/dev/misc",
                 "/paper/contributing",
+                "/es/paper/admin",
+                "/es/paper/admin/getting-started",
+                "/es/paper/admin/how-to",
+                "/es/paper/admin/misc",
+                "/es/paper/admin/reference",
+                "/es/paper/dev",
+                "/es/paper/dev/getting-started",
+                "/es/paper/dev/api",
+                "/es/paper/dev/api/command-api",
+                "/es/paper/dev/api/command-api/arguments",
+                "/es/paper/dev/api/command-api/basics",
+                "/es/paper/dev/api/command-api/misc",
+                "/es/paper/dev/api/component-api",
+                "/es/paper/dev/api/entity-api",
+                "/es/paper/dev/api/inventories",
+                "/es/paper/dev/api/lifecycle",
+                "/es/paper/dev/api/event-api",
+                "/es/paper/dev/misc",
+                "/es/paper/contributing",
               ],
               velocity: [
                 "/velocity/admin",
@@ -530,11 +582,19 @@ export default defineConfig({
                 "/velocity/dev/getting-started",
                 "/velocity/dev/how-to",
                 "/velocity/dev/api",
+                "/es/velocity/admin",
+                "/es/velocity/admin/getting-started",
+                "/es/velocity/admin/how-to",
+                "/es/velocity/admin/reference",
+                "/es/velocity/dev",
+                "/es/velocity/dev/getting-started",
+                "/es/velocity/dev/how-to",
+                "/es/velocity/dev/api",
               ],
-              folia: ["/folia/admin", "/folia/admin/reference"],
-              adventure: ["/adventure/version-history"],
-              waterfall: ["/waterfall"],
-              misc: ["/misc", "/misc/tools"],
+              folia: ["/folia/admin", "/folia/admin/reference", "/es/folia/admin", "/es/folia/admin/reference"],
+              adventure: ["/adventure/version-history", "/es/adventure/version-history"],
+              waterfall: ["/waterfall", "/es/waterfall"],
+              misc: ["/misc", "/misc/tools", "/es/misc", "/es/misc/tools"],
             },
           }
         ),

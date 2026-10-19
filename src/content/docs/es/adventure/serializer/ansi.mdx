@@ -1,0 +1,80 @@
+---
+title: ANSI
+slug: es/adventure/serializer/ansi
+description: Serialización de componentes a ANSI.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ANSI_RELEASE, LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+
+El serializador de texto ANSI es un codificador que convierte componentes en texto con
+[códigos de escape ANSI](https://en.wikipedia.org/wiki/ANSI_escape_code), que permite mostrar texto con estilo en una terminal. Así, por ejemplo, se pueden generar registros del servidor
+con componentes y conservar sus colores y estilos.
+
+Ten en cuenta que, al ser un codificador, solo puede serializar componentes y no puede
+deserializar texto para convertirlo de nuevo en componentes.
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-text-serializer-ansi" version={LATEST_ADVENTURE_API_RELEASE} />
+
+## Uso
+
+Existen distintos tipos de códigos de escape ANSI que permiten diferentes niveles de precisión de color,
+pero no todas las terminales admiten las secuencias de escape más recientes.
+De forma predeterminada, `ANSIComponentSerializer` intentará deducir los tipos de
+secuencias de escape compatibles a partir de las variables de entorno del sistema.
+
+Esto se puede anular para una instancia concreta del serializador mediante el método
+`colorLevel` del constructor.
+
+También se puede anular globalmente mediante propiedades del sistema. La propiedad
+`net.kyori.ansi.colorLevel` se puede establecer al iniciar la JVM mediante la
+opción de línea de comandos `-Dnet.kyori.ansi.colorLevel=value`. Se pueden establecer
+4 valores diferentes:
+
+* `none`: Evita que se emita cualquier secuencia de escape ANSI.
+* `indexed16`: Conjunto original de 16 colores.
+* `indexed256`: Conjunto algo más reciente de 256 colores.
+* `truecolor`: Espectro completo de colores de 24 bits.
+
+También se pueden desactivar las secuencias de escape ANSI estableciendo en `false`
+la propiedad del sistema `terminal.ansi`.
+
+## Biblioteca ANSI
+
+:::note
+
+Esta sección trata sobre la biblioteca independiente de componentes. Si solo te interesa
+la implementación específica para componentes de Adventure, no necesitas leerla.
+
+:::
+
+`AnsiComponentSerializer` se basa en una biblioteca ANSI independiente, que gestiona
+la lógica de bajo nivel de las secuencias de escape ANSI y también permite crear un conversor ANSI
+para cualquier tipo de componente, no solo los de Adventure.
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="ansi" version={LATEST_ANSI_RELEASE} />
+
+### Uso de la implementación
+
+Para empezar, debes crear una clase que implemente `StyleOps<S>`, donde `S` es
+el tipo de estilo de tu tipo de componente. Esta clase adaptadora permite que la lógica ANSI
+acceda a las propiedades del estilo.
+
+Para iniciar la conversión, crea una instancia de `ANSIComponentRenderer` usando
+uno de los métodos estáticos. El más sencillo es `ANSIComponentRenderer.toString()`;
+pásale una instancia del adaptador `StyleOps` descrito anteriormente.
+
+Después, debes recorrer la estructura del árbol de componentes usando los métodos
+`pushStyle()`, `text()` y `popStyle()` de la instancia del renderizador.
+
+Por último, llama a `complete()` cuando termines de recorrer el árbol. El trabajo del renderizador
+habrá concluido. En el caso del renderizador `ToString`, puedes acceder al resultado
+mediante el método `asString()`.
+
+Como se describe en la sección [Uso de ANSI](#uso), la biblioteca intentará deducir de forma predeterminada
+los colores compatibles con el entorno actual. Esto se puede anular pasando un `ColorLevel` personalizado
+al crear el renderizador o usando las propiedades del sistema descritas anteriormente.

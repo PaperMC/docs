@@ -1,0 +1,26 @@
+---
+title: spigot.yml
+description: Explicación del archivo de configuración de Spigot.
+slug: es/paper/reference/spigot-configuration
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import SpigotYML from "/src/config/paper/spigot.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+El YAML siguiente muestra la estructura y los valores predeterminados de `spigot.yml`.
+
+Haz clic en un nodo hoja para ver la descripción de ese ajuste.
+
+:::
+
+:::note
+
+Para anular una opción por mundo, crea una clave nueva en `world-settings` con el nombre del nivel (el nombre de la carpeta).
+
+:::
+
+<ConfigNode data={parse(SpigotYML)} />

@@ -1,0 +1,105 @@
+---
+title: NeoForge
+slug: es/adventure/platform/neoforge
+description: Implementación de Adventure para NeoForge.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_MOD_RELEASE, LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE } from "/src/utils/versions";
+
+Adventure admite NeoForge en *Minecraft: Java Edition* 1.21 y versiones posteriores, tanto en el servidor como en el cliente. Por lo general, cada versión principal de Minecraft requiere
+una nueva versión de la plataforma.
+
+La plataforma admite todas las funciones, incluidas la localización y los renderizadores personalizados.
+
+## Dependencia
+
+La plataforma NeoForge se empaqueta como mod y está diseñada para incluirse en otros mods mediante el empaquetado jar-in-jar. Como los demás proyectos de Adventure,
+las versiones se distribuyen en Maven Central y las compilaciones snapshot en Sonatype OSS:
+
+El siguiente ejemplo usa ModDevGradle (`net.neoforged.moddev`). Usa `implementation` para la dependencia de desarrollo
+y `jarJar` para empaquetar la plataforma en tu mod:
+
+<Dependency name="neoforge" template="adventure-platform-mod" />
+
+La versión actual de la plataforma, {LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}, está destinada a Minecraft {LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}.
+
+:::danger[Atención]
+
+Cada versión principal de Minecraft requiere distintas versiones de la plataforma. Para versiones anteriores de Minecraft, consulta la tabla
+de [Con mods (API compartida de Fabric y NeoForge)](/es/adventure/platform/modded).
+
+:::
+
+## Uso básico
+
+Consulta [Con mods (API compartida de Fabric y NeoForge)](/es/adventure/platform/modded) para obtener información de uso común a NeoForge y Fabric.
+
+## Servidor
+
+Se puede acceder al lado del servidor lógico de la plataforma con mods siempre que haya un servidor disponible, mediante una instancia `MinecraftServerAudiences`.
+De forma predeterminada, los componentes traducibles se renderizan con el traductor global, aunque se puede pasar un renderizador personalizado al inicializar la plataforma.
+
+Se admiten todos los métodos de la interfaz `AudienceProvider`.
+
+Para empezar a usar Adventure, configura un proveedor de audiencias como este:
+
+```java
+@Mod("my_mod")
+public class MyMod {
+
+    private volatile MinecraftServerAudiences adventure;
+
+    public MinecraftServerAudiences adventure() {
+        if (this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure without a running server!");
+        }
+        return this.adventure;
+    }
+
+    public MyMod() {
+        // Registrar las devoluciones de llamada del ciclo de vida del servidor.
+        // Así se garantiza que se borren los datos de la plataforma entre instancias del juego.
+        // Esto es importante en el servidor integrado, donde puede haber varias
+        // instancias del servidor durante la inicialización de un mismo mod.
+        NeoForge.EVENT_BUS.addListener((ServerStartingEvent e) ->
+            this.adventure = MinecraftServerAudiences.of(e.getServer())
+        );
+        NeoForge.EVENT_BUS.addListener((ServerStoppedEvent e) ->
+            this.adventure = null
+        );
+    }
+}
+```
+
+Desde aquí, se pueden obtener audiencias para jugadores y cualquier otro `CommandSource`. También hay instancias especializadas de serializadores que permiten usar
+información del juego al serializar componentes.
+
+## Comandos
+
+La plataforma NeoForge incluye un método para registrar `KeyArgumentType` y `ComponentArgumentType`:
+  - `AdventureArgumentTypes.register();`
+
+Debes llamarlo desde el constructor de la clase anotada con `@Mod`.
+Si registras los tipos de argumento en el servidor, todos los clientes que se unan también deberán tenerlos
+registrados.
+
+## Cliente
+
+Una particularidad de la plataforma con mods es que admite operaciones exclusivamente del lado del cliente. La configuración es más sencilla que la del servidor, ya que el cliente es un singleton y
+solo hay un sujeto sobre el que actuar: el jugador del cliente.
+
+Esto significa que la mayoría de los usuarios puede tratar el objeto `MinecraftClientAudiences` como un singleton. La única excepción son quienes usan un renderizador personalizado. Así, usar audiencias de Adventure
+es bastante sencillo, como muestra este ejemplo de código:
+
+```java
+void doThing() {
+  // Obtener la audiencia
+  final Audience client = MinecraftClientAudiences.of().audience();
+
+  // Hacer algo. Esto solo funcionará cuando el jugador esté dentro de la partida.
+  client.sendMessage(Component.text("meow", NamedTextColor.DARK_PURPLE));
+}
+```
+
+Está disponible toda la funcionalidad de la interfaz `Audience`, incluida la localización.

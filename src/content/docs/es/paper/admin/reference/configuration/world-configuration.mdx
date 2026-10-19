@@ -1,0 +1,21 @@
+---
+title: Configuración por mundo
+slug: es/paper/reference/world-configuration
+description: Explicación del archivo de configuración de mundos de Paper.
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import PaperWorldDefaultsYML from "/src/config/paper/paper-world-defaults.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+El YAML siguiente muestra la estructura y los valores predeterminados de la configuración por mundo (`config/paper-world-defaults.yml` y
+`world/dimensions/<namespace>/<key>/paper-world.yml`).
+
+Haz clic en un nodo hoja para ver la descripción de ese ajuste.
+
+:::
+
+<ConfigNode data={parse(PaperWorldDefaultsYML)} />

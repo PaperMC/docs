@@ -1,0 +1,189 @@
+---
+title: Con mods (API compartida de Fabric y NeoForge)
+slug: es/adventure/platform/modded
+description: Implementación compartida de Adventure para Fabric y NeoForge.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+Desde *Minecraft: Java Edition* 1.21.2, Adventure se implementa principalmente con código compartido entre NeoForge y Fabric.
+Por lo general, cada versión principal de Minecraft requiere una nueva versión de la plataforma.
+
+La plataforma admite todas las funciones, incluidas la localización y los renderizadores personalizados.
+
+## Dependencia
+
+Al crear mods para varios cargadores, a menudo queremos trasladar la mayor cantidad de código posible a una parte de nuestros proyectos independiente del cargador.
+
+Adventure lo facilita mediante el artefacto `net.kyori:adventure-platform-mod-shared`.
+
+Para Minecraft 26.1 y versiones posteriores, usa este artefacto tanto con Loom como con ModDevGradle. Los proyectos Loom deben usar el
+plugin sin remapeo `net.fabricmc.fabric-loom` y la configuración estándar `compileOnly`.
+
+Para Minecraft 1.21.11 y versiones anteriores, los módulos comunes administrados por Loom con remapeo (`net.fabricmc.fabric-loom-remap` o el
+plugin antiguo `fabric-loom`) deben usar `net.kyori:adventure-platform-mod-shared-fabric-repack` con `modCompileOnly`.
+
+:::caution[Nota]
+  Estos artefactos son para el módulo común de mods multiplataforma. Para plataformas concretas, consulta las páginas de
+  [Fabric](/es/adventure/platform/fabric) o [NeoForge](/es/adventure/platform/neoforge). Si estás creando un mod
+  exclusivo para Fabric o NeoForge, o no necesitas usar la API de plataforma en el código compartido, no hace falta que uses
+  este artefacto explícitamente, ya que ambas plataformas dependen de él de forma transitiva.
+:::
+
+Como los demás proyectos de Adventure, las versiones se distribuyen en Maven Central y las compilaciones snapshot en Sonatype OSS:
+
+
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kotlin title="build.gradle.kts" replace
+    repositories {
+      // Para compilaciones de desarrollo
+      maven(url = "https://central.sonatype.com/repository/maven-snapshots/") {
+        name = "central-snapshots"
+        mavenContent { snapshotsOnly() }
+      }
+      // Para versiones publicadas
+      mavenCentral()
+    }
+
+    dependencies {
+      // Módulo común (Loom o ModDevGradle)
+      compileOnly("net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}") // Para Minecraft \{LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}
+    }
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy title="build.gradle" replace
+    repositories {
+      // Para compilaciones de desarrollo
+      maven {
+        name = 'central-snapshots'
+        url = 'https://central.sonatype.com/repository/maven-snapshots/'
+        mavenContent { snapshotsOnly() }
+      }
+      // Para versiones publicadas
+      mavenCentral()
+    }
+
+    dependencies {
+      // Módulo común (Loom o ModDevGradle)
+      compileOnly('net.kyori:adventure-platform-mod-shared:\{LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}') // Para Minecraft \{LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}
+    }
+    ```
+  </TabItem>
+</Tabs>
+
+
+:::note[Atención]
+
+Cada versión principal de Minecraft requiere distintas versiones de la plataforma. Para las versiones anteriores de Minecraft, consulta la siguiente tabla.
+
+<details>
+  <summary>Versiones anteriores</summary>
+
+  | Versión de Minecraft | Versión de Adventure | Versión de `adventure-platform-(mod-shared/fabric/neoforge)` |
+  |-------------------|-------------------|-----------------------------------------------------------|
+  | 26.2              | 5.2.0             | 7.1.1                                                     |
+  | 26.1-26.1.2       | 4.26.1            | 6.9.0                                                     |
+  | 1.21.11           | 4.25.0            | 6.8.0                                                     |
+  | 1.21.9-1.21.10    | 4.25.0            | 6.7.0                                                     |
+  | 1.21.6-1.21.8     | 4.24.0            | 6.6.0                                                     |
+  | 1.21.5            | 4.21.0            | 6.4.0                                                     |
+  | 1.21.2-1.21.4     | 4.20.0            | 6.3.0                                                     |
+  | 1.21-1.21.1       | 4.17.0            | 6.0.0                                                     |
+
+</details>
+
+:::
+
+## Uso básico
+
+La forma más sencilla de empezar a usar esta plataforma es trabajar con los objetos del juego de Minecraft que implementan directamente las interfaces de Adventure.
+
+Esto cubre casi todos los casos en los que se usa el renderizador predeterminado.
+
+En Fabric, Loom aplica la inyección de interfaces, por lo que puedes llamar directamente a los métodos de interfaz en los objetos de Minecraft.
+
+En NeoForge, debes hacer una conversión de tipo manual o usar los métodos auxiliares de `MinecraftAudiences`.
+
+Se implementan directamente las siguientes interfaces de Adventure:
+
+`Audience`
+  - `net.minecraft.commands.CommandSourceStack`, `net.minecraft.server.MinecraftServer`, `net.minecraft.server.rcon.RconConsoleSource`,
+  - `net.minecraft.server.level.ServerPlayer`, `net.minecraft.client.player.LocalPlayer`
+
+`AdventureCommandSourceStack`
+  - `net.minecraft.commands.CommandSourceStack`
+
+`Sound.Emitter`
+  - `net.minecraft.world.entity.Entity`
+
+`Sound.Type`
+  - `net.minecraft.sounds.SoundEvent`
+
+`Identified`
+  - `net.minecraft.world.entity.player.Player`
+
+`ComponentLike`
+  - `net.minecraft.network.chat.Component`
+
+`Key`
+  - `net.minecraft.resources.Identifier`
+
+`Keyed`
+  - `net.minecraft.resources.ResourceKey`
+
+`HoverEventSource`
+  - `net.minecraft.world.entity.Entity`,
+  - `net.minecraft.world.item.ItemStack`, `net.minecraft.world.item.ItemStackTemplate`
+
+`SignedMessage`
+  - `net.minecraft.network.chat.PlayerChatMessage`
+
+
+Con estas inyecciones, empezar a usar la plataforma es tan sencillo como:
+
+```java
+void greet(final ServerPlayer player) {
+    Component message = Component.text()
+        .content("Hola ")
+        .append(player.get(Identity.DISPLAY_NAME)
+            .get()
+            .color(NamedTextColor.RED)
+        )
+        .build();
+    player.sendMessage(message);
+}
+```
+
+Para casos de uso más complejos, `MinecraftServerAudiences` o `MinecraftClientAudiences` proporcionan API adicional.
+
+### Comandos
+
+La plataforma proporciona tipos de argumento personalizados para especificar parámetros `Key` y `Component` en comandos Brigadier.
+
+:::caution
+
+Consulta la documentación específica de la plataforma para obtener detalles sobre el registro y la sincronización de estos tipos de argumento.
+
+:::
+
+Por ejemplo, este comando sencillo repetirá lo que se proporcione como entrada:
+
+```java
+// Posible método para la clase de inicialización del mod mostrada arriba
+private static final String ARG_MESSAGE = "message";
+
+void registerCommands(final CommandDispatcher dispatcher, final boolean isDedicated) {
+  dispatcher.register(literal("echo").then(argument(ARG_MESSAGE, component()).executes(context -> {
+      final Component message = component(context, ARG_MESSAGE);
+      ((Audience) context.getSource()).sendMessage(Component.text("Has dicho: ").append(message));
+  })));
+}
+```
+
+## Trabajar con tipos nativos
+
+Por desgracia, Adventure no puede proporcionar una API para todos los lugares del juego donde se usan componentes del chat. Sin embargo, en los casos que no cubre la API de `Audience`,
+es posible convertir componentes entre tipos nativos y de Adventure. Consulta los tipos nativos que implementan
+interfaces de Adventure y los métodos de `MinecraftAudiences` para ver otras conversiones disponibles.

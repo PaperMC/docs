@@ -1,0 +1,48 @@
+---
+title: Bienvenido
+description: Documentación de todos los proyectos de PaperMC, incluidos Paper, Velocity y Folia.
+template: splash
+editUrl: false
+lastUpdated: false
+hero:
+  title: Documentación de PaperMC
+  tagline: Documentación de todos los proyectos de PaperMC, incluidos Paper, Velocity y Folia.
+  image:
+    file: "https://assets.papermc.io/brand/papermc_logo.min.svg"
+    alt: Logotipo de PaperMC
+---
+
+import { CardGrid } from "@astrojs/starlight/components";
+import { ContributorList } from "astro-contributors";
+import LinkCard from "/src/components/LinkCard.astro";
+
+<CardGrid>
+  <LinkCard title="Paper" href="/es/paper" icon="paper">
+    Servidor de Minecraft de alto rendimiento que busca corregir inconsistencias en la jugabilidad y las mecánicas.
+  </LinkCard>
+  <LinkCard title="Velocity" href="/es/velocity" icon="velocity">
+    Proxy de servidor de Minecraft moderno y de última generación.
+  </LinkCard>
+  <LinkCard title="Folia" href="/es/folia" icon="folia">
+    Fork de Paper que añade multihilo por regiones al servidor dedicado.
+  </LinkCard>
+  <LinkCard title="Adventure" href="/es/adventure" icon="adventure">
+    Biblioteca Java para crear elementos de interfaz controlados por el servidor en Minecraft: Java Edition.
+  </LinkCard>
+  <LinkCard title="Waterfall" href="/es/waterfall" destructive icon="waterfall">
+    Bifurcación abandonada del proxy BungeeCord que buscaba mejorar el rendimiento y la estabilidad.
+  </LinkCard>
+  <LinkCard title="Varios" href="/es/misc" icon="random">
+    Otra documentación y herramientas.
+  </LinkCard>
+</CardGrid>
+
+<br />
+
+## [Colabora](https://github.com/PaperMC/docs)
+
+Queremos agradecer sinceramente a todas las personas que han contribuido a esta documentación.
+Ya sea escribiendo código, enviando comentarios, corrigiendo erratas o compartiendo sus conocimientos, agradecemos cada aporte.
+Este proyecto es un esfuerzo colectivo y nos alegra contar contigo.
+
+<ContributorList githubRepo="PaperMC/docs" />

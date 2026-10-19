@@ -1,0 +1,95 @@
+---
+title: Compatibilidad de servidores
+description: Guía de compatibilidad de servidores con Velocity.
+slug: es/velocity/server-compatibility
+---
+
+import { LATEST_MC_RELEASE } from "/src/utils/versions";
+
+Velocity es compatible con muchas implementaciones de servidores de Minecraft. En principio, Velocity funcionará si el
+servidor se comporta como Vanilla; además, hacemos adaptaciones especiales para configuraciones con mods cuando es posible.
+
+## Versiones de juego compatibles
+
+En el momento de redactar esta página, Velocity es compatible con Minecraft 1.7.2 hasta {LATEST_MC_RELEASE}.
+
+## Configuraciones Vanilla
+
+Velocity se prueba principalmente con implementaciones derivadas del servidor Vanilla de Mojang que no
+añaden contenido al juego.
+
+### Servidores Vanilla
+
+El software Vanilla de Mojang se encuentra en una situación complicada. Es útil porque a menudo generamos
+actualizaciones del protocolo usando el servidor de Mojang para las pruebas, pero en entornos de producción, la falta de
+compatibilidad con el reenvío de información de jugadores puede causar problemas sutiles en los clientes.
+
+Si planeas ejecutar un servidor Vanilla, **el equipo de Velocity recomienda encarecidamente usar Fabric
+con el mod FabricProxy-Lite**. Fabric y FabricProxy-Lite no cambian por sí solos la experiencia Vanilla,
+y tu servidor seguirá siendo compatible con clientes Vanilla. Si no puedes (o no quieres)
+usar Fabric, [VanillaCord](https://github.com/ME1312/VanillaCord) permite usar
+el reenvío heredado de BungeeCord.
+
+### Spigot
+
+Spigot no se ha probado exhaustivamente con Velocity. Sin embargo, se basa en Vanilla y, como es la base de
+Paper, cuenta con una compatibilidad relativamente buena.
+
+Spigot no admite el reenvío moderno de Velocity, pero sí el reenvío heredado de BungeeCord.
+
+### Paper
+
+El proyecto Velocity recomienda usar Paper para ejecutar un servidor público. Velocity funciona con todas
+las versiones de Paper, desde la 1.7.10 hasta la más reciente.
+
+Puedes usar el reenvío moderno de Velocity si ejecutas Paper 1.13.2 o posterior. Si usas Paper 1.12.2
+o anterior, debes usar el reenvío heredado de BungeeCord.
+
+### SpongeVanilla
+
+SpongeVanilla es compatible con el reenvío heredado de BungeeCord y con el reenvío moderno. Nuestra compatibilidad con Sponge se
+centra principalmente en Forge; consulta más información a continuación.
+
+## Configuraciones con mods
+
+### Fabric
+
+Velocity funciona con Fabric desde el primer momento, pero deberías añadir compatibilidad con el reenvío de información de jugadores
+mediante un mod como [FabricProxy-Lite](https://modrinth.com/mod/fabricproxy-lite), que admite
+el reenvío moderno de Velocity.
+
+Además, si tienes previsto ejecutar mods que añaden contenido a Vanilla, deberías instalar
+[CrossStitch](https://modrinth.com/mod/crossstitch), que mejora la compatibilidad con algunas funciones de Minecraft
+ampliadas por mods, como los tipos de argumentos personalizados. El proyecto Velocity mantiene oficialmente
+este mod.
+
+### Minecraft Forge (1.13 y posterior)
+
+Desde la versión 3.3.0, Velocity admite servidores Forge posteriores a la versión 1.20.2.
+No se prevé admitir las versiones intermedias entre 1.13 y 1.20.1; sin embargo,
+puedes usar el plugin [Ambassador](https://modrinth.com/plugin/ambassador) para admitirlas.
+
+Para añadir compatibilidad con el reenvío moderno a Forge, debes instalar el mod [ProxyCompatibleForge](https://modrinth.com/mod/proxy-compatible-forge)
+o [SpongeForge](https://spongepowered.org/downloads/spongeforge) correspondiente a la versión de tu servidor.
+*Ten en cuenta que la compatibilidad de SpongeForge con Forge para la versión 1.20.4 está en fase experimental.*
+
+### Minecraft Forge (1.7.2-1.12.2)
+
+Minecraft Forge para Minecraft 1.7.2-1.12.2 es totalmente compatible con Velocity, ya que hacemos adaptaciones
+especiales para sincronizar el estado del cliente con cada servidor. Sin embargo, recomendamos **encarecidamente**
+usar SpongeForge o BungeeForge, porque permite utilizar el reenvío heredado de información de jugadores de BungeeCord y, en general,
+mejora la compatibilidad con proxies.
+
+Velocity no admite híbridos Forge-Bukkit: han causado varios problemas y el diseño de
+la API de Bukkit impide ofrecer una compatibilidad razonable con mods.
+
+## Proxy detrás de otro proxy (BungeeCord, Velocity, ...)
+
+Estas configuraciones _no se admiten en absoluto_. Te recomendamos evitarlas, ya que pueden causar
+muchos problemas. La mayoría de las configuraciones de proxy detrás de otro proxy carecen de lógica desde el principio o pueden
+resolverse mejor con soluciones más escalables y eficientes.
+
+## Otras implementaciones
+
+Naturalmente, esta no es una lista exhaustiva. Otras implementaciones del protocolo de Minecraft
+pueden funcionar o no. Te animamos a probarlas y compartir los resultados.

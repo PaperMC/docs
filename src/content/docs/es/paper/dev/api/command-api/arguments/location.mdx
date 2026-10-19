@@ -1,0 +1,79 @@
+---
+title: Ubicación
+description: Documentación de argumentos BlockPosition, FinePosition y World.
+slug: es/paper/dev/command-api/arguments/location
+version: "26.2"
+---
+
+import BlockPositionMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/blockposition.mp4?url";
+import FinePositionMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/fineposition.mp4?url";
+import WorldMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/world.mp4?url";
+
+import Video from "/src/components/Video.astro";
+
+## Argumento de posición del bloque
+El argumento de posición del bloque se utiliza para recuperar la posición de un bloque. Funciona de la misma manera que el primer argumento del comando `/setblock <position> <block>` Vanilla. Para recuperar la variable `BlockPosition` de [](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.BlockPositionResolver), tenemos que resolverla usando la fuente del comando.
+
+### Ejemplo de uso
+```java
+Commands.argument("pos", ArgumentTypes.blockPosition())
+    .executes(context -> {
+        final BlockPositionResolver resolver = context.getArgument("pos", BlockPositionResolver.class);
+        final BlockPosition pos = resolver.resolve(context.getSource());
+
+        context.getSource().getSender().sendPlainMessage(        "Introduce " + pos.x() + " " + pos.y() + " " + pos.z());
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={BlockPositionMp4} />
+
+
+## Argumento de posición fina
+El argumento de posición fina funciona de manera similar al argumento de posición del bloque, con la única diferencia de que puede aceptar entradas de ubicación decimal (precisa). La sobrecarga opcional (`ArgumentTypes.finePosition(boolean centerIntegers)`), que por defecto es falsa si no se configura, centrará toda la entrada, lo que significa que 5 se convierte en 5.5 (aunque 5.0 permanecería como 5.0), ya que es el "medio" de un bloque. Esto sólo se aplica a X/Z, la coordenada Y no se ve afectada por esta operación.
+
+Este argumento devuelve un [](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.FinePositionResolver). Puede resolverlo ejecutando `FinePositionResolver#resolve(CommandSourceStack)` para obtener el resultado [](jd:paper:io.papermc.paper.math.FinePosition).
+
+### Ejemplo de uso
+```java
+Commands.argument("pos", ArgumentTypes.finePosition(true))
+    .executes(context -> {
+        final FinePositionResolver resolver = context.getArgument("pos", FinePositionResolver.class);
+        final FinePosition pos = resolver.resolve(context.getSource());
+
+        context.getSource().getSender().sendRichMessage("Position: <red><x></red> <green><y></green> <blue><z></blue>",
+            Placeholder.unparsed("x", String.valueOf(pos.x())),
+            Placeholder.unparsed("y", String.valueOf(pos.y())),
+            Placeholder.unparsed("z", String.valueOf(pos.z()))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={FinePositionMp4} />
+
+
+## argumento mundial
+Este argumento permite al usuario seleccionar uno de los mundos actualmente cargados. Puede recuperar el resultado de eso como un objeto Bukkit [](jd:paper:org.bukkit.World) genérico.
+
+### Ejemplo de uso
+```java
+Commands.argument("world", ArgumentTypes.world())
+    .executes(context -> {
+        final World world = context.getArgument("world", World.class);
+        final Player player = context.getSource().getPlayerOrThrow();
+
+        if (player.teleport(world.getSpawnLocation(), PlayerTeleportEvent.TeleportCause.COMMAND)) {
+            context.getSource().getSender().sendRichMessage(            "Teletransportaste a <player> a <aqua><world></aqua> correctamente.",
+                Placeholder.component("player", player.displayName()),
+                Placeholder.unparsed("world", world.key().asString())
+            );
+            return Command.SINGLE_SUCCESS;
+        } else {
+            context.getSource().getSender().sendRichMessage(            "<red>No se pudo teletransportar al jugador.");
+            return Command.SINGLE_SUCCESS;
+        }
+    })
+```
+### Vista previa del juego
+<Video src={WorldMp4} />

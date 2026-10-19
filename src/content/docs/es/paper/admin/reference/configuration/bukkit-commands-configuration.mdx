@@ -1,0 +1,28 @@
+---
+title: commands.yml
+description: Explicación del archivo commands.yml de Bukkit.
+slug: es/paper/reference/bukkit-commands-configuration
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import CommandsYML from "/src/config/paper/commands.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+El YAML siguiente muestra la estructura y los valores predeterminados del archivo heredado `commands.yml`.
+
+Haz clic en un nodo hoja para ver la descripción de ese ajuste.
+
+:::
+
+:::caution
+
+Los alias definidos en este archivo heredado no admiten funciones modernas, como:
+- Tab completion
+- Permissions
+
+:::
+
+<ConfigNode data={parse(CommandsYML)} />

@@ -1,0 +1,146 @@
+---
+title: Argumentos específicos de Paper
+description: Documentación para argumentos que manejan diversos valores de API de Paper.
+slug: es/paper/dev/command-api/arguments/paper
+version: "26.2"
+---
+
+import BlockStateMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/blockstate.mp4?url";
+import ItemStackMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/itemstack.mp4?url";
+import NamespacedKeyMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/namespacedkey.mp4?url";
+import TimeMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/time.mp4?url";
+import UuidMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/uuid.mp4?url";
+import ObjectiveCriteriaMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/objectivecriteria.mp4?url";
+
+import Video from "/src/components/Video.astro";
+
+Los argumentos de esta sección devuelven objetos utilizados con frecuencia en Paper API.
+
+## Argumento de estado de bloque
+El argumento del estado del bloque se puede utilizar para obtener un tipo de bloque y datos asociados explícitos.
+
+### Ejemplo de uso
+```java
+Commands.argument("state", ArgumentTypes.blockState())
+    .executes(context -> {
+        final BlockState state = context.getArgument("state", BlockState.class);
+        // Será una instantánea no colocada; debes copiarla para usarla más adelante.
+
+        context.getSource().getSender().sendRichMessage(        "Especificaste un <block>.",
+            Placeholder.component("block", Component.translatable(state.getType()))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={BlockStateMp4} />
+
+
+## Argumento del artículo
+El argumento del elemento es la forma de recuperar un [elemento](jd:paper:org.bukkit.inventory.ItemStack) siguiendo el mismo formato de argumento que el comando Vanilla `/give <player> <item> [<amount>]` como segundo argumento. El usuario también puede definir componentes para personalizar aún más el `ItemStack`. Si solo necesita un tipo de elemento, debería consultar los [argumentos del registro](/es/paper/dev/command-api/arguments/registry).
+
+### Ejemplo de uso
+```java
+Commands.argument("item", ArgumentTypes.itemStack())
+    .executes(context -> {
+        final ItemStack item = context.getArgument("item", ItemStack.class);
+        final Player player = context.getSource().getPlayerOrThrow();
+
+        player.getInventory().addItem(item);
+        context.getSource().getSender().sendRichMessage(        "<green>Le diste un objeto <item> a <player> correctamente.",
+            Placeholder.component("player", player.displayName()),
+            Placeholder.component("item", Component.translatable(item).hoverEvent(item))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={ItemStackMp4} />
+
+
+## Argumento de clave con espacio de nombres
+Este argumento permite al usuario proporcionar cualquier clave artificial (con espacio de nombres). El valor de retorno de este argumento es [](jd:paper:org.bukkit.NamespacedKey), lo que lo hace útil cuando se trata de la API de Bukkit.
+
+### Ejemplo de uso
+```java
+Commands.argument("key", ArgumentTypes.namespacedKey())
+    .executes(context -> {
+        final NamespacedKey key = context.getArgument("key", NamespacedKey.class);
+
+        context.getSource().getSender().sendRichMessage(        "Has introducido <aqua><key></aqua>.",
+            Placeholder.unparsed("key", key.toString())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={NamespacedKeyMp4} />
+
+
+## Argumento de tiempo
+El argumento de tiempo permite al usuario definir un período de tiempo, similar al argumento de tiempo de Vanilla `/time set <time>`. El usuario tiene 4 formas posibles de ingresar el tiempo:
+* Solo como un número: esto se resuelve en los ticks habituales (`/timearg 1` --> 1 tick)
+* Con un sufijo `t`: Esto también se resuelve en ticks (`/timearg 1t` --> 1 tick)
+* Con un sufijo `s`: Esto se resuelve en segundos, lo que significa multiplicar el primer número por 20. (`/timearg 1s` --> 20 ticks)
+* Con sufijo `d`. Esto se resuelve como días de juego, lo que significa multiplicar el primer número por 24000. (`/timearg 1d` --> 24000 ticks)
+
+Si elige utilizar este argumento, se recomienda explicar a los usuarios qué significan estos sufijos, ya que el tiempo real (sufijo `s`) se mezcla con el tiempo del juego (sufijo `t` y `d`).
+
+El método `ArgumentTypes.time()` tiene una sobrecarga adicional: `ArgumentTypes.time(int minTime)`. Esto permite establecer la cantidad mínima requerida de ticks que este argumento debe resolver. Por defecto este valor está establecido en 0.
+
+### Ejemplo de uso
+```java
+Commands.argument("time", ArgumentTypes.time())
+    .executes(context -> {
+        final int timeInTicks = IntegerArgumentType.getInteger(context, "time");
+        final Player player = context.getSource().getPlayerOrThrow();
+
+        player.getWorld().setFullTime(player.getWorld().getFullTime() + timeInTicks);
+        player.sendPlainMessage(        "Se adelantó el tiempo " + timeInTicks + " ticks!");
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={TimeMp4} />
+
+
+## argumento UUID
+El argumento UUID permite al usuario ingresar un UUID válido. Puede recuperar ese valor como un objeto `UUID`, que se utiliza en varios lugares, como `Bukkit.getOfflinePlayer(UUID)`. Este argumento no es muy fácil de usar, por lo que se sugiere usarlo solo como argumento de moderación o depuración (y al menos proporcionar sugerencias para completar). Para la entrada del usuario sobre la recuperación de jugadores sin conexión, se prefiere el [argumento de perfiles de jugadores](/es/paper/dev/command-api/arguments/entity-player#player-profiles-argument), ya que permite la búsqueda por nombre.
+
+### Ejemplo de uso: comando de búsqueda
+```java
+Commands.argument("uuid", ArgumentTypes.uuid())
+    .executes(context -> {
+        final UUID uuid = context.getArgument("uuid", UUID.class);
+        final OfflinePlayer result = Bukkit.getOfflinePlayer(uuid);
+
+        context.getSource().getSender().sendRichMessage(        "¿Ha jugado <aqua><uuid></aqua> antes? <result:'<green>sí</green>':'<red>no</red>'>",
+            Placeholder.unparsed("uuid", uuid.toString()),
+            Formatter.booleanChoice("result", result.hasPlayedBefore())
+        );
+
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={UuidMp4} />
+
+
+## Argumento de criterios objetivos
+Puede recuperar el valor del argumento como `Criteria`, que se puede utilizar con objetos `Scoreboard`.
+
+### Ejemplo de uso
+```java
+Commands.argument("criteria", ArgumentTypes.objectiveCriteria())
+    .executes(context -> {
+        final Criteria criteria = context.getArgument("criteria", Criteria.class);
+
+        context.getSource().getSender().sendRichMessage(        "Tipo de representación predeterminado para <criteria>: <render_type>",
+            Placeholder.unparsed("criteria", criteria.getName()),
+            Placeholder.unparsed("render_type", criteria.getDefaultRenderType().name())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={ObjectiveCriteriaMp4} />

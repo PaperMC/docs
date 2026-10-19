@@ -1,0 +1,241 @@
+---
+title: Configuración del proyecto
+description: Instrucciones paso a paso para configurar un entorno de desarrollo de plugins.
+slug: es/paper/dev/project-setup
+---
+
+import { FileTree, Tabs, TabItem } from "@astrojs/starlight/components";
+import { LATEST_PAPER_RELEASE, LATEST_PAPER_BUILD_API_VERSION} from "/src/utils/versions";
+
+Como el equipo de Paper usa principalmente [IntelliJ IDEA](https://www.jetbrains.com/idea/), esta guía se centrará en ese IDE.
+Sin embargo, los pasos siguientes también deberían servir para otros IDE, con algunos cambios menores.
+
+El equipo de Paper usa [Gradle](https://gradle.org/) como sistema de compilación, y sus herramientas están hechas para Gradle.
+La mayor parte del código que aparece a continuación se puede adaptar a otros sistemas, como Maven, pero esta guía solo cubrirá Gradle
+con **Kotlin DSL**.
+
+Sigue la guía [aquí](https://docs.gradle.org/current/userguide/migrating_from_maven.html) para aprender a migrar de Maven a Gradle.
+
+## Crear un proyecto
+
+Abre el IDE y selecciona la opción para crear un proyecto nuevo.
+En IntelliJ, aparecerá la opción para elegir el tipo de proyecto que quieres crear: selecciona `New Project`.
+Selecciona `Gradle - Kotlin DSL` y haz clic en `Create`.
+
+Se abrirá el archivo `build.gradle.kts`, donde puedes añadir tus dependencias.
+
+### Añadir Paper como dependencia
+
+Para añadir Paper como dependencia, debes añadir el repositorio y la dependencia de Paper al archivo `build.gradle.kts`.
+
+:::tip
+
+Si quieres hacer referencia a una compilación específica, puedes sustituir el signo + por el identificador de compilación
+(por ejemplo, `{VERSION}.build.25-stable` para la compilación estable número 25 de una versión). Antes de la versión `26.1`
+(`1.21.11` y anteriores), el formato de la cadena de versión era `{VERSION}-R0.1-SNAPSHOT` y no había forma de especificar
+una compilación concreta.
+
+:::
+
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle">
+    ```kotlin title="build.gradle.kts" replace
+    repositories {
+      maven(url = "https://repo.papermc.io/repository/maven-public/") {
+        name = "papermc"
+      }
+    }
+
+    dependencies {
+      compileOnly("io.papermc.paper:paper-api:\{LATEST_PAPER_RELEASE}.build.+")
+    }
+
+    java {
+      toolchain.languageVersion.set(JavaLanguageVersion.of(25))
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven (No recomendado)">
+    Si quieres resolver dinámicamente con Maven la versión de la compilación más reciente, debes declarar
+    la versión como un rango: `[\{LATEST_PAPER_RELEASE}.build,)`. Para una compilación concreta, puedes
+    usar la variante estándar: `\{LATEST_PAPER_BUILD_API_VERSION}`.
+
+    ```xml title="pom.xml" replace
+    <project>
+      <repositories>
+        <repository>
+          <id>papermc</id>
+          <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+      </repositories>
+
+      <dependencies>
+        <dependency>
+          <groupId>io.papermc.paper</groupId>
+          <artifactId>paper-api</artifactId>
+          <version>[\{LATEST_PAPER_RELEASE}.build,)</version>
+          <scope>provided</scope>
+        </dependency>
+      </dependencies>
+    </project>
+    ```
+  </TabItem>
+</Tabs>
+
+### Configurar el directorio `src`
+
+:::note
+
+Si tu IDE crea automáticamente un directorio `src`, puedes omitir este paso.
+
+:::
+
+Para configurar el directorio `src`, crea un directorio llamado `src` y, dentro, otro directorio llamado `main`.
+Dentro de `main`, crea dos directorios: `java` y `resources`.
+
+La estructura debería ser así:
+
+<FileTree>
+  - example-plugin/
+    - build.gradle.kts
+    - settings.gradle.kts
+    - src/
+      - main/
+        - java/
+        - resources/
+</FileTree>
+
+### Configurar el directorio `java`
+
+Colocarás los archivos fuente de Java en el directorio `java`. Primero debes crear algunos paquetes para organizar el código.
+En este ejemplo, crearemos el paquete `com.example.paperplugin` y, dentro, una clase llamada `ExamplePlugin`.
+
+<FileTree>
+  - example-plugin/
+    - build.gradle.kts
+    - settings.gradle.kts
+    - src/
+      - main/
+        - java/
+          - com/
+            - example/
+              - paperplugin/
+                - ExamplePlugin.java
+        - resources/
+</FileTree>
+
+### Paquetes
+
+Como puedes ver, la clase `ExamplePlugin` está dentro del paquete `com.example.paperplugin`.
+Un paquete permite organizar el código; básicamente, es una carpeta. Los paquetes de Java se usan para agrupar clases relacionadas.
+Oracle tiene una guía sobre [paquetes](https://docs.oracle.com/javase/tutorial/java/package/packages.html) si quieres obtener más información.
+
+Al [dar nombre](https://docs.oracle.com/javase/tutorial/java/package/namingpkgs.html) a tus paquetes, debes usar tu nombre de dominio en orden inverso.
+Por ejemplo, si tu dominio es `example.com`, el nombre del paquete debería ser `com.example`. Si no tienes un nombre de dominio,
+puedes usar algo como tu nombre de usuario de GitHub. Si fueras Linus Torvalds, tu paquete sería `io.github.torvalds`.
+
+A continuación se añade el nombre del proyecto.
+Por ejemplo, si el proyecto se llamara `ExamplePlugin`, el paquete sería `io.github.torvalds.exampleplugin`.
+Así se obtiene un nombre de paquete único para cada plugin.
+
+### La clase _principal_
+
+La clase principal es el punto de entrada del plugin y será la única clase del plugin que extienda
+[](jd:paper:org.bukkit.plugin.java.JavaPlugin). Se considera una buena práctica **no** llamar a esta clase `Main`.
+En su lugar, elige un nombre más descriptivo, como el nombre de tu plugin. Si tu plugin se llama `Example`, la clase principal
+podría llamarse `ExamplePlugin`. Un ejemplo de implementación de esta clase podría ser:
+
+```java title="ExamplePlugin.java" collapse={1-6} showLineNumbers
+package com.example.paperplugin;
+
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public final class ExamplePlugin extends JavaPlugin implements Listener {
+    @Override
+    public void onEnable() {
+        this.getServer().getPluginManager().registerEvents(this, this);
+    }
+
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent event) {
+        event.getPlayer().sendPlainMessage("Hello, " + event.getPlayer().getName() + "!");
+    }
+}
+```
+
+### Configurar `resources`
+
+El directorio `resources` es donde colocarás el archivo `plugin.yml` de tu plugin. Consulta la página [Plugin YML](/es/paper/dev/plugin-yml) para obtener más información.
+
+## Usar el plugin Minecraft Development para IntelliJ
+
+Como alternativa, puedes usar el [plugin Minecraft Development para IntelliJ](https://plugins.jetbrains.com/plugin/8327-minecraft-development)
+para crear un proyecto nuevo.
+
+:::note
+
+Este tutorial solo funciona con IntelliJ IDEA. Si usas otro IDE, sigue la guía manual de configuración del proyecto descrita anteriormente.
+
+:::
+
+### Instalar el plugin Minecraft Development
+Lo primero que debes hacer es instalar el plugin [Minecraft Development](https://plugins.jetbrains.com/plugin/8327-minecraft-development).
+Para ello, ve a `File > Settings > Plugins` y busca `Minecraft Development` en la sección `Marketplace`.
+
+![](/paper/dev/getting-started/assets/installing-plugin.png)
+
+Después de instalar el plugin, tendrás que reiniciar IntelliJ.
+Para hacerlo, haz clic en el botón `Restart IDE` que aparece tras instalarlo.
+
+![](/paper/dev/getting-started/assets/restart-ide.png)
+
+### Crear un proyecto
+Una vez instalado el plugin, puedes crear un proyecto nuevo desde `File > New > Project...` y seleccionando `Minecraft` en la lista de opciones.
+
+![](/paper/dev/getting-started/assets/new-project-paper.png)
+
+Se te pedirá que proporciones información sobre el proyecto.
+
+| Campo                 | Explicación                                                                                                                                                                                                                                                          |
+|-----------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Name**              | El nombre del proyecto.                                                                                                                                                                                                                                              |
+| **Location**          | La ubicación del proyecto. Aquí se almacenarán los archivos del proyecto.                                                                                                                                                                                            |
+| **Platform Type**     | El tipo de plataforma para la que desarrollas. Debe ser `Plugin`.                                                                                                                                                                                                    |
+| **Platform**          | La plataforma para la que desarrollas. Debe ser `Paper`.                                                                                                                                                                                                             |
+| **Minecraft Version** | La versión de Minecraft para la que desarrollas.                                                                                                                                                                                                                     |
+| **Plugin Name**       | El nombre del plugin.                                                                                                                                                                                                                                                |
+| **Main Class**        | La clase principal del plugin. Debe ser la clase que extiende `JavaPlugin`.                                                                                                                                                                                          |
+| **Optional Settings** | Aquí puedes definir datos como los autores, el sitio web y la descripción. Son opcionales y el plugin no los necesita para funcionar.                                                                                                                                |
+| **Build System**      | El sistema de compilación que quieres usar. Paper recomienda Gradle, pero puedes usar Maven si lo prefieres.                                                                                                                                                         |
+| **Paper Manifest**    | Indica si quieres usar los nuevos plugins de Paper. Por ahora, no se recomienda porque todavía están en desarrollo.                                                                                                                                                  |
+| **Group ID**          | El ID de grupo del proyecto, que se usa en Maven y Gradle. Normalmente es tu nombre de dominio en orden inverso. Si no sabes qué poner, puedes usar algo como `io.github.<yourname>` o, si no tienes GitHub, `me.<yourname>`. |
+| **Artifact ID**       | El ID del artefacto del proyecto, que se usa en Maven y Gradle. Normalmente es el nombre del proyecto, que suele coincidir con el campo `Name`.                                                                                                                       |
+| **Version**           | La versión del proyecto, que se usa en Maven y Gradle. Por ahora suele ser `1.0-SNAPSHOT` y no es muy importante.                                                                                                                                                    |
+| **JDK**               | El JDK que quieres usar. Puede ser cualquier versión a partir de Java 25.                                                                                                                                                                                            |
+
+Ahora puedes hacer clic en el botón `Create` para que IntelliJ cree el proyecto.
+Si todo ha salido bien, deberías ver algo parecido a esto:
+
+![](/paper/dev/getting-started/assets/paper-plugin-overview.png)
+
+## Conclusión
+
+Ahora deberías tener un proyecto configurado con Paper como dependencia.
+Solo queda compilar el plugin y ejecutarlo en un servidor Paper.
+
+:::note
+
+Si quieres agilizar las pruebas de un plugin, puedes usar el plugin de Gradle [Run-Task](https://github.com/jpenilla/run-task).
+Descargará automáticamente un servidor Paper y lo ejecutará por ti.
+
+:::
+
+:::note
+
+Si usas IntelliJ, puedes compilar el plugin desde el menú de Gradle `Build`, situado en la esquina superior derecha del IDE.
+El JAR de salida del plugin estará en el directorio `build/libs`.
+
+:::

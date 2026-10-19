@@ -1,0 +1,135 @@
+---
+title: Configuración
+description: Descripción general de los archivos de configuración de Paper.
+slug: es/paper/reference/configuration
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+
+:::note
+
+Muchos de nuestros archivos cuentan con documentación completa. En esos casos, incluyen un enlace a su página.
+Si no es así, ofrecen una breve explicación de su contenido.
+
+:::
+
+<FileTree>
+  - logs/ todos los registros del servidor
+    - latest.log el registro más reciente
+    - \<yyyy-MM-dd\>-\<run-id\>.log.gz registros antiguos comprimidos con gzip
+  - config/
+    - [paper-global.yml](/es/paper/reference/global-configuration)
+    - [paper-world-defaults.yml](/es/paper/reference/world-configuration)
+  - plugins/ aquí puedes colocar los JAR de tus plugins
+    - .paper-remapped/ se usa para almacenar JAR de plugins con los paquetes reubicados; obtén más información [aquí](https://forums.papermc.io/threads/important-dev-psa-future-removal-of-cb-package-relocation.1106/)
+    - bStats/
+      - config.yml almacena la configuración de las métricas del plugin bStats
+    - spark/ carpeta del plugin para el perfilador spark incluido
+      - [config.json](https://spark.lucko.me/docs/Configuration) archivo principal de configuración de spark
+  - world/dimensions/\<namespace\>/\<key\>/
+    - [paper-world.yml](#valores-por-mundo) almacena los [valores de configuración](/es/paper/reference/world-configuration) que se aplican únicamente al mundo con la clave `namespace:key`
+  - [banned-ips.json](/es/paper/reference/vanilla-data-files#banned-ipsjson) almacena las direcciones IP bloqueadas en el servidor
+  - [banned-players.json](/es/paper/reference/vanilla-data-files#banned-playersjson) almacena los jugadores bloqueados en el servidor
+  - [bukkit.yml](/es/paper/reference/bukkit-configuration)
+  - [commands.yml](/es/paper/reference/bukkit-commands-configuration)
+  - [eula.txt](/es/paper/reference/vanilla-data-files#eulatxt) almacena el estado de aceptación del EULA
+  - [help.yml](/es/paper/reference/bukkit-help-configuration) almacena la configuración del comando `/help`
+  - [ops.json](/es/paper/reference/vanilla-data-files#opsjson) almacena información sobre los jugadores con estado de operador
+  - [permissions.yml](/es/paper/reference/bukkit-permissions-configuration) almacena definiciones de permisos adicionales
+  - [server.properties](/es/paper/reference/server-properties)
+  - [spigot.yml](/es/paper/reference/spigot-configuration)
+  - usercache.json almacena en caché datos de jugadores obtenidos de la API de Mojang, como las texturas de sus cabezas
+  - [whitelist.json](/es/paper/reference/vanilla-data-files#whitelistjson) almacena información de los jugadores incluidos en la lista de permitidos
+</FileTree>
+
+## Configuración por mundo
+
+Una de las funciones más potentes y, a la vez, menos comprendidas de la configuración de Paper es definir
+opciones por mundo. Aunque no es posible anular todas las opciones de configuración por mundo,
+sí se puede anular todo lo almacenado en `paper-world-defaults.yml`.
+
+### Valores predeterminados
+
+De forma predeterminada, Paper no define anulaciones por mundo y almacena todos los valores predeterminados en
+`config/paper-world-defaults.yml`. Todo lo que aparece en este archivo se puede anular por mundo, pero no se hace
+por defecto. Si cambias algo en `paper-world-defaults.yml`, el valor cambiará en todos los mundos en los que no
+lo hayas anulado manualmente.
+
+### Valores por mundo
+
+Para establecer un valor en un mundo concreto, edita `paper-world.yml` dentro de la carpeta del mundo. Por ejemplo, si
+quisieras habilitar `lootables.auto-replenish` en un mundo con la clave `custom:resource`, editarías
+`paper-world.yml` en la carpeta `world/dimensions/custom/resource` de esta manera:
+
+```yaml title=world/dimensions/custom/resource/paper-world.yml {3-4}
+_version: 28
+
+lootables:
+  auto-replenish: true
+```
+
+De forma predeterminada, los archivos de configuración `paper-world.yml` solo contienen `_version`. Para
+anular el valor predeterminado de una opción, debes añadirla manualmente copiándola de
+`paper-world-defaults.yml`.
+
+### Herencia
+
+Toda la configuración que no se defina explícitamente para un mundo se hereda de `paper-world-defaults.yml`.
+Esto significa que no hace falta repetir valores en `paper-world-defaults.yml` y en cada archivo
+`paper-world.yml`. **No es necesario ni recomendable** copiar todo el archivo
+`paper-world-default.yml` en cada archivo `paper-world.yml` que quieras modificar. Copia únicamente el
+valor exacto que quieres cambiar.
+
+Veamos un ejemplo más complejo y práctico: establecer distintos valores de `spawn-limits` y `auto-replenish`
+en dos mundos.
+
+```yaml title="paper-world-defaults.yml"
+lootables:
+  auto-replenish: true
+entities:
+  spawning:
+    spawn-limits:
+      ambient: 70
+      axolotls: 10
+      creature: 15
+      monster: 5
+      underground_water_creature: 5
+      water_ambient: 5
+      water_creature: 20
+```
+
+```yaml title="world/dimensions/minecraft/the_nether/paper-world.yml"
+entities:
+  spawning:
+    spawn-limits:
+      monster: 90
+```
+
+```yaml title="world/dimensions/custom/resource/paper-world.yml"
+lootables:
+  auto-replenish: false
+entities:
+  spawning:
+    spawn-limits:
+      axolotls: 8
+      creature: 15
+      monster: 2
+```
+
+Este ejemplo ilustra el concepto de herencia. Esta es la configuración efectiva que se aplicará a cada mundo de `world/dimensions`:
+
+| Clave de configuración                                      | minecraft/overworld | minecraft/the_nether | minecraft/the_end | custom/resource |
+|-------------------------------------------------------------|---------------------|----------------------|-------------------|-----------------|
+| `lootables.auto-replenish`                                  | `true`              | `true`               | `true`            | `false`         |
+| `entities.spawning.spawn-limits.ambient`                    | `15`                | `15`                 | `15`              | `15`            |
+| `entities.spawning.spawn-limits.axolotls`                   | `5`                 | `5`                  | `5`               | `8`             |
+| `entities.spawning.spawn-limits.creature`                   | `10`                | `10`                 | `10`              | `15`            |
+| `entities.spawning.spawn-limits.monster`                    | `70`                | `90`                 | `70`              | `2`             |
+| `entities.spawning.spawn-limits.underground_water_creature` | `5`                 | `5`                  | `5`               | `5`             |
+| `entities.spawning.spawn-limits.water_ambient`              | `20`                | `20`                 | `20`              | `20`            |
+| `entities.spawning.spawn-limits.water_creature`             | `5`                 | `5`                  | `5`               | `5`             |
+
+Observa que nunca se modificó `world/dimensions/minecraft/the_end/paper-world.yml`. Por eso, hereda todas las
+opciones de configuración de `config/paper-world-defaults.yml`. Además, `auto-replenish` solo se desactivó en
+`world/dimensions/custom/resource/paper-world.yml` porque en `config/paper-world-defaults.yml`
+`auto-replenish` está establecido en `true`.

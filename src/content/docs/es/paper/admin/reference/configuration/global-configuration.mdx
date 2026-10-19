@@ -1,0 +1,20 @@
+---
+title: Configuración global
+description: Explicación del archivo de configuración global de Paper.
+slug: es/paper/reference/global-configuration
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import PaperGlobalYML from "/src/config/paper/paper-global.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+El YAML siguiente muestra la estructura y los valores predeterminados de la configuración global (`config/paper-global.yml`).
+
+Haz clic en un nodo hoja para ver la descripción de ese ajuste.
+
+:::
+
+<ConfigNode data={parse(PaperGlobalYML)} />

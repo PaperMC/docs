@@ -1,0 +1,61 @@
+---
+title: Primeros pasos
+slug: es/adventure/getting-started
+description: Guía para empezar a usar Adventure.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+
+Para usar Adventure en tu proyecto, debes añadir la siguiente dependencia (y el repositorio si usas Gradle):
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-api" version={LATEST_ADVENTURE_API_RELEASE} />
+
+¿Necesitas compilaciones de desarrollo o snapshots? [Uso de compilaciones snapshot](#uso-de-compilaciones-snapshot)
+
+Algunas plataformas ya usan Adventure de forma nativa.
+En ese caso, no es necesario añadir Adventure como dependencia.
+Para ver la lista de plataformas que incluyen Adventure, consulta [Compatibilidad nativa](/es/adventure/platform/native).
+
+Para usar Adventure con otras plataformas, puedes consultar los adaptadores específicos de cada plataforma.
+Encontrarás la lista de plataformas con adaptadores compatibles en [Plataformas](/es/adventure/platform).
+
+## Uso de compilaciones snapshot
+
+Para usar compilaciones snapshot, debes añadir el siguiente repositorio:
+
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle (Kotlin)">
+    ```kotlin title="build.gradle.kts"
+    repositories {
+      maven(url = "https://central.sonatype.com/repository/maven-snapshots/") {
+        name = "central-snapshots"
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Gradle (Groovy)">
+    ```groovy title="build.gradle"
+    repositories {
+      maven {
+        name = 'central-snapshots'
+        url = 'https://central.sonatype.com/repository/maven-snapshots/'
+      }
+    }
+    ```
+  </TabItem>
+  <TabItem label="Maven">
+    ```xml title="pom.xml"
+    <repositories>
+      <repository>
+        <id>central-snapshots</id>
+        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+      </repository>
+    </repositories>
+    ```
+  </TabItem>
+</Tabs>

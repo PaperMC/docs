@@ -1,0 +1,28 @@
+---
+title: Configuración
+description: Guía de configuración de Waterfall.
+slug: es/waterfall/configuration
+banner:
+  destructive: true
+  content: Te recomendamos migrar a <a href="https://papermc.io/software/velocity">Velocity</a>. Para más información, consulta el <a href="https://forums.papermc.io/threads/1088/">anuncio</a>.
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import WaterfallConfigYML from "/src/config/waterfall/waterfall-config.yml?raw";
+import { parse } from "yaml";
+
+Esta página detalla las distintas opciones de configuración de Waterfall. Puedes encontrarlas en
+waterfall.yml.
+
+Si necesitas información sobre las opciones de config.yml de BungeeCord, consulta las páginas de documentación
+correspondientes.
+
+:::note
+
+El YAML siguiente muestra la estructura y los valores predeterminados de la configuración global.
+
+Haz clic en una hoja del árbol para ver la descripción de esa opción.
+
+:::
+
+<ConfigNode data={parse(WaterfallConfigYML)} />

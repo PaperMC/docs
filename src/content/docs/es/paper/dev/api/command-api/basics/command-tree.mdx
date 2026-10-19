@@ -1,0 +1,235 @@
+---
+title: Árboles de comando
+description: Una guía extensa para construir un árbol de comandos.
+slug: es/paper/dev/command-api/basics/command-tree
+---
+
+import { Image } from "astro:assets";
+import tree from "../../../../../../paper/dev/api/command-api/basics/assets/forest/tree.png";
+import treeDescriptions from "../../../../../../paper/dev/api/command-api/basics/assets/forest/tree-descriptions.png";
+
+¿Qué es un árbol de mando y qué tiene que ver con Brigadier? Si estás confundido, ¡esta es la página para ti! ¡Aquí analizaremos exhaustivamente todo lo que necesita saber para comprender el árbol de comandos!
+:::note
+Este pretende ser un curso completo sobre la estructura de los comandos de los brigadier. Este sitio no proporciona información sobre la ejecución de ramas o argumentos generales, solo literales. Se sugiere que consulte aquí si es nuevo en la programación de Brigadier.
+:::
+## ¿Qué es un árbol?
+Cuando se habla de árboles, lo primero que nos viene a la mente es un árbol en estado salvaje. Uno que puede verse así:
+
+<Image src={tree} alt="árbol de comandos" style="width: 40%; margin: 1.5rem auto;" />
+
+Entonces, ¿qué tiene esto que ver con los comandos? Imagine un comando similar a este:
+```yml title="A Generic Command"
+/customplugin reload
+/customplugin tphere
+/customplugin killall
+```
+En aras de la simplicidad, nos referiremos a `/customplugin` (sin ningún argumento) como nuestra raíz de "comando" o "árbol". Cada argumento después de nuestra "raíz" se denomina "rama". Puedes visualizar esto en nuestro árbol genérico así:
+
+<Image src={treeDescriptions} alt="Árbol de comandos descrito" style="width: 40%; margin: 1.5rem auto;" />
+
+Tener que dibujar un árbol cada vez de esta manera es agotador y, por lo general, no va al grano. Podemos visualizar árboles usando un **diagrama de árbol**. Esto se vería así:
+```d2
+style.fill: transparent
+direction: down
+
+customplugin -> reload
+customplugin -> tphere
+customplugin -> killall
+```
+Ahora es mucho más fácil comprender la relación raíz/rama de los elementos. El nodo raíz es el nodo que está en la cima de nuestra jerarquía. En este caso, ese es el nodo 'complemento personalizado'. Los otros elementos tienen una flecha que apunta **hacia** ellos, lo que significa que son una **rama** de nuestro nodo raíz, también llamado hijo. Los árboles genealógicos siguen una estructura similar, como puedes ver aquí:
+```d2
+style.fill: transparent
+direction: down
+
+parents -> "first child"
+parents -> "second child"
+parents -> "third child"
+"second child" -> "first grandchild"
+"third child" -> "second grandchild"
+"third child" -> "third grandchild"
+```
+Es importante recordar que esta estructura en forma de árbol no sólo es importante para el Brigadier. Es un concepto bastante utilizado. La [API de aventuras](/es/paper/dev/component-api/introduction) incluida en Paper también funciona mediante un árbol. ¿Por qué es esto importante para usar Brigadier? Bueno, permite una declaración de comando explícita. Al estar en un nodo, sabes exactamente dónde estás. Eso significa que no es necesario, como en la forma estándar de Bukkit, verificar primero si la cantidad de argumentos es 2 y si el primer argumento es `tphere`. Debido a que estás exactamente en ese nodo `tphere`, puedes comenzar a escribir tu lógica. Si desea obtener más información sobre la lógica de ejecución de los comandos de Brigadier, le sugerimos que consulte [ejecutores de comandos](/es/paper/dev/command-api/basics/executors).
+
+## ¿Cómo podemos visualizar un árbol en código?
+Podemos definir nuestra raíz así:
+```java
+LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("customplugin");
+```
+Este método devuelve un `LiteralArgumentBuilder<CommandSourceStack>`, que es una clase que nos permite agregarle ramas usando el método `.then(...)`, así:
+```java
+LiteralArgumentBuilder<CommandSourceStack> root = Commands.literal("customplugin");
+root.then(Commands.literal("reload"));
+root.then(Commands.literal("tphere"));
+root.then(Commands.literal("killall"));
+```
+Cada uno de estos métodos `.then(...)` agrega una nueva rama a nuestra raíz. Es posible que haya notado el uso repetido de `Commands.literal(String)` aquí. No sólo define la raíz del árbol de nuestro comando, sino también nuestros "subcomandos" (`reload`, `tphere` y `killall`). Cada literal "secundario" se denomina subcomando de su padre.
+
+## Creando un comando más avanzado
+Pero ¿y si queremos un comando más complejo? Digamos que queremos definir el siguiente comando:
+```yml title="Advanced Command"
+/advanced
+ ┣━┳ killall
+ ┃ ┣━━ entities
+ ┃ ┣━━ players
+ ┃ ┗━━ zombies
+ ┗━┳ eat
+   ┣━━ ice-cream
+   ┗━━ main-dish
+```
+Lo que permite las siguientes ejecuciones de comandos en el juego:
+```
+/advanced killall entities
+/advanced killall players
+/advanced killall zombies
+/advanced eat ice-cream
+/advanced eat main-dish
+```
+Como este es un comando bastante complicado, primero podemos visualizarlo como un gráfico de árbol para comprender mejor lo que está sucediendo:
+```d2
+style.fill: transparent
+direction: down
+
+advanced -> killall
+advanced -> eat
+killall -> entities
+killall -> players
+killall -> zombies
+eat -> "ice cream"
+eat -> "main dish"
+```
+Habiendo definido nuestro comando objetivo, ¿cómo podemos hacer esto ahora? Hay algunas formas posibles, pero la más simple es definir primero **más lejos de la raíz**. Eso significa que primero estamos definiendo las últimas ramas de todo nuestro árbol. Entonces aquellos que no tienen subcomandos:
+```java
+LiteralArgumentBuilder<CommandSourceStack> entities = Commands.literal("entities");
+LiteralArgumentBuilder<CommandSourceStack> players = Commands.literal("players");
+LiteralArgumentBuilder<CommandSourceStack> zombies = Commands.literal("zombies");
+
+LiteralArgumentBuilder<CommandSourceStack> iceCream = Commands.literal("ice-cream");
+LiteralArgumentBuilder<CommandSourceStack> mainDish = Commands.literal("main-dish");
+```
+Esto nos otorga los elementos más profundos de nuestro árbol.
+```d2
+style.fill: transparent
+
+entities
+players
+zombies
+"ice cream"
+"main dish"
+```
+Ahora, podemos definir la siguiente capa de literales: Entonces, los `killall` y `eat`:
+```java
+LiteralArgumentBuilder<CommandSourceStack> killall = Commands.literal("killall");
+LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat");
+```
+Visualizado en nuestro gráfico de árbol:
+```d2
+style.fill: transparent
+
+killall
+eat
+```
+Con estos definidos, podemos agregar nuestros elementos secundarios a su elemento principal, así:
+```java
+killall.then(entities);
+killall.then(players);
+killall.then(zombies);
+
+eat.then(iceCream);
+eat.then(mainDish);
+```
+Lo que nos da esta estructura algo parecida a un árbol:
+```d2
+style.fill: transparent
+direction: down
+
+killall -> entities
+killall -> players
+killall -> zombies
+eat -> "ice cream"
+eat -> "main dish"
+```
+Finalmente, podemos crear nuestro **nodo raíz** y agregarle nuestros subcomandos `killall` y `eat`:
+```java
+LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced");
+advancedCommandRoot.then(killall);
+advancedCommandRoot.then(eat);
+```
+Y esto devuelve el árbol de comandos final:
+```d2
+style.fill: transparent
+
+killall -> entities
+killall -> players
+killall -> zombies
+eat -> "ice cream"
+eat -> "main dish"
+advanced -> killall
+advanced -> eat
+```
+¡Y hemos terminado!
+
+## Encadenando llamadas al método 'entonces'
+Es posible que hayas notado que parece innecesariamente detallado tener que almacenar cada nodo secundario en su propia variable. Pero aquí es donde el argumento `.then()` viene al rescate. Devuelve el mismo elemento que fue llamado. Eso significa que si tuviéramos que ejecutar este código:
+```java
+LiteralArgumentBuilder<CommandSourceStack> value = killall.then(entities);
+if (value == killall) {
+    logger.info("El valor de retorno es el mismo que killall");
+}
+```
+Siempre veríamos impreso «El valor de retorno es el mismo que killall». Y podemos aprovecharlo encadenando las llamadas `then(...)`, así:
+```java
+killall.then(entities).then(players).then(zombies);
+```
+Debido a que esto es difícil de leer, debemos darle a cada rama una nueva línea:
+```java
+killall
+    .then(entities)
+    .then(players)
+    .then(zombies);
+```
+Con esto, tampoco tenemos que almacenar cada literal en su propia variable, sino que podemos pasarlos directamente al método `.then(...)`:
+```java
+killall
+    .then(Commands.literal("entities"))
+    .then(Commands.literal("players"))
+    .then(Commands.literal("zombies"));
+```
+Se puede hacer lo mismo con el subcomando `eat`:
+```java
+eat
+    .then(Commands.literal("ice-cream"))
+    .then(Commands.literal("main-dish"));
+```
+Aprovechando aún más el patrón constructor del método `then`, podemos colocar estas ramas encadenadas directamente en la creación inicial de nuestro subcomando. Como esto:
+```java
+LiteralArgumentBuilder<CommandSourceStack> eat = Commands.literal("eat")
+    .then(Commands.literal("ice-cream"))
+    .then(Commands.literal("main-dish"));
+
+LiteralArgumentBuilder<CommandSourceStack> killall = Commands.literal("killall")
+    .then(Commands.literal("entities"))
+    .then(Commands.literal("players"))
+    .then(Commands.literal("zombies"));
+
+
+LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced");
+advancedCommandRoot.then(eat);
+advancedCommandRoot.then(killall);
+```
+Ahora bien, habrás notado que nuestro nodo raíz también registra sus ramas usando el método `.then(...)`, lo que significa que también podemos combinarlos:
+```java
+LiteralArgumentBuilder<CommandSourceStack> advancedCommandRoot = Commands.literal("advanced")
+    .then(Commands.literal("eat")
+        .then(Commands.literal("ice-cream"))
+        .then(Commands.literal("main-dish"))
+    )
+    .then(Commands.literal("killall")
+        .then(Commands.literal("entities"))
+        .then(Commands.literal("players"))
+        .then(Commands.literal("zombies"))
+    );
+```
+¡Lo que da como resultado el comando terminado!
+:::caution
+Tienes que tener mucho cuidado al anidar ramas, ya que el comando se vuelve completamente diferente cuando pierdes un soporte.
+:::

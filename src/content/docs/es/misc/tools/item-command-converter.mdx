@@ -1,0 +1,21 @@
+---
+title: Conversor de comandos de objetos
+description: Herramienta para actualizar comandos del antiguo formato de objetos basado en NBT a componentes de objetos.
+slug: es/misc/tools/item-command-converter
+tableOfContents: false
+---
+
+import ItemCommandConverter from "/src/components/tools/ItemCommandConverter.svelte";
+
+En la versión 1.20.5, Mojang pasó del NBT no estructurado a los llamados componentes de objetos. Aunque Minecraft
+actualizará automáticamente todos los objetos existentes, solo Paper actualizará, cuando sea posible, los comandos y
+componentes de texto que contengan objetos. Esta herramienta permite convertir externamente los comandos antiguos de objetos al
+nuevo formato.
+
+
+Ten en cuenta que debes seleccionar el modo *Argumento de entidad* si quieres convertir datos de entidades fuera del
+comando summon, ya que necesitamos el tipo de entidad para convertir los datos correctamente.
+
+<br />
+
+<ItemCommandConverter client:load />

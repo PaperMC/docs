@@ -1,0 +1,80 @@
+---
+title: Predicados
+description: Documentación de argumentos que permiten la validación de valores.
+slug: es/paper/dev/command-api/arguments/predicate
+---
+
+import DoubleRangeMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/doublerange.mp4";
+import IntegerRangeMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/integerrange.mp4";
+import ItemPredicateMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/itempredicate.mp4";
+
+import Video from "/src/components/Video.astro";
+
+Un predicado permite comprobar si hay valores válidos. Estos argumentos están dedicados a comprobar si algún tipo de valor es válido según la entrada del usuario.
+
+
+## Argumento de doble rango
+Este argumento se puede utilizar como predicado para números, que requieren una entrada precisa.
+
+### Ejemplo de uso
+```java
+Commands.argument("range", ArgumentTypes.doubleRange())
+    .executes(context -> {
+        final Range<Double> range = context.getArgument("range", DoubleRangeProvider.class).range();
+        final CommandSender sender = context.getSource().getSender();
+
+        for (int i = 0; i < 5; i++) {
+            sender.sendRichMessage("Is <index> in bounds? <result>",
+                Placeholder.unparsed("index", String.valueOf(i)),
+                Placeholder.unparsed("result", String.valueOf(range.contains((double) i)))
+            );
+        }
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={DoubleRangeMp4} />
+
+
+## Argumento de rango entero
+Este argumento funciona de manera muy similar al argumento de doble rango, con la única diferencia de que este argumento solo acepta números enteros.
+
+### Ejemplo de uso
+```java
+Commands.argument("range", ArgumentTypes.integerRange())
+    .then(Commands.argument("input", IntegerArgumentType.integer())
+        .executes(context -> {
+            final Range<Integer> range = context.getArgument("range", IntegerRangeProvider.class).range();
+            final int input = IntegerArgumentType.getInteger(context, "input");
+            final CommandSender sender = context.getSource().getSender();
+
+            sender.sendRichMessage(            "<aqua><input></aqua> <result:'<green>está</green>':'<red>no está</red>'/> dentro del intervalo especificado.",
+                Placeholder.unparsed("input", String.valueOf(input)),
+                Formatter.booleanChoice("result", range.contains(input))
+            );
+            return Command.SINGLE_SUCCESS;
+        })
+    )
+```
+### Vista previa del juego
+<Video src={IntegerRangeMp4} />
+
+
+## Argumento del predicado del elemento
+Este argumento permite comprobar si un elemento se ajusta a algún predicado. Es útil para filtrar ciertos elementos según algunos criterios.
+
+### Ejemplo de uso
+```java
+Commands.argument("predicate", ArgumentTypes.itemPredicate())
+    .executes(context -> {
+        final ItemStackPredicate predicate = context.getArgument("predicate", ItemStackPredicate.class);
+        final ItemStack woodenSword = ItemType.WOODEN_SWORD.createItemStack();
+
+        context.getSource().getSender().sendRichMessage(        "¿El predicado incluye una espada de madera predeterminada? <result:'<green>sí</green>':'<red>no</red>'>",
+            Formatter.booleanChoice("result", predicate.test(woodenSword))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={ItemPredicateMp4} />

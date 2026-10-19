@@ -1,0 +1,239 @@
+---
+title: API de MiniMessage
+slug: es/adventure/minimessage/api
+description: Guía para usar MiniMessage en tu código.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+
+## Dependencia
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-text-minimessage" version={LATEST_ADVENTURE_API_RELEASE} />
+
+:::note
+
+Algunas plataformas ya proporcionan MiniMessage de forma nativa. En ese caso, no es necesario añadir MiniMessage como dependencia.
+
+:::
+
+## Primeros pasos
+
+MiniMessage ofrece una API sencilla mediante la clase `MiniMessage`.
+
+Se puede obtener una instancia estándar del serializador mediante el método `miniMessage()`. Usa el conjunto predeterminado de etiquetas y no está en modo estricto.
+
+MiniMessage se puede personalizar más mediante el [constructor](#constructor).
+
+MiniMessage permite serializar componentes como cadenas MiniMessage y analizar o deserializar cadenas MiniMessage para convertirlas en componentes.
+
+A continuación se muestra un breve ejemplo para probarlo:
+
+```java
+final Audience player = ...;
+final MiniMessage mm = MiniMessage.miniMessage();
+
+final Component parsed = mm.deserialize("Hola <rainbow>mundo</rainbow>, ¿no es divertido <underlined>MiniMessage</underlined>?");
+
+player.sendMessage(parsed);
+```
+
+Para usos más avanzados, se pueden registrar resolvedores de etiquetas adicionales, que generarán una instancia `Tag` al recibir el nombre de una etiqueta y sus argumentos. Se describen con más detalle a continuación.
+
+### Preajustes
+
+MiniMessage también proporciona un conjunto de preajustes que se pueden usar en lugar de la instancia principal de MiniMessage.
+Estos preajustes permiten a los desarrolladores evitar fácilmente que los usuarios usen por accidente funciones de componentes susceptibles de abuso, como el evento de clic para ejecutar comandos.
+
+A continuación se muestra una lista de los preajustes disponibles y sus funciones:
+* **`DEFAULT`**\
+  El preajuste predeterminado, que incluye todas las funciones de MiniMessage.
+  Equivale a `MiniMessage.miniMessage()`.
+* **`NON_INTERACTABLE`**\
+  Un preajuste que desactiva todas las funciones de componentes que permiten la interacción.
+  Incluye eventos de clic, eventos de desplazamiento e inserción de texto.
+  También incluye un posprocesador personalizado que elimina del componente resultante cualquier elemento interactivo.
+  Por tanto, también se puede usar con resolvedores de etiquetas personalizados que podrían generar componentes interactivos.
+* **`FORMATTED_TEXT`**\
+  Un preajuste que solo permite componentes de texto y el formato asociado.
+  Incluye color, sombra, fuente y decoración de texto (por ejemplo, negrita y cursiva).
+  También incluye un posprocesador personalizado que elimina del componente resultante cualquier componente que no sea de texto o elemento interactivo.
+  Por tanto, también se puede usar con resolvedores de etiquetas personalizados.
+
+```java
+// Puedes obtener una instancia de MiniMessage preconfigurada con cualquiera de los preajustes.
+final MiniMessage miniMessage = MiniMessage.miniMessage(MiniMessage.Preset.NON_INTERACTABLE);
+
+// Como alternativa, puedes obtener un constructor preconfigurado...
+final MiniMessage.Builder builder = MiniMessage.builder(MiniMessage.Preset.NON_INTERACTABLE);
+
+// ...y añadir tus propias etiquetas o cambiar otros ajustes si hace falta...
+builder.editTags(tags -> {
+  tags
+    .resolver(new MyCustomTagResolver())
+    .resolver(fetchExternalTags());
+});
+
+// ...y, por último, crear tu instancia de MiniMessage.
+final MiniMessage myCustomMiniMessageInstance = builder.build();
+```
+
+### Constructor
+
+Para facilitar la personalización de MiniMessage, ofrecemos un constructor. Los métodos específicos se explican en los Javadocs.
+
+```java
+final MiniMessage mm = MiniMessage.builder()
+    .tags(TagResolver.builder()
+      .resolver(StandardTags.color())
+      .resolver(StandardTags.decorations())
+      .resolver(this.someResolvers)
+      .build()
+    )
+    .build();
+```
+
+:::tip
+
+Es recomendable inicializar una instancia de MiniMessage una sola vez en un lugar central y usarla para todos los mensajes.
+La excepción sería que quisieras personalizar MiniMessage en función de los permisos del usuario (por ejemplo, permitir que los administradores usen colores y decoraciones en sus mensajes, pero no los usuarios normales).
+
+:::
+
+### Gestión de errores
+
+De forma predeterminada, MiniMessage nunca lanza una excepción causada por la entrada del usuario. En su lugar, trata las etiquetas no válidas como texto normal. El modo `MiniMessage.Builder#strict(true)` habilita el modo estricto,
+que lanza excepciones cuando hay etiquetas sin cerrar, pero sigue permitiendo las etiquetas especificadas incorrectamente.
+
+Para obtener información sobre los motivos por los que puede haber fallado el análisis, se puede proporcionar `MiniMessage.Builder#debug(Consumer<String>)`, que recibirá los mensajes de depuración de una cadena de entrada.
+
+
+## Resolvedores de etiquetas
+
+Toda resolución de etiquetas pasa por resolvedores de etiquetas. Hay un resolvedor global que describe las etiquetas disponibles en una instancia de `MiniMessage`, además de resolvedores específicos de cada análisis que pueden proporcionar etiquetas adicionales para una entrada concreta.
+
+Los resolvedores de etiquetas vinculan un nombre y sus argumentos con la lógica que genera el `Component` contenido en una instancia `Tag`. Se pueden combinar, por lo que un `TagResolver` puede generar cualquier cantidad de instancias `Tag`. El nombre de etiqueta que reciben los resolvedores siempre estará en minúsculas para que las búsquedas no distingan entre mayúsculas y minúsculas.
+
+Los nombres de etiquetas solo pueden contener los caracteres a-z, 0-9, `_` y `-`. Además, pueden empezar opcionalmente por cualquiera de estos caracteres: `!?#`.
+
+Puedes crear tu propio `TagResolver` mediante los métodos de fábrica estáticos de `TagResolver`. Para reemplazar etiquetas dinámicamente por texto, MiniMessage incluye `Placeholder` y `Formatter`.
+Siempre que sea posible, conviene usar estos resolvedores integrados, ya que MiniMessage puede aplanar sus combinaciones para obtener un formato más eficiente.
+Consulta [aquí](/es/adventure/minimessage/dynamic-replacements) los reemplazos dinámicos integrados.
+
+Para combinar varios resolvedores, consulta el constructor de resolvedores de etiquetas: `TagResolver.builder()`.
+
+El constructor de `MiniMessage` permite proporcionar un resolvedor de etiquetas personalizado en lugar del predeterminado (`StandardTags.all()`).
+
+MiniMessage también ofrece métodos de conveniencia para hacerlo:
+
+```java
+final MiniMessage serializer = MiniMessage.builder()
+  .tags(TagResolver.builder()
+    .resolver(StandardTags.color())
+    .build()
+  )
+  .build();
+
+Component parsed = serializer.deserialize("<green><bold>Hola");
+
+// La aserción se cumple.
+assertEquals(Component.text("<bold>Hola", NamedTextColor.GREEN), parsed);
+```
+
+Como la etiqueta `<bold>` no está habilitada en este constructor, se interpreta como texto literal.
+
+### Gestionar argumentos
+
+Los resolvedores de etiquetas reciben un parámetro `ArgumentQueue`, que proporciona los argumentos de etiqueta presentes en la entrada. Los métodos auxiliares de `Tag.Argument` pueden facilitar la conversión de la etiqueta.
+
+Las excepciones que lanzan los métodos `popOr()` interrumpen la ejecución, pero por ahora solo se exponen a los usuarios en la salida de depuración. Tenemos previsto añadir una función de autocompletado que pueda
+mostrar parte de esta información al usuario; por eso, procura redactar mensajes de error útiles en los resolvedores de etiquetas personalizados.
+
+## Etiquetas
+
+Una vez que un resolvedor de etiquetas ha procesado los argumentos, devuelve un objeto `Tag`. Estos objetos implementan la lógica para generar o modificar un árbol de componentes. Hay tres tipos principales de `Tag`; todas las implementaciones personalizadas deben implementar una de estas interfaces.
+
+### Preprocesamiento
+
+Estas etiquetas implementan la interfaz `PreProcess` y contienen una cadena MiniMessage sin procesar que se inserta en la entrada del usuario antes de continuar con el análisis.
+
+Debido a las limitaciones de la implementación actual del analizador, ten en cuenta que las etiquetas de preprocesamiento alteran los desplazamientos de los mensajes de error y pueden impedir el autocompletado. Sin embargo, actualmente son la única forma de integrar fragmentos de marcado en un mensaje.
+
+### Inserción
+
+Estas etiquetas son bastante sencillas: representan un `Component` literal. La mayoría de las implementaciones de `Tag` deberían
+ser etiquetas `Inserting`. Estas etiquetas también pueden ser autocerradas opcionalmente; de forma predeterminada, solo ocurre con las etiquetas creadas por `Placeholder.unparsed(String)` y `Placeholder.component(Component)`,
+para que los marcadores de posición sean autónomos.
+
+La mayoría de las `etiquetas estándar <./format>` son `Inserting`. Estas etiquetas insertan directamente un componente o usan el método auxiliar `Tag.styling(StyleBuilderApplicable...)` para aplicar estilos a los componentes.
+
+Este método auxiliar permite aplicar de forma eficiente una colección de estilos con una sola etiqueta. Por ejemplo, para crear una etiqueta `<a:[href]>Título</a>` que convierta ese texto en un enlace que abra una URL con el estilo tradicional de los enlaces, se puede usar lo siguiente:
+
+```java
+Component aTagExample() {
+  final String input = "Hola, <a:https://docs.papermc.io>¡haz clic aquí!</a>, pero no aquí.";
+  final MiniMessage extendedInstance = MiniMessage.builder()
+    .editTags(b -> b.tag("a", MiniMessageTest::createA))
+    .build();
+
+  return extendedInstance.deserialize(input);
+}
+
+static Tag createA(final ArgumentQueue args, final Context ctx) {
+  final String link = args.popOr("La etiqueta <a> requiere exactamente un argumento: el enlace que se abrirá").value();
+
+  return Tag.styling(
+    NamedTextColor.BLUE,
+    TextDecoration.UNDERLINED,
+    ClickEvent.openUrl(link),
+    HoverEvent.showText(Component.text("Abrir " + link))
+  );
+}
+```
+
+Esto permite generar estilos enriquecidos con relativa rapidez.
+
+
+### Modificación
+
+Las etiquetas de modificación son las más complejas y especializadas. Reciben el árbol de nodos y pueden analizarlo antes de
+crear los componentes; después reciben cada componente secundario generado y pueden modificarlo. Se usan para las etiquetas integradas `<rainbow>` y `<gradient>`,
+pero también sirven para transformaciones complejas similares.
+
+Primero, las etiquetas de modificación pueden recorrer cada nodo del árbol en profundidad. Si una instancia `Modifying` almacena estado durante este recorrido, su resolvedor debe devolver una instancia nueva cada vez para evitar que se corrompa el estado.
+
+:::note
+
+La API `Node` de 4.10.0 todavía no está muy desarrollada: la mayoría de sus elementos siguen siendo internos. Se puede exponer información adicional según las necesidades de quienes desarrollen etiquetas.
+
+:::
+
+Una vez recorrido todo el árbol de análisis, se llama al método `postVisit()`. Se puede sobrescribir opcionalmente si es necesario realizar cálculos adicionales.
+
+A continuación, la instancia `Modifying` entra en la fase de aplicación, en la que se presenta el árbol de componentes a la etiqueta para su transformación. Esto permite que la etiqueta *modifique* el contenido de los componentes, de ahí su nombre.
+
+### Directivas del analizador
+
+Las directivas del analizador son un tipo especial de etiqueta: son instrucciones para el analizador y, por tanto, los usuarios finales no pueden implementarlas.
+
+Actualmente solo hay una, pero se pueden añadir más en cualquier momento.
+
+| Directiva | Descripción                                                                      |
+|-----------|----------------------------------------------------------------------------------|
+| RESET     | Indica al analizador que esta etiqueta debe cerrar todas las etiquetas que estén abiertas. |
+
+Esto permite ofrecer la funcionalidad de una etiqueta `<reset>` con otro nombre. Por ejemplo:
+
+```java
+final var clearTag = TagResolver.resolver("clear", ParserDirective.RESET);
+
+final var parser = MiniMessage.builder()
+  .editTags(t -> t.resolver(clearTag))
+  .build();
+
+final Component parsed = parser.deserialize("<red>hola <bold>mundo<clear>, ¿cómo estás?");
+```
+
+Este código añade una etiqueta `<clear>` que se comporta igual que la etiqueta `<reset>` predeterminada: el texto `, ¿cómo estás?` no aparecería en negrita ni en rojo.

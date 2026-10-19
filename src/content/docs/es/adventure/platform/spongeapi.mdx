@@ -1,0 +1,47 @@
+---
+title: SpongeAPI
+slug: es/adventure/platform/spongeapi
+description: Implementación de Adventure para SpongeAPI.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_RELEASE } from "/src/utils/versions";
+
+Adventure ofrece una plataforma para SpongeAPI 7 en *Minecraft: Java Edition* 1.12.
+
+:::danger
+
+La implementación de la plataforma Adventure para SpongeAPI 7 ya no se mantiene.
+El equipo de Adventure ya no ofrece asistencia para estas bibliotecas.
+
+Recomendamos que quienes usan estas bibliotecas migren a programas modernos con [compatibilidad nativa con Adventure](/es/adventure/platform/native) (por ejemplo, SpongeAPI 8 o posterior).
+
+:::
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-platform-spongeapi" version={LATEST_ADVENTURE_PLATFORM_RELEASE} />
+
+## Uso
+
+La plataforma SpongeAPI se puede crear mediante la inyección de dependencias de Guice o directamente. Recomendamos usar la inyección, ya que requiere menos código repetitivo.
+
+Un plugin de ejemplo es bastante sencillo:
+
+```java
+@Plugin(/* [...] */)
+public class MyPlugin {
+    private final SpongeAudiences adventure;
+
+    @Inject
+    MyPlugin(final SpongeAudiences adventure) {
+        this.adventure = adventure;
+    }
+
+    public SpongeAudiences adventure() {
+        return this.adventure;
+    }
+}
+```
+
+Esto configura una instancia de `SpongeAudiences` que puede proporcionar audiencias para los jugadores o cualquier `MessageReceiver`.

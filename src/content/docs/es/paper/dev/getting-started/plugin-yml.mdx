@@ -1,0 +1,253 @@
+---
+title: plugin.yml
+description: Guía del archivo plugin.yml de Bukkit.
+slug: es/paper/dev/plugin-yml
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+import { LATEST_PAPER_RELEASE } from "/src/utils/versions";
+
+El archivo `plugin.yml` es el archivo de configuración principal de tu plugin.
+Contiene información sobre el plugin, como el nombre, la versión y la descripción.
+También contiene información sobre sus dependencias, permisos y comandos.
+
+El archivo `plugin.yml` se encuentra en el directorio `resources` del proyecto.
+
+<FileTree>
+  - example-plugin/
+    - build.gradle.kts
+    - settings.gradle.kts
+    - src/
+      - main/
+        - java/
+        - resources/
+          - **plugin.yml**
+</FileTree>
+
+## Ejemplo
+
+Este es un ejemplo de un archivo `plugin.yml`:
+
+```yaml replace
+name: Example-Plugin
+version: 1.0.0
+main: com.example.paperplugin.ExamplePlugin
+description: An example plugin
+author: PaperMC
+website: https://papermc.io
+api-version: '\{LATEST_PAPER_RELEASE}'
+```
+
+## Campos
+
+:::note
+
+Los campos de esta sección no están en ningún orden en particular.
+Si un campo tiene un asterisco (\*) junto a su nombre, significa que es obligatorio.
+
+:::
+
+### name*
+
+El nombre de tu plugin. Es lo que se mostrará en la lista de plugins y en los mensajes del registro.
+Si se establece el prefijo, este sustituirá al nombre en los registros.
+- `name: Example-Plugin`
+
+### version*
+
+La versión actual del plugin. Se muestra en los mensajes de información del plugin y en los registros del servidor.
+- `version: 1.0.0`
+
+### main*
+
+La clase principal del plugin. Es la clase que extiende `JavaPlugin` y constituye el punto de entrada del plugin.
+- `main: com.example.paperplugin.ExamplePlugin`
+
+Esta es la ruta del paquete y el nombre de la clase principal.
+
+### description
+
+Una breve descripción del plugin y de lo que hace. Se mostrará en los comandos de información del plugin.
+- `description: An example plugin`
+
+### author / authors
+
+El autor o los autores del plugin. Puede ser un solo autor o una lista de autores.
+- `author: PaperMC`
+- `authors: [PaperMC, Bukkit]`
+Se mostrarán en los comandos de información del plugin.
+
+### contributors
+
+Los colaboradores del plugin que no sean sus autores responsables.
+- `contributors: [PaperMC, Bukkit]`
+Se mostrarán en los comandos de información del plugin.
+
+### website
+
+El sitio web del plugin. Resulta útil para enlazar a un repositorio de GitHub o a la página del plugin.
+- `website: https://papermc.io`
+Se mostrará en los comandos de información del plugin.
+
+### api-version
+
+La versión de la API de Paper que usa tu plugin. Hasta la versión 1.20.5 no incluía la versión menor. Desde la versión 1.20.5,
+se admite una versión menor.
+Los servidores con una versión inferior a la indicada aquí se negarán a cargar el plugin.
+Las versiones válidas son de 1.13 a {LATEST_PAPER_RELEASE}.
+- `api-version: '\{LATEST_PAPER_RELEASE}'`
+
+:::note
+
+Si no se especifica este campo, el plugin se cargará como un plugin antiguo y se imprimirá una advertencia en la consola.
+
+:::
+
+### load
+
+Indica cuándo debe cargar el servidor el plugin. Puede ser `STARTUP` o `POSTWORLD`. Si no se especifica, el valor predeterminado es `POSTWORLD`.
+- `load: STARTUP`
+
+### prefix
+
+El prefijo del plugin. Es lo que se mostrará en el registro en lugar del nombre del plugin.
+- `prefix: EpicPaperMCHypePlugin`
+
+### libraries
+
+Lista de bibliotecas de las que depende el plugin. Estas bibliotecas se descargan del repositorio Maven Central y se añaden al classpath.
+Así no hace falta sombrear ni reubicar las bibliotecas.
+
+```yaml
+libraries:
+  - com.google.guava:guava:30.1.1-jre
+  - com.google.code.gson:gson:2.8.6
+```
+
+:::note
+
+Puedes configurar el repositorio central mediante la variable de entorno
+[`PAPER_DEFAULT_CENTRAL_REPOSITORY`](/es/paper/reference/system-properties#paper_default_central_repository) y la propiedad del sistema
+[`org.bukkit.plugin.java.LibraryLoader.centralURL`](/es/paper/reference/system-properties#orgbukkitpluginjavalibraryloadercentralurl).
+
+:::
+
+### permissions
+
+Lista de los permisos que usa tu plugin. Resulta útil para restringir el acceso a ciertas funciones.
+```yaml
+permissions:
+  permission.node:
+    description: "This is a permission node"
+    default: op
+    children:
+      permission.node.child: true
+  another.permission.node:
+    description: "This is another permission node"
+    default: notop
+```
+
+`description` es la descripción del nodo de permiso. Es lo que se mostrará en la lista de permisos.
+`default` es el valor predeterminado del nodo de permiso. Puede ser `op`/`notop` o `true`/`false`.
+Si no se especifica, se usa el valor de `default-permission`, cuyo valor predeterminado es `op`.
+Cada nodo de permiso puede tener nodos secundarios. Si se establece en `true`, heredará el permiso principal.
+
+### default-permission
+
+El valor predeterminado para los permisos que no tengan un valor `default` especificado. Puede ser `op`/`notop` o `true`/`false`.
+- `default-permission: true`
+
+### paper-plugin-loader
+
+El nombre completo de una clase de [loader](/es/paper/dev/getting-started/paper-plugins#loaders) de Paper, si quieres usarla.
+- `paper-plugin-loader: com.example.paperplugin.ExamplePluginLoader`
+
+:::danger[Experimental]
+
+Los [plugins de Paper](/es/paper/dev/getting-started/paper-plugins) (y, por tanto, los loaders de plugins) son experimentales y podrían cambiar.
+
+:::
+
+### paper-skip-libraries
+
+Si es `true`, Paper omitirá la resolución de las bibliotecas definidas en la [sección `libraries`](#libraries).
+Esto resulta útil para delegar la carga de bibliotecas a un [loader](/es/paper/dev/getting-started/paper-plugins#loaders) de plugins de Paper.
+- `paper-skip-libraries: false`
+
+:::danger[Experimental]
+
+Los [plugins de Paper](/es/paper/dev/getting-started/paper-plugins) (y, por tanto, los loaders de plugins) son experimentales y podrían cambiar.
+
+:::
+
+## Comandos
+
+Lista de los comandos que usa tu plugin. Resulta útil si tu plugin usa comandos para ofrecer funciones.
+```yaml
+commands:
+  command:
+    description: "This is a command"
+    usage: "/command <arg>"
+    aliases: [cmd, command]
+    permission: permission.node
+    permission-message: "You do not have permission to use this command"
+```
+
+- `description` es la descripción del comando. Explica brevemente qué hace.
+- `usage` indica cómo se usa el comando. Se muestra cuando el jugador ejecuta `/help <command>`.
+- `aliases` es una lista de alias con los que se puede ejecutar el comando. Resulta útil para abreviarlo.
+- `permission` es el nodo de permiso que necesita el jugador para ejecutar el comando. Nota: los jugadores solo verán los comandos que tengan permiso para ejecutar.
+- `permission-message` es el mensaje que se mostrará si el jugador no tiene permiso para ejecutar el comando.
+
+## Dependencias
+
+:::caution[Dependencias cíclicas]
+
+Si se especifica un plugin como dependencia, se cargará antes que tu plugin.
+Ten cuidado: las dependencias cíclicas pueden causar problemas al cargar los plugins. Este es un ejemplo de dependencia cíclica:
+
+```d2
+style.fill: transparent
+direction: right
+
+"Plugin A" -> "Plugin B"
+"Plugin B" -> "Plugin C"
+"Plugin C" -> "Plugin D"
+"Plugin D" -> "Plugin A"
+```
+
+En este ejemplo, `Plugin A` y `Plugin B` son plugins que dependen uno del otro.
+
+:::
+
+### depend
+
+Lista de los plugins de los que depende tu plugin para **cargarse**. Se especifican por el nombre del plugin.
+
+:::note
+
+Si no se encuentra el plugin, tu plugin no se cargará.
+
+:::
+
+- `depend: [Vault, WorldEdit]`
+
+### softdepend
+
+Lista de los plugins de los que depende tu plugin para tener **toda su funcionalidad**. Se especifican por el nombre del plugin.
+
+- `softdepend: [Vault, WorldEdit]`
+
+### loadbefore
+
+Lista de los plugins antes de los que debe cargarse el tuyo. Se especifican por el nombre del plugin.
+Esto resulta útil si quieres que tu plugin se cargue antes que otro para que ese plugin pueda usar la API del tuyo.
+
+- `loadbefore: [Vault, FactionsUUID]`
+
+### provides
+
+Puedes usarlo para indicar al servidor que este plugin ofrece la funcionalidad de una biblioteca o de otro plugin (por ejemplo, un sistema de alias).
+Al resolver dependencias o usar [](jd:paper:org.bukkit.plugin.PluginManager#getPlugin(java.lang.String)),
+los plugins que tengan una dependencia (opcional o no) del otro plugin tratarán el tuyo como si ese otro plugin estuviera presente.
+- `provides: [SomeOtherPlugin]`

@@ -1,0 +1,127 @@
+---
+title: Descubrimiento de paquetes de datos
+description: Cómo incluir paquetes de datos en tu plugin y registrarlos mediante la API del ciclo de vida.
+slug: es/paper/dev/lifecycle/datapacks
+version: 1.21.4+
+sidebar:
+  badge:
+    text: Experimental
+    variant: danger
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+
+:::danger[Experimental]
+La API de descubrimiento de paquetes de datos es actualmente experimental y puede cambiar en el futuro.
+:::
+La API del ciclo de vida permite modificar directamente algunos componentes centrales del servidor, incluidos los **paquetes de datos**. En vez de pedir a los usuarios que descarguen el paquete de datos por separado, puedes incluirlo en el JAR del plugin y cargarlo desde allí.
+:::note
+Para usar esta función, necesitas conocimientos básicos de la [API del ciclo de vida](/es/paper/dev/lifecycle) y del formato de los paquetes de datos (consulta [Minecraft Wiki](https://minecraft.wiki/w/Data_pack)). También necesitas un [plugin de Paper](/es/paper/dev/getting-started/paper-plugins) con un archivo `paper-plugin.yml`.
+:::
+## El evento del ciclo de vida del descubrimiento del paquete de datos
+El evento del ciclo de vida [`LifecycleEvents.DATAPACK_DISCOVERY`](jd:paper:io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents#DATAPACK_DISCOVERY) permite a los desarrolladores agregar, comprobar e incluso eliminar paquetes de datos que están a punto de ser cargados por el servidor.
+:::tip
+Los ejemplos siguientes se ejecutan dentro del método `bootstrap` de `PluginBootstrap` y de un controlador de eventos. La estructura es la siguiente:
+```java title="ExamplePluginBootstrap.java" showLineNumbers
+public final class ExamplePluginBootstrap implements PluginBootstrap {
+
+    @Override
+    public void bootstrap(final BootstrapContext context) {
+        context.getLifecycleManager().registerEventHandler(LifecycleEvents.DATAPACK_DISCOVERY, event -> {
+            // Todo el código está aquí.
+        });
+    }
+}
+```
+
+:::
+### Consultar los paquetes de datos detectados
+Para consultar los paquetes de datos detectados, usa el siguiente código:
+```java
+context.getLogger().info("The following datapacks were found: {}",
+    String.join(", ", event.registrar().getDiscoveredPacks().keySet())
+);
+```
+Esto podría generar el siguiente resultado de registro:
+```
+[20:36:22 INFO]: [ExamplePlugin] The following datapacks were found: minecart_improvements, paper, redstone_experiments, trade_rebalance, vanilla
+```
+El resultado incluye más paquetes de datos de lo esperado: en este ejemplo, los experimentales `minecart_improvements`, `redstone_experiments` y `trade_rebalance`. La detección no comprueba si están habilitados; solo **busca** los paquetes que el servidor *podría* habilitar.
+
+### Eliminando paquetes de datos descubiertos
+Para impedir que se detecte un paquete de datos, llama a [](jd:paper:io.papermc.paper.datapack.DatapackRegistrar#removeDiscoveredPack(java.lang.String)) con su nombre.
+
+Para eliminar los paquetes de datos experimentales mencionados anteriormente, puede utilizar el siguiente código:
+```java
+// Los nombres de los paquetes de datos que queremos eliminar.
+final Set<String> datapacksToRemove = Set.of("minecart_improvements", "redstone_experiments", "trade_rebalance");
+
+datapacksToRemove.forEach(
+    // Recorre todos los paquetes de datos y elimínalos de los paquetes descubiertos.
+    datapack -> event.registrar().removeDiscoveredPack(datapack)
+);
+
+// La línea de registro anterior.
+context.getLogger().info("The following datapacks were found: {}",
+    String.join(", ", event.registrar().getDiscoveredPacks().keySet())
+);
+```
+Como se esperaba, esto eliminaría el registro de las entradas (y, por lo tanto, su descubrimiento):
+```
+[20:43:42 INFO]: [ExamplePlugin] The following datapacks were found: paper, vanilla
+```
+## Registrar paquetes de datos personalizados
+El uso principal del evento de detección es cargar paquetes de datos incluidos en plugins. Para ello, incluye los **archivos fuente** directamente en el JAR del plugin; no hace falta empaquetarlos en un archivo ZIP. Así podrás editarlos fácilmente durante el desarrollo.
+:::tip
+Esta sección presupone que ya tienes un paquete de datos funcional. Si todavía no tienes uno, puedes probar alguno de los paquetes de [Vanilla Tweaks](https://vanillatweaks.net/picker/datapacks).
+:::
+### Incluir el paquete de datos en el plugin
+Antes de indicarle al servidor que cargue el paquete, inclúyelo entre los recursos del plugin, normalmente en **src/main/resources**. El paquete debe estar dentro de una subcarpeta: no coloques todos sus archivos directamente en `resources`. En este ejemplo, la carpeta se llama **custom_datapack**, pero puedes elegir otro nombre. La estructura será similar a esta:
+
+<FileTree>
+  - src/main/resources
+        - custom_datapack
+          - pack.mcmeta
+          - data/
+</FileTree>
+
+Compila el plugin y comprueba que la carpeta **custom_datapack** esté en la raíz del JAR.
+
+### Descubriendo el paquete de datos
+Para detectar el paquete, llama a [](jd:paper:io.papermc.paper.datapack.DatapackRegistrar#discoverPack(java.net.URI,java.lang.String)). El URI debe apuntar a **la carpeta del paquete de datos dentro del JAR**; puedes obtenerlo con `this.getClass().getResource("/custom_datapack").toURI()`. **La barra inicial es importante**. El identificador puede ser cualquier valor que elijas. El nombre final del paquete será `<YourPluginName>/<id>`.
+
+Ejemplo de código:
+```java showLineNumbers startLineNumber=8
+try {
+    // Obtén el URI de la carpeta del paquete de datos.
+    final URI uri = this.getClass().getResource("/custom_datapack").toURI();
+    // Descubre el paquete. El ID se establece en "provided", lo que indica
+    // a quien administra el servidor que tu plugin incluye este paquete de datos.
+    event.registrar().discoverPack(uri, "provided");
+} catch (URISyntaxException | IOException e) {
+    throw new RuntimeException(e);
+}
+```
+### Verificando que el paquete de datos se cargó correctamente
+Puede verificar que se cargó un paquete de datos simplemente ejecutando el comando `/datapack list enabled`.
+
+Alternativamente, puede verificar el estado cargado de su paquete de datos durante la ejecución normal de su complemento. Por ejemplo, una verificación simple dentro del método `onLoad` de su complemento podría verse así:
+```java title="ExamplePlugin.java" showLineNumbers
+public final class ExamplePlugin extends JavaPlugin {
+
+    @Override
+    public void onLoad() {
+        final Datapack pack = this.getServer().getDatapackManager().getPack(this.getPluginMeta().getName() + "/provided");
+        if (pack != null && pack.isEnabled()) {
+            this.getSLF4JLogger().info("The datapack loaded successfully!");
+        } else {
+            this.getSLF4JLogger().warn("The datapack failed to load.");
+        }
+    }
+}
+```
+Si todo funciona, la consola mostrará un resultado similar a este:
+```
+[20:51:25 INFO]: [ExamplePlugin] Loading server plugin ExamplePlugin v1.0
+[20:51:25 INFO]: [ExamplePlugin] The datapack loaded successfully!
+```

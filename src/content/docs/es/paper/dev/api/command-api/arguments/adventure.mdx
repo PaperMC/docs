@@ -1,0 +1,137 @@
+---
+title: Aventura
+description: Documentación para todos los argumentos que devuelven objetos de la API de Adventure.
+slug: es/paper/dev/command-api/arguments/adventure
+---
+
+import ComponentMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/component.mp4?url";
+import KeyMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/key.mp4?url";
+import NamedColorMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/namedcolor.mp4?url";
+import StyleMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/style.mp4?url";
+import SignedMessageMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/signedmessage.mp4?url";
+
+import Video from "/src/components/Video.astro";
+
+Estos argumentos devuelven una clase del paquete `net.kyori`. Técnicamente no son nativos de Minecraft o Bukkit, pero como Paper incluye la biblioteca Adventure, se usan ampliamente en el ecosistema de Paper.
+
+## Argumento del componente
+:::note
+Este argumento es muy técnico. Siguiendo el mismo formato que el comando `/tellraw <player> <component>` para su segundo argumento, espera la representación JSON de un componente de texto, lo que lo hace inapropiado para la entrada general del usuario.
+:::
+El resultado se devuelve como un componente de Aventura con el que trabajar.
+
+### Ejemplo de uso
+```java
+Commands.argument("input", ArgumentTypes.component())
+  .executes(context -> {
+      final Component input = context.getArgument("input", Component.class);
+
+      context.getSource().getSender().sendRichMessage(      "Tu mensaje: <input>",
+          Placeholder.component("input", input)
+      );
+      return Command.SINGLE_SUCCESS;
+  })
+```
+### Vista previa del juego
+<Video src={ComponentMp4} />
+
+## Argumento clave
+El argumento clave permite al usuario ingresar cualquier clave artificial (con espacio de nombres), asegurando su validez. Esto devuelve un [](jd:adventure:net.kyori.adventure.key:net.kyori.adventure.key.Key), que se puede utilizar en varios otros lugares de la API de Paper.
+
+### Ejemplo de uso
+```java
+Commands.argument("key", ArgumentTypes.key())
+    .executes(context -> {
+        final Key key = context.getArgument("key", Key.class);
+
+        context.getSource().getSender().sendRichMessage(        "Has introducido <aqua><key></aqua>.",
+            Placeholder.unparsed("key", key.asString())
+        );
+
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={KeyMp4} />
+
+
+## Argumento de color con nombre
+Este argumento proporciona al usuario la posibilidad de seleccionar entre los 16 colores de texto "con nombre" integrados. Este argumento devuelve un [](jd:adventure:net.kyori.adventure.text.format.NamedTextColor), que puede utilizar para aplicar un color a los componentes.
+
+### Ejemplo de uso
+```java
+Commands.argument("color", ArgumentTypes.namedColor())
+    .then(Commands.argument("message", StringArgumentType.greedyString())
+        .executes(context -> {
+            final NamedTextColor color = context.getArgument("color", NamedTextColor.class);
+            final String msg = StringArgumentType.getString(context, "message");
+
+            context.getSource().getSender().sendMessage(
+                Component.text(msg).color(color)
+            );
+            return Command.SINGLE_SUCCESS;
+        })
+    )
+```
+### Vista previa del juego
+<Video src={NamedColorMp4} />
+
+
+## Argumento estilo aventura
+:::note
+Al igual que el argumento del componente, este argumento no es realmente apropiado para la entrada general del usuario, ya que también sigue el formato JSON para mostrar componentes. La mayoría de los usuarios no saben cómo utilizar ese formato y, por lo tanto, no se recomienda su uso general.
+:::
+El argumento de estilo devuelve su valor en forma de objeto [](jd:adventure:net.kyori.adventure.text.format.Style). Esto se puede aplicar a cualquier componente usando `Component#style(Style)`. Si bien la entrada JSON permite el campo `text`, su contenido se ignora por completo.
+
+### Ejemplo de uso
+```java
+Commands.argument("style", ArgumentTypes.style())
+    .then(Commands.argument("message", StringArgumentType.greedyString())
+        .executes(context -> {
+            final Style style = context.getArgument("style", Style.class);
+            final String msg = StringArgumentType.getString(context, "message");
+
+            context.getSource().getSender().sendRichMessage(            "Tu entrada: <input>",
+                Placeholder.component("input", Component.text(msg).style(style))
+            );
+            return Command.SINGLE_SUCCESS;
+        })
+    )
+```
+### Vista previa del juego
+<Video src={StyleMp4} />
+
+
+## Argumento del mensaje firmado
+El argumento del mensaje firmado permite a un jugador enviar un argumento en forma de **mensaje firmado** al servidor. Este mensaje firmado es de un tipo especial: permite al servidor enviar ese mensaje, sin la posibilidad de modificarlo directamente, a cualquier jugador. La diferencia visible es que los mensajes sin firmar tienen una barra blanca a la izquierda, mientras que los mensajes firmados no.
+
+Un argumento de mensaje firmado devuelve `SignedMessageResolver`. Para llamar a su método `#resolve`, debe pasar dos parámetros:
+* El nombre del argumento
+* El objeto `CommandContext<CommandSourceStack>`
+
+El valor resuelto es `CompletableFuture<SignedMessage>`, cuyo valor [](jd:adventure:net.kyori.adventure.chat.SignedMessage) puede manejar usando `thenAccept(Consumer<T>)`. Dentro del consumidor, puedes enviar el mensaje firmado a los jugadores o trabajar con él de otras maneras.
+:::caution
+De forma predeterminada, el consumidor pasado a `thenAccept` no se ejecuta en el hilo principal, lo que hace que no sea seguro utilizar la mayor parte de la API de Paper dentro de él. Si necesita utilizar la API, puede programar una tarea para que se ejecute en el siguiente tick disponible. Para esto puedes usar el [ejecutor del hilo principal](jd:paper:org.bukkit.scheduler.BukkitScheduler#getMainThreadExecutor(org.bukkit.plugin.Plugin)). Puedes leer más sobre eso [aquí](/es/paper/dev/scheduler).
+:::
+
+:::note
+Un remitente que no es jugador no es capaz de enviar un mensaje firmado, lo que significa que el `CompletableFuture` resuelto nunca se completará. Debes asegurarte de que solo los jugadores puedan usar tu argumento con `.requires(source -> source.getSender() instanceof Player)`. Puede agregar un argumento de cadena codicioso alternativo para remitentes que no son jugadores si desea que el argumento se ejecute independientemente de la firma.
+:::
+### Ejemplo de uso
+```java
+Commands.argument("target", ArgumentTypes.player())
+    .then(Commands.argument("message", ArgumentTypes.signedMessage())
+        .executes(context -> {
+            final Player target = context.getArgument("target", PlayerSelectorArgumentResolver.class).resolve(context.getSource()).getFirst();
+            final SignedMessageResolver resolver = context.getArgument("message", SignedMessageResolver.class);
+
+            resolver.resolveSignedMessage("message", context).thenAccept(msg -> {
+                target.sendMessage(msg, ChatType.CHAT.bind(context.getSource().getSender().name()));
+            });
+
+            return Command.SINGLE_SUCCESS;
+        })
+    )
+```
+### Vista previa del juego
+<Video src={SignedMessageMp4} />

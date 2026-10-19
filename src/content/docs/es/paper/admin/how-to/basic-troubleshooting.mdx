@@ -1,0 +1,233 @@
+---
+title: Solución básica de problemas
+description: Esta guía te ayudará a diagnosticar los problemas del servidor antes de comunicarlos a PaperMC o al autor del plugin.
+slug: es/paper/basic-troubleshooting
+---
+
+Esta guía te ayudará a diagnosticar los problemas del servidor antes de comunicarlos a PaperMC o al autor del plugin.
+
+:::caution[Detén el servidor y haz una copia de seguridad]
+
+Antes de seguir esta guía, detén el servidor. Modificar sus archivos mientras está en ejecución los dañará. Solo un apagado completo del servidor puede evitarlo.
+
+Además, si no sigues esta guía con atención o cometes un error al hacerlo, podrías dañar el servidor. Se recomienda encarecidamente crear una copia de seguridad antes de seguirla. Basta con archivar la carpeta del servidor como archivo .zip o, si lo prefieres, usar programas de copia de seguridad como [borg](https://www.borgbackup.org/) o [kopia](https://kopia.io/). Lo ideal sería crear un servidor de prueba copiando los archivos del servidor de producción, aunque no siempre es posible.
+
+:::
+
+Si se produce un problema, el servidor imprimirá un mensaje de error en la consola, generará un informe de fallo y se cerrará, o hará ambas cosas.
+Si el servidor falla, el informe se guardará en el directorio crash-report. Si no se ha cerrado, los mensajes de error se guardarán en el directorio de registros junto con los demás mensajes.
+
+Ten en cuenta que los registros anteriores al más reciente se comprimen y no se guardan como archivos de texto sin formato.
+
+Lo primero que debes hacer es diagnosticar esos mensajes.
+
+Casi todos los problemas que encuentres mostrarán en la consola del servidor líneas de mensaje de error llamadas «stack trace» (traza de pila). Examinar la traza de pila te ayudará a averiguar qué causa los problemas del servidor.
+
+La traza de pila empieza con el mensaje de error, el tipo de excepción y el mensaje de la excepción.
+
+Los mensajes de error y de excepción los añadió el desarrollador de tu plugin o de Paper. Estos mensajes indican qué problema tuvo el servidor. Un tipo de excepción como `java.lang.RuntimeException` señala la clase de excepción y ayudará al desarrollador (y a ti) a comprender el problema. Un buen punto de partida es buscar el tipo y el mensaje de la excepción en el [Discord de Paper](https://discord.gg/papermc).
+
+Debajo del mensaje de excepción pueden aparecer muchas líneas que empiezan con `at`. Estas forman el cuerpo de la traza de pila e indican dónde empieza el problema. La primera línea del cuerpo señala exactamente dónde ocurrió y, si es posible, muestra su origen.
+
+Los problemas suelen deberse a plugins, así que eso es lo primero que deberías comprobar.
+
+# Problemas comunes
+
+## Problemas causados por plugins
+Si encuentras el nombre de algún plugin en una traza de pila de los registros, ve a [Comprobar las actualizaciones de plugins](#comprobar-las-actualizaciones-de-plugins) y sigue las instrucciones de esa sección. En la mayoría de los casos, el plugin que aparece en la traza de pila es el causante del problema.
+
+Puedes desactivar todos los plugins cambiando el nombre del directorio plugins por otro, como plugins-disabled, o archivando y eliminando el directorio plugins.
+
+Después, intenta iniciar el servidor.
+
+Si el problema se resuelve al quitar los plugins, sabrás que lo causaba uno de ellos.
+
+### Búsqueda binaria
+Si has determinado que un plugin causa problemas, pero no consigues identificar cuál, prueba con una búsqueda binaria.
+
+1. Divide los plugins en dos grupos. Los grupos pueden tener tamaños distintos, pero lo ideal es que la diferencia sea mínima. Asegúrate de agrupar juntos los plugins que dependen entre sí.
+2. Desactiva uno de los grupos. Para hacerlo, puedes cambiar la extensión de sus archivos de .jar a otra, como .jar-disabled, o moverlos fuera del directorio plugins a otro directorio.
+3. Inicia el servidor y comprueba si el problema persiste. Si se resuelve, el plugin causante está entre los desactivados. Si no se resuelve, está entre los que siguen activos.
+4. Vuelve a empezar con el grupo de plugins sospechoso.
+Repite estos pasos con el grupo que contiene el plugin causante.
+
+:::caution[Dependencias de plugins de bibliotecas]
+
+Algunos plugins que instalas no son plugins típicos, sino bibliotecas. Se instalan como plugins, pero suelen ofrecer pocas funciones visibles para el usuario y otros plugins dependen de ellas. Si desactivas una biblioteca, los plugins que dependen de ella no funcionarán correctamente. Algunos ejemplos comunes son ProtocolLib, los proveedores de Vault y los plugins de permisos.
+
+:::
+
+### Comprobar las actualizaciones de plugins
+Es posible que el problema ya esté corregido en la versión estable o compilación más recientes del plugin.
+
+Visita la página oficial de descarga del plugin y comprueba si usas la compilación o la versión estable más recientes. Si no es así, actualízalo a la versión más reciente e intenta iniciar el servidor otra vez para ver si se resolvió el problema.
+
+### Actualizar los plugins de bibliotecas
+Muchos plugins usan bibliotecas como ProtocolLib, que debes descargar y colocar en el directorio plugins.
+
+Si no las actualizas a la versión o compilación más recientes, podrías tener problemas con los plugins que dependen de ellas.
+
+Algunas bibliotecas indican a sus usuarios que utilicen la compilación de desarrollo más reciente para admitir la última versión de Minecraft. Revisa atentamente los requisitos de tus plugins.
+
+### Consultar la documentación
+Una configuración incorrecta del plugin o del servidor también puede causar problemas. Muchos plugins tienen su propia documentación sobre cómo configurarlos correctamente. Léela con atención y comprueba si hay algún problema con la configuración del plugin.
+
+Si el problema está relacionado con un plugin y aún no sabes cómo resolverlo, puedes intentar contactar con su autor. Muchos plugins ofrecen algún medio para hacerlo, como el rastreador de incidencias de GitHub, un servidor de asistencia en Discord, Gitter, IRC, etc.
+
+A continuación, enumeramos otros problemas que pueden surgir al ejecutar un servidor.
+
+## El servidor no se inicia
+Si ocurre esto, revisa siempre el archivo `latest.log` de la carpeta `logs`; puede que allí aparezca el problema. Si no se generan registros, comprueba el script de inicio tal como se describe a continuación:
+
+### Comprobar el script de inicio
+La forma recomendada de iniciar un servidor es mediante un script de inicio, que puedes generar [aquí](/es/misc/tools/start-script-gen). ¡No hagas doble clic en el archivo .jar!
+Si usas Windows y el terminal desaparece poco después de iniciarlo, asegúrate de que haya una línea al final del archivo que contenga únicamente `pause`.
+Si aparece un error parecido a `Error: Unable to access jarfile server.jar`, asegúrate de que el nombre del archivo .jar en el script de inicio coincida con el nombre del archivo que descargaste. Ten en cuenta que Windows oculta las extensiones de forma predeterminada, así que quizá tengas que volver a activarlas en las opciones de carpeta y búsqueda del explorador de archivos para ver el nombre correcto, incluida la extensión.
+
+### No se pudo enlazar el puerto
+Esto puede ocurrir en dos casos:
+1. Ya hay un servidor en ejecución. Busca procesos de Java en el administrador de tareas.
+2. `server-ip` está configurado incorrectamente en `server.properties`. Esta opción no es un marcador de posición para tu IP externa: controla a qué interfaces de red se enlazará el servidor. En la mayoría de los casos, debe dejarse vacía.
+
+### Se intentó cargar un chunk guardado con una versión más reciente
+{/* spellchecker:off */}
+```
+java.lang.RuntimeException: Server attempted to load chunk saved with newer version of minecraft! 3955 > 3465
+[18:23:38 WARN]:        at net.minecraft.world.level.chunk.storage.ChunkRegionLoader.loadChunk(ChunkRegionLoader.java:149)
+[18:23:38 WARN]:        at io.papermc.paper.chunk.system.scheduling.ChunkLoadTask$ChunkDataLoadTask.runOffMain(ChunkLoadTask.java:338)
+[18:23:38 WARN]:        at io.papermc.paper.chunk.system.scheduling.GenericDataLoadTask$ProcessOffMainTask.run(GenericDataLoadTask.java:307)
+[18:23:38 WARN]:        at ca.spottedleaf.concurrentutil.executor.standard.PrioritisedThreadedTaskQueue$PrioritisedTask.executeInternal(PrioritisedThreadedTaskQueue.java:351)
+[18:23:38 WARN]:        at ca.spottedleaf.concurrentutil.executor.standard.PrioritisedThreadedTaskQueue.executeTask(PrioritisedThreadedTaskQueue.java:118)
+[18:23:38 WARN]:        at ca.spottedleaf.concurrentutil.executor.standard.PrioritisedThreadPool$PrioritisedThread.pollTasks(PrioritisedThreadPool.java:274)
+[18:23:38 WARN]:        at ca.spottedleaf.concurrentutil.executor.standard.PrioritisedQueueExecutorThread.run(PrioritisedQueueExecutorThread.java:50)
+```
+{/* spellchecker:on */}
+
+Ese error significa que tu mundo se creó o abrió con una versión del servidor más reciente que la que estás ejecutando. No se admite volver a una versión anterior del mundo, así que asegúrate de usar la última versión compatible de Paper. Al cargar el mundo con una versión más reciente, se actualiza automáticamente aunque todavía no hayas entrado al servidor.
+
+:::danger[Forzar al servidor a intentar cargar un mundo más reciente]
+
+El servidor se iniciará si usas el indicador `-DPaper.ignoreWorldDataVersion=true`. Sin embargo, **no se recomienda en absoluto, no se admite y puede dañar tu mundo de forma permanente**. Si vas a intentarlo, haz una copia de seguridad.
+
+:::
+
+### Carga circular de plugins
+
+```
+[15:01:04] [Server thread/ERROR]: [SimpleProviderStorage] Circular plugin loading detected!
+[15:01:04] [Server thread/ERROR]: [SimpleProviderStorage] Circular load order:
+[15:01:04] [Server thread/ERROR]: [SimpleProviderStorage]   Plugin1 -> Plugin2 -> Plugin3 -> Plugin4 -> Plugin1
+[15:01:04] [Server thread/ERROR]: [SimpleProviderStorage] Please report this to the plugin authors of the first plugin of each loop or join the PaperMC Discord server for further help.
+[15:01:04] [Server thread/ERROR]: [SimpleProviderStorage] If you would like to still load these plugins, acknowledging that there may be unexpected plugin loading issues, run the server with -Dpaper.useLegacyPluginLoading=true
+```
+
+Esto significa que la configuración de tus plugins hace que quieran iniciarse antes (o después) unos de otros, algo imposible: uno debe iniciarse primero. Por lo general, los plugins tienen motivos para querer iniciarse antes que otros; cuando se produce este conflicto, en vez de elegir un orden al azar y arriesgarse a causar problemas, el servidor te avisa y se cierra.
+A menudo hay un plugin problemático. Lo mejor es comunicar el problema a sus autores; también puede solucionarse eliminándolo. Como último recurso, puedes usar el indicador de inicio `-Dpaper.useLegacyPluginLoading=true`, pero podría causar problemas difíciles de depurar.
+
+### Versión de Java obsoleta
+
+```
+Exception in thread "ServerMain" java.lang.UnsupportedClassVersionError: org/bukkit/craftbukkit/Main has been compiled by a more recent version of the Java Runtime (class file version 65.0), this version of the Java Runtime only recognizes class file versions up to 61.0
+        at java.base/java.lang.ClassLoader.defineClass1(Native Method)
+        at java.base/java.lang.ClassLoader.defineClass(ClassLoader.java:1017)
+        at java.base/java.security.SecureClassLoader.defineClass(SecureClassLoader.java:150)
+        at java.base/java.net.URLClassLoader.defineClass(URLClassLoader.java:524)
+        at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:427)
+        at java.base/java.net.URLClassLoader$1.run(URLClassLoader.java:421)
+        at java.base/java.security.AccessController.doPrivileged(AccessController.java:712)
+        at java.base/java.net.URLClassLoader.findClass(URLClassLoader.java:420)
+        at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:592)
+        at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:525)
+        at java.base/java.lang.Class.forName0(Native Method)
+        at java.base/java.lang.Class.forName(Class.java:467)
+        at io.papermc.paperclip.Paperclip.lambda$main$0(Paperclip.java:38)
+        at java.base/java.lang.Thread.run(Thread.java:842)
+```
+
+Tu versión de Java está obsoleta; consulta [nuestra guía para actualizarla](/es/misc/java-install). Para evitar tener que hacer otros ajustes, desinstala la versión actual de Java, si la hay.
+Si ya tienes instalada la versión correcta, es posible que el sistema operativo no la esté detectando. Asegúrate de cerrar y volver a abrir el terminal después de instalarla y de que Java esté en la variable de entorno `PATH`.
+
+## El servidor falla o se cierra inesperadamente
+
+:::caution[¡Actualiza!]
+
+Mantén siempre el servidor actualizado (y crea una copia de seguridad antes de actualizar). Se sabe que en versiones antiguas hay fallos que los jugadores pueden provocar en cualquier momento.
+
+:::
+
+### Cierre normal inesperado
+Si el servidor se cierra con normalidad, como si hubieras escrito `/stop` o pulsado el botón para detenerlo en el panel, habilita `debug` en `server.properties`. La próxima vez que se cierre, obtendrás una traza de pila que te ayudará a depurarlo.
+
+### Volcado del watchdog («DO NOT REPORT THIS TO PAPER»)
+```
+[02:04:00] [Paper Watchdog Thread/ERROR]: --- DO NOT REPORT THIS TO PAPER - THIS IS NOT A BUG OR A CRASH  - 1.21.3-66-afb5b13 (MC: 1.21.3) ---
+[02:04:00] [Paper Watchdog Thread/ERROR]: The server has not responded for 10 seconds! Creating thread dump
+[02:04:00] [Paper Watchdog Thread/ERROR]: ------------------------------
+[02:04:00] [Paper Watchdog Thread/ERROR]: Server thread dump (Look for plugins here before reporting to Paper!):
+[02:04:00] [Paper Watchdog Thread/ERROR]: ------------------------------
+[02:04:00] [Paper Watchdog Thread/ERROR]: Current Thread: Server thread
+[02:04:00] [Paper Watchdog Thread/ERROR]: PID: 129 | Suspended: false | Native: true | State: RUNNABLE
+[02:04:00] [Paper Watchdog Thread/ERROR]: Stack:
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.UnixFileDispatcherImpl.write0(Native Method)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.UnixFileDispatcherImpl.write(UnixFileDispatcherImpl.java:65)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.IOUtil.write(IOUtil.java:102)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.IOUtil.write(IOUtil.java:72)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.FileChannelImpl.write(FileChannelImpl.java:300)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.ChannelOutputStream.writeFully(ChannelOutputStream.java:68)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/sun.nio.ch.ChannelOutputStream.write(ChannelOutputStream.java:105)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/java.io.BufferedOutputStream.flushBuffer(BufferedOutputStream.java:125)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/java.io.BufferedOutputStream.implFlush(BufferedOutputStream.java:252)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/java.io.BufferedOutputStream.flush(BufferedOutputStream.java:240)
+[02:04:00] [Paper Watchdog Thread/ERROR]: java.base@21.0.5/java.io.FilterOutputStream.close(FilterOutputStream.java:184)
+```
+
+Ese mensaje aparece cuando el servidor tarda mucho (más de 10 segundos) en completar el tick actual. No es un error ni un fallo: solo te advierte de un retraso grave que podría acabar provocando un fallo.
+Como regla general, revisa las primeras líneas de la traza de pila, que muestran dónde se bloqueó el hilo principal cuando se generó el mensaje. A menudo, ahí encontrarás la causa principal.
+Sin embargo, a veces el problema no es evidente ni aparece en la traza. Si es posible, analiza un [informe de spark](#informe-de-spark) para obtener más detalles. Si no sabes cómo proceder, visita el [Discord de Paper](https://discord.gg/papermc) para pedir ayuda.
+
+### Fallo sin registros
+Si tienes acceso a un shell de Linux, ejecuta `dmesg -T | grep -i killed`. Esto debería indicar cómo se cerró el proceso del servidor.
+Una causa común (aunque no la única) de que se cierre por OOM es que el panel del servidor tenga un límite de memoria demasiado cercano a `-Xmx`. Reduce `-Xmx` (como medida inicial, entre 1 y 2 GB) o aumenta/desactiva los límites de memoria del panel.
+Si usas un proveedor de alojamiento que solo ofrece un panel, probablemente no tengas las herramientas necesarias para investigar el problema. En ese caso, abre un ticket con el proveedor.
+
+## Problemas de rendimiento y jugabilidad
+Por desgracia, Paper no puede reproducir el comportamiento de Vanilla al 100 %, aunque ese es el objetivo (salvo en lo que respecta a los exploits). Si sigues teniendo un error que no se puede reproducir en el modo **multijugador** de Vanilla, aplica una [configuración similar a Vanilla](/es/paper/vanilla) y comprueba si ya hay una incidencia abierta en nuestro GitHub. Si no la hay, puedes crear una.
+
+### Comportamiento extraño de entidades, granjas, redstone o aparición
+Si copiaste valores de una configuración ya preparada o de una guía de optimización, este es un buen momento para revertirlos. Si quieres, guarda una copia de las configuraciones actuales y elimina los originales para que se vuelvan a generar con los valores predeterminados.
+
+Si sigues teniendo estos problemas con la configuración predeterminada, prueba nuestras [configuraciones similares a Vanilla](/es/paper/vanilla), pero ten en cuenta que afectarán al rendimiento.
+
+Ten en cuenta también que el modo de un jugador no se comporta igual que el multijugador, tanto en la aparición de criaturas como en ciertos comportamientos de entidades. Por ejemplo, las criaturas desaparecen si están a más de 128 bloques de un jugador; esto se nota más en multijugador, especialmente si construyes granjas en las que los monstruos viajan a otra dimensión mediante un portal del Nether. Si hay jugadores en la dimensión de destino y todos están muy lejos del portal, la criatura desaparecerá al instante: ese es el comportamiento previsto de Vanilla.
+
+### Los métodos de duplicación no funcionan
+Paper incluye algunos [ajustes no compatibles](/es/paper/reference/global-configuration#unsupported_settings) que permiten ciertas duplicaciones. Sin embargo, algunas no se pueden volver a habilitar porque afectarían a otros aspectos del servidor. Paper tampoco volverá a incorporar métodos de duplicación que ya no existan en el juego.
+
+## Problemas de rendimiento
+### Informe de spark
+Paper incluye el perfilador [spark](https://spark.lucko.me/) para diagnosticar la causa raíz de los problemas de rendimiento.
+Por ejemplo, puedes generar un informe durante 300 segundos ejecutando `/spark profiler start --timeout 300`.
+Si quieres diagnosticar picos de retraso que duren más de, por ejemplo, 100 ms, ejecuta `/spark profiler start --only-ticks-over 100 --timeout 300`.
+
+Consulta la [documentación de spark](https://spark.lucko.me/docs) para obtener una guía más detallada sobre cómo usarlo y leer informes. Si todavía no sabes cuál es la causa del problema, puedes enviarnos el enlace mediante el [Discord de Paper](https://discord.gg/papermc).
+
+### Uso elevado de RAM
+El uso elevado de memoria es normal, a menos que se produzcan fallos por falta de memoria o tiempos de recolección de basura (GC) excesivos.
+
+Los programas Java almacenan objetos en memoria, en un área llamada heap. El heap crece con el tiempo; puedes definir su tamaño inicial con `-Xms` y el máximo con `-Xmx`.
+
+Es normal que el proceso de Java use la RAM que se le asigna y, a veces, un poco más de `-Xmx`. Esta cifra no disminuirá con el tiempo, ya que en servidores el recolector de basura (GC) rara vez devuelve RAM al sistema operativo. Esto no es un problema; de hecho, es beneficioso: al disponer de más memoria heap, el GC tendrá que dedicar menos tiempo de procesamiento a liberar memoria no utilizada. Esto no es una fuga de memoria y no provocará fallos por falta de memoria, que suelen deberse a no dejar suficiente RAM para el sistema operativo o a límites de memoria mal configurados en un contenedor.
+
+Hay varias métricas de memoria que se pueden medir. Por ejemplo, imagina un servidor en un contenedor de 16 GB que se ejecuta con `-Xms1G -Xmx14G`. En este caso:
+* **Límite de memoria del contenedor:** 16 GB
+* **Tamaño máximo del heap:** 14 GB
+* **Tamaño actual del heap:** empieza en 1 GB y crece rápidamente. En cualquier momento tendrá entre 1 y 14 GB
+* **Uso actual del heap:** será inferior al tamaño indicado arriba y, en condiciones normales, aumentará y disminuirá siguiendo un patrón de dientes de sierra
+
+Ten en cuenta que cada herramienta puede elegir distintas métricas para mostrar, así que el indicador de uso del panel quizá no coincida a simple vista con lo que muestra un plugin.
+
+### Uso bajo de CPU
+Paper puede usar varios núcleos, pero eso no significa necesariamente que varios de ellos vayan a estar cerca del 100 % de uso. Una parte importante de la carga del servidor proviene del bucle de ticks, que usa un solo hilo. Por tanto, a partir de cierto punto, disponer de más núcleos no mejorará el rendimiento. Conviene elegir una CPU con un alto rendimiento de un solo hilo y asignar suficientes hilos al servidor (al menos 4). En servidores con muchos núcleos, esto puede traducirse en un uso bajo de CPU respecto al total de núcleos.
+
+Sin embargo, si tu servidor (sobre todo si es grande) insiste en usar un solo núcleo, comprueba el ajuste de asignación de CPU del panel. En algunos paneles, un número como `4` no significa que se usarán 4 núcleos, sino que se usará el núcleo con ID 4.

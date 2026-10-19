@@ -1,0 +1,218 @@
+---
+title: Fabric
+slug: es/adventure/platform/fabric
+description: Implementación de Adventure para Fabric.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_MOD_RELEASE, LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE } from "/src/utils/versions";
+
+Adventure admite Fabric en *Minecraft: Java Edition* 1.16 y versiones posteriores, tanto en el servidor como en el cliente. Por lo general, cada versión principal de Minecraft
+requiere una nueva versión de la plataforma.
+
+La plataforma admite todas las funciones, incluidas la localización y los renderizadores personalizados.
+
+Desde la versión 5.3.0, esta plataforma ofrece una experiencia *casi nativa* mediante la implementación directa de interfaces Adventure en las clases de Minecraft cuando es posible.
+
+:::danger[Atención]
+
+La versión 6.x de adventure-platform-fabric, que usa una implementación compartida con NeoForge (consulta [Con mods (API compartida de Fabric y NeoForge)](/es/adventure/platform/modded)),
+no se publica para Minecraft 1.20-1.21.1. Así se evitan conflictos con los mods existentes que usan 5.x.
+Desde Minecraft 1.21.2, se publica la versión 6.x para ambas plataformas.
+
+:::
+
+## Dependencia
+
+La plataforma Fabric se empaqueta como mod y está diseñada para incluirse en otros mods mediante el empaquetado jar-in-jar.
+Como los demás proyectos de Adventure, las versiones se distribuyen en Maven Central y las compilaciones snapshot en Sonatype OSS:
+
+El siguiente ejemplo usa el plugin sin remapeo `net.fabricmc.fabric-loom` para Minecraft 26.1 y versiones posteriores.
+Usa `implementation` para la dependencia de desarrollo y `include` para empaquetar la plataforma en tu mod:
+
+<Dependency name="fabric" template="adventure-platform-mod" />
+
+La versión actual de la plataforma, {LATEST_ADVENTURE_PLATFORM_MOD_RELEASE}, está destinada a Minecraft {LATEST_ADVENTURE_PLATFORM_MOD_SUPPORTED_MC_RANGE}.
+Para Minecraft 1.21.11 y versiones anteriores, usa una versión compatible de la plataforma con Loom con remapeo
+(`net.fabricmc.fabric-loom-remap` o el plugin antiguo `fabric-loom`) y `modImplementation` en lugar de `implementation`.
+
+La plataforma Fabric necesita *fabric-api-base* para proporcionar el evento de cambio de configuración regional y *fabric-command-api-v2* para el evento de clic de devolución de llamada.
+También puede usar [Colonel](https://gitlab.com/stellardrift/colonel) (o *fabric-networking-api-v1*) de forma opcional para permitir que se usen los tipos de argumento `Component` y `Key`
+en clientes que no tengan instalado el mod. No hay otras dependencias.
+
+:::danger[Atención]
+
+Cada versión principal de Minecraft requiere distintas versiones de la plataforma. Para versiones anteriores de Minecraft, consulta la siguiente tabla.
+Para Minecraft 1.21.2 y posteriores, consulta la tabla de [Con mods (API compartida de Fabric y NeoForge)](/es/adventure/platform/modded).
+
+<details>
+  <summary>Versiones anteriores</summary>
+  | Versión de Minecraft | Versión de Adventure | Versión de `adventure-platform-fabric` |
+  |-------------------|-------------------|-------------------------------------|
+  | 1.16.2-1.16.4     | 4.9.3             | 4.0.0                               |
+  | 1.17.x            | 4.9.3             | 4.1.0                               |
+  | 1.18, 1.18.1      | 4.10.0            | 5.1.0                               |
+  | 1.18.2            | 4.11.0            | 5.3.1                               |
+  | 1.19              | 4.11.0            | 5.4.0                               |
+  | 1.19.1-1.19.2     | 4.12.0            | 5.5.2                               |
+  | 1.19.3            | 4.13.0            | 5.7.0                               |
+  | 1.19.4            | 4.13.0            | 5.8.0                               |
+  | 1.20-1.20.1       | 4.14.0            | 5.9.0                               |
+  | 1.20.2            | 4.14.0            | 5.10.1                              |
+  | 1.20.4            | 4.16.0            | 5.12.0                              |
+  | 1.20.5-1.20.6     | 4.17.0            | 5.13.0                              |
+  | 1.21-1.21.1       | 4.17.0            | 5.14.1                              |
+</details>
+
+:::
+
+## Uso básico
+
+La forma más sencilla de empezar a usar esta plataforma es trabajar con los objetos del juego de Minecraft que implementan directamente las interfaces de Adventure mediante la inyección de interfaces de Loom.
+
+Esto cubre casi todos los casos en los que se usa el renderizador predeterminado.
+
+Se implementan directamente las siguientes interfaces de Adventure:
+
+`Audience`
+  - `net.minecraft.commands.CommandSourceStack`, `net.minecraft.server.MinecraftServer`, `net.minecraft.server.rcon.RconConsoleSource`,
+  - `net.minecraft.server.level.ServerPlayer`, `net.minecraft.client.player.LocalPlayer`
+
+`AdventureCommandSourceStack`
+  - `net.minecraft.commands.CommandSourceStack`
+
+`Sound.Emitter`
+  - `net.minecraft.world.entity.Entity`
+
+`Sound.Type`
+  - `net.minecraft.sounds.SoundEvent`
+
+`Identified`
+  - `net.minecraft.world.entity.player.Player`
+
+`ComponentLike`
+  - `net.minecraft.network.chat.Component`
+
+`Key`
+  - `net.minecraft.resources.Identifier`
+
+`Keyed`
+  - `net.minecraft.resources.ResourceKey`
+
+`HoverEventSource`
+  - `net.minecraft.world.entity.Entity`,
+  - `net.minecraft.world.item.ItemStack`, `net.minecraft.world.item.ItemStackTemplate`
+
+`SignedMessage`
+  - `net.minecraft.network.chat.PlayerChatMessage`
+
+Además, todas las `Key` creadas serán instancias de `Identifier`.
+
+Con estas inyecciones, empezar a usar la plataforma es tan sencillo como:
+
+```java
+void greet(final ServerPlayer player) {
+    final Component message = Component.text()
+        .content("Hola ")
+        .append(player.get(Identity.DISPLAY_NAME)
+            .get()
+            .color(NamedTextColor.RED)
+        )
+        .build();
+    player.sendMessage(message);
+}
+```
+
+Para casos de uso más complejos, `MinecraftServerAudiences` o `MinecraftClientAudiences` proporcionan API adicional.
+
+## Servidor
+
+Se puede acceder al lado del servidor lógico de la plataforma Fabric siempre que haya un servidor disponible, mediante una instancia `MinecraftServerAudiences`. De forma predeterminada, los componentes traducibles se renderizan con el traductor global, aunque se puede pasar un renderizador personalizado al inicializar la plataforma.
+
+Se admiten todos los métodos de la interfaz `AudienceProvider`. El método `permission` requiere *fabric-permissions-api* para filtrar jugadores por permiso.
+
+Para empezar a usar Adventure, configura un proveedor de audiencias como este:
+
+```java title="MyMod.java"
+public class MyMod implements ModInitializer {
+
+    private volatile MinecraftServerAudiences adventure;
+
+    public MinecraftServerAudiences adventure() {
+        if (this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure without a running server!");
+        }
+        return this.adventure;
+    }
+
+    @Override
+    public void onInitialize() {
+        // Registrar las devoluciones de llamada del ciclo de vida del servidor.
+        // Así se garantiza que se borren los datos de la plataforma entre instancias del juego.
+        // Esto es importante en el servidor integrado, donde puede haber varias
+        // instancias del servidor durante la inicialización de un mismo mod.
+        ServerLifecycleEvents.SERVER_STARTING.register(server -> this.adventure = MinecraftServerAudiences.of(server));
+        ServerLifecycleEvents.SERVER_STOPPED.register(server -> this.adventure = null);
+    }
+}
+```
+
+Desde aquí, se pueden obtener audiencias para jugadores y cualquier otro `CommandSource`. También hay instancias especializadas de serializadores que permiten usar
+información del juego al serializar componentes.
+
+### Localización
+
+Como parte de la compatibilidad de traducción de la plataforma, se llamará a la devolución de llamada `PlayerLocales.CHANGED_EVENT` cada vez que un jugador del servidor reciba del cliente un idioma
+actualizado; esto permite acceder a la configuración regional actual del jugador.
+
+### Comandos
+
+La plataforma Fabric proporciona tipos de argumento personalizados para especificar parámetros `Key` y `Component` en comandos Brigadier y métodos auxiliares para obtener fácilmente una
+`Audience` a partir de una instancia `CommandSourceStack`.
+
+:::caution
+
+Si se usan estos tipos de argumento personalizados (antes de 1.19), los clientes vanilla no podrán unirse a menos que el mod [Colonel](https://gitlab.com/stellardrift/colonel)
+esté instalado en el servidor. Al igual que la plataforma, es pequeño y se puede incluir fácilmente en el archivo jar del mod.
+
+:::
+
+Por ejemplo, este comando sencillo repetirá lo que se proporcione como entrada:
+
+```java
+// Posible método para la clase de inicialización del mod mostrada arriba
+private static final String ARG_MESSAGE = "message";
+
+void registerCommands(final CommandDispatcher dispatcher, final boolean isDedicated) {
+    dispatcher.register(literal("echo").then(argument(ARG_MESSAGE, component()).executes(context -> {
+        final Component message = component(context, ARG_MESSAGE);
+        context.getSource().sendMessage(Component.text("Has dicho: ").append(message));
+    })));
+}
+```
+
+## Cliente
+
+Una particularidad de la plataforma Fabric es que admite operaciones exclusivamente del lado del cliente. La configuración es más sencilla que la del servidor,
+ya que el cliente es un singleton y solo hay un sujeto sobre el que actuar: el jugador del cliente.
+
+Esto significa que la mayoría de los usuarios puede tratar el objeto `MinecraftClientAudiences` como un singleton. La única excepción son quienes usan un
+renderizador personalizado. Así, usar audiencias de Adventure es bastante sencillo, como muestra este ejemplo de código:
+
+```java
+void doThing() {
+    // Obtener la audiencia
+    final Audience client = MinecraftClientAudiences.of().audience();
+
+    // Hacer algo. Esto solo funcionará cuando el jugador esté dentro de la partida.
+    client.sendMessage(Component.text("meow", NamedTextColor.DARK_PURPLE));
+}
+```
+
+Está disponible toda la funcionalidad de la interfaz `Audience`, incluida la localización.
+
+## Trabajar con tipos nativos
+
+Por desgracia, Adventure no puede proporcionar una API para todos los lugares del juego donde se usan componentes del chat. Sin embargo, en los casos que no cubre la API de `Audience`,
+es posible convertir componentes entre tipos nativos y de Adventure. Consulta los tipos nativos que implementan
+interfaces de Adventure y los métodos de `MinecraftAudiences` para ver otras conversiones disponibles.

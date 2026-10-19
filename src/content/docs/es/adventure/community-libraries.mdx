@@ -1,0 +1,73 @@
+---
+title: Bibliotecas de la comunidad
+slug: es/adventure/community-libraries
+description: Bibliotecas que utilizan la API de Adventure.
+---
+
+Adventure busca proporcionar las bibliotecas básicas necesarias para interactuar con componentes del chat.
+Sin embargo, dado el tiempo y los recursos limitados del equipo de Adventure, y la enorme cantidad de casos de uso posibles, no podemos ofrecer soluciones directas para todos los problemas.
+
+Por suerte, muchos miembros de nuestra comunidad han creado bibliotecas que complementan Adventure y ofrecen funciones adicionales e integraciones con otros programas.
+
+:::note
+
+Esta lista de bibliotecas se ofrece únicamente como referencia.
+El equipo de Adventure no respalda ninguna biblioteca en particular ni puede proporcionar información o asistencia más allá de los enlaces incluidos.
+
+Si quieres que se incluya una biblioteca, abre una solicitud de cambios en el repositorio [PaperMC/docs](https://github.com/PaperMC/docs).
+
+:::
+
+{/* Los elementos de todas estas tablas deben ordenarse alfabéticamente */}
+
+## Serializadores
+
+Estas bibliotecas se centran en ofrecer formatos de serialización adicionales para componentes del chat.
+Normalmente no dependen de una plataforma concreta, sino solo de Adventure y, posiblemente, de alguna biblioteca con la que se integren.
+
+{/* spellchecker:off */}
+Nombre                      | Descripción                                                           | Enlace
+----------------------------|-----------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------
+EnhancedLegacyText          | Formato de entrada alternativo compatible con las nuevas funciones del formato antiguo | [Vankka/EnhancedLegacyText](https://github.com/Vankka/EnhancedLegacyText)
+MCDiscordReserializer       | Serializadores para convertir entre Minecraft y Discord                | [Vankka/MCDiscordReserializer](https://github.com/Vankka/MCDiscordReserializer)
+Minedown                    | Formato de estilo Markdown para representar componentes               | [Phoenix616/MineDown](https://github.com/Phoenix616/MineDown)
+{/* spellchecker:on */}
+
+## Plataformas
+
+Estas bibliotecas proporcionan implementaciones de Adventure en distintas plataformas que no están integradas oficialmente en el software ni mantenidas por el equipo de Adventure.
+
+{/* spellchecker:off */}
+Nombre                      | Descripción                                   | Enlace
+----------------------------|-----------------------------------------------|-----------------------------------------------------------------------------------------------------
+adventure-platform-hytale   | Implementación de la plataforma Adventure para Hytale | [ArikSquad/adventure-platform-hytale](https://github.com/ArikSquad/adventure-platform-hytale)
+{/* spellchecker:on */}
+
+## Ampliaciones
+
+Estas bibliotecas amplían la API principal de Adventure con funciones independientes de la plataforma que no se incluyen en el proyecto principal o no son adecuadas para incluirse en él.
+
+{/* spellchecker:off */}
+Nombre              | Descripción                                                           | Enlace
+--------------------|-----------------------------------------------------------------------|----------------------------------------------------
+MiniPlaceholders    | Biblioteca de marcadores de posición basada en componentes MiniMessage e independiente de la plataforma | [MiniPlaceholders/MiniPlaceholders](https://github.com/MiniPlaceholders/MiniPlaceholders)
+{/* spellchecker:on */}
+
+## Bibliotecas adicionales de interfaz de usuario
+
+Estas bibliotecas usan Adventure en su API, pero se centran en aspectos distintos a los componentes del chat.
+Permiten usar Adventure en elementos de interfaz de usuario que no admiten las bibliotecas principales de Adventure.
+Entre ellos se incluyen los comandos, los marcadores y los inventarios.
+A menudo, estas bibliotecas dependen de una o varias plataformas concretas para ofrecer su funcionalidad.
+
+{/* spellchecker:off */}
+Nombre              | Descripción                                                           | Enlace
+--------------------|-----------------------------------------------------------------------|----------------------------------------------------
+Cloud               | Despachador de comandos y marco de trabajo de propósito general para Java | [Incendo/cloud](https://github.com/Incendo/cloud)
+Creative            | Biblioteca de paquetes de recursos para Minecraft: Java Edition      | [unnamed/creative](https://github.com/unnamed/creative)
+Inventory Framework | Marco de trabajo de inventarios para administrar interfaces gráficas       | [stefvanschie/IF](https://github.com/stefvanschie/IF)
+LiteCommands        | Marco de trabajo de comandos basado en anotaciones para Velocity, Bukkit y BungeeCord | [Rollczi/LiteCommands](https://github.com/Rollczi/LiteCommands)
+ProtocolSidebar     | Biblioteca de barras laterales fácil de usar para servidores Paper/Spigot | [CatCoderr/ProtocolSidebar](https://github.com/CatCoderr/ProtocolSidebar)
+ScoreboardLibrary   | Biblioteca de marcadores para servidores Paper/Spigot                | [MegavexNetwork/scoreboard-library](https://github.com/MegavexNetwork/scoreboard-library)
+Triumph GUI         | Biblioteca que simplifica la creación de interfaces gráficas de inventario | [TriumphTeam/triumph-gui](https://github.com/TriumphTeam/triumph-gui)
+{/* spellchecker:on */}

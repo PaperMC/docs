@@ -1,0 +1,120 @@
+---
+title: Registro
+description: Documentación para argumentos que recuperan valores de registro.
+slug: es/paper/dev/command-api/arguments/registry
+version: "26.2"
+---
+
+import ResourceItem from "../../../../../../paper/dev/api/command-api/arguments/assets/registry-arguments/resource-item.mp4";
+import ResourceKeyItem from "../../../../../../paper/dev/api/command-api/arguments/assets/registry-arguments/resourcekey-item.mp4";
+import EnchantsRegistry from "../../../../../../paper/dev/api/command-api/arguments/assets/registry-arguments/enchants-registry.mp4";
+
+import Video from "/src/components/Video.astro";
+
+Los registros en Minecraft contienen todo tipo de información: posibles tipos de elementos o bloques, encantamientos, efectos de pociones,... ¡y más!
+
+Hay dos tipos de argumentos de registro: `resource` y `resourceKey`. La principal diferencia entre esos argumentos es el valor de retorno: el argumento `resource` devuelve el valor analizado, mientras que el `resourceKey` solo devuelve un `TypedKey`, que puede utilizar para recuperar el valor usted mismo.
+
+## Argumento de recurso
+Al igual que cualquier otro argumento, puede obtener una referencia `ArgumentType<T>` usando `ArgumentTypes.resource(RegistryKey<T>)`. Se accede a ellos en un contexto estático utilizando la interfaz [](jd:paper:io.papermc.paper.registry.RegistryKey).
+
+Cada entrada en `RegistryKey` devuelve un `RegistryKey<T>`. El parámetro genérico `<T>` aquí describe el tipo de devolución. Esto significa que si recuperáramos [`RegistryKey.ITEM`](jd:paper:io.papermc.paper.registry.RegistryKey#ITEM), el tipo de retorno sería un `ItemType`, ya que se define de la siguiente manera:
+```java title="RegistryKey.java"
+public sealed interface RegistryKey<T> extends Keyed permits RegistryKeyImpl {
+    // ...
+    RegistryKey<ItemType> ITEM = RegistryKeyImpl.create("item");
+    // ...
+}
+```
+Y realmente, no hay mucho más. Precisamente por esa razón, aquí hay un ejemplo de la implementación de dicho argumento:
+```java
+Commands.argument("enchantment", ArgumentTypes.resource(RegistryKey.ENCHANTMENT))
+    .executes(context -> {
+        final Player player = context.getSource().getPlayerOrThrow();
+        final ItemStack item = player.getInventory().getItemInMainHand();
+        if (item.isEmpty()) {
+            context.getSource().getSender().sendRichMessage(            "<red><player> no tiene ningún objeto en la mano.",
+                Placeholder.component("player", player.displayName())
+            );
+            return Command.SINGLE_SUCCESS;
+        }
+
+        final Enchantment enchantment = context.getArgument("enchantment", Enchantment.class);
+        item.addUnsafeEnchantment(enchantment, 10);
+        context.getSource().getSender().sendRichMessage("Enchanted <player>'s <item> with <enchantment>!",
+            Placeholder.component("player", player.displayName()),
+            Placeholder.component("item", Component.translatable(item).hoverEvent(item)),
+            Placeholder.component("enchantment", enchantment.displayName(10))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+Definimos un argumento `enchantment` usando la clave de registro del registro de encantamiento y recuperamos el valor de ese usando `context.getArgument("enchantment", Enchantment.class)`. Finalmente, encantamos el objeto de la mano del jugador ejecutor con cualquier encantamiento que el remitente haya elegido en el nivel 10 y enviamos un mensaje de éxito.
+
+Así es como se ve en el juego:
+<Video src={EnchantsRegistry} />
+:::caution
+Hay ciertos casos extremos en los que este argumento, debido a la falta de registros en el cliente, provocará un **Error de protocolo de red**. Actualmente, el único recurso en el que ocurre esto es con la clave de registro `STRUCTURE`.
+```java
+// Al registrar este comando, los clientes no podrán conectarse al servidor.
+final LiteralCommandNode<CommandSourceStack> invalidRegistryArgument = Commands.literal("registry-structure")
+    .then(Commands.argument("value", ArgumentTypes.resource(RegistryKey.STRUCTURE)))
+    .build();
+```
+Debido a este hecho, se recomienda utilizar únicamente la clave de registro `STRUCTURE` con un tipo de argumento `resourceKey(...)` y analizar los valores usted mismo.
+:::
+## Argumento clave de recurso
+Para el cliente, apenas hay diferencia entre usar `ArgumentTypes.resource` o `ArgumentTypes.resourceKey`. La única diferencia es que el uso de `ArgumentTypes.resourceKey` no proporciona **comprobación de errores**. Podemos visualizar esto usando `RegistryKey.ITEM`.
+
+Aquí está la finalización de la pestaña cuando se usa `ArgumentTypes.resource(RegistryKey.ITEM)`:
+<Video src={ResourceItem} /><br />
+
+Y aquí está la finalización de la pestaña cuando se usa `ArgumentTypes.resourceKey(RegistryKey.ITEM)`:
+<Video src={ResourceKeyItem} /><br />
+:::note
+En el ejemplo anterior, debido a un error `NullPointerException` no controlado, el comando no se ejecuta correctamente. El código para ese comando intenta utilizar directamente el valor recuperado por el acceso al registro haciendo `RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key())`. Si intenta realizar alguna operación con el resultado, es posible que sea nulo y con error.
+
+Debe **siempre** verificar el resultado de una operación de recuperación del registro cuando el tipo de argumento aún no la aplica. A continuación se proporciona un ejemplo de esto en la [comparación de código directo](#direct-code-comparison).
+:::
+El argumento de recurso proporciona una experiencia de usuario mucho más limpia, mientras que el argumento `resourceKey` tiene un caso de uso muy importante: obtienes el `TypedKey<T>` sin procesar como resultado del argumento. Este objeto es particularmente útil, ya que proporciona toda la información necesaria para poder recuperar un valor de un registro usted mismo.
+:::tip
+A menos que tenga una razón específica para usar el argumento `resourceKey` en lugar del `resource`, se prefiere el argumento `resource` debido a la verificación de errores del lado del cliente y su facilidad de uso.
+:::
+### Comparación directa de código
+Aquí hay un fragmento de código simple sobre cómo se puede usar el registro `RegistryKey.ITEM` con un tipo de argumento `resource`:
+```java
+Commands.argument("item", ArgumentTypes.resource(RegistryKey.ITEM))
+    .executes(context -> {
+        final ItemType item = context.getArgument("item", ItemType.class);
+        final Player player = context.getSource().getPlayerOrThrow();
+
+        player.getInventory().addItem(item.createItemStack());
+
+        return Command.SINGLE_SUCCESS;
+    })
+```
+Aquí está el mismo código, usando un tipo de argumento `resourceKey`. En lugar de recuperar directamente el argumento usando `context.getArgument("item", TypedKey.class)`, usamos [](jd:paper:io.papermc.paper.command.brigadier.argument.RegistryArgumentExtractor) para recuperar nuestro `TypedKey<ItemType>`.
+```java
+Commands.argument("item", ArgumentTypes.resourceKey(RegistryKey.ITEM))
+    .executes(context -> {
+        final TypedKey<ItemType> itemKey = RegistryArgumentExtractor.getTypedKey(context, RegistryKey.ITEM, "item");
+        final ItemType item = RegistryAccess.registryAccess().getRegistry(itemKey.registryKey()).get(itemKey.key());
+
+        if (item == null) {
+            context.getSource().getSender().sendRichMessage(            "<red>Introduce un objeto válido.");
+            return Command.SINGLE_SUCCESS;
+        }
+
+        context.getSource().getPlayerOrThrow().getInventory().addItem(item.createItemStack());
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Usando una clave mecanografiada
+Primero, para obtener el registro correcto, puede ejecutar `RegistryAccess#getRegistry(RegistryKey)`. Para obtener un `RegistryAccess`, puede utilizar el método estático `RegistryAccess.registryAccess()`. El `RegistryKey` se recupera usando `TypedKey#registryKey()`. Ahora, para obtener el valor final `T`, puede ejecutar `Registry#get(Key)`, donde la clave se puede recuperar usando `TypedKey#key()`. Esto devolverá la instancia de respaldo de esa clave de recurso o nula, si no se ha encontrado ningún valor.
+
+### Caso de uso sobre argumento de recurso
+El principal caso de uso de este tipo de argumento es la capacidad de almacenar la clave (el valor que le devuelve `TypedKey#key`). Si desea poder almacenar la entrada exacta del usuario y poder recuperar la instancia respaldada sin muchos problemas, esa es la manera de hacerlo.
+
+## Tipos de claves de registro
+
+Puede obtener una lista de todos los tipos de claves de registro y sus valores devueltos en los [`RegistryKey` Javadocs](jd:paper:io.papermc.paper.registry.RegistryKey).

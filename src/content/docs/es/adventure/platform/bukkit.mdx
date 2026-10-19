@@ -1,0 +1,70 @@
+---
+title: Bukkit
+slug: es/adventure/platform/bukkit
+description: Implementación de Adventure para Bukkit.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_PLATFORM_BUKKIT_SUPPORTED_MC, LATEST_ADVENTURE_PLATFORM_RELEASE } from "/src/utils/versions";
+
+La implementación de la plataforma Adventure para Bukkit es compatible con Paper, Spigot y Bukkit desde
+Minecraft 1.7.10 hasta {LATEST_ADVENTURE_PLATFORM_BUKKIT_SUPPORTED_MC}.
+
+:::danger
+
+La implementación de la plataforma Adventure para Bukkit/Spigot y los serializadores de componentes de Minecraft/Bungeecord ya no se mantienen.
+El equipo de Adventure ya no ofrece asistencia para estas bibliotecas.
+
+Recomendamos que quienes usan estas bibliotecas migren a programas modernos con [compatibilidad nativa con Adventure](/es/adventure/platform/native) (por ejemplo, [Paper](/es/paper)).
+
+:::
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-platform-bukkit" version={LATEST_ADVENTURE_PLATFORM_RELEASE} />
+
+## Uso
+
+Primero debes obtener un objeto `BukkitAudiences` mediante `BukkitAudiences.create(plugin)`. Este objeto es seguro para subprocesos
+y, si es necesario, se puede reutilizar desde distintos subprocesos. A partir de ahí, puedes convertir los `CommandSender` y `Player` de Bukkit en
+`Audience` usando los métodos correspondientes de `BukkitAudiences`.
+
+También debes cerrar el objeto de audiencias cuando se desactive un plugin para liberar recursos y aumentar las probabilidades de que `/reload` se complete correctamente.
+
+```java title="MyPlugin.java"
+public class MyPlugin extends JavaPlugin {
+
+    private BukkitAudiences adventure;
+
+    public BukkitAudiences adventure() {
+        if (this.adventure == null) {
+            throw new IllegalStateException("Tried to access Adventure when the plugin was disabled!");
+        }
+        return this.adventure;
+    }
+
+    @Override
+    public void onEnable() {
+        // Inicializar una instancia de audiencias para el plugin
+        this.adventure = BukkitAudiences.create(this);
+        // y realizar el resto de la inicialización
+    }
+
+    @Override
+    public void onDisable() {
+        if (this.adventure != null) {
+            this.adventure.close();
+            this.adventure = null;
+        }
+    }
+}
+```
+
+Es preferible usar este proveedor de audiencias en lugar de los serializadores directamente, ya que se encarga de las medidas de compatibilidad necesarias para enviar mensajes entre versiones.
+
+## Serializadores de componentes
+
+Para los casos que no cubre la interfaz `Audience`, la plataforma Bukkit proporciona `MinecraftComponentSerializer`
+(disponible en servidores basados en CraftBukkit) y `BungeeComponentSerializer` (disponible en servidores Spigot y Paper)
+para convertir directamente entre los [componentes](/es/adventure/text) de Adventure y otros tipos de componentes. Para los usos que no se integran
+directamente con tipos nativos, `BukkitComponentSerializer` expone serializadores JSON y de formato antiguo para la versión del servidor en ejecución.

@@ -1,0 +1,124 @@
+---
+title: Enumeraciones
+description: Documentación para EntityAnchor, GameMode y argumentos de valor de enumeración similares.
+slug: es/paper/dev/command-api/arguments/enums
+version: "26.2"
+---
+
+import EntityAnchorMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/entityanchor.mp4?url";
+import GameModeMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/gamemode.mp4?url";
+import HeightMapMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/heightmap.mp4?url";
+import ScoreboardDisplaySlotMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/scoreboarddisplayslot.mp4?url";
+import TemplateMirrorMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/templatemirror.mp4?url";
+import TemplateRotationMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/templaterotation.mp4?url";
+
+import Video from "/src/components/Video.astro";
+
+## Argumento ancla de entidad
+El argumento de anclaje de entidad tiene dos entradas válidas: `feet` y `eyes`. El [](jd:paper:io.papermc.paper.entity.LookAnchor) resultante se utiliza principalmente para métodos como [](jd:paper:org.bukkit.entity.Entity#lookAt(io.papermc.paper.math.Position,io.papermc.paper.entity.LookAnchor)) o [](jd:paper:org.bukkit.entity.Player#lookAt(org.bukkit.entity.Entity,io.papermc.paper.entity.LookAnchor,io.papermc.paper.entity.LookAnchor)).
+
+### Ejemplo de uso
+```java
+Commands.argument("anchor", ArgumentTypes.entityAnchor())
+    .executes(context -> {
+        final LookAnchor anchor = context.getArgument("anchor", LookAnchor.class);
+
+        context.getSource().getSender().sendRichMessage(        "Elegiste <aqua><anchor></aqua>.",
+            Placeholder.unparsed("anchor", anchor.name())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={EntityAnchorMp4} />
+
+
+## Argumento del modo de juego
+El argumento del modo de juego funciona de la misma manera que el primer argumento del comando Vanilla `/gamemode <gamemode>`. Acepta cualquiera de los 4 modos de juego válidos, devolviendo una enumeración [](jd:paper:org.bukkit.GameMode) para usar en el código.
+
+### Ejemplo de uso
+```java
+Commands.argument("mode", ArgumentTypes.gameMode())
+    .executes(context -> {
+        final GameMode mode = context.getArgument("mode", GameMode.class);
+        final Player player = context.getSource().getPlayerOrThrow();
+
+        player.setGameMode(mode);
+        player.sendRichMessage(        "Tu modo de juego se estableció en <red><mode></red>.",
+            Placeholder.component("mode", Component.translatable(mode))
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={GameModeMp4} />
+
+
+## Argumento del mapa de altura
+El argumento [](jd:paper:org.bukkit.HeightMap) consta de las siguientes entradas válidas: `motion_blocking`, `motion_blocking_no_leaves`, `ocean_floor` y `world_surface`. A menudo se utiliza para declarar el posicionamiento relativo de paquetes de datos o el comando `/execute positioned over <height_map>`. P.ej. `world_surface` significaría que se debe utilizar la coordenada Y de la superficie del mundo en los valores X/Z establecidos.
+
+### Ejemplo de uso
+```java
+Commands.argument("height_map", ArgumentTypes.heightMap())
+    .executes(context -> {
+        final HeightMap heightMap = context.getArgument("height_map", HeightMap.class);
+
+        context.getSource().getSender().sendRichMessage(        "Seleccionaste <gold><selection></gold>",
+            Placeholder.unparsed("selection", heightMap.name())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={HeightMapMp4} />
+
+
+## Argumento de la ranura de visualización del marcador
+Este argumento le permite recuperar un valor de enumeración [](jd:paper:org.bukkit.scoreboard.DisplaySlot) del usuario.
+
+### Ejemplo de uso
+```java
+Commands.argument("slot", ArgumentTypes.scoreboardDisplaySlot())
+    .executes(context -> {
+        final DisplaySlot slot = context.getArgument("slot", DisplaySlot.class);
+
+        context.getSource().getSender().sendPlainMessage(        "Seleccionaste: " + slot.toString());
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={ScoreboardDisplaySlotMp4} />
+
+
+## Argumento espejo de plantilla
+Aquí, el usuario tiene 3 posibilidades de entrada válidas: `front_back`, `left_right` y `none`. Puede recuperar el resultado del argumento como un valor de enumeración [](jd:paper:org.bukkit.block.structure.Mirror).
+
+### Ejemplo de uso
+```java
+Commands.argument("mirror", ArgumentTypes.templateMirror())
+    .executes(context -> {
+        final Mirror mirror = context.getArgument("mirror", Mirror.class);
+
+        context.getSource().getSender().sendPlainMessage(        "Seleccionaste: " + mirror.name());
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={TemplateMirrorMp4} />
+
+
+## Argumento de rotación de plantilla
+Para el argumento de rotación de plantilla, el usuario tiene 4 posibilidades de entrada válidas: `180`, `clockwise_90`, `counterclockwise_90` y `none`. Puede recuperar el resultado del argumento como un valor de enumeración [](jd:paper:org.bukkit.block.structure.StructureRotation).
+
+### Ejemplo de uso
+```java
+Commands.argument("rotation", ArgumentTypes.templateRotation())
+    .executes(context -> {
+        final StructureRotation rotation = context.getArgument("rotation", StructureRotation.class);
+
+        context.getSource().getSender().sendPlainMessage(        "Seleccionaste: " + rotation.name());
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={TemplateRotationMp4} />

@@ -1,0 +1,20 @@
+---
+title: server.properties
+description: Explicación del archivo server.properties de Minecraft.
+slug: es/paper/reference/server-properties
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import ServerPropertiesYML from "/src/config/paper/server-properties.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+Esta página muestra los ajustes y los valores predeterminados del archivo `server.properties`.
+
+Haz clic en una propiedad para obtener más información.
+
+:::
+
+<ConfigNode data={parse(ServerPropertiesYML)} lang="properties" />

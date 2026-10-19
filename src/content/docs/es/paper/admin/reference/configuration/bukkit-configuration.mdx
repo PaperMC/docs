@@ -1,0 +1,20 @@
+---
+title: bukkit.yml
+description: Explicación del archivo de configuración de Bukkit.
+slug: es/paper/reference/bukkit-configuration
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import BukkitYML from "/src/config/paper/bukkit.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+El YAML siguiente muestra la estructura y los valores predeterminados de `bukkit.yml`.
+
+Haz clic en un nodo hoja para ver la descripción de ese ajuste.
+
+:::
+
+<ConfigNode data={parse(BukkitYML)} />

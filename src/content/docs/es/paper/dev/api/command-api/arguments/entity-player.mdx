@@ -1,0 +1,139 @@
+---
+title: Entidades y jugadores
+description: Documentación de argumentos de jugador y entidad.
+slug: es/paper/dev/command-api/arguments/entity-player
+---
+
+import EntityOppedMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/entity-opped.mp4?url";
+import EntityUnoppedMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/entity-unopped.mp4?url";
+import EntitiesMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/entities.mp4?url";
+import PlayerMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/player.mp4?url";
+import PlayersMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/players.mp4?url";
+import PlayerProfilesMp4 from "../../../../../../paper/dev/api/command-api/arguments/assets/vanilla-arguments/playerprofiles.mp4?url";
+
+import Video from "/src/components/Video.astro";
+
+Los argumentos descritos en esta sección se relacionan con argumentos que puede utilizar para recuperar entidades. Su uso principal es la selección de objetivos de mando. Todos estos tienen selectores de entidades (`@a`, `@e`, `@n`, etc.) como entradas válidas, aunque requieren el permiso `minecraft.command.selector` para poder usarse. Los argumentos específicos pueden permitir o no ciertos selectores.
+
+## Argumento de entidad
+Este argumento, después de resolver su retorno `EntitySelectorArgumentResolver`, devuelve una lista de exactamente una entidad, ni más ni menos. Es seguro llamar al `List#getFirst()` para recuperar esa entidad. Puedes resolverlo usando [](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)).
+
+### Ejemplo de uso
+```java
+Commands.argument("entity", ArgumentTypes.entity())
+    .executes(context -> {
+        final EntitySelectorArgumentResolver resolver = context.getArgument("entity", EntitySelectorArgumentResolver.class);
+        final Entity entity = resolver.resolve(context.getSource()).getFirst();
+
+        context.getSource().getSender().sendRichMessage("Found <green><entity_name>",
+            Placeholder.component("entity_name", entity.teamDisplayName())
+        );
+
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+Si el jugador ejecutante no tiene el permiso `minecraft.command.selector`:
+<Video src={EntityUnoppedMp4} />
+
+Si el jugador ejecutante tiene el permiso `minecraft.command.selector`:
+<Video src={EntityOppedMp4} />
+
+
+## Argumento de entidades
+A diferencia del argumento de entidad única, este argumento de entidades múltiples acepta cualquier cantidad de entidades, siendo la cantidad mínima de entidades 1. Pueden, una vez más, resolverse usando [](jd:paper:io.papermc.paper.command.brigadier.argument.resolvers.ArgumentResolver#resolve(io.papermc.paper.command.brigadier.CommandSourceStack)), que devuelve `List<Entity>`.
+
+### Ejemplo de uso
+```java
+Commands.argument("entities", ArgumentTypes.entities())
+    .executes(context -> {
+        final EntitySelectorArgumentResolver resolver = context.getArgument("entities", EntitySelectorArgumentResolver.class);
+        final List<Entity> entities = resolver.resolve(context.getSource());
+
+        final Component entityNames = Component.join(JoinConfiguration.commas(true), entities.stream().map(Entity::teamDisplayName).toList());
+
+        context.getSource().getSender().sendRichMessage("Found <green><entity_names>",
+            Placeholder.component("entity_names", entityNames)
+        );
+
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={EntitiesMp4} />
+
+
+## Argumento del jugador
+El argumento del jugador permite recuperar un `PlayerSelectorArgumentResolver`. Para este argumento de "un jugador", puedes obtener con seguridad el jugador objetivo ejecutando `PlayerSelectorArgumentResolver.resolve(context.getSource()).getFirst()`, que devuelve un objeto [](jd:paper:org.bukkit.entity.Player).
+
+### Ejemplo de uso
+¡Este comando lanza al jugador objetivo al aire!
+```java
+Commands.argument("target", ArgumentTypes.player())
+    .executes(context -> {
+        final PlayerSelectorArgumentResolver resolver = context.getArgument("target", PlayerSelectorArgumentResolver.class);
+        final Player target = resolver.resolve(context.getSource()).getFirst();
+
+        target.setVelocity(new Vector(0, 3.9, 0));
+        target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+        context.getSource().getSender().sendRichMessage("Yeeted <target>!",
+            Placeholder.component("target", target.displayName())
+        );
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={PlayerMp4} />
+
+
+## Argumento de los jugadores
+El argumento "múltiples jugadores" funciona de manera similar al argumento "un solo jugador", y también devuelve un `PlayerSelectorArgumentResolver`. En lugar de resolverse exactamente en un `Player`, este puede resolverse en más de un solo jugador, lo cual debes tener en cuenta en caso de utilizar este argumento. `PlayerSelectorArgumentResolver.resolve(context.getSource())` devuelve un `List<Player>`, que puede recorrer en iteración.
+
+### Ejemplo de uso
+Ampliar el comando yeet de "un jugador" para admitir múltiples objetivos puede verse así:
+```java
+Commands.argument("targets", ArgumentTypes.players())
+  .executes(context -> {
+      final PlayerSelectorArgumentResolver resolver = context.getArgument("targets", PlayerSelectorArgumentResolver.class);
+      final List<Player> targets = resolver.resolve(context.getSource());
+      final CommandSender sender = context.getSource().getSender();
+
+      for (final Player target : targets) {
+          target.setVelocity(new Vector(0, 3.9, 0));
+          target.sendRichMessage("<rainbow>Yeeeeeeeeeet");
+
+          sender.sendRichMessage("Yeeted <target>!",
+              Placeholder.component("target", target.displayName())
+          );
+      }
+      return Command.SINGLE_SUCCESS;
+  })
+```
+### Vista previa del juego
+<Video src={PlayersMp4} />
+
+
+## Argumento de perfiles de jugadores
+El argumento de los perfiles de jugadores es un argumento muy poderoso que puede recuperar jugadores tanto en línea como fuera de línea. Devuelve el resultado del argumento como `PlayerProfileListResolver`, que se resuelve en `Collection<PlayerProfile>`. Esta colección se puede iterar para obtener los perfiles resultantes. Por lo general, solo devuelve un único `PlayerProfile` si recupera un jugador por su nombre, pero puede devolver varios si usa los selectores de entidades (como `@a` en jugadores en línea). Por lo tanto, siempre tiene sentido ejecutar cualquier operación que desee ejecutar en todas las entradas de la colección en lugar de solo en la primera.
+
+Este argumento ejecutará llamadas API a los servidores de Mojang para recuperar información de los jugadores que nunca antes se han unido al servidor. Debido a que esta operación a veces demora un poco más, se sugiere resolver este argumento en un contexto asincrónico para no causar ningún retraso en el servidor.
+
+A veces, estas llamadas API pueden fallar. Esto también es visible en la vista previa del juego a continuación. Este comportamiento también es la razón de `/whitelist add` a veces.
+
+### Ejemplo de uso: comando de búsqueda de jugadores
+```java
+Commands.argument("profiles", ArgumentTypes.playerProfiles())
+    .executes(context -> {
+        final PlayerProfileListResolver resolver = context.getArgument("profiles", PlayerProfileListResolver.class);
+        final Collection<PlayerProfile> profiles = resolver.resolve(context.getSource());
+
+        for (final PlayerProfile profile : profiles) {
+            context.getSource().getSender().sendPlainMessage("Found " + profile.getName());
+        }
+
+        return Command.SINGLE_SUCCESS;
+    })
+```
+### Vista previa del juego
+<Video src={PlayerProfilesMp4} />

@@ -1,0 +1,126 @@
+---
+title: Configuración de plugins
+description: Cómo crear archivos de configuración para que los usuarios puedan personalizar tus plugins.
+slug: es/paper/dev/plugin-configurations
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+
+Los archivos de configuración permiten que los usuarios modifiquen el comportamiento de los plugins. Aquí se explica cómo usarlos.
+
+## Formato
+
+De forma predeterminada, los plugins usan archivos de configuración [YAML](https://yaml.org) (`.yaml` o `.yml`). También puedes usar otros formatos, como JSON o TOML, pero Paper no los admite de forma nativa y no se tratarán aquí.
+
+YAML organiza los datos en forma de árbol mediante pares `key: value`, como los que aparecen en [`plugin.yml`](/es/paper/dev/plugin-yml). Por ejemplo:
+```yaml
+root:
+  one-key: 10
+  another-key: David
+```
+Al acceder a valores sangrados, separa los niveles con puntos (`.`). Por ejemplo, la clave para la cadena `David` sería `root.another-key`.
+
+## Crear `config.yml`
+
+Puedes definir valores predeterminados en un archivo `config.yml` dentro del plugin. Colócalo en el directorio `resources`:
+
+<FileTree>
+  - example-plugin/
+    - src/
+      - main/
+        - java/
+        - resources/
+          - **config.yml**
+          - plugin.yml
+</FileTree>
+
+Al inicializar el plugin, copia este archivo al directorio de datos del plugin para que el usuario pueda editarlo. Por ejemplo, puedes hacerlo desde `onEnable`:
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
+
+    @Override
+    public void onEnable() {
+        this.saveResource("config.yml", /* replace */ false);
+
+        // También puedes usar este método abreviado para el archivo predeterminado (config.yml):
+        // this.saveDefaultConfig();
+        // El archivo solo se guarda si aún no existe.
+
+        // this.getConfig()...
+    }
+}
+```
+
+:::note
+El parámetro booleano `replace` indica si se debe reemplazar un archivo existente. Si es `true`, el archivo de configuración se sobrescribe en cada llamada.
+:::
+## Leer y escribir datos
+
+Después de guardar la configuración, puedes obtener el [](jd:paper:org.bukkit.configuration.file.FileConfiguration) del plugin mediante [](jd:paper:org.bukkit.plugin.Plugin#getConfig()). Usa los métodos `get...(key)` para leer valores y [`set(key, value)`](jd:paper:org.bukkit.configuration.ConfigurationSection#set(java.lang.String,java.lang.Object)) para modificarlos. YAML admite la mayoría de los tipos de datos básicos, que puedes leer con métodos como [`getString(key)`](jd:paper:org.bukkit.configuration.ConfigurationSection#getString(java.lang.String)) y [`getBoolean(key)`](jd:paper:org.bukkit.configuration.ConfigurationSection#getBoolean(java.lang.String)).
+
+También se admiten tipos de datos más complejos de Bukkit, como [](jd:paper:org.bukkit.inventory.ItemStack), [](jd:paper:org.bukkit.Location) y [](jd:paper:org.bukkit.util.Vector). Este ejemplo lee de la configuración la ubicación a la que se teletransportará un jugador:
+:::note[Guardar configuraciones]
+Después de modificar la configuración, llama a [](jd:paper:org.bukkit.configuration.file.FileConfiguration#save(java.io.File)) para guardar los cambios en el disco.
+:::
+
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin {
+
+    public void teleportPlayer(Player player) {
+        Location to = this.getConfig().getLocation("target-location");
+        player.teleport(to);
+    }
+}
+```
+Esto es posible porque esos tipos implementan [](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerializable). También puedes implementar y registrar una clase personalizada.
+```java title="TeleportOptions.java"
+public class TeleportOptions implements ConfigurationSerializable {
+
+    private final String name;
+    private final int chunkX;
+    private final int chunkZ;
+
+    public TeleportOptions(String name, int chunkX, int chunkZ) {
+        this.name = name;
+        // ...
+    }
+
+    public Map<String, Object> serialize() {
+        Map<String, Object> data = new HashMap<>(3);
+
+        data.put("name", this.name);
+        data.put("chunk-x", this.chunkX);
+        data.put("chunk-z", this.chunkZ);
+
+        return data;
+    }
+
+    public static TeleportOptions deserialize(Map<String, Object> args) {
+        return new TeleportOptions(
+                (String) args.get("name"),
+                (int) args.get("chunk-x"),
+                (int) args.get("chunk-z")
+        );
+    }
+}
+```
+Aquí podemos ver que tenemos un método `serialize` basado en instancias, que devuelve un mapa, y luego un método estático `deserialize` que toma un mapa como parámetro y devuelve una instancia de la clase `TeleportOptions`. Finalmente, para que esto funcione debemos llamar al: `ConfigurationSerialization.registerClass(TeleportOptions.class);`
+:::caution
+Si no llama a [](jd:paper:org.bukkit.configuration.serialization.ConfigurationSerialization#registerClass(java.lang.Class)) con los complementos de Paper, no podrá cargar ni guardar sus clases personalizadas.
+:::
+## Archivos de configuración personalizados
+
+Es muy probable que tengas muchas cosas diferentes que configurar en tu complemento. Si elige dividirlos en varios archivos diferentes, aún puede usar la API Bukkit `FileConfiguration` para leer los datos de estos. Es tan simple como:
+```java
+File file = new File(plugin.getDataFolder(), "items.yaml");
+YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
+// Trabaja con la configuración aquí.
+config.save(file);
+```
+Este ejemplo lee el archivo `items.yaml` del directorio de datos de su complemento. Si el archivo no existe o se produce un error durante la lectura, se devolverá una configuración vacía.
+:::danger[Bloqueo de E/S]
+Cargar y guardar archivos en el hilo principal ralentizará su servidor. Las operaciones `load` y `save` deben ejecutarse de forma asíncrona.
+:::
+## Configurar
+
+Configurate es una biblioteca de terceros para trabajar con configuraciones, mantenida por el proyecto Sponge. Paper utiliza este proyecto internamente para su configuración y ofrece muchas características que la API `FileConfiguration` no tiene. Vea su proyecto [aquí](https://github.com/SpongePowered/Configurate) para obtener más información.

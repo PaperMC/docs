@@ -1,0 +1,50 @@
+---
+title: Gson
+slug: es/adventure/serializer/gson
+description: Serialización de componentes a JSON con Gson.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+
+El serializador de texto Gson convierte componentes de chat a su representación JSON
+y viceversa mediante la biblioteca Gson. Si quieres enviar un componente de chat para
+mostrarlo en un cliente de Minecraft o admitir funciones avanzadas de componentes de chat,
+debes usar el serializador de texto Gson.
+
+Normalmente, quienes usan este serializador de texto solo necesitan deserializar un
+componente de una fuente externa; las [plataformas](/es/adventure/platform) se encargan automáticamente de serializarlo
+cuando se envía al usuario.
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-text-serializer-gson" version={LATEST_ADVENTURE_API_RELEASE} />
+
+## Uso
+
+En Minecraft 1.16, Mojang introdujo varios cambios importantes en el formato JSON del chat: añadió
+colores RGB y modificó la serialización de los eventos de desplazamiento. Los componentes generados para
+versiones anteriores de Minecraft seguirán mostrándose en un cliente 1.16,
+pero los componentes serializados para un cliente 1.16 no se podrán mostrar en
+un cliente de Minecraft 1.15.2 o anterior.
+
+Para obtener un serializador compatible con clientes 1.16 y posteriores, usa
+`GsonComponentSerializer.gson()`. Para obtener un serializador compatible con todas las versiones
+de Minecraft que admiten componentes de texto, usa `GsonComponentSerializer.colorDownsamplingGson()`.
+Este serializador reduce los colores RGB al color antiguo de Mojang más cercano y serializa
+los eventos de desplazamiento de forma compatible con clientes anteriores.
+
+### ¿Qué serializador debo usar?
+
+Si solo vas a cargar y guardar componentes en un archivo de configuración o una base de datos,
+probablemente quieras usar el serializador predeterminado para 1.16.
+
+Si quieres enviar un componente a un cliente, primero considera si puedes usar alguna de las
+plataformas disponibles. Si no puedes usar una plataforma, en general es preferible usar el serializador predeterminado
+para deserializar componentes (ya que es compatible con versiones anteriores) y decidir
+si usas el serializador predeterminado o el que reduce los colores según la versión del cliente.
+
+### Uso avanzado
+
+El serializador Gson expone tanto la instancia `Gson` subyacente como un cargador que permite
+registrar serializadores Adventure en cualquier instancia de `GsonBuilder`.

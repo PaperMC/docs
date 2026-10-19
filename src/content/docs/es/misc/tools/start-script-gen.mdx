@@ -1,0 +1,23 @@
+---
+title: Generador de scripts de inicio
+description: Generador de scripts de inicio para proyectos de PaperMC.
+slug: es/misc/tools/start-script-gen
+tableOfContents: false
+---
+
+import StartScriptGenerator from "/src/components/tools/StartScriptGenerator.svelte";
+
+<details>
+  <summary>¿Qué opciones debo elegir?</summary>
+  Si usas una JVM moderna, por ejemplo la 17, 21 o superior, primero prueba sin opciones.
+  Las JVM modernas gestionan muy bien distintas aplicaciones con la configuración predeterminada del GC.
+
+  Si tienes problemas con el GC o ejecutas una versión antigua de Minecraft o Java,
+  prueba las [opciones de Aikar](/es/paper/aikars-flags), optimizadas específicamente para Minecraft.
+
+  Si generas un script para iniciar [Velocity](https://papermc.io/software/velocity), selecciona "Velocity".
+</details>
+
+<br />
+
+<StartScriptGenerator client:load />

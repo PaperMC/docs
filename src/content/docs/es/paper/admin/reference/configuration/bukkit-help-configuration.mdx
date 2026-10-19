@@ -1,0 +1,20 @@
+---
+title: help.yml
+description: Explicación del archivo help.yml de Bukkit.
+slug: es/paper/reference/bukkit-help-configuration
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import HelpYML from "/src/config/paper/help.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+El YAML siguiente muestra la estructura de `help.yml`.
+
+Haz clic en un nodo hoja para ver la descripción de ese ajuste.
+
+:::
+
+<ConfigNode data={parse(HelpYML)} />

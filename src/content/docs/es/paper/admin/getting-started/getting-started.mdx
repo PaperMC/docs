@@ -1,0 +1,71 @@
+---
+title: Primeros pasos
+description: Cómo empezar a descargar y configurar un servidor Paper.
+slug: es/paper/getting-started
+---
+
+## Requisitos
+
+:::tip
+
+Paper requiere al menos **Java 25** para ejecutarse; [descargarlo e instalarlo es sencillo](/es/misc/java-install).
+
+:::
+
+| Versión de Paper  | Versión recomendada de Java |
+|-------------------|--------------------------|
+| 1.7.10 to 1.11    | Java 8                   |
+| 1.12 to 1.16.4    | Java 11                  |
+| 1.16.5            | Java 16                  |
+| 1.17 to 1.19      | Java 17                  |
+| 1.20 to 1.21.11   | Java 21                  |
+| 26.1+             | Java 25                  |
+
+## Descargar Paper
+
+Paper ofrece archivos JAR de servidor ejecutables directamente desde la
+[página de descargas de nuestro sitio web](https://papermc.io/downloads/paper).
+
+Haz clic en el número de compilación para descargar un archivo.
+
+## Ejecutar el servidor
+
+Para ejecutar el servidor, tendrás que crear un script de inicio
+o ejecutar un comando en el terminal.
+
+Puedes generar un script de inicio con nuestro [Generador de scripts de inicio](/es/misc/tools/start-script-gen).
+También puedes obtener allí el comando optimizado para ejecutar el servidor desde el terminal.
+
+Si solo buscas un comando breve:
+```bash
+java -Xms4G -Xmx4G -jar paper.jar --nogui
+```
+Asegúrate de que el terminal esté situado en el directorio de tu servidor
+y de haber sustituido `paper.jar` por el nombre del archivo JAR que descargaste.
+
+Puedes establecer la cantidad de RAM cambiando los valores de los argumentos `Xmx` y `Xms`.
+`--nogui` desactiva la interfaz gráfica de Vanilla para evitar que aparezcan dos interfaces al usar la línea de comandos.
+
+Para configurar el servidor, consulta las páginas de [Configuración global](/es/paper/reference/global-configuration) y
+[Configuración por mundo](/es/paper/reference/world-configuration).
+
+## Actualizar el servidor
+
+¡Actualizar Paper es sencillo! Consulta nuestro [tutorial de actualización](/es/paper/updating) para obtener más información.
+
+## Migrar a Paper
+
+### Desde Vanilla
+
+La migración desde Vanilla es sencilla, pero hay algunas diferencias, sobre todo en los datos guardados de los mundos. Paper permite que las dimensiones tengan datos independientes (como las reglas del juego).
+
+Paper realizará esta conversión automáticamente. No hace falta ningún paso adicional.
+
+### Desde CraftBukkit o Spigot
+
+Paper sustituye directamente tanto a CraftBukkit como a Spigot, así que no necesitas hacer ningún cambio.
+
+## Próximos pasos
+
+Consulta nuestra guía de [próximos pasos](/es/paper/next-steps) para poner en marcha tu servidor con el mejor rendimiento y las mejores
+funciones.

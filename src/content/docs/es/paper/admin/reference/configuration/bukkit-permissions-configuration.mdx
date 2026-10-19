@@ -1,0 +1,28 @@
+---
+title: permissions.yml
+description: Explicación del archivo permissions.yml de Bukkit.
+slug: es/paper/reference/bukkit-permissions-configuration
+tableOfContents: false
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import PermissionsYML from "/src/config/paper/permissions.yml?raw";
+import { parse } from "yaml";
+
+:::note
+
+El YAML siguiente muestra la estructura de `permissions.yml`.
+
+Haz clic en un nodo hoja para ver la descripción de ese ajuste.
+
+:::
+
+:::caution
+
+Esto NO sustituye a un plugin de permisos.
+
+Este archivo define metadatos sobre los propios permisos, como una descripción y un valor predeterminado.
+
+:::
+
+<ConfigNode data={parse(PermissionsYML)} />

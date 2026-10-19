@@ -1,0 +1,49 @@
+---
+title: Antiguo
+slug: es/adventure/serializer/legacy
+description: (Obsoleto) Serialización de componentes al formato antiguo.
+---
+
+import Dependency from "/src/components/Dependency.astro";
+import { LATEST_ADVENTURE_API_RELEASE } from "/src/utils/versions";
+
+El serializador de texto antiguo convierte texto al formato de chat tradicional usado
+en Minecraft antes de la versión 1.7 y todavía se usa por ser familiar para los propietarios de servidores.
+
+El serializador de texto antiguo no admite la mayoría de las funciones avanzadas, incluidos los eventos
+de desplazamiento y clic, los componentes que no sean de texto y las inserciones. Sí admite los colores RGB
+(consulta la sección [Compatibilidad con RGB](#compatibilidad-con-rgb)) y, si se solicita explícitamente, puede convertir las URL
+en componentes en los que se pueda hacer clic (ten en cuenta que los eventos de clic
+que contienen una URL *no* se serializan). Si necesitas funciones avanzadas, considera
+usar [MiniMessage](/es/adventure/minimessage).
+
+Declaración de la dependencia:
+
+<Dependency group="net.kyori" name="adventure-text-serializer-legacy" version={LATEST_ADVENTURE_API_RELEASE} />
+
+## Uso
+
+Se accede al serializador de texto antiguo mediante `LegacyComponentSerializer`. Los serializadores predeterminados
+incluyen uno que usa el símbolo de sección (§) (para mostrar texto en clientes antiguos) y otro que usa el signo «&», que suele emplearse en configuraciones y
+comandos para indicar códigos de color.
+
+La configuración predeterminada del serializador de texto antiguo deserializa los tres formatos
+RGB que admite Adventure, pero solo serializa los colores antiguos de Mojang
+(reduciéndolos al color más cercano cuando sea necesario) y no convierte las URL del texto en
+enlaces. Puedes configurar una instancia para que añada automáticamente eventos de clic a las URL de
+los componentes y permitir que el serializador codifique colores RGB con el formato RGB de Adventure o el de BungeeCord mediante el constructor.
+
+## Compatibilidad con RGB
+
+El serializador antiguo admite la deserialización de tres formatos distintos:
+
+* Códigos antiguos de color y formato de Mojang (como `§a` o `§l`).
+* Un formato RGB específico de Adventure, diseñado para que sea fácil de editar
+  (por ejemplo, `§#a25981`).
+* Un formato de código de color RGB de BungeeCord, compatible con rutinas de deserialización
+  antiguas, pero difícil de manipular y que deja al usuario la responsabilidad de asignar
+  un valor alternativo para clientes sin compatibilidad con RGB (como `§x§a§2§5§9§8§1`).
+
+El serializador antiguo reduce los colores RGB de forma predeterminada, pero puedes crear un serializador
+que los codifique con el formato RGB de Adventure o de BungeeCord mediante el
+constructor.

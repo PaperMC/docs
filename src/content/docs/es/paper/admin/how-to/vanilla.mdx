@@ -1,0 +1,49 @@
+---
+title: Una experiencia similar a Vanilla
+description: Esta página enumera todos los cambios que producen una experiencia distinta de Vanilla.
+slug: es/paper/vanilla
+---
+
+import ConfigNode from "/src/components/ConfigNode.astro";
+import { filterVanilla } from "/src/utils/config";
+import { parse } from "yaml";
+
+import ServerPropertiesYML from "/src/config/paper/server-properties.yml?raw";
+import PaperWorldDefaultsYML from "/src/config/paper/paper-world-defaults.yml?raw";
+import PaperGlobalYML from "/src/config/paper/paper-global.yml?raw";
+import SpigotYML from "/src/config/paper/spigot.yml?raw";
+
+Debido a la forma en que se implementa la API de Bukkit en Paper, puede haber diferencias entre la experiencia de juego de Vanilla y Paper.
+Estas diferencias pueden aumentar al corregir errores presentes en Minecraft Vanilla.
+Aunque muchas personas quizá no las noten, hay situaciones en las que resultan problemáticas.
+Por ejemplo, los jugadores técnicos pueden tener dificultades para que sus mecanismos funcionen como deberían.
+Esta página ofrece un punto de partida para quienes quieren acercarse lo máximo posible a Vanilla.
+
+:::note
+
+Esta página se inspira en la [recopilación de Earthcomputer](https://gist.github.com/Earthcomputer/2296da33b8cc91dba81b48103c0e1fe3) sobre cambios que rompen la compatibilidad con Vanilla.
+
+:::
+
+:::caution
+
+Esta guía solo te ayudará a acercarte lo máximo posible a Vanilla.
+Por desgracia, actualmente no es posible obtener una experiencia 100 % Vanilla en Paper.
+
+:::
+## server.properties
+<ConfigNode data={filterVanilla(parse(ServerPropertiesYML))} lang="properties" path={["server_properties"]} />
+
+## paper-world-defaults.yml
+<ConfigNode data={filterVanilla(parse(PaperWorldDefaultsYML))} path={["paper_world_defaults"]} />
+
+## paper-global.yml
+<ConfigNode data={filterVanilla(parse(PaperGlobalYML))} path={["paper_global"]} />
+
+## spigot.yml
+<ConfigNode data={filterVanilla(parse(SpigotYML))} path={["spigot"]} />
+
+## Otras consideraciones
+
+* `settings.timeout-time` en `spigot.yml` refleja el ajuste del watchdog en el archivo `server.properties`. Ten en cuenta que el ajuste de `spigot.yml` se expresa en segundos, mientras que el valor predeterminado se expresa en milisegundos.
+* `watchdog` en `paper-global.yml` controla el aviso anticipado del watchdog. Aunque solo es un aviso, quizá quieras desactivarlo porque puede resultar molesto.

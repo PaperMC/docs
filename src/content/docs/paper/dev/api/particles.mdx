@@ -2,7 +2,7 @@
 title: Particles
 description: A comprehensive guide to particle spawning.
 slug: paper/dev/particles
-version: "26.2"
+version: "26.3"
 ---
 
 import { Tabs, TabItem, Badge } from "@astrojs/starlight/components";
@@ -41,12 +41,33 @@ The second way is using the `spawnParticle()` methods in `World` and `Player` cl
 ## `count` argument behavior <Badge variant="danger" text="Important" size="large" />
 When spawning particles, the Minecraft client behaves differently based on the `count` argument:
 - If `count = 0`, a singular particle spawns and the client uses the provided location without modification.
-The offset values are multiplied by the `extra` argument and passed to the particle constructor. The way these values are
-used may vary between particle types.
+The offset values are multiplied by the `speed` argument on each axis and passed to the particle constructor.
+The way these values are used may vary between particle types.
 
 - If `count > 0`, the client spawns `count` number of particles. For each particle, it generates new offset
-values using a Gaussian (normal) distribution, multiplies them by the `extra` argument, and passes
-them to the particle constructor.
+values, applies them to the location, and uses the `speed` argument to calculate its initial velocity. How the
+offset and speed values are randomized depends on the [randomization type](#randomization-types).
+
+### Randomization types
+When `count` is greater than `0`, the client uses the selected randomization type to determine how the offset and
+speed values of each particle are randomized. The type is a
+[](jd:paper:org.bukkit.Particle$RandomizationType), and can be selected with
+[`ParticleBuilder.randomizationType(...)`](jd:paper:com.destroystokyo.paper.ParticleBuilder#randomizationType(org.bukkit.Particle.RandomizationType)),
+or by using the `spawnParticle(...)` overload that takes `speedX`, `speedY`, `speedZ` and a randomization type.
+
+- `DEFAULT`: multiplies each offset axis and each speed axis independently by its own Gaussian random value
+  (similar to `Random.nextGaussian()`, with a mean of `0` and a standard deviation of `1`).
+- `ALTERNATIVE`: multiplies each offset axis independently by its own uniform random value in the range `[0, 1)`.
+  The speed is left unmodified.
+- `ALTERNATIVE_WITH_SPEED`: multiplies each offset axis and each speed axis independently by its own uniform random
+  value in the range `[0, 1)`.
+
+:::note
+Minecraft 26.3 renamed the particle `extra` value to `speed` and split it into three axes. Use
+[`ParticleBuilder.speed(double)`](jd:paper:com.destroystokyo.paper.ParticleBuilder#speed(double)) to set all axes at
+once, or [`ParticleBuilder.speed(double, double, double)`](jd:paper:com.destroystokyo.paper.ParticleBuilder#speed(double,double,double))
+to set each axis individually. The deprecated `ParticleBuilder.extra(...)` method is an alias for `speed(double)`.
+:::
 
 ## Directional particles
 This type of particle has an initial velocity when spawned.
@@ -56,7 +77,7 @@ Effective speed varies between particles.
 :::
 
 In the following example 8 `FLAME` particles are spawned in a 1x1x1 cube shape randomly. `someLocation` serves as its center.
-The `extra` argument is set to 0, so the particles don't move.
+The `speed` argument is set to 0, so the particles don't move.
 <Tabs syncKey="spawn-type">
   <TabItem label="ParticleBuilder">
     ```java
@@ -64,7 +85,7 @@ The `extra` argument is set to 0, so the particles don't move.
         .location(someLocation)
         .offset(0.5, 0.5, 0.5)
         .count(8)
-        .extra(0)
+        .speed(0)
         .receivers(32, true)
         .spawn();
     ```
@@ -77,7 +98,7 @@ The `extra` argument is set to 0, so the particles don't move.
 </Tabs>
 
 :::caution
-Leaving the `extra` parameter unset will default it to `1`, likely resulting in unexpected behavior.
+Leaving the `speed` parameter unset will default it to `1`, likely resulting in unexpected behavior.
 :::
 
 ### Random direction
@@ -91,7 +112,7 @@ An example of spawning 6 `CRIT` particles at a location, without offset, that wi
     Particle.CRIT.builder()
         .location(someLocation)
         .count(6)
-        .extra(0.6)
+        .speed(0.6)
         .receivers(32, true)
         .spawn();
     ```
@@ -117,7 +138,7 @@ An example of a repeating task spawning campfire smoke that slowly goes "up" (po
         .location(someLocation)
         .offset(0, 1, 0)
         .count(0)
-        .extra(0.1);
+        .speed(0.1);
 
     Bukkit.getScheduler().runTaskTimer(plugin, () -> {
         particleBuilder.receivers(32, true).spawn();
@@ -143,7 +164,7 @@ We could also make the smoke go down if we wanted to:
         .location(someLocation)
         .offset(0, -1, 0)
         .count(0)
-        .extra(0.1);
+        .speed(0.1);
 
     Bukkit.getScheduler().runTaskTimer(plugin, () -> {
         particleBuilder.receivers(32, true).spawn();
@@ -536,7 +557,7 @@ Example of spawning a sculk charge particle at 45° that doesn't move:
     Particle.SCULK_CHARGE.builder()
         .location(someLocation)
         .data((float) Math.toRadians(45))
-        .extra(0)
+        .speed(0)
         .receivers(32, true)
         .spawn();
     ```

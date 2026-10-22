@@ -113,7 +113,7 @@ The default value shown may not be set for the property but will only be used by
 #### velocity.pre-shutdown-timeout
 
 - **default**: `10`
-- **description**: The timeout in seconds for the [](jd:velocity:com.velocitypowered.api.event.proxy.ProxyPreShutdownEvent), meaning before players are disconnected.
+- **description**: The timeout in seconds for the handling of [](jd:velocity:com.velocitypowered.api.event.proxy.ProxyPreShutdownEvent), players are disconnected after the timeout elapses.
 
 #### velocity.strictErrorHandling
 

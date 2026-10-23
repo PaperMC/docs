@@ -77,7 +77,7 @@ In the plugins block of your `build.gradle.kts` build script, add the publish pl
 
 ```kotlin title="build.gradle.kts"
 plugins {
-    id("io.papermc.hangar-publish-plugin") version "0.1.2"
+    id("io.papermc.hangar-publish-plugin") version "0.1.4"
 }
 ```
 
@@ -97,11 +97,11 @@ import io.papermc.hangarpublishplugin.model.Platforms
 
 hangarPublish {
     publications.register("plugin") {
-        version.set(project.version as String)
+        version.set(project.version.toString())
         channel.set("Snapshot") // We're using the 'Snapshot' channel
         // TODO: Edit the project name to match your Hangar project
         id.set("hangar-project")
-        apiKey.set(System.getenv("HANGAR_API_TOKEN"))
+        apiKey.set(providers.environmentVariable("HANGAR_API_TOKEN"))
         platforms {
             // TODO: Use the correct platform(s) for your plugin
             register(Platforms.PAPER) {
@@ -111,9 +111,8 @@ hangarPublish {
                 jar.set(tasks.jar.flatMap { it.archiveFile })
 
                 // Set platform versions from gradle.properties file
-                val versions: List<String> = (property("paperVersion") as String)
-                        .split(",")
-                        .map { it.trim() }
+                val versions = providers.gradleProperty("paperVersion")
+                    .map { it.split(",").map(String::trim) }
                 platformVersions.set(versions)
 
                 // TODO: Configure your plugin dependencies, if any
@@ -185,36 +184,21 @@ Make sure you never publish ongoing development builds to the `Release` channel.
 :::
 
 ```kotlin
-import java.io.ByteArrayOutputStream
-
-// ...
-
-// Helper methods
-fun executeGitCommand(vararg command: String): String {
-    val byteOut = ByteArrayOutputStream()
-    exec {
-        commandLine = listOf("git", *command)
-        standardOutput = byteOut
-    }
-    return byteOut.toString(Charsets.UTF_8.name()).trim()
-}
-
-fun latestCommitMessage(): String {
-    return executeGitCommand("log", "-1", "--pretty=%B")
-}
-
-val versionString: String = version as String
+val versionString: String = project.version.toString()
 val isRelease: Boolean = !versionString.contains('-')
 
 val suffixedVersion: String = if (isRelease) {
     versionString
 } else {
     // Give the version a unique name by using the GitHub Actions run number
-    versionString + "+" + System.getenv("GITHUB_RUN_NUMBER")
+    versionString + "+" + providers.environmentVariable("GITHUB_RUN_NUMBER").get()
 }
 
 // Use the commit description for the changelog
-val changelogContent: String = latestCommitMessage()
+val changelogContent = providers.exec {
+    workingDir(layout.projectDirectory.asFile)
+    commandLine("git", "log", "-1", "--pretty=%B")
+}.standardOutput.asText.map { it.trim() }
 
 // If you would like to publish releases with their proper changelogs manually, simply add an if statement with the `isRelease` variable here.
 hangarPublish {
@@ -232,9 +216,10 @@ hangarPublish {
 A notable part of publishing a new version might be updating the resource page (e.g. the plugin's home page) with new content from your plugin's repository.
 
 In this example, we're using a README file, but you can use any text you want, as long as it is in Markdown format.
+Your Hangar API key also needs the `edit_page` permission to sync pages.
 
 ```kotlin
-val pageContent = project.file("README.md").readText()
+val pageContent = providers.fileContents(layout.projectDirectory.file("README.md")).asText
 
 hangarPublish {
     publications.register("plugin") {
@@ -248,6 +233,7 @@ You can invoke the `syncPluginPublicationMainResourcePagePageToHangar` task to u
 This will not publish a new version, but simply update the page content on Hangar.
 
 If you're using a GitHub Actions workflow, you should also add the task invocation to the `Publish` step in your workflow:
+
 ```yaml
 - name: Publish
   # ...

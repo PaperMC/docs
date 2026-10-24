@@ -89,11 +89,10 @@ For example, we can write a `/persistent` command which opens a player's own, pe
 ```java title="CommandPersistent.java" showLineNumbers
 public class CommandPersistent implements Listener {
 
-    // A map to store all inventory views in. Generally it is not recommended
-    // to use Player objects as keys or values, but in this case it is acceptable
-    // because the inventory view is also bound to a player object, meaning we
-    // couldn't reuse it after a player rejoins anyways.
-    private static final Map<Player, InventoryView> VIEWS = new HashMap<>();
+    // A map to store all inventory views in, keyed by the player's UUID.
+    // Storing Player objects in long-lived collections is not recommended,
+    // as they become invalid once the player leaves the server.
+    private static final Map<UUID, InventoryView> VIEWS = new HashMap<>();
 
     // Create a command. Commands are explained in the Command API documentation
     // pages and therefore won't be covered here.
@@ -102,11 +101,11 @@ public class CommandPersistent implements Listener {
             Player player = context.getSource().getPlayerOrThrow();
 
             // First, attempt to get a stored view.
-            InventoryView view = VIEWS.computeIfAbsent(player, p -> {
+            InventoryView view = VIEWS.computeIfAbsent(player.getUniqueId(), uuid -> {
                 // If there is no view currently stored, create it.
                 return MenuType.GENERIC_9X6.builder()
-                    .title(Component.text(p.getName() + "'s stash", NamedTextColor.DARK_RED))
-                    .build(p);
+                    .title(Component.text(player.getName() + "'s stash", NamedTextColor.DARK_RED))
+                    .build(player);
             });
 
             // As the inventory view is directly bound to the player, we do not have
@@ -116,12 +115,49 @@ public class CommandPersistent implements Listener {
         }).build();
     }
 
+    // Views can be used to identify which menu a player is interacting with.
+    // In this example, we prevent players from putting shulker boxes into their stash.
+    @EventHandler
+    void onInventoryClick(InventoryClickEvent event) {
+        // Only handle clicks while the player's stash is open.
+        InventoryView stash = VIEWS.get(event.getWhoClicked().getUniqueId());
+        if (stash == null || event.getView() != stash) {
+            return;
+        }
+
+        boolean clickedStash = event.getClickedInventory() == stash.getTopInventory();
+        ItemStack movedItem = switch (event.getAction()) {
+            // Placing or swapping the item on the cursor into the stash.
+            case PLACE_ALL, PLACE_SOME, PLACE_ONE, SWAP_WITH_CURSOR ->
+                clickedStash ? event.getCursor() : null;
+            // Shift-clicking an item from the player's inventory into the stash.
+            case MOVE_TO_OTHER_INVENTORY ->
+                clickedStash ? null : event.getCurrentItem();
+            // Swapping a hotbar or offhand item into the stash using the number or offhand keys.
+            case HOTBAR_SWAP -> {
+                if (!clickedStash) {
+                    yield null;
+                }
+                // The hotbar button is -1 if the item was swapped with the offhand.
+                PlayerInventory inventory = event.getWhoClicked().getInventory();
+                yield event.getHotbarButton() == -1
+                    ? inventory.getItemInOffHand()
+                    : inventory.getItem(event.getHotbarButton());
+            }
+            default -> null;
+        };
+
+        if (movedItem != null && Tag.SHULKER_BOXES.isTagged(movedItem.getType())) {
+            event.setCancelled(true);
+        }
+    }
+
     // There are two things we should do on the quit event:
     // 1. Remove the player entry from the map, as it is no longer valid.
     // 2. Store the top inventory somewhere so it persists across server restarts.
     @EventHandler
     void onPlayerQuit(PlayerQuitEvent event) {
-        InventoryView view = VIEWS.remove(event.getPlayer());
+        InventoryView view = VIEWS.remove(event.getPlayer().getUniqueId());
         if (view != null) {
             Inventory inventory = view.getTopInventory();
             // Save the contents of the inventory to a file or database.
@@ -129,3 +165,11 @@ public class CommandPersistent implements Listener {
     }
 }
 ```
+
+:::note
+
+Players can also drag items into an inventory, which fires an [](jd:paper:org.bukkit.event.inventory.InventoryDragEvent)
+instead of an [](jd:paper:org.bukkit.event.inventory.InventoryClickEvent). To fully prevent certain items from
+being put into a menu, that event has to be handled as well.
+
+:::

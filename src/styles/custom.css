@@ -36,6 +36,19 @@
   width: auto;
 }
 
+.img-20-left {
+  max-width: 20rem;
+  padding-top: 1rem;
+}
+.img-30-left {
+  max-width: 30rem;
+  padding-top: 1rem;
+}
+.img-40-left {
+  max-width: 40rem;
+  padding-top: 1rem;
+}
+
 /* use custom font first instead of system */
 .sl-badge {
   font-family: var(--__sl-font-mono);

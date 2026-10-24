@@ -142,6 +142,14 @@ commands:
   ride-command-allow-player-as-vehicle:
     default: "false"
     description: Allow mounting entities to a player in the Vanilla `/ride` command.
+  server-side-dimension-suggestions:
+    default: "false"
+    description: >-
+      Requests dimension command suggestions from the server so they reflect
+      worlds loaded or unloaded after a player joins. Applies only to dimension
+      arguments without a custom suggestion provider. After changing this
+      setting, online players must reconnect or have their command trees resent
+      for the change to take effect.
   suggest-player-names-when-null-tab-completions:
     vanilla: "false"
     default: "true"

@@ -74,7 +74,12 @@ Timings are deprecated. Due to that, this flag does not have any effect.
 
 - **default**: `unset`
 - **description**: Disables the plugin channel limit for the server. This will disable the limit of 128 plugin channels
-  per player.
+  per player defined in `paper.pluginMessageChannelLimit`.
+
+#### paper.pluginMessageChannelLimit
+
+- **default**: `128`
+- **description**: Sets the limit of plugin channels per player.
 
 #### net.kyori.adventure.text.warnWhenLegacyFormattingDetected
 

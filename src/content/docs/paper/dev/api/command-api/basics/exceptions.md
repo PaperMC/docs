@@ -59,6 +59,10 @@ Commands.literal("heal")
     });
 ```
 
+If the player already has full health, they see the message in red:
+
+![The message "Steve already has full health!" in red in the chat](./assets/exception-full-health.png)
+
 ## Using components as messages
 `LiteralMessage` only contains plain text. If you want to use a `Component` as the message, convert it using
 the [`MessageComponentSerializer`](jd:paper:io.papermc.paper.command.brigadier.MessageComponentSerializer):
@@ -73,6 +77,8 @@ private static final DynamicCommandExceptionType ERROR_FULL_HEALTH = new Dynamic
 ```
 
 The message is still shown in red, but parts with their own color, like the name above, keep it.
+
+![The message "Steve already has full health!" in the chat, with the name in gold and the rest in red](./assets/exception-component.png)
 
 ## Showing where the input is invalid
 While a custom argument is parsing its input in `parse(StringReader)`, you can use `createWithContext(reader, ...)` instead
@@ -109,12 +115,9 @@ public final class EvenIntegerArgument implements CustomArgumentType<Integer, In
 }
 ```
 
-Running `/split 7` with this argument shows the following, with the `7` in the second line marked in red:
+Running `/split 7` with this argument shows the following:
 
-```
-7 is not an even number!
-split 7<--[HERE]
-```
+![The message "7 is not an even number!" in the chat, followed by the line "split 7<--[HERE]" with the 7 underlined in red](./assets/exception-context.png)
 
 The second line is only shown for exceptions thrown while the command is being parsed. Exceptions thrown in `executes(...)`
 or in `CustomArgumentType.Converted#convert` only show the message, even if they were created with context.

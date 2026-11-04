@@ -197,6 +197,7 @@ export default defineConfig({
                                 "paper/dev/command-api/basics/requirements",
                                 "paper/dev/command-api/basics/argument-suggestions",
                                 "paper/dev/command-api/basics/custom-arguments",
+                                "paper/dev/command-api/basics/exceptions",
                               ],
                             },
                             {

@@ -9,7 +9,7 @@ reduce code repetition.
 
 ## Why would you use custom arguments?
 As example, if you want to have an argument for a player, which is currently online and an operator, you could use a player argument type, add custom suggestions, and throw a
-`CommandSyntaxException` in your `executes(...)` method body. This would look like this:
+[`CommandSyntaxException`](/paper/dev/command-api/basics/exceptions) in your `executes(...)` method body. This would look like this:
 
 ```java
 Commands.argument("player", ArgumentTypes.player())

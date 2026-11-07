@@ -9,8 +9,8 @@
   const flags: Option[] = [
     { id: "none", label: "None", value: "" },
     {
-      id: "aikar",
-      label: "Aikar's",
+      id: "paper",
+      label: "Paper",
       value: [
         "-XX:+AlwaysPreTouch",
         "-XX:+DisableExplicitGC",

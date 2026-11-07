@@ -119,42 +119,42 @@ up much space (5MB)
     gen usage, try to reclaim old gen memory faster to avoid running out of old.
 
 10.  **G1MixedGCLiveThresholdPercent:** Controls when to include regions in mixed GCs in the young
-    GC collection, keeping old gen tidy without doing a normal old gen GC collection. When your
-    memory is less than this percent, old gen won't even be included in 'mixed' collections. Mixed
-    are not as heavy as a full old collection, so having small incremental cleanups of old keeps
-    memory usage light.
-    
-    Default is 65 to 85 depending on the Java version, we are setting that to 90 to ensure we reclaim garbage
-    in old gen as fast as possible to retain as much free regions as we can.
+     GC collection, keeping old gen tidy without doing a normal old gen GC collection. When your
+     memory is less than this percent, old gen won't even be included in 'mixed' collections. Mixed
+     are not as heavy as a full old collection, so having small incremental cleanups of old keeps
+     memory usage light.
 
-11.  **G1ReservePercent=20:** Minecraft memory allocation rate in up-to-date versions is really insane. We
-    run the risk of a dreaded "to-space exhaustion" not having enough memory free to move data
-    around. This ensures more memory is waiting to be used for this operation. Default is 10, so we
-    are giving another 10 to it.
+     Default is 65 to 85 depending on the Java version, we are setting that to 90 to ensure we reclaim garbage
+     in old gen as fast as possible to retain as much free regions as we can.
 
-12. **G1RSetUpdatingPauseTimePercent=5:** Default is 10% of time spent during pause updating RSets,
-    reduce this to 5% to make more of it concurrent to reduce pause durations.
+12.  **G1ReservePercent=20:** Minecraft memory allocation rate in up-to-date versions is really insane. We
+     run the risk of a dreaded "to-space exhaustion" not having enough memory free to move data
+     around. This ensures more memory is waiting to be used for this operation. Default is 10, so we
+     are giving another 10 to it.
 
-13.  **MaxTenuringThreshold=1:** Minecraft has a really high allocation rate of memory. Of that
-    memory, most is reclaimed in the eden generation. However, transient data will overflow into
-    survivor. Initially played with completely removing survivor and had decent results, but does
-    result in transient data making its way to old which is not good. Max Tenuring 1 ensures that we
-    do not promote transient data to old generation, but anything that survives 2 passes of GC is
-    just going to be assumed as longer-lived.
+13.  **G1RSetUpdatingPauseTimePercent=5:** Default is 10% of time spent during pause updating RSets,
+     reduce this to 5% to make more of it concurrent to reduce pause durations.
 
-    Doing this greatly reduces pause times in young collections as copying data up to 15 times in
-    survivor space for a tenured object really takes a lot of time for actually old memory. Ideally
-    the GC engine would track average age for objects instead and tenure out data faster, but that
-    is not how it works.
+14.  **MaxTenuringThreshold=1:** Minecraft has a really high allocation rate of memory. Of that
+     memory, most is reclaimed in the eden generation. However, transient data will overflow into
+     survivor. Initially played with completely removing survivor and had decent results, but does
+     result in transient data making its way to old which is not good. Max Tenuring 1 ensures that we
+     do not promote transient data to old generation, but anything that survives 2 passes of GC is
+     just going to be assumed as longer-lived.
 
-    Considering average GC rate is 10s to the upwards of minutes per young collection, this does not
-    result in any 'garbage' being promoted, and just delays longer lived memory to be collected in
-    mixed GCs.
+     Doing this greatly reduces pause times in young collections as copying data up to 15 times in
+     survivor space for a tenured object really takes a lot of time for actually old memory. Ideally
+     the GC engine would track average age for objects instead and tenure out data faster, but that
+     is not how it works.
 
-13.  **SurvivorRatio=32:** Because we drastically reduced MaxTenuringThreshold, we will be reducing
-    use of survivor space drastically. This frees up more regions to be used by eden instead.
+     Considering average GC rate is 10s to the upwards of minutes per young collection, this does not
+     result in any 'garbage' being promoted, and just delays longer lived memory to be collected in
+     mixed GCs.
 
-14. **UseCompactObjectHeaders** Shrinks object headers, doing so saves memory and cpu usage.
+15.  **SurvivorRatio=32:** Because we drastically reduced MaxTenuringThreshold, we will be reducing
+     use of survivor space drastically. This frees up more regions to be used by eden instead.
+
+16.  **UseCompactObjectHeaders** Shrinks object headers, doing so saves memory and cpu usage.
 
 
 ### Transparent huge pages

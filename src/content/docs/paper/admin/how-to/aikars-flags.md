@@ -1,10 +1,14 @@
 ---
-title: Aikar's flags
-description: Aikar's flags are a set of JVM flags designed to improve the performance of your Paper server.
+title: Java startup flags
+description: Recommended JVM startup flags for Paper servers running Java 25.
 slug: paper/aikars-flags
 ---
 
 ## Recommended JVM startup flags
+
+These flags build on Aikar's original recommendations and target Paper servers running Java 25.
+Newer Java versions can also use this command as a starting point, but check that your JVM
+supports each flag before using it.
 
 :::caution[Script Generator]
 
@@ -14,7 +18,7 @@ our **[Script Generator](/misc/tools/start-script-gen)**.
 :::
 
 ```bash
-java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -Dusing.aikars.flags=https://mcflags.emc.gs -Daikars.new.flags=true -jar paper.jar --nogui
+java -Xms10G -Xmx10G -XX:+UseG1GC -XX:+UseCompactObjectHeaders -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1 -jar paper.jar --nogui
 ```
 
 :::danger[Do not allocate all of your available memory on a shared host!]
@@ -139,33 +143,22 @@ up much space (5MB)
     lag spike. This flag disables plugins from trying to do this, protecting you from their bad
     code.
 
-10. **MaxGCPauseMillis=200:** This setting controls how much memory is used in between the minimum
-    and maximum ranges specified for your new generation. This is a "goal" for how long you want
-    your server to pause for collections. 200 is aiming for at most loss of 4 ticks. This will
-    result in a short TPS drop, however the server can make up for this drop instantly, meaning it
-    will have no meaningful impact on your TPS. 200ms is lower than players can recognize. In
-    testing, having this value constrained to an even lower number results in G1 not recollecting
-    memory fast enough and potentially running out of old gen triggering a full collection. Just
-    because this number is 200 does not mean every collection will be 200. It means it can use up to
-    200 if it really needs it, and we need to let it do its job when there is memory to collect.
+10. **+UseCompactObjectHeaders:** Reduces the memory used by Java object headers. Java 25 supports
+    this flag without enabling experimental VM options.
 
-11. **+ParallelRefProcEnabled:** Optimizes the GC process to use multiple threads for weak reference
-    checking. Not sure why this isn't default...
-
-12. **G1RSetUpdatingPauseTimePercent=5:** Default is 10% of time spent during pause updating RSets,
+11. **G1RSetUpdatingPauseTimePercent=5:** Default is 10% of time spent during pause updating RSets,
     reduce this to 5% to make more of it concurrent to reduce pause durations.
 
-13. **G1MixedGCCountTarget=4:** Default is 8. Because we are aiming to collect slower, with less old
+12. **G1MixedGCCountTarget=4:** Default is 8. Because we are aiming to collect slower, with less old
     gen usage, try to reclaim old gen memory faster to avoid running out of old.
 
-14. **G1HeapRegionSize=8M+:** Default is auto calculated. Super important for Minecraft, especially
+13. **G1HeapRegionSize=8M+:** Default is auto calculated. Super important for Minecraft, especially
     1.15, as with low memory situations, the default calculation will in most times be too low. Any
     memory allocation half of this size (4MB) will be treated as "Humongous" and promote straight to
     old generation and is harder to free. If you allow Java to use the default, you will be
     destroyed with a significant chunk of your memory getting treated as Humongous.
 
-15. **+PerfDisableSharedMem:** Causes GC to write to file system which can cause major latency if
-    disk IO is high - see https://www.evanjones.ca/jvm-mmap-pause.html
+14. **+PerfDisableSharedMem:** Keeps JVM performance counters out of shared memory.
 
 ### Transparent huge pages
 

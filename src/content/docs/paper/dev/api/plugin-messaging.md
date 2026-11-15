@@ -226,3 +226,62 @@ public final class ExamplePlugin extends JavaPlugin {
 ```
 
 This will send the player a clickable message saying "Click Me!" that opens `https://papermc.io` upon clicking.
+
+## Using your own channel
+
+You are not limited to the `BungeeCord` channel. If you control the other end of the connection, such as a companion plugin
+on your proxy or a client-side mod, you can use your own channel instead. The Paper API stays the same; only the channel name changes.
+
+Apart from `BungeeCord`, channel names must be valid namespaced keys, such as `myplugin:main`.
+
+```java title="ExamplePlugin.java"
+public final class ExamplePlugin extends JavaPlugin implements PluginMessageListener {
+
+    private static final String CHANNEL = "myplugin:main";
+
+    @Override
+    public void onEnable() {
+        this.getServer().getMessenger().registerOutgoingPluginChannel(this, CHANNEL);
+        this.getServer().getMessenger().registerIncomingPluginChannel(this, CHANNEL, this);
+    }
+
+    public void sendGreeting(Player player) {
+        ByteArrayDataOutput out = ByteStreams.newDataOutput();
+        out.writeUTF("Hello from Paper!");
+        player.sendPluginMessage(this, CHANNEL, out.toByteArray());
+    }
+
+    @Override
+    public void onPluginMessageReceived(String channel, Player player, byte[] message) {
+        if (!channel.equals(CHANNEL)) {
+            return;
+        }
+        ByteArrayDataInput in = ByteStreams.newDataInput(message);
+        String greeting = in.readUTF(); // Read the data in the same order it was written
+    }
+}
+```
+
+The format of the message is up to you, as long as both ends read and write it in the same way.
+
+:::caution[The other end must register the channel]
+
+Paper only sends a plugin message to a player if their connection has registered the channel,
+which is done by sending a `minecraft:register` plugin message to the server.
+Otherwise, [`sendPluginMessage`](jd:paper:org.bukkit.plugin.messaging.PluginMessageRecipient#sendPluginMessage(org.bukkit.plugin.Plugin,java.lang.String,byte[]))
+silently drops the message.
+
+BungeeCord and Velocity (when `bungee-plugin-message-channel` is enabled) register the `BungeeCord` channel for you, but your own channel must be registered by whatever is on the other end:
+
+- On Velocity, register the channel with the [](jd:velocity:com.velocitypowered.api.proxy.messages.ChannelRegistrar).
+  Velocity then registers it with each backend server the player connects to. See [Velocity's plugin messaging guide](/velocity/dev/plugin-messaging) for the proxy side.
+- On BungeeCord, register the channel with `ProxyServer#registerChannel`.
+- A client-side mod must register the channels it listens on.
+
+You can check which channels a player has registered with [`getListeningPluginChannels`](jd:paper:org.bukkit.plugin.messaging.PluginMessageRecipient#getListeningPluginChannels()).
+
+:::
+
+Incoming messages do not need to be registered this way. As soon as your plugin registers an incoming channel,
+it receives every message sent on it, including ones sent by players' clients.
+Only trust them if your proxy stops players from sending messages on that channel.

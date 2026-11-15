@@ -177,6 +177,9 @@ command-blocks:
   permissions-level:
     default: "2"
     description: "Default Vanilla permission level for command blocks."
+  time-format-pattern:
+    default: "default"
+    description: "The time format to use in command block outputs, accepts any [](jd:java:java.time.format.DateTimeFormatter) pattern."
 entities:
   armor-stands:
     do-collision-entity-lookups:

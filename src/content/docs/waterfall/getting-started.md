@@ -4,7 +4,7 @@ description: How to get started with running Waterfall.
 slug: waterfall/getting-started
 banner:
   destructive: true
-  content: We recommend you transition to <a href="https://papermc.io/software/velocity">Velocity</a>. For more information, see the <a href="https://forums.papermc.io/threads/1088/">announcement</a>.
+  content: We recommend you transition to <a href="https://papermc.io/software/velocity">Velocity</a>. For more information, see the <a href="https://papermc.io/news/announcing-the-end-of-life-of-waterfall/">announcement</a>.
 ---
 
 ## What is Waterfall?

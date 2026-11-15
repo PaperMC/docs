@@ -757,6 +757,16 @@ environment:
   generate-flat-bedrock:
     default: "false"
     description: Instructs the server to generate bedrock as a single flat layer
+  fix-missing-tree-snow:
+    default: "false"
+    description: >-
+      Fixes MC-119599. Vanilla places snow on a chunk while generating that chunk's features,
+      so tree parts that neighboring chunks generate into it afterwards are left without snow,
+      causing snowless patches of leaves with straight edges at chunk borders. Vanilla also
+      only places snow on the top block of each column, so lower leaf layers and the ground
+      under leaves never get snow. When enabled, snow is placed again as neighboring chunks
+      generate their features, including on lower leaf layers and the ground under leaves.
+      This changes world generation and only affects newly generated chunks.
   locate-structures-outside-world-border:
     default: "false"
     description: >-

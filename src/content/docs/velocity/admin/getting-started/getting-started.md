@@ -18,6 +18,19 @@ Head over to the [downloads](https://papermc.io/downloads/velocity) page to get 
 of Velocity. We recommend getting the latest stable version. After downloading Velocity, move the
 JAR file to a dedicated folder for just the proxy or upload it to your server.
 
+### Releases and snapshots
+
+Velocity versions come in two kinds:
+
+- **Releases**, such as `4.3.1`, are stable.
+- **Snapshots**, such as `4.3.2-SNAPSHOT`, are beta. There are no compatibility promises within a
+  snapshot cycle, and an `x.y.z-SNAPSHOT` version does not promise that `x.y.z` will ever be
+  released. When a release follows, its version is `x.y.z` or higher, so `4.3.2-SNAPSHOT` could
+  become `4.3.2`, `4.4.0`, or `5.0.0`.
+
+Velocity tries to follow [semantic versioning](https://semver.org/) for release versions. Since
+Velocity is not a library, it does not always fit semantic versioning exactly.
+
 ## Launching Velocity for the first time
 
 Once you have downloaded Velocity, we will launch it for the first time to generate the

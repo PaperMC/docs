@@ -19,6 +19,21 @@ Translatable components can have styling, hover/click events and children compon
 You can provide translation files in a resource pack in order to change existing translations or add new ones.
 For a guide on how to do that, see the [Minecraft Wiki](https://minecraft.wiki/w/Resource_pack#Language).
 
+### Translating multiple lines
+
+For content such as item lore, which requires a separate component for each line, use a separate translation key for each line:
+
+```java
+final List<Component> lore = List.of(
+    Component.translatable("myplugin.item.key.description"),
+    Component.translatable("myplugin.item.key.usage")
+);
+```
+
+Define both keys in each language file, then pass the list to your platform's lore API.
+Putting a newline in a translation does not create another lore entry. Keeping the lines separate also avoids having to split a translated component and preserve its styles and children.
+See the [lore FAQ](/adventure/faq#how-can-i-put-multiple-lines-in-item-lore) for an example using configured MiniMessage strings.
+
 ### Using Adventure's localization
 
 Adventure also provides a way to handle localization in Adventure itself.

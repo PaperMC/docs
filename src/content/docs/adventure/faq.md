@@ -12,6 +12,24 @@ Components will inherit style from their parent. For example, in the following c
 
 In vanilla Minecraft, some places where components are rendered have parent styles. For example, lore text has a parent style that makes all text italic. This means that you will need to set italic to false if you do not want any component you are storing in lore to be italic. The `Component.decorationIfAbsent()` method can apply this to existing components without overriding any formatting specifically set by users.
 
+## How can I put multiple lines in item lore?
+
+Item lore is a list of components, with one component for each line. A newline inside a component does not create another lore entry.
+Build each line separately instead of splitting an existing component, which may contain styles, children, and translatable components.
+
+If your lore comes from a configuration file, store it as a list of strings and deserialize each entry separately:
+
+```java
+final List<String> lines = List.of("<gold>A mysterious key", "<gray>Opens a hidden door");
+final MiniMessage miniMessage = MiniMessage.miniMessage();
+final List<Component> lore = lines.stream()
+    .map(miniMessage::deserialize)
+    .toList();
+```
+
+Pass the resulting list to your platform's lore API. Each line is parsed independently, so include any formatting it needs in that line.
+For translated lore, see [Translating multiple lines](/adventure/localization#translating-multiple-lines).
+
 ## Messages not sending? Hex colors not working? Events not appearing? Fonts messed up?
 
 - Test on a vanilla client, without any mods or resource packs. Modded clients (such as Badlion), client mods, and even resource packs can break many elements of the modern JSON chat format and mess with incoming chat packets in ways that cause a myriad of issues.

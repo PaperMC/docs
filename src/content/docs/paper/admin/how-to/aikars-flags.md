@@ -154,7 +154,7 @@ up much space (5MB)
 15.  **SurvivorRatio=32:** Because we drastically reduced MaxTenuringThreshold, we will be reducing
      use of survivor space drastically. This frees up more regions to be used by eden instead.
 
-16.  **UseCompactObjectHeaders** Shrinks object headers, doing so saves memory and cpu usage.
+16.  **UseCompactObjectHeaders:** Shrinks object headers, doing so saves memory and cpu usage.
 
 
 ### Transparent huge pages

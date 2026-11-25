@@ -29,6 +29,10 @@ import Font1 from "./assets/font_1.png";
 import Newline1 from "./assets/newline_1.png";
 import Selector1 from "./assets/selector_1.png";
 
+import Head1 from "./assets/head_1.png";
+import Pride1 from "./assets/pride_1.png";
+import Sprite1 from "./assets/sprite_1.png";
+
 The MiniMessage language uses tags. Everything you do will be defined with tags. Tags have a start tag and an end tag (the `<reset>` tag is an exception here).
 Start tags are mandatory (obviously), but end tags aren't outside of `strict` mode. The following are all visually identical:
 ```mm
@@ -540,6 +544,9 @@ Happy <pride>pride month</pride>!
 Kyori supports <pride:trans>trans rights</pride>!
 ```
 
+<br/>
+<Image class="img-inline" alt="The result of parsing `Happy <pride>pride month</pride>!Kyori supports <pride:trans>trans rights</pride>!`, show in-game in the Minecraft client's chat window" src={Pride1} />
+
 ### Sprite
 
 *(since v4.25.0)* Inserts a sprite.
@@ -557,6 +564,9 @@ Look at my <sprite:blocks:block/stone>!
 This item costs 10 x <sprite:"minecraft:items":item/porkchop>.
 This is a custom texture from a namespace: <sprite:items:"custom:item/ruby">
 ```
+
+<br/>
+<Image class="img-inline" alt="The result of parsing `Happy <pride>pride month</pride>!Kyori supports <pride:trans>trans rights</pride>!`, show in-game in the Minecraft client's chat window" src={Sprite1} />
 
 ### Head
 
@@ -576,3 +586,6 @@ My favorite dev is <head:1f085b2d-9548-4159-a8c7-f3ccdf0c2054>.
 Do you prefer <head:entity/player/wide/steve> Steve or <head:entity/player/slim/alex> Alex?
 Thanks <head:Strokkur24:false> for the docs!
 ```
+
+<br/>
+<Image class="img-inline" alt="The result of parsing the examples, show in-game in the Minecraft client's chat window" src={Head1} />

@@ -81,6 +81,44 @@ version string format used was `{VERSION}-R0.1-SNAPSHOT`, with no way to referen
   </TabItem>
 </Tabs>
 
+### Downloading Javadocs
+
+The Paper repository publishes Javadoc and source JARs alongside the API, but your IDE may not download them by default.
+If the Javadocs don't show up when you hover over Paper API classes or methods, you can tell your IDE to download them.
+You can also browse the Javadocs online at [jd.papermc.io](jd:paper).
+
+<Tabs syncKey="build-system">
+  <TabItem label="Gradle">
+    To have IntelliJ download the Javadocs on every project sync, apply the `idea` plugin and
+    enable `isDownloadJavadoc` in your `build.gradle.kts` file:
+
+    ```kotlin title="build.gradle.kts"
+    plugins {
+      idea
+    }
+
+    idea {
+      module {
+        isDownloadJavadoc = true
+      }
+    }
+    ```
+
+    Then reload the project in the Gradle tool window.
+  </TabItem>
+  <TabItem label="Maven (Discouraged)">
+    In IntelliJ, open the Maven tool window and select `Download Sources and/or Documentation > Download Documentation`
+    in the toolbar. To download them automatically, enable `Documentation` under `Automatically download` in the
+    Maven `Importing` settings.
+
+    Outside an IDE, you can download the Javadoc JARs into your local repository from the command line:
+
+    ```sh
+    mvn dependency:resolve -Dclassifier=javadoc
+    ```
+  </TabItem>
+</Tabs>
+
 ### Setting up the `src` directory
 
 :::note

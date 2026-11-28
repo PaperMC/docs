@@ -250,6 +250,7 @@ export default defineConfig({
                             "paper/dev/display-entities",
                             "paper/dev/mob-goals",
                             "paper/dev/entity-pathfinder",
+                            "paper/dev/projectiles",
                           ],
                         },
                         {
